@@ -1,0 +1,493 @@
+﻿<HBProfile>
+	<Name>[H - Rep Quest] TB Peninsula Dailies [Kick]</Name>
+	<MinLevel>85</MinLevel>
+	<MaxLevel>90</MaxLevel>
+	
+	<MinDurability>0.2</MinDurability>
+	<MinFreeBagSlots>2</MinFreeBagSlots>
+	
+	<MailGrey>False</MailGrey>
+	<MailWhite>False</MailWhite>
+	<MailGreen>False</MailGreen>
+	<MailBlue>False</MailBlue>
+	<MailPurple>False</MailPurple>
+	
+	<SellGrey>True</SellGrey>
+	<SellWhite>False</SellWhite>
+	<SellGreen>False</SellGreen>
+	<SellBlue>False</SellBlue>
+	<SellPurple>False</SellPurple>
+	
+	<Blackspots>
+		<Blackspot X="-586.3358" Y="1413.081" Z="21.75919" Radius="4" />
+		<Blackspot X="-578.0546" Y="1387.458" Z="23.6434" Radius="2" />
+		<Blackspot X="-578.9312" Y="1381.403" Z="23.27984" Radius="2" />
+		<Blackspot X="-591.2113" Y="1381.581" Z="22.21762" Radius="2" />
+		<Blackspot X="-600.8854" Y="1402.316" Z="21.58193" Radius="4" /> <!-- Fire in dailies camp -->
+		<Blackspot X="-163.6802" Y="1901.315" Z="1.837813" Radius="21" />
+	</Blackspots>
+
+	<Vendors>
+		<Vendor Name="Karosh" Entry="48356" Type="Repair" X="-607.5608" Y="1380.215" Z="22.00996" />
+	</Vendors>
+
+	<Quest Id="28700" Name="Taking the Overlook Back">
+		<Objective Type="KillMob" MobId="47304" KillCount="1">
+			<Hotspots>
+				<Hotspot X="-142.7136" Y="973.4319" Z="120.1456" />
+			</Hotspots>
+		</Objective>
+	</Quest> 
+	<Quest Id="28694" Name="Watch Out For Splinters!">
+	<Objective Type="CollectItem" ItemId="62811" CollectCount="15">
+		<CollectFrom>
+			<Mob Name="Ghastly Dockhand" Id="46641" />
+			<Mob Name="Accursed Shipbuilder" Id="46643" />
+			<GameObject Name="Shipyard Lumber" Id="206583" />
+		</CollectFrom>
+		<Hotspots>
+			<Hotspot X="-167.3765" Y="1849.325" Z="2.382729" />
+			<Hotspot X="-198.5779" Y="1883.063" Z="2.382843" />
+			<Hotspot X="-198.5602" Y="1908.246" Z="2.752382" />
+			<Hotspot X="-169.7275" Y="1858.202" Z="2.383965" />
+			<Hotspot X="-146.1035" Y="1869.178" Z="2.417267" />
+			<Hotspot X="-124.0322" Y="1922.913" Z="2.382826" />
+			<Hotspot X="-122.1458" Y="1943.29" Z="2.379083" />
+			<Hotspot X="-92.40714" Y="1944.395" Z="13.47554" />
+			<Hotspot X="-79.28756" Y="1915.401" Z="13.24181" />
+			<Hotspot X="-102.238" Y="1886.431" Z="13.54396" />
+			<Hotspot X="-126.3708" Y="1883.362" Z="7.47734" />
+			<Hotspot X="-142.1002" Y="1883.223" Z="2.609627" />
+			<Hotspot X="-151.5295" Y="1863.142" Z="2.384385" />
+		</Hotspots>
+	</Objective>
+	</Quest>
+	<Quest Id="28691" Name="First Lieutenant Connor">
+	<Objective Type="KillMob" MobId="46571" KillCount="1">
+	<Hotspots>
+	<Hotspot X="-596.5239" Y="1715.017" Z="63.88278" />
+	</Hotspots>
+	</Objective>
+	</Quest>
+	<Quest Id="28693" Name="Finish The Job">
+	<Objective Type="KillMob" MobId="46825" KillCount="5">
+	<Hotspots>
+		<Hotspot X="-366.0929" Y="1727.022" Z="22.73531" />
+		<Hotspot X="-363.3139" Y="1653.258" Z="18.30021" />
+		<Hotspot X="-407.9453" Y="1586.206" Z="24.00062" />
+		<Hotspot X="-482.8566" Y="1530.755" Z="18.80788" />	
+	</Hotspots>
+	</Objective>
+	</Quest>
+	<Quest Id="28686" Name="Not The Friendliest Town">
+	<Objective Type="KillMob" MobId="47664" KillCount="14">
+	<Hotspots>
+		<Hotspot X="-76.54547" Y="1346.212" Z="22.04963" />
+		<Hotspot X="-25.19899" Y="1341.452" Z="22.05027" />
+		<Hotspot X="14.76371" Y="1296.069" Z="20.42659" />
+		<Hotspot X="16.10763" Y="1258.006" Z="15.05701" />
+		<Hotspot X="-27.51064" Y="1216.344" Z="15.07817" />
+		<Hotspot X="-13.07056" Y="1164.045" Z="15.08945" />
+		<Hotspot X="-40.21508" Y="1144.721" Z="15.06185" />
+		<Hotspot X="-72.26093" Y="1171.12" Z="15.13031" />
+		<Hotspot X="-139.3597" Y="1188.298" Z="22.04813" />
+		<Hotspot X="-116.9286" Y="1229.621" Z="22.04814" />
+		<Hotspot X="-98.99667" Y="1286.69" Z="22.04827" />
+		<Hotspot X="-106.7051" Y="1307.235" Z="22.24372" />
+		<Hotspot X="-101.667" Y="1313.881" Z="22.04965" />
+	</Hotspots>
+	</Objective>
+	</Quest>
+	<Quest Id="28678" Name="Captain P. Harris">
+	<Objective Type="KillMob" MobId="47287" KillCount="1">
+	<Hotspots><Hotspot X="272.2379" Y="1527.812" Z="2.695419" /></Hotspots>
+	</Objective>
+	</Quest>
+	<Quest Id="28684" Name="A Sticky Task">
+	<Objective Type="CollectItem" ItemId="62803" CollectCount="4">
+		<CollectFrom>
+			<Mob Name="Darkwood Broodmother" Id="46507" />
+		</CollectFrom>
+		<Hotspots>
+			<Hotspot X="-276.8569" Y="1279.073" Z="22.99864" />
+			<Hotspot X="-313.2652" Y="1355.637" Z="21.73801" />
+			<Hotspot X="-235.5992" Y="1382.193" Z="22.71463" />
+			<Hotspot X="-236.4346" Y="1448.735" Z="24.6194" />
+			<Hotspot X="-270.6553" Y="1382.272" Z="23.22095" />
+			<Hotspot X="-339.5683" Y="1290.853" Z="24.74712" />
+			<Hotspot X="-369.0026" Y="1354.439" Z="21.03231" />
+		</Hotspots>
+	</Objective>
+	</Quest>
+	<Quest Id="28690" Name="Salvaging the Remains" >
+    <Objective Type="CollectItem" ItemId="62808" CollectCount="9">
+      <CollectFrom>
+	<Mob Name="Forgotten Ghoul" Id="46569" />
+      </CollectFrom>
+		<Hotspots>
+		   <Hotspot X="-472.3245" Y="1888.093" Z="46.92218" />
+		</Hotspots>
+	</Objective>
+	</Quest>
+	<Quest Id="28680" Name="Boosting Morale">
+	<Objective Type="CollectItem" ItemId="62810" CollectCount="6">
+	<CollectFrom>
+	</CollectFrom>
+	<Hotspots>
+	<Hotspot X="111.2332" Y="1497.821" Z="-5.699194" />
+	</Hotspots>
+	</Objective>
+	</Quest>
+	<Quest Id="28687" Name="Teach A Man To Fish.... Or Steal">
+	<Objective Type="CollectItem" ItemId="63047" CollectCount="22">
+	<CollectFrom>
+	</CollectFrom>
+	<Hotspots>
+
+	</Hotspots>
+	</Objective>
+	</Quest>
+	<Quest Id="28695" Name="WANTED: Foreman Wellson">
+	<Objective Type="KillMob" MobId="46648" KillCount="1">
+	<Hotspots>
+	<Hotspot X="-208.5763" Y="1912.925" Z="2.382754" />
+	</Hotspots>
+	</Objective>
+	</Quest>
+	<Quest Id="28697" Name="Ghostbuster">
+	<Objective Type="KillMob" MobId="47303" KillCount="14">
+	<Hotspots>
+		<Hotspot X="-137.311" Y="1061.943" Z="22.05109" />
+		<Hotspot X="-255.9008" Y="978.67" Z="48.97158" />
+		<Hotspot X="-166.22" Y="919.7796" Z="73.23612" />
+		<Hotspot X="-156.3961" Y="1046.136" Z="23.91223" />
+	</Hotspots>
+	</Objective>
+	</Quest>
+	<Quest Id="28681" Name="Shark Tank"> <!-- TB -->
+		<Objective Type="KillMob" MobId="46608" KillCount="1">
+			<Hotspots>
+				<Hotspot X="128.1277" Y="1530.333" Z="-1.498052" />
+				<Hotspot X="238.5994" Y="1518.904" Z="-3.574885" />
+				<Hotspot X="226.5217" Y="1565.425" Z="-1.488782" />
+				<Hotspot X="117.839" Y="1565.4" Z="-1.507426" />			
+			</Hotspots>
+		</Objective>
+	</Quest>	
+
+ 
+  <QuestOrder>
+
+		<CustomBehavior File="UserSettings" TrainNewSkills="False" UseMount="True" LootMobs="True" PullDistance="25"  />
+		
+	 <!-- If I am in Dalaran, take the portal to Org -->
+	 <If Condition="(Me.ZoneId == 4395)" >
+		<CustomBehavior File="ForcedDismount" />
+		<RunTo X="5924.277" Y="589.9855" Z="639.8734" />
+		<CustomBehavior File="ForcedDismount" />
+		
+		<CustomBehavior File="InteractWith" MobId="191009" ObjectType="Gameobject" Range="4" X="5925.295" Y="593.4274" Z="640.5935" />
+		<CustomBehavior File="WaitTimer" WaitTime="5000" GoalText="Waiting for port {TimeRemaining}" />
+	  <If Condition="(Me.ZoneId == 1637)" >
+		<RunTo X="1897.4" Y="-4523.682" Z="27.50176" />
+	  </If>
+	 </If>
+
+	 <!-- If I am in Org, take the Org portal to TB -->
+	 <If Condition="(Me.ZoneId == 1637) &amp;&amp; (Me.ZoneId != 5389) &amp;&amp; (Me.ZoneId != 5095)" >
+		<CustomBehavior File="FlyTo" DestName="Org Portal" X="2031.758" Y="-4332.968" Z="95.4723" />
+		<CustomBehavior File="ForcedDismount" />
+		
+		<CustomBehavior File="InteractWith" MobId="206595" ObjectType="Gameobject" Range="4" X="2031.758" Y="-4332.968" Z="95.4723" />
+		<CustomBehavior File="WaitTimer" WaitTime="5000" GoalText="Waiting for port {TimeRemaining}" />
+	 </If>
+
+	<If Condition="(Me.ZoneId == 5095)" >
+		<RunTo X="-598.8535" Y="1380.87" Z="21.99788" />
+	</If>
+			
+	<!-- This is the MobId, not QuestId -->
+	<While Condition="HasQuestAvailable(48361)" >
+		<CustomBehavior File="InteractWith" MobId="48361" Range="3" X="-1226.825" Y="982.4016" Z="119.5738" />
+		<CustomBehavior File="Misc\RunLua" Lua="AcceptQuest()" WaitTime="1000" />
+		<CustomBehavior File="Misc\RunLua" Lua="SelectAvailableQuest(1)" WaitTime="1000" />
+		<CustomBehavior File="Misc\RunLua" Lua="AcceptQuest()" WaitTime="1000" />
+	</While>
+
+	<While Condition="HasQuestAvailable(48360)" >
+		<CustomBehavior File="InteractWith" MobId="48360" Range="3" X="-1226.825" Y="982.4016" Z="119.5738" />
+		<CustomBehavior File="Misc\RunLua" Lua="AcceptQuest()" WaitTime="1000" />
+		<CustomBehavior File="Misc\RunLua" Lua="SelectAvailableQuest(1)" WaitTime="1000" />
+		<CustomBehavior File="Misc\RunLua" Lua="AcceptQuest()" WaitTime="1000" />
+	</While>
+	
+	<While Condition="HasQuestAvailable(48358)" >
+		<CustomBehavior File="InteractWith" MobId="48358" Range="3" X="-1226.825" Y="982.4016" Z="119.5738" />
+		<CustomBehavior File="Misc\RunLua" Lua="AcceptQuest()" WaitTime="1000" />
+		<CustomBehavior File="Misc\RunLua" Lua="SelectAvailableQuest(1)" WaitTime="1000" />
+		<CustomBehavior File="Misc\RunLua" Lua="AcceptQuest()" WaitTime="1000" />
+	</While>
+
+	<While Condition="HasQuestAvailable(48363)" >
+		<CustomBehavior File="InteractWith" MobId="48363" Range="3" X="-1226.825" Y="982.4016" Z="119.5738" />
+		<CustomBehavior File="Misc\RunLua" Lua="AcceptQuest()" WaitTime="1000" />
+		<CustomBehavior File="Misc\RunLua" Lua="SelectAvailableQuest(1)" WaitTime="1000" />
+		<CustomBehavior File="Misc\RunLua" Lua="AcceptQuest()" WaitTime="1000" />
+	</While>
+
+	
+    <If Condition="HasQuest(28693)">
+		<Objective QuestName="Finish The Job" QuestId="28693" Type="KillMob" MobId="46825" KillCount="5" />
+    </If>
+
+    <If Condition="(HasQuest(28692)) &amp;&amp; (!IsQuestCompleted(28692))">
+		<CustomBehavior File="UserSettings" UseMount="False" PullDistance="1" />
+	 <While Condition="((HasQuest(28692)) &amp;&amp; (!IsQuestCompleted(28692)))" > <!-- TB -->
+		<UseItem QuestId="28692" ItemId="62829" X="-354.8989" Y="1729.685" Z="24.83073" />
+		<CustomBehavior File="WaitTimer" QuestId="28692" WaitTime="2000" GoalText="Waiting for agro to clear {TimeRemaining}" />
+		<CustomBehavior File="InteractWith" QuestId="28692" MobId1="206644" MobId2="206651" MobId3="206652" ObjectType="Gameobject" Range="4" NumOfTimes="20" CollectionDistance="20" WaitForNpcs="False" />
+		
+		<UseItem QuestId="28692" ItemId="62829" X="-375.6446" Y="1713.888" Z="21.03204" />
+		<CustomBehavior File="WaitTimer" QuestId="28692" WaitTime="2000" GoalText="Waiting for agro to clear {TimeRemaining}" />
+		<CustomBehavior File="InteractWith" QuestId="28692" MobId1="206644" MobId2="206651" MobId3="206652" ObjectType="Gameobject" Range="4" NumOfTimes="20" CollectionDistance="20" WaitForNpcs="False" />
+		
+		<UseItem QuestId="28692" ItemId="62829" X="-387.5059" Y="1678.007" Z="17.98487" />
+		<CustomBehavior File="WaitTimer" QuestId="28692" WaitTime="2000" GoalText="Waiting for agro to clear {TimeRemaining}" />
+		<CustomBehavior File="InteractWith" QuestId="28692" MobId1="206644" MobId2="206651" MobId3="206652" ObjectType="Gameobject" Range="4" NumOfTimes="20" CollectionDistance="20" WaitForNpcs="False" />
+		
+		<UseItem QuestId="28692" ItemId="62829" X="-369.5399" Y="1662.519" Z="18.06426" />
+		<CustomBehavior File="WaitTimer" QuestId="28692" WaitTime="2000" GoalText="Waiting for agro to clear {TimeRemaining}" />
+		<CustomBehavior File="InteractWith" QuestId="28692" MobId1="206644" MobId2="206651" MobId3="206652" ObjectType="Gameobject" Range="4" NumOfTimes="20" CollectionDistance="20" WaitForNpcs="False" />
+		
+		<UseItem QuestId="28692" ItemId="62829" X="-363.9879" Y="1643.076" Z="18.18084" />
+		<CustomBehavior File="WaitTimer" QuestId="28692" WaitTime="2000" GoalText="Waiting for agro to clear {TimeRemaining}" />
+		<CustomBehavior File="InteractWith" QuestId="28692" MobId1="206644" MobId2="206651" MobId3="206652" ObjectType="Gameobject" Range="4" NumOfTimes="20" CollectionDistance="20" WaitForNpcs="False" />
+		
+		<UseItem QuestId="28692" ItemId="62829" X="-342.6443" Y="1634.853" Z="20.98205" />
+		<CustomBehavior File="WaitTimer" QuestId="28692" WaitTime="2000" GoalText="Waiting for agro to clear {TimeRemaining}" />
+		<CustomBehavior File="InteractWith" QuestId="28692" MobId1="206644" MobId2="206651" MobId3="206652" ObjectType="Gameobject" Range="4" NumOfTimes="20" CollectionDistance="20" WaitForNpcs="False" />
+		
+		<UseItem QuestId="28692" ItemId="62829" X="-359.9781" Y="1617.626" Z="24.28876" />
+		<CustomBehavior File="WaitTimer" QuestId="28692" WaitTime="2000" GoalText="Waiting for agro to clear {TimeRemaining}" />
+		<CustomBehavior File="InteractWith" QuestId="28692" MobId1="206644" MobId2="206651" MobId3="206652" ObjectType="Gameobject" Range="4" NumOfTimes="20" CollectionDistance="20" WaitForNpcs="False" />
+		
+		<UseItem QuestId="28692" ItemId="62829" X="-381.2203" Y="1637.391" Z="22.99713" />
+		<CustomBehavior File="WaitTimer" QuestId="28692" WaitTime="2000" GoalText="Waiting for agro to clear {TimeRemaining}" />
+		<CustomBehavior File="InteractWith" QuestId="28692" MobId1="206644" MobId2="206651" MobId3="206652" ObjectType="Gameobject" Range="4" NumOfTimes="20" CollectionDistance="20" WaitForNpcs="False" />
+		
+		<UseItem QuestId="28692" ItemId="62829" X="-397.9663" Y="1640.518" Z="20.73367" />
+		<CustomBehavior File="WaitTimer" QuestId="28692" WaitTime="2000" GoalText="Waiting for agro to clear {TimeRemaining}" />
+		<CustomBehavior File="InteractWith" QuestId="28692" MobId1="206644" MobId2="206651" MobId3="206652" ObjectType="Gameobject" Range="4" NumOfTimes="20" CollectionDistance="20" WaitForNpcs="False" />
+		
+		<UseItem QuestId="28692" ItemId="62829" X="-415.3267" Y="1617.886" Z="18.6075" />
+		<CustomBehavior File="WaitTimer" QuestId="28692" WaitTime="2000" GoalText="Waiting for agro to clear {TimeRemaining}" />
+		<CustomBehavior File="InteractWith" QuestId="28692" MobId1="206644" MobId2="206651" MobId3="206652" ObjectType="Gameobject" Range="4" NumOfTimes="20" CollectionDistance="20" WaitForNpcs="False" />
+		
+		<UseItem QuestId="28692" ItemId="62829" X="-396.8392" Y="1599.369" Z="23.03087" />
+		<CustomBehavior File="WaitTimer" QuestId="28692" WaitTime="2000" GoalText="Waiting for agro to clear {TimeRemaining}" />
+		<CustomBehavior File="InteractWith" QuestId="28692" MobId1="206644" MobId2="206651" MobId3="206652" ObjectType="Gameobject" Range="4" NumOfTimes="20" CollectionDistance="20" WaitForNpcs="False" />
+		
+		<UseItem QuestId="28692" ItemId="62829" X="-383.5915" Y="1575.847" Z="17.72996" />
+		<CustomBehavior File="WaitTimer" QuestId="28692" WaitTime="2000" GoalText="Waiting for agro to clear {TimeRemaining}" />
+		<CustomBehavior File="InteractWith" QuestId="28692" MobId1="206644" MobId2="206651" MobId3="206652" ObjectType="Gameobject" Range="4" NumOfTimes="20" CollectionDistance="20" WaitForNpcs="False" />
+		
+		<UseItem QuestId="28692" ItemId="62829" X="-412.6295" Y="1572.277" Z="23.08245" />
+		<CustomBehavior File="WaitTimer" QuestId="28692" WaitTime="2000" GoalText="Waiting for agro to clear {TimeRemaining}" />
+		<CustomBehavior File="InteractWith" QuestId="28692" MobId1="206644" MobId2="206651" MobId3="206652" ObjectType="Gameobject" Range="4" NumOfTimes="20" CollectionDistance="20" WaitForNpcs="False" />
+		
+		<UseItem QuestId="28692" ItemId="62829" X="-435.7594" Y="1596.063" Z="23.56715" />
+		<CustomBehavior File="WaitTimer" QuestId="28692" WaitTime="2000" GoalText="Waiting for agro to clear {TimeRemaining}" />
+		<CustomBehavior File="InteractWith" QuestId="28692" MobId1="206644" MobId2="206651" MobId3="206652" ObjectType="Gameobject" Range="4" NumOfTimes="20" CollectionDistance="20" WaitForNpcs="False" />
+		
+		<UseItem QuestId="28692" ItemId="62829" X="-459.0166" Y="1573.946" Z="24.13523" />
+		<CustomBehavior File="WaitTimer" QuestId="28692" WaitTime="2000" GoalText="Waiting for agro to clear {TimeRemaining}" />
+		<CustomBehavior File="InteractWith" QuestId="28692" MobId1="206644" MobId2="206651" MobId3="206652" ObjectType="Gameobject" Range="4" NumOfTimes="20" CollectionDistance="20" WaitForNpcs="False" />
+		
+		<UseItem QuestId="28692" ItemId="62829" X="-457.5177" Y="1555.46" Z="21.3856" />
+		<CustomBehavior File="WaitTimer" QuestId="28692" WaitTime="2000" GoalText="Waiting for agro to clear {TimeRemaining}" />
+		<CustomBehavior File="InteractWith" QuestId="28692" MobId1="206644" MobId2="206651" MobId3="206652" ObjectType="Gameobject" Range="4" NumOfTimes="20" CollectionDistance="20" WaitForNpcs="False" />
+		
+		<UseItem QuestId="28692" ItemId="62829" X="-482.6157" Y="1536.296" Z="18.46501" />
+		<CustomBehavior File="WaitTimer" QuestId="28692" WaitTime="2000" GoalText="Waiting for agro to clear {TimeRemaining}" />
+		<CustomBehavior File="InteractWith" QuestId="28692" MobId1="206644" MobId2="206651" MobId3="206652" ObjectType="Gameobject" Range="4" NumOfTimes="20" CollectionDistance="20" WaitForNpcs="False" />
+	 </While>
+		<CustomBehavior File="UserSettings" LootMobs="True" UseMount="True" PullDistance="15"  />
+    </If> 
+
+    <If Condition="HasQuest(28691)">
+		<Objective QuestName="First Lieutenant Connor" QuestId="28691" Type="KillMob" MobId="46571" KillCount="1" />
+    </If>
+
+    <If Condition="HasQuest(28689)">
+		<Objective QuestName="The Forgotten" QuestId="28689" Type="UseObject" ObjectId="206570" UseCount="6" />	  
+    </If>  
+
+    <If Condition="HasQuest(28690)">
+		<Objective QuestName="Salvaging the Remains" QuestId="28690" Type="CollectItem" ItemId="62808" CollectCount="9" />
+    </If>
+
+    <If Condition="HasQuest(28695)">
+		<Objective QuestName="WANTED: Foreman Wellson" QuestId="28695" Type="KillMob" MobId="46648" KillCount="1" />
+    </If>
+
+    <If Condition="(HasQuest(28696)) &amp;&amp; (!IsQuestCompleted(28696))">
+		<RunTo X="-71.24492" Y="2008.903" Z="7.228067" />
+		<CustomBehavior File="ForcedDismount" />
+			<If Condition="Me.Class == WoWClass.Druid">
+				<CustomBehavior File="RunMacro" Macro="/cancelaura cat form\n/cancelaura moonkin form\n/cancelaura bear form" NumOfTimes="1" WaitTime="1000" />
+			</If>
+		<CustomBehavior File="NoControlVehicle" QuestId="28696" VehicleMountId="48283" TargetId="48286" NumOfTimes="10" AttackButton="1" GoHomeButton="1" MaxRange="200" WaitTime="2000" />
+    </If>
+
+    <If Condition="HasQuest(28694)">
+		<Objective QuestName="Watch Out For Splinters!" QuestId="28694" Type="CollectItem" ItemId="62811" CollectCount="15" />
+    </If>
+
+    <If Condition="HasQuest(28682)">              
+		<Objective QuestName="Claiming The Keep" QuestId="28682" Type="KillMob" MobId="47447" KillCount="1" />
+    </If>    
+
+    <While Condition="(HasQuest(28721)) &amp;&amp; (!IsQuestCompleted(28721))">
+		<RunTo QuestId="28721" X="24.51268" Y="1728.881" Z="28.21425"  />
+		<CustomBehavior File="InteractWith" QuestId="28721" MobId="48309" X="19.70313" Y="1733.854" Z="28.21435" /> 
+		<CustomBehavior File="FollowNpcUntil" NpcId="49443" Location="21.19097 1728.368 36.44616" EndNpcId="48325" />
+		<CustomBehavior File="WaitTimer" QuestId="28721" WaitTime="5000" GoalText="Waiting for  {TimeRemaining}" />
+    </While>
+
+    <If Condition="HasQuest(28685)">
+		<Objective QuestName="Leave No Weapon Behind" QuestId="28685" Type="CollectItem" ItemId="62921" CollectCount="12" />  
+    </If>
+
+    <If Condition="HasQuest(28678)">              
+		<Objective QuestName="Captain P. Harris" QuestId="28678" Type="KillMob" MobId="47287" KillCount="1" />           
+    </If>            
+
+    <If Condition="HasQuest(28680)">
+		<Objective QuestName="Boosting Morale" QuestId="28680" Type="CollectItem" ItemId="62810" CollectCount="6" />
+    </If>
+
+    <If Condition="HasQuest(28679)">
+		<Objective QuestName="Rattling Their Cages" QuestId="28679" Type="KillMob" MobId="46605" KillCount="8" />
+    </If> 
+
+    <If Condition="HasQuest(28686)">
+		<Objective QuestName="Not The Friendliest Town" QuestId="28686" Type="KillMob" MobId="47664" KillCount="14" />
+    </If>
+
+    <If Condition="HasQuest(28687)">
+		<Objective QuestName="Teach A Man To Fish.... Or Steal" QuestId="28687" Type="CollectItem" ItemId="63047" CollectCount="22" />
+    </If>
+
+    <If Condition="HasQuest(28697)">
+		<Objective QuestName="Ghostbuster" QuestId="28697" Type="KillMob" MobId="47303" KillCount="14" />
+    </If>
+
+    <If Condition="HasQuest(28698)">
+		<Objective QuestName="Cannonball!" QuestId="28698" Type="CollectItem" ItemId="62818" CollectCount="4" />
+    </If>
+
+    <If Condition="HasQuest(28700)">
+		<Objective QuestName="Taking the Overlook Back" QuestId="28700" Type="KillMob" MobId="47304" KillCount="1" />
+    </If>
+
+    <If Condition="HasQuest(28684)">
+		<Objective QuestName="A Sticky Task" QuestId="28684" Type="CollectItem" ItemId="62803" CollectCount="4" />
+    </If>
+
+    <If Condition="HasQuest(28683)">
+		<CustomBehavior File="UserSettings" PullDistance="35"  />
+		<Objective QuestName="Thinning the Brood" QuestId="28683" Type="KillMob" MobId="46508" KillCount="12" />
+		<CustomBehavior File="UserSettings" PullDistance="15"  />
+    </If>
+
+	<If Condition="((HasQuest(28681)) &amp;&amp; (!IsQuestCompleted(28681)))">
+		<CustomBehavior File="UserSettings" PullDistance="40"  />
+		<RunTo QuestId="28681" X="88.00489" Y="1511.841" Z="-1.689145" />
+		<Objective QuestName="Shark Tank" QuestId="28681" Type="KillMob" MobId="46608" KillCount="1" />
+ 		<CustomBehavior File="UserSettings" PullDistance="15"  />
+   </If>
+
+		<If Condition="HasQuest(28689)">
+    <TurnIn QuestName="The Forgotten" QuestId="28689" TurnInId="48363" TurnInName="Captain Prug" X="-594.509" Y="1403.89" Z="21.39922" />
+		</If>
+		<If Condition="HasQuest(28690)">
+    <TurnIn QuestName="Salvaging the Remains" QuestId="28690" TurnInId="48363" TurnInName="Captain Prug" X="-594.509" Y="1403.89" Z="21.39922" />
+		</If>
+		<If Condition="HasQuest(28691)">
+    <TurnIn QuestName="First Lieutenant Connor" QuestId="28691" TurnInId="48363" TurnInName="Captain Prug" X="-594.509" Y="1403.89" Z="21.39922" />
+		</If>
+		<If Condition="((HasQuest(28692)) &amp;&amp; (IsQuestCompleted(28692)))">
+    <TurnIn QuestName="Magnets, How Do They Work?" QuestId="28692" TurnInId="48363" TurnInName="Captain Prug" X="-594.509" Y="1403.89" Z="21.39922" />
+		</If> 
+		<If Condition="HasQuest(28693)">
+    <TurnIn QuestName="Finish The Job" QuestId="28693" TurnInId="48363" TurnInName="Captain Prug" X="-594.509" Y="1403.89" Z="21.39922" />
+		</If>
+		<If Condition="HasQuest(28694)">
+    <TurnIn QuestName="Watch Out For Splinters!" QuestId="28694" TurnInId="48361" TurnInName="Private Sarlosk"  X="-584.285" Y="1387.62" Z="22.81599" />
+		</If>
+		<If Condition="HasQuest(28695)">
+    <TurnIn QuestName="WANTED: Foreman Wellson" QuestId="28695" TurnInId="48361" TurnInName="Private Sarlosk"  X="-584.285" Y="1387.62" Z="22.81599" />
+		</If>
+		<If Condition="HasQuest(28696)">
+    <TurnIn QuestName="Bomb's Away!" QuestId="28696" TurnInId="48361" TurnInName="Private Sarlosk"  X="-584.285" Y="1387.62" Z="22.81599" />
+		</If>
+		<If Condition="HasQuest(28697)">
+    <TurnIn QuestName="Ghostbuster" QuestId="28697" TurnInId="48361" TurnInName="Private Sarlosk"  X="-584.285" Y="1387.62" Z="22.81599" />
+		</If>
+		<If Condition="HasQuest(28698)">
+    <TurnIn QuestName="Cannonball!" QuestId="28698" TurnInId="48361" TurnInName="Private Sarlosk"  X="-584.285" Y="1387.62" Z="22.81599" />
+		</If>
+		<If Condition="HasQuest(28700)">
+    <TurnIn QuestName="Taking the Overlook Back" QuestId="28700" TurnInId="48361" TurnInName="Private Sarlosk"  X="-584.285" Y="1387.62" Z="22.81599" />
+		</If>
+		<If Condition="HasQuest(28678)">
+    <TurnIn QuestName="Captain P. Harris" QuestId="28678" TurnInId="48360" TurnInName="3rd Officer Kronkar" X="-619.2344" Y="1397.754" Z="22.04972" />
+		</If> 
+		<If Condition="HasQuest(28679)">
+    <TurnIn QuestName="Rattling Their Cages" QuestId="28679" TurnInId="48360" TurnInName="3rd Officer Kronkar" X="-619.2344" Y="1397.754" Z="22.04972" />
+		</If> 
+		<If Condition="HasQuest(28680)">
+    <TurnIn QuestName="Boosting Morale" QuestId="28680" TurnInId="48360" TurnInName="3rd Officer Kronkar" X="-619.2344" Y="1397.754" Z="22.04972" />
+		</If> 
+		<If Condition="((HasQuest(28681)) &amp;&amp; (IsQuestCompleted(28681)))">
+    <TurnIn QuestName="Shark Tank" QuestId="28681" TurnInId="48360" TurnInName="3rd Officer Kronkar" X="-619.2344" Y="1397.754" Z="22.04972" />
+		</If> 
+		<If Condition="HasQuest(28683)">
+    <TurnIn QuestName="Thinning the Brood" QuestId="28683" TurnInId="48360" TurnInName="3rd Officer Kronkar" X="-619.2344" Y="1397.754" Z="22.04972" />
+		</If> 
+		<If Condition="HasQuest(28684)">
+    <TurnIn QuestName="A Sticky Task" QuestId="28684" TurnInId="48360" TurnInName="3rd Officer Kronkar" X="-619.2344" Y="1397.754" Z="22.04972" />
+		</If> 
+		<If Condition="HasQuest(28682)">              
+    <TurnIn QuestName="Claiming The Keep" QuestId="28682" TurnInId="48358" TurnInName="Commander Larmash" X="-609.971" Y="1428.8" Z="22.04976" />
+		</If>   
+		<If Condition="HasQuest(28685)">
+    <TurnIn QuestName="Leave No Weapon Behind" QuestId="28685" TurnInId="48358" TurnInName="Commander Larmash" X="-609.971" Y="1428.8" Z="22.04976" />
+		</If> 
+		<If Condition="HasQuest(28686)">
+    <TurnIn QuestName="Not The Friendliest Town" QuestId="28686" TurnInId="48358" TurnInName="Commander Larmash" X="-609.971" Y="1428.8" Z="22.04976" />
+		</If>
+		<If Condition="HasQuest(28687)">
+    <TurnIn QuestName="Teach A Man To Fish.... Or Steal" QuestId="28687" TurnInId="48358" TurnInName="Commander Larmash" X="-609.971" Y="1428.8" Z="22.04976" />
+		</If> 
+		<If Condition="HasQuest(28721)">
+    <TurnIn QuestName="Walk A Mile In Their Shoes" QuestId="28721" TurnInId="48358" TurnInName="Commander Larmash" X="-609.971" Y="1428.8" Z="22.04976" />
+		</If> 
+		
+			
+			<If Condition="(Me.ZoneId == 5389)" > <!-- Portal to Org -->
+				<CustomBehavior File="InteractWith" MobId="208226" ObjectType="GameObject" X="-598.69" Y="1380.432" Z="21.99778" />
+			</If>
+			
+			<!--
+		<If Condition="(IsQuestCompleted(26709)) &amp;&amp; (Lua.GetReturnVal<int>('return GetDailyQuestsCompleted()', 0) &lt;= 20)">
+			-->
+		<If Condition="(IsQuestCompleted(26709))">
+			<CustomBehavior File="LoadProfile" ProfileName="..\[Fly][N - Rep Quest] DH Therazane Rep Dailies [Kick]" /> 
+		</If> 
+
+		<CustomBehavior File="UserDialog" AllowBotStop="True" SoundCue="Asterisk" SoundCueInterval="2" Text="End of TB Dailies" />
+
+ </QuestOrder> 
+  
+</HBProfile>

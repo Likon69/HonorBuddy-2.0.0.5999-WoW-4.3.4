@@ -1,0 +1,63 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<HBProfile>
+  <Name>Mageweave Cloth - Felwood</Name>
+  <MinDurability>0.3</MinDurability>
+  <MinFreeBagSlots>2</MinFreeBagSlots>
+  <MinLevel>1</MinLevel>
+  <MaxLevel>86</MaxLevel>
+	<SellGrey>True</SellGrey>
+	<SellWhite>True</SellWhite>
+	<SellGreen>False</SellGreen>
+	<SellBlue>False</SellBlue>
+	<SellPurple>False</SellPurple>
+	
+	<MailWhite>True</MailWhite>
+	<MailGreen>True</MailGreen>
+	<MailBlue>True</MailBlue>
+	<MailPurple>True</MailPurple>  
+
+	<Vendors>
+<Vendor Name="Willard Harrington" Entry="48258" Type="Repair" X="6193.27" Y="-1946.21" Z="568.3515" />
+	</Vendors>
+	
+	<Mailboxes>
+<Mailbox X="6207.434" Y="-1935.216" Z="568.8104" />
+
+	</Mailboxes>
+
+  <GrindArea>
+    <TargetMinLevel>1</TargetMinLevel>
+    <TargetMaxLevel>86</TargetMaxLevel>
+    <Factions>82</Factions>
+    <Hotspots>
+<Hotspot X="6602.264" Y="-1912.641" Z="545.8044" />
+<Hotspot X="6645.532" Y="-1960.333" Z="550.842" />
+<Hotspot X="6645.749" Y="-2005.107" Z="553.1375" />
+<Hotspot X="6716.455" Y="-1971.104" Z="557.8937" />
+<Hotspot X="6792.076" Y="-1954.415" Z="551.0662" />
+<Hotspot X="6812.295" Y="-2004.332" Z="566.8889" />
+<Hotspot X="6883.274" Y="-2019.954" Z="577.9567" />
+<Hotspot X="6837.836" Y="-1948.128" Z="550.3264" />
+<Hotspot X="6841.817" Y="-1884.236" Z="550.0371" />
+<Hotspot X="6896.39" Y="-1887.808" Z="566.9591" />
+<Hotspot X="6899.184" Y="-1819.678" Z="568.8958" />
+<Hotspot X="6833.426" Y="-1826.114" Z="561.8018" />
+<Hotspot X="6780.034" Y="-1866.967" Z="551.192" />
+<Hotspot X="6720.896" Y="-1876.11" Z="550.5284" />
+    </Hotspots>
+  </GrindArea>
+
+
+           <ProtectedItems>
+           <Item name="Linen Cloth" entry="2589" /> 
+           <Item name="Wool Cloth" entry="2592" /> 
+           <Item name="Silk Cloth" entry="4306" /> 
+           <Item name="Mageweave Cloth" entry="4338" /> 
+           </ProtectedItems>
+           <ForceMail>
+           <Item name="Wool Cloth" entry="2592" /> 
+           <Item name="Linen Cloth" entry="2589" />
+           <Item name="Silk Cloth" entry="4306" /> 
+           <Item name="Mageweave Cloth" entry="4338" /> 
+           </ForceMail>
+</HBProfile>

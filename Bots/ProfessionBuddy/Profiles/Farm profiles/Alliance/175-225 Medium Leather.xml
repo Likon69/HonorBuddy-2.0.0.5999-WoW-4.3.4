@@ -1,0 +1,90 @@
+<HBProfile>
+<Name>175-225 Heavy Leather-Alliance</Name>
+<MinDurability>0.4</MinDurability>
+<MinFreeBagSlots>1</MinFreeBagSlots>
+
+
+<MailGrey>false</MailGrey>
+<MailWhite>false</MailWhite>
+<MailGreen>false</MailGreen>
+<MailBlue>false</MailBlue>
+<MailPurple>false</MailPurple>
+
+<SellGrey>True</SellGrey>
+<SellWhite>True</SellWhite>
+<SellGreen>True</SellGreen>
+<SellBlue>false</SellBlue>
+<SellPurple>false</SellPurple>
+
+<Vendors>
+</Vendors>
+
+<Mailboxes>
+</Mailboxes>
+
+<Blackspots>
+</Blackspots>
+
+  <QuestOrder>
+    
+
+    <While Condition="(Me.Level &gt; 1)" >
+
+      <If Condition="(Me.FreeBagSlots &gt; 5)" >
+
+        <CustomBehavior File="FlyTo" DestName="Farm Area" X="-13813.25" Y="93.49027" Z="26.99422" />
+        <CustomBehavior File="ForcedDismount" />
+
+        <SetGrindArea>
+          <GrindArea>
+            <TargetMinLevel>1</TargetMinLevel>
+            <TargetMaxLevel>86</TargetMaxLevel>
+            <Factions>14 16 48 72</Factions>           
+            <TargetMinLevel>20</TargetMinLevel>
+            <TargetMaxLevel>30</TargetMaxLevel>
+            <Hotspots>
+              <Hotspot X="-13813.25" Y="93.49027" Z="26.99422" />
+              <Hotspot X="-13854.97" Y="110.5135" Z="17.35789" />
+              <Hotspot X="-13878.33" Y="64.24706" Z="16.15997" />
+              <Hotspot X="-13916.53" Y="90.68429" Z="14.70266" />
+              <Hotspot X="-13958.54" Y="79.27751" Z="16.76558" />
+              <Hotspot X="-13958" Y="134.17" Z="13.38363" />
+              <Hotspot X="-13991.61" Y="161.5431" Z="13.21219" />
+              <Hotspot X="-14043.1" Y="133.2648" Z="11.27847" />
+              <Hotspot X="-14071.26" Y="174.502" Z="11.93576" />
+              <Hotspot X="-14065.82" Y="207.7571" Z="14.60054" />
+              <Hotspot X="-14018.11" Y="204.2136" Z="12.68127" />
+              <Hotspot X="-14000.44" Y="165.2755" Z="13.71375" />
+              <Hotspot X="-13942.46" Y="76.67322" Z="16.04244" />
+            </Hotspots>
+          </GrindArea>
+        </SetGrindArea>
+        <GrindTo Condition="(Me.FreeBagSlots &lt;= 5) || (Me.DurabilityPercent &lt;= 0.3)" GoalText="Farming Light Leather." />
+      </If>
+      <If Condition="(Me.FreeBagSlots &lt;= 5) || (Me.DurabilityPercent &lt;= 0.3)" >
+
+        <CustomBehavior File="Message" Text="Sell \ Repair." LogColor="Red" />
+
+        <CustomBehavior File="FlyTo" X="-9463.318" Y="-1349.133" Z="75.51675"   DestName="Repair Run" />
+        <CustomBehavior File="ForcedDismount" />
+
+        <SetVendor>
+          <Vendors>
+            <Vendor Name="Rallik Finn" Entry="1198" Type="Repair" X="-9469.282" Y="-1355.242" Z="47.20448" />
+          </Vendors>
+        </SetVendor>
+
+        <CustomBehavior File="ForceSetVendor" DoMail="False" DoSell="True" DoRepair="True" DoTrain="False" />
+
+        <ClearMailbox />
+        <ClearVendor />
+
+      </If>
+
+
+
+    </While>
+
+
+  </QuestOrder>
+</HBProfile>

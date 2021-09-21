@@ -1,0 +1,236 @@
+<HBProfile xsi:noNamespaceSchemaLocation="../Schemas/EchoSchema.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<!-- Original contribution by EchoTiger -->
+	<Name>Blood Elf Starter ($ShortHash$)</Name>
+
+	<MinDurability>0.3</MinDurability>
+	<MinFreeBagSlots>3</MinFreeBagSlots>
+
+	<SellGrey>true</SellGrey>
+	<SellWhite>true</SellWhite>
+	<SellGreen>true</SellGreen>
+	<SellBlue>true</SellBlue>
+	<SellPurple>false</SellPurple>
+
+	<MailGrey>false</MailGrey>
+	<MailWhite>true</MailWhite>
+	<MailGreen>true</MailGreen>
+	<MailBlue>true</MailBlue>
+	<MailPurple>true</MailPurple>
+
+	<TargetElites>true</TargetElites>
+
+	<AvoidMobs>
+	</AvoidMobs>
+
+	<Mailboxes>
+	</Mailboxes>
+
+	<Vendors>
+	</Vendors>
+
+	<Blackspots>
+	</Blackspots>
+
+	<Blacklist>
+	</Blacklist>
+
+	<QuestOrder IgnoreCheckpoints="false" ContinuallySkipToCheckpoints="true" >
+		<!-- Check function status -->
+		<Code File="RunCode" Type="Definition">
+			<![CDATA[
+			private static bool? profileFunctionsEnabled => (bool?)AppDomain.CurrentDomain.GetData("QuestingProfiles_FunctionsEnabled");
+			private static bool IsStoreProfile(string path) => path.StartsWith("store://");
+			private static string Slashify(string path) => IsStoreProfile(path) ? path.Replace(@"\", "/") : path.Replace("/", @"\");
+
+			public __CompiledBatchClass__()
+			{
+				ActivateFunctions();
+			}
+
+			private static void ActivateFunctions()
+			{
+				if (profileFunctionsEnabled == null || profileFunctionsEnabled == false)
+				{
+					Bots.Professionbuddy.PBLog.Log(Colors.MediumPurple, "[Profile Message!]: ", Colors.Yellow, "Please stand by as the functions are being activated!");
+					LoadProfile(@"..\..\Functions\Activate Functions.xml");
+				}
+			}
+
+			private static void LoadProfile(string path)
+			{
+				var profile = GetNewPath(path);
+				if (!IsStoreProfile(profile) && !File.Exists(profile))
+				{
+					Bots.Professionbuddy.PBLog.Log(Colors.MediumPurple, "[Profile Message!]: ", Colors.Yellow, "Profile does not exist.\n" + profile);
+					return;
+				}
+
+				Bots.Professionbuddy.PBLog.Log(Colors.MediumPurple, "[Profile Message!]: ", Colors.Yellow, "Loading: " + profile);
+				ProfileManager.LoadNew(profile, false);
+			}
+
+			private static string GetNewPath(string path)
+			{
+				if (IsStoreProfile(path))
+					return Slashify(path);
+
+				var currentProfile = ProfileManager.XmlLocation;
+				if (IsStoreProfile(currentProfile))
+					return Slashify(currentProfile + "/../" + path);
+
+				var absolutePath = Path.Combine(Path.GetDirectoryName(currentProfile), path);
+				absolutePath = Path.GetFullPath(absolutePath);
+				var canonicalPath = new Uri(absolutePath).LocalPath;
+				return Slashify(canonicalPath);
+			}]]>
+		</Code>
+		<Code File="RunCode" Code="ActivateFunctions();" />
+		<!-- END Check function status -->
+
+		<If Condition="Me.IsAlliance" >
+			<Code File="LoadProfile" ProfileName="..\..\Questing Autoloader.xml" />
+		</If>
+		<!-- RunCode Methods -->
+			<Code File="RunCode">
+			<![CDATA[
+				Bots.Professionbuddy.PBLog.Log(System.Windows.Media.Colors.MediumPurple, "> [Profile Initialization Status] ", System.Windows.Media.Colors.CornflowerBlue, "\n     Auto-Looting	:: Enabled\n     Looting	:: Enabled\n     Game Addons	:: Disabled");
+				Lua.DoString("SetCVar('AutoLootDefault', 1);");
+				Lua.DoString("SetCVar('autoDismountFlying', 1);");
+				CharacterSettings.Instance.LootMobs = true;
+				CharacterSettings.Instance.Save();
+				Logging.Write(System.Windows.Media.Colors.MediumPurple, "> [Ready to bot!]");
+			]]>
+			</Code>
+			<Code File="RunCode" Type="Definition">
+				<![CDATA[
+						bool DoQuest(params uint[] questIds)
+						{
+							foreach (var questId in questIds)
+							{
+								if (HasQuest(questId) && !IsQuestCompleted(questId)) return true;
+							}
+							return false;
+						}
+						bool NeedsQuest(params uint[] questIds)
+						{
+							foreach (var questId in questIds)
+							{
+								if (!HasQuest(questId) && !IsQuestCompleted(questId)) return true;
+							}
+							return false;
+						}
+						bool NeedsBreadcrumbQuest(params uint[] questIds)
+						{
+							foreach (var questId in questIds)
+							{
+								if (IsQuestCompleted(questId)) return false;
+							}
+							return true;
+						}
+						bool QuestDone(params uint[] questIds)
+						{
+							foreach (var questId in questIds)
+							{
+								if (HasQuest(questId) && IsQuestCompleted(questId)) return true;
+							}
+							return false;
+						}
+						bool QuestFlaggedCompleted(params uint[] questIds)
+						{
+							foreach (var questId in questIds)
+							{
+								return Lua.GetReturnVal<bool>($"return IsQuestFlaggedCompleted({questId});", 0);
+							}
+							return false;
+						}
+						async Task SkipCutscene(int preWait = 3000, int postWait = 3000)
+						{
+					// Add detection of cutscene here.
+							await Coroutine.Sleep(preWait);
+					// Test and improve the working method.
+							Lua.DoString("MovieFrame:StopMovie(); CinematicFrame_CancelCinematic(); StopCinematic();");
+							await Coroutine.Sleep(postWait);
+						}
+					]]>
+			</Code>
+		<!-- END RunCode Methods -->
+
+
+		<PickUp QuestName="Reclaiming Sunstrider Isle" QuestId="8325" GiverName="Magistrix Erona" GiverId="15278" X="10349.6" Y="-6357.29" Z="33.4026" />
+		<Code File="KillUntilComplete" MobId="15274" QuestId="8325" >
+			<HuntingGrounds>
+				<Hotspot X="10288.8" Y="-6344.147" Z="22.4168" />
+				<Hotspot X="10382.89" Y="-6258.063" Z="26.35585" />
+			</HuntingGrounds>
+		</Code>
+		<TurnIn QuestName="Reclaiming Sunstrider Isle" QuestId="8325" TurnInName="Magistrix Erona" TurnInId="15278" X="10349.6" Y="-6357.29" Z="33.4026" />
+
+		<PickUp QuestName="Unfortunate Measures" QuestId="8326" GiverName="Magistrix Erona" GiverId="15278" X="10350.12" Y="-6357.311" Z="33.42451" />
+		<Code File="KillUntilComplete" MobIds="15366, 15372" QuestId="8326" >
+			<HuntingGrounds>
+				<Hotspot X="10414.34" Y="-6427.237" Z="41.91719" />
+				<Hotspot X="10493.75" Y="-6479.204" Z="10.92873" />
+				<Hotspot X="10370.44" Y="-6458.381" Z="36.59145" />
+			</HuntingGrounds>
+		</Code>
+		<TurnIn QuestName="Unfortunate Measures" QuestId="8326" TurnInName="Magistrix Erona" TurnInId="15278" X="10355.42" Y="-6362.305" Z="34.68933" />
+
+		<PickUp QuestName="Report to Lanthan Perilon" QuestId="8327" GiverName="Magistrix Erona" GiverId="15278" X="10355.42" Y="-6362.305" Z="34.68933" />
+		<PickUp QuestName="The Shrine of Dath&apos;Remar" QuestId="37442" GiverName="Well Watcher Solanian" GiverId="15295" X="10379.26" Y="-6408.055" Z="49.71678" />
+		<PickUp QuestName="Solanian&apos;s Belongings" QuestId="37443" GiverName="Well Watcher Solanian" GiverId="15295" X="10379.26" Y="-6408.055" Z="49.71678" />
+		<PickUp QuestName="A Fistful of Slivers" QuestId="37440" GiverName="Arcanist Ithanas" GiverId="15296" X="10409.86" Y="-6372.121" Z="35.64185" />
+		<!--<PickUp QuestName="Thirst Unending" QuestId="37439" GiverName="Arcanist Helion" GiverId="15297" X="10417.92" Y="-6321.607" Z="35.57412" /> Racial quest that just ruins everything. -->
+
+		<Code File="InteractWith" MobId="180516" NonCompeteDistance="0" InteractBlacklistTimeInSeconds="1" QuestId="37442" QuestObjectiveIndex="1" X="10403.45" Y="-5949.631" Z="41.17837" />
+
+		<Code File="InteractWith" MobId="180511" NonCompeteDistance="0" InteractByLooting="true" InteractBlacklistTimeInSeconds="1" QuestId="37443" QuestObjectiveIndex="2" X="10296.56" Y="-6030.346" Z="28.44278" />
+		<Code File="InteractWith" MobId="180510" NonCompeteDistance="0" InteractByLooting="true" InteractBlacklistTimeInSeconds="1" QuestId="37443" QuestObjectiveIndex="1" X="10091.08" Y="-6216.918" Z="16.66722" />
+		<Code File="InteractWith" MobId="180512" NonCompeteDistance="0" InteractByLooting="true" InteractBlacklistTimeInSeconds="1" QuestId="37443" QuestObjectiveIndex="3" X="10221.65" Y="-6342.844" Z="30.84069" />
+
+		<Code File="KillUntilComplete" MobId="15274" QuestId="37440" X="10235.56" Y="-6334.975" Z="30.84136" />
+
+		<TurnIn QuestName="The Shrine of Dath&apos;Remar" QuestId="37442" TurnInName="Well Watcher Solanian" TurnInId="15295" X="10380.02" Y="-6407.378" Z="49.7169" />
+		<TurnIn QuestName="Solanian&apos;s Belongings" QuestId="37443" TurnInName="Well Watcher Solanian" TurnInId="15295" X="10380.02" Y="-6407.378" Z="49.7169" />
+		<TurnIn QuestName="A Fistful of Slivers" QuestId="37440" TurnInName="Arcanist Ithanas" TurnInId="15296" X="10409.66" Y="-6371.36" Z="35.64158" />
+		<TurnIn QuestName="Report to Lanthan Perilon" QuestId="8327" TurnInName="Lanthan Perilon" TurnInId="15281" X="10305.13" Y="-6230.929" Z="26.75177" />
+
+		<PickUp QuestName="Aggression" QuestId="8334" GiverName="Lanthan Perilon" GiverId="15281" X="10305.13" Y="-6230.929" Z="26.75177" />
+		<Code File="KillUntilComplete" QuestId="8334" >
+			<HuntingGrounds>
+				<Hotspot X="10276.28" Y="-6069.354" Z="25.9077" />
+				<Hotspot X="10171.92" Y="-6186.116" Z="20.70976" />
+				<Hotspot X="10135.83" Y="-6197.147" Z="15.41999" />
+			</HuntingGrounds>
+			<PursuitList>
+				<PursueUnit Id="15271" PursueWhen="!IsObjectiveComplete(1, 8334)" />
+				<PursueUnit Id="15294" PursueWhen="!IsObjectiveComplete(2, 8334)" />
+			</PursuitList>
+		</Code>
+		<TurnIn QuestName="Aggression" QuestId="8334" TurnInName="Lanthan Perilon" TurnInId="15281" X="10305.29" Y="-6228.999" Z="26.81228" />
+
+		<PickUp QuestName="Felendren the Banished" QuestId="8335" GiverName="Lanthan Perilon" GiverId="15281" X="10305.29" Y="-6228.999" Z="26.81228" />
+		<Code File="KillUntilComplete" TerminateWhen="!DoQuest(8335) &amp;&amp; IsQuestCompleted(8338)" >
+			<HuntingGrounds>
+				<Hotspot X="10184.32" Y="-6034.688" Z="26.00856" />
+				<Hotspot X="10142.53" Y="-6002.356" Z="110.1548" />
+			</HuntingGrounds>
+			<PursuitList>
+				<PursueUnit Id="15273" PursueWhen="!IsObjectiveComplete(1, 8335)" />
+				<PursueUnit Id="15298" PursueWhen="!IsObjectiveComplete(2, 8335)" />
+				<PursueUnit Id="15367" PursueWhen="!IsObjectiveComplete(3, 8335)" />
+			</PursuitList>
+		</Code>
+
+		<TurnIn QuestName="Felendren the Banished" QuestId="8335" TurnInName="Lanthan Perilon" TurnInId="15281" X="10301.83" Y="-6226.127" Z="26.67972" />
+		<PickUp QuestName="Aiding the Outrunners" QuestId="8347" GiverName="Lanthan Perilon" GiverId="15281" X="10301.83" Y="-6226.127" Z="26.67972" />
+		<TurnIn QuestName="Tainted Arcane Sliver" QuestId="8338" TurnInName="Arcanist Helion" TurnInId="15297" X="10415.8" Y="-6318.655" Z="35.57366" />
+		<TurnIn QuestName="Aiding the Outrunners" QuestId="8347" TurnInName="Outrunner Alarion" TurnInId="15301" X="9987.384" Y="-6475.941" Z="0.9072171" />
+		<PickUp QuestName="Slain by the Wretched" QuestId="9704" GiverName="Outrunner Alarion" GiverId="15301" X="9986.455" Y="-6477.615" Z="0.9143658" />
+		<TurnIn QuestName="Slain by the Wretched" QuestId="9704" TurnInName="Slain Outrunner" TurnInId="17849" X="9873.688" Y="-6555.179" Z="10.37969" />
+
+		<Checkpoint Level="6" />
+
+		<Code File="LoadProfile" ProfileName="..\1-41 Autoloader.xml" />
+
+	</QuestOrder>
+</HBProfile>

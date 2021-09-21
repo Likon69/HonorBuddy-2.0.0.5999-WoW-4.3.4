@@ -1,0 +1,133 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<HBProfile>
+	<Name>Netherweave Cloth- Zangarmarsh</Name>
+	<MinDurability>0.3</MinDurability>
+	<MinFreeBagSlots>2</MinFreeBagSlots>
+	<MinLevel>1</MinLevel>
+	<MaxLevel>86</MaxLevel>
+	<SellGrey>True</SellGrey>
+	<SellWhite>True</SellWhite>
+	<SellGreen>False</SellGreen>
+	<SellBlue>False</SellBlue>
+	<SellPurple>False</SellPurple>
+	<MailWhite>True</MailWhite>
+	<MailGreen>True</MailGreen>
+	<MailBlue>True</MailBlue>
+	<MailPurple>True</MailPurple>
+	<AvoidMobs>
+		<Mob Name="Daggerfen Assassin" Entry="18116"/>
+	</AvoidMobs>
+	<Vendors>
+		<Vendor Name="Sana" Entry="3319" Type="Repair" X="1583.74" Y="-4288.98" Z="21.5408" />
+		<Vendor Name="Bar Talet" Entry="18962" Type="Repair" X="-2639.384" Y="4425.386" Z="36.68296" />
+		<Vendor Name="Captured Gnome" Entry="19383" Type="Repair" X="323.0882" Y="7839.829" Z="22.0852" />
+	</Vendors>
+	<Blackspots>
+		<Blackspot X="-2800.589" Y="4435.135" Z="-5.241126" Radius="2.772864" />
+	</Blackspots>
+	<Mailboxes>
+		<Mailbox X="1550.696" Y="-4362.707" Z="17.56405" />
+		<Hotspot X="-2617.099" Y="4413.033" Z="35.24812" />
+		<Mailbox X="259.0139" Y="7868.185" Z="23.24626" />
+	</Mailboxes>
+	<ProtectedItems>
+		<Item name="Linen Cloth" entry="2589" />
+		<Item name="Wool Cloth" entry="2592" />
+		<Item name="Silk Cloth" entry="4306" />
+		<Item name="Mageweave Cloth" entry="4338" />
+		<Item name="Runecloth" entry="14047" />
+		<Item name="Netherweave Cloth" entry="21877" />
+	</ProtectedItems>
+	<ForceMail>
+		<Item name="Wool Cloth" entry="2592" />
+		<Item name="Linen Cloth" entry="2589" />
+		<Item name="Silk Cloth" entry="4306" />
+		<Item name="Mageweave Cloth" entry="4338" />
+		<Item name="Runecloth" entry="14047" />
+		<Item name="Netherweave Cloth" entry="21877" />
+	</ForceMail>
+	<QuestOrder>
+		
+		<!-- Start Outland GoTo Routine -->
+		<While Condition="(Me.MapId != 530)" >
+			<If Condition="Me.IsHorde">
+				<CustomBehavior File="Message" Text="HB: We are not in Outlands" LogColor="Orange" />
+				<If Condition="(Me.MapId == 0)" >
+					<CustomBehavior File="Message" Text="HB: We are Somewhere in EK" LogColor="Orange" />
+					<If Condition="(Me.ZoneId != 4)" >
+						<CustomBehavior File="Message" Text="HB: We are not in the Blasted Lands" LogColor="Orange" />
+						<CustomBehavior File="Message" Text="HB: Hearthing..." LogColor="Orange" />
+						<CustomBehavior File="ForcedDismount" />
+						<CustomBehavior File="RunMacro" Macro="/use Hearthstone" NumOfTimes="1" WaitTime="10000"/>
+						<Else>
+							<CustomBehavior File="Message" Text="HB: We are in the Blasted Lands" LogColor="Orange" />
+						</Else>
+					</If>
+				</If>
+				<If Condition="(Me.MapId == 1)" >
+					<CustomBehavior File="Message" Text="HB: We are in Kalimdor" LogColor="Orange" />
+					<If Condition="Me.ZoneId == 1637" >
+						<CustomBehavior File="Message" Text="HB: We are in Org" LogColor="Orange" />
+						<CustomBehavior File="Message" Text="Emptying our bags before leaving home" LogColor="Orange" />
+						<CustomBehavior File="ForceSetVendor"  DoMail="true" DoRepair="true" DoSell="true" DoTrain="false" />
+						<CustomBehavior File="Message" Text="Porting to Blasted Lands" LogColor="Orange" />
+						<RunTo X="1708.986" Y="-4317.475" Z="31.30815" />
+						<CustomBehavior File="InteractWith" MobId="195142" ObjectType="Gameobject" Range="4.75" X="1768.45" Y="-4325.86" Z="-8.3711" />
+						<CustomBehavior File="WaitTimer" WaitTime="2000" GoalText="Waiting for port {TimeRemaining}" />
+						<Else>
+							<CustomBehavior File="Message" Text="HB: We are not in Org" LogColor="Orange" />
+							<CustomBehavior File="Message" Text="HB: Hearthing..." LogColor="Orange" />
+							<CustomBehavior File="ForcedDismount" />
+							<CustomBehavior File="RunMacro" Macro="/use Hearthstone" NumOfTimes="1" WaitTime="10000"/>
+						</Else>
+					</If>
+				</If>
+			</If>
+			<While Condition="(Me.MapId == 0) &amp;&amp; (Me.ZoneId == 4)" >
+				<If Condition="(Me.MapId == 0) &amp;&amp; (Me.ZoneId == 4)" >
+					<CustomBehavior File="Message" Text="Let's run near the Dark Portal" LogColor="Orange" />
+					<RunTo X="-11895.44" Y="-3206.936" Z="-14.64132" />
+					<CustomBehavior File="WaitTimer" WaitTime="1000" />
+				</If>
+				<If Condition="(Me.MapId == 0) &amp;&amp; (Me.ZoneId == 4)" >
+					<CustomBehavior File="Message" Text="Let's head through the Dark Portal" LogColor="Orange" />
+					<CustomBehavior File="MyCTM" X="-11908.09" Y="-3208.854" Z="-14.83002" />
+					<CustomBehavior File="WaitTimer" WaitTime="1000" />
+				</If>
+				<If Condition="(Me.MapId == 0) &amp;&amp; (Me.ZoneId == 4)" >
+					<CustomBehavior File="WaitTimer" WaitTime="15000" />
+				</If>
+			</While>
+		</While>
+		<!-- End Outland GoTo Routine -->
+		<While Condition="(Me.Level &gt; 1)" >
+			<If Condition="(Me.LowestDurabilityPercent &gt;= 0.3) &amp;&amp; (Me.FreeBagSlots &gt;= 3)" >
+				<CustomBehavior File="Message" Text="HB: Flying to Terokkar Forest" LogColor="Orange" />
+				<CustomBehavior File="FlyTo" X="1185.068" Y="8162.861" Z="18.78151" />
+				<CustomBehavior File="ForcedDismount" />
+				<SetGrindArea>
+					<GrindArea>
+						<TargetMinLevel>1</TargetMinLevel>
+						<TargetMaxLevel>86</TargetMaxLevel>
+						<GrindArea>51</GrindArea>
+						<Hotspots>
+							<Hotspot X="1185.068" Y="8162.861" Z="18.78151" />
+							<Hotspot X="1124.68" Y="8194.838" Z="20.89286" />
+							<Hotspot X="1054.3" Y="8230.779" Z="22.37381" />
+							<Hotspot X="1085.146" Y="8306.014" Z="17.37439" />
+							<Hotspot X="1163.881" Y="8302.833" Z="18.30597" />
+							<Hotspot X="1193.313" Y="8350.942" Z="17.37538" />
+						</Hotspots>
+					</GrindArea>
+				</SetGrindArea>
+				<GrindTo Condition="(Me.LowestDurabilityPercent &lt; 0.3) || (Me.FreeBagSlots &lt;= 2)" GoalText="Netherweave Cloth - FirstAid" />
+			</If>
+			<If Condition="(Me.LowestDurabilityPercent &lt; 0.3) || (Me.FreeBagSlots &lt; 3)" >
+				<CustomBehavior File="Message" Text="HB: Flying to Repair" LogColor="Orange" />
+				<CustomBehavior File="FlyTo"  XX="323.0882" Y="7839.829" Z="22.0852" DestName="Somewhere over the rainbow" />
+				<CustomBehavior File="Message" Text="HB: Selling/Mailing/Repairing" LogColor="Orange" />
+				<CustomBehavior File="ForceSetVendor"  DoMail="true" DoRepair="true" DoSell="true" />
+			</If>
+		</While>
+	</QuestOrder>
+</HBProfile>

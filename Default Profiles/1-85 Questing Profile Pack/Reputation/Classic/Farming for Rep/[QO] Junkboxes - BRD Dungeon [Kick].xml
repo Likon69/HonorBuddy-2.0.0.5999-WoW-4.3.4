@@ -1,0 +1,101 @@
+﻿<HBProfile>
+	<Name>[QO] Heavy Junkboxes [Kick]</Name>
+   
+	<MinLevel>1</MinLevel>
+	<MaxLevel>86</MaxLevel>
+   
+	<MinDurability>0.2</MinDurability>
+	<MinFreeBagSlots>2</MinFreeBagSlots>
+	
+	<MailGrey>False</MailGrey>
+	<MailWhite>True</MailWhite>
+	<MailGreen>True</MailGreen>
+	<MailBlue>True</MailBlue>
+	<MailPurple>True</MailPurple>
+   
+	<SellGrey>True</SellGrey>
+	<SellWhite>False</SellWhite>
+	<SellGreen>False</SellGreen>
+	<SellBlue>False</SellBlue>
+	<SellPurple>False</SellPurple>
+   
+	<TargetElites>True</TargetElites>
+
+	<AvoidMobs>
+	</AvoidMobs>
+	<Blackspots>
+	</Blackspots>
+
+	<Mailboxes>
+
+	</Mailboxes>
+ 
+	<Vendors>
+
+	</Vendors>
+
+ 
+ 
+	<QuestOrder>
+	
+		<CustomBehavior File="UserSettings" LootMobs="False" PullDistance="1" TrainNewSkills="False" LearnFlightPaths="False" KillBetweenHotspots="True" LogoutForInactivity="False" />
+	
+						<SetGrindArea>
+							<GrindArea>
+								<!-- 54 = iron dorf -->
+								<Factions></Factions>
+								<Hotspots>
+<Hotspot X="475.5779" Y="-24.98996" Z="-67.37171" />
+<Hotspot X="487.3801" Y="-55.87526" Z="-62.55271" />
+<Hotspot X="481.1799" Y="-89.61293" Z="-62.79137" />
+<Hotspot X="532.7936" Y="-75.16994" Z="-62.61019" />
+<Hotspot X="597.3641" Y="19.93697" Z="-72.52074" />
+<Hotspot X="627.2638" Y="31.61983" Z="-73.99065" />
+<Hotspot X="627.6259" Y="82.65527" Z="-73.24635" />
+<Hotspot X="641.4291" Y="117.8404" Z="-73.25829" />
+<Hotspot X="666.4671" Y="107.5432" Z="-73.87005" />
+<Hotspot X="676.4672" Y="133.3225" Z="-73.31374" />
+<Hotspot X="681.0238" Y="138.2402" Z="-73.19168" />
+<Hotspot X="681.7303" Y="139.0027" Z="-73.16441" />
+<Hotspot X="726.3801" Y="161.2984" Z="-72.21241" />
+<Hotspot X="667.89" Y="188.1072" Z="-72.19753" />
+<Hotspot X="652.7241" Y="117.1125" Z="-73.27983" />
+<Hotspot X="638.0029" Y="-13.93868" Z="-73.2462" />
+<Hotspot X="654.1867" Y="-38.70285" Z="-73.27921" />
+<Hotspot X="680.5195" Y="-116.8253" Z="-71.897" />
+<Hotspot X="732.34" Y="-66.69744" Z="-72.0135" /><!-- end of bottom, now going up -->
+<Hotspot X="566.9967" Y="15.72081" Z="-70.65856" />
+<Hotspot X="606.0372" Y="-51.59724" Z="-60.05531" />
+<Hotspot X="571.6407" Y="-89.87202" Z="-45.02094" />
+<Hotspot X="621.1379" Y="-100.7245" Z="-46.15447" />
+<Hotspot X="692.4691" Y="-134.8414" Z="-46.23273" />
+<Hotspot X="594.7867" Y="-133.234" Z="-38.39676" />
+<Hotspot X="551.0784" Y="-178.5595" Z="-38.36112" />
+<Hotspot X="572.9288" Y="-227.0345" Z="-38.36203" />
+<Hotspot X="623.9193" Y="-225.737" Z="-38.36165" />
+<Hotspot X="643.8365" Y="-183.9802" Z="-38.36165" />
+<Hotspot X="629.0684" Y="-154.6291" Z="-38.36165" />
+<Hotspot X="594.683" Y="-242.9739" Z="-38.38302" />
+<Hotspot X="586.447" Y="-283.3104" Z="-43.10133" />
+<Hotspot X="540.9981" Y="-252.9058" Z="-43.1013" />
+<Hotspot X="628.3311" Y="-290.6653" Z="-43.1072" />
+<Hotspot X="766.3961" Y="-272.7729" Z="-42.87955" />
+<Hotspot X="789.1321" Y="-270.2801" Z="-43.37053" />
+<Hotspot X="775.6371" Y="-301.6512" Z="-43.30069" />
+<Hotspot X="791.0847" Y="-295.5465" Z="-43.29878" />
+<Hotspot X="811.7144" Y="-296.9541" Z="-43.29482" />
+<Hotspot X="801.4513" Y="-226.5771" Z="-43.29716" />
+<Hotspot X="862.1296" Y="-259.8111" Z="-49.93819" />
+<Hotspot X="861.0713" Y="-291.2965" Z="-49.9366" />
+<Hotspot X="903.8574" Y="-308.1002" Z="-49.9366" />
+<Hotspot X="475.5779" Y="-24.98996" Z="-67.37171" />
+<!-- end -->
+								</Hotspots>
+							</GrindArea>
+						</SetGrindArea>
+					<GrindTo Level="86" GoalText="Farming Heavy Junkboxes" />
+
+	</QuestOrder>
+	
+
+</HBProfile>

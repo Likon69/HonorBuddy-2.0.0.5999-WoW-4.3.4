@@ -1,0 +1,166 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Professionbuddy>
+  <LoadProfileAction ProfileType="Honorbuddy" Path="" />
+  <If Condition="SecondaryBot.Name == &quot;Combat Bot&quot;" IgnoreCanRun="True">
+    <ChangeBotAction BotName="Combat Bot" />
+  </If>
+  <While Condition="true" IgnoreCanRun="True">
+    <If Condition="Me.NormalBagsFull" IgnoreCanRun="True">
+      <SellItemOnAhAction Category="TradeGoods" SubCategoryType="WoWItemTradeGoodsClass" SubCategory="MetalStone" UseCategory="True" RunTime="_24_Hours" AmountType="Everything" ItemID="" MinBuyout="0g10s0c" MaxBuyout="100g0s0c" StackSize="20" IgnoreStackSizeBelow="1" Amount="10" BidPrecent="95" UndercutPrecent="0.1" AutoFindAh="True" PostIfBelowMinBuyout="True" Location="0, 0, 0" />
+    </If>
+    <If Condition="Mining.MaxLevel == 0" IgnoreCanRun="False">
+      <TrainSkillAction NpcEntry="28698" Location="0, 0, 0" />
+    </If>
+    <!--Copper-->
+    <If Condition="Mining.Level &lt; 50" IgnoreCanRun="False">
+      <If Condition="CanCraft(2657)" IgnoreCanRun="True">
+        <MoveToAction Location="5923.522, 722.3371, 642.1357" MoveType="Location" Pathing="Navigator" Entry="0" />
+        <CastSpellAction RepeatType="Craftable" Repeat="50" Entry="2657" CastOnItem="False" ItemType="Chest" ItemId="0" />
+      </If>
+      <If Condition="!CanCraft(2657) &amp;&amp; !HasNewMail" IgnoreCanRun="False">
+        <BuyItemFromAhAction ItemListType="Item" ItemID="2770" MaxBuyout="4g0s0c" Amount="50" BuyAdditively="True" AutoFindAh="True" BidOnItem="False" Location="0, 0, 0" />
+      </If>
+      <If Condition="HasNewMail || MailCount &gt; 0" IgnoreCanRun="True">
+        <GetMailAction GetMailType="AllItems" ItemID="0" CheckNewMail="True" MinFreeBagSlots="2" AutoFindMailBox="True" Location="0, 0, 0" />
+      </If>
+    </If>
+    <!--Bronze-->
+    <If Condition="Mining.Level &gt;= 50 &amp;&amp; Mining.Level &lt; 90" IgnoreCanRun="False">
+      <If Condition="!HasRecipe(2659) || !HasRecipe(3304)" IgnoreCanRun="True">
+        <TrainSkillAction NpcEntry="28698" Location="0, 0, 0" />
+      </If>
+      <If Condition="CanCraft(2659) || CanCraft(3304) || CanCraft(2657)" IgnoreCanRun="True">
+        <MoveToAction Location="5923.522, 722.3371, 642.1357" MoveType="Location" Pathing="Navigator" Entry="0" />
+        <CastSpellAction RepeatType="Craftable" Repeat="5" Entry="2657" CastOnItem="False" ItemType="Chest" ItemId="0" />
+        <CastSpellAction RepeatType="Craftable" Repeat="5" Entry="3304" CastOnItem="False" ItemType="Chest" ItemId="0" />
+        <CastSpellAction RepeatType="Craftable" Repeat="5" Entry="2659" CastOnItem="False" ItemType="Chest" ItemId="0" />
+      </If>
+      <If Condition="HasNewMail || MailCount &gt; 0" IgnoreCanRun="True">
+        <GetMailAction GetMailType="AllItems" ItemID="0" CheckNewMail="True" MinFreeBagSlots="2" AutoFindMailBox="True" Location="0, 0, 0" />
+      </If>
+      <If Condition="!HasNewMail &amp;&amp; !CanCraft(2657) &amp;&amp; !CanCraft(2659) &amp;&amp; !CanCraft(3304) &amp;&amp; !HasNewMail" IgnoreCanRun="False">
+        <If Condition="Mining.Level &lt; 75 || InbagCount(3576) &lt;=5" IgnoreCanRun="True">
+          <BuyItemFromAhAction ItemListType="Item" ItemID="2771" MaxBuyout="4g0s0c" Amount="20" BuyAdditively="True" AutoFindAh="True" BidOnItem="False" Location="0, 0, 0" />
+        </If>
+        <If Condition="Mining.Level &gt;= 75 &amp;&amp; InbagCount(2840) &lt;=5" IgnoreCanRun="True">
+          <BuyItemFromAhAction ItemListType="Item" ItemID="2770" MaxBuyout="4g0s0c" Amount="20" BuyAdditively="True" AutoFindAh="True" BidOnItem="False" Location="0, 0, 0" />
+        </If>
+      </If>
+    </If>
+    <!--Silver-->
+    <If Condition="Mining.Level &gt;= 90 &amp;&amp; Mining.Level &lt; 100" IgnoreCanRun="False">
+      <If Condition="!HasRecipe(2658)" IgnoreCanRun="True">
+        <TrainSkillAction NpcEntry="28698" Location="0, 0, 0" />
+      </If>
+      <If Condition="CanCraft(2658)" IgnoreCanRun="True">
+        <MoveToAction Location="5923.522, 722.3371, 642.1357" MoveType="Location" Pathing="Navigator" Entry="0" />
+        <CastSpellAction RepeatType="Craftable" Repeat="5" Entry="2658" CastOnItem="False" ItemType="Chest" ItemId="0" />
+      </If>
+      <If Condition="!HasNewMail &amp;&amp; !CanCraft(2658)" IgnoreCanRun="False">
+        <BuyItemFromAhAction ItemListType="Item" ItemID="2775" MaxBuyout="10g0s0c" Amount="20" BuyAdditively="True" AutoFindAh="True" BidOnItem="False" Location="0, 0, 0" />
+      </If>
+      <If Condition="HasNewMail || MailCount &gt; 0" IgnoreCanRun="True">
+        <GetMailAction GetMailType="AllItems" ItemID="0" CheckNewMail="True" MinFreeBagSlots="2" AutoFindMailBox="True" Location="0, 0, 0" />
+      </If>
+    </If>
+    <!--Iron-->
+    <If Condition="Mining.Level &gt;= 100 &amp;&amp; Mining.Level &lt; 140" IgnoreCanRun="False">
+      <If Condition="!HasRecipe(3307)" IgnoreCanRun="True">
+        <TrainSkillAction NpcEntry="28698" Location="0, 0, 0" />
+      </If>
+      <If Condition="CanCraft(3307)" IgnoreCanRun="True">
+        <MoveToAction Location="5923.522, 722.3371, 642.1357" MoveType="Location" Pathing="Navigator" Entry="0" />
+        <CastSpellAction RepeatType="Craftable" Repeat="5" Entry="3307" CastOnItem="False" ItemType="Chest" ItemId="0" />
+      </If>
+      <If Condition="!HasNewMail &amp;&amp; !CanCraft(3307)" IgnoreCanRun="False">
+        <BuyItemFromAhAction ItemListType="Item" ItemID="2772" MaxBuyout="10g0s0c" Amount="40" BuyAdditively="True" AutoFindAh="True" BidOnItem="False" Location="0, 0, 0" />
+      </If>
+      <If Condition="HasNewMail || MailCount &gt; 0" IgnoreCanRun="True">
+        <GetMailAction GetMailType="AllItems" ItemID="0" CheckNewMail="True" MinFreeBagSlots="2" AutoFindMailBox="True" Location="0, 0, 0" />
+      </If>
+    </If>
+    <!--Gold-->
+    <If Condition="Mining.Level &gt;= 140 &amp;&amp; Mining.Level &lt; 150" IgnoreCanRun="False">
+      <If Condition="!HasRecipe(3308)" IgnoreCanRun="True">
+        <TrainSkillAction NpcEntry="28698" Location="0, 0, 0" />
+      </If>
+      <If Condition="CanCraft(3308)" IgnoreCanRun="True">
+        <MoveToAction Location="5923.522, 722.3371, 642.1357" MoveType="Location" Pathing="Navigator" Entry="0" />
+        <CastSpellAction RepeatType="Craftable" Repeat="5" Entry="3308" CastOnItem="False" ItemType="Chest" ItemId="0" />
+      </If>
+      <If Condition="HasNewMail || MailCount &gt; 0" IgnoreCanRun="True">
+        <GetMailAction GetMailType="AllItems" ItemID="0" CheckNewMail="True" MinFreeBagSlots="2" AutoFindMailBox="True" Location="0, 0, 0" />
+      </If>
+      <If Condition="!HasNewMail &amp;&amp; !CanCraft(3308)" IgnoreCanRun="False">
+        <BuyItemFromAhAction ItemListType="Item" ItemID="2776" MaxBuyout="10g0s0c" Amount="10" BuyAdditively="True" AutoFindAh="True" BidOnItem="False" Location="0, 0, 0" />
+      </If>
+    </If>
+    <!--Mithril-->
+    <If Condition="Mining.Level &gt;= 150 &amp;&amp; Mining.Level &lt; 200" IgnoreCanRun="False">
+      <If Condition="!HasRecipe(10097)" IgnoreCanRun="True">
+        <TrainSkillAction NpcEntry="28698" Location="0, 0, 0" />
+      </If>
+      <If Condition="Mining.Level &gt; 200 &amp;&amp; Mining.MaxLevel == 225" IgnoreCanRun="True">
+        <TrainSkillAction NpcEntry="28698" Location="0, 0, 0" />
+      </If>
+      <If Condition="CanCraft(10097)" IgnoreCanRun="True">
+        <MoveToAction Location="5923.522, 722.3371, 642.1357" MoveType="Location" Pathing="Navigator" Entry="0" />
+        <CastSpellAction RepeatType="Craftable" Repeat="5" Entry="10097" CastOnItem="False" ItemType="Chest" ItemId="0" />
+      </If>
+      <If Condition="!HasNewMail &amp;&amp; !CanCraft(10097)" IgnoreCanRun="False">
+        <BuyItemFromAhAction ItemListType="Item" ItemID="3858" MaxBuyout="10g0s0c" Amount="20" BuyAdditively="True" AutoFindAh="True" BidOnItem="False" Location="0, 0, 0" />
+      </If>
+      <If Condition="HasNewMail || MailCount &gt; 0" IgnoreCanRun="True">
+        <GetMailAction GetMailType="AllItems" ItemID="0" CheckNewMail="True" MinFreeBagSlots="2" AutoFindMailBox="True" Location="0, 0, 0" />
+      </If>
+    </If>
+    <!--Thorium-->
+    <If Condition="Mining.Level &gt;= 200 &amp;&amp; Mining.Level &lt; 275" IgnoreCanRun="False">
+      <If Condition="!HasRecipe(16153)" IgnoreCanRun="True">
+        <TrainSkillAction NpcEntry="28698" Location="0, 0, 0" />
+      </If>
+      <If Condition="CanCraft(16153)" IgnoreCanRun="True">
+        <MoveToAction Location="5923.522, 722.3371, 642.1357" MoveType="Location" Pathing="Navigator" Entry="0" />
+        <CastSpellAction RepeatType="Craftable" Repeat="5" Entry="16153" CastOnItem="False" ItemType="Chest" ItemId="0" />
+      </If>
+      <If Condition="HasNewMail || MailCount &gt; 0" IgnoreCanRun="True">
+        <GetMailAction GetMailType="AllItems" ItemID="0" CheckNewMail="True" MinFreeBagSlots="2" AutoFindMailBox="True" Location="0, 0, 0" />
+      </If>
+      <If Condition="!HasNewMail &amp;&amp; !CanCraft(16153)" IgnoreCanRun="False">
+        <BuyItemFromAhAction ItemListType="Item" ItemID="10620" MaxBuyout="10g0s0c" Amount="20" BuyAdditively="True" AutoFindAh="True" BidOnItem="False" Location="0, 0, 0" />
+      </If>
+    </If>
+    <!--Fel Iron-->
+    <If Condition="Mining.Level &gt;= 275 &amp;&amp; Mining.Level &lt; 325" IgnoreCanRun="False">
+      <If Condition="!HasRecipe(29356)" IgnoreCanRun="True">
+        <TrainSkillAction NpcEntry="28698" Location="0, 0, 0" />
+      </If>
+      <If Condition="CanCraft(29356)" IgnoreCanRun="True">
+        <MoveToAction Location="5923.522, 722.3371, 642.1357" MoveType="Location" Pathing="Navigator" Entry="0" />
+        <CastSpellAction RepeatType="Craftable" Repeat="5" Entry="29356" CastOnItem="False" ItemType="Chest" ItemId="0" />
+      </If>
+      <If Condition="!HasNewMail &amp;&amp; !CanCraft(29356)" IgnoreCanRun="False">
+        <BuyItemFromAhAction ItemListType="Item" ItemID="23424" MaxBuyout="10g0s0c" Amount="20" BuyAdditively="True" AutoFindAh="True" BidOnItem="False" Location="0, 0, 0" />
+      </If>
+      <If Condition="HasNewMail || MailCount &gt; 0" IgnoreCanRun="True">
+        <GetMailAction GetMailType="AllItems" ItemID="0" CheckNewMail="True" MinFreeBagSlots="2" AutoFindMailBox="True" Location="0, 0, 0" />
+      </If>
+    </If>
+    <!--Adamantite-->
+    <If Condition="Mining.Level &gt;= 325 &amp;&amp; Mining.Level &lt; 340" IgnoreCanRun="False">
+      <If Condition="!HasRecipe(29358)" IgnoreCanRun="True">
+        <TrainSkillAction NpcEntry="28698" Location="0, 0, 0" />
+      </If>
+      <If Condition="!HasNewMail &amp;&amp; !CanCraft(29358)" IgnoreCanRun="False">
+        <BuyItemFromAhAction ItemListType="Item" ItemID="23425" MaxBuyout="10g0s0c" Amount="20" BuyAdditively="True" AutoFindAh="True" BidOnItem="False" Location="0, 0, 0" />
+      </If>
+      <If Condition="HasNewMail || MailCount &gt; 0" IgnoreCanRun="True">
+        <GetMailAction GetMailType="AllItems" ItemID="0" CheckNewMail="True" MinFreeBagSlots="2" AutoFindMailBox="True" Location="0, 0, 0" />
+      </If>
+      <If Condition="CanCraft(29358)" IgnoreCanRun="True">
+        <MoveToAction Location="5923.522, 722.3371, 642.1357" MoveType="Location" Pathing="Navigator" Entry="0" />
+        <CastSpellAction RepeatType="Craftable" Repeat="5" Entry="29358" CastOnItem="False" ItemType="Chest" ItemId="0" />
+      </If>
+    </If>
+  </While>
+</Professionbuddy>

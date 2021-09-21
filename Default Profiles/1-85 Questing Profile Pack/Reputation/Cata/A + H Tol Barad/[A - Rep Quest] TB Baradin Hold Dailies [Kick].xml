@@ -1,0 +1,389 @@
+<HBProfile>
+	<Name>[A] Tol Barad - Baradin Hold Dailies [Kick]</Name>
+	<MinLevel>1</MinLevel>
+	<MaxLevel>101</MaxLevel>
+  
+	<MinDurability>0.1</MinDurability>
+	<MinFreeBagSlots>2</MinFreeBagSlots>
+  
+	<MailGrey>False</MailGrey>
+	<MailWhite>False</MailWhite>
+	<MailGreen>False</MailGreen>
+	<MailBlue>False</MailBlue>
+	<MailPurple>False</MailPurple>
+  
+	<SellGrey>True</SellGrey>
+	<SellWhite>False</SellWhite>
+	<SellGreen>False</SellGreen>
+	<SellBlue>False</SellBlue>
+	<SellPurple>False</SellPurple>
+  
+	<TargetElites>False</TargetElites>
+
+	<Vendors>
+		<Vendor Name="Kevin Geissler" Entry="48251" Type="Repair" X="-374.3594" Y="1052.682" Z="21.98276" />
+	</Vendors>
+  
+	<AvoidMobs>
+		<Mob Name="Hellscream Guard" Entry="48355" />
+	</AvoidMobs>
+   
+	<Blackspots>
+		<Blackspot X="-548.1035" Y="1101.35" Z="95.06052" Radius="5" />
+		<Blackspot X="-1279.2" Y="1052.76" Z="119.8992" Radius="8.899702" />
+		<Blackspot X="-1423.173" Y="1263.538" Z="133.716" Radius="4.768376" />
+		<Blackspot X="-166.1057" Y="1887.206" Z="2.573525" Radius="24.23259" />
+	</Blackspots>
+   
+   <!-- Quest Overrides PvP -->
+	<Quest Id="28223" Name="The Warden"> <!-- BH -->
+		<Objective Type="CollectItem" ItemId="63309" CollectCount="1">
+			<CollectFrom>
+				<Mob Name="Warden Silva" Id="48036" />
+			</CollectFrom>
+			<Hotspots>
+				<Hotspot X="-1513.718" Y="1257.581" Z="102.8731" />
+			</Hotspots>
+		</Objective>
+	</Quest>
+  
+	<Quest Id="28232" Name="Food From Below"> <!-- BH -->
+		<Objective Type="CollectItem" ItemId="63315" CollectCount="12">
+			<CollectFrom>
+				<Mob Name="Imprisoned Worker" Id="47550" />
+			</CollectFrom>
+			<Hotspots>
+				<Hotspot X="-1513.718" Y="1257.581" Z="102.8731" />
+				<Hotspot X="-1609.996" Y="1204.691" Z="95.01488" />
+			</Hotspots>
+		</Objective>
+	</Quest>
+
+	<Quest Id="28188" Name="Prison Revolt"> <!-- BH -->
+		<Objective Type="KillMob" MobId="48035" KillCount="12">
+			<Hotspots>
+				<Hotspot X="-1513.718" Y="1257.581" Z="102.8731" />
+				<Hotspot X="-1609.996" Y="1204.691" Z="95.01488" />
+		  </Hotspots>
+		</Objective>
+	</Quest>
+    
+	<Quest Id="28117" Name="Clearing the Depths"> <!-- BH -->
+		<Objective Type="KillMob" MobId="47616" KillCount="9">
+			<Hotspots>
+				<Hotspot X="-1253.92" Y="821.2767" Z="89.52864" />
+				<Hotspot X="-1261.914" Y="853.1677" Z="89.53249" />
+				<Hotspot X="-1239.083" Y="837.6199" Z="89.53144" />
+				<Hotspot X="-1196.304" Y="834.5411" Z="89.53281" />
+			</Hotspots>
+		</Objective>
+	</Quest>
+   
+	<Quest Id="28118" Name="The Imprisoned Archmage"> <!-- BH -->
+		<Objective Type="CollectItem" ItemId="63033" CollectCount="1">
+			<CollectFrom></CollectFrom>
+			<Hotspots>
+				<Hotspot X="-1296.256" Y="872.0165" Z="89.52589" />
+			</Hotspots>
+		</Objective>
+	</Quest>
+   
+	<Quest Id="28186" Name="Cursed Shackles"> <!-- BH -->
+		<Objective Type="CollectItem" ItemId="63149" CollectCount="8">
+			<CollectFrom>
+				<Mob Name="Cursed Shackles" Id="206905" />
+			</CollectFrom>
+			<Hotspots>
+			   <Hotspot X="-1010.569" Y="1127.54" Z="86.80908" />
+			</Hotspots>
+		</Objective>
+	</Quest>
+
+	<Quest Id="28122" Name="A Huge Problem"> <!-- BH -->
+		<Objective Type="KillMob" MobId="47593" KillCount="1">
+			<Hotspots>
+			<Hotspot X="-1359.611" Y="755.4788" Z="123.4198" />
+			<Hotspot X="-1276.3" Y="721.4294" Z="123.4214" />
+			<Hotspot X="-1161.972" Y="759.3795" Z="124.8844" />
+			<Hotspot X="-1052.892" Y="828.3678" Z="123.5566" />
+			<Hotspot X="-1019.066" Y="1168.219" Z="123.1021" />
+			<Hotspot X="-1090.375" Y="1354.869" Z="142.272" />
+			<Hotspot X="-1238.902" Y="1381.828" Z="123.3653" />
+			<Hotspot X="-1348.979" Y="1307.689" Z="131.5121" />
+			<Hotspot X="-1356.276" Y="1146.249" Z="123.4216" />
+			<Hotspot X="-1343.228" Y="982.8886" Z="123.2747" />
+			</Hotspots>
+		</Objective>
+    </Quest>
+	
+    <Quest Id="28162" Name="Swamp Bait"> <!-- BH -->
+		<Objective Type="CollectItem" ItemId="63103" CollectCount="8">
+			<CollectFrom>
+				<Mob Name="Baradin Crocolisk" Id="47591" />
+			</CollectFrom>
+			<Hotspots>
+				<Hotspot X="-1148.072" Y="1113.514" Z="119.5545" />
+				<Hotspot X="-1139.02" Y="1318.319" Z="120.3693" />
+			</Hotspots>
+		</Objective>
+    </Quest>
+
+	<Quest Id="28659" Name="The Leftovers">
+		<Objective Type="KillMob" MobId="48144" KillCount="12">
+			<Hotspots>
+				<Hotspot X="-879.9796" Y="963.4136" Z="121.4408" />
+				<Hotspot X="-1491.521" Y="1310.331" Z="152.9613" />
+				<Hotspot X="-1441.033" Y="681.9825" Z="123.4195" />
+			</Hotspots>
+		</Objective>
+	</Quest>
+	
+    <Quest Id="28120" Name="Learning From The Past"> <!-- BH -->
+		<Objective Type="CollectItem" ItemId="63034" CollectCount="4">
+			<CollectFrom>
+			</CollectFrom>
+			<Hotspots>
+				<Hotspot X="-1253.92" Y="821.2767" Z="89.52864" />
+				<Hotspot X="-1261.914" Y="853.1677" Z="89.53249" />
+				<Hotspot X="-1239.083" Y="837.6199" Z="89.53144" />
+				<Hotspot X="-1196.304" Y="834.5411" Z="89.53281" />
+			</Hotspots>
+		</Objective>
+    </Quest>
+
+	<Quest Id="28185" Name="Svarnos">
+		<Objective Type="CollectItem" ItemId="63143" CollectCount="1">
+        <CollectFrom>
+			<Mob Name="Svarnos" Entry="47544" />
+		</CollectFrom>
+        <Hotspots>
+			<Hotspot X="-975.0261" Y="1038.409" Z="84.58284" />
+        </Hotspots>
+		</Objective>
+	</Quest>
+
+	<!-- End of Quest Overrides -->
+  
+	<QuestOrder>
+
+		<CustomBehavior File="UserSettings" TrainNewSkills="False" UseMount="True" LootMobs="True" PullDistance="25"  />
+		
+		<!-- If I am in Dalaran, take the portal to Main City -->
+		<If Condition="(Me.ZoneId == 4395)" >
+			 <If Condition="Me.IsAlliance" >
+				<CustomBehavior File="Message" Text="We are in Dalaran, using portal to SW" LogColor="Cornflowerblue" />
+				<CustomBehavior File="ForcedDismount" />
+				<RunTo X="5718.221" Y="721.2461" Z="641.7213" />
+				<CustomBehavior File="ForcedDismount" />
+				
+				<CustomBehavior File="InteractWith" MobId="190960" ObjectType="Gameobject" Range="4" X="5718.221" Y="721.2461" Z="641.7213" />
+				<CustomBehavior File="WaitTimer" WaitTime="5000" GoalText="Waiting for port {TimeRemaining}" />
+			  <If Condition="(Me.ZoneId == 1519)" >
+				<RunTo X="-8988.831" Y="860.4624" Z="125.7445" />
+			  </If>
+			 </If>
+		</If>
+		
+			<!-- If I am in EK, take the SW portal -->
+			 <If Condition="(Me.MapId == 0) &amp;&amp; (Me.ZoneId != 5389) &amp;&amp; (Me.ZoneId != 5095)" >
+				<CustomBehavior File="FlyTo" DestName="SW Portal" X="-8208.783" Y="445.8443" Z="117.9366" />
+				<CustomBehavior File="ForcedDismount" />
+				
+				<CustomBehavior File="InteractWith" MobId="206594" ObjectType="Gameobject" Range="4" X="-8208.508" Y="449.4972" Z="117.7234" />
+				<CustomBehavior File="WaitTimer" WaitTime="5000" GoalText="Waiting for port {TimeRemaining}" />
+			 </If>
+	
+			<!-- 
+			<RunTo X="-1225.118" Y="979.6929" Z="119.7149" />
+			-->
+			<If Condition="(Me.ZoneId == 5389)" >
+				<!-- Run to BH if we're in Peninsula -->
+				<RunTo X="-1225.118" Y="979.6929" Z="119.7149" />
+			</If>
+	
+			<!-- This is the MobId, not QuestId -->
+			<While Condition="HasQuestAvailable(48066)" >
+				<CustomBehavior File="InteractWith"  MobId="48066" NumOfTimes="1" CollectionDistance="200" WaitTime="1000" X="-1226.825" Y="982.4016" Z="119.5738" />
+				<CustomBehavior File="RunMacro" Macro="/click GossipTitleButton1" />
+				<CustomBehavior File="Misc\RunLua" Lua="AcceptQuest()" WaitTime="1000" />
+			</While>
+			<While Condition="HasQuestAvailable(48039)" >
+				<CustomBehavior File="InteractWith"  MobId="48039" NumOfTimes="1" CollectionDistance="200" WaitTime="1000" X="-1226.825" Y="982.4016" Z="119.5738" />
+				<CustomBehavior File="RunMacro" Macro="/click GossipTitleButton1" />
+				<CustomBehavior File="Misc\RunLua" Lua="AcceptQuest()" WaitTime="1000" />
+			</While>
+			<While Condition="HasQuestAvailable(48250)" >
+				<CustomBehavior File="InteractWith"  MobId="48250" NumOfTimes="1" CollectionDistance="200" WaitTime="1000" X="-1226.825" Y="982.4016" Z="119.5738" />
+				<CustomBehavior File="RunMacro" Macro="/click GossipTitleButton1" />
+				<CustomBehavior File="Misc\RunLua" Lua="AcceptQuest()" WaitTime="1000" />
+			</While>
+			<While Condition="HasQuestAvailable(48061)" >
+				<CustomBehavior File="InteractWith"  MobId="48061" NumOfTimes="1" CollectionDistance="200" WaitTime="1000" X="-1226.825" Y="982.4016" Z="119.5738" />
+				<CustomBehavior File="RunMacro" Macro="/click GossipTitleButton1" />
+				<CustomBehavior File="Misc\RunLua" Lua="AcceptQuest()" WaitTime="1000" />
+			</While>
+			<While Condition="HasQuestAvailable(48074)" >
+				<CustomBehavior File="InteractWith"  MobId="48074" NumOfTimes="1" CollectionDistance="200" WaitTime="1000" X="-1226.825" Y="982.4016" Z="119.5738" />
+				<CustomBehavior File="RunMacro" Macro="/click GossipTitleButton1" />
+				<CustomBehavior File="Misc\RunLua" Lua="AcceptQuest()" WaitTime="1000" />
+			</While>
+
+			<If Condition="HasQuest(28118) &amp;&amp; !IsQuestCompleted(28118)"> <!-- BH -->
+				<RunTo X="-1295.436" Y="881.7836" Z="89.52482" />
+				<Objective QuestName="The Imprisoned Archmage" QuestId="28118" Type="CollectItem" ItemId="63033" CollectCount="1" />
+			</If>
+			
+			<If Condition="HasQuest(28120) &amp;&amp; !IsQuestCompleted(28120)"> <!-- BH -->
+				<Objective QuestName="Learning From The Past" QuestId="28120" Type="CollectItem" ItemId="63034" CollectCount="4" />
+			</If> 
+			
+			<If Condition="HasQuest(27117) &amp;&amp; !IsQuestCompleted(27117)"> <!-- BH -->
+				<Objective QuestName="Clearing the Depths" QuestId="27117" Type="KillMob" MobId="47616" KillCount="9" />
+			</If>
+
+			<If Condition="HasQuest(28185) &amp;&amp; !IsQuestCompleted(28185)"> <!-- BH -->
+				<RunTo X="-973.9736" Y="1030.49" Z="84.58082" />
+				<Objective QuestName="Svarnos" QuestId="28185" Type="CollectItem" ItemId="63143" CollectCount="1" />
+			</If>
+
+			<If Condition="HasQuest(28186) &amp;&amp; !IsQuestCompleted(28186)"> <!-- BH -->
+				<RunTo X="-1010.569" Y="1127.54" Z="86.80908"   />
+				<Objective QuestName="Cursed Shackles" QuestId="28186" Type="CollectItem" ItemId="63149" CollectCount="8" />
+			</If>
+
+			<If Condition="HasQuest(28663) &amp;&amp; !IsQuestCompleted(28663)"> <!-- BH -->
+				<Objective QuestName="D-Block" QuestId="28663" Type="KillMob" MobId="47785" KillCount="10" />
+			</If>
+
+			<If Condition="HasQuest(28223) &amp;&amp; !IsQuestCompleted(28223)"> <!-- BH -->
+				<Objective QuestName="The Warden" QuestId="28223" Type="CollectItem" ItemId="63309" CollectCount="1" />
+			</If>
+			
+			<If Condition="HasQuest(28232) &amp;&amp; !IsQuestCompleted(28232)"> <!-- BH -->
+				<Objective QuestName="Food From Below" QuestId="28232" Type="CollectItem" ItemId="63315" CollectCount="12" />
+			</If>
+
+			<If Condition="((HasQuest(28117)) &amp;&amp; (!IsQuestCompleted(28117)))" >
+				<Objective QuestName="Clearing the Depths" QuestId="28117" Type="KillMob" MobId="47616" KillCount="9" />
+			</If>
+
+			<If Condition="HasQuest(28188) &amp;&amp; !IsQuestCompleted(28188)"> <!-- BH -->
+				<Objective QuestName="Prison Revolt" QuestId="28188" Type="KillMob" MobId="48035" KillCount="10" />
+			</If>
+			
+			<If Condition="HasQuest(28162) &amp;&amp; !IsQuestCompleted(28162)"> <!-- BH -->
+				<Objective QuestName="Swamp Bait" QuestId="28162" Type="CollectItem" ItemId="63103" CollectCount="8" />
+			</If>
+		
+			<If Condition="HasQuest(28163) &amp;&amp; !IsQuestCompleted(28163)"> <!-- BH -->
+				<CustomBehavior File="UserSettings" PullDistance="35"  />
+				<Objective QuestName="The Leftovers" QuestId="28163" Type="KillMob" MobId="48144" KillCount="12" />
+				<CustomBehavior File="UserSettings" PullDistance="15"  />
+			</If>     
+
+			<If Condition="HasQuest(28122) &amp;&amp; !IsQuestCompleted(28122)"> <!-- BH -->
+				<RunTo X="-1351.555" Y="913.0949" Z="123.0453" />
+				<Objective QuestName="A Huge Problem" QuestId="28122" Type="KillMob" MobId="47593" KillCount="1" />
+			</If> 
+			
+				<CustomBehavior File="UserSettings" PullDistance="1" />
+			
+			<!-- Turn In -->
+			<If Condition="((HasQuest(28118)) &amp;&amp; (IsQuestCompleted(28118)))" >
+		<TurnIn QuestName="The Imprisoned Archmage" QuestId="28118" TurnInName="Commander Stevens" TurnInId="48039" />
+			</If>
+			<If Condition="((HasQuest(28120)) &amp;&amp; (IsQuestCompleted(28120)))" >
+		<TurnIn QuestName="Learning From The Past" QuestId="28120" TurnInName="Commander Stevens" TurnInId="48039" />
+			</If>
+			<If Condition="((HasQuest(28117)) &amp;&amp; (IsQuestCompleted(28117)))" >
+		<TurnIn QuestName="Clearing the Depths" QuestId="28117" TurnInName="Commander Stevens" TurnInId="48039" />
+			</If>
+			<If Condition="((HasQuest(27966)) &amp;&amp; (IsQuestCompleted(27966)))" >
+		<TurnIn QuestName="Salvaging the Remains" QuestId="27966" TurnInName="Lieutenant Farnsworth" TurnInId="48250" />
+			</If>
+			<If Condition="((HasQuest(28046)) &amp;&amp; (IsQuestCompleted(28046)))" >
+		<TurnIn QuestName="Finish The Job" QuestId="28046" TurnInName="Lieutenant Farnsworth" TurnInId="48250" />
+			</If>
+			<If Condition="((HasQuest(28185)) &amp;&amp; (IsQuestCompleted(28185)))" >
+		<TurnIn QuestName="Svarnos" QuestId="28185" TurnInName="2nd Lieutenant Farnsworth" TurnInId="48061" />
+			</If>
+			<If Condition="((HasQuest(28165)) &amp;&amp; (IsQuestCompleted(28165)))" >
+		<TurnIn QuestName="D-Block" QuestId="28165" TurnInName="2nd Lieutenant Wansworth" TurnInId="48061" />
+			</If>
+			<If Condition="((HasQuest(28186)) &amp;&amp; (IsQuestCompleted(28186)))" >
+		<TurnIn QuestName="Cursed Shackles" QuestId="28186" TurnInName="2nd Lieutenant Wansworth" TurnInId="48061" />
+			</If>
+			<If Condition="((HasQuest(28163)) &amp;&amp; (IsQuestCompleted(28163)))" >
+		<TurnIn QuestName="The Leftovers" QuestId="28163" TurnInName="Sergeant Parker" TurnInId="48066" />
+			</If>
+			<If Condition="((HasQuest(28162)) &amp;&amp; (IsQuestCompleted(28162)))" >
+		<TurnIn QuestName="Swamp Bait" QuestId="28162" TurnInName="Sergeant Parker" TurnInId="48066" />
+			</If>
+			<If Condition="((HasQuest(28122)) &amp;&amp; (IsQuestCompleted(28122)))" >
+		<TurnIn QuestName="A Huge Problem" QuestId="28122" TurnInName="Sergeant Parker" TurnInId="48066" />
+			</If>
+			<If Condition="((HasQuest(28223)) &amp;&amp; (IsQuestCompleted(28223)))" >
+		<TurnIn QuestName="The Warden" QuestId="28223" TurnInName="Marshal Fallows" TurnInId="48074" />
+			</If>
+			<If Condition="((HasQuest(28188)) &amp;&amp; (IsQuestCompleted(28188)))" >
+		<TurnIn QuestName="Prison Revolt" QuestId="28188" TurnInName="Marshal Fallows" TurnInId="48074" />
+			</If>
+			<If Condition="((HasQuest(28232)) &amp;&amp; (IsQuestCompleted(28232)))" >
+		<TurnIn QuestName="Food From Below" QuestId="28232" TurnInName="Marshal Fallows" TurnInId="48074" />
+			</If>
+
+			<If Condition="(Me.ZoneId == 5095)" >
+				<RunTo X="-345.2877" Y="1035.014" Z="22.08401" />
+			</If>
+			<If Condition="(Me.ZoneId == 5389)" >
+				<CustomBehavior File="LoadProfile" ProfileName="[A - Rep Quest] TB Peninsula Dailies [Kick]" /> 
+			</If>
+
+		
+		
+	<CustomBehavior File="UserDialog"  Title="title" AllowBotStop="True" SoundCue="Asterisk" SoundCueInterval="1" Text="End of BH Dailies" />
+
+
+
+
+
+
+
+
+	
+	
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	
+
+ </QuestOrder> 
+  
+</HBProfile>

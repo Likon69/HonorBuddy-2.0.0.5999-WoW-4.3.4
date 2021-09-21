@@ -1,0 +1,520 @@
+<HBProfile>
+<!-- Run Bot in Quest Mode -->
+<Name>[Alliance] Skinning 1-525 [Alpha]</Name>
+<MinDurability>0.3</MinDurability>
+<MinFreeBagSlots>1</MinFreeBagSlots>
+<SellGrey>True</SellGrey>
+<SellWhite>True</SellWhite>
+<SellGreen>False</SellGreen>
+<MailWhite>False</MailWhite>
+<MailGreen>True</MailGreen>
+<MailBlue>True</MailBlue>
+<MinLevel>1</MinLevel>
+<MaxLevel>91</MaxLevel>
+<Vendors>
+</Vendors>
+<AvoidMobs>
+</AvoidMobs>
+<Blackspots>
+<Blackspot X="-2356.129" Y="6929.728" Z="-0.6852777" Radius="20" />
+<Blackspot X="-2482.034" Y="6969.319" Z="-2.031194" Radius="50" />
+</Blackspots>
+<QuestOrder>
+<CustomBehavior File="UserSettings" LootMobs="True" PullDistance="35" KillBetweenHotspots="True" LogoutForInactivity="False" SkinMobs="True" NinjaSkin="True" />
+<CustomBehavior File="Message" Text="Loading Alliance Alpha QO for LW + Skinning PB profile" LogColor="GreenYellow" />
+<While Condition="(Me.GetSkill(Styx.SkillLine.Leatherworking).CurrentValue &gt;= 1) &amp;&amp; (Me.GetSkill(Styx.SkillLine.Leatherworking).CurrentValue &lt;= 100)" >
+	<If Condition="Me.GetSkill(Styx.SkillLine.Skinning).CurrentValue &lt;= 75">
+	<CustomBehavior File="Message" Text="Loading Elyween Forest 1-75" LogColor="GreenYellow" />
+	<CustomBehavior File="FlyTo" X="-9720.43" Y="49.7692" Z="41.01646" />
+	<CustomBehavior File="ForcedDismount" />
+	<SetGrindArea>
+		<GrindArea>
+			<Name>Elyween Forest 1-75</Name>
+			<LootRadius>100</LootRadius>
+			<Factions>38 44 189</Factions>
+			<Hotspots>
+								<Hotspot X="-9720.43" Y="49.7692" Z="41.01646" />
+								<Hotspot X="-9798.137" Y="9.242975" Z="29.57826" />
+								<Hotspot X="-9863.74" Y="6.092821" Z="27.79266" />
+								<Hotspot X="-9906.576" Y="-28.88545" Z="30.29438" />
+								<Hotspot X="-9973.366" Y="-47.40935" Z="34.99699" />
+								<Hotspot X="-10022.73" Y="-22.00787" Z="34.01312" />
+								<Hotspot X="-9958.058" Y="-60.10365" Z="33.72009" />
+								<Hotspot X="-9931.236" Y="-89.88985" Z="30.37609" />
+								<Hotspot X="-9899.061" Y="-50.5927" Z="28.9197" />
+								<Hotspot X="-9859.553" Y="-43.15723" Z="26.10554" />
+								<Hotspot X="-9812.51" Y="-78.52355" Z="25.81955" />
+								<Hotspot X="-9813.236" Y="-10.45343" Z="26.11792" />
+								<Hotspot X="-9823.549" Y="44.84231" Z="33.44895" />
+								<Hotspot X="-9764.188" Y="77.97866" Z="41.09714" />
+								<Hotspot X="-9786.423" Y="6.081963" Z="31.51482" />
+								<Hotspot X="-9788.001" Y="-62.88512" Z="26.40487" />
+								<Hotspot X="-9730.659" Y="-71.08958" Z="34.26672" />
+								<Hotspot X="-9672.373" Y="-19.31929" Z="43.55779" />
+								<Hotspot X="-9655.652" Y="-90.79086" Z="43.23079" />
+								<Hotspot X="-9679.263" Y="-124.3228" Z="42.91785" />
+								<Hotspot X="-9676.548" Y="-171.9559" Z="46.49627" />
+								<Hotspot X="-9731.208" Y="-206.9452" Z="42.60763" />
+								<Hotspot X="-9784.082" Y="-200.0088" Z="38.5035" />
+								<Hotspot X="-9830.678" Y="-185.0714" Z="36.51274" />
+								<Hotspot X="-9882.451" Y="-144.5452" Z="30.09871" />
+								<Hotspot X="-9918.553" Y="-87.61197" Z="29.4919" />
+								<Hotspot X="-9900.093" Y="-49.90158" Z="28.97948" />
+								<Hotspot X="-9831.786" Y="12.80331" Z="27.89258" />
+								<Hotspot X="-9729.723" Y="40.52927" Z="39.03622" />
+			</Hotspots>
+		</GrindArea>
+	</SetGrindArea>
+	</If>
+	
+	<If Condition="Me.GetSkill(Styx.SkillLine.Skinning).CurrentValue &gt;= 75">
+	<CustomBehavior File="Message" Text="Loading Light Leather in Westfall" LogColor="GreenYellow" />
+	<CustomBehavior File="FlyTo" X="-10938.6" Y="743.1607" Z="42.47563" />
+	<CustomBehavior File="ForcedDismount" />
+	<SetGrindArea>
+		<GrindArea>
+			<Name>EK 75-105</Name>
+			<LootRadius>100</LootRadius>
+			<Factions>38 44 189</Factions>
+			<Hotspots>
+							<Hotspot X="-10927.45" Y="682.4547" Z="36.27343" />
+							<Hotspot X="-11007.05" Y="664.8237" Z="34.2948" />
+							<Hotspot X="-11071.32" Y="661.7849" Z="33.96656" />
+							<Hotspot X="-11158.97" Y="645.3047" Z="39.09586" />
+							<Hotspot X="-11200.58" Y="616.1589" Z="40.76339" />
+							<Hotspot X="-11197.68" Y="677.7004" Z="38.09158" />
+							<Hotspot X="-11114.45" Y="681.5295" Z="34.36172" />
+							<Hotspot X="-11075.07" Y="710.581" Z="37.09513" />
+							<Hotspot X="-11026.12" Y="724.5164" Z="35.62669" />
+							<Hotspot X="-10971.89" Y="744.1304" Z="47.07913" />
+							<Hotspot X="-10948.11" Y="820.0963" Z="35.97744" />
+							<Hotspot X="-10899.5" Y="866.967" Z="33.92288" />
+							<Hotspot X="-10950.96" Y="897.5833" Z="35.09533" />
+							<Hotspot X="-10972.46" Y="943.1457" Z="34.47799" />
+							<Hotspot X="-10962.46" Y="1015.95" Z="37.00306" />
+							<Hotspot X="-10981.58" Y="1076.918" Z="38.07872" />
+							<Hotspot X="-10881.5" Y="977.325" Z="36.30569" />
+							<Hotspot X="-10836.63" Y="942.0261" Z="39.46837" />
+							<Hotspot X="-10771.09" Y="946.0983" Z="40.59146" />
+							<Hotspot X="-10693.78" Y="905.8904" Z="36.9439" />
+							<Hotspot X="-10719.92" Y="852.7723" Z="40.85915" />
+							<Hotspot X="-10908.21" Y="908.7533" Z="33.11295" />
+							<Hotspot X="-10959.55" Y="875.8633" Z="35.40514" />
+							<Hotspot X="-10924.06" Y="757.3781" Z="36.68958" />
+							<Hotspot X="-10888.03" Y="700.5343" Z="33.92117" />
+							<Hotspot X="-10802.93" Y="711.397" Z="39.99997" />
+							<Hotspot X="-10720.86" Y="762.8583" Z="42.56983" />
+							<Hotspot X="-10619.38" Y="801.6268" Z="52.99866" />
+			</Hotspots>
+		</GrindArea>
+	</SetGrindArea>
+	</If>
+	<GrindTo Condition="Me.GetSkill(Styx.SkillLine.Leatherworking).CurrentValue &gt;= 100"/>
+</While>
+
+<While Condition="(Me.GetSkill(Styx.SkillLine.Leatherworking).CurrentValue &gt;= 100) &amp;&amp; (Me.GetSkill(Styx.SkillLine.Skinning).CurrentValue &lt; 175)" >
+	<If Condition="(Me.GetSkill(Styx.SkillLine.Skinning).CurrentValue &gt;= 105) &amp;&amp; (Me.GetSkill(Styx.SkillLine.Skinning).CurrentValue &lt; 130)">
+	<CustomBehavior File="Message" Text="Loading Light/Medium Leather in Darkshire" LogColor="GreenYellow" />
+	<CustomBehavior File="FlyTo" X="-10015.67" Y="-1657.282" Z="32.79153" />
+	<CustomBehavior File="ForcedDismount" />
+	<SetGrindArea>
+		<GrindArea>
+			<Name>EK 105-130</Name>
+			<LootRadius>100</LootRadius>
+			<Factions>38</Factions>
+			<Hotspots>
+							<Hotspot X="-9926.116" Y="-1695.649" Z="22.97017" />
+							<Hotspot X="-9912.771" Y="-1768.645" Z="32.12413" />
+							<Hotspot X="-9982.13" Y="-1710.15" Z="27.35047" />
+							<Hotspot X="-10014.87" Y="-1673.089" Z="30.28931" />
+							<Hotspot X="-10020.26" Y="-1600.278" Z="32.25587" />
+							<Hotspot X="-9952.896" Y="-1591.395" Z="29.31221" />
+							<Hotspot X="-9972.919" Y="-1553.059" Z="27.51498" />
+							<Hotspot X="-10007.76" Y="-1508.549" Z="29.74335" />
+							<Hotspot X="-10042.83" Y="-1441.983" Z="29.19605" />
+							<Hotspot X="-10042.31" Y="-1370.095" Z="29.04033" />
+							<Hotspot X="-10046.42" Y="-1297.009" Z="30.97382" />
+							<Hotspot X="-10108.53" Y="-1270.751" Z="29.51727" />
+							<Hotspot X="-10043.31" Y="-1231.316" Z="29.07565" />
+							<Hotspot X="-10044.95" Y="-1191.777" Z="29.56542" />
+							<Hotspot X="-10044.71" Y="-1142.731" Z="29.23804" />
+							<Hotspot X="-10075.33" Y="-1106.832" Z="28.7328" />
+							<Hotspot X="-10051.44" Y="-1045.033" Z="28.25253" />
+							<Hotspot X="-10086.63" Y="-1025.012" Z="32.16104" />
+							<Hotspot X="-10120.66" Y="-975.6288" Z="32.09806" />
+							<Hotspot X="-10058.9" Y="-963.3929" Z="34.53672" />
+							<Hotspot X="-10018.89" Y="-957.1539" Z="29.39417" />
+							<Hotspot X="-10036.65" Y="-895.8156" Z="33.30318" />
+							<Hotspot X="-10082.98" Y="-901.608" Z="35.80597" />
+							<Hotspot X="-10136.14" Y="-914.5132" Z="34.65869" />
+							<Hotspot X="-10136.09" Y="-960.3381" Z="31.80387" />
+							<Hotspot X="-10199.63" Y="-976.2916" Z="36.14519" />
+							<Hotspot X="-10219.99" Y="-1021.292" Z="32.03933" />
+							<Hotspot X="-10231.76" Y="-950.4543" Z="37.79209" />
+							<Hotspot X="-10242.96" Y="-893.196" Z="36.13042" />
+							<Hotspot X="-10219.97" Y="-870.2596" Z="41.16904" />
+							<Hotspot X="-10197.21" Y="-840.8852" Z="42.02546" />
+							<Hotspot X="-10181.53" Y="-789.8684" Z="45.70173" />
+							<Hotspot X="-10125.86" Y="-801.2908" Z="36.57192" />
+							<Hotspot X="-10066.45" Y="-831.0767" Z="36.31736" />
+							<Hotspot X="-10048.87" Y="-864.4763" Z="34.51636" />
+							<Hotspot X="-10009.73" Y="-858.1799" Z="30.02235" />
+							<Hotspot X="-9990.949" Y="-805.1486" Z="28.10014" />
+							<Hotspot X="-9989.885" Y="-759.204" Z="30.49004" />
+							<Hotspot X="-10052.32" Y="-739.7487" Z="36.61999" />
+							<Hotspot X="-10123.4" Y="-717.0942" Z="41.94709" />
+							<Hotspot X="-10115.78" Y="-683.4827" Z="44.6024" />
+							<Hotspot X="-10081.05" Y="-681.1119" Z="37.75928" />
+							<Hotspot X="-10002.6" Y="-692.0652" Z="35.03407" />
+							<Hotspot X="-9957.059" Y="-683.6439" Z="29.5661" />
+							<Hotspot X="-9963.605" Y="-616.341" Z="34.21157" />
+							<Hotspot X="-9983.646" Y="-596.0478" Z="38.20391" />
+							<Hotspot X="-10017.64" Y="-626.243" Z="40.56673" />
+							<Hotspot X="-10052.97" Y="-605.2977" Z="44.42616" />
+							<Hotspot X="-10025.04" Y="-566.3351" Z="44.24185" />
+							<Hotspot X="-9981.385" Y="-517.5344" Z="39.36047" />
+							<Hotspot X="-9950.762" Y="-503.0972" Z="30.55637" />
+							<Hotspot X="-9975.688" Y="-454.87" Z="25.76377" />
+							<Hotspot X="-10010.37" Y="-441.4009" Z="31.71942" />
+							<Hotspot X="-10053.75" Y="-468.9838" Z="48.60239" />
+							<Hotspot X="-10037.43" Y="-375.3502" Z="28.4767" />
+							<Hotspot X="-10053.67" Y="-325.8018" Z="29.36052" />
+							<Hotspot X="-10074.72" Y="-295.4091" Z="30.96775" />
+							<Hotspot X="-10065.29" Y="-265.0197" Z="29.70981" />
+							<Hotspot X="-10070.75" Y="-234.8424" Z="31.63417" />
+							<Hotspot X="-10098.89" Y="-206.7364" Z="30.47458" />
+							<Hotspot X="-10070.14" Y="-185.7688" Z="28.59105" />
+							<Hotspot X="-10108.87" Y="-150.233" Z="29.61342" />
+							<Hotspot X="-10118.4" Y="-91.09659" Z="26.54906" />
+							<Hotspot X="-10109.97" Y="-36.37171" Z="22.11353" />
+			</Hotspots>
+		</GrindArea>
+	</SetGrindArea>
+	</If>
+
+	<If Condition="Me.GetSkill(Styx.SkillLine.Skinning).CurrentValue &gt;= 130" >
+	<CustomBehavior File="Message" Text="Loading Medium Leather in Stranglethorn" LogColor="GreenYellow" />
+	<CustomBehavior File="FlyTo" X="-11517.55" Y="-289.1764" Z="39.35883" />
+	<CustomBehavior File="ForcedDismount" />
+	<SetGrindArea>
+		<GrindArea>
+			<Name>Stranglethorn 130-175</Name>
+			<LootRadius>100</LootRadius>
+			<Factions>16 48 72</Factions>
+			<Hotspots>
+								<Hotspot X="-11486.01" Y="314.8814" Z="43.28415" /> 
+								<Hotspot X="-11546.42" Y="289.8967" Z="38.87825" />
+								<Hotspot X="-11588.51" Y="256.8199" Z="40.93376" />
+								<Hotspot X="-11640.83" Y="223.4522" Z="40.75352" />
+								<Hotspot X="-11672.26" Y="197.6156" Z="42.80061" />
+								<Hotspot X="-11707.43" Y="199.4595" Z="39.03061" />
+								<Hotspot X="-11696.64" Y="238.7745" Z="41.00598" />
+								<Hotspot X="-11652.8" Y="253.0481" Z="36.47485" />
+								<Hotspot X="-11620.65" Y="289.4843" Z="42.0281" />
+								<Hotspot X="-11651.83" Y="323.3864" Z="41.5052" />
+								<Hotspot X="-11613.18" Y="345.8741" Z="46.80145" />
+								<Hotspot X="-11586.46" Y="394.2265" Z="46.02891" />
+								<Hotspot X="-11559.79" Y="409.3743" Z="45.63778" />
+								<Hotspot X="-11570.96" Y="381.5569" Z="44.98768" />
+								<Hotspot X="-11578.6" Y="325.7874" Z="43.60071" />
+								<Hotspot X="-11538.01" Y="311.6955" Z="39.19328" />
+								<Hotspot X="-11542.57" Y="277.6321" Z="38.22281" />
+			</Hotspots>
+		</GrindArea>
+	</SetGrindArea>
+	</If>
+	<GrindTo Condition="(Me.GetSkill(Styx.SkillLine.Leatherworking).CurrentValue &gt;= 115) &amp;&amp; (Me.GetSkill(Styx.SkillLine.Skinning).CurrentValue &gt;= 175)"/>
+</While>
+<While Condition="(Me.GetSkill(Styx.SkillLine.Leatherworking).CurrentValue &gt;= 115) &amp;&amp; (Me.GetSkill(Styx.SkillLine.Leatherworking).CurrentValue &lt; 150)">
+	<If Condition="(Me.GetSkill(Styx.SkillLine.Skinning).CurrentValue &gt;= 175) &amp;&amp; (Me.GetSkillLine(Styx.SkillLine.Skinning).CurrentValue &lt;= 210)">
+	<CustomBehavior File="Message" Text="Loading Medium/Heavy Leather in Stranglethorn" LogColor="GreenYellow" />
+	<CustomBehavior File="FlyTo" X="-11955.35" Y="-267.6772" Z="14.16627" />
+	<CustomBehavior File="ForcedDismount" />
+	<SetGrindArea>
+		<GrindArea>
+			<Name>Stranglethorn 130-175</Name>
+			<LootRadius>100</LootRadius>
+			<Factions>48 188 72 16 14</Factions>
+			<Hotspots>
+								<Hotspot X="-11636.35" Y="161.6405" Z="16.74864" />
+								<Hotspot X="-11541.49" Y="169.627" Z="14.64202" />
+								<Hotspot X="-11587.97" Y="59.45034" Z="15.92421" />
+								<Hotspot X="-11689.96" Y="-11.95557" Z="15.65612" />
+								<Hotspot X="-11799.19" Y="-49.63132" Z="40.30447" />
+								<Hotspot X="-11818.17" Y="-156.4458" Z="14.78903" />
+								<Hotspot X="-11817.2" Y="-234.312" Z="16.57566" />
+								<Hotspot X="-11955.35" Y="-267.6772" Z="14.16627" />
+			</Hotspots>
+		</GrindArea>
+	</SetGrindArea>
+	</If>
+	<If Condition="Me.GetSkill(Styx.SkillLine.Skinning).CurrentValue &gt;= 210">
+	<CustomBehavior File="Message" Text="Loading Medium/Heavy Leather in Stranglethorn" LogColor="GreenYellow" />
+	<CustomBehavior File="FlyTo" X="-12220.82" Y="-427.5647" Z="16.07418" />
+	<CustomBehavior File="ForcedDismount" />
+	<SetGrindArea>
+		<GrindArea>
+			<Name>Stranglethorn 210-250</Name>
+			<LootRadius>100</LootRadius>
+			<Factions>48 188 72 16 14</Factions>
+			<Hotspots>
+								<Hotspot X="-12220.82" Y="-427.5647" Z="16.07418" />
+								<Hotspot X="-12317.61" Y="-374.1459" Z="14.63022" />
+								<Hotspot X="-12490.36" Y="-362.8354" Z="16.27687" />
+								<Hotspot X="-12578.06" Y="-435.7383" Z="19.74297" />
+								<Hotspot X="-12543.14" Y="-549.4469" Z="40.18469" />
+								<Hotspot X="-12515.21" Y="-672.3065" Z="38.04612" />
+								<Hotspot X="-12422.65" Y="-715.3423" Z="31.92147" />
+								<Hotspot X="-12238.66" Y="-709.5009" Z="14.44466" />
+								<Hotspot X="-12413.63" Y="-573.84" Z="10.74107" />
+								<Hotspot X="-12346.75" Y="-530.3137" Z="15.0151" />
+								<Hotspot X="-12206.35" Y="-425.3035" Z="18.91804" />
+			</Hotspots>
+		</GrindArea>
+	</SetGrindArea>
+	</If>
+	<GrindTo Condition="Me.GetSkill(Styx.SkillLine.Leatherworking).CurrentValue &gt;= 150"/>
+</While>
+<While Condition="(Me.GetSkill(Styx.SkillLine.Leatherworking).CurrentValue &gt;= 150) &amp;&amp; (Me.GetSkill(Styx.SkillLine.Leatherworking).CurrentValue &lt; 165)">
+	<If Condition="Me.GetSkill(Styx.SkillLine.Skinning).CurrentValue &gt;= 220" >
+	<CustomBehavior File="Message" Text="Loading Medium/Heavy Leather in Stranglethorn" LogColor="GreenYellow" />
+	<CustomBehavior File="FlyTo" X="-14552.05" Y="-265.3068" Z="16.09826"  />
+	<CustomBehavior File="ForcedDismount" />
+	<SetGrindArea>
+		<GrindArea>
+			<Name>Stranglethorn 200-230</Name>
+			<LootRadius>100</LootRadius>
+			<Factions>76 16 72</Factions>
+			<Hotspots>
+							<Hotspot X="-14511.45" Y="-149.2053" Z="4.725216" />
+							<Hotspot X="-14835.09" Y="-184.6554" Z="5.3633" />
+							<Hotspot X="-14796.95" Y="-422.8404" Z="3.545349" />
+							<Hotspot X="-14480.68" Y="-439.1731" Z="3.838682" />
+							<Hotspot X="-14619.57" Y="-332.9982" Z="8.708584" />
+							<Hotspot X="-14797.72" Y="-293.7176" Z="3.782383" />
+							<Hotspot X="-14673.82" Y="-176.4407" Z="8.984927" />
+							<Hotspot X="-14584.21" Y="-280.1857" Z="11.72996" />
+			</Hotspots>
+		</GrindArea>
+	</SetGrindArea>
+	</If>
+	<GrindTo Condition="Me.GetSkill(Styx.SkillLine.Leatherworking).CurrentValue &gt;= 165"/>
+</While>
+<While Condition="(Me.GetSkill(Styx.SkillLine.Leatherworking).CurrentValue &gt;= 165) &amp;&amp; (Me.GetSkill(Styx.SkillLine.Leatherworking).CurrentValue &lt;= 200)">
+	<If Condition="Me.GetSkill(Styx.SkillLine.Skinning).CurrentValue &gt;= 200">
+	<CustomBehavior File="Message" Text="Loading Medium/Heavy Leather in Jaguero Island" LogColor="GreenYellow" />
+	<CustomBehavior File="FlyTo" X="-14715.82" Y="-214.9609" Z="4.87939"  />
+	<CustomBehavior File="ForcedDismount" />
+	<SetGrindArea>
+		<GrindArea>
+			<Name>Stranglethorn 200-230</Name>
+			<LootRadius>100</LootRadius>
+			<Factions>72 16 76</Factions>
+			<Hotspots>
+							<Hotspot X="-14511.45" Y="-149.2053" Z="4.725216" />
+							<Hotspot X="-14835.09" Y="-184.6554" Z="5.3633" />
+							<Hotspot X="-14796.95" Y="-422.8404" Z="3.545349" />
+							<Hotspot X="-14480.68" Y="-439.1731" Z="3.838682" />
+							<Hotspot X="-14619.57" Y="-332.9982" Z="8.708584" />
+							<Hotspot X="-14797.72" Y="-293.7176" Z="3.782383" />
+							<Hotspot X="-14673.82" Y="-176.4407" Z="8.984927" />
+							<Hotspot X="-14584.21" Y="-280.1857" Z="11.72996" />
+			</Hotspots>
+		</GrindArea>
+	</SetGrindArea>
+	</If>
+	<GrindTo Condition="Me.GetSkill(Styx.SkillLine.Leatherworking).CurrentValue &gt;= 200"/>
+</While>
+<While Condition="(Me.GetSkill(Styx.SkillLine.Leatherworking).CurrentValue &gt;= 200) &amp;&amp; (Me.GetSkill(Styx.SkillLine.Leatherworking).CurrentValue &lt;= 250)" >
+	<If Condition="Me.GetSkill(Styx.SkillLine.Skinning).CurrentValue &gt;= 250">
+	<CustomBehavior File="Message" Text="Loading Heavy/Thick Leather in Burning Steps" LogColor="GreenYellow" />
+	<CustomBehavior File="FlyTo" X="-7659.057" Y="-2648.615" Z="136.7831"  />
+	<CustomBehavior File="ForcedDismount" />
+	<SetGrindArea>
+		<GrindArea>
+			<Name>Stranglethorn 200-230</Name>
+			<LootRadius>100</LootRadius>
+			<Factions>14 38 103</Factions>
+			<Hotspots>
+							<Hotspot X="-7663.138" Y="-2729.281" Z="132.4882" />
+							<Hotspot X="-7547.003" Y="-2700.758" Z="135.9881" />
+							<Hotspot X="-7599.268" Y="-2862.372" Z="134.9981" />
+							<Hotspot X="-7657.523" Y="-2730.121" Z="132.0422" />
+							<Hotspot X="-7677.908" Y="-2887.794" Z="132.6012" />
+							<Hotspot X="-7778.78" Y="-2932.106" Z="131.7788" />
+							<Hotspot X="-7845.278" Y="-2899.811" Z="133.0586" />
+							<Hotspot X="-7828.276" Y="-2831.458" Z="133.4498" />
+							<Hotspot X="-7979.682" Y="-2910.747" Z="135.0967" />
+							<Hotspot X="-8065.582" Y="-2892.002" Z="135.7988" />
+							<Hotspot X="-8143.668" Y="-2934.201" Z="133.3689" />
+							<Hotspot X="-8202.089" Y="-2818.773" Z="137.4894" />
+							<Hotspot X="-8100.957" Y="-2761.546" Z="133.6333" />
+							<Hotspot X="-7982.959" Y="-2820.426" Z="138.9763" />
+			</Hotspots>
+		</GrindArea>
+	</SetGrindArea>
+	</If>
+	<GrindTo Condition="Me.GetSkill(Styx.SkillLine.Leatherworking).CurrentValue &gt;= 250"/>
+</While>
+<While Condition="(Me.GetSkill(Styx.SkillLine.Leatherworking).CurrentValue &gt;= 250) &amp;&amp; (Me.GetSkill(Styx.SkillLine.Leatherworking).CurrentValue &lt;= 300)" >
+	<If Condition="Me.GetSkill(Styx.SkillLine.Skinning).CurrentValue &gt;= 250">
+	<CustomBehavior File="Message" Text="Loading Heavy/Thick/Rugged Leather in Burning Steps" LogColor="GreenYellow" />
+	<CustomBehavior File="FlyTo" X="-7659.057" Y="-2648.615" Z="136.7831"  />
+	<CustomBehavior File="ForcedDismount" />
+	<SetGrindArea>
+		<GrindArea>
+			<Name>Burning Steps 250-300</Name>
+			<LootRadius>100</LootRadius>
+			<Factions>14 38 103 72</Factions>
+			<Hotspots>
+							<Hotspot X="-7663.138" Y="-2729.281" Z="132.4882" />
+							<Hotspot X="-7547.003" Y="-2700.758" Z="135.9881" />
+							<Hotspot X="-7599.268" Y="-2862.372" Z="134.9981" />
+							<Hotspot X="-7657.523" Y="-2730.121" Z="132.0422" />
+							<Hotspot X="-7677.908" Y="-2887.794" Z="132.6012" />
+							<Hotspot X="-7778.78" Y="-2932.106" Z="131.7788" />
+							<Hotspot X="-7845.278" Y="-2899.811" Z="133.0586" />
+							<Hotspot X="-7828.276" Y="-2831.458" Z="133.4498" />
+							<Hotspot X="-7979.682" Y="-2910.747" Z="135.0967" />
+							<Hotspot X="-8065.582" Y="-2892.002" Z="135.7988" />
+							<Hotspot X="-8143.668" Y="-2934.201" Z="133.3689" />
+							<Hotspot X="-8202.089" Y="-2818.773" Z="137.4894" />
+							<Hotspot X="-8100.957" Y="-2761.546" Z="133.6333" />
+							<Hotspot X="-7982.959" Y="-2820.426" Z="138.9763" />
+			</Hotspots>
+		</GrindArea>
+	</SetGrindArea>
+	</If>
+	<GrindTo Condition="Me.GetSkill(Styx.SkillLine.Leatherworking).CurrentValue &gt;= 300"/>
+</While>
+<While Condition="(Me.GetSkill(Styx.SkillLine.Leatherworking).CurrentValue &gt;= 300) &amp;&amp; (Me.GetSkill(Styx.SkillLine.Leatherworking).CurrentValue &lt;= 350)" >
+	<If Condition="(Me.GetSkill(Styx.SkillLine.Skinning).CurrentValue &gt;= 300) &amp;&amp; (Me.GetSkill(Styx.SkillLine.Skinning).CurrentValue &lt; 330)">
+	<CustomBehavior File="Message" Text="Loading Knothide Leather in Hellfire" LogColor="GreenYellow" />
+	<CustomBehavior File="FlyTo" X="-1346.818" Y="3302.203" Z="47.68531"  />
+	<CustomBehavior File="ForcedDismount" />
+	<SetGrindArea>
+		<GrindArea>
+			<Name>Hellfire 300-350</Name>
+			<LootRadius>100</LootRadius>
+			<Factions>14 16</Factions>
+			<Hotspots>
+							<Hotspot X="-1379.092" Y="3366.29" Z="41.2301" />
+							<Hotspot X="-1435.037" Y="3372.267" Z="31.26875" />
+							<Hotspot X="-1474.764" Y="3417.591" Z="30.39755" />
+							<Hotspot X="-1529.945" Y="3472.469" Z="25.46519" />
+							<Hotspot X="-1571.623" Y="3537.667" Z="26.27242" />
+							<Hotspot X="-1609.087" Y="3595.403" Z="27.24035" />
+							<Hotspot X="-1640.45" Y="3636.602" Z="29.56636" />
+							<Hotspot X="-1579.172" Y="3721.235" Z="42.00074" />
+							<Hotspot X="-1540.108" Y="3635.076" Z="35.51966" />
+							<Hotspot X="-1497.327" Y="3573.654" Z="50.4101" />
+							<Hotspot X="-1399.172" Y="3469.035" Z="52.71167" />
+			</Hotspots>
+		</GrindArea>
+	</SetGrindArea>
+	</If>
+
+	<If Condition="Me.GetSkill(Styx.SkillLine.Skinning).CurrentValue &gt;= 330">
+	<CustomBehavior File="Message" Text="Loading Knothide Leather in Nagrande" LogColor="GreenYellow" />
+	<CustomBehavior File="FlyTo" X="-1753.768" Y="7401.863" Z="-1.662863"/>
+	<CustomBehavior File="ForcedDismount" />
+	<SetGrindArea>
+		<GrindArea>
+			<Name>Hellfire 330-350</Name>
+			<LootRadius>100</LootRadius>
+			<Factions>7 16 14</Factions>
+			<Hotspots>
+							<Hotspot X="-1753.768" Y="7401.863" Z="-1.662863" />
+							<Hotspot X="-1415.901" Y="6835.489" Z="26.95772" />
+							<Hotspot X="-1813.082" Y="6884.806" Z="-38.93454" />
+							<Hotspot X="-1665.833" Y="7138.033" Z="4.498174" />
+			</Hotspots>
+		</GrindArea>
+	</SetGrindArea>
+	</If>
+	<GrindTo Condition="Me.GetSkill(Styx.SkillLine.Leatherworking).CurrentValue &gt;= 350"/>
+</While>
+<While Condition="(Me.GetSkill(Styx.SkillLine.Leatherworking).CurrentValue &gt;= 350) &amp;&amp; (Me.GetSkill(Styx.SkillLine.Leatherworking).CurrentValue &lt; 430)">
+	<If Condition="Me.GetSkill(Styx.SkillLine.Skinning).CurrentValue &gt;= 400">
+	<CustomBehavior File="Message" Text="Loading Borean Leather in Sholazar" LogColor="GreenYellow" />
+	<CustomBehavior File="FlyTo" X="5199.797" Y="4242.852" Z="-90.15619"/>
+	<CustomBehavior File="ForcedDismount" />
+	<SetGrindArea>
+		<GrindArea>
+			<Name>Northrend 350-425</Name>
+			<LootRadius>100</LootRadius>
+			<Factions>16 189</Factions>
+			<Hotspots>
+							<Hotspot X="5199.797" Y="4242.852" Z="-90.15619" />
+							<Hotspot X="5183.305" Y="4417.984" Z="-94.25593" />
+							<Hotspot X="5115.573" Y="4136.284" Z="-75.31605" />
+							<Hotspot X="5139.844" Y="4030.496" Z="-62.20717" />
+							<Hotspot X="5237.208" Y="3799.379" Z="-22.72471" />
+			</Hotspots>
+		</GrindArea>
+	</SetGrindArea>
+	<GrindTo Condition="Me.GetSkill(Styx.SkillLine.Leatherworking).CurrentValue &gt;= 425"/>
+	</If>	
+</While>
+<While Condition="(Me.GetSkill(Styx.SkillLine.Leatherworking).CurrentValue &gt;= 425) &amp;&amp; (Me.GetSkill(Styx.SkillLine.Leatherworking).CurrentValue &lt; 425)" >
+	<If Condition="Me.GetSkill(Styx.SkillLine.Skinning).CurrentValue &gt;= 425">	
+	<CustomBehavior File="Message" Text="Loading Savage Leather in TB" LogColor="GreenYellow" />	
+        <SetGrindArea>
+		<GrindArea>
+			<Name>Twilight 450-525</Name>
+			<LootRadius>100</LootRadius>
+			<Factions>190 22</Factions>
+			<Hotspots>
+							<Hotspot X="-178.8354" Y="1509.827" Z="24.79742" />
+							<Hotspot X="-190.5138" Y="1458.725" Z="26.08689" />
+							<Hotspot X="-258.2431" Y="1452.047" Z="25.78642" />
+							<Hotspot X="-226.9813" Y="1386.002" Z="22.87954" />
+							<Hotspot X="-297.2507" Y="1374.415" Z="23.51452" />
+							<Hotspot X="-348.8922" Y="1404.017" Z="24.04597" />
+							<Hotspot X="-363.175" Y="1352.499" Z="22.50158" />
+							<Hotspot X="-360.013" Y="1298.906" Z="23.75375" />
+							<Hotspot X="-310.4642" Y="1288.005" Z="23.65015" />
+							<Hotspot X="-284.5306" Y="1331.216" Z="22.59983" />
+							<Hotspot X="-233.9808" Y="1359.232" Z="24.57418" />
+							<Hotspot X="-196.6336" Y="1432.322" Z="25.01598" />
+							<Hotspot X="-188.4307" Y="1502.435" Z="25.95962" />
+			</Hotspots>
+		</GrindArea>
+        </SetGrindArea>
+	<GrindTo Condition="Me.GetSkill(Styx.SkillLine.Leatherworking).CurrentValue &gt;= 525"/>
+	</If>
+</While>
+<While Condition="Me.GetSkill(Styx.SkillLine.Leatherworking).CurrentValue &gt;= 500" >
+	<If Condition="Me.GetSkill(Styx.SkillLine.Skinning).CurrentValue &gt;= 520">	
+	<CustomBehavior File="Message" Text="Loading Exotic Leather in Wild Plains" LogColor="GreenYellow" />
+	<CustomBehavior File="FlyTo" X="-583.9448" Y="1984.168" Z="129.0191"/>
+	<CustomBehavior File="ForcedDismount" />	
+        <SetGrindArea>
+		<GrindArea>
+			<Name>Wild Plains500-600</Name>
+			<LootRadius>100</LootRadius>
+			<Factions>14 16 188 190 1711 2136 2358</Factions>
+			<Hotspots>
+							<Hotspot X="-583.9448" Y="1984.168" Z="129.0191" />
+							<Hotspot X="-664.9493" Y="2033.978" Z="137.7332" />
+							<Hotspot X="-743.1422" Y="1986.413" Z="148.2329" />
+							<Hotspot X="-829.5029" Y="1995.109" Z="151.0818" />
+							<Hotspot X="-972.6725" Y="2023.208" Z="152.6213" />
+							<Hotspot X="-985.7335" Y="1939.035" Z="151.746" />
+							<Hotspot X="-980.4761" Y="2076.189" Z="125.4894" />
+							<Hotspot X="-929.2694" Y="1871.349" Z="150.9657" />
+							<Hotspot X="-899.3708" Y="1758.074" Z="150.592" />
+							<Hotspot X="-784.8211" Y="1781.102" Z="151.1461" />
+							<Hotspot X="-686.3676" Y="1694.728" Z="152.4404" />
+							<Hotspot X="-611.895" Y="1749.964" Z="147.1987" />
+							<Hotspot X="-842.1874" Y="2172.22" Z="100.5762" />
+							<Hotspot X="-672.7037" Y="2090.021" Z="124.463" />
+			</Hotspots>
+		</GrindArea>
+        </SetGrindArea>
+	<GrindTo Condition="Me.GetSkill(Styx.SkillLine.Leatherworking).CurrentValue &gt;= 600"/>
+	</If>
+</While>
+</QuestOrder>
+</HBProfile>
+	

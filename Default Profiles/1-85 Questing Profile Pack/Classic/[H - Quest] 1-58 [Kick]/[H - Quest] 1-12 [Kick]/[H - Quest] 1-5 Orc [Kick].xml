@@ -1,0 +1,315 @@
+<HBProfile>
+	<Name>[H - Quest] 1-5 Orc [Kick]</Name>
+	<MinDurability>0.4</MinDurability>
+	<MinFreeBagSlots>3</MinFreeBagSlots>
+	<MinLevel>1</MinLevel>
+	<MaxLevel>86</MaxLevel>
+	<MailGrey>False</MailGrey>
+	<MailWhite>False</MailWhite>
+	<MailGreen>True</MailGreen>
+	<SellGrey>True</SellGrey>
+	<SellWhite>True</SellWhite>
+	<SellGreen>True</SellGreen>
+	<SellBlue>False</SellBlue>
+	<SellPurple>False</SellPurple>
+	
+	<AvoidMobs>
+	<!--Orc Questgiver Bot Wants Dead-->
+		<Mob Name="Rezlak" Entry="3293"/><!--Orc Training Dummy-->
+		<Mob Name="Training Dummy" Entry="44820"  />
+	</AvoidMobs>
+	
+	<Mailboxes>
+	<!--Sen'jin Village Mailbox-->
+		<Mailbox X="-816.5651" Y="-4926.866" Z="19.88713"/>
+	<!--Razor Hill Mailbox-->
+		<Mailbox X="321.0783" Y="-4708.963" Z="14.15302"/>
+	</Mailboxes>
+	
+	<Blackspots>
+		<!--Valley of Trials Middle Fire-->
+		<Blackspot X="-602.3636" Y="-4250.66" Z="38.95682" Radius="3.759537"/>
+		<!--Durotar Blackspots-->
+		<Blackspot X="373.5913" Y="-4712.287" Z="16.10571" Radius="10.30227" />
+
+		<!--Sen'jin Village Fence-->
+		<Blackspot X="-768.1917" Y="-4881.526" Z="20.29184" Radius="7.254548"/>
+		<Blackspot X="-767.4973" Y="-4880.469" Z="20.56847" Radius="4.278707"/>
+		
+		<!--Troll Starting Area-->
+		<Blackspot X="-1135.981" Y="-5414.498" Z="13.00538" Radius="2.300135" />
+		<Blackspot X="-1150.384" Y="-5519.188" Z="11.58836" Radius="2.494276" />
+		<Blackspot X="-1168.537" Y="-5269.622" Z="0.8604383" Radius="3.024951" />		
+		<!--Harpy Nest-->
+		<Blackspot X="-2639.21" Y="-1405.313" Z="32.07373" Radius="3.31264"/>
+		<!--Cold Hearth Manor Sign-->
+		<Blackspot X="2188.518" Y="661.0852" Z="33.29134" Radius="4.017753"/>	
+	</Blackspots>
+
+	<Vendors>
+	<!--Valley of Trials Vendors-->
+		<Vendor Name="Zlagk" Entry="3882" Type="Food" X="-560.1253" Y="-4217.204" Z="41.59082"/>
+   		<Vendor Name="Huklah" Entry="3160" Type="Repair" X="-590.3455" Y="-4227.319" Z="38.3847"/>
+	<!--Valley of Trials Trainers-->
+		<Vendor Name="Acrypha" Entry="39206" Type="Train" TrainClass="Mage" X="-625.296" Y="-4210.167" Z="38.13415"/>
+		<Vendor Name="Shikrik" Entry="3157" Type="Train" TrainClass="Shaman" X="-623.9393" Y="-4203.878" Z="38.13462"/>
+		<Vendor Name="Rwag" Entry="3155" Type="Train" TrainClass="Rogue" X="-617.059" Y="-4202.635" Z="38.13412"/>
+		<Vendor Name="Karranisha" Entry="39214" Type="Train" TrainClass="Hunter" X="-635.4618" Y="-4227.521" Z="38.13442"/>
+		<Vendor Name="Frang" Entry="3153" Type="Train" TrainClass="Warrior" X="-640.1024" Y="-4229.821" Z="38.13398"/>
+		<Vendor Name="Nartok" Entry="3156" Type="Train" TrainClass="Warlock" X="-590.8021" Y="-4203.484" Z="38.42764"/>
+	<!--Sen'jin Village Vendors-->
+		<Vendor Name="K'waii" Entry="3186" Type="Food" X="-779.0314" Y="-4938.931" Z="22.24685" />
+		<Vendor Name="Trayexir" Entry="10369" Type="Repair" X="-769.1502" Y="-4948.526" Z="22.84936"/>
+	<!--Sen'jin Village Trainers-->
+		<Vendor Name="Bomsanchu" Entry="50002" Type="Train" TrainClass="Mage" X="-789.2239" Y="-4943.434" Z="38.28099"/>
+		<Vendor Name="Cona" Entry="50011" Type="Train" TrainClass="Shaman" X="-841.7292" Y="-4937.272" Z="20.98561"/>
+		<Vendor Name="Munalti" Entry="50015" Type="Train" TrainClass="Rogue" X="-778.5746" Y="-4926.359" Z="22.90205"/>
+		<Vendor Name="Jamai" Entry="50004" Type="Train" TrainClass="Hunter" X="-790.0643" Y="-4908.497" Z="19.60824"/>
+		<Vendor Name="Yeniss" Entry="50006" Type="Train" TrainClass="Warrior" X="-773.3785" Y="-4947.198" Z="22.881"/>
+		<Vendor Name="Gusini" Entry="49998" Type="Train" TrainClass="Warlock" X="-785.9184" Y="-4939.8" Z="38.28124"/>
+		<Vendor Name="Parata" Entry="50001" Type="Train" TrainClass="Priest" X="-784.3837" Y="-4944.821" Z="38.28099"/>
+		<Vendor Name="Den'chulu" Entry="49997" Type="Train" TrainClass="Druid" X="-844.0104" Y="-4932.819" Z="20.98573"/>
+
+	<!--Razor Hill Vendors-->
+		<Vendor Name="Innkeeper Grosk" Entry="6928" Type="Food" X="340.3629" Y="-4686.287" Z="16.48928"/>
+		<Vendor Name="Ghrawt" Entry="3165" Type="Repair" X="362.1046" Y="-4763.842" Z="12.46936"/>
+	<!--Razor Hill Trainers-->
+		<Vendor Name="Un'Thuwa" Entry="5880" Type="Train" TrainClass="Mage" X="334.717" Y="-4767.622" Z="12.63494"/>
+		<Vendor Name="Swart" Entry="3173" Type="Train" TrainClass="Shaman" X="307.1142" Y="-4839.906" Z="10.52414"/>
+		<Vendor Name="Kaplak" Entry="3170" Type="Train" TrainClass="Rogue" X="268.1285" Y="-4710.936" Z="17.76733"/>
+		<Vendor Name="Thotar" Entry="3171" Type="Train" TrainClass="Hunter" X="275.3385" Y="-4703.997" Z="11.90343"/>
+		<Vendor Name="Tarshaw Jaggedscar" Entry="3169" Type="Train" TrainClass="Warrior" X="311.3524" Y="-4827.792" Z="9.580641"/>
+		<Vendor Name="Dhugru Gorelust" Entry="3172" Type="Train" TrainClass="Warlock" X="356.192" Y="-4837.954" Z="11.08876"/>
+		<Vendor Name="Tai'jin" Entry="3706" Type="Train" TrainClass="Priest" X="294.8838" Y="-4831.495" Z="10.52398"/>		
+	</Vendors>
+	
+	<!--Orc Quest Overrides-->
+	<Quest Id="25126" Name="Cutting Teeth">
+		<Objective Type="KillMob" MobId="3098" KillCount="6">
+			<Hotspots>
+				<Hotspot X="-507.7307" Y="-4341.651" Z="38.31589"/>
+				<Hotspot X="-477.4008" Y="-4345.411" Z="41.38916"/>
+			</Hotspots>
+		</Objective>
+	</Quest>
+	<Quest Id="25136" Name="Galgar's Cactus Apple Surprise">
+		<Objective Type="CollectItem" ItemId="11583" CollectCount="6">
+			<CollectFrom>
+				<GameObject Name="Cactus Apple" Id="171938"/>
+			</CollectFrom>
+			<Hotspots>
+				<Hotspot X="-744.5067" Y="-4275.841" Z="42.98434"/>
+				<Hotspot X="-768.7281" Y="-4208.202" Z="44.68142"/>
+				<Hotspot X="-740.795" Y="-4137.785" Z="38.3647"/>
+				<Hotspot X="-477.4457" Y="-4321.036" Z="44.42284"/>
+				<Hotspot X="-553.2103" Y="-4289.594" Z="37.28544"/>
+			</Hotspots>
+		</Objective>
+	</Quest>
+	<Quest Id="25172" Name="Invaders in Our Home">
+		<Objective Type="KillMob" MobId="39317" KillCount="7">
+			<Hotspots>
+				<Hotspot X="-728.6015" Y="-4297.181" Z="45.10564"/>
+				<Hotspot X="-765.9155" Y="-4270.51" Z="46.75948"/>
+				<Hotspot X="-747.0746" Y="-4213.219" Z="39.63412"/>
+			</Hotspots>
+		</Objective>
+	</Quest>
+	<Quest Id="25127" Name="Sting of the Scorpid">
+		<Objective Type="CollectItem" ItemId="4862" CollectCount="8">
+			<CollectFrom>
+				<Mob Name="Scorpid Worker" Id="3124"/>
+			</CollectFrom>
+			<Hotspots>
+				<Hotspot X="-464.7263" Y="-4198.291" Z="51.22854"/>
+				<Hotspot X="-435.2009" Y="-4136.958" Z="51.62202"/>
+				<Hotspot X="-411.5247" Y="-4076.037" Z="50.10033"/>
+				<Hotspot X="-368.7698" Y="-4079.11" Z="50.01267"/>
+			</Hotspots>
+		</Objective>
+	</Quest>
+	<Quest Id="25129" Name="Sarkoth">
+		<Objective Type="CollectItem" ItemId="4905" CollectCount="1">
+			<CollectFrom>
+				<Mob Name="Sarkoth" Id="3281"/>
+			</CollectFrom>
+			<Hotspots>
+				<Hotspot X="-548.802" Y="-4099.277" Z="70.87624"/>
+			</Hotspots>
+		</Objective>
+	</Quest>
+	<Quest Id="25131" Name="Vile Familiars">
+		<Objective Type="KillMob" MobId="3101" KillCount="8">
+			<Hotspots>
+				<Hotspot X="-228.0485" Y="-4371.036" Z="63.85124"/>
+				<Hotspot X="-163.2926" Y="-4360.089" Z="67.19205"/>
+				<Hotspot X="-140.7615" Y="-4280.591" Z="63.96115"/>
+			</Hotspots>
+		</Objective>
+	</Quest>
+	<Quest Id="25135" Name="Thazz'ril's Pick">
+	<Objective Type="CollectItem" ItemId="16332" CollectCount="1">
+
+	<Hotspots>
+
+	<Hotspot X="-87.13933" Y="-4277.13" Z="65.05371" />
+
+	</Hotspots>
+
+	</Objective>
+
+	</Quest>
+
+
+
+
+	<QuestOrder>
+	
+	<CustomBehavior File="UserSettings" LootMobs="True" TrainNewSkills="True" LearnFlightPaths="False" UseFlightPaths="False" PullDistance="25" />
+	
+		<PickUp QuestName="Your Place In The World" QuestId="25152" GiverName="Kaltunk" GiverId="10176" />
+		<TurnIn QuestName="Your Place In The World" QuestId="25152" TurnInName="Gornek" TurnInId="3143" />
+			<Objective QuestName="Cutting Teeth" QuestId="25126" Type="KillMob" MobId="3098" KillCount="6" />
+		<TurnIn QuestName="Cutting Teeth" QuestId="25126" TurnInName="Gornek" TurnInId="3143" />
+		<PickUp QuestName="Invaders in Our Home" QuestId="25172" GiverName="Gornek" GiverId="3143"/>
+		<PickUp QuestName="Galgar's Cactus Apple Surprise" QuestId="25136" GiverName="Galgar" GiverId="9796" />
+			<Objective QuestName="Invaders in Our Home" QuestId="25172" Type="KillMob" MobId="39317" KillCount="7" />
+			<Objective QuestName="Galgar's Cactus Apple Surprise" QuestId="25136" Type="CollectItem" ItemId="11583" CollectCount="6" />
+		<TurnIn QuestName="Galgar's Cactus Apple Surprise" QuestId="25136" TurnInName="Galgar" TurnInId="9796" />
+		<TurnIn QuestName="Invaders in Our Home" QuestId="25172" TurnInName="Gornek" TurnInId="3143" />
+		
+
+			<!-- Class Specific Quests -->
+			
+			<If Condition="Me.Class == WoWClass.Hunter">
+		<PickUp QuestName="Etched Parchment" QuestId="3087" GiverName="Gornek" GiverId="3143" />
+		<TurnIn QuestName="Etched Parchment" QuestId="3087" TurnInName="Karranisha" TurnInId="39214" />
+		
+		<!-- while 
+			<If Condition="!HasSpell(56641)">
+				<CustomBehavior File="ForceSetVendor" VendorType="Train" />
+			</If>
+			<CustomBehavior File="WaitTimer" WaitTime="1000"/>
+			<CustomBehavior File="CastSpellOn" QuestId="25139" NumOfTimes="5" SpellId="56641" MobId="44820" X="-579.9462" Y="-4240.132" Z="38.17958" />
+		<TurnIn QuestName="Steady Shot" QuestId="25139" TurnInName="Karranisha" TurnInId="39214" />
+		-->
+			</If>
+
+			<If Condition="Me.Class == WoWClass.Warrior">
+		<PickUp QuestName="Simple Parchment" QuestId="2383" GiverName="Gornek" GiverId="3143" />
+		<TurnIn QuestName="Simple Parchment" QuestId="2383" TurnInName="Frang" TurnInId="3153" />
+		
+		<!--
+			<PickUp QuestName="Charge" QuestId="25147" GiverName="Frang" GiverId="3153" />
+
+			<If Condition="!HasSpell(100)">
+				<CustomBehavior File="ForceSetVendor" VendorType="Train" />
+			</If>
+					<RunTo X="-584.0283" Y="-4236.268" Z="38.23893" />
+					<CustomBehavior File="RunMacro" Macro="/target Training Dummy" NumOfTimes="1" WaitTime="1000"/>
+			<CustomBehavior File="CastSpellOn" QuestId="25147" SpellId="100" MobId="44820" NumOfTimes="1" MobHpPercentLeft="100" MinRange="8" X="-584.0283" Y="-4236.268" Z="38.23893" />
+					<TurnIn QuestName="Charge" QuestId="25147" TurnInName="Frang" TurnInId="3153" />
+		-->
+			</If>
+
+			<If Condition="Me.Class == WoWClass.Rogue">
+		<PickUp QuestName="Encrypted Parchment" QuestId="3088" GiverName="Gornek" GiverId="3143" />
+		<TurnIn QuestName="Encrypted Parchment" QuestId="3088" TurnInName="Rwag" TurnInId="3155" />
+		<!--
+			<PickUp QuestName="Eviscerate" QuestId="25141" GiverName="Rwag" GiverId="3155" />
+
+		<If Condition="!HasSpell(2098)">
+				<CustomBehavior File="ForceSetVendor" VendorType="Train" />
+			</If>
+			<While Condition="HasQuest(25141) &amp;&amp; !IsQuestCompleted(25141)">
+						<CustomBehavior File="CastSpellOn" SpellId="1752" MobId="44820" MobHpPercentLeft="100" NumOfTimes="1" MinRange="3" Range="5" X="-584.0283" Y="-4236.268" Z="38.23893" />
+						<CustomBehavior File="CastSpellOn" SpellId="2098" MobId="44820" MobHpPercentLeft="100" NumOfTimes="1" MinRange="3" Range="5" X="-584.0283" Y="-4236.268" Z="38.23893" />
+					</While>
+
+			<TurnIn QuestName="Eviscerate" QuestId="25141" TurnInName="Rwag" TurnInId="3155" />
+		-->
+		
+			</If>
+
+			<If Condition="Me.Class == WoWClass.Mage">
+		<PickUp QuestName="Glyphic Parchment" QuestId="25138" GiverName="Gornek" GiverId="3143" />
+		<TurnIn QuestName="Glyphic Parchment" QuestId="25138" TurnInName="Acrypha" TurnInId="39206" />
+		<!--
+			<PickUp QuestName="Arcane Missiles" QuestId="25149" GiverName="Acrypha" GiverId="39206" />
+
+			<If Condition="!HasSpell(5143)">
+				<CustomBehavior File="ForceSetVendor" VendorType="Train" />
+			</If>
+
+			<While Condition="HasQuest(25149) &amp;&amp; !IsQuestCompleted(25149)">
+				<CustomBehavior File="CastSpellOn" SpellId="133" MobId="44820" NumOfTimes="1" MobHpPercentLeft="100" MinRange="5" Range="30" X="-584.0283" Y="-4236.268" Z="38.23893" />
+				<CustomBehavior File="CastSpellOn" SpellId="5143" MobId="44820" NumOfTimes="1" MobHpPercentLeft="100" MinRange="5" Range="30" X="-584.0283" Y="-4236.268" Z="38.23893" />
+			</While>
+			<TurnIn QuestName="Arcane Missiles" QuestId="25149" TurnInName="Acrypha" TurnInId="39206" />
+		-->
+		
+			</If>
+
+			<If Condition="Me.Class == WoWClass.Warlock">
+		<PickUp QuestName="Tainted Parchment" QuestId="3090" GiverName="Gornek" GiverId="3143" />
+		<TurnIn QuestName="Tainted Parchment" QuestId="3090" TurnInName="Nartok" TurnInId="3156" />
+		<!--
+		<PickUp QuestName="Immolate" QuestId="25145" GiverName="Nartok" GiverId="3156" />
+
+			<If Condition="!HasSpell(348)">
+				<CustomBehavior File="ForceSetVendor" VendorType="Train" />
+			</If>
+			<RunTo X="-579.9462" Y="-4240.132" Z="38.17958" />
+			<CustomBehavior File="CastSpellOn" QuestId="25145" SpellId="348" MobId="44820" NumOfTimes="5" MobHpPercentLeft="100" MinRange="1" X="-579.9462" Y="-4240.132" Z="38.17958" />
+		<TurnIn QuestName="Immolate" QuestId="25145" TurnInName="Nartok" TurnInId="3156" />
+		-->
+			</If>
+
+			<If Condition="Me.Class == WoWClass.Shaman">
+		<PickUp QuestName="Rune-Inscribed Parchment" QuestId="3089" GiverName="Gornek" GiverId="3143" />
+		<TurnIn QuestName="Rune-Inscribed Parchment" QuestId="3089" TurnInName="Shikrik" TurnInId="3157" />
+		<PickUp QuestName="Primal Strike" QuestId="25143" GiverName="Shikrik" GiverId="3157" />
+			<If Condition="((HasQuest(25143)) &amp;&amp; (!IsQuestCompleted(25143)))" >
+				<If Condition="!HasSpell(73899)">
+					<CustomBehavior File="ForceSetVendor" VendorType="Train" />
+				</If>
+				<CustomBehavior File="CastSpellOn" QuestId="25143" SpellId="73899" MobId="44820" NumOfTimes="20" MobHpPercentLeft="100" MinRange="1" Range="3" X="-584.0283" Y="-4236.268" Z="38.23893" />
+			</If>
+		<TurnIn QuestName="Primal Strike" QuestId="25143" TurnInName="Shikrik" TurnInId="3157" />
+			</If>
+			<!-- End of Class Specific Quests -->
+			
+		<PickUp QuestName="Sting of the Scorpid" QuestId="25127" GiverName="Gornek" GiverId="3143" />
+		<PickUp QuestName="Lazy Peons" QuestId="25134" GiverName="Foreman Thazz'ril" GiverId="11378" />
+			<While Condition="((HasQuest(25134)) &amp;&amp; (!IsQuestCompleted(25134)))" >
+				<CustomBehavior File="UseItemOn" QuestId="25134" MobId="10556" ItemId="16114" NumOfTimes="100" HasAuraId="17743" Range="5" CollectionDistance="1000" X="-413.3748" Y="-4101.751" Z="49.63153" />
+			</While>
+			<Objective QuestName="Sting of the Scorpid" QuestId="25127" Type="CollectItem" ItemId="4862" CollectCount="8" />
+		<TurnIn QuestName="Lazy Peons" QuestId="25134" TurnInName="Foreman Thazz'ril" TurnInId="11378" />
+		<TurnIn QuestName="Sting of the Scorpid" QuestId="25127" TurnInName="Gornek" TurnInId="3143" />
+		<PickUp QuestName="Hana'zua" QuestId="25128" GiverName="Canaga Earthcaller" GiverId="5887"/>
+		<TurnIn QuestName="Hana'zua" QuestId="25128" TurnInName="Hana'zua" TurnInId="3287"/>
+		<PickUp QuestName="Sarkoth" QuestId="25129" GiverName="Hana'zua" GiverId="3287"/>
+			<Objective QuestName="Sarkoth" QuestId="25129" Type="CollectItem" ItemId="4905" CollectCount="1"/>
+		<TurnIn QuestName="Sarkoth" QuestId="25129" TurnInName="Hana'zua" TurnInId="3287"/>
+		<PickUp QuestName="Back to the Den" QuestId="25130" GiverName="Hana'zua" GiverId="3287"/>
+		<TurnIn QuestName="Back to the Den" QuestId="25130" TurnInName="Gornek" TurnInId="3143"/>
+		<PickUp QuestName="Vile Familiars" QuestId="25131" GiverName="Zureetha Fargaze" GiverId="3145"/>
+			<Objective QuestName="Vile Familiars" QuestId="25131" Type="KillMob" MobId="3101" KillCount="8"/>
+		<TurnIn QuestName="Vile Familiars" QuestId="25131" TurnInName="Zureetha Fargaze" TurnInId="3145"/>
+		<PickUp QuestName="Burning Blade Medallion" QuestId="25132" GiverName="Zureetha Fargaze" GiverId="3145" />
+		<PickUp QuestName="Thazz'ril's Pick" QuestId="25135" GiverName="Foreman Thazz'ril" GiverId="11378" />
+			<Objective QuestName="Thazz'ril's Pick" QuestId="25135" Type="CollectItem" ItemId="16332" CollectCount="1" />
+			<Objective QuestName="Burning Blade Medallion" QuestId="25132" Type="CollectItem" ItemId="4859" CollectCount="1" />
+			<Objective QuestName="Burning Blade Medallion" QuestId="25132" Type="KillMob" MobId="3102" KillCount="7" />
+		<TurnIn QuestName="Burning Blade Medallion" QuestId="25132" TurnInName="Zureetha Fargaze" TurnInId="3145" />
+		<TurnIn QuestName="Thazz'ril's Pick" QuestId="25135" TurnInName="Foreman Thazz'ril" TurnInId="11378" />
+		<PickUp QuestName="Report to Sen'jin Village" QuestId="25133" GiverName="Zureetha Fargaze" GiverId="3145" />
+		<TurnIn QuestName="Report to Sen'jin Village" QuestId="25133" TurnInName="Master Gadrin" TurnInId="3188" />
+		
+		<CustomBehavior File="LoadProfile" ProfileName="[H - Quest] 5-12 Durotar [Kick]" /> 
+		
+	</QuestOrder>
+	
+</HBProfile>
+	

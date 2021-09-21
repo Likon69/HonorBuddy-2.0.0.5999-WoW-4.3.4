@@ -1,0 +1,92 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<DungeonBuddyProfile>
+  <Name>The Siege of Wyrmrest Temple Heroic</Name>
+  <DungeonId>416</DungeonId>
+  <BossEncounters>
+	<Boss isFinal="false" entry="55265" name="Morchok" killOrder="1" optional="false" X="-1981.033" Y="-2409.299" Z="69.05319" />
+	<Boss isFinal="false" entry="55308" name="Warlord Zon'ozz" killOrder="2" optional="false" X="-1760.69" Y="-1913.82" Z="-226.12" />
+	<Boss isFinal="false" entry="55312" name="Yor'sahj the Unsleeping" killOrder="3" optional="false" X="-1765.655" Y="-3034.354" Z="-182.4589" />
+	<Boss isFinal="true" entry="55689" name="Hagara the Stormbinder" killOrder="4" optional="false" X="13587.32" Y="13611.98" Z="122.4213" />
+  </BossEncounters>
+  <Blackspots>
+    <!--<Blackspot X="-101.3791" Y="-703.8368" Z="9.095623" Radius="3.363508" />-->
+  </Blackspots>
+
+
+  <Vendor Name="Morchok" Entry="55265" Type="Repair" X="-1981.033" Y="-2409.299" Z="69.05319" />
+  <!-- abilities: stomp (melee stand in this), resonating crystal (ranged / heals stand *on* the red circle), black blood of the earth (gtfo and hide) - 
+crush armor (on the tanks) - tanks taunt at 3 or when their stacks fall off -->
+
+  <Vendor Name="Warlord Zon'ozz" Entry="55308" Type="Repair" X="-1760.69" Y="-1913.82" Z="-226.12" />
+  <!-- zonozz trash - follow group and kill trash x3 sets - then kill zon'ozz
+Name="Eye of Go'rath" Entry="57875"
+Name="Flail of Go'rath" Entry="57877" 
+Name="Claw of Go'rath" Entry="57890" 
+
+zon'ozz logic:
+stack on boss, kill (ignore ball). Do nothing else. 
+dps - pop cd's in black phase (forgot buff name on boss)  
+healers - heal more after 8+ stacks of Focused Anger on the boss and in black phase
+-->
+  <!-- use the portal to get back to the temple (Travel to Wyrmrest Temple) -->
+
+  <Vendor Name="Yor'sahj the Unsleeping" Entry="55312" Type="Repair" X="-1765.655" Y="-3034.354" Z="-182.4589" />
+  <!--
+Yor'sahj Trash:
+Follow the group, always stack, and kill slimes
+purple slime - don't heal tanks more than 4 stacks of purple debuff (dunno what it's called from mini slimes)
+
+Trash Globules:
+Name="Shadowed Globule" Entry="57388" // purple
+Name="Glowing Globule" Entry="57387" // yellow
+Name="Cobalt Globule" Entry="57384" // blue
+Name="Dark Globule" Entry="57382" // black
+Name="Crimson Globule" Entry="57386" // red
+Name="Acidic Globule" Entry="57333" // green
+
+Yor'sahj Logic
+
+// logic: Purple > Yellow > Red > Green (for LFR only! - ignore blue, black in lfr)
+after you kill 1 of the 3 slimes... you go back to boss!
+you ALWAYS stack on boss in lfr!
+Mana Void (if red buff is up and Me.IsMelee - ignore unless within melee distance of you!) > Black Adds > Zon'ozz (when boss has cobalt blood of shu'ma)
+Healers - if purple buff is up... do not heal anyone with more than 4 stacks of Deep Corruption - doing this will blow that person up (not a huge deal in LFR)
+
+Name="Mana Void" Entry="56231" // mana void from blue globule
+Name="Forgotten One" Entry="56265" // adds from black globule
+
+Boss Globules:
+Name="Shadowed Globule" Entry="55863" // purple
+Name="Glowing Globule" Entry="55864" // yellow
+Name="Cobalt Globule" Entry="55866" // blue
+Name="Crimson Globule" Entry="55865" // red
+Name="Acidic Globule" Entry="55862" // green
+Name="Dark Globule" Entry="55867"
+
+ -->
+  <!-- use the portal to get back to the temple (Travel to Wyrmrest Temple) -->
+
+  <!-- 
+	mount Name="Valeera" Entry="57289" X="-1783.076" Y="-2361.068" Z="47.28809" /> and fly to zonozz -
+or
+	mount Name="Eiendormi" Entry="57288" X="-1787.854" Y="-2426.568" Z="47.28844" /> and fly to yor'sahj
+or
+	mount Name="Nethestrasz" Entry="57287" TX="-1754.102" Y="-2394.892" Z="47.28849" /> and fly to top of temple (to go to hagara)
+	
+	then to get to hagara - use the (Travel to the Eye of Eternity) portal (assuming you're at the top of the temple)
+-->
+
+  <Vendor Name="Hagara the Stormbinder" Entry="55689" Type="Repair" X="13587.32" Y="13611.98" Z="122.4213" />
+  <!-- Hagara trash - kill stuff, don't stand in blizzard, don't stand in the swirling tornado's.  interrupt stuff, heal stuff. win -->
+  <!-- Hagara herself - this fight is easy if your group isn't retarded.  
+get away from ice lances
+tank - move out of focused assault
+You'll have to script this bc I can't explain it - it's the same as regular except less HP and no Ice Tombs) 
+Ice - kill the 4 ice crystals - don't get hit by the ice wave - don't get stuck inside
+<Vendor Name="Frozen Binding Crystal" Entry="56136" Type="Repair" X="13617.5" Y="13580.92" Z="123.4838" />
+lightning - stack with group and you should be fine as long as you follow someone to the 4 lightning pillars (clockwise)
+<Vendor Name="Bound Lightning Elemental" Entry="56700" Type="Repair" X="13628.44" Y="13610.42" Z="123.4843" />
+pop cd's while she's still stunned for more dps
+-->
+
+</DungeonBuddyProfile>

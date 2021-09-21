@@ -1,0 +1,50 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<HBProfile>
+  <Name>Wool Cloth - Wetlands</Name>
+  <MinDurability>0.3</MinDurability>
+  <MinFreeBagSlots>2</MinFreeBagSlots>
+  <MinLevel>1</MinLevel>
+  <MaxLevel>86</MaxLevel>
+	<SellGrey>True</SellGrey>
+	<SellWhite>True</SellWhite>
+	<SellGreen>False</SellGreen>
+	<SellBlue>False</SellBlue>
+	<SellPurple>False</SellPurple>
+	
+	<MailWhite>True</MailWhite>
+	<MailGreen>True</MailGreen>
+	<MailBlue>True</MailBlue>
+	<MailPurple>True</MailPurple>  
+
+	<Vendors>
+<Vendor Name="Victorina" Entry="41622" Type="Repair" X="-3270.458" Y="-2787.835" Z="12.77773" />
+	</Vendors>
+	
+	<Mailboxes>
+<Mailbox  X="-3253.29" Y="-2771.891" Z="13.15546" />
+	</Mailboxes>
+
+  <GrindArea>
+    <TargetMinLevel>1</TargetMinLevel>
+    <TargetMaxLevel>86</TargetMaxLevel>
+    <Factions>2273</Factions>
+    <MaxDistance>30</MaxDistance>
+    <Hotspots>
+      <Hotspot x="-3285.41675" y="-2162.5" z="Findhighest" />
+      <Hotspot x="-3358.3335" y="-2200" z="Findhighest" />
+      <Hotspot x="-3381.25" y="-2283.3335" z="Findhighest" />
+      <Hotspot x="-3437.5" y="-2364.5835" z="Findhighest" />
+      <Hotspot x="-3493.75" y="-2433.3335" z="Findhighest" />
+    </Hotspots>
+  </GrindArea>
+
+
+           <ProtectedItems>
+           <Item name="Linen Cloth" entry="2589" /> 
+           <Item name="Wool Cloth" entry="2592" /> 
+           </ProtectedItems>
+           <ForceMail>
+           <Item name="Wool Cloth" entry="2592" /> 
+           <Item name="Linen Cloth" entry="2589" />
+           </ForceMail>
+</HBProfile>

@@ -1,0 +1,973 @@
+	<HBProfile>
+	<Name>Worgen Start Area</Name>
+	<MinDurability>0.4</MinDurability>
+	<MinFreeBagSlots>3</MinFreeBagSlots>
+	<MinLevel>1</MinLevel>
+	<MaxLevel>86</MaxLevel>
+	<MailGrey>False</MailGrey>
+	<MailWhite>False</MailWhite>
+	<MailGreen>True</MailGreen>
+	<SellGrey>True</SellGrey>
+	<SellWhite>True</SellWhite>
+	<SellGreen>True</SellGreen>
+	<SellBlue>False</SellBlue>
+	<SellPurple>False</SellPurple>
+	
+	<AvoidMobs>
+	<Mob Name="Tunnel Rat Lackey" Entry="44264"  />
+	<Mob Name="Bluegill Representative" Entry="44263" />
+	<Mob Name="Mosshide Representative" Entry="44262" />
+	<Mob Name="Cosmetic Mottled Raptor" Entry="40495" />
+	<Mob Name="Stickbone Berserker" Entry="44329" />
+	<Mob Name="Crazed Leper Gnome" Entry="46391" />
+	<Mob Name="Living Contamination" Entry="43089" />
+	<Mob Name="Araj the Summoner" Entry="1852" />
+	<Mob Name="Koltira Deathweaver" Entry="44452" />
+	<Mob Name="Senara Swiftsilver" Entry="48123" />
+	<Mob Name="Aoren Sunglow" Entry="46758" />
+	<Mob Name="Selara" Entry="44408"  />
+	<Mob Name="Ramah Goldenray" Entry="48122" />
+	<Mob Name="Quartermaster Kaoshin" Entry="48085" />
+	<Mob Name ="Stonard Grunt" Entry="866" />
+	<Mob Name ="Bonepicker Felfeeder" Entry="5983" />
+	<Mob Name="Horrid Abomination" Entry="36231" />
+	<Mob Name="Koroth the Hillbreaker" Entry="36528" />
+	<Mob Name="Koroth the Hillbreaker" Entry="36294" />
+	</AvoidMobs>
+	
+	<Mailboxes>
+	<!-- Kharanos Mailbox -->
+	<Mailbox X="-5603.603" Y="-512.9031" Z="401.6768" />
+	<!-- Thelsamar Mailbox -->
+	<Mailbox X="-5364.78" Y="-2953.748" Z="323.8507" />
+	<!-- Menethil Harbor Mailbox -->
+	<Mailbox X="-3792.943" Y="-838.8805" Z="-0.05157017" />
+	<!-- Wildhammer Keep Mailbox -->
+	<Mailbox X="293.83" Y="-2116.429" Z="121.8381" />
+	<!-- Stormfeather Outpost Mailbox -->
+	<Mailbox X="303.7507" Y="-4113.429" Z="118.3129" />
+	<!-- Chillwind Camp Mailbox -->
+	<Mailbox X="947.6384" Y="-1460.586" Z="62.53422" />
+	<!-- Lights hope Mailbox  -->
+	<Mailbox X="2289.696" Y="-5322.46" Z="89.91563" />
+	<!-- Fuselight-by-the-Sea -->
+	<Mailbox X="-6617.911" Y="-4690.531" Z="8.643024" />
+	</Mailboxes>
+	
+	<Vendors>
+	<!-- Human -->
+	<Vendor Name="Ashley Blank" Entry="43278" Type="Train" TrainClass="Hunter" X="-8924.651" Y="-149.9028" Z="81.36338" />
+	<Vendor Name="Llane Beshere" Entry="911" Type="Train" TrainClass="Warrior" X="-8918.364" Y="-208.4109" Z="82.1258" />
+	<Vendor Name="Brother Sammuel" Entry="925" Type="Train" TrainClass="Paladin" X="-8914.567" Y="-215.0163" Z="82.11678" />
+	<Vendor Name="Jorik Kerridan" Entry="915" Type="Train" TrainClass="Rogue" X="-8863.468" Y="-210.9055" Z="80.57269" />
+	<Vendor Name="Priestess Anetta" Entry="375" Type="Train" TrainClass="Priest" X="-8853.587" Y="-193.336" Z="81.93322" />
+	<Vendor Name="Khelden Bremen" Entry="198" Type="Train" TrainClass="Mage" X="-8851.57" Y="-188.234" Z="89.31389" />
+	<Vendor Name="Drusilla La Salle" Entry="459" Type="Train" TrainClass="Warlock" X="-8926.743" Y="-195.5889" Z="80.58879" />
+	<Vendor Name="Janos Hammerknuckle" Entry="78" Type="Repair" X="-8909.458" Y="-104.1632" Z="81.84879" />
+	
+	<!-- Worgen -->
+	<Vendor Name="Marie Allen" Entry="43558" Type="Repair" X="-2456.46" Y="1539.8" Z="18.69155" />
+	<Vendor Name="Karen Murray" Entry="42853" Type="Repair" X="-1354.778" Y="1203.944" Z="35.15623" />
+	<Vendor Name="Marie Allen" Entry="38783" Type="Repair" X="-1314.288" Y="2146.639" Z="6.887578" />
+	<Vendor Name="Samantha Buckley" Entry="36695" Type="Food" X="-1894.104" Y="2299.844" Z="44.16436" />
+    <Vendor Name="Huntsman Blake" Entry="35874" Type="Train" TrainClass="Hunter" X="-1670.313" Y="1297.233" Z="21.33171" />
+	<Vendor Name="Huntsman Blake" Entry="36629" Type="Train" TrainClass="Hunter" X="-1862.472" Y="2243.186" Z="42.32375" />
+    <Vendor Name="Loren the Fence" Entry="35871" Type="Train" TrainClass="Rogue" X="-1696.627" Y="1298.148" Z="20.2842" />
+    <Vendor Name="Sergeant Cleese" Entry="35839" Type="Train" TrainClass="Warrior" X="-1687.948" Y="1332.111" Z="15.13502" />
+	<Vendor Name="Sergeant Cleese" Entry="36651" Type="Train" TrainClass="Warrior" X="-1864.545" Y="2235.503" Z="42.3235" />
+    <Vendor Name="Vitus Darkwalker" Entry="35869" Type="Train" TrainClass="Warlock" X="-1688.852" Y="1297.922" Z="20.28586" />
+    <Vendor Name="Myriam Spellwaker" Entry="35872" Type="Train" TrainClass="Mage" X="-1690.356" Y="1328.24" Z="16.29859" />
+    <Vendor Name="Sister Almyra" Entry="35870" Type="Train" TrainClass="Priest" X="-1695.432" Y="1306.851" Z="19.78222" />
+	<Vendor Name="Sister Almyra" Entry="36632" Type="Train" TrainClass="Priest" X="-1895.778" Y="2306.538" Z="44.17108" />
+    <Vendor Name="Celestine of the Harvest" Entry="35873" Type="Train" TrainClass="Druid" X="-1697.469" Y="1308.936" Z="19.78265" />
+	<Vendor Name="Celestine of the Harvest" Entry="36628" Type="Train" TrainClass="Druid" X="-1878.58" Y="2298.418" Z="42.32362" />
+	<Vendor Name="Sister Almyra" Entry="38795" Type="Train" TrainClass="Priest" X="-2454.618" Y="1536.955" Z="25.03644" />
+	<Vendor Name="Huntsman Blake" Entry="38798" Type="Train" TrainClass="Hunter" X="-2437.955" Y="1537.361" Z="16.79407" />
+	<Vendor Name="Loren the Fence" Entry="38796" Type="Train" TrainClass="Rogue" X="-2430.38" Y="1544.134" Z="16.88406" />
+	<Vendor Name="Sergeant Cleese" Entry="38793" Type="Train" TrainClass="Warrior" X="-2442.507" Y="1567.884" Z="16.81032" />
+	<Vendor Name="Myriam Spellwaker" Entry="38794" Type="Train" TrainClass="Mage" X="-2483.625" Y="1581.184" Z="16.66482" />
+	<Vendor Name="Myriam Spellwaker" Entry="36631" Type="Train" TrainClass="Mage" X="-1872.325" Y="2303.998" Z="42.32134" />
+	<Vendor Name="Celestine of the Harvest" Entry="38799" Type="Train" TrainClass="Druid"  X="-2468.189" Y="1552.111" Z="16.76347" />
+	<Vendor Name="Vitus Darkwalker" Entry="38797" Type="Train" TrainClass="Warlock" X="-2444.295" Y="1497.804" Z="18.45912" />
+	<Vendor Name="Vitus Darkwalker" Entry="36652" Type="Train" TrainClass="Warlock" X="-1873.196" Y="2312.637" Z="42.27339" />
+	<Vendor Name="Gerard Walthorn" Entry="36717" Type="Repair" X="-1867.021" Y="2232.498" Z="42.32364" />
+	<Vendor Name="Benjamin Sykes" Entry="42953" Type="Food" X="-2095.238" Y="1296.852" Z="-83.93577" />
+
+	<!-- Dwarf -->
+	<Vendor Name="Thorgas Grimson" Entry="895" Type="Train" TrainClass="Hunter" X="-6091.788" Y="365.1413" Z="395.5414" />
+	<Vendor Name="Bromos Grummner" Entry="926" Type="Train" TrainClass="Paladin" X="-6120.679" Y="382.0895" Z="395.5435" />
+	<Vendor Name="Solm Hargrin" Entry="916" Type="Train" TrainClass="Rogue" X="-6093.748" Y="404.9183" Z="395.5375" />
+	<Vendor Name="Thran Khorman" Entry="912" Type="Train" TrainClass="Warrior" X="-6084.768" Y="382.1413" Z="395.5432" />
+	<Vendor Name="Saripal Smolderbrew" Entry="43455" Type="Train" TrainClass="Warlock" X="-6074.89" Y="388.547" Z="393.6033" />
+	<Vendor Name="Teegli Merrowith" Entry="37121" Type="Train" TrainClass="Mage" X="-6056.094" Y="388.1749" Z="392.7616" />
+	<Vendor Name="Teo Hammerstorm" Entry="37115" Type="Train" TrainClass="Shaman" X="-6051.206" Y="387.3906" Z="398.8733" />
+	<Vendor Name="Branstock Khalder" Entry="837" Type="Train" TrainClass="Priest" X="-6056.739" Y="393.548" Z="392.7603" />
+	<Vendor Name="Adlin Pridedrift" Entry="829" Type="Food" X="-6225.237" Y="320.3721" Z="383.1173" />
+	<Vendor Name="Durnan Furcutter" Entry="836" Type="Repair" X="-6056.377" Y="385.2125" Z="392.7625" />
+	<Vendor Name="Rybrad Coldbank" Entry="945" Type="Repair" X="-6101.101" Y="390.5695" Z="395.5436" />
+	
+	<!-- Gnome -->
+	<Vendor Name="Elly Sharpedge" Entry="42335" Type="Repair" X="-5168.75" Y="469.4097" Z="389.5963" />
+	<Vendor Name="Burdrak Harglhelm" Entry="3162" Type="Repair" X="-5367.575" Y="287.7031" Z="394.3148" />
+	<Vendor Name="Drill Sergeant Steamcrank" Entry="42324" Type="Train" TrainClass="Warrior" X="-5166.505" Y="458.7344" Z="391.1533" />
+	<Vendor Name="" Entry="42323" Type="Train" TrainClass="Priest" X="-5077.156" Y="477.2257" Z="401.7406" />
+	<Vendor Name="Kelsey Steelspark" Entry="42366" Type="Train" TrainClass="Rogue"	X="-5141.02" Y="502.714" Z="395.5452" />
+	<Vendor Name="Bipsi Frostflinger" Entry="42331" Type="Train" TrainClass="Mage" X="-5086.4" Y="446.071" Z="409.8239" />
+	<Vendor Name="Alamar Grimm" Entry="460" Type="Train" TrainClass="Warlock" X="-5195.21" Y="509.182" Z="387.7732" />
+	
+	<!-- Kharanos -->
+	<Vendor Name="Grawn Thromwyn" Entry="1273" Type="Repair" X="-5590.67" Y="-428.416" Z="397.3266" />
+	<Vendor Name="Turuk Amberstill" Entry="3177" Type="Repair" X="-5514.975" Y="-1295.747" Z="405.9352" />
+	<Vendor Name="Frast Dokner" Entry="1698" Type="Repair" X="-5714.372" Y="-1589.517" Z="383.2044" />
+	<Vendor Name="Monann Coldforge" Entry="43384" Type="Food" X="-5522.49" Y="-1930.35" Z="398.9589" />
+	<Vendor Name="Jade Ramalot" Entry="46996" Type="Repair" X="-4594.17" Y="-1714.2" Z="503.476" />
+	<Vendor Name="Grif Wildheart" Entry="1231" Type="Train" TrainClass="Hunter" X="-5618.542" Y="-454.0711" Z="407.6592" />
+	<Vendor Name="Halbin Frosthammer" Entry="43464" Type="Train" TrainClass="Shaman"  X="-5581.44" Y="-536.977" Z="403.5413" />
+	<Vendor Name="Azar Stronghammer" Entry="1232" Type="Train" TrainClass="Paladin" X="-5586.76" Y="-542.163" Z="403.5417" />
+	<Vendor Name="Magis Sparkmantle" Entry="1228" Type="Train" TrainClass="Mage" X="-5586.94" Y="-537.173" Z="403.5413" />
+	<Vendor Name="Granis Swiftaxe" Entry="1229" Type="Train" TrainClass="Warrior" X="-5605.73" Y="-530.385" Z="399.6557" />
+	<Vendor Name="Maxan Anvol" Entry="1226" Type="Train" TrainClass="Priest" X="-5590.56" Y="-529.656" Z="399.6527" />
+	<Vendor Name="Hogral Bakkan" Entry="1234" Type="Train" TrainClass="Rogue" X="-5604.44" Y="-540.3233" Z="399.0975" />
+	<Vendor Name="Gimrizz Shadowcog" Entry="5612"  Type="Train" TrainClass="Warlock" X="-5640.001" Y="-528.8012" Z="404.2961" />
+
+	<!--Ironforge-->
+	<Vendor Name="Braenna Flintcrag" Entry="5142" Type="Train" TrainClass="Priest" X="-4617.629" Y="-906.6656" Z="501.073" />
+    <Vendor Name="Brandur Ironhammer" Entry="5149" Type="Train" TrainClass="Paladin" X="-4601.648" Y="-896.4678" Z="502.7671" />
+    <Vendor Name="Dink" Entry="7312" Type="Train" TrainClass="Mage" X="-4614.484" Y="-928.3623" Z="501.0683" />
+    <Vendor Name="Darba the Crone" Entry="50729" Type="Train" TrainClass="Warlock" X="-4599.313" Y="-1107.486" Z="504.9388" />
+    <Vendor Name="Fenthwick" Entry="5167" Type="Train" TrainClass="Rogue" X="-4650.119" Y="-1120.803" Z="508.5508" />
+    <Vendor Name="Farseer Javad" Entry="23127" Type="Train" TrainClass="Shaman" X="-4720.412" Y="-1149.962" Z="502.448" />
+    <Vendor Name="Kelstrum Stonebreaker" Entry="1901" Type="Train" TrainClass="Warrior" X="-5044.874" Y="-1243.064" Z="507.7531" />
+    <Vendor Name="Olmin Burningbeard" Entry="5116" Type="Train" TrainClass="Hunter" X="-5010.387" Y="-1274.048" Z="507.7523" />
+	
+	<!-- Loch Modan -->
+	<Vendor Name="Thorvald Deepforge" Entry="6030" Type="Repair" X="-5854.738" Y="-2646.693" Z="308.9741" />
+	<Vendor Name="Morhan Coppertongue" Entry="167" Type="Repair" X="-5343.68" Y="-2932.134" Z="324.3619" />
+	<Vendor Name="Gothor Brumn" Entry="1362" Type="Repair" X="-4822.432" Y="-2659.405" Z="327.1299" />
+	<Vendor Name="Grenhild Darktalon" Entry="49808" Type="Train" TrainClass="Shaman" X="-5376.724" Y="-3003.167" Z="330.6352" />
+    <Vendor Name="Solbin Shadowcog" Entry="49791" Type="Train" TrainClass="Warlock" X="-5337.372" Y="-2983.408" Z="324.0803" />
+	<Vendor Name="Priestess Baerla" Entry="49784" Type="Train" TrainClass="Priest" X="-5331.785" Y="-2989.688" Z="325.1758" />
+    <Vendor Name="Grendin Swiftaxe" Entry="49781" Type="Train" TrainClass="Warrior" X="-5347.851" Y="-2930.248" Z="324.3611" />	
+    <Vendor Name="Belda Wildheart" Entry="49806" Type="Train" TrainClass="Hunter" X="-5372.601" Y="-2946.861" Z="324.3516" />
+    <Vendor Name="Faldoc Stonefaith" Entry="49793" Type="Train" TrainClass="Paladin" X="-5385.389" Y="-2969.505" Z="322.0596" />	
+    <Vendor Name="Gindle the Green" Entry="49786" Type="Train" TrainClass="Mage" X="-5378.679" Y="-2959.512" Z="322.0605" />
+    <Vendor Name="Galda Bronzeblade" Entry="49782" Type="Train" TrainClass="Rogue" X="-5379.384" Y="-2957.448" Z="322.0616" />
+	<Vendor Name="Aldren Cordon" Entry="1214" Type="Repair" X="-5702.525" Y="-3781.788" Z="322.819" />
+	<Vendor Name="Cliff Hadin" Entry="1687" Type="Repair" X="-5644.182" Y="-4284.025" Z="407.8123" />
+	
+	<!-- Wetlands -->
+	<Vendor Name="Darvish Quickhammer" Entry="43998" Type="Repair" X="-4112.06" Y="-2776.33" Z="17.92434" />
+	<Vendor Name="Jennabink Powerseam" Entry="1454" Type="Repair" X="-3775.439" Y="-805.4011" Z="0.6004186" />
+	<Vendor Name="Edwina Monzor" Entry="1462" Type="Repair" X="-3745.517" Y="-846.8663" Z="0.580714" />
+	<Vendor Name="Wenna Silkbeard" Entry="2679" Type="Repair" X="-2859.093" Y="-1448.462" Z="8.6065" />
+	<Vendor Name="Victorina" Entry="41622" Type="Repair" X="-3270.458" Y="-2787.835" Z="12.77861" />
+	<Vendor Name="Breg FullBeard" Entry="43997" Type="Food" X="-2651.13" Y="-2458.76" Z="80.1019" />
+	<Vendor Name="Cedric Bronzeflint" Entry="44001" Type="Food" X="-3241.76" Y="-1990.28" Z="50.54773" />
+
+	
+	<!-- Arathi Highlands -->
+	<Vendor Name="Jannos Ironwill" Entry="1471" Type="Repair" X="-1257.82" Y="-2546.45" Z="21.4542" />
+	
+	<!-- The Hinterlands -->
+	<Vendor Name="Harggan" Entry="8161" Type="Repair" X="311.295" Y="-2092.38" Z="123.2283" />
+	<Vendor Name="Brannik Ironbelly" Entry="12040" Type="Repair" X="333.38" Y="-4139.95" Z="117.2163" />
+	
+	<!-- Western Plaguelands -->
+	<Vendor Name="Leonard Porter" Entry="12942" Type="Repair" X="949.8846" Y="-1435.649" Z="62.58992" />
+	<Vendor Name="Foreman Milos" Entry="47721" Type="Repair" X="1408.33" Y="-1284.47" Z="61.46687" />
+	<Vendor Name="Gurt" Entry="47758" Type="Repair" X="1843.62" Y="-1762.78" Z="60.45281" />
+	<Vendor Name="Outfitter Mendelev" Entry="45149" Type="Repair" X="3010.41" Y="-1509.98" Z="146.2696" />
+	<Vendor Name="Morris Vant" Entry="45148" Type="Repair" X="2979.31" Y="-1491.73" Z="147.0424" />
+	
+	<!-- Eastern Plaguelands -->
+	<Vendor Name="Urk Gagbaz" Entry="45500" Type="Repair" X="1872.73" Y="-3699.23" Z="158.9659" />
+	<Vendor Name="Kathryn Humphries" Entry="47149" Type="Repair" X="2252.36" Y="-4456.02" Z="114.296" />
+	<Vendor Name="Vincent Randolph" Entry="47286" Type="Repair" X="2256.98" Y="-5292.6" Z="82.1395" />
+	<Vendor Name="Patricia Marshall" Entry="47144" Type="Repair" X="2567.37" Y="-4803.67" Z="108.8294" />
+	<Vendor Name="Dorris Manchester" Entry="47166" Type="Repair" X="3178.53" Y="-4342.51" Z="133.4253" />
+	<Vendor Name="Christine Gade" Entry="47106" Type="Repair" X="2968.8" Y="-3002.64" Z="127.2623" />
+	
+	<!-- Badlands -->
+	<Vendor Name="Colt Carbine" Entry="49920" Type="Repair" X="-6623.202" Y="-4706.712" Z="8.670415" />
+	<Vendor Name="Artie Steelbolt" Entry="48057" Type="Repair" X="-6600.45" Y="-3898.99" Z="379.1221" />
+	<Vendor Name="Vernon Farcavern" Entry="48090" Type="Repair" X="-6599.86" Y="-3414" Z="279.2871" />
+	<Vendor  Entry="48096" Type="Repair" X="-7042.65" Y="-2557.39" Z="252.3194" />
+	
+	<!-- Searing -->
+	<Vendor Name="Master Smith Burninate" Entry="14624" Type="Food" X="-6526.64" Y="-1185.78" Z="309.2663" />
+	<Vendor Name="Fergus Gravelsmash" Entry="47937" Type="Repair" X="-7093.68" Y="-1268.31" Z="270.4849" />
+
+	<!-- Burning -->
+	<Vendor Name="Felder Stover" Entry="1296" Type="Repair" X="-8366.36" Y="-2762.51" Z="187.5335" />
+	
+	<!-- Swamp -->
+	<Vendor Name="Dronk Drophammer" Entry="47059" Type="Repair" X="-9766.76" Y="-3901.64" Z="21.81462" />
+	<Vendor Name="Darbo Stableflux" Entry="47532" Type="Repair" X="-10200.2" Y="-4192.51" Z="22.28553" />
+	<Vendor Name="Sid Shillcopper" Entry="47547" Type="Food" X="-10822" Y="-3804.74" Z="21.9269" />
+	<Vendor Name="Hull Forgehammer" Entry="46702" Type="Repair" X="-10122.4" Y="-3826.35" Z="19.1014" />
+
+	<!-- Blasted Lands -->
+	<Vendor Name="Strumner Flintheel" Entry="5508" Type="Repair" X="-10951.8" Y="-3451.99" Z="66.76138" />
+	<Vendor Name="Quartermaster Apone" Entry="44344" Type="Food" X="-11806.4" Y="-3227.13" Z="-30.32623" />
+	<Vendor Name="Maurice Essman" Entry="44337" Type="Repair" X="-12749.4" Y="-2871.93" Z="1.809172" />
+	</Vendors>
+	
+	<BlackSpots>
+	<Blackspot X="-5516.001" Y="-3386.498" Z="278.4626" Radius="32.40734" />
+	<Blackspot X="-545.1632" Y="-4570.106" Z="11.93347" Radius="78.53169" />
+	<Blackspot X="1468.338" Y="-1406.357" Z="61.51985" Radius="53.40335" />
+	<Blackspot X="1546.37" Y="-1485.264" Z="63.03589" Radius="55.24517" />
+	<Blackspot X="1529.911" Y="-1627.633" Z="70.29951" Radius="79.41965" />
+	<Blackspot X="1563.263" Y="-1626.189" Z="67.84369" Radius="84.48022" />
+	<Blackspot X="1958.073" Y="-2405.169" Z="61.16305" Radius="7.710938" />
+	<Blackspot X="1974.155" Y="-2472.759" Z="61.24541" Radius="6.757856" />
+	<Blackspot X="1384.969" Y="-1521.306" Z="56.81214" Radius="23.125" />
+	<Blackspot X="-6913.565" Y="-3480.883" Z="242.563" Radius="85.37571" />
+	<Blackspot X="73.8718" Y="-2438.773" Z="124.9895" Radius="30" /> 
+    <Blackspot X="113.7116" Y="-2454.407" Z="121.8866" Radius="30" /> 
+    <Blackspot X="107.0908" Y="-2493.105" Z="120.5747" Radius="30" /> 
+    <Blackspot X="72.2145" Y="-2528.835" Z="118.8243" Radius="30" /> 
+    <Blackspot X="56.863" Y="-2476.407" Z="124.3176" Radius="30" /> 
+	<Blackspot X="-8085.75" Y="-1884.997" Z="134.6046" Radius="65.43249" />
+	<Blackspot X="-10437.79" Y="-3243.199" Z="22.87132" Radius="111.0495" />
+	<Blackspot X="-10408.71" Y="-2615.271" Z="22.71787" Radius="30.95999" />
+	<Blackspot X="-11250.71" Y="-3754.429" Z="1.632197" Radius="45.23685" />
+	<Blackspot X="-11258.76" Y="-3745.705" Z="8.525477" Radius="13.98042" />
+	<Blackspot X="-1469.433" Y="1411.747" Z="35.55615" Radius="1.97401" />
+	</BlackSpots>
+	
+	<QuestOrder>
+	<!-- Worgen City -->
+	<If Condition="Me.Race == WoWRace.Worgen &amp;&amp; Me.ZoneId == 4755">
+	<If Condition="!IsQuestCompleted(14078)" >
+	<CustomBehavior File="UserDialog"
+                    
+                   Text="It is vital for this profile that you do not use auto learn skill!!!
+				   The worgen area is badly meshed so please watch the bot throught this part
+				   All credit must go to natfoth
+				   Nuok"
+                   Title="Welcome to Worgen"
+                   AllowBotStop="false"
+                   SoundCue="Asterisk"
+                   SoundCueInterval="1" />
+	<PickUp QuestName="Lockdown!" QuestId="14078" GiverName="Prince Liam Greymane" GiverId="34850" />
+	<TurnIn QuestName="Lockdown!" QuestId="14078" TurnInName="Lieutenant Walden" TurnInId="34863" />
+	</If>
+	<PickUp QuestName="Something's Amiss" QuestId="14091" GiverName="Lieutenant Walden" GiverId="34863" />
+	<TurnIn QuestName="Something's Amiss" QuestId="14091" TurnInName="Prince Liam Greymane" TurnInId="34913" />
+	<PickUp QuestName="All Hell Breaks Loose" QuestId="14093" GiverName="Rampaging Worgen" GiverId="34913" X="-1440.347" Y="1400.943" Z="35.5563" />
+	<PickUp QuestName="Evacuate the Merchant Square" QuestId="14098" GiverName="Gilneas Evacuation Facing Marker (First)" GiverId="34913" X="-1440.347" Y="1400.943" Z="35.5563" />
+	<While Condition="!IsQuestCompleted(14098)" >
+	<CustomBehavior File="UseGameObject" QuestId="14098" ObjectId="195327" NumOfTimes="3" X="-1440.016" Y="1419.363" Z="35.55614" />
+	</While>
+	<Objective QuestName="All Hell Breaks Loose" QuestId="14093" Type="KillMob" MobId="34884" KillCount="6" />
+	<PickUp QuestName="Salvage the Supplies" QuestId="14094" GiverName="Gwen Armstead" GiverId="34936" />
+	<Objective QuestName="Salvage the Supplies" QuestId="14094" Type="CollectItem" ItemId="46896" CollectCount="4" />
+	<TurnIn QuestName="Salvage the Supplies" QuestId="14094" TurnInName="Gwen Armstead" TurnInId="34936" />
+	<TurnIn QuestName="All Hell Breaks Loose" QuestId="14093" TurnInName="Prince Liam Greymane" TurnInId="34913" />
+	<TurnIn QuestName="Evacuate the Merchant Square" QuestId="14098" TurnInName="Prince Liam Greymane" TurnInId="34913" />
+	<PickUp QuestName="Royal Orders" QuestId="14099" GiverName="Prince Liam Greymane" GiverId="34913" />
+	<TurnIn QuestName="Royal Orders" QuestId="14099" TurnInName="Gwen Armstead" TurnInId="35840" />
+	
+	<If Condition="Me.Class == WoWClass.Druid">
+        <PickUp QuestName="The Winds Know Your Name... Apparently" QuestId="14280" GiverName="Gwen Armstead" GiverId="35840" />
+        <if Condition="HasQuest(14280)" >
+		<CustomBehavior File="Message" Text="Setting Pull Distance 1" />
+		<CustomBehavior File="UserSettings" PullDistance="1" />	
+        <TurnIn QuestName="The Winds Know Your Name... Apparently" QuestId="14280" TurnInName="Celestine of the Harvest" TurnInId="35873" />
+        </if>
+        <PickUp QuestName="Healing Touch" QuestId="14283" GiverName="Celestine of the Harvest" GiverId="35873" />
+		<While Condition="(HasQuest(14283)) &amp;&amp; (!IsQuestCompleted(14283))">
+			<CustomBehavior File="UserSettings" PullDistance="1" />	
+			<CustomBehavior QuestId="14283" File="ForceSetVendor" VendorType="Train" />
+			<CustomBehavior File="CastSpellOn" QuestId="14283" SpellId="5185" MobId="47091" NumOfTimes="2" HpLeftAmount="70" MinRange="14" X="-1694.702" Y="1310.653" Z="19.7822" />
+        </While>
+		<TurnIn QuestName="Healing Touch" QuestId="14283" TurnInName="Celestine of the Harvest" TurnInId="35873" />
+        <PickUp QuestName="Safety in Numbers" QuestId="14291" GiverName="Celestine of the Harvest" GiverId="35873" />
+        <TurnIn QuestName="Safety in Numbers" QuestId="14291" TurnInName="King Genn Greymane" TurnInId="35112" />
+      </If>
+	
+	<If Condition="Me.Class == WoWClass.Warlock">
+        <PickUp QuestName="Shady Associates" QuestId="14273" GiverName="Gwen Armstead" GiverId="35840" />
+        <if Condition="HasQuest(14273)" >
+		<CustomBehavior File="Message" Text="Setting Pull Distance 1" />
+		<CustomBehavior File="UserSettings" PullDistance="1" />	
+        <TurnIn QuestName="Shady Associates" QuestId="14273" TurnInName="Vitus Darkwalker" TurnInId="35869" />
+        </if>
+        <PickUp QuestName="Immolate" QuestId="14274" GiverName="Vitus Darkwalker" GiverId="35869" />
+		<While Condition="(HasQuest(14274)) &amp;&amp; (!IsQuestCompleted(14274))">
+			<CustomBehavior File="UserSettings" PullDistance="1" />			
+			<CustomBehavior QuestId="14274" File="ForceSetVendor" VendorType="Train" />
+			<CustomBehavior File="CastSpellOn" QuestId="14274" SpellId="348" MobId="35118" NumOfTimes="1" HpLeftAmount="101" MinRange="14" X="-1689.44" Y="1323.236" Z="18.33426" />
+        </While>
+		<TurnIn QuestName="Immolate" QuestId="14274" TurnInName="Vitus Darkwalker" TurnInId="35869" />
+        <PickUp QuestName="Safety in Numbers" QuestId="14287" GiverName="Vitus Darkwalker" GiverId="35869" />
+        <TurnIn QuestName="Safety in Numbers" QuestId="14287" TurnInName="King Genn Greymane" TurnInId="35112" />
+      </If>
+	
+	<If Condition="Me.Class == WoWClass.Mage">
+        <PickUp QuestName="Arcane Inquiries" QuestId="14277" GiverName="Gwen Armstead" GiverId="35840" />
+        <if Condition="HasQuest(14277)" >
+		<CustomBehavior File="Message" Text="Setting Pull Distance 1" />
+		<CustomBehavior File="UserSettings" PullDistance="1" />			
+        <TurnIn QuestName="Arcane Inquiries" QuestId="14277" TurnInName="Myriam Spellwaker" TurnInId="35872" />
+        </if>
+        <PickUp QuestName="Arcane Missiles" QuestId="14281" GiverName="Myriam Spellwaker" GiverId="35872" />
+		<While Condition="HasQuest(14281)" >
+			<CustomBehavior File="UserSettings" PullDistance="1" />			
+			<CustomBehavior QuestId="14281" File="ForceSetVendor" VendorType="Train" />
+			<Objective QuestName="Arcane Missiles" QuestId="14281" Type="KillMob" MobId="44175" KillCount="1" />        
+			<TurnIn QuestName="Arcane Missiles" QuestId="14281" TurnInName="Myriam Spellwaker" TurnInId="35872" />
+		</While>
+        <PickUp QuestName="Safety in Numbers" QuestId="14288" GiverName="Myriam Spellwaker" GiverId="35872" />
+        <TurnIn QuestName="Safety in Numbers" QuestId="14288" TurnInName="King Genn Greymane" TurnInId="35112" />
+    </If>
+	
+	<If Condition="Me.Class == WoWClass.Priest">
+        <PickUp QuestName="Seek the Sister" QuestId="14278" GiverName="Gwen Armstead" GiverId="35840" />
+        <if Condition="HasQuest(14278)" >
+		<CustomBehavior File="Message" Text="Setting Pull Distance 1" />
+		<CustomBehavior File="UserSettings" PullDistance="1" />	
+        <TurnIn QuestName="Seek the Sister" QuestId="14278" TurnInName="Sister Almyra" TurnInId="35870" />
+        </if>
+        <PickUp QuestName="Flash Heal" QuestId="14279" GiverName="Sister Almyra" GiverId="35870" />
+		<While Condition="!IsQuestCompleted(14279)">
+			<CustomBehavior QuestId="14324" File="ForceSetVendor" VendorType="Train" />
+			<CustomBehavior File="CastSpellOn" QuestId="14279" SpellId="2061" MobId="47091" NumOfTimes="2" X="-1702.011" Y="1307.625" Z="19.78224" />
+		</While>
+		<TurnIn QuestName="Flash Heal" QuestId="14279" TurnInName="Sister Almyra" TurnInId="35870" />
+        <PickUp QuestName="Safety in Numbers" QuestId="14289" GiverName="Sister Almyra" GiverId="35870" />
+        <TurnIn QuestName="Safety in Numbers" QuestId="14289" TurnInName="King Genn Greymane" TurnInId="35112" />
+    </If>
+	
+    <If Condition="Me.Class == WoWClass.Warrior">
+        <PickUp QuestName="Your Instructor" QuestId="14265" GiverName="Gwen Armstead" GiverId="35840" />
+        <if Condition="HasQuest(14265)" >
+		<CustomBehavior File="Message" Text="Setting Pull Distance 1" />
+		<CustomBehavior File="UserSettings" PullDistance="1" />	
+        <TurnIn QuestName="Your Instructor" QuestId="14265" TurnInName="Sergeant Cleese" TurnInId="35839" />
+        </if>
+        <PickUp QuestName="Charge" QuestId="14266" GiverName="Sergeant Cleese" GiverId="35839" />
+		<if Condition="HasQuest(14266)" >
+			<CustomBehavior File="Message" Text="Setting Pull Distance 1" />
+			<CustomBehavior File="UserSettings" PullDistance="1" />	
+			<CustomBehavior QuestId="14324" File="ForceSetVendor" VendorType="Train" />
+			<While Condition="!IsQuestCompleted(14266)" >
+			<CustomBehavior File="CastSpellOn" QuestId="14266" SpellId="100" MobId="35118" NumOfTimes="1" HpLeftAmount="101" MinRange="14" X="-1689.941" Y="1338.184" Z="15.13523" />
+			</While>
+			<TurnIn QuestName="Charge" QuestId="14266" TurnInName="Sergeant Cleese" TurnInId="35839" />
+		</if>
+        <PickUp QuestName="Safety in Numbers" QuestId="14286" GiverName="Sergeant Cleese" GiverId="35839" />
+        <TurnIn QuestName="Safety in Numbers" QuestId="14286" TurnInName="King Genn Greymane" TurnInId="35112" />
+    </If>
+	
+	<If Condition="Me.Class == WoWClass.Hunter">
+        <PickUp QuestName="Someone's Keeping Track of You" QuestId="14275" GiverName="Gwen Armstead" GiverId="35840" />
+        <if Condition="HasQuest(14275)" >
+		<CustomBehavior File="Message" Text="Setting Pull Distance 1" />
+		<CustomBehavior File="UserSettings" PullDistance="1" />	
+        <TurnIn QuestName="Someone's Keeping Track of You" QuestId="14275" TurnInName="Huntsman Blake" TurnInId="35874" />
+        </if>
+        <PickUp QuestName="Steady Shot" QuestId="14276" GiverName="Huntsman Blake" GiverId="35874" />
+		<if Condition="HasQuest(14276)" >
+		<While Condition="!IsQuestCompleted(14276)">
+			<CustomBehavior File="Message" Text="Setting Pull Distance 1" />
+			<CustomBehavior File="UserSettings" PullDistance="1" />	
+			<CustomBehavior QuestId="14324" File="ForceSetVendor" VendorType="Train" />
+			<CustomBehavior File="CastSpellOn" QuestId="14276" SpellId="56641" MobId="35118" NumOfTimes="2" HpLeftAmount="101" MinRange="14" X="-1689.44" Y="1323.236" Z="18.33426" />
+        </While>
+		</if>
+		<TurnIn QuestName="Steady Shot" QuestId="14276" TurnInName="Huntsman Blake" TurnInId="35874" />
+        <PickUp QuestName="Safety in Numbers" QuestId="14290" GiverName="Huntsman Blake" GiverId="35874" />
+        <TurnIn QuestName="Safety in Numbers" QuestId="14290" TurnInName="King Genn Greymane" TurnInId="35112" />
+    </If>
+	
+	<If Condition="Me.Class == WoWClass.Rogue">
+        <PickUp QuestName="Someone's Looking for You" QuestId="14269" GiverName="Gwen Armstead" GiverId="35840" />
+        <if Condition="HasQuest(14269)" >
+			<CustomBehavior File="Message" Text="Setting Pull Distance 1" />
+			<CustomBehavior File="UserSettings" PullDistance="1" />	
+			<TurnIn QuestName="Someone's Looking for You" QuestId="14269" TurnInName="Loren the Fence" TurnInId="35871" />
+        </if>
+        <PickUp QuestName="Eviscerate" QuestId="14272" GiverName="Loren the Fence" GiverId="35871" />
+		<if Condition="HasQuest(14272)" >
+		<CustomBehavior QuestId="14272" File="ForceSetVendor" VendorType="Train" />
+		<While Condition="!IsQuestCompleted(14272)">
+			<CustomBehavior File="UserSettings" PullDistance="1" />	
+			<Objective QuestName="Eviscerate" QuestId="14272" Type="KillMob" MobId="44175" KillCount="1" />
+		</While>
+		</if>
+		<TurnIn QuestName="Eviscerate" QuestId="14272" TurnInName="Loren the Fence" TurnInId="35871" />
+        <PickUp QuestName="Safety in Numbers" QuestId="14285" GiverName="Loren the Fence" GiverId="35871" />
+        <TurnIn QuestName="Safety in Numbers" QuestId="14285" TurnInName="King Genn Greymane" TurnInId="35112" />
+    </If>
+
+	
+	
+	<PickUp QuestName="Old Divisions" QuestId="14157" GiverName="King Genn Greymane" GiverId="35112" />	
+	<PickUp QuestName="While You're At It" QuestId="24930" GiverName="Bloodfang Worgen" GiverId="35115" X="-1767.094" Y="1352.62" Z="19.91833" />
+	<if Condition="HasQuest(24930)" >
+	<CustomBehavior File="Message" Text="Setting Pull Distance 1" />
+	<CustomBehavior File="UserSettings" PullDistance="1" />	
+	</if>
+	<TurnIn QuestName="Old Divisions" QuestId="14157" TurnInName="Captain Broderick" TurnInId="50371" />
+	<PickUp QuestName="The Prison Rooftop" QuestId="28850" GiverName="Captain Broderick" GiverId="50371" />
+	
+	<!-- Run Upstairs -->
+	<If Condition="HasQuest(28850)" >
+	<CustomBehavior File="Message" Text="Run Upstairs" />
+	<RunTo X="-1752.005" Y="1417.292" Z="23.01946" />
+	<CustomBehavior File="MyCTM" X="-1753.73" Y="1415.579" Z="23.2059" />
+	<CustomBehavior File="MyCTM" X="-1757.453" Y="1424.364" Z="26.65325" />
+	<CustomBehavior File="MyCTM" X="-1749.373" Y="1427.798" Z="30.65482" />
+	<CustomBehavior File="MyCTM" X="-1747.346" Y="1419.96" Z="34.22781" />
+	<CustomBehavior File="MyCTM" X="-1755.369" Y="1418.357" Z="37.7216" />
+	<CustomBehavior File="MyCTM" X="-1756.319" Y="1426.12" Z="41.16135" />
+	<CustomBehavior File="MyCTM" X="-1748.867" Y="1427.813" Z="44.36826" />
+	<CustomBehavior File="MyCTM" X="-1747.188" Y="1419.057" Z="48.05021" />
+	<CustomBehavior File="MyCTM" X="-1754.242" Y="1418.911" Z="51.01963" />
+	<CustomBehavior File="MyCTM" X="-1757.804" Y="1423.336" Z="52.74318" />
+	<CustomBehavior File="MyCTM" X="-1746.238" Y="1429.098" Z="52.74318" />
+	</If>
+	
+	<TurnIn QuestName="The Prison Rooftop" QuestId="28850" TurnInName="Lord Darius Crowley" TurnInId="35077" />
+	<PickUp QuestName="By the Skin of His Teeth" QuestId="14154" GiverName="Lord Darius Crowley" GiverId="35077" />
+	<If Condition="HasQuest(14154)">
+		<CustomBehavior File="Message" Text="Setting Pull Distance 4" />
+		<CustomBehavior File="UserSettings" PullDistance="4" />	
+		<CustomBehavior File="Escort" QuestId="14154" MobId="35077" X="-1679.734" Y="1442.122" Z="52.28712" />
+	</If>
+	<TurnIn QuestName="By the Skin of His Teeth" QuestId="14154" TurnInName="Lord Darius Crowley" TurnInId="35077" />
+	<PickUp QuestName="Brothers In Arms" QuestId="26129" GiverName="Lord Darius Crowley" GiverId="35077" />
+
+	<!-- Run DownStairs -->
+	<If Condition="HasQuest(26129)" >
+	<CustomBehavior File="Message" Text="Run DownStairs" />
+	<RunTo X="-1744.918" Y="1430.262" Z="52.47403" />
+	<CustomBehavior File="MyCTM" X="-1746.238" Y="1429.098" Z="52.74318" />
+	<CustomBehavior File="MyCTM" X="-1757.804" Y="1423.336" Z="52.74318" />
+	<CustomBehavior File="MyCTM" X="-1754.242" Y="1418.911" Z="51.01963" />
+	<CustomBehavior File="MyCTM" X="-1747.188" Y="1419.057" Z="48.05021" />
+	<CustomBehavior File="MyCTM" X="-1748.867" Y="1427.813" Z="44.36826" />
+	<CustomBehavior File="MyCTM" X="-1756.319" Y="1426.12" Z="41.16135" />
+	<CustomBehavior File="MyCTM" X="-1755.369" Y="1418.357" Z="37.7216" />
+	<CustomBehavior File="MyCTM" X="-1747.346" Y="1419.96" Z="34.22781" />
+	<CustomBehavior File="MyCTM" X="-1749.373" Y="1427.798" Z="30.65482" />
+	<CustomBehavior File="MyCTM" X="-1757.453" Y="1424.364" Z="26.65325" />
+	<CustomBehavior File="MyCTM" X="-1750.126" Y="1416.612" Z="23.01937" />
+	<TurnIn QuestName="Brothers In Arms" QuestId="26129" TurnInName="King Genn Greymane" TurnInId="35112" />
+	</If>	
+	<If Condition="HasQuest(24930)" >
+	<CustomBehavior File="Message" Text="Setting Pull Distance 7" />
+	<CustomBehavior File="UserSettings" PullDistance="7" />	
+	<Objective QuestName="While You're At It" QuestId="24930" Type="KillMob" MobId="35118" KillCount="5" />
+	<CustomBehavior File="Message" Text="Setting Pull Distance 1" />
+	<CustomBehavior File="UserSettings" PullDistance="1" />	
+	<TurnIn QuestName="While You're At It" QuestId="24930" TurnInName="Lord Godfrey" TurnInId="35115" />
+	</If>
+    <PickUp QuestName="The Rebel Lord's Arsenal" QuestId="14159" GiverName="King Genn Greymane" GiverId="35112" />
+      <If Condition="HasQuest(14159)" >
+		<CustomBehavior File="UseGameObject" ObjectId="195621" NumOfTimes="1" X="-1790.102" Y="1437.378" Z="21.29635" />
+		<CustomBehavior File="MyCTM" X="-1790.92" Y="1442.058" Z="20.00245" />
+		<CustomBehavior File="MyCTM" X="-1790.233" Y="1437.504" Z="20.66352" />
+        <CustomBehavior File="MyCTM" X="-1789.07" Y="1427.188" Z="12.94492" />
+        <CustomBehavior File="MyCTM" X="-1812.303" Y="1429.841" Z="12.46178" />
+    <TurnIn QuestName="The Rebel Lord's Arsenal" QuestId="14159" TurnInName="Josiah Avery" TurnInId="35369" />
+		<CustomBehavior File="WaitTimer" WaitTime="10000"/>
+    </If>
+	<PickUp QuestName="From the Shadows" QuestId="14204" GiverName="Bloodfang Lurker" GiverId="35378" />
+	<If Condition="HasQuest(14204)" >
+	<!-- Move Out of cellor -->
+	<If Condition="!IsQuestCompleted(14204)" >
+	<CustomBehavior File="MyCTM" QuestId="14204" X="-1812.303" Y="1429.841" Z="12.46178" />
+	<CustomBehavior File="MyCTM" QuestId="14204" X="-1789.478" Y="1427.607" Z="12.93635" />
+	<CustomBehavior File="MyCTM" QuestId="14204" X="-1789.99" Y="1444.513" Z="19.96003" />
+	<CustomBehavior File="Message" Text="Setting Pull Distance 10" />
+	<CustomBehavior File="UserSettings" PullDistance="10" />	
+	<Objective QuestName="From the Shadows" QuestId="14204" Type="KillMob" MobId="35463" KillCount="6" />
+	</If>
+	<!-- Back down -->
+	<CustomBehavior File="Message" Text="Setting Pull Distance 1" />
+	<CustomBehavior File="UserSettings" PullDistance="1" />
+	<RunTo   X="-1790.654" Y="1441.545" Z="20.02885" />
+	<CustomBehavior File="MyCTM"   X="-1789.478" Y="1427.607" Z="12.93635" />
+	<TurnIn QuestName="From the Shadows" QuestId="14204" TurnInName="Lorna Crowley" TurnInId="35378" />
+	</If>
+	<PickUp QuestName="Message to Greymane" QuestId="14214" GiverName="Lorna Crowley" GiverId="35378" />
+	<If Condition="HasQuest(14214)" >
+	<CustomBehavior File="MyCTM"   X="-1789.99" Y="1444.513" Z="19.96003" />
+	<TurnIn QuestName="Message to Greymane" QuestId="14214" TurnInName="King Genn Greymane" TurnInId="35550" />
+	</If>
+	<PickUp QuestName="Save Krennan Aranas" QuestId="14293" GiverName="King Genn Greymane" GiverId="35550" />
+	<While Condition="!IsQuestCompleted(14293)" >
+		<CustomBehavior File="NoControlVehicle" QuestId="14293" VehicleMountId="68219" TargetId="35753" AttackButton="1" VehicleId="35905" OftenToUse="1600" NumOfTimes="1" MaxRange="12" TypeId="1" />
+	</While>
+	<TurnIn QuestName="Save Krennan Aranas" QuestId="14293" TurnInName="Lord Godfrey" TurnInId="35906" />
+	<PickUp QuestName="Time to Regroup" QuestId="14294" GiverName="Lord Godfrey" GiverId="35906" />
+	<If Condition="HasQuest(14294)" >
+	<CustomBehavior File="Message" Text="Setting Pull Distance 1" />
+	<CustomBehavior File="UserSettings" PullDistance="1" />
+	</If>
+	<TurnIn QuestName="Time to Regroup" QuestId="14294" TurnInName="King Genn Greymane" TurnInId="35911" />
+    <PickUp QuestName="Sacrifices" QuestId="14212" GiverName="Lord Darius Crowley" GiverId="35552" X="-1738.244" Y="1658.19" Z="20.479" />
+    <While Condition="!IsQuestCompleted(14212)">
+        <CustomBehavior File="NoControlVehicle" QuestId="14212" VehicleMountId="44427" TargetId="35229" AttackButton="1" OftenToUse="1600" NumOfTimes="33" VehicleId="35231" MaxRange="30" TypeId="2" />
+    </While>
+	<TurnIn QuestName="Sacrifices" QuestId="14212" TurnInName="Tobias Mistmantle" TurnInId="35618" />
+    <PickUp QuestName="By Blood and Ash" QuestId="14218" GiverName="Tobias Mistmantle" GiverId="35618" />
+    <While Condition="!IsQuestCompleted(14218)" >
+		<CustomBehavior File="NoControlVehicle" QuestId="14218" VehicleMountId="35317" TargetId="35229" AttackButton="1" OftenToUse="1000" NumOfTimes="80" VehicleId="35317" MaxRange="100" TypeId="3" />
+    </While>
+	<If Condition="HasQuest(14294)" >
+	<CustomBehavior File="Message" Text="Setting Pull Distance 1" />
+	<CustomBehavior File="UserSettings" PullDistance="1" />
+	</If>
+	<TurnIn QuestName="By Blood and Ash" QuestId="14218" TurnInName="Tobias Mistmantle" TurnInId="35618" />
+	<PickUp QuestName="Never Surrender, Sometimes Retreat" QuestId="14221" GiverName="Tobias Mistmantle" GiverId="35618" />
+	<TurnIn QuestName="Never Surrender, Sometimes Retreat" QuestId="14221" TurnInName="Lord Darius Crowley" TurnInId="35566" />
+	<PickUp QuestName="Last Stand" QuestId="14222" GiverName="Frenzied Stalker" GiverId="35566" />
+	<If Condition="HasQuest(14222)" >
+	<CustomBehavior File="Message" Text="Setting Pull Distance 6" />
+	<CustomBehavior File="UserSettings" PullDistance="6" />
+	<!-- trying to stop death -->
+	<SetGrindArea>	
+		<GrindArea>
+        <TargetMaxLevel>44</TargetMaxLevel>
+        <Factions>2179</Factions>
+        <Hotspots>
+        <RandomizeHotspots>True</RandomizeHotspots>
+        <Hotspot X="-1598.544" Y="1519.467" Z="29.24376" />
+		<Hotspot X="-1595.92" Y="1531.559" Z="29.23088" />
+		<Hotspot X="-1584.487" Y="1517.658" Z="29.2307" />
+        </Hotspots>
+     	</GrindArea>
+    	</SetGrindArea>
+   	<Grindto Condition="IsQuestCompleted(14222)"/>	
+	<CustomBehavior File="Message" Text="Setting Pull Distance 1" />
+	<CustomBehavior File="UserSettings" PullDistance="1" />
+	<TurnIn QuestName="Last Stand" QuestId="14222" TurnInName="Lord Darius Crowley" TurnInId="35566" />
+	</If>
+	<!-- Cinematic Timer -->
+	<If Condition="!IsQuestCompleted(14375)" >
+	<CustomBehavior File="WaitTimer" WaitTime="180000"/>
+	</If>
+	</If> 
+	<!-- End of Worgen Part ONE -->
+	
+	<!-- Worgen Part Two -->
+	<If Condition="((Me.Race == WoWRace.Worgen) &amp;&amp; ((Me.ZoneId == 4714) || (Me.ZoneId == 4755)))" >
+	<If Condition="!IsQuestCompleted(14375)" >
+		<CustomBehavior File="Message" Text="Setting Pull Distance 30" />
+		<CustomBehavior File="UserSettings" PullDistance="30" />
+		<CustomBehavior File="BasicInteractWith" MobId="36332" MoveTo="False" />
+		<CustomBehavior File="RunMacro"
+		Macro="/run SelectGossipAvailableQuest(1)\n/run SelectGossipActiveQuest(1)\n/run CompleteQuest()\n/run SelectGossipOption(1)\n/run AcceptQuest()\n/run GetQuestReward(1)"
+		NumOfTimes="1"
+		WaitTime="2000" />
+		<CustomBehavior File="WaitTimer" WaitTime="1000"/>
+	</If>
+	<PickUp QuestName="Among Humans Again" QuestId="14313" GiverName="Lord Godfrey" GiverId="36170" />
+	<TurnIn QuestName="Among Humans Again" QuestId="14313" TurnInName="Krennan Aranas" TurnInId="36132" />
+	<PickUp QuestName="In Need of Ingredients" QuestId="14320" GiverName="Krennan Aranas" GiverId="36132" />
+	<If Condition="HasQuest(14320)" >
+	<CustomBehavior   File="ForceSetVendor" VendorType="Train" />
+	</If>
+	<TurnIn QuestName="In Need of Ingredients" QuestId="14320" TurnInName="Crate of Mandrake Essence" TurnInId="196394" />
+	<PickUp QuestName="Invasion" QuestId="14321" GiverName="Slain Watchman" GiverId="36205" />
+	<TurnIn QuestName="Invasion" QuestId="14321" TurnInName="Gwen Armstead" TurnInId="34571" />
+	<PickUp QuestName="Kill or Be Killed" QuestId="14336" GiverName="Gwen Armstead" GiverId="34571" />
+	<TurnIn QuestName="Kill or Be Killed" QuestId="14336" TurnInName="Prince Liam Greymane" TurnInId="36140" />
+	<PickUp QuestName="Hold the Line" QuestId="14347" GiverName="Prince Liam Greymane" GiverId="36140" />
+	<PickUp QuestName="You Can't Take 'Em Alone" QuestId="14348" GiverName="Prince Liam Greymane" GiverId="36140" />
+	<If Condition="HasQuest(14347)" >
+	<CustomBehavior File="Message" Text="Setting Pull Distance 10" />
+	<CustomBehavior File="UserSettings" PullDistance="10" />
+	</If>	<Objective QuestName="Hold the Line" QuestId="14347" Type="KillMob" MobId="34511" KillCount="10" />
+	<While Condition="!IsQuestCompleted(14348)" >
+	<While Condition="!HasItem(49202)" >
+	<CustomBehavior File="Message" Text="Setting Pull Distance 5" />
+	<CustomBehavior File="UserSettings" PullDistance="5" />
+	<Objective QuestName="You Can't Take 'Em Alone" QuestId="14348" Type="CollectItem" ItemId="49202" CollectCount="4" />
+	</While>
+	<While Condition="HasItem(49202)" >
+	<CustomBehavior File="UserSettings" PullDistance="10" />
+	<CustomBehavior File="UseItemOn" QuestId="14348" MobId="36231" ItemId="49202" NumOfTimes="1" Range="19" NpcState="Alive" HpLeftAmount="101" MobType="Npc" X="-1967.197" Y="2355.968" Z="29.47851" />
+	</While>
+	</While>
+	<If Condition="HasQuest(14347)" >
+	<CustomBehavior File="UserSettings" PullDistance="5" />
+	</If>
+	<TurnIn QuestName="Hold the Line" QuestId="14347" TurnInName="Prince Liam Greymane" TurnInId="36140" />
+	<TurnIn QuestName="You Can't Take 'Em Alone" QuestId="14348" TurnInName="Prince Liam Greymane" TurnInId="36140" />
+	<PickUp QuestName="Holding Steady" QuestId="14366" GiverName="Prince Liam Greymane" GiverId="36140" />
+	<TurnIn QuestName="Holding Steady" QuestId="14366" TurnInName="Gwen Armstead" TurnInId="34571" />
+	<PickUp QuestName="The Allens' Storm Cellar" QuestId="14367" GiverId="34571" X="-1862.302" Y="2262.728" Z="44.21601" />
+	<If Condition="HasQuest(14367)" >
+	<RunTo   X="-1889.126" Y="2539.884" Z="1.72244" />
+	<CustomBehavior File="MyCTM"   X="-1874.092" Y="2551.16" Z="-5.905109" />
+	<CustomBehavior File="MyCTM"   X="-1871.759" Y="2548.296" Z="-6.365731" />
+	</If>
+	<TurnIn QuestName="The Allens' Storm Cellar" QuestId="14367" TurnInId="36290" />
+	<PickUp QuestName="Unleash the Beast" QuestId="14369" GiverName="Lord Godfrey" GiverId="36290" />
+	<PickUp QuestName="Two By Sea" QuestId="14382" GiverName="Lord Godfrey" GiverId="36290" />
+	<PickUp QuestName="Save the Children!" QuestId="14368" GiverName="Melinda Hammond" GiverId="36291" />
+	<If Condition="!IsQuestCompleted(14368)" >
+	<RunTo QuestId="14368" X="-1869.6" Y="2544.809" Z="-6.365252" />
+    <CustomBehavior File="MyCTM" QuestId="14368" X="-1873.87" Y="2550.767" Z="-5.89991" />
+	<CustomBehavior File="MyCTM" QuestId="14368" X="-1889.126" Y="2539.884" Z="1.72244" />
+	</If>
+	<If Condition="!IsQuestCompleted(14368)" >
+	<CustomBehavior File="InteractWith" QuestId="14368" MobId="36287" GossipOptions="1" ObjectType="Npc"  X="-1973.227" Y="2513.613" Z="1.576067" />
+	<CustomBehavior File="InteractWith" QuestId="14368" MobId="36289" GossipOptions="1" ObjectType="Npc"  X="-1940.676" Y="2544.439" Z="1.392734" />
+	<RunTo   X="-1917.839" Y="2563.152" Z="3.580088" />
+	<CustomBehavior File="MyCTM"   X="-1923.317" Y="2551.197" Z="12.73655" />
+	<CustomBehavior File="MyCTM"   X="-1928.959" Y="2554.402" Z="12.73551" />
+	<CustomBehavior File="MyCTM"   X="-1928.133" Y="2559.994" Z="12.73551" />
+	<CustomBehavior File="InteractWith" QuestId="14368" MobId="36288" GossipOptions="1" ObjectType="Npc"  X="-1928.133" Y="2559.994" Z="12.73551" />
+	<CustomBehavior File="MyCTM"   X="-1928.133" Y="2559.994" Z="12.73551" />
+	<CustomBehavior File="MyCTM"   X="-1928.959" Y="2554.402" Z="12.73551" />
+	<CustomBehavior File="MyCTM"   X="-1923.317" Y="2551.197" Z="12.73655" />
+	</If>
+	<If Condition="!IsQuestCompleted(14382)" >
+	<CustomBehavior File="UserSettings" PullDistance="6" />
+	<CustomBehavior File="VehicleBehavior" QuestId="14382" VehicleMountId="36283" VehicleId="36283" AttackButton="1" FireHeight="15" FireLocationX="-2070.634" FireLocationY="2620.279" FireLocationZ="0.5988749" TargetLocationX="-2124.423" TargetLocationY="2662.952" TargetLocationZ="8.255829" PreviousFireLocationX="0" PreviousFireLocationY="0" PreviousFireLocationZ="0" />
+	<CustomBehavior File="EjectVeh" />
+	<CustomBehavior File="WaitTimer" WaitTime="4000"/>
+	<Objective QuestName="Two By Sea" QuestId="14382" Type="KillMob" MobId="36397" KillCount="1" />
+	<RunTo   X="-2132.759" Y="2663.426" Z="8.254766" />
+    <CustomBehavior File="MyCTM"   X="-2059.805" Y="2647.792" Z="-2.936483" />
+
+	<CustomBehavior File="VehicleBehavior" QuestId="14382" VehicleMountId="36283" VehicleId="36283" AttackButton="1" FireHeight="15" FireLocationX="-2167.469" FireLocationY="2511.088" FireLocationZ="4.0535" TargetLocationX="-2226.172" TargetLocationY="2564.856" TargetLocationZ="8.66542" PreviousFireLocationX="0" PreviousFireLocationY="0" PreviousFireLocationZ="0" />
+	<CustomBehavior File="EjectVeh" />
+	<CustomBehavior File="WaitTimer" WaitTime="4000"/>
+	<Objective QuestName="Two By Sea" QuestId="14382" Type="KillMob" MobId="36399" KillCount="1" />
+    <CustomBehavior File="NoCombatMoveTo"   X="-2226.172" Y="2564.856" Z="8.66542" />
+    <CustomBehavior File="MyCTM"   X="-2167.469" Y="2511.088" Z="4.0535"/>
+	</If>
+	<Objective QuestName="Unleash the Beast" QuestId="14369" Type="KillMob" MobId="36634" KillCount="8" />
+	<If Condition="HasQuest(14382)" >
+	<RunTo   X="-1889.126" Y="2539.884" Z="1.72244" />
+	<CustomBehavior File="MyCTM"   X="-1874.092" Y="2551.16" Z="-5.905109" />
+	<CustomBehavior File="MyCTM"   X="-1871.759" Y="2548.296" Z="-6.365731" />
+	<TurnIn QuestName="Unleash the Beast" QuestId="14369" TurnInName="Lord Godfrey" TurnInId="36290" />
+	<TurnIn QuestName="Two By Sea" QuestId="14382" TurnInName="Lord Godfrey" TurnInId="36290" />
+	<TurnIn QuestName="Save the Children!" QuestId="14368" TurnInName="Melinda Hammond" TurnInId="36291" />
+	</If>
+	<PickUp QuestName="Leader of the Pack" QuestId="14386" GiverName="Lord Godfrey" GiverId="36290" />
+	<If Condition="!IsQuestCompleted(14386)" >
+	<RunTo QuestId="14386" X="-1869.6" Y="2544.809" Z="-6.365252" />
+    <CustomBehavior File="MyCTM" QuestId="14386" X="-1873.87" Y="2550.767" Z="-5.89991" />
+	<CustomBehavior File="MyCTM" QuestId="14386" X="-1889.126" Y="2539.884" Z="1.72244" />
+	<UseItem ItemId="49240" QuestId="14386" X="-1948.945" Y="2667.647" Z="0.8727904" />
+	<CustomBehavior File="WaitTimer" WaitTime="4000"/>
+	<Objective QuestName="Leader of the Pack" QuestId="14386" Type="KillMob" MobId="36312" KillCount="1" />
+	</If>
+	<If Condition="HasQuest(14386)" >
+	<RunTo   X="-1889.126" Y="2539.884" Z="1.72244" />
+	<CustomBehavior File="MyCTM"   X="-1874.092" Y="2551.16" Z="-5.905109" />
+	<CustomBehavior File="MyCTM"   X="-1871.759" Y="2548.296" Z="-6.365731" />
+	<TurnIn QuestName="Leader of the Pack" QuestId="14386" TurnInName="Lord Godfrey" TurnInId="36290" />
+	</If>
+	<PickUp QuestName="As the Land Shatters" QuestId="14396" GiverName="Lord Godfrey" GiverId="36290" />
+	<If Condition="HasQuest(14396)" >
+	<RunTo   X="-1869.6" Y="2544.809" Z="-6.365252" />
+    <CustomBehavior File="MyCTM"   X="-1873.87" Y="2550.767" Z="-5.89991" />
+	<CustomBehavior File="MyCTM"   X="-1889.126" Y="2539.884" Z="1.72244" />
+	<TurnIn QuestName="As the Land Shatters" QuestId="14396" TurnInName="Prince Liam Greymane" TurnInId="36451" />
+	</If>
+	<PickUp QuestName="Gasping for Breath" QuestId="14395" GiverName="Prince Liam Greymane" GiverId="36451" />
+	<While Condition="!IsQuestCompleted(14395)" >
+	<RunTo QuestId="14395" X="-1969.096" Y="2535.52" Z="-1.604949" />
+	<CustomBehavior File="InteractWith" QuestId="14395" MobId="36440" NumOfTimes="1" ObjectType="Npc" X="-1936.267" Y="2536.79" Z="-1.973247" />
+	<CustomBehavior File="MyCTM"   X="-1910.921" Y="2531.755" Z="-1.524391" />
+	<CustomBehavior File="MyCTM"   X="-1892.068" Y="2508.939" Z="1.393327" />
+	</While>
+	<TurnIn QuestName="Gasping for Breath" QuestId="14395" TurnInName="Prince Liam Greymane" TurnInId="36451" />
+	<PickUp QuestName="Evacuation" QuestId="14397" GiverName="Prince Liam Greymane" GiverId="36451" />
+	<TurnIn QuestName="Evacuation" QuestId="14397" TurnInName="Gwen Armstead" TurnInId="36452" />
+	<PickUp QuestName="Grandma Wahl" QuestId="14398" GiverName="Gwen Armstead" GiverId="36452" />
+	<PickUp QuestName="The Hayward Brothers" QuestId="14403" GiverName="Gwen Armstead" GiverId="36452" />
+	<PickUp QuestName="The Crowley Orchard" QuestId="14406" GiverName="Gwen Armstead" GiverId="36452" />
+	<TurnIn QuestName="The Crowley Orchard" QuestId="14406" TurnInName="Lorna Crowley" TurnInId="36457" />
+	<PickUp QuestName="The Hungry Ettin" QuestId="14416" GiverName="Lorna Crowley" GiverId="36457" />
+	<While Condition="!IsQuestCompleted(14416)" >
+	<CustomBehavior File="InteractWith" QuestId="14416" MobId="36540" NumOfTimes="1" ObjectType="Npc" X="-2081.075" Y="2190.58" Z="25.03768" />
+	<CustomBehavior File="WaitTimer" WaitTime="4000"/>
+	<RunTo QuestId="14416" X="-2059.174" Y="2257.15" Z="22.38288" />
+	<CustomBehavior File="WaitTimer" WaitTime="4000"/>
+	</While>
+	<TurnIn QuestName="The Hungry Ettin" QuestId="14416" TurnInName="Lorna Crowley" TurnInId="36457" />
+	<TurnIn QuestName="Grandma Wahl" QuestId="14398" TurnInName="Grandma Wahl" TurnInId="36458" />
+	<PickUp QuestName="Grandma's Lost It Alright" QuestId="14399" GiverName="Grandma Wahl" GiverId="36458" />
+	<Objective QuestName="Grandma's Lost It Alright" QuestId="14399" Type="CollectItem" ItemId="49280" CollectCount="1" />
+	<TurnIn QuestName="Grandma's Lost It Alright" QuestId="14399" TurnInName="Grandma Wahl" TurnInId="36458" />
+	<PickUp QuestName="I Can't Wear This" QuestId="14400" GiverName="Grandma Wahl" GiverId="36458" />
+	<Objective QuestName="I Can't Wear This" QuestId="14400" Type="CollectItem" ItemId="49279" CollectCount="1" />
+	<TurnIn QuestName="I Can't Wear This" QuestId="14400" TurnInName="Grandma Wahl" TurnInId="36458" />
+	<PickUp QuestName="Grandma's Cat" QuestId="14401" GiverName="Grandma Wahl" GiverId="36458" />
+	<CustomBehavior File="InteractWith" QuestId="14401" MobId="36459" NumOfTimes="1" ObjectType="Npc" X="-2107.302" Y="2334.632" Z="7.309505" />
+	<TurnIn QuestName="Grandma's Cat" QuestId="14401" TurnInName="Grandma Wahl" TurnInId="36458" />
+	<While Condition="HasQuest(14403)" >
+	<CustomBehavior File="InteractWith" MobId="36456" NumOfTimes="1" ObjectType="Npc" X="-2302.853" Y="2279.787" Z="-0.1638604" />
+	<CustomBehavior File="RunMacro"
+    Macro="/run SelectGossipAvailableQuest(1)\n/run SelectGossipActiveQuest(1)\n/run CompleteQuest()\n/run SelectGossipOption(1)\n/run AcceptQuest()\n/run GetQuestReward(1)"
+    NumOfTimes="1"
+    WaitTime="2000" />
+	</While>
+	<PickUp QuestName="Not Quite Shipshape" QuestId="14404" GiverName="Sebastian Hayward" GiverId="36456" />
+	<PickUp QuestName="Washed Up" QuestId="14412" GiverName="Sebastian Hayward" GiverId="36456" />
+	<If Condition="!IsQuestCompleted(14404)" >
+	<CustomBehavior File="UserSettings" PullDistance="1" />
+	<Objective QuestName="Not Quite Shipshape" QuestId="14404" Type="CollectItem" ItemId="49337" CollectCount="1" />
+	<Objective QuestName="Not Quite Shipshape" QuestId="14404" Type="CollectItem" ItemId="49338" CollectCount="1" />
+	<Objective QuestName="Not Quite Shipshape" QuestId="14404" Type="CollectItem" ItemId="49339" CollectCount="1" />
+	</If>
+	<If Condition="!IsQuestCompleted(14412)" >
+	<CustomBehavior File="UserSettings" PullDistance="5" />
+	</If>
+	<Objective QuestName="Washed Up" QuestId="14412" Type="KillMob" MobId="36488" KillCount="6" />
+	<TurnIn QuestName="Not Quite Shipshape" QuestId="14404" TurnInName="Sebastian Hayward" TurnInId="36456" />
+	<TurnIn QuestName="Washed Up" QuestId="14412" TurnInName="Sebastian Hayward" TurnInId="36456" />
+	<PickUp QuestName="Escape By Sea" QuestId="14405" GiverName="Sebastian Hayward" GiverId="36456" />
+	<TurnIn QuestName="Escape By Sea" QuestId="14405" TurnInName="Gwen Armstead" TurnInId="36452" />
+	<PickUp QuestName="To Greymane Manor" QuestId="14465" GiverName="Gwen Armstead" GiverId="36452" />
+	<TurnIn QuestName="To Greymane Manor" QuestId="14465" TurnInName="Queen Mia Greymane" TurnInId="36606" />
+	<PickUp QuestName="The King's Observatory" QuestId="14466" GiverName="Queen Mia Greymane" GiverId="36606" />
+	<TurnIn QuestName="The King's Observatory" QuestId="14466" TurnInName="King Genn Greymane" TurnInId="36743" />
+	<If Condition="!IsQuestCompleted(14467)" >
+	<CustomBehavior File="InteractWith" MobId="36743" NumOfTimes="1" ObjectType="Npc" X="-1517.514" Y="2607.744" Z="203.5256" />
+	<CustomBehavior File="RunMacro"
+    Macro="/run SelectGossipAvailableQuest(1)\n/run SelectGossipActiveQuest(1)\n/run CompleteQuest()\n/run SelectGossipOption(1)\n/run AcceptQuest()\n/run GetQuestReward(1)"
+    NumOfTimes="1"
+    WaitTime="2000" />
+	</If>
+	<If Condition="!IsQuestCompleted(24438)" >
+	<PickUp QuestName="Exodus" QuestId="24438" GiverName="King Genn Greymane" GiverId="36743" />
+	</If>
+	<If Condition="HasQuest(24438)" >
+	<CustomBehavior File="InteractWith" MobId="44928" NumOfTimes="1" ObjectType="Npc" X="-1670.69" Y="2530.55" Z="97.83398" />
+	<CustomBehavior File="WaitTimer" WaitTime="4000"/>
+	</If>
+	<TurnIn QuestName="Exodus" QuestId="24438" TurnInName="Prince Liam Greymane" TurnInId="37065" />
+	<PickUp QuestName="Stranded at the Marsh" QuestId="24468" GiverName="Prince Liam Greymane" GiverId="37065" />
+	<If Condition="!IsQuestCompleted(24468)" >
+	<CustomBehavior File="UserSettings" PullDistance="30" />
+	</If>
+	<Objective QuestName="Stranded at the Marsh" QuestId="24468" Type="KillMob" MobId="37078" KillCount="5" />
+	<If Condition="HasQuest(24468)" >
+	<CustomBehavior File="UserSettings" PullDistance="1" />
+	</If>
+	<TurnIn QuestName="Stranded at the Marsh" QuestId="24468" TurnInName="Prince Liam Greymane" TurnInId="37065" />
+	<PickUp QuestName="Introductions Are in Order" QuestId="24472" GiverId="37065" />
+	<Objective QuestName="Introductions Are in Order" QuestId="24472" Type="CollectItem" ItemId="49742" CollectCount="1" />
+	<If Condition="HasQuest(24472)" >
+	<CustomBehavior File="UserSettings" PullDistance="6" />
+	</If>
+	<Objective QuestName="Introductions Are in Order" QuestId="24472" Type="KillMob" MobId="36293" KillCount="4" />
+	<If Condition="HasQuest(24472)" >
+	<CustomBehavior File="UserSettings" PullDistance="1" />
+	</If>
+	<TurnIn QuestName="Introductions Are in Order" QuestId="24472" TurnInId="37065" />
+	<PickUp QuestName="Stormglen" QuestId="24483" GiverName="Prince Liam Greymane" GiverId="37065" />
+	<TurnIn QuestName="Stormglen" QuestId="24483" TurnInName="Gwen Armstead" TurnInId="37102" />
+	<PickUp QuestName="Pest Control" QuestId="24484" GiverName="Gwen Armstead" GiverId="37102" />
+	<PickUp QuestName="Pieces of the Past" QuestId="24495" GiverName="Lorna Crowley" GiverId="37815" />
+	<Objective QuestName="Pieces of the Past" QuestId="24495" Type="CollectItem" ItemId="49760" CollectCount="6" />
+	<Objective QuestName="Pest Control" QuestId="24484" Type="KillMob" MobId="36813" KillCount="6" />
+	<If Condition="HasQuest(24495)" >
+	<CustomBehavior   File="ForceSetVendor" VendorType="Train" />
+	</If>
+	<TurnIn QuestName="Pest Control" QuestId="24484" TurnInName="Gwen Armstead" TurnInId="37102" />
+	<TurnIn QuestName="Pieces of the Past" QuestId="24495" TurnInName="Lorna Crowley" TurnInId="37815" />
+	<PickUp QuestName="Queen-Sized Troubles" QuestId="24501" GiverName="Gwen Armstead" GiverId="37102" />
+	<If Condition="HasQuest(24501)" >
+	<CustomBehavior File="UserSettings" PullDistance="20" />
+	</If>
+	<Objective QuestName="Queen-Sized Troubles" QuestId="24501" Type="KillMob" MobId="37045" KillCount="1" />
+	<TurnIn QuestName="Queen-Sized Troubles" QuestId="24501" TurnInName="Gwen Armstead" TurnInId="37102" />
+	<PickUp QuestName="The Blackwald" QuestId="24578" GiverName="Lorna Crowley" GiverId="37815" />
+	<TurnIn QuestName="The Blackwald" QuestId="24578" TurnInName="Belysra Starbreeze" TurnInId="37822" />
+	<PickUp QuestName="Losing Your Tail" QuestId="24616" GiverName="Belysra Starbreeze" GiverId="37822" />
+	<!-- Should use thing when trapped ItemId="49944" -->
+	<Objective QuestName="Losing Your Tail" QuestId="24616" Type="KillMob" MobId="37953" KillCount="1" />
+	<TurnIn QuestName="Losing Your Tail" QuestId="24616" TurnInId="37822" />
+	<PickUp QuestName="Tal'doren, the Wild Home" QuestId="24617" GiverName="Belysra Starbreeze" GiverId="37822" />
+	<TurnIn QuestName="Tal'doren, the Wild Home" QuestId="24617" TurnInName="Lord Darius Crowley" TurnInId="37195" X="-2071.819" Y="1275.442" Z="-85.30907" />
+	<PickUp QuestName="At Our Doorstep" QuestId="24627" GiverName="Lord Darius Crowley" GiverId="37195" />
+	<PickUp QuestName="Preparations" QuestId="24628" GiverName="Vassandra Stormclaw" GiverId="37873" />
+	<Objective QuestName="Preparations" QuestId="24628" Type="CollectItem" ItemId="50017" CollectCount="6" />
+	<Objective QuestName="At Our Doorstep" QuestId="24627" Type="KillMob" MobId="37757" KillCount="6" />
+	<TurnIn QuestName="At Our Doorstep" QuestId="24627" TurnInName="Lord Darius Crowley" TurnInId="37195" />
+	<TurnIn QuestName="Preparations" QuestId="24628" TurnInName="Vassandra Stormclaw" TurnInId="37873" />
+	<PickUp QuestName="Take Back What's Ours" QuestId="24646" GiverName="Lord Darius Crowley" GiverId="37195" />
+	<If Condition="HasQuest(24646)" >
+	<CustomBehavior File="UserSettings" PullDistance="1" />
+	</If>
+	<UseItem ItemId="50134" QuestId="24646" X="-2114.707" Y="1582.041" Z="-48.35059" />
+	<If Condition="HasQuest(24646)" >
+	<CustomBehavior File="UserSettings" PullDistance="1" />
+	<CustomBehavior File="WaitTimer" WaitTime="4000"/>
+	</If>
+	<Objective QuestName="Take Back What's Ours" QuestId="24646" Type="CollectItem" ItemId="50086" CollectCount="1" />
+	<TurnIn QuestName="Take Back What's Ours" QuestId="24646" TurnInName="Lord Darius Crowley" TurnInId="37195" />
+	<PickUp QuestName="Neither Human Nor Beast" QuestId="24593" GiverName="Lord Darius Crowley" GiverId="37195" />
+	<Objective QuestName="Neither Human Nor Beast" QuestId="24593" Type="UseObject" ObjectId="201950" UseCount="1" />
+	<Objective QuestName="Neither Human Nor Beast" QuestId="24593" Type="UseObject" ObjectId="201951" UseCount="1" />
+	<Objective QuestName="Neither Human Nor Beast" QuestId="24593" Type="UseObject" ObjectId="201952" UseCount="1" />
+	<TurnIn QuestName="Neither Human Nor Beast" QuestId="24593" TurnInName="Lord Darius Crowley" TurnInId="37195" />
+	<PickUp QuestName="Return to Stormglen" QuestId="24673" GiverName="Lord Darius Crowley" GiverId="37195" />
+	<TurnIn QuestName="Return to Stormglen" QuestId="24673" TurnInName="Gwen Armstead" TurnInId="37102" />
+	<PickUp QuestName="Onwards and Upwards" QuestId="24672" GiverName="Gwen Armstead" GiverId="37102" />
+	<TurnIn QuestName="Onwards and Upwards" QuestId="24672" TurnInName="Krennan Aranas" TurnInId="37874" />
+	<PickUp QuestName="Betrayal at Tempest's Reach" QuestId="24592" GiverId="37874" />
+	<If Condition="HasQuest(24592)" >
+	<CustomBehavior File="UserSettings" PullDistance="20" />
+	</If>
+	<Objective QuestName="Betrayal at Tempest's Reach" QuestId="24592" Type="KillMob" MobId="37735" KillCount="1" />
+	<Objective QuestName="Betrayal at Tempest's Reach" QuestId="24592" Type="KillMob" MobId="37733" KillCount="1" />
+	<TurnIn QuestName="Betrayal at Tempest's Reach" QuestId="24592" TurnInId="37876" />
+	<PickUp QuestName="Flank the Forsaken" QuestId="24677" GiverName="King Genn Greymane" GiverId="37876" />
+	<If Condition="HasQuest(24677)" >
+	<CustomBehavior File="InteractWith" MobId="38764" GossipOptions="1" ObjectType="Npc"  X="-1973.227" Y="2513.613" Z="1.576067" />
+	</If>
+	<TurnIn QuestName="Flank the Forsaken" QuestId="24677" TurnInName="Lorna Crowley" TurnInId="37783" />
+	<PickUp QuestName="Liberation Day" QuestId="24575" GiverName="" GiverId="37783" />
+	<PickUp QuestName="Last Meal" QuestId="24675" GiverName="" GiverId="38143" />
+	<PickUp QuestName="Slaves to No One" QuestId="24674" GiverName="Marcus" GiverId="37803" />
+	<If Condition="HasQuest(24674)" >
+	<CustomBehavior File="UserSettings" PullDistance="20" />
+	</If>
+	<Objective QuestName="Slaves to No One" QuestId="24674" Type="KillMob" MobId="37802" KillCount="1" />
+	<If Condition="!IsQuestCompleted(24575)" >
+	<Objective QuestName="Liberation Day" QuestId="24575" Type="CollectItem" ItemId="49881" CollectCount="5" />
+	</If>
+	<Objective QuestName="Liberation Day" QuestId="24575" Type="UseObject" ObjectId="201775" UseCount="5" />
+	<If Condition="HasQuest(24674)" >
+	<CustomBehavior File="UserSettings" PullDistance="30" />
+	</If>	
+	<Objective QuestName="Last Meal" QuestId="24675" Type="CollectItem" ItemId="50219" CollectCount="10" />
+	<TurnIn QuestName="Liberation Day" QuestId="24575" TurnInId="37783" />
+	<TurnIn QuestName="Last Meal" QuestId="24675" TurnInId="38143" />
+	<TurnIn QuestName="Slaves to No One" QuestId="24674" TurnInName="Marcus" TurnInId="37803" />
+	<PickUp QuestName="Push Them Out" QuestId="24676" GiverId="37783" />
+	<Objective QuestName="Push Them Out" QuestId="24676" Type="KillMob" MobId="37686" KillCount="1" />
+	<Objective QuestName="Push Them Out" QuestId="24676" Type="KillMob" MobId="37685" KillCount="1" />
+	<Objective QuestName="Push Them Out" QuestId="24676" Type="KillMob" MobId="37692" KillCount="4" />
+	<TurnIn QuestName="Push Them Out" QuestId="24676" TurnInId="37783" />
+	<PickUp QuestName="The Battle for Gilneas City" QuestId="24904" GiverName="Lorna Crowley" GiverId="37783" />
+    <If Condition="!IsQuestCompleted(24904)" >
+			<CustomBehavior File="InteractWith" MobId="38553" GossipOptions="1" ObjectType="Npc" X="-1391.245" Y="1236.05" Z="35.5599" />
+			<CustomBehavior File="Escort" QuestId="24904" MobId="38218" X="-1392.526" Y="1222.099" Z="35.55768"/>
+    </If>	
+	<TurnIn QuestName="The Battle for Gilneas City" QuestId="24904" TurnInName="Lorna Crowley" TurnInId="38611" />
+    <PickUp QuestName="The Hunt For Sylvanas" QuestId="24902" GiverName="Lorna Crowley" GiverId="38611" X="-1663.908" Y="1589.962" Z="23.12686" />
+	  <If Condition="!IsQuestCompleted(24902)" >
+		<CustomBehavior File="UserSettings" PullDistance="1" />
+		<CustomBehavior File="MyCTM" QuestId="24902" X="-1657.388" Y="1582.5" Z="21.15002" />
+		<RunTo QuestId="24902" X="-1630.569" Y="1610.099" Z="20.48684" />
+		<CustomBehavior File="WaitTimer" QuestId="24902" WaitTime="8000"/>
+		<CustomBehavior File="MyCTM" QuestId="24902" X="-1597.685" Y="1607.3" Z="21.59968"/>
+		<CustomBehavior File="WaitTimer" QuestId="24902" WaitTime="5000"/>
+		<CustomBehavior File="MyCTM" QuestId="24902" X="-1581.727" Y="1618.003" Z="20.58184"/>
+		<RunTo QuestId="24902" X="-1492.456" Y="1576.429" Z="20.48551" />
+		<CustomBehavior File="WaitTimer" QuestId="24902" WaitTime="9000"/>
+		<RunTo QuestId="24902" X="-1610.533" Y="1535.239" Z="29.22881" />
+		<CustomBehavior File="WaitTimer" QuestId="24902" WaitTime="100000"/>
+		<RunTo QuestId="24902" X="-1646.602" Y="1708.9" Z="20.49091" />
+	  </If>
+    <TurnIn QuestName="The Hunt For Sylvanas" QuestId="24902" TurnInName="Lorna Crowley" TurnInId="38611" />
+	<PickUp QuestName="Vengeance or Survival" QuestId="24903" GiverName="Lorna Crowley" GiverId="38611" />
+	<TurnIn QuestName="Vengeance or Survival" QuestId="24903" TurnInName="King Genn Greymane" TurnInId="38539" />
+	
+	<PickUp QuestName="Slowing the Inevitable" QuestId="24920" GiverName="King Genn Greymane" GiverId="38539" />
+	  <If Condition="HasQuest(24920)" >
+		<CustomBehavior File="NoControlVehicle" VehicleMountId="38615" TargetId="38287" AttackButton="1" OftenToUse="2000" NumOfTimes="6" VehicleId="38540" MaxRange="100" TypeId="2" />
+		<While Condition="!IsQuestCompleted(24920)" >
+		<CustomBehavior File="NoControlVehicle" VehicleMountId="38615" TargetId="38363" AttackButton="1" OftenToUse="2000" NumOfTimes="5" VehicleId="38540" MaxRange="100" TypeId="2" />
+		</While>
+		<CustomBehavior File="NoControlVehicle" VehicleMountId="38615" TargetId="38363" AttackButton="5" OftenToUse="2000" NumOfTimes="1" VehicleId="38540" MaxRange="100" TypeId="2" />
+      </If>
+	  <TurnIn QuestName="Slowing the Inevitable" QuestId="24920" TurnInName="King Genn Greymane" TurnInId="38539" />
+
+      <PickUp QuestName="Knee-Deep" QuestId="24678" GiverName="King Genn Greymane" GiverId="38539" />
+	  <If Condition="HasQuest(24678)" >
+			<CustomBehavior File="UserDialog"
+                    
+                   Text="Use the torch and run through the tunnel"
+                   Title="HELP, Quest too hard"
+                   AllowBotStop="false"
+                   SoundCue="Asterisk"
+                   SoundCueInterval="1" />
+	  </If>
+      <TurnIn QuestName="Knee-Deep" QuestId="24678" TurnInName="Krennan Aranas" TurnInId="38144" />
+
+      <PickUp QuestName="Laid to Rest" QuestId="24602" GiverName="Krennan Aranas" GiverId="38144" />
+		<If Condition="HasQuest(24602)" >
+		<CustomBehavior File="UserSettings" PullDistance="20" />
+		</If>
+      <Objective QuestName="Laid to Rest" QuestId="24602" Type="CollectItem" ItemId="49921" CollectCount="5" />
+      <TurnIn QuestName="Laid to Rest" QuestId="24602" TurnInName="Krennan Aranas" TurnInId="38144" />
+
+      <PickUp QuestName="Patriarch's Blessing" QuestId="24679" GiverName="Krennan Aranas" GiverId="38144" />
+      <UseItem ItemId="51956" QuestName="Patriarch's Blessing" QuestId="24679" X="-1643.742" Y="1905.736" Z="29.95211" />
+      <TurnIn QuestName="Patriarch's Blessing" QuestId="24679" TurnInName="Krennan Aranas" TurnInId="38144" />
+
+      <PickUp QuestName="Keel Harbor" QuestId="24680" GiverName="Krennan Aranas" GiverId="38144" />
+      <TurnIn QuestName="Keel Harbor" QuestId="24680" TurnInName="Lord Darius Crowley" TurnInId="38149" />
+
+      <PickUp QuestName="They Have Allies, But So Do We" QuestId="24681" GiverName="Lord Darius Crowley" GiverId="38149" />
+	  <If Condition="HasQuest(24681)" >
+			<CustomBehavior File="UserDialog"
+                    
+                   Text="Use the glaive and go pwn"
+                   Title="HELP, quest too hard"
+                   AllowBotStop="false"
+                   SoundCue="Asterisk"
+                   SoundCueInterval="1" />     
+				   </If>
+	 <TurnIn QuestName="They Have Allies, But So Do We" QuestId="24681" TurnInName="Lord Darius Crowley" TurnInId="38149" />
+
+      <PickUp QuestName="Endgame" QuestId="26706" GiverName="Lorna Crowley" GiverId="43727" />
+	  <If Condition="HasQuest(26706)" >
+		<CustomBehavior File="MountVehOnly" QuestId="26706" VehicleMountId="43747" X="-1286.587" Y="2130.113" Z="5.547534"/>
+		<CustomBehavior File="WaitTimer" QuestId="26706" WaitTime="300000"/>
+		<TurnIn QuestName="Endgame" QuestId="26706" TurnInName="Lorna Crowley" TurnInId="43727" />
+		<CustomBehavior File="CompleteLogQuest" QuestId="26706" />
+	  </If>
+		<CustomBehavior File="InteractWith" MobId="36616" GossipOptions="1" ObjectType="Npc" X="-1292.39" Y="2101.581" Z="5.546446" />
+		<CustomBehavior File="WaitTimer" WaitTime="4000"/>
+	</If>
+	<!-- End of Worgen -->
+
+	<!-- Time to move worgen to IF -->
+	<!-- Boat to SW -->
+	<If Condition="Me.Race == WoWRace.Worgen">
+	<If Condition="Me.ZoneId == 141">
+	<CustomBehavior File="Message" Text="Take Boat to SW" />
+	<CustomBehavior File="UseTransport" TransportId="176310"
+	TransportStartX="8162.587" TransportStartY="1005.365" TransportStartZ="-0.04583085"
+	TransportEndX="-8650.719" TransportEndY="1346.051" TransportEndZ="-0.0485219" 
+	WaitAtX="8192.421" WaitAtY="998.6914" WaitAtZ="7.028804"
+	GetOffX="-8640.582" GetOffY="1327.276" GetOffZ="5.233609"
+	StandOnX="8165.493" StandOnY="1011.57" StandOnZ="6.047645" />
+	</If>
+	<!-- Take portal to Tram -->
+	<If Condition="Me.ZoneId == 1519">
+	<CustomBehavior File="Message" Text="Go to Tram" />
+	<RunTo X="-8365.658" Y="524.9838" Z="84.40855" />
+	<CustomBehavior File="GoThruPortal" X="-8352.252" Y="508.7534" Z="84.40907" />
+	</If>
+	<!-- Take Tram to IF -->
+	<If Condition="Me.ZoneId == 2257">
+	<CustomBehavior File="Message" Text="To IF!!" />
+	<CustomBehavior File="UseTransport" TransportId="176081"
+	TransportStartX="4.527849" TransportStartY="2490.735" TransportStartZ="7.197604"
+	TransportEndX="4.528066" TransportEndY="8.435292" TransportEndZ="7.011068"
+	WaitAtX="15.89736" WaitAtY="2490.564" WaitAtZ="-4.292795"
+	GetOffX="20.06575" GetOffY="8.898974" GetOffZ="-4.297331"
+	StandOnX="4.410645" StandOnY="2490.565" StandOnZ="-4.296015" />
+	<RunTo X="46.32416" Y="9.885495" Z="-4.297345" />
+	<CustomBehavior File="GoThruPortal" X="78.16028" Y="10.60271" Z="-4.297345" />
+	</If>
+	</QuestOrder>
+	</HBProfile>

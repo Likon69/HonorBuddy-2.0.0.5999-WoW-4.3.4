@@ -1,0 +1,91 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<HBProfile>
+	<Name>Frostweave Cloth- Icecrown</Name>
+	<MinDurability>0.3</MinDurability>
+	<MinFreeBagSlots>2</MinFreeBagSlots>
+	<MinLevel>1</MinLevel>
+	<MaxLevel>86</MaxLevel>
+	<SellGrey>True</SellGrey>
+	<SellWhite>True</SellWhite>
+	<SellGreen>False</SellGreen>
+	<SellBlue>False</SellBlue>
+	<SellPurple>False</SellPurple>
+
+	<MailWhite>True</MailWhite>
+	<MailGreen>True</MailGreen>
+	<MailBlue>True</MailBlue>
+	<MailPurple>True</MailPurple>  
+	<Vendors>
+		<Vendor Name="Brollen Wheatbeard" Entry="33599" Type="Repair" X="8548.112" Y="933.3629" Z="547.2943" />
+	</Vendors>
+
+	<Mailboxes>
+		<Mailbox X="8591.137" Y="694.834" Z="547.293" />
+
+	</Mailboxes>
+	<AvoidMobs>
+		<Mob Name="Skeletal Reaver" Entry="32467"  />
+		<Mob Name="Ranged Target" Entry="33243"  />
+		<Mob Name="Melee Target" Entry="33229"  />
+		<Mob Name="Charge Target" Entry="33272"  />
+
+	</AvoidMobs>
+	<QuestOrder>
+		
+		<While Condition="(Me.Level &gt; 1)" >
+			<If Condition="(Me.LowestDurabilityPercent &gt;= 0.3) &amp;&amp; (Me.FreeBagSlots &gt;= 3)" >
+				<CustomBehavior File="Message" Text="HB: Flying to Grind Zone" LogColor="Orange" />
+				<CustomBehavior File="FlyTo" X="7809.521" Y="2164.453" Z="365.6669" />
+				<CustomBehavior File="ForcedDismount" />
+				<SetGrindArea>
+					<GrindArea>
+						<TargetMinLevel>1</TargetMinLevel>
+						<TargetMaxLevel>86</TargetMaxLevel>
+						<GrindArea>974 634</GrindArea>
+
+						<Hotspots>
+							<Hotspot X="7809.521" Y="2164.453" Z="365.6669" />
+							<Hotspot X="7676.899" Y="2226.134" Z="367.288" />
+							<Hotspot X="7839.41" Y="2402.769" Z="391.5206" />
+							<Hotspot X="7660.426" Y="2368.692" Z="377.5927" />
+							<Hotspot X="7528.784" Y="2332.823" Z="376.2051" />
+							<Hotspot X="7425.119" Y="2446.382" Z="386.3779" />
+							<Hotspot X="7360.848" Y="2547.826" Z="392.1097" />
+							<Hotspot X="7306.281" Y="2623.792" Z="392.3871" />
+							<Hotspot X="7329.381" Y="2717.89" Z="396.1105" />
+							<Hotspot X="7368.674" Y="2786.239" Z="404.0681" />
+							<Hotspot X="7204.631" Y="2729.195" Z="397.8494" />
+							<Hotspot X="7107.386" Y="2619.79" Z="394.6446" />
+						</Hotspots>
+					</GrindArea>
+				</SetGrindArea>
+				<GrindTo Condition="(Me.LowestDurabilityPercent &lt; 0.3) || (Me.FreeBagSlots &lt;= 2)" GoalText="Frostweave Cloth - FirstAid" />
+			</If>
+			<If Condition="(Me.LowestDurabilityPercent &lt; 0.3) || (Me.FreeBagSlots &lt; 3)" >
+				<CustomBehavior File="Message" Text="HB: Flying to Repair" LogColor="Orange" />
+				<CustomBehavior File="FlyTo" X="8548.112" Y="933.3629" Z="547.2943" DestName="Somewhere over the rainbow" />
+				<CustomBehavior File="Message" Text="HB: Selling/Mailing/Repairing" LogColor="Orange" />
+				<CustomBehavior File="ForceSetVendor"  DoMail="true" DoRepair="true" DoSell="true" />
+			</If>
+		</While>
+	</QuestOrder>
+
+	<ProtectedItems>
+		<Item name="Linen Cloth" entry="2589" /> 
+		<Item name="Wool Cloth" entry="2592" /> 
+		<Item name="Silk Cloth" entry="4306" /> 
+		<Item name="Mageweave Cloth" entry="4338" /> 
+		<Item name="Runecloth" entry="14047" /> 
+		<Item name="Netherweave Cloth" entry="21877" /> 
+		<Item name="Frostweave Cloth" entry="33470" /> 
+	</ProtectedItems>
+	<ForceMail>
+		<Item name="Wool Cloth" entry="2592" /> 
+		<Item name="Linen Cloth" entry="2589" />
+		<Item name="Silk Cloth" entry="4306" /> 
+		<Item name="Mageweave Cloth" entry="4338" /> 
+		<Item name="Runecloth" entry="14047" /> 
+		<Item name="Netherweave Cloth" entry="21877" /> 
+		<Item name="Frostweave Cloth" entry="33470" /> 
+	</ForceMail>
+</HBProfile>

@@ -1,0 +1,17 @@
+<HBProfile>
+	<Name>SW to Vashj'ir Portal</Name>
+	<MinLevel>1</MinLevel>
+	<MaxLevel>101</MaxLevel>
+	
+	<QuestOrder>
+
+			<If Condition="(Me.ZoneId == 1519)" >
+				<CustomBehavior File="FlyTo" DestName="Vashj'ir Portal in SW" X="-8192.679" Y="446.8246" Z="116.8664" />
+				<CustomBehavior File="ForcedDismount" />
+				
+				<CustomBehavior File="InteractWith" MobId="207691" ObjectType="Gameobject" Range="5" X="-8192.679" Y="446.8246" Z="116.8664" />
+			</If>
+	
+	
+	</QuestOrder>
+</HBProfile>

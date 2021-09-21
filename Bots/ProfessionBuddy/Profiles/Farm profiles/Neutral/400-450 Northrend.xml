@@ -1,0 +1,109 @@
+<HBProfile>
+<Name>400-450 Northrend Leather farm</Name>
+<MinDurability>0.4</MinDurability>
+<MinFreeBagSlots>1</MinFreeBagSlots>
+
+
+<MailGrey>false</MailGrey>
+<MailWhite>false</MailWhite>
+<MailGreen>false</MailGreen>
+<MailBlue>false</MailBlue>
+<MailPurple>false</MailPurple>
+
+<SellGrey>True</SellGrey>
+<SellWhite>True</SellWhite>
+<SellGreen>True</SellGreen>
+<SellBlue>false</SellBlue>
+<SellPurple>false</SellPurple>
+
+<Vendors>
+</Vendors>
+
+<Mailboxes>
+</Mailboxes>
+
+<Blackspots>
+</Blackspots>
+
+  <QuestOrder>
+    
+
+    <While Condition="(Me.Level &gt; 1)" >
+
+      <If Condition="(Me.FreeBagSlots &gt; 5)" >
+
+        <CustomBehavior File="FlyTo" DestName="Farm Area" X="5352.07" Y="5574.687" Z="-91.27075" />
+        <CustomBehavior File="ForcedDismount" />
+
+        <SetGrindArea>
+          <GrindArea>
+            <TargetMinLevel>70</TargetMinLevel>
+            <TargetMaxLevel>80</TargetMaxLevel>
+            <Factions>15 1917 14 1999 2030</Factions>
+            <Hotspots>
+              <Hotspot X="5352.07" Y="5574.687" Z="-91.27075" />
+              <Hotspot X="5302.167" Y="5616.734" Z="-92.54089" />
+              <Hotspot X="5306.405" Y="5682.392" Z="-89.59415" />
+              <Hotspot X="5296.685" Y="5769.406" Z="-79.27522" />
+              <Hotspot X="5233.706" Y="5814.805" Z="-74.51286" />
+              <Hotspot X="5193.609" Y="5872.866" Z="-70.7523" />
+              <Hotspot X="5229.051" Y="5921.676" Z="-62.64098" />
+              <Hotspot X="5231.093" Y="5980.372" Z="-43.7092" />
+              <Hotspot X="5275.06" Y="5971.328" Z="-45.55296" />
+              <Hotspot X="5335.264" Y="5979.924" Z="-40.0816" />
+              <Hotspot X="5394.316" Y="5976.972" Z="-42.72119" />
+              <Hotspot X="5460.841" Y="5968.263" Z="-40.63033" />
+              <Hotspot X="5481.662" Y="5894.434" Z="-56.58644" />
+              <Hotspot X="5447.189" Y="5771.521" Z="-76.32093" />
+              <Hotspot X="5402.97" Y="5678" Z="-85.70569" />
+              <Hotspot X="5350.77" Y="5571.562" Z="-90.86132" />
+              <Hotspot X="5415.706" Y="5534.403" Z="-99.57941" />
+              <Hotspot X="5472.516" Y="5516.202" Z="-99.5425" />
+              <Hotspot X="5530.124" Y="5525.742" Z="-100.6296" />
+              <Hotspot X="5547.659" Y="5482.376" Z="-99.04948" />
+              <Hotspot X="5617.269" Y="5528.771" Z="-87.61431" />
+              <Hotspot X="5669.545" Y="5363.432" Z="-97.80017" />
+              <Hotspot X="5645.49" Y="5278.974" Z="-130.4818" />
+              <Hotspot X="5700.181" Y="5231.074" Z="-132.763" />
+              <Hotspot X="5742.889" Y="5195.069" Z="-132.6584" />
+              <Hotspot X="5838.138" Y="5185.11" Z="-114.1876" />
+              <Hotspot X="5902.864" Y="5200.229" Z="-101.9755" />
+              <Hotspot X="5892.915" Y="5131.26" Z="-108.1053" />
+              <Hotspot X="5861.771" Y="5058.898" Z="-128.3176" />
+              <Hotspot X="5773.376" Y="5056.947" Z="-135.8057" />
+              <Hotspot X="5721.584" Y="5031.304" Z="-133.9725" />
+              <Hotspot X="5672.262" Y="5004.075" Z="-134.9045" />
+              <Hotspot X="5636.106" Y="4958.515" Z="-134.2547" />
+              <Hotspot X="5756.711" Y="4911.549" Z="-132.7338" />
+              <Hotspot X="5766.906" Y="4838.47" Z="-133.4418" />
+              <Hotspot X="5826.711" Y="4764.17" Z="-132.565" />
+              <Hotspot X="5873.932" Y="4662.995" Z="-132.9918" />
+              <Hotspot X="5871.057" Y="4598.926" Z="-136.506" />
+              <Hotspot X="5756.27" Y="4615.857" Z="-134.1544" />
+              <Hotspot X="5729.213" Y="4724.967" Z="-135.0415" />
+              <Hotspot X="5684.926" Y="4846.579" Z="-136.3346" />
+              <Hotspot X="5617.613" Y="4858.64" Z="-136.5539" />
+              <Hotspot X="5559.41" Y="5025.689" Z="-134.6197" />
+              <Hotspot X="5458.857" Y="5009.203" Z="-130.6161" />
+              <Hotspot X="5337.802" Y="5019.649" Z="-135.9482" />
+              <Hotspot X="5206.935" Y="4980.843" Z="-133.5428" />
+              <Hotspot X="5139.125" Y="5075.871" Z="-131.8456" />
+              <Hotspot X="5236.379" Y="5129.723" Z="-135.2015" />
+              <Hotspot X="5315.612" Y="5167.044" Z="-134.4891" />
+              <Hotspot X="5334.14" Y="5279.299" Z="-135.7003" />
+              <Hotspot X="5390.019" Y="5317.742" Z="-131.1081" />
+              <Hotspot X="5278.722" Y="5399.57" Z="-103.287" />
+              <Hotspot X="5318.436" Y="5469.979" Z="-100.063" />
+            </Hotspots>
+            </GrindArea>
+        </SetGrindArea>
+        <GrindTo Condition="Me.FreeBagSlots &lt;= 5" GoalText="Farming Leather." />
+      </If>
+
+
+
+    </While>
+
+
+  </QuestOrder>
+</HBProfile>

@@ -1,0 +1,498 @@
+<HBProfile xsi:noNamespaceSchemaLocation="../Schemas/EchoSchema.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<!-- Original contribution by EchoTiger -->
+	<Name>Cape of Stranglethorn ($ShortHash$)</Name>
+
+	<MinDurability>0.3</MinDurability>
+	<MinFreeBagSlots>3</MinFreeBagSlots>
+
+	<SellGrey>true</SellGrey>
+	<SellWhite>true</SellWhite>
+	<SellGreen>true</SellGreen>
+	<SellBlue>true</SellBlue>
+	<SellPurple>false</SellPurple>
+
+	<MailGrey>false</MailGrey>
+	<MailWhite>true</MailWhite>
+	<MailGreen>true</MailGreen>
+	<MailBlue>true</MailBlue>
+	<MailPurple>true</MailPurple>
+
+	<TargetElites>true</TargetElites>
+
+	<AvoidMobs>
+	</AvoidMobs>
+
+	<Mailboxes>
+		<Mailbox Name="Booty Bay" X="-14418.51" Y="516.501" Z="4.998396" />
+	</Mailboxes>
+
+	<Vendors>
+		<!-- Explorers league digsite -->
+		<Vendor Name="Linzi Hewstrike" Entry="44083" Type="Repair" X="-13626.7" Y="-77.9288" Z="35.2404" />
+
+		<!-- Booty Bay Vendors -->
+		<Vendor Name="Jutak" Entry="2843" Type="Repair" X="-14467.77" Y="468.375" Z="15.02454" />
+		<Vendor Name="Nixxrax Fillamug" Entry="2832" Type="Food" X="-14451.7" Y="495.417" Z="15.105" />
+	</Vendors>
+
+	<Blackspots>
+		<Blackspot X="-13807.5" Y="370.505" Z="95.6695" Radius="1" /> <!-- Naga Icon in Nek'mani Wellspring -->
+		<Blackspot X="-13799.4" Y="375.703" Z="95.6695" Radius="1" /> <!-- Naga Icon in Nek'mani Wellspring -->
+	</Blackspots>
+
+	<Blacklist>
+		<Mob Name="Magister Aledis" Id="20159" Flags="Combat" />
+	</Blacklist>
+
+	<QuestOrder IgnoreCheckpoints="false" >
+		<!-- Check function status -->
+		<Code File="RunCode" Type="Definition">
+			<![CDATA[
+			private static bool? profileFunctionsEnabled => (bool?)AppDomain.CurrentDomain.GetData("QuestingProfiles_FunctionsEnabled");
+			private static bool IsStoreProfile(string path) => path.StartsWith("store://");
+			private static string Slashify(string path) => IsStoreProfile(path) ? path.Replace(@"\", "/") : path.Replace("/", @"\");
+
+			public __CompiledBatchClass__()
+			{
+				ActivateFunctions();
+			}
+
+			private static void ActivateFunctions()
+			{
+				if (profileFunctionsEnabled == null || profileFunctionsEnabled == false)
+				{
+					Bots.Professionbuddy.PBLog.Log(Colors.MediumPurple, "[Profile Message!]: ", Colors.Yellow, "Please stand by as the functions are being activated!");
+					LoadProfile(@"..\..\Functions\Activate Functions.xml");
+				}
+			}
+
+			private static void LoadProfile(string path)
+			{
+				var profile = GetNewPath(path);
+				if (!IsStoreProfile(profile) && !File.Exists(profile))
+				{
+					Bots.Professionbuddy.PBLog.Log(Colors.MediumPurple, "[Profile Message!]: ", Colors.Yellow, "Profile does not exist.\n" + profile);
+					return;
+				}
+
+				Bots.Professionbuddy.PBLog.Log(Colors.MediumPurple, "[Profile Message!]: ", Colors.Yellow, "Loading: " + profile);
+				ProfileManager.LoadNew(profile, false);
+			}
+
+			private static string GetNewPath(string path)
+			{
+				if (IsStoreProfile(path))
+					return Slashify(path);
+
+				var currentProfile = ProfileManager.XmlLocation;
+				if (IsStoreProfile(currentProfile))
+					return Slashify(currentProfile + "/../" + path);
+
+				var absolutePath = Path.Combine(Path.GetDirectoryName(currentProfile), path);
+				absolutePath = Path.GetFullPath(absolutePath);
+				var canonicalPath = new Uri(absolutePath).LocalPath;
+				return Slashify(canonicalPath);
+			}]]>
+		</Code>
+		<Code File="RunCode" Code="ActivateFunctions();" />
+		<!-- END Check function status -->
+
+		<If Condition="Me.IsHorde" >
+			<Code File="LoadProfile" ProfileName="..\..\Questing Autoloader.xml" />
+		</If>
+		<!-- RunCode Methods -->
+			<Code File="RunCode">
+			<![CDATA[
+				Bots.Professionbuddy.PBLog.Log(System.Windows.Media.Colors.MediumPurple, "> [Profile Initialization Status] ", System.Windows.Media.Colors.CornflowerBlue, "\n     Auto-Looting	:: Enabled\n     Looting	:: Enabled\n     Game Addons	:: Disabled");
+				Lua.DoString("SetCVar('AutoLootDefault', 1);");
+				Lua.DoString("SetCVar('autoDismountFlying', 1);");
+				CharacterSettings.Instance.LootMobs = true;
+				CharacterSettings.Instance.Save();
+				Logging.Write(System.Windows.Media.Colors.MediumPurple, "> [Ready to bot!]");
+			]]>
+			</Code>
+			<Code File="RunCode" Type="Definition">
+				<![CDATA[
+						bool DoQuest(params uint[] questIds)
+						{
+							foreach (var questId in questIds)
+							{
+								if (HasQuest(questId) && !IsQuestCompleted(questId)) return true;
+							}
+							return false;
+						}
+						bool NeedsQuest(params uint[] questIds)
+						{
+							foreach (var questId in questIds)
+							{
+								if (!HasQuest(questId) && !IsQuestCompleted(questId)) return true;
+							}
+							return false;
+						}
+						bool NeedsBreadcrumbQuest(params uint[] questIds)
+						{
+							foreach (var questId in questIds)
+							{
+								if (IsQuestCompleted(questId)) return false;
+							}
+							return true;
+						}
+						bool QuestDone(params uint[] questIds)
+						{
+							foreach (var questId in questIds)
+							{
+								if (HasQuest(questId) && IsQuestCompleted(questId)) return true;
+							}
+							return false;
+						}
+						bool QuestFlaggedCompleted(params uint[] questIds)
+						{
+							foreach (var questId in questIds)
+							{
+								return Lua.GetReturnVal<bool>($"return IsQuestFlaggedCompleted({questId});", 0);
+							}
+							return false;
+						}
+						async Task SkipCutscene(int preWait = 3000, int postWait = 3000)
+						{
+					// Add detection of cutscene here.
+							await Coroutine.Sleep(preWait);
+					// Test and improve the working method.
+							Lua.DoString("MovieFrame:StopMovie(); CinematicFrame_CancelCinematic(); StopCinematic();");
+							await Coroutine.Sleep(postWait);
+						}
+					]]>
+			</Code>
+		<!-- END RunCode Methods -->
+
+
+		<PickUp QuestName="To the Cape!" QuestId="26805" GiverName="Wulfred Harrys" GiverId="44018" X="-12828.11" Y="-442.2816" Z="12.96667" />
+		<If Condition="HasQuest(26805) &amp;&amp; Me.MinimapZoneText.Contains(&quot;Fort Livingston&quot;)" >
+			<Code File="InteractWith" MobId="43042" GossipOptions="2" WaitTime="2500" X="-12823.31" Y="-414.4375" Z="12.96758" />
+		</If>
+		<TurnIn QuestName="To the Cape!" QuestId="26805" TurnInName="Bronwyn Hewstrike" TurnInId="44082" X="-13632.36" Y="-72.11275" Z="35.23949" />
+
+		<PickUp QuestName="Good-Fer-Nothin' Slither-Dogs" QuestId="26822" GiverName="Goris" GiverId="44100" X="-13632.97" Y="-50.01823" Z="35.23898" />
+		<PickUp QuestName="Dask &quot;The Flask&quot; Gobfizzle" VariantQuestIds="26825, 26826" GiverName="Bronwyn Hewstrike" GiverId="44082" X="-13633.7" Y="-70.22907" Z="35.23901" />
+		<TurnIn QuestName="Dask &quot;The Flask&quot; Gobfizzle" VariantQuestIds="26825, 26826" TurnInName="Dask &quot;The Flask&quot; Gobfizzle" TurnInId="44099" X="-13621.19" Y="-72.77769" Z="35.23845" />
+		<PickUp QuestName="Too Big For His Britches" QuestId="26823" GiverName="Dask &quot;The Flask&quot; Gobfizzle" GiverId="44099" X="-13621.19" Y="-72.77769" Z="35.23845" />
+
+		<Code File="KillUntilComplete" MobId="44113" QuestId="26823" X="-13212.62" Y="-510.0067" Z="4.14012" />
+
+		<While Condition="DoQuest(26822)" >
+			<Code File="KillUntilComplete" MobId="1551" QuestId="26822" >
+				<HuntingGrounds>
+					<Hotspot X="-13292.13" Y="-359.0672" Z="12.53501" />
+					<Hotspot X="-13267.79" Y="-505.8658" Z="19.40409" />
+				</HuntingGrounds>
+			</Code>
+		</While>
+
+		<TurnIn QuestName="Good-Fer-Nothin' Slither-Dogs" QuestId="26822" TurnInName="Goris" TurnInId="44100" X="-13631.49" Y="-48.15049" Z="35.23891" />
+		<TurnIn QuestName="Too Big For His Britches" QuestId="26823" TurnInName="Dask &quot;The Flask&quot; Gobfizzle" TurnInId="44099" X="-13620.88" Y="-72.27871" Z="35.23886" />
+		<PickUp QuestName="Perfectly Pure" QuestId="26817" GiverName="Dask &quot;The Flask&quot; Gobfizzle" GiverId="44099" X="-13620.88" Y="-72.27871" Z="35.23886" />
+		<PickUp QuestName="Plush Pelts" QuestId="26818" GiverName="Linzi Hewstrike" GiverId="44083" X="-13626.58" Y="-75.85876" Z="35.2392" />
+		<PickUp QuestName="Akiris by the Bundle" QuestId="26819" GiverName="Linzi Hewstrike" GiverId="44083" X="-13626.58" Y="-75.85876" Z="35.2392" />
+		<PickUp QuestName="If They're Just Going to Leave Them Lying Around..." QuestId="26820" GiverName="Linzi Hewstrike" GiverId="44083" X="-13626.58" Y="-75.85876" Z="35.2392" />
+
+		<While Condition="DoQuest(26818)" >
+			<Code File="KillUntilComplete" MobId="1713" QuestId="26818" QuestObjectiveIndex="2" >
+				<HuntingGrounds>
+					<Hotspot X="-13306.96" Y="452.2567" Z="4.542526" />
+					<Hotspot X="-13284.5" Y="541.943" Z="2.411124" />
+					<Hotspot X="-13284.17" Y="498.2609" Z="3.948146" />
+					<Hotspot X="-13238.96" Y="449.9545" Z="5.618012" />
+					<Hotspot X="-13210.33" Y="479.5561" Z="5.011939" />
+					<Hotspot X="-13177.38" Y="455.4802" Z="8.759562" />
+				</HuntingGrounds>
+			</Code>
+			<Code File="KillUntilComplete" MobId="772" QuestId="26818" QuestObjectiveIndex="1" >
+				<HuntingGrounds>
+					<Hotspot X="-13132.56" Y="398.5937" Z="15.80574" />
+					<Hotspot X="-12957.4" Y="272.5747" Z="17.44655" />
+					<Hotspot X="-12849.59" Y="186.7239" Z="18.93121" />
+					<Hotspot X="-12797.68" Y="61.43914" Z="12.29469" />
+				</HuntingGrounds>
+			</Code>
+		</While>
+
+		<While Condition="DoQuest(26817)" >
+			<Code File="InteractWith" MobId="759" Range="5" InteractByLooting="true" NonCompeteDistance="0" QuestId="26817" X="-13806.17" Y="376.986" Z="93.99285" />
+		</While>
+
+		<While Condition="DoQuest(26820)" >
+			<Code File="InteractWith" MobId="204336" InteractByLooting="true" CollectionDistance="200" NumOfTimes="6" QuestId="26820" >
+				<HuntingGrounds>
+					<Hotspot X="-13820.35" Y="439.1103" Z="90.71483" />
+					<Hotspot X="-13823.35" Y="499.2951" Z="82.39664" />
+					<Hotspot X="-13752.52" Y="541.6765" Z="46.01245" />
+					<Hotspot X="-13839.41" Y="555.4119" Z="47.28064" />
+					<Hotspot X="-13727.59" Y="615.7792" Z="14.5411" />
+				</HuntingGrounds>
+			</Code>
+		</While>
+
+		<While Condition="DoQuest(26819)" >
+			<Code File="KillUntilComplete" MobId="1907" QuestId="26819" >
+				<HuntingGrounds>
+					<Hotspot X="-13820.35" Y="439.1103" Z="90.71483" />
+					<Hotspot X="-13823.35" Y="499.2951" Z="82.39664" />
+					<Hotspot X="-13752.52" Y="541.6765" Z="46.01245" />
+					<Hotspot X="-13839.41" Y="555.4119" Z="47.28064" />
+					<Hotspot X="-13727.59" Y="615.7792" Z="14.5411" />
+				</HuntingGrounds>
+			</Code>
+		</While>
+
+		<TurnIn QuestName="Perfectly Pure" QuestId="26817" TurnInName="Dask &quot;The Flask&quot; Gobfizzle" TurnInId="44099" X="-13621.33" Y="-71.14774" Z="35.23935" />
+		<PickUp QuestName="Zanzil's Secret" QuestId="26815" GiverName="Dask &quot;The Flask&quot; Gobfizzle" GiverId="44099" X="-13621.33" Y="-71.14774" Z="35.23935" />
+		<TurnIn QuestName="Plush Pelts" QuestId="26818" TurnInName="Linzi Hewstrike" TurnInId="44083" X="-13627.22" Y="-75.0037" Z="35.23935" />
+		<TurnIn QuestName="Akiris by the Bundle" QuestId="26819" TurnInName="Linzi Hewstrike" TurnInId="44083" X="-13627.22" Y="-75.0037" Z="35.23935" />
+		<TurnIn QuestName="If They're Just Going to Leave Them Lying Around..." QuestId="26820" TurnInName="Linzi Hewstrike" TurnInId="44083" X="-13627.22" Y="-75.0037" Z="35.23935" />
+		<RecheckCheckpoints />
+		<PickUp QuestName="Maywiki" QuestId="26808" GiverName="Linzi Hewstrike" GiverId="44083" X="-13627.22" Y="-75.0037" Z="35.23935" />
+		<TurnIn QuestName="Maywiki" QuestId="26808" TurnInName="Maywiki" TurnInId="44084" X="-13629.12" Y="-89.01821" Z="35.6207" />
+		<PickUp QuestName="Backdoor Dealings" QuestId="26809" GiverName="Maywiki" GiverId="44084" X="-13629.12" Y="-89.01821" Z="35.6207" />
+
+		<While Condition="DoQuest(26809)" >
+			<Code File="InteractWith" MobId="204361" GossipOptions="1" QuestId="26809" QuestObjectiveIndex="1" X="-13342.59" Y="-29.5491" Z="22.3786" />
+			<Code File="WaitTimer" WaitTime="85000" QuestId="26809" QuestObjectiveIndex="2" />
+		</While>
+
+		<While Condition="DoQuest(26815)" >
+			<Code File="KillUntilComplete" MobIds="43223, 1488" QuestId="26815" >
+				<HuntingGrounds>
+					<Hotspot X="-13339.2" Y="13.9063" Z="25.83374" />
+					<Hotspot X="-13288.39" Y="-12.20566" Z="25.56871" />
+				</HuntingGrounds>
+			</Code>
+		</While>
+
+		<TurnIn QuestName="Zanzil's Secret" QuestId="26815" TurnInName="Dask &quot;The Flask&quot; Gobfizzle" TurnInId="44099" X="-13621" Y="-71.39111" Z="35.23932" />
+		<PickUp QuestName="Results: Inconclusive" QuestId="26824" GiverName="Dask &quot;The Flask&quot; Gobfizzle" GiverId="44099" X="-13621" Y="-71.39111" Z="35.23932" />
+		<PickUp QuestName="Recipe for Disaster" QuestId="26816" GiverName="Dask &quot;The Flask&quot; Gobfizzle" GiverId="44099" X="-13621" Y="-71.39111" Z="35.23932" />
+		<TurnIn QuestName="Backdoor Dealings" QuestId="26809" TurnInName="Maywiki" TurnInId="44084" X="-13624.51" Y="-89.30922" Z="35.77915" />
+		<PickUp QuestName="Eliminate the Outcast" QuestId="26810" GiverName="Maywiki" GiverId="44084" X="-13624.51" Y="-89.30922" Z="35.77915" />
+		<TurnIn QuestName="Results: Inconclusive" QuestId="26824" TurnInName="Bronwyn Hewstrike" TurnInId="44082" X="-13631.59" Y="-72.19932" Z="35.23829" />
+		<RecheckCheckpoints />
+		<PickUp QuestName="Airwyn Bantamflax" QuestId="26821" GiverName="Bronwyn Hewstrike" GiverId="44082" X="-13631.59" Y="-72.19932" Z="35.23829" />
+
+		<While Condition="DoQuest(26810)" >
+			<MoveTo X="-13686.77" Y="-309.7516" Z="7.264627" />
+		</While>
+		<TurnIn QuestName="Eliminate the Outcast" QuestId="26810" />
+		<!--<PickUp QuestName="Through the Troll Hole" QuestId="26811" GiverName="Nobody" GiverId="0" />-->
+		<If Condition="HasQuest(26811)" >
+			<Code File="AbandonQuest" QuestId="26811" Type="All" />
+		</If>
+
+		<PickUp QuestName="Message in a Bottle" QuestId="26603" GiverName="Half-Buried Bottle" GiverId="204406" X="-13745.02" Y="-353.356" Z="1.15709" />
+
+		<Code File="KillUntilComplete" MobId="1490" QuestId="26816" X="-13610.42" Y="-284.8946" Z="10.21467" />
+
+		<!--<While Condition="DoQuest(26811)" >
+			<Code File="InteractWith" MobId="204372" NonCompeteDistance="0" QuestId="26811" X="-13676.86" Y="-306.3325" Z="8.174047" />
+		</While>
+		<If Condition="QuestDone(26811)" >
+			<Code File="RunCode" Code="QuestFrame.Instance.Close();" />
+			<Code File="WaitTimer" WaitTime="1000" />
+			<TurnIn QuestName="Through the Troll Hole" QuestId="26811" />
+		</If>-->
+		<!-- <PickUp QuestName="High Priestess Jeklik" QuestId="26812" GiverName="Nobody" GiverId="0" />
+		<If Condition="HasQuest(26812)" >
+			<Code File="RunCode" Code="QuestFrame.Instance.Close();" />
+			<Code File="WaitTimer" WaitTime="1000" />
+			<Code File="AbandonQuest" QuestId="26812" Type="All" /> Skipping these quests due to technicalities 
+		</If>-->
+
+		<TurnIn QuestName="Recipe for Disaster" QuestId="26816" TurnInName="Dask &quot;The Flask&quot; Gobfizzle" TurnInId="44099" X="-13621.36" Y="-73.54778" Z="35.23897" />
+		<PickUp QuestName="The Captain's Chest" QuestId="26599" GiverName="Captain Hecklebury Smotts" GiverId="2500" X="-14301.54" Y="515.6361" Z="8.698982" />
+		<TurnIn QuestName="Airwyn Bantamflax" QuestId="26821" TurnInName="Airwyn Bantamflax" TurnInId="44112" X="-14440.21" Y="431.7695" Z="15.57242" />
+		<PickUp QuestName="Stranglethorn Fever" QuestId="26597" GiverName="Fin Fizracket" GiverId="2486" X="-14434.28" Y="455.1649" Z="15.34561" />
+		<PickUp QuestName="Scaring Shaky" QuestId="26593" GiverName="&quot;Sea Wolf&quot; MacKinley" GiverId="2501" X="-14450.2" Y="448.6818" Z="15.63535" />
+
+		<Code File="SetHearthstone" MobId="6807" AreaId="8615" X="-14457.73" Y="495.3478" Z="15.12231" />
+
+		<Code File="KillUntilComplete" MobId="1492" QuestId="26599" >
+			<HuntingGrounds>
+				<Hotspot X="-14208.46" Y="-64.14197" Z="0.5593621" />
+				<Hotspot X="-14301.51" Y="36.59834" Z="0.9136508" />
+			</HuntingGrounds>
+		</Code>
+
+		<Code File="KillUntilComplete" MobId="1557" QuestId="26593" >
+			<HuntingGrounds>
+				<Hotspot X="-13886.74" Y="44.11662" Z="12.03411" />
+				<Hotspot X="-13962.73" Y="110.95" Z="13.34265" />
+				<Hotspot X="-14009.08" Y="185.5127" Z="13.55354" />
+			</HuntingGrounds>
+		</Code>
+
+		<While Condition="DoQuest(26597)" >
+			<Code File="KillUntilComplete" MobId="1557" TerminateWhen="HasItem(2799)" >
+				<HuntingGrounds>
+					<Hotspot X="-13886.74" Y="44.11662" Z="12.03411" />
+					<Hotspot X="-13962.73" Y="110.95" Z="13.34265" />
+					<Hotspot X="-14009.08" Y="185.5127" Z="13.55354" />
+				</HuntingGrounds>
+			</Code>
+
+			<If Condition="HasItem(2799)" >
+				<Code File="InteractWith" MobId="1449" X="-13738.46" Y="-29.74349" Z="44.55416" />
+				<Code File="Misc\RunLua" WaitTime="1000" Lua="QuestFrameCompleteButton:Click();" />
+				<Code File="Misc\RunLua" Lua="QuestFrameCompleteQuestButton:Click();" />
+			</If>
+
+			<Code File="KillUntilComplete" MobIds="1511, 1516, 1514" QuestId="26597" X="-13752.49" Y="-19.07974" Z="44.14424" TermianteAfterMaxRuntimeSecs="35000" />
+			<!-- Terminate is for in case somehow the event fails, or whater may be. -->
+		</While>
+
+
+		<TurnIn QuestName="Scaring Shaky" QuestId="26593" TurnInName="&quot;Shaky&quot; Phillipe" TurnInId="2502" X="-14298.5" Y="509.1534" Z="8.963343" />
+		<PickUp QuestName="Return to MacKinley" QuestId="26594" GiverName="&quot;Shaky&quot; Phillipe" GiverId="2502" X="-14298.5" Y="509.1534" Z="8.963343" />
+		<TurnIn QuestName="The Captain's Chest" QuestId="26599" TurnInName="Captain Hecklebury Smotts" TurnInId="2500" X="-14300.83" Y="514.0722" Z="8.699461" />
+		<PickUp QuestName="A Giant's Feast" QuestId="26600" GiverName="Captain Hecklebury Smotts" GiverId="2500" X="-14300.83" Y="514.0722" Z="8.699461" />
+
+		<Code File="InteractWith" MobId="2664" InteractByBuyingItemId="59036" NonCompeteDistance="0" QuestId="26600" QuestObjectiveIndex="1" X="-14335.02" Y="420.5874" Z="6.62639" />
+
+		<TurnIn QuestName="Stranglethorn Fever" QuestId="26597" TurnInName="Fin Fizracket" TurnInId="2486" X="-14432.55" Y="454.9335" Z="15.34522" />
+		<TurnIn QuestName="Return to MacKinley" QuestId="26594" TurnInName="&quot;Sea Wolf&quot; MacKinley" TurnInId="2501" X="-14450.19" Y="450.5197" Z="15.64971" />
+		<PickUp QuestName="Kill-Collect" QuestId="26595" GiverName="&quot;Sea Wolf&quot; MacKinley" GiverId="2501" X="-14450.19" Y="450.5197" Z="15.64971" />
+
+		<Code File="InteractWith" MobId="2491" InteractByBuyingItemId="59037" NonCompeteDistance="0" QuestId="26600" QuestObjectiveIndex="2" X="-14464.5" Y="491.1931" Z="15.12014" />
+
+		<TurnIn QuestName="A Giant's Feast" QuestId="26600" TurnInName="Captain Hecklebury Smotts" TurnInId="2500" X="-14303.02" Y="515.5546" Z="8.686487" />
+		<PickUp QuestName="A Dish Best Served Huge" QuestId="26602" GiverName="Captain Hecklebury Smotts" GiverId="2500" X="-14303.02" Y="515.5546" Z="8.686487" />
+
+		<TurnIn QuestName="Message in a Bottle" QuestId="26603" TurnInName="Princess Poobah" TurnInId="2634" X="-14599.23" Y="-235.6811" Z="24.76972" />
+		<PickUp QuestName="Protecting Her Royal Highness Poobah" QuestId="26604" GiverName="Princess Poobah" GiverId="2634" X="-14599.23" Y="-235.6811" Z="24.76972" />
+
+		<While Condition="DoQuest(26604)" >
+			<Code File="KillUntilComplete" MobId="2522" QuestId="26604" >
+				<HuntingGrounds>
+					<Hotspot X="-14706.77" Y="-178.92" Z="8.033024" />
+					<Hotspot X="-14632.32" Y="-186.511" Z="9.315476" />
+					<Hotspot X="-14560.17" Y="-187.2497" Z="12.1058" />
+					<Hotspot X="-14512.51" Y="-195.1104" Z="9.358522" />
+					<Hotspot X="-14528.15" Y="-154.746" Z="5.063646" />
+					<Hotspot X="-14717.59" Y="-155.1181" Z="7.144094" />
+					<Hotspot X="-14817.65" Y="-197.0106" Z="3.252118" />
+				</HuntingGrounds>
+			</Code>
+		</While>
+
+		<TurnIn QuestName="Protecting Her Royal Highness Poobah" QuestId="26604" TurnInName="Princess Poobah" TurnInId="2634" X="-14599.23" Y="-235.6811" Z="24.76972" />
+		<PickUp QuestName="Grubby Little Paws" QuestId="26605" GiverName="Princess Poobah" GiverId="2634" X="-14599.23" Y="-235.6811" Z="24.76972" />
+
+		<While Condition="DoQuest(26605)" >
+			<Code File="KillUntilComplete" MobIds="2521, 43417" QuestId="26605" >
+				<HuntingGrounds>
+					<Hotspot X="-14636.69" Y="-348.9366" Z="7.763863" />
+					<Hotspot X="-14532.73" Y="-351.0284" Z="6.517631" />
+					<Hotspot X="-14524.78" Y="-437.3802" Z="3.338977" />
+				</HuntingGrounds>
+			</Code>
+		</While>
+
+		<TurnIn QuestName="Grubby Little Paws" QuestId="26605" TurnInName="Princess Poobah" TurnInId="2634" X="-14599.23" Y="-235.6811" Z="24.76972" />
+		<PickUp QuestName="Mukla's Demise" QuestId="26606" GiverName="Princess Poobah" GiverId="2634" X="-14599.23" Y="-235.6811" Z="24.76972" />
+
+		<Code File="KillUntilComplete" MobId="1559" QuestId="26606" X="-14704.46" Y="-365.5078" Z="9.188932" />
+
+		<TurnIn QuestName="Mukla's Demise" QuestId="26606" TurnInName="Princess Poobah" TurnInId="2634" X="-14599.23" Y="-235.6811" Z="24.76972" />
+
+		<While Condition="DoQuest(26602)" >
+			<Code File="InteractWith" MobId="2289" GossipOptions="1" QuestId="26602" X="-14650.79" Y="148.4651" Z="2.685986" />
+			<Code File="WaitTimer" WaitTime="15000" TerminateWhen="Me.Combat" /> <!-- let Negolash come to us so the bot won't get stuck in the water -->
+			<Code File="KillUntilComplete" MobId="1494" QuestId="26602" X="-14601.24" Y="81.81326" Z="-10.79917" />
+		</While>
+
+		<While Condition="DoQuest(26595)" >
+			<Code File="KillUntilComplete" MobId="43376" QuestId="26595" QuestObjectiveIndex="2" X="-13978.26" Y="-126.2447" Z="2.22752" />
+			<Code File="InteractWith" MobId="43377" GossipOptions="1" NonCompeteDistance="0" CollectionDistance="200" PreInteractMountStrategy="Dismount" MobState="Alive" QuestId="26595" QuestObjectiveIndex="3" >
+				<HuntingGrounds>
+					<Hotspot X="-13804.9" Y="-178.0533" Z="15.47627" />
+					<Hotspot X="-13847.41" Y="-33.94525" Z="50.58499" />
+				</HuntingGrounds>
+			</Code>
+			<Code File="KillUntilComplete" MobId="2535" QuestId="26595" QuestObjectiveIndex="1" X="-13812.55" Y="-242.5309" Z="0.7451075" />
+			<Code File="UseHearthstone" WaitForCD="false" />
+		</While>
+
+		<TurnIn QuestName="Kill-Collect" QuestId="26595" TurnInName="&quot;Sea Wolf&quot; MacKinley" TurnInId="2501" X="-14449.51" Y="451.1974" Z="15.6532" />
+		<TurnIn QuestName="A Dish Best Served Huge" QuestId="26602" TurnInName="Captain Hecklebury Smotts" TurnInId="2500" X="-14302.82" Y="513.4743" Z="8.689931" />
+		<RecheckCheckpoints />
+
+		<PickUp QuestName="Mok'rash the Cleaver" QuestId="26601" GiverName="Captain Hecklebury Smotts" GiverId="2500" X="-14302.27" Y="514.4473" Z="8.69274" />
+		<If Condition="DoQuest(26601)" >
+			<MoveTo X="-14284.84" Y="558.5567" Z="8.687806" />
+			<Code File="MyCTM" X="-14243.1" Y="708.755" Z="0.3748586" />
+			<Code File="KillUntilComplete" MobId="1493" QuestId="26601" X="-14236.44" Y="736.5925" Z="1.492138" />
+			<MoveTo X="-14252.43" Y="715.5132" Z="-0.05604324" />
+			<Code File="MyCTM" X="-14432.88" Y="458.747" Z="-0.06474232" />
+			<Code File="MyCTM" X="-14440.49" Y="453.4809" Z="3.754416" />
+		</If>
+		<TurnIn QuestName="Mok'rash the Cleaver" QuestId="26601" TurnInName="Captain Hecklebury Smotts" TurnInId="2500" X="-14302.27" Y="514.4473" Z="8.69274" />
+
+		<PickUp QuestName="The Bloodsail Buccaneers" QuestId="26609" GiverName="First Mate Crazz" GiverId="2490" X="-14408.16" Y="426.7243" Z="8.751307" />
+		<If Condition="QuestDone(26609)" >
+			<Code File="InteractWith" MobId="43454" InteractByLooting="true" X="-14127.82" Y="472.6178" Z="1.567325" NumOfTimes="50" TerminateWhen="HasQuest(26617)" />
+		</If>
+		<TurnIn QuestName="The Bloodsail Buccaneers" QuestId="26609" TurnInName="Bloodsail Raider" TurnInId="2083" TurnInType="Object" X="-14125.29" Y="477.6337" Z="1.240816" />
+
+		<PickUp QuestName="Bloodsail Treachery" QuestId="26610" GiverName="Bloodsail Raider" GiverId="2083" GiverType="Object" X="-14125.29" Y="477.6337" Z="1.240816" />
+		<TurnIn QuestName="Bloodsail Treachery" QuestId="26610" TurnInName="First Mate Crazz" TurnInId="2490" X="-14408.64" Y="426.4579" Z="8.75612" />
+		<PickUp QuestName="The Baron Must Be Told" QuestId="26611" GiverName="First Mate Crazz" GiverId="2490" X="-14408.64" Y="426.4579" Z="8.75612" />
+		<TurnIn QuestName="An Old Sea Dog" QuestId="26617" TurnInName="Fleet Master Seahorn" TurnInId="2487" X="-14442.27" Y="487.7196" Z="28.74108" />
+		<TurnIn QuestName="The Baron Must Be Told" QuestId="26611" TurnInName="Baron Revilgaz" TurnInId="2496" X="-14441.52" Y="485.3179" Z="28.75289" />
+		<RecheckCheckpoints />
+		<PickUp QuestName="Details of the Attack" QuestId="26612" GiverName="Baron Revilgaz" GiverId="2496" X="-14441.52" Y="485.3179" Z="28.75289" />
+		<PickUp QuestName="Up to Snuff" QuestId="26613" GiverName="Deeg" GiverId="2488" X="-14459.51" Y="501.5707" Z="26.27258" />
+		<PickUp QuestName="Keep An Eye Out" QuestId="26614" GiverName="Dizzy One-Eye" GiverId="2493" X="-14394.8" Y="396.2044" Z="22.67813" />
+
+		<While Condition="DoQuest(26612, 26613, 26614)" >
+			<Code File="InteractWith" MobId="2087" InteractByLooting="true" QuestId="26612" QuestObjectiveIndex="4" >
+				<HuntingGrounds>
+					<Hotspot X="-14612.05" Y="334.3777" Z="2.467227" />
+					<Hotspot X="-14693.19" Y="479.1406" Z="3.097193" />
+				</HuntingGrounds>
+			</Code>
+			<Code File="InteractWith" MobId="2086" InteractByLooting="true" QuestId="26612" QuestObjectiveIndex="3" >
+				<HuntingGrounds>
+					<Hotspot X="-14680.51" Y="498.4228" Z="1.738644" />
+					<Hotspot X="-14699.16" Y="449.5959" Z="0.4098025" />
+					<Hotspot X="-14612.2" Y="324.604" Z="3.332967" />
+				</HuntingGrounds>
+			</Code>
+
+			<Code File="KillUntilComplete" MobIds="1565, 1653" TerminateWhen="!DoQuest(26612, 26613, 26614) &amp;&amp; (Me.Level == 33 ? Me.Experience &gt;= 37750 : true)" >
+				<HuntingGrounds>
+					<Hotspot X="-14674.83" Y="421.8425" Z="3.097597" />
+					<Hotspot X="-14707.87" Y="525.6118" Z="1.907788" />
+					<Hotspot X="-14620.22" Y="247.9373" Z="0.6841445" />
+					<Hotspot X="-14545.05" Y="173.0273" Z="2.43651" />
+				</HuntingGrounds>
+			</Code>
+		</While>
+
+		<Code File="KillUntilComplete" MobIds="1565, 1653" TerminateWhen="(Me.Level == 33 ? Me.Experience &gt;= 37750 : true)" >
+			<HuntingGrounds>
+				<Hotspot X="-14674.83" Y="421.8425" Z="3.097597" />
+				<Hotspot X="-14707.87" Y="525.6118" Z="1.907788" />
+				<Hotspot X="-14620.22" Y="247.9373" Z="0.6841445" />
+				<Hotspot X="-14545.05" Y="173.0273" Z="2.43651" />
+			</HuntingGrounds>
+		</Code>
+
+		<TurnIn QuestName="Keep An Eye Out" QuestId="26614" TurnInName="Dizzy One-Eye" TurnInId="2493" X="-14394.54" Y="395.7499" Z="22.69152" />
+		<TurnIn QuestName="Up to Snuff" QuestId="26613" TurnInName="Deeg" TurnInId="2488" X="-14458.65" Y="501.0263" Z="26.27239" />
+		<TurnIn QuestName="Details of the Attack" QuestId="26612" TurnInName="Baron Revilgaz" TurnInId="2496" X="-14440.21" Y="485.5562" Z="28.74498" />
+
+		<Checkpoint Level="35" />
+		<If Condition="Me.Level &lt;= 36" >
+			<Code File="RunCode" Code="foreach (PlayerQuest quest in Me.QuestLog.GetAllQuests()) QuestLog.Instance.AbandonQuestById(quest.Id)" />
+		</If>
+		<Code File="LoadProfile" ProfileName="Western Plaguelands.xml" />
+
+	</QuestOrder>
+</HBProfile>

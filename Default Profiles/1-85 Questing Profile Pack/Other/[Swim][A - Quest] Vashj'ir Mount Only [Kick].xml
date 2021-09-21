@@ -1,0 +1,452 @@
+<HBProfile>
+	<Name>[Swim][A - Quest] Vashj'ir Mount Only [Kick]</Name>
+	<MinLevel>80</MinLevel>
+	<MaxLevel>86</MaxLevel>
+	
+	<MinDurability>0.1</MinDurability>
+	<MinFreeBagSlots>1</MinFreeBagSlots>
+
+	<SellGrey>True</SellGrey>
+	<SellWhite>True</SellWhite>
+	<SellGreen>True</SellGreen>
+	<SellBlue>True</SellBlue>
+	
+	<MailWhite>True</MailWhite>
+	<MailGreen>True</MailGreen>
+	<MailBlue>True</MailBlue>
+	<MailPurple>True</MailPurple>
+
+	<Blackspots>
+		<Blackspot X="-4364.624" Y="3753.08" Z="-75.95557" Radius="5.65239" />
+		<Blackspot X="-4363.466" Y="3768.926" Z="-54.26155" Radius="26.72299" Height="50" />
+		<Blackspot X="-4455.472" Y="3677.403" Z="-112.6802" Radius="10.936418" Height="30" />
+		<Blackspot X="-4559.021" Y="3658.106" Z="-111.6706" Radius="9.216867" />
+	</Blackspots>
+	
+	<AvoidMobs>
+	</AvoidMobs>
+	
+	<Vendors>
+		<Vendor Name="Erunak Stonespeaker" Entry="36915" Type="Food" X="-4455.174" Y="3803.011" Z="-81.99465" />
+		<Vendor Name="Erunak Stonespeaker" Entry="36915" Type="Sell" X="-4455.174" Y="3803.011" Z="-81.99465" />
+		<Vendor Name="Rusty Anvil" Entry="41461" Type="Repair" X="-4462.955" Y="3809.103" Z="-83.56189" />
+	</Vendors>
+	
+	<Mailboxes>
+	</Mailboxes>
+	
+	
+	<QuestOrder IgnoreCheckpoints="True" >
+
+	<CustomBehavior File="UserSettings" LootMobs="True" UseMount="False" TrainNewSkills="False" LearnFlightPaths="False" UseFlightPaths="False" PullDistance="5" />
+		<If Condition="(!IsQuestCompleted(27724))" >
+	<CustomBehavior File="UserDialog" AllowBotStop="True" SoundCue="Exclamation" ExpiryTime="10" ExpiryAction="InputEnabled_Continue" SoundCueInterval="2" Text="This is a Vashj'ir Mount Run Profile ONLY!\n\nDo NOT AFK this profile! - This profile is NOT SUPPORTED.  If you do not have code to give, please do not QQ about it" />
+		</If>
+
+			<!-- Vashj'ir Quests -->
+		<CustomBehavior File="Message" Text="Compiling GoTo Vashj'ir Quests" LogColor="Green" />
+
+			<If Condition="((!HasQuest(27724)) &amp;&amp; (!IsQuestCompleted(27724)) &amp;&amp; (Me.MapId == 0))" >
+				<CustomBehavior File="FlyTo" DestName="Pickup Quest" X="-8345.274" Y="638.8595" Z="95.40167" />
+				<CustomBehavior File="ForcedDismount" />
+		<PickUp QuestName="Hero's Call: Vashj'ir!" QuestId="27724" GiverName="Hero's Call Board" GiverId="206294" GiverType="GameObject" X="-8345.274" Y="638.8595" Z="95.40167" />
+			</If>
+			<If Condition="((HasQuest(27724)) &amp;&amp; (IsQuestCompleted(27724))) &amp;&amp; (Me.MapId == 0)" >
+				<CustomBehavior File="FlyTo" DestName="Turnin Quest" X="-8274.703" Y="1243.733" Z="5.230506" />
+		<TurnIn QuestName="Hero's Call: Vashj'ir!" QuestId="27724" TurnInName="Recruiter Burns" TurnInId="36799" />
+			</If>
+			<If Condition="((!HasQuest(14482)) &amp;&amp; (!IsQuestCompleted(14482))) &amp;&amp; (Me.MapId == 0)" >
+				<CustomBehavior File="FlyTo" DestName="Pickup Quest" X="-8275.248" Y="1245.895" Z="5.230105" />
+		<PickUp QuestName="Call of Duty" QuestId="14482" GiverName="Recruiter Burns" GiverId="36799" />
+			</If>
+			<If Condition="((HasQuest(14482)) &amp;&amp; (!IsQuestCompleted(14482))) &amp;&amp; (Me.ZoneId == 1519)" >
+				<CustomBehavior File="FlyTo" DestName="Boat" X="-8291.557" Y="1405.631" Z="4.716912" />
+				<CustomBehavior File="ForcedDismount" />
+				
+				<CustomBehavior File="UserDialog" QuestId="14482" AllowBotStop="True" SoundCue="Exclamation" SoundCueInterval="1" Text="Get on the boat and ride it to Vashj'ir\n\nThis window will auto close when you wake up!" />
+			</If>
+			<!--
+			
+			<Hotspot X="-8291.557" Y="1405.631" Z="4.716912" /> wait for boat here
+			<Hotspot X="-8291.921" Y="1422.919" Z="5.214637" /> stand on boat here
+			197195	Ship to Vashj'ir	<-8290.86, 1423.76, -0.01856764>
+			
+			<-4632.93, 3863.71, 7.597334> // we stop here and then waittime for a bit (75000) for scene
+			
+			
+			-->
+			<If Condition="((HasQuest(14482)) &amp;&amp; (IsQuestCompleted(14482)))" >
+				<CustomBehavior File="WaitTimer" WaitTime="7000" GoalText="Waiting to wakeup {TimeRemaining}" />
+		<TurnIn QuestName="Call of Duty" QuestId="14482" TurnInName="Erunak Stonespeaker" TurnInId="36915" X="-4455.174" Y="3803.011" Z="-81.99501" />
+			</If>
+			
+			<!-- Vashj'ir Quests -->
+		<CustomBehavior File="Message" Text="Compiling Vashj'ir Quests" LogColor="Green" />
+
+		<PickUp QuestName="Sea Legs" QuestId="24432" GiverName="Erunak Stonespeaker" GiverId="36915" />
+			<If Condition="((HasQuest(24432)) &amp;&amp; (!IsQuestCompleted(24432)))" >
+				<If Condition="(Me.IsIndoors)"> <!-- Get out of cabin (Me.Y &lt; 3810) -->
+					<CustomBehavior File="MyCTM" X="-4455.772" Y="3806.388" Z="-82.5752" />
+					<CustomBehavior File="MyCTM" X="-4446.748" Y="3809.262" Z="-86.20185" />
+					<CustomBehavior File="MyCTM" X="-4461.192" Y="3800.638" Z="-88.33996" />
+					<CustomBehavior File="MyCTM" X="-4457.473" Y="3774.673" Z="-105.1683" />
+					<CustomBehavior File="MyCTM" X="-4516.011" Y="3802.54" Z="-97.61694" />
+				</If>
+				<!--
+				<CustomBehavior File="CollectThings" QuestId="24432" ObjectId="205989" CollectItemCount="3" CollectItemId="54828" HuntingGroundRadius="200" X="-4491.999" Y="3814.793" Z="-104.6294" />
+				-->
+			 <While Condition="((HasQuest(24432)) &amp;&amp; (!IsObjectiveComplete(1, 24432)))">
+				<CustomBehavior File="InteractWith" QuestId="24432" MobId="205989" ObjectType="Gameobject" Range="4" NumOfTimes="1" Nav="CTM" CollectionDistance="1000" X="-4516.011" Y="3802.54" Z="-97.61694" />
+				<CustomBehavior File="MyCTM" X="-4516.011" Y="3802.54" Z="-97.61694" />
+			 </While>
+				<CustomBehavior File="CollectThings" QuestId="24432" ObjectId="202560" CollectItemCount="1" CollectItemId="52504" HuntingGroundRadius="200" X="-4491.999" Y="3814.793" Z="-104.6294" />
+				<CustomBehavior File="MyCTM" X="-4516.011" Y="3802.54" Z="-97.61694" />
+			</If>
+			<If Condition="((HasQuest(24432)) &amp;&amp; (IsQuestCompleted(24432))) &amp;&amp; (!Me.IsIndoors)" >
+				<CustomBehavior File="MyCTM" X="-4516.011" Y="3802.54" Z="-97.61694" />
+				<CustomBehavior File="MyCTM" X="-4457.473" Y="3774.673" Z="-105.1683" />
+				<CustomBehavior File="MyCTM" X="-4461.192" Y="3800.638" Z="-88.33996" />
+				<CustomBehavior File="MyCTM" X="-4455.249" Y="3803.735" Z="-86.29517" />
+				<CustomBehavior File="MyCTM" X="-4447.991" Y="3809.859" Z="-88.42919" />
+				<CustomBehavior File="MyCTM" X="-4453.412" Y="3819.426" Z="-86.44718" />
+				<CustomBehavior File="MyCTM" X="-4448.414" Y="3822.403" Z="-84.54517" />
+				<CustomBehavior File="MyCTM" X="-4444.844" Y="3815.697" Z="-82.90934" />
+				<CustomBehavior File="MyCTM" X="-4456.275" Y="3810.09" Z="-82.90536" />
+				<CustomBehavior File="MyCTM" X="-4455.585" Y="3804.906" Z="-82.32745" />
+			</If>
+		<TurnIn QuestName="Sea Legs" QuestId="24432" TurnInName="Erunak Stonespeaker" TurnInId="36915" />
+		<PickUp QuestName="Pay It Forward" QuestId="25281" GiverName="Erunak Stonespeaker" GiverId="36915" />
+			<If Condition="((HasQuest(25281)) &amp;&amp; (!IsQuestCompleted(25281)))" >
+				<If Condition="(Me.IsIndoors)"> <!-- Get out of cabin (Me.Y &lt; 3810) -->
+					<CustomBehavior File="MyCTM" X="-4455.772" Y="3806.388" Z="-82.5752" />
+					<CustomBehavior File="MyCTM" X="-4446.748" Y="3809.262" Z="-86.20185" />
+					<CustomBehavior File="MyCTM" X="-4461.192" Y="3800.638" Z="-88.33996" />
+					<CustomBehavior File="MyCTM" X="-4457.473" Y="3774.673" Z="-105.1683" />
+					<CustomBehavior File="MyCTM" X="-4516.011" Y="3802.54" Z="-97.61694" />
+				</If>
+				<CustomBehavior File="UseItemOn" QuestId="25281" MobId="39663" ItemId="52710" NumOfTimes="100" MobState="Alive" WaitTime="2000" Range="5" Nav="CTM" CollectionDistance="1000" X="-4455.228" Y="3849.246" Z="-76.71584" />
+			</If>
+			<If Condition="((HasQuest(25281)) &amp;&amp; (IsQuestCompleted(25281))) &amp;&amp; (!Me.IsIndoors)" >
+				<CustomBehavior File="MyCTM" X="-4516.011" Y="3802.54" Z="-97.61694" />
+				<CustomBehavior File="MyCTM" X="-4457.473" Y="3774.673" Z="-105.1683" />
+				<CustomBehavior File="MyCTM" X="-4461.192" Y="3800.638" Z="-88.33996" />
+				<CustomBehavior File="MyCTM" X="-4455.249" Y="3803.735" Z="-86.29517" />
+				<CustomBehavior File="MyCTM" X="-4447.991" Y="3809.859" Z="-88.42919" />
+				<CustomBehavior File="MyCTM" X="-4453.412" Y="3819.426" Z="-86.44718" />
+				<CustomBehavior File="MyCTM" X="-4448.414" Y="3822.403" Z="-84.54517" />
+				<CustomBehavior File="MyCTM" X="-4444.844" Y="3815.697" Z="-82.90934" />
+				<CustomBehavior File="MyCTM" X="-4456.275" Y="3810.09" Z="-82.90536" />
+				<CustomBehavior File="MyCTM" X="-4455.585" Y="3804.906" Z="-82.32745" />
+			</If>
+		<TurnIn QuestName="Pay It Forward" QuestId="25281" TurnInName="Erunak Stonespeaker" TurnInId="36915" />
+		<PickUp QuestName="Rest For the Weary" QuestId="25405" GiverName="Erunak Stonespeaker" GiverId="36915" />
+		<TurnIn QuestName="Rest For the Weary" QuestId="25405" TurnInName="Captain Taylor" TurnInId="39887" X="-4440.316" Y="3817.341" Z="-82.81866" />
+		<PickUp QuestName="Buy Us Some Time" QuestId="25357" GiverName="Captain Taylor" GiverId="39887" />
+		<PickUp QuestName="Traveling on Our Stomachs" QuestId="25546" GiverName="Captain Taylor" GiverId="39887" />
+			<If Condition="((HasQuest(25546)) &amp;&amp; (!IsQuestCompleted(25546)))" >
+				<If Condition="(Me.IsIndoors)"> <!-- Get out of cabin (Me.Y &lt; 3810) -->
+					<CustomBehavior File="MyCTM" X="-4442.016" Y="3817.038" Z="-82.90441" />
+					<CustomBehavior File="MyCTM" X="-4446.748" Y="3809.262" Z="-86.20185" />
+					<CustomBehavior File="MyCTM" X="-4461.192" Y="3800.638" Z="-88.33996" />
+					<CustomBehavior File="MyCTM" X="-4457.473" Y="3774.673" Z="-105.1683" />
+					<CustomBehavior File="MyCTM" X="-4516.011" Y="3802.54" Z="-97.61694" />
+				</If>
+				<CustomBehavior File="CollectThings" QuestId="25546" MobId="40685" CollectItemCount="8" CollectItemId="54845" HuntingGroundRadius="200" > <!-- Crab Meat -->
+					<Hotspot X="-4512.246" Y="3859.608" Z="-97.11565" />
+					<Hotspot X="-4560.755" Y="3828.823" Z="-101.173" />
+					<Hotspot X="-4526.46" Y="3722.807" Z="-113.8207" />
+				</CustomBehavior>
+				<CustomBehavior File="AscendInWater" />
+				<!-- add jump / ascend for 1 sec to get off of the sea floor.  add stop jump / ascend -->
+			</If>
+			<If Condition="((HasQuest(25357)) &amp;&amp; (!IsQuestCompleted(25357)))" >
+				<CustomBehavior File="CollectThings" QuestId="25357" MobId="39313" CollectUntil="QuestComplete" HuntingGroundRadius="200" > <!-- Raiders -->
+					<Hotspot X="-4519.831" Y="3762.554" Z="-92.45083" />
+					<Hotspot X="-4510.01" Y="3831.784" Z="-80.88984" />
+					<Hotspot X="-4491.216" Y="3867.37" Z="-83.1701" />
+				</CustomBehavior>
+			</If>
+			<If Condition="((HasQuest(25357)) &amp;&amp; (IsQuestCompleted(25357))) &amp;&amp; (!Me.IsIndoors)" >
+				<CustomBehavior File="MyCTM" X="-4516.011" Y="3802.54" Z="-97.61694" />
+				<CustomBehavior File="MyCTM" X="-4457.473" Y="3774.673" Z="-105.1683" />
+				<CustomBehavior File="MyCTM" X="-4461.192" Y="3800.638" Z="-88.33996" />
+				<CustomBehavior File="MyCTM" X="-4455.249" Y="3803.735" Z="-86.29517" />
+				<CustomBehavior File="MyCTM" X="-4447.991" Y="3809.859" Z="-88.42919" />
+				<CustomBehavior File="MyCTM" X="-4453.412" Y="3819.426" Z="-86.44718" />
+				<CustomBehavior File="MyCTM" X="-4448.414" Y="3822.403" Z="-84.54517" />
+				<CustomBehavior File="MyCTM" X="-4444.844" Y="3815.697" Z="-82.90934" />
+			</If>
+		<TurnIn QuestName="Buy Us Some Time" QuestId="25357" TurnInName="Captain Taylor" TurnInId="39887" />
+		<TurnIn QuestName="Traveling on Our Stomachs" QuestId="25546" TurnInName="Captain Taylor" TurnInId="39887" />
+		<PickUp QuestName="Stormwind Elite Aquatic and Land Forces" QuestId="25564" GiverName="Captain Taylor" GiverId="39887" />
+		<PickUp QuestName="To Arms!" QuestId="25545" GiverName="Captain Taylor" GiverId="39887" />
+			<While Condition="((HasQuest(25564)) &amp;&amp; (!IsQuestCompleted(25564)))" >
+				<If Condition="(Me.IsIndoors)"> <!-- Get out of cabin (Me.Y &lt; 3810) -->
+					<CustomBehavior File="MyCTM" X="-4442.016" Y="3817.038" Z="-82.90441" />
+					<CustomBehavior File="MyCTM" X="-4446.748" Y="3809.262" Z="-86.20185" />
+					<CustomBehavior File="MyCTM" X="-4461.192" Y="3800.638" Z="-88.33996" />
+					<CustomBehavior File="MyCTM" X="-4457.473" Y="3774.673" Z="-105.1683" />
+				</If>
+				<!--
+				<CustomBehavior File="CollectThings" QuestId="25564" ObjectId="203061" CollectUntil="QuestComplete" NonCompeteDistance="1" HuntingGroundRadius="5" > // SEAL Equipment //
+					<Hotspot X="-4518.161" Y="3678.568" Z="-114.3587" />
+					<Hotspot X="-4537.996" Y="3658.505" Z="-122.0339" />
+					<Hotspot X="-4549.774" Y="3672.645" Z="-118.4126" />
+					<Hotspot X="-4572.766" Y="3686.55" Z="-118.288" />
+					<Hotspot X="-4586.496" Y="3673.964" Z="-115.9627" />
+					<Hotspot X="-4623.357" Y="3679.128" Z="-119.1274" />
+					<Hotspot X="-4637.016" Y="3655.744" Z="-119.1274" />
+					<Hotspot X="-4573.6" Y="3623.711" Z="-103.8185" />
+					<Hotspot X="-4507.995" Y="3642.804" Z="-103.9922" />
+					<Hotspot X="-4470.147" Y="3673.164" Z="-120.558" />
+					<Hotspot X="-4496.993" Y="3715.714" Z="-117.2454" />
+					<Hotspot X="-4431.273" Y="3720.227" Z="-93.50142" />
+					<Hotspot X="-4436.703" Y="3679.747" Z="-114.2395" />
+					<Hotspot X="-4420.799" Y="3679.677" Z="-100.639" />
+					<Hotspot X="-4406.273" Y="3686.518" Z="-107.2568" />
+					<Hotspot X="-4410.508" Y="3685.18" Z="-55.56793" />
+					<Hotspot X="-4518.46" Y="3671.557" Z="-110.2237" />
+				</CustomBehavior>
+				-->
+					<CustomBehavior File="MyCTM" QuestId="25564" X="-4518.161" Y="3678.568" Z="-114.3587" />
+					<CustomBehavior File="InteractWith" QuestId="25564" MobId="203061" ObjectType="Gameobject" Range="4" CollectionDistance="5" Nav="CTM" WaitForNpcs="False" />
+					<CustomBehavior File="MyCTM" QuestId="25564" X="-4539.708" Y="3681.169" Z="-110.765" />
+					<CustomBehavior File="InteractWith" QuestId="25564" MobId="203061" ObjectType="Gameobject" Range="4" CollectionDistance="5" Nav="CTM" WaitForNpcs="False" />
+					<CustomBehavior File="MyCTM" QuestId="25564" X="-4549.774" Y="3672.645" Z="-118.4126" />
+					<CustomBehavior File="InteractWith" QuestId="25564" MobId="203061" ObjectType="Gameobject" Range="4" CollectionDistance="5" Nav="CTM" WaitForNpcs="False" />
+					<CustomBehavior File="MyCTM" QuestId="25564" X="-4551.221" Y="3672.838" Z="-117.5455" />
+					<CustomBehavior File="InteractWith" QuestId="25564" MobId="203061" ObjectType="Gameobject" Range="4" CollectionDistance="5" Nav="CTM" WaitForNpcs="False" />
+					<CustomBehavior File="MyCTM" QuestId="25564" X="-4572.766" Y="3686.55" Z="-118.288" />
+					<CustomBehavior File="InteractWith" QuestId="25564" MobId="203061" ObjectType="Gameobject" Range="4" CollectionDistance="5" Nav="CTM" WaitForNpcs="False" />
+					<CustomBehavior File="MyCTM" QuestId="25564" X="-4586.496" Y="3673.964" Z="-115.9627" />
+					<CustomBehavior File="InteractWith" QuestId="25564" MobId="203061" ObjectType="Gameobject" Range="4" CollectionDistance="5" Nav="CTM" WaitForNpcs="False" />
+					<CustomBehavior File="MyCTM" QuestId="25564" X="-4623.357" Y="3679.128" Z="-119.1274" />
+					<CustomBehavior File="InteractWith" QuestId="25564" MobId="203061" ObjectType="Gameobject" Range="4" CollectionDistance="5" Nav="CTM" WaitForNpcs="False" />
+					<CustomBehavior File="MyCTM" QuestId="25564" X="-4637.016" Y="3655.744" Z="-119.1274" />
+					<CustomBehavior File="InteractWith" QuestId="25564" MobId="203061" ObjectType="Gameobject" Range="4" CollectionDistance="5" Nav="CTM" WaitForNpcs="False" />
+					<CustomBehavior File="MyCTM" QuestId="25564" X="-4573.6" Y="3623.711" Z="-103.8185" />
+					<CustomBehavior File="InteractWith" QuestId="25564" MobId="203061" ObjectType="Gameobject" Range="4" CollectionDistance="5" Nav="CTM" WaitForNpcs="False" />
+					<CustomBehavior File="MyCTM" QuestId="25564" X="-4507.995" Y="3642.804" Z="-103.9922" />
+					<CustomBehavior File="InteractWith" QuestId="25564" MobId="203061" ObjectType="Gameobject" Range="4" CollectionDistance="5" Nav="CTM" WaitForNpcs="False" />
+					<CustomBehavior File="MyCTM" QuestId="25564" X="-4470.147" Y="3673.164" Z="-120.558" />
+					<CustomBehavior File="InteractWith" QuestId="25564" MobId="203061" ObjectType="Gameobject" Range="4" CollectionDistance="5" Nav="CTM" WaitForNpcs="False" />
+					<CustomBehavior File="MyCTM" QuestId="25564" X="-4496.993" Y="3715.714" Z="-117.2454" />
+					<CustomBehavior File="InteractWith" QuestId="25564" MobId="203061" ObjectType="Gameobject" Range="4" CollectionDistance="5" Nav="CTM" WaitForNpcs="False" />
+					<CustomBehavior File="MyCTM" QuestId="25564" X="-4431.273" Y="3720.227" Z="-93.50142" />
+					<CustomBehavior File="InteractWith" QuestId="25564" MobId="203061" ObjectType="Gameobject" Range="4" CollectionDistance="5" Nav="CTM" WaitForNpcs="False" />
+					<CustomBehavior File="MyCTM" QuestId="25564" X="-4436.703" Y="3679.747" Z="-114.2395" />
+					<CustomBehavior File="InteractWith" QuestId="25564" MobId="203061" ObjectType="Gameobject" Range="4" CollectionDistance="5" Nav="CTM" WaitForNpcs="False" />
+					<CustomBehavior File="MyCTM" QuestId="25564" X="-4420.799" Y="3679.677" Z="-100.639" />
+					<CustomBehavior File="InteractWith" QuestId="25564" MobId="203061" ObjectType="Gameobject" Range="4" CollectionDistance="5" Nav="CTM" WaitForNpcs="False" />
+					<CustomBehavior File="MyCTM" QuestId="25564" X="-4406.273" Y="3686.518" Z="-107.2568" />
+					<CustomBehavior File="InteractWith" QuestId="25564" MobId="203061" ObjectType="Gameobject" Range="4" CollectionDistance="5" Nav="CTM" WaitForNpcs="False" />
+					<CustomBehavior File="MyCTM" QuestId="25564" X="-4410.508" Y="3685.18" Z="-55.56793" />
+					<CustomBehavior File="InteractWith" QuestId="25564" MobId="203061" ObjectType="Gameobject" Range="4" CollectionDistance="5" Nav="CTM" WaitForNpcs="False" />
+					<CustomBehavior File="MyCTM" QuestId="25564" X="-4518.46" Y="3671.557" Z="-110.2237" />
+					<CustomBehavior File="InteractWith" QuestId="25564" MobId="203061" ObjectType="Gameobject" Range="4" CollectionDistance="5" Nav="CTM" WaitForNpcs="False" />
+			</While>
+			<If Condition="((HasQuest(25545)) &amp;&amp; (!IsQuestCompleted(25545)))" >
+				<If Condition="(Me.IsIndoors)"> <!-- Get out of cabin (Me.Y &lt; 3810) -->
+					<CustomBehavior File="MyCTM" X="-4442.016" Y="3817.038" Z="-82.90441" />
+					<CustomBehavior File="MyCTM" X="-4446.748" Y="3809.262" Z="-86.20185" />
+					<CustomBehavior File="MyCTM" X="-4461.192" Y="3800.638" Z="-88.33996" />
+					<CustomBehavior File="MyCTM" X="-4457.473" Y="3774.673" Z="-105.1683" />
+				</If>
+				<CustomBehavior File="CollectThings" QuestId="25545" ObjectId="203016" CollectItemCount="4" CollectItemId="54843" NonCompeteDistance="1" HuntingGroundRadius="20" > <!-- 1 Breastplate -->
+					<Hotspot X="-4547.232" Y="3726.265" Z="-118.1998" />
+					<Hotspot X="-4559.394" Y="3678.269" Z="-118.6152" />
+					<Hotspot X="-4592.795" Y="3709.769" Z="-121.4288" />
+					<Hotspot X="-4640.731" Y="3667.301" Z="-118.4411" />
+					<Hotspot X="-4607.982" Y="3634.313" Z="-103.1929" />
+					<Hotspot X="-4578.187" Y="3636.823" Z="-111.1221" />
+					<Hotspot X="-4537.931" Y="3634.52" Z="-115.9864" />
+					<Hotspot X="-4530.328" Y="3650.539" Z="-116.8623" />
+					<Hotspot X="-4524.88" Y="3687.659" Z="-119.8867" />
+					<Hotspot X="-4488.56" Y="3673.844" Z="-118.4773" />
+					<Hotspot X="-4441.963" Y="3645.03" Z="-102.4159" />
+					<Hotspot X="-4387.494" Y="3637.423" Z="-83.74017" />
+					<Hotspot X="-4395.363" Y="3674.902" Z="-102.1443" />
+					<Hotspot X="-4430.379" Y="3709.065" Z="-119.6548" />
+					<Hotspot X="-4502.699" Y="3710.266" Z="-120.8389" />
+					<Hotspot X="-4542.387" Y="3666.448" Z="-117.887" />
+					<Hotspot X="-4532.309" Y="3713.859" Z="-109.2357" />
+				</CustomBehavior>
+				<CustomBehavior File="CollectThings" QuestId="25545" ObjectId="203015" CollectItemCount="4" CollectItemId="54842" NonCompeteDistance="1" HuntingGroundRadius="20" > <!-- 2 Helm -->
+					<Hotspot X="-4547.232" Y="3726.265" Z="-118.1998" />
+					<Hotspot X="-4559.394" Y="3678.269" Z="-118.6152" />
+					<Hotspot X="-4592.795" Y="3709.769" Z="-121.4288" />
+					<Hotspot X="-4640.731" Y="3667.301" Z="-118.4411" />
+					<Hotspot X="-4607.982" Y="3634.313" Z="-103.1929" />
+					<Hotspot X="-4578.187" Y="3636.823" Z="-111.1221" />
+					<Hotspot X="-4537.931" Y="3634.52" Z="-115.9864" />
+					<Hotspot X="-4530.328" Y="3650.539" Z="-116.8623" />
+					<Hotspot X="-4524.88" Y="3687.659" Z="-119.8867" />
+					<Hotspot X="-4488.56" Y="3673.844" Z="-118.4773" />
+					<Hotspot X="-4441.963" Y="3645.03" Z="-102.4159" />
+					<Hotspot X="-4387.494" Y="3637.423" Z="-83.74017" />
+					<Hotspot X="-4395.363" Y="3674.902" Z="-102.1443" />
+					<Hotspot X="-4430.379" Y="3709.065" Z="-119.6548" />
+					<Hotspot X="-4502.699" Y="3710.266" Z="-120.8389" />
+					<Hotspot X="-4542.387" Y="3666.448" Z="-117.887" />
+					<Hotspot X="-4532.309" Y="3713.859" Z="-109.2357" />
+				</CustomBehavior>
+				<CustomBehavior File="CollectThings" QuestId="25545" ObjectId="203014" CollectItemCount="4" CollectItemId="54958" NonCompeteDistance="1" HuntingGroundRadius="20" > <!-- 3 Spear -->
+					<Hotspot X="-4547.232" Y="3726.265" Z="-118.1998" />
+					<Hotspot X="-4559.394" Y="3678.269" Z="-118.6152" />
+					<Hotspot X="-4592.795" Y="3709.769" Z="-121.4288" />
+					<Hotspot X="-4640.731" Y="3667.301" Z="-118.4411" />
+					<Hotspot X="-4607.982" Y="3634.313" Z="-103.1929" />
+					<Hotspot X="-4578.187" Y="3636.823" Z="-111.1221" />
+					<Hotspot X="-4537.931" Y="3634.52" Z="-115.9864" />
+					<Hotspot X="-4530.328" Y="3650.539" Z="-116.8623" />
+					<Hotspot X="-4524.88" Y="3687.659" Z="-119.8867" />
+					<Hotspot X="-4488.56" Y="3673.844" Z="-118.4773" />
+					<Hotspot X="-4441.963" Y="3645.03" Z="-102.4159" />
+					<Hotspot X="-4387.494" Y="3637.423" Z="-83.74017" />
+					<Hotspot X="-4395.363" Y="3674.902" Z="-102.1443" />
+					<Hotspot X="-4430.379" Y="3709.065" Z="-119.6548" />
+					<Hotspot X="-4502.699" Y="3710.266" Z="-120.8389" />
+					<Hotspot X="-4542.387" Y="3666.448" Z="-117.887" />
+					<Hotspot X="-4532.309" Y="3713.859" Z="-109.2357" />
+				</CustomBehavior>
+				<CustomBehavior File="CollectThings" QuestId="25545" MobId="40677" CollectUntil="QuestComplete" HuntingGroundRadius="200" > <!-- Goblins -->
+					<Hotspot X="-4547.232" Y="3726.265" Z="-118.1998" />
+					<Hotspot X="-4559.394" Y="3678.269" Z="-118.6152" />
+					<Hotspot X="-4592.795" Y="3709.769" Z="-121.4288" />
+					<Hotspot X="-4640.731" Y="3667.301" Z="-118.4411" />
+					<Hotspot X="-4607.982" Y="3634.313" Z="-103.1929" />
+					<Hotspot X="-4578.187" Y="3636.823" Z="-111.1221" />
+					<Hotspot X="-4537.931" Y="3634.52" Z="-115.9864" />
+					<Hotspot X="-4530.328" Y="3650.539" Z="-116.8623" />
+					<Hotspot X="-4524.88" Y="3687.659" Z="-119.8867" />
+					<Hotspot X="-4488.56" Y="3673.844" Z="-118.4773" />
+					<Hotspot X="-4441.963" Y="3645.03" Z="-102.4159" />
+					<Hotspot X="-4387.494" Y="3637.423" Z="-83.74017" />
+					<Hotspot X="-4395.363" Y="3674.902" Z="-102.1443" />
+					<Hotspot X="-4430.379" Y="3709.065" Z="-119.6548" />
+					<Hotspot X="-4502.699" Y="3710.266" Z="-120.8389" />
+					<Hotspot X="-4542.387" Y="3666.448" Z="-117.887" />
+					<Hotspot X="-4532.309" Y="3713.859" Z="-109.2357" />
+				</CustomBehavior>
+			</If>
+			<While Condition="((!HasQuest(27729)) &amp;&amp; (!IsQuestCompleted(27729)))" >
+				<CustomBehavior File="AscendInWater" />
+				<CustomBehavior File="InteractWith" MobId="40855" Nav="CTM" X="-4549.904" Y="3729.019" Z="-111.392" />
+			</While>
+			<If Condition="((HasQuest(27729)) &amp;&amp; (!IsQuestCompleted(27729)))" >
+				<CustomBehavior File="AscendInWater" />
+				<CustomBehavior File="CollectThings" QuestId="27729" MobId="40855" CollectUntil="QuestComplete" HuntingGroundRadius="200" > <!-- Eels -->
+					<Hotspot X="-4452.544" Y="3770.74" Z="-101.4714" />
+					<Hotspot X="-4453.065" Y="3727.883" Z="-109.789" />
+					<Hotspot X="-4391.064" Y="3713.251" Z="-95.75906" />
+					<Hotspot X="-4549.904" Y="3729.019" Z="-111.392" />
+					<Hotspot X="-4579.107" Y="3717.753" Z="-110.366" />
+					<Hotspot X="-4516.167" Y="3711.978" Z="-106.7224" />
+					<Hotspot X="-4525.189" Y="3626.585" Z="-100.4123" />
+					<Hotspot X="-4579.039" Y="3620.865" Z="-100.3693" />
+					<Hotspot X="-4532.092" Y="3584.595" Z="-84.40829" />
+				</CustomBehavior>
+				<CustomBehavior File="AscendInWater" />
+			</If>
+			<If Condition="((HasQuest(27729)) &amp;&amp; (IsQuestCompleted(27729)))" >
+				<CustomBehavior File="CompleteLogQuest" QuestId="27729" />
+				<CustomBehavior File="WaitTimer" WaitTime="4000" GoalText="Waiting for bot {TimeRemaining}" />
+			</If>
+			<If Condition="((HasQuest(25545)) &amp;&amp; (IsQuestCompleted(25545)))" >
+				<If Condition="(!Me.IsIndoors)">
+					<CustomBehavior File="AscendInWater" />
+					<CustomBehavior File="MyCTM" X="-4490.162" Y="3705.553" Z="-92.84213" />
+					<CustomBehavior File="MyCTM" X="-4457.473" Y="3774.673" Z="-105.1683" />
+					<CustomBehavior File="MyCTM" X="-4461.192" Y="3800.638" Z="-88.33996" />
+					<CustomBehavior File="MyCTM" X="-4455.249" Y="3803.735" Z="-86.29517" />
+					<CustomBehavior File="MyCTM" X="-4447.991" Y="3809.859" Z="-88.42919" />
+					<CustomBehavior File="MyCTM" X="-4453.412" Y="3819.426" Z="-86.44718" />
+					<CustomBehavior File="MyCTM" X="-4448.414" Y="3822.403" Z="-84.54517" />
+					<CustomBehavior File="MyCTM" X="-4444.844" Y="3815.697" Z="-82.90934" />
+				</If>
+			</If>
+		<TurnIn QuestName="To Arms!" QuestId="25545" TurnInName="Captain Taylor" TurnInId="39887" />
+		<TurnIn QuestName="Stormwind Elite Aquatic and Land Forces" QuestId="25564" TurnInName="Captain Taylor" TurnInId="39887" />
+		<PickUp QuestName="On Our Own Terms" QuestId="25547" GiverName="Captain Taylor" GiverId="39887" />
+		<TurnIn QuestName="On Our Own Terms" QuestId="25547" TurnInName="Captain Taylor" TurnInId="40690" X="-4458.373" Y="3809.054" Z="-82.90069" />
+			<If Condition="((!HasQuest(40105)) &amp;&amp; (!IsQuestCompleted(40105)))" >
+		<PickUp QuestName="All or Nothing" QuestId="25558" GiverName="Captain Taylor" GiverId="40690" />
+			</If>
+			<If Condition="((HasQuest(25558)) &amp;&amp; (!IsQuestCompleted(25558)))" >
+				<If Condition="(Me.IsIndoors)"> <!-- Get out of cabin (Me.Y &lt; 3810) -->
+					<CustomBehavior File="MyCTM" X="-4442.016" Y="3817.038" Z="-82.90441" />
+					<CustomBehavior File="MyCTM" X="-4446.748" Y="3809.262" Z="-86.20185" />
+					<CustomBehavior File="MyCTM" X="-4461.192" Y="3800.638" Z="-88.33996" />
+					<CustomBehavior File="MyCTM" X="-4457.473" Y="3774.673" Z="-105.1683" />
+					<CustomBehavior File="MyCTM" X="-4471.389" Y="3762.152" Z="-102.961" />
+					<CustomBehavior File="MyCTM" X="-4498.745" Y="3816.122" Z="-104.5784" />
+				</If>
+				<!--
+				<CustomBehavior File="CollectThings" QuestId="25558" MobId1="40782" MobId2="40797" CollectUntil="QuestComplete" HuntingGroundRadius="80" >
+					<Hotspot X="-4490.405" Y="3822.626" Z="-99.1144" />
+					<Hotspot X="-4895.474" Y="3772.646" Z="-148.1422" />
+				</CustomBehavior>
+				-->
+				<!--
+				once we get away:
+				X="-4568.098" Y="3797.188" Z="-77.00008" />
+				once we're dropped off:
+				X="-4833.727" Y="3763.424" Z="-136.5025" />
+				-->
+				<!-- Escort doesn't work properly in the water
+				<CustomBehavior File="Escort" EscortUntil="DestinationReached" MobId="40737" EscortDestX="-4568.098" EscortDestY="3797.188" EscortDestZ="-77.00008" X="-4490.405" Y="3822.626" Z="-99.1144" />
+				-->
+				<!-- I'll have to fiddle with this later -->
+				<CustomBehavior File="Escort" QuestId="25558" MobId="40737" X="-4490.405" Y="3822.626" Z="-99.1144" />
+				<CustomBehavior File="WaitTimer" WaitTime="5000" GoalText="Waiting to be dragged {TimeRemaining}" />
+			</If>
+			<If Condition="((HasQuest(25558)) &amp;&amp; (IsQuestCompleted(25558)))" >
+				<CustomBehavior File="AscendInWater" />
+				<CustomBehavior File="MyCTM" X="-4895.474" Y="3772.646" Z="-148.1422" />
+			</If>
+		<TurnIn QuestName="All or Nothing" QuestId="25558" TurnInName="Erunak Stonespeaker" TurnInId="40105" X="-4895.474" Y="3772.646" Z="-148.1422" />
+		<PickUp QuestName="Better Late Than Dead" QuestId="25477" GiverName="Moanah Stormhoof" GiverId="41248" />
+			<While Condition="((HasQuest(25477)) &amp;&amp; (!IsQuestCompleted(25477)))" >
+				<CustomBehavior File="MyCTM" X="-4908.723" Y="3578.676" Z="-90.67768" />
+				<CustomBehavior File="UseItemOn" QuestId="25477" MobId="40223" ItemId="54462" Nav="CTM" NumOfTimes="1" WaitTime="1000" Range="3" CollectionDistance="1000" X="-4908.723" Y="3578.676" Z="-90.67768" />
+				<CustomBehavior File="WaitTimer" WaitTime="20000" GoalText="Waiting for quest to complete {TimeRemaining}" />
+				<CustomBehavior File="AscendInWater" />
+				<CustomBehavior File="MyCTM" X="-4908.723" Y="3578.676" Z="-90.67768" />
+			</While>
+			<If Condition="((HasQuest(25477)) &amp;&amp; (IsQuestCompleted(25477)))" >
+				<CustomBehavior File="MyCTM" X="-4888.884" Y="3779.326" Z="-146.3589" />
+				<CustomBehavior File="MyCTM" X="-4893.633" Y="3779.302" Z="-146.5512" />
+		<TurnIn QuestName="Better Late Than Dead" QuestId="25477" TurnInName="Moanah Stormhoof" TurnInId="41248" />
+			</If>
+		<PickUp QuestName="The Abyssal Ride" QuestId="25371" GiverName="Moanah Stormhoof" GiverId="41248" />
+			<If Condition="((HasQuest(25371)) &amp;&amp; (!IsQuestCompleted(25371)))" >
+	<CustomBehavior File="UserDialog" QuestId="25371" AllowBotStop="True" SoundCue="Exclamation" SoundCueInterval="1" Text="Use the line and then mount the seahorse\n\nOnce mounted, read the queues on screen to complete" />
+			<!-- fiddle w/ this later
+			 <If Condition="((HasQuest(25371)) &amp;&amp; (!IsObjectiveComplete(1, 25371)))">
+				<CustomBehavior File="MyCTM" X="-4890.172" Y="3797.045" Z="-147.5677" />
+				<CustomBehavior File="InteractWith" QuestId="25371" MobId="202766" ObjectType="Gameobject" Nav="CTM" Range="8" NumOfTimes="1" CollectionDistance="1000" X="-4890.172" Y="3797.045" Z="-147.5677" />
+				<CustomBehavior File="WaitTimer" WaitTime="12000" GoalText="Waiting for seahorse {TimeRemaining}" />
+			 </If>
+			 <If Condition="((HasQuest(25371)) &amp;&amp; (!IsObjectiveComplete(2, 25371)))">
+				<CustomBehavior File="InteractWith" QuestId="25371" MobId="39996" Nav="CTM" NumOfTimes="1" WaitTime="1000" CollectionDistance="1000" X="-4878.225" Y="3828.313" Z="-152.924" />
+			 </If>
+			 -->
+			</If>
+			<If Condition="((HasQuest(25371)) &amp;&amp; (IsQuestCompleted(25371)))" >
+				<CustomBehavior File="WaitTimer" WaitTime="5000" GoalText="Waiting for quest to complete {TimeRemaining}" />
+				<CustomBehavior File="MyCTM" X="-4888.884" Y="3779.326" Z="-146.3589" />
+				<CustomBehavior File="MyCTM" X="-4893.633" Y="3779.302" Z="-146.5512" />
+		<TurnIn QuestName="The Abyssal Ride" QuestId="25371" TurnInName="Moanah Stormhoof" TurnInId="41248" />
+				<CustomBehavior File="WaitTimer" WaitTime="2000" GoalText="Waiting for quest to complete {TimeRemaining}" />
+			</If>
+			 <If Condition="(HasItem(54465))" >
+				<CustomBehavior File="Misc\RunLua" Lua="UseItemByName(54465)" WaitTime="1000" />
+			 </If>
+
+
+	<CustomBehavior File="UserDialog" AllowBotStop="True" SoundCue="Exclamation" SoundCueInterval="1" Text="End of profile, if you enjoyed this profile please +rep or donate\n\n-Kick" />
+
+
+
+	</QuestOrder>
+</HBProfile>

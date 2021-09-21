@@ -1,0 +1,37 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<DungeonBuddyProfile>
+  <Name>Grim Batol Heroic</Name>
+  <DungeonId>322</DungeonId>
+  <BossEncounters>
+	<!-- bust out nets and fly drakes (x5) / kill shit while on it 
+	<Vendor Name="Net" Entry="42570" Type="Repair" X="-440.7257" Y="-335.5625" Z="268.7343" />
+	<Vendor Name="Battered Red Drake" Entry="39294" Type="Repair" X="-440.7257" Y="-335.5625" Z="268.7343" />
+	 make sure we're not shapeshifted! -->
+	 <!-- 1st boss - cc the <Vendor Name="Malignant Trogg" Entry="39984" Type="Repair" X="-682.5227" Y="-431.3113" Z="268.7674" /> -->
+	<Boss isFinal="false" entry="39625" name="General Umbriss" killOrder="1" optional="true" X="-704.9254" Y="-444.5625" Z="269.048" />
+	<Boss isFinal="false" entry="40177" name="Forgemaster Throngus" killOrder="2" optional="true" >
+      <Path>
+ 		<Hotspot X="-525.1589" Y="-468.0977" Z="276.5975" />
+		<Hotspot X="-554.5166" Y="-592.175" Z="276.5973" />
+     </Path>
+    </Boss>	
+<!-- 
+<Vendor Name="Drahga Shadowburner" Entry="40319" Type="Repair" X="-425.7691" Y="-687.3577" Z="268.3017" /> // dps him dow and then he runs.  
+<Vendor Name="Invoked Flaming Spirit" Entry="40357" Type="Repair" X="-442.3626" Y="-706.9373" Z="268.7675" /> // kill these
+<Vendor Name="Valiona" Entry="40320" Type="Repair" X="-433.9495" Y="-695.4099" Z="268.6504" /> // kill valiona - don't stand in front of devouring flames and don't stand in seeping twilight
+<Vendor Name="Drahga Shadowburner" Entry="40319" Type="Repair" X="-434.1795" Y="-693.1592" Z="268.5984" /> // once valiona flies away, kill him
+-->
+	<Boss isFinal="false" entry="40319" name="Drahga Shadowburner" killOrder="3" optional="true" X="-425.7691" Y="-687.3577" Z="268.3017" />
+	<!-- kill the 2x <Vendor Name="Faceless Corruptor" Entry="48844" Type="Repair" X="-640.595" Y="-825.8333" Z="235.5593" /> that spawn; make sure you stand in the gale -->
+	<Boss isFinal="true" entry="40484" name="Erudax" killOrder="4" optional="false" X="-774.9028" Y="-827.0243" Z="233.2096" />
+  </BossEncounters>
+
+  <PullBlackspots> <!-- Trash pulls we can skip -->
+    <PullBlackspot X="-633.7935" Y="-391.757" Z="269.4797" Radius="12.84796" />
+    <PullBlackspot X="-616.4711" Y="-329.9916" Z="268.8668" Radius="10.0455" />
+    <PullBlackspot X="-577.3046" Y="-553.6543" Z="276.5973" Radius="11.26754" />
+  </PullBlackspots>
+  <Blackspots>
+    <!--<Blackspot X="-101.3791" Y="-703.8368" Z="9.095623" Radius="3.363508" />-->
+  </Blackspots>
+</DungeonBuddyProfile>

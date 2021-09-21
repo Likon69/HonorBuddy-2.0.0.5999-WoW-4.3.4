@@ -1,0 +1,198 @@
+<HBProfile xsi:noNamespaceSchemaLocation="../Schemas/EchoSchema.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<!-- Original contribution by EchoTiger -->
+	<Name>Thousand Needles ($ShortHash$)</Name>
+
+	<MinDurability>0.3</MinDurability>
+	<MinFreeBagSlots>3</MinFreeBagSlots>
+
+	<SellGrey>true</SellGrey>
+	<SellWhite>true</SellWhite>
+	<SellGreen>true</SellGreen>
+	<SellBlue>true</SellBlue>
+	<SellPurple>false</SellPurple>
+
+	<MailGrey>false</MailGrey>
+	<MailWhite>true</MailWhite>
+	<MailGreen>true</MailGreen>
+	<MailBlue>true</MailBlue>
+	<MailPurple>true</MailPurple>
+
+	<TargetElites>true</TargetElites>
+
+	<AvoidMobs>
+	</AvoidMobs>
+
+	<Mailboxes>
+	</Mailboxes>
+
+	<Vendors>
+	</Vendors>
+
+	<Blackspots>
+		<Blackspot X="106.3682" Y="-366.4266" Z="2.085551" Radius="35" /> <!-- Crundig Darkcloud -->
+	</Blackspots>
+
+	<Blacklist>
+	</Blacklist>
+
+	<QuestOrder IgnoreCheckpoints="false" >
+		<!-- Check function status -->
+		<Code File="RunCode" Type="Definition">
+			<![CDATA[
+			private static bool? profileFunctionsEnabled => (bool?)AppDomain.CurrentDomain.GetData("QuestingProfiles_FunctionsEnabled");
+			private static bool IsStoreProfile(string path) => path.StartsWith("store://");
+			private static string Slashify(string path) => IsStoreProfile(path) ? path.Replace(@"\", "/") : path.Replace("/", @"\");
+
+			public __CompiledBatchClass__()
+			{
+				ActivateFunctions();
+			}
+
+			private static void ActivateFunctions()
+			{
+				if (profileFunctionsEnabled == null || profileFunctionsEnabled == false)
+				{
+					Bots.Professionbuddy.PBLog.Log(Colors.MediumPurple, "[Profile Message!]: ", Colors.Yellow, "Please stand by as the functions are being activated!");
+					LoadProfile(@"..\..\Functions\Activate Functions.xml");
+				}
+			}
+
+			private static void LoadProfile(string path)
+			{
+				var profile = GetNewPath(path);
+				if (!IsStoreProfile(profile) && !File.Exists(profile))
+				{
+					Bots.Professionbuddy.PBLog.Log(Colors.MediumPurple, "[Profile Message!]: ", Colors.Yellow, "Profile does not exist.\n" + profile);
+					return;
+				}
+
+				Bots.Professionbuddy.PBLog.Log(Colors.MediumPurple, "[Profile Message!]: ", Colors.Yellow, "Loading: " + profile);
+				ProfileManager.LoadNew(profile, false);
+			}
+
+			private static string GetNewPath(string path)
+			{
+				if (IsStoreProfile(path))
+					return Slashify(path);
+
+				var currentProfile = ProfileManager.XmlLocation;
+				if (IsStoreProfile(currentProfile))
+					return Slashify(currentProfile + "/../" + path);
+
+				var absolutePath = Path.Combine(Path.GetDirectoryName(currentProfile), path);
+				absolutePath = Path.GetFullPath(absolutePath);
+				var canonicalPath = new Uri(absolutePath).LocalPath;
+				return Slashify(canonicalPath);
+			}]]>
+		</Code>
+		<Code File="RunCode" Code="ActivateFunctions();" />
+		<!-- END Check function status -->
+
+		<If Condition="Me.IsAlliance" >
+			<Code File="LoadProfile" ProfileName="..\..\Questing Autoloader.xml" />
+		</If>
+		<!-- RunCode Methods -->
+			<Code File="RunCode">
+			<![CDATA[
+				Bots.Professionbuddy.PBLog.Log(System.Windows.Media.Colors.MediumPurple, "> [Profile Initialization Status] ", System.Windows.Media.Colors.CornflowerBlue, "\n     Auto-Looting	:: Enabled\n     Looting	:: Enabled\n     Game Addons	:: Disabled");
+				Lua.DoString("SetCVar('AutoLootDefault', 1);");
+				Lua.DoString("SetCVar('autoDismountFlying', 1);");
+				CharacterSettings.Instance.LootMobs = true;
+				CharacterSettings.Instance.Save();
+				Logging.Write(System.Windows.Media.Colors.MediumPurple, "> [Ready to bot!]");
+			]]>
+			</Code>
+			<Code File="RunCode" Type="Definition">
+				<![CDATA[
+						bool DoQuest(params uint[] questIds)
+						{
+							foreach (var questId in questIds)
+							{
+								if (HasQuest(questId) && !IsQuestCompleted(questId)) return true;
+							}
+							return false;
+						}
+						bool NeedsQuest(params uint[] questIds)
+						{
+							foreach (var questId in questIds)
+							{
+								if (!HasQuest(questId) && !IsQuestCompleted(questId)) return true;
+							}
+							return false;
+						}
+						bool NeedsBreadcrumbQuest(params uint[] questIds)
+						{
+							foreach (var questId in questIds)
+							{
+								if (IsQuestCompleted(questId)) return false;
+							}
+							return true;
+						}
+						bool QuestDone(params uint[] questIds)
+						{
+							foreach (var questId in questIds)
+							{
+								if (HasQuest(questId) && IsQuestCompleted(questId)) return true;
+							}
+							return false;
+						}
+						bool QuestFlaggedCompleted(params uint[] questIds)
+						{
+							foreach (var questId in questIds)
+							{
+								return Lua.GetReturnVal<bool>($"return IsQuestFlaggedCompleted({questId});", 0);
+							}
+							return false;
+						}
+						async Task SkipCutscene(int preWait = 3000, int postWait = 3000)
+						{
+					// Add detection of cutscene here.
+							await Coroutine.Sleep(preWait);
+					// Test and improve the working method.
+							Lua.DoString("MovieFrame:StopMovie(); CinematicFrame_CancelCinematic(); StopCinematic();");
+							await Coroutine.Sleep(postWait);
+						}
+					]]>
+			</Code>
+		<!-- END RunCode Methods -->
+
+
+		<If Condition="QuestDone(25478)" >
+			<TurnIn QuestName="To the Summit" QuestId="25478" TurnInName="Kanati Greycloud" TurnInId="39895" X="-4300.851" Y="-921.6107" Z="80.93874" />
+		</If>
+
+		<PickUp QuestName="The Grimtotem are Coming" QuestId="25487" GiverName="Kanati Greycloud" GiverId="39895" X="-4300.563" Y="-920.5148" Z="80.9181" />
+		<Code File="KillUntilComplete" MobId="39947" QuestId="25487" >
+			<HuntingGrounds>
+				<Hotspot X="-4288.136" Y="-931.0222" Z="79.85339" />
+				<Hotspot X="-4134.751" Y="-1016.464" Z="86.34194" />
+			</HuntingGrounds>
+		</Code>
+		<TurnIn QuestName="The Grimtotem are Coming" QuestId="25487" TurnInName="Motega Firemane" TurnInId="39963" X="-4219.215" Y="-896.3825" Z="0.1459213" />
+
+		<PickUp QuestName="Two If By Boat" QuestId="25489" GiverName="Motega Firemane" GiverId="39963" X="-4219.215" Y="-896.3825" Z="0.1459213" />
+		<If Condition="QuestDone(25489)" >
+			<Code File="WaitTimer" WaitTime="140000" TerminateWhen="Me.IsOnTransport" />
+		</If>
+		<TurnIn QuestName="Two If By Boat" QuestId="25489" TurnInName="Pozzik" TurnInId="40028" X="-6155.723" Y="-3777.387" Z="33.57933" />
+
+		<PickUp QuestName="Do Me a Favor?" QuestId="25505" GiverName="Pozzik" GiverId="40028" X="-6155.723" Y="-3777.387" Z="33.57933" />
+		<TurnIn QuestName="Do Me a Favor?" QuestId="25505" TurnInName="Razzeric" TurnInId="40487" X="-6150.405" Y="-3825.654" Z="26.21966" />
+		<PickUp QuestName="Down in the Deeps" QuestId="25516" GiverName="Razzeric" GiverId="40487" X="-6150.405" Y="-3825.654" Z="26.21966" />
+
+		<PickUp QuestName="Bar Fight!" QuestId="25518" GiverName="Zamek" GiverId="40556" X="-6124.603" Y="-3868.882" Z="6.452078" />
+		<While Condition="DoQuest(25518)" >
+			<Code File="InteractWith" MobId="40832" InteractByBuyingItemId="54747" QuestId="25518" QuestObjectiveIndex="1" X="-6159.005" Y="-3802.925" Z="6.203893" TerminateWhen="HasItem(54747)" />
+			<Code File="InteractWith" MobId="40529" Range="2" InteractByUsingItemId="54747" QuestId="25518" QuestObjectiveIndex="1" X="-6159.005" Y="-3802.925" Z="6.203893" TerminateWhen="!HasItem(54747)" />			
+		</While>
+		<TurnIn QuestName="Bar Fight!" QuestId="25518" TurnInName="Zamek" TurnInId="40556" X="-6126.655" Y="-3865.557" Z="6.452705" />
+
+		<PickUp QuestName="In the Outhouse" QuestId="25526" GiverName="Submerged Outhouse" GiverId="202975" X="-6167.76" Y="-3934.115" Z="-68.0976" />
+
+
+		<Code File="Message" Text="Under development." />
+		<Code File="Halt" />
+
+
+	</QuestOrder>
+</HBProfile>

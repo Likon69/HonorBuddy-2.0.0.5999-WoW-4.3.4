@@ -1,0 +1,496 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Professionbuddy>
+  <CustomAction Code="CharacterSettings.Instance.LootMobs = false;" />
+  <Settings DefaultValue="true" Type="Boolean" Name="AH Items" Summary="If set to true this profile will sell items on AH, otherwise it'll mail items to an alt.If mailing items to alt make sure to set the Grind Bot's 'Recipient' field to your alts name." Category="Profile" Global="False" Hidden="False" />
+  <Settings DefaultValue="true" Type="Boolean" Name="Herb" Summary="Set to true if you want to level herbalism" Category="Profile" Global="False" Hidden="False" />
+  <Settings DefaultValue="true" Type="Boolean" Name="Mining" Summary="Set to true if you want to level Mining" Category="Profile" Global="False" Hidden="False" />
+  <Declaration Code="bool mining,herb;" />
+  <Declaration Code="int MiningLevel,MiningMaxLevel,HerbLevel,HerbMaxLevel, LowestMinLevel;" />
+  <CustomAction Code="Log(Color.Green,&quot;Mine/Herb 1-525: &quot;,Color.LightGreen,&quot;Made by HighVoltz&quot;);" />
+  <CustomAction Code="Log(Color.Green,&quot;Mine/Herb 1-525: &quot;,Color.LightGreen,&quot;Mining: {0}&quot;,Settings[&quot;Mining&quot;]);" />
+  <CustomAction Code="Log(Color.Green,&quot;Mine/Herb 1-525: &quot;,Color.LightGreen,&quot;Herb: {0}&quot;,Settings[&quot;Herb&quot;]);" />
+  <CustomAction Code="Log(Color.Green,&quot;Mine/Herb 1-525: &quot;,Color.LightGreen,&quot;Mining.Level: {0}&quot;,Mining.Level);" />
+  <CustomAction Code="Log(Color.Green,&quot;Mine/Herb 1-525: &quot;,Color.LightGreen,&quot;Mining.MaxLevel: {0}&quot;,Mining.MaxLevel);" />
+  <CustomAction Code="Log(Color.Green,&quot;Mine/Herb 1-525: &quot;,Color.LightGreen,&quot;Herbalism.Level: {0}&quot;,Herbalism.Level);" />
+  <CustomAction Code="Log(Color.Green,&quot;Mine/Herb 1-525: &quot;,Color.LightGreen,&quot;Herbalism.MaxLevel: {0}&quot;,Herbalism.MaxLevel);" />
+  <CustomAction Code="var1 = false;" />
+  <!--mining = Gather Mines?-->
+  <CustomAction Code="mining = (bool)Settings[&quot;Mining&quot;];" />
+  <!--herb = Gather Herb?-->
+  <CustomAction Code="herb = (bool)Settings[&quot;Herb&quot;];" />
+  <!--MiningLevel = Mining.Level-->
+  <CustomAction Code="MiningLevel = 0;" />
+  <!--MiningMaxLevel = Mining.MaxLevel-->
+  <CustomAction Code="MiningMaxLevel = 0;" />
+  <!--HerbLevel = Herbalism.Level-->
+  <CustomAction Code="HerbLevel = 0;" />
+  <!--HerbMaxLevel = Herbalism.MaxLevel-->
+  <CustomAction Code="HerbMaxLevel = 0;" />
+  <!--LowestMinLevel = lowestMaxLevel-->
+  <CustomAction Code="LowestMinLevel = 0;" />
+  <If Condition="SecondaryBot.Name != &quot;Gatherbuddy2&quot;" IgnoreCanRun="True">
+    <ChangeBotAction BotName="Gatherbuddy2" />
+  </If>
+  <While Condition="true" IgnoreCanRun="True">
+    <CustomAction Code="MiningLevel = (int)Mining.Level;" />
+    <CustomAction Code="MiningMaxLevel = (int)Mining.MaxLevel;" />
+    <CustomAction Code="HerbLevel = (int)Herbalism.Level;" />
+    <CustomAction Code="HerbMaxLevel =  (int)Herbalism.MaxLevel;" />
+    <!--disable gathering of mines-->
+    <CustomAction Code="if (((bool)Settings[&quot;Mining&quot;] &amp;&amp;&#xD;&#xA;   (MiningLevel == MiningMaxLevel || ((bool)Settings[&quot;Herb&quot;] &amp;&amp; MiningMaxLevel &gt; HerbMaxLevel ))) ||&#xD;&#xA; !(bool)Settings[&quot;Mining&quot;])&#xD;&#xA;{&#xD;&#xA;    mining = Bots.Gatherbuddy.GatherbuddySettings.Instance.GatherMinerals = false;&#xD;&#xA;}" />
+    <!--enable gathering of mines-->
+    <CustomAction Code="if ((bool)Settings[&quot;Mining&quot;] &amp;&amp; MiningLevel != MiningMaxLevel &amp;&amp; &#xD;&#xA;    ( MiningMaxLevel &lt;= HerbMaxLevel || !(bool)Settings[&quot;Herb&quot;] ))&#xD;&#xA;{&#xD;&#xA;   mining = Bots.Gatherbuddy.GatherbuddySettings.Instance.GatherMinerals = true;&#xD;&#xA;}" />
+    <!--disable gathering of herbs-->
+    <CustomAction Code="if (((bool)Settings[&quot;Herb&quot;] &amp;&amp; (HerbLevel == HerbMaxLevel || ((bool)Settings[&quot;Mining&quot;] &amp;&amp; HerbMaxLevel &gt; MiningMaxLevel))) || !(bool)Settings[&quot;Herb&quot;]) herb = Bots.Gatherbuddy.GatherbuddySettings.Instance.GatherHerbs = false;" />
+    <!--enable Herb in GB2 if enabled in profile Settings and Herb MaxLevel <= Mining.MaxLevel-->
+    <CustomAction Code="if ((bool)Settings[&quot;Herb&quot;] &amp;&amp; HerbLevel != HerbMaxLevel &amp;&amp;&#xD;&#xA;  (HerbMaxLevel &lt;= MiningMaxLevel  || !(bool)Settings[&quot;Mining&quot;] ) )&#xD;&#xA;{&#xD;&#xA;   herb = Bots.Gatherbuddy.GatherbuddySettings.Instance.GatherHerbs = true;&#xD;&#xA;}" />
+    <CustomAction Code="LowestMinLevel = (bool)Settings[&quot;Mining&quot;] &amp;&amp; (bool)Settings[&quot;Herb&quot;] ? (MiningMaxLevel &lt; HerbMaxLevel ? MiningMaxLevel : HerbMaxLevel):(bool)Settings[&quot;Mining&quot;] ? MiningMaxLevel :HerbMaxLevel;" />
+    <!--Herb/Mining 1-300-->
+    <If Condition=" LowestMinLevel &lt;=300" IgnoreCanRun="True">
+      <If Condition="Me.FreeNormalBagSlots &lt;=4" IgnoreCanRun="True">
+        <If Condition="Me.IsAlliance" IgnoreCanRun="True">
+          <CallSubRoutine SubRoutineName="EmptyBagsInStormwind" />
+        </If>
+        <If Condition="Me.IsHorde" IgnoreCanRun="True">
+          <CallSubRoutine SubRoutineName="EmptyBagsInOrg" />
+        </If>
+      </If>
+      <If Condition="Me.IsAlliance" IgnoreCanRun="True">
+        <If Condition="Me.MapId != 0" IgnoreCanRun="True">
+          <CustomAction Code="MessageBox.Show(&quot;Please switch to Eastern Kingdoms continent&quot;);" />
+          <CustomAction Code="TreeRoot.Stop();" />
+        </If>
+        <If Condition=" LowestMinLevel ==75" IgnoreCanRun="True">
+          <!--Mining 1-50 and Herb 1-50-->
+          <LoadProfileAction ProfileType="Honorbuddy" Path="HBProfiles\(GB2 1-300)Herb&amp;Mining\Alliance\(GB2 1-75)(Elwynn.Alliance)Herb&amp;Mining.xml" />
+        </If>
+        <If Condition=" LowestMinLevel ==150" IgnoreCanRun="True">
+          <!--Mining 50-125 and Herb 50-125-->
+          <LoadProfileAction ProfileType="Honorbuddy" Path="HBProfiles\(GB2 1-300)Herb&amp;Mining\Alliance\(GB2 75-120)(Duskwood.Alliance)Herb&amp;Mining.xml" />
+        </If>
+        <If Condition=" LowestMinLevel ==225" IgnoreCanRun="True">
+          <If Condition="(herb &amp;&amp; HerbLevel &lt; 160)" IgnoreCanRun="True">
+            <!--Mining 65-125 and Herb 120-160-->
+            <LoadProfileAction ProfileType="Honorbuddy" Path="HBProfiles\(GB2 1-300)Herb&amp;Mining\Alliance\(GB2 120-160)(StranglethornJungle.Alliance)Herb&amp;Mining.xml" />
+          </If>
+          <If Condition="(herb &amp;&amp; HerbLevel&gt;=160 &amp;&amp; HerbLevel &lt;200 ) || ((mining &amp;&amp; !herb &amp;&amp; MiningLevel &lt;175 ) ^ (herb &amp;&amp; !mining &amp;&amp; HerbLevel &gt;=160 &amp;&amp; HerbLevel &lt; 200 ))" IgnoreCanRun="True">
+            <!--Mining 125-175 and Herb 160-200-->
+            <LoadProfileAction ProfileType="Honorbuddy" Path="HBProfiles\(GB2 1-300)Herb&amp;Mining\Alliance\(GB2 160-175)(TheCapeOfStranglethorn.Alliance)Herb&amp;Mining.xml" />
+          </If>
+          <If Condition="(mining &amp;&amp; MiningLevel &gt;=175  &amp;&amp; herb &amp;&amp; HerbLevel &gt;=200 ) || ((mining &amp;&amp; !herb &amp;&amp; MiningLevel &gt;=175 ) ^ (herb &amp;&amp; !mining &amp;&amp; HerbLevel &gt;=200 ))" IgnoreCanRun="True">
+            <!--Mining 175-235 and Herb 200-260-->
+            <LoadProfileAction ProfileType="Honorbuddy" Path="HBProfiles\(GB2 1-300)Herb&amp;Mining\Alliance\(GB2 175-235)(Badlands.Alliance)Herb&amp;Mining.xml" />
+          </If>
+        </If>
+        <If Condition=" LowestMinLevel ==300" IgnoreCanRun="True">
+          <If Condition="(mining &amp;&amp; MiningLevel &lt; 235) || (herb &amp;&amp; HerbLevel &lt; 260)" IgnoreCanRun="True">
+            <!--Mining 175-235 and Herb 200-260-->
+            <LoadProfileAction ProfileType="Honorbuddy" Path="HBProfiles\(GB2 1-300)Herb&amp;Mining\Alliance\(GB2 175-235)(Badlands.Alliance)Herb&amp;Mining.xml" />
+          </If>
+          <If Condition="(mining &amp;&amp; MiningLevel &gt;=235  &amp;&amp; herb &amp;&amp; HerbLevel &gt;=260 ) || ((mining &amp;&amp; !herb &amp;&amp; MiningLevel &gt;=235 ) ^ (herb &amp;&amp; !mining &amp;&amp; HerbLevel &gt;=260 ))" IgnoreCanRun="True">
+            <!--Mining 250-300 and Herb 260-300-->
+            <LoadProfileAction ProfileType="Honorbuddy" Path="HBProfiles\(GB2 1-300)Herb&amp;Mining\Alliance\(GB2 255-300)(SwampOfSorrows.Alliance)Herb&amp;Mining.xml" />
+          </If>
+        </If>
+        <If Condition="((bool)Settings[&quot;Mining&quot;] &amp;&amp; MiningMaxLevel-MiningLevel &lt;=25 ) || ((bool)Settings[&quot;Herb&quot;] &amp;&amp; HerbMaxLevel - HerbLevel &lt;= 25 )" IgnoreCanRun="True">
+          <CallSubRoutine SubRoutineName="TrainInStormwind" />
+        </If>
+      </If>
+      <If Condition="Me.IsHorde" IgnoreCanRun="True">
+        <If Condition="Me.MapId != 1" IgnoreCanRun="True">
+          <CustomAction Code="MessageBox.Show(&quot;Move to Kalimdor 1st&quot;);TreeRoot.Stop();" />
+        </If>
+        <!--Mining 1-50 and Herb 1-50-->
+        <If Condition=" LowestMinLevel ==75" IgnoreCanRun="True">
+          <LoadProfileAction ProfileType="Honorbuddy" Path="HBProfiles\(GB2 1-300)Herb&amp;Mining\Horde\(GB2 1-50)(Durotar.Horde)Herb&amp;Mining.xml" />
+        </If>
+        <If Condition=" LowestMinLevel == 150" IgnoreCanRun="True">
+          <!--Mining 50-65 and Herb 50-75-->
+          <If Condition="(mining &amp;&amp; MiningLevel &lt; 65) || (herb &amp;&amp; HerbLevel &lt; 75)" IgnoreCanRun="True">
+            <LoadProfileAction ProfileType="Honorbuddy" Path="HBProfiles\(GB2 1-300)Herb&amp;Mining\Horde\(GB2 50-120)(Barrens.Horde)Herb&amp;Mining.xml" />
+          </If>
+          <!--Mining 65-125 and Herb 75-150-->
+          <If Condition="(mining &amp;&amp; MiningLevel &gt;=65  &amp;&amp; herb &amp;&amp; HerbLevel &gt;=75 ) || ((mining &amp;&amp; !herb &amp;&amp; MiningLevel &gt;=65 ) ^ (herb &amp;&amp; !mining &amp;&amp; HerbLevel &gt;=75 ))" IgnoreCanRun="True">
+            <LoadProfileAction ProfileType="Honorbuddy" Path="HBProfiles\(GB2 1-300)Herb&amp;Mining\Horde\(GB2 120-180)(Ashenvale.Horde)Herb&amp;Mining.xml" />
+          </If>
+        </If>
+        <If Condition=" LowestMinLevel == 225" IgnoreCanRun="True">
+          <!--Mining 125-175 and Herb 150-225-->
+          <If Condition="(mining &amp;&amp; MiningLevel &lt; 175) || (herb &amp;&amp; HerbLevel &lt;225)" IgnoreCanRun="True">
+            <LoadProfileAction ProfileType="Honorbuddy" Path="HBProfiles\(GB2 1-300)Herb&amp;Mining\Horde\(GB2 180-225)(SouthernBarrens.Horde)Herb&amp;Mining.xml" />
+          </If>
+          <!--Mining 175-235 and Herb 225-280-->
+          <If Condition="(mining &amp;&amp; MiningLevel &gt;=175  &amp;&amp; herb &amp;&amp; HerbLevel &gt;=225 ) || ((mining &amp;&amp; !herb &amp;&amp; MiningLevel &gt;=175 ) ^ (herb &amp;&amp; !mining &amp;&amp; HerbLevel &gt;=225 ))" IgnoreCanRun="True">
+            <LoadProfileAction ProfileType="Honorbuddy" Path="HBProfiles\(GB2 1-300)Herb&amp;Mining\Horde\(GB2 225-275)(Felwood.Horde)Herb&amp;Mining.xml" />
+          </If>
+        </If>
+        <If Condition=" LowestMinLevel == 300" IgnoreCanRun="True">
+          <If Condition="(herb &amp;&amp; HerbLevel &lt;225)" IgnoreCanRun="True">
+            <LoadProfileAction ProfileType="Honorbuddy" Path="HBProfiles\(GB2 1-300)Herb&amp;Mining\Horde\(GB2 180-225)(SouthernBarrens.Horde)Herb&amp;Mining.xml" />
+          </If>
+          <!--Mining 175-235 and Herb 225-280-->
+          <If Condition="(herb &amp;&amp; HerbLevel&gt;=225 &amp;&amp; HerbLevel &lt;280 ) || ((mining &amp;&amp; !herb &amp;&amp; MiningLevel &lt;235 ) ^ (herb &amp;&amp; !mining &amp;&amp; HerbLevel &gt;=225 &amp;&amp; HerbLevel &lt; 280))" IgnoreCanRun="True">
+            <LoadProfileAction ProfileType="Honorbuddy" Path="HBProfiles\(GB2 1-300)Herb&amp;Mining\Horde\(GB2 225-275)(Felwood.Horde)Herb&amp;Mining.xml" />
+          </If>
+          <!--Mining 235-300 and Herb 280-300-->
+          <If Condition="(mining &amp;&amp; MiningLevel &gt;=235 &amp;&amp; herb &amp;&amp; HerbLevel &gt;=280 ) || ((mining &amp;&amp; !herb &amp;&amp; MiningLevel &gt;=235 ) ^ (herb &amp;&amp; !mining &amp;&amp; HerbLevel &gt;=280 ))" IgnoreCanRun="True">
+            <LoadProfileAction ProfileType="Honorbuddy" Path="HBProfiles\(GB2 1-300)Herb&amp;Mining\Horde\(GB2 270-300)(Winterspring.Horde)Herb&amp;Mining.xml" />
+          </If>
+        </If>
+        <If Condition="((bool)Settings[&quot;Mining&quot;] &amp;&amp; MiningMaxLevel-MiningLevel &lt;=25 ) || ((bool)Settings[&quot;Herb&quot;] &amp;&amp; HerbMaxLevel - HerbLevel &lt;= 25 )" IgnoreCanRun="True">
+          <CallSubRoutine SubRoutineName="TrainInOrg" />
+        </If>
+      </If>
+    </If>
+    <!--Herb/Mining 300-350-->
+    <If Condition=" LowestMinLevel ==375" IgnoreCanRun="True">
+      <LoadProfileAction ProfileType="Honorbuddy" Path="HBProfiles\(GB2 1-300)Herb&amp;Mining\Neutral\(GB2 300-350)(Outlands.Neutral)Herb&amp;Mining.xml" />
+      <While Condition="Me.FreeNormalBagSlots &lt;=4" IgnoreCanRun="True">
+        <CustomAction Code="Log(&quot;Bags are full, selling&quot;);" />
+        <If Condition="Me.MapId == 530" IgnoreCanRun="True">
+          <FlyToAction Dismount="False" Location="-252.0331, 965.9687, 90.23502" />
+          <CustomAction Code="CTM(-247.3961, 890.3077, 96.21683);" />
+          <WaitAction Condition="Me.MapId == 0" Timeout="25000" />
+        </If>
+        <If Condition="Me.IsAlliance &amp;&amp; Me.MapId == 0" IgnoreCanRun="True">
+          <CallSubRoutine SubRoutineName="EmptyBagsInStormwind" />
+        </If>
+        <If Condition="Me.IsHorde &amp;&amp; Me.MapId == 0" IgnoreCanRun="True">
+          <CallSubRoutine SubRoutineName="EmptyBagsInUndercity" />
+        </If>
+      </While>
+      <If Condition="Me.MapId == 1 &amp;&amp; Me.IsHorde " IgnoreCanRun="True">
+        <FlyToAction Dismount="True" Location="1662.198, -4132.378, 56.96952" />
+        <InteractionAction InteractType="GameObject" Entry="195142" InteractDelay="2000" GameObjectType="Transport" SpellFocus="Anvil" />
+        <WaitAction Condition="Me.MapId == 0" Timeout="20000" />
+      </If>
+      <If Condition="Me.MapId == 0 &amp;&amp; (((bool)Settings[&quot;Mining&quot;] &amp;&amp; MiningLevel &lt; 350 || !(bool)Settings[&quot;Mining&quot;]) || (((bool)Settings[&quot;Herb&quot;] &amp;&amp; HerbLevel &lt; 350)|| !(bool)Settings[&quot;Herb&quot;]))" IgnoreCanRun="True">
+        <If Condition="Me.IsAlliance" IgnoreCanRun="True">
+          <FlyToAction Dismount="True" Location="-8984.83, 863.0924, 124.4113" />
+          <InteractionAction InteractType="GameObject" Entry="195141" InteractDelay="2000" GameObjectType="Transport" SpellFocus="Anvil" />
+        </If>
+        <If Condition="Me.IsHorde &amp;&amp; DistanceTo(1770.275, 62.06269, -46.32109) &lt; 2000" IgnoreCanRun="True">
+          <MoveToAction Location="1770.275, 62.06269, -46.32109" MoveType="Location" Pathing="Navigator" Entry="0" />
+          <InteractionAction InteractType="GameObject" Entry="195142" InteractDelay="2000" GameObjectType="Transport" SpellFocus="Anvil" />
+        </If>
+        <FlyToAction Dismount="False" Location="-11895.9, -3206.984, -6.04731" />
+        <CustomAction Code="CTM(-11930.31, -3209.613, -1.836873);" />
+        <WaitAction Condition="Me.MapId == 530" Timeout="25000" />
+      </If>
+      <If Condition=" (((bool)Settings[&quot;Mining&quot;] &amp;&amp; MiningLevel &gt;=350 )|| !(bool)Settings[&quot;Mining&quot;]) &amp;&amp; (((bool)Settings[&quot;Herb&quot;] &amp;&amp; HerbLevel &gt;=350)|| !(bool)Settings[&quot;Herb&quot;])" IgnoreCanRun="True">
+        <If Condition="Me.MapId == 530" IgnoreCanRun="True">
+          <FlyToAction Dismount="False" Location="-252.0331, 965.9687, 90.23502" />
+          <CustomAction Code="CTM(-247.3961, 890.3077, 96.21683);" />
+          <WaitAction Condition="Me.MapId == 0" Timeout="25000" />
+        </If>
+        <If Condition="Me.MapId ==0" IgnoreCanRun="True">
+          <If Condition="Me.IsAlliance" IgnoreCanRun="True">
+            <CallSubRoutine SubRoutineName="TrainInStormwind" />
+          </If>
+          <If Condition="Me.IsHorde" IgnoreCanRun="True">
+            <CallSubRoutine SubRoutineName="TrainInUndercity" />
+          </If>
+        </If>
+      </If>
+      <If Condition="Me.MapId == 530" IgnoreCanRun="True">
+        <If Condition="!Me.IsFlying &amp;&amp; InbagCount(22573) &gt;= 10" IgnoreCanRun="True">
+          <CustomAction Code="Lua.DoString(&quot;for bag = 0,4 do for slot=1,GetContainerNumSlots(bag) do local id = GetContainerItemID(bag,slot) or 0 if id == 22573 then UseContainerItem(bag,slot) end end end&quot;);" />
+        </If>
+        <If Condition="!Me.IsFlying &amp;&amp; InbagCount(22574) &gt;= 10" IgnoreCanRun="True">
+          <CustomAction Code="Lua.DoString(&quot;for bag = 0,4 do for slot=1,GetContainerNumSlots(bag) do local id = GetContainerItemID(bag,slot) or 0 if id == 22574 then UseContainerItem(bag,slot) end end end&quot;);" />
+        </If>
+      </If>
+    </If>
+    <!--Herb/Mining 350-450-->
+    <If Condition=" LowestMinLevel == 450" IgnoreCanRun="True">
+      <While Condition="Me.FreeNormalBagSlots &lt;=4" IgnoreCanRun="True">
+        <If Condition="Me.MapId == 571" IgnoreCanRun="True">
+          <CallSubRoutine SubRoutineName="EmptyBagsInDalaran" />
+        </If>
+        <If Condition="Me.MapId == 1 &amp;&amp; Me.IsHorde" IgnoreCanRun="True">
+          <CallSubRoutine SubRoutineName="EmptyBagsInOrg" />
+        </If>
+        <If Condition="Me.MapId == 0" IgnoreCanRun="True">
+          <If Condition="Me.IsAlliance" IgnoreCanRun="True">
+            <CallSubRoutine SubRoutineName="EmptyBagsInStormwind" />
+          </If>
+          <If Condition="Me.IsHorde" IgnoreCanRun="True">
+            <CallSubRoutine SubRoutineName="EmptyBagsInUndercity" />
+          </If>
+        </If>
+      </While>
+      <If Condition="(mining &amp;&amp; MiningLevel &lt; 400) || (herb &amp;&amp; HerbLevel &lt; 400)" IgnoreCanRun="True">
+        <LoadProfileAction ProfileType="Honorbuddy" Path="HBProfiles\(GB2 1-300)Herb&amp;Mining\Neutral\(GB2 350-400)(HowlingFjord.Neutral)Herb&amp;Mining.xml" />
+      </If>
+      <If Condition="(mining &amp;&amp; MiningLevel &gt;=400 &amp;&amp; herb &amp;&amp; HerbLevel &gt;=400 ) || ((mining &amp;&amp; !herb &amp;&amp; MiningLevel &gt;=400 ) ^ (herb &amp;&amp; !mining &amp;&amp; HerbLevel &gt;=400 ))" IgnoreCanRun="True">
+        <LoadProfileAction ProfileType="Honorbuddy" Path="HBProfiles\(GB2 1-300)Herb&amp;Mining\Neutral\(GB2 400-450)(SholazarBasin.Neutral)Herb&amp;Mining.xml" />
+      </If>
+      <If Condition="Me.MapId == 0" IgnoreCanRun="True">
+        <If Condition="(((bool)Settings[&quot;Mining&quot;] &amp;&amp; MiningLevel &lt; 450)|| !(bool)Settings[&quot;Mining&quot;]) &amp;&amp; (((bool)Settings[&quot;Herb&quot;] &amp;&amp; HerbLevel &lt; 450)|| !(bool)Settings[&quot;Herb&quot;])" IgnoreCanRun="True">
+          <If Condition="Me.IsHorde" IgnoreCanRun="True">
+            <If Condition="DistanceTo(1696.929, 731.7497, 68.85725) &lt;1000" IgnoreCanRun="True">
+              <MoveToAction Location="1696.929, 731.7497, 68.85725" MoveType="Location" Pathing="Navigator" Entry="0" />
+            </If>
+            <FlyToAction Dismount="False" Location="2062.034, 358.3257, 82.47099" />
+            <WaitAction Condition="ObjectManager.GetObjectsOfType&lt;WoWGameObject&gt;().FirstOrDefault(o =&gt; o.Entry == 181689 ) != null &amp;&amp; ObjectManager.GetObjectsOfType&lt;WoWGameObject&gt;().FirstOrDefault(o =&gt; o.Entry == 181689 ).Location.Distance(new WoWPoint(2056.493, 381.6347, 100.362)) &lt; 1" Timeout="600000" />
+            <CustomAction Code="CTM(2058.573, 372.6453, 82.5169);" />
+            <WaitAction Condition="Me.MapId == 571" Timeout="600000" />
+          </If>
+          <If Condition="Me.IsAlliance" IgnoreCanRun="True">
+            <FlyToAction Dismount="False" Location="-3689.26, -602.9856, 4.345168" />
+            <WaitAction Condition="ObjectManager.GetObjectsOfType&lt;WoWGameObject&gt;().FirstOrDefault(o =&gt; o.Entry == 181688 ) != null &amp;&amp; ObjectManager.GetObjectsOfType&lt;WoWGameObject&gt;().FirstOrDefault(o =&gt; o.Entry == 181688 ).Location.Distance(new WoWPoint(-3674.43, -586.774, 0.04286573)) &lt; 1" Timeout="6000000" />
+            <CustomAction Code="CTM(-3674.097, -593.0407, 9.392573);" />
+            <WaitAction Condition="Me.MapId == 571" Timeout="600000" />
+          </If>
+        </If>
+      </If>
+      <If Condition="Me.MapId == 1 &amp;&amp; Me.IsHorde" IgnoreCanRun="True">
+        <FlyToAction Dismount="True" Location="1662.198, -4132.378, 56.96952" />
+        <InteractionAction InteractType="GameObject" Entry="195142" InteractDelay="2000" GameObjectType="Transport" SpellFocus="Anvil" />
+        <WaitAction Condition="Me.MapId == 0" Timeout="20000" />
+      </If>
+      <If Condition="Me.MapId == 571" IgnoreCanRun="True">
+        <If Condition="!Me.IsFlying &amp;&amp; InbagCount(37701) &gt;= 10" IgnoreCanRun="True">
+          <CustomAction Code="Lua.DoString(&quot;for bag = 0,4 do for slot=1,GetContainerNumSlots(bag) do local id = GetContainerItemID(bag,slot) or 0 if id == 37701 then UseContainerItem(bag,slot) end end end&quot;);" />
+        </If>
+        <If Condition="!Me.IsFlying &amp;&amp; InbagCount(37704) &gt;= 10" IgnoreCanRun="True">
+          <CustomAction Code="Lua.DoString(&quot;for bag = 0,4 do for slot=1,GetContainerNumSlots(bag) do local id = GetContainerItemID(bag,slot) or 0 if id == 37704 then UseContainerItem(bag,slot) end end end&quot;);" />
+        </If>
+        <If Condition="!Me.IsFlying &amp;&amp; InbagCount(37705) &gt;= 10" IgnoreCanRun="True">
+          <CustomAction Code="Lua.DoString(&quot;for bag = 0,4 do for slot=1,GetContainerNumSlots(bag) do local id = GetContainerItemID(bag,slot) or 0 if id == 37705 then UseContainerItem(bag,slot) end end end&quot;);" />
+        </If>
+        <If Condition="!Me.IsFlying &amp;&amp; InbagCount(37703) &gt;= 10" IgnoreCanRun="True">
+          <CustomAction Code="Lua.DoString(&quot;for bag = 0,4 do for slot=1,GetContainerNumSlots(bag) do local id = GetContainerItemID(bag,slot) or 0 if id == 37703 then UseContainerItem(bag,slot) end end end&quot;);" />
+        </If>
+        <If Condition="(((bool)Settings[&quot;Mining&quot;] &amp;&amp; MiningLevel == 450) || !(bool)Settings[&quot;Mining&quot;]) &amp;&amp; (((bool)Settings[&quot;Herb&quot;] &amp;&amp; HerbLevel == 450) || !(bool)Settings[&quot;Herb&quot;])" IgnoreCanRun="True">
+          <CallSubRoutine SubRoutineName="TrainInDalaran" />
+        </If>
+      </If>
+    </If>
+    <!--Herb/Mining 450-525-->
+    <If Condition=" LowestMinLevel == 525" IgnoreCanRun="True">
+      <While Condition="Me.FreeNormalBagSlots &lt;=4" IgnoreCanRun="True">
+        <CustomAction Code="Log(&quot;Bags are full, selling&quot;);" />
+        <If Condition="Me.IsAlliance" IgnoreCanRun="True">
+          <FlyToAction Dismount="False" Location="-3994.829, -4719.628, 4.139777" />
+          <WaitAction Condition="ObjectManager.GetObjectsOfType&lt;WoWGameObject&gt;().FirstOrDefault(o =&gt; o.Entry == 176231) != null &amp;&amp; ObjectManager.GetObjectsOfType&lt;WoWGameObject&gt;().FirstOrDefault(o =&gt; o.Entry == 176231).Location.Distance(new WoWPoint(-4016.39, -4740.588, -0.04110325)) &lt; 1" Timeout="6000000" />
+          <CustomAction Code="CTM(-4010.385, -4735.384, 6.06652);" />
+          <WaitAction Condition="Me.MapId == 0" Timeout="600000" />
+          <CallSubRoutine SubRoutineName="EmptyBagsInIronforge" />
+        </If>
+        <If Condition="Me.IsHorde" IgnoreCanRun="True">
+          <CallSubRoutine SubRoutineName="EmptyBagsInOrg" />
+        </If>
+      </While>
+      <If Condition="(mining &amp;&amp; MiningLevel &lt; 475) || (herb &amp;&amp; HerbLevel &lt; 475)" IgnoreCanRun="True">
+        <LoadProfileAction ProfileType="Honorbuddy" Path="HBProfiles\(GB2 1-300)Herb&amp;Mining\Neutral\(GB2 450-475)(Hyjal.Neutral)Herb&amp;Mining-herb.xml" />
+      </If>
+      <If Condition="(mining &amp;&amp; MiningLevel &gt;=475 &amp;&amp; herb &amp;&amp; HerbLevel &gt;=475 ) || ((mining &amp;&amp; !herb &amp;&amp; MiningLevel &gt;=475 ) ^ (herb &amp;&amp; !mining &amp;&amp; HerbLevel &gt;=475 ))" IgnoreCanRun="True">
+        <LoadProfileAction ProfileType="Honorbuddy" Path="HBProfiles\(GB2 1-300)Herb&amp;Mining\Neutral\(GB2 475-525)(Uldum.Neutral)Herb&amp;Mining-herb.xml" />
+      </If>
+      <If Condition="(((bool)Settings[&quot;Mining&quot;] &amp;&amp; MiningLevel == 525)|| !(bool)Settings[&quot;Mining&quot;]) &amp;&amp; (((bool)Settings[&quot;Herb&quot;] &amp;&amp; HerbLevel &gt;= 525)|| !(bool)Settings[&quot;Herb&quot;])" IgnoreCanRun="True">
+        <If Condition="Me.IsAlliance" IgnoreCanRun="True">
+          <If Condition="Me.MapId == 1" IgnoreCanRun="True">
+            <FlyToAction Dismount="False" Location="-3994.829, -4719.628, 9.139777" />
+            <WaitAction Condition="ObjectManager.GetObjectsOfType&lt;WoWGameObject&gt;().FirstOrDefault(o =&gt; o.Entry == 176231) != null &amp;&amp; ObjectManager.GetObjectsOfType&lt;WoWGameObject&gt;().FirstOrDefault(o =&gt; o.Entry == 176231).Location.Distance(new WoWPoint(-4016.39, -4740.588, -0.04110325)) &lt; 1" Timeout="60000000" />
+            <CustomAction Code="CTM(-4010.385, -4735.384, 5.06652);" />
+            <WaitAction Condition="Me.MapId == 0" Timeout="6000000" />
+          </If>
+          <If Condition="Me.MapId == 0" IgnoreCanRun="True">
+            <CallSubRoutine SubRoutineName="TrainInStormwind" />
+          </If>
+        </If>
+        <If Condition="Me.IsHorde" IgnoreCanRun="True">
+          <CallSubRoutine SubRoutineName="TrainInOrg" />
+        </If>
+        <CustomAction Code="Log(Color.Green,&quot;Mine/Herb 1-525: &quot;,Color.LightGreen,&quot;Stopping HB since We are 525 herb/mining&quot;);" />
+        <CustomAction Code="Bots.Gatherbuddy.GatherbuddySettings.Instance.GatherMinerals = true;&#xD;&#xA;Bots.Gatherbuddy.GatherbuddySettings.Instance.GatherHerbs = true;&#xD;&#xA;&#xD;&#xA;" />
+        <CustomAction Code=" Lua.DoString(&quot;Logout()&quot;);TreeRoot.Stop();" />
+      </If>
+      <If Condition="Me.MapId == 1 &amp;&amp; DistanceTo(1804.349, -4346.937, -10.66582) &lt; 70" IgnoreCanRun="True">
+        <MoveToAction Location="1894.106, -4495.328, 23.87761" MoveType="Location" Pathing="Navigator" Entry="0" />
+      </If>
+      <If Condition="Me.MapId == 0" IgnoreCanRun="True">
+        <If Condition="(((bool)Settings[&quot;Mining&quot;] &amp;&amp; MiningLevel &lt; 525)|| !(bool)Settings[&quot;Mining&quot;]) &amp;&amp; (((bool)Settings[&quot;Herb&quot;] &amp;&amp; HerbLevel &lt; 525)|| !(bool)Settings[&quot;Herb&quot;])" IgnoreCanRun="True">
+          <If Condition="Me.IsHorde" IgnoreCanRun="True">
+            <If Condition="DistanceTo(1696.929, 731.7497, 68.85725) &lt; 500" IgnoreCanRun="True">
+              <MoveToAction Location="1696.929, 731.7497, 68.85725" MoveType="Location" Pathing="Navigator" Entry="0" />
+            </If>
+            <FlyToAction Dismount="False" Location="2067.27, 285.2988, 97.03257" />
+            <WaitAction Condition="ObjectManager.GetObjectsOfType&lt;WoWGameObject&gt;().FirstOrDefault(o =&gt; o.Entry == 164871) != null &amp;&amp; ObjectManager.GetObjectsOfType&lt;WoWGameObject&gt;().FirstOrDefault(o =&gt; o.Entry == 164871).Location.Distance(new WoWPoint(2062.376, 292.998, 114.973)) &lt; 1" Timeout="6000000" />
+            <CustomAction Code="CTM(2068.119, 295.5195, 97.24951);" />
+            <WaitAction Condition="Me.MapId == 1" Timeout="6000000" />
+          </If>
+          <If Condition="Me.IsAlliance" IgnoreCanRun="True">
+            <If Condition="DistanceTo(-5047.012, -800.6297, 495.1275) &lt; 500" IgnoreCanRun="True">
+              <MoveToAction Location="-5047.012, -800.6297, 495.1275" MoveType="Location" Pathing="Navigator" Entry="0" />
+            </If>
+            <FlyToAction Dismount="False" Location="-3859.199, -661.5073, 10.08274" />
+            <WaitAction Condition="ObjectManager.GetObjectsOfType&lt;WoWGameObject&gt;().FirstOrDefault(o =&gt; o.Entry == 176231) != null &amp;&amp; ObjectManager.GetObjectsOfType&lt;WoWGameObject&gt;().FirstOrDefault(o =&gt; o.Entry == 176231).Location.Distance(new WoWPoint(-3872.35, -639.9439, 0.04815831)) &lt; 1" Timeout="6000000" />
+            <CustomAction Code="CTM(-3866.837, -642.1938, 5.096432);" />
+            <WaitAction Condition="Me.MapId == 1" Timeout="6000000" />
+          </If>
+        </If>
+      </If>
+      <If Condition="Me.MapId == 571" IgnoreCanRun="True">
+        <If Condition="Me.IsAlliance" IgnoreCanRun="True">
+          <FlyToAction Dismount="True" Location="5768.25, 707.2867, 641.5833" />
+          <InteractionAction InteractType="GameObject" Entry="190960" InteractDelay="2000" GameObjectType="Transport" SpellFocus="Anvil" />
+          <WaitAction Condition="Me.MapId == 0" Timeout="20000" />
+        </If>
+        <If Condition="Me.IsHorde" IgnoreCanRun="True">
+          <FlyToAction Dismount="True" Location="5897.042, 562.7647, 639.48" />
+          <InteractionAction InteractType="GameObject" Entry="191009" InteractDelay="2000" GameObjectType="Transport" SpellFocus="Anvil" />
+          <WaitAction Condition="Me.MapId == 1" Timeout="20000" />
+        </If>
+      </If>
+    </If>
+  </While>
+  <SubRoutine SubRoutineName="EmptyBagsInIronforge">
+    <CustomAction Code="Log(Color.Green,&quot;Mine/Herb 1-525: &quot;,Color.LightGreen,&quot;Emptying my bags in Ironforge&quot;);" />
+    <!--Front of Ironforge gates-->
+    <FlyToAction Dismount="False" Location="-5043.242, -805.4196, 504.7747" />
+    <FlyToAction Dismount="False" Location="-4982.075, -879.6846, 512.5381" />
+    <FlyToAction Dismount="False" Location="-5021.301, -943.3182, 509.3302" />
+    <FlyToAction Dismount="True" Location="-4908.107, -974.3073, 501.4522" />
+    <GetMailAction GetMailType="AllItems" ItemID="0" CheckNewMail="True" MinFreeBagSlots="2" AutoFindMailBox="False" Location="-4908.314, -975.7229, 501.4461" />
+    <If Condition="(bool)Settings[&quot;AH Items&quot;]" IgnoreCanRun="True">
+      <SellItemOnAhAction Category="Gem" SubCategoryType="WoWItemGemClass" SubCategory="None" UseCategory="True" RunTime="_24_Hours" AmountType="Everything" ItemID="13466" MinBuyout="0g10s0c" MaxBuyout="4g0s0c" StackSize="20" IgnoreStackSizeBelow="1" Amount="10" BidPrecent="95" UndercutPrecent="0.001" AutoFindAh="True" PostIfBelowMinBuyout="True" Location="0, 0, 0" />
+      <SellItemOnAhAction Category="TradeGoods" SubCategoryType="WoWItemTradeGoodsClass" SubCategory="None" UseCategory="True" RunTime="_24_Hours" AmountType="Everything" ItemID="13466" MinBuyout="0g10s0c" MaxBuyout="4g0s0c" StackSize="20" IgnoreStackSizeBelow="1" Amount="10" BidPrecent="95" UndercutPrecent="0.001" AutoFindAh="True" PostIfBelowMinBuyout="True" Location="0, 0, 0" />
+    </If>
+    <If Condition="!(bool)Settings[&quot;AH Items&quot;]" IgnoreCanRun="True">
+      <MailItemAction Category="Gem" SubCategoryType="WoWItemGemClass" SubCategory="None" Mail="All" UseCategory="True" ItemID="0" Amount="0" AutoFindMailBox="True" Location="0, 0, 0" />
+      <MailItemAction Category="TradeGoods" SubCategoryType="WoWItemTradeGoodsClass" SubCategory="None" Mail="All" UseCategory="True" ItemID="0" Amount="0" AutoFindMailBox="True" Location="0, 0, 0" />
+    </If>
+  </SubRoutine>
+  <SubRoutine SubRoutineName="EmptyBagsInStormwind">
+    <CustomAction Code="Log(Color.Green,&quot;Mine/Herb 1-525: &quot;,Color.LightGreen,&quot;Emptying my bags in Stormwind&quot;);" />
+    <!--Front of AH area-->
+    <FlyToAction Dismount="True" Location="-8355.722, 641.4622, 95.28886" />
+    <GetMailAction GetMailType="AllItems" ItemID="0" CheckNewMail="True" MinFreeBagSlots="2" AutoFindMailBox="True" Location="0, 0, 0" />
+    <If Condition="(bool)Settings[&quot;AH Items&quot;]" IgnoreCanRun="True">
+      <SellItemOnAhAction Category="Gem" SubCategoryType="WoWItemGemClass" SubCategory="None" UseCategory="True" RunTime="_24_Hours" AmountType="Everything" ItemID="13466" MinBuyout="0g10s0c" MaxBuyout="4g0s0c" StackSize="20" IgnoreStackSizeBelow="1" Amount="10" BidPrecent="95" UndercutPrecent="0.001" AutoFindAh="True" PostIfBelowMinBuyout="True" Location="0, 0, 0" />
+      <SellItemOnAhAction Category="TradeGoods" SubCategoryType="WoWItemTradeGoodsClass" SubCategory="None" UseCategory="True" RunTime="_24_Hours" AmountType="Everything" ItemID="13466" MinBuyout="0g10s0c" MaxBuyout="4g0s0c" StackSize="20" IgnoreStackSizeBelow="1" Amount="10" BidPrecent="95" UndercutPrecent="0.001" AutoFindAh="True" PostIfBelowMinBuyout="True" Location="0, 0, 0" />
+    </If>
+    <If Condition="!(bool)Settings[&quot;AH Items&quot;]" IgnoreCanRun="True">
+      <MailItemAction Category="Gem" SubCategoryType="WoWItemGemClass" SubCategory="None" Mail="All" UseCategory="True" ItemID="0" Amount="0" AutoFindMailBox="True" Location="0, 0, 0" />
+      <MailItemAction Category="TradeGoods" SubCategoryType="WoWItemTradeGoodsClass" SubCategory="None" Mail="All" UseCategory="True" ItemID="0" Amount="0" AutoFindMailBox="True" Location="0, 0, 0" />
+    </If>
+  </SubRoutine>
+  <SubRoutine SubRoutineName="TrainInStormwind">
+    <CallSubRoutine SubRoutineName="EmptyBagsInStormwind" />
+    <CustomAction Code="Log(Color.Green,&quot;Mine/Herb 1-525: &quot;,Color.LightGreen,&quot;Training in Stormwind&quot;);" />
+    <If Condition="(bool)Settings[&quot;Mining&quot;]" IgnoreCanRun="True">
+      <FlyToAction Dismount="True" Location="-8419.147, 666.6985, 94.58031" />
+      <TrainSkillAction NpcEntry="5513" Location="-8433.48, 688.922, 96.31891" />
+      <WaitAction Condition="Mining.MaxLevel-Mining.Level &gt; 25" Timeout="3000" />
+      <If Condition="InbagCount (2901) == 0 &amp;&amp; InbagCount (40772) == 0" IgnoreCanRun="False">
+        <BuyItemAction NpcEntry="5514" Location="-8430.177, 695.1375, 96.31892" ItemID="2901" BuyItemType="SpecificItem" Count="1" BuyAdditively="True" />
+      </If>
+    </If>
+    <If Condition="(bool)Settings[&quot;Herb&quot;]" IgnoreCanRun="True">
+      <FlyToAction Dismount="False" Location="-8971.845, 777.4791, 96.39404" />
+      <TrainSkillAction NpcEntry="5566" Location="-8969.993, 779.6597, 96.25022" />
+      <WaitAction Condition="Herbalism.MaxLevel-Herbalism.Level &gt; 25" Timeout="3000" />
+    </If>
+  </SubRoutine>
+  <SubRoutine SubRoutineName="EmptyBagsInUndercity">
+    <CustomAction Code="Log(Color.Green,&quot;Mine/Herb 1-525: &quot;,Color.LightGreen,&quot;Emptying my bags in Undercity&quot;);" />
+    <FlyToAction Dismount="False" Location="1688.531, 730.3077, 73.82889" />
+    <GetMailAction GetMailType="AllItems" ItemID="0" CheckNewMail="True" MinFreeBagSlots="2" AutoFindMailBox="False" Location="1644.13, 277.5082, -62.18286" />
+    <If Condition="(bool)Settings[&quot;AH Items&quot;]" IgnoreCanRun="True">
+      <SellItemOnAhAction Category="Gem" SubCategoryType="WoWItemGemClass" SubCategory="None" UseCategory="True" RunTime="_24_Hours" AmountType="Everything" ItemID="13466" MinBuyout="0g10s0c" MaxBuyout="4g0s0c" StackSize="20" IgnoreStackSizeBelow="1" Amount="10" BidPrecent="95" UndercutPrecent="0.001" AutoFindAh="True" PostIfBelowMinBuyout="True" Location="0, 0, 0" />
+      <SellItemOnAhAction Category="TradeGoods" SubCategoryType="WoWItemTradeGoodsClass" SubCategory="None" UseCategory="True" RunTime="_24_Hours" AmountType="Everything" ItemID="13466" MinBuyout="0g10s0c" MaxBuyout="4g0s0c" StackSize="20" IgnoreStackSizeBelow="1" Amount="10" BidPrecent="95" UndercutPrecent="0.001" AutoFindAh="True" PostIfBelowMinBuyout="True" Location="0, 0, 0" />
+    </If>
+    <If Condition="!(bool)Settings[&quot;AH Items&quot;]" IgnoreCanRun="True">
+      <MoveToAction Location="1560.8, 355.098, -62.16309" MoveType="Location" Pathing="Navigator" Entry="0" />
+      <MailItemAction Category="Gem" SubCategoryType="WoWItemGemClass" SubCategory="None" Mail="All" UseCategory="True" ItemID="0" Amount="0" AutoFindMailBox="True" Location="0, 0, 0" />
+      <MailItemAction Category="TradeGoods" SubCategoryType="WoWItemTradeGoodsClass" SubCategory="None" Mail="All" UseCategory="True" ItemID="0" Amount="0" AutoFindMailBox="True" Location="0, 0, 0" />
+    </If>
+  </SubRoutine>
+  <SubRoutine SubRoutineName="TrainInUndercity">
+    <CallSubRoutine SubRoutineName="EmptyBagsInUndercity" />
+    <CustomAction Code="Log(Color.Green,&quot;Mine/Herb 1-525: &quot;,Color.LightGreen,&quot;Training in Undercity&quot;);" />
+    <If Condition="(bool)Settings[&quot;Herb&quot;]" IgnoreCanRun="True">
+      <TrainSkillAction NpcEntry="4614" Location="1560.8, 355.098, -62.16309" />
+      <WaitAction Condition="Herbalism.MaxLevel-Herbalism.Level &gt; 25" Timeout="3000" />
+    </If>
+    <If Condition="(bool)Settings[&quot;Mining&quot;]" IgnoreCanRun="True">
+      <TrainSkillAction NpcEntry="4598" Location="1638.21, 335.638, -62.18319" />
+      <WaitAction Condition="Mining.MaxLevel-Mining.Level &gt; 25" Timeout="3000" />
+    </If>
+  </SubRoutine>
+  <SubRoutine SubRoutineName="EmptyBagsInOrg">
+    <CustomAction Code="Log(Color.Green,&quot;Mine/Herb 1-525: &quot;,Color.LightGreen,&quot;Emptying my bags in Org&quot;);" />
+    <!--In front of AH area-->
+    <FlyToAction Dismount="True" Location="2012.031, -4690.59, 28.64125" />
+    <GetMailAction GetMailType="AllItems" ItemID="0" CheckNewMail="True" MinFreeBagSlots="2" AutoFindMailBox="True" Location="0, 0, 0" />
+    <If Condition="(bool)Settings[&quot;AH Items&quot;]" IgnoreCanRun="True">
+      <SellItemOnAhAction Category="Gem" SubCategoryType="WoWItemGemClass" SubCategory="None" UseCategory="True" RunTime="_24_Hours" AmountType="Everything" ItemID="13466" MinBuyout="0g10s0c" MaxBuyout="4g0s0c" StackSize="20" IgnoreStackSizeBelow="1" Amount="10" BidPrecent="95" UndercutPrecent="0.001" AutoFindAh="True" PostIfBelowMinBuyout="True" Location="0, 0, 0" />
+      <SellItemOnAhAction Category="TradeGoods" SubCategoryType="WoWItemTradeGoodsClass" SubCategory="None" UseCategory="True" RunTime="_24_Hours" AmountType="Everything" ItemID="13466" MinBuyout="0g10s0c" MaxBuyout="4g0s0c" StackSize="20" IgnoreStackSizeBelow="1" Amount="10" BidPrecent="95" UndercutPrecent="0.001" AutoFindAh="True" PostIfBelowMinBuyout="True" Location="0, 0, 0" />
+      <MoveToAction Location="2012.031, -4690.59, 28.64125" MoveType="Location" Pathing="Navigator" Entry="0" />
+    </If>
+    <If Condition="!(bool)Settings[&quot;AH Items&quot;]" IgnoreCanRun="True">
+      <MailItemAction Category="Gem" SubCategoryType="WoWItemGemClass" SubCategory="None" Mail="All" UseCategory="True" ItemID="0" Amount="0" AutoFindMailBox="True" Location="0, 0, 0" />
+      <MailItemAction Category="TradeGoods" SubCategoryType="WoWItemTradeGoodsClass" SubCategory="None" Mail="All" UseCategory="True" ItemID="0" Amount="0" AutoFindMailBox="True" Location="0, 0, 0" />
+    </If>
+  </SubRoutine>
+  <SubRoutine SubRoutineName="TrainInOrg">
+    <CallSubRoutine SubRoutineName="EmptyBagsInOrg" />
+    <CustomAction Code="Log(Color.Green,&quot;Mine/Herb 1-525: &quot;,Color.LightGreen,&quot;Training in Org&quot;);" />
+    <If Condition="(bool)Settings[&quot;Mining&quot;]" IgnoreCanRun="True">
+      <!--In front of Mining trainer building-->
+      <FlyToAction Dismount="True" Location="2069.483, -4766.704, 27.47169" />
+      <TrainSkillAction NpcEntry="3357" Location="2081.978, -4764.085, 27.92557" />
+      <WaitAction Condition="Mining.MaxLevel-Mining.Level &gt; 25" Timeout="3000" />
+      <If Condition="InbagCount (2901) == 0 &amp;&amp; InbagCount (40772) == 0" IgnoreCanRun="True">
+        <BuyItemAction NpcEntry="3358" Location="2083.222, -4770.205, 27.92618" ItemID="2901" BuyItemType="SpecificItem" Count="1" BuyAdditively="False" />
+      </If>
+    </If>
+    <If Condition="(bool)Settings[&quot;Herb&quot;]" IgnoreCanRun="True">
+      <!--Close to Herb trainer building-->
+      <FlyToAction Dismount="True" Location="1910.606, -4391.944, 43.89495" />
+      <TrainSkillAction NpcEntry="46741" Location="1902.69, -4450.71, 53.4155" />
+      <WaitAction Condition="Herbalism.MaxLevel-Herbalism.Level &gt; 25" Timeout="3000" />
+      <MoveToAction Location="1889.895, -4445.791, 52.52325" MoveType="Location" Pathing="Navigator" Entry="0" />
+    </If>
+  </SubRoutine>
+  <SubRoutine SubRoutineName="EmptyBagsInDalaran">
+    <CustomAction Code="Log(Color.Green,&quot;Mine/Herb 1-525: &quot;,Color.LightGreen,&quot;Emptying my bags in Dalaran&quot;);" />
+    <If Condition="DistanceTo(5896.106, 719.2957, 640.5133) &gt; 100" IgnoreCanRun="True">
+      <FlyToAction Dismount="False" Location="5341.598, 522.6038, 440.8728" />
+      <MoveToAction Location="5611.935, 601.7, 796.0209" MoveType="Location" Pathing="ClickToMove" Entry="0" />
+      <MoveToAction Location="5888.19, 714.7673, 712.1321" MoveType="Location" Pathing="ClickToMove" Entry="0" />
+      <FlyToAction Dismount="True" Location="5896.106, 719.2957, 640.5133" />
+    </If>
+    <GetMailAction GetMailType="AllItems" ItemID="0" CheckNewMail="True" MinFreeBagSlots="2" AutoFindMailBox="True" Location="0, 0, 0" />
+    <If Condition="(bool)Settings[&quot;AH Items&quot;]" IgnoreCanRun="True">
+      <SellItemOnAhAction Category="Gem" SubCategoryType="WoWItemGemClass" SubCategory="None" UseCategory="True" RunTime="_24_Hours" AmountType="Everything" ItemID="13466" MinBuyout="0g10s0c" MaxBuyout="4g0s0c" StackSize="20" IgnoreStackSizeBelow="1" Amount="10" BidPrecent="95" UndercutPrecent="0.001" AutoFindAh="True" PostIfBelowMinBuyout="True" Location="0, 0, 0" />
+      <SellItemOnAhAction Category="TradeGoods" SubCategoryType="WoWItemTradeGoodsClass" SubCategory="None" UseCategory="True" RunTime="_24_Hours" AmountType="Everything" ItemID="13466" MinBuyout="0g10s0c" MaxBuyout="4g0s0c" StackSize="20" IgnoreStackSizeBelow="1" Amount="10" BidPrecent="95" UndercutPrecent="0.001" AutoFindAh="True" PostIfBelowMinBuyout="True" Location="0, 0, 0" />
+    </If>
+    <If Condition="!(bool)Settings[&quot;AH Items&quot;]" IgnoreCanRun="True">
+      <MailItemAction Category="Gem" SubCategoryType="WoWItemGemClass" SubCategory="None" Mail="All" UseCategory="True" ItemID="0" Amount="0" AutoFindMailBox="True" Location="0, 0, 0" />
+      <MailItemAction Category="TradeGoods" SubCategoryType="WoWItemTradeGoodsClass" SubCategory="None" Mail="All" UseCategory="True" ItemID="0" Amount="0" AutoFindMailBox="True" Location="0, 0, 0" />
+    </If>
+    <MoveToAction Location="5901.044, 724.9983, 639.8762" MoveType="Location" Pathing="Navigator" Entry="0" />
+  </SubRoutine>
+  <SubRoutine SubRoutineName="TrainInDalaran">
+    <CallSubRoutine SubRoutineName="EmptyBagsInDalaran" />
+    <CustomAction Code="Log(Color.Green,&quot;Mine/Herb 1-525: &quot;,Color.LightGreen,&quot;Training in Dalaran&quot;);" />
+    <If Condition="DistanceTo(5896.106, 719.2957, 640.5133) &gt; 100" IgnoreCanRun="True">
+      <FlyToAction Dismount="False" Location="5341.598, 522.6038, 440.8728" />
+      <MoveToAction Location="5611.935, 601.7, 796.0209" MoveType="Location" Pathing="ClickToMove" Entry="0" />
+      <MoveToAction Location="5888.19, 714.7673, 712.1321" MoveType="Location" Pathing="ClickToMove" Entry="0" />
+      <FlyToAction Dismount="True" Location="5896.106, 719.2957, 640.5133" />
+    </If>
+    <If Condition="(bool)Settings[&quot;Mining&quot;]" IgnoreCanRun="True">
+      <TrainSkillAction NpcEntry="28698" Location="5924.542, 708.256, 642.5153" />
+      <WaitAction Condition="Mining.MaxLevel-Mining.Level &gt; 25" Timeout="3000" />
+    </If>
+    <If Condition="(bool)Settings[&quot;Herb&quot;]" IgnoreCanRun="True">
+      <TrainSkillAction NpcEntry="28704" Location="5878.112, 696.3543, 644.9129" />
+      <WaitAction Condition="Herbalism.MaxLevel-Herbalism.Level &gt; 25" Timeout="3000" />
+      <MoveToAction Location="5869.937, 683.9773, 643.323" MoveType="Location" Pathing="Navigator" Entry="0" />
+    </If>
+  </SubRoutine>
+</Professionbuddy>

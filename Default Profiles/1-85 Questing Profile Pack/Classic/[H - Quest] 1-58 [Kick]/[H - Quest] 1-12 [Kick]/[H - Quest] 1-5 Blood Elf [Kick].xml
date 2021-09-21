@@ -1,0 +1,251 @@
+<HBProfile>
+	<Name>[H - Quest] 1-5 Blood Elf [Kick]</Name>
+	<MinDurability>0.2</MinDurability>
+	<MinFreeBagSlots>3</MinFreeBagSlots>
+	<MinLevel>1</MinLevel>
+	<MaxLevel>86</MaxLevel>
+	<MailGrey>False</MailGrey>
+	<MailWhite>False</MailWhite>
+	<MailGreen>True</MailGreen>
+	<SellGrey>True</SellGrey>
+	<SellWhite>True</SellWhite>
+	<SellGreen>True</SellGreen>
+	<SellBlue>False</SellBlue>
+	<SellPurple>False</SellPurple>
+
+	<AvoidMobs>
+		<Mob Name="Training Dummy" Entry="44794"/><!--Blood Elf Training Dummy-->
+	</AvoidMobs>
+
+	<Mailboxes>
+<!--Sunstrider Isle Mailbox-->
+		<Mailbox X="10353.51" Y="-6368.346" Z="35.71226"/>
+<!--Ruins of Silvermoon Mailbox-->
+		<Mailbox X="9500.1" Y="-6840.219" Z="16.49203"/>
+<!--Fairbreeze Village Mailbox-->
+		<Mailbox X="8721.254" Y="-6666.695" Z="70.27271"/>		
+	</Mailboxes>
+
+	<Vendors>
+<!--Farstrider Retreat-->
+		<Vendor Name="Zalene Firstlight" Type="Food" Entry="16443" X="8990.876" Y="-7462.583" Z="86.68631"/>
+		<Vendor Name="Areyn" Type="Repair" Entry="16260" X="8980.713" Y="-7411.196" Z="89.40303"/>
+<!--Fairbreeze Village-->
+		<Vendor Name="Marniel Amberlight" Entry="15397" Type="Food" X="8700.384" Y="-6638.356" Z="72.7468"/>
+		<Vendor Name="Sathiel" Entry="16261" Type="Repair" X="8692.212" Y="-6639.568" Z="72.7468"/>
+<!--Sunstrider Isle Vendors-->
+		<Vendor Name="Shara Sunwing" Type="Food" Entry="15287" X="10374.12" Y="-6391.749" Z="38.53321"/>
+		<Vendor Name="Jainthess Thelryn" Type="Repair" Entry="15291" X="10416.79" Y="-6316.604" Z="35.57223"/>
+<!--Sunstrider Isle Trainers-->
+		<Vendor Name="Summoner Teli'Larien" Type="Train" TrainClass="Warlock" Entry="15283" X="10337.57" Y="-6405.026" Z="38.53403"/>
+		<Vendor Name="Julia Sunstriker" Type="Train" TrainClass="Mage" Entry="15279" X="10337.19" Y="-6419.446" Z="38.533"/>
+		<Vendor Name="Matron Arena" Type="Train" TrainClass="Priest" Entry="15284" X="10372.4" Y="-6428.843" Z="38.53291"/>
+		<Vendor Name="Jesthenis Sunstriker" Type="Train" TrainClass="Paladin" Entry="15280" X="10366.67" Y="-6431.529" Z="38.5341"/>
+		<Vendor Name="Delios Silverblade" Type="Train" TrainClass="Warrior" Entry="43010" X="10381.3" Y="-6422.5" Z="38.53276"/>
+		<Vendor Name="Pathstalker Kariel" Type="Train" TrainClass="Rogue" Entry="15285" X="10384.53" Y="-6404.986" Z="38.53375"/>
+		<Vendor Name="Ranger Sallina" Type="Train" TrainClass="Hunter" Entry="15513" X="10384.72" Y="-6410.674" Z="38.53271"/>
+<!--Ruins of Silvermoon Vendors-->
+		<Vendor Name="Kyrenna" Type="Food" Entry="18929" X="9552.018" Y="-6825.113" Z="16.49371"/>
+		<Vendor Name="Sleyin" Type="Repair" Entry="18926" X="9482.344" Y="-6805.512" Z="16.49449"/>
+<!--Ruins of Silvermoon Trainers-->
+		<Vendor Name="Celoenus" Type="Train" TrainClass="Warlock" Entry="16266" X="9467.632" Y="-6862.825" Z="28.33208"/>
+		<Vendor Name="Garridel" Type="Train" TrainClass="Mage" Entry="16269" X="9462.238" Y="-6853.449" Z="28.3786"/>
+		<Vendor Name="Ponaris" Type="Train" TrainClass="Priest" Entry="16276" X="9466.62" Y="-6844.234" Z="28.37831"/>
+		<Vendor Name="Noellene" Type="Train" TrainClass="Paladin" Entry="16275" X="9516.046" Y="-6870.964" Z="18.75058"/>
+		<Vendor Name="Lothan Silverblade" Entry="43012" Type="Train" TrainClass="Warrior" X="9521.21" Y="-6865.33" Z="18.75"/>
+		<Vendor Name="Tannaria" Type="Train" TrainClass="Rogue" Entry="16279" X="9534.146" Y="-6875.998" Z="26.15075"/>
+		<Vendor Name="Hannovia" Type="Train" TrainClass="Hunter" Entry="16270" X="9529.209" Y="-6864.578" Z="18.74909"/>
+<!--Silvermoon Vendors-->
+		<Vendor Name="Innkeeper Jovia" Entry="17630" Type="Food" X="9565.677" Y="-7222.801" Z="16.21334"/>
+		<Vendor Name="Zathanna" Entry="16636" Type="Repair" X="9629.071" Y="-7240.864" Z="15.24548"/>
+<!--Silvermoon Trainers-->
+		<Vendor Name="Talionia" Entry="16647" Type="Train" TrainClass="Warlock" X="9773.275" Y="-7301.98" Z="14.6676"/>
+		<Vendor Name="Zaedana" Entry="16651" Type="Train" TrainClass="Mage" X="10001.53" Y="-7093.241" Z="47.70744"/>
+		<Vendor Name="Lotheolan" Entry="16659" Type="Train" TrainClass="Priest" X="9937.808" Y="-7071.593" Z="47.71674"/>
+		<Vendor Name="Champion Bachi" Entry="16681" Type="Train" TrainClass="Paladin" X="9850.974" Y="-7517.683" Z="19.73597"/>
+		<Vendor Name="Beldis" Entry="44129" Type="Train" TrainClass="Warrior" X="9844.25" Y="-7383.62" Z="18.61278"/>
+		<Vendor Name="Nerisen" Entry="16686" Type="Train" TrainClass="Rogue" X="9745.938" Y="-7363.866" Z="24.33784"/>
+		<Vendor Name="Tana" Entry="16672" Type="Train" TrainClass="Hunter" X="9943.191" Y="-7398.918" Z="12.3814"/>
+	</Vendors>
+
+	<Blackspots>
+		<Blackspot X="9147.209" Y="-6994.8" Z="9.03133" Radius="33.13993" />
+	</Blackspots>
+
+	<!-- Quest Overrides -->
+	<Quest Id="8335" Name="Felendren the Banished">
+		<Objective QuestName="Felendren the Banished" QuestId="8335" Type="CollectItem" Name="Felendren's Head" ItemId="20799" CollectCount="1">
+            		<CollectFrom>
+				<Mob Name="Felendren the Banished" Id="15367" />
+            		</CollectFrom>
+            		<Hotspots>
+				<Hotspot X="10166.42" Y="-6016.767" Z="63.57109" />
+				<Hotspot X="10150.6" Y="-6006.179" Z="110.1546" />
+            		</Hotspots>
+		</Objective>
+		<Objective QuestName="Felendren the Banished" QuestId="8335" Type="KillMob" Name="Tainted Arcane Wraith" MobId="15298" KillCount="2" >
+			<Hotspots>
+				<Hotspot X="10145.7" Y="-6022.378" Z="63.56999" />
+				<Hotspot X="10073.21" Y="-6041.684" Z="42.1644" />
+			</Hotspots>
+		</Objective>
+		<Objective QuestName="Felendren the Banished" QuestId="8335" Type="KillMob" Name="Arcane Wraith" MobId="15273" KillCount="8" >
+			<Hotspots>
+				<Hotspot X="10222.85" Y="-5983.911" Z="38.94392" />
+				<Hotspot X="10173.27" Y="-5949.974" Z="63.57146" />
+				<Hotspot X="10137.68" Y="-5996.978" Z="110.1542" />
+				<Hotspot X="10086.69" Y="-5988.642" Z="63.32656" />
+				<Hotspot X="10073.15" Y="-6042.694" Z="42.16415" />
+				<Hotspot X="10128.45" Y="-6061.079" Z="25.57002" />
+				<Hotspot X="10177.92" Y="-6050.373" Z="25.53964" />
+			</Hotspots>
+		</Objective>
+	</Quest>
+	<Quest Id="8479" Name="Zul'Marosh">
+		<Objective QuestName="Zul'Marosh" QuestId="8479" Type="CollectItem" Name="Chieftain Zul'Marosh's Head" ItemId="20760" CollectCount="1">
+			<Hotspots>
+				<Hotspot X="8429.978" Y="-7555.859" Z="174.4593"/>
+			</Hotspots>
+		</Objective>
+	</Quest>
+	<Quest Id="9076" Name="Wretched Ringleader">
+		<Objective QuestName="Wretched Ringleader" QuestId="9076" Type="CollectItem" Name="Aldaron's Head" ItemId="22487" CollectCount="1">
+			<CollectFrom/>
+			<Hotspots>
+				<Hotspot X="8756.895" Y="-6101.759" Z="73.07583"/>
+			</Hotspots>
+		</Objective>
+	</Quest>
+	<Quest Id="8325" Name="Reclaiming Sunstrider Isle">
+		<Objective QuestName="Reclaiming Sunstrider Isle" QuestId="8325" Type="KillMob" Name="Mana Wyrm" MobId="15274" KillCount="8">
+			<CollectFrom/>
+			<Hotspots>
+				<Hotspot X="10240.16" Y="-6341.321" Z="30.84126"/>
+			</Hotspots>
+		</Objective>
+	</Quest>
+	<Quest Id="8334" Name="Aggression">
+		<Objective QuestName="Aggression" QuestId="8334" Type="KillMob" Name="Tender" MobId="15271" KillCount="7">
+			<Hotspots>
+				<Hotspot X="10241.23" Y="-6128.996" Z="21.03963"/>
+				<Hotspot X="10258.9" Y="-6069.61" Z="24.82249"/>
+				<Hotspot X="10273.7" Y="-6012.498" Z="26.6564"/>
+				<Hotspot X="10309.04" Y="-6002.535" Z="33.47968"/>
+				<Hotspot X="10377.22" Y="-6033.536" Z="29.25511"/>
+				<Hotspot X="10324.88" Y="-6071.027" Z="25.98827"/>
+			</Hotspots>
+		</Objective>
+		<Objective QuestName="Aggression" QuestId="8334" Type="KillMob" Name="Feral Tender" MobId="15294" KillCount="7">
+			<Hotspots>
+				<Hotspot X="10241.23" Y="-6128.996" Z="21.03963"/>
+				<Hotspot X="10258.9" Y="-6069.61" Z="24.82249"/>
+				<Hotspot X="10273.7" Y="-6012.498" Z="26.6564"/>
+				<Hotspot X="10309.04" Y="-6002.535" Z="33.47968"/>
+				<Hotspot X="10377.22" Y="-6033.536" Z="29.25511"/>
+				<Hotspot X="10324.88" Y="-6071.027" Z="25.98827"/>
+			</Hotspots>
+		</Objective>
+	</Quest>
+
+	<QuestOrder IgnoreCheckPoints="True" >
+	
+	<CustomBehavior File="UserSettings" LootMobs="True" TrainNewSkills="True" LearnFlightPaths="False" UseFlightPaths="False" PullDistance="25" />
+	
+		<PickUp QuestName="Reclaiming Sunstrider Isle" QuestId="8325" GiverId="15278" GiverName="Magistrix Erona"/>
+			<Objective QuestName="Reclaiming Sunstrider Isle" QuestId="8325" Type="KillMob" Name="Mana Wyrm" MobId="15274" KillCount="8"/>
+		<TurnIn QuestName="Reclaiming Sunstrider Isle" QuestId="8325" TurnInId="15278" TurnInName="Magistrix Erona"/>
+		<PickUp QuestName="Unfortunate Measures" QuestId="8326" GiverId="15278" GiverName="Magistrix Erona"/>
+			<Objective QuestName="Unfortunate Measures" QuestId="8326" Type="CollectItem" Name="Lynx Collar" ItemId="20797" CollectCount="8"/>
+		<TurnIn QuestName="Unfortunate Measures" QuestId="8326" TurnInId="15278" TurnInName="Magistrix Erona"/>
+		<PickUp QuestName="Solanian's Belongings" QuestId="8330" GiverId="15295" GiverName="Well Watcher Solanian"/>
+		<PickUp QuestName="The Shrine of Dath'Remar" QuestId="8345" GiverId="15295" GiverName="Well Watcher Solanian"/>
+		<PickUp QuestName="A Fistful of Slivers" QuestId="8336" GiverId="15296" GiverName="Arcanist Ithanas"/>
+			<!-- there are 5 diff versions of this ability on wowhead
+		<PickUp QuestName="Thirst Unending" QuestId="8346" GiverName="Arcanist Helion" GiverId="15297" />
+			<CustomBehavior File="CastSpellOn" QuestId="8346" NumOfTimes="1" MobHpPercentLeft="100" SpellId="28730" MobId="15274" Range="2" MinRange="1" X="10382.54" Y="-6300.068" Z="29.83106" />
+		<TurnIn QuestName="Thirst Unending" QuestId="8346" TurnInName="Arcanist Helion" TurnInId="15297" /> -->
+			<Objective QuestName="A Fistful of Slivers" QuestId="8336" Type="CollectItem" Name="Arcane Sliver" ItemId="20482" CollectCount="6"/>
+			<Objective QuestName="Solanian's Belongings" QuestId="8330" Type="CollectItem" Name="Solanian's Journal" ItemId="20472" CollectCount="1"/><!--Need to add middle strip hotspots for Unfortunate Measures, so it doesn't move all over the place-->
+			<Objective QuestName="Solanian's Belongings" QuestId="8330" Type="CollectItem" Name="Scroll of Scourge Magic" ItemId="20471" CollectCount="1"/>
+			<Objective QuestName="The Shrine of Dath'Remar" QuestId="8345" Type="UseObject" Name="Shrine of Dath'Remar Read" ObjectId="180516" UseCount="1"/>
+			<Objective QuestName="Solanian's Belongings" QuestId="8330" Type="CollectItem" Name="Solanian's Scrying Orb" ItemId="20470" CollectCount="1"/>
+		<PickUp QuestName="Report to Lanthan Perilon" QuestId="8327" GiverId="15278" GiverName="Magistrix Erona"/>
+		<TurnIn QuestName="Solanian's Belongings" QuestId="8330" TurnInId="15295" TurnInName="Well Watcher Solanian"/>
+		<TurnIn QuestName="The Shrine of Dath'Remar" QuestId="8345" TurnInId="15295" TurnInName="Well Watcher Solanian"/>
+		<TurnIn QuestName="A Fistful of Slivers" QuestId="8336" TurnInId="15296" TurnInName="Arcanist Ithanas"/>
+		<TurnIn QuestName="Report to Lanthan Perilon" QuestId="8327" TurnInId="15281" TurnInName="Lanthan Perilon"/>
+		<PickUp QuestName="Aggression" QuestId="8334" GiverId="15281" GiverName="Lanthan Perilon"/>
+			<Objective QuestName="Aggression" QuestId="8334" Type="KillMob" Name="Tender" MobId="15271" KillCount="7"/>
+			<Objective QuestName="Aggression" QuestId="8334" Type="KillMob" Name="Feral Tender" MobId="15294" KillCount="7"/>
+		<TurnIn QuestName="Aggression" QuestId="8334" TurnInId="15281" TurnInName="Lanthan Perilon"/>
+		<PickUp QuestName="Felendren the Banished" QuestId="8335" GiverId="15281" GiverName="Lanthan Perilon"/>
+			<Objective QuestName="Felendren the Banished" QuestId="8335" Type="CollectItem" Name="Felendren's Head" ItemId="20799" CollectCount="1" X="10130.96" Y="-5994.089" Z="110.1553"/>
+			<Objective QuestName="Felendren the Banished" QuestId="8335" Type="KillMob" Name="Tainted Arcane Wraith" MobId="15298" KillCount="2"/>
+			<Objective QuestName="Felendren the Banished" QuestId="8335" Type="KillMob" Name="Arcane Wraith" MobId="15273" KillCount="8"/>
+			<If Condition="(HasItem(20483))" >
+		<PickUp QuestName="Tainted Arcane Sliver" QuestId="8338" GiverName="Tainted Arcane Sliver" GiverId="20483" GiverType="Item" />
+			</If>
+			<If Condition="((HasQuest(8338)) &amp;&amp; (IsQuestCompleted(8338)))" >
+		<TurnIn QuestName="Tainted Arcane Sliver" QuestId="8338" TurnInName="Arcanist Helion" TurnInId="15297" />
+			</If>
+		<TurnIn QuestName="Felendren the Banished" QuestId="8335" TurnInId="15281" TurnInName="Lanthan Perilon"/>
+		<PickUp QuestName="Aiding the Outrunners" QuestId="8347" GiverId="15281" GiverName="Lanthan Perilon"/>
+		<TurnIn QuestName="Aiding the Outrunners" QuestId="8347" TurnInId="15301" TurnInName="Outrunner Alarion"/>
+		<PickUp QuestName="Slain by the Wretched" QuestId="9704" GiverId="15301" GiverName="Outrunner Alarion" X="9984.044" Y="-6478.019" Z="0.997164"/>
+		<TurnIn QuestName="Slain by the Wretched" QuestId="9704" TurnInId="17849" TurnInName="Slain Outrunner"/>
+		<PickUp QuestName="Package Recovery" QuestId="9705" GiverId="17849" GiverName="Slain Outrunner"/>
+		<TurnIn QuestName="Package Recovery" QuestId="9705" TurnInId="15301" TurnInName="Outrunner Alarion"/>
+		
+			<If Condition="Me.ZoneId == 3430" > <!-- Eversong Woods -->
+				<CustomBehavior File="Message" Text="Running to Silvermoon City" LogColor="Cornflowerblue" />
+
+				<RunTo X="10042.92" Y="-7001.271" Z="61.98705" />
+			</If>
+		
+			<If Condition="Me.ZoneId == 3487" > <!-- Silvermoon City -->
+				<CustomBehavior File="Message" Text="Using Translocation Orb in Silvermoon City to Undercity" LogColor="Cornflowerblue" />
+
+				<RunTo X="10042.92" Y="-7001.271" Z="61.98705" />
+				
+				<CustomBehavior File="InteractWith" MobId="184502" ObjectType="Gameobject" Range="8" X="10034.72" Y="-7000.292" Z="61.57618" />
+				<CustomBehavior File="WaitTimer" WaitTime="10000" GoalText="Waiting for port {TimeRemaining}" />
+			</If>
+			
+			 <If Condition="Me.ZoneId == 1497" > <!-- Undercity -->
+				<CustomBehavior File="Message" Text="Running to UC Zepp to Org" LogColor="Cornflowerblue" />
+				<RunTo X="2067.232" Y="286.1159" Z="97.03087" />
+			 </If>
+		
+			<If Condition="Me.ZoneId == 85" > <!-- Tirisfal Glades -->
+				<CustomBehavior File="Message" Text="Running to UC Zepp to Org" LogColor="Cornflowerblue" />
+				<RunTo X="2067.232" Y="286.1159" Z="97.03087" />
+				
+				<CustomBehavior File="Message" Text="Waiting for Zepp to Org - don't interact!" LogColor="Orange" />
+		
+				<CustomBehavior File="UseTransport" TransportId="164871"
+											WaitAtX="2070.155" WaitAtY="289.2588" WaitAtZ="97.0315" 
+											TransportStartX="2062.376" TransportStartY="292.998" TransportStartZ="114.973"
+											StandOnX="2067.979" StandOnY="295.2747" StandOnZ="97.23677" 
+											TransportEndX="1833.509" TransportEndY="-4391.543" TransportEndZ="152.7679"
+											GetOffX="1840.225" GetOffY="-4390.912" GetOffZ="135.2337" />
+
+			</If>
+			
+			 <!-- does this new mex / mey work properly?  &amp;&amp; (Me.Y &lt; -4000) &amp;&amp; (Me.X &gt; 1600)
+			<If Condition="(Me.MapId == 1)" >
+				<CustomBehavior File="InteractWith" MobId="3310" X="1799.95" Y="-4370.14" Z="102.6434" />
+				<CustomBehavior File="WaitTimer" WaitTime="2000" GoalText="Waiting for bot {TimeRemaining}" />
+				<RunTo X="-778.0994" Y="-4891.135" Z="19.71905" />
+			</If>
+			 -->
+			 
+			<If Condition="Me.ZoneId == 85" > <!-- Tirisfal Glades -->
+	<CustomBehavior File="UserDialog" AllowBotStop="True" SoundCue="Exclamation" SoundCueInterval="1" Text="Something went wrong!  Move your toon to Orgrimmar and then down to Sen'jin Village (Durotar)!\n\nIf you are above level 5 - load the 5-12 or 12-58 profile" />
+			</If>
+					
+		
+		<CustomBehavior File="LoadProfile" ProfileName="[H - Quest] 5-12 Durotar [Kick]" /> 
+		
+	</QuestOrder>
+
+</HBProfile>

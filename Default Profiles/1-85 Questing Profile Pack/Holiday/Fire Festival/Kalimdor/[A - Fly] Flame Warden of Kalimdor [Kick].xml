@@ -1,0 +1,146 @@
+<HBProfile>
+	<Name>[A] Flame Warden of Kalimdor [Kick]</Name>
+	<MinLevel>1</MinLevel>
+	<MaxLevel>86</MaxLevel>
+	
+	<MinDurability>0.1</MinDurability>
+	<MinFreeBagSlots>1</MinFreeBagSlots>
+	
+	
+	
+	<QuestOrder>
+
+	<CustomBehavior File="UserSettings" LootMobs="True" PullDistance="1" UseMount="False" TrainNewSkills="False" LearnFlightPaths="False" KillBetweenHotspots="True" LogoutForInactivity="False" />
+
+
+				<!-- Ramkahen / Uldum Flame Warden -->
+				<CustomBehavior File="FlyTo" DestName="Uldum Flame Warden" X="-12436.95" Y="75.21933" Z="5.542328" /> <!-- get correct coords plz -->
+				<CustomBehavior File="ForcedDismount" />
+				<CustomBehavior File="InteractWith" MobId="51653" />
+				<CustomBehavior File="RunMacro" Macro="/click GossipTitleButton1" />
+				<CustomBehavior File="RunMacro" Macro="/click QuestFrameCompleteQuestButton" />	
+
+				<!-- Gadgetzan / Tanaris Flame Warden -->
+				<CustomBehavior File="FlyTo" DestName="Tanaris Flame Warden" X="-7232.183" Y="-3865.565" Z="11.36992" />
+				<CustomBehavior File="ForcedDismount" />
+				<CustomBehavior File="InteractWith" MobId="25916" />
+				<CustomBehavior File="RunMacro" Macro="/click GossipTitleButton1" />
+				<CustomBehavior File="RunMacro" Macro="/click QuestFrameCompleteQuestButton" />	
+
+				<!-- Marshal's Stand / Un'Goro Flame Warden -->
+				<CustomBehavior File="FlyTo" DestName="Un'Goro Flame Warden" X="-7524.563" Y="-1683.091" Z="-281.1782" />
+				<CustomBehavior File="ForcedDismount" />
+				<CustomBehavior File="InteractWith" MobId="51606" />
+				<CustomBehavior File="RunMacro" Macro="/click GossipTitleButton1" />
+				<CustomBehavior File="RunMacro" Macro="/click QuestFrameCompleteQuestButton" />	
+
+				<!-- Cenarion Hold / Silithus Flame Warden -->
+				<CustomBehavior File="FlyTo" DestName="Silithus Flame Warden" X="-6783.817" Y="535.0407" Z="-1.279832" />
+				<CustomBehavior File="ForcedDismount" />
+				<CustomBehavior File="InteractWith" MobId="25914" />
+				<CustomBehavior File="RunMacro" Macro="/click GossipTitleButton1" />
+				<CustomBehavior File="RunMacro" Macro="/click QuestFrameCompleteQuestButton" />	
+
+				<!-- Feathermoon / Feralas Flame Warden -->
+				<CustomBehavior File="FlyTo" DestName="Feralas Flame Warden" X="-4379.804" Y="2179.405" Z="13.60329" />
+				<CustomBehavior File="ForcedDismount" />
+				<CustomBehavior File="InteractWith" MobId="25899" />
+				<CustomBehavior File="RunMacro" Macro="/click GossipTitleButton1" />
+				<CustomBehavior File="RunMacro" Macro="/click QuestFrameCompleteQuestButton" />	
+
+				<!-- Nijel's Point / Desolace Flame Warden -->
+				<CustomBehavior File="FlyTo" DestName="Desolace Flame Warden" X="-63.59695" Y="1266.532" Z="91.19852" />
+				<CustomBehavior File="ForcedDismount" />
+				<CustomBehavior File="InteractWith" MobId="25894" />
+				<CustomBehavior File="RunMacro" Macro="/click GossipTitleButton1" />
+				<CustomBehavior File="RunMacro" Macro="/click QuestFrameCompleteQuestButton" />	
+
+				<!-- Fort Triumph / S. Barrens Flame Warden -->
+				<CustomBehavior File="FlyTo" DestName="S. Barrens Flame Warden" X="-3365.704" Y="-2223.33" Z="92.48001" />
+				<CustomBehavior File="ForcedDismount" />
+				<CustomBehavior File="InteractWith" MobId="51586" />
+				<CustomBehavior File="RunMacro" Macro="/click GossipTitleButton1" />
+				<CustomBehavior File="RunMacro" Macro="/click QuestFrameCompleteQuestButton" />	
+
+				<!-- Theramore / Dustwallow Flame Warden -->
+				<CustomBehavior File="FlyTo" DestName="Dustwallow Flame Warden" X="-3453.332" Y="-4216.833" Z="11.26394" />
+				<CustomBehavior File="ForcedDismount" />
+				<CustomBehavior File="InteractWith" MobId="25897" />
+				<CustomBehavior File="RunMacro" Macro="/click GossipTitleButton1" />
+				<CustomBehavior File="RunMacro" Macro="/click QuestFrameCompleteQuestButton" />	
+
+				<!-- Forest Song / Ashenvale Flame Warden -->
+				<CustomBehavior File="FlyTo" DestName="Forest Song Flame Warden" X="3067.937" Y="-3312.889" Z="150.1151" />
+				<CustomBehavior File="ForcedDismount" />
+				<CustomBehavior File="InteractWith" MobId="25883" />
+				<CustomBehavior File="RunMacro" Macro="/click GossipTitleButton1" />
+				<CustomBehavior File="RunMacro" Macro="/click QuestFrameCompleteQuestButton" />	
+				
+					<CustomBehavior File="FlyTo" DestName="Hyjal Flame Warden" X="5545.063" Y="-3819.247" Z="1676.295" />
+					<CustomBehavior File="FlyTo" DestName="Hyjal Flame Warden" X="5551.757" Y="-3598.695" Z="1567.861" />	
+					<!--
+			<PickUp QuestName="Honor the Flame" QuestId="29030" GiverName="Hyjal Flame Guardian" GiverId="51682" />
+			<TurnIn QuestName="Honor the Flame" QuestId="29030" TurnInName="Earthen Ring Bonfire" TurnInId="208184" TurnInType="GameObject" X="5548.535" Y="-3597.205" Z="1568.205" />
+					-->
+				<CustomBehavior File="InteractWith" MobId="51682" />
+				<CustomBehavior File="RunMacro" Macro="/click GossipTitleButton1" NumOfTimes="1" WaitTime="1000" />
+				<CustomBehavior File="RunMacro" Macro="/click QuestFrameAcceptButton" NumOfTimes="1" WaitTime="1000" />
+
+				<CustomBehavior File="InteractWith" MobId="208184" ObjectType="Gameobject" Range="10" WaitTime="3000" />
+				<CustomBehavior File="RunMacro" Macro="/click GossipTitleButton1" />
+				<CustomBehavior File="RunMacro" Macro="/click QuestFrameCompleteQuestButton" />	
+
+
+				<!-- Everlook / Winterspring Flame Warden -->
+				<CustomBehavior File="FlyTo" DestName="Winterspring Flame Warden" X="6859.802" Y="-4755.062" Z="696.4268" />
+				<CustomBehavior File="ForcedDismount" />
+				<CustomBehavior File="InteractWith" MobId="25917" />
+				<CustomBehavior File="RunMacro" Macro="/click GossipTitleButton1" />
+				<CustomBehavior File="RunMacro" Macro="/click QuestFrameCompleteQuestButton" />	
+
+				<!-- Lor'Danel / Darkshore Flame Warden -->
+				<CustomBehavior File="FlyTo" DestName="Darkshore Flame Warden" X="7247.057" Y="-133.0235" Z="15.46967" />
+				<CustomBehavior File="ForcedDismount" />
+				<CustomBehavior File="InteractWith" MobId="25893" />
+				<CustomBehavior File="RunMacro" Macro="/click GossipTitleButton1" />
+				<CustomBehavior File="RunMacro" Macro="/click QuestFrameCompleteQuestButton" />	
+
+				<!-- Dolanaar / Teldrassil Flame Warden -->
+				<CustomBehavior File="FlyTo" DestName="Continent Bounds" X="8030.916" Y="-1143.794" Z="252.2711" />
+				<CustomBehavior File="MyCTM" DestName="Rut'theran Village" X="8372.175" Y="994.4741" Z="26.56884" />
+	<CustomBehavior File="UserDialog" AllowBotStop="True" SoundCue="Exclamation" SoundCueInterval="1" Text="Zone into Darnassus and press continue (don't go too far)" />
+				<!--
+				<CustomBehavior File="FlyTo" DestName="Teldrassil Flame Warden" X="9786.135" Y="1009.887" Z="1299.332" />
+				-->	
+				<RunTo X="9786.135" Y="1009.887" Z="1299.332" />
+				<CustomBehavior File="ForcedDismount" />
+				<CustomBehavior File="InteractWith" MobId="25906" />
+				<CustomBehavior File="RunMacro" Macro="/click GossipTitleButton1" />
+				<CustomBehavior File="RunMacro" Macro="/click QuestFrameCompleteQuestButton" />	
+				<!--
+				<CustomBehavior File="FlyTo" DestName="Darnassus" X="9722.51" Y="2526.562" Z="1335.678" />
+				-->
+				<RunTo DestName="Darnassus" X="9722.51" Y="2526.562" Z="1335.678" />
+				<CustomBehavior File="ForcedDismount" />
+				<CustomBehavior File="InteractWith" MobId="207995" ObjectType="Gameobject" Range="10" WaitTime="5000" />
+
+				<!-- Azure Watch / Azuremyst Isle Flame Warden -->
+				<!-- <CustomBehavior File="FlyTo" DestName="Azuremyst Isle Flame Warden" X="-4214.986" Y="-12312.82" Z="1.918927" /> -->
+				<RunTo DestName="Azuremyst Isle Flame Warden" X="-4214.986" Y="-12312.82" Z="1.918927" />
+				<CustomBehavior File="ForcedDismount" />
+				<CustomBehavior File="InteractWith" MobId="25888" />
+				<CustomBehavior File="RunMacro" Macro="/click GossipTitleButton1" />
+				<CustomBehavior File="RunMacro" Macro="/click QuestFrameCompleteQuestButton" />	
+
+				<!-- Blood Watch / Bloodmyst Isle Flame Warden -->
+				<!-- <CustomBehavior File="FlyTo" DestName="Bloodmyst Isle Flame Warden" X="-2233.91" Y="-11898.15" Z="26.15769" /> -->
+				<RunTo DestName="Bloodmyst Isle Flame Warden" X="-2233.91" Y="-11898.15" Z="26.15769" />
+				<CustomBehavior File="ForcedDismount" />
+				<CustomBehavior File="InteractWith" MobId="25891" />
+				<CustomBehavior File="RunMacro" Macro="/click GossipTitleButton1" />
+				<CustomBehavior File="RunMacro" Macro="/click QuestFrameCompleteQuestButton" />	
+
+	<CustomBehavior File="UserDialog" AllowBotStop="True" SoundCue="Exclamation" SoundCueInterval="1" Text="Grats on your ach!\n\nEnd of Line" />
+
+	</QuestOrder>
+</HBProfile>

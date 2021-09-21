@@ -1,0 +1,442 @@
+<HBProfile xsi:noNamespaceSchemaLocation="../Schemas/EchoSchema.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<!-- Original contribution by EchoTiger -->
+	<Name>Duskwood ($ShortHash$)</Name>
+
+	<MinDurability>0.3</MinDurability>
+	<MinFreeBagSlots>3</MinFreeBagSlots>
+
+	<SellGrey>true</SellGrey>
+	<SellWhite>true</SellWhite>
+	<SellGreen>true</SellGreen>
+	<SellBlue>true</SellBlue>
+	<SellPurple>false</SellPurple>
+
+	<MailGrey>false</MailGrey>
+	<MailWhite>true</MailWhite>
+	<MailGreen>true</MailGreen>
+	<MailBlue>true</MailBlue>
+	<MailPurple>true</MailPurple>
+
+	<TargetElites>true</TargetElites>
+
+	<AvoidMobs>
+	</AvoidMobs>
+
+	<Mailboxes>
+		<Mailbox Name="Darkshire" X="-10548.96" Y="-1157.706" Z="27.89534" />
+	</Mailboxes>
+
+	<Vendors>
+		<Vendor Name="Innkeeper Trelayne" Entry="6790" Type="Food" X="-10516" Y="-1161.213" Z="28.10035" />
+		<Vendor Name="Mabel Solaj" Entry="227" Type="Food" X="-10523.23" Y="-1170.426" Z="27.40962" />
+		<Vendor Name="Morg Gnarltree" Entry="226" Type="Repair" X="-10596.64" Y="-1163.852" Z="30.06012" />
+		<Vendor Name="Wilkinson" Entry="44114" Type="Food" X="-10767.3" Y="286.467" Z="39.54105" />
+	</Vendors>
+
+	<Blackspots>
+		<!-- House in Raven Hill that has level 100 mobs in it -->
+		<Blackspot X="-10702.11" Y="313.115" Z="40.02248" Radius="30.08644" />
+	</Blackspots>
+
+	<Blacklist>
+		<!-- Mobs introduced by Legion content that are level 110 -->
+		<Mob Name="Dark Rider" Id="100704" Flags="Combat" />
+		<Mob Name="Dark Rider" Id="100346" Flags="Combat" /> 
+		<Mob Name="Dark Rider" Id="99875" Flags="Combat" /> 
+		<Mob Name="Veiled Fanatic" Id="107659" Flags="Pull,Combat" /> 
+		<Mob Name="Felcaller Whitley" Id="107736" Flags="Pull,Combat" />
+	</Blacklist>
+
+	<QuestOrder IgnoreCheckpoints="false" >
+		<!-- Check function status -->
+		<Code File="RunCode" Type="Definition">
+			<![CDATA[
+			private static bool? profileFunctionsEnabled => (bool?)AppDomain.CurrentDomain.GetData("QuestingProfiles_FunctionsEnabled");
+			private static bool IsStoreProfile(string path) => path.StartsWith("store://");
+			private static string Slashify(string path) => IsStoreProfile(path) ? path.Replace(@"\", "/") : path.Replace("/", @"\");
+
+			public __CompiledBatchClass__()
+			{
+				ActivateFunctions();
+			}
+
+			private static void ActivateFunctions()
+			{
+				if (profileFunctionsEnabled == null || profileFunctionsEnabled == false)
+				{
+					Bots.Professionbuddy.PBLog.Log(Colors.MediumPurple, "[Profile Message!]: ", Colors.Yellow, "Please stand by as the functions are being activated!");
+					LoadProfile(@"..\..\Functions\Activate Functions.xml");
+				}
+			}
+
+			private static void LoadProfile(string path)
+			{
+				var profile = GetNewPath(path);
+				if (!IsStoreProfile(profile) && !File.Exists(profile))
+				{
+					Bots.Professionbuddy.PBLog.Log(Colors.MediumPurple, "[Profile Message!]: ", Colors.Yellow, "Profile does not exist.\n" + profile);
+					return;
+				}
+
+				Bots.Professionbuddy.PBLog.Log(Colors.MediumPurple, "[Profile Message!]: ", Colors.Yellow, "Loading: " + profile);
+				ProfileManager.LoadNew(profile, false);
+			}
+
+			private static string GetNewPath(string path)
+			{
+				if (IsStoreProfile(path))
+					return Slashify(path);
+
+				var currentProfile = ProfileManager.XmlLocation;
+				if (IsStoreProfile(currentProfile))
+					return Slashify(currentProfile + "/../" + path);
+
+				var absolutePath = Path.Combine(Path.GetDirectoryName(currentProfile), path);
+				absolutePath = Path.GetFullPath(absolutePath);
+				var canonicalPath = new Uri(absolutePath).LocalPath;
+				return Slashify(canonicalPath);
+			}]]>
+		</Code>
+		<Code File="RunCode" Code="ActivateFunctions();" />
+		<!-- END Check function status -->
+
+		<If Condition="Me.IsHorde" >
+			<Code File="LoadProfile" ProfileName="..\..\Questing Autoloader.xml" />
+		</If>
+		<!-- RunCode Methods -->
+			<Code File="RunCode">
+			<![CDATA[
+				Bots.Professionbuddy.PBLog.Log(System.Windows.Media.Colors.MediumPurple, "> [Profile Initialization Status] ", System.Windows.Media.Colors.CornflowerBlue, "\n     Auto-Looting	:: Enabled\n     Looting	:: Enabled\n     Game Addons	:: Disabled");
+				Lua.DoString("SetCVar('AutoLootDefault', 1);");
+				Lua.DoString("SetCVar('autoDismountFlying', 1);");
+				CharacterSettings.Instance.LootMobs = true;
+				CharacterSettings.Instance.Save();
+				Logging.Write(System.Windows.Media.Colors.MediumPurple, "> [Ready to bot!]");
+			]]>
+			</Code>
+			<Code File="RunCode" Type="Definition">
+				<![CDATA[
+						bool DoQuest(params uint[] questIds)
+						{
+							foreach (var questId in questIds)
+							{
+								if (HasQuest(questId) && !IsQuestCompleted(questId)) return true;
+							}
+							return false;
+						}
+						bool NeedsQuest(params uint[] questIds)
+						{
+							foreach (var questId in questIds)
+							{
+								if (!HasQuest(questId) && !IsQuestCompleted(questId)) return true;
+							}
+							return false;
+						}
+						bool NeedsBreadcrumbQuest(params uint[] questIds)
+						{
+							foreach (var questId in questIds)
+							{
+								if (IsQuestCompleted(questId)) return false;
+							}
+							return true;
+						}
+						bool QuestDone(params uint[] questIds)
+						{
+							foreach (var questId in questIds)
+							{
+								if (HasQuest(questId) && IsQuestCompleted(questId)) return true;
+							}
+							return false;
+						}
+						bool QuestFlaggedCompleted(params uint[] questIds)
+						{
+							foreach (var questId in questIds)
+							{
+								return Lua.GetReturnVal<bool>($"return IsQuestFlaggedCompleted({questId});", 0);
+							}
+							return false;
+						}
+						async Task SkipCutscene(int preWait = 3000, int postWait = 3000)
+						{
+					// Add detection of cutscene here.
+							await Coroutine.Sleep(preWait);
+					// Test and improve the working method.
+							Lua.DoString("MovieFrame:StopMovie(); CinematicFrame_CancelCinematic(); StopCinematic();");
+							await Coroutine.Sleep(postWait);
+						}
+					]]>
+			</Code>
+		<!-- END RunCode Methods -->
+
+
+		<Code File="Hooks\MountHook" state="true" />
+
+		<PickUp QuestName="Wolves at Our Heels" QuestId="26618" GiverName="Commander Althea Ebonlocke" GiverId="264" X="-10559.99" Y="-1154.057" Z="27.98358" />
+		<PickUp QuestName="Seasoned Wolf Kabobs" QuestId="26620" GiverName="Chef Grual" GiverId="272" X="-10512.34" Y="-1161.07" Z="28.09929" />
+		<PickUp QuestName="Dusky Crab Cakes" QuestId="26623" GiverName="Chef Grual" GiverId="272" X="-10512.34" Y="-1161.07" Z="28.09929" />
+
+		<Code File="SetHearthstone" MobId="6790" AreaId="42" X="-10517.47" Y="-1163.598" Z="28.10011" />
+
+		<While Condition="DoQuest(26618, 26620, 26623)" >
+			<Code File="KillUntilComplete" TerminateWhen="!DoQuest(26618, 26620, 26623)" >
+				<HuntingGrounds>
+					<Hotspot X="-10512.34" Y="-1161.07" Z="28.09929" />
+					<Hotspot X="-10105.31" Y="-1041.985" Z="34.3012" />
+					<Hotspot X="-10070.05" Y="-942.8239" Z="35.48397" />
+					<Hotspot X="-10033.32" Y="-849.2815" Z="31.07321" />
+					<Hotspot X="-10055" Y="-761.1633" Z="35.75701" />
+					<Hotspot X="-10021.63" Y="-681.7753" Z="38.07467" />
+					<Hotspot X="-10007.6" Y="-566.1694" Z="41.79941" />
+				</HuntingGrounds>
+				<PursuitList>
+					<PursueUnit Id="43704" PursueWhen="DoQuest(26618, 26620)" />
+					<PursueUnit Id="217" PursueWhen="DoQuest(26623)" />
+				</PursuitList>
+			</Code>
+		</While>
+
+		<If Condition="Me.HearthstoneAreaId == 42 &amp;&amp; QuestDone(26623) &amp;&amp; (Me.MinimapZoneText.Contains(&quot;The Darkened Bank&quot;) || Me.MinimapZoneText.Contains(&quot;Brightwood Grove&quot;))" >
+			<Code File="UseHearthstone" WaitForCD="false" />
+		</If>
+
+		<TurnIn QuestName="Wolves at Our Heels" QuestId="26618" TurnInName="Commander Althea Ebonlocke" TurnInId="264" X="-10560.38" Y="-1154.259" Z="27.96955" />
+		<PickUp QuestName="The Hermit" QuestId="26627" GiverName="Commander Althea Ebonlocke" GiverId="264" X="-10560.38" Y="-1154.259" Z="27.96955" />
+		<PickUp QuestName="The Night Watch" QuestId="26645" GiverName="Commander Althea Ebonlocke" GiverId="264" X="-10560.38" Y="-1154.259" Z="27.96955" />
+		<TurnIn QuestName="Seasoned Wolf Kabobs" QuestId="26620" TurnInName="Chef Grual" TurnInId="272" X="-10500.53" Y="-1160.118" Z="28.0875" />
+		<TurnIn QuestName="Dusky Crab Cakes" QuestId="26623" TurnInName="Chef Grual" TurnInId="272" X="-10500.53" Y="-1160.118" Z="28.0875" />
+		<PickUp QuestName="Look To The Stars" QuestId="26683" GiverName="Viktori Prism'Antras" GiverId="276" X="-10568.81" Y="-1313.256" Z="48.65923" />
+		<TurnIn QuestName="The Hermit" QuestId="26627" TurnInName="Abercrombie" TurnInId="289" X="-10350.5" Y="-1527.36" Z="92.64196" />
+		<PickUp QuestName="Supplies from Darkshire" QuestId="26653" GiverName="Abercrombie" GiverId="289" X="-10355.61" Y="-1526.699" Z="92.64206" />
+		<TurnIn QuestName="Supplies from Darkshire" QuestId="26653" TurnInName="Madame Eva" TurnInId="265" X="-10532.31" Y="-1211.942" Z="28.11813" />
+		<PickUp QuestName="Ghost Hair Thread" QuestId="26652" GiverName="Madame Eva" GiverId="265" X="-10532.31" Y="-1211.942" Z="28.11813" />
+		<TurnIn QuestName="Look To The Stars" QuestId="26683" TurnInName="Blind Mary" TurnInId="302" X="-10782.24" Y="-1377.309" Z="39.71869" />
+		<PickUp QuestName="The Insane Ghoul" QuestId="26684" GiverName="Blind Mary" GiverId="302" X="-10782.24" Y="-1377.309" Z="39.71869" />
+		<TurnIn QuestName="Ghost Hair Thread" QuestId="26652" TurnInName="Blind Mary" TurnInId="302" X="-10782.24" Y="-1377.309" Z="39.71869" />
+		<PickUp QuestName="Return the Comb" QuestId="26654" GiverName="Blind Mary" GiverId="302" X="-10782.24" Y="-1377.309" Z="39.71869" />
+
+		<Code File="KillUntilComplete" MobId="202" QuestId="26645" >
+			<HuntingGrounds>
+				<Hotspot X="-10775.48" Y="-1346.941" Z="37.50399" />
+				<Hotspot  X="-10736.86" Y="-1390.053" Z="38.12563" />
+			</HuntingGrounds>
+		</Code>
+		<Code File="KillUntilComplete" MobId="511" QuestId="26684" X="-11004.94" Y="-1352.239" Z="53.65908" />
+
+		<TurnIn QuestName="The Insane Ghoul" QuestId="26684" TurnInName="Viktori Prism'Antras" TurnInId="276" X="-10570.55" Y="-1312.516" Z="48.84132" />
+		<PickUp QuestName="Classy Glass" QuestId="26685" GiverName="Viktori Prism'Antras" GiverId="276" X="-10570.55" Y="-1312.516" Z="48.84132" />
+		<TurnIn QuestName="Return the Comb" QuestId="26654" TurnInName="Madame Eva" TurnInId="265" X="-10533.11" Y="-1211.865" Z="28.11845" />
+		<PickUp QuestName="Deliver the Thread" QuestId="26655" GiverName="Madame Eva" GiverId="265" X="-10533.11" Y="-1211.865" Z="28.11845" />
+		<TurnIn QuestName="The Night Watch" QuestId="26645" TurnInName="Commander Althea Ebonlocke" TurnInId="264" X="-10560.25" Y="-1153.649" Z="27.98667" />
+		<PickUp QuestName="Bones That Walk" QuestId="26686" GiverName="Commander Althea Ebonlocke" GiverId="264" X="-10560.25" Y="-1153.649" Z="27.98667" />
+		<TurnIn QuestName="Deliver the Thread" QuestId="26655" TurnInName="Abercrombie" TurnInId="289" X="-10353.06" Y="-1527.023" Z="92.64225" />
+		<PickUp QuestName="Zombie Juice" QuestId="26660" GiverName="Abercrombie" GiverId="289" X="-10353.06" Y="-1527.023" Z="92.64225" />
+		<TurnIn QuestName="Zombie Juice" QuestId="26660" TurnInName="Tavernkeep Smitts" TurnInId="273" X="-10522.46" Y="-1165.795" Z="27.47747" />
+		<PickUp QuestName="Gather Rot Blossoms" QuestId="26661" GiverName="Tavernkeep Smitts" GiverId="273" X="-10522.46" Y="-1165.795" Z="27.47747" />
+
+		<While Condition="DoQuest(26661)" >
+			<Code File="InteractWith" MobId="204457" InteractByLooting="true" NumOfTimes="5" QuestId="26661" X="-10983.84" Y="-1304.082" Z="52.58028" />
+		</While>
+
+		<While Condition="DoQuest(26686)" >
+			<Code File="KillUntilComplete" QuestId="26686" X="-10990.39" Y="-1277.222" Z="52.62516" >
+				<PursuitList>
+					<PursueUnit Id="48" PursueWhen="!IsObjectiveComplete(1, 26686)"  />
+					<PursueUnit Id="203" PursueWhen="!IsObjectiveComplete(2, 26686)"  />
+				</PursuitList>
+			</Code>
+		</While>
+
+		<TurnIn QuestName="Bones That Walk" QuestId="26686" TurnInName="Commander Althea Ebonlocke" TurnInId="264" X="-10562.18" Y="-1155.092" Z="27.90883" />
+		<TurnIn QuestName="Gather Rot Blossoms" QuestId="26661" TurnInName="Tavernkeep Smitts" TurnInId="273" X="-10516.73" Y="-1161.302" Z="28.10025" />
+		<PickUp QuestName="Juice Delivery" QuestId="26676" GiverName="Tavernkeep Smitts" GiverId="273" X="-10516.73" Y="-1161.302" Z="28.10025" />
+		<TurnIn QuestName="Juice Delivery" QuestId="26676" TurnInName="Abercrombie" TurnInId="289" X="-10354.87" Y="-1527.408" Z="92.64152" />
+		<PickUp QuestName="Ogre Thieves" QuestId="26680" GiverName="Abercrombie" GiverId="289" X="-10354.87" Y="-1527.408" Z="92.64152" />
+		<PickUp QuestName="The Legend of Stalvan" QuestId="26666" GiverName="Tobias Mistmantle" GiverId="43453" X="-10513.01" Y="-1300.704" Z="41.29004" />
+		<TurnIn QuestName="The Legend of Stalvan" QuestId="26666" TurnInName="Clerk Daltry" TurnInId="267" X="-10560.45" Y="-1125.094" Z="30.06742" />
+		<RecheckCheckpoints />
+		<PickUp QuestName="The Stolen Letters" QuestId="26667" GiverName="Clerk Daltry" GiverId="267" X="-10560.45" Y="-1125.094" Z="30.06742" />
+		<PickUp QuestName="Worgen in the Woods" QuestId="26688" GiverName="Calor" GiverId="663" X="-10579.72" Y="-1198.344" Z="27.55411" />
+
+		<While Condition="DoQuest(26667)" >
+			<Code File="InteractWith" MobId="204462" InteractByLooting="true" QuestId="26667" X="-10446.1" Y="-820.554" Z="48.7847" />
+		</While>
+
+		<While Condition="DoQuest(26688)" >
+			<Code File="KillUntilComplete" MobId="898" QuestId="26688" >
+				<HuntingGrounds>
+					<Hotspot X="-10455.54" Y="-849.3251" Z="49.30766" />
+					<Hotspot X="-10350.75" Y="-853.3818" Z="41.89801" />
+					<Hotspot X="-10552.37" Y="-853.0412" Z="50.21828" />
+				</HuntingGrounds>
+			</Code>
+		</While>
+
+		<TurnIn QuestName="The Stolen Letters" QuestId="26667" TurnInName="Clerk Daltry" TurnInId="267" X="-10560.28" Y="-1125.098" Z="30.06785" />
+		<PickUp QuestName="In A Dark Corner" QuestId="26669" GiverName="Clerk Daltry" GiverId="267" X="-10560.28" Y="-1125.098" Z="30.06785" />
+		<TurnIn QuestName="Worgen in the Woods" QuestId="26688" TurnInName="Calor" TurnInId="663" X="-10579.63" Y="-1198.465" Z="27.55031" />
+		<PickUp QuestName="The Rotting Orchard" QuestId="26689" GiverName="Calor" GiverId="663" X="-10579.63" Y="-1198.465" Z="27.55031" />
+
+		<While Condition="DoQuest(26669)" >
+			<Code File="InteractWith" MobId="204464" InteractByLooting="true" QuestId="26669" X="-11094.94" Y="-961.1793" Z="65.37193" />
+		</While>
+
+		<While Condition="DoQuest(26689)" >
+			<Code File="KillUntilComplete" MobId="533" QuestId="26689" >
+				<HuntingGrounds>
+					<Hotspot X="-11018.31" Y="-963.5046" Z="64.33723" />
+					<Hotspot X="-11087.48" Y="-888.0313" Z="64.07513" />
+					<Hotspot X="-11029.81" Y="-860.524" Z="61.34233" />
+				</HuntingGrounds>
+			</Code>
+		</While>
+
+		<PickUp QuestName="Vulgar Vul'Gol" QuestId="25235" GiverName="Watcher Dodds" GiverId="888" X="-10921.45" Y="-387.0699" Z="39.25708" />
+
+		<While Condition="DoQuest(26680)" >
+			<Code File="InteractWith" MobId="119" InteractByLooting="true" QuestId="26680" X="-11072.56" Y="-71.61285" Z="16.01041" />
+		</While>
+
+		<While Condition="DoQuest(26685)" >
+			<Code File="KillUntilComplete" MobId="300" QuestId="26685" X="-11231.31" Y="-178.0686" Z="4.662977" />
+		</While>
+
+		<While Condition="DoQuest(25235)" >
+			<Code File="KillUntilComplete" MobIds="889, 212" QuestId="25235" >
+				<HuntingGrounds>
+					<Hotspot X="-11166.46" Y="-158.7256" Z="8.511371" />
+					<Hotspot X="-11113.71" Y="-138.159" Z="12.80862" />
+					<Hotspot X="-11064.25" Y="-76.46749" Z="16.15731" />
+					<Hotspot X="-11002.43" Y="-128.1777" Z="15.0866" />
+				</HuntingGrounds>
+			</Code>
+		</While>
+
+		<TurnIn QuestName="Vulgar Vul'Gol" QuestId="25235" TurnInName="Watcher Dodds" TurnInId="888" X="-10920.79" Y="-383.6645" Z="38.66821" />
+		<PickUp QuestName="A Deadly Vine" QuestId="26707" GiverName="Apprentice Fess" GiverId="43738" X="-10927.9" Y="-378.3406" Z="39.23602" />
+		<PickUp QuestName="The Yorgen Worgen" QuestId="26717" GiverName="Apprentice Fess" GiverId="43738" X="-10927.9" Y="-378.3406" Z="39.23602" />
+
+		<While Condition="DoQuest(26717)" >
+			<Code File="InteractWith" MobId="204777" QuestId="26717" X="-11115.4" Y="-512.764" Z="32.6271" />
+		</While>
+
+		<While Condition="DoQuest(26707)" >
+			<Code File="KillUntilComplete" MobId="43732" QuestId="26707" >
+				<HuntingGrounds>
+					<Hotspot X="-11043.39" Y="-488.5875" Z="30.15953" />
+					<Hotspot X="-11054.73" Y="-567.8895" Z="32.40008" />
+					<Hotspot X="-11034.19" Y="-452.3722" Z="29.90278" />
+				</HuntingGrounds>
+			</Code>
+		</While>
+
+		<TurnIn QuestName="A Deadly Vine" QuestId="26707" TurnInName="Apprentice Fess" TurnInId="43738" X="-10931.88" Y="-377.4149" Z="39.47296" />
+		<TurnIn QuestName="The Yorgen Worgen" QuestId="26717" TurnInName="Apprentice Fess" TurnInId="43738" X="-10931.88" Y="-377.4149" Z="39.47296" />
+		<RecheckCheckpoints />
+		<PickUp QuestName="Delivery to Master Harris" QuestId="26719" GiverName="Apprentice Fess" GiverId="43738" X="-10931.88" Y="-377.4149" Z="39.47296" />
+		<PickUp QuestName="Soothing Spirits" QuestId="26777" GiverName="Sister Elsington" GiverId="43731" X="-10754.94" Y="293.3603" Z="39.56591" />
+			<TurnIn QuestName="Delivery to Master Harris" QuestId="26719" TurnInName="Oliver Harris" TurnInId="43730" X="-10755.99" Y="335.8235" Z="37.18488" />
+		<PickUp QuestName="A Curse We Cannot Lift" QuestId="26720" GiverName="Oliver Harris" GiverId="43730" X="-10755.99" Y="335.8235" Z="37.18488" />
+
+		<If Condition="Me.HearthstoneAreaId == 42 &amp;&amp; QuestDone(26689) &amp;&amp; Me.MinimapZoneText.Contains(&quot;Raven Hill&quot;)" >
+			<Code File="UseHearthstone" WaitForCD="false" />
+		</If>
+
+		<TurnIn QuestName="In A Dark Corner" QuestId="26669" TurnInName="Clerk Daltry" TurnInId="267" X="-10560.3" Y="-1124.871" Z="30.0673" />
+		<PickUp QuestName="Roland's Doom" QuestId="26670" GiverName="Clerk Daltry" GiverId="267" X="-10560.3" Y="-1124.871" Z="30.0673" />
+		<TurnIn QuestName="The Rotting Orchard" QuestId="26689" TurnInName="Calor" TurnInId="663" X="-10579.62" Y="-1198.489" Z="27.54696" />
+		<PickUp QuestName="Vile and Tainted" QuestId="26690" GiverName="Calor" GiverId="663" X="-10579.62" Y="-1198.489" Z="27.54696" />
+		<TurnIn QuestName="Classy Glass" QuestId="26685" TurnInName="Viktori Prism'Antras" TurnInId="276" X="-10569.1" Y="-1312.116" Z="48.59304" />
+		<TurnIn QuestName="Ogre Thieves" QuestId="26680" TurnInName="Abercrombie" TurnInId="289" X="-10353.06" Y="-1527.191" Z="92.64145" />
+		<RecheckCheckpoints />
+		<PickUp QuestName="Ghoulish Effigy" QuestId="26677" GiverName="Abercrombie" GiverId="289" X="-10353.06" Y="-1527.191" Z="92.64145" />
+
+		<While Condition="DoQuest(26677)" >
+			<Code File="KillUntilComplete" MobId="1270" QuestId="26677" >
+				<HuntingGrounds>
+					<Hotspot X="-10323.57" Y="-1260.97" Z="35.37282" />
+					<Hotspot X="-10343.17" Y="-1225" Z="38.09998" />
+					<Hotspot X="-10370.88" Y="-1187.509" Z="45.71397" />
+					<Hotspot X="-10403.91" Y="-1194.505" Z="41.84872" />
+				</HuntingGrounds>
+			</Code>
+		</While>
+
+		<TurnIn QuestName="Ghoulish Effigy" QuestId="26677" TurnInName="Abercrombie" TurnInId="289" X="-10354.28" Y="-1527.26" Z="92.64171" />
+		<PickUp QuestName="Note to the Mayor" QuestId="26681" GiverName="Abercrombie" GiverId="289" X="-10354.28" Y="-1527.26" Z="92.64171" />
+		<TurnIn QuestName="Note to the Mayor" QuestId="26681" TurnInName="Lord Ello Ebonlocke" TurnInId="263" X="-10553.14" Y="-1107.259" Z="31.42904" />
+		<PickUp QuestName="The Embalmer's Revenge" QuestId="26727" GiverName="Lord Ello Ebonlocke" GiverId="263" X="-10553.14" Y="-1107.259" Z="31.42904" />
+
+		<Code File="KillUntilComplete" MobId="43862" QuestId="26727" X="-10553.2" Y="-1169.15" Z="27.80009" />
+
+		<TurnIn QuestName="The Embalmer's Revenge" QuestId="26727" TurnInName="Lord Ello Ebonlocke" TurnInId="263" X="-10553.25" Y="-1106.55" Z="31.4285" />
+
+		<While Condition="DoQuest(26670)" >
+			<Code File="InteractWith" MobId="204591" InteractByLooting="true" NonCompeteDistance="0" QuestId="26670" X="-11142.43" Y="-1154.698" Z="43.07284" />
+		</While>
+
+		<While Condition="DoQuest(26690)" >
+			<Code File="KillUntilComplete" QuestId="26690" >
+				<HuntingGrounds>
+					<Hotspot X="-10948.22" Y="-1154.6" Z="39.47313" />
+					<Hotspot X="-11051.15" Y="-1140.433" Z="39.17701" />
+					<Hotspot X="-11140.75" Y="-1163.887" Z="42.59913" />
+				</HuntingGrounds>
+				<PursuitList>
+					<PursueUnit Id="206" PursueWhen="!IsObjectiveComplete(1, 26690)" />
+					<PursueUnit Id="920" PursueWhen="!IsObjectiveComplete(2, 26690)" />
+					<PursueUnit Id="534" /> <!-- Rare spawn -->
+				</PursuitList>
+			</Code>
+		</While>
+
+		<TurnIn QuestName="Vile and Tainted" QuestId="26690" TurnInName="Calor" TurnInId="663" X="-10579.75" Y="-1198.457" Z="27.55207" />
+		<PickUp QuestName="Worgen in the Woods" QuestId="26691" GiverName="Calor" GiverId="663" X="-10579.75" Y="-1198.457" Z="27.55207" />
+		<TurnIn QuestName="Worgen in the Woods" QuestId="26691" TurnInName="Jonathan Carevin" TurnInId="661" X="-10595.61" Y="-1200.346" Z="28.49817" />
+		<TurnIn QuestName="Roland's Doom" QuestId="26670" TurnInName="Clerk Daltry" TurnInId="267" X="-10561.8" Y="-1123.928" Z="30.06779" />
+		<PickUp QuestName="The Fate of Stalvan Mistmantle" QuestId="26671" GiverName="Clerk Daltry" GiverId="267" X="-10561.8" Y="-1123.928" Z="30.06779" />
+		<TurnIn QuestName="The Fate of Stalvan Mistmantle" QuestId="26671" TurnInName="Tobias Mistmantle" TurnInId="43453" X="-10513.69" Y="-1301.671" Z="41.29015" />
+		<PickUp QuestName="Clawing at the Truth" QuestId="26672" GiverName="Tobias Mistmantle" GiverId="43453" X="-10513.69" Y="-1301.671" Z="41.29015" />
+		<TurnIn QuestName="Clawing at the Truth" QuestId="26672" TurnInName="Madame Eva" TurnInId="265" X="-10532.32" Y="-1212.416" Z="28.11712" />
+		<RecheckCheckpoints />
+		<PickUp QuestName="Mistmantle's Revenge" QuestId="26674" GiverName="Madame Eva" GiverId="265" X="-10532.32" Y="-1212.416" Z="28.11712" />
+
+		<While Condition="DoQuest(26674)" >
+			<MoveTo X="-10368.84" Y="-1255.558" Z="35.90874" />
+			<Code File="UseItem" ItemId="59363" TerminateWhen="Unit(315) != null" />
+			<Code File="KillUntilComplete" MobId="315" QuestId="26674" X="-10370.4" Y="-1253.52" Z="35.90949" TerminateWhen="Unit(315) == null" />
+		</While>
+
+		<TurnIn QuestName="Mistmantle's Revenge" QuestId="26674" TurnInName="Tobias Mistmantle" TurnInId="43453" X="-10511.92" Y="-1300.825" Z="41.28996" />
+
+		<While Condition="DoQuest(26720)" >
+			<Code File="CombatUseItemOnV2" QuestId="26720" ItemId="60206" MobId="43814" UseItemStrategy="UseItemContinuouslyOnTargetDontDefend" ItemAppliesAuraId="1337" UseWhenMobHasHealthPercent="30" MaxRangeToUseItem="15" RecallPetAtMobPercentHealth="50" NonCompeteDistance="0" >
+				<HuntingGrounds>
+					<Hotspot X="-11039.69" Y="256.9025" Z="27.68965" />
+					<Hotspot X="-11038.78" Y="250.8796" Z="27.65554" />
+					<Hotspot X="-11029.23" Y="250.0632" Z="27.59942" />
+					<Hotspot X="-11038.78" Y="250.8796" Z="27.65554" />
+				</HuntingGrounds>
+			</Code>
+		</While>
+
+		<While Condition="DoQuest(26777)" >
+			<Code File="InteractWith" MobId="43923" MobState="Alive" Range="10" NumOfTimes="5" InteractByUsingItemId="60225" CollectionDistance="200" QuestId="26777" X="-10970.27" Y="254.6975" Z="28.9587" />
+		</While>
+
+		<TurnIn QuestName="Soothing Spirits" QuestId="26777" TurnInName="Sister Elsington" TurnInId="43731" X="-10756.53" Y="296.7722" Z="39.51202" />
+		<TurnIn QuestName="A Curse We Cannot Lift" QuestId="26720" TurnInName="Oliver Harris" TurnInId="43730" X="-10756.13" Y="334.8011" Z="37.17974" />
+
+		<PickUp QuestName="Cry For The Moon" QuestId="26760" GiverName="Oliver Harris" GiverId="43730" X="-10756.13" Y="334.8011" Z="37.17974" />
+		<While Condition="DoQuest(26760)" >
+			<Code File="WaitTimer" WaitTime="70000" Quest="26760" />
+		</While>
+		<TurnIn QuestName="Cry For The Moon" QuestId="26760" TurnInName="Oliver Harris" TurnInId="43730" X="-10756.13" Y="334.8011" Z="37.17974" />
+
+		<Checkpoint Level="26" />
+		<If Condition="Me.Level &lt;= 27" >
+			<Code File="RunCode" Code="foreach (PlayerQuest quest in Me.QuestLog.GetAllQuests()) QuestLog.Instance.AbandonQuestById(quest.Id)" />
+		</If>
+		<Code File="LoadProfile" ProfileName="Northern Stranglethorn.xml" />
+
+	</QuestOrder>
+</HBProfile>

@@ -1,0 +1,543 @@
+<HBProfile xsi:noNamespaceSchemaLocation="../Schemas/EchoSchema.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<!-- Original contribution by EchoTiger -->
+	<Name>Badlands ($ShortHash$)</Name>
+
+	<MinDurability>0.3</MinDurability>
+	<MinFreeBagSlots>3</MinFreeBagSlots>
+
+	<SellGrey>true</SellGrey>
+	<SellWhite>true</SellWhite>
+	<SellGreen>true</SellGreen>
+	<SellBlue>true</SellBlue>
+	<SellPurple>false</SellPurple>
+
+	<MailGrey>false</MailGrey>
+	<MailWhite>true</MailWhite>
+	<MailGreen>true</MailGreen>
+	<MailBlue>true</MailBlue>
+	<MailPurple>true</MailPurple>
+
+	<TargetElites>true</TargetElites>
+
+	<AvoidMobs>
+	</AvoidMobs>
+
+	<Mailboxes>
+	</Mailboxes>
+
+	<Vendors>
+	</Vendors>
+
+	<Blackspots>
+		<Blackspot X="-6609.52" Y="-3414.63" Z="279.287" Radius="40" /> <!-- Dustwing Dig, Alliance Camp, Middle of Town -->
+		<Blackspot X="-6644.98" Y="-3378.029" Z="266.4928" Radius="40" /> <!-- Dustwing Dig, Alliance Camp Outskirt of Town -->
+	</Blackspots>
+
+	<Blacklist>
+	</Blacklist>
+
+	<QuestOrder IgnoreCheckpoints="false" >
+		<!-- Check function status -->
+		<Code File="RunCode" Type="Definition">
+			<![CDATA[
+			private static bool? profileFunctionsEnabled => (bool?)AppDomain.CurrentDomain.GetData("QuestingProfiles_FunctionsEnabled");
+			private static bool IsStoreProfile(string path) => path.StartsWith("store://");
+			private static string Slashify(string path) => IsStoreProfile(path) ? path.Replace(@"\", "/") : path.Replace("/", @"\");
+
+			public __CompiledBatchClass__()
+			{
+				ActivateFunctions();
+			}
+
+			private static void ActivateFunctions()
+			{
+				if (profileFunctionsEnabled == null || profileFunctionsEnabled == false)
+				{
+					Bots.Professionbuddy.PBLog.Log(Colors.MediumPurple, "[Profile Message!]: ", Colors.Yellow, "Please stand by as the functions are being activated!");
+					LoadProfile(@"..\..\Functions\Activate Functions.xml");
+				}
+			}
+
+			private static void LoadProfile(string path)
+			{
+				var profile = GetNewPath(path);
+				if (!IsStoreProfile(profile) && !File.Exists(profile))
+				{
+					Bots.Professionbuddy.PBLog.Log(Colors.MediumPurple, "[Profile Message!]: ", Colors.Yellow, "Profile does not exist.\n" + profile);
+					return;
+				}
+
+				Bots.Professionbuddy.PBLog.Log(Colors.MediumPurple, "[Profile Message!]: ", Colors.Yellow, "Loading: " + profile);
+				ProfileManager.LoadNew(profile, false);
+			}
+
+			private static string GetNewPath(string path)
+			{
+				if (IsStoreProfile(path))
+					return Slashify(path);
+
+				var currentProfile = ProfileManager.XmlLocation;
+				if (IsStoreProfile(currentProfile))
+					return Slashify(currentProfile + "/../" + path);
+
+				var absolutePath = Path.Combine(Path.GetDirectoryName(currentProfile), path);
+				absolutePath = Path.GetFullPath(absolutePath);
+				var canonicalPath = new Uri(absolutePath).LocalPath;
+				return Slashify(canonicalPath);
+			}]]>
+		</Code>
+		<Code File="RunCode" Code="ActivateFunctions();" />
+		<!-- END Check function status -->
+
+		<If Condition="Me.IsAlliance" >
+			<Code File="LoadProfile" ProfileName="..\..\Questing Autoloader.xml" />
+		</If>
+		<!-- RunCode Methods -->
+			<Code File="RunCode">
+			<![CDATA[
+				Bots.Professionbuddy.PBLog.Log(System.Windows.Media.Colors.MediumPurple, "> [Profile Initialization Status] ", System.Windows.Media.Colors.CornflowerBlue, "\n     Auto-Looting	:: Enabled\n     Looting	:: Enabled\n     Game Addons	:: Disabled");
+				Lua.DoString("SetCVar('AutoLootDefault', 1);");
+				Lua.DoString("SetCVar('autoDismountFlying', 1);");
+				CharacterSettings.Instance.LootMobs = true;
+				CharacterSettings.Instance.Save();
+				Logging.Write(System.Windows.Media.Colors.MediumPurple, "> [Ready to bot!]");
+			]]>
+			</Code>
+			<Code File="RunCode" Type="Definition">
+				<![CDATA[
+						bool DoQuest(params uint[] questIds)
+						{
+							foreach (var questId in questIds)
+							{
+								if (HasQuest(questId) && !IsQuestCompleted(questId)) return true;
+							}
+							return false;
+						}
+						bool NeedsQuest(params uint[] questIds)
+						{
+							foreach (var questId in questIds)
+							{
+								if (!HasQuest(questId) && !IsQuestCompleted(questId)) return true;
+							}
+							return false;
+						}
+						bool NeedsBreadcrumbQuest(params uint[] questIds)
+						{
+							foreach (var questId in questIds)
+							{
+								if (IsQuestCompleted(questId)) return false;
+							}
+							return true;
+						}
+						bool QuestDone(params uint[] questIds)
+						{
+							foreach (var questId in questIds)
+							{
+								if (HasQuest(questId) && IsQuestCompleted(questId)) return true;
+							}
+							return false;
+						}
+						bool QuestFlaggedCompleted(params uint[] questIds)
+						{
+							foreach (var questId in questIds)
+							{
+								return Lua.GetReturnVal<bool>($"return IsQuestFlaggedCompleted({questId});", 0);
+							}
+							return false;
+						}
+						async Task SkipCutscene(int preWait = 3000, int postWait = 3000)
+						{
+					// Add detection of cutscene here.
+							await Coroutine.Sleep(preWait);
+					// Test and improve the working method.
+							Lua.DoString("MovieFrame:StopMovie(); CinematicFrame_CancelCinematic(); StopCinematic();");
+							await Coroutine.Sleep(postWait);
+						}
+					]]>
+			</Code>
+		<!-- END RunCode Methods -->
+
+
+		<If Condition="Me.ZoneId == 139" >
+			<PickUp QuestName="Fuselight, Ho!" QuestId="27762" GiverName="Gek Nozzlerocket" GiverId="48704" X="2278.246" Y="-5261.961" Z="81.67115" />
+			<While Condition="HasQuest(27762) &amp;&amp; Me.ZoneId == 139" >
+				<MoveTo X="2276.458" Y="-5258.253" Z="81.52784" />
+				<Code File="Misc\RunLua" Lua="CancelShapeshiftForm();" />
+				<Code File="InteractWith" MobId="48708" NonCompeteDistance="0" PreInteractMountStrategy="Dismount" X="2276.458" Y="-5258.253" Z="81.52784" TerminateWhen="Me.ZoneId != 139 || Unit(49637) != null || Me.IsOnTransport" />
+				<Code File="Misc\RunLua" Lua="StaticPopup1Button1:Click();" />
+				<Code File="WaitTimer" WaitTime="300000" TerminateWhen="!Me.IsOnTransport" />
+			</While>
+		</If>
+		<If Condition="QuestDone(27762)" >
+			<TurnIn QuestName="Fuselight, Ho!" QuestId="27762" TurnInName="Eddie Flofizzle" TurnInId="46650" X="-6649.842" Y="-4743.275" Z="8.373528" />
+		</If>
+
+		<PickUp QuestName="To Fuselight Proper" QuestId="27763" GiverName="Eddie Flofizzle" GiverId="46650" X="-6649.842" Y="-4743.275" Z="8.373528" />
+		<While Condition="HasQuest(27763) &amp;&amp; Me.Z &lt; 40" >
+			<MoveTo Precision="1" X="-6523.083" Y="-4611.477" Z="27.64117" />
+			<Code File="MyCTM" X="-6518.026" Y="-4602.104" Z="28.35862" TerminateWhen="Me.Z &gt; 300" />
+			<Code File="WaitTimer" WaitTime="1000" />
+		</While>
+		<TurnIn QuestName="To Fuselight Proper" QuestId="27763" TurnInName="Dolph Blastus" TurnInId="46652" X="-6636.455" Y="-3899.755" Z="378.9542" />
+
+		<PickUp QuestName="Easily Swayed" QuestId="27774" GiverName="Dolph Blastus" GiverId="46652" X="-6636.455" Y="-3899.755" Z="378.9542" />
+		<PickUp QuestName="When the Going Gets Tough, Cheat" QuestId="27775" GiverName="Garyanne Fleezlebop" GiverId="46653" X="-6633.127" Y="-3878.902" Z="379.1793" />
+
+		<Code File="KillUntilComplete" TerminateWhen="!DoQuest(27774, 27775)" >
+			<HuntingGrounds>
+				<Hotspot X="-6380.757" Y="-3655.014" Z="243.2941" />
+				<Hotspot X="-6394.54" Y="-3764.44" Z="292.8005" />
+				<Hotspot X="-6323.77" Y="-3704.86" Z="256.7024" />
+				<Hotspot X="-6350.72" Y="-3644.47" Z="243.8249" />
+			</HuntingGrounds>
+			<PursuitList>
+				<PursueUnit Id="46693" PursueWhen="DoQuest(27775)" />
+				<PursueUnit Id="46693" PursueWhen="DoQuest(27774)" />
+				<PursueUnit Id="46694" PursueWhen="DoQuest(27774)" />
+				<PursueUnit Id="46695" PursueWhen="DoQuest(27774)" />
+			</PursuitList>
+		</Code>
+
+		<TurnIn QuestName="Easily Swayed" QuestId="27774" TurnInName="Dolph Blastus" TurnInId="46652" X="-6637.744" Y="-3899.989" Z="379.0592" />
+		<PickUp QuestName="A Strange Request" QuestId="27764" GiverName="Dolph Blastus" GiverId="46652" X="-6637.744" Y="-3899.989" Z="379.0592" />
+		<TurnIn QuestName="When the Going Gets Tough, Cheat" QuestId="27775" TurnInName="Garyanne Fleezlebop" TurnInId="46653" X="-6631.827" Y="-3878.234" Z="379.0251" />
+		<RecheckCheckpoints />
+		<PickUp QuestName="It's Goat Time, Baby" QuestId="27776" GiverName="Garyanne Fleezlebop" GiverId="46653" X="-6631.827" Y="-3878.234" Z="379.0251" />
+
+		<While Condition="DoQuest(27776)" >
+			<Code File="InteractWith" MobId="46393" InteractByUsingItemId="62397" Range="2" CollectionDistance="200" NumOfTimes="12" QuestId="27776" >
+				<HuntingGrounds>
+					<Hotspot X="-6564.189" Y="-3891.018" Z="390.9267" />
+					<Hotspot X="-6634.684" Y="-3823.215" Z="378.8917" />
+					<Hotspot X="-6592.794" Y="-3953.741" Z="377.3676" />
+				</HuntingGrounds>
+			</Code>
+		</While>
+		<TurnIn QuestName="It's Goat Time, Baby" QuestId="27776" TurnInName="Garyanne Fleezlebop" TurnInId="46653" X="-6631.645" Y="-3877.676" Z="378.9816" />
+
+		<TurnIn QuestName="A Strange Request" QuestId="27764" TurnInName="Rhea" TurnInId="46654" X="-6987.605" Y="-3942.073" Z="263.8885" />
+		<PickUp QuestName="First Sample: Wild Eggs" QuestId="27765" GiverName="Rhea" GiverId="46654" X="-6987.605" Y="-3942.073" Z="263.8885" />
+		<PickUp QuestName="Second Sample: Whelps" QuestId="27766" GiverName="Rhea" GiverId="46654" X="-6987.605" Y="-3942.073" Z="263.8885" />
+
+		<While Condition="DoQuest(27765)" >
+			<Code File="InteractWith" MobId="206320" InteractByLooting="true" CollectionDistance="200" NumOfTimes="6" QuestId="27765" >
+				<HuntingGrounds>
+					<Hotspot X="-6954.108" Y="-3923.896" Z="263.8897" />
+					<Hotspot X="-6802.127" Y="-3953.94" Z="264.3817" />
+					<Hotspot X="-6635.477" Y="-4054.089" Z="264.368" />
+					<Hotspot X="-6693.549" Y="-4131.286" Z="264.2012" />
+					<Hotspot X="-6770.768" Y="-4174.303" Z="266.345" />
+					<Hotspot X="-6869.496" Y="-4090.522" Z="265.403" />
+				</HuntingGrounds>
+			</Code>
+		</While>
+
+		<Code File="KillUntilComplete" MobId="2725" QuestId="27766" >
+			<HuntingGrounds>
+				<Hotspot X="-6917.457" Y="-3945.728" Z="264.2035" />
+				<Hotspot X="-6842.057" Y="-4040.97" Z="264.1735" />
+				<Hotspot X="-6748.962" Y="-4140.976" Z="263.919" />
+			</HuntingGrounds>
+		</Code>
+
+		<TurnIn QuestName="First Sample: Wild Eggs" QuestId="27765" TurnInName="Rhea" TurnInId="46654" X="-6985.823" Y="-3942.462" Z="263.8897" />
+		<TurnIn QuestName="Second Sample: Whelps" QuestId="27766" TurnInName="Rhea" TurnInId="46654" X="-6985.823" Y="-3942.462" Z="263.8897" />
+		<RecheckCheckpoints />
+		<PickUp QuestName="Lifting the Veil" QuestId="27770" GiverName="Rhea" GiverId="46654" X="-6985.517" Y="-3944.302" Z="263.8888" />
+		<Code File="WaitTimer" WaitTime="10000" QuestId="27770" />
+		<TurnIn QuestName="Lifting the Veil" QuestId="27770" TurnInName="Rhea" TurnInId="46654" X="-6985.517" Y="-3944.302" Z="263.8888" />
+		<PickUp QuestName="Third Sample: Implanted Eggs" QuestId="27771" GiverName="Rhea" GiverId="46654" X="-6985.517" Y="-3944.302" Z="263.8888" />
+
+		<While Condition="DoQuest(27771)" >
+			<Code File="InteractWith" MobId="206321" NumOfTimes="3" InteractByLooting="true" QuestId="27771" X="-7007.418" Y="-3931.526" Z="263.8891" />
+		</While>
+
+		<TurnIn QuestName="Third Sample: Implanted Eggs" QuestId="27771" TurnInName="Rhea" TurnInId="46654" X="-6991.344" Y="-3942.301" Z="263.8886" />
+		<PickUp QuestName="Rhea Revealed" QuestId="27769" GiverName="Rhea" GiverId="46654" X="-6991.344" Y="-3942.301" Z="263.8886" />
+		<TurnIn QuestName="Rhea Revealed" QuestId="27769" TurnInName="Rheastrasza" TurnInId="46655" X="-6991.344" Y="-3942.301" Z="263.8886" />
+		<PickUp QuestName="The Venerable Doctor Blam" QuestId="27772" GiverName="Rheastrasza" GiverId="46655" X="-6991.344" Y="-3942.301" Z="263.8886" />
+		<TurnIn QuestName="The Venerable Doctor Blam" QuestId="27772" TurnInName="Dr. Hieronymus Blam" TurnInId="46664" X="-7008.16" Y="-3342.356" Z="241.7066" />
+		<RecheckCheckpoints />
+
+		<PickUp QuestName="Troggish Troubles" QuestId="27789" GiverName="Dr. Hieronymus Blam" GiverId="46664" X="-7008.16" Y="-3342.356" Z="241.7066" />
+		<While Condition="DoQuest(27789)" >
+			<Code File="InteractWith" MobId="46707" AuraIdMissingFromMob="87027" QuestId="27789" X="-7032.902" Y="-3349.085" Z="241.6668" TerminateWhen="Me.InVehicle" />
+			<DisableBehavior Name="All" />
+			<Code File="RunCode"><![CDATA[
+					while (DoQuest(27789) && Me.InVehicle)
+					{
+						var killUnit = (from unit in ObjectManager.GetObjectsOfType<WoWUnit>()
+								where unit.IsAlive && (unit.Entry == 46711 || unit.Entry == 46712)
+								let loc = unit.Location
+								orderby loc.DistanceSquared(Me.Location)
+								select unit).FirstOrDefault();
+
+						while (killUnit != null && killUnit.IsValid && killUnit.IsAlive)
+						{
+							Me.SetFacing(killUnit.Location);
+							Lua.DoString("if GetPetActionCooldown(2) == 0 then CastPetAction(2) else CastPetAction(1) end", 0);
+							await Coroutine.Sleep(1000);
+						}
+						await Coroutine.Sleep(100);
+					}
+				]]>
+			</Code>
+			<EnableBehavior Name="All" />
+		</While>
+
+		<TurnIn QuestName="Troggish Troubles" QuestId="27789" TurnInName="Dr. Hieronymus Blam" TurnInId="46664" X="-7012.471" Y="-3347.069" Z="241.6687" />
+		<PickUp QuestName="Bloodwatcher Point" QuestId="27881" GiverName="Dr. Hieronymus Blam" GiverId="46664" X="-7013.894" Y="-3346.698" Z="241.6679" />
+		<TurnIn QuestName="Bloodwatcher Point" QuestId="27881" TurnInName="High Examiner Tae&apos;thelan Bloodwatcher" TurnInId="46757" X="-6903.327" Y="-3504.807" Z="242.0849" />
+		<RecheckCheckpoints />
+		<PickUp QuestName="It&apos;s Not About History, It&apos;s About Power" QuestId="27882" GiverName="High Examiner Tae&apos;thelan Bloodwatcher" GiverId="46757" X="-6903.952" Y="-3505.601" Z="242.0849" />
+		<PickUp QuestName="Forcible Acquisition" QuestId="27878" GiverName="Aoren Sunglow" GiverId="46758" X="-6906.834" Y="-3507.239" Z="242.0853" />
+		<PickUp QuestName="The Morons&apos; League" QuestId="27877" GiverName="Lidia Sunglow" GiverId="46759" X="-6906.834" Y="-3507.239" Z="242.0853" />
+
+		<Code File="KillUntilComplete" MobId="46773" QuestId="27882" >
+			<HuntingGrounds>
+				<Hotspot X="-6685.327" Y="-3613.053" Z="242.4457" />
+				<Hotspot X="-6832.041" Y="-3606.193" Z="241.4185" />
+				<Hotspot X="-6678.372" Y="-3526.86" Z="244.7657" />
+			</HuntingGrounds>
+		</Code>
+
+		<Code File="InteractWith" MobId="206388" InteractByLooting="true" NonCompeteDistance="0" InteractBlacklistTimeInSeconds="1" QuestId="27878" QuestObjectiveIndex="1" X="-6364.972" Y="-3129.566" Z="283.8883" />
+
+		<Code File="KillUntilComplete" MobIds="2742" QuestId="27877" >
+			<HuntingGrounds>
+				<Hotspot X="-6355.289" Y="-3112.766" Z="301.1108" />
+				<Hotspot X="-6399.064" Y="-3160.625" Z="300.6942" />
+			</HuntingGrounds>
+		</Code>
+
+		<TurnIn QuestName="It&apos;s Not About History, It&apos;s About Power" QuestId="27882" TurnInName="High Examiner Tae&apos;thelan Bloodwatcher" TurnInId="46757" X="-6902.62" Y="-3504.557" Z="242.0856" />
+		<PickUp QuestName="The Warden&apos;s Pawn" QuestId="27883" GiverName="High Examiner Tae&apos;thelan Bloodwatcher" GiverId="46757" X="-6902.62" Y="-3504.557" Z="242.0856" />
+		<PickUp QuestName="The Sentinel&apos;s Pawn" QuestId="27884" GiverName="High Examiner Tae&apos;thelan Bloodwatcher" GiverId="46757" X="-6902.62" Y="-3504.557" Z="242.0856" />
+		<TurnIn QuestName="Forcible Acquisition" QuestId="27878" TurnInName="Aoren Sunglow" TurnInId="46758" X="-6907.506" Y="-3504.612" Z="242.0856" />
+		<TurnIn QuestName="The Morons&apos; League" QuestId="27877" TurnInName="Lidia Sunglow" TurnInId="46759" X="-6909.821" Y="-3507.931" Z="242.0856" />
+
+		<TurnIn QuestName="The Sentinel's Pawn" QuestId="27884" TurnInName="Marble Slab" TurnInId="206336" TurnInType="Object" X="-6896.085" Y="-3378.095" Z="202.2841" />
+
+		<While Condition="!IsQuestCompleted(27886)" >
+			<PickUp QuestName="The Sentinel&apos;s Game" QuestId="27886" GiverName="Marble Slab" GiverId="206336" X="-6895.875" Y="-3381.015" Z="202.2848" />
+			<MoveTo QuestId="27886" X="-6896.325" Y="-3394.104" Z="202.2843" />
+			<Code File="InteractWith" QuestId="27886" MobId="46395" CollectionDistance="3" WaitTime="1000" NonCompeteDistance="0" X="-6896.788" Y="-3394.938" Z="202.2851" />
+			<Code File="InteractWith" QuestId="27886" MobId="46395" CollectionDistance="3" WaitTime="1000" NonCompeteDistance="0" X="-6896.788" Y="-3394.938" Z="202.2851" />
+			<MoveTo QuestId="27886" X="-6902.833" Y="-3377.874" Z="202.2835" />
+			<Code File="InteractWith" QuestId="27886" MobId="46395" CollectionDistance="3" WaitTime="1000" NonCompeteDistance="0" X="-6902.833" Y="-3377.874" Z="202.2835" />
+			<MoveTo QuestId="27886" X="-6912.886" Y="-3405.671" Z="202.2837" />
+			<Code File="InteractWith" QuestId="27886" MobId="46395" CollectionDistance="3" WaitTime="1000" NonCompeteDistance="0" X="-6912.886" Y="-3405.671" Z="202.2837" />
+			<Code File="InteractWith" QuestId="27886" MobId="46395" CollectionDistance="3" WaitTime="1000" NonCompeteDistance="0" X="-6912.886" Y="-3405.671" Z="202.2837" />
+			<MoveTo QuestId="27886" X="-6923.221" Y="-3386.836" Z="202.2837" />
+			<Code File="InteractWith" QuestId="27886" MobId="46395" CollectionDistance="3" WaitTime="1000" NonCompeteDistance="0" X="-6923.221" Y="-3386.836" Z="202.2837" />
+			<MoveTo QuestId="27886" X="-6934.489" Y="-3400.389" Z="202.2837" />
+			<Code File="InteractWith" QuestId="27886" MobId="46395" CollectionDistance="3" WaitTime="1000" NonCompeteDistance="0" X="-6934.489" Y="-3400.389" Z="202.2837" />
+			<Code File="InteractWith" QuestId="27886" MobId="46395" CollectionDistance="3" WaitTime="1000" NonCompeteDistance="0" X="-6934.489" Y="-3400.389" Z="202.2837" />
+			<MoveTo QuestId="27886" X="-6940.63" Y="-3377.553" Z="202.2837" />
+			<Code File="InteractWith" QuestId="27886" MobId="46395" CollectionDistance="3" WaitTime="1000" NonCompeteDistance="0" X="-6940.63" Y="-3377.553" Z="202.2837" />
+			<Code File="InteractWith" QuestId="27886" MobId="46395" CollectionDistance="3" WaitTime="1000" NonCompeteDistance="0" X="-6940.63" Y="-3377.553" Z="202.2837" />
+			<Code File="WaitTimer" WaitTime="2000" QuestId="27886" GoalText="Waiting for quest to complete {TimeRemaining}" />
+			<If Condition="!IsQuestCompleted(27886)" >
+				<Code File="AbandonQuest" QuestId="27886" />
+			</If>
+		</While>
+		<TurnIn QuestName="The Sentinel's Game" QuestId="27886" />
+
+		<TurnIn QuestName="The Warden&apos;s Pawn" QuestId="27883" TurnInName="Stone Slab" TurnInId="206335" X="-6971.218" Y="-3448.278" Z="200.8961" />
+
+		<While Condition="!IsQuestCompleted(27885)" >
+			<PickUp QuestName="The Warden's Game" QuestId="27885" GiverName="Stone Slab" GiverId="206335" GiverType="Object" X="-6964.62" Y="-3445.19" Z="200.632" />
+			<Code File="RunCode" Code="QuestFrame.Instance.Close();" /> <!-- Clear off annoying sticky quest frame -->
+			<Code File="RunCode" Type="Definition" ><![CDATA[
+					async Task PrecisionCTM(Vector3 ctmTo)
+					{
+						while (Me.Location.DistanceSqr(ctmTo) > .5f*.5f)
+						{
+							WoWMovement.ClickToMove(ctmTo);
+							await Coroutine.Yield();
+						}
+					}
+					async Task PrecisionInteract(uint interactId)
+					{
+						await Coroutine.Sleep(750);
+						WoWUnit interactWith = ObjectManager.GetObjectsOfType<WoWUnit>().OrderBy(u => u.DistanceSqr).FirstOrDefault(u => u.DistanceSqr <= .5f*.5f);
+						if (interactWith == null) return;
+						interactWith.Interact();
+					}
+				]]>
+			</Code>
+
+			<MoveTo QuestId="27885" X="-6966.399" Y="-3443.15" Z="200.8954" />
+
+			<Code File="RunCode" Code="await PrecisionCTM(new Vector3(-6966.399f, -3443.15f, 200.8954f));" />
+			<Code File="RunCode" Code="await PrecisionInteract(46344);" />
+
+			<Code File="RunCode" Code="await PrecisionCTM(new Vector3(-6962.501f, -3447.25f, 200.8954f));" />
+			<Code File="RunCode" Code="await PrecisionInteract(46344);" />
+
+			<Code File="RunCode" Code="await PrecisionCTM(new Vector3(-6964.45f, -3445.2f, 200.8954f));" />
+			<Code File="RunCode" Code="await PrecisionInteract(46344);" />
+
+			<Code File="RunCode" Code="await PrecisionCTM(new Vector3(-6962.451f, -3445.25f, 200.8954f));" />
+			<Code File="RunCode" Code="await PrecisionInteract(46344);" />
+
+			<Code File="RunCode" Code="await PrecisionCTM(new Vector3(-6966.45f, -3445.15f, 200.8954f));" />
+			<Code File="RunCode" Code="await PrecisionInteract(46344);" />
+
+			<Code File="RunCode" Code="await PrecisionCTM(new Vector3(-6964.45f, -3445.2f, 200.8954f));" />
+			<Code File="RunCode" Code="await PrecisionInteract(46344);" />
+
+			<Code File="RunCode" Code="await PrecisionCTM(new Vector3(-6964.4f, -3443.201f, 200.8954f));" />
+			<Code File="RunCode" Code="await PrecisionInteract(46344);" />
+
+			<Code File="RunCode" Code="await PrecisionCTM(new Vector3(-6964.5f, -3447.199f, 200.8954f));" />
+			<Code File="RunCode" Code="await PrecisionInteract(46344);" />
+
+			<Code File="RunCode" Code="await PrecisionCTM(new Vector3(-6964.45f, -3445.2f, 200.8954f));" />
+			<Code File="RunCode" Code="await PrecisionInteract(46344);" />
+
+			<Code File="RunCode" Code="await PrecisionCTM(new Vector3(-6966.5f, -3447.149f, 200.8954f));" />
+			<Code File="RunCode" Code="await PrecisionInteract(46344);" />
+
+			<Code File="RunCode" Code="await PrecisionCTM(new Vector3(-6962.4f, -3443.251f, 200.8954f));" />
+			<Code File="RunCode" Code="await PrecisionInteract(46344);" />
+
+			<Code File="RunCode" Code="await PrecisionCTM(new Vector3(-6964.45f, -3445.2f, 200.8954f));" />
+			<Code File="RunCode" Code="await PrecisionInteract(46344);" />
+
+			<Code File="WaitTimer" QuestId="27885" WaitTime="2000" />
+			<If Condition="!IsQuestCompleted(27885)" >
+				<Code File="AbandonQuest" QuestId="27885" Type="All" />
+			</If>
+			<If Condition="QuestDone(27885)" >
+				<TurnIn QuestName="The Warden's Game" QuestId="27885" />
+			</If>
+		</While>
+
+		<PickUp QuestName="Ancient Protectors" QuestId="27887" GiverName="EchoTiger" GiverId="0" X="-6935.728" Y="-3444.731" Z="197.649" />
+		<While Condition="DoQuest(27887)" >
+			<Code File="InteractWith" MobId="46768" GossipOptions="1" QuestId="27887" QuestObjectiveIndex="1" X="-6935.728" Y="-3444.731" Z="197.649" />
+			<Code File="InteractWith" MobId="46769" GossipOptions="1" QuestId="27887" QuestObjectiveIndex="2" X="-6905.013" Y="-3446.839" Z="200.1998" />
+		</While>
+		<TurnIn QuestName="Ancient Protectors" QuestId="27887" />
+
+		<PickUp QuestName="The Titans' Trove" QuestId="27913" GiverName="EchoTiger" GiverId="0" />
+		<TurnIn QuestName="The Titans' Trove" QuestId="27913" TurnInName="Trove of the Watchers" TurnInId="206374" TurnInType="Object" X="-6941.187" Y="-3445.912" Z="197.6487" />
+		<RecheckCheckpoints />
+		<PickUp QuestName="Return to Blam" QuestId="27888" GiverName="Trove of the Watchers" GiverId="206374" X="-6938.213" Y="-3445.023" Z="197.6487" />
+		<TurnIn QuestName="Return to Blam" QuestId="27888" TurnInName="Dr. Hieronymus Blam" TurnInId="46664" X="-7008.068" Y="-3337.711" Z="241.7397" />
+		<PickUp QuestName="New Kargath" QuestId="27889" GiverName="Dr. Hieronymus Blam" GiverId="46664" X="-7011.413" Y="-3347.012" Z="241.6688" />
+		<PickUp QuestName="Survival of the Fattest" QuestId="27879" GiverName="Aidan Summerwind" GiverId="46660" X="-6702.305" Y="-2467.743" Z="272.8453" />
+		<TurnIn QuestName="New Kargath" QuestId="27889" TurnInName="Rhea" TurnInId="46654" X="-6721.665" Y="-2457.626" Z="272.8447" />
+		<PickUp QuestName="The Bad Dogs" QuestId="27890" GiverName="Rhea" GiverId="46654" X="-6721.665" Y="-2457.626" Z="272.8447" />
+
+		<Code File="SetHearthstone" MobId="9356" AreaId="5565" X="-6728.248" Y="-2463.283" Z="274.5767" />
+
+		<TurnIn QuestName="The Bad Dogs" QuestId="27890" TurnInName="Amakkar" TurnInId="47011" X="-6731.783" Y="-2478.467" Z="274.187" />
+		<PickUp QuestName="Amakkar, Jack of All Trades" QuestId="27891" GiverName="Amakkar" GiverId="47011" X="-6731.783" Y="-2478.467" Z="274.187" />
+		<PickUp QuestName="Gargal, the Behemoth" QuestId="27893" GiverName="Gargal" GiverId="47022" X="-6731.783" Y="-2478.467" Z="274.187" />
+		<PickUp QuestName="Jurrix the Striker" QuestId="27892" GiverName="Jurrix Whitemane" GiverId="47024" X="-6731.783" Y="-2478.467" Z="274.187" />
+
+		<While Condition="DoQuest(27893)" >
+			<Code File="ForcedDismount" />
+			<Code File="UsePetAbility" AttackButton="7" />
+			<Code File="UsePetAbility" AttackButton="8" />
+		</While>
+
+		<PickUp QuestName="Half-Ton Holdouts" QuestId="27880" GiverName="Gorn" GiverId="1068" X="-6749.301" Y="-2444.427" Z="272.7769" />
+
+		<If Condition="DoQuest(27891, 27893, 27892)" >
+			<Code File="Hooks\DoWhen" ActivityName="UseBadDogAbilities" LogExecution="false" StopMovingToConductActivity="false" AllowUseWhileInCombat="true" UseAtInterval="500" >
+				<If Condition="Me.CurrentTarget != null &amp;&amp; Me.CurrentTarget.IsAlive &amp;&amp; Me.CurrentTarget.Attackable" >
+					<Code File="Misc\RunLua" Lua="CastPetAction(1); CastPetAction(2); CastPetAction(4); CastPetAction(5); CastPetAction(7); CastPetAction(8);" />
+				</If>
+			</Code> 
+		</If>
+
+		<Code File="KillUntilComplete" MobIds="46918, 46917" X="-6815.63" Y="-2399.39" Z="282.708" TerminateWhen="!DoQuest(27891, 27893, 27892)" />
+
+		<If Condition="!DoQuest(27891, 27893, 27892)" >
+			<Code File="Hooks\DoWhen" ActivityName="UseBadDogAbilities" Command="Remove" />
+		</If>
+
+		<TurnIn QuestName="Gargal, the Behemoth" QuestId="27893" TurnInName="Gargal" TurnInId="47022" X="-6758.248" Y="-2448.034" Z="272.7888" />
+		<TurnIn QuestName="Jurrix the Striker" QuestId="27892" TurnInName="Jurrix Whitemane" TurnInId="47024" X="-6756.219" Y="-2440.533" Z="272.7778" />
+		<TurnIn QuestName="Amakkar, Jack of All Trades" QuestId="27891" TurnInName="Amakkar" TurnInId="47021" X="-6756.219" Y="-2440.533" Z="272.7778" />
+		<RecheckCheckpoints />
+		<PickUp QuestName="The Wrath of a Dragonflight" QuestId="27894" GiverName="Amakkar" GiverId="47021" X="-6739.823" Y="-2446.942" Z="272.7771" />
+
+
+		<Code File="Hooks\DoWhen" ActivityName="UseAbilities" AllowUseWhileMounted="true" AllowUseWhileInCombat="true" UseWhen="Me.CurrentTarget != null &amp;&amp; Me.CurrentTarget.Entry == 46859 &amp;&amp; Me.CurrentTarget.DistanceSqr &lt;= 100f*100f &amp;&amp; Lua.GetReturnVal&lt;bool&gt;(&quot;return GetPetActionCooldown(4) == 0&quot;, 0)" >
+			<Code File="ForcedDismount" />
+			<Code File="RunCode" Code="Unit(46859).Target();" />
+			<Code File="Misc\RunLua" Lua="CastPetAction(4);" />
+		</Code>
+
+		<Code File="KillUntilComplete" QuestId="27894" >
+			<HuntingGrounds>
+				<Hotspot X="-6823.426" Y="-2599.623" Z="241.069" />
+				<Hotspot X="-6828.776" Y="-2702.153" Z="242.7732" />
+				<Hotspot X="-6743.495" Y="-2751.398" Z="243.237" />
+				<Hotspot X="-6712.676" Y="-2819.113" Z="245.048" />
+			</HuntingGrounds>
+			<PursuitList>
+				<PursueUnit Id="46859" Priority="100" PursueWhen="!IsObjectiveComplete(1, 27894)" />
+				<PursueUnit Id="46915" Priority="1" PursueWhen="!IsObjectiveComplete(2, 27894)" />
+			</PursuitList>
+		</Code>
+
+		<TurnIn QuestName="The Wrath of a Dragonflight" QuestId="27894" />
+		<PickUp QuestName="Their Hunt Continues" QuestId="27895" GiverName="EchoTiger" GiverId="0" />
+
+
+		<Code File="KillUntilComplete" MobId="46938" QuestId="27895" QuestObjectiveIndex="2" X="-6848.256" Y="-2420.549" Z="273.3744" />
+		<Code File="KillUntilComplete" MobId="46938" QuestId="27895" QuestObjectiveIndex="1" X="-6731.121" Y="-2371.818" Z="385.9272" />
+		<Code File="KillUntilComplete" MobIds="46918, 46917" QuestId="27895" QuestObjectiveIndex="3" X="-6815.63" Y="-2399.39" Z="282.708" />
+
+		<TurnIn QuestName="Their Hunt Continues" QuestId="27895" />
+		<!-- Not doing this, its not worth it <PickUp QuestName="The Sorrow and the Fury" QuestId="27896" GiverName="EchoTiger" GiverId="0" /> -->
+		<If Condition="HasQuest(27896)" >
+			<Code File="AbandonQuest" QuestId="27896" />
+		</If>
+
+		<While Condition="DoQuest(27879)" >
+			<Code File="InteractWith" InteractByLooting="true" Range="5" CollectionDistance="200" NumOfTimes="16" QuestId="27879" >
+				<HuntingGrounds>
+					<Hotspot X="-7347.178" Y="-2277.858" Z="239.386" />
+					<Hotspot X="-7397.012" Y="-2254.711" Z="234.556" />
+					<Hotspot X="-7410.138" Y="-2325.12" Z="241.4872" />
+				</HuntingGrounds>
+				<PursuitList>
+					<PursueObject Id="206498" PursueWhen="!IsObjectiveComplete(1, 27879)" />
+					<PursueObject Id="206420" PursueWhen="!IsObjectiveComplete(1, 27879)" />
+					<PursueObject Id="206499" PursueWhen="!IsObjectiveComplete(2, 27879)" />
+				</PursuitList>
+			</Code>
+		</While>
+
+		<Code File="KillUntilComplete" MobIds="2718, 2717" QuestId="27880" >
+			<HuntingGrounds>
+				<Hotspot X="-7211.873" Y="-2308.021" Z="244.4543" />
+				<Hotspot X="-7194.829" Y="-2396.117" Z="241.4096" />
+				<Hotspot X="-7105.853" Y="-2422.245" Z="242.6133" />
+				<Hotspot X="-7108.425" Y="-2332.005" Z="243.0582" />
+			</HuntingGrounds>
+		</Code>
+
+		<If Condition="QuestDone(27880) &amp;&amp; Me.HearthstoneAreaId == 5565" >
+			<Code File="UseHearthstone" WaitForCD="false" />
+		</If>
+
+		<TurnIn QuestName="Half-Ton Holdouts" QuestId="27880" TurnInName="Gorn" TurnInId="1068" X="-6752.442" Y="-2441.907" Z="272.7773" />
+		<TurnIn QuestName="Survival of the Fattest" QuestId="27879" TurnInName="Aidan Summerwind" TurnInId="46660" X="-6706.32" Y="-2466.545" Z="272.7602" />
+
+		<!-- <Checkpoint Level="46.25" > 46 is the point, but there shouldn't really be a checkpoint here -->
+		<Checkpoint Level="47" />
+		<If Condition="Me.Level &lt;= 48" >
+			<Code File="RunCode" Code="foreach (PlayerQuest quest in Me.QuestLog.GetAllQuests()) QuestLog.Instance.AbandonQuestById(quest.Id)" />
+		</If>
+		<PickUp QuestName="To the Aid of the Thorium Brotherhood" QuestId="28512" GiverName="Aidan Summerwind" GiverId="46660" X="-6706.32" Y="-2466.545" Z="272.7602" />
+		<Code File="LoadProfile" ProfileName="Searing Gorge.xml" />
+
+	</QuestOrder>
+</HBProfile>

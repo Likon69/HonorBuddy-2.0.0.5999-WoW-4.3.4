@@ -1,0 +1,67 @@
+<HBProfile>
+	<Name>DK H K to LK [Kick]</Name>
+	<MinLevel>1</MinLevel>
+	<MaxLevel>86</MaxLevel>
+	
+	<MinDurability>0.1</MinDurability>
+	<MinFreeBagSlots>1</MinFreeBagSlots>
+	
+
+	<Vendors>
+	</Vendors>
+	
+	<Mailboxes>
+	</Mailboxes>
+	
+	<Blackspots>
+	</Blackspots>
+	
+	<QuestOrder>
+	
+		<CustomBehavior File="UserSettings" LearnFlightPaths="False" UseFlightPaths="False" TrainNewSkills="False" />
+				
+				<If Condition="(Me.MapId == 0) &amp;&amp; (!IsQuestCompleted(25316))" >
+					<RunTo X="2047.313" Y="310.4062" Z="54.157" />
+					<RunTo X="2067.457" Y="289.577" Z="97.03069" />
+				   <If Condition="Me.ZoneId == 85" > <!-- Tirisfal Glades -->
+					<CustomBehavior File="Message" Text="Running to UC Zepp to Org" LogColor="Cornflowerblue" />
+					<RunTo X="2067.232" Y="286.1159" Z="97.03087" />
+					
+					<CustomBehavior File="Message" Text="Waiting for Zepp to Org - don't interact!" LogColor="Orange" />
+			
+					<CustomBehavior File="UseTransport" TransportId="164871"
+												WaitAtX="2070.155" WaitAtY="289.2588" WaitAtZ="97.0315" 
+												TransportStartX="2062.376" TransportStartY="292.998" TransportStartZ="114.973"
+												StandOnX="2067.979" StandOnY="295.2747" StandOnZ="97.23677" 
+												TransportEndX="1833.509" TransportEndY="-4391.543" TransportEndZ="152.7679"
+												GetOffX="1840.225" GetOffY="-4390.912" GetOffZ="135.2337" />
+
+				   </If>
+				</If>
+				
+			<If Condition="Me.MapId == 1 &amp;&amp; (Me.ZoneId == 1637)" >
+				<If Condition="Me.Class != WoWClass.DeathKnight">
+					<CustomBehavior File="UserSettings" TrainNewSkills="True" />
+					<CustomBehavior File="ForceSetVendor" DoTrain="True" DoSell="True" DoRepair="True" DoMail="True" />
+					<CustomBehavior File="WaitTimer" WaitTime="5000" GoalText="Waiting to Train  {TimeRemaining}" />
+				</If>
+				
+				<CustomBehavior File="Message" Text="Running to Org Zepp to Borean" LogColor="Cornflowerblue" />
+				<RunTo X="1763.389" Y="-4283.858" Z="133.1073" />
+				
+				<CustomBehavior File="Message" Text="Waiting for Org Zepp to Borean - don't interact!" LogColor="Orange" />
+		
+				<CustomBehavior File="UseTransport" TransportId="186238"
+											WaitAtX="1763.203" WaitAtY="-4284.529" WaitAtZ="133.1072" 
+											TransportStartX="1775.066" TransportStartY="-4299.745" TransportStartZ="151.0326" 
+											StandOnX="1770.22" StandOnY="-4292.056" StandOnZ="133.1872" 
+											TransportEndX="2837.908" TransportEndY="6187.443" TransportEndZ="140.1648" 
+											GetOffX="2836.831" GetOffY="6185.15" GetOffZ="121.9923" />
+	
+			</If>
+		
+			<CustomBehavior File="LoadProfile" ProfileName="..\LK\[Fly][H - Quest] LK 68-80 [Kick]" /> 
+
+	  
+	</QuestOrder>
+</HBProfile>

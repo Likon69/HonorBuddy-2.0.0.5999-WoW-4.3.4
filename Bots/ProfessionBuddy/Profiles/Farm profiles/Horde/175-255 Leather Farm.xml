@@ -1,0 +1,67 @@
+<!-- Southern Barrens Leather farming by Deathburn -->
+<HBProfile>
+<Name>175-225 Leather - Horde</Name>
+<MinDurability>0.1</MinDurability>
+<MinFreeBagSlots>1</MinFreeBagSlots>
+
+
+<MailGrey>false</MailGrey>
+<MailWhite>false</MailWhite>
+<MailGreen>false</MailGreen>
+<MailBlue>false</MailBlue>
+<MailPurple>false</MailPurple>
+
+<SellGrey>True</SellGrey>
+<SellWhite>True</SellWhite>
+<SellGreen>True</SellGreen>
+<SellBlue>false</SellBlue>
+<SellPurple>false</SellPurple>
+
+<Vendors>
+</Vendors>
+
+<Mailboxes>
+</Mailboxes>
+
+<Blackspots>
+</Blackspots>
+
+  <QuestOrder>
+    
+
+    <While Condition="(Me.Level &gt; 1)" >
+
+      <If Condition="(Me.FreeBagSlots &gt; 5)" >
+
+        <CustomBehavior File="FlyTo" DestName="Farm Area" X="-3336.295" Y="-2151.977" Z="124.0537" />
+        <CustomBehavior File="ForcedDismount" />
+
+        <SetGrindArea>
+          <GrindArea>
+            <TargetMinLevel>1</TargetMinLevel>
+            <TargetMaxLevel>86</TargetMaxLevel>
+            <Factions>14 15</Factions>           
+            <TargetMinLevel>20</TargetMinLevel>
+            <TargetMaxLevel>30</TargetMaxLevel>
+            <Hotspots>
+              <Hotspot X="-3440.349" Y="-2138.042" Z="91.95173" />
+              <Hotspot X="-3432.859" Y="-2218.82" Z="93.03426" />
+              <Hotspot X="-3480.487" Y="-2230.944" Z="93.09011" />
+              <Hotspot X="-3550.183" Y="-2139.01" Z="94.69069" />
+              <Hotspot X="-3598.222" Y="-2195.313" Z="91.6901" />
+              <Hotspot X="-3575.226" Y="-2290.064" Z="92.22637" />
+              <Hotspot X="-3509.565" Y="-2308.63" Z="92.46613" />
+              <Hotspot X="-3503.472" Y="-2352.342" Z="91.66665" />
+              <Hotspot X="-3498.836" Y="-2406.215" Z="91.97472" />
+              <Hotspot X="-3541.806" Y="-2417.375" Z="93.93512" />
+              <Hotspot X="-3554.491" Y="-2340.392" Z="98.18338" />
+              <Hotspot X="-3544.813" Y="-2259.406" Z="92.10066" />
+              <Hotspot X="-3482.546" Y="-2188.267" Z="95.57259" />
+            </Hotspots>
+          </GrindArea>
+        </SetGrindArea>
+        <GrindTo Condition="(Me.FreeBagSlots &lt;= 5) || (Me.DurabilityPercent &lt;= 0.3)" GoalText="Farming Light Leather." />
+      </If>
+    </While>
+  </QuestOrder>
+</HBProfile>

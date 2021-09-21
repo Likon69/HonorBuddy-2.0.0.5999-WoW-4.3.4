@@ -1,0 +1,72 @@
+<HBProfile>
+	<Name>[A] Extinguishing Outland [Kick]</Name>
+	<MinLevel>1</MinLevel>
+	<MaxLevel>86</MaxLevel>
+	
+	<MinDurability>0.1</MinDurability>
+	<MinFreeBagSlots>1</MinFreeBagSlots>
+	
+	
+	
+	<QuestOrder>
+
+	<CustomBehavior File="UserSettings" LootMobs="True" PullDistance="1" UseMount="False" TrainNewSkills="False" LearnFlightPaths="False" KillBetweenHotspots="True" LogoutForInactivity="False" />
+
+
+
+				<!-- Thrallmar / Hellfire Extinguish Horde Bonfire -->
+				<CustomBehavior File="FlyTo" DestName="Hellfire Horde Bonfire" X="33.95839" Y="2581.025" Z="68.02706" />
+				<CustomBehavior File="ForcedDismount" />
+				<CustomBehavior File="InteractWith" MobId="187963" ObjectType="Gameobject" Range="10" WaitTime="3000" />
+				<CustomBehavior File="RunMacro" Macro="/click GossipTitleButton1" />
+				<CustomBehavior File="RunMacro" Macro="/click QuestFrameCompleteQuestButton" />	
+
+				<!-- Shadowmoon Village / SMV Extinguish Horde Bonfire -->
+				<CustomBehavior File="FlyTo" DestName="SMV Horde Bonfire" X="-3056.857" Y="2377.223" Z="63.26477" />
+				<CustomBehavior File="ForcedDismount" />
+				<CustomBehavior File="InteractWith" MobId="187967" ObjectType="Gameobject" Range="10" WaitTime="3000" />
+				<CustomBehavior File="RunMacro" Macro="/click GossipTitleButton1" />
+				<CustomBehavior File="RunMacro" Macro="/click QuestFrameCompleteQuestButton" />	
+
+				<!-- Stonebreaker Hold / Terrokar Extinguish Horde Bonfire -->
+				<CustomBehavior File="FlyTo" DestName="Terrokar Horde Bonfire" X="-2559.602" Y="4285.864" Z="20.24311" />
+				<CustomBehavior File="ForcedDismount" />
+				<CustomBehavior File="InteractWith" MobId="187970" ObjectType="Gameobject" Range="10" WaitTime="3000" />
+				<CustomBehavior File="RunMacro" Macro="/click GossipTitleButton1" />
+				<CustomBehavior File="RunMacro" Macro="/click QuestFrameCompleteQuestButton" />	
+
+				<!-- Garadar / Nagrand Extinguish Horde Bonfire -->
+				<CustomBehavior File="FlyTo" DestName="Nagrand Horde Bonfire" X="-1220.073" Y="7476.025" Z="22.08828" />
+				<CustomBehavior File="ForcedDismount" />
+				<CustomBehavior File="InteractWith" MobId="187966" ObjectType="Gameobject" Range="10" WaitTime="3000" />
+				<CustomBehavior File="RunMacro" Macro="/click GossipTitleButton1" />
+				<CustomBehavior File="RunMacro" Macro="/click QuestFrameCompleteQuestButton" />	
+
+				<!-- Zabra'jin / Zangarmarsh Extinguish Horde Bonfire -->
+				<CustomBehavior File="FlyTo" DestName="Zangarmarsh Horde Bonfire" X="193.9369" Y="7685.295" Z="22.45855" />
+				<CustomBehavior File="ForcedDismount" />
+				<CustomBehavior File="InteractWith" MobId="187975" ObjectType="Gameobject" Range="10" WaitTime="3000" />
+				<CustomBehavior File="RunMacro" Macro="/click GossipTitleButton1" />
+				<CustomBehavior File="RunMacro" Macro="/click QuestFrameCompleteQuestButton" />	
+
+				<!-- Thunderlord Stronghold / Blade's Edge Extinguish Horde Bonfire -->
+				<CustomBehavior File="FlyTo" DestName="Blade's Edge Horde Bonfire" X="2273.543" Y="6137.475" Z="136.6412" />
+				<CustomBehavior File="ForcedDismount" />
+				<CustomBehavior File="InteractWith" MobId="187955" ObjectType="Gameobject" Range="10" WaitTime="3000" />
+				<CustomBehavior File="RunMacro" Macro="/click GossipTitleButton1" />
+				<CustomBehavior File="RunMacro" Macro="/click QuestFrameCompleteQuestButton" />	
+
+				<!-- Area 52 / Netherstorm Extinguish Horde Bonfire -->
+				<CustomBehavior File="FlyTo" DestName="Netherstorm Horde Bonfire" X="2918.107" Y="3676.373" Z="144.1794" />
+				<CustomBehavior File="ForcedDismount" />
+				<CustomBehavior File="InteractWith" MobId="187949" ObjectType="Gameobject" Range="10" WaitTime="3000" />
+				<CustomBehavior File="RunMacro" Macro="/click GossipTitleButton1" />
+				<CustomBehavior File="RunMacro" Macro="/click QuestFrameCompleteQuestButton" />	
+
+
+				
+
+	<CustomBehavior File="UserDialog" AllowBotStop="True" SoundCue="Exclamation" SoundCueInterval="1" Text="Grats on your ach!\n\nEnd of Line" />
+
+	</QuestOrder>
+</HBProfile>

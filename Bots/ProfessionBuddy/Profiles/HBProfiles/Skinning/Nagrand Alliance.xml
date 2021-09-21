@@ -1,0 +1,451 @@
+<HBProfile>
+  <Name>Alliance Nagrand Leather farming</Name>
+  <MinDurability>0.2</MinDurability>
+  <MinFreeBagSlots>2</MinFreeBagSlots>
+  <SellGrey>True</SellGrey>
+  <SellWhite>False</SellWhite>
+  <SellGreen>False</SellGreen>
+  <MinLevel>65</MinLevel>
+  <MaxLevel>86</MaxLevel>
+  
+  <SubProfile>
+   <Name>Nagrand</Name>
+   <Factions>91 14 7</Factions>
+
+   <Vendors>
+   <Vendor Name="Sparik" Entry="19012" Type="Repair" X="-2530.663" Y="7354.053" Z="9.284518" />
+   </Vendors>
+
+   <Mailboxes>
+   <Mailbox X="-2672.006" Y="7288.747" Z="36.62866" />
+   </Mailboxes>
+
+   <Hotspots>
+    <Hotspot X="-2654.71" Y="6982.63867" Z="findhighest" />
+      <Hotspot X="-2473.635" Y="7046.89063" Z="findhighest" />
+      <Hotspot X="-2304.242" Y="7000.162" Z="findhighest" />
+      <Hotspot X="-2204.94385" Y="6863.868" Z="findhighest" />
+      <Hotspot X="-2278.93066" Y="6686.68848" Z="findhighest" />
+      <Hotspot X="-2376.284" Y="6565.972" Z="findhighest" />
+      <Hotspot X="-2510.62842" Y="6569.866" Z="findhighest" />
+      <Hotspot X="-2629.39868" Y="6639.959" Z="findhighest" />
+      <Hotspot X="-2703.3855" Y="6809.35156" Z="findhighest" />
+   </Hotspots>
+
+   <Blackspots>
+   </Blackspots>
+  </SubProfile>
+
+  <AvoidMobs>
+  </AvoidMobs> 
+
+  <ProtectedItems>
+    <!--Normal Stuff-->
+    <Item>6948</Item>     <!-- Hearthstone -->
+    <Item>7005</Item>     <!-- Skinning Knife -->
+    <Item>2901</Item>     <!-- Mining Pick -->
+    <Item>5956</Item>	  <!-- Blacksmith Hammer-->
+    <Item>6256</Item>	  <!-- Fishing Pole-->
+    <Item>6365</Item>	  <!-- Strong Fishing Pole-->
+    <Item>40772</Item>    <!-- Gnomish Army Knife -->
+    <Item>40769</Item>
+
+	<Item>34767</Item>
+	<Item>46376</Item>
+    <!--Enchanting-->
+    <Item>6218</Item>	  <!-- Runed Copper Rod-->
+    <Item>6339</Item>	  <!-- Runed Silver Rod-->
+    <Item>11130</Item>	  <!-- Runed Golden Rod-->
+    <Item>11145</Item>	  <!-- Runed Truesilver Rod-->
+    <Item>16207</Item>	  <!-- Runed Arcanite Rod-->
+    <Item>22461</Item>	  <!-- Runed Fel iron Rod-->
+    <Item>22462</Item>	  <!-- Runed Adamantite Rod-->
+    <Item>22463</Item>	  <!-- Runed Eternium Rod-->
+    <Item>44452</Item>	  <!-- Runed Titanium Rod-->
+
+    <!--Mage Stuff-->
+	<!--Regents-->
+    <Item>17032</Item>    <!--Rune Of Portals-->
+   	<Item>17031</Item>    <!--Rune of Teleportation-->
+   	<Item>17056</Item>    <!--Light Feather-->
+   	<Item>17020</Item>    <!--Arcane Powder-->
+	
+	<!--Conjured Water-->
+    	<Item>5350</Item>     <!-- Conjured Water -->
+    	<Item>2288</Item>     <!-- Conjured Fresh Water -->
+    	<Item>2136</Item>     <!-- Conjured Purified Water -->
+    	<Item>3772</Item>     <!-- Conjured Spring Water -->
+    	<Item>8077</Item>     <!-- Conjured Mineral Water -->
+    	<Item>8078</Item>     <!-- Conjured Mineral Water -->
+    	<Item>8079</Item>     <!-- Conjured Crystal Water -->
+    	<Item>30703</Item>    <!-- Conjured Mountain Spring Water -->
+    	<Item>22018</Item>    <!-- Conjured Glacier Water -->
+
+	<!--Conjured Food-->
+    	<Item>5349</Item>     <!-- Conjured Muffin -->
+    	<Item>1113</Item>     <!-- Conjured Bread -->
+    	<Item>1114</Item>     <!-- Conjured Rye -->
+    	<Item>1487</Item>     <!-- Conjured Pumpernickel -->
+    	<Item>8075</Item>     <!-- Conjured Sourdough -->
+    	<Item>8076</Item>     <!-- Conjured Sweet Roll -->
+    	<Item>22895</Item>    <!-- Conjured Cinnamon Roll -->
+    	<Item>34062</Item>    <!-- Conjured Mana Biscuit -->
+    	<Item>22019</Item>    <!-- Conjured Croissant -->
+    	<Item>43518</Item>    <!-- Conjured Mana Pie -->
+    	<Item>43523</Item>    <!-- Conjured Mana Strudel -->
+
+	<!--Conjured Gem-->
+    	<Item>5514</Item>     <!-- Mana Agate -->
+    	<Item>5513</Item>     <!-- Mana Jade -->
+    	<Item>8007</Item>     <!-- Mana Citrine -->
+    	<Item>8008</Item>     <!-- Mana Ruby -->
+    	<Item>22044</Item>    <!-- Mana Emerald -->
+    	<Item>33312</Item>    <!-- Mana Sapphire -->
+
+
+    <!--Shaman Stuff-->
+	<!--Totems-->
+    	<Item>5175</Item>     <!-- Earth Totem -->
+   	<Item>5176</Item>     <!-- Fire Totem -->
+    	<Item>5177</Item>     <!-- Water Totem -->
+    	<Item>5178</Item>     <!-- Air Totem -->
+	<!--Regents-->
+    	<Item>17058</Item>    <!-- Fish Oil -->
+    	<Item>17057</Item>    <!-- Shiny Fish Scales -->
+    	<Item>17030</Item>    <!-- Ankh -->
+
+    <!--Priest Stuff-->
+	<!--Regents-->
+    	<Item>17028</Item>    <!-- Holy Candle -->
+    	<Item>17029</Item>    <!-- Sacred Candle -->
+    	<Item>44615</Item>    <!-- Devout Candle -->
+
+    <!--Paladin Stuff-->
+	<!--Regents-->
+    	<Item>17033</Item>    <!-- Symbol of Divinity -->
+    	<Item>21177</Item>    <!-- Symbol of Kings -->
+    	<Item>17030</Item>    <!-- Symbol of Divinity -->
+    	<Item>17030</Item>    <!-- Symbol of Divinity -->
+    	<Item>17030</Item>    <!-- Symbol of Divinity -->
+
+    <!--Druid Stuff-->
+	<!--Regents-->
+    	<Item>17034</Item>    <!-- Maple Seed -->
+    	<Item>17035</Item>    <!-- Stranglethorn Seed -->
+    	<Item>17036</Item>    <!-- AShwood Seed -->
+    	<Item>17037</Item>    <!-- Hornbeam Seed -->
+    	<Item>17038</Item>    <!-- Ironwood Seed -->
+    	<Item>22147</Item>    <!-- Flintweed Seed -->
+    	<Item>44614</Item>    <!-- Starleaf Seed -->
+    	<Item>17026</Item>    <!-- Wild Thornroot -->
+    	<Item>22148</Item>    <!-- Wild Quillvine -->
+    	<Item>17021</Item>    <!-- Wild Berries -->
+    	<Item>44605</Item>    <!-- Wild Spineleaf -->
+
+    <!--Rouge Stuff-->
+	<!--Regents-->
+    	<Item>5060</Item>    <!-- Thieves' Tools -->
+    	<Item>3775</Item>    <!-- Crippling Poison -->
+    	<Item>5237</Item>    <!-- Mind-numbing Poison -->
+    	<Item>6947</Item>    <!-- Instant Poison -->
+    	<Item>6949</Item>    <!-- Instant Poison II -->
+    	<Item>6950</Item>    <!-- Instant Poison III-->
+    	<Item>8926</Item>    <!-- Instant Poison IV-->
+    	<Item>8927</Item>    <!-- Instant Poison V -->
+    	<Item>8928</Item>    <!-- Instant Poison VI-->
+    	<Item>22054</Item>   <!-- Instant Poison VII-->
+    	<Item>43230</Item>   <!-- Instant Poison VIII-->
+    	<Item>43231</Item>   <!-- Instant Poison IX-->
+    	<Item>2892</Item>    <!-- Deadly Poison -->
+    	<Item>2893</Item>    <!-- Deadly Poison II-->
+    	<Item>8984</Item>    <!-- Deadly Poison III-->
+    	<Item>8985</Item>    <!-- Deadly Poison IV-->
+    	<Item>20844</Item>   <!-- Deadly Poison V-->
+    	<Item>22053</Item>   <!-- Deadly Poison VI-->
+    	<Item>22054</Item>   <!-- Deadly Poison VII-->
+    	<Item>43232</Item>   <!-- Deadly Poison VIII-->
+    	<Item>43233</Item>   <!-- Deadly Poison IX-->
+    	<Item>10918</Item>   <!-- Wound Poison -->
+    	<Item>10920</Item>   <!-- Wound Poison II-->
+    	<Item>10921</Item>   <!-- Wound Poison III-->
+    	<Item>10922</Item>   <!-- Wound Poison IV-->
+    	<Item>22055</Item>   <!-- Wound Poison V-->
+    	<Item>43234</Item>   <!-- Wound Poison VI-->
+    	<Item>43235</Item>   <!-- Wound Poison VII-->
+    	<Item>21835</Item>   <!-- Anesthetic Poison -->
+    	<Item>43237</Item>   <!-- Anesthetic Poison II-->
+
+    <!--Death Knight Stuff-->
+	<!--Regents-->
+    	<Item>37201</Item>    <!-- Corpse Dust -->
+
+    <!--Warlock Stuff-->
+	<!--Regents-->
+    	<Item>5565</Item>     <!-- Infernal Stone -->
+    	<Item>6265</Item>     <!-- SoulShard -->
+    	<Item>16583</Item>    <!-- Demonic Figurine -->
+
+
+    <!-- Arrows -->
+    <Item>2512</Item>      <!-- Rough Arrow  -->
+    <Item>2515</Item>      <!-- Sharp Arrow -->
+    <Item>3030</Item>      <!-- Razor Arrow -->
+    <Item>11285</Item>     <!-- Jagged Arrow -->
+    <Item>28056</Item>     <!-- Blackflight Arrow -->
+    <Item>41586</Item>     <!-- Terrorshaft Arrow -->
+    <Item>28053</Item>     <!-- Terrorshaft Arrow -->
+    <Item>3464</Item>      <!-- Feather Arrow -->
+    <Item>9399</Item>      <!-- Precision Arrow -->
+    <Item>10579</Item>     <!-- Explosive Arrow -->
+    <Item>19316</Item>     <!--Ice Threaded Arrow -->
+    <Item>18042</Item>     <!-- Thorium Headed Arrow -->
+    <Item>12654</Item>     <!-- Doomshot -->
+    <Item>24417</Item>     <!-- Scout's Arrow -->
+    <Item>30611</Item>     <!-- Halaani razorshaft -->
+    <Item>31949</Item>     <!-- Warden's Arrow -->
+    <Item>33803</Item>     <!-- Adamantite Stinger -->
+    <Item>34581</Item>     <!-- Mysterious Arrow -->
+    <Item>31737</Item>     <!-- Timeless Arrow -->
+    <Item>41165</Item>     <!-- Saronite Razorheads -->
+    <Item>52021</Item>     <!-- Iceblade Arrow -->
+
+    <Item>32760</Item>     <!-- The Macho Gnome's Arrow -->
+    <Item>30319</Item>     <!-- Nether Spike -->
+
+
+    <!-- Bullets -->
+    <Item>2516</Item>      <!-- Light Shot -->
+    <Item>4960</Item>      <!-- Flash Pellet -->
+    <Item>5568</Item>      <!-- Smooth Pebble -->
+    <Item>3033</Item>      <!-- Solid Shot -->
+    <Item>8067</Item>      <!-- Crafted Light Shot -->
+    <Item>8068</Item>      <!-- Crafted Heavy Shot -->
+    <Item>8069</Item>      <!-- Crafted Solid Shot -->
+    <Item>3465</Item>      <!-- Exploding Shot -->
+    <Item>10512</Item>     <!-- Hi-Impact Mithril Slugs -->
+    <Item>11284</Item>     <!-- Accurate Slugs -->
+    <Item>10513</Item>     <!-- Mithril Gyro-Shot -->
+    <Item>11630</Item>     <!-- Rockshard Pellets -->
+    <Item>19317</Item>     <!-- Ice Threade Bullet -->
+    <Item>15997</Item>     <!-- Thorium Shells -->
+    <Item>13377</Item>     <!-- Miniature Cannon Balls -->
+    <Item>23772</Item>     <!-- Fel Iron Shells -->
+    <Item>30612</Item>     <!-- Halaani Grimshot-->
+    <Item>32882</Item>     <!-- Hellfire Shot -->
+    <Item>32883</Item>     <!-- Felbane Slugs -->
+    <Item>23773</Item>     <!-- Adamantite Shells -->
+    <Item>34582</Item>     <!-- Mysterious Shell -->
+    <Item>31735</Item>     <!-- Timeless Shell -->
+    <Item>2519</Item>      <!-- Heavy Shot -->
+    <Item>28060</Item>     <!-- Impact Shot -->
+    <Item>28061</Item>     <!-- Ironbite Shell -->
+    <Item>41584</Item>     <!-- Frostbite Bullets -->
+    <Item>41164</Item>     <!-- Mammoth Cutters -->
+    <Item>52020</Item>     <!-- Shatter Rounds -->
+
+
+    <!--Healing Potion-->
+    <Item>118</Item>      <!-- Minor Healing Potion -->
+    <Item>858</Item>      <!-- Lesser Healing Potion -->
+    <Item>4596</Item>     <!-- Discolored Healing Potion -->
+    <Item>929</Item>      <!-- Healing Potion -->
+    <Item>1710</Item>     <!-- Greater Healing Potion -->
+    <Item>3928</Item>     <!-- Superior Healing Potion -->
+    <Item>13446</Item>    <!-- Major Healing Potion -->
+    <Item>17348</Item>    <!-- Major Healing Draught PvP -->
+    <Item>28100</Item>    <!-- Volatile Healing Potion -->
+    <Item>33934</Item>    <!-- Crystal Healing Potion -->
+    <Item>22829</Item>    <!-- Super Healing Potion -->
+    <Item>17349</Item>    <!-- Super Healing Draught -->
+    <Item>32947</Item>    <!-- Auchenai Healing Potion -->
+    <Item>33092</Item>    <!-- Healing Potion Injector -->
+    <Item>18839</Item>    <!-- Combat Healing Potion -->
+    <Item>31839</Item>    <!-- Major Combat Healing Potion -->
+    <Item>31852</Item>    <!-- Major Combat Healing Potion -->
+    <Item>31853</Item>    <!-- Major Combat Healing Potion -->
+    <Item>31838</Item>    <!-- Major Combat Healing Potion -->
+    <Item>39671</Item>    <!-- Resurgent Healing Potion -->
+    <Item>33447</Item>    <!-- Runic Healing Potion -->
+    <Item>41166</Item>    <!-- Runic Healing Injector -->
+    <Item>43531</Item>    <!-- Argent Healing Potion -->
+
+	
+    <!--Mana Potion-->
+    <Item>2455</Item>     <!-- Minor Mana Potion -->
+    <Item>3385</Item>     <!-- Lesser Mana Potion -->
+    <Item>3827</Item>     <!-- Mana Potion -->
+    <Item>6149</Item>     <!-- Greater Mana Potion -->
+    <Item>13443</Item>    <!-- Superior Mana Potion -->
+    <Item>13444</Item>    <!-- Major Mana Potion -->
+    <Item>22832</Item>    <!-- Super Mana Potion -->
+    <Item>28101</Item>    <!-- Unstable Mana Potion -->
+    <Item>31677</Item>    <!-- Fel Mana Potion -->
+    <Item>43530</Item>    <!-- Argent Mana Potion -->
+    <Item>33093</Item>    <!-- Mana Potion Injector -->
+    <Item>42545</Item>    <!-- Runic Mana Injector -->
+    <Item>33448</Item>    <!-- Runic Mana Potion -->
+    <Item>40067</Item>    <!-- Icy Mana Potion -->
+    <Item>18841</Item>    <!-- Combat Mana Potion -->
+    <Item>31855</Item>    <!-- Major Combat Mana Potion -->
+    <Item>31854</Item>    <!-- Major Combat Mana Potion -->
+    <Item>31841</Item>    <!-- Major Combat Mana Potion -->
+    <Item>31840</Item>    <!-- Major Combat Mana Potion -->
+    <Item>17352</Item>    <!-- Superior Mana Draught -->
+    <Item>17351</Item>    <!-- Major Mana Draught -->
+
+
+    <!--Mana Oil-->
+    <Item>20745</Item>    <!-- Minor Mana Oil -->
+    <Item>20747</Item>    <!-- Lesser Mana Oil -->
+    <Item>20748</Item>    <!-- Brilliant Mana Oil -->
+    <Item>22521</Item>    <!-- Superior Mana Oil -->
+    <Item>36899</Item>    <!-- Exeptional Mana Oil -->
+
+
+    <!--Bandage-->
+    <Item>1251</Item>     <!-- Linen Bandage -->
+    <Item>2581</Item>     <!-- Heavy Linen Bandage -->
+    <Item>3530</Item>     <!-- Wool Bandage -->
+    <Item>3531</Item>     <!-- Heavy Wool Bandage -->
+    <Item>6450</Item>     <!-- Silk Bandage -->
+    <Item>6451</Item>     <!-- Heavy Silk Bandage -->
+    <Item>8544</Item>     <!-- Mageweave Bandage -->
+    <Item>8545</Item>     <!-- Heavy Mageweave Bandage -->
+    <Item>14529</Item>    <!-- Runecloth Bandage -->
+    <Item>14530</Item>    <!-- Heavy Runecloth Bandage -->
+    <Item>21990</Item>    <!-- Netherweave Bandage -->
+    <Item>21991</Item>    <!-- Heavy Netherweave Bandage -->
+    <Item>34721</Item>    <!-- Frostweave Bandage -->
+    <Item>34722</Item>    <!-- Heavy Frostweave Bandage -->
+
+
+    <!--Water-->
+    <!--1-5-->
+    <Item>159</Item>	<!--Refreshing Spring Water-->
+
+    <!--5-15-->
+    <Item>1179</Item>	<!--Ice Cold Milk-->
+
+    <!--15-25-->
+    <Item>1205</Item>	<!--Melon Juice-->
+
+    <!--25-35-->
+    <Item>1708</Item>	<!--Sweet Nectar-->
+
+    <!--35-45-->
+    <Item>1645</Item>	<!--Moonberry Juice-->
+
+    <!--45-55-->
+    <Item>8766</Item>	<!--Morning Glory Dew-->
+    <Item>22324</Item>	<!--Winter Kimchi-->
+
+    <!--55-65-->
+    <Item>28399</Item>	<!--Filtered Draenic Water-->
+    <Item>29454</Item>	<!--Silverwine-->
+
+
+    <!--65-75--> 
+    <Item>27860</Item>	<!--Purified Draenic Water-->
+    <Item>29395</Item>	<!--Ethermead-->
+    <Item>33444</Item>	<!--Pungent Seal Whey-->
+    <Item>33445</Item>	<!--Honeymint Tea-->
+    <Item>35954</Item>	<!--Sweetened Goat's Milk-->
+
+
+    <!--Food-->
+    <!--1-5-->
+    <Item>20857</Item>	<!--Honey Bread-->
+    <Item>2070</Item>	<!--Darnassian Bleu-->
+    <Item>117</Item>	<!--Tough Jerky-->
+    <Item>4540</Item>	<!--Tough Hunk of Bread-->
+    <Item>4604</Item>	<!--Forest Mushroom Cap-->
+    <Item>4536</Item>	<!--Shiny Red Apple-->
+    <Item>787</Item>	<!--Slitherskin Mackerel-->
+
+    <!--5-15-->
+    <Item>2287</Item>	<!--Haunch of Meat-->
+    <Item>17406</Item>	<!--Holiday Cheesewheel-->
+    <Item>4537</Item>	<!--Tel'Abim Banana-->
+    <Item>414</Item>	<!--Dalaran Sharp-->
+    <Item>4541</Item>	<!--Freshly Baked Bread-->
+    <Item>4605</Item>	<!--Red-Speckled Mushroom-->
+    <Item>4592</Item>	<!--Longjaw Mud Snapper-->
+
+    <!--15-25-->
+    <Item>3770</Item>	<!--Mutton chop-->
+    <Item>422</Item>	<!--Dwarven Mild-->
+    <Item>4538</Item>	<!--Snapvine Watermelon-->
+    <Item>16170</Item>	<!--Steamed Mandu-->
+    <Item>7228</Item>	<!--Strawberry Ice Cream-->
+    <Item>4542</Item>	<!--Moist Cornbread-->
+    <Item>4606</Item>	<!--Spongy Morel-->
+    <Item>4593</Item>	<!--Bristle Whisker Catfish-->
+
+    <!--25-35-->
+    <Item>18632</Item>	<!--Moonbrook Riot Taffy-->
+    <Item>16169</Item>	<!--Wild Ricecake-->
+    <Item>4607</Item>	<!--Delicious Cave Mold-->
+    <Item>4539</Item>	<!--GoldenBark Apple-->
+    <Item>17407</Item>	<!--Graccu's Homemade Meat Pie-->
+    <Item>3771</Item>	<!--Wild Hog Shank-->
+    <Item>4544</Item>	<!--Mulgore Spice Bread-->
+    <Item>1707</Item>	<!--Stormwind Brie-->
+    <Item>4594</Item>	<!--Rockscale Cod-->
+
+    <!--35-45-->
+    <Item>18635</Item>	<!--Bellara's Nutterbar-->
+    <Item>21030</Item>	<!--Darnassus Kimchi Pie-->
+    <Item>16168</Item>	<!--Heaven Peach-->
+    <Item>17408</Item>	<!--Spicy Beefstick-->
+    <Item>21552</Item>	<!--Striped Yellowtail-->
+    <Item>4599</Item>	<!--Cured Ham Steak-->
+    <Item>3927</Item>	<!--Fine aged Cheddar-->
+    <Item>4602</Item>	<!--Moon Harvest Pumpkin-->
+    <Item>4608</Item>	<!--Raw Black Truffle-->
+    <Item>4601</Item>	<!--Soft Banana Bread-->
+
+    <!--45-55-->
+    <Item>21031</Item>	<!--Cabbage Kimchi-->
+    <Item>21033</Item>	<!--Radish Kimchi-->
+    <Item>8957</Item>	<!--Spinefin Halibut-->
+    <Item>8932</Item>	<!--Alterac Swiss-->
+    <Item>8953</Item>	<!--Deep Fried Plantains-->
+    <Item>8948</Item>	<!--Dried King Bolete-->
+    <Item>8950</Item>	<!--Homemade Cherry Pie-->
+    <Item>8952</Item>	<!--Roasted Quail-->
+
+    <!--55-65-->
+    <Item>29393</Item>	<!--Diamon Berries-->
+    <Item>27857</Item>	<!--Garadar Sharp-->
+    <Item>27855</Item>	<!--Mag'har Grainbread-->
+    <Item>27856</Item>	<!--Skethnyl Berries-->
+    <Item>27854</Item>	<!--Smoked Talbuk Venison-->
+    <Item>27858</Item>	<!--Sunspring Carp-->
+    <Item>27859</Item>	<!--Zangar Caps-->
+
+    <!--65-75-->
+   <Item>29449</Item>	<!--BladeSpire Bagel-->
+   <Item>29451</Item>	<!--Clefthoof Ribs-->
+   <Item>29394</Item>	<!--Lyribread-->
+   <Item>35949</Item>	<!--Tundra Berries-->
+   <Item>29452</Item>	<!--Zangar Trout-->
+   <Item>33449</Item>	<!--Crusty Flatbread-->
+   <Item>33451</Item>	<!--Fillet of Icefin-->
+   <Item>37252</Item>	<!--Frostberries-->
+   <Item>33452</Item>	<!--Honey-Spiced Lichen-->
+   <Item>29448</Item>	<!--Mag'har Mild Cheese-->
+   <Item>33454</Item>	<!--Salted Venison-->
+   <Item>33443</Item>	<!--Sour Goat Cheese-->
+   <Item>29453</Item>	<!--Sporeggar Mushroom-->
+   <Item>29450</Item>	<!--Telaari Grapes-->
+
+    <!--75-75-->
+   <Item>42429</Item>	<!--Red Velvet Cupcake-->
+   <Item>42431</Item>	<!--Dalaran Brownie-->
+   <Item>35950</Item>	<!--Sweet potatoe Bread-->
+   
+</ProtectedItems>
+
+
+
+</HBProfile>

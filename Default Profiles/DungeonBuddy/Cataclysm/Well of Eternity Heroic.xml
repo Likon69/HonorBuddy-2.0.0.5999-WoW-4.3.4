@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<DungeonBuddyProfile>
+  <Name>Well of Eternity Heroic</Name>
+  <DungeonId>437</DungeonId>
+  <BossEncounters>
+	  <Boss isFinal="false" entry="55085" name="Peroth'arn" killOrder="1" optional="false" X="3339.316" Y="-4895.977" Z="181.077" /> <!-- kill him, don't stand in stuff. make tank eat the eyeballs during 50% phase -->
+	  <Boss isFinal="false" entry="54853" name="Queen Azshara" killOrder="2" optional="false" X="3459.464" Y="-5239.582" Z="230.5747" /> <!-- Event - kill her 6 mobs and interrupt her, u never kill her -->
+	  <!-- <Vendor Name="Abyssal Doombringer" Entry="55510" Type="Repair" X="3257.824" Y="-5702.807" Z="17.31816" /> - mini boss that u must kill before captain / mannoroth - after porting into last phase-->
+	  <Boss isFinal="false" entry="55419" name="Captain Varo'then" killOrder="3" optional="false" X="3319.672" Y="-5716.471" Z="16.09521" />
+	  <Boss isFinal="true" entry="54969" name="Mannoroth" killOrder="4" optional="false" X="3353.072" Y="-5736.212" Z="15.04705" />
+  </BossEncounters>
+  <Blackspots>
+    <!--<Blackspot X="-101.3791" Y="-703.8368" Z="9.095623" Radius="3.363508" />-->
+  </Blackspots>
+</DungeonBuddyProfile>

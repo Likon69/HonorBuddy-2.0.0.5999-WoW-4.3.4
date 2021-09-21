@@ -1,0 +1,558 @@
+<HBProfile>
+	<Name>[H - Quest] 1-5 Troll [Kick]</Name>
+	<MinDurability>0.4</MinDurability>
+	<MinFreeBagSlots>3</MinFreeBagSlots>
+	<MinLevel>1</MinLevel>
+	<MaxLevel>86</MaxLevel>
+	<MailGrey>False</MailGrey>
+	<MailWhite>False</MailWhite>
+	<MailGreen>True</MailGreen>
+	<SellGrey>True</SellGrey>
+	<SellWhite>True</SellWhite>
+	<SellGreen>True</SellGreen>
+	<SellBlue>False</SellBlue>
+	<SellPurple>False</SellPurple>
+	
+	<AvoidMobs>
+		<!--
+		<Mob Name="Spitescale Wavethrasher" Entry="38300" />
+		<Mob Name="Spitescale Siren" Entry="38301" />
+		-->
+	</AvoidMobs>
+	
+	<Mailboxes>
+	<!--Sen'jin Village Mailbox-->
+		<Mailbox X="-816.5651" Y="-4926.866" Z="19.88713"/>
+	<!--Razor Hill Mailbox-->
+		<Mailbox X="321.0783" Y="-4708.963" Z="14.15302"/>
+	</Mailboxes>
+	
+	<Blackspots>
+		<!--Valley of Trials Middle Fire-->
+		<Blackspot X="-602.3636" Y="-4250.66" Z="38.95682" Radius="3.759537"/>
+		<!--Durotar Blackspots-->
+		<Blackspot X="373.5913" Y="-4712.287" Z="16.10571" Radius="10.30227" />
+		<Blackspot X="-1290.54" Y="-5567.071" Z="21.00622" Radius="3.280843" />
+
+		<!--Sen'jin Village Fence-->
+		<Blackspot X="-768.1917" Y="-4881.526" Z="20.29184" Radius="7.254548"/>
+		<Blackspot X="-767.4973" Y="-4880.469" Z="20.56847" Radius="4.278707"/>
+		
+		<!--Troll Starting Area-->
+		<Blackspot X="-1135.981" Y="-5414.498" Z="13.00538" Radius="2.300135" />
+		<Blackspot X="-1150.384" Y="-5519.188" Z="11.58836" Radius="2.494276" />
+		<Blackspot X="-1168.537" Y="-5269.622" Z="0.8604383" Radius="3.024951" />		
+		<!--Harpy Nest-->
+		<Blackspot X="-2639.21" Y="-1405.313" Z="32.07373" Radius="3.31264"/>
+		<!--Cold Hearth Manor Sign-->
+		<Blackspot X="2188.518" Y="661.0852" Z="33.29134" Radius="4.017753"/>	
+	</Blackspots>
+
+	<Vendors>
+	
+		<!-- Echo Islands Vendors -->
+		<Vendor Name="Gora'tin" Entry="39032" Type="Food" X="-1281.953" Y="-5524.03" Z="24.17037" />
+		<Vendor Name="Sortura" Entry="39033" Type="Repair" X="-1268.302" Y="-5572.389" Z="20.85521" />
+		
+		<!-- Echo Islands Trainers -->
+		<Vendor Name="Nekali" Entry="38242" Type="Train" TrainClass="Shaman" X="-1160.215" Y="-5396.146" Z="12.23201" />
+		<Vendor Name="Voldreka" Entry="42618" Type="Train" TrainClass="Warlock" X="-1126.516" Y="-5395.474" Z="12.20928" /> 
+		<Vendor Name="Legati" Entry="38244" Type="Train" TrainClass="Rogue" X="-1125.962" Y="-5446.971" Z="11.98263" /> 
+		<Vendor Name="Nortet" Entry="38037" Type="Train" TrainClass="Warrior" X="-1171.352" Y="-5440.788" Z="11.9441" /> 
+		<Vendor Name="Soratha" Entry="38246" Type="Train" TrainClass="Mage" X="-1145.95" Y="-5543.13" Z="12.48829" />
+		<Vendor Name="Tunari" Entry="38245" Type="Train" TrainClass="Priest" X="-1118.16" Y="-5539.962" Z="11.97958" />
+		<Vendor Name="Zen'tabra" Entry="38243" Type="Train" TrainClass="Druid" X="-1175.598" Y="-5540.39" Z="11.94129" />
+		<Vendor Name="Ortezza" Entry="38247" Type="Train" TrainClass="Hunter" X="-1128.116" Y="-5510.068" Z="11.98163" />
+		
+		<!--Sen'jin Village Vendors-->
+		<Vendor Name="K'waii" Entry="3186" Type="Food" X="-779.0314" Y="-4938.931" Z="22.24685" />
+		<Vendor Name="Trayexir" Entry="10369" Type="Repair" X="-769.1502" Y="-4948.526" Z="22.84936"/>
+		<!--Sen'jin Village Trainers-->
+		<Vendor Name="Bomsanchu" Entry="50002" Type="Train" TrainClass="Mage" X="-789.2239" Y="-4943.434" Z="38.28099"/>
+		<Vendor Name="Cona" Entry="50011" Type="Train" TrainClass="Shaman" X="-841.7292" Y="-4937.272" Z="20.98561"/>
+		<Vendor Name="Munalti" Entry="50015" Type="Train" TrainClass="Rogue" X="-778.5746" Y="-4926.359" Z="22.90205"/>
+		<Vendor Name="Jamai" Entry="50004" Type="Train" TrainClass="Hunter" X="-790.0643" Y="-4908.497" Z="19.60824"/>
+		<Vendor Name="Yeniss" Entry="50006" Type="Train" TrainClass="Warrior" X="-773.3785" Y="-4947.198" Z="22.881"/>
+		<Vendor Name="Gusini" Entry="49998" Type="Train" TrainClass="Warlock" X="-785.9184" Y="-4939.8" Z="38.28124"/>
+		<Vendor Name="Parata" Entry="50001" Type="Train" TrainClass="Priest" X="-784.3837" Y="-4944.821" Z="38.28099"/>
+		<Vendor Name="Den'chulu" Entry="49997" Type="Train" TrainClass="Druid" X="-844.0104" Y="-4932.819" Z="20.98573"/>
+
+		<!--Razor Hill Vendors-->
+		<Vendor Name="Innkeeper Grosk" Entry="6928" Type="Food" X="340.3629" Y="-4686.287" Z="16.48928"/>
+		<Vendor Name="Ghrawt" Entry="3165" Type="Repair" X="362.1046" Y="-4763.842" Z="12.46936"/>
+		<!--Razor Hill Trainers-->
+		<Vendor Name="Un'Thuwa" Entry="5880" Type="Train" TrainClass="Mage" X="334.717" Y="-4767.622" Z="12.63494"/>
+		<Vendor Name="Swart" Entry="3173" Type="Train" TrainClass="Shaman" X="307.1142" Y="-4839.906" Z="10.52414"/>
+		<Vendor Name="Kaplak" Entry="3170" Type="Train" TrainClass="Rogue" X="268.1285" Y="-4710.936" Z="17.76733"/>
+		<Vendor Name="Thotar" Entry="3171" Type="Train" TrainClass="Hunter" X="275.3385" Y="-4703.997" Z="11.90343"/>
+		<Vendor Name="Tarshaw Jaggedscar" Entry="3169" Type="Train" TrainClass="Warrior" X="311.3524" Y="-4827.792" Z="9.580641"/>
+		<Vendor Name="Dhugru Gorelust" Entry="3172" Type="Train" TrainClass="Warlock" X="356.192" Y="-4837.954" Z="11.08876"/>
+		<Vendor Name="Tai'jin" Entry="3706" Type="Train" TrainClass="Priest" X="294.8838" Y="-4831.495" Z="10.52398"/>		
+		
+	</Vendors>
+	
+	<!--Troll Overrides-->
+
+	<Quest Name="Proving Pit" Id="24780">
+		<Objective Type="KillMob" MobId="38142" KillCount="1">
+			<Hotspots>
+				<Hotspot X="-1148.229" Y="-5418.824" Z="10.59866" />
+				<Hotspot X="-1148.191" Y="-5531.603" Z="8.105322" />
+			</Hotspots>
+		</Objective>
+	</Quest>
+	<Quest Name="Proving Pit" Id="24786">
+		<Objective Type="KillMob" MobId="38142" KillCount="1">
+			<Hotspots>
+				<Hotspot X="-1148.191" Y="-5531.603" Z="8.105322" />
+				<Hotspot X="-1148.229" Y="-5418.824" Z="10.59866" />
+			</Hotspots>
+		</Objective>
+	</Quest>
+	<Quest Name="Proving Pit" Id="26276">
+		<Objective Type="KillMob" MobId="38142" KillCount="1">
+			<Hotspots>
+				<Hotspot X="-1148.229" Y="-5418.824" Z="10.59866" />
+				<Hotspot X="-1148.191" Y="-5531.603" Z="8.105322" />
+			</Hotspots>
+		</Objective>
+	</Quest>
+	<Quest Name="Proving Pit" Id="24774">
+		<Objective Type="KillMob" MobId="38142" KillCount="1">
+			<Hotspots>
+				<Hotspot X="-1148.229" Y="-5418.824" Z="10.59866" />
+				<Hotspot X="-1148.191" Y="-5531.603" Z="8.105322" />
+			</Hotspots>
+		</Objective>
+	</Quest>
+	<Quest Name="Proving Pit" Id="24768">
+		<Objective Type="KillMob" MobId="38142" KillCount="1">
+			<Hotspots>
+				<Hotspot X="-1148.229" Y="-5418.824" Z="10.59866" />
+				<Hotspot X="-1148.191" Y="-5531.603" Z="8.105322" />
+			</Hotspots>
+		</Objective>
+	</Quest>
+	<Quest Name="Proving Pit" Id="24754">
+		<Objective Type="KillMob" MobId="38142" KillCount="1">
+			<Hotspots>
+				<Hotspot X="-1148.229" Y="-5418.824" Z="10.59866" />
+				<Hotspot X="-1148.191" Y="-5531.603" Z="8.105322" />
+			</Hotspots>
+		</Objective>
+	</Quest>
+	<Quest Name="Proving Pit" Id="24762">
+		<Objective Type="KillMob" MobId="38142" KillCount="1">
+			<Hotspots>
+				<Hotspot X="-1148.229" Y="-5418.824" Z="10.59866" />
+				<Hotspot X="-1148.191" Y="-5531.603" Z="8.105322" />
+			</Hotspots>
+		</Objective>
+	</Quest>
+	<Quest Name="Proving Pit" Id="24642">
+		<Objective Type="KillMob" MobId="38142" KillCount="1">
+			<Hotspots>
+				<Hotspot X="-1148.229" Y="-5418.824" Z="10.59866" />
+				<Hotspot X="-1148.191" Y="-5531.603" Z="8.105322" />
+			</Hotspots>
+		</Objective>
+	</Quest>
+	<Quest Name="Consort of the Sea Witch" Id="24625">
+		<Objective Type="CollectItem" ItemId="50018" CollectCount="1">
+			<CollectFrom>
+				<Mob Name="Naj'tess" Id="39072"/>
+			</CollectFrom>
+			<Hotspots>
+				<Hotspot X="-1358.533" Y="-5152.711" Z="13.58079"  />
+			</Hotspots>
+		</Objective>
+	</Quest>
+	
+
+	<QuestOrder IgnoreCheckPoints="True" >
+
+	<CustomBehavior File="UserSettings" LootMobs="True" TrainNewSkills="True" LearnFlightPaths="False" UseFlightPaths="False" PullDistance="15" />
+	
+		<If Condition="Me.Class == WoWClass.Warlock">
+			<PickUp QuestName="The Rise of the Darkspear" QuestId="26272" GiverName="Jin'thala" GiverId="37951"/>
+			<TurnIn QuestName="The Rise of the Darkspear" QuestId="26272" TurnInName="Voldreka" TurnInId="42618"/>
+
+			<PickUp QuestName="The Basics: Hitting Things" QuestId="26273" GiverName="Voldreka" GiverId="42618"/>
+				<Objective QuestName="The Basics: Hitting Things" QuestId="26273" Type="KillMob" MobId="38038" KillCount="6"/>
+			<TurnIn QuestName="The Basics: Hitting Things" QuestId="26273" TurnInName="Voldreka" TurnInId="42618"/>
+
+			<PickUp QuestName="A Rough Start" QuestId="26275" GiverName="Voldreka" GiverId="42618"/>
+				<Objective QuestName="A Rough Start" QuestId="26275" Type="CollectItem" ItemId="50222" CollectCount="1"/>
+			<TurnIn QuestName="A Rough Start" QuestId="26275" TurnInName="Voldreka" TurnInId="42618"/>
+
+			<PickUp QuestName="Proving Pit" QuestId="26276" GiverName="Voldreka" GiverId="42618"/>
+				<While Condition="((HasQuest(26276)) &amp;&amp; (!IsQuestCompleted(26276)))" >
+					<CustomBehavior File="InteractWith" QuestId="26276" MobId="39062" GossipOptions="1,1,1,1" NumOfTimes="1" X="-1161.016" Y="-5530.047" Z="11.97635" />
+					<RunTo QuestId="26276" X="-1148.87" Y="-5530.831" Z="8.106249" />
+					<CustomBehavior QuestId="26276" File="WaitTimer" WaitTime="8000"/>
+					
+					<CustomBehavior QuestId="26276" File="InteractWith" WaitForNpcs="False" MobState="Alive" MobId="38142" X="-1161.016" Y="-5530.047" Z="11.97635" />
+					<CustomBehavior QuestId="26276" File="WaitTimer" WaitTime="4000" GoalText="Waiting for mob to spawn {TimeRemaining}" />
+					<CustomBehavior QuestId="26276" File="InteractWith" WaitForNpcs="False" MobState="Alive" MobId="38142" X="-1161.016" Y="-5530.047" Z="11.97635" />
+					<CustomBehavior QuestId="26276" File="WaitTimer" WaitTime="4000" GoalText="Waiting for mob to spawn {TimeRemaining}" />
+					<CustomBehavior QuestId="26276" File="InteractWith" WaitForNpcs="False" MobState="Alive" MobId="38142" X="-1161.016" Y="-5530.047" Z="11.97635" />
+				</While>
+			<TurnIn QuestName="Proving Pit" QuestId="26276" TurnInName="Voldreka" TurnInId="42618"/>
+			<PickUp QuestName="The Arts of a Warlock" QuestId="26274" GiverName="Voldreka" GiverId="42618" />
+				<If Condition="HasQuest(26274)">
+					<If Condition="!HasSpell(348)">
+						<CustomBehavior File="ForceSetVendor" DoTrain="true" DoRepair ="false" />
+					</If>
+					<While Condition="HasQuest(26274) &amp;&amp; !IsQuestCompleted(26274)">
+						<CustomBehavior File="CastSpellOn" QuestId="26274" SpellId="348" MobId="38038" NumOfTimes="20" MinRange="3" Range="20" MobHpPercentLeft="100" X="-1168.694" Y="-5451.706" Z="12.15925" />
+					</While>
+				</If>
+			<TurnIn QuestName="The Arts of a Warlock" QuestId="26274" TurnInName="Voldreka" TurnInId="42618"/>
+			<PickUp QuestName="More Than Expected" QuestId="26277" GiverName="Voldreka" GiverId="42618" />
+			<TurnIn QuestName="More Than Expected" QuestId="26277" TurnInName="Vol'Jin" TurnInId="38966" />
+		</If>
+
+		<If Condition="Me.Class == WoWClass.Druid">
+			<PickUp QuestName="The Rise of the Darkspear" QuestId="24764" GiverName="Jin'thala" GiverId="37951"/>
+			<TurnIn QuestName="The Rise of the Darkspear" QuestId="24764" TurnInName="Zen'tabra" TurnInId="38243"/>
+
+			<PickUp QuestName="The Basics: Hitting Things" QuestId="24765" GiverName="Zen'tabra" GiverId="38243"/>
+				<Objective QuestName="The Basics: Hitting Things" QuestId="24765" Type="KillMob" MobId="38038" KillCount="6"/>
+			<TurnIn QuestName="The Basics: Hitting Things" QuestId="24765" TurnInName="Zen'tabra" TurnInId="38243"/>
+
+			<PickUp QuestName="A Rough Start" QuestId="24767" GiverName="Zen'tabra" GiverId="38243"/>
+				<Objective QuestName="A Rough Start" QuestId="24767" Type="CollectItem" ItemId="50222" CollectCount="1"/>
+			<TurnIn QuestName="A Rough Start" QuestId="24767" TurnInName="Zen'tabra" TurnInId="38243"/>
+
+			<PickUp QuestName="Proving Pit" QuestId="24768" GiverName="Zen'tabra" GiverId="38243"/>
+				<While Condition="!IsQuestCompleted(24768) &amp;&amp; HasQuest(24768)">
+					<CustomBehavior File="InteractWith" MobId="39062" GossipOptions="1,1,1,1" NumOfTimes="1" X="-1161.016" Y="-5530.047" Z="11.97635" />
+					<RunTo X="-1148.87" Y="-5530.831" Z="8.106249" />
+					<CustomBehavior File="WaitTimer" WaitTime="8000"/>
+					
+					<CustomBehavior File="InteractWith" WaitForNpcs="False" MobState="Alive" MobId="38142" X="-1161.016" Y="-5530.047" Z="11.97635" />
+					<CustomBehavior File="WaitTimer" WaitTime="4000" GoalText="Waiting for mob to spawn {TimeRemaining}" />
+					<CustomBehavior File="InteractWith" WaitForNpcs="False" MobState="Alive" MobId="38142" X="-1161.016" Y="-5530.047" Z="11.97635" />
+					<CustomBehavior File="WaitTimer" WaitTime="4000" GoalText="Waiting for mob to spawn {TimeRemaining}" />
+				</While>
+			<TurnIn QuestName="Proving Pit" QuestId="24768" TurnInName="Zen'tabra" TurnInId="38243"/>
+			<PickUp QuestName="The Arts of a Druid" QuestId="24766" GiverName="Zen'tabra" GiverId="38243" />
+				<If Condition="HasQuest(24766)">
+					<If Condition="!HasSpell(774)">
+						<CustomBehavior File="ForceSetVendor" DoTrain="true" DoRepair ="false" />
+					</If>
+					<While Condition="HasQuest(24766) &amp;&amp; !IsQuestCompleted(24766)"> 
+						<CustomBehavior File="CastSpellOn" QuestId="24766" SpellId="774" MobId="47057" NumOfTimes="20" MinRange="3" Range="13" MobHpPercentLeft="100" X="-1168.694" Y="-5451.706" Z="12.15925" />
+					</While>
+				</If>
+			<TurnIn QuestName="The Arts of a Druid" QuestId="24766" TurnInName="Zen'tabra" TurnInId="38243"/>
+			<PickUp QuestName="More Than Expected" QuestId="24769" GiverName="Zen'tabra" GiverId="38243" />
+			<TurnIn QuestName="More Than Expected" QuestId="24769" TurnInName="Vol'Jin" TurnInId="38966" />
+		</If>
+
+		<If Condition="Me.Class == WoWClass.Mage">
+			<PickUp QuestName="The Rise of the Darkspear" QuestId="24750" GiverName="Jin'thala" GiverId="37951"/>
+			<TurnIn QuestName="The Rise of the Darkspear" QuestId="24750" TurnInName="Soratha" TurnInId="38246"/>
+
+			<PickUp QuestName="The Basics: Hitting Things" QuestId="24751" GiverName="Soratha" GiverId="38246"/>
+				<Objective QuestName="The Basics: Hitting Things" QuestId="24751" Type="KillMob" MobId="38038" KillCount="6"/>
+			<TurnIn QuestName="The Basics: Hitting Things" QuestId="24751" TurnInName="Soratha" TurnInId="38246"/>
+
+			<PickUp QuestName="A Rough Start" QuestId="24753" GiverName="Soratha" GiverId="38246"/>
+				<Objective QuestName="A Rough Start" QuestId="24753" Type="CollectItem" ItemId="50222" CollectCount="1"/>
+			<TurnIn QuestName="A Rough Start" QuestId="24753" TurnInName="Soratha" TurnInId="38246"/>
+
+			<PickUp QuestName="Proving Pit" QuestId="24754" GiverName="Soratha" GiverId="38246"/>
+				<While Condition="!IsQuestCompleted(24754) &amp;&amp; HasQuest(24754)">
+					<CustomBehavior File="InteractWith" MobId="39062" GossipOptions="1,1,1,1" NumOfTimes="1" X="-1161.016" Y="-5530.047" Z="11.97635" />
+					<RunTo X="-1148.87" Y="-5530.831" Z="8.106249" />
+					<CustomBehavior File="WaitTimer" WaitTime="8000"/>
+					
+					<CustomBehavior File="InteractWith" WaitForNpcs="False" MobState="Alive" MobId="38142" X="-1161.016" Y="-5530.047" Z="11.97635" />
+					<CustomBehavior File="WaitTimer" WaitTime="4000" GoalText="Waiting for mob to spawn {TimeRemaining}" />
+					<CustomBehavior File="InteractWith" WaitForNpcs="False" MobState="Alive" MobId="38142" X="-1161.016" Y="-5530.047" Z="11.97635" />
+					<CustomBehavior File="WaitTimer" WaitTime="4000" GoalText="Waiting for mob to spawn {TimeRemaining}" />
+				</While>
+			<TurnIn QuestName="Proving Pit" QuestId="24754" TurnInName="Soratha" TurnInId="38246"/>
+			<PickUp QuestName="The Arts of a Mage" QuestId="24752" GiverName="Soratha" GiverId="38246" />
+				<If Condition="HasQuest(24752)">
+					<If Condition="!HasSpell(24752)">
+						<CustomBehavior File="ForceSetVendor" DoTrain="true" DoRepair ="false" />
+					</If>
+					<While Condition="HasQuest(24752) &amp;&amp; !IsQuestCompleted(24752)">
+						<RunTo X="-1165.603" Y="-5449.383" Z="12.01036" />
+						<CustomBehavior File="CastSpellOn" QuestId="24752" MobHpPercentLeft="100" SpellId="133" MobId="38038" NumOfTimes="2" MinRange="3" Range="20" X="-1168.694" Y="-5451.706" Z="12.15925" />
+						<CustomBehavior File="CastSpellOn" QuestId="24752" MobHpPercentLeft="100" SpellId="5143" MobId="38038" NumOfTimes="1" MinRange="3" Range="20" X="-1168.694" Y="-5451.706" Z="12.15925" />
+						<CustomBehavior File="CastSpellOn" QuestId="24752" MobHpPercentLeft="100" SpellId="133" MobId="38038" NumOfTimes="2" MinRange="3" Range="20" X="-1168.694" Y="-5451.706" Z="12.15925" />
+						<CustomBehavior File="CastSpellOn" QuestId="24752" MobHpPercentLeft="100" SpellId="5143" MobId="38038" NumOfTimes="1" MinRange="3" Range="20" X="-1168.694" Y="-5451.706" Z="12.15925" />
+						<CustomBehavior File="CastSpellOn" QuestId="24752" MobHpPercentLeft="100" SpellId="133" MobId="38038" NumOfTimes="2" MinRange="3" Range="20" X="-1168.694" Y="-5451.706" Z="12.15925" />
+						<CustomBehavior File="CastSpellOn" QuestId="24752" MobHpPercentLeft="100" SpellId="5143" MobId="38038" NumOfTimes="1" MinRange="3" Range="20" X="-1168.694" Y="-5451.706" Z="12.15925" />
+						<CustomBehavior File="CastSpellOn" QuestId="24752" MobHpPercentLeft="100" SpellId="133" MobId="38038" NumOfTimes="2" MinRange="3" Range="20" X="-1168.694" Y="-5451.706" Z="12.15925" />
+						<CustomBehavior File="CastSpellOn" QuestId="24752" MobHpPercentLeft="100" SpellId="5143" MobId="38038" NumOfTimes="1" MinRange="3" Range="20" X="-1168.694" Y="-5451.706" Z="12.15925" />
+					</While>
+				</If>
+			<TurnIn QuestName="The Arts of a Mage" QuestId="24752" TurnInName="Soratha" TurnInId="38246"/>
+			<PickUp QuestName="More Than Expected" QuestId="24755" GiverName="Soratha" GiverId="38246" />
+			<TurnIn QuestName="More Than Expected" QuestId="24755" TurnInName="Vol'Jin" TurnInId="38966" />
+		</If>
+
+		<If Condition="Me.Class == WoWClass.Shaman">
+			<PickUp QuestName="The Rise of the Darkspear" QuestId="24758" GiverName="Jin'thala" GiverId="37951"/>
+			<TurnIn QuestName="The Rise of the Darkspear" QuestId="24758" TurnInName="Nekali" TurnInId="38242"/>
+
+			<PickUp QuestName="The Basics: Hitting Things" QuestId="24759" GiverName="Nekali" GiverId="38242"/>
+				<Objective QuestName="The Basics: Hitting Things" QuestId="24759" Type="KillMob" MobId="38038" KillCount="6"/>
+			<TurnIn QuestName="The Basics: Hitting Things" QuestId="24759" TurnInName="Nekali" TurnInId="38242"/>
+
+			<PickUp QuestName="A Rough Start" QuestId="24761" GiverName="Nekali" GiverId="38242"/>
+				<Objective QuestName="A Rough Start" QuestId="24761" Type="CollectItem" ItemId="50222" CollectCount="1"/>
+			<TurnIn QuestName="A Rough Start" QuestId="24761" TurnInName="Nekali" TurnInId="38242"/>
+
+			<PickUp QuestName="Proving Pit" QuestId="24762" GiverName="Nekali" GiverId="38242"/>
+				<While Condition="!IsQuestCompleted(24762) &amp;&amp; HasQuest(24762)">
+					<CustomBehavior File="InteractWith" MobId="39062" GossipOptions="1,1,1,1" NumOfTimes="1" X="-1161.016" Y="-5530.047" Z="11.97635" />
+					<RunTo X="-1148.87" Y="-5530.831" Z="8.106249" />
+					<CustomBehavior File="WaitTimer" WaitTime="8000"/>
+					
+					<CustomBehavior File="InteractWith" WaitForNpcs="False" MobState="Alive" MobId="38142" X="-1161.016" Y="-5530.047" Z="11.97635" />
+					<CustomBehavior File="WaitTimer" WaitTime="4000" GoalText="Waiting for mob to spawn {TimeRemaining}" />
+					<CustomBehavior File="InteractWith" WaitForNpcs="False" MobState="Alive" MobId="38142" X="-1161.016" Y="-5530.047" Z="11.97635" />
+					<CustomBehavior File="WaitTimer" WaitTime="4000" GoalText="Waiting for mob to spawn {TimeRemaining}" />
+				</While>
+			<TurnIn QuestName="Proving Pit" QuestId="24762" TurnInName="Nekali" TurnInId="38242"/>
+			<PickUp QuestName="The Arts of a Shaman" QuestId="24760" GiverName="Nekali" GiverId="38242" />
+				<If Condition="HasQuest(24760)">
+					<If Condition="!HasSpell(73899)">
+						<CustomBehavior File="ForceSetVendor" DoTrain="true" DoRepair ="false" />
+					</If>
+					<While Condition="!IsQuestCompleted(24760) &amp;&amp; HasQuest(24760)">
+						<CustomBehavior File="CastSpellOn" QuestId="24760" SpellId="73899" MobId="38038" MinRange="3" Range="5" MobHpPercentLeft="100" NumOfTimes="20" X="-1155.756" Y="-5385.159" Z="11.93735" />
+					</While>
+				</If>
+			<TurnIn QuestName="The Arts of a Shaman" QuestId="24760" TurnInName="Nekali" TurnInId="38242"/>
+			<PickUp QuestName="More Than Expected" QuestId="24763" GiverName="Nekali" GiverId="38242" />
+			<TurnIn QuestName="More Than Expected" QuestId="24763" TurnInName="Vol'Jin" TurnInId="38966" />
+		</If>
+
+		<If Condition="Me.Class == WoWClass.Priest">
+			<PickUp QuestName="The Rise of the Darkspear" QuestId="24782" GiverName="Jin'thala" GiverId="37951"/>
+			<TurnIn QuestName="The Rise of the Darkspear" QuestId="24782" TurnInName="Tunari" TurnInId="38245"/>
+			<PickUp QuestName="The Basics: Hitting Things" QuestId="24783" GiverName="Tunari" GiverId="38245"/>
+				<Objective QuestName="The Basics: Hitting Things" QuestId="24783" Type="KillMob" MobId="38038" KillCount="6"/>
+			<TurnIn QuestName="The Basics: Hitting Things" QuestId="24783" TurnInName="Tunari" TurnInId="38245"/>
+			<PickUp QuestName="A Rough Start" QuestId="24785" GiverName="Tunari" GiverId="38245"/>
+				<Objective QuestName="A Rough Start" QuestId="24785" Type="CollectItem" ItemId="50222" CollectCount="1"/>
+			<TurnIn QuestName="A Rough Start" QuestId="24785" TurnInName="Tunari" TurnInId="38245"/>
+			<PickUp QuestName="Proving Pit" QuestId="24786" GiverName="Tunari" GiverId="38245"/>
+				<While Condition="((HasQuest(24786)) &amp;&amp; (!IsQuestCompleted(24786)))" >
+					<CustomBehavior File="InteractWith" MobId="39062" GossipOptions="1,1,1,1" NumOfTimes="1" X="-1161.016" Y="-5530.047" Z="11.97635" />
+					<RunTo X="-1148.87" Y="-5530.831" Z="8.106249" />
+					<CustomBehavior File="WaitTimer" WaitTime="8000"/>
+					
+					<CustomBehavior File="InteractWith" WaitForNpcs="False" MobState="Alive" MobId="38142" X="-1161.016" Y="-5530.047" Z="11.97635" />
+					<CustomBehavior File="WaitTimer" WaitTime="4000" GoalText="Waiting for mob to spawn {TimeRemaining}" />
+					<CustomBehavior File="InteractWith" WaitForNpcs="False" MobState="Alive" MobId="38142" X="-1161.016" Y="-5530.047" Z="11.97635" />
+					<CustomBehavior File="WaitTimer" WaitTime="4000" GoalText="Waiting for mob to spawn {TimeRemaining}" />
+				</While>
+			<TurnIn QuestName="Proving Pit" QuestId="24786" TurnInName="Tunari" TurnInId="38245"/>
+			<PickUp QuestName="The Arts of a Priest" QuestId="24784" GiverName="Tunari" GiverId="38245" />
+				<If Condition="((HasQuest(24784)) &amp;&amp; (!IsQuestCompleted(24784)))" >
+					<If Condition="!HasSpell(2061)">
+						<CustomBehavior File="ForceSetVendor" DoTrain="True" />
+					</If>
+					<While Condition="((HasQuest(24784)) &amp;&amp; (!IsQuestCompleted(24784)))" >
+						<CustomBehavior File="CastSpellOn" QuestId="24784" SpellId="2061" MobId="47057" NumOfTimes="20" MinRange="3" Range="13" MobHpPercentLeft="100" X="-1105.562" Y="-5470.519" Z="12.51251" />
+					</While>
+				</If>
+			<TurnIn QuestName="The Arts of a Priest" QuestId="24784" TurnInName="Tunari" TurnInId="38245"/>
+			<PickUp QuestName="More Than Expected" QuestId="24787" GiverName="Tunari" GiverId="38245" />
+			<TurnIn QuestName="More Than Expected" QuestId="24787" TurnInName="Vol'jin" TurnInId="38966" />
+		</If>
+
+		<If Condition="Me.Class == WoWClass.Rogue">
+			<PickUp QuestName="The Rise of the Darkspear" QuestId="24770" GiverName="Jin'thala" GiverId="37951"/>
+			<TurnIn QuestName="The Rise of the Darkspear" QuestId="24770" TurnInName="Legati" TurnInId="38244"/>
+
+			<PickUp QuestName="The Basics: Hitting Things" QuestId="24771" GiverName="Legati" GiverId="38244"/>
+				<Objective QuestName="The Basics: Hitting Things" QuestId="24771" Type="KillMob" MobId="38038" KillCount="6"/>
+			<TurnIn QuestName="The Basics: Hitting Things" QuestId="24771" TurnInName="Legati" TurnInId="38244"/>
+
+			<PickUp QuestName="A Rough Start" QuestId="24773" GiverName="Legati" GiverId="38244"/>
+				<Objective QuestName="A Rough Start" QuestId="24773" Type="CollectItem" ItemId="50222" CollectCount="1"/>
+			<TurnIn QuestName="A Rough Start" QuestId="24773" TurnInName="Legati" TurnInId="38244"/>
+
+			<PickUp QuestName="Proving Pit" QuestId="24774" GiverName="Legati" GiverId="38244"/>
+				<While Condition="!IsQuestCompleted(24774) &amp;&amp; HasQuest(24774)">
+					<CustomBehavior File="InteractWith" MobId="39062" GossipOptions="1,1,1,1" NumOfTimes="1" X="-1161.016" Y="-5530.047" Z="11.97635" />
+					<RunTo X="-1148.87" Y="-5530.831" Z="8.106249" />
+					<CustomBehavior File="WaitTimer" WaitTime="8000"/>
+					
+					<CustomBehavior File="InteractWith" WaitForNpcs="False" MobState="Alive" MobId="38142" X="-1161.016" Y="-5530.047" Z="11.97635" />
+					<CustomBehavior File="WaitTimer" WaitTime="4000" GoalText="Waiting for mob to spawn {TimeRemaining}" />
+					<CustomBehavior File="InteractWith" WaitForNpcs="False" MobState="Alive" MobId="38142" X="-1161.016" Y="-5530.047" Z="11.97635" />
+					<CustomBehavior File="WaitTimer" WaitTime="4000" GoalText="Waiting for mob to spawn {TimeRemaining}" />
+				</While>
+			<TurnIn QuestName="Proving Pit" QuestId="24774" TurnInName="Legati" TurnInId="38244"/>
+			<PickUp QuestName="The Arts of a Rogue" QuestId="24772" GiverName="Legati" GiverId="38244" />
+				<If Condition="HasQuest(24772)">
+					<If Condition="!HasSpell(2098)">
+						<CustomBehavior File="ForceSetVendor" DoTrain="true" DoRepair ="false" />
+					</If>
+					<While Condition="HasQuest(24772) &amp;&amp; !IsQuestCompleted(24772)"> 
+						<RunTo X="-1165.603" Y="-5449.383" Z="12.01036" />
+						<CustomBehavior File="CastSpellOn" QuestId="24772" SpellId="1752" MobId="38038" NumOfTimes="1" MinRange="3" Range="5" MobHpPercentLeft="100" X="-1165.603" Y="-5449.383" Z="12.01036" />
+						<CustomBehavior File="CastSpellOn" QuestId="24772" SpellId="2098" MobId="38038" NumOfTimes="1" MinRange="3" Range="5" MobHpPercentLeft="100" X="-1165.603" Y="-5449.383" Z="12.01036" />
+						<CustomBehavior File="CastSpellOn" QuestId="24772" SpellId="1752" MobId="38038" NumOfTimes="1" MinRange="3" Range="5" MobHpPercentLeft="100" X="-1165.603" Y="-5449.383" Z="12.01036" />
+						<CustomBehavior File="CastSpellOn" QuestId="24772" SpellId="2098" MobId="38038" NumOfTimes="1" MinRange="3" Range="5" MobHpPercentLeft="100" X="-1165.603" Y="-5449.383" Z="12.01036" />
+						<CustomBehavior File="CastSpellOn" QuestId="24772" SpellId="1752" MobId="38038" NumOfTimes="1" MinRange="3" Range="5" MobHpPercentLeft="100" X="-1165.603" Y="-5449.383" Z="12.01036" />
+						<CustomBehavior File="CastSpellOn" QuestId="24772" SpellId="2098" MobId="38038" NumOfTimes="1" MinRange="3" Range="5" MobHpPercentLeft="100" X="-1165.603" Y="-5449.383" Z="12.01036" />
+						<CustomBehavior File="CastSpellOn" QuestId="24772" SpellId="1752" MobId="38038" NumOfTimes="1" MinRange="3" Range="5" MobHpPercentLeft="100" X="-1165.603" Y="-5449.383" Z="12.01036" />
+						<CustomBehavior File="CastSpellOn" QuestId="24772" SpellId="2098" MobId="38038" NumOfTimes="1" MinRange="3" Range="5" MobHpPercentLeft="100" X="-1165.603" Y="-5449.383" Z="12.01036" />
+					</While>
+				</If>
+			<TurnIn QuestName="The Arts of a Rogue" QuestId="24772" TurnInName="Legati" TurnInId="38244"/>
+			<PickUp QuestName="More Than Expected" QuestId="24775" GiverName="Legati" GiverId="38244" />
+			<TurnIn QuestName="More Than Expected" QuestId="24775" TurnInName="Vol'Jin" TurnInId="38966" />
+		</If>
+
+		<If Condition="Me.Class == WoWClass.Hunter">
+			<PickUp QuestName="The Rise of the Darkspear" QuestId="24776" GiverName="Jin'thala" GiverId="37951"/>
+			<TurnIn QuestName="The Rise of the Darkspear" QuestId="24776" TurnInName="Ortezza" TurnInId="38247"/>
+
+			<PickUp QuestName="The Basics: Hitting Things" QuestId="24777" GiverName="Ortezza" GiverId="38247"/>
+				<Objective QuestName="The Basics: Hitting Things" QuestId="24777" Type="KillMob" MobId="38038" KillCount="6"/>
+			<TurnIn QuestName="The Basics: Hitting Things" QuestId="24777" TurnInName="Ortezza" TurnInId="38247"/>
+
+			<PickUp QuestName="A Rough Start" QuestId="24779" GiverName="Tunari" GiverId="38245"/>
+				<Objective QuestName="A Rough Start" QuestId="24779" Type="CollectItem" ItemId="50222" CollectCount="1"/>
+			<TurnIn QuestName="A Rough Start" QuestId="24779" TurnInName="Ortezza" TurnInId="38247"/>
+
+			<PickUp QuestName="Proving Pit" QuestId="24780" GiverName="Ortezza" GiverId="38247"/>
+				<While Condition="!IsQuestCompleted(24780) &amp;&amp; HasQuest(24780)">
+					<CustomBehavior File="InteractWith" MobId="39062" GossipOptions="1,1,1,1" NumOfTimes="1" X="-1161.016" Y="-5530.047" Z="11.97635" />
+					<RunTo X="-1148.87" Y="-5530.831" Z="8.106249" />
+					<CustomBehavior File="WaitTimer" WaitTime="8000"/>
+					
+					<CustomBehavior File="InteractWith" WaitForNpcs="False" MobState="Alive" MobId="38142" X="-1161.016" Y="-5530.047" Z="11.97635" />
+					<CustomBehavior File="WaitTimer" WaitTime="4000" GoalText="Waiting for mob to spawn {TimeRemaining}" />
+					<CustomBehavior File="InteractWith" WaitForNpcs="False" MobState="Alive" MobId="38142" X="-1161.016" Y="-5530.047" Z="11.97635" />
+					<CustomBehavior File="WaitTimer" WaitTime="4000" GoalText="Waiting for mob to spawn {TimeRemaining}" />
+				</While>
+			<TurnIn QuestName="Proving Pit" QuestId="24780" TurnInName="Ortezza" TurnInId="38247"/>
+			<PickUp QuestName="The Arts of a Hunter" QuestId="24778" GiverName="Ortezza" GiverId="38247" />
+				<If Condition="HasQuest(24778)">
+					<If Condition="!HasSpell(56641)">
+						<CustomBehavior File="ForceSetVendor" DoTrain="true" DoRepair ="false" /> 
+					</If>
+					<CustomBehavior File="CastSpellOn" QuestId="24778" SpellId="56641" MobId="38038" NumOfTimes="20" MinRange="3" Range="20" MobHpPercentLeft="100" X="-1133.846" Y="-5501.374" Z="11.94427" />
+				</If>
+			<TurnIn QuestName="The Arts of a Hunter" QuestId="24778" TurnInName="Ortezza" TurnInId="38247"/>
+			<PickUp QuestName="More Than Expected" QuestId="24781" GiverName="Ortezza" GiverId="38247" />
+			<TurnIn QuestName="More Than Expected" QuestId="24781" TurnInName="Vol'jin" TurnInId="38966" />
+		</If>
+
+		<If Condition="Me.Class == WoWClass.Warrior">
+			<PickUp QuestName="The Rise of the Darkspear" QuestId="24607" GiverName="Jin'thala" GiverId="37951"/>
+			<TurnIn QuestName="The Rise of the Darkspear" QuestId="24607" TurnInName="Nortet" TurnInId="38037"/>
+
+			<PickUp QuestName="The Basics: Hitting Things" QuestId="24639" GiverName="Nortet" GiverId="38037"/>
+				<Objective QuestName="The Basics: Hitting Things" QuestId="24639" Type="KillMob" MobId="38038" KillCount="6"/>
+			<TurnIn QuestName="The Basics: Hitting Things" QuestId="24639" TurnInName="Nortet" TurnInId="38037"/>
+
+			<PickUp QuestName="A Rough Start" QuestId="24641" GiverName="Nortet" GiverId="38037"/>
+				<Objective QuestName="A Rough Start" QuestId="24641" Type="CollectItem" ItemId="50222" CollectCount="1"/>
+			<TurnIn QuestName="A Rough Start" QuestId="24641" TurnInName="Nortet" TurnInId="38037"/>
+
+			<PickUp QuestName="Proving Pit" QuestId="24642" GiverName="Nortet" GiverId="38037"/>
+				<While Condition="!IsQuestCompleted(24642) &amp;&amp; HasQuest(24642)">
+					<CustomBehavior File="InteractWith" MobId="39062" GossipOptions="1,1,1,1" NumOfTimes="1" X="-1161.016" Y="-5530.047" Z="11.97635" />
+					<RunTo X="-1148.87" Y="-5530.831" Z="8.106249" />
+					<CustomBehavior File="WaitTimer" WaitTime="8000"/>
+					
+					<CustomBehavior File="InteractWith" WaitForNpcs="False" MobState="Alive" MobId="38142" X="-1161.016" Y="-5530.047" Z="11.97635" />
+					<CustomBehavior File="WaitTimer" WaitTime="4000" GoalText="Waiting for mob to spawn {TimeRemaining}" />
+					<CustomBehavior File="InteractWith" WaitForNpcs="False" MobState="Alive" MobId="38142" X="-1161.016" Y="-5530.047" Z="11.97635" />
+					<CustomBehavior File="WaitTimer" WaitTime="4000" GoalText="Waiting for mob to spawn {TimeRemaining}" />
+				</While>
+			<TurnIn QuestName="Proving Pit" QuestId="24642" TurnInName="Nortet" TurnInId="38037"/>
+			<PickUp QuestName="The Arts of a Warrior" QuestId="24640" GiverName="Nortet" GiverId="38037" />
+				<If Condition="HasQuest(24640)">
+					<If Condition="!HasSpell(100)">
+						<CustomBehavior File="ForceSetVendor" DoTrain="true" DoRepair ="false" />
+					</If>
+					<RunTo X="-1159.035" Y="-5423.543" Z="13.23093" />
+				<CustomBehavior File="NPCAssistance" MobId="38038" X="-1168.694" Y="-5451.706" Z="12.15925" />
+					<CustomBehavior File="CastSpellOn" MobHpPercentLeft="100" SpellId="100" MobId="38038" NumOfTimes="1" MinRange="3" Range="20" X="-1168.694" Y="-5451.706" Z="12.15925" />
+				</If>
+			<TurnIn QuestName="The Arts of a Warrior" QuestId="24640" TurnInName="Nortet" TurnInId="38037"/>
+			<PickUp QuestName="More Than Expected" QuestId="24643" GiverName="Nortet" GiverId="38037" />
+			<TurnIn QuestName="More Than Expected" QuestId="24643" TurnInName="Vol'jin" TurnInId="38966" />
+		</If>
+
+		<PickUp QuestName="Moraya'" QuestId="25064" GiverName="Vol'jin" GiverId="38966" />
+		<PickUp QuestName="Crab Fishin'" QuestId="25037" GiverName="Tora'jin" GiverId="39007" />
+		<TurnIn QuestName="Moraya" QuestId="25064" TurnInName="Moraya" TurnInId="38005" />
+		<PickUp QuestName="A Troll's Truest Companion" QuestId="24622" GiverName="Moraya" GiverId="38005" />
+			<Objective QuestName="Crab Fishin'" QuestId="25037" Type="CollectItem" ItemId="52080" CollectCount="5"/>
+		<TurnIn QuestName="A Troll's Truest Companion" QuestId="24622" TurnInName="Kijara" TurnInId="37969" />
+		<PickUp QuestName="Saving the Young" QuestId="24623" GiverName="Kijara" GiverId="37969" />
+		<PickUp QuestName="Mercy for the Lost" QuestId="24624" GiverName="Tegashi" GiverId="37987" />
+		<PickUp QuestName="Consort of the Sea Witch" QuestId="24625" GiverName="Tegashi" GiverId="37987" />
+			<Objective QuestName="Consort of the Sea Witch" QuestId="24625" Type="CollectItem" ItemId="50018" CollectCount="1"/>
+			<CustomBehavior File="UseItemOn" QuestId="24623" MobId="39157" ItemId="52283" NumOfTimes="100" CollectionDistance="1000" X="-1355.853" Y="-5181.864" Z="2.525697" />
+			<Objective QuestName="Mercy for the Lost" QuestId="24624" Type="KillMob" MobId="37961" KillCount="8"/>
+		<TurnIn QuestName="Mercy for the Lost" QuestId="24624" TurnInName="Tegashi" TurnInId="37987" />
+		<TurnIn QuestName="Consort of the Sea Witch" QuestId="24625" TurnInName="Tegashi" TurnInId="37987" />
+		<TurnIn QuestName="Saving the Young" QuestId="24623" TurnInName="Kijara" TurnInId="37969" />
+		<PickUp QuestName="Young and Vicious" QuestId="24626" GiverName="Kijara" GiverId="37969" />
+			<While Condition="((HasQuest(24626)) &amp;&amp; (!IsQuestCompleted(24626)))" >
+				<CustomBehavior QuestId="24626" File="WaitTimer" WaitTime="10000" />
+				<CustomBehavior File="UseItemOn" QuestId="24626" ItemId="50053" Range="10" WaitForNpcs="False" MobId="38002" X="-1550.751" Y="-5311.479" Z="8.237605" />
+				<CustomBehavior QuestId="24626" File="WaitTimer" WaitTime="3000" />
+				<RunTo QuestId="24626" X="-1304.525" Y="-5443.421" Z="14.68565" />
+				<CustomBehavior QuestId="24626" File="WaitTimer" WaitTime="10000" />
+				<CustomBehavior File="AbandonQuest" QuestId="24626" Type="Incomplete" />
+				<CustomBehavior QuestId="24626" File="WaitTimer" WaitTime="10000" />
+		<PickUp QuestName="Young and Vicious" QuestId="24626" GiverName="Kijara" GiverId="37969" />
+				<CustomBehavior QuestId="24626" File="WaitTimer" WaitTime="2000" />
+			</While>
+		<TurnIn QuestName="Young and Vicious" QuestId="24626" TurnInName="Moraya" TurnInId="38005" />
+		<TurnIn QuestName="Crab Fishin'" QuestId="25037" TurnInName="Tora'jin" TurnInId="39007" />
+		<PickUp QuestName="Breaking the Line" QuestId="25035" GiverName="Tortunga" GiverId="38440" />
+			<CustomBehavior File="InteractWith" QuestId="25035" MobId="38989" GossipOptions="1, 1, 1" WaitTime="31000" X="-1280.58" Y="-5583.325" Z="21.69825" />
+		<TurnIn QuestName="Breaking the Line" QuestId="25035" TurnInName="Morakki" TurnInId="38442" />
+		<!-- My Feral Druid couldn't pick up the next few quests
+		<PickUp QuestName="No More Mercy" QuestId="24812" GiverName="Morakki" GiverId="38442" />
+		<PickUp QuestName="Territorial Fetish" QuestId="24813" GiverName="Morakki" GiverId="38442" />
+			<CustomBehavior File="CollectThings" CollectUntil="QuestComplete" QuestId="24812" MobId1="38301" MobId2="38300" HuntingGroundRadius="200" X="-841.8256" Y="-5603.839" Z="3.291721" />
+		<TurnIn QuestName="No More Mercy" QuestId="24812" TurnInName="Morakki" TurnInId="38442" />
+			<If Condition="((HasQuest(24813)) &amp;&amp; (!IsQuestCompleted(24813)))" >
+				<CustomBehavior File="UserSettings" PullDistance="1" />
+				<CustomBehavior File="UseItemOn" QuestId="24813" MobId="202113" ItemId="52065" NumOfTimes="100" MobType="GameObject" WaitTime="2000" Range="3" CollectionDistance="1000" X="-723.6396" Y="-5613.34" Z="-9.4165" />
+			</If>
+		<TurnIn QuestName="Territorial Fetish" QuestId="24813" TurnInName="Morakki" TurnInId="38442" />
+		<PickUp QuestName="An Ancient Enemy" QuestId="24814" GiverName="Morakki" GiverId="38442" />
+			<If Condition="((HasQuest(24814)) &amp;&amp; (!IsQuestCompleted(24814)))" >
+				<CustomBehavior File="UserSettings" PullDistance="25" />
+				<CustomBehavior File="InteractWith" MobId="38225" GossipOptions="1, 1, 1" NumOfTimes="1" WaitTime="1000" X="-743.6827" Y="-5615.54" Z="24.9367" />
+				<CustomBehavior File="WaitTimer" WaitTime="20000" />
+				<While Condition="!IsQuestCompleted(24814) &amp;&amp; HasQuest(24814)">
+					<RunTo X="-708.0248" Y="-5583.581" Z="25.52343" />
+					<CustomBehavior File="WaitTimer" WaitTime="2000" />
+				</While>
+				<RunTo X="-716.3348" Y="-5584.135" Z="25.49815" />
+				<CustomBehavior File="WaitTimer" WaitTime="60000" />
+				<CustomBehavior File="InteractWith" MobId="38437" GossipOptions="1, 1, 1" NumOfTimes="1" WaitTime="1000" X="-743.6827" Y="-5615.54" Z="24.9367" />
+				<CustomBehavior File="WaitTimer" WaitTime="5000" />
+			</If>
+		<TurnIn QuestName="An Ancient Enemy" QuestId="24814" TurnInName="Vol'jin" TurnInId="38966" />
+		<PickUp QuestName="Sen'jin Village" QuestId="25073" GiverName="Vol'jin" GiverId="38966" />
+		<TurnIn QuestName="Sen'jin Village" QuestId="25073" TurnInName="Master Gadrin" TurnInId="3188" />
+		-->
+		
+		<CustomBehavior File="LoadProfile" ProfileName="[H - Quest] 5-12 Durotar [Kick]" /> 
+		
+	</QuestOrder>
+	
+</HBProfile>
+	

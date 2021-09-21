@@ -1,0 +1,36 @@
+<HBProfile>
+	<Name>[A - Quest] 1-12 Auto-Loader [Kick]</Name>
+	
+	<QuestOrder>
+	
+				<CustomBehavior File="RunMacro" Macro="/script SetCVar('AutoLootDefault', 1)" NumOfTimes="1" WaitTime="1000" />
+				<CustomBehavior File="EnablePlugin" Names="Questhelper - ItemForAura,Anti Drown,AutoEquip2,Talented" />
+	<CustomBehavior File="UserDialog" AllowBotStop="False" SoundCue="Exclamation" SoundCueInterval="15" ExpiryTime="30" ExpiryAction="InputEnabled_Continue" Text="Make sure you setup AutoEquip2 and Talented\n\nIf you have money - set food and drinks as well\n\nYou may also want to set a mail recipient! (Settings and Tools Button)" />
+
+			<If Condition="Me.Race == WoWRace.Human">
+				<CustomBehavior File="LoadProfile" ProfileName="[A - Quest] 1-12 [Kick]\[A - Quest] Human 1-5 [Kick]" />
+			</If>
+			
+			<If Condition="Me.Race == WoWRace.Gnome">
+				<CustomBehavior File="LoadProfile" ProfileName="[A - Quest] 1-12 [Kick]\[A - Quest] Gnome 1-5 [Kick]" />
+			</If>
+			
+			<If Condition="Me.Race == WoWRace.Dwarf">
+				<CustomBehavior File="LoadProfile" ProfileName="[A - Quest] 1-12 [Kick]\[A - Quest] Dwarf 1-5 [Kick]" />
+			</If>
+			
+			<If Condition="Me.Race == WoWRace.NightElf">
+				<CustomBehavior File="LoadProfile" ProfileName="[A - Quest] 1-12 [Kick]\[A - Quest] Night Elf 1-5 [Kick]" />
+			</If>
+			
+			<If Condition="Me.Race == WoWRace.Draenei">
+				<CustomBehavior File="LoadProfile" ProfileName="[A - Quest] 1-12 [Kick]\[A - Quest] Draenei 1-5 [Kick]" />
+			</If>
+			
+			<If Condition="Me.Race == WoWRace.Worgen" >
+				<CustomBehavior File="UserDialog" AllowBotStop="True" SoundCue="Exclamation" ExpiryAction="InputEnabled_Continue" Text="use the un supported worgen profile in the 1-85 questing / other folder" />
+			</If>
+			
+	</QuestOrder>
+	
+</HBProfile>

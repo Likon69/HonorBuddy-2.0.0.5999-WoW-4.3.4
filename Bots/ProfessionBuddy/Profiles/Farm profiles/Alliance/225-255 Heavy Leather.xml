@@ -1,0 +1,66 @@
+<HBProfile>
+<Name>225-255 Heavy Leather-Alliance</Name>
+<MinDurability>0.4</MinDurability>
+<MinFreeBagSlots>1</MinFreeBagSlots>
+
+
+<MailGrey>false</MailGrey>
+<MailWhite>false</MailWhite>
+<MailGreen>false</MailGreen>
+<MailBlue>false</MailBlue>
+<MailPurple>false</MailPurple>
+
+<SellGrey>True</SellGrey>
+<SellWhite>True</SellWhite>
+<SellGreen>True</SellGreen>
+<SellBlue>false</SellBlue>
+<SellPurple>false</SellPurple>
+
+<Vendors>
+</Vendors>
+
+<Mailboxes>
+</Mailboxes>
+
+<Blackspots>
+</Blackspots>
+
+  <QuestOrder>
+    
+
+    <While Condition="(Me.Level &gt; 1)" >
+
+      <If Condition="(Me.FreeBagSlots &gt; 5)" >
+
+        <CustomBehavior File="FlyTo" DestName="Farm Area" X="-7015.273" Y="-3605.118" Z="242.0636" />
+        <CustomBehavior File="ForcedDismount" />
+
+        <SetGrindArea>
+          <GrindArea>
+            <Factions>38 16</Factions>
+            <TargetMinLevel>42</TargetMinLevel>
+            <TargetMaxLevel>52</TargetMaxLevel>
+            <Hotspots>
+              <Hotspot X="-7015.273" Y="-3605.118" Z="242.0636" />
+              <Hotspot X="-6873.819" Y="-3577.824" Z="243.2934" />
+              <Hotspot X="-6725.524" Y="-3561.088" Z="243.8807" />
+              <Hotspot X="-6502.863" Y="-3646.018" Z="244.1146" />
+              <Hotspot X="-6898.88" Y="-3374.939" Z="241.765" />
+              <Hotspot X="-6800.563" Y="-3342.77" Z="241.7203" />
+              <Hotspot X="-6582.287" Y="-3262.022" Z="241.9538" />
+              <Hotspot X="-6579.571" Y="-3203.49" Z="252.9633" />
+              <Hotspot X="-6550.688" Y="-3171.09" Z="255.1464" />
+              <Hotspot X="-6532.066" Y="-3255.526" Z="242.1929" />
+              <Hotspot X="-6698.496" Y="-3334.592" Z="241.3694" />
+              <Hotspot X="-6693.899" Y="-3595.03" Z="242.5235" />
+            </Hotspots>
+          </GrindArea>
+        </SetGrindArea>
+        <GrindTo Condition="Me.FreeBagSlots &lt;= 5" GoalText="Farming Leather." />
+      </If>
+     
+
+    </While>
+
+  </QuestOrder>
+</HBProfile>

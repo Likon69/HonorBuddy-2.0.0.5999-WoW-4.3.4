@@ -1,0 +1,91 @@
+<?xml version="1.0"?>
+<HBProfile>
+	<Name>Mage Weave Cloth - Horde </Name>
+	<MinLevel>0</MinLevel>
+	<MaxLevel>91</MaxLevel>
+	<ProtectedItems>
+		<Item Name="Linen Cloth" Entry="2589"/>
+		<Item Name="Wool Cloth" Entry="2592"/>
+		<Item Name="Silk Cloth" Entry="4306"/>
+		<Item Name="Mageweave Cloth" Entry="4338"/>
+	</ProtectedItems>
+	<MinDurability>0.3</MinDurability>
+	<MinFreeBagSlots>2</MinFreeBagSlots>
+	<MailGrey>False</MailGrey>
+	<MailWhite>True</MailWhite>
+	<MailGreen>True</MailGreen>
+	<MailBlue>True</MailBlue>
+	<MailPurple>True</MailPurple>
+	<SellGrey>True</SellGrey>
+	<SellWhite>True</SellWhite>
+	<SellGreen>True</SellGreen>
+	<SellBlue>False</SellBlue>
+	<SellPurple>False</SellPurple>
+	<TargetElites>False</TargetElites>
+	<AvoidMobs/>
+	<Blackspots/>
+	<Vendors>
+		<Vendor Name="Zido Helmbreaker" Entry="45549" Type="Repair" X="1524.05" Y="-4138.78" Z="50.76641" />
+		<Vendor Name="Krinkle Goodsteel" Entry="5411" Type="Repair" X="-7232.01" Y="-3751.71" Z="9.093496" />
+	</Vendors>
+	<Mailboxes/>
+	<QuestOrder>
+		<While Condition="(Me.IsHorde)">
+			<If Condition="(Me.MapId != 1)">
+				<CustomBehavior File="Message" Text="HB: We are not on Kalimdor" LogColor="Orange"/>
+				<CustomBehavior File="ForcedDismount"/>
+				<CustomBehavior File="RunMacro" Macro="/use Hearthstone" NumOfTimes="1" WaitTime="10000"/>
+				<CustomBehavior File="WaitTimer" WaitTime="10000"/>
+			</If>
+			<If Condition="(Me.MapId == 1) &amp;&amp; (Me.ZoneId == 1637)">
+				<If Condition="!HasQuest(28112) &amp;&amp; IsQuestCompleted(28112)">
+					<CustomBehavior File="Message" Text="HB: Using Uldum Portal" LogColor="Orange"/>
+					<CustomBehavior File="FlyTo" X="2038.541" Y="-4360.08" Z="98.05457" DestName="Orgrimmar Portal Platform"/>
+					<CustomBehavior File="ForcedDismount"/>
+					<CustomBehavior File="InteractWith" ObjectType="Gameobject" MobId="207687" NumOfTimes="1" Range="5" WaitTime="10000" CollectionDistance="10" X="2039.67" Y="-4356.288" Z="98.00434"/>
+					<CustomBehavior File="WaitTimer" WaitTime="10000"/>
+				</If>
+			</If>
+			<If Condition="(Me.LowestDurabilityPercent &gt;= 0.3) &amp;&amp; (Me.FreeBagSlots &gt;= 3)" >
+				<CustomBehavior File="FlyTo" X="-8374.753" Y="-5040.749" Z="5.779434"/>
+				<CustomBehavior File="Message" Text="HB: Debug 1" LogColor="Orange"/>
+				<CustomBehavior File="ForcedDismount"/>
+				<CustomBehavior File="Message" Text="HB: Debug 2" LogColor="Orange"/>
+				<SetGrindArea>
+					<GrindArea>
+						<GrindArea>106 230 14 2258</GrindArea>
+						<TargetMinLevel>39</TargetMinLevel>
+						<TargetMaxLevel>49</TargetMaxLevel>
+                                                <MaxDistance>65</MaxDistance>
+						<Hotspots>
+							<Hotspot X="-8284.484" Y="-5085.372" Z="4.532082"/>
+							<Hotspot X="-8319.669" Y="-5051.455" Z="6.39219"/>
+							<Hotspot X="-8374.753" Y="-5040.749" Z="5.779434"/>
+							<Hotspot X="-8428.729" Y="-4975.885" Z="1.67678"/>
+							<Hotspot X="-8479.983" Y="-5047.295" Z="5.868147"/>
+							<Hotspot X="-8510.588" Y="-5078.207" Z="14.10821"/>
+							<Hotspot X="-8417.035" Y="-5149.018" Z="4.805648"/>
+							<Hotspot X="-8178.219" Y="-5162.471" Z="3.562446"/>
+							<Hotspot X="-8147.94" Y="-5304.215" Z="0.5795179"/>
+							<Hotspot X="-8091.392" Y="-5300.046" Z="0.5524499"/>
+							<Hotspot X="-8092.222" Y="-5243.189" Z="2.545727"/>
+							<Hotspot X="-8035.554" Y="-5258.125" Z="0.7489745"/>
+							<Hotspot X="-8029.085" Y="-5220.318" Z="2.177873"/>
+							<Hotspot X="-8008.656" Y="-5285.577" Z="0.5747139"/>
+							<Hotspot X="-7977.095" Y="-5315.609" Z="2.065806"/>
+							<Hotspot X="-8014.105" Y="-5357.158" Z="0.799879"/>
+							<Hotspot X="-7949.624" Y="-5471.102" Z="12.96926"/>
+						</Hotspots>
+					</GrindArea>
+				</SetGrindArea>
+				<GrindTo Condition="(Me.LowestDurabilityPercent &lt; 0.3) || (Me.FreeBagSlots &lt;= 2)" GoalText="Mage Weave Cloth - First Aid"/>
+			</If>
+			<If Condition="(Me.LowestDurabilityPercent &lt; 0.3) || (Me.FreeBagSlots &lt; 3)" >
+				<CustomBehavior File="Message" Text="HB: Flying to Repair" LogColor="Orange" />
+				<CustomBehavior File="FlyTo" X="-7232.01" Y="-3751.71" Z="9.093496" DestName="Somewhere over the rainbow" />
+				<CustomBehavior File="Message" Text="HB: Selling/Mailing/Repairing" LogColor="Orange" />
+				<CustomBehavior File="ForceSetVendor"  DoMail="true" DoRepair="true" DoSell="true" />
+			</If>
+		</While>
+	</QuestOrder>
+</HBProfile>

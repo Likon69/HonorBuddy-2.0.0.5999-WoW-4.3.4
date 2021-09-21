@@ -1,0 +1,144 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<DungeonBuddyProfile>
+  <Name>Fall of Deathwing Heroic</Name>
+  <DungeonId>417</DungeonId>
+  <BossEncounters>
+	<Boss isFinal="false" entry="55294" name="Ultraxion" killOrder="1" optional="false" X="-1707.89" Y="-2384.9" Z="353.84" />
+	<Boss isFinal="false" entry="56427" name="Warmaster Blackhorn" killOrder="2" optional="false" X="13438.05" Y="-12133.02" Z="151.1276" />
+	<Boss isFinal="false" entry="00000" name="Spine of Deathwing" killOrder="3" optional="false" /> <!-- Spine -->
+	<Boss isFinal="true" entry="57962" name="Deathwing" killOrder="4" optional="false" X="-12063.49" Y="12198.86" Z="-13.05473" />
+  </BossEncounters>
+  <Blackspots>
+    <!--<Blackspot X="-101.3791" Y="-703.8368" Z="9.095623" Radius="3.363508" />-->
+  </Blackspots>
+</DungeonBuddyProfile>
+
+
+<!--
+Ultraxion trash before - taunt drakes down.. kill them
+<Vendor Name="Twilight Assaulter" Entry="56250" Type="Repair" X="-1775.041" Y="-2398.751" Z="343.0515" />... don't stand in fire (Twilight Flames)
+
+Ultraxion:
+<Vendor Name="Ultraxion" Entry="55294" Type="Repair" X="-1707.89" Y="-2384.9" Z="353.84" />
+Very large hitbox
+kill boss 
+when Ultra is casting Hour of Twilight - hit your button (Heroic Will - macro or lua "/click ExtraActionButton1" ) - you will gain debuff "Heroic Will" for up to 5 seconds.  Her cast is 5 seconds... so if you hit it off the bat - you shouldn't die (or within 4.5 seconds after she starts casting)
+Tanks (don't support this - but here's the logic) - when 1 tank has Fading Light - the other tank taunts.
+If I have Fading Light debuff >= 3 seconds LEFT - hit Heroic Will button (EAB1)  (tanks only in LFR)
+
+Healers - Red, Green, Blue buffs from the gameobjects that will spawn 
+Red (Gift of Life) = 100% more heals throughput // gift of life debuff\
+Green (Essence of Dreams) = AoE heals % with every heal // essence of dreams debuff
+Blue (Source of Magic) = 100 haste, all spells cost like no mana // source of magic
+
+Boat - 
+Kill the 3 sets of melee adds (melee - Dragonslayer first, then Slayer second), kill the 3 sets of drakes (ranged)
+Tanks (don't support this) - 1 tank gets 1st/3rd dragon and 2nd slayer.  2nd tank gets 1st/3rd slayer and 2nd dragonslayer
+ranged - kill drakes
+LFR - ignore everything... stack with group (sometimes they don't always stack in onslaught and die... but most groups stack in onslaught)
+don't stand in the charge that the melee adds do.  don't stand in the twilight barrages that the drakes do (in lfr only you don't - in reg / heroic you have to!)
+<Vendor Name="Twilight Elite Dreadblade" Entry="56854" Type="Repair" X="13435.82" Y="-12141.12" Z="151.1678" />
+<Vendor Name="Twilight Elite Slayer" Entry="56848" Type="Repair" X="13434.12" Y="-12137.62" Z="151.1973" />
+<Vendor Name="Twilight Assault Drake" Entry="56855" Type="Repair" X="13432.86" Y="-12083.7" Z="167.352" />
+
+<Vendor Name="Warmaster Blackhorn" Entry="56427" Type="Repair" X="13438.05" Y="-12133.02" Z="151.1276" /> // melee kill him
+^^ he casts shockwave - get out of it
+^^ he casts disrupting roar - don't be casting when he does it (if you're within 10 yards of him)
+^^ he will sunder armor the tanks - tanks need to switch at 2 debuffs or when their debuff wears off
+
+<Vendor Name="Goriona" Entry="56781" Type="Repair" X="13408.51" Y="-12090.55" Z="168.4647" /> - casts twilight flames - don't stand in it.  She flies away at around 30% hp.
+ranged need to stand on the north side of the boat to kill her
+
+spine encounter - 
+kill 1 corruption (usually top right) and then get the hideous amalgamation down to 30-40% and stop dps... kill the corrupted bloods x9.
+after bloods are down - tank will drag the hideous amalgamation through the bloods and get 9 stacks of a debuff and bring the hideous amalgamation to the left or right side of the plate - it will blow up once at 1hp and pop the plate
+a burning tendons will spawn... kill it so the plate flies off
+rinse / repeat the process 2 more times after
+
+
+
+<Vendor Name="Hideous Amalgamation" Entry="53890" Type="Repair" X="-13849.62" Y="-13658.99" Z="264.2523" /> // all of these are the same
+
+corruptions:
+7 8
+5 6
+3 4
+1 2
+
+<Vendor Name="Corruption" Entry="56161" Type="Repair" X="-13868.62" Y="-13667.27" Z="262.8357" /> // 1st left = 1 - we usually ignore
+<Vendor Name="Corruption" Entry="56162" Type="Repair" X="-13841.07" Y="-13666.91" Z="262.7953" /> // 1st right = 2 - we usually ignore
+<Vendor Name="Corruption" Entry="53891" Type="Repair" X="-13868.5" Y="-13654.04" Z="263.4821" /> // 2nd left = 3 - we usually ignore
+<Vendor Name="Corruption" Entry="53891" Type="Repair" X="-13842.79" Y="-13654.1" Z="263.9649" /> // 2nd right = 4 
+<Vendor Name="Corruption" Entry="53891" Type="Repair" X="-13841.19" Y="-13635.21" Z="265.1811" /> // 3rd right = 6
+<Vendor Name="Corruption" Entry="53891" Type="Repair" X="-13867.11" Y="-13638.54" Z="264.7831" /> // 3rd left = 5 - we usually ignore
+<Vendor Name="Corruption" Entry="53891" Type="Repair" X="-13839.33" Y="-13614.76" Z="266.2161" /> // 4th right = 8
+<Vendor Name="Corruption" Entry="53891" Type="Repair" X="-13870.45" Y="-13614.38" Z="266.8768" />// 4th left = 7 - we usually ignore
+
+
+
+<Vendor Name="Burning Tendons" Entry="56575" Type="Repair" X="-13846.8" Y="-13644.7" Z="265.7886" /> // first right
+<Vendor Name="Burning Tendons" Entry="56341" Type="Repair" X="-13862.8" Y="-13645.01" Z="265.7521" /> // first left
+<Vendor Name="Burning Tendons" Entry="56575" Type="Repair" X="-13840.43" Y="-13624.99" Z="266.3144" /> // 2nd right
+<Vendor Name="Burning Tendons" Entry="56575" Type="Repair" X="-13846.6" Y="-13604.66" Z="269.1742" /> // third right
+
+<Vendor Name="Corrupted Blood" Entry="53889" Type="Repair" X="-13857.31" Y="-13662.48" Z="264.4814" />
+
+deathwing encounter:
+priority:
+corruption, then bolt (priority 1) - back to corruption until dead.  go to arm tentacle  until bloods spawn... kill them, go back to arm... wait for blistering tentacles to spawn and SINGLE TARGET them (x2 sets).. then kill arm
+
+3 - Ysera: 50% dmg absorb CD (Dream button - EAB1) and 20% healing buff
+2 - Nozdormu: 20% haste and slows bolt / has time zone up (slows mobs atk speed by 50%)
+1 - Alexstraza:: 20% HP buff and burns blistering tentacles
+4 - Kalegos: 20% dmg buff and extra arcane dmg procs (AoE) when attacking
+
+1 2 3 4 - platforms; you start on third.  after 3 2 1 4 ... we go back to 3 and kill deathwing
+// pop healing, dmg, and hp cd's for burning blood >= 80 stacks on arms
+
+3rd: all buffs
+<RunTo X="-12078.51" Y="12152.36" Z="-2.735701" />
+<Vendor Name="Arm Tentacle" Entry="56167" Type="Repair" X="-12065.03" Y="12127.18" Z="-3.294598" />
+<Vendor Name="Mutated Corruption" Entry="56471" Type="Repair" X="-12107.37" Y="12201.94" Z="-5.323973" />
+<Vendor Name="Elementium Bolt" Entry="56262" Type="Repair" X="-12099.02" Y="12160.73" Z="0.3897651" />
+<Vendor Name="Regenerative Blood" Entry="56263" Type="Repair" X="-12101.33" Y="12164.92" Z="-2.734942" />
+<Vendor Name="Blistering Tentacle" Entry="56188" Type="Repair" X="-12082.07" Y="12156.7" Z="1.155603" />
+
+
+2nd platform: no longer have 50% less dmg CD
+<RunTo X="-12036.29" Y="12227.72" Z="-6.152275" />
+
+<Vendor Name="Arm Tentacle" Entry="56846" Type="Repair" X="-12005.8" Y="12190.35" Z="-6.593992" />
+<Vendor Name="Mutated Corruption" Entry="56471" Type="Repair" X="-12082.41" Y="12227.6" Z="-7.547659" />
+<Vendor Name="Elementium Bolt" Entry="56262" Type="Repair" X="-12031.83" Y="12217.32" Z="-2.139712" />
+<Vendor Name="Blistering Tentacle" Entry="56188" Type="Repair" X="-12027.66" Y="12213.77" Z="-2.516394" />
+<Vendor Name="Regenerative Blood" Entry="56263" Type="Repair" X="-12044.72" Y="12230.17" Z="-6.150591" />
+
+1st platform: we lose the slow on bolt nor 50% less dmg CD
+<RunTo X="-11951.14" Y="12267.67" Z="1.299114" />
+
+<Vendor Name="Wing Tentacle" Entry="56168" Type="Repair" X="-11941.15" Y="12248.89" Z="12.14991" />
+<Vendor Name="Mutated Corruption" Entry="56471" Type="Repair" X="-11993.29" Y="12286.31" Z="-2.581145" />
+<Vendor Name="Elementium Bolt" Entry="56262" Type="Repair" X="-11960.15" Y="12286.01" Z="2.914875" />
+<Vendor Name="Regenerative Blood" Entry="56263" Type="Repair" X="-11961.2" Y="12283.94" Z="1.298979" />
+<Vendor Name="Blistering Tentacle" Entry="56188" Type="Repair" X="-11942.7" Y="12250.57" Z="5.390908" />
+
+
+4th platform: no buffs except 20% dmg
+<RunTo X="-12113.57" Y="12070.36" Z="2.308735" />
+
+<Vendor Name="Wing Tentacle" Entry="56168" Type="Repair" X="-12097.79" Y="12067.37" Z="13.48882" />
+<Vendor Name="Mutated Corruption" Entry="56471" Type="Repair" X="-12160.9" Y="12057.04" Z="2.473624" />
+<Vendor Name="Elementium Bolt" Entry="56262" Type="Repair" X="-12136.93" Y="12080.07" Z="3.859306" />
+<Vendor Name="Regenerative Blood" Entry="56263" Type="Repair" X="-12131.59" Y="12072.1" Z="2.307656" />
+<Vendor Name="Blistering Tentacle" Entry="56188" Type="Repair" X="-12097.51" Y="12069.1" Z="7.699826" />
+
+3rd platform again to kill DW: (and gain all buffs back)
+<RunTo X="-12078.51" Y="12152.36" Z="-2.735701" />
+
+kill the Elementium Fragments that spawn on the ground and throw shrapnel.  if not a tank - use EAB1 (Dream) to take 50% less dmg when 2s is left on their cast (1st set only)
+kill the Elementium Terrors as soon as they come up - make sure to pop a healing CD to heal the tanks / dmg cd's to help kill them. make sure tank tanks them in the yellow bubble (1st set only)
+
+<Vendor Name="Deathwing" Entry="57962" Type="Repair" X="-12063.49" Y="12198.86" Z="-13.05473" />
+<Vendor Name="Elementium Fragment" Entry="56724" Type="Repair" X="-12115.87" Y="12158.49" Z="-2.734253" /> x2 sets (ignore 2nd set and kill dw)
+<Vendor Name="Elementium Terror" Entry="56710" Type="Repair" X="-12100.72" Y="12171.58" Z="-2.734565" /> x2 sets (ignore 2nd set and kill dw)
+-->

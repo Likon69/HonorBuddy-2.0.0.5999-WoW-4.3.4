@@ -1,0 +1,266 @@
+<HBProfile>
+	<Name>[N - Rep Quest] Shadow - Molten Front Firelands Dailies [Kick]</Name>
+
+	<MinDurability>0.1</MinDurability>
+
+
+	<Blackspots>
+	</Blackspots>
+	<AvoidMobs>
+		<Mob Name="Molten Behemoth" Entry="52552" />
+	</AvoidMobs>
+	<Vendors>
+		<Vendor Name="Zen'Vorka" Entry="52822" Type="Repair" X="979.8785" Y="375.066" Z="37.98084" />
+	</Vendors>
+	
+	<Quest Id="29159" Name="Pyrorachnophobia">
+		<Objective Type="KillMob" MobId="52648" KillCount="8">
+			<Hotspots>
+				<Hotspot X="1351.945" Y="173.9379" Z="52.25431" />
+				<Hotspot X="1392.545" Y="175.9935" Z="56.93462" />
+				<Hotspot X="1293.637" Y="93.14039" Z="64.35235" />
+				<Hotspot X="1266.693" Y="221.9548" Z="55.40652" />			
+			</Hotspots>
+		</Objective>
+	</Quest>
+	<Quest Id="29160" Name="Egg-stinction">
+		<Objective Type="CollectItem" ItemId="69214" CollectCount="20">
+			<CollectFrom>
+				<GameObject Name="Cinderweb Egg Sac" Id="208431" />
+				<GameObject Name="Cinderweb Egg Sac" Id="208426" />
+				<GameObject Name="Cinderweb Egg Sac" Id="208423" />
+			</CollectFrom>
+			<Hotspots>
+				<Hotspot X="1351.945" Y="173.9379" Z="52.25431" />
+				<Hotspot X="1392.545" Y="175.9935" Z="56.93462" />
+				<Hotspot X="1293.637" Y="93.14039" Z="64.35235" />
+				<Hotspot X="1266.693" Y="221.9548" Z="55.40652" />			
+			</Hotspots>
+		</Objective>
+	</Quest>
+	
+
+	
+	<QuestOrder>
+	
+		<CustomBehavior File="UserSettings" TrainNewSkills="False" LootMobs="True" UseMount="True" PullDistance="30"  />
+	
+		
+			<If Condition="(IsQuestCompleted(29214)) &amp;&amp; (HasQuest(29215))" >
+		<TurnIn QuestName="The Hunt Begins" QuestId="29215" TurnInName="Captain Saynna Stormrunner" TurnInId="52493" X="982.84" Y="368.9735" Z="38.06548" />
+			</If>
+	
+			<If Condition="((!HasQuest(29245)) &amp;&amp; (!IsQuestCompleted(29245)))" >
+				<!-- Non Daily Acorn Quest -->
+					<SetGrindArea>	
+						<GrindArea>
+							<Factions>2371</Factions> <!-- [Hyjal Invaders] -->
+							<Hotspots> 
+								<Hotspot X="1352.499" Y="101.3619" Z="63.49738" />
+								<Hotspot X="1420.179" Y="119.826" Z="62.75326" />
+								<Hotspot X="1363.899" Y="69.27287" Z="67.86981" />
+							</Hotspots>
+						</GrindArea> 
+					</SetGrindArea>	
+				<GrindTo Condition="HasQuestAvailable(208535)" />
+
+		<PickUp QuestName="The Mysterious Seed" QuestId="29245" GiverName="Dried Acorn" GiverId="208535" />
+		
+				<CustomBehavior File="NoCombatMoveTo" X="1009.831" Y="329.2008" Z="41.2768" />
+			</If>
+			<If Condition="((HasQuest(29245)) &amp;&amp; (IsQuestCompleted(29245)))" >
+		<TurnIn QuestName="The Mysterious Seed" QuestId="29245" TurnInName="Avrilla" TurnInId="52489" X="1009.831" Y="329.2008" Z="41.2768" />
+		<PickUp QuestName="Planting Season" QuestId="29249" GiverName="Avrilla" GiverId="52489" X="1009.831" Y="329.2008" Z="41.2768" />
+			</If>
+			<If Condition="((!HasQuest(29249)) &amp;&amp; (!IsQuestCompleted(29249)))" >
+		<PickUp QuestName="Planting Season" QuestId="29249" GiverName="Avrilla" GiverId="52489" X="1009.831" Y="329.2008" Z="41.2768" />
+			</If>
+			<If Condition="((HasQuest(29249)) &amp;&amp; (!IsQuestCompleted(29249)))" >
+				<CustomBehavior File="InteractWith" QuestId="29249" MobId="208537" ObjectType="Gameobject" Range="8" X="980.4998" Y="297.2505" Z="45.74989" />
+				<CustomBehavior File="WaitTimer" WaitTime="10000" GoalText="Waiting for quest to complete {TimeRemaining}" />
+			</If>
+			<If Condition="((HasQuest(29249)) &amp;&amp; (IsQuestCompleted(29249)))" >
+				<CustomBehavior File="CompleteLogQuest" QuestId="29249" /> <!-- Get 29254 -->
+				<CustomBehavior File="WaitTimer" WaitTime="2000" GoalText="Waiting for bot {TimeRemaining}" />
+			</If>
+			<If Condition="((HasQuest(29254)) &amp;&amp; (IsQuestCompleted(29254)))" >
+		<TurnIn QuestName="Little Lasher" QuestId="29254" TurnInName="Avrilla" TurnInId="52489" X="1009.831" Y="329.2008" Z="41.2768" />
+			</If>
+
+				
+			<!-- This is the MobId, not QuestId -->
+			<While Condition="HasQuestAvailable(52824)" >
+				<CustomBehavior File="InteractWith" MobId="52824" />
+				<CustomBehavior File="RunMacro" Macro="/click GossipTitleButton1" />
+				<CustomBehavior File="RunMacro" Macro="/click QuestFrameAcceptButton" />
+			</While>
+			
+			<If Condition="((HasQuest(29205)) &amp;&amp; (!IsQuestCompleted(29205)))" >
+				<RunTo X="1157.52" Y="277.6692" Z="16.75616" />
+				<CustomBehavior File="UserDialog" QuestId="29205" AllowBotStop="True" SoundCue="Exclamation" SoundCueInterval="1" Text="Follow the npc's up and kill Pyrelord" />
+				<CustomBehavior File="Escort" QuestId="29205" MobId="52953" X="1157.52" Y="277.6692" Z="16.75616" /> <!-- There might be more than 1 npc.  I think keeper Talros is also helping out, maybe Turak, Tholo, and anren too -->
+				<CustomBehavior File="WaitTimer" WaitTime="15000" GoalText="Waiting for cutscene {TimeRemaining}" /> <!-- after killing 52998 Pyrelord --> 
+			</If>
+			<If Condition="((HasQuest(29205)) &amp;&amp; (IsQuestCompleted(29205)))" >
+		<TurnIn QuestName="The Forlorn Spire" QuestId="29205" TurnInName="Marin Bladewing" TurnInId="52494" X="1168.755" Y="162.3811" Z="60.06127" />
+			</If>
+			<!-- i'm not 100% sure if 29205 is a daily quest, but it shows up as a daily on the first day (kill Pyrelord and take over Forlorn Spire) -->
+			
+			<!-- Forlorn Spire Dailies -->
+			<While Condition="HasQuestAvailable(52494)" >
+				<CustomBehavior File="InteractWith" MobId="52494" />
+				<CustomBehavior File="RunMacro" Macro="/click GossipTitleButton1" />
+				<CustomBehavior File="RunMacro" Macro="/click QuestFrameAcceptButton" />
+			</While>
+			<While Condition="HasQuestAvailable(52921)" >
+				<CustomBehavior File="InteractWith" MobId="52921" />
+				<CustomBehavior File="RunMacro" Macro="/click GossipTitleButton1" />
+				<CustomBehavior File="RunMacro" Macro="/click QuestFrameAcceptButton" />
+			</While>
+			
+			
+			<If Condition="((HasQuest(29211)) &amp;&amp; (!IsQuestCompleted(29211)))" >
+				<RunTo X="1375.436" Y="133.87" Z="61.15922" />
+				<RunTo X="1359.946" Y="95.76835" Z="64.10181" />
+				<RunTo X="1377.605" Y="67.79134" Z="68.27894" />
+				<RunTo X="1412.027" Y="63.78046" Z="67.53947" />
+				<RunTo X="1397.953" Y="90.44868" Z="68.84512" />
+				<CustomBehavior File="WaitTimer" WaitTime="3000" GoalText="Waiting for agro to clear {TimeRemaining}" />
+				<CustomBehavior File="InteractWith" QuestId="29211" MobId="208474" ObjectType="Gameobject" Range="8" X="1397.953" Y="90.44868" Z="68.84512" />
+				<CustomBehavior File="WaitTimer" WaitTime="5000" GoalText="Waiting for quest to complete {TimeRemaining}" />
+				<CustomBehavior File="MyCTM" X="1375.436" Y="133.87" Z="61.15922" />
+			</If>
+			<If Condition="((HasQuest(29189)) &amp;&amp; (!IsQuestCompleted(29189)))" >
+				<!-- Wicked Webs -->
+				<CustomBehavior File="UserSettings" PullDistance="10" />
+	<CustomBehavior File="UserDialog" QuestId="29189" AllowBotStop="True" SoundCue="Exclamation" SoundCueInterval="1" Text="This quest currently has issues.  Free the people by killing the spider sacs" />
+				<CustomBehavior File="KillUntilComplete" QuestId="29189" MobId1="52784" X="1351.945" Y="173.9379" Z="52.25431" />
+				<!-- 
+					<SetGrindArea>	
+						<GrindArea>
+							<Factions>14</Factions>
+							<Hotspots> 
+								<Hotspot X="1351.945" Y="173.9379" Z="52.25431" />
+								<Hotspot X="1392.545" Y="175.9935" Z="56.93462" />
+								<Hotspot X="1293.637" Y="93.14039" Z="64.35235" />
+								<Hotspot X="1266.693" Y="221.9548" Z="55.40652" />
+							</Hotspots>
+						</GrindArea> 
+					</SetGrindArea>	
+				<GrindTo Condition="(IsQuestCompleted(29189))" />
+				-->
+			</If>
+			<If Condition="((HasQuest(29160)) &amp;&amp; (!IsQuestCompleted(29160)))" >
+				<Objective QuestName="Egg-stinction" QuestId="29160" Type="CollectItem" ItemId="69214" CollectCount="20" />
+			</If>
+			<If Condition="((HasQuest(29159)) &amp;&amp; (!IsQuestCompleted(29159)))" >
+				<CustomBehavior File="UserSettings" PullDistance="10" />
+				<Objective QuestName="Pyrorachnophobia" QuestId="29159" Type="KillMob" MobId="52648" KillCount="8" />
+			</If>
+			
+
+
+			<CustomBehavior File="NoCombatMoveTo" X="1186.644" Y="153.5595" Z="60.92998" />
+
+			<If Condition="((HasQuest(29189)) &amp;&amp; (IsQuestCompleted(29189)))" >
+		<TurnIn QuestName="Wicked Webs" QuestId="29189" TurnInName="Deldren Ravenelm" TurnInId="52921" />
+			</If>
+			<If Condition="((HasQuest(29159)) &amp;&amp; (IsQuestCompleted(29159)))" >
+		<TurnIn QuestName="Pyrorachnophobia" QuestId="29159" TurnInName="Deldren Ravenelm" TurnInId="52921" />
+			</If>
+			<If Condition="((HasQuest(29160)) &amp;&amp; (IsQuestCompleted(29160)))" >
+		<TurnIn QuestName="Egg-stinction" QuestId="29160" TurnInName="Deldren Ravenelm" TurnInId="52921" />
+			</If>
+			<If Condition="((HasQuest(29211)) &amp;&amp; (IsQuestCompleted(29211)))" >
+		<TurnIn QuestName="Solar Core Destruction" QuestId="29211" TurnInName="Marin Bladewing" TurnInId="52494" />
+			</If>
+			
+				<CustomBehavior File="UserSettings" PullDistance="20" />
+				
+			
+
+			
+			
+			<While Condition="HasQuestAvailable(52824)" >
+				<CustomBehavior File="InteractWith" MobId="52824" />
+				<CustomBehavior File="RunMacro" Macro="/click GossipTitleButton1" />
+				<CustomBehavior File="RunMacro" Macro="/click QuestFrameAcceptButton" />
+			</While>
+			
+			
+			<If Condition="((HasQuest(29210)) &amp;&amp; (!IsQuestCompleted(29210)))" >
+				<If Condition="(!IsObjectiveComplete(1, 29210))">
+					<RunTo X="1307.24" Y="238.8463" Z="24.56153" />
+				</If>
+				<While Condition="(!IsObjectiveComplete(2, 29210))">
+					<CustomBehavior File="UserDialog" QuestId="29210" AllowBotStop="True" SoundCue="Exclamation" SoundCueInterval="1" 
+					Text="This quest currently has issues.  run around and click the blue circles in the cave(hb isn't returning an npc nor a gameobject).  ignore fire guys" />
+					
+					<CustomBehavior File="WaitTimer" WaitTime="3000" GoalText="Waiting for quest to complete {TimeRemaining}" />
+				<!-- 
+					<CustomBehavior File="NoCombatMoveTo" X="1282.764" Y="199.9376" Z="3.79715" />
+					<CustomBehavior File="InteractWith" QuestId="29210" MobId="52889" IgnoreCombat="True" CollectionDistance="10" X="1282.764" Y="199.9376" Z="3.79715" />
+					
+					<CustomBehavior File="NoCombatMoveTo" X="1317.794" Y="203.1866" Z="14.50614" />
+					<CustomBehavior File="InteractWith" QuestId="29210" MobId="52884" IgnoreCombat="True" CollectionDistance="10" X="1317.794" Y="203.1866" Z="14.50614" />
+
+					<CustomBehavior File="NoCombatMoveTo" X="1287.823" Y="143.8314" Z="4.259557" />
+					<CustomBehavior File="InteractWith" QuestId="29210" MobId="52885" IgnoreCombat="True" CollectionDistance="10" X="1287.823" Y="143.8314" Z="4.259557" />
+
+					<CustomBehavior File="NoCombatMoveTo" X="1287.823" Y="143.8314" Z="4.259557" />
+					<CustomBehavior File="InteractWith" QuestId="29210" MobId="52890" IgnoreCombat="True" CollectionDistance="10" X="1287.823" Y="143.8314" Z="4.259557" />
+
+					<CustomBehavior File="NoCombatMoveTo" X="1225.958" Y="212.8385" Z="4.066926" />
+					<CustomBehavior File="InteractWith" QuestId="29210" MobId="52888" IgnoreCombat="True" CollectionDistance="10" X="1225.958" Y="212.8385" Z="4.066926" />
+
+					<CustomBehavior File="NoCombatMoveTo" X="1177.622" Y="170.0713" Z="4.38552" />
+					<CustomBehavior File="InteractWith" QuestId="29210" MobId="52887" IgnoreCombat="True" CollectionDistance="10" X="1177.622" Y="170.0713" Z="4.38552" />
+
+					<CustomBehavior File="NoCombatMoveTo" X="1239.309" Y="114.2077" Z="4.264248" />
+					<CustomBehavior File="InteractWith" QuestId="29210" MobId="52886" IgnoreCombat="True" CollectionDistance="10" X="1239.309" Y="114.2077" Z="4.264248" />
+					
+					<CustomBehavior File="UserDialog" QuestId="29210" AllowBotStop="True" SoundCue="Exclamation" SoundCueInterval="1" 
+					Text="This quest currently has issues.  run around and click the blue circles in the cave(hb isn't returning an npc nor a gameobject).  ignore fire guys" />
+					
+
+					<CustomBehavior File="NoCombatMoveTo" X="1217.242" Y="113.7649" Z="6.791813" />
+					<RunTo X="1192.292" Y="111.6759" Z="4.134892" />
+					<CustomBehavior File="InteractWith" QuestId="29210" MobId="53887" CollectionDistance="10" X="1173.972" Y="122.8178" Z="4.252748" />
+					<CustomBehavior File="NoCombatMoveTo" X="1194.156" Y="113.9745" Z="3.963918" />
+					<RunTo X="1220.965" Y="113.8248" Z="5.827456" />
+					
+					<CustomBehavior File="WaitTimer" WaitTime="3000" GoalText="Waiting for quest to complete {TimeRemaining}" />
+					-->
+				</While>
+			</If>
+
+			<CustomBehavior File="NoCombatMoveTo" X="1186.644" Y="153.5595" Z="60.92998" />
+
+			<If Condition="((HasQuest(29210)) &amp;&amp; (IsQuestCompleted(29210)))" >
+		<TurnIn QuestName="Enduring the Heat" QuestId="29210" TurnInName="Theresa Barkskin" TurnInId="52823" />
+			</If>
+			
+			
+			
+			
+			<If Condition="(((HasQuest(29181)) || (HasQuest(29214))) &amp;&amp; (GetCurrencyAmount(416) &gt;= 150))" >
+				<CustomBehavior File="UserDialog" AllowBotStop="True" SoundCue="Exclamation" SoundCueInterval="1" 
+				Text="I noticed you have 150 tokens - please go and turn in your quest (In Hyjal)" />
+			</If>
+			
+			
+			
+			
+			
+	
+			
+	<CustomBehavior File="UserDialog" AllowBotStop="True" SoundCue="Exclamation" SoundCueInterval="1" Text="End of Line!\n\nYes, I fight for the users!" />
+		<!--
+		-->
+
+	
+	
+	
+	</QuestOrder>
+
+</HBProfile>

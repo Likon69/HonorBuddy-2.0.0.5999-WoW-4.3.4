@@ -1,0 +1,70 @@
+<HBProfile>
+<Name>300-350 Outland Leather farm</Name>
+<MinDurability>0.4</MinDurability>
+<MinFreeBagSlots>1</MinFreeBagSlots>
+
+
+<MailGrey>false</MailGrey>
+<MailWhite>false</MailWhite>
+<MailGreen>false</MailGreen>
+<MailBlue>false</MailBlue>
+<MailPurple>false</MailPurple>
+
+<SellGrey>True</SellGrey>
+<SellWhite>True</SellWhite>
+<SellGreen>True</SellGreen>
+<SellBlue>false</SellBlue>
+<SellPurple>false</SellPurple>
+
+<Vendors>
+</Vendors>
+
+<Mailboxes>
+</Mailboxes>
+
+<Blackspots>
+</Blackspots>
+
+  <QuestOrder>
+    
+
+    <While Condition="(Me.Level &gt; 1)" >
+
+      <If Condition="(Me.FreeBagSlots &gt; 5)" >
+
+        <CustomBehavior File="FlyTo" DestName="Farm Area" X="-487.7064" Y="2609.858" Z="66.65978" />
+        <CustomBehavior File="ForcedDismount" />
+
+        <SetGrindArea>
+          <GrindArea>
+            <Factions>954</Factions>
+            <TargetMinLevel>1</TargetMinLevel>
+            <TargetMaxLevel>85</TargetMaxLevel>
+            <Hotspots>
+              <Hotspot X="-487.7064" Y="2609.858" Z="66.65978" />
+              <Hotspot X="-458.5109" Y="2551.861" Z="54.67494" />
+              <Hotspot X="-463.2208" Y="2478.906" Z="43.16395" />
+              <Hotspot X="-447.5613" Y="2420.833" Z="38.47363" />
+              <Hotspot X="-445.7334" Y="2378.024" Z="39.03765" />
+              <Hotspot X="-383.0123" Y="2443.212" Z="40.61808" />
+              <Hotspot X="-411.2234" Y="2544.293" Z="49.32917" />
+              <Hotspot X="-419.1731" Y="2635.358" Z="53.98248" />
+              <Hotspot X="-453.7545" Y="2707.784" Z="54.87354" />
+              <Hotspot X="-479.0135" Y="2750.133" Z="54.56009" />
+              <Hotspot X="-494.6826" Y="2816.173" Z="48.04903" />
+              <Hotspot X="-541.5155" Y="2761.508" Z="67.97762" />
+              <Hotspot X="-470.1254" Y="2621.745" Z="64.31351" />
+              <Hotspot X="-485.2344" Y="2542.975" Z="55.88961" />
+            </Hotspots>
+          </GrindArea>
+        </SetGrindArea>
+        <GrindTo Condition="Me.FreeBagSlots &lt;= 5" GoalText="Farming Leather." />
+      </If>
+
+
+
+    </While>
+
+
+  </QuestOrder>
+</HBProfile>

@@ -1,0 +1,523 @@
+<HBProfile xsi:noNamespaceSchemaLocation="../Schemas/EchoSchema.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<!-- Original contribution by EchoTiger -->
+	<Name>Grizzly Hills ($ShortHash$)</Name>
+
+	<DefaultNavType>Fly</DefaultNavType>
+
+	<MinDurability>0.3</MinDurability>
+	<MinFreeBagSlots>3</MinFreeBagSlots>
+
+	<SellGrey>true</SellGrey>
+	<SellWhite>true</SellWhite>
+	<SellGreen>true</SellGreen>
+	<SellBlue>true</SellBlue>
+	<SellPurple>false</SellPurple>
+
+	<MailGrey>false</MailGrey>
+	<MailWhite>true</MailWhite>
+	<MailGreen>true</MailGreen>
+	<MailBlue>true</MailBlue>
+	<MailPurple>true</MailPurple>
+
+	<TargetElites>true</TargetElites>
+
+	<AvoidMobs>
+	</AvoidMobs>
+
+	<Mailboxes>
+	</Mailboxes>
+
+	<Vendors>
+	</Vendors>
+
+	<Blackspots>
+		<Blackspot X="3232.967" Y="-2270.532" Z="114.2953" Radius="3" /> <!-- Banner near Hidetrader Jun'ik -->
+		<Blackspot X="3849.871" Y="-4535.432" Z="209.2311" Radius="3" /> <!-- Bonfire in Camp Oneqwah in front of Tormak the Scarred -->
+		<Blackspot X="4034.946" Y="-4322.221" Z="252.3767" /> <!-- Bonfire in Solstice Village -->
+	</Blackspots>
+
+	<Blacklist>
+	</Blacklist>
+
+	<QuestOrder IgnoreCheckpoints="false" >
+		<!-- Check function status -->
+		<Code File="RunCode" Type="Definition">
+			<![CDATA[
+			private static bool? profileFunctionsEnabled => (bool?)AppDomain.CurrentDomain.GetData("QuestingProfiles_FunctionsEnabled");
+			private static bool IsStoreProfile(string path) => path.StartsWith("store://");
+			private static string Slashify(string path) => IsStoreProfile(path) ? path.Replace(@"\", "/") : path.Replace("/", @"\");
+
+			public __CompiledBatchClass__()
+			{
+				ActivateFunctions();
+			}
+
+			private static void ActivateFunctions()
+			{
+				if (profileFunctionsEnabled == null || profileFunctionsEnabled == false)
+				{
+					Bots.Professionbuddy.PBLog.Log(Colors.MediumPurple, "[Profile Message!]: ", Colors.Yellow, "Please stand by as the functions are being activated!");
+					LoadProfile(@"..\..\Functions\Activate Functions.xml");
+				}
+			}
+
+			private static void LoadProfile(string path)
+			{
+				var profile = GetNewPath(path);
+				if (!IsStoreProfile(profile) && !File.Exists(profile))
+				{
+					Bots.Professionbuddy.PBLog.Log(Colors.MediumPurple, "[Profile Message!]: ", Colors.Yellow, "Profile does not exist.\n" + profile);
+					return;
+				}
+
+				Bots.Professionbuddy.PBLog.Log(Colors.MediumPurple, "[Profile Message!]: ", Colors.Yellow, "Loading: " + profile);
+				ProfileManager.LoadNew(profile, false);
+			}
+
+			private static string GetNewPath(string path)
+			{
+				if (IsStoreProfile(path))
+					return Slashify(path);
+
+				var currentProfile = ProfileManager.XmlLocation;
+				if (IsStoreProfile(currentProfile))
+					return Slashify(currentProfile + "/../" + path);
+
+				var absolutePath = Path.Combine(Path.GetDirectoryName(currentProfile), path);
+				absolutePath = Path.GetFullPath(absolutePath);
+				var canonicalPath = new Uri(absolutePath).LocalPath;
+				return Slashify(canonicalPath);
+			}]]>
+		</Code>
+		<Code File="RunCode" Code="ActivateFunctions();" />
+		<!-- END Check function status -->
+
+		<If Condition="Me.IsAlliance" >
+			<Code File="LoadProfile" ProfileName="..\..\Questing Autoloader.xml" />
+		</If>
+		<!-- RunCode Methods -->
+			<Code File="RunCode">
+			<![CDATA[
+				Bots.Professionbuddy.PBLog.Log(System.Windows.Media.Colors.MediumPurple, "> [Profile Initialization Status] ", System.Windows.Media.Colors.CornflowerBlue, "\n     Auto-Looting	:: Enabled\n     Looting	:: Enabled\n     Game Addons	:: Disabled");
+				Lua.DoString("SetCVar('AutoLootDefault', 1);");
+				Lua.DoString("SetCVar('autoDismountFlying', 1);");
+				CharacterSettings.Instance.LootMobs = true;
+				CharacterSettings.Instance.Save();
+				Logging.Write(System.Windows.Media.Colors.MediumPurple, "> [Ready to bot!]");
+			]]>
+			</Code>
+			<Code File="RunCode" Type="Definition">
+				<![CDATA[
+						bool DoQuest(params uint[] questIds)
+						{
+							foreach (var questId in questIds)
+							{
+								if (HasQuest(questId) && !IsQuestCompleted(questId)) return true;
+							}
+							return false;
+						}
+						bool NeedsQuest(params uint[] questIds)
+						{
+							foreach (var questId in questIds)
+							{
+								if (!HasQuest(questId) && !IsQuestCompleted(questId)) return true;
+							}
+							return false;
+						}
+						bool NeedsBreadcrumbQuest(params uint[] questIds)
+						{
+							foreach (var questId in questIds)
+							{
+								if (IsQuestCompleted(questId)) return false;
+							}
+							return true;
+						}
+						bool QuestDone(params uint[] questIds)
+						{
+							foreach (var questId in questIds)
+							{
+								if (HasQuest(questId) && IsQuestCompleted(questId)) return true;
+							}
+							return false;
+						}
+						bool QuestFlaggedCompleted(params uint[] questIds)
+						{
+							foreach (var questId in questIds)
+							{
+								return Lua.GetReturnVal<bool>($"return IsQuestFlaggedCompleted({questId});", 0);
+							}
+							return false;
+						}
+						async Task SkipCutscene(int preWait = 3000, int postWait = 3000)
+						{
+					// Add detection of cutscene here.
+							await Coroutine.Sleep(preWait);
+					// Test and improve the working method.
+							Lua.DoString("MovieFrame:StopMovie(); CinematicFrame_CancelCinematic(); StopCinematic();");
+							await Coroutine.Sleep(postWait);
+						}
+					]]>
+			</Code>
+		<!-- END RunCode Methods -->
+
+
+		<Code File="KillUntilComplete" MobIds="26592, 26363" TerminateWhen="Me.Level &gt;= 73" >
+			<HuntingGrounds>
+				<Hotspot X="3164.349" Y="-2461.452" Z="67.19038" />
+				<Hotspot X="3058.75" Y="-2433.262" Z="63.62542" />
+				<Hotspot X="2993.431" Y="-2357.082" Z="55.22325" />
+				<Hotspot X="3164.131" Y="-2108.033" Z="96.0041" />
+				<Hotspot X="3289.776" Y="-2018.549" Z="95.54144" />
+			</HuntingGrounds>
+		</Code>
+
+		<PickUp QuestName="Supplemental Income" QuestId="12436" GiverName="Provisioner Lorkran" GiverId="26868" X="3198.575" Y="-2299.396" Z="107.6755" />
+		<PickUp QuestName="Gray Worg Hides" QuestId="12175" GiverName="Hidetrader Jun&apos;ik" GiverId="27037" X="3238.753" Y="-2264" Z="114.3371" />
+
+		<If Condition="!IsQuestCompleted(12451)" >
+			<Code File="SetHearthstone" MobId="27125" AreaId="4206" X="3259.919" Y="-2205.646" Z="117.0293" />
+		</If>
+
+		<PickUp QuestName="The Conqueror&apos;s Task" QuestId="12468" GiverName="Conqueror Krenna" GiverId="26860" X="3268.833" Y="-2201.235" Z="117.0293" />
+		<TurnIn QuestName="The Conqueror&apos;s Task" QuestId="12468" TurnInName="Sergeant Nazgrim" TurnInId="27388" X="3271.613" Y="-2210.434" Z="117.0294" />
+		<PickUp QuestName="A Show of Strength" QuestId="12257" GiverName="Sergeant Nazgrim" GiverId="27388" X="3272.209" Y="-2210.689" Z="117.0294" />
+		<PickUp QuestName="The Flamebinders&apos; Secrets" QuestId="12256" GiverName="Sergeant Nazgrim" GiverId="27388" X="3272.209" Y="-2210.689" Z="117.0294" />
+
+		<Code File="KillUntilComplete" MobId="26592" QuestId="12175" >
+			<HuntingGrounds>
+				<Hotspot X="3164.349" Y="-2461.452" Z="67.19038" />
+				<Hotspot X="3058.75" Y="-2433.262" Z="63.62542" />
+				<Hotspot X="2993.431" Y="-2357.082" Z="55.22325" />
+				<Hotspot X="3164.131" Y="-2108.033" Z="96.0041" />
+				<Hotspot X="3289.776" Y="-2018.549" Z="95.54144" />
+			</HuntingGrounds>
+		</Code>
+
+		<Code File="KillUntilComplete" MobId="26363" QuestId="12436" >
+			<HuntingGrounds>
+				<Hotspot X="3310.4" Y="-2116.28" Z="112.7705" />
+				<Hotspot X="3497.335" Y="-2132.733" Z="132.1334" />
+				<Hotspot X="3529.674" Y="-2277.852" Z="128.0425" />
+				<Hotspot X="3621.076" Y="-2258.51" Z="139.0571" />
+			</HuntingGrounds>
+		</Code>
+
+		<TurnIn QuestName="Gray Worg Hides" QuestId="12175" TurnInName="Hidetrader Jun&apos;ik" TurnInId="27037" X="3239.569" Y="-2262.983" Z="114.5925" />
+		<PickUp QuestName="A Minor Substitution" QuestId="12176" GiverName="Hidetrader Jun&apos;ik" GiverId="27037" X="3239.569" Y="-2262.983" Z="114.5925" />
+		<TurnIn QuestName="Supplemental Income" QuestId="12436" TurnInName="Provisioner Lorkran" TurnInId="26868" X="3197.914" Y="-2298.855" Z="107.6759" />
+
+		<Code File="KillUntilComplete" MobId="27131" QuestId="12176" >
+			<HuntingGrounds>
+				<Hotspot X="3493.73" Y="-2651.66" Z="91.57889" />
+				<Hotspot X="3578.216" Y="-2664.428" Z="123.0775" />
+				<Hotspot X="3665.89" Y="-2685.451" Z="157.9781" />
+			</HuntingGrounds>
+		</Code>
+
+		<If Condition="QuestDone(12176) &amp;&amp; Me.HearthstoneAreaId == 4206 &amp;&amp; Unit(27131) != null" >
+			<Code File="UseHearthstone" WaitForCd="false" />
+		</If>
+
+		<TurnIn QuestName="A Minor Substitution" QuestId="12176" TurnInName="Hidetrader Jun&apos;ik" TurnInId="27037" X="3239.493" Y="-2263.477" Z="114.4817" />
+
+		<PickUp QuestName="Jun&apos;ik&apos;s Coverup" QuestId="12177" GiverName="Hidetrader Jun&apos;ik" GiverId="27037" X="3239.493" Y="-2263.477" Z="114.4817" />
+		<Code File="RunCode">
+			<![CDATA[
+				var whitelist = (List<uint>)AppDomain.CurrentDomain.GetData("QuestingProfiles_AFKModeWhitelist");
+				whitelist.Add(30817);
+				whitelist.Add(3857);
+				AppDomain.CurrentDomain.SetData("QuestingProfiles_AFKModeWhitelist", whitelist);
+			]]>
+		</Code>
+		<Code File="InteractWith" MobId="26868" NonCompeteDistance="0" InteractByBuyingItemId="30817" BuyItemCount="5" QuestId="12177" QuestObjectiveIndex="2" X="3198.785" Y="-2298.937" Z="107.6756" />
+		<Code File="InteractWith" MobId="27134" NonCompeteDistance="0" InteractByBuyingItemId="3857" BuyItemCount="1" QuestId="12177" QuestObjectiveIndex="1" X="3307.065" Y="-2337.795" Z="110.05" />
+		<TurnIn QuestName="Jun&apos;ik&apos;s Coverup" QuestId="12177" TurnInName="Hidetrader Jun&apos;ik" TurnInId="27037" X="3239.986" Y="-2263.442" Z="114.566" />
+
+		<PickUp QuestName="Delivery to Krenna" QuestId="12178" GiverName="Hidetrader Jun&apos;ik" GiverId="27037" X="3239.986" Y="-2263.442" Z="114.566" />
+		<TurnIn QuestName="Delivery to Krenna" QuestId="12178" TurnInName="Conqueror Krenna" TurnInId="26860" X="3269.816" Y="-2201.18" Z="117.052" />
+
+		<Code File="KillUntilComplete" TerminateWhen="!DoQuest(12256, 12257)" >
+			<HuntingGrounds>
+				<Hotspot X="2933.39" Y="-2572.388" Z="84.65116" />
+				<Hotspot X="2890.038" Y="-2667.411" Z="84.89376" />
+				<Hotspot X="2757.018" Y="-2751.519" Z="92.50169" />
+			</HuntingGrounds>
+			<PursuitList>
+				<PursueUnit Id="27260" PursueWhen="DoQuest(12257)" />
+				<PursueUnit Id="27259" PursueWhen="DoQuest(12256)" />
+			</PursuitList>
+		</Code>
+
+		<If Condition="QuestDone(12256) &amp;&amp; Me.HearthstoneAreaId == 4206 &amp;&amp; Unit(27259) != null || Unit(27260) != null" >
+			<Code File="UseHearthstone" WaitForCd="false" />
+		</If>
+
+		<TurnIn QuestName="A Show of Strength" QuestId="12257" TurnInName="Sergeant Nazgrim" TurnInId="27388" X="3270.294" Y="-2210.742" Z="117.0299" />
+		<TurnIn QuestName="The Flamebinders&apos; Secrets" QuestId="12256" TurnInName="Sergeant Nazgrim" TurnInId="27388" X="3270.294" Y="-2210.742" Z="117.0299" />
+		<RecheckCheckpoints />
+
+		<PickUp QuestName="The Thane of Voldrune" QuestId="12259" GiverName="Sergeant Nazgrim" GiverId="27388" X="3271.93" Y="-2213.05" Z="117.0299" />
+		<While Condition="DoQuest(12259)" >
+			<MoveTo X="2979.937" Y="-2505.984" Z="125.7976" />
+			<Code File="KillUntilComplete" MobId="27377" MovementBy="NavigatorOnly" QuestId="12259" X="2973.216" Y="-2507.678" Z="125.9708" TerminateWhen="Unit(27377) == null || Unit(27377, u =&gt; u.DistanceSqr &gt; 35f*35f) != null" />
+		</While>
+		<TurnIn QuestName="The Thane of Voldrune" QuestId="12259" TurnInName="Sergeant Nazgrim" TurnInId="27388" X="3272.726" Y="-2211.227" Z="117.0293" />
+
+		<PickUp QuestName="Onward to Camp Oneqwah" QuestId="12451" GiverName="Sergeant Nazgrim" GiverId="27388" X="3272.726" Y="-2211.227" Z="117.0293" />
+		<PickUp QuestName="My Enemy&apos;s Friend" QuestId="12412" GiverName="Conqueror Krenna" GiverId="26860" X="3269.727" Y="-2200.912" Z="117.0991" />
+
+		<Code File="KillUntilComplete" MobId="27547" QuestId="12412" QuestObjectiveIndex="2" X="3151.46" Y="-3001.282" Z="134.0614" />
+		<Code File="KillUntilComplete" MobId="27546" QuestId="12412" >
+			<HuntingGrounds>
+				<Hotspot X="3153.717" Y="-3087.124" Z="137.0185" />
+				<Hotspot X="3157.004" Y="-2973.512" Z="126.4737" />
+				<Hotspot X="3083.112" Y="-3019.917" Z="117.9296" />
+			</HuntingGrounds>
+		</Code>
+
+		<If Condition="QuestDone(12412) &amp;&amp; Me.HearthstoneAreaId == 4206 &amp;&amp; Unit(27546) != null" >
+			<Code File="UseHearthstone" WaitForCd="false" />
+		</If>
+
+		<TurnIn QuestName="My Enemy&apos;s Friend" QuestId="12412" TurnInName="Conqueror Krenna" TurnInId="26860" X="3267.452" Y="-2200.983" Z="117.0293" />
+		<PickUp QuestName="Attack on Silverbrook" QuestId="12413" GiverName="Conqueror Krenna" GiverId="26860" X="3267.452" Y="-2200.983" Z="117.0293" />
+		<TurnIn QuestName="Mikhail&apos;s Journal" QuestId="12423" TurnInName="Conqueror Krenna" TurnInId="26860" X="3267.452" Y="-2200.983" Z="117.0293" />
+		<PickUp QuestName="Gorgonna" QuestId="12424" GiverName="Conqueror Krenna" GiverId="26860" X="3267.452" Y="-2200.983" Z="117.0293" />
+		<TurnIn QuestName="Gorgonna" QuestId="12424" TurnInName="Gorgonna" TurnInId="27102" X="3272.968" Y="-2205.491" Z="117.0293" />
+		<PickUp QuestName="Tactical Clemency" QuestId="12422" GiverName="Gorgonna" GiverId="27102" X="3272.968" Y="-2205.491" Z="117.0293" />
+		<PickUp QuestName="Good Troll Hunting" QuestId="12208" GiverName="Sergeant Thurkin" GiverId="27266" X="3251.403" Y="-2278.928" Z="108.6166" />
+		<PickUp QuestName="Eyes Above" QuestId="12453" GiverName="Windseer Grayhorn" GiverId="27262" X="3311.635" Y="-2290.971" Z="110.1066" />
+		<TurnIn QuestName="Good Troll Hunting" QuestId="12208" TurnInName="Samir" TurnInId="26424" X="3846.885" Y="-1960.14" Z="208.4936" />
+		<RecheckCheckpoints />
+
+		<Code File="KillUntilComplete" MobId="27676" QuestId="12413" >
+			<HuntingGrounds>
+				<Hotspot X="4331.762" Y="-2387.23" Z="231.2301" />
+				<Hotspot X="4408.513" Y="-2433.779" Z="241.3364" />
+				<Hotspot X="4216.584" Y="-2407.408" Z="231.2889" />
+			</HuntingGrounds>
+		</Code>
+
+		<TurnIn QuestName="Tactical Clemency" QuestId="12422" TurnInName="Captured Trapper" TurnInId="27497" X="4466.663" Y="-2262.285" Z="181.2739" />
+
+		<If Condition="QuestDone(12413) &amp;&amp; Me.HearthstoneAreaId == 4206 &amp;&amp; Unit(27676) != null" >
+			<Code File="UseHearthstone" WaitForCd="false" />
+		</If>
+
+		<TurnIn QuestName="Attack on Silverbrook" QuestId="12413" TurnInName="Conqueror Krenna" TurnInId="26860" X="3269.297" Y="-2200.956" Z="117.0538" />
+		<PickUp QuestName="Ruuna the Blind" QuestId="12425" GiverName="Gorgonna" GiverId="27102" X="3272.734" Y="-2207.379" Z="117.0293" />
+		<PickUp QuestName="Vordrassil&apos;s Fall" QuestId="12207" GiverName="Windseer Grayhorn" GiverId="27262" X="3312.265" Y="-2291.121" Z="110.1066" />
+		<PickUp QuestName="The Darkness Beneath" QuestId="12213" GiverName="Windseer Grayhorn" GiverId="27262" X="3312.265" Y="-2291.121" Z="110.1066" />
+
+		<While Condition="DoQuest(12213)" >
+			<If Condition="!IsObjectiveComplete(3, 12213)" >
+				<MoveTo QuestId="12213" X="3930.47" Y="-2601.735" Z="206.5681" />
+				<MoveTo QuestId="12213" Nav="Run" X="3975.776" Y="-2706.984" Z="164.9843" />
+				<Code File="UseItem" ItemId="37173" QuestId="12213" QuestObjectiveIndex="3" />
+				<Code File="WaitTimer" WaitTime="5000" QuestId="1220" QuestObjectiveIndex="3" />
+			</If>
+			<If Condition="!IsObjectiveComplete(2, 12213)" >
+				<MoveTo QuestId="12213" X="3810.003" Y="-2865.437" Z="220.4921" />
+				<MoveTo QuestId="12213" Nav="Run" X="3912.182" Y="-2808.781" Z="175.5126" />
+				<Code File="UseItem" ItemId="37173" QuestId="12213" QuestObjectiveIndex="2" />
+				<Code File="WaitTimer" WaitTime="5000" QuestId="1220" QuestObjectiveIndex="2" />
+			</If>
+			<If Condition="!IsObjectiveComplete(1, 12213)" >
+				<MoveTo QuestId="12213" X="3710.913" Y="-3241.805" Z="280.7703" />
+				<MoveTo QuestId="12213" Nav="Run" X="3605.651" Y="-3269.874" Z="222.0514" />
+				<Code File="UseItem" ItemId="37173" QuestId="12213" QuestObjectiveIndex="1" />
+				<Code File="WaitTimer" WaitTime="5000" QuestId="1220" QuestObjectiveIndex="1" />
+			</If>
+		</While>
+
+		<Code File="KillUntilComplete" MobId="26366" QuestId="12207" >
+			<HuntingGrounds>
+				<Hotspot X="3725.704" Y="-3206.836" Z="279.5185" />
+				<Hotspot X="3824.137" Y="-3159.904" Z="282.5313" />
+				<Hotspot X="3788.23" Y="-2911.189" Z="226.4893" />
+				<Hotspot X="3946.806" Y="-2553.854" Z="211.3652" />
+			</HuntingGrounds>
+		</Code>
+
+		<Code File="InteractWith" MobId="26369" MobState="Alive" InteractByUsingItemId="37877" CollectionDistance="200" PreInteractMountStrategy="Dismount" QuestId="12453" QuestObjectiveIndex="1" >
+			<HuntingGrounds>
+				<Hotspot X="3825.02" Y="-3355.139" Z="291.2978" />
+				<Hotspot X="3654.156" Y="-3407.463" Z="241.9084" />
+			</HuntingGrounds>
+		</Code>
+
+		<TurnIn QuestName="Ruuna the Blind" QuestId="12425" TurnInName="Ruuna the Blind" TurnInId="27581" X="3837.194" Y="-3426.758" Z="293.1038" />
+
+		<PickUp QuestName="Ruuna&apos;s Request" QuestId="12328" GiverName="Ruuna the Blind" GiverId="27581" X="3836.817" Y="-3423.591" Z="293.1039" />
+		<Code File="KillUntilComplete" MobId="27421" QuestId="12328" >
+			<HuntingGrounds>
+				<Hotspot X="4074.638" Y="-3552.111" Z="254.2219" />
+				<Hotspot X="4252.412" Y="-3635.552" Z="251.0433" />
+			</HuntingGrounds>
+		</Code>
+		<TurnIn QuestName="Ruuna&apos;s Request" QuestId="12328" TurnInName="Ruuna the Blind" TurnInId="27581" X="3837.577" Y="-3424.78" Z="293.1037" />
+
+		<PickUp QuestName="Out of Body Experience" QuestId="12327" GiverName="Ruuna the Blind" GiverId="27581" X="3837.577" Y="-3424.78" Z="293.1037" />
+		<While Condition="DoQuest(12327)" >
+			<MoveTo X="3838.197" Y="-3425.134" Z="293.1037" />
+			<Code File="UseItem" WaitTime="1000" ItemId="37661" TerminateWhen="Me.MapId == 0" />
+			<Code File="WaitTimer" WaitTime="10000" TerminateWhen="Me.HasAura(49097)" />
+			<Code File="WaitTimer" WaitTime="2500" />
+			<Code File="RunCode" Code="
+				while (Me.HasAura(49097))
+				{
+					Me.GetAuraById(49097).TryCancelAura();
+					await Coroutine.Yield();
+				}"
+			/>
+			<Code File="WaitTimer" WaitTime="5000" QuestId="12327" />
+		</While>
+		<TurnIn QuestName="Out of Body Experience" QuestId="12327" TurnInName="Ruuna the Blind" TurnInId="27581" X="3839.761" Y="-3426.717" Z="293.104" />
+
+		<PickUp QuestName="Fate and Coincidence" QuestId="12329" GiverName="Ruuna the Blind" GiverId="27581" X="3841.4" Y="-3426.65" Z="293.104" />
+		<TurnIn QuestName="Onward to Camp Oneqwah" QuestId="12451" TurnInName="Scout Vor&apos;takh" TurnInId="26666" X="3847.324" Y="-4527.894" Z="209.5051" />
+		<PickUp QuestName="An Expedient Ally" QuestId="12074" GiverName="Scout Vor&apos;takh" GiverId="26666" X="3849.296" Y="-4528.72" Z="209.2902" />
+		<PickUp QuestName="The Horse Hollerer" QuestId="12415" GiverName="Soulok Stormfury" GiverId="26944" X="3842.355" Y="-4525.223" Z="210.2324" />
+		<PickUp QuestName="The Unexpected &apos;Guest&apos;" QuestId="12195" GiverName="Tormak the Scarred" GiverId="27221" X="3856.594" Y="-4535.063" Z="209.2591" />
+
+		<If Condition="Me.HearthstoneAreaId != 4211" >
+			<Code File="InteractWith" MobId="26680" NonCompeteDistance="0" X="3871.204" Y="-4544.024" Z="209.2655" />
+			<Code File="Misc\RunLua" Lua="GossipTitleButton1:Click();" WaitTime="1000" />
+			<Code File="Misc\RunLua" Lua="StaticPopup1Button1:Click();" />
+		</If>
+
+		<TurnIn QuestName="Vordrassil&apos;s Fall" QuestId="12207" TurnInName="Windseer Grayhorn" TurnInId="27262" X="3312.738" Y="-2291.119" Z="110.1063" />
+		<TurnIn QuestName="The Darkness Beneath" QuestId="12213" TurnInName="Windseer Grayhorn" TurnInId="27262" X="3312.738" Y="-2291.119" Z="110.1063" />
+		<TurnIn QuestName="Eyes Above" QuestId="12453" TurnInName="Windseer Grayhorn" TurnInId="27262" X="3312.738" Y="-2291.119" Z="110.1063" />
+		<RecheckCheckpoints />
+		<PickUp QuestName="A Possible Link" QuestId="12229" GiverName="Windseer Grayhorn" GiverId="27262" X="3312.738" Y="-2291.119" Z="110.1063" />
+		<PickUp QuestName="The Bear God&apos;s Offspring" QuestId="12231" GiverName="Windseer Grayhorn" GiverId="27262" X="3312.738" Y="-2291.119" Z="110.1063" />
+
+		<While Condition="DoQuest(12231)" >
+			<Code File="InteractWith" MobId="27274" NonCompeteDistance="0" GossipOptions="1,1,1" InteractBlacklistTimeInSeconds="1" QuestId="12231" QuestObjectiveIndex="1" X="3471.722" Y="-3648.964" Z="244.4007" />
+			<Code File="InteractWith" MobId="27275" NonCompeteDistance="0" GossipOptions="1,1" InteractBlacklistTimeInSeconds="1" QuestId="12231" QuestObjectiveIndex="2" X="3354.032" Y="-4614.674" Z="233.236" />
+		</While>
+
+		<Code File="KillUntilComplete" MobId="26356" QuestId="12229" >
+			<HuntingGrounds>
+				<Hotspot X="3407.355" Y="-4592.572" Z="231.5728" />
+				<Hotspot X="3527.416" Y="-4517.073" Z="212.8558" />
+				<Hotspot X="3602.517" Y="-4563.908" Z="193.7988" />
+			</HuntingGrounds>
+		</Code>
+
+		<Code File="KillUntilComplete" MobId="27230" QuestId="12195" >
+			<HuntingGrounds>
+				<Hotspot X="3602.398" Y="-4396.179" Z="208.9061" />
+				<Hotspot X="3670.449" Y="-4137.616" Z="194.5927" />
+				<Hotspot X="3846.686" Y="-4133.882" Z="208.3179" />
+				<Hotspot X="3843.957" Y="-4640.442" Z="173.094" />
+				<Hotspot X="4023.378" Y="-4750.78" Z="124.5656" />
+			</HuntingGrounds>
+		</Code>
+
+		<TurnIn QuestName="The Unexpected &apos;Guest&apos;" QuestId="12195" TurnInName="Tormak the Scarred" TurnInId="27221" X="3857.895" Y="-4537.626" Z="209.2673" />
+		<!-- <PickUp QuestName="An Intriguing Plan" QuestId="12165" GiverName="Tormak the Scarred" GiverId="27221" X="3857.895" Y="-4537.626" Z="209.2673" /> Not worth it -->
+		<TurnIn QuestName="Fate and Coincidence" QuestId="12329" TurnInName="Sasha" TurnInId="26935" X="4070.222" Y="-4129.218" Z="211.5147" />
+		<RecheckCheckpoints />
+		<PickUp QuestName="Sasha&apos;s Hunt" QuestId="12134" GiverName="Sasha" GiverId="26935" X="4070.997" Y="-4126.921" Z="211.5544" />
+		<PickUp QuestName="Anatoly Will Talk" QuestId="12330" GiverName="Sasha" GiverId="26935" X="4070.997" Y="-4126.921" Z="211.5544" />
+
+		<Code File="KillUntilComplete" MobIds="26389, 26416" QuestId="12134" >
+			<HuntingGrounds>
+				<Hotspot X="4115.457" Y="-4381.54" Z="266.1873" />
+				<Hotspot X="4041.391" Y="-4304.324" Z="252.0958" />
+				<Hotspot X="4060.693" Y="-4392.741" Z="260.5887" />
+			</HuntingGrounds>
+		</Code>
+
+		<While Condition="DoQuest(12330)" >
+			<Code File="InteractWith" MobId="27627" InteractByUsingItemId="37665" Range="30" PreInteractMountStrategy="Dismount" MobState="Alive" NonCompeteDistance="0" QuestId="12330" X="4052.391" Y="-4373.224" Z="261.0187" />
+			<Code File="WaitTimer" WaitTime="5000" QuestId="12330" TerminateWhen="Unit(27626, u =&gt; u.CanInteract) != null" />
+			<Code File="InteractWith" MobId="27626" NonCompeteDistance="0" QuestId="12330" X="4051.077" Y="-4374.589" Z="261.3032" />
+			<Code File="WaitTimer" WaitTime="30000" QuestId="12330" />
+		</While>
+
+		<TurnIn QuestName="Sasha&apos;s Hunt" QuestId="12134" TurnInName="Sasha" TurnInId="26935" X="4069.233" Y="-4132.074" Z="211.3765" />
+		<TurnIn QuestName="Anatoly Will Talk" QuestId="12330" TurnInName="Sasha" TurnInId="26935" X="4069.233" Y="-4132.074" Z="211.3765" />
+		<PickUp QuestName="A Sister&apos;s Pledge" QuestId="12411" GiverName="Sasha" GiverId="26935" X="4068.209" Y="-4133.175" Z="211.2997" />
+		<TurnIn QuestName="A Sister&apos;s Pledge" QuestId="12411" TurnInName="Anya" TurnInId="27646" X="3997.091" Y="-4516.084" Z="196.4682" />
+		<RecheckCheckpoints />
+		<PickUp QuestName="A Bear of an Appetite" QuestId="12279" GiverName="Hugh Glass" GiverId="26484" X="4112.26" Y="-4735.012" Z="100.7864" />
+		<!-- <PickUp QuestName="Nice to Meat You" QuestId="12113" GiverName="Harkor" GiverId="26884" X="4323.179" Y="-4979.283" Z="20.40757" /> Too risky? Maybe? -->
+		<PickUp QuestName="Therapy" QuestId="12114" GiverName="Harkor" GiverId="26884" X="4323.179" Y="-4979.283" Z="20.40757" />
+		<PickUp QuestName="It Takes Guts...." QuestId="12116" GiverName="Kraz" GiverId="26886" X="4318.798" Y="-4988.204" Z="20.37845" />
+
+		<Code File="InteractWith" MobId="189290" CollectionDistance="200" InteractByUsingItemId="37542" PreInteractMountStrategy="Dismount" QuestId="12279" QuestObjectiveIndex="1" >
+			<HuntingGrounds>
+				<Hotspot X="4307.056" Y="-5125.262" Z="-0.9299186" />
+				<Hotspot X="4089.366" Y="-5195.846" Z="-0.4678258" />
+				<Hotspot X="4352.365" Y="-5344.664" Z="-0.7924088" />
+			</HuntingGrounds>
+		</Code>
+
+		<Code File="InteractWith" MobId="188499" CollectionDistance="200" InteractByLooting="true" QuestId="12116" QuestObjectiveIndex="1" >
+			<HuntingGrounds>
+				<Hotspot X="4768.53" Y="-4835.946" Z="25.49168" />
+				<Hotspot X="4816.719" Y="-4808.724" Z="25.53759" />
+			</HuntingGrounds>
+		</Code>
+
+		<Code File="KillUntilComplete" QuestId="12114" >
+			<HuntingGrounds>
+				<Hotspot X="4574.986" Y="-4908.643" Z="48.39562" />
+				<Hotspot X="4593.519" Y="-4792.385" Z="47.99355" />
+				<Hotspot X="4720.939" Y="-4895.075" Z="48.00354" />
+			</HuntingGrounds>
+			<PursuitList>
+				<PursueUnit Id="26797" PursueWhen="!IsObjectiveComplete(1, 12114)" />
+				<PursueUnit Id="26795" PursueWhen="!IsObjectiveComplete(2, 12114)" />
+			</PursuitList>
+		</Code>
+
+		<While Condition="DoQuest(12415)" >
+			<MoveTo X="5043.136" Y="-4889.17" Z="313.531" />
+			<Code File="InteractWith" MobId="26472" Range="25" CollectionDistance="200" InteractByUsingItemId="37716" MovementBy="NavigatorOnly" PreInteractMountStrategy="Dismount" QuestId="12415" QuestObjectiveIndex="1" >
+				<HuntingGrounds>
+					<Hotspot X="5043.136" Y="-4889.17" Z="313.531" />
+					<Hotspot X="5102.635" Y="-4554.721" Z="284.3731" />
+					<Hotspot X="5002.591" Y="-4382.232" Z="273.663" />
+				</HuntingGrounds>
+			</Code>
+		</While>
+
+		<TurnIn QuestName="An Expedient Ally" QuestId="12074" TurnInName="Kurun" TurnInId="26260" X="4901.459" Y="-4567.099" Z="347.5678" />
+
+		<PickUp QuestName="Raining Down Destruction" QuestId="11982" GiverName="Kurun" GiverId="26260" X="4901.459" Y="-4567.099" Z="347.5678" />
+		<While Condition="DoQuest(11982)" >
+			<Code File="InteractWith" MobIds="26268, 26270" Range="195" CollectionDistance="200" InteractByUsingItemId="35734" InteractBlacklistTimeInSeconds="1" IgnoreLoSToTarget="true" PreInteractMountStrategy="Dismount" QuestId="11982" QuestObjectiveIndex="1" X="4999.633" Y="-4630.67" Z="296.6553" TerminateWhen="!HasItem(35734)" />
+
+			<Code File="InteractWith" MobId="188260" CollectionDistance="200" InteractByLooting="true" PreInteractMountStrategy="Dismount" QuestId="11982" QuestObjectiveIndex="1" TerminateWhen="GetItemCount(35734) &gt;= 5" >
+				<HuntingGrounds>
+					<Hotspot X="5029.805" Y="-4560.676" Z="283.774" />
+					<Hotspot X="5081.55" Y="-4597.024" Z="283.8368" />
+					<Hotspot X="5115.751" Y="-4539.03" Z="284.3975" />
+				</HuntingGrounds>
+			</Code>
+		</While>
+		<TurnIn QuestName="Raining Down Destruction" QuestId="11982" TurnInName="Kurun" TurnInId="26260" X="4902.744" Y="-4566.271" Z="347.7267" />
+
+		<TurnIn QuestName="Therapy" QuestId="12114" TurnInName="Harkor" TurnInId="26884" X="4323.905" Y="-4980.164" Z="20.38039" />
+		<TurnIn QuestName="It Takes Guts...." QuestId="12116" TurnInName="Kraz" TurnInId="26886" X="4319.306" Y="-4987.157" Z="20.3792" />
+		<RecheckCheckpoints />
+
+		<PickUp QuestName="Drak&apos;aguul&apos;s Mallet" QuestId="12120" GiverName="Kraz" GiverId="26886" X="4319.306" Y="-4987.157" Z="20.3792" />
+		<Code File="KillUntilComplete" MobId="26919" QuestId="12120" X="4474.646" Y="-4873.969" Z="25.3107" />
+		<TurnIn QuestName="Drak&apos;aguul&apos;s Mallet" QuestId="12120" TurnInName="Kraz" TurnInId="26886" X="4326.153" Y="-4989.332" Z="20.37851" />
+
+		<TurnIn QuestName="A Bear of an Appetite" QuestId="12279" TurnInName="Hugh Glass" TurnInId="26484" X="4113.956" Y="-4734.162" Z="100.7885" />
+		<TurnIn QuestName="The Horse Hollerer" QuestId="12415" TurnInName="Soulok Stormfury" TurnInId="26944" X="3843.38" Y="-4524.027" Z="210.2006" />
+		<TurnIn QuestName="A Possible Link" QuestId="12229" TurnInName="Windseer Grayhorn" TurnInId="27262" X="3311.406" Y="-2291.092" Z="110.108" />
+		<TurnIn QuestName="The Bear God&apos;s Offspring" QuestId="12231" TurnInName="Windseer Grayhorn" TurnInId="27262" X="3311.406" Y="-2291.092" Z="110.108" />
+
+		<Checkpoint Level="75" />
+
+		<Code File="LoadProfile" ProfileName="Zul'Drak" />
+
+	</QuestOrder>
+</HBProfile>

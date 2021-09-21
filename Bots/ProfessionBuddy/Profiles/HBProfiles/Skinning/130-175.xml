@@ -1,0 +1,32 @@
+<HBProfile>
+<MinDurability>0.2</MinDurability> 
+<MinFreeBagSlots>2</MinFreeBagSlots> 
+<SellGrey>True</SellGrey> 
+<SellWhite>false</SellWhite> 
+<SellGreen>True</SellGreen>
+
+<SubProfile>
+<MinLevel>1</MinLevel> 
+<MaxLevel>86</MaxLevel>
+<Factions>16 48 188</Factions>
+<Hotspots>
+							<Hotspot X="-11486.01" Y="314.8814" Z="43.28415" /> <!-- Panthers in STV -->
+								<Hotspot X="-11546.42" Y="289.8967" Z="38.87825" />
+								<Hotspot X="-11588.51" Y="256.8199" Z="40.93376" />
+								<Hotspot X="-11640.83" Y="223.4522" Z="40.75352" />
+								<Hotspot X="-11672.26" Y="197.6156" Z="42.80061" />
+								<Hotspot X="-11707.43" Y="199.4595" Z="39.03061" />
+								<Hotspot X="-11696.64" Y="238.7745" Z="41.00598" />
+								<Hotspot X="-11652.8" Y="253.0481" Z="36.47485" />
+								<Hotspot X="-11620.65" Y="289.4843" Z="42.0281" />
+								<Hotspot X="-11651.83" Y="323.3864" Z="41.5052" />
+								<Hotspot X="-11613.18" Y="345.8741" Z="46.80145" />
+								<Hotspot X="-11586.46" Y="394.2265" Z="46.02891" />
+								<Hotspot X="-11559.79" Y="409.3743" Z="45.63778" />
+								<Hotspot X="-11570.96" Y="381.5569" Z="44.98768" />
+								<Hotspot X="-11578.6" Y="325.7874" Z="43.60071" />
+								<Hotspot X="-11538.01" Y="311.6955" Z="39.19328" />
+								<Hotspot X="-11542.57" Y="277.6321" Z="38.22281" /> <!--End of Panthers -->
+</Hotspots>
+</SubProfile>
+</HBProfile>

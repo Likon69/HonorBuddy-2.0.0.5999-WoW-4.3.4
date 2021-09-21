@@ -1,0 +1,318 @@
+<HBProfile xsi:noNamespaceSchemaLocation="../Questing Profile Pack/Schemas/EchoSchema.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+	<MinDurability>-1</MinDurability>
+	<MinFreeBagSlots>-1</MinFreeBagSlots>
+
+	<!-- Original contribution by EchoTiger -->
+	<Name>58-68 Autoloader ($ShortHash$)</Name>
+
+	<QuestOrder>
+		<!-- Check function status -->
+		<Code File="RunCode" Type="Definition">
+			<![CDATA[
+			private static bool? profileFunctionsEnabled => (bool?)AppDomain.CurrentDomain.GetData("QuestingProfiles_FunctionsEnabled");
+			private static bool IsStoreProfile(string path) => path.StartsWith("store://");
+			private static string Slashify(string path) => IsStoreProfile(path) ? path.Replace(@"\", "/") : path.Replace("/", @"\");
+
+			public __CompiledBatchClass__()
+			{
+				ActivateFunctions();
+			}
+
+			private static void ActivateFunctions()
+			{
+				if (profileFunctionsEnabled == null || profileFunctionsEnabled == false)
+				{
+					Bots.Professionbuddy.PBLog.Log(Colors.MediumPurple, "[Profile Message!]: ", Colors.Yellow, "Please stand by as the functions are being activated!");
+					LoadProfile(@"..\Functions\Activate Functions.xml");
+				}
+			}
+
+			private static void LoadProfile(string path)
+			{
+				var profile = GetNewPath(path);
+				if (!IsStoreProfile(profile) && !File.Exists(profile))
+				{
+					Bots.Professionbuddy.PBLog.Log(Colors.MediumPurple, "[Profile Message!]: ", Colors.Yellow, "Profile does not exist.\n" + profile);
+					return;
+				}
+
+				Bots.Professionbuddy.PBLog.Log(Colors.MediumPurple, "[Profile Message!]: ", Colors.Yellow, "Loading: " + profile);
+				ProfileManager.LoadNew(profile, false);
+			}
+
+			private static string GetNewPath(string path)
+			{
+				if (IsStoreProfile(path))
+					return Slashify(path);
+
+				var currentProfile = ProfileManager.XmlLocation;
+				if (IsStoreProfile(currentProfile))
+					return Slashify(currentProfile + "/../" + path);
+
+				var absolutePath = Path.Combine(Path.GetDirectoryName(currentProfile), path);
+				absolutePath = Path.GetFullPath(absolutePath);
+				var canonicalPath = new Uri(absolutePath).LocalPath;
+				return Slashify(canonicalPath);
+			}]]>
+		</Code>
+		<Code File="RunCode" Code="ActivateFunctions();" />
+		<!-- END Check function status -->
+		
+		<If Condition="Me.IsAlliance" >
+			<Code File="LoadProfile" ProfileName="..\Questing Autoloader.xml" />
+		</If>
+
+		<!-- Clean out trash items from 1-58 -->
+		<Code File="RunCode" Type="Definition"><![CDATA[
+			bool LoremasterCheckpointCheck(float levelToCheck, int achievementId = 0, int achievementIndex = 0)
+			{
+				if (Me.LevelFraction < levelToCheck) return true;
+				if (achievementId == 0) return false;
+				return (Styx.Helpers.CharacterSettings.Instance.IgnoreCheckpoints && !IsAchievementCompleted(achievementId, achievementIndex));
+			}
+			bool HasArrivedOutland()
+			{
+				if (Me.ZoneId == 7078 || Me.ZoneId == 7004) return false; // Draenor Garrisons count as instanced locations.
+				if (Me.ZoneId == 3557 || Me.ZoneId == 3524 || Me.ZoneId == 6456 || Me.ZoneId == 3525 || Me.ZoneId == 3557 || Me.ZoneId == 3524 || Me.ZoneId == 6456 || Me.ZoneId == 3525) return false; // Areas that share the same mapId as Outland.
+				if (StyxWoW.Me.MapId == 530) return true;
+				return false;
+			}
+			bool InPriorityLocationOutland()
+			{
+				if (StyxWoW.Me.ZoneId == 6554 || StyxWoW.Me.ZoneId == 6141) return true; // Horde Shrine
+				return false;
+			}
+			bool HearthIsPriorityLocationOutland()
+			{
+				if (StyxWoW.Me.HearthstoneAreaId == 6519) return true; // Horde Shrine
+				if (Styx.WoWInternals.DBC.AreaTable.FromId(StyxWoW.Me.HearthstoneAreaId).MapId == 530) return true; // All Outland inns.  May conflict with non-Outland but other BC zones.
+				return false;
+			}
+			bool HearthIsReadyOutland()
+			{
+				if (HasItem(64488) && !WoWSpell.FromId(94719).Cooldown) return true; // Innkeeper Daughter
+				if (HasItem(6948) && !WoWSpell.FromId(8690).Cooldown) return true; // Hearthstone
+				if (SpellManager.CanCast(556)) return true; // Astral Recall
+				return false;
+			}
+			bool HasHearthOutland()
+			{
+				if (HasItem(64488)) return true; // Innkeeper Daughter
+				if (HasItem(6948)) return true; // Hearthstone
+				if (SpellManager.CanCast(556)) return true; // Astral Recall
+				return false;
+			}
+			bool CastingInterruptedOutland()
+			{
+				if (StyxWoW.Me.Combat || !Me.IsCasting) return true;
+				return false;
+			}
+			void OutlandLog(System.Windows.Media.Color color, string message)
+			{
+				Bots.Professionbuddy.PBLog.Log(System.Windows.Media.Colors.DeepSkyBlue, "[Azyul Navigator]: ", color, $"{message}");
+			}
+			]]>
+		</Code>
+
+		<If Condition="!HasArrivedOutland() &amp;&amp; LoremasterCheckpointCheck(68, 1262)" >
+			<Code File="RunCode" Code="OutlandLog(Colors.LightGreen, &quot;Going to Outlands!&quot;);" />
+			<!-- /// Mage Logic /// -->
+			<If Condition="SpellManager.CanCast(35715)" > <!-- Checks if we're a mage and spell is fully learnt+castable -->
+				<Code File="RunCode" Code="OutlandLog(Colors.LightGreen, &quot;We're a Mage! Teleporting to Shattrath.&quot;);" />
+				<Code File="ForcedDismount" />
+				<While Condition="Me.ZoneId != 3703" >
+					<Code File="Misc\RunLua" Lua="CastSpellByID(35715);" WaitTime="500" />
+					<Code File="WaitTimer" WaitTime="50000" TerminateWhen="Me.ZoneId == 3703 || CastingInterruptedOutland()" />
+				</While>
+			</If>
+			<!-- /// Item Teleportation Logic.   Teleport to area that has portals (Shrine/etc) or teleport to destination /// -->
+			<If Condition="!HasArrivedOutland() &amp;&amp; HearthIsPriorityLocationOutland() &amp;&amp; !InPriorityLocationOutland() &amp;&amp; HasHearthOutland()" >
+				<Code File="RunCode" Code="OutlandLog(Colors.LightGreen, &quot;Hearthing would be faster to reach our destination, attempting to Hearth!&quot;);" />
+				<Code File="ForcedDismount" />
+				<While Condition="!(HasArrivedOutland() || InPriorityLocationOutland())" >
+					<Code File="RunCode" Code="await Coroutine.Wait(1800000, () => HearthIsReadyOutland() || InPriorityLocationOutland());" />
+					<Code File="Misc\RunLua" Lua="UseItemByName(6948); UseItemByName(64488); CastSpellByID(556);" WaitTime="500" />
+					<Code File="WaitTimer" WaitTime="50000" TerminateWhen="HasArrivedOutland() || InPriorityLocationOutland() || CastingInterruptedOutland()" />
+				</While>
+			</If>
+			<!-- /// Generic Logic /// -->
+			<If Condition="Me.ZoneId == 6455 || Me.ZoneId == 3430 || Me.ZoneId == 3487 || Me.ZoneId == 3433" > <!-- Sunstrider Isle, Eversong Woods, Silvermoon City, Ghostlands -->
+				<Code File="RunCode" Code="OutlandLog(Colors.LightGreen, &quot;We're in northen Eastern Kingdoms.  Using the portal in Sunfury Spire to Hellfire Peninsula.&quot;);" />
+				<MoveTo DestName="Sunfury Spire" X="9984.867" Y="-7105.491" Z="47.70603" />
+				<While Condition="Me.ZoneId != 3483" >
+					<Code File="InteractWith" MobId="184502" X="10032.36" Y="-7000.288" Z="61.30979" WaitTime="2500" />
+					<Code File="WaitTimer" WaitTime="50000" TerminateWhen="Me.ZoneId == 3483" />
+				</While>
+			</If>
+			<If Condition="Me.ZoneId == 4080" > <!-- Isle of Quel'Danas -->
+				<Code File="RunCode" Code="OutlandLog(Colors.LightGreen, &quot;We're in Isle of Quel'Danas, using the Flight Master to Undercity.&quot;);" />
+				<MoveTo DestName="Ohura, the flight master." X="13009.74" Y="-6910.024" Z="9.584676" />
+				<Code File="InteractWith" MobId="26560" X="13012.39" Y="-6911.189" Z="9.586156" WaitTime="850" />
+				<Code File="WaitTimer" WaitTime="600000" TerminateWhen="!Me.OnTaxi" />
+				<Code File="Misc\RunLua" Lua="TaxiButton2:Click();" WaitTime="1000" />
+			</If>
+			<If Condition="Me.MapId == 870" > <!-- Pandaria -->
+				<Code File="RunCode" Code="OutlandLog(Colors.LightGreen, &quot;We're in Pandaria, using the Shrine portal to Shattrath.&quot;);" />
+				<If Condition="Me.ZoneId != 6141" > <!-- If not inside of Shrine building -->
+					<MoveTo Nav="Fly" X="1629.72" Y="924.5151" Z="471.1836" />
+				</If>
+				<MoveTo X="1725.195" Y="875.6638" Z="487.0624" />
+				<While Condition="!HasArrivedOutland()" >
+					<Code File="InteractWith" MobId="215113" X="1709.74" Y="899.3869" Z="487.0404" TerminateWhen="HasArrivedOutland()" />
+					<Code File="WaitTimer" WaitTime="50000" TerminateWhen="HasArrivedOutland() || Me.Combat" />
+				</While>
+			</If>
+			<If Condition="Me.MapId == 571" > <!-- Northrend -->
+				<If Condition="Me.Y &gt;= 3000 &amp;&amp; Me.MapId == 571" > <!-- Western Northrend, Warsong Hold to Orgrimmar -->
+					<Code File="RunCode" Code="OutlandLog(Colors.LightGreen, &quot;We're in Western Northrend, using the Warsong Hold zeppelin to Orgrimmar.&quot;);" />
+					<Code File="FlyTo" X="2946.323" Y="6069.065" Z="147.4432" />
+					<DisableBehavior Name="FlightPath" />
+					<Code File="MyCTM" X="2829.086" Y="6176.118" Z="128.0574" />
+					<Code File="WaitTimer" WaitTime="850" /> <!-- Consider lag and CTM tolerance. -->
+					<Code File="ForcedDismount" />
+					<Code File="UseTransport" TransportId="186238"
+						WaitAtX="2837.035" WaitAtY="6185.063" WaitAtZ="121.9975"
+						TransportStartX="2837.908" TransportStartY="6187.443" TransportStartZ="140.1648"
+						StandOnX="2844.346" StandOnY="6191.38" StandOnZ="122.3167"					  
+						TransportEndX="1775.066" TransportEndY="-4299.745" TransportEndZ="151.0326"
+						GetOffX="1761.337" GetOffY="-4281.487" GetOffZ="133.1072"
+					/>
+					<EnableBehavior Name="FlightPath" />
+				</If>
+				<If Condition="Me.Y &lt; 3000 &amp;&amp; Me.Y &gt; -2200 &amp;&amp; Me.MapId == 571" > <!-- Middle Northrend, Dalaran to Orgrimmar -->
+					<Code File="RunCode" Code="OutlandLog(Colors.LightGreen, &quot;We're in Northrend, using the Dalaran portal to Orgrimmar.&quot;);" />
+					<MoveTo Nav="Fly" X="5923.893" Y="589.9543" Z="639.8708" />
+					<While Condition="Me.MapId != 1" >
+						<Code File="InteractWith" MobId="191009" X="5925.874" Y="593.1875" Z="640.5933" TerminateWhen="Me.MapId == 1" />
+						<Code File="WaitTimer" WaitTime="50000" TerminateWhen="Me.MapId == 1 || Me.Combat" />
+					</While>
+				</If>
+				<If Condition="Me.Y &lt;= -2200 &amp;&amp; Me.MapId == 571" > <!-- Eastern Northrend, Vengeance Landing to Thunder Bluff -->
+					<Code File="RunCode" Code="OutlandLog(Colors.LightGreen, &quot;We're in Eastern Northrend, using the Vengeance Landing zeppelin to Undercity.&quot;);" />
+					<MoveTo Nav="Fly" X="1974.872" Y="-6098.991" Z="67.15174" />
+					<DisableBehavior Name="FlightPath" />
+					<Code File="UseTransport" TransportId="181689"
+						WaitAtX="1976.73" WaitAtY="-6095.377" WaitAtZ="67.15933"
+						TransportStartX="1989.353" TransportStartY="-6082.776" TransportStartZ="85.59646"
+						StandOnX="1982.445" StandOnY="-6091.406" StandOnZ="67.6969"
+						TransportEndX="2056.493" TransportEndY="381.6347" TransportEndZ="100.362"
+						GetOffX="2061.253" GetOffY="360.2228" GetOffZ="82.48778"
+					/>
+					<EnableBehavior Name="FlightPath" />
+				</If>
+			</If>
+			<If Condition="Me.MapId == 0" > <!-- Eastern Kingdoms -->
+				<If Condition="Me.ZoneId == 4" >
+					<MoveTo Nav="Fly" X="-11894.83" Y="-3208.023" Z="-14.62257" />
+					<Code File="MyCTM" X="-11916.9" Y="-3209.366" Z="-14.13327" TerminateWhen="Me.MapId == 530" />
+				</If>
+				<If Condition="Me.X &gt;= -5275 &amp;&amp; Me.MapId == 0" >
+					<Code File="RunCode" Code="OutlandLog(Colors.LightGreen, &quot;We're in Eastern Kingdoms, using the Undercity Zeppelin to Kalimdor.&quot;);" />
+					<MoveTo Nav="Fly" X="2067.433" Y="286.6822" Z="97.03147" />
+					<Code File="ForcedDismount" />
+					<MoveTo WaitAtX="2061.913" WaitAtY="365.0161" WaitAtZ="82.51536" />
+					<Code File="UseTransport" TransportId="164871"
+						WaitAtX="2067.045" WaitAtY="290.4988" WaitAtZ="97.03147"
+						TransportStartX="2062.376" TransportStartY="292.998" TransportStartZ="114.973" 
+						StandOnX="2068.475" StandOnY="294.824" StandOnZ="97.26456"
+						TransportEndX="1833.509" TransportEndY="-4391.543" TransportEndZ="152.7679"
+						GetOffX="1840.091" GetOffY="-4392.189" GetOffZ="135.233" />
+				</If>
+				<If Condition="Me.X &lt; -5275 &amp;&amp; Me.MapId == 0" >
+					<Code File="RunCode" Code="OutlandLog(Colors.LightGreen, &quot;We're in Eastern Kingdoms, going to Booty Bay to take the boat to Ratchet.&quot;);" />
+					<MoveTo Nav="Fly" X="-14284.1" Y="558.6824" Z="8.684329" />
+					<Code File="ForcedDismount" />
+					<Code File="UseTransport" TransportId="20808"
+						WaitAtX="-14281.7" WaitAtY="564.5626" WaitAtZ="7.523634"
+						TransportStartX="-14277.75" TransportStartY="582.8661" TransportStartZ="0.02733914"
+						StandOnX="-14274.47" StandOnY="579.4496" StandOnZ="6.051711"
+						TransportEndX="-1005.613" TransportEndY="-3841.647" TransportEndZ="0.04629734"
+						GetOffX="-994.4224" GetOffY="-3829.305" GetOffZ="5.609204" />
+				</If>
+			</If>
+			<!--<If Condition="HasArrivedOutland()" >  Instanced Draenei Zone 
+				Do we really need Horde support for this?
+			</If> -->
+			<If Condition="Me.CurrentMap.ExpansionId == 5" > <!-- Draenor -->
+				<Code File="RunCode" Code="OutlandLog(Colors.LightGreen, &quot;We're in Draenor, using the Ashran portal to Orgrimmar.&quot;);" />
+				<If Condition="Me.Y &gt; -3509.631" > <!-- Not in Ashran -->
+					<If Condition="Me.BagItems.FirstOrDefault(h => h.Entry == 110560).CooldownTimeLeft.TotalMilliseconds == 0 &amp;&amp; Me.ZoneId != 7004" > <!-- Can cast G-Hearth and Outside of Garrison. -->
+						<While Condition="Me.ZoneId != 7004" >
+							<Code File="Misc\RunLua" Lua="UseItemByName(110560);" WaitTime="500" />
+							<Code File="WaitTimer" WaitTime="50000" TerminateWhen="Me.ZoneId == 7004 || CastingInterruptedOutland()" />
+						</While>
+						<Else>
+							<MoveTo DestName="Garrison" X="5592.404" Y="4529.675" Z="126.3718" />
+						</Else>
+					</If>
+					<If Condition="Me.MapId == 1153" >
+						<MoveTo DestName="Ashran Portal" X="5583.557" Y="4373.989" Z="137.6236" />
+						<Code File="MyCTM" X="5579.374" Y="4366.707" Z="138.9411" />
+						<Code File="MyCTM" X="5575.75" Y="4367.552" Z="138.9789" />
+						<Code File="MyCTM" X="5572.477" Y="4361.848" Z="143.433" />
+						<Code File="MyCTM" X="5578.62" Y="4358.129" Z="147.87" />
+						<Code File="MyCTM" X="5582.464" Y="4364.247" Z="152.3972" />
+						<Code File="MyCTM" X="5576.058" Y="4368.637" Z="156.7244" />
+						<Code File="MyCTM" X="5572.972" Y="4361.899" Z="159.8998" />
+						<Code File="MyCTM" X="5584.697" Y="4356.71" Z="160.9148" />
+					</If>
+					<While Condition="Me.ZoneId != 7333" >
+						<Code File="InteractWith" MobId="233600" X="5586.819" Y="4357.713" Z="161.427" TerminateWhen="Me.ZoneId == 7333" />
+						<Code File="WaitTimer" WaitTime="50000" TerminateWhen="Me.ZoneId == 7333 || Me.Combat" />
+					</While>
+				</If>
+				<MoveTo X="5266.4" Y="-4075.891" Z="21.13024" />
+				<While Condition="Me.MapId != 1" >
+					<Code File="InteractWith" MobId="235880" X="5266.4" Y="-4075.891" Z="21.13024" TerminateWhen="Me.MapId == 1" />
+					<Code File="WaitTimer" WaitTime="50000" TerminateWhen="Me.MapId == 1 || Me.Combat" />
+				</While>
+			</If>
+			<If Condition="Me.MapId == 646" > <!-- Deepholm -->
+				<Code File="RunCode" Code="OutlandLog(Colors.LightGreen, &quot;We're in Deepholm, using the portal for Orgrimmar.&quot;);" />
+				<MoveTo Nav="Fly" X="991.8574" Y="458.2401" Z="-44.27066" />
+				<While Condition="Me.MapId != 1" >
+					<Code File="InteractWith" MobId="205273" X="990.495" Y="454.457" Z="-44.2477" TerminateWhen="Me.MapId == 1" />
+					<Code File="WaitTimer" WaitTime="50000" TerminateWhen="Me.MapId == 1 || Me.Combat" />
+				</While>
+			</If>
+			<If Condition="Me.MapId == 1" > <!-- Kalimdor -->
+				<Code File="RunCode" Code="OutlandLog(Colors.LightGreen, &quot;We're in Kalimdor, taking the Orgrimmar portal to Outlands.&quot;);" />
+				<MoveTo Nav="Fly" X="1792.593" Y="-4277.689" Z="7.512893" />
+				<While Condition="!HasArrivedOutland()" >
+					<Code File="InteractWith" MobId="195142" X="1791.696" Y="-4273.472" Z="7.674594" TerminateWhen="HasArrivedOutland()" />
+					<Code File="WaitTimer" WaitTime="50000" TerminateWhen="HasArrivedOutland() || Me.Combat" />
+				</While>
+			</If>
+			<Code File="RunCode" Code="OutlandLog(Colors.LightGreen, &quot;We have reached Outlands!&quot;);" />
+		</If>
+
+		<If Condition="LoremasterCheckpointCheck(61.5f, 1189)" > <!-- 58 -->
+			<Code File="LoadProfile" ProfileName="Outlands\Hellfire Peninsula.xml" />
+		</If>
+
+		<If Condition="LoremasterCheckpointCheck(63, 1190)" >
+			<Code File="LoadProfile" ProfileName="Outlands\Zangarmarsh.xml" />
+		</If>
+
+		<If Condition="LoremasterCheckpointCheck(64.6f, 1191)" >
+			<Code File="LoadProfile" ProfileName="Outlands\Terokkar Forest.xml" />
+		</If>
+
+		<If Condition="LoremasterCheckpointCheck(66.5f, 1192)" >
+			<Code File="LoadProfile" ProfileName="Outlands\Nagrand.xml" />
+		</If>
+
+		<If Condition="LoremasterCheckpointCheck(68, 1193)" >
+			<Code File="LoadProfile" ProfileName="Outlands\Blade's Edge Mountains.xml" />
+		</If>
+
+		<If Condition="LoremasterCheckpointCheck(68, 1194)" >
+			<Code File="LoadProfile" ProfileName="Outlands\Netherstorm.xml" />
+		</If>
+
+		<Code File="LoadProfile" ProfileName="68-80 Autoloader.xml" />
+
+	</QuestOrder>
+
+</HBProfile>

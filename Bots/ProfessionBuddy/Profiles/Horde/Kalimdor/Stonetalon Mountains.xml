@@ -1,0 +1,553 @@
+<HBProfile xsi:noNamespaceSchemaLocation="../Schemas/EchoSchema.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<!-- Original contribution by EchoTiger -->
+	<Name>Stonetalon Mountains ($ShortHash$)</Name>
+
+	<MinDurability>0.3</MinDurability>
+	<MinFreeBagSlots>3</MinFreeBagSlots>
+
+	<SellGrey>true</SellGrey>
+	<SellWhite>true</SellWhite>
+	<SellGreen>true</SellGreen>
+	<SellBlue>true</SellBlue>
+	<SellPurple>false</SellPurple>
+
+	<MailGrey>false</MailGrey>
+	<MailWhite>true</MailWhite>
+	<MailGreen>true</MailGreen>
+	<MailBlue>true</MailBlue>
+	<MailPurple>true</MailPurple>
+
+	<TargetElites>true</TargetElites>
+
+	<AvoidMobs>
+	</AvoidMobs>
+
+	<Mailboxes>
+	</Mailboxes>
+
+	<Vendors>
+	</Vendors>
+
+	<Blackspots>
+		<Blackspot X="106.3682" Y="-366.4266" Z="2.085551" Radius="35" /> <!-- Crundig Darkcloud -->
+	</Blackspots>
+
+	<Blacklist>
+	</Blacklist>
+
+	<QuestOrder IgnoreCheckpoints="false" >
+		<!-- Check function status -->
+		<Code File="RunCode" Type="Definition">
+			<![CDATA[
+			private static bool? profileFunctionsEnabled => (bool?)AppDomain.CurrentDomain.GetData("QuestingProfiles_FunctionsEnabled");
+			private static bool IsStoreProfile(string path) => path.StartsWith("store://");
+			private static string Slashify(string path) => IsStoreProfile(path) ? path.Replace(@"\", "/") : path.Replace("/", @"\");
+
+			public __CompiledBatchClass__()
+			{
+				ActivateFunctions();
+			}
+
+			private static void ActivateFunctions()
+			{
+				if (profileFunctionsEnabled == null || profileFunctionsEnabled == false)
+				{
+					Bots.Professionbuddy.PBLog.Log(Colors.MediumPurple, "[Profile Message!]: ", Colors.Yellow, "Please stand by as the functions are being activated!");
+					LoadProfile(@"..\..\Functions\Activate Functions.xml");
+				}
+			}
+
+			private static void LoadProfile(string path)
+			{
+				var profile = GetNewPath(path);
+				if (!IsStoreProfile(profile) && !File.Exists(profile))
+				{
+					Bots.Professionbuddy.PBLog.Log(Colors.MediumPurple, "[Profile Message!]: ", Colors.Yellow, "Profile does not exist.\n" + profile);
+					return;
+				}
+
+				Bots.Professionbuddy.PBLog.Log(Colors.MediumPurple, "[Profile Message!]: ", Colors.Yellow, "Loading: " + profile);
+				ProfileManager.LoadNew(profile, false);
+			}
+
+			private static string GetNewPath(string path)
+			{
+				if (IsStoreProfile(path))
+					return Slashify(path);
+
+				var currentProfile = ProfileManager.XmlLocation;
+				if (IsStoreProfile(currentProfile))
+					return Slashify(currentProfile + "/../" + path);
+
+				var absolutePath = Path.Combine(Path.GetDirectoryName(currentProfile), path);
+				absolutePath = Path.GetFullPath(absolutePath);
+				var canonicalPath = new Uri(absolutePath).LocalPath;
+				return Slashify(canonicalPath);
+			}]]>
+		</Code>
+		<Code File="RunCode" Code="ActivateFunctions();" />
+		<!-- END Check function status -->
+
+		<If Condition="Me.IsAlliance" >
+			<Code File="LoadProfile" ProfileName="..\..\Questing Autoloader.xml" />
+		</If>
+		<!-- RunCode Methods -->
+			<Code File="RunCode">
+			<![CDATA[
+				Bots.Professionbuddy.PBLog.Log(System.Windows.Media.Colors.MediumPurple, "> [Profile Initialization Status] ", System.Windows.Media.Colors.CornflowerBlue, "\n     Auto-Looting	:: Enabled\n     Looting	:: Enabled\n     Game Addons	:: Disabled");
+				Lua.DoString("SetCVar('AutoLootDefault', 1);");
+				Lua.DoString("SetCVar('autoDismountFlying', 1);");
+				CharacterSettings.Instance.LootMobs = true;
+				CharacterSettings.Instance.Save();
+				Logging.Write(System.Windows.Media.Colors.MediumPurple, "> [Ready to bot!]");
+			]]>
+			</Code>
+			<Code File="RunCode" Type="Definition">
+				<![CDATA[
+						bool DoQuest(params uint[] questIds)
+						{
+							foreach (var questId in questIds)
+							{
+								if (HasQuest(questId) && !IsQuestCompleted(questId)) return true;
+							}
+							return false;
+						}
+						bool NeedsQuest(params uint[] questIds)
+						{
+							foreach (var questId in questIds)
+							{
+								if (!HasQuest(questId) && !IsQuestCompleted(questId)) return true;
+							}
+							return false;
+						}
+						bool NeedsBreadcrumbQuest(params uint[] questIds)
+						{
+							foreach (var questId in questIds)
+							{
+								if (IsQuestCompleted(questId)) return false;
+							}
+							return true;
+						}
+						bool QuestDone(params uint[] questIds)
+						{
+							foreach (var questId in questIds)
+							{
+								if (HasQuest(questId) && IsQuestCompleted(questId)) return true;
+							}
+							return false;
+						}
+						bool QuestFlaggedCompleted(params uint[] questIds)
+						{
+							foreach (var questId in questIds)
+							{
+								return Lua.GetReturnVal<bool>($"return IsQuestFlaggedCompleted({questId});", 0);
+							}
+							return false;
+						}
+						async Task SkipCutscene(int preWait = 3000, int postWait = 3000)
+						{
+					// Add detection of cutscene here.
+							await Coroutine.Sleep(preWait);
+					// Test and improve the working method.
+							Lua.DoString("MovieFrame:StopMovie(); CinematicFrame_CancelCinematic(); StopCinematic();");
+							await Coroutine.Sleep(postWait);
+						}
+					]]>
+			</Code>
+		<!-- END RunCode Methods -->
+
+		<PickUp QuestName="We&apos;re Here to Do One Thing, Maybe Two..." QuestId="25945" GiverName="Blood Guard Aldo Rockrain" GiverId="41678" X="2146.052" Y="-1178.456" Z="98.33046" />
+		<If Condition="QuestDone(25945) &amp;&amp; Me.ZoneId == 331" >
+			<Code File="InteractWith" MobId="41744" NonCompeteDistance="0" X="2127.706" Y="-1097.163" Z="100.1383" />
+			<Code File="WaitTimer" WaitTime="130000" TerminateWhen="!Me.InVehicle" />
+		</If>
+		<TurnIn QuestName="We&apos;re Here to Do One Thing, Maybe Two..." QuestId="25945" TurnInName="Saurboz" TurnInId="34341" X="1531.438" Y="-481.4399" Z="55.88945" />
+
+		<PickUp QuestName="Barrier to Entry" QuestId="25999" GiverName="Saurboz" GiverId="34341" X="1531.438" Y="-481.4399" Z="55.88945" />
+		<Code File="InteractWith" MobId="203413" InteractByUsingItemId="56263" CollectionDistance="200" QuestId="25999" QuestObjectiveIndex="1" X="1712.263" Y="-425.6876" Z="98.88267" />
+		<TurnIn QuestName="Barrier to Entry" QuestId="25999" TurnInName="Saurboz" TurnInId="34341" X="1530.875" Y="-479.9468" Z="55.88741" />
+
+		<PickUp QuestName="The Missing Blastgineer" QuestId="26001" GiverName="Saurboz" GiverId="34341" X="1530.875" Y="-479.9468" Z="55.88741" />
+		<PickUp QuestName="Lessons from the Lost Isles" QuestId="26003" GiverName="Kilag Gorefang" GiverId="40926" X="1530.033" Y="-484.9405" Z="55.88741" />
+		<TurnIn QuestName="The Missing Blastgineer" QuestId="26001" TurnInName="Blastgineer Fuzzwhistle" TurnInId="40901" X="1179.264" Y="-424.3366" Z="21.89724" />
+		<PickUp QuestName="Alliance Attack Plans" QuestId="26002" GiverName="Blastgineer Fuzzwhistle" GiverId="40901" X="1179.264" Y="-424.3366" Z="21.89724" />
+
+		<Code File="KillUntilComplete" MobId="41864" QuestId="26002" X="1126.129" Y="-535.3386" Z="5.581006" />
+
+		<While Condition="DoQuest(26003)" >
+			<Code File="UseItem" ItemId="56470" QuestId="26003" X="1202.615" Y="-366.8019" Z="10.43203" TerminateWhen="Me.HasAura(78050)" />
+			<Code File="KillUntilComplete" MobId="41865" QuestId="26003" TerminateWhen="!Me.HasAura(78050)" >
+				<HuntingGrounds>
+					<Hotspot X="1225.838" Y="-558.0258" Z="10.63237" />
+					<Hotspot X="1126.571" Y="-477.3784" Z="9.39539" />
+					<Hotspot X="1287.545" Y="-457.4688" Z="21.07083" />
+					<Hotspot X="1241.307" Y="-356.3938" Z="14.63598" />
+				</HuntingGrounds>
+			</Code>
+		</While>
+
+		<TurnIn QuestName="Lessons from the Lost Isles" QuestId="26003" TurnInName="Kilag Gorefang" TurnInId="40926" X="1529.199" Y="-492.8624" Z="55.88958" />
+		<TurnIn QuestName="Alliance Attack Plans" QuestId="26002" TurnInName="Saurboz" TurnInId="34341" X="1529.044" Y="-482.9964" Z="55.88958" />
+		<PickUp QuestName="Krom&apos;gar Fortress" QuestId="26004" GiverName="Saurboz" GiverId="34341" X="1529.044" Y="-482.9964" Z="55.88958" />
+		<TurnIn QuestName="Krom&apos;gar Fortress" QuestId="26004" TurnInName="Overlord Krom&apos;gar" TurnInId="41023" X="905.7866" Y="-8.67474" Z="92.71169" />
+		<RecheckCheckpoints />
+		<If Condition="!IsQuestCompleted(26010)" > <!-- Seek and Destroy is a daily, so don't do it if we've already completed quests in this area -->
+			<PickUp QuestName="Seek and Destroy" QuestId="26009" GiverName="Overlord Krom&apos;gar" GiverId="41023" X="899.7942" Y="-0.4207533" Z="93.03426" />
+		</If>
+		<PickUp QuestName="Ashes to Ashes" QuestId="26010" GiverName="Overlord Krom&apos;gar" GiverId="41023" X="899.7942" Y="-0.4207533" Z="93.03426" />
+		<PickUp QuestName="Dream of a Better Tomorrow" QuestId="26026" GiverName="Clarissa" GiverId="40907" X="880.5118" Y="5.983295" Z="92.6759" />
+
+		<Code File="SetHearthstone" AreaId="4933" MobId="41892" X="877.2882" Y="-20.30903" Z="92.67496" />
+
+		<If Condition="!IsQuestCompleted(28084)" >
+			<Code File="InteractWith" MobId="42028" X="885.3196" Y="15.81447" Z="93.04076" />
+			<Code File="RunCode" Code="
+				QuestFrame.Instance.SelectAvailableQuest(0);
+				await Coroutine.Sleep(750);
+				QuestFrame.Instance.CompleteQuest();
+			" />
+		</If>
+
+		<PickUp QuestName="Enemy of the Horde: Marshal Paltrow" QuestId="26011" GiverName="Spy-Mistress Anara" GiverId="40903" X="911.5475" Y="21.2858" Z="95.2219" />
+
+		<Code File="KillUntilComplete" MobId="41937" QuestId="26011" X="735.0089" Y="245.8138" Z="24.71961" />
+
+		<If Condition="DoQuest(26010)" >
+			<Code File="RunCode" Type="Definition" ><![CDATA[
+					private Styx.TreeSharp.Composite _torchTentHook;
+					private WoWGameObject _currentTent;
+					private WoWItem flamethrowerPoi => Me.BagItems.FirstOrDefault(x => x.Entry == 56473);
+					private List<WoWGuid> _tentBlacklist = new List<WoWGuid>();
+
+					private async Task<bool> TorchTentLogic()
+					{
+						if (QuestDone(26010)) return false;
+						if (_currentTent == null || !_currentTent.IsValid || _currentTent.State == WoWGameObjectState.ActiveAlternative)
+						{
+							_currentTent = ObjectManager.GetObjectsOfType<WoWGameObject>().Where(u => !_tentBlacklist.Contains(u.Guid) && u.Entry == 203431 && u.State == WoWGameObjectState.Ready).OrderBy(u => u.DistanceSqr).FirstOrDefault();
+							if (_currentTent == null) return false;
+						}
+						if (_currentTent.Location.DistanceSquared((WoWMovement.ActiveMover ?? StyxWoW.Me).Location) > 9 * 9)
+						{
+							TreeRoot.StatusText = "Moving to tent";
+							return (await CommonCoroutines.MoveTo(_currentTent.Location)).IsSuccessful();
+						}
+
+						if (!Me.IsCasting)
+						{
+							TreeRoot.StatusText = "Torching tent";
+							await CommonCoroutines.StopMoving();
+							Me.SetFacing(_currentTent.Location);
+							flamethrowerPoi.Use();
+							return true;
+						}
+
+						if (_currentTent != null || _currentTent.State == WoWGameObjectState.Ready)
+							return true;
+
+						_tentBlacklist.Add(_currentTent.Guid);
+						SpellManager.StopCasting();
+						_currentTent = null;
+
+						return true;
+					}
+				]]>
+			</Code>
+			<Code File="RunCode"><![CDATA[ TreeHooks.Instance.InsertHook("Questbot_Profile", 0, _torchTentHook ?? (_torchTentHook = new  CommonBehaviors.Actions.ActionRunCoroutine(ctx => TorchTentLogic()))); ]]></Code>
+			<While Condition="DoQuest(26010)" >
+				<MoveTo X="803.3762" Y="247.9285" Z="22.39021" />
+				<MoveTo X="870.0879" Y="254.2329" Z="22.76707" />
+				<MoveTo X="958.1483" Y="249.17" Z="20.39883" />
+			</While>
+			<Code File="RunCode"><![CDATA[ TreeHooks.Instance.RemoveHook("Questbot_Profile", _torchTentHook); ]]></Code>
+		</If>
+
+		<Code File="InteractWith" MobId="203175" InteractByLooting="true" NonCompeteDistance="0" InteractBlacklistTimeInSeconds="1" PreInteractMountStrategy="Dismount" QuestId="26026" QuestObjectiveIndex="4" X="887.2422" Y="363.0734" Z="23.57681" />
+
+		<Code File="KillUntilComplete" MobId="41935" QuestId="26009" >
+			<HuntingGrounds>
+				<Hotspot X="803.3762" Y="247.9285" Z="22.39021" />
+				<Hotspot X="870.0879" Y="254.2329" Z="22.76707" />
+				<Hotspot X="958.1483" Y="249.17" Z="20.39883" />
+			</HuntingGrounds>
+		</Code>
+
+		<Code File="InteractWith" MobId="203174" InteractByLooting="true" NonCompeteDistance="0" InteractBlacklistTimeInSeconds="1" PreInteractMountStrategy="Dismount" QuestId="26026" QuestObjectiveIndex="2" X="1174.142" Y="186.4574" Z="23.20292" />
+		<Code File="InteractWith" MobId="203176" InteractByLooting="true" NonCompeteDistance="0" InteractBlacklistTimeInSeconds="1" PreInteractMountStrategy="Dismount" QuestId="26026" QuestObjectiveIndex="3" X="1436.074" Y="0.520202" Z="38.80597" />
+		<Code File="InteractWith" MobId="203088" InteractByLooting="true" NonCompeteDistance="0" InteractBlacklistTimeInSeconds="1" PreInteractMountStrategy="Dismount" QuestId="26026" QuestObjectiveIndex="1" X="1604.647" Y="181.7267" Z="104.6717" />
+
+		<If Condition="QuestDone(26026, 26009, 26026) &amp;&amp; Me.HearthstoneAreaId == 4933 &amp;&amp; Unit(4070) != null || Unit(4202) != null" >
+			<Code File="UseHearthstone" WaitForCD="false" />
+		</If>
+
+		<If Condition="IsQuestCompleted(26009)" > <!-- Seek and Destroy is a daily, so don't do it if we've already completed quests in this area -->
+			<TurnIn QuestName="Seek and Destroy" QuestId="26009" TurnInName="Overlord Krom&apos;gar" TurnInId="41023" X="895.5471" Y="1.850014" Z="92.97017" />
+		</If>
+		<TurnIn QuestName="Ashes to Ashes" QuestId="26010" TurnInName="Overlord Krom&apos;gar" TurnInId="41023" X="895.5471" Y="1.850014" Z="92.97017" />
+		<PickUp QuestName="Report to Bombgutz" QuestId="26020" GiverName="Overlord Krom&apos;gar" GiverId="41023" X="895.5471" Y="1.850014" Z="92.97017" />
+		<TurnIn QuestName="Report to Bombgutz" QuestId="26020" TurnInName="Chief Blastgineer Bombgutz" TurnInId="40902" X="925.0555" Y="-7.100707" Z="92.59325" />
+		<PickUp QuestName="Where Are the Parts?" QuestId="26044" GiverName="Chief Blastgineer Bombgutz" GiverId="40902" X="925.0555" Y="-7.100707" Z="92.59325" />
+		<TurnIn QuestName="Enemy of the Horde: Marshal Paltrow" QuestId="26011" TurnInName="Spy-Mistress Anara" TurnInId="40903" X="914.7513" Y="18.538" Z="94.77613" />
+		<TurnIn QuestName="Dream of a Better Tomorrow" QuestId="26026" TurnInName="Clarissa" TurnInId="40907" X="877.6036" Y="6.835302" Z="92.67599" />
+		<RecheckCheckpoints />
+
+		<PickUp QuestName="Mr. D&apos;s Wild Ride" QuestId="26028" GiverName="Clarissa" GiverId="40907" X="881.555" Y="4.84694" Z="92.6749" />
+		<If Condition="DoQuest(26028)" >
+			<Code File="InteractWith" MobId="40907" GossipOptions="1" QuestId="26028" X="883.851" Y="4.10352" Z="92.68142" TerminateWhen="Me.InVehicle" />
+			<DisableBehavior Name="All" />
+			<Code File="RunCode" Type="Definition" ><![CDATA[
+					private Styx.TreeSharp.Composite _mrdHook;
+					private WoWUnit _currentKillPoi;
+					private async Task<bool> MrDsWildRideLogic()
+					{
+						if (QuestDone(26028)) return false;
+						if (!Me.InVehicle) return false;
+						if (_currentKillPoi == null || !_currentKillPoi.IsValid || _currentKillPoi.IsDead || _currentKillPoi.HealthPercent < 1)
+						{
+							if (!IsObjectiveComplete(1, 26028) && !IsObjectiveComplete(2, 35203))
+								_currentKillPoi = ObjectManager.GetObjectsOfType<WoWUnit>().OrderBy(u => u.DistanceSqr).FirstOrDefault(u => u.IsAlive && u.HealthPercent >= 1 && u.Entry == 35203 || u.Entry == 35334);
+							else if (!IsObjectiveComplete(1, 26028))
+								_currentKillPoi = ObjectManager.GetObjectsOfType<WoWUnit>().OrderBy(u => u.DistanceSqr).FirstOrDefault(u => u.IsAlive && u.HealthPercent >= 1 && u.Entry == 35203);
+							else if (!IsObjectiveComplete(2, 26028))
+								_currentKillPoi = ObjectManager.GetObjectsOfType<WoWUnit>().OrderBy(u => u.DistanceSqr).FirstOrDefault(u => u.IsAlive && u.HealthPercent >= 1 && u.Entry == 35334);
+
+							if (_currentKillPoi == null) return false;
+						}
+						if (_currentKillPoi.Location.DistanceSquared((WoWMovement.ActiveMover ?? StyxWoW.Me).Location) > 30 * 30)
+						{
+							TreeRoot.StatusText = $"Moving to kill {_currentKillPoi.Name}";
+							return (await CommonCoroutines.MoveTo(_currentKillPoi.Location)).IsSuccessful();
+						}
+
+						TreeRoot.StatusText = $"Killing {_currentKillPoi.Name}";
+
+						if (_currentKillPoi.IsAlive && _currentKillPoi.Entry == 35334)
+						{
+							Me.SetFacing(_currentKillPoi.Location);
+							await CommonCoroutines.StopMoving();
+							Lua.DoString("CastPetAction(3);");
+							await Coroutine.Sleep(500);
+							Lua.DoString("CastPetAction(3);");
+							return true;
+						}
+
+						if (_currentKillPoi.IsAlive && _currentKillPoi.Entry == 35203)
+						{
+							Me.SetFacing(_currentKillPoi.Location);
+							await CommonCoroutines.StopMoving();
+							Lua.DoString("CastPetAction(1);");
+							return true;
+						}
+
+						if (_currentKillPoi == null || !_currentKillPoi.IsAlive)
+						{
+							SpellManager.StopCasting();
+							_currentKillPoi = null;
+							return true;
+						}
+						return false;
+					}
+				]]>
+			</Code>
+			<Code File="RunCode"><![CDATA[ TreeHooks.Instance.InsertHook("Questbot_Main", 0, _mrdHook ?? (_mrdHook = new  CommonBehaviors.Actions.ActionRunCoroutine(ctx => MrDsWildRideLogic()))); ]]></Code>
+			<While Condition="DoQuest(26028)" >
+				<Code File="NoCombatMoveTo" X="1047.825" Y="-199.7951" Z="8.317526" QuestId="26028" />
+				<Code File="NoCombatMoveTo" X="1087.683" Y="-47.70783" Z="4.20623" QuestId="26028" />
+				<Code File="NoCombatMoveTo" X="1039.594" Y="18.95545" Z="10.23113" QuestId="26028" />
+			</While>
+			<MoveTo X="892.2943" Y="0.1668491" Z="92.7381" />
+			<Code File="RunCode"><![CDATA[ TreeHooks.Instance.RemoveHook("Questbot_Main", _mrdHook); ]]></Code>
+			<EnableBehavior Name="All" />
+			<Code File="EjectVeh" />
+		</If>
+		<TurnIn QuestName="Mr. D&apos;s Wild Ride" QuestId="26028" TurnInName="Overlord Krom&apos;gar" TurnInId="41023" X="895.0071" Y="3.252544" Z="92.97868" />
+
+		<If Condition="QuestDone(26044)" >
+			<If Condition="!Me.IsIndoors" >
+				<MoveTo X="1027.438" Y="-20.54412" Z="11.75932" />
+			</If>
+			<TurnIn Nav="Run" QuestName="Where Are the Parts?" QuestId="26044" TurnInName="Sergeant Dontrag" TurnInId="41991" X="869.9907" Y="-57.33129" Z="9.547189" />
+		</If>
+
+		<PickUp QuestName="I Got Your Parts Right Here..." QuestId="26045" GiverName="Sergeant Dontrag" GiverId="41991" X="871.6028" Y="-57.48486" Z="9.582047" />
+		<PickUp QuestName="And That&apos;s Why They Call Them Peons..." QuestId="26047" GiverName="Blastgineer Igore" GiverId="41992" X="871.6028" Y="-57.48486" Z="9.582047" />
+		<PickUp QuestName="Between a Rock and a Hard Place" QuestId="26046" GiverName="Scout Utvoch" GiverId="41990" X="868.486" Y="-57.1833" Z="9.531699" />
+
+		<Code File="InteractWith" CollectionDistance="200" NumOfTimes="1000" TerminateWhen="!DoQuest(26047, 26045)" >
+			<HuntingGrounds>
+				<Hotspot X="828.7198" Y="-41.96485" Z="13.18131" />
+				<Hotspot X="713.2782" Y="-16.16747" Z="20.86889" />
+				<Hotspot X="578.3375" Y="-53.74289" Z="30.26628" />
+				<Hotspot X="377.1188" Y="-222.5032" Z="63.39521" />
+			</HuntingGrounds>
+			<PursuitList>
+				<PursueUnit Id="41989" PursueWhen="DoQuest(26047)" />
+				<PursueGameObject Id="203443" PursueWhen="DoQuest(26045)" />
+			</PursuitList>
+		</Code>
+
+		<Code File="KillUntilComplete" MobId="41993" QuestId="26046" >
+			<HuntingGrounds>
+				<Hotspot X="828.7198" Y="-41.96485" Z="13.18131" />
+				<Hotspot X="713.2782" Y="-16.16747" Z="20.86889" />
+				<Hotspot X="578.3375" Y="-53.74289" Z="30.26628" />
+				<Hotspot X="377.1188" Y="-222.5032" Z="63.39521" />
+			</HuntingGrounds>
+		</Code>
+
+		<TurnIn QuestName="Between a Rock and a Hard Place" QuestId="26046" TurnInName="Scout Utvoch" TurnInId="41990" X="862.8359" Y="-59.61103" Z="10.21546" />
+		<TurnIn QuestName="I Got Your Parts Right Here..." QuestId="26045" TurnInName="Sergeant Dontrag" TurnInId="41991" X="863.1778" Y="-60.71862" Z="10.31904" />
+		<TurnIn QuestName="And That&apos;s Why They Call Them Peons..." QuestId="26047" TurnInName="Blastgineer Igore" TurnInId="41992" X="864.0282" Y="-63.4051" Z="10.56876" />
+		<PickUp QuestName="Spare Parts Up In Here!" QuestId="26048" GiverName="Sergeant Dontrag" GiverId="41991" X="862.9474" Y="-62.17424" Z="10.50489" />
+		<TurnIn QuestName="Spare Parts Up In Here!" QuestId="26048" TurnInName="Chief Blastgineer Bombgutz" TurnInId="40902" X="928.8107" Y="-10.955" Z="92.55253" />
+		<RecheckCheckpoints />
+
+		<PickUp QuestName="In Defense of Krom&apos;gar Fortress" QuestId="26058" GiverName="Chief Blastgineer Bombgutz" GiverId="40902" X="928.8107" Y="-10.955" Z="92.55253" />
+		<While Condition="DoQuest(26058)" >
+			<Code File="InteractWith" MobId="41895" NonCompeteDistance="0" QuestId="26058" X="927.985" Y="-6.187547" Z="92.57553" TerminateWhen="Me.InVehicle" />
+			<Code File="Vehicles\CannonControl" QuestId="26058" Gravity="0.01" MinAngle="-0.034910000860691" MaxAngle="0.43630000948906" MobId1="42016" MobId2="42017" Buttons="1" VehicleId="41895" X="4163.167" Y="4396.066" Z="768.3977" TerminateWhen="!Me.InVehicle" />
+		</While>
+		<TurnIn QuestName="In Defense of Krom&apos;gar Fortress" QuestId="26058" TurnInName="Overlord Krom&apos;gar" TurnInId="41023" X="901.634" Y="-2.148363" Z="92.92921" />
+
+		<PickUp QuestName="Eyes and Ears: Malaka&apos;jin" QuestId="26059" GiverName="Overlord Krom&apos;gar" GiverId="41023" X="899.9568" Y="1.689486" Z="93.0416" />
+		<PickUp QuestName="The Queen and Her Court" QuestId="26063" GiverName="Darn Talongrip" GiverId="11821" X="156.4095" Y="72.96072" Z="49.24345" />
+
+		<Code File="KillUntilComplete" MobId="41185" QuestId="26063" QuestObjectiveIndex="1" >
+			<HuntingGrounds WaypointVisitStrategy="InOrder" >
+				<Hotspot X="474.5179" Y="541.3983" Z="76.54845" />
+				<Hotspot X="688.1241" Y="522.2377" Z="77.35736" />
+				<Hotspot X="535.3282" Y="621.4785" Z="73.48613" />
+			</HuntingGrounds>
+		</Code>
+
+		<Code File="KillUntilComplete" MobIds="4005, 4007" QuestId="26063" QuestObjectiveIndex="2" >
+			<HuntingGrounds WaypointVisitStrategy="InOrder" >
+				<Hotspot X="475.5704" Y="485.6996" Z="75.67567" />
+				<Hotspot X="589.9366" Y="551.1567" Z="78.53647" />
+				<Hotspot X="704.6146" Y="539.8353" Z="77.14185" />
+			</HuntingGrounds>
+		</Code>
+
+		<TurnIn QuestName="The Queen and Her Court" QuestId="26063" TurnInName="Darn Talongrip" TurnInId="11821" X="156.2663" Y="68.93864" Z="48.4319" />
+		<TurnIn QuestName="Eyes and Ears: Malaka&apos;jin" QuestId="26059" TurnInName="Witch Doctor Jin&apos;Zil" TurnInId="3995" X="-179.1564" Y="-295.2719" Z="11.46254" />
+		<RecheckCheckpoints />
+		<PickUp QuestName="Da Voodoo: Stormer Heart" QuestId="26060" GiverName="Witch Doctor Jin&apos;Zil" GiverId="3995" X="-179.1564" Y="-295.2719" Z="11.46254" />
+		<PickUp QuestName="Da Voodoo: Ram Horns" QuestId="26061" GiverName="Witch Doctor Jin&apos;Zil" GiverId="3995" X="-179.1564" Y="-295.2719" Z="11.46254" />
+		<PickUp QuestName="Nura Pathfinder" QuestId="26069" GiverName="Witch Doctor Jin&apos;Zil" GiverId="3995" X="-179.1564" Y="-295.2719" Z="11.46254" />
+		<PickUp QuestName="Fight On Their Stomachs" QuestId="26064" GiverName="Denni&apos;ka" GiverId="3411" X="-183.5553" Y="-344.5197" Z="8.840024" />
+
+		<Code File="InteractWith" MobId="203253" InteractByLooting="true" CollectionDistance="200" QuestId="26064" QuestObjectiveIndex="1" >
+			<HuntingGrounds>
+				<Hotspot X="49.54219" Y="5.418998" Z="37.77132" />
+				<Hotspot X="75.24083" Y="151.5571" Z="33.18853" />
+				<Hotspot X="151.6628" Y="285.5479" Z="50.18275" />
+				<Hotspot X="-121.9638" Y="78.77556" Z="49.71881" />
+			</HuntingGrounds>
+		</Code>
+
+		<Code File="KillUntilComplete" TerminateWhen="!DoQuest(26060, 26061)" >
+			<HuntingGrounds>
+				<Hotspot X="49.54219" Y="5.418998" Z="37.77132" />
+				<Hotspot X="75.24083" Y="151.5571" Z="33.18853" />
+				<Hotspot X="151.6628" Y="285.5479" Z="50.18275" />
+				<Hotspot X="-121.9638" Y="78.77556" Z="49.71881" />
+			</HuntingGrounds>
+			<PursuitList>
+				<PursueUnit Id="4008" PursueWhen="DoQuest(26060)" />
+				<PursueUnit Id="34894" PursueWhen="DoQuest(26061)" />
+			</PursuitList>
+		</Code>
+
+		<TurnIn QuestName="Da Voodoo: Stormer Heart" QuestId="26060" TurnInName="Witch Doctor Jin&apos;Zil" TurnInId="3995" X="-179.8789" Y="-295.3581" Z="11.47398" />
+		<TurnIn QuestName="Da Voodoo: Ram Horns" QuestId="26061" TurnInName="Witch Doctor Jin&apos;Zil" TurnInId="3995" X="-179.8789" Y="-295.3581" Z="11.47398" />
+		<PickUp QuestName="Da Voodoo: Resonite Crystal" QuestId="26062" GiverName="Witch Doctor Jin&apos;Zil" GiverId="3995" X="-179.8789" Y="-295.3581" Z="11.47398" />
+		<PickUp QuestName="Reinforcements..." QuestId="26066" GiverName="Subjugator Devo" GiverId="42023" X="-179.8789" Y="-295.3581" Z="11.47398" />
+		<TurnIn QuestName="Fight On Their Stomachs" QuestId="26064" TurnInName="Denni&apos;ka" TurnInId="3411" X="-183.4318" Y="-344.9897" Z="8.791433" />
+		<RecheckCheckpoints />
+
+		<Code File="InteractWith" MobIds="178104, 178105" CollectionDistance="200" QuestId="26062" QuestObjectiveIndex="1" >
+			<HuntingGrounds>
+				<Hotspot X="-106.0768" Y="244.1611" Z="102.1507" />
+				<Hotspot X="-20.1486" Y="339.5048" Z="98.59551" />
+				<Hotspot X="-50.59282" Y="404.9764" Z="105.3322" />
+			</HuntingGrounds>
+		</Code>
+
+		<Code File="InteractWith" MobIds="11917, 42024" MobState="Alive" InteractByUsingItemId="56794" CollectionDistance="200" QuestId="26066" QuestObjectiveIndex="1" >
+			<HuntingGrounds>
+				<Hotspot X="-106.0768" Y="244.1611" Z="102.1507" />
+				<Hotspot X="-20.1486" Y="339.5048" Z="98.59551" />
+				<Hotspot X="-50.59282" Y="404.9764" Z="105.3322" />
+			</HuntingGrounds>
+		</Code>
+
+		<TurnIn QuestName="Reinforcements..." QuestId="26066" TurnInName="Subjugator Devo" TurnInId="42023" X="-176.8823" Y="-296.7662" Z="11.1751" />
+		<PickUp QuestName="Kobold Fury!" QuestId="26068" GiverName="Subjugator Devo" GiverId="42023" X="-176.8823" Y="-296.7662" Z="11.1751" />
+		<TurnIn QuestName="Da Voodoo: Resonite Crystal" QuestId="26062" TurnInName="Witch Doctor Jin&apos;Zil" TurnInId="3995" X="-180.0991" Y="-294.9387" Z="11.48629" />
+		<PickUp QuestName="Jin&apos;Zil&apos;s Blessing" QuestId="26067" GiverName="Witch Doctor Jin&apos;Zil" GiverId="3995" X="-180.0991" Y="-294.9387" Z="11.48629" />
+
+		<Code File="InteractWith" MobId="41360" AuraIdMissingFromMob="78337" WaitTime="5000" InteractByUsingItemId="56798" QuestId="26067" QuestObjectiveIndex="1" >
+			<HuntingGrounds>
+				<Hotspot X="76.62654" Y="-240.9918" Z="7.131302" />
+				<Hotspot X="72.28398" Y="-432.9551" Z="-9.010149" />
+				<Hotspot X="94.82921" Y="-575.6672" Z="-19.52661" />
+				<Hotspot X="116.2256" Y="-722.8231" Z="-8.455402" />
+			</HuntingGrounds>
+		</Code>
+
+		<While Condition="DoQuest(26068)" >
+			<MoveTo X="319.0612" Y="-462.0511" Z="69.76944" />
+			<Code File="UseItem" ItemId="56799" QuestId="26068" />
+		</While>
+
+		<TurnIn QuestName="Kobold Fury!" QuestId="26068" TurnInName="Subjugator Devo" TurnInId="42023" X="-175.4624" Y="-298.2559" Z="10.83985" />
+		<TurnIn QuestName="Jin&apos;Zil&apos;s Blessing" QuestId="26067" TurnInName="Witch Doctor Jin&apos;Zil" TurnInId="3995" X="-181.7656" Y="-294.6335" Z="11.52843" />
+		<RecheckCheckpoints />
+
+		<PickUp QuestName="All&apos;s Quiet on the Southern Front" QuestId="26073" GiverName="Witch Doctor Jin&apos;Zil" GiverId="3995" X="-181.7656" Y="-294.6335" Z="11.52843" />
+		<If Condition="QuestDone(26073) &amp;&amp; Me.HearthstoneAreaId == 4933 &amp;&amp; Unit(3995) != null" >
+			<Code File="UseHearthstone" WaitForCD="false" />
+		</If>
+		<TurnIn QuestName="All&apos;s Quiet on the Southern Front" QuestId="26073" TurnInName="Overlord Krom&apos;gar" TurnInId="41023" X="895.5201" Y="-3.310216" Z="92.71769" />
+
+		<PickUp QuestName="Beginning of the End" QuestId="26074" GiverName="Overlord Krom&apos;gar" GiverId="41023" X="894.378" Y="3.611061" Z="92.96024" />
+		<While Condition="DoQuest(26074)" >
+			<Code File="InteractWith" MobId="42029" NonCompeteDistance="0" QuestId="26074" X="896.8785" Y="-31.98223" Z="94.27809" TerminateWhen="Me.InVehicle" />
+			<Code File="WaitTimer" WaitTime="70000" TerminateWhen="!Me.InVehicle" />
+		</While>
+		<TurnIn QuestName="Beginning of the End" QuestId="26074" TurnInName="Jibbly Rakit" TurnInId="42033" X="1860.191" Y="779.8288" Z="143.8124" />
+
+		<PickUp QuestName="The Turd Problem" QuestId="26075" GiverName="Jibbly Rakit" GiverId="42033" X="1860.191" Y="779.8288" Z="143.8124" />
+		<Code File="KillUntilComplete" MobIds="4012, 4014" QuestId="26075">
+			<HuntingGrounds>
+				<Hotspot X="1546.097" Y="669.1446" Z="141.8862" />
+				<Hotspot X="1736.832" Y="624.0319" Z="194.9729" />
+			</HuntingGrounds>
+		</Code>
+		<TurnIn QuestName="The Turd Problem" QuestId="26075" TurnInName="Jibbly Rakit" TurnInId="42033" X="1861.178" Y="778.7894" Z="143.8119" />
+
+		<PickUp QuestName="Spy Infestation" QuestId="26076" GiverName="Jibbly Rakit" GiverId="42033" X="1861.178" Y="778.7894" Z="143.8119" />
+		<Code File="InteractWith" MobId="42035" Range="5" MobState="Alive" WaitTime="2500" CollectionDistance="200" NonCompeteDistance="0" InteractByUsingItemId="56800" PreInteractMountStrategy="Dismount" QuestId="26076" QuestObjectiveIndex="1" >
+			<HuntingGrounds>
+				<Hotspot X="1760.265" Y="818.977" Z="131.4263" />
+				<Hotspot X="1683.559" Y="779.8624" Z="131.1458" />
+				<Hotspot X="1791.833" Y="750.5167" Z="138.5981" />
+			</HuntingGrounds>
+		</Code>
+		<TurnIn QuestName="Spy Infestation" QuestId="26076" TurnInName="Jibbly Rakit" TurnInId="42033" X="1861.657" Y="778.6208" Z="143.8118" />
+
+		<PickUp QuestName="Final Delivery" QuestId="26077" GiverName="Jibbly Rakit" GiverId="42033" X="1861.657" Y="778.6208" Z="143.8118" />
+		<While Condition="DoQuest(26077)" >
+			<Code File="InteractWith" MobId="41418" NonCompeteDistance="0" QuestId="26077" X="1615.724" Y="881.6211" Z="147.7513" TerminateWhen="Me.InVehicle" />
+			<Code File="WaitTimer" WaitTime="80000" TerminateWhen="!Me.InVehicle" />
+		</While>
+		<TurnIn QuestName="Final Delivery" QuestId="26077" TurnInName="General Grebo" TurnInId="42050" X="2119.732" Y="1238.252" Z="451.9312" />
+
+		<Checkpoint Level="32" />
+
+		<Code File="LoadProfile" ProfileName="Southern Barrens.xml" />
+
+
+	</QuestOrder>
+</HBProfile>
+

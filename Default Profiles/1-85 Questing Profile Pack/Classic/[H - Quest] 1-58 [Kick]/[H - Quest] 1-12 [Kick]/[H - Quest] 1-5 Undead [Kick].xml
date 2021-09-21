@@ -1,0 +1,437 @@
+<HBProfile>
+	<Name>[H - Quest] 1-5 Undead [Kick]</Name>
+	<MinDurability>0.2</MinDurability>
+	<MinFreeBagSlots>3</MinFreeBagSlots>
+	<MinLevel>1</MinLevel>
+	<MaxLevel>86</MaxLevel>
+	<MailGrey>False</MailGrey>
+	<MailWhite>False</MailWhite>
+	<MailGreen>True</MailGreen>
+	<SellGrey>True</SellGrey>
+	<SellWhite>True</SellWhite>
+	<SellGreen>True</SellGreen>
+	<SellBlue>False</SellBlue>
+	<SellPurple>False</SellPurple>
+	
+	<AvoidMobs>
+		<Mob Name="Training Dummy" Entry="44820"/><!--Undead Training Dummy-->
+	</AvoidMobs>
+	
+	<Blackspots>
+		<!--Cold Hearth Manor Sign-->
+		<Blackspot X="2188.518" Y="661.0852" Z="33.29134" Radius="4.017753"/>	
+	</Blackspots>
+	
+	<Mailboxes>
+		<!--Deathknell Mailbox-->
+		<Mailbox X="1843.379" Y="1584.786" Z="93.73871"/>
+	</Mailboxes>
+	
+	<Vendors>
+	<!--Deathknell Vendors-->
+		<Vendor Name="Joshua Kien" Entry="2115" Type="Food" X="1866.022" Y="1574.447" Z="94.31525"/>
+		<Vendor Name="Archibald Kava" Entry="2113" Type="Repair" X="1860.848" Y="1568.365" Z="94.31361"/>
+	<!--Deathknell Trainers-->
+		<Vendor Name="Xavier the Huntsman" Entry="38911" Type="Train" TrainClass="Hunter" X="1861.363" Y="1612.109" Z="95.60777"/>
+		<Vendor Name="David Trias" Entry="2122" Type="Train" TrainClass="Rogue" X="1859.652" Y="1563.301" Z="94.30677"/>
+		<Vendor Name="Dannal Stern" Entry="2119" Type="Train" TrainClass="Warrior" X="1860.85" Y="1557.41" Z="94.78485"/>
+		<Vendor Name="Maximillion" Entry="2126" Type="Train" TrainClass="Warlock" X="1839.03" Y="1636.539" Z="96.93337"/>
+		<Vendor Name="Isabella" Entry="2124" Type="Train" TrainClass="Mage" X="1847.386" Y="1635.52" Z="96.93366"/>
+		<Vendor Name="Dark Cleric Duesten" Entry="2123" Type="Train" TrainClass="Priest" X="1848.324" Y="1627.631" Z="96.93338"/>
+		
+	<!--Calston Estate Vendors-->
+		<Vendor Name="Franklin Brinklestein" Entry="44034" Type="Food" X="2234.77" Y="1021.9" Z="36.4495"/>
+		<Vendor Name="Gordo" Entry="10666" Type="Food" X="2238.43" Y="1001.97" Z="36.58329"/>
+	<!--Calston Estate Trainers-->
+		<Vendor Name="Dark Cleric Claressa" Entry="48614" Type="Train" TrainClass="Priest" X="2236.35" Y="1009.74" Z="36.79127"/>
+		<Vendor Name="Maressa Milner" Entry="48612" Type="Train" TrainClass="Warlock" X="2235.5" Y="1012.34" Z="36.80368"/>
+		<Vendor Name="Larah Firesong" Entry="48613" Type="Train" TrainClass="Mage" X="2233.2" Y="1009.78" Z="36.64421"/>
+		<Vendor Name="Darna Woad" Entry="48618" Type="Train" TrainClass="Hunter" X="2223.78" Y="1001.81" Z="36.47761"/>
+		<Vendor Name="Karla Fain" Entry="48616" Type="Train" TrainClass="Warrior" X="2224.72" Y="998.88" Z="36.5359"/>
+		<Vendor Name="Shernon the Footpad" Entry="48615" Type="Train" TrainClass="Rogue" X="2221.5" Y="999.688" Z="36.48019"/>
+		<Vendor Name="Ortezza" Entry="38247" Type="Train" TrainClass="Hunter" X="-1125.943" Y="-5508.729" Z="11.95828"/>
+		<Vendor Name="Tunari" Entry="38245" Type="Train" TrainClass="Priest" X="-1118.16" Y="-5539.962" Z="11.97764"/>
+		<Vendor Name="Voldreka" Entry="42618" Type="Train" TrainClass="Warlock" X="-1126.516" Y="-5395.474" Z="12.20943"/>
+		<Vendor Name="Legati" Entry="38244" Type="Train" TrainClass="Rogue" X="-1125.962" Y="-5446.971" Z="11.98163"/>
+		<Vendor Name="Zen'tabra" Entry="38243" Type="Train" TrainClass="Druid" X="-1175.747" Y="-5540.455" Z="11.94026"/>
+		<Vendor Name="Ortezza" Entry="38247" Type="Train" TrainClass="Hunter" X="-1125.943" Y="-5508.729" Z="11.95828"/>
+		<Vendor Name="Tunari" Entry="38245" Type="Train" TrainClass="Priest" X="-1118.16" Y="-5539.962" Z="11.97764" />
+		<Vendor Name="Voldreka" Entry="42618" Type="Train" TrainClass="Warlock" X="-1126.516" Y="-5395.474" Z="12.20943" />
+		<Vendor Name="Legati" Entry="38244" Type="Train" TrainClass="Rogue" X="-1125.962" Y="-5446.971" Z="11.98163" />
+		<Vendor Name="Zen'tabra" Entry="38243" Type="Train" TrainClass="Druid" X="-1175.747" Y="-5540.455" Z="11.94058" />
+		<Vendor Name="Soratha" Entry="38246" Type="Train" TrainClass="Mage" X="-1151.981" Y="-5569.874" Z="11.93533" />
+		<Vendor Name="Nekali" Entry="38242" Type="Train" TrainClass="Shaman" X="-1160.215" Y="-5396.146" Z="12.23187" />
+		<Vendor Name="Nortet" Entry="38037" Type="Train" TrainClass="Warrior" X="-1171.352" Y="-5440.788" Z="11.94391" />
+		
+	<!--Tirisfal Glades Vendors-->
+		<Vendor Name="Innkeeper Renee" Entry="5688" Type="Food" X="2285.95" Y="282.613" Z="33.24683" />
+		<Vendor Name="Eliza Callen" Entry="2137" Type="Repair" X="2302.86" Y="288.523" Z="33.35699" />
+		<Vendor Name="Constance Brisboise" Entry="3522" Type="Repair" X="2157.345" Y="656.6657" Z="34.54608" />
+		<Vendor Name="Blacksmith Rand" Entry="2116" Type="Repair" X="1842.443" Y="1570.188" Z="96.58139" />
+	</Vendors>
+	
+	<!--Undead Quest Overrides-->
+	<Quest Id="28608" Name="The Shadow Grave">
+		<Objective Type="CollectItem" ItemId="64582" CollectCount="1">
+			<CollectFrom>
+				<GameObject Name="Thick Embalming Fluid" Id="207255"/>
+			</CollectFrom>
+			<Hotspots>
+				<Hotspot X="1668.484" Y="1692.268" Z="120.7192"/>
+			</Hotspots>
+		</Objective>
+		<Objective Type="CollectItem" ItemId="64581" CollectCount="1">
+			<CollectFrom>
+				<GameObject Name="Corpse-Stitching Twine" Id="207256"/>
+			</CollectFrom>
+			<Hotspots>
+				<Hotspot X="1668.484" Y="1692.268" Z="120.7192"/>
+			</Hotspots>
+		</Objective>
+	</Quest>
+	<Quest Id="26799" Name="Those That Couldn't Be Saved">
+		<Objective Type="KillMob" MobId="1501" KillCount="6">
+			<Hotspots>
+				<Hotspot X="1736.53" Y="1698.18" Z="126.8978"/>
+				<Hotspot X="1728.107" Y="1654.6" Z="126.6466"/>
+			</Hotspots>
+		</Objective>
+	</Quest>
+	<Quest Id="26801" Name="Scourge on our Perimeter">
+		<Objective Type="KillMob" MobId="1890" KillCount="8">
+			<Hotspots>
+				<Hotspot X="1919.483" Y="1622.099" Z="85.29385"/>
+				<Hotspot X="1967.845" Y="1640.188" Z="77.12695"/>
+				<Hotspot X="2012.089" Y="1609.348" Z="72.76481"/>
+				<Hotspot X="2017.864" Y="1569.919" Z="77.83659"/>
+			</Hotspots>
+		</Objective>
+	</Quest>
+	<Quest Id="24971" Name="Assault on the Rotbrain Encampment">
+    		<Objective Type="KillMob" MobId="49424" KillCount="1">
+      			<Hotspots>
+        			<Hotspot X="1767.575" Y="1381.822" Z="91.51944" />
+      			</Hotspots>
+    		</Objective>
+    		<Objective Type="KillMob" MobId="49422" KillCount="8">
+     			<Hotspots>
+        			<Hotspot X="1836.804" Y="1349.277" Z="77.91927" />
+        			<Hotspot X="1828.991" Y="1319.502" Z="88.10773" />
+        			<Hotspot X="1799.092" Y="1301.17" Z="102.4522" />
+        			<Hotspot X="1766.655" Y="1320.194" Z="95.56926" />
+        			<Hotspot X="1772.948" Y="1358.667" Z="89.51058" />
+        			<Hotspot X="1793.545" Y="1374.698" Z="84.34228" />
+        			<Hotspot X="1818.842" Y="1374.153" Z="77.35603" />
+        			<Hotspot X="1832.802" Y="1359.632" Z="76.48158" />
+      			</Hotspots>
+    		</Objective>
+  	</Quest>
+	<Quest Id="24997" Name="Graverobbers">
+		<Objective QuestName="Graverobbers" QuestId="24997" Type="KillMob" MobId="1941" KillCount="8">
+                <Hotspots>
+                    <Hotspot X="2613.26" Y="413.4034" Z="36.47172" />
+                    <Hotspot X="2684.771" Y="479.4792" Z="16.33921" />
+                    <Hotspot X="2603.52" Y="532.202" Z="17.54621" />
+                </Hotspots>
+            </Objective>
+            <Objective QuestName="Graverobbers" QuestId="24997" Type="KillMob" MobId="1675" KillCount="5">
+                <Hotspots>
+                    <Hotspot X="2816.732" Y="353.3618" Z="22.91257" />
+		    <Hotspot X="2891.264" Y="404.0455" Z="26.54923" />
+                </Hotspots>
+            </Objective>
+	    <Objective Type="CollectItem" ItemId="2834" CollectCount="6">
+			<CollectFrom>
+				<Mob Name="Rot Hide Graverobber" Id="1941" />
+				<Mob Name="Rot Hide Graverobber" Id="1675" />
+				<Mob Name="Rot Hide Graverobber" Id="1674" />
+			</CollectFrom>
+			<Hotspots>
+                    		<Hotspot X="2613.26" Y="413.4034" Z="36.47172" />
+                    		<Hotspot X="2684.771" Y="479.4792" Z="16.33921" />
+                    		<Hotspot X="2603.52" Y="532.202" Z="17.54621" />
+                	</Hotspots>
+	    </Objective>				
+	</Quest>	
+	<Quest Id="26802" Name="The Damned">
+    		<Objective Type="CollectItem" ItemId="3265" CollectCount="4">
+      			<CollectFrom>
+        			<Mob Name="Duskbat" Id="1512" />
+      			</CollectFrom>
+      			<Hotspots>
+        			<Hotspot X="2080.11" Y="1552.155" Z="74.18394" />
+        			<Hotspot X="2098.035" Y="1584.014" Z="74.96807" />
+        			<Hotspot X="2084.229" Y="1612.891" Z="72.27579" />
+       				<Hotspot X="2151.179" Y="1618.579" Z="82.87949" />
+        			<Hotspot X="2143.007" Y="1560.85" Z="77.87823" />
+        			<Hotspot X="2122.925" Y="1501.363" Z="72.13499" />
+        			<Hotspot X="2123.312" Y="1457.671" Z="65.03465" />
+        			<Hotspot X="2141.014" Y="1412.882" Z="69.26765" />
+        			<Hotspot X="2146.099" Y="1395.59" Z="71.11362" />
+        			<Hotspot X="2120.5" Y="1371.238" Z="63.73124" />
+        			<Hotspot X="2085.674" Y="1396.326" Z="62.16375" />
+      			</Hotspots>
+    		</Objective>
+    		<Objective Type="CollectItem" ItemId="3264" CollectCount="4">
+      			<CollectFrom>
+        			<Mob Name="Young Scavenger" Id="1508" />
+      			</CollectFrom>
+      			<Hotspots>
+        			<Hotspot X="2080.11" Y="1552.155" Z="74.18394" />
+        			<Hotspot X="2098.035" Y="1584.014" Z="74.96807" />
+        			<Hotspot X="2084.229" Y="1612.891" Z="72.27579" />
+        			<Hotspot X="2151.179" Y="1618.579" Z="82.87949" />
+        			<Hotspot X="2143.007" Y="1560.85" Z="77.87823" />
+        			<Hotspot X="2122.925" Y="1501.363" Z="72.13499" />
+        			<Hotspot X="2123.312" Y="1457.671" Z="65.03465" />
+        			<Hotspot X="2141.014" Y="1412.882" Z="69.26765" />
+        			<Hotspot X="2146.099" Y="1395.59" Z="71.11362" />
+        			<Hotspot X="2120.5" Y="1371.238" Z="63.73124" />
+        			<Hotspot X="2085.674" Y="1396.326" Z="62.16375" />
+      			</Hotspots>
+    		</Objective>
+  	</Quest>
+	<Quest Id="24975" Name="Fields of Grief">
+		<Objective Type="CollectItem" ItemId="2846" CollectCount="10">
+			<Hotspots>
+				<Hotspot X="2297.939" Y="1435.213" Z="33.3336" />
+				<Hotspot X="2343.894" Y="1378.254" Z="33.33342" />
+				<Hotspot X="2312.015" Y="1228.254" Z="33.47467" />
+			</Hotspots>
+		</Objective>
+	</Quest>
+	<Quest Id="25003" Name="The Family Crypt">
+		<Objective Type="KillMob" MobId="1530" KillCount="5">
+			<Hotspots>
+				<Hotspot X="2853.641" Y="687.5914" Z="135.4419" />
+				<Hotspot X="2973.256" Y="749.5015" Z="97.30669" />
+			</Hotspots>
+		</Objective>
+		<Objective Type="KillMob" MobId="1534" KillCount="5">
+			<Hotspots>
+				<Hotspot X="2853.641" Y="687.5914" Z="135.4419" />
+				<Hotspot X="2973.256" Y="749.5015" Z="97.30669" />
+			</Hotspots>
+		</Objective>
+	</Quest>
+
+	<QuestOrder IgnoreCheckPoints="True" >
+
+	<CustomBehavior File="UserSettings" LootMobs="True" TrainNewSkills="True" LearnFlightPaths="False" UseFlightPaths="False" PullDistance="25" />
+
+		<PickUp QuestName="Fresh out of the Grave" QuestId="24959" GiverName="Agatha" GiverId="49044"/>
+		<TurnIn QuestName="Fresh out of the Grave" QuestId="24959" TurnInName="Undertaker Mordo" TurnInId="1568"/>
+		<PickUp QuestName="the Shadow Grave" QuestId="28608" GiverName="Undertaker Mordo" GiverId="1568"/>
+			<Objective QuestName="The Shadow Grave" QuestId="28608" Type="CollectItem" ItemId="64582" CollectCount="1"/>
+			<Objective QuestName="The Shadow Grave" QuestId="28608" Type="CollectItem" ItemId="64581" CollectCount="1"/>
+		<TurnIn QuestName="The Shadow Grave" QuestId="28608" TurnInId="1568" TurnInName="Undertaker Mordo"/>
+		<PickUp QuestName="Those That Couldn't Be Saved" QuestId="26799" GiverId="1568" GiverName="Undertaker Mordo"/>
+		<PickUp QuestName="The Wakening" QuestId="24960" GiverId="2307" GiverName="Caretaker Caice"/>
+			<If Condition="((HasQuest(24960)) &amp;&amp; (!IsQuestCompleted(24960)))" >
+				<CustomBehavior File="Message" Text="If you're stuck here doing nothing :: Re-svn and copy over the quest behaviors and restart HB!" LogColor="Orange" />
+				<CustomBehavior File="InteractWith" QuestId="24960" MobId="49230" GossipOptions="1, 1" X="1752.307" Y="1641.032" Z="117.6537" />
+				<CustomBehavior File="InteractWith" QuestId="24960" MobId="38895" GossipOptions="1, 1" X="1755.315" Y="1665.666" Z="121.2976" />
+				<CustomBehavior File="InteractWith" QuestId="24960" MobId="49231" GossipOptions="1, 1, 1" X="1740.29" Y="1703.01" Z="128.3187" />
+			</If>
+			<!-- Syntax kept for later
+			<If Condition="((HasQuest(24960)) &amp;&amp; (!IsQuestCompleted(24960)))" >
+				<RunTo X="1746.01" Y="1642.759" Z="118.1697" />
+			
+			 <While Condition="((HasQuest(24960)) &amp;&amp; (!IsObjectiveComplete(2, 24960)))">
+				<CustomBehavior File="BasicInteractWith" QuestId="24960" MobId="49230" MoveTo="True" UseLuaTarget="True" />
+				<CustomBehavior File="Misc\RunLua" Lua="SelectGossipOption(1)" WaitTime="1000" />
+				<CustomBehavior File="Misc\RunLua" Lua="SelectGossipOption(1)" WaitTime="1000" />
+			 </While>
+			 <While Condition="((HasQuest(24960)) &amp;&amp; (!IsObjectiveComplete(1, 24960)))">
+				<CustomBehavior File="BasicInteractWith" QuestId="24960" MobId="38895" MoveTo="True" UseLuaTarget="True" />
+				<CustomBehavior File="Misc\RunLua" Lua="SelectGossipOption(1)" WaitTime="1000" />
+				<CustomBehavior File="Misc\RunLua" Lua="SelectGossipOption(1)" WaitTime="1000" />
+			 </While>
+			 <While Condition="((HasQuest(24960)) &amp;&amp; (!IsObjectiveComplete(3, 24960)))">
+				<CustomBehavior File="BasicInteractWith" QuestId="24960" MobId="49231" MoveTo="True" UseLuaTarget="True" />
+				<CustomBehavior File="Misc\RunLua" Lua="SelectGossipOption(1)" WaitTime="1000" />
+				<CustomBehavior File="Misc\RunLua" Lua="SelectGossipOption(1)" WaitTime="1000" />
+				<CustomBehavior File="Misc\RunLua" Lua="SelectGossipOption(1)" WaitTime="1000" />
+			 </While>
+			</If>
+			-->
+			<Objective QuestName="Those That Couldn't Be Saved" QuestId="26799" Type="KillMob" MobId="1501" KillCount="6"/>
+		<TurnIn QuestName="The Wakening" QuestId="24960" TurnInId="2307" TurnInName="Caretaker Caice" />
+		<PickUp QuestName="Beyond the Graves" QuestId="25089" GiverId="2307" GiverName="Caretaker Caice"/>
+		<TurnIn QuestName="Those That Couldn't Be Saved" QuestId="26799" TurnInId="1568" GiverName="Undertaker Mordo"/>
+		<TurnIn QuestName="Beyond the Graves" QuestId="25089" TurnInId="1740" TurnInName="Deathguard Saltain"/>
+		<PickUp QuestName="Recruitment" QuestId="26800" GiverId="1740" GiverName="Deathguard Saltain"/>
+		<PickUp QuestName="Scourge on our Perimeter" QuestId="26801" GiverId="1569" GiverName="Shadow Priest Sarvis"/>
+			<CustomBehavior File="InteractWith" QuestId="26800" MobId="49340" NumOfTimes="30" WaitTime="2500" X="1917.147" Y="1539.306" Z="86.90076" />
+			<Objective QuestName="Scourge on our Perimeter" QuestId="26801" Type="KillMob" MobId="1890" KillCount="8"/>
+		<TurnIn QuestName="Recruitment" QuestId="26800" TurnInName="Deathguard Saltain" TurnInId="1740"/>
+		<TurnIn QuestName="Scourge on our Perimeter" QuestId="26801" TurnInId="1569" TurnInName="Shadow Priest Sarvis"/>
+		<PickUp QuestName="The Truth of the Grave" QuestId="24961" GiverId="1661" GiverName="Novice Elreth"/>
+		
+			<!-- Class Specific Quests -->
+		<If Condition="Me.Class == WoWClass.Warrior">
+			<PickUp QuestName="Simple Scroll" QuestId="3095" GiverId="1569" GiverName="Shadow Priest Sarvis"/>
+			<TurnIn QuestName="Simple Scroll" QuestId="3095" TurnInId="2119" TurnInName="Dannal Stern"/>
+			<PickUp QuestName="Charging into Battle" QuestId="24969" GiverId="2119" GiverName="Dannal Stern"/>
+				<If Condition="HasQuest(24969) &amp;&amp; !IsQuestCompleted(24969)">
+					<If Condition="!HasSpell(100)">
+						<CustomBehavior File="ForceSetVendor" DoTrain="True" />
+					</If>
+					<RunTo X="1834.51" Y="1601.513" Z="95.62691" />
+				<CustomBehavior File="NPCAssistance" MobId="44794" X="1821.23" Y="1603.28" Z="95.78717" />
+					<CustomBehavior File="CastSpellOn" QuestId="24969" SpellId="100" MobId="44794" NumOfTimes="20" MobHpPercentLeft="100" MinRange="3" Range="20" X="1821.23" Y="1603.28" Z="95.78717" />
+				</If>	
+			<TurnIn QuestName="Charging into Battle" QuestId="24969" TurnInId="2119" TurnInName="Dannal Stern"/>
+		</If>
+
+		<If Condition="Me.Class == WoWClass.Hunter">
+			<PickUp QuestName="Trail-Worn Scroll" QuestId="24962" GiverId="1569" GiverName="Shadow Priest Sarvis"/>
+			<TurnIn QuestName="Trail-Worn Scroll" QuestId="24962" TurnInId="38911" TurnInName="Xavier the Huntsman"/>
+			<PickUp QuestName="The Thrill of the Hunt" QuestId="24964" GiverId="38911" GiverName="Xavier the Huntsman"/>
+				<If Condition="HasQuest(24964) &amp;&amp; !IsQuestCompleted(24964)">
+					<If Condition="!HasSpell(56641)">
+						<CustomBehavior File="ForceSetVendor" DoTrain="True" />
+					</If>
+					<RunTo X="1834.51" Y="1601.513" Z="95.62691" />
+					<CustomBehavior File="CastSpellOn" QuestId="24964" SpellId="56641" MobId="44794" NumOfTimes="25" MobHpPercentLeft="100" MinRange="3" Range="20" X="1821.23" Y="1603.28" Z="95.78717" />
+				</If>	
+			<TurnIn QuestName="The Thrill of the Hunt" QuestId="24964" TurnInId="38911" TurnInName="Xavier the Huntsman"/>
+		</If>
+
+		<If Condition="Me.Class == WoWClass.Rogue">
+			<PickUp QuestName="Encrypted Scroll" QuestId="3096" GiverId="1569" GiverName="Shadow Priest Sarvis"/>
+			<TurnIn QuestName="Encrypted Scroll" QuestId="3096" TurnInId="2122" TurnInName="David Trias"/>
+			<PickUp QuestName="Stab!" QuestId="24967" GiverId="2122" GiverName="David Trias"/>
+				<While Condition="HasQuest(24967) &amp;&amp; !IsQuestCompleted(24967)">
+					<If Condition="!HasSpell(2098)">
+						<CustomBehavior File="ForceSetVendor" DoTrain="True" />
+					</If>
+					<While Condition="HasQuest(24967) &amp;&amp; !IsQuestCompleted(24967)">
+						<CustomBehavior File="CastSpellOn" QuestId="24967" SpellId="1752" MobId="44794" MobHpPercentLeft="100" NumOfTimes="1" MinRange="3" Range="5" X="1819.765" Y="1599.915" Z="96.03812" />
+						<CustomBehavior File="CastSpellOn" QuestId="24967" SpellId="2098" MobId="44794" MobHpPercentLeft="100" NumOfTimes="1" MinRange="3" Range="5" X="1819.765" Y="1599.915" Z="96.03812" />
+						<CustomBehavior File="CastSpellOn" QuestId="24967" SpellId="1752" MobId="44794" MobHpPercentLeft="100" NumOfTimes="1" MinRange="3" Range="5" X="1819.765" Y="1599.915" Z="96.03812" />
+						<CustomBehavior File="CastSpellOn" QuestId="24967" SpellId="2098" MobId="44794" MobHpPercentLeft="100" NumOfTimes="1" MinRange="3" Range="5" X="1819.765" Y="1599.915" Z="96.03812" />
+						<CustomBehavior File="CastSpellOn" QuestId="24967" SpellId="1752" MobId="44794" MobHpPercentLeft="100" NumOfTimes="1" MinRange="3" Range="5" X="1819.765" Y="1599.915" Z="96.03812" />
+						<CustomBehavior File="CastSpellOn" QuestId="24967" SpellId="2098" MobId="44794" MobHpPercentLeft="100" NumOfTimes="1" MinRange="3" Range="5" X="1819.765" Y="1599.915" Z="96.03812" />
+						<CustomBehavior File="CastSpellOn" QuestId="24967" SpellId="1752" MobId="44794" MobHpPercentLeft="100" NumOfTimes="1" MinRange="3" Range="5" X="1819.765" Y="1599.915" Z="96.03812" />
+						<CustomBehavior File="CastSpellOn" QuestId="24967" SpellId="2098" MobId="44794" MobHpPercentLeft="100" NumOfTimes="1" MinRange="3" Range="5" X="1819.765" Y="1599.915" Z="96.03812" />
+						<CustomBehavior File="CastSpellOn" QuestId="24967" SpellId="1752" MobId="44794" MobHpPercentLeft="100" NumOfTimes="1" MinRange="3" Range="5" X="1819.765" Y="1599.915" Z="96.03812" />
+						<CustomBehavior File="CastSpellOn" QuestId="24967" SpellId="2098" MobId="44794" MobHpPercentLeft="100" NumOfTimes="1" MinRange="3" Range="5" X="1819.765" Y="1599.915" Z="96.03812" />
+						<CustomBehavior File="CastSpellOn" QuestId="24967" SpellId="1752" MobId="44794" MobHpPercentLeft="100" NumOfTimes="1" MinRange="3" Range="5" X="1819.765" Y="1599.915" Z="96.03812" />
+						<CustomBehavior File="CastSpellOn" QuestId="24967" SpellId="2098" MobId="44794" MobHpPercentLeft="100" NumOfTimes="1" MinRange="3" Range="5" X="1819.765" Y="1599.915" Z="96.03812" />
+					</While>
+				</While>	
+			<TurnIn QuestName="Stab!" QuestId="24967" TurnInId="2122" TurnInName="David Trias"/>
+		</If>
+
+		<If Condition="Me.Class == WoWClass.Priest">
+			<PickUp QuestName="Hallowed Scroll" QuestId="3097" GiverId="1569" GiverName="Shadow Priest Sarvis"/>
+			<TurnIn QuestName="Hallowed Scroll" QuestId="3097" TurnInId="2123" TurnInName="Dark Cleric Duesten"/>
+			<PickUp QuestName="Of Light and Shadows" QuestId="24966" GiverId="2123" GiverName="Dark Cleric Duesten"/>
+				<If Condition="HasQuest(24966) &amp;&amp; !IsQuestCompleted(24966)">
+					<If Condition="!HasSpell(2061)">
+						<CustomBehavior File="ForceSetVendor" DoTrain="True" />
+					</If>
+					<CustomBehavior File="CastSpellOn" QuestId="24966" SpellId="2061" MobId="44795" NumOfTimes="20" MinRange="5" Range="20" X="1842.35" Y="1627.585" Z="96.93431" />
+				</If>	
+			<TurnIn QuestName="Of Light and Shadows" QuestId="24966" TurnInId="2123" TurnInName="Dark Cleric Duesten"/>
+		</If>
+
+		<If Condition="Me.Class == WoWClass.Mage">
+			<PickUp QuestName="Glyphic Scroll" QuestId="3098" GiverId="1569" GiverName="Shadow Priest Sarvis"/>
+			<TurnIn QuestName="Glyphic Scroll" QuestId="3098" TurnInId="2124" TurnInName="Isabella"/>
+			<PickUp QuestName="Magic Training" QuestId="24965" GiverId="2124" GiverName="Isabella"/>
+				<If Condition="HasQuest(24965) &amp;&amp; !IsQuestCompleted(24965)">
+					<If Condition="!HasSpell(5143)">
+						<CustomBehavior File="ForceSetVendor" DoTrain="True" />
+					</If>
+					<While Condition="HasQuest(24965) &amp;&amp; !IsQuestCompleted(24965)">
+						<RunTo X="1841.596" Y="1600.659" Z="94.58064" />
+						<CustomBehavior File="CastSpellOn" QuestId="24965" SpellId="133" MobId="44794" NumOfTimes="1" MinRange="3" Range="20" X="1821.23" Y="1603.28" Z="95.78717" />
+						<CustomBehavior File="CastSpellOn" QuestId="24965" SpellId="5143" MobId="44794" NumOfTimes="1" MinRange="3" Range="20" X="1821.23" Y="1603.28" Z="95.78717" />
+						<CustomBehavior File="CastSpellOn" QuestId="24965" SpellId="133" MobId="44794" NumOfTimes="1" MinRange="3" Range="20" X="1821.23" Y="1603.28" Z="95.78717" />
+						<CustomBehavior File="CastSpellOn" QuestId="24965" SpellId="5143" MobId="44794" NumOfTimes="1" MinRange="3" Range="20" X="1821.23" Y="1603.28" Z="95.78717" />
+						<CustomBehavior File="CastSpellOn" QuestId="24965" SpellId="133" MobId="44794" NumOfTimes="1" MinRange="3" Range="20" X="1821.23" Y="1603.28" Z="95.78717" />
+						<CustomBehavior File="CastSpellOn" QuestId="24965" SpellId="5143" MobId="44794" NumOfTimes="1" MinRange="3" Range="20" X="1821.23" Y="1603.28" Z="95.78717" />
+						<CustomBehavior File="CastSpellOn" QuestId="24965" SpellId="133" MobId="44794" NumOfTimes="1" MinRange="3" Range="20" X="1821.23" Y="1603.28" Z="95.78717" />
+						<CustomBehavior File="CastSpellOn" QuestId="24965" SpellId="5143" MobId="44794" NumOfTimes="1" MinRange="3" Range="20" X="1821.23" Y="1603.28" Z="95.78717" />
+						<CustomBehavior File="CastSpellOn" QuestId="24965" SpellId="133" MobId="44794" NumOfTimes="1" MinRange="3" Range="20" X="1821.23" Y="1603.28" Z="95.78717" />
+						<CustomBehavior File="CastSpellOn" QuestId="24965" SpellId="5143" MobId="44794" NumOfTimes="1" MinRange="3" Range="20" X="1821.23" Y="1603.28" Z="95.78717" />
+						<CustomBehavior File="CastSpellOn" QuestId="24965" SpellId="133" MobId="44794" NumOfTimes="1" MinRange="3" Range="20" X="1821.23" Y="1603.28" Z="95.78717" />
+						<CustomBehavior File="CastSpellOn" QuestId="24965" SpellId="5143" MobId="44794" NumOfTimes="1" MinRange="3" Range="20" X="1821.23" Y="1603.28" Z="95.78717" />
+					</While>
+				</If>	
+			<TurnIn QuestName="Magic Training" QuestId="24965" TurnInId="2124" TurnInName="Isabella"/>
+		</If>
+
+		<If Condition="Me.Class == WoWClass.Warlock">
+			<PickUp QuestName="Tainted Scroll" QuestId="3099" GiverId="1569" GiverName="Shadow Priest Sarvis"/>
+			<TurnIn QuestName="Tainted Scroll" QuestId="3099" TurnInId="2126" TurnInName="Maximillion"/>
+			<PickUp QuestName="Dark Deeds" QuestId="24968" GiverId="2126" GiverName="Maximillion"/>
+				<If Condition="HasQuest(24968) &amp;&amp; !IsQuestCompleted(24968)">
+					<If Condition="!HasSpell(348)">
+						<CustomBehavior File="ForceSetVendor" DoTrain="True" />
+					</If>
+					<RunTo X="1841.596" Y="1600.659" Z="94.58064" />
+					<CustomBehavior File="CastSpellOn" QuestId="24968" SpellId="348" MobId="44794" NumOfTimes="25" MinRange="3" Range="20" X="1821.23" Y="1603.28" Z="95.78717" />
+				</If>	
+			<TurnIn QuestName="Dark Deeds" QuestId="24968" TurnInId="2126" TurnInName="Maximillion"/>
+		</If>
+			
+			<While Condition="HasQuest(24961) &amp;&amp; !IsQuestCompleted(24961)">
+				<CustomBehavior File="InteractWith" QuestId="24961" MobId="38910" WaitTime="7000" GossipOptions="1" X="1861.425" Y="1565.896" Z="94.31261" />
+			</While>
+		<TurnIn QuestName="The Truth of the Grave" QuestId="24961" TurnInId="1661" TurnInName="Novice Elreth"/>
+		<PickUp QuestName="The Executor In the Field" QuestId="28672" GiverId="1661" GiverName="Novice Elreth"/>
+		<TurnIn QuestName="The Executor In the Field" QuestId="28672" TurnInId="1570" TurnInName="Executor Arren"/>
+		<PickUp QuestName="The Damned" QuestId="26802" GiverId="1570" GiverName="Executor Arren"/>
+			<Objective QuestName="The Damned" QuestId="26802" Type="CollectItem" ItemId="3265" CollectCount="4"/>
+			<Objective QuestName="The Damned" QuestId="26802" Type="CollectItem" ItemId="3264" CollectCount="4"/>
+		<TurnIn QuestName="The Damned" QuestId="26802" TurnInId="1570" TurnInName="Executor Arren"/>
+		<PickUp QuestName="Night Web's Hollow" QuestId="24973" GiverName="Executor Arren" GiverId="1570"/>
+			<Objective QuestName="Night Web's Hollow" QuestId="24973" Type="KillMob" MobId="1504" KillCount="8"/>
+			<Objective QuestName="Night Web's Hollow" QuestId="24973" Type="KillMob" MobId="1505" KillCount="5"/>
+		<TurnIn QuestName="Night Web's Hollow" QuestId="24973" TurnInName="Executor Arren" TurnInId="1570"/>
+		<PickUp QuestName="No Better Than the Zombies" QuestId="24970" GiverName="Executor Arren" GiverId="1570"/>
+		<TurnIn QuestName="No Better Than the Zombies" QuestId="24970" TurnInName="Darnell" TurnInId="49425"/>
+		<PickUp QuestName="Assault on the Rotbrain Encampment" QuestId="24971" GiverName="Darnell" GiverId="49425"/>
+			<Objective QuestName="Assault on the Rotbrain Encampment" QuestId="24971" Type="KillMob" MobId="49424" KillCount="1"/>
+			<Objective QuestName="Assault on the Rotbrain Encampment" QuestId="24971" Type="KillMob" MobId="49422" KillCount="8"/>
+		<TurnIn QuestName="Assault on the Rotbrain Encampment" QuestId="24971" TurnInName="Shadow Priest Sarvis" TurnInId="1569"/>
+		<PickUp QuestName="Vital Intelligence" QuestId="24972" GiverName="Shadow Priest Sarvis" GiverId="1569"/>
+			<Objective QuestName="Vital Intelligence" QuestId="24972" Type="CollectItem" ItemId="2885" CollectCount="1"/>
+		<TurnIn QuestName="Vital Intelligence" QuestId="24972" TurnInName="Deathguard Simmer" TurnInId="1519" X="2222.186" Y="1012.801" Z="37.12211"/>
+		
+			<If Condition="Me.ZoneId == 85" > <!-- Tirisfal Glades -->
+				<CustomBehavior File="Message" Text="Running to UC Zepp to Org" LogColor="Cornflowerblue" />
+				<RunTo X="2067.232" Y="286.1159" Z="97.03087" />
+				
+				<CustomBehavior File="Message" Text="Waiting for Zepp to Org - don't interact!" LogColor="Orange" />
+		
+				<CustomBehavior File="UseTransport" TransportId="164871"
+											WaitAtX="2070.155" WaitAtY="289.2588" WaitAtZ="97.0315" 
+											TransportStartX="2062.376" TransportStartY="292.998" TransportStartZ="114.973"
+											StandOnX="2067.979" StandOnY="295.2747" StandOnZ="97.23677" 
+											TransportEndX="1833.509" TransportEndY="-4391.543" TransportEndZ="152.7679"
+											GetOffX="1840.225" GetOffY="-4390.912" GetOffZ="135.2337" />
+
+			</If>
+			
+			<If Condition="Me.MapId == 1" >
+				<CustomBehavior File="InteractWith" MobId="3310" X="1799.95" Y="-4370.14" Z="102.6434" />
+				<CustomBehavior File="WaitTimer" WaitTime="2000" GoalText="Waiting for bot {TimeRemaining}" />
+				<RunTo X="-778.0994" Y="-4891.135" Z="19.71905" />
+			</If>
+			
+			<If Condition="Me.ZoneId == 85" > <!-- Tirisfal Glades -->
+	<CustomBehavior File="UserDialog" AllowBotStop="True" SoundCue="Exclamation" SoundCueInterval="1" Text="Something went wrong!  Move your toon to Orgrimmar and then down to Sen'jin Village (Durotar)!\n\nIf you are above level 5 - load the 5-12 or 12-58 profile" />
+			</If>
+			
+
+
+			<CustomBehavior File="LoadProfile" ProfileName="[H - Quest] 5-12 Durotar [Kick]" /> 
+		
+	</QuestOrder>
+
+</HBProfile>
+	

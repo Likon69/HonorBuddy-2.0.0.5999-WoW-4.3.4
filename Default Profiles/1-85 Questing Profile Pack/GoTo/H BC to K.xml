@@ -1,0 +1,76 @@
+<HBProfile>
+	<Name>H BC to K</Name>
+	<MinLevel>1</MinLevel>
+	<MaxLevel>86</MaxLevel>
+	
+	<MinDurability>0.1</MinDurability>
+	<MinFreeBagSlots>1</MinFreeBagSlots>
+	
+
+	<QuestOrder>
+	
+		<CustomBehavior File="UserSettings" LearnFlightPaths="False" UseFlightPaths="False" TrainNewSkills="False" />
+		
+			<While Condition="Me.MapId == 530 &amp;&amp; (Me.Level &gt;= 68)">
+				<If Condition="Me.Class == WoWClass.DeathKnight">
+				 <While Condition="Me.Zone != 139" >
+					<CustomBehavior File="Misc\RunLua" Lua="CastSpellByID(50977)" />
+					<CustomBehavior File="WaitTimer" WaitTime="12000" GoalText="Waiting for port {TimeRemaining}" />
+					<CustomBehavior File="InteractWith" MobId="190942" ObjectType="Gameobject" Range="6" WaitForNpcs="False" />
+					<CustomBehavior File="WaitTimer" WaitTime="5000" GoalText="Waiting for port {TimeRemaining}" />
+				 </While>
+				
+				 <If Condition="Me.ZoneId == 139" >
+					<ClearVendor />
+					
+					<SetVendor>
+						<Vendors>
+							<Vendor Name="Lady Alistra" Entry="29195" Type="Repair" X="2488.616" Y="-5654.104" Z="376.9503" />
+						</Vendors>
+					</SetVendor>
+					
+					<CustomBehavior File="ForceSetVendor" DoTrain="True" />
+					<ClearVendor />
+				
+					<CustomBehavior File="UserSettings" UseFlightPaths="True" />
+					<CustomBehavior File="InteractWith" MobId="29480" X="2348.626" Y="-5669.289" Z="382.2406" />
+				 </If>
+					
+				  <If Condition="(Me.IsHorde) &amp;&amp; (Me.MapId == 0)" >
+					<RunTo X="2047.313" Y="310.4062" Z="54.157" />
+					<RunTo X="2067.457" Y="289.577" Z="97.03069" />
+				   <If Condition="Me.ZoneId == 85" > <!-- Tirisfal Glades -->
+					<CustomBehavior File="Message" Text="Running to UC Zepp to Org" LogColor="Cornflowerblue" />
+					<RunTo X="2067.232" Y="286.1159" Z="97.03087" />
+					
+					<CustomBehavior File="Message" Text="Waiting for Zepp to Org - don't interact!" LogColor="Orange" />
+			
+					<CustomBehavior File="UseTransport" TransportId="164871"
+												WaitAtX="2070.155" WaitAtY="289.2588" WaitAtZ="97.0315" 
+												TransportStartX="2062.376" TransportStartY="292.998" TransportStartZ="114.973"
+												StandOnX="2067.979" StandOnY="295.2747" StandOnZ="97.23677" 
+												TransportEndX="1833.509" TransportEndY="-4391.543" TransportEndZ="152.7679"
+												GetOffX="1840.225" GetOffY="-4390.912" GetOffZ="135.2337" />
+
+				   </If>
+				  </If>
+				  
+					<CustomBehavior File="UserSettings" UseFlightPaths="False" />
+				</If>
+				
+				<If Condition="Me.Class != WoWClass.DeathKnight">
+					<CustomBehavior File="FlyTo" DestName="Org portal" X="-1956.413" Y="5383.551" Z="-12.42774" />
+					<CustomBehavior File="ForcedDismount" />
+
+					<RunTo X="-1898.169" Y="5395.958" Z="-12.42774" />
+					<CustomBehavior File="InteractWith" MobId="183323" ObjectType="Gameobject" Range="4" />
+					<CustomBehavior File="WaitTimer" WaitTime="5000" GoalText="Waiting for zone {TimeRemaining}" />
+				</If>
+			</While>
+		
+			<CustomBehavior File="LoadProfile" ProfileName="H K to LK" /> 
+		
+
+	  
+	</QuestOrder>
+</HBProfile>

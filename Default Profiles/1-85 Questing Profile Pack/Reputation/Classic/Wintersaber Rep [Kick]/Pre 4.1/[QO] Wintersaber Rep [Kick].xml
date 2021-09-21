@@ -1,0 +1,218 @@
+<HBProfile>
+	<Name>[A - Rep Quest] Frostsaber Rep - Winterspring [Kick]</Name>
+	<MinLevel>60</MinLevel>
+	<MaxLevel>86</MaxLevel>
+	
+	<MinDurability>0.1</MinDurability>
+	<MinFreeBagSlots>2</MinFreeBagSlots>
+	
+	<SellGrey>True</SellGrey>
+	<SellWhite>False</SellWhite>
+	<SellGreen>False</SellGreen>
+	<SellBlue>False</SellBlue>
+	<SellPurple>False</SellPurple>
+	
+	<MailWhite>True</MailWhite>
+	<MailGreen>True</MailGreen>
+	<MailBlue>True</MailBlue>
+	<MailPurple>True</MailPurple>  
+	
+	<ContinentId>1</ContinentId>
+
+	<Vendors>
+		<Vendor Name="Trapper Kiefer" Entry="50094" Type="Repair" X="7636.761" Y="-4429.5" Z="623.8735" />
+		<Vendor Name="Wixxrak" Entry="11184" Type="Repair" X="6733.39" Y="-4699.038" Z="721.3696" />
+	</Vendors>
+	
+	<Mailboxes>
+		<Mailbox X="6707.588" Y="-4667.385" Z="721.3739" />
+	</Mailboxes>
+
+	<!--
+	<Quest Id="4970" Name="Frostsaber Provisions">
+		<Objective Type="CollectItem" ItemId="12622" CollectCount="5">
+			<CollectFrom>
+				<Mob Name="Shardtooth Bear" Id="7444" />
+			</CollectFrom>
+			<Hotspots>
+				<Hotspot X="7655.942" Y="-4246.395" Z="664.5908" />
+				<Hotspot X="7622.995" Y="-4273.018" Z="646.0189" />
+				<Hotspot X="7602.851" Y="-4323.669" Z="631.2996" />
+				<Hotspot X="7552.883" Y="-4326.684" Z="627.837" />
+				<Hotspot X="7488.75" Y="-4282.033" Z="652.0037" />
+				<Hotspot X="7538.257" Y="-4498.985" Z="604.7014" />
+				<Hotspot X="7498.919" Y="-4531.972" Z="605.8318" />
+				<Hotspot X="7466.029" Y="-4581.558" Z="609.3859" />
+				<Hotspot X="7403.598" Y="-4560.221" Z="597.4431" />	
+			</Hotspots>
+		</Objective>
+		<Objective Type="CollectItem" ItemId="12623" CollectCount="5">
+			<CollectFrom>
+				<Mob Name="Chillwind Chimaera" Id="7448" />
+			</CollectFrom>
+			<Hotspots>
+				<Hotspot X="7674.313" Y="-4517.809" Z="636.657" />
+				<Hotspot X="7707.975" Y="-4548.208" Z="657.0831" />
+				<Hotspot X="7785.501" Y="-4567.216" Z="679.4836" />
+				<Hotspot X="7767.693" Y="-4480.86" Z="655.1276" />
+				<Hotspot X="7846.698" Y="-4438.643" Z="680.785" />
+				<Hotspot X="7892.479" Y="-4432.637" Z="697.3455" />
+				<Hotspot X="7873.846" Y="-4497.483" Z="690.1465" />
+				<Hotspot X="7866.892" Y="-4543.228" Z="692.8818" />
+			</Hotspots>
+		</Objective>
+	</Quest>
+	-->
+	
+	<QuestOrder>
+			<!-- This will stop the bot after you're Exalted -->
+			<If Condition="Me.GetReputationLevelWith(589) == Styx.WoWUnitReaction.Exalted" >
+				<CustomBehavior File="UserDialog" Title="title" AllowBotStop="True" SoundCue="Asterisk" SoundCueInterval="1" Text="You have reached Exalted\nIf you liked this profile, +rep is always appreciated" />
+			</If>
+			
+			<!-- If you don't have the quest, fly there and get the quest -->
+			<If Condition="(!HasQuest(4970))" >
+				<CustomBehavior File="ForcedMount"  MountType="Flying" />
+				<CustomBehavior File="WaitTimer" WaitTime="2000"/>
+				<CustomBehavior File="FlyTo" X="8067.484" Y="-3862.439" Z="763.0035" />
+				<CustomBehavior File="RunMacro" Macro="/dismount\n/cancelaura Swift Flight Form\n/cancelaura Flight Form" NumOfTimes="1" WaitTime="2000" />
+		<Pickup QuestName="Frostsaber Provisions" QuestId="4970" GiverName="Rivern Frostwind" GiverId="10618" GiverType="NPC" X="8067.484" Y="-3862.439" Z="763.0035" />
+			</If>
+
+			<!-- This will get Winterfall Intrusion once you're above Neutral -->
+			<If Condition="Me.GetReputationLevelWith(589) &gt;= Styx.WoWUnitReaction.Friendly" >
+		<Pickup QuestName="Winterfall Intrusion" QuestId="5201" GiverName="Rivern Frostwind" GiverId="10618" GiverType="NPC" X="8067.484" Y="-3862.439" Z="763.0035" />
+			</If>
+			
+			<If Condition="((HasQuest(4970)) &amp;&amp; (!IsQuestCompleted(4970)))" >
+				<CustomBehavior File="ForcedMount"  MountType="Flying" />
+				<CustomBehavior File="WaitTimer" WaitTime="2000"/>
+				<CustomBehavior File="FlyTo" X="7427.28" Y="-4557.608" Z="599.6826" />
+				<CustomBehavior File="RunMacro" Macro="/dismount\n/cancelaura Swift Flight Form\n/cancelaura Flight Form" NumOfTimes="1" WaitTime="2000" />
+
+					<SetGrindArea>
+						<GrindArea>
+							<Factions>16</Factions>
+							<Hotspots>
+								
+								<Hotspot X="7406.217" Y="-4513.667" Z="601.7342" />
+								<Hotspot X="7546.768" Y="-4476.634" Z="604.1885" />
+								<Hotspot X="7871.396" Y="-4531.024" Z="691.2752" />
+								<Hotspot X="7461.662" Y="-4545.568" Z="602.9006" />	
+							
+							<!--
+								<Hotspot X="7656.962" Y="-4470.248" Z="623.8687" />
+								<Hotspot X="7706.44" Y="-4476.772" Z="636.6271" />
+								<Hotspot X="7759.063" Y="-4460.95" Z="650.9647" />
+								<Hotspot X="7805.286" Y="-4439.956" Z="663.3369" />
+								<Hotspot X="7861.797" Y="-4429.039" Z="686.0825" />
+								<Hotspot X="7898.118" Y="-4437.957" Z="700.6752" />
+								<Hotspot X="7880.776" Y="-4484.772" Z="692.715" />
+								<Hotspot X="7864.476" Y="-4539.521" Z="691.7702" />
+								<Hotspot X="7835.277" Y="-4577.682" Z="695.7509" />
+								<Hotspot X="7846.604" Y="-4638.583" Z="713.9006" />
+								<Hotspot X="7785.329" Y="-4635.712" Z="704.9752" />
+								<Hotspot X="7775.287" Y="-4572.902" Z="678.2904" />
+								<Hotspot X="7745.068" Y="-4538.382" Z="663.7018" />
+								<Hotspot X="7734.583" Y="-4481.117" Z="645.3224" />
+								<Hotspot X="7672.242" Y="-4495.557" Z="629.3514" />
+
+								<Hotspot X="7655.942" Y="-4246.395" Z="664.5908" />
+								<Hotspot X="7622.995" Y="-4273.018" Z="646.0189" />
+								<Hotspot X="7602.851" Y="-4323.669" Z="631.2996" />
+								<Hotspot X="7552.883" Y="-4326.684" Z="627.837" />
+								<Hotspot X="7488.75" Y="-4282.033" Z="652.0037" />
+								<Hotspot X="7538.257" Y="-4498.985" Z="604.7014" />
+								<Hotspot X="7498.919" Y="-4531.972" Z="605.8318" />
+								<Hotspot X="7466.029" Y="-4581.558" Z="609.3859" />
+								<Hotspot X="7403.598" Y="-4560.221" Z="597.4431" />	
+							-->
+							</Hotspots>
+						</GrindArea>
+					</SetGrindArea>
+				<GrindTo Condition="(IsQuestCompleted(4970))" />
+			</If>
+
+			<!--
+			<Objective QuestName="Frostsaber Provisions" QuestId="4970" Type="CollectItem" ItemId="12622" CollectCount="5" />
+			<Objective QuestName="Frostsaber Provisions" QuestId="4970" Type="CollectItem" ItemId="12623" CollectCount="5" />
+			-->
+			
+			<If Condition="((HasQuest(5201)) &amp;&amp; (!IsQuestCompleted(5201)))" >
+				<CustomBehavior File="ForcedMount"  MountType="Flying" />
+				<CustomBehavior File="WaitTimer" WaitTime="2000"/>
+				<CustomBehavior File="FlyTo" X="6834.525" Y="-5088.687" Z="691.638" />
+				<CustomBehavior File="RunMacro" Macro="/dismount\n/cancelaura Swift Flight Form\n/cancelaura Flight Form" NumOfTimes="1" WaitTime="2000" />
+
+					<SetGrindArea>
+						<GrindArea>
+							<Factions>82</Factions>
+							<Hotspots>
+								<!-- Furbolg -->
+								<Hotspot X="6858.091" Y="-5080.417" Z="690.3635" />
+								<Hotspot X="6840.232" Y="-5108.572" Z="693.1045" />
+								<Hotspot X="6782.113" Y="-5108.074" Z="705.7988" />
+								<Hotspot X="6779.908" Y="-5157.022" Z="732.4071" />
+								<Hotspot X="6740.849" Y="-5132.644" Z="728.759" />
+								<Hotspot X="6757.69" Y="-5083.506" Z="724.779" />
+								<Hotspot X="6728.13" Y="-5188.915" Z="750.9246" />
+								<Hotspot X="6739.972" Y="-5214.117" Z="765.2922" />
+								<Hotspot X="6714.563" Y="-5232.45" Z="778.2242" />
+								<Hotspot X="6738.964" Y="-5147.642" Z="731.4659" />
+								<Hotspot X="6802.688" Y="-5099.467" Z="697.7739" />
+								<Hotspot X="6855.838" Y="-5077.897" Z="690.0119" />
+							</Hotspots>
+						</GrindArea>
+					</SetGrindArea>
+				<GrindTo Condition="(IsQuestCompleted(5201))" />
+
+			<!--
+			<Objective QuestName="Winterfall Intrusion" QuestId="5201" Type="KillMob" MobId="7439" KillCount="5" />
+			<Objective QuestName="Winterfall Intrusion" QuestId="5201" Type="KillMob" MobId="7438" KillCount="5" />
+			-->
+			
+				<CustomBehavior File="ForcedMount"  MountType="Flying" />
+				<CustomBehavior File="WaitTimer" WaitTime="2000"/>
+				<CustomBehavior File="FlyTo" X="8067.484" Y="-3862.439" Z="763.0035" />
+				<CustomBehavior File="RunMacro" Macro="/dismount\n/cancelaura Swift Flight Form\n/cancelaura Flight Form" NumOfTimes="1" WaitTime="2000" />
+		<TurnIn QuestName="Winterfall Intrusion" QuestId="5201" TurnInName="Rivern Frostwind" TurnInId="10618" X="8067.484" Y="-3862.439" Z="763.0035" />
+		<Pickup QuestName="Winterfall Intrusion" QuestId="5201" GiverName="Rivern Frostwind" GiverId="10618" GiverType="NPC" X="8067.484" Y="-3862.439" Z="763.0035" />
+			</If>
+			<If Condition="((HasQuest(5201)) &amp;&amp; (IsQuestCompleted(5201)))" >
+		<TurnIn QuestName="Winterfall Intrusion" QuestId="5201" TurnInName="Rivern Frostwind" TurnInId="10618" X="8067.484" Y="-3862.439" Z="763.0035" />
+		<Pickup QuestName="Winterfall Intrusion" QuestId="5201" GiverName="Rivern Frostwind" GiverId="10618" GiverType="NPC" X="8067.484" Y="-3862.439" Z="763.0035" />
+			</If>
+			<If Condition="Me.GetReputationLevelWith(589) &gt;= Styx.WoWUnitReaction.Friendly" >
+			<If Condition="(!HasQuest(5201))" >
+		<Pickup QuestName="Winterfall Intrusion" QuestId="5201" GiverName="Rivern Frostwind" GiverId="10618" GiverType="NPC" X="8067.484" Y="-3862.439" Z="763.0035" />
+			</If>
+			</If>
+			
+			
+			<If Condition="((HasQuest(4970)) &amp;&amp; (IsQuestCompleted(4970)))" >
+				<CustomBehavior File="ForcedMount"  MountType="Flying" />
+				<CustomBehavior File="WaitTimer" WaitTime="2000"/>
+				<CustomBehavior File="FlyTo" X="8067.484" Y="-3862.439" Z="763.0035" />
+				<CustomBehavior File="RunMacro" Macro="/dismount\n/cancelaura Swift Flight Form\n/cancelaura Flight Form" NumOfTimes="1" WaitTime="2000" />
+			</If>
+		<TurnIn QuestName="Frostsaber Provisions" QuestId="4970" TurnInName="Rivern Frostwind" TurnInId="10618" X="8067.484" Y="-3862.439" Z="763.0035" />
+			<If Condition="((HasQuest(4970)) &amp;&amp; (IsQuestCompleted(4970)))" >
+		<TurnIn QuestName="Frostsaber Provisions" QuestId="4970" TurnInName="Rivern Frostwind" TurnInId="10618" X="8067.484" Y="-3862.439" Z="763.0035" />
+			</If>
+		<Pickup QuestName="Frostsaber Provisions" QuestId="4970" GiverName="Rivern Frostwind" GiverId="10618" GiverType="NPC" X="8067.484" Y="-3862.439" Z="763.0035" />
+
+			<If Condition="(!HasQuest(4970))" >
+		<Pickup QuestName="Frostsaber Provisions" QuestId="4970" GiverName="Rivern Frostwind" GiverId="10618" GiverType="NPC" X="8067.484" Y="-3862.439" Z="763.0035" />
+			</If>
+
+		
+				<CustomBehavior File="WaitTimer" WaitTime="5000"/>
+			<!-- If you rename this profile, you have to rename the ProfileName="" -->
+			<CustomBehavior File="LoadProfile" ProfileName="[QO] Wintersaber Rep [Kick].xml" />
+	
+	</QuestOrder>
+</HBProfile>
+
+<!--
+<GrindTo Condition="(Me.CarriedItems.Count(ret => ret.Entry == 12622) &gt;= 5)"/>
+ -->

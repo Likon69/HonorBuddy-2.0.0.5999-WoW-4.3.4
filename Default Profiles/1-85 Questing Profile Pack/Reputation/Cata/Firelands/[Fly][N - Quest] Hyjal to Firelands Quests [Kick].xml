@@ -1,0 +1,51 @@
+<HBProfile>
+	<Name>[Fly][N - Quest] Hyjal to Firelands Quests [Kick]</Name>
+
+	<MinDurability>0.1</MinDurability>
+
+
+	<Blackspots>
+	</Blackspots>
+	<AvoidMobs>
+		<Mob Name="Leyara" Entry="53014" />
+	</AvoidMobs>
+	
+	
+	<QuestOrder>
+	
+		<CustomBehavior File="UserSettings" TrainNewSkills="False" LootMobs="True" PullDistance="25"  />
+	
+			<If Condition="((!HasQuest(29200)) &amp;&amp; (!IsQuestCompleted(29200)))" >
+				<CustomBehavior File="FlyTo" DestName="Pickup Quest" X="4418.696" Y="-2080.762" Z="1210.32" />
+		<PickUp QuestName="Leyara" QuestId="29200" GiverName="Arch Druid Hamuul Runetotem" GiverId="52838" />
+			</If>
+			<If Condition="((HasQuest(29200)) &amp;&amp; (!IsQuestCompleted(29200)))" >
+				<CustomBehavior File="FlyTo" DestName="find Leyara" Distance="1" X="5236.886" Y="-1214.2" Z="1423.288" />
+				<CustomBehavior File="ForcedDismount" />
+				<CustomBehavior File="InteractWith" QuestId="29200" MobId="53014" NumOfTimes="1" GossipOptions="1, 1, 1" />
+				<CustomBehavior File="WaitTimer" WaitTime="85000" GoalText="Waiting for speech {TimeRemaining}" />
+			</If>
+			<If Condition="((HasQuest(29200)) &amp;&amp; (IsQuestCompleted(29200)))" >
+				<CustomBehavior File="FlyTo" DestName="Turnin Quest" X="4426.363" Y="-2084.204" Z="1209.685" />	
+		<TurnIn QuestName="Leyara" QuestId="29200" TurnInName="Matoclaw" TurnInId="52669" />
+		<PickUp QuestName="Through the Gates of Hell" QuestId="29201" GiverName="Malfurion Stormrage" GiverId="52845" />
+			</If>
+			<If Condition="((!HasQuest(29201)) &amp;&amp; (!IsQuestCompleted(29201)))" >
+				<CustomBehavior File="FlyTo" DestName="Pickup Quest" X="4422.963" Y="-2075.246" Z="1210.32" />
+		<PickUp QuestName="Through the Gates of Hell" QuestId="29201" GiverName="Malfurion Stormrage" GiverId="52845" />
+			</If>
+			<If Condition="((HasQuest(29201)) &amp;&amp; (!IsQuestCompleted(29201)))" >
+				<CustomBehavior File="FlyTo" DestName="Firelands" X="4618.406" Y="-2093.736" Z="1238.793" />
+				<CustomBehavior File="ForcedDismount" />
+				<CustomBehavior File="InteractWith" QuestId="29201" MobId="208900" ObjectType="Gameobject" WaitTime="10000" X="4605.788" Y="-2095.764" Z="1238.9" />
+			</If>
+			<If Condition="((HasQuest(29201)) &amp;&amp; (IsQuestCompleted(29201)))" >
+	<CustomBehavior File="UserDialog" AllowBotStop="True" SoundCue="Exclamation" SoundCueInterval="1" Text="Tilemap for Firelands Dailies is currently *null*" />
+		<TurnIn QuestName="Through the Gates of Hell" QuestId="29201" TurnInName="Malfurion Stormrage" TurnInId="53385" X="985.0344" Y="371.8745" Z="38.11482" />
+			</If>
+			<!-- End of Hyjal to Firelands Quests Profile -->
+			
+	<CustomBehavior File="LoadProfile" ProfileName="[Fly][N - Rep Quest] Molten Front Firelands Dailies [Kick]" /> 
+	
+	</QuestOrder>
+</HBProfile>

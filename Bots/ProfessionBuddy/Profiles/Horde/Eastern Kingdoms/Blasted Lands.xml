@@ -1,0 +1,582 @@
+<HBProfile xsi:noNamespaceSchemaLocation="../Schemas/EchoSchema.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<!-- Original contribution by EchoTiger -->
+	<Name>Blasted Lands ($ShortHash$)</Name>
+
+	<MinDurability>0.3</MinDurability>
+	<MinFreeBagSlots>3</MinFreeBagSlots>
+
+	<SellGrey>true</SellGrey>
+	<SellWhite>true</SellWhite>
+	<SellGreen>true</SellGreen>
+	<SellBlue>true</SellBlue>
+	<SellPurple>false</SellPurple>
+
+	<MailGrey>false</MailGrey>
+	<MailWhite>true</MailWhite>
+	<MailGreen>true</MailGreen>
+	<MailBlue>true</MailBlue>
+	<MailPurple>true</MailPurple>
+
+	<TargetElites>true</TargetElites>
+
+	<AvoidMobs>
+	</AvoidMobs>
+
+	<Mailboxes>
+	</Mailboxes>
+
+	<Vendors>
+	</Vendors>
+
+	<Blackspots>
+		<Blackspot X="-11786.27" Y="-3156.42" Z="-27.2632" Radius="5" /> <!-- Tent that's too short for tall races to walk under. -->
+		<Blackspot X="-11783.14" Y="-3158.424" Z="-27.63164" Radius="10" /> <!-- Tent that's too short for tall races to walk under. -->
+	</Blackspots>
+
+	<Blacklist>
+	</Blacklist>
+
+	<QuestOrder IgnoreCheckpoints="false" >
+		<!-- Check function status -->
+		<Code File="RunCode" Type="Definition">
+			<![CDATA[
+			private static bool? profileFunctionsEnabled => (bool?)AppDomain.CurrentDomain.GetData("QuestingProfiles_FunctionsEnabled");
+			private static bool IsStoreProfile(string path) => path.StartsWith("store://");
+			private static string Slashify(string path) => IsStoreProfile(path) ? path.Replace(@"\", "/") : path.Replace("/", @"\");
+
+			public __CompiledBatchClass__()
+			{
+				ActivateFunctions();
+			}
+
+			private static void ActivateFunctions()
+			{
+				if (profileFunctionsEnabled == null || profileFunctionsEnabled == false)
+				{
+					Bots.Professionbuddy.PBLog.Log(Colors.MediumPurple, "[Profile Message!]: ", Colors.Yellow, "Please stand by as the functions are being activated!");
+					LoadProfile(@"..\..\Functions\Activate Functions.xml");
+				}
+			}
+
+			private static void LoadProfile(string path)
+			{
+				var profile = GetNewPath(path);
+				if (!IsStoreProfile(profile) && !File.Exists(profile))
+				{
+					Bots.Professionbuddy.PBLog.Log(Colors.MediumPurple, "[Profile Message!]: ", Colors.Yellow, "Profile does not exist.\n" + profile);
+					return;
+				}
+
+				Bots.Professionbuddy.PBLog.Log(Colors.MediumPurple, "[Profile Message!]: ", Colors.Yellow, "Loading: " + profile);
+				ProfileManager.LoadNew(profile, false);
+			}
+
+			private static string GetNewPath(string path)
+			{
+				if (IsStoreProfile(path))
+					return Slashify(path);
+
+				var currentProfile = ProfileManager.XmlLocation;
+				if (IsStoreProfile(currentProfile))
+					return Slashify(currentProfile + "/../" + path);
+
+				var absolutePath = Path.Combine(Path.GetDirectoryName(currentProfile), path);
+				absolutePath = Path.GetFullPath(absolutePath);
+				var canonicalPath = new Uri(absolutePath).LocalPath;
+				return Slashify(canonicalPath);
+			}]]>
+		</Code>
+		<Code File="RunCode" Code="ActivateFunctions();" />
+		<!-- END Check function status -->
+
+		<If Condition="Me.IsAlliance" >
+			<Code File="LoadProfile" ProfileName="..\..\Questing Autoloader.xml" />
+		</If>
+		<!-- RunCode Methods -->
+			<Code File="RunCode">
+			<![CDATA[
+				Bots.Professionbuddy.PBLog.Log(System.Windows.Media.Colors.MediumPurple, "> [Profile Initialization Status] ", System.Windows.Media.Colors.CornflowerBlue, "\n     Auto-Looting	:: Enabled\n     Looting	:: Enabled\n     Game Addons	:: Disabled");
+				Lua.DoString("SetCVar('AutoLootDefault', 1);");
+				Lua.DoString("SetCVar('autoDismountFlying', 1);");
+				CharacterSettings.Instance.LootMobs = true;
+				CharacterSettings.Instance.Save();
+				Logging.Write(System.Windows.Media.Colors.MediumPurple, "> [Ready to bot!]");
+			]]>
+			</Code>
+			<Code File="RunCode" Type="Definition">
+				<![CDATA[
+						bool DoQuest(params uint[] questIds)
+						{
+							foreach (var questId in questIds)
+							{
+								if (HasQuest(questId) && !IsQuestCompleted(questId)) return true;
+							}
+							return false;
+						}
+						bool NeedsQuest(params uint[] questIds)
+						{
+							foreach (var questId in questIds)
+							{
+								if (!HasQuest(questId) && !IsQuestCompleted(questId)) return true;
+							}
+							return false;
+						}
+						bool NeedsBreadcrumbQuest(params uint[] questIds)
+						{
+							foreach (var questId in questIds)
+							{
+								if (IsQuestCompleted(questId)) return false;
+							}
+							return true;
+						}
+						bool QuestDone(params uint[] questIds)
+						{
+							foreach (var questId in questIds)
+							{
+								if (HasQuest(questId) && IsQuestCompleted(questId)) return true;
+							}
+							return false;
+						}
+						bool QuestFlaggedCompleted(params uint[] questIds)
+						{
+							foreach (var questId in questIds)
+							{
+								return Lua.GetReturnVal<bool>($"return IsQuestFlaggedCompleted({questId});", 0);
+							}
+							return false;
+						}
+						async Task SkipCutscene(int preWait = 3000, int postWait = 3000)
+						{
+					// Add detection of cutscene here.
+							await Coroutine.Sleep(preWait);
+					// Test and improve the working method.
+							Lua.DoString("MovieFrame:StopMovie(); CinematicFrame_CancelCinematic(); StopCinematic();");
+							await Coroutine.Sleep(postWait);
+						}
+					]]>
+			</Code>
+		<!-- END RunCode Methods -->
+
+
+		<PickUp QuestName="Futile Pride" QuestId="25674" GiverName="Okrilla" GiverId="41124" X="-10871" Y="-2678.448" Z="9.46485" />
+		<Code File="KillUntilComplete" MobId="41136" QuestId="25674" X="-11017.36" Y="-2805.431" Z="6.048459" />
+		<TurnIn QuestName="Futile Pride" QuestId="25674" TurnInName="Okrilla" TurnInId="41124" X="-10871.48" Y="-2678.465" Z="9.465833" />
+
+		<PickUp QuestName="Heartstrike" QuestId="25676" GiverName="Okrilla" GiverId="41124" X="-10871.48" Y="-2678.465" Z="9.465833" />
+		<PickUp QuestName="Ogre Combat" QuestId="25675" GiverName="Master Aitokk" GiverId="41125" X="-10920.94" Y="-2754.72" Z="19.9216" />
+
+		<Code File="KillUntilComplete" QuestId="25675" >
+			<HuntingGrounds>
+				<Hotspot X="-11355.46" Y="-2784.057" Z="7.688684" />
+				<Hotspot X="-11371.23" Y="-2863.41" Z="5.311133" />
+				<Hotspot X="-11447.29" Y="-2870.66" Z="2.105396" />
+				<Hotspot X="-11467.75" Y="-2739.3" Z="3.741264" />
+				<Hotspot X="-11582.83" Y="-2817.342" Z="5.455671" />
+				<Hotspot X="-11488.23" Y="-2886.811" Z="10.68391" />
+			</HuntingGrounds>
+			<PursuitList>
+				<PursueUnit Id="5977" PursueWhen="!IsObjectiveComplete(1, 25675)" />
+				<PursueUnit Id="5978" PursueWhen="!IsObjectiveComplete(2, 25675)" />
+			</PursuitList>
+		</Code>
+
+		<TurnIn QuestName="Heartstrike" QuestId="25676" TurnInName="Rofilian Dane" TurnInId="41133" X="-10667.65" Y="-3371.991" Z="1.627276" />
+
+		<PickUp QuestName="It&apos;s All Mine" QuestId="25677" GiverName="Rofilian Dane" GiverId="41133" X="-10667.65" Y="-3371.991" Z="1.627276" />
+		<PickUp QuestName="Pick Your Fate" QuestId="25678" GiverName="Rofilian Dane" GiverId="41133" X="-10667.65" Y="-3371.991" Z="1.627276" />
+
+		<Code File="InteractWith" MobId="203183" CollectionDistance="200" InteractByUsingItemId="55238" QuestId="25677" QuestObjectiveIndex="1" >
+			<HuntingGrounds>
+				<Hotspot X="-10678.6" Y="-3355.771" Z="-10.40525" />
+				<Hotspot X="-10624.61" Y="-3287.882" Z="-6.454985" />
+				<Hotspot X="-10767.09" Y="-3468.964" Z="-22.57184" />
+				<Hotspot X="-10692.83" Y="-3539.654" Z="-33.3988" />
+			</HuntingGrounds>
+		</Code>
+
+		<Code File="KillUntilComplete" QuestId="25678" >
+			<HuntingGrounds>
+				<Hotspot X="-10678.6" Y="-3355.771" Z="-10.40525" />
+				<Hotspot X="-10624.61" Y="-3287.882" Z="-6.454985" />
+				<Hotspot X="-10767.09" Y="-3468.964" Z="-22.57184" />
+				<Hotspot X="-10692.83" Y="-3539.654" Z="-33.3988" />
+			</HuntingGrounds>
+			<PursuitList>
+				<PursueUnit Id="5996" PursueWhen="!IsObjectiveComplete(1, 25678)" />
+				<PursueUnit Id="5997" PursueWhen="!IsObjectiveComplete(2, 25678)" />
+				<PursueUnit Id="5998" PursueWhen="!IsObjectiveComplete(3, 25678)" />
+			</PursuitList>
+		</Code>
+
+		<TurnIn QuestName="It&apos;s All Mine" QuestId="25677" TurnInName="Rofilian Dane" TurnInId="41133" X="-10673.33" Y="-3372.816" Z="1.082495" />
+		<TurnIn QuestName="Pick Your Fate" QuestId="25678" TurnInName="Rofilian Dane" TurnInId="41133" X="-10673.33" Y="-3372.816" Z="1.082495" />
+		<PickUp QuestName="Into the Mountain" QuestId="25679" GiverName="Rofilian Dane" GiverId="41133" X="-10673.33" Y="-3372.816" Z="1.082495" />
+		<TurnIn QuestName="Into the Mountain" QuestId="25679" TurnInName="Tak&apos;arili" TurnInId="41134" X="-10622.25" Y="-3469.522" Z="5.890329" />
+		<RecheckCheckpoints />
+
+		<PickUp QuestName="That&apos;s Not Us" QuestId="25680" GiverName="Tak&apos;arili" GiverId="41134" X="-10622.25" Y="-3469.522" Z="5.890329" />
+		<Code File="KillUntilComplete" MobId="41163" QuestId="25680" X="-10780.72" Y="-3597.294" Z="-12.37721" />
+		<TurnIn QuestName="That&apos;s Not Us" QuestId="25680" TurnInName="Tak&apos;arili" TurnInId="41134" X="-10616.77" Y="-3475.817" Z="5.278571" />
+
+		<PickUp QuestName="Some People Just Need Killing" QuestId="25681" GiverName="Tak&apos;arili" GiverId="41134" X="-10616.77" Y="-3475.817" Z="5.278571" />
+		<!-- Not using the box, we could use the extra grind experience from the mobs -->
+		<Code File="KillUntilComplete" MobId="41173" QuestId="25681" X="-10647.58" Y="-3103.46" Z="24.30207" />
+		<TurnIn QuestName="Some People Just Need Killing" QuestId="25681" TurnInName="Tak&apos;arili" TurnInId="41134" X="-10622.29" Y="-3470.509" Z="5.84622" />
+		<PickUp QuestName="Mission Complete" QuestId="25682" GiverName="Tak&apos;arili" GiverId="41134" X="-10622.29" Y="-3470.509" Z="5.84622" />
+		<TurnIn QuestName="Ogre Combat" QuestId="25675" TurnInName="Master Aitokk" TurnInId="41125" X="-10921.18" Y="-2754.772" Z="19.9728" />
+		<TurnIn QuestName="Mission Complete" QuestId="25682" TurnInName="Okrilla" TurnInId="41124" X="-10871.25" Y="-2678.57" Z="9.464231" />
+		<PickUp QuestName="The Dreadmaul Furnace" QuestId="25683" GiverName="Okrilla" GiverId="41124" X="-10871.25" Y="-2678.57" Z="9.464231" />
+		<TurnIn QuestName="The Dreadmaul Furnace" QuestId="25683" TurnInName="Bloodmage Lynnore" TurnInId="7506" X="-11465.25" Y="-2629.145" Z="2.987825" />
+		<RecheckCheckpoints />
+
+		<PickUp QuestName="Attune the Bloodstone" QuestId="25684" GiverName="Bloodmage Lynnore" GiverId="7506" X="-11465.25" Y="-2629.145" Z="2.987825" />
+		<Code File="InteractWith" MobId="203181" NonCompeteDistance="0" InteractBlacklistTimeInSeconds="1" QuestId="25684" QuestObjectiveIndex="1" X="-11456.8" Y="-2632.858" Z="3.839553" />
+		<Code File="InteractWith" MobId="203180" NonCompeteDistance="0" InteractBlacklistTimeInSeconds="1" QuestId="25684" QuestObjectiveIndex="2" X="-11364.58" Y="-2714.715" Z="13.49091" />
+		<TurnIn QuestName="Attune the Bloodstone" QuestId="25684" TurnInName="Bloodmage Lynnore" TurnInId="7506" X="-11466.74" Y="-2630.621" Z="3.727248" />
+
+		<PickUp QuestName="The First Step" QuestId="25685" GiverName="Bloodmage Lynnore" GiverId="7506" X="-11466.74" Y="-2630.621" Z="3.727248" />
+		<PickUp QuestName="A Bloodmage&apos;s Gotta Eat Too" QuestId="25690" GiverName="Bloodmage Drazial" GiverId="7505" X="-11466.39" Y="-2631.821" Z="3.97085" />
+
+		<If Condition="DoQuest(25685, 25690) &amp;&amp; Object(203181, u =&gt; u.Distance &lt; 40) != null" > <!-- Use porter to get outside of cave. -->
+			<Code File="InteractWith" MobId="203181" NonCompeteDistance="0" X="-11466.39" Y="-2631.821" Z="3.97085" />
+		</If>
+
+		<Code File="KillUntilComplete" TerminateWhen="!DoQuest(25685, 25690)" >
+			<HuntingGrounds>
+				<Hotspot X="-11381.46" Y="-3122.26" Z="5.715907" />
+				<Hotspot X="-11285.18" Y="-3147.302" Z="4.809456" />
+				<Hotspot X="-11176.85" Y="-3237.154" Z="7.02208" />
+				<Hotspot X="-11252.2" Y="-3053.629" Z="-0.157057" />
+				<Hotspot X="-11116.19" Y="-2942.546" Z="8.780975" />
+				<Hotspot X="-11012.29" Y="-2905.618" Z="8.976727" />
+				<Hotspot X="-11459.75" Y="-3105.806" Z="4.630188" />
+				<Hotspot X="-11516.67" Y="-3007.257" Z="12.14178" />
+			</HuntingGrounds>
+			<PursuitList>
+				<PursueUnit Id="5985" PursueWhen="!IsObjectiveComplete(1, 25685)" />
+				<PursueUnit Id="5990" PursueWhen="!IsObjectiveComplete(2, 25685)" />
+				<PursueUnit Id="5992" PursueWhen="!IsObjectiveComplete(1, 25690)" />
+			</PursuitList>
+		</Code>
+
+		<If Condition="QuestDone(25685, 25690)" > <!-- Use porter to get inside cave -->
+			<Code File="InteractWith" MobId="203180" NonCompeteDistance="0" X="-11364.58" Y="-2714.715" Z="13.49091" />
+		</If>
+
+		<TurnIn QuestName="A Bloodmage&apos;s Gotta Eat Too" QuestId="25690" TurnInName="Bloodmage Drazial" TurnInId="7505" X="-11464.26" Y="-2630.06" Z="3.009963" />
+		<TurnIn QuestName="The First Step" QuestId="25685" TurnInName="Bloodmage Lynnore" TurnInId="7506" X="-11466.66" Y="-2629.09" Z="3.295882" />
+		<RecheckCheckpoints />
+
+		<PickUp QuestName="Blood Ritual" QuestId="25686" GiverName="Bloodmage Lynnore" GiverId="7506" X="-11466.66" Y="-2629.09" Z="3.295882" />
+		<Code File="InteractWith" MobId="7506" GossipOptions="1" NonCompeteDistance="0" InteractBlacklistTimeInSeconds="1" QuestId="25686" QuestObjectiveIndex="1" X="-11466.18" Y="-2629.561" Z="3.313975" />
+		<TurnIn QuestName="Blood Ritual" QuestId="25686" TurnInName="Bloodmage Lynnore" TurnInId="7506" X="-11466.18" Y="-2629.561" Z="3.313975" />
+
+		<PickUp QuestName="Not Just Any Body" QuestId="25687" GiverName="Bloodmage Lynnore" GiverId="7506" X="-11466.18" Y="-2629.561" Z="3.313975" />
+		<While Condition="DoQuest(25687)" >
+			<If Condition="!IsObjectiveComplete(2, 25687)" >
+				<If Condition="Unit(7506, u =&gt; u.DistanceSqr &lt; 10f*10f) != null" >
+					<MoveTo X="-11468.45" Y="-2631.843" Z="4.170267" />
+					<Code File="MyCTM" X="-11482.61" Y="-2639.811" Z="-4.998346" TerminateWhen="Me.IsFalling" />
+				</If>
+				<Code File="InteractWith" MobId="203205" InteractByLooting="true" NonCompeteDistance="0" InteractBlacklistTimeInSeconds="1" QuestId="25687" QuestObjectiveIndex="2" X="-11488.87" Y="-2655.246" Z="-5.083395" />
+			</If>
+
+			<Code File="InteractWith" MobId="203204" InteractByLooting="true" NonCompeteDistance="0" InteractBlacklistTimeInSeconds="1" QuestId="25687" QuestObjectiveIndex="1" X="-11244.11" Y="-2902.225" Z="10.47023" />
+			<Code File="InteractWith" MobId="203206" InteractByLooting="true" NonCompeteDistance="0" InteractBlacklistTimeInSeconds="1" QuestId="25687" QuestObjectiveIndex="3" X="-11539.34" Y="-2889.65" Z="10.38763" />
+		</While>
+		<If Condition="QuestDone(25687)" > <!-- Use porter to get inside cave -->
+			<Code File="InteractWith" MobId="203180" NonCompeteDistance="0" X="-11361.23" Y="-2714.106" Z="13.3626" />
+		</If>
+		<TurnIn QuestName="Not Just Any Body" QuestId="25687" TurnInName="Bloodmage Lynnore" TurnInId="7506" X="-11465.2" Y="-2630.97" Z="3.472454" />
+
+		<PickUp QuestName="The Altar of Storms" QuestId="25688" GiverName="Bloodmage Lynnore" GiverId="7506" X="-11465.2" Y="-2630.97" Z="3.472454" />
+
+		<If Condition="DoQuest(25688) &amp;&amp; Object(203181, u =&gt; u.Distance &lt; 40) != null" > <!-- Use porter to get outside of cave. -->
+			<Code File="InteractWith" MobId="203181" NonCompeteDistance="0" X="-11466.39" Y="-2631.821" Z="3.97085" />
+		</If>
+
+		<While Condition="DoQuest(25688)" >
+			<Code File="InteractWith" MobId="203196" NonCompeteDistance="0" QuestId="25688" X="-11292.37" Y="-2549.73" Z="97.03294" TerminateWhen="Unit(41193) != null &amp;&amp; Unit(41193, u =&gt; u.IsAlive) != null" />
+			<Code File="KillUntilComplete" MobId="41191" QuestId="25688" X="-11292.27" Y="-2548.266" Z="97.03506" TerminateWhen="Unit(41193) == null &amp;&amp; Unit(41193, u =&gt; !u.IsAlive) == null || Unit(41193) == null" />
+		</While>
+
+		<If Condition="QuestDone(25688)" > <!-- Use porter to get inside cave -->
+			<Code File="InteractWith" MobId="203180" NonCompeteDistance="0" X="-11364.58" Y="-2714.715" Z="13.49091" />
+		</If>
+
+		<TurnIn QuestName="The Altar of Storms" QuestId="25688" TurnInName="Loramus Thalipedes" TurnInId="7783" X="-11459.68" Y="-2633.754" Z="3.501437" />
+
+		<PickUp QuestName="Time is Short" QuestId="25689" GiverName="Loramus Thalipedes" GiverId="7783" X="-11459.68" Y="-2633.754" Z="3.501437" />
+		<If Condition="QuestDone(25689) &amp;&amp; Object(203181, u =&gt; u.Distance &lt; 40) != null" > <!-- Use porter to get outside of cave. -->
+			<Code File="InteractWith" MobId="203181" NonCompeteDistance="0" X="-11466.39" Y="-2631.821" Z="3.97085" />
+		</If>
+		<TurnIn QuestName="Time is Short" QuestId="25689" TurnInName="Watcher Wazzik" TurnInId="41159" X="-11806.78" Y="-3181.075" Z="-30.95821" />
+
+		<PickUp QuestName="The Charred Granite of the Dark Portal" QuestId="25691" GiverName="Watcher Wazzik" GiverId="41159" X="-11806.78" Y="-3181.075" Z="-30.95821" />
+		<PickUp QuestName="The Vile Blood of Demons" QuestId="25692" GiverName="Watcher Wazzik" GiverId="41159" X="-11806.78" Y="-3181.075" Z="-30.95821" />
+		<PickUp QuestName="Protecting Our Rear" QuestId="25694" GiverName="Warlord Dar&apos;toon" GiverId="19254" X="-11814.09" Y="-3185.965" Z="-30.5586" />
+
+		<Code File="KillUntilComplete" MobId="41165" QuestId="25694" QuestObjectiveIndex="2" X="-11647.63" Y="-3393.149" Z="15.0494" />
+		<Code File="KillUntilComplete" MobId="41166" QuestId="25694" QuestObjectiveIndex="3" X="-11610.91" Y="-3094.394" Z="9.40578" />
+		<Code File="KillUntilComplete" MobId="41164" QuestId="25694" QuestObjectiveIndex="1" X="-11751.46" Y="-2801.75" Z="19.20919" />
+
+		<Code File="InteractWith" MobId="203224" CollectionDistance="200" PreInteractMountStrategy="Dismount" InteractByLooting="true" QuestId="25691" QuestObjectiveIndex="1" >
+			<HuntingGrounds>
+				<Hotspot X="-11762.29" Y="-3038.811" Z="19.67188" />
+				<Hotspot X="-11699.39" Y="-3076.792" Z="21.76476" />
+				<Hotspot X="-11608.32" Y="-3162.978" Z="4.594819" />
+				<Hotspot X="-11676.82" Y="-3376.805" Z="8.520686" />
+				<Hotspot X="-11791.12" Y="-3305.691" Z="5.663662" />
+			</HuntingGrounds>
+		</Code>
+
+		<Code File="KillUntilComplete" MobIds="6010, 6011, 41253" QuestId="25692" >
+			<HuntingGrounds>
+				<Hotspot X="-11753.5" Y="-3326.55" Z="10.4488" />
+				<Hotspot X="-11674.86" Y="-3199.329" Z="14.64489" />
+				<Hotspot X="-11705.3" Y="-3024.642" Z="17.34847" />
+			</HuntingGrounds>
+		</Code>
+
+		<TurnIn QuestName="The Charred Granite of the Dark Portal" QuestId="25691" TurnInName="Watcher Wazzik" TurnInId="41159" X="-11808.73" Y="-3183.436" Z="-30.72477" />
+		<TurnIn QuestName="The Vile Blood of Demons" QuestId="25692" TurnInName="Watcher Wazzik" TurnInId="41159" X="-11808.73" Y="-3183.436" Z="-30.72477" />
+		<PickUp QuestName="Enhancing the Stone" QuestId="25693" GiverName="Watcher Wazzik" GiverId="41159" X="-11808.73" Y="-3183.436" Z="-30.72477" />
+		<TurnIn QuestName="Protecting Our Rear" QuestId="25694" TurnInName="Warlord Dar&apos;toon" TurnInId="19254" X="-11815.11" Y="-3186.479" Z="-30.59617" />
+		<RecheckCheckpoints />
+
+		<PickUp QuestName="Watching Our Back" QuestId="25695" GiverName="Warlord Dar&apos;toon" GiverId="19254" X="-11815.11" Y="-3186.479" Z="-30.59617" />
+		<While Condition="DoQuest(25695)" >
+			<Code File="InteractWith" MobId="203226" Range="7" MovementBy="None" IgnoreLoSToTarget="true" NonCompeteDistance="0" InteractBlacklistTimeInSeconds="1" QuestId="25695" QuestObjectiveIndex="1" X="-11807.82" Y="-3231.535" Z="-30.10377" TerminateWhen="Object(203226, u =&gt; u.DistanceSqr &gt; 7f*7f) != null" />
+			<MoveTo Precision="3.01" X="-11806.03" Y="-3222.554" Z="-30.65008" />
+			<Code File="ForcedDismount" />
+			<Code File="RunCode">
+				<![CDATA[
+					while (Me.Location.Distance(new Vector3(-11803.23f, -3232.761f, -28.5176f)) > 1f*1f)
+					{
+						WoWMovement.ClickToMove(new Vector3(-11803.23f, -3232.761f, -28.5176f));
+						await Coroutine.Yield();
+					}
+				]]>
+			</Code>
+			<Code File="WaitTimer" WaitTime="60000" QuestId="25695" TerminateWhen="Unit(41269, u =&gt; u.Location.DistanceSqr(new Vector3(-11806.56f, -3241.442f, -29.68326f)) &lt;= 5) != null" />
+		</While>
+		<If Condition="QuestDone(25695) &amp;&amp; Me.Location.Distance(new Vector3(-11803.23f, -3232.761f, -28.5176f)) &lt;= 1f*1f" >
+			<Code File="RunCode">
+				<![CDATA[
+					while (Me.Location.Distance(new Vector3(-11805.35f, -3222.034f, -30.63861f)) > 2f*2f)
+					{
+						WoWMovement.ClickToMove(new Vector3(-11805.35f, -3222.034f, -30.63861f));
+						await Coroutine.Yield();
+					}
+				]]>
+			</Code>
+		</If>
+		<TurnIn QuestName="Watching Our Back" QuestId="25695" TurnInName="Warlord Dar&apos;toon" TurnInId="19254" X="-11820.59" Y="-3188.565" Z="-30.72888" />
+
+		<PickUp QuestName="The Sunveil Excursion" QuestId="25696" GiverName="Warlord Dar&apos;toon" GiverId="19254" X="-11820.59" Y="-3188.565" Z="-30.72888" />
+
+		<If Condition="QuestDone(25693)" > <!-- Use porter to get inside cave -->
+			<Code File="InteractWith" MobId="203180" NonCompeteDistance="0" X="-11364.58" Y="-2714.715" Z="13.49091" />
+		</If>
+		<TurnIn QuestName="Enhancing the Stone" QuestId="25693" TurnInName="Loramus Thalipedes" TurnInId="7783" X="-11458.75" Y="-2632.521" Z="3.573497" />
+
+		<PickUp QuestName="The Amulet of Allistarj" QuestId="25697" GiverName="Loramus Thalipedes" GiverId="7783" X="-11458.75" Y="-2632.521" Z="3.573497" />
+		<PickUp QuestName="The Amulet of Sevine" QuestId="25698" GiverName="Loramus Thalipedes" GiverId="7783" X="-11458.75" Y="-2632.521" Z="3.573497" />
+		<PickUp QuestName="The Amulet of Grol" QuestId="25699" GiverName="Loramus Thalipedes" GiverId="7783" X="-11458.75" Y="-2632.521" Z="3.573497" />
+
+		<If Condition="DoQuest(25697, 25698, 25699) &amp;&amp; Object(203181, u =&gt; u.Distance &lt; 40) != null" > <!-- Use porter to get outside of cave. -->
+			<Code File="InteractWith" MobId="203181" NonCompeteDistance="0" X="-11466.39" Y="-2631.821" Z="3.97085" />
+		</If>
+
+		<Code File="InteractWith" MobId="203229" InteractByLooting="true" NonCompeteDistance="0" InteractBlacklistTimeInSeconds="1" QuestId="25697" QuestObjectiveIndex="1" X="-11238.66" Y="-3451.11" Z="7.151475" />
+		<While Condition="DoQuest(25699)" >
+			<Code File="InteractWith" MobId="203230" InteractByLooting="true" NonCompeteDistance="0" InteractBlacklistTimeInSeconds="1" QuestId="25699" X="-11449.27" Y="-3799.65" Z="0.396718" TerminateWhen="Unit(41267, u =&gt; u.Lootable) != null" />
+			<Code File="KillUntilComplete" MobId="41267" WaitForNpcs="false" QuestId="25699" X="-11448.99" Y="-3795.018" Z="-5.610494" />
+		</While>
+		<Code File="InteractWith" MobId="41265" GossipOptions="1" NonCompeteDistance="0" InteractBlacklistTimeInSeconds="1" QuestId="25698" QuestObjectiveIndex="1" X="-11744" Y="-3872.149" Z="57.27409" />
+
+		<Code File="KillUntilComplete" MobIds="5985, 5990, 5992" TerminateWhen="Me.Level &gt; 54" >
+			<HuntingGrounds>
+				<Hotspot X="-11381.46" Y="-3122.26" Z="5.715907" />
+				<Hotspot X="-11285.18" Y="-3147.302" Z="4.809456" />
+				<Hotspot X="-11176.85" Y="-3237.154" Z="7.02208" />
+				<Hotspot X="-11252.2" Y="-3053.629" Z="-0.157057" />
+				<Hotspot X="-11116.19" Y="-2942.546" Z="8.780975" />
+				<Hotspot X="-11012.29" Y="-2905.618" Z="8.976727" />
+				<Hotspot X="-11459.75" Y="-3105.806" Z="4.630188" />
+				<Hotspot X="-11516.67" Y="-3007.257" Z="12.14178" />
+			</HuntingGrounds>
+		</Code>
+
+		<PickUp QuestName="Home... Gone... Naga..." QuestId="25702" GiverName="Salt-Flop" GiverId="41265" X="-11743.87" Y="-3872.52" Z="57.23584" />
+
+		<While Condition="DoQuest(26168)" >
+			<Code File="InteractWith" MobId="41265" GossipOptions="1" NonCompeteDistance="0" QuestId="26168" X="-11744" Y="-3872.149" Z="57.27409" />
+		</While>
+
+		<TurnIn QuestName="Home... Gone... Naga..." QuestId="25702" TurnInName="Neptool" TurnInId="41354" X="-12046.69" Y="-3795.369" Z="24.20739" />
+		<PickUp QuestName="Atrocities" QuestId="25703" GiverName="Neptool" GiverId="41354" X="-12046.69" Y="-3795.369" Z="24.20739" />
+
+		<Code File="KillUntilComplete" QuestId="25703" >
+			<HuntingGrounds>
+				<Hotspot X="-12330.3" Y="-3655.91" Z="19.26998" />
+				<Hotspot X="-12358.67" Y="-3591.897" Z="19.12223" />
+				<Hotspot X="-12396.51" Y="-3430.85" Z="18.28418" />
+				<Hotspot X="-12127.64" Y="-3750.781" Z="9.598459" />
+				<Hotspot X="-12092.52" Y="-3727.963" Z="9.887219" />
+			</HuntingGrounds>
+			<PursuitList>
+				<PursueUnit Id="41386" PursueWhen="!IsObjectiveComplete(1, 25703)" />
+				<PursueUnit Id="41387" PursueWhen="!IsObjectiveComplete(2, 25703)" />
+			</PursuitList>
+		</Code>
+
+		<TurnIn QuestName="Atrocities" QuestId="25703" TurnInName="Neptool" TurnInId="41354" X="-12048.13" Y="-3795.009" Z="24.11158" />
+		<PickUp QuestName="False Idols" QuestId="25705" GiverName="Neptool" GiverId="41354" X="-12048.13" Y="-3795.009" Z="24.11158" />
+		<PickUp QuestName="Neptool's Revenge" QuestId="25706" GiverName="Neptool" GiverId="41354" X="-12048.13" Y="-3795.009" Z="24.11158" />
+
+		<Code File="KillUntilComplete" TerminateWhen="IsObjectiveComplete(3, 25706) &amp;&amp; IsObjectiveComplete(4, 25706)" >
+			<HuntingGrounds>
+				<Hotspot X="-12315.6" Y="-3396.833" Z="20.62354" />
+				<Hotspot X="-12391.81" Y="-3638.177" Z="19.40569" />
+				<Hotspot X="-12285.24" Y="-3578.273" Z="18.05265" />
+			</HuntingGrounds>
+			<PursuitList>
+				<PursueUnit Id="41404" PursueWhen="!IsObjectiveComplete(3, 25706)" />
+				<PursueUnit Id="41405" PursueWhen="!IsObjectiveComplete(4, 25706)" />
+			</PursuitList>
+		</Code>
+
+		<While Condition="DoQuest(25705)" >
+			<Code File="InteractWith" MobId="203289" NumOfTimes="16" CollectionDistance="200" QuestId="25705" >
+				<HuntingGrounds>
+					<Hotspot X="-12063.24" Y="-3441.285" Z="22.16823" />
+					<Hotspot X="-11960.67" Y="-3454.912" Z="3.700366" />
+					<Hotspot X="-12056.71" Y="-3502.195" Z="-10.55713" />
+				</HuntingGrounds>
+			</Code>
+		</While>
+
+		<Code File="KillUntilComplete" TerminateWhen="IsObjectiveComplete(1, 25706) &amp;&amp; IsObjectiveComplete(2, 25706)" >
+			<HuntingGrounds>
+				<Hotspot X="-12063.24" Y="-3441.285" Z="22.16823" />
+				<Hotspot X="-11960.67" Y="-3454.912" Z="3.700366" />
+				<Hotspot X="-12056.71" Y="-3502.195" Z="-10.55713" />
+			</HuntingGrounds>
+			<PursuitList>
+				<PursueUnit Id="41422" PursueWhen="!IsObjectiveComplete(1, 25706)" />
+				<PursueUnit Id="41423" PursueWhen="!IsObjectiveComplete(2, 25706)" />
+			</PursuitList>
+		</Code>
+
+		<TurnIn QuestName="False Idols" QuestId="25705" TurnInName="Neptool" TurnInId="41354" X="-12048.68" Y="-3795.288" Z="24.01207" />
+		<TurnIn QuestName="Neptool's Revenge" QuestId="25706" TurnInName="Neptool" TurnInId="41354" X="-12048.68" Y="-3795.288" Z="24.01207" />
+
+		<If Condition="QuestDone(25697, 25698, 25699)" > <!-- Use porter to get inside cave -->
+			<Code File="InteractWith" MobId="203180" NonCompeteDistance="0" X="-11364.58" Y="-2714.715" Z="13.49091" />
+		</If>
+
+		<TurnIn QuestName="The Amulet of Allistarj" QuestId="25697" TurnInName="Bloodmage Lynnore" TurnInId="7506" X="-11466.57" Y="-2626.724" Z="2.887737" />
+		<TurnIn QuestName="The Amulet of Sevine" QuestId="25698" TurnInName="Bloodmage Lynnore" TurnInId="7506" X="-11466.57" Y="-2626.724" Z="2.887737" />
+		<TurnIn QuestName="The Amulet of Grol" QuestId="25699" TurnInName="Bloodmage Lynnore" TurnInId="7506" X="-11466.57" Y="-2626.724" Z="2.887737" />
+		<RecheckCheckpoints />
+
+		<PickUp QuestName="Loramus Thalipedes Awaits" QuestId="25700" GiverName="Bloodmage Lynnore" GiverId="7506" X="-11466.57" Y="-2626.724" Z="2.887737" />
+		<Code File="InteractWith" MobId="7506" GossipOptions="1" NonCompeteDistance="0" InteractBlacklistTimeInSeconds="1" QuestId="25700" QuestObjectiveIndex="1" X="-11467.15" Y="-2628.94" Z="3.368223" />
+		<TurnIn QuestName="Loramus Thalipedes Awaits" QuestId="25700" TurnInName="Loramus Thalipedes" TurnInId="7783" X="-11459.79" Y="-2632.276" Z="3.425553" />
+
+		<PickUp QuestName="You Are Rakh&apos;likh, Demon" QuestId="25701" GiverName="Loramus Thalipedes" GiverId="7783" X="-11459.79" Y="-2632.276" Z="3.425553" />
+		<If Condition="DoQuest(25701) &amp;&amp; Object(203181, u =&gt; u.Distance &lt; 40) != null" > <!-- Use porter to get outside of cave. -->
+			<Code File="InteractWith" MobId="203181" NonCompeteDistance="0" X="-11466.39" Y="-2631.821" Z="3.97085" />
+		</If>
+		<While Condition="DoQuest(25701)" >
+			<If Condition="Me.Z &lt;= 100" >
+				<Code File="InteractWith" MobId="8816" GossipOptions="1" NonCompeteDistance="0" X="-11114.45" Y="-2896.692" Z="10.68762" TerminateWhen="Me.Z &gt; 100" />
+			</If>
+			<Code File="Hooks\DoWhen" ActivityName="KnifeRazelikh" AllowUseDuringCombat="true" UseWhen="Me.CurrentTarget != null &amp;&amp; Me.CurrentTarget.Entry == 41279 &amp;&amp; Me.CurrentTarget.HealthPercent &lt; 10" >
+				<Code File="UseItem" ItemId="56012" TerminateWhen="!DoQuest(25701) || Me.CurrentTarget == null || Me.CurrentTarget.Entry != 41279 || Me.CurrentTarget.HealthPercent &gt;= 10" />
+				<Code File="WaitTimer" WaitTime="2000" />
+			</Code>
+			<Code File="KillUntilComplete" MobIds="41280, 41279" QuestId="25701" X="-11235.59" Y="-2837.588" Z="157.9235" TerminateWhen="Me.Z &lt;= 15 || (Unit(41280) == null &amp;&amp; Unit(41279) == null)" />
+
+			<If Condition="QuestDone(25701) || (DoQuest(25701) &amp;&amp; Me.Z &gt;= 15 &amp;&amp; Unit(41280) == null &amp;&amp; Unit(41279) == null)" >
+				<Code File="MyCTM" X="-11184.44" Y="-2834.53" Z="116.9781" TerminateWhen="Me.Z &lt;= 15" />
+			</If>
+		</While>
+		<If Condition="QuestDone(25701) &amp;&amp; Me.Z &gt;= 15" >
+			<Code File="MyCTM" X="-11184.44" Y="-2834.53" Z="116.9781" TerminateWhen="Me.Z &lt;= 15" />
+		</If>
+		<TurnIn QuestName="You Are Rakh&apos;likh, Demon" QuestId="25701" TurnInName="Watcher Wazzik" TurnInId="41159" X="-11808.1" Y="-3181.873" Z="-30.83442" />
+
+		<TurnIn QuestName="The Sunveil Excursion" QuestId="25696" TurnInName="Rohan Sunveil" TurnInId="42344" X="-12331.39" Y="-3016.867" Z="88.21632" />
+
+		<PickUp QuestName="The Demons and the Druid" QuestId="25717" GiverName="Rohan Sunveil" GiverId="42344" X="-12331.39" Y="-3016.867" Z="88.21632" />
+		<Code File="KillUntilComplete" QuestId="25717" >
+			<HuntingGrounds>
+				<Hotspot X="-12356.76" Y="-2677.759" Z="3.271801" />
+				<Hotspot X="-12367.69" Y="-2574.78" Z="3.041045" />
+				<Hotspot X="-12477.16" Y="-2397.786" Z="1.958436" />
+			</HuntingGrounds>
+			<PursuitList>
+				<PursueUnit Id="41470" PursueWhen="!IsObjectiveComplete(1, 25717)" />
+				<PursueUnit Id="41471" PursueWhen="!IsObjectiveComplete(2, 25717)" />
+				<PursueUnit Id="45119" PursueWhen="!IsObjectiveComplete(3, 25717)" />
+				<PursueUnit Id="45125" PursueWhen="!IsObjectiveComplete(4, 25717)" />
+			</PursuitList>
+		</Code>
+		<TurnIn QuestName="The Demons and the Druid" QuestId="25717" TurnInName="Rohan Sunveil" TurnInId="42344" X="-12330.86" Y="-3015.551" Z="88.21577" />
+
+		<PickUp QuestName="How Best to Proceed" QuestId="25718" GiverName="Rohan Sunveil" GiverId="42344" X="-12330.86" Y="-3015.551" Z="88.21577" />
+		<TurnIn QuestName="How Best to Proceed" QuestId="25718" TurnInName="Elijah Dawnflight" TurnInId="42348" X="-12271.02" Y="-2922.909" Z="97.508" />
+
+		<PickUp QuestName="Demoniac Vessel" QuestId="25719" GiverName="Elijah Dawnflight" GiverId="42348" X="-12271.02" Y="-2922.909" Z="97.508" />
+		<While Condition="DoQuest(25719)" >
+			<Code File="KillUntilComplete" MovementBy="NavigatorPreferred" QuestId="25719" TerminateWhen="HasItem(57180) || (GetItemCount(57177) &gt;=4 &amp;&amp; GetItemCount(57178) &gt;=20 &amp;&amp; GetItemCount(57179) &gt;=2)" >
+				<HuntingGrounds>
+					<Hotspot X="-11897.3" Y="-2551.494" Z="-23.27049" />
+					<Hotspot X="-11875.39" Y="-2674.74" Z="0.1754021" />
+					<Hotspot X="-12039.87" Y="-2649.746" Z="-23.14241" />
+					<Hotspot X="-12084.9" Y="-2580.866" Z="-24.86729" />
+					<Hotspot X="-11975.21" Y="-2479.839" Z="-25.08699" />
+				</HuntingGrounds>
+				<PursuitList>
+					<PursueUnit Id="42336" PursueWhen="GetItemCount(57177) &lt; 4" />
+					<PursueUnit Id="42337" PursueWhen="GetItemCount(57178) &lt; 20" />
+					<PursueUnit Id="42338" PursueWhen="GetItemCount(57179) &lt; 2" />
+				</PursuitList>
+			</Code>
+
+			<Code File="UseItem" ItemId="57177" NumOfTimes="500" TerminateWhen="!HasItem(57177) || HasItem(57180)" />
+			<Code File="UseItem" ItemId="57178" NumOfTimes="500" TerminateWhen="!HasItem(57178) || GetItemCount(57181) &gt;= 20" />
+			<Code File="UseItem" ItemId="57179" NumOfTimes="500" TerminateWhen="!HasItem(57179)" />
+			<Code File="UseItem" ItemId="57182" NumOfTimes="500" TerminateWhen="!HasItem(57182)" />
+			<Code File="UseItem" ItemId="57183" NumOfTimes="500" TerminateWhen="!HasItem(57183)" />
+		</While>
+		<TurnIn QuestName="Demoniac Vessel" QuestId="25719" TurnInName="Rohan Sunveil" TurnInId="42344" X="-12330.98" Y="-3015.659" Z="88.2173" />
+
+		<PickUp QuestName="The Downfall of Marl Wormthorn" QuestId="25720" GiverName="Rohan Sunveil" GiverId="42344" X="-12330.98" Y="-3015.659" Z="88.2173" />
+		<While Condition="DoQuest(25720)" >
+			<Code File="UseItemTargetLocation" QuestId="25720" ItemId="57185" UseType="ToObject" WaitTime="4000" MobId="42334" MinRange="2" Range="6" X="-12238.83" Y="-2464.189" Z="38.91131" TerminateWhen="Unit(42334, u =&gt; !u.HasAura(78986)) != null" />
+			<Code File="KillUntilComplete" MobId="42334" QuestId="25720" X="-12245.26" Y="-2493.646" Z="37.0256" TerminateWhen="Unit(42334, u =&gt; u.HasAura(78986)) != null" />
+		</While>
+		<TurnIn QuestName="The Downfall of Marl Wormthorn" QuestId="25720" TurnInName="Rohan Sunveil" TurnInId="42344" X="-12331.41" Y="-3015.236" Z="88.21734" />
+
+		<Code File="KillUntilComplete" MobIds="41470, 41471, 45119, 45125" TerminateWhen="Me.Level &gt;= 58" >
+			<HuntingGrounds>
+				<Hotspot X="-12356.76" Y="-2677.759" Z="3.271801" />
+				<Hotspot X="-12367.69" Y="-2574.78" Z="3.041045" />
+				<Hotspot X="-12477.16" Y="-2397.786" Z="1.958436" />
+			</HuntingGrounds>
+		</Code>
+
+		<Checkpoint Level="58" />
+
+		<Code File="DeleteItems" Ids="10593" />
+		<If Condition="Me.Level &lt;= 60" >
+			<Code File="RunCode" Code="foreach (PlayerQuest quest in Me.QuestLog.GetAllQuests()) QuestLog.Instance.AbandonQuestById(quest.Id)" />
+		</If>
+		<Code File="LoadProfile" ProfileName="../58-68 Autoloader.xml" />
+
+
+	</QuestOrder>
+</HBProfile>

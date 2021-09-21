@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<DungeonBuddyProfile>
+  <Name>Shadowfang Keep Heroic</Name>
+  <DungeonId>327</DungeonId>
+  <BossEncounters>
+	<Boss isFinal="false" entry="46962" name="Baron Ashbury" killOrder="1" optional="false" X="-256.1198" Y="2117.153" Z="81.17966" />
+	<Boss isFinal="false" entry="3887" name="Baron Silverlaine" killOrder="2" optional="true" X="-265.866" Y="2293.65" Z="76.15351" /> <!-- he spawns a couple of adds -->
+	<Boss isFinal="false" entry="4278" name="Commander Springvale" killOrder="3" optional="true" X="-227.4983" Y="2257.703" Z="102.7531" />
+	<Boss isFinal="false" entry="46963" name="Lord Walden" killOrder="4" optional="false" X="-141.84" Y="2183.98" Z="128.696" />
+	<Boss isFinal="true" entry="46964" name="Lord Godfrey" killOrder="5" optional="false" X="-82.66493" Y="2157.446" Z="155.712" /> <!-- Watch out for bullets! -->
+  </BossEncounters>
+  <Blackspots>
+    <!--<Blackspot X="-101.3791" Y="-703.8368" Z="9.095623" Radius="3.363508" />-->
+  </Blackspots>
+</DungeonBuddyProfile>

@@ -1,0 +1,135 @@
+
+<HBProfile>
+	<Name>[QO][Skinning] Twilight Highlands - Embersilk Cloth [tipexxx]</Name>
+	<MinLevel>78</MinLevel>
+	<MaxLevel>86</MaxLevel>
+	<MinDurability>0.1</MinDurability>
+	<MinFreeBagSlots>1</MinFreeBagSlots>
+	<MailGrey>False</MailGrey>
+	<MailWhite>False</MailWhite>
+	<MailGreen>False</MailGreen>
+	<MailBlue>True</MailBlue>
+	<MailPurple>True</MailPurple>
+	<SellGrey>True</SellGrey>
+	<SellWhite>False</SellWhite>
+	<SellGreen>True</SellGreen>
+	<SellBlue>False</SellBlue>
+	<SellPurple>False</SellPurple>
+	<TargetElites>False</TargetElites>
+	<Blackspots>
+		<Blackspot X="-4456.868" Y="-4642.982" Z="178.0604" Radius="7.390968" />
+		<Blackspot X="-4499.083" Y="-4660.313" Z="175.5453" Radius="7.156137" />
+		<Blackspot X="-4631.23" Y="-4587.103" Z="195.199" Radius="7.142785" />
+		<Blackspot X="-4506.191" Y="-4536.134" Z="192.1011" Radius="8.353387" />
+	</Blackspots>
+	<Vendors>
+		<Vendor Name="Zim Bamzabble" Entry="50460" Type="Repair" X="-4010.719" Y="-6501.42" Z="15.74668" />
+		<Vendor Name="Naka Scaleblade" Entry="49768" Type="Repair" X="-3675.151" Y="-5381.104" Z="35.76864" />
+	</Vendors>
+	<Mailboxes>
+		<Mailbox X="-4020.269" Y="-6425.382" Z="37.69161" />
+		<Mailbox X="-3666.49" Y="-5280.973" Z="41.76272" />
+	</Mailboxes>
+	<QuestOrder>
+		<CustomBehavior File="Message" Text="HB: Hello Botter, let's make some Gold!" LogColor="YellowGreen" />
+		<While Condition="(Me.MapId != 0) &amp;&amp; (Me.ZoneId != 4922)" >
+			<If Condition="(Me.MapId == 0) &amp;&amp; (Me.ZoneId != 4922) &amp;&amp; !IsQuestCompleted(26830)" >
+				<CustomBehavior File="Message" Text="HB: Flying ourselves to Bloodgultch in Twilight Highlands" LogColor="Orange" />
+				<CustomBehavior File="FlyTo"  X="-3666.49" Y="-5280.973" Z="41.76272" DestName="Twilight Highlands - Bloodgultch" />
+			</If>
+			<If Condition="Me.IsHorde">
+				<If Condition="(Me.MapId != 0)" >
+					<If Condition="(Me.ZoneId != 1637)" >
+						<CustomBehavior File="Message" Text="HB: We are not in Org" LogColor="Orange" />
+						<If Condition="(Me.ZoneId != 4922)" >
+							<CustomBehavior File="Message" Text="HB: We are not in Twilight Highlands either" LogColor="Orange" />
+							<CustomBehavior File="Message" Text="HB: Hearthing..." LogColor="Orange" />
+							<CustomBehavior File="ForcedDismount" />
+							<CustomBehavior File="RunMacro" Macro="/use Hearthstone" NumOfTimes="1" WaitTime="10000"/>
+							<Else>
+								<CustomBehavior File="Message" Text="HB: But we are in Twilight Highlands" LogColor="Orange" />
+							</Else>
+						</If>
+						<Else>
+							<CustomBehavior File="Message" Text="HB: We are in Org" LogColor="Orange" />
+						</Else>
+					</If>
+					<If Condition="(Me.MapId == 1) &amp;&amp; (Me.ZoneId == 1637)" >
+						<If Condition="!HasQuest(26830) &amp;&amp; IsQuestCompleted(26830)" >
+							<CustomBehavior File="Message" Text="HB: Using Twilight Highlands Portal" LogColor="Orange" />
+							<CustomBehavior File="FlyTo"  X="2032.612" Y="-4378.049" Z="98.04253" DestName="Orgrimmar Portal Platform" />
+							<CustomBehavior File="ForcedDismount" />
+							<CustomBehavior File="InteractWith" ObjectType="Gameobject" MobId="207686" NumOfTimes="1" Range="5" WaitTime="10000" CollectionDistance="10" X="2029.23267"	Y="-4379.82666" Z="97.9757" />
+							<CustomBehavior File="MyCTM" X="-4030.962" Y="-6343.906" Z="37.61724" />
+							<CustomBehavior File="ForceSetVendor"  DoMail="true" DoRepair="true" DoSell="true" DoTrain="false" />
+							<Else>
+								<CustomBehavior File="UserDialog" AllowBotStop="True" SoundCue="Exclamation" SoundCueInterval="1" Text="Move to Twilight Highlands or do the Quests to open the portal!" />
+							</Else>
+						</If>
+					</If>
+				</If>
+			</If>
+		</While>
+		<While Condition="(Me.Level &gt; 1)" >
+			<If Condition="(Me.LowestDurabilityPercent &gt;= 0.3) &amp;&amp; (Me.FreeBagSlots &gt;= 4)" >
+				<If Condition="(Me.MapId == 0) &amp;&amp; (Me.ZoneId == 4922)" >
+					<CustomBehavior File="Message" Text="HB: Flying to grind location" LogColor="Orange" />
+					<CustomBehavior File="FlyTo" X="-4647.453" Y="-4619.965" Z="195.5121" DestName="Twilight Highlands - Twilight Gate" />
+					<CustomBehavior File="ForcedDismount" />
+					<SetGrindArea>
+						<GrindArea>
+							<TargetMinLevel>78</TargetMinLevel>
+							<TargetMaxLevel>85</TargetMaxLevel>
+							<GrindArea>2350 103</GrindArea>
+                                                        <MaxDistance>65</MaxDistance>
+							<RandomizeHotspots>True</RandomizeHotspots>
+							<Hotspots>
+								<Hotspot X="-4302.415" Y="-4735.911" Z="135.5413" />
+								<Hotspot X="-4342.023" Y="-4730.898" Z="140.6516" />
+								<Hotspot X="-4371.405" Y="-4704.486" Z="149.9301" />
+								<Hotspot X="-4404.915" Y="-4683.327" Z="156.5268" />
+								<Hotspot X="-4441.394" Y="-4700.026" Z="157.2159" />
+								<Hotspot X="-4474.682" Y="-4679.41" Z="167.0276" />
+								<Hotspot X="-4494.069" Y="-4645.556" Z="176.7227" />
+								<Hotspot X="-4530.293" Y="-4628.604" Z="175.524" />
+								<Hotspot X="-4570.776" Y="-4630.959" Z="176.3954" />
+								<Hotspot X="-4607.695" Y="-4619.77" Z="189.4142" />
+								<Hotspot X="-4647.453" Y="-4619.965" Z="195.5121" />
+								<Hotspot X="-4655.653" Y="-4579.962" Z="196.3769" />
+								<Hotspot X="-4615.93" Y="-4572.091" Z="196.1804" />
+								<Hotspot X="-4615.23" Y="-4613.327" Z="192.4527" />
+								<Hotspot X="-4579.696" Y="-4626.888" Z="179.3551" />
+								<Hotspot X="-4542.001" Y="-4611.968" Z="179.6647" />
+								<Hotspot X="-4536.793" Y="-4571.99" Z="188.3003" />
+								<Hotspot X="-4497.68" Y="-4563.182" Z="188.9408" />
+								<Hotspot X="-4464.446" Y="-4585.088" Z="183.3736" />
+								<Hotspot X="-4431.721" Y="-4560.044" Z="185.9968" />
+								<Hotspot X="-4392.222" Y="-4566.471" Z="183.3265" />
+								<Hotspot X="-4375.284" Y="-4529.323" Z="189.852" />
+								<Hotspot X="-4414.339" Y="-4520.901" Z="197.3575" />
+								<Hotspot X="-4439.526" Y="-4551.818" Z="188.8235" />
+								<Hotspot X="-4455.6" Y="-4588.339" Z="182.0559" />
+								<Hotspot X="-4483.339" Y="-4617.661" Z="179.7034" />
+								<Hotspot X="-4482.516" Y="-4657.602" Z="174.5715" />
+								<Hotspot X="-4469.53" Y="-4694.394" Z="161.7299" />
+								<Hotspot X="-4432.564" Y="-4709.681" Z="155.133" />
+								<Hotspot X="-4392.756" Y="-4716.087" Z="149.8598" />
+								<Hotspot X="-4354.157" Y="-4725.562" Z="143.6349" />
+								<Hotspot X="-4314.792" Y="-4735.883" Z="136.6177" />
+							</Hotspots>
+						</GrindArea>
+					</SetGrindArea>
+					<GrindTo Condition="(Me.LowestDurabilityPercent &lt; 0.3) &amp;&amp; (Me.FreeBagSlots &lt;= 3)" GoalText="Grinding for Embersilk Cloth" />
+				</If>
+			</If>
+			<If Condition="(Me.LowestDurabilityPercent &lt; 0.3) &amp;&amp; (Me.FreeBagSlots &lt; 4)" >
+				<If Condition="Me.IsHorde" >
+					<CustomBehavior File="Message" Text="HB: Flying to Bloodgultch" LogColor="Orange" />
+					<CustomBehavior File="FlyTo"  X="-3675.151" Y="-5381.104" Z="35.76864" DestName="Bloodgultch" />
+				</If>
+				<CustomBehavior File="Message" Text="HB: Selling/Mailing/Repairing" LogColor="Orange" />
+				<CustomBehavior File="ForceSetVendor"  DoMail="true" DoRepair="true" DoSell="true" DoTrain="false" />
+			</If>
+		</While>
+	</QuestOrder>
+</HBProfile>

@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<DungeonBuddyProfile>
+  <Name>The Stonecore</Name>
+  <DungeonId>307</DungeonId>
+  <BossEncounters>
+	<!-- Don't stand in Crystal Barrage - kill crystal shards and don't get hit by them; don't get hit by the submerge jump -->
+	<Boss isFinal="false" entry="43438" name="Corborus" killOrder="1" optional="false" X="1154.55" Y="878.8431" Z="284.9632" /> 
+	<Boss isFinal="false" entry="43214" name="Slabhide" killOrder="2" optional="false" X="1280.065" Y="1227.754" Z="247.0767" />
+	<Boss isFinal="false" entry="42188" name="Ozruk" killOrder="3" optional="false" X="1507.859" Y="1073.26" Z="217.2513" />
+	<Boss isFinal="true" entry="42333" name="High Priestess Azil" killOrder="4" optional="false" X="1335.714" Y="969.8461" Z="211.6319" />
+  </BossEncounters>
+  <Blackspots>
+    <!--<Blackspot X="-101.3791" Y="-703.8368" Z="9.095623" Radius="3.363508" />-->
+  </Blackspots>
+</DungeonBuddyProfile>

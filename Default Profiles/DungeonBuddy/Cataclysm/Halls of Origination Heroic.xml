@@ -1,0 +1,35 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<DungeonBuddyProfile>
+  <Name>Halls of Origination Heroic</Name>
+  <DungeonId>321</DungeonId>
+  <BossEncounters>
+    <!-- kill snakes and use the levers on the sides  -->
+    <Boss isFinal="false" entry="39425" name="Temple Guardian Anhuur" killOrder="1" optional="false" X="-640.658" Y="334.349" Z="77.75692" />
+    <!-- Talk to Brann <Vendor Name="Brann Bronzebeard" Entry="39908" Type="Repair" X="-446.9355" Y="366.7675" Z="90.26968" /> to open door to vault -->
+    <!-- 4 mini bosses for vault of lights that leads to Anraphet -->
+
+    <Boss isFinal="false" entry="39801" name="Earth Warden" killOrder="2" optional="false" /> <!-- X="-223.5727" Y="482.2034" Z="89.13339" /> -->
+    <Boss isFinal="false" entry="39802" name="Water Warden" killOrder="2" optional="false" /> <!-- X="-223.4335" Y="251.0197" Z="89.13157" /> -->
+    <Boss isFinal="false" entry="39800" name="Flame Warden" killOrder="2" optional="false" /> <!-- X="-331.0515" Y="257.3164" Z="89.12778" /> -->
+    <Boss isFinal="false" entry="39803" name="Air Warden" killOrder="2" optional="false" /> <!-- X="-329.7274" Y="481.1424" Z="89.13226" /> -->
+
+    <Boss isFinal="false" entry="39788" name="Anraphet" killOrder="6" optional="false" X="-193.656" Y="366.689" Z="75.86589" />
+    <!-- use transit device at  X="-76.14256" Y="362.6189" Z="89.77859" /> to go back down to lift after killing Anraphet-->
+    <!-- Grab a camel around <Hotspot X="-523.3001" Y="-271.2154" Z="141.0734" /> before going to boss -->
+    <Boss isFinal="false" entry="39428" name="Earthrager Ptah" killOrder="7" optional="true" X="-507.759" Y="-414.168" Z="155.1805" />
+    <!-- after ptah, use the transit device at X="-503.6507" Y="-337.7109" Z="164.1681" /> -->
+    <!-- for the next 4 - use the maker's lift controller while on the elevator to go to 2nd floor (X="-491.3007" Y="208.3459" Z="79.80518" />) -->
+    <!-- These next 4 can be done in any order - but Rahj finishes the dungeon -->
+    <Boss isFinal="false" entry="39731" name="Ammunae" killOrder="8" optional="true" X="-730.9445" Y="193.7344" Z="343.9491" />
+    <!-- Kill pods / spore, then boss -->
+    <Boss isFinal="false" entry="39732" name="Setesh" killOrder="9" optional="true" X="-505.1701" Y="-32.4132" Z="343.9492" />
+    <!-- Kill Chaos portals before trash.  don't stand in green shit.  then kill boss. Tank picks up sentinels - they don't die. Boss un-tankable -->
+    <Boss isFinal="false" entry="39587" name="Isiset" killOrder="10" optional="true" X="-505.2049" Y="419.2708" Z="343.9493" />
+    <!-- look away from supernova! don't stand in shit. -->
+    <Boss isFinal="true" entry="39378" name="Rajh" killOrder="11" optional="false" X="-277.7587" Y="193.2552" Z="343.9499" />
+    <!-- don't stand in fire / tornado's -->
+  </BossEncounters>
+  <Blackspots>
+    <!--<Blackspot X="-101.3791" Y="-703.8368" Z="9.095623" Radius="3.363508" />-->
+  </Blackspots>
+</DungeonBuddyProfile>

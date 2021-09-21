@@ -1,0 +1,569 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Professionbuddy>
+  <CustomAction Code="MyLog(&quot;First Aid 1-525 [Deathburn]&quot;);" />
+  <If Condition="SecondaryBot.Name != &quot;Combat Bot&quot;" IgnoreCanRun="True">
+    <ChangeBotAction BotName="Combat Bot" />
+  </If>
+  <CustomAction Code="Lua.DoString(&quot;SetCVar(\&quot;AutoLootDefault\&quot;, 1)&quot;);" />
+  <While Condition="(FirstAid.Level &lt; 525)" IgnoreCanRun="False">
+    <If Condition="(FirstAid.Level &gt;=1) &amp;&amp; (FirstAid.Level &lt; FirstAid.MaxLevel - 25) &amp;&amp; FirstAid.MaxLevel &lt; 525" IgnoreCanRun="False">
+      <If Condition="FirstAid.Level &lt; 80" IgnoreCanRun="False">
+        <While Condition="FirstAid.Level &lt; 60 &amp;&amp; (InbagCount(2589) &lt; (int)(80 - FirstAid.Level)*1.8)" IgnoreCanRun="False">
+          <CallSubRoutine SubRoutineName="FarmLinen" />
+        </While>
+        <If Condition="FirstAid.Level &gt;= 60 &amp;&amp; InbagCount(2589) &lt; ((80 - FirstAid.Level) *2)" IgnoreCanRun="False">
+          <CallSubRoutine SubRoutineName="FarmLinen" />
+        </If>
+        <If Condition="FirstAid.Level &lt; 40 &amp;&amp; InbagCount(2589) &gt;= ((80 - FirstAid.Level) *2)" IgnoreCanRun="False">
+          <ChangeBotAction BotName="Combat Bot" />
+          <CastSpellAction RepeatType="Specific" Repeat="40 - (int)FirstAid.Level" Entry="3275" CastOnItem="False" ItemType="Chest" ItemId="0" />
+        </If>
+        <If Condition="FirstAid.Level == 40 &amp;&amp; !HasRecipe(3276)" IgnoreCanRun="True">
+          <CallSubRoutine SubRoutineName="VendorAndTrain" />
+        </If>
+        <If Condition="FirstAid.Level &gt;= 40" IgnoreCanRun="False">
+          <CastSpellAction RepeatType="Specific" Repeat="80 - (int)FirstAid.Level" Entry="3276" CastOnItem="False" ItemType="Chest" ItemId="0" />
+        </If>
+      </If>
+      <If Condition="FirstAid.Level &gt;= 80 &amp;&amp; FirstAid.Level &lt; 150" IgnoreCanRun="False">
+        <If Condition="FirstAid.Level == 80 &amp;&amp; !HasRecipe(3277)" IgnoreCanRun="True">
+          <CallSubRoutine SubRoutineName="VendorAndTrain" />
+        </If>
+        <While Condition="FirstAid.Level &lt; 110 &amp;&amp; InbagCount(2592) &lt; (int)((150 - FirstAid.Level)) *1.8" IgnoreCanRun="False">
+          <CallSubRoutine SubRoutineName="FarmWool" />
+        </While>
+        <If Condition="FirstAid.Level &gt;= 110 &amp;&amp; InbagCount(2592) &lt; ((150 - FirstAid.Level) *2)" IgnoreCanRun="True">
+          <CallSubRoutine SubRoutineName="FarmWool" />
+        </If>
+        <If Condition="FirstAid.Level &gt;= 80 &amp;&amp; InbagCount(2592) &gt;= ((150 - FirstAid.Level) *2)" IgnoreCanRun="False">
+          <ChangeBotAction BotName="Combat Bot" />
+          <CastSpellAction RepeatType="Specific" Repeat="115 - (int)FirstAid.Level" Entry="3277" CastOnItem="False" ItemType="Chest" ItemId="0" />
+        </If>
+        <If Condition="FirstAid.Level == 115 &amp;&amp; !HasRecipe(3278)" IgnoreCanRun="True">
+          <CallSubRoutine SubRoutineName="VendorAndTrain" />
+        </If>
+        <If Condition="FirstAid.Level &gt;= 115" IgnoreCanRun="False">
+          <CastSpellAction RepeatType="Specific" Repeat="150 - (int)FirstAid.Level" Entry="3278" CastOnItem="False" ItemType="Chest" ItemId="0" />
+        </If>
+      </If>
+      <If Condition="FirstAid.Level &gt;= 150 &amp;&amp; FirstAid.Level &lt; 210" IgnoreCanRun="False">
+        <If Condition="FirstAid.Level == 150 &amp;&amp; !HasRecipe(7928)" IgnoreCanRun="True">
+          <CallSubRoutine SubRoutineName="VendorAndTrain" />
+        </If>
+        <While Condition="FirstAid.Level &lt; 190 &amp;&amp; (InbagCount(4306) &lt; (int)(210 - FirstAid.Level)*1.8)" IgnoreCanRun="False">
+          <CallSubRoutine SubRoutineName="FarmSilk" />
+        </While>
+        <If Condition="FirstAid.Level &gt;= 190 &amp;&amp; InbagCount(4306) &lt; (int)(210 - FirstAid.Level) *2" IgnoreCanRun="False">
+          <CallSubRoutine SubRoutineName="FarmSilk" />
+        </If>
+        <If Condition="FirstAid.Level &lt; 180 &amp;&amp; InbagCount(4306) &gt;= (int)(210 - FirstAid.Level) *2" IgnoreCanRun="False">
+          <ChangeBotAction BotName="Combat Bot" />
+          <CastSpellAction RepeatType="Specific" Repeat="180 - (int)FirstAid.Level" Entry="7928" CastOnItem="False" ItemType="Chest" ItemId="0" />
+        </If>
+        <If Condition="FirstAid.Level == 180 &amp;&amp; !HasRecipe(7929)" IgnoreCanRun="True">
+          <CallSubRoutine SubRoutineName="VendorAndTrain" />
+        </If>
+        <If Condition="FirstAid.Level &gt;= 180" IgnoreCanRun="False">
+          <CastSpellAction RepeatType="Specific" Repeat="210 - (int)FirstAid.Level" Entry="7929" CastOnItem="False" ItemType="Chest" ItemId="0" />
+        </If>
+      </If>
+      <If Condition="FirstAid.Level &gt;= 210 &amp;&amp; FirstAid.Level &lt; 260" IgnoreCanRun="False">
+        <If Condition="FirstAid.Level == 210 &amp;&amp; !HasRecipe(10840)" IgnoreCanRun="True">
+          <CallSubRoutine SubRoutineName="VendorAndTrain" />
+        </If>
+        <While Condition="FirstAid.Level &lt; 240 &amp;&amp; (InbagCount(4338) &lt; (int)(260 - FirstAid.Level)*1.8)" IgnoreCanRun="False">
+          <CallSubRoutine SubRoutineName="FarmMageweave" />
+        </While>
+        <If Condition="FirstAid.Level &gt;= 240 &amp;&amp; InbagCount(4338) &lt; (int)(260 - FirstAid.Level) *2" IgnoreCanRun="False">
+          <CallSubRoutine SubRoutineName="FarmMageweave" />
+        </If>
+        <If Condition="FirstAid.Level &lt; 240 &amp;&amp; InbagCount(4338) &gt;= (int)(260 - FirstAid.Level) *2" IgnoreCanRun="False">
+          <ChangeBotAction BotName="Combat Bot" />
+          <CastSpellAction RepeatType="Specific" Repeat="240 - (int)FirstAid.Level" Entry="10840" CastOnItem="False" ItemType="Chest" ItemId="0" />
+        </If>
+        <If Condition="FirstAid.Level &gt;= 240 &amp;&amp; !HasRecipe(10841)" IgnoreCanRun="True">
+          <CallSubRoutine SubRoutineName="VendorAndTrain" />
+        </If>
+        <If Condition="FirstAid.Level &gt;= 240" IgnoreCanRun="False">
+          <CastSpellAction RepeatType="Specific" Repeat="260 - (int)FirstAid.Level" Entry="10841" CastOnItem="False" ItemType="Chest" ItemId="0" />
+        </If>
+      </If>
+      <If Condition="FirstAid.Level &gt;= 260 &amp;&amp; FirstAid.Level &lt; 300" IgnoreCanRun="True">
+        <If Condition="FirstAid.Level == 260 &amp;&amp; !HasRecipe(18629)" IgnoreCanRun="True">
+          <CallSubRoutine SubRoutineName="VendorAndTrain" />
+        </If>
+        <While Condition="FirstAid.Level &lt; 280 &amp;&amp; (InbagCount(14047) &lt; (int)(300 - FirstAid.Level)*1.8)" IgnoreCanRun="False">
+          <CallSubRoutine SubRoutineName="FarmRunecloth" />
+        </While>
+        <If Condition="FirstAid.Level &gt;= 280 &amp;&amp; InbagCount(14047) &lt; (int)(300 - FirstAid.Level) *2" IgnoreCanRun="False">
+          <CallSubRoutine SubRoutineName="FarmRunecloth" />
+        </If>
+        <If Condition="FirstAid.Level &lt; 290 &amp;&amp; (InbagCount(14047) &gt;= (300 - FirstAid.Level)*2)" IgnoreCanRun="False">
+          <ChangeBotAction BotName="Combat Bot" />
+          <CastSpellAction RepeatType="Specific" Repeat="290 - (int)FirstAid.Level" Entry="18629" CastOnItem="False" ItemType="Chest" ItemId="0" />
+        </If>
+        <If Condition="FirstAid.Level &gt;= 290 &amp;&amp; !HasRecipe(18630)" IgnoreCanRun="True">
+          <CallSubRoutine SubRoutineName="VendorAndTrain" />
+        </If>
+        <If Condition="FirstAid.Level &gt;= 290" IgnoreCanRun="True">
+          <CastSpellAction RepeatType="Specific" Repeat="300 - (int)FirstAid.Level" Entry="18630" CastOnItem="False" ItemType="Chest" ItemId="0" />
+        </If>
+      </If>
+      <If Condition="FirstAid.Level &gt;= 300 &amp;&amp; FirstAid.Level &lt; 367" IgnoreCanRun="True">
+        <If Condition="Me.MapId != 530" IgnoreCanRun="True">
+          <CallSubRoutine SubRoutineName="TravelCO" />
+        </If>
+        <If Condition="FirstAid.Level == 300 &amp;&amp; !HasRecipe(27032)" IgnoreCanRun="True">
+          <CallSubRoutine SubRoutineName="VendorAndTrain" />
+        </If>
+        <While Condition="FirstAid.Level &lt; 350 &amp;&amp; (InbagCount(21877) &lt; (int)(367 - FirstAid.Level)*1.8)" IgnoreCanRun="False">
+          <CallSubRoutine SubRoutineName="FarmNetherweave" />
+        </While>
+        <If Condition="FirstAid.Level &gt;= 350 &amp;&amp; InbagCount(21877) &lt; (int)(367 - FirstAid.Level)*2" IgnoreCanRun="False">
+          <CallSubRoutine SubRoutineName="FarmNetherweave" />
+        </If>
+        <If Condition="FirstAid.Level &gt;= 300 &amp;&amp; !HasRecipe(27032)" IgnoreCanRun="True">
+          <CallSubRoutine SubRoutineName="VendorAndTrain" />
+        </If>
+        <If Condition="FirstAid.Level &lt; 340 &amp;&amp; (InbagCount(21877) &gt;= (367 - FirstAid.Level)*2)" IgnoreCanRun="False">
+          <ChangeBotAction BotName="Combat Bot" />
+          <CastSpellAction RepeatType="Specific" Repeat="340 - (int)FirstAid.Level" Entry="27032" CastOnItem="False" ItemType="Chest" ItemId="0" />
+        </If>
+        <If Condition="FirstAid.Level &gt;= 340 &amp;&amp; !HasRecipe(27033)" IgnoreCanRun="True">
+          <CallSubRoutine SubRoutineName="VendorAndTrain" />
+        </If>
+        <If Condition="FirstAid.Level &gt;= 340" IgnoreCanRun="True">
+          <CastSpellAction RepeatType="Specific" Repeat="367 - (int)FirstAid.Level" Entry="27033" CastOnItem="False" ItemType="Chest" ItemId="0" />
+        </If>
+      </If>
+      <If Condition="FirstAid.Level &gt;= 367 &amp;&amp; FirstAid.Level &lt; 425" IgnoreCanRun="True">
+        <While Condition="Me.MapId != 571" IgnoreCanRun="True">
+          <If Condition="Me.MapId == 530" IgnoreCanRun="True">
+            <CallSubRoutine SubRoutineName="TravelOC" />
+          </If>
+          <CallSubRoutine SubRoutineName="TravelCN" />
+        </While>
+        <If Condition="FirstAid.Level == 367 &amp;&amp; !HasRecipe(45545)" IgnoreCanRun="True">
+          <CallSubRoutine SubRoutineName="VendorAndTrain" />
+        </If>
+        <While Condition="FirstAid.Level &lt; 410 &amp;&amp; (InbagCount(33470) &lt; (int)(425 - FirstAid.Level)*1.8)" IgnoreCanRun="False">
+          <CallSubRoutine SubRoutineName="FarmFrostweave" />
+        </While>
+        <If Condition="FirstAid.Level &gt;= 410 &amp;&amp; InbagCount(33470) &lt; (int)(425 - FirstAid.Level) *2" IgnoreCanRun="False">
+          <CallSubRoutine SubRoutineName="FarmFrostweave" />
+        </If>
+        <If Condition="FirstAid.Level &lt; 400 &amp;&amp; (InbagCount(33470) &gt;= (425 - FirstAid.Level)*2)" IgnoreCanRun="False">
+          <ChangeBotAction BotName="Combat Bot" />
+          <CastSpellAction RepeatType="Specific" Repeat="400 - (int)FirstAid.Level" Entry="45545" CastOnItem="False" ItemType="Chest" ItemId="0" />
+        </If>
+        <If Condition="FirstAid.Level &gt;= 400 &amp;&amp; !HasRecipe(45546)" IgnoreCanRun="True">
+          <CallSubRoutine SubRoutineName="VendorAndTrain" />
+        </If>
+        <If Condition="FirstAid.Level &gt;= 400" IgnoreCanRun="True">
+          <CastSpellAction RepeatType="Specific" Repeat="425 - (int)FirstAid.Level" Entry="45546" CastOnItem="False" ItemType="Chest" ItemId="0" />
+        </If>
+      </If>
+      <If Condition="FirstAid.Level &gt;= 425 &amp;&amp; FirstAid.Level &lt; 525" IgnoreCanRun="True">
+        <If Condition="Me.MapId == 571" IgnoreCanRun="True">
+          <CallSubRoutine SubRoutineName="TravelNC" />
+        </If>
+        <If Condition="FirstAid.Level == 425 &amp;&amp; !HasRecipe(74556)" IgnoreCanRun="True">
+          <CallSubRoutine SubRoutineName="VendorAndTrain" />
+        </If>
+        <While Condition="FirstAid.Level &lt; 490 &amp;&amp; (InbagCount(53010) &lt; (int)(525 - FirstAid.Level)*2.2)" IgnoreCanRun="False">
+          <CallSubRoutine SubRoutineName="FarmEmbersilk" />
+        </While>
+        <If Condition="FirstAid.Level &gt;= 490 &amp;&amp; InbagCount(53010) &lt; ((int)(525 - FirstAid.Level) *2)" IgnoreCanRun="False">
+          <CallSubRoutine SubRoutineName="FarmEmbersilk" />
+        </If>
+        <If Condition="FirstAid.Level &lt; 475  &amp;&amp; (InbagCount(53010) &gt;= (525 - FirstAid.Level)*2)" IgnoreCanRun="False">
+          <ChangeBotAction BotName="Combat Bot" />
+          <CastSpellAction RepeatType="Specific" Repeat="475 - (int)FirstAid.Level" Entry="74556" CastOnItem="False" ItemType="Chest" ItemId="0" />
+        </If>
+        <If Condition="FirstAid.Level &gt;= 475  &amp;&amp; !HasRecipe(74557)" IgnoreCanRun="True">
+          <CallSubRoutine SubRoutineName="VendorAndTrain" />
+        </If>
+        <If Condition="FirstAid.Level &gt;= 475" IgnoreCanRun="True">
+          <CustomAction Code="MyLog(&quot;Crafting Heavies,&quot;); " />
+          <CastSpellAction RepeatType="Specific" Repeat="525 - (int)FirstAid.Level" Entry="74557" CastOnItem="False" ItemType="Chest" ItemId="0" />
+        </If>
+      </If>
+    </If>
+    <If Condition="(FirstAid.MaxLevel == 0) || (FirstAid.Level &gt;= FirstAid.MaxLevel - 25 &amp;&amp; FirstAid.MaxLevel &lt; 525)" IgnoreCanRun="True">
+      <CallSubRoutine SubRoutineName="VendorAndTrain" />
+    </If>
+  </While>
+  <If Condition="FirstAid.Level == 525" IgnoreCanRun="True">
+    <If Condition="!HasRecipe(88893)" IgnoreCanRun="True">
+      <CallSubRoutine SubRoutineName="VendorAndTrain" />
+    </If>
+    <CallSubRoutine SubRoutineName="FarmEmbersilk" />
+  </If>
+  <SubRoutine SubRoutineName="VendorAndTrain">
+    <CustomAction Code="MyLog(&quot;Training and Vendoring&quot;);" />
+    <If Condition="Me.MapId == 530" IgnoreCanRun="True">
+      <CustomAction Code="MyLog(&quot;Flying to Shattrath&quot;);" />
+      <FlyToAction Dismount="False" Location="-1594.931, 5262.519, -13.9793" />
+      <TrainSkillAction NpcEntry="19184" Location="-1592.02, 5263.724, -13.99498" />
+      <CustomAction Code="Lua.DoString(&quot;CloseTrainer()&quot;);" />
+      <WaitAction Condition="false" Timeout="2000" />
+      <If Condition="(StyxWoW.Me.LowestDurabilityPercent &lt;= 0.6) || (Me.FreeBagSlots &lt;= 2)" IgnoreCanRun="True">
+        <CustomAction Code="MyLog(&quot;Repairing&quot;);" />
+        <FlyToAction Dismount="True" Location="-2094.76, 5299.139, -37.32325" />
+        <While Condition="MerchantFrame.Instance != null &amp;&amp; MerchantFrame.Instance.IsVisible" IgnoreCanRun="True">
+          <InteractionAction InteractType="NPC" Entry="19662" InteractDelay="2000" GameObjectType="Mailbox" SpellFocus="Anvil" />
+        </While>
+      </If>
+    </If>
+    <If Condition="Me.MapId == 1" IgnoreCanRun="True">
+      <If Condition="Me.IsHorde" IgnoreCanRun="True">
+        <CustomAction Code="MyLog(&quot;Flying to Org Trainer&quot;);" />
+        <FlyToAction Dismount="False" Location="1484.38, -4166.369, 52.60411" />
+        <CustomAction Code="Lua.DoString(&quot;CloseMerchant()&quot;);" />
+        <TrainSkillAction NpcEntry="45540" Location="1472.12, -4148.55, 52.61613" />
+        <CustomAction Code="Lua.DoString(&quot;CloseTrainer()&quot;);" />
+        <WaitAction Condition="false" Timeout="2000" />
+        <If Condition="(StyxWoW.Me.LowestDurabilityPercent &lt;= 0.6) || (Me.FreeBagSlots &lt;= 2)" IgnoreCanRun="True">
+          <CustomAction Code="MyLog(&quot;Repairing&quot;);" />
+          <FlyToAction Dismount="True" Location="1524.05, -4138.78, 50.76632" />
+          <While Condition="MerchantFrame.Instance != null &amp;&amp; MerchantFrame.Instance.IsVisible" IgnoreCanRun="True">
+            <InteractionAction InteractType="NPC" Entry="45549" InteractDelay="2000" GameObjectType="Mailbox" SpellFocus="Anvil" />
+          </While>
+        </If>
+      </If>
+      <If Condition="Me.IsAlliance" IgnoreCanRun="True">
+        <CallSubRoutine SubRoutineName="TravelKE" />
+      </If>
+    </If>
+    <If Condition="Me.MapId == 0" IgnoreCanRun="True">
+      <If Condition="Me.IsHorde" IgnoreCanRun="True">
+        <!--Not Yet Implemented-->
+        <!-- <CallSubRoutine SubRoutineName="TravelEK" /> -->
+      </If>
+      <If Condition="Me.IsAlliance" IgnoreCanRun="True">
+        <CustomAction Code="MyLog(&quot;Flying to SW Trainer&quot;);" />
+        <FlyToAction Dismount="False" Location="-8608.48, 786.3201, 99.81252" />
+        <CustomAction Code="Lua.DoString(&quot;CloseMerchant()&quot;);" />
+        <TrainSkillAction NpcEntry="56796" Location="-8524.519, 816.4502, 106.5197" />
+        <CustomAction Code="Lua.DoString(&quot;CloseTrainer()&quot;);" />
+        <WaitAction Condition="false" Timeout="2000" />
+        <If Condition="(StyxWoW.Me.LowestDurabilityPercent &lt;= 0.6) || (Me.FreeBagSlots &lt;= 2)" IgnoreCanRun="True">
+          <CustomAction Code="MyLog(&quot;Repairing&quot;);" />
+          <FlyToAction Dismount="True" Location="-8430.486, 623.2193, 95.50689" />
+          <While Condition="MerchantFrame.Instance != null &amp;&amp; MerchantFrame.Instance.IsVisible" IgnoreCanRun="True">
+            <InteractionAction InteractType="NPC" Entry="5512" InteractDelay="2000" GameObjectType="Mailbox" SpellFocus="Anvil" />
+          </While>
+        </If>
+      </If>
+    </If>
+    <If Condition="Me.MapId == 571" IgnoreCanRun="True">
+      <If Condition="Me.ZoneId != 4395" IgnoreCanRun="True">
+        <CustomAction Code="MyLog(&quot;Flying to Dalaran&quot;);" />
+        <FlyToAction Dismount="False" Location="5817.01, 260.0195, 701.4214" />
+        <FlyToAction Dismount="False" Location="5893.923, 717.828, 710.7392" />
+      </If>
+      <FlyToAction Dismount="True" Location="5865.732, 737.3549, 640.4123" />
+      <TrainSkillAction NpcEntry="28706" Location="5860.105, 748.9985, 640.5706" />
+      <CustomAction Code="Lua.DoString(&quot;CloseTrainer()&quot;);" />
+      <WaitAction Condition="false" Timeout="2000" />
+      <If Condition="(StyxWoW.Me.LowestDurabilityPercent &lt;= 0.6) || (Me.FreeBagSlots &lt;= 2)" IgnoreCanRun="True">
+        <CustomAction Code="MyLog(&quot;Repairing&quot;);" />
+        <FlyToAction Dismount="True" Location="5860.105, 748.9985, 640.5706" />
+        <While Condition="MerchantFrame.Instance != null &amp;&amp; MerchantFrame.Instance.IsVisible" IgnoreCanRun="True">
+          <InteractionAction InteractType="NPC" Entry="34252" InteractDelay="2000" GameObjectType="Mailbox" SpellFocus="Anvil" />
+        </While>
+      </If>
+    </If>
+    <If Condition="(StyxWoW.Me.LowestDurabilityPercent &lt;= 0.6) || (Me.FreeBagSlots &lt;= 2)" IgnoreCanRun="True">
+      <SellItemAction Sell="All" NpcEntry="0" Location="1524.05, -4138.78, 50.76632" SellItemType="Greys" ItemID="0" Count="0" />
+      <SellItemAction Sell="All" NpcEntry="0" Location="0, 0, 0" SellItemType="Specific" ItemID="1251,2581,3530,3531,6450,6451,8544,8545,14529,14530,21990,21991,34721,34722,53049" Count="0" />
+      <SellItemAction Sell="All" NpcEntry="0" Location="0, 0, 0" SellItemType="Specific" ItemID="20408,20406,20407," Count="0" />
+      <CustomAction Code="Lua.DoString(&quot;RepairAllItems()&quot;);" />
+      <CustomAction Code="Lua.DoString(&quot;CloseMerchant()&quot;);" />
+      <WaitAction Condition="false" Timeout="2000" />
+    </If>
+  </SubRoutine>
+  <SubRoutine SubRoutineName="FarmLinen">
+    <If Condition="SecondaryBot.Name != &quot;Questing&quot;" IgnoreCanRun="True">
+      <ChangeBotAction BotName="Questing" />
+      <CustomAction Code="MyLog(&quot;Farming Linen&quot;);" />
+    </If>
+    <If Condition="Me.IsHorde" IgnoreCanRun="False">
+      <LoadProfileAction ProfileType="Honorbuddy" Path="HBProfiles\Cloth\HordeLinen.xml" />
+    </If>
+    <If Condition="Me.IsAlliance" IgnoreCanRun="False">
+      <LoadProfileAction ProfileType="Honorbuddy" Path="HBProfiles\Cloth\AllianceLinen.xml" />
+    </If>
+  </SubRoutine>
+  <SubRoutine SubRoutineName="FarmWool">
+    <If Condition="SecondaryBot.Name != &quot;Questing&quot;" IgnoreCanRun="True">
+      <ChangeBotAction BotName="Questing" />
+      <CustomAction Code="MyLog(&quot;Farming Wool&quot;);" />
+    </If>
+    <If Condition="Me.IsHorde" IgnoreCanRun="False">
+      <LoadProfileAction ProfileType="Honorbuddy" Path="HBProfiles\Cloth\HordeWool.xml" />
+    </If>
+    <If Condition="Me.IsAlliance" IgnoreCanRun="False">
+      <LoadProfileAction ProfileType="Honorbuddy" Path="HBProfiles\Cloth\AllianceWool.xml" />
+    </If>
+  </SubRoutine>
+  <SubRoutine SubRoutineName="FarmSilk">
+    <If Condition="SecondaryBot.Name != &quot;Questing&quot;" IgnoreCanRun="True">
+      <ChangeBotAction BotName="Questing" />
+      <CustomAction Code="MyLog(&quot;Farming Silkn&quot;);" />
+    </If>
+    <If Condition="Me.IsHorde" IgnoreCanRun="False">
+      <LoadProfileAction ProfileType="Honorbuddy" Path="HBProfiles\Cloth\HordeSilk.xml" />
+    </If>
+    <If Condition="Me.IsAlliance" IgnoreCanRun="False">
+      <LoadProfileAction ProfileType="Honorbuddy" Path="HBProfiles\Cloth\AllianceSilk.xml" />
+    </If>
+  </SubRoutine>
+  <SubRoutine SubRoutineName="FarmMageweave">
+    <If Condition="SecondaryBot.Name != &quot;Questing&quot;" IgnoreCanRun="True">
+      <ChangeBotAction BotName="Questing" />
+      <CustomAction Code="MyLog(&quot;Farming Mageweave&quot;);" />
+    </If>
+    <If Condition="Me.IsHorde" IgnoreCanRun="False">
+      <LoadProfileAction ProfileType="Honorbuddy" Path="HBProfiles\Cloth\HordeMageweave.xml" />
+    </If>
+    <If Condition="Me.IsAlliance" IgnoreCanRun="False">
+      <If Condition="Me.MapId != 1" IgnoreCanRun="True">
+        <CallSubRoutine SubRoutineName="TravelEK" />
+      </If>
+      <LoadProfileAction ProfileType="Honorbuddy" Path="HBProfiles\Cloth\AllianceMageweave.xml" />
+    </If>
+  </SubRoutine>
+  <SubRoutine SubRoutineName="FarmRunecloth">
+    <If Condition="SecondaryBot.Name != &quot;Questing&quot;" IgnoreCanRun="True">
+      <ChangeBotAction BotName="Questing" />
+      <CustomAction Code="MyLog(&quot;Farming Runecloth&quot;);" />
+    </If>
+    <If Condition="Me.IsHorde" IgnoreCanRun="False">
+      <LoadProfileAction ProfileType="Honorbuddy" Path="HBProfiles\Cloth\HordeRunecloth.xml" />
+    </If>
+    <If Condition="Me.IsAlliance" IgnoreCanRun="False">
+      <If Condition="Me.MapId != 1" IgnoreCanRun="True">
+        <CallSubRoutine SubRoutineName="TravelEK" />
+      </If>
+      <LoadProfileAction ProfileType="Honorbuddy" Path="HBProfiles\Cloth\AllianceRunecloth.xml" />
+    </If>
+  </SubRoutine>
+  <SubRoutine SubRoutineName="FarmNetherweave">
+    <If Condition="SecondaryBot.Name != &quot;Questing&quot;" IgnoreCanRun="True">
+      <ChangeBotAction BotName="Questing" />
+      <CustomAction Code="MyLog(&quot;Farming Netherweave&quot;);" />
+    </If>
+    <If Condition="Me.MapId != 530" IgnoreCanRun="True">
+      <CallSubRoutine SubRoutineName="TravelCO" />
+      <If Condition="Me.IsHorde" IgnoreCanRun="False">
+        <LoadProfileAction ProfileType="Honorbuddy" Path="HBProfiles\Cloth\HordeNetherweave.xml" />
+      </If>
+      <If Condition="Me.IsAlliance" IgnoreCanRun="False">
+        <LoadProfileAction ProfileType="Honorbuddy" Path="HBProfiles\Cloth\AllianceNetherweave.xml" />
+      </If>
+    </If>
+  </SubRoutine>
+  <SubRoutine SubRoutineName="FarmFrostweave">
+    <If Condition="SecondaryBot.Name != &quot;Questing&quot;" IgnoreCanRun="True">
+      <ChangeBotAction BotName="Questing" />
+      <CustomAction Code="MyLog(&quot;Farming Frostweave&quot;);" />
+    </If>
+    <If Condition="Me.MapId != 571" IgnoreCanRun="True">
+      <If Condition="Me.MapId == 530" IgnoreCanRun="True">
+        <CallSubRoutine SubRoutineName="TravelOC" />
+      </If>
+      <CallSubRoutine SubRoutineName="TravelCN" />
+    </If>
+    <If Condition="Me.IsHorde" IgnoreCanRun="False">
+      <LoadProfileAction ProfileType="Honorbuddy" Path="HBProfiles\Cloth\HordeFrostweave.xml" />
+    </If>
+    <If Condition="Me.IsAlliance" IgnoreCanRun="False">
+      <LoadProfileAction ProfileType="Honorbuddy" Path="HBProfiles\Cloth\AllianceFrostweave.xml" />
+    </If>
+  </SubRoutine>
+  <SubRoutine SubRoutineName="FarmEmbersilk">
+    <If Condition="SecondaryBot.Name != &quot;Questing&quot;" IgnoreCanRun="True">
+      <ChangeBotAction BotName="Questing" />
+      <CustomAction Code="MyLog(&quot;Farming Embersilk&quot;);" />
+    </If>
+    <If Condition="Me.IsHorde" IgnoreCanRun="False">
+      <LoadProfileAction ProfileType="Honorbuddy" Path="HBProfiles\Cloth\HordeEmbersilk.xml" />
+    </If>
+    <If Condition="Me.IsAlliance" IgnoreCanRun="False">
+      <LoadProfileAction ProfileType="Honorbuddy" Path="HBProfiles\Cloth\AllianceEmbersilk.xml" />
+    </If>
+  </SubRoutine>
+  <SubRoutine SubRoutineName="TravelEK">
+    <If Condition="Me.IsAlliance" IgnoreCanRun="True">
+      <If Condition="Me.MapId == 0" IgnoreCanRun="True">
+        <CustomAction Code="MyLog(&quot;Going to Kalimdor,&quot;); " />
+        <FlyToAction Dismount="True" Location="-3859.799, -658.565, 5.186935" />
+        <CustomAction Code="MyLog(&quot;Waiting for the boat.&quot;); " />
+        <WaitAction Condition="ObjectManager.GetObjectsOfType&lt;WoWGameObject&gt;().FirstOrDefault(o =&gt; o.Entry == 176231 ) != null &amp;&amp; ObjectManager.GetObjectsOfType&lt;WoWGameObject&gt;().FirstOrDefault(o =&gt; o.Entry == 176231 ).Location.Distance(new WoWPoint(-3872.35, -639.9439, 0.03924475)) &lt; 20" Timeout="60000000" />
+        <WaitAction Condition="false" Timeout="7832" />
+        <MoveToAction Location="-3866.206, -647.1971, 6.05872" MoveType="Location" Pathing="ClickToMove" Entry="0" />
+        <MoveToAction Location="-3864.247, -636.9529, 6.129509" MoveType="Location" Pathing="ClickToMove" Entry="0" />
+        <MoveToAction Location="-3874.158, -629.8268, 6.014582" MoveType="Location" Pathing="ClickToMove" Entry="0" />
+        <WaitAction Condition="Me.MapId == 1" Timeout="650000" />
+        <CustomAction Code="MyLog(&quot;Waiting for the boat to get along side!&quot;); " />
+        <WaitAction Condition="ObjectManager.GetObjectsOfType&lt;WoWGameObject&gt;().FirstOrDefault(o =&gt; o.Entry == 176231 ) != null &amp;&amp; ObjectManager.GetObjectsOfType&lt;WoWGameObject&gt;().FirstOrDefault(o =&gt; o.Entry == 176231 ).Location.Distance(new WoWPoint(-4016.39, -4740.588, -0.04994059)) &lt; 3" Timeout="6000000" />
+        <WaitAction Condition="false" Timeout="9854" />
+        <MoveToAction Location="-3999.296, -4726.252, 4.38778" MoveType="Location" Pathing="ClickToMove" Entry="0" />
+      </If>
+    </If>
+  </SubRoutine>
+  <SubRoutine SubRoutineName="TravelKE">
+    <If Condition="Me.IsAlliance" IgnoreCanRun="True">
+      <If Condition="Me.MapId == 1" IgnoreCanRun="True">
+        <CustomAction Code="MyLog(&quot;Going home to Eastern Kingdom to cook!&quot;); " />
+        <FlyToAction Dismount="True" Location="-4004.245, -4728.441, 4.5875" />
+        <MoveToAction Location="-4019.357, -4748.401, 6.035104" MoveType="Location" Pathing="Navigator" Entry="0" />
+        <CustomAction Code="MyLog(&quot;Waiting for the boat.&quot;); " />
+        <WaitAction Condition="ObjectManager.GetObjectsOfType&lt;WoWGameObject&gt;().FirstOrDefault(o =&gt; o.Entry == 176231 ) != null &amp;&amp; ObjectManager.GetObjectsOfType&lt;WoWGameObject&gt;().FirstOrDefault(o =&gt; o.Entry == 176231 ).Location.Distance(new WoWPoint(-4016.39, -4740.588, -0.04994059)) &lt; 3" Timeout="6000000" />
+        <WaitAction Condition="false" Timeout="7896" />
+        <MoveToAction Location="-4007.859, -4734.534, 6.039006" MoveType="Location" Pathing="Navigator" Entry="0" />
+        <MoveToAction Location="-4012.03, -4744.639, 6.123847" MoveType="Location" Pathing="ClickToMove" Entry="0" />
+        <MoveToAction Location="-4019.784, -4748.647, 6.087955" MoveType="Location" Pathing="ClickToMove" Entry="0" />
+        <WaitAction Condition="Me.MapId == 0" Timeout="650000" />
+        <CustomAction Code="MyLog(&quot;Waiting for the boat to get along side!&quot;); " />
+        <WaitAction Condition="ObjectManager.GetObjectsOfType&lt;WoWGameObject&gt;().FirstOrDefault(o =&gt; o.Entry == 176231 ) != null &amp;&amp; ObjectManager.GetObjectsOfType&lt;WoWGameObject&gt;().FirstOrDefault(o =&gt; o.Entry == 176231 ).Location.Distance(new WoWPoint(-3872.35, -639.9439, 0.03924475)) &lt; 20" Timeout="60000000" />
+        <WaitAction Condition="false" Timeout="8997" />
+        <MoveToAction Location="-3861.168, -657.361, 5.266752" MoveType="Location" Pathing="ClickToMove" Entry="0" />
+        <FlyToAction Dismount="True" Location="-3890.306, -709.368, 17.34875" />
+      </If>
+    </If>
+  </SubRoutine>
+  <SubRoutine SubRoutineName="TravelCO">
+    <While Condition="Me.MapId != 530" IgnoreCanRun="False">
+      <CustomAction Code="MyLog(&quot;Going to Outlands.&quot;); " />
+      <If Condition="Me.IsHorde" IgnoreCanRun="True">
+        <If Condition="(Me.MapId == 1) &amp;&amp; (Me.ZoneId != 1637)" IgnoreCanRun="True">
+          <CustomAction Code="Log(System.Drawing.Color.Orange,&quot;We are not in Org.&quot;); " />
+          <FlyToAction Dismount="False" Location="1708.986, -4317.475, 31.30815" />
+        </If>
+        <If Condition="(Me.MapId == 1) &amp;&amp; (Me.ZoneId == 1637)" IgnoreCanRun="True">
+          <CustomAction Code="MyLog(&quot;Porting to Blasted Lands&quot;); " />
+          <MoveToAction Location="1709.683, -4317.789, 31.30923" MoveType="Location" Pathing="Navigator" Entry="0" />
+          <MoveToAction Location="1711.484, -4283.375, 27.86806" MoveType="Location" Pathing="Navigator" Entry="0" />
+          <MoveToAction Location="1770.981, -4316.705, 6.252295" MoveType="Location" Pathing="Navigator" Entry="0" />
+          <MoveToAction Location="1779.663, -4328.729, -8.144003" MoveType="Location" Pathing="ClickToMove" Entry="0" />
+          <InteractionAction InteractType="GameObject" Entry="195142" InteractDelay="2000" GameObjectType="Transport" SpellFocus="Anvil" />
+          <WaitAction Condition="false" Timeout="1000" />
+        </If>
+      </If>
+      <If Condition="Me.IsAlliance" IgnoreCanRun="True">
+        <If Condition="Me.MapId == 0 &amp;&amp; Me.ZoneId != 4" IgnoreCanRun="True">
+          <CustomAction Code="MyLog(&quot;Going to Outlands.&quot;); " />
+          <MoveToAction Location="-5603.183, -484.9108, 397.0643" MoveType="Location" Pathing="Navigator" Entry="0" />
+          <FlyToAction Dismount="False" Location="-5025.113, -829.3038, 495.3176" />
+          <MoveToAction Location="-4607.481, -926.5313, 501.0694" MoveType="Location" Pathing="Navigator" Entry="0" />
+          <InteractionAction InteractType="GameObject" Entry="195141" InteractDelay="2000" GameObjectType="Transport" SpellFocus="Anvil" />
+          <WaitAction Condition="false" Timeout="1000" />
+          <FlyToAction Dismount="False" Location="-11895.9, -3206.984, -6.04731" />
+          <MoveToAction Location="-11930.31, -3209.613, -1.836873" MoveType="Location" Pathing="ClickToMove" Entry="0" />
+          <WaitAction Condition="Me.MapId == 530" Timeout="25000" />
+        </If>
+      </If>
+      <If Condition="(Me.MapId == 0) &amp;&amp; (Me.ZoneId == 4)" IgnoreCanRun="True">
+        <FlyToAction Dismount="True" Location="-11895.44, -3206.936, -14.64132" />
+        <MoveToAction Location="-11908.09, -3208.854, -14.83002" MoveType="Location" Pathing="ClickToMove" Entry="0" />
+        <WaitAction Condition="Me.MapId == 530" Timeout="25000" />
+        <MoveToAction Location="-248.5246, 940.9374, 84.37959" MoveType="Location" Pathing="Navigator" Entry="0" />
+      </If>
+    </While>
+  </SubRoutine>
+  <SubRoutine SubRoutineName="TravelOC">
+    <If Condition="Me.MapId == 530" IgnoreCanRun="True">
+      <CustomAction Code="MyLog(&quot;Going back to our Capital City.&quot;); " />
+      <If Condition="Me.IsAlliance" IgnoreCanRun="True">
+        <FlyToAction Dismount="True" Location="-337.1399, 967.8793, 54.28538" />
+        <InteractionAction InteractType="GameObject" Entry="195139" InteractDelay="1500" GameObjectType="Transport" SpellFocus="Anvil" />
+        <WaitAction Condition="Me.MapId == 0" Timeout="25000" />
+      </If>
+      <If Condition="Me.IsHorde" IgnoreCanRun="True">
+        <FlyToAction Dismount="True" Location="-161.6826, 971.2495, 54.28574" />
+        <InteractionAction InteractType="GameObject" Entry="195140" InteractDelay="1500" GameObjectType="Transport" SpellFocus="Anvil" />
+        <WaitAction Condition="Me.MapId == 1" Timeout="25000" />
+        <MoveToAction Location="1846.822, -4409.28, 5.320685" MoveType="Location" Pathing="Navigator" Entry="0" />
+        <MoveToAction Location="1893.854, -4500.016, 24.2756" MoveType="Location" Pathing="Navigator" Entry="0" />
+      </If>
+    </If>
+  </SubRoutine>
+  <SubRoutine SubRoutineName="TravelCN">
+    <If Condition="Me.IsHorde" IgnoreCanRun="True">
+      <If Condition="Me.MapId == 1" IgnoreCanRun="True">
+        <CustomAction Code="MyLog(&quot;Going to Northernd.&quot;); " />
+        <FlyToAction Dismount="True" Location="1760.425, -4279.274, 133.1068" />
+        <CustomAction Code="MyLog(&quot;Waiting for the boat.&quot;); " />
+        <WaitAction Condition="ObjectManager.GetObjectsOfType&lt;WoWGameObject&gt;().FirstOrDefault(o =&gt; o.Entry == 186238 ) != null &amp;&amp; ObjectManager.GetObjectsOfType&lt;WoWGameObject&gt;().FirstOrDefault(o =&gt; o.Entry == 186238 ).Location.Distance(new WoWPoint(1775.066, -4299.745, 151.0326)) &lt; 30" Timeout="6000000" />
+        <CustomAction Code="MyLog(&quot;Boat is here! Wake up.&quot;); " />
+        <WaitAction Condition="false" Timeout="6987" />
+        <MoveToAction Location="1770.22, -4292.056, 133.1872" MoveType="Location" Pathing="ClickToMove" Entry="0" />
+        <WaitAction Condition="Me.MapId == 571" Timeout="650000" />
+        <CustomAction Code="MyLog(&quot;Waiting for boat to get along side.&quot;); " />
+        <WaitAction Condition="ObjectManager.GetObjectsOfType&lt;WoWGameObject&gt;().FirstOrDefault(o =&gt; o.Entry == 186238 ) != null &amp;&amp; ObjectManager.GetObjectsOfType&lt;WoWGameObject&gt;().FirstOrDefault(o =&gt; o.Entry == 186238 ).Location.Distance(new WoWPoint(2837.908, 6187.443, 140.1648)) &lt; 30" Timeout="6000000" />
+        <WaitAction Condition="false" Timeout="3000" />
+        <MoveToAction Location="2836.831, 6185.15, 121.9923" MoveType="Location" Pathing="ClickToMove" Entry="0" />
+      </If>
+    </If>
+    <If Condition="Me.IsAlliance" IgnoreCanRun="True">
+      <If Condition="Me.MapId == 0" IgnoreCanRun="True">
+        <CustomAction Code="MyLog(&quot;Going to Northernd.&quot;); " />
+        <FlyToAction Dismount="True" Location="-8295.954, 1405.365, 4.412278" />
+        <CustomAction Code="MyLog(&quot;Waiting for the boat.&quot;); " />
+        <WaitAction Condition="ObjectManager.GetObjectsOfType&lt;WoWGameObject&gt;().FirstOrDefault(o =&gt; o.Entry == 190536 ) != null &amp;&amp; ObjectManager.GetObjectsOfType&lt;WoWGameObject&gt;().FirstOrDefault(o =&gt; o.Entry == 190536 ).Location.Distance(new WoWPoint(-8288.816, 1424.703, 0.01983927)) &lt; 30" Timeout="6000000" />
+        <CustomAction Code="MyLog(&quot;Boat is here! Wake up.&quot;); " />
+        <WaitAction Condition="false" Timeout="6987" />
+        <MoveToAction Location="-8294.362, 1423.174, 9.456192" MoveType="Location" Pathing="ClickToMove" Entry="0" />
+        <WaitAction Condition="Me.MapId == 571" Timeout="650000" />
+        <CustomAction Code="MyLog(&quot;Waiting for boat to get along side.&quot;); " />
+        <WaitAction Condition="ObjectManager.GetObjectsOfType&lt;WoWGameObject&gt;().FirstOrDefault(o =&gt; o.Entry == 190536 ) != null &amp;&amp; ObjectManager.GetObjectsOfType&lt;WoWGameObject&gt;().FirstOrDefault(o =&gt; o.Entry == 190536 ).Location.Distance(new WoWPoint(2218.391, 5119.589, -0.03280054)) &lt; 30" Timeout="6000000" />
+        <WaitAction Condition="false" Timeout="3000" />
+        <MoveToAction Location="2231.335, 5132.801, 5.343085" MoveType="Location" Pathing="ClickToMove" Entry="0" />
+      </If>
+    </If>
+  </SubRoutine>
+  <SubRoutine SubRoutineName="TravelNC">
+    <If Condition="Me.MapId == 571" IgnoreCanRun="True">
+      <If Condition="Me.IsAlliance" IgnoreCanRun="True">
+        <CustomAction Code="MyLog(&quot;Going back to SW.&quot;); " />
+        <If Condition="Me.ZoneId != 4395" IgnoreCanRun="True">
+          <FlyToAction Dismount="False" Location="5721.083, 713.4098, 654.6246" />
+        </If>
+        <InteractionAction InteractType="GameObject" Entry="190960" InteractDelay="0" GameObjectType="Transport" SpellFocus="Anvil" />
+        <WaitAction Condition="Me.MapId == 0" Timeout="25000" />
+      </If>
+      <If Condition="Me.IsHorde" IgnoreCanRun="True">
+        <CustomAction Code="MyLog(&quot;Going back to Org.&quot;); " />
+        <If Condition="Me.ZoneId != 4395" IgnoreCanRun="True">
+          <FlyToAction Dismount="False" Location="5892.886, 562.0911, 639.6778" />
+        </If>
+        <MoveToAction Location="5925.151, 590.3297, 639.8861" MoveType="Location" Pathing="Navigator" Entry="0" />
+        <InteractionAction InteractType="GameObject" Entry="191009" InteractDelay="2000" GameObjectType="Transport" SpellFocus="Anvil" />
+        <WaitAction Condition="Me.MapId == 1" Timeout="25000" />
+        <MoveToAction Location="1893.854, -4500.016, 24.2756" MoveType="Location" Pathing="Navigator" Entry="0" />
+      </If>
+    </If>
+  </SubRoutine>
+  <SubRoutine SubRoutineName="TravelCU">
+    <If Condition="(Me.IsHorde) &amp;&amp; (Me.MapId == 1)" IgnoreCanRun="True">
+      <CustomAction Code="MyLog(&quot;Flying to Uldum Portal.&quot;); " />
+      <FlyToAction Dismount="True" Location="2042.699, -4360.661, 98.51802" />
+      <If Condition="ObjectManager.GetObjectsOfType&lt;WoWGameObject&gt;().FirstOrDefault(o =&gt; o.Entry == 207687 ) != null &amp;&amp; ObjectManager.GetObjectsOfType&lt;WoWGameObject&gt;().FirstOrDefault(o =&gt; o.Entry == 207687 ).Location.Distance(new WoWPoint(2039.67,-4356.288,98.00434)) &lt; 20" IgnoreCanRun="True">
+        <InteractionAction InteractType="GameObject" Entry="207687" InteractDelay="0" GameObjectType="Transport" SpellFocus="Anvil" />
+        <WaitAction Condition="Me.ZoneId == 5034" Timeout="5000" />
+      </If>
+    </If>
+    <If Condition="Me.IsAlliance" IgnoreCanRun="True">
+      <CustomAction Code="MyLog(&quot;Flying to Uldum Portal.&quot;); " />
+      <FlyToAction Dismount="True" Location="-8231.306, 417.2011, 117.4756" />
+      <If Condition="ObjectManager.GetObjectsOfType&lt;WoWGameObject&gt;().FirstOrDefault(o =&gt; o.Entry == 207695 ) != null &amp;&amp; ObjectManager.GetObjectsOfType&lt;WoWGameObject&gt;().FirstOrDefault(o =&gt; o.Entry == 207695 ).Location.Distance(new WoWPoint(-8231.306, 417.2011, 117.4756)) &lt; 20" IgnoreCanRun="True">
+        <InteractionAction InteractType="GameObject" Entry="207695" InteractDelay="0" GameObjectType="Transport" SpellFocus="Anvil" />
+        <WaitAction Condition="Me.MapId == 1" Timeout="5000" />
+      </If>
+    </If>
+  </SubRoutine>
+  <Declaration Code="void MyErr(string fmt,params object[] args)&#xD;&#xA;{&#xD;&#xA;    Log(Color.Orange,&quot;First Aid 1-525: &quot;,Color.Red,fmt,args);&#xD;&#xA;}" />
+  <Declaration Code="void MyLog(string fmt,params object[] args)&#xD;&#xA;{&#xD;&#xA;    Log(Color.Orange,&quot;First Aid 1-525: &quot;,Color.LightYellow,fmt,args);&#xD;&#xA;}" />
+</Professionbuddy>

@@ -1,0 +1,82 @@
+﻿<HBProfile>
+	<Name>[QO] Dreadfang Venom Sacs farm[Kick]</Name>
+   
+	<MinLevel>1</MinLevel>
+	<MaxLevel>86</MaxLevel>
+   
+	<MinDurability>0.2</MinDurability>
+	<MinFreeBagSlots>2</MinFreeBagSlots>
+	
+	<MailGrey>False</MailGrey>
+	<MailWhite>True</MailWhite>
+	<MailGreen>True</MailGreen>
+	<MailBlue>True</MailBlue>
+	<MailPurple>True</MailPurple>
+   
+	<SellGrey>True</SellGrey>
+	<SellWhite>False</SellWhite>
+	<SellGreen>False</SellGreen>
+	<SellBlue>False</SellBlue>
+	<SellPurple>False</SellPurple>
+   
+	<TargetElites>True</TargetElites>
+
+	<AvoidMobs>
+	</AvoidMobs>
+	<Blackspots>
+	</Blackspots>
+
+	<Mailboxes>
+		<Mailbox X="-2931.671" Y="4008.319" Z="-1.318626" />
+	</Mailboxes>
+ 
+	<Vendors>
+		<Vendor Name="Innkeeper Biribi" Entry="19296" Type="Food" X="-2917.881" Y="4021.484" Z="0.4282244" />
+		<Vendor Name="Cecil Meyers" Entry="19056" Type="Repair" X="-2978.951" Y="4033.115" Z="3.573883" />
+	</Vendors>
+
+
+ 
+	<QuestOrder>
+	
+		<CustomBehavior File="UserSettings" LootMobs="True" PullDistance="35" TrainNewSkills="False" LearnFlightPaths="False" KillBetweenHotspots="True" LogoutForInactivity="False" />
+	
+						<SetGrindArea>
+							<GrindArea>
+								<Factions>22</Factions>
+								<Hotspots>
+									<Hotspot X="-2809.652" Y="4430.046" Z="-5.847267" />
+									<Hotspot X="-2938.517" Y="4338.751" Z="-2.49191" />
+									<Hotspot X="-3063.584" Y="4211.631" Z="-5.067679" />
+									<Hotspot X="-3137.517" Y="4147.014" Z="2.394211" />
+									<Hotspot X="-3110.131" Y="4047.25" Z="3.112486" />
+									<Hotspot X="-3189.287" Y="4026.406" Z="0.5399919" />
+									<Hotspot X="-3220.701" Y="4108.229" Z="3.311402" />
+									<Hotspot X="-3223.501" Y="4216.345" Z="-12.4992" />
+									<Hotspot X="-3278.219" Y="4129.525" Z="-2.198339" />
+									<Hotspot X="-3378.204" Y="4164.786" Z="-1.759626" />
+									<Hotspot X="-3484.235" Y="4205.715" Z="-3.958466" />
+									<Hotspot X="-3559.96" Y="4186.092" Z="-3.613329" />
+									<Hotspot X="-3721.719" Y="4218.91" Z="7.269322" />
+									<Hotspot X="-3794.524" Y="4238.146" Z="4.996505" />
+									<Hotspot X="-3826.075" Y="4210.091" Z="1.408177" />
+									<Hotspot X="-3841.879" Y="4276.017" Z="7.821634" />
+									<Hotspot X="-3938.471" Y="4297.222" Z="-13.72838" />
+									<Hotspot X="-3893.444" Y="4356.19" Z="0.502449" />
+									<Hotspot X="-3964.027" Y="4344.275" Z="-16.61684" />
+									<Hotspot X="-3902.99" Y="4254.692" Z="-11.33631" />
+									<Hotspot X="-3761.898" Y="4226.947" Z="5.425411" />
+									<Hotspot X="-3542.365" Y="4184.493" Z="-3.296901" />
+									<Hotspot X="-3411.602" Y="4170.224" Z="-1.942379" />
+									<Hotspot X="-3248.878" Y="4125.857" Z="-1.461314" />
+									<Hotspot X="-3169.08" Y="4104.695" Z="1.631223" />
+									<Hotspot X="-3085.08" Y="4200.975" Z="-4.827444" />
+								</Hotspots>
+							</GrindArea>
+						</SetGrindArea>
+					<GrindTo Level="86" GoalText="Farming Netherweb Sacs" />
+
+	</QuestOrder>
+	
+
+</HBProfile>

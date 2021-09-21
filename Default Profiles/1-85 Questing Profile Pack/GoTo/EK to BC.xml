@@ -1,0 +1,61 @@
+<HBProfile>
+	<Name>EK to BC [Kick]</Name>
+	<MinLevel>58</MinLevel>
+	<MaxLevel>86</MaxLevel>
+	
+	<MinDurability>0.2</MinDurability>
+	<MinFreeBagSlots>2</MinFreeBagSlots>
+	
+	<MailGrey>False</MailGrey>
+	<MailWhite>False</MailWhite>
+	<MailGreen>True</MailGreen>
+	
+	<SellGrey>True</SellGrey>
+	<SellWhite>True</SellWhite>
+	<SellGreen>True</SellGreen>
+	<SellBlue>False</SellBlue>
+	<SellPurple>False</SellPurple>
+
+	<QuestOrder>
+	
+	<CustomBehavior File="UserSettings" TrainNewSkills="False" />
+				
+	<If Condition="Me.MapId == 0" >
+	   
+		<If Condition="(!HasQuest(28708))"> <If Condition="(!IsQuestCompleted(28708))" >
+		  <If Condition="(!IsQuestCompleted(10119))" >
+			<PickUp QuestName="Through the Dark Portal" QuestId="10119" GiverName="Watch Commander Relthorn Netherwane" GiverId="16841" X="-11814.47" Y="-3196.079" Z="-31.03" />
+		  </If>
+		</If></If>
+		
+			<!-- through the BC portal we go! -->
+			<While Condition="Me.MapId == 0" >
+			 <If Condition="Me.MapId == 0" >
+				<RunTo X="-11895.44" Y="-3206.936" Z="-14.64132" />
+				<CustomBehavior File="WaitTimer" WaitTime="1000" />
+			  </If>
+			  <If Condition="Me.MapId == 0" >
+				<CustomBehavior File="MyCTM" X="-11908.09" Y="-3208.854" Z="-14.83002" />
+				<CustomBehavior File="WaitTimer" WaitTime="1000" />
+			  </If>
+			 <If Condition="Me.MapId == 0" >
+				<CustomBehavior File="WaitTimer" WaitTime="15000" />
+			 </If>
+			</While>
+	</If>
+		
+	<If Condition="Me.MapId == 530" >
+		<If Condition="(HasQuest(10119))" >
+			<TurnIn QuestName="Through the Dark Portal" QuestId="10119" TurnInName="Commander Duron" TurnInId="19229" X="-265.7064" Y="1028.849" Z="54.32343" />
+		</If>
+		<If Condition="(HasQuest(28708))" >
+			<TurnIn QuestName="Hero's Call: Outland!" QuestId="28708" TurnInName="Commander Duron" TurnInId="19229" X="-265.7064" Y="1028.849" Z="54.32343" />
+	    </If>
+	</If>
+		
+		
+		<CustomBehavior File="LoadProfile" ProfileName="..\BC\[Fly][A - Quest] BC 58-70 [Kick]" /> 
+
+	  
+	</QuestOrder>
+</HBProfile>

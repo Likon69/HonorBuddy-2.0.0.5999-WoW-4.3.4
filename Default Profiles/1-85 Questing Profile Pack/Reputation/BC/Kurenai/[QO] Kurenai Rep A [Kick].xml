@@ -1,0 +1,186 @@
+﻿<HBProfile>
+	<Name>[QO] Kurenai Rep A [Kick]</Name>
+   
+	<MinLevel>1</MinLevel>
+	<MaxLevel>86</MaxLevel>
+   
+	<MinDurability>0.2</MinDurability>
+	<MinFreeBagSlots>2</MinFreeBagSlots>
+	
+	<MailGrey>False</MailGrey>
+	<MailWhite>False</MailWhite>
+	<MailGreen>False</MailGreen>
+	<MailBlue>True</MailBlue>
+	<MailPurple>True</MailPurple>
+   
+	<SellGrey>True</SellGrey>
+	<SellWhite>True</SellWhite>
+	<SellGreen>True</SellGreen>
+	<SellBlue>False</SellBlue>
+	<SellPurple>False</SellPurple>
+   
+	<TargetElites>True</TargetElites>
+
+	<AvoidMobs>
+	</AvoidMobs>
+	<Blackspots>
+		<Blackspot X="-2012.614" Y="7558.771" Z="-89.05171" Radius="9.484614" />
+		<Blackspot X="-2563.781" Y="7276.854" Z="15.37977" Radius="4.372739" />
+		<Blackspot X="292.1132" Y="8487.395" Z="43.51323" Radius="42.63336" />
+		<Blackspot X="486.4735" Y="8158.848" Z="21.46613" Radius="5.398831" />
+	</Blackspots>
+
+	<Mailboxes>
+		<Mailbox X="-2670.931" Y="7288.093" Z="36.30991" /> <!-- Nagrand -->
+	</Mailboxes>
+ 
+	<Vendors>
+		<Vendor Name="Paulsta'ats" Entry="23007" Type="Repair" X="-2054.747" Y="8609.072" Z="22.16219" />
+	</Vendors>
+	
+	<Quest Id="10476" Name="Fierce Enemies">
+		<Objective Type="CollectItem" ItemId="25433" CollectCount="10">
+			<Hotspots>
+				<Hotspot X="-2031.721" Y="7653.852" Z="-86.77483" /> <!-- Southwind Cleft & inside cave -->
+				<Hotspot X="-2007.341" Y="7592.552" Z="-90.6832" />
+				<Hotspot X="-1966.614" Y="7562.087" Z="-91.6572" />
+				<Hotspot X="-2031.674" Y="7540.051" Z="-92.02007" />
+				<Hotspot X="-2040.388" Y="7562.156" Z="-91.48486" />
+				<Hotspot X="-2055.959" Y="7516.799" Z="-94.80575" />
+				<Hotspot X="-2043.698" Y="7495.235" Z="-97.14955" />
+				<Hotspot X="-2002.45" Y="7478.721" Z="-96.30782" />
+				<Hotspot X="-2011.966" Y="7422.976" Z="-95.20641" />
+				<Hotspot X="-2011.465" Y="7465.341" Z="-97.70175" />
+				<Hotspot X="-2040.078" Y="7441.078" Z="-99.16151" />
+				<Hotspot X="-2072.187" Y="7449.063" Z="-102.3337" />
+				<Hotspot X="-2056.631" Y="7418.72" Z="-102.942" />
+				<Hotspot X="-2078.308" Y="7373.243" Z="-104.4655" />
+				<Hotspot X="-2057.164" Y="7420.631" Z="-102.6495" />
+				<Hotspot X="-2038.31" Y="7442.574" Z="-98.70209" />
+				<Hotspot X="-2001.496" Y="7474.154" Z="-97.33662" />
+				<Hotspot X="-2045.324" Y="7494.437" Z="-97.29666" />
+				<Hotspot X="-2054.438" Y="7520.031" Z="-93.36745" />
+				<Hotspot X="-2039.958" Y="7544.921" Z="-92.78878" />
+				<Hotspot X="-1995.714" Y="7590.118" Z="-90.95038" />
+				<Hotspot X="-1949.175" Y="7682.474" Z="-93.26241" /> <!-- End of Southwind Cleft & cave -->
+			</Hotspots>
+		</Objective>
+	</Quest>	
+
+	<QuestOrder>
+	
+	<CustomBehavior File="UserSettings" LootMobs="True" PullDistance="35" TrainNewSkills="False" LearnFlightPaths="False" KillBetweenHotspots="True" LogoutForInactivity="False" />
+				
+			<!-- Grind to Neutral -->
+			<If Condition="Me.GetReputationLevelWith(978) &lt; Styx.WoWUnitReaction.Neutral" >
+				<CustomBehavior File="FlyTo" X="-1926.844" Y="7644.984" Z="-87.07913" />
+				<CustomBehavior File="ForcedDismount" />
+					<SetGrindArea>
+						<Grindarea>
+							<TargetMinLevel>64</TargetMinLevel> 
+							<TargetMaxLevel>71</TargetMaxLevel>
+							<Factions>45</Factions> <!-- [Ogre] -->
+							<Hotspots>
+								<Hotspot X="-2031.721" Y="7653.852" Z="-86.77483" /> <!-- Southwind Cleft & inside cave -->
+								<Hotspot X="-2007.341" Y="7592.552" Z="-90.6832" />
+								<Hotspot X="-1966.614" Y="7562.087" Z="-91.6572" />
+								<Hotspot X="-2031.674" Y="7540.051" Z="-92.02007" />
+								<Hotspot X="-2040.388" Y="7562.156" Z="-91.48486" />
+								<Hotspot X="-2055.959" Y="7516.799" Z="-94.80575" />
+								<Hotspot X="-2043.698" Y="7495.235" Z="-97.14955" />
+								<Hotspot X="-2002.45" Y="7478.721" Z="-96.30782" />
+								<Hotspot X="-2011.966" Y="7422.976" Z="-95.20641" />
+								<Hotspot X="-2011.465" Y="7465.341" Z="-97.70175" />
+								<Hotspot X="-2040.078" Y="7441.078" Z="-99.16151" />
+								<Hotspot X="-2072.187" Y="7449.063" Z="-102.3337" />
+								<Hotspot X="-2056.631" Y="7418.72" Z="-102.942" />
+								<Hotspot X="-2078.308" Y="7373.243" Z="-104.4655" />
+								<Hotspot X="-2057.164" Y="7420.631" Z="-102.6495" />
+								<Hotspot X="-2038.31" Y="7442.574" Z="-98.70209" />
+								<Hotspot X="-2001.496" Y="7474.154" Z="-97.33662" />
+								<Hotspot X="-2045.324" Y="7494.437" Z="-97.29666" />
+								<Hotspot X="-2054.438" Y="7520.031" Z="-93.36745" />
+								<Hotspot X="-2039.958" Y="7544.921" Z="-92.78878" />
+								<Hotspot X="-1995.714" Y="7590.118" Z="-90.95038" />
+								<Hotspot X="-1949.175" Y="7682.474" Z="-93.26241" /> <!-- End of Southwind Cleft & cave -->
+							</Hotspots>
+						</Grindarea>
+					</SetGrindArea>
+				<GrindTo Condition="Me.GetReputationLevelWith(978) &gt;= Styx.WoWUnitReaction.Neutral" GoalText="Getting Neutral with Kurenai" />
+			</If>
+	
+			<!-- Once Neutral, do the first beads quest -->
+			<If Condition="Me.GetReputationLevelWith(978) &gt;= Styx.WoWUnitReaction.Neutral" >
+			<If Condition="((!HasQuest(10476)) &amp;&amp; (!IsQuestCompleted(10476)))" >
+				<CustomBehavior File="FlyTo" X="-2567.123" Y="7269.978" Z="15.44274" />
+				<CustomBehavior File="ForcedDismount" />
+			</If>
+		<PickUp QuestName="Fierce Enemies" QuestId="10476" GiverName="Warden Moi'bff Jill" GiverId="18408" X="-2565.826" Y="7274.235" Z="15.47992" />
+			<If Condition="((HasQuest(10476)) &amp;&amp; (!IsQuestCompleted(10476)))" >
+				<CustomBehavior File="FlyTo" X="-1926.844" Y="7644.984" Z="-87.07913" />
+				<CustomBehavior File="ForcedDismount" />
+				<Objective QuestName="Fierce Enemies" QuestId="10476" Type="CollectItem" CollectCount="10" Name="Obsidian Warbeads" ItemId="25433" />
+			</If>
+			<If Condition="((HasQuest(10476)) &amp;&amp; (IsQuestCompleted(10476)))" >
+				<CustomBehavior File="FlyTo" X="-2567.123" Y="7269.978" Z="15.44274" />
+				<CustomBehavior File="ForcedDismount" />
+			</If>
+		<TurnIn QuestName="Fierce Enemies" QuestId="10476" TurnInName="Warden Moi'bff Jill" TurnInId="18408" X="-2565.826" Y="7274.235" Z="15.47992" />
+				</If>
+
+			<!-- Farming for Obsidian War Beads - 10 for each turnin -->
+			<While Condition="Me.GetReputationLevelWith(978) &lt; Styx.WoWUnitReaction.Exalted" >
+				<If Condition="(GetItemCount(25433) &lt; 10)" >
+				<CustomBehavior File="FlyTo" X="-1926.844" Y="7644.984" Z="-87.07913" />
+				<CustomBehavior File="ForcedDismount" />
+						<SetGrindArea>
+							<Grindarea>
+								<TargetMinLevel>64</TargetMinLevel> 
+								<TargetMaxLevel>71</TargetMaxLevel>
+								<Factions>45</Factions> <!-- [Ogre] -->
+								<Hotspots>
+									<Hotspot X="-2031.721" Y="7653.852" Z="-86.77483" /> <!-- Southwind Cleft & inside cave -->
+									<Hotspot X="-2007.341" Y="7592.552" Z="-90.6832" />
+									<Hotspot X="-1966.614" Y="7562.087" Z="-91.6572" />
+									<Hotspot X="-2031.674" Y="7540.051" Z="-92.02007" />
+									<Hotspot X="-2040.388" Y="7562.156" Z="-91.48486" />
+									<Hotspot X="-2055.959" Y="7516.799" Z="-94.80575" />
+									<Hotspot X="-2043.698" Y="7495.235" Z="-97.14955" />
+									<Hotspot X="-2002.45" Y="7478.721" Z="-96.30782" />
+									<Hotspot X="-2011.966" Y="7422.976" Z="-95.20641" />
+									<Hotspot X="-2011.465" Y="7465.341" Z="-97.70175" />
+									<Hotspot X="-2040.078" Y="7441.078" Z="-99.16151" />
+									<Hotspot X="-2072.187" Y="7449.063" Z="-102.3337" />
+									<Hotspot X="-2056.631" Y="7418.72" Z="-102.942" />
+									<Hotspot X="-2078.308" Y="7373.243" Z="-104.4655" />
+									<Hotspot X="-2057.164" Y="7420.631" Z="-102.6495" />
+									<Hotspot X="-2038.31" Y="7442.574" Z="-98.70209" />
+									<Hotspot X="-2001.496" Y="7474.154" Z="-97.33662" />
+									<Hotspot X="-2045.324" Y="7494.437" Z="-97.29666" />
+									<Hotspot X="-2054.438" Y="7520.031" Z="-93.36745" />
+									<Hotspot X="-2039.958" Y="7544.921" Z="-92.78878" />
+									<Hotspot X="-1995.714" Y="7590.118" Z="-90.95038" />
+									<Hotspot X="-1949.175" Y="7682.474" Z="-93.26241" /> <!-- End of Southwind Cleft & cave -->
+								</Hotspots>
+							</Grindarea>
+						</SetGrindArea>
+					<GrindTo Condition="(GetItemCount(25433) &gt;= 10)" GoalText="Getting 10 Warbeads" />
+				</If>
+				<While Condition="(GetItemCount(25433) &gt;= 10)" >
+					<CustomBehavior File="FlyTo" X="-2567.123" Y="7269.978" Z="15.44274" />
+					<CustomBehavior File="ForcedDismount" />
+					<CustomBehavior File="InteractWith"  MobId="18408" NumOfTimes="1" CollectionDistance="50" WaitTime="1000" X="-2565.826" Y="7274.235" Z="15.47992" />
+					<CustomBehavior File="RunMacro" Macro="/click GossipTitleButton1" NumOfTimes="1" WaitTime="1000" />
+					<CustomBehavior File="RunMacro" Macro="/click QuestFrameCompleteButton" NumOfTimes="1" WaitTime="1000" />
+					<CustomBehavior File="RunMacro" Macro="/click QuestFrameCompleteQuestButton" NumOfTimes="1" WaitTime="1000" />
+					<CustomBehavior File="WaitTimer" WaitTime="3000" />
+				</While>
+			</While>
+			
+			<If Condition="Me.GetReputationLevelWith(978) == Styx.WoWUnitReaction.Exalted" >
+				<CustomBehavior File="UserDialog" Title="title" AllowBotStop="True" SoundCue="Asterisk" SoundCueInterval="1" Text="You have reached Exalted\nIf you liked this profile, +rep is always appreciated" />
+			</If>
+	
+	</QuestOrder>
+
+</HBProfile>

@@ -1,0 +1,142 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<HBProfile>
+	<Name>Netherweave Cloth - Expedition Armory</Name>
+	<MinDurability>0.3</MinDurability>
+	<MinFreeBagSlots>2</MinFreeBagSlots>
+	<MinLevel>1</MinLevel>
+	<MaxLevel>86</MaxLevel>
+	<SellGrey>True</SellGrey>
+	<SellWhite>True</SellWhite>
+	<SellGreen>False</SellGreen>
+	<SellBlue>False</SellBlue>
+	<SellPurple>False</SellPurple>
+	<MailWhite>True</MailWhite>
+	<MailGreen>True</MailGreen>
+	<MailBlue>True</MailBlue>
+	<MailPurple>True</MailPurple>
+	<AvoidMobs>
+		<Mob Name="Daggerfen Assassin" Entry="18116" />
+		<Mob Name="Fel Reaver" Entry="18733" />
+	</AvoidMobs>
+	<Vendors>
+		<Vendor Name="Sana" Entry="3319" Type="Repair" X="1583.74" Y="-4288.98" Z="21.5408" />
+		<Vendor Name="Hagash the Blind" Entry="19561" Type="Repair" X="-1329.014" Y="2397.584" Z="89.0753" />
+		<Vendor Name="Mondul" Entry="19559" Type="Food" X="-1319.302" Y="2351.025" Z="88.95537" />
+	</Vendors>
+	<Blackspots>
+		<Blackspot X="1760.366" Y="-4301.938" Z="6.906757" Radius="1.472948" />
+		<Blackspot X="-1322.34" Y="2379.802" Z="88.6505" Radius="3.153111" />
+		<Blackspot X="-1334.172" Y="2348.408" Z="88.95781" Radius="6.024092" />
+		<Blackspot X="-1347.698" Y="2360.728" Z="88.96777" Radius="11.32145" />
+		<Blackspot X="-1218.128" Y="2627.558" Z="15.68632" Radius="3" />
+		<Blackspot X="-1195.012" Y="2640.096" Z="13.01976" Radius="3" />
+		<Blackspot X="-1255.827" Y="2652.475" Z="10.47688" Radius="3" />
+		<Blackspot X="-1251.39" Y="2709.794" Z="-7.556149" Radius="3" />
+		<Blackspot X="-1254.703" Y="2705.839" Z="-6.787035" Radius="3" />
+		<Blackspot X="-1251.463" Y="2662" Z="6.298704" Radius="4.803078" />
+		<Blackspot X="-1221.629" Y="2676.333" Z="2.692603" Radius="5.237628" />
+		<Blackspot X="-1183.991" Y="2662.563" Z="7.703997" Radius="7.393686" />
+		<Blackspot X="-1249.274" Y="2686.257" Z="-0.5437328" Radius="6.126235" />
+		<Blackspot X="-1248.262" Y="2695.542" Z="-3.050791" Radius="7.075663" />
+		<Blackspot X="-1276.573" Y="2693.49" Z="-4.287487" Radius="9.63184" />
+		<Blackspot X="-1306.921" Y="2721.458" Z="-16.66666" Radius="5.423014" />
+		<Blackspot X="-1316.026" Y="2692.39" Z="-9.431856" Radius="4.229671" />
+		<Blackspot X="-1394.307" Y="2738.87" Z="-35.35329" Radius="13.83099" />
+	</Blackspots>
+	<Mailboxes />
+	<ProtectedItems>
+		<Item name="Linen Cloth" entry="2589" />
+		<Item name="Wool Cloth" entry="2592" />
+		<Item name="Silk Cloth" entry="4306" />
+		<Item name="Mageweave Cloth" entry="4338" />
+		<Item name="Runecloth" entry="14047" />
+		<Item name="Netherweave Cloth" entry="21877" />
+	</ProtectedItems>
+	<QuestOrder>
+		<!-- Start Outland GoTo Routine -->
+		<While Condition="(Me.MapId != 530)" >
+			<If Condition="Me.IsHorde">
+				<CustomBehavior File="Message" Text="HB: We are not in Outlands" LogColor="Orange" />
+				<If Condition="(Me.MapId == 0)" >
+					<CustomBehavior File="Message" Text="HB: We are Somewhere in EK" LogColor="Orange" />
+					<If Condition="(Me.ZoneId != 4)" >
+						<CustomBehavior File="Message" Text="HB: We are not in the Blasted Lands" LogColor="Orange" />
+						<CustomBehavior File="Message" Text="HB: Hearthing..." LogColor="Orange" />
+						<CustomBehavior File="ForcedDismount" />
+						<CustomBehavior File="RunMacro" Macro="/use Hearthstone" NumOfTimes="1" WaitTime="10000"/>
+						<Else>
+							<CustomBehavior File="Message" Text="HB: We are in the Blasted Lands" LogColor="Orange" />
+						</Else>
+					</If>
+				</If>
+				<If Condition="(Me.MapId == 1)" >
+					<CustomBehavior File="Message" Text="HB: We are in Kalimdor" LogColor="Orange" />
+					<If Condition="Me.ZoneId == 1637" >
+						<CustomBehavior File="Message" Text="HB: We are in Org" LogColor="Orange" />
+						<CustomBehavior File="Message" Text="Emptying our bags before leaving home" LogColor="Orange" />
+						<CustomBehavior File="ForceSetVendor"  DoMail="true" DoRepair="true" DoSell="true" DoTrain="false" />
+						<CustomBehavior File="Message" Text="Porting to Blasted Lands" LogColor="Orange" />
+						<RunTo X="1708.986" Y="-4317.475" Z="31.30815" />
+						<CustomBehavior File="InteractWith" MobId="195142" ObjectType="Gameobject" Range="4.75" X="1768.45" Y="-4325.86" Z="-8.3711" />
+						<CustomBehavior File="WaitTimer" WaitTime="2000" GoalText="Waiting for port {TimeRemaining}" />
+						<Else>
+							<CustomBehavior File="Message" Text="HB: We are not in Org" LogColor="Orange" />
+							<CustomBehavior File="Message" Text="HB: Hearthing..." LogColor="Orange" />
+							<CustomBehavior File="ForcedDismount" />
+							<CustomBehavior File="RunMacro" Macro="/use Hearthstone" NumOfTimes="1" WaitTime="10000"/>
+						</Else>
+					</If>
+				</If>
+			</If>
+			<While Condition="(Me.MapId == 0) &amp;&amp; (Me.ZoneId == 4)" >
+				<If Condition="(Me.MapId == 0) &amp;&amp; (Me.ZoneId == 4)" >
+					<CustomBehavior File="Message" Text="Let's run near the Dark Portal" LogColor="Orange" />
+					<RunTo X="-11895.44" Y="-3206.936" Z="-14.64132" />
+					<CustomBehavior File="WaitTimer" WaitTime="1000" />
+					<CustomBehavior File="Message" Text="Let's head through the Dark Portal" LogColor="Orange" />
+					<CustomBehavior File="MyCTM" X="-11908.09" Y="-3208.854" Z="-14.83002" />
+					<CustomBehavior File="WaitTimer" WaitTime="1000" />
+				</If>
+				<If Condition="(Me.MapId == 0) &amp;&amp; (Me.ZoneId == 4)" >
+					<CustomBehavior File="WaitTimer" WaitTime="15000" />
+				</If>
+			</While>
+		</While>
+		<!-- End Outland GoTo Routine -->
+		<While Condition="(Me.Level &gt; 1)" >
+			<If Condition="(Me.LowestDurabilityPercent &gt;= 0.3) &amp;&amp; (Me.FreeBagSlots &gt;= 3)" >
+				<CustomBehavior File="Message" Text="HB: Flying to Hellfire Peninsula" LogColor="Orange" />
+				<CustomBehavior File="FlyTo" X="-1269.75" Y="2484.299" Z="51.18158" />
+				<CustomBehavior File="ForcedDismount" />
+				<SetGrindArea>
+					<GrindArea>
+						<TargetMinLevel>1</TargetMinLevel>
+						<TargetMaxLevel>86</TargetMaxLevel>
+                                                <MaxDistance>65</MaxDistance>
+						<GrindArea>51</GrindArea>
+						<Hotspots>
+							<Hotspot X="-1233.302" Y="2542.9" Z="37.68797" />
+							<Hotspot X="-1141.691" Y="2551.281" Z="44.75709" />
+							<Hotspot X="-1090.378" Y="2617.361" Z="24.69562" />
+							<Hotspot X="-1199.372" Y="2626.636" Z="18.42012" />
+							<Hotspot X="-1263.314" Y="2697.934" Z="-4.404714" />
+							<Hotspot X="-1335.438" Y="2728.38" Z="-21.59246" />
+							<Hotspot X="-1331.232" Y="2666.103" Z="-2.60785" />
+							<Hotspot X="-1385.826" Y="2715.445" Z="-26.42729" />
+							<Hotspot X="-1316.805" Y="2784.466" Z="-29.47231" />
+							<Hotspot X="-1449.094" Y="2759.02" Z="-50.81581" />
+							<Hotspot X="-1473.652" Y="2685.916" Z="-46.86142" />
+						</Hotspots>
+					</GrindArea>
+				</SetGrindArea>
+				<GrindTo Condition="(Me.LowestDurabilityPercent &lt; 0.3) || (Me.FreeBagSlots &lt;= 2)" GoalText="Netherweave Cloth - FirstAid" />
+			</If>
+			<If Condition="(Me.LowestDurabilityPercent &lt; 0.3) || (Me.FreeBagSlots &lt; 3)" >
+				<CustomBehavior File="Message" Text="HB: Flying to Repair" LogColor="Orange" />
+				<CustomBehavior File="FlyTo" X="-1324.325" Y="2388.55" Z="88.6805" DestName="Spinebreaker Post Repair Center" />
+				<CustomBehavior File="Message" Text="HB: Selling/Mailing/Repairing" LogColor="Orange" />
+				<CustomBehavior File="ForceSetVendor" DoRepair="true" DoSell="true" />
+			</If>
+		</While>
+	</QuestOrder>
+</HBProfile>

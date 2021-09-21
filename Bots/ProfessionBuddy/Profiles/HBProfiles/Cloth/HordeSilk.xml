@@ -1,0 +1,80 @@
+<HBProfile>
+	<Name>Silk Cloth - Horde </Name>
+	<MinLevel>0</MinLevel>
+	<MaxLevel>91</MaxLevel>
+	<ProtectedItems>
+		<Item Name="Linen Cloth" Entry="2589" />
+		<Item Name="Wool Cloth" Entry="2592" />	
+		<Item Name="Silk Cloth" Entry="4306" />
+		<Item Name="Mageweave Cloth" Entry="4338" />
+	</ProtectedItems>
+	<MinDurability>0.3</MinDurability>
+	<MinFreeBagSlots>2</MinFreeBagSlots>
+	<MailGrey>False</MailGrey>
+	<MailWhite>True</MailWhite>
+	<MailGreen>True</MailGreen>
+	<MailBlue>True</MailBlue>
+	<MailPurple>True</MailPurple>
+	<SellGrey>True</SellGrey>
+	<SellWhite>True</SellWhite>
+	<SellGreen>True</SellGreen>
+	<SellBlue>False</SellBlue>
+	<SellPurple>False</SellPurple>
+	<TargetElites>False</TargetElites>
+	<AvoidMobs />
+	<Blackspots />
+	<Mailboxes />
+	<Vendors>
+		<Vendor Name="Krak" Entry="4883" Type="Repair" X="-3112.938" Y="-2885.783" Z="35.26592" />
+	</Vendors>
+	<QuestOrder>
+		<While Condition="(Me.Level &gt; 1)" >
+			<If Condition="(Me.IsHorde)" >
+				<CustomBehavior File="FlyTo" X="-2899.094" Y="-3680.5" Z="36.58815" />
+				<CustomBehavior File="ForcedDismount" />
+				<SetGrindArea>
+					<GrindArea>
+						<GrindArea>14</GrindArea>
+						<TargetMinLevel>29</TargetMinLevel>
+						<TargetMaxLevel>39</TargetMaxLevel>
+                                                <MaxDistance>65</MaxDistance>
+						<Hotspots>
+							<Hotspot X="-2899.094" Y="-3680.5" Z="36.58815" />
+							<Hotspot X="-2799.817" Y="-3716.695" Z="32.43042" />
+							<Hotspot X="-2784.093" Y="-3893.802" Z="37.7562" />
+							<Hotspot X="-2828.846" Y="-3857.759" Z="35.43537" />
+							<Hotspot X="-2866.805" Y="-3910.003" Z="37.56842" />
+							<Hotspot X="-2873.886" Y="-4015.482" Z="29.24236" />
+							<Hotspot X="-2898.881" Y="-4088.037" Z="37.21372" />
+							<Hotspot X="-3019.646" Y="-4015.383" Z="37.44759" />
+							<Hotspot X="-3024.763" Y="-4045.711" Z="39.33712" />
+							<Hotspot X="-2994.468" Y="-3984.551" Z="40.49612" />
+							<Hotspot X="-2892.273" Y="-3953.319" Z="37.05796" />
+							<Hotspot X="-2812.976" Y="-3960.091" Z="32.49196" />
+							<Hotspot X="-2821.896" Y="-3883.747" Z="38.38264" />
+							<Hotspot X="-2788.94" Y="-3836.853" Z="36.42377" />
+							<Hotspot X="-2922.872" Y="-3780.093" Z="41.34991" />
+							<Hotspot X="-2999.018" Y="-3767.122" Z="38.32257" />
+							<Hotspot X="-3104.447" Y="-3803.441" Z="28.85908" />
+							<Hotspot X="-3194.279" Y="-3861.461" Z="28.16865" />
+							<Hotspot X="-3172.185" Y="-3804.176" Z="37.02683" />
+							<Hotspot X="-3148.196" Y="-3739.844" Z="39.94116" />
+							<Hotspot X="-3069.284" Y="-3698.585" Z="29.13363" />
+							<Hotspot X="-3031.122" Y="-3654.346" Z="28.5278" />
+							<Hotspot X="-3042.944" Y="-3624.67" Z="30.50007" />
+							<Hotspot X="-2981.87" Y="-3624.474" Z="29.92903" />
+							<Hotspot X="-2934.942" Y="-3680.64" Z="38.09633" />
+						</Hotspots>
+					</GrindArea>
+				</SetGrindArea>
+				<GrindTo Condition="(Me.LowestDurabilityPercent &lt; 0.3) || (Me.FreeBagSlots &lt;= 2)" GoalText="Silk Cloth - First Aid" />
+			</If>
+			<If Condition="(Me.LowestDurabilityPercent &lt; 0.3) || (Me.FreeBagSlots &lt; 3)" >
+				<CustomBehavior File="Message" Text="HB: Flying to Repair" LogColor="Orange" />
+				<CustomBehavior File="FlyTo" X="-3112.938" Y="-2885.783" Z="35.26592" DestName="Somewhere over the rainbow" />
+				<CustomBehavior File="Message" Text="HB: Selling/Mailing/Repairing" LogColor="Orange" />
+				<CustomBehavior File="ForceSetVendor"  DoMail="true" DoRepair="true" DoSell="true" />
+			</If>
+		</While>
+	</QuestOrder>
+</HBProfile>

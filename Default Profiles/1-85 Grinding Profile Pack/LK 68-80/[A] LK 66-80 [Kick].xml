@@ -1,0 +1,228 @@
+<HBProfile creator="Kickazz006" version="1.0">
+  <Name>Alliance Northrend</Name>
+  <MinLevel>65</MinLevel>
+  <MaxLevel>86</MaxLevel>
+
+  <MinDurability>0.3</MinDurability>
+  <MinFreeBagSlots>2</MinFreeBagSlots>
+  
+  <SellGrey>True</SellGrey>
+  <SellWhite>True</SellWhite>
+  <SellGreen>False</SellGreen>
+  <SellBlue>False</SellBlue>
+  
+  <MailWhite>True</MailWhite>
+  <MailGreen>True</MailGreen>
+  <MailBlue>True</MailBlue>
+  <MailPurple>True</MailPurple>
+  
+    <SubProfile> <!-- Wyrmskull Village - Howling Fjorde -->
+    <Name>Wyrmskull Village</Name>
+    <MinLevel>65</MinLevel>
+    <MaxLevel>68</MaxLevel>
+    <Vendors> <!-- Valgarde -->
+		<Vendor Name="Bartleby Armorfist" Entry="23735" Type="Repair" X="543.8926" Y="-4995.161" Z="10.5697" />
+		<Vendor Name="Coot &quot;The Stranger&quot; Albertson" Entry="23737" Type="Food" X="580.9688" Y="-4924.766" Z="18.67433" />
+	</Vendors>
+    <Mailboxes> <!-- Valgarde -->
+		<Mailbox X="568.9056" Y="-4937.374" Z="17.96031" />
+    </Mailboxes>
+	<GrindArea>
+		<Factions>1885 1895</Factions> <!-- [Vyrkul, Wolf] -->
+		<TargetMinLevel>67</TargetMinLevel>
+		<TargetMaxLevel>72</TargetMaxLevel>
+		<Hotspots> 
+			<Hotspot X="814.8876" Y="-4894.716" Z="1.383141" />
+			<Hotspot X="861.2005" Y="-4856.904" Z="2.893423" />
+			<Hotspot X="911.5117" Y="-4849.15" Z="5.361267" />
+			<Hotspot X="997.3243" Y="-4811.892" Z="-1.237068" />
+			<Hotspot X="1008.684" Y="-4848.007" Z="-1.765305" />
+			<Hotspot X="979.7365" Y="-4883.16" Z="5.448614" />
+			<Hotspot X="1044.738" Y="-4919.232" Z="9.268414" />
+			<Hotspot X="1017.692" Y="-5003.661" Z="9.610247" />
+			<Hotspot X="977.9351" Y="-4964.279" Z="4.659968" />
+			<Hotspot X="932.3597" Y="-4929.538" Z="1.743828" />
+			<Hotspot X="886.2585" Y="-4903.8" Z="2.181741" />
+			<Hotspot X="835.8135" Y="-4864.723" Z="1.818264" />
+		</Hotspots>
+	</GrindArea>
+		<Blackspots>
+
+		</Blackspots>
+		<AvoidMobs>
+			<Mob Name="Storm Giant" Entry="24812" />
+		</AvoidMobs>
+  </SubProfile>
+
+  <SubProfile> <!-- Halgrind - Howling Fjorde -->
+    <Name>Halgrind</Name>
+    <MinLevel>68</MinLevel>
+    <MaxLevel>72</MaxLevel>
+    <Vendors> <!-- Valgarde -->
+		<Vendor Name="Bartleby Armorfist" Entry="23735" Type="Repair" X="543.8926" Y="-4995.161" Z="10.5697" />
+		<Vendor Name="Coot &quot;The Stranger&quot; Albertson" Entry="23737" Type="Food" X="580.9688" Y="-4924.766" Z="18.67433" />
+	</Vendors>
+    <Mailboxes> <!-- Valgarde -->
+		<Mailbox X="568.9056" Y="-4937.374" Z="17.96031" />
+    </Mailboxes>
+	<GrindArea>
+		<Factions>1885 1895 1886 1887</Factions> <!-- [Pig, Vyrkul, Wolf] -->
+		<TargetMinLevel>67</TargetMinLevel>
+		<TargetMaxLevel>72</TargetMaxLevel>
+		<Hotspots> 
+			<Hotspot X="1195.627" Y="-4508.603" Z="176.935" />
+			<Hotspot X="1191.13" Y="-4434.951" Z="169.3403" />
+			<Hotspot X="1207.599" Y="-4380.383" Z="160.7911" />
+			<Hotspot X="1242.244" Y="-4309.017" Z="145.5674" />
+			<Hotspot X="1177.158" Y="-4278.567" Z="153.24" />
+			<Hotspot X="1061.998" Y="-4255.018" Z="161.971" />
+			<Hotspot X="1034.277" Y="-4194.077" Z="163.3312" />
+			<Hotspot X="984.9335" Y="-4142.714" Z="159.931" />
+			<Hotspot X="875.7112" Y="-4227.799" Z="171.4039" />
+			<Hotspot X="756.6478" Y="-4250.07" Z="188.375" />
+			<Hotspot X="680.8136" Y="-4298.582" Z="198.2404" />
+			<Hotspot X="670.9421" Y="-4427.6" Z="198.6563" />
+			<Hotspot X="614.7029" Y="-4401.741" Z="207.6569" />
+			<Hotspot X="599.3947" Y="-4553.106" Z="203.1919" />
+			<Hotspot X="613.7532" Y="-4669.44" Z="201.0961" />
+			<Hotspot X="728.2789" Y="-4639.421" Z="193.1628" />
+			<Hotspot X="589.4612" Y="-4725.053" Z="210.374" />
+			<Hotspot X="476.0808" Y="-4777.356" Z="211.5125" />
+			<Hotspot X="555.8477" Y="-4673.726" Z="203.3278" />
+			<Hotspot X="590.2625" Y="-4561.192" Z="202.9255" />
+			<Hotspot X="582.9365" Y="-4496.324" Z="205.7842" />
+			<Hotspot X="533.0164" Y="-4412.525" Z="210.4577" />
+			<Hotspot X="426.3695" Y="-4345.221" Z="224.7597" />
+			<Hotspot X="478.9858" Y="-4257.692" Z="230.1783" />
+			<Hotspot X="544.2031" Y="-4205.876" Z="224.6873" />
+			<Hotspot X="696.4753" Y="-4151.583" Z="203.7957" />
+			<Hotspot X="895.7404" Y="-4165.953" Z="171.4063" />
+			<Hotspot X="984.0687" Y="-4149.232" Z="158.8646" />
+			<Hotspot X="1086.469" Y="-4165.317" Z="154.5471" />
+			<Hotspot X="1178.24" Y="-4224.436" Z="147.9381" />
+			<Hotspot X="1213.941" Y="-4314.916" Z="150.3252" />
+			<Hotspot X="1228.944" Y="-4404.097" Z="159.6627" />
+			<Hotspot X="1215.757" Y="-4503.977" Z="175.1376" />
+		</Hotspots>
+	</GrindArea>
+		<Blackspots>
+
+		</Blackspots>
+		<AvoidMobs>
+			<Mob Name="Storm Giant" Entry="24812" />
+		</AvoidMobs>
+  </SubProfile>
+ 
+  <SubProfile> <!-- Grizzly Hills - Voldrune -->
+    <Name>Grizzly Hills - Voldrune</Name>
+    <MinLevel>72</MinLevel>
+    <MaxLevel>86</MaxLevel>
+    <Vendors> <!-- Amberpine Lodge -->
+		<Vendor Name="Brom Armstrong" Entry="27062" Type="Repair" X="3421.368" Y="-2757.578" Z="199.3001" />
+		<Vendor Name="Jennifer Bell" Entry="27066" Type="Food" X="3406.959" Y="-2788.631" Z="201.5212" />
+    </Vendors>
+    <Mailboxes> <!-- Amperpine Lodge -->
+		<Mailbox X="3401.815" Y="-2812.88" Z="200.4855" />
+    </Mailboxes>
+	<GrindArea>
+	<Factions>1885</Factions>
+    <TargetMinLevel>72</TargetMinLevel>
+	<TargetMaxLevel>75</TargetMaxLevel>
+    <Hotspots>
+		<Hotspot X="2757.384" Y="-2425.463" Z="39.52515" />
+		<Hotspot X="2793.607" Y="-2482.677" Z="47.74365" />
+		<Hotspot X="2872.646" Y="-2503.47" Z="62.72336" />
+		<Hotspot X="2948.708" Y="-2545.961" Z="87.1694" />
+		<Hotspot X="2958.145" Y="-2571.92" Z="87.77851" />
+		<Hotspot X="2947.92" Y="-2629.647" Z="90.7224" />
+		<Hotspot X="2946.74" Y="-2669.038" Z="93.8243" />
+		<Hotspot X="2900.605" Y="-2659.436" Z="84.69591" />
+		<Hotspot X="2860.149" Y="-2608.616" Z="84.65641" />
+		<Hotspot X="2920.517" Y="-2584.468" Z="84.65567" />
+		<Hotspot X="2886.921" Y="-2665.016" Z="84.89584" />
+		<Hotspot X="2847.61" Y="-2728.964" Z="84.68433" />
+		<Hotspot X="2784.781" Y="-2750.719" Z="92.16015" />
+		<Hotspot X="2890.551" Y="-2665.922" Z="84.87913" />
+		<Hotspot X="2921.264" Y="-2558.848" Z="84.61346" />
+		<Hotspot X="2857.923" Y="-2491.83" Z="56.92867" />
+		<Hotspot X="2753.252" Y="-2445.307" Z="39.42575" />
+    </Hotspots>
+	</GrindArea>
+	<Blackspots>
+		<Blackspot X="2799.708" Y="-2675.981" Z="68.61756" Radius="40.48968" Height="19.34004" /> <!-- lady on wagon -->
+		<Blackspot X="3414.625" Y="-2758.061" Z="199.3011" Radius="4.417544" /> <!-- Stuck on forge -->
+		<Blackspot X="3396.748" Y="-2763.859" Z="197.5077" Radius="24.4102" /> <!-- go around house to repair -->
+	</Blackspots>
+  </SubProfile>
+  
+  <SubProfile> <!-- K3 Gnolls -->
+    <Name>K3 Gnolls</Name>
+    <MinLevel>76</MinLevel>
+    <MaxLevel>80</MaxLevel>
+    <Vendors> <!-- K3 -->
+		<Vendor Name="Xark Bolthammer" Entry="29907" Type="Repair" X="6097.559" Y="-1071.257" Z="404.4125" />
+		<Vendor Name="Smilin' Slirk Brassknob" Entry="29904" Type="Food" X="6124.416" Y="-1080.962" Z="402.5415" />
+	<!-- Wildrunner's Outlook in Crystalsong
+		<Vendor Name="Lanudal Silverhart" Entry="30241" Type="Repair" X="5056.556" Y="-591.7134" Z="219.9717" />
+		<Vendor Name="Aniduria" Entry="30255" Type="Food" X="5070.674" Y="-589.3512" Z="219.9713" />
+	-->
+	</Vendors>
+    <Mailboxes> <!-- K3 -->
+		<Mailbox X="6126.403" Y="-1069.047" Z="403.0461" />
+    </Mailboxes>
+	<GrindArea>
+	<Factions>16 1693 190</Factions> <!-- [Gnoll, Kobold, Mammoth] -->
+    <TargetMinLevel>75</TargetMinLevel>
+	<TargetMaxLevel>80</TargetMaxLevel>
+    <Hotspots>
+		<Hotspot X="6285.17" Y="-896.4157" Z="409.7999" />
+		<Hotspot X="6325.764" Y="-892.1709" Z="408.42" />
+		<Hotspot X="6383.059" Y="-863.1478" Z="408.4239" />
+		<Hotspot X="6373.252" Y="-824.2702" Z="409.4583" />
+		<Hotspot X="6322.515" Y="-791.652" Z="407.4753" />
+		<Hotspot X="6266.65" Y="-796.7496" Z="408.6371" />
+		<Hotspot X="6243.16" Y="-840.7773" Z="407.1665" />
+		<Hotspot X="6265.521" Y="-694.8317" Z="418.3795" />
+		<Hotspot X="6239.067" Y="-666.7831" Z="416.1303" />
+		<Hotspot X="6180.708" Y="-650.7217" Z="404.7965" />
+		<Hotspot X="6225.924" Y="-593.2983" Z="416.8743" />
+		<Hotspot X="6260.139" Y="-620.3668" Z="419.7072" />
+		<Hotspot X="6301.604" Y="-629.5598" Z="423.3912" />
+		<Hotspot X="6302.375" Y="-674.4965" Z="425.3145" />
+		<Hotspot X="6264.413" Y="-698.1252" Z="418.4413" />
+    </Hotspots>
+	</GrindArea>
+	<AvoidMobs>
+		<Mob Name="Ancient Watcher" Entry="31229" />
+		<Mob Name="Unbound Ancient" Entry="30861" />
+		<Mob Name="Spark AA Cannon" Entry="29399" />
+		<Mob Name="Gigantaur" Entry="26836" />
+		<Mob Name="Iceshatter" Entry="27007" />
+	</AvoidMobs>
+	<Blackspots>
+		<Blackspot X="3531.309" Y="-1153.684" Z="113.713" Radius="101.0137" /> <!-- Dragonblight travelling blackspot -->
+		<Blackspot X="2915.6" Y="-2750.925" Z="77.49868" Radius="25.51372" /> <!-- Blackspot by Voldrune -->
+		<Blackspot X="6137.455" Y="-965.4685" Z="397.8212" Radius="5.78932" /> <!-- pipe in ground -->
+	</Blackspots>
+  </SubProfile>
+  
+  	<AvoidMobs>
+		<Mob Name="Ancient Watcher" Entry="31229" />
+		<Mob Name="Unbound Ancient" Entry="30861" />
+		<Mob Name="Spark AA Cannon" Entry="29399" />
+		<Mob Name="Gigantaur" Entry="26836" />
+		<Mob Name="Iceshatter" Entry="27007" />
+	</AvoidMobs>
+  
+	<Blackspots> <!-- Travelling Blackspots -->
+		<Blackspot X="3281.581" Y="-2274.305" Z="111.0464" Radius="148.6421" Height="13.33825" />
+		<Blackspot X="6107.924" Y="-361.1776" Z="445.5483" Radius="10.64786" Height="13.83136" />
+		<Blackspot X="3531.309" Y="-1153.684" Z="113.713" Radius="101.0137" /> <!-- Dragonblight travelling blackspot -->
+		<Blackspot X="2915.6" Y="-2750.925" Z="77.49868" Radius="48.51372" /> <!-- Blackspot by Voldrune -->
+	</Blackspots>
+	
+  </HBProfile>
+
+
+
+

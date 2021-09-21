@@ -1,0 +1,265 @@
+<HBProfile>
+	<!-- Run Bot in Quest Mode -->
+    <Name>Herb and Mining 1-300 Horde ground</Name>
+	<MinDurability>0.3</MinDurability>
+	<MinFreeBagSlots>2</MinFreeBagSlots>
+	<SellGrey>True</SellGrey>
+	<SellWhite>True</SellWhite>
+	<SellGreen>False</SellGreen>
+	
+	<MailWhite>False</MailWhite>
+	<MailGreen>True</MailGreen>
+	<MailBlue>True</MailBlue>
+	<MailPurple>True</MailPurple>
+
+	<MinLevel>1</MinLevel>
+	<MaxLevel>86</MaxLevel>
+
+	<Mailboxes>
+		<!-- Durotar -->
+		<Mailbox X="321.8162" Y="-4707.742" Z="14.555" />
+		<!-- Northern Barrens -->
+		<Mailbox X="-440.7929" Y="-2652.555" Z="95.87133" />
+		<!--Ashenvale-->
+		<Mailbox X="2330.655" Y="-2546.743" Z="102.4219" />
+		<!-- Southern Barrens -->		
+		<Mailbox X="-2350.32" Y="-1945.408" Z="95.80665" />
+		<!-- Winterspring -->
+		<Mailbox X="6704.82" Y="-4666.534" Z="721.6656" />
+    </Mailboxes>
+   
+	<Vendors>
+		<!-- Durotar -->
+		<Vendor Name="Ghrawt" Entry="3165" Type="Repair" X="362.1046" Y="-4763.842" Z="12.46935" />
+		<!-- Northern Barrens -->
+		<Vendor Name="Halija Whitestrider" Entry="3486" Type="Repair" X="-539.8406" Y="-2672.23" Z="95.78771" />
+		<!--Ashenvale-->
+		<Vendor Name="Burkrum" Entry="6028" Type="Repair" X="2346.262" Y="-2582.214" Z="103.0939" />		
+		<!-- Southern Barrens -->
+		<Vendor Name="Sanuye Runetotem" Entry="10380" Type="Repair" X="-2117.366" Y="-1720.104" Z="98.25043" />
+		<!-- Winterspring -->
+		<Vendor Name="Wixxrak" Entry="11184" Type="Repair" X="6733.39" Y="-4699.038" Z="721.3698" />
+	</Vendors>
+   
+	<Blackspots>
+		<!-- Forest Song Alliance camp -->
+		<Blackspot X="2967.899" Y="-3290.422" Z="157.8666" Radius="61.13169" />
+		<!-- Ashenvale alliance druid npc -->
+		<Blackspot X="1761.225" Y="-2649.768" Z="105.3705" Radius="25.04349" />
+		<!-- Org -->
+		<Blackspot X="1918.384" Y="-4584.305" Z="38.08955" Radius="2.488826" />
+		<Blackspot X="1904.622" Y="-4611.38" Z="38.08939" Radius="2.925328" />
+		<Blackspot X="1945.513" Y="-4697.564" Z="36.01491" Radius="5.738221" />
+		<Blackspot X="1955.528" Y="-4720.438" Z="37.65824" Radius="2.542814" />
+		<Blackspot X="1909.309" Y="-4678.926" Z="35.30098" Radius="1.203703" />
+		<Blackspot X="1904.355" Y="-4509.64" Z="26.82976" Radius="3.579645" />
+		<Blackspot X="1736.511" Y="-4442.859" Z="39.60423" Radius="1.832101" />
+	</Blackspots>
+	<QuestOrder> 
+		<SetGrindArea>
+			<GrindArea>
+				<Name>Durotar Mining and Herb 1-50</Name> 
+				<LootRadius>100</LootRadius> 
+				<Hotspots>
+					<Hotspot X="226.5481" Y="-4960.051" Z="14.39176" />
+					<Hotspot X="140.2605" Y="-4649.878" Z="23.3554" />
+					<Hotspot X="-3.559398" Y="-4665.697" Z="39.00121" />
+					<Hotspot X="-152.7559" Y="-4646.651" Z="38.97042" />
+					<Hotspot X="-377.432" Y="-4694.922" Z="42.70164" />
+					<Hotspot X="-471.0599" Y="-4650.417" Z="44.29048" />
+					<Hotspot X="-721.6679" Y="-4693.072" Z="37.22851" />
+					<Hotspot X="-732.9247" Y="-4610.409" Z="43.03048" />
+					<Hotspot X="-834.6677" Y="-4586.037" Z="51.23519" />
+					<Hotspot X="-984.7738" Y="-4764.663" Z="12.97954" />
+					<Hotspot X="-822.198" Y="-4798.747" Z="24.14064" />
+					<Hotspot X="-894.8483" Y="-4890.216" Z="10.03536" />
+					<Hotspot X="-660.2412" Y="-5083.522" Z="19.87173" />
+					<Hotspot X="-674.7885" Y="-4902.28" Z="29.67629" />
+					<Hotspot X="-597.8583" Y="-4924.442" Z="35.66864" />
+					<Hotspot X="-76.55823" Y="-4987.988" Z="18.53954" />
+					<Hotspot X="64.29607" Y="-4932.028" Z="17.33877" />
+					<Hotspot X="186.7195" Y="-5049.994" Z="2.992226" />
+				</Hotspots>	
+			</GrindArea>
+		</SetGrindArea>
+		<GrindTo Condition="(Me.GetSkill(Styx.SkillLine.Herbalism).CurrentValue &gt;= 50)" />
+
+		<SetGrindArea>
+			<GrindArea>
+				<Name>Northern Barrens Mining and Herb 50-75</Name> 
+				<LootRadius>100</LootRadius> 
+				<Hotspots>
+					<Hotspot X="927.3068" Y="-3480.987" Z="91.88885" />
+					<Hotspot X="971.502" Y="-3395.51" Z="92.9039" />
+					<Hotspot X="1182.997" Y="-3093.379" Z="94.79194" />
+					<Hotspot X="1091.307" Y="-2994.436" Z="91.68259" />
+					<Hotspot X="928.9847" Y="-2964.062" Z="91.66669" />
+					<Hotspot X="1017.185" Y="-2879.604" Z="95.1087" />
+					<Hotspot X="934.7449" Y="-2802.53" Z="91.6665" />
+					<Hotspot X="860.0001" Y="-2656.657" Z="91.69484" />
+					<Hotspot X="730.8855" Y="-2712.428" Z="92.58946" />
+					<Hotspot X="611.1575" Y="-2690.392" Z="92.93027" />
+					<Hotspot X="648.2236" Y="-2589.351" Z="92.4545" />
+					<Hotspot X="520.0696" Y="-2371.157" Z="91.66679" />
+					<Hotspot X="658.5664" Y="-2345.532" Z="91.67278" />
+					<Hotspot X="734.2397" Y="-2427.054" Z="92.42468" />
+					<Hotspot X="823.2521" Y="-2348.675" Z="91.7629" />
+					<Hotspot X="798.9749" Y="-1887.447" Z="94.06892" />
+					<Hotspot X="657.6336" Y="-1479.705" Z="94.2668" />
+					<Hotspot X="343.49" Y="-1631.669" Z="94.06822" />
+					<Hotspot X="365.1895" Y="-1424.746" Z="91.77777" />
+					<Hotspot X="285.0951" Y="-1422.331" Z="100.1563" />
+					<Hotspot X="56.04421" Y="-1436.143" Z="91.66755" />
+					<Hotspot X="-208.352" Y="-1784.817" Z="91.67325" />
+					<Hotspot X="-93.26275" Y="-1863.701" Z="95.95104" />
+					<Hotspot X="579.5822" Y="-1817.126" Z="92.90457" />
+					<Hotspot X="120.9178" Y="-2007.605" Z="94.0547" />
+					<Hotspot X="-51.15709" Y="-2336.981" Z="94.44167" />
+					<Hotspot X="-94.56008" Y="-2606.692" Z="99.97623" />
+					<Hotspot X="60.35023" Y="-2424.698" Z="92.12079" />
+					<Hotspot X="392.2571" Y="-2559.541" Z="91.66951" />
+					<Hotspot X="489.9523" Y="-2792.894" Z="92.95514" />
+					<Hotspot X="786.7235" Y="-2858.012" Z="91.67373" />
+					<Hotspot X="604.9565" Y="-3036.984" Z="91.81597" />
+					<Hotspot X="448.0769" Y="-3166.976" Z="94.4051" />
+					<Hotspot X="432.9649" Y="-3406.937" Z="91.91555" />
+				</Hotspots>	
+			</GrindArea>
+		</SetGrindArea>
+		<GrindTo Condition="(Me.GetSkill(Styx.SkillLine.Herbalism).CurrentValue &gt;= 75)" />
+		
+		<SetGrindArea>
+			<GrindArea>
+				<Name>Ashenvale Mining and Herb 75-125</Name> 
+				<LootRadius>100</LootRadius> 
+				<Hotspots>
+					<Hotspot X="2940.413" Y="-3463.327" Z="123.3242" />
+					<Hotspot X="2861.097" Y="-3074.724" Z="194.3755" />
+					<Hotspot X="2798.8" Y="-3008.843" Z="157.0212" />
+					<Hotspot X="2706.98" Y="-2990.834" Z="140.9576" />
+					<Hotspot X="2864.601" Y="-2871.489" Z="202.2855" />
+					<Hotspot X="3043.161" Y="-2792.115" Z="196.2582" />
+					<Hotspot X="2644.906" Y="-2661.81" Z="137.9966" />
+					<Hotspot X="2626.361" Y="-2428.365" Z="168.1061" />
+					<Hotspot X="2377.292" Y="-2053.018" Z="133.1136" />
+					<Hotspot X="1997.907" Y="-1924.573" Z="98.42037" />
+					<Hotspot X="2024.182" Y="-2125.855" Z="111.6112" />
+					<Hotspot X="2134.762" Y="-2298.729" Z="101.3112" />
+					<Hotspot X="1792.951" Y="-2341.346" Z="106.5816" />
+					<Hotspot X="1942.307" Y="-2500.486" Z="79.79281" />
+					<Hotspot X="1954.841" Y="-2637.695" Z="90.81735" />
+					<Hotspot X="2059.806" Y="-2836.309" Z="109.1272" />
+					<Hotspot X="1628.611" Y="-3057.037" Z="89.4312" />
+					<Hotspot X="1711.691" Y="-3442.564" Z="144.4181" />
+					<Hotspot X="2623.565" Y="-3299.461" Z="135.7101" />
+					<Hotspot X="2696.766" Y="-3605.523" Z="103.997" />
+				</Hotspots>	
+			</GrindArea>
+		</SetGrindArea>
+		<GrindTo Condition="(Me.GetSkill(Styx.SkillLine.Herbalism).CurrentValue &gt;= 150)" />
+
+		<SetGrindArea>
+			<GrindArea>
+				<Name>Southern Barens 125 -175 herb and mine</Name> 
+				<LootRadius>100</LootRadius> 
+				<Hotspots>
+					<Hotspot X="-2028.13" Y="-3239.945" Z="91.94167" />
+					<Hotspot X="-1657.657" Y="-2584.222" Z="77.04848" />
+					<Hotspot X="-1475.428" Y="-2542.56" Z="84.26682" />
+					<Hotspot X="-1548.295" Y="-2452.655" Z="94.02652" />
+					<Hotspot X="-1436.367" Y="-2224.594" Z="91.31103" />
+					<Hotspot X="-1326.791" Y="-2201.736" Z="77.88" />
+					<Hotspot X="-1024.751" Y="-1744.367" Z="90.36182" />
+					<Hotspot X="-1013.452" Y="-1610.221" Z="92.66546" />
+					<Hotspot X="-1226.402" Y="-1731.284" Z="91.66708" />
+					<Hotspot X="-1414.593" Y="-1722.111" Z="92.12773" />
+					<Hotspot X="-1446.247" Y="-1504.816" Z="92.66785" />
+					<Hotspot X="-1563.237" Y="-1613.442" Z="91.89922" />
+					<Hotspot X="-1639.815" Y="-2196.236" Z="97.03629" />
+					<Hotspot X="-1865.113" Y="-2381.234" Z="97.70934" />
+					<Hotspot X="-2075.674" Y="-2190.697" Z="99.45315" />
+					<Hotspot X="-1854.665" Y="-1941.31" Z="93.06011" />
+					<Hotspot X="-1799.202" Y="-1684.141" Z="92.66869" />
+					<Hotspot X="-2308.477" Y="-1688.647" Z="97.02951" />
+					<Hotspot X="-2320.09" Y="-2014.968" Z="95.79324" />
+					<Hotspot X="-2504.925" Y="-1941.358" Z="91.7841" />
+					<Hotspot X="-2753.255" Y="-1909.783" Z="91.66938" />
+					<Hotspot X="-2834.814" Y="-1958.579" Z="91.87486" />
+					<Hotspot X="-2794.819" Y="-2225.485" Z="92.51244" />
+					<Hotspot X="-2458.732" Y="-2510.463" Z="91.96687" />
+					<Hotspot X="-2218.008" Y="-2730.296" Z="92.0895" />
+				</Hotspots>	
+			</GrindArea>
+		</SetGrindArea>
+		<GrindTo Condition="(Me.GetSkill(Styx.SkillLine.Herbalism).CurrentValue &gt;= 225) " />
+		<SetGrindArea>
+			<GrindArea>
+				<Name>Felwood 160 - 235 herb and mine</Name> 
+				<LootRadius>100</LootRadius> 
+				<Hotspots>
+					<Hotspot X="3649.888" Y="-1611.335" Z="205.7323" />
+					<Hotspot X="3762.934" Y="-1584.865" Z="220.7808" />
+					<Hotspot X="3774.759" Y="-1699.988" Z="258.6165" />
+					<Hotspot X="3820.125" Y="-1725.913" Z="274.0485" />
+					<Hotspot X="3916.816" Y="-1630.172" Z="264.8573" />
+					<Hotspot X="3944.085" Y="-1481.041" Z="243.5802" />
+					<Hotspot X="3809.239" Y="-1473.305" Z="211.3323" />
+					<Hotspot X="4003.997" Y="-1208.602" Z="269.0508" />
+					<Hotspot X="4098.111" Y="-1200.403" Z="292.221" />
+					<Hotspot X="4060.399" Y="-1107.266" Z="271.7606" />
+					<Hotspot X="4128.307" Y="-1052.053" Z="284.682" />
+					<Hotspot X="4196.044" Y="-1172.771" Z="319.0283" />
+					<Hotspot X="4321.173" Y="-1067.871" Z="325.139" />
+					<Hotspot X="4243.4" Y="-1013.423" Z="298.6697" />
+					<Hotspot X="4323.668" Y="-966.8419" Z="306.626" />
+					<Hotspot X="4428.909" Y="-974.8982" Z="322.6932" />
+					<Hotspot X="4467.337" Y="-919.0743" Z="311.7873" />
+					<Hotspot X="4515.813" Y="-976.8419" Z="328.2876" />
+					<Hotspot X="4649.445" Y="-918.7637" Z="334.5039" />
+					<Hotspot X="4655.512" Y="-840.8776" Z="312.2982" />
+					<Hotspot X="4556.208" Y="-806.4768" Z="283.0699" />
+					<Hotspot X="4542.098" Y="-720.9332" Z="259.1747" />
+					<Hotspot X="4732.007" Y="-730.71" Z="300.9311" />
+					<Hotspot X="4769.705" Y="-787.1718" Z="302.2827" />
+					<Hotspot X="5077.106" Y="-780.3893" Z="326.2364" />
+					<Hotspot X="5027.264" Y="-638.0376" Z="291.8752" />
+					<Hotspot X="4865.287" Y="-664.6138" Z="294.7225" />
+					<Hotspot X="4853.99" Y="-346.4443" Z="356.4475" />
+					<Hotspot X="4588.228" Y="-593.5212" Z="281.4152" />
+					<Hotspot X="4500.146" Y="-575.0998" Z="288.8346" />
+					<Hotspot X="4262.312" Y="-548.9355" Z="300.3612" />
+					<Hotspot X="4196.108" Y="-821.7983" Z="254.8648" />
+					<Hotspot X="4137.735" Y="-744.4565" Z="275.7039" />
+					<Hotspot X="4165.652" Y="-688.9246" Z="283.0232" />
+					<Hotspot X="3951.757" Y="-747.8074" Z="288.5546" />
+					<Hotspot X="4014.362" Y="-931.4868" Z="255.7614" />
+					<Hotspot X="3898.24" Y="-1012.602" Z="247.7262" />
+					<Hotspot X="3557.694" Y="-1124.174" Z="221.1253" />
+				</Hotspots>	
+			</GrindArea>
+		</SetGrindArea>
+		<GrindTo Condition="(Me.GetSkill(Styx.SkillLine.Herbalism).CurrentValue &gt;= 280)" />
+		<SetGrindArea>
+			<GrindArea>	
+				<Name>Winterspring 235 - 300 herb and mine</Name> 
+				<LootRadius>100</LootRadius> 
+				<Hotspots>
+					<Hotspot X="6881.67" Y="-2295.906" Z="584.8558" />
+					<Hotspot X="6416.268" Y="-2383.942" Z="568.2747" />
+					<Hotspot X="6222.806" Y="-2385.156" Z="590.9743" />
+					<Hotspot X="6398.544" Y="-2560.004" Z="550.0565" />
+					<Hotspot X="6377.393" Y="-2789.186" Z="582.1558" />
+					<Hotspot X="6404.069" Y="-3131.103" Z="589.4615" />
+					<Hotspot X="6438.401" Y="-3488.7" Z="644.5562" />
+					<Hotspot X="6364.051" Y="-3866.161" Z="681.717" />
+					<Hotspot X="6798.544" Y="-3585.535" Z="712.3241" />
+					<Hotspot X="6838.052" Y="-3155.391" Z="615.3704" />
+					<Hotspot X="6845.688" Y="-2895.758" Z="594.0655" />
+					<Hotspot X="6800.983" Y="-2701.776" Z="558.2277" />
+					<Hotspot X="6885.387" Y="-2381.375" Z="556.1876" />
+				</Hotspots>	
+			</GrindArea>
+		</SetGrindArea>	
+		<GrindTo Condition="(Me.GetSkill(Styx.SkillLine.Herbalism).CurrentValue &gt;= 303)" />
+	</QuestOrder>
+</HBProfile>

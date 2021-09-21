@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<DungeonBuddyProfile>
+  <Name>Blackrock Caverns Heroic</Name>
+  <DungeonId>323</DungeonId>
+  <BossEncounters>
+	<Boss isFinal="false" entry="39665" name="Rom'ogg Bonecrusher" killOrder="1" optional="true" X="202.1898" Y="962.3428" Z="190.9241" />
+	<!-- moveto <Hotspot X="551.1982" Y="926.903" Z="169.5524" /> and jump to <Hotspot X="557.8335" Y="939.0205" Z="159.377" /> -->
+	<Boss isFinal="false" entry="39679" name="Corla, Herald of Twilight" killOrder="2" optional="false" X="573.4445" Y="987.6875" Z="155.3538" />
+	<Boss isFinal="false" entry="39698" name="Karsh Steelbender" killOrder="3" optional="false" X="237.286" Y="774.547" Z="95.90907" />
+	<Boss isFinal="false" entry="39700" name="Beauty" killOrder="4" optional="true" X="102.8576" Y="583.9549" Z="76.78667" />
+	<!-- 2 pups, 3 if you count runty
+	<Vendor Name="Spot" Entry="40011" Type="Repair" X="126.901" Y="579.3837" Z="76.41671" />
+	<Vendor Name="Buster" Entry="40013" Type="Repair" X="117.0966" Y="590.681" Z="76.33243" />
+	<Vendor Name="Runty" Entry="40015" Type="Repair" X="84.80825" Y="615.2934" Z="76.86863" />
+	-->
+	<Boss isFinal="true" entry="39705" name="Ascendant Lord Obsidius" killOrder="5" optional="false" X="301.8958" Y="554.5201" Z="66.4882" />
+  </BossEncounters>
+  <Blackspots>
+    <!--<Blackspot X="-101.3791" Y="-703.8368" Z="9.095623" Radius="3.363508" />-->
+  </Blackspots>
+  <PullBlackspots>
+    <PullBlackspot X="173.9614" Y="1085.016" Z="206.3636" Radius="4.689246" />
+    <PullBlackspot X="237.7001" Y="1085.065" Z="205.9066" Radius="9.655891" />
+  </PullBlackspots>
+</DungeonBuddyProfile>

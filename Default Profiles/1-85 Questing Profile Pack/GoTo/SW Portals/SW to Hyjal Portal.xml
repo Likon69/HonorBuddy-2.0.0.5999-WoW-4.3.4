@@ -1,0 +1,17 @@
+<HBProfile>
+	<Name>SW to Hyjal Portal</Name>
+	<MinLevel>1</MinLevel>
+	<MaxLevel>101</MaxLevel>
+	
+	<QuestOrder>
+
+			<If Condition="(Me.ZoneId == 1519)" >
+				<CustomBehavior File="FlyTo" DestName="Hyjal Portal in SW" X="-8212.235" Y="402.7114" Z="117.2917" />
+				<CustomBehavior File="ForcedDismount" />
+				
+				<CustomBehavior File="InteractWith" MobId="207692" ObjectType="Gameobject" Range="5" X="-8212.235" Y="402.7114" Z="117.2917" />
+			</If>
+	
+	
+	</QuestOrder>
+</HBProfile>

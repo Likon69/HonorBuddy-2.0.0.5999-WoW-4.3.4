@@ -1,0 +1,120 @@
+<HBProfile>
+	<Name>H LK to K [Kick]</Name>
+	<MinLevel>1</MinLevel>
+	<MaxLevel>86</MaxLevel>
+	
+	<MinDurability>0.1</MinDurability>
+	<MinFreeBagSlots>1</MinFreeBagSlots>
+	
+
+	<Vendors>
+		<!-- Orgrimmar Vendor -->
+		<Vendor Name="Trak'gen" Entry="3313" Type="Food" X="1528.89" Y="-4442.89" Z="24.02194" />
+		<Vendor Name="Urtharo" Entry="3314" Type="Repair" X="1639.75" Y="-4316.71" Z="21.12019" />
+		<!--Orgrimmar Trainers-->
+		<Vendor Name="Zevrost" Type="Train" TrainClass="Warlock" Entry="3326" X="1848.788" Y="-4360.646" Z="-14.72255"/>
+		<Vendor Name="Marud" Type="Train" TrainClass="Mage" Entry="47247" X="1764.56" Y="-4349.509" Z="-7.769643"/>
+		<Vendor Name="Seer Liwatha" Type="Train" TrainClass="Priest" Entry="44735" X="1863.46" Y="-4297.75" Z="23.74968"/>
+		<Vendor Name="Blademaster Ronakada" Entry="46667" Type="Train" TrainClass="Warrior" X="1960.88" Y="-4788.98" Z="39.11317" />
+		<Vendor Name="Sahi Cloudsinger" Entry="44740" Type="Train" TrainClass="Shaman" X="1884.15" Y="-4282.4" Z="23.5918"/>
+		<Vendor Name="Gordul" Type="Train" TrainClass="Rogue" Entry="47233" X="1773.21" Y="-4282.96" Z="7.892303"/>
+		<Vendor Name="Nohi Plainswalker" Type="Train" TrainClass="Hunter" Entry="44743"  X="1872.89" Y="-4281.46" Z="23.76952"/>
+		<Vendor Name="Sunwalker Atohmo" Type="Train" TrainClass="Paladin" Entry="44725"  X="1863.88" Y="-4292.69" Z="23.78126"/>
+		<Vendor Name="Shalla Whiteleaf" Type="Train" TrainClass="Druid" Entry="44726"  X="1888.95" Y="-4285.25" Z="23.55553"/>
+	</Vendors>
+	
+	<Mailboxes>
+		<Mailbox X="1604.843" Y="-4383.491" Z="20.57193" /> <!-- Org -->
+	</Mailboxes>
+	
+	<Blackspots>
+	</Blackspots>
+	
+	<QuestOrder>
+	
+		<CustomBehavior File="UserSettings" LearnFlightPaths="False" UseFlightPaths="False" TrainNewSkills="False" />
+				
+			 <If Condition="(Me.MapId == 571) &amp;&amp; (Me.Class == WoWClass.DeathKnight)" >
+			<While Condition="Me.Zone != 139" >
+				<CustomBehavior File="Misc\RunLua" Lua="CastSpellByID(50977)" />
+				<CustomBehavior File="WaitTimer" WaitTime="12000" GoalText="Waiting for port {TimeRemaining}" />
+				<CustomBehavior File="InteractWith" MobId="190942" ObjectType="Gameobject" Range="6" WaitForNpcs="False" />
+				<CustomBehavior File="WaitTimer" WaitTime="5000" GoalText="Waiting for port {TimeRemaining}" />
+			</While>
+			
+			<If Condition="Me.ZoneId == 139" >
+				<ClearVendor />
+				
+				<SetVendor>
+					<Vendors>
+						<Vendor Name="Lady Alistra" Entry="29195" Type="Repair" X="2488.616" Y="-5654.104" Z="376.9503" />
+					</Vendors>
+				</SetVendor>
+				
+				<CustomBehavior File="ForceSetVendor" DoTrain="True" />
+				<ClearVendor />
+			
+				<CustomBehavior File="UserSettings" UseFlightPaths="True" />
+				<CustomBehavior File="InteractWith" MobId="29480" X="2348.626" Y="-5669.289" Z="382.2406" />
+			 </If>
+				
+			  <If Condition="(Me.IsHorde) &amp;&amp; (Me.MapId == 0)" >
+				<RunTo X="2047.313" Y="310.4062" Z="54.157" />
+				<RunTo X="2067.457" Y="289.577" Z="97.03069" />
+			   <If Condition="Me.ZoneId == 85" > <!-- Tirisfal Glades -->
+				<CustomBehavior File="Message" Text="Running to UC Zepp to Org" LogColor="Cornflowerblue" />
+				<RunTo X="2067.232" Y="286.1159" Z="97.03087" />
+				
+				<CustomBehavior File="Message" Text="Waiting for Zepp to Org - don't interact!" LogColor="Orange" />
+		
+				<CustomBehavior File="UseTransport" TransportId="164871"
+											WaitAtX="2070.155" WaitAtY="289.2588" WaitAtZ="97.0315" 
+											TransportStartX="2062.376" TransportStartY="292.998" TransportStartZ="114.973"
+											StandOnX="2067.979" StandOnY="295.2747" StandOnZ="97.23677" 
+											TransportEndX="1833.509" TransportEndY="-4391.543" TransportEndZ="152.7679"
+											GetOffX="1840.225" GetOffY="-4390.912" GetOffZ="135.2337" />
+
+			   </If>
+			  </If>
+			  
+				<CustomBehavior File="UserSettings" UseFlightPaths="False" />
+			 </If>
+			 
+			 <If Condition="(Me.MapId == 571) &amp;&amp; (Me.Class != WoWClass.DeathKnight)" >
+				<CustomBehavior File="FlyTo" DestName="Borean Tundra" X="2708.396" Y="6066.991" Z="109.617" />
+				<CustomBehavior File="FlyTo" DestName="Warsong Hold, BT" X="2740.837" Y="6097.529" Z="76.88604" />
+				
+				<CustomBehavior File="Message" Text="Running to Borean Zepp to Org" LogColor="Cornflowerblue" />
+				<RunTo X="2829.74" Y="6179.48" Z="121.9793" />
+				
+				<CustomBehavior File="Message" Text="Waiting for Borean Zepp to Org - don't interact!" LogColor="Orange" />
+		
+				<CustomBehavior File="UseTransport" TransportId="186238"
+											WaitAtX="2836.831" WaitAtY="6185.15" WaitAtZ="121.9923" 
+											TransportStartX="2837.908" TransportStartY="6187.443" TransportStartZ="140.1648" 
+											StandOnX="2844.171" StandOnY="6191.577" StandOnZ="122.3017" 
+											TransportEndX="1775.066" TransportEndY="-4299.745" TransportEndZ="151.0326" 
+											GetOffX="1763.203" GetOffY="-4284.529" GetOffZ="133.1072" />
+
+			 </If>
+	
+			
+			<If Condition="Me.MapId == 1 &amp;&amp; (Me.ZoneId == 1637)" >
+				<If Condition="Me.Class != WoWClass.DeathKnight">
+					<CustomBehavior File="UserSettings" TrainNewSkills="True" />
+					<CustomBehavior File="ForceSetVendor" DoTrain="True" DoSell="True" DoRepair="True" DoMail="True" />
+					<RunTo X="1717.191" Y="-4352.751" Z="31.41282" />
+				</If>
+				<If Condition="!SpellManager.HasSpell(&quot;Flight Master's License&quot;)">
+					<CustomBehavior File="ForceTrainRiding" MobId="44919" />
+					<CustomBehavior File="WaitTimer" WaitTime="5000" GoalText="Waiting for quest to complete {TimeRemaining}" />
+				</If>
+			</If>
+				<If Condition="!SpellManager.HasSpell(&quot;Flight Master's License&quot;)">
+	<CustomBehavior File="UserDialog" AllowBotStop="True" SoundCue="Exclamation" SoundCueInterval="1" Text="You need your cata flying license to continue!!!! Train it at Org Flight Path!" />
+				</If>
+			
+		<CustomBehavior File="LoadProfile" ProfileName="..\Cata\[Fly][N - Quest] Hyjal 80-82 [Kick]" /> 
+	  
+	</QuestOrder>
+</HBProfile>

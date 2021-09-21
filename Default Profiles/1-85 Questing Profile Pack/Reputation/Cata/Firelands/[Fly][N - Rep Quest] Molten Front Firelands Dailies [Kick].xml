@@ -1,0 +1,343 @@
+<HBProfile>
+	<Name>[N - Rep Quest] Molten Front Firelands Dailies [Kick]</Name>
+
+	<MinDurability>0.1</MinDurability>
+
+
+	<Blackspots>
+	</Blackspots>
+	<AvoidMobs>
+		<Mob Name="Molten Behemoth" Entry="52552" />
+	</AvoidMobs>
+	<Vendors>
+		<Vendor Name="Zen'Vorka" Entry="52822" Type="Repair" X="979.8785" Y="375.066" Z="37.98084" />
+	</Vendors>
+	
+	
+	<Quest Id="29179" Name="Hostile Elements">
+		<Objective Type="KillMob" MobId="52504" KillCount="8">
+			<Hotspots>
+				<Hotspot X="1070.131" Y="365.8237" Z="32.16909" />
+				<Hotspot X="1163.085" Y="362.5709" Z="16.89077" />
+				<Hotspot X="1215.312" Y="365.9862" Z="15.90511" />			
+			</Hotspots>
+		</Objective>
+	</Quest>
+	<Quest Id="29137" Name="Breach in the Defenses">
+		<Objective Type="KillMob" MobId="52633" KillCount="5">
+			<Hotspots>
+				<Hotspot X="1070.131" Y="365.8237" Z="32.16909" />
+				<Hotspot X="1163.085" Y="362.5709" Z="16.89077" />
+				<Hotspot X="1215.312" Y="365.9862" Z="15.90511" />
+				<Hotspot X="1158.828" Y="287.8879" Z="16.40254" />
+				<Hotspot X="1218.296" Y="415.741" Z="19.65164" />
+				<Hotspot X="1306.02" Y="390.476" Z="22.23001" />			
+			</Hotspots>
+		</Objective>
+	</Quest>	
+	<Quest Id="29304" Name="The Dogs of War">
+		<Objective Type="KillMob" MobId="54339" KillCount="5">
+			<Hotspots>
+				<Hotspot X="1227.841" Y="294.1497" Z="21.199" />
+				<Hotspot X="1111.717" Y="297.7415" Z="15.70232" />
+				<Hotspot X="1141.271" Y="354.0903" Z="16.67934" />
+				<Hotspot X="1131.765" Y="417.3665" Z="16.73324" />
+				<Hotspot X="1216.131" Y="410.7752" Z="18.29552" />
+				<Hotspot X="1254.653" Y="453.8996" Z="22.94057" />
+				<Hotspot X="1198.281" Y="390.2693" Z="16.14559" />
+				<Hotspot X="1168.376" Y="319.9581" Z="16.41817" />
+				<Hotspot X="1125.151" Y="290.8251" Z="15.5314" />
+			</Hotspots>
+		</Objective>
+	</Quest>	
+	<Quest Id="29142" Name="Traitors Return">
+		<Objective Type="KillMob" MobId="54343" KillCount="3">
+			<Hotspots>
+				<Hotspot X="1070.131" Y="365.8237" Z="32.16909" />
+				<Hotspot X="1163.085" Y="362.5709" Z="16.89077" />
+				<Hotspot X="1215.312" Y="365.9862" Z="15.90511" />
+				<Hotspot X="1158.828" Y="287.8879" Z="16.40254" />
+				<Hotspot X="1218.296" Y="415.741" Z="19.65164" />
+				<Hotspot X="1306.02" Y="390.476" Z="22.23001" />			
+			</Hotspots>
+		</Objective>
+	</Quest>
+	<Quest Id="29141" Name="The Harder They Fall">
+		<Objective Type="KillMob" MobId="52552" KillCount="3">
+			<Hotspots>
+				<Hotspot X="1070.131" Y="365.8237" Z="32.16909" />
+				<Hotspot X="1163.085" Y="362.5709" Z="16.89077" />
+				<Hotspot X="1215.312" Y="365.9862" Z="15.90511" />			
+			</Hotspots>
+		</Objective>
+	</Quest>
+	<Quest Id="29255" Name="Embergris">
+		<Objective Type="CollectItem" ItemId="69722" CollectCount="5">
+			<CollectFrom>
+				<Mob Name="Charred Soldier" Entry="52504" />
+				<Mob Name="Charred Vanquisher" Entry="52503" />
+			</CollectFrom>
+			<Hotspots>
+				<Hotspot X="1070.131" Y="365.8237" Z="32.16909" />
+				<Hotspot X="1163.085" Y="362.5709" Z="16.89077" />
+				<Hotspot X="1215.312" Y="365.9862" Z="15.90511" />
+				<Hotspot X="1158.828" Y="287.8879" Z="16.40254" />
+				<Hotspot X="1218.296" Y="415.741" Z="19.65164" />
+				<Hotspot X="1306.02" Y="390.476" Z="22.23001" />			
+			</Hotspots>
+		</Objective>
+	</Quest>
+	<Quest Id="29257" Name="Steal Magmolias">
+		<Objective Type="CollectItem" ItemId="69725" CollectCount="8">
+			<CollectFrom>
+				<GameObject Name="Magmolia" Id="208540" />
+				<GameObject Name="Magmolia" Id="208543" />
+				<GameObject Name="Magmolia" Id="208544" />
+			</CollectFrom>
+			<Hotspots>
+				<Hotspot X="1317.235" Y="394.4182" Z="21.61626" />
+				<Hotspot X="1260.687" Y="444.7308" Z="22.62494" />
+				<Hotspot X="1392.042" Y="357.3324" Z="25.72089" />
+				<Hotspot X="1345.574" Y="299.6357" Z="22.87051" />
+				<Hotspot X="1253.672" Y="298.7153" Z="23.08849" />
+			</Hotspots>
+		</Objective>
+	</Quest>
+
+
+	
+	<QuestOrder>
+	
+		<CustomBehavior File="UserSettings" TrainNewSkills="False" LootMobs="True" UseMount="True" PullDistance="20"  />
+	
+			<If Condition="((HasQuest(29128)) &amp;&amp; (IsQuestCompleted(29128)))" >
+				<!-- Quest from Hyjal Dailies -->
+		<TurnIn QuestName="The Protectors of Hyjal" QuestId="29128" TurnInName="General Taldris Moonfall" TurnInId="52824" />
+			</If>	
+	
+	
+			<!-- This is the MobId, not QuestId -->
+			<While Condition="HasQuestAvailable(52467)" >
+				<CustomBehavior File="InteractWith" MobId="52467" />
+				<CustomBehavior File="RunMacro" Macro="/click GossipTitleButton1" />
+				<CustomBehavior File="RunMacro" Macro="/click QuestFrameAcceptButton" />
+			</While>
+			<While Condition="HasQuestAvailable(52824)" >
+				<CustomBehavior File="InteractWith" MobId="52824" />
+				<CustomBehavior File="RunMacro" Macro="/click GossipTitleButton1" />
+				<CustomBehavior File="RunMacro" Macro="/click QuestFrameAcceptButton" />
+			</While>
+			<While Condition="HasQuestAvailable(53080)" >
+				<CustomBehavior File="InteractWith" MobId="53080" />
+				<CustomBehavior File="RunMacro" Macro="/click GossipTitleButton1" />
+				<CustomBehavior File="RunMacro" Macro="/click QuestFrameAcceptButton" />
+			</While>
+			<!-- Avrilla Daily -->
+			<While Condition="HasQuestAvailable(52489)" >
+				<CustomBehavior File="InteractWith" MobId="52489" X="1009.831" Y="329.2008" Z="41.2768" />
+				<CustomBehavior File="RunMacro" Macro="/click GossipTitleButton1" />
+				<CustomBehavior File="RunMacro" Macro="/click QuestFrameAcceptButton" />
+			</While>
+
+	
+	
+			<If Condition="((HasQuest(29143)) &amp;&amp; (!IsQuestCompleted(29143)))" >
+				<!-- Wisp Away -->
+				<CustomBehavior File="UserSettings" PullDistance="5" />
+				<CustomBehavior File="NoCombatMoveTo" X="1167.15" Y="372.1573" Z="16.37098" />
+				<!-- <CustomBehavior File="KillUntilComplete" QuestId="29143" MobId="53092" X="1167.15" Y="372.1573" Z="16.37098" /> -->
+			 <While Condition="((HasQuest(29143)) &amp;&amp; (!IsQuestCompleted(29143)))" >
+				<RunTo X="1167.15" Y="372.1573" Z="16.37098" />
+				<RunTo X="1166.934" Y="366.7576" Z="16.39577" />
+				<RunTo X="1162.55" Y="373.5835" Z="16.40357" />
+				<RunTo X="1168.76" Y="376.8334" Z="16.38472" />
+			 </While>
+			</If>
+			
+			<If Condition="((HasQuest(29139)) &amp;&amp; (!IsQuestCompleted(29139)))" >
+				<!-- Aggressive Growth -->
+				<CustomBehavior File="UserSettings" PullDistance="1" />
+				<CustomBehavior File="InteractWith" QuestId="29139" MobId="208545" ObjectType="Gameobject" NumOfTimes="20" CollectionDistance="500" X="1138.623" Y="367.218" Z="17.09965" />
+			</If>
+			
+			<If Condition="((HasQuest(29138)) &amp;&amp; (!IsQuestCompleted(29138)))" >
+				<!-- Burn Victims -->
+				<CustomBehavior File="UserSettings" PullDistance="1" />
+				<RunTo X="1196.614" Y="348.1345" Z="16.59474" />
+				<CustomBehavior File="UseItemOn" QuestId="29138" MobId="52834" ItemId="69240" NumOfTimes="100" WaitTime="3500" Range="5" MobHpPercentLeft="15" CollectionDistance="500" X="1138.623" Y="367.218" Z="17.09965" />
+			</If>
+			
+			<If Condition="((HasQuest(29304)) &amp;&amp; (!IsQuestCompleted(29304)))" >
+				<CustomBehavior File="UserSettings" PullDistance="20" />
+				<Objective QuestName="The Dogs of War" QuestId="29304" Type="KillMob" MobId="54339" KillCount="5" />
+			</If>
+			
+			<If Condition="((HasQuest(29137)) &amp;&amp; (!IsQuestCompleted(29137)))" >
+				<CustomBehavior File="UserSettings" PullDistance="20" />
+				<Objective QuestName="Breach in the Defenses" QuestId="29137" Type="KillMob" MobId="52633" KillCount="5" />
+			</If>
+			
+			<If Condition="((HasQuest(29179)) &amp;&amp; (!IsQuestCompleted(29179)))" >
+				<CustomBehavior File="UserSettings" PullDistance="20" />
+				<Objective QuestName="Hostile Elements" QuestId="29179" Type="KillMob" MobId="52504" KillCount="8" />
+			</If>
+			
+			<If Condition="((HasQuest(29142)) &amp;&amp; (!IsQuestCompleted(29142)))" >
+				<CustomBehavior File="UserSettings" PullDistance="20" />
+				<Objective QuestName="Traitors Return" QuestId="29142" Type="KillMob" MobId="54343" KillCount="3" />
+			</If>
+			
+			<If Condition="((HasQuest(29141)) &amp;&amp; (!IsQuestCompleted(29141)))" >
+				<!-- Minor issues with this quest - get a combat run away from on cast id behavior - also the bot is taking forever to kill these guys -->
+				<Objective QuestName="The Harder They Fall" QuestId="29141" Type="KillMob" MobId="52552" KillCount="3" />
+			</If>
+			
+			<!-- Some Like It Hot - Avrilla Daily -->
+			<If Condition="((HasQuest(29299)) &amp;&amp; (!IsQuestCompleted(29299)))" >
+				<SetGrindArea>
+					<GrindArea>
+						<Factions>2156</Factions>
+						<Hotspots>
+							<Hotspot X="1317.235" Y="394.4182" Z="21.61626" />
+							<Hotspot X="1260.687" Y="444.7308" Z="22.62494" />
+							<Hotspot X="1392.042" Y="357.3324" Z="25.72089" />
+							<Hotspot X="1345.574" Y="299.6357" Z="22.87051" />
+							<Hotspot X="1253.672" Y="298.7153" Z="23.08849" />
+						</Hotspots>
+					</GrindArea>
+				</SetGrindArea>
+				<GrindTo Condition="(IsQuestCompleted(29299))" />
+			</If>
+			
+			<!-- Avrilla Daily -->
+			<If Condition="((HasQuest(29255)) &amp;&amp; (!IsQuestCompleted(29255)))" >
+				<Objective QuestName="Embergris" QuestId="29255" Type="CollectItem" ItemId="69722" CollectCount="5" />
+			</If>
+			
+			<!-- Avrilla Daily -->
+			<If Condition="((HasQuest(29257)) &amp;&amp; (!IsQuestCompleted(29257)))" >
+				<Objective QuestName="Steal Magmolias" QuestId="29257" Type="CollectItem" ItemId="69725" CollectCount="8" />
+			</If>
+
+			
+	
+	
+
+	
+
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+				<CustomBehavior File="NoCombatMoveTo" X="1021.436" Y="368.7899" Z="41.0231" />
+	
+	
+			<If Condition="((HasQuest(29139)) &amp;&amp; (IsQuestCompleted(29139)))" >
+		<TurnIn QuestName="Aggressive Growth" QuestId="29139" TurnInName="Rayne Feathersong" TurnInId="52467" />
+			</If>
+			<If Condition="((HasQuest(29179)) &amp;&amp; (IsQuestCompleted(29179)))" >
+		<TurnIn QuestName="Hostile Elements" QuestId="29179" TurnInName="General Taldris Moonfall" TurnInId="52824" />	
+			</If>
+			<If Condition="((HasQuest(29137)) &amp;&amp; (IsQuestCompleted(29137)))" >
+		<TurnIn QuestName="Breach in the Defenses" QuestId="29137" TurnInName="General Taldris Moonfall" TurnInId="52824" />
+			</If>
+			<If Condition="((HasQuest(29138)) &amp;&amp; (IsQuestCompleted(29138)))" >
+		<TurnIn QuestName="Burn Victims" QuestId="29138" TurnInName="Captain Irontree" TurnInId="53080" />
+			</If>
+			<If Condition="((HasQuest(29304)) &amp;&amp; (IsQuestCompleted(29304)))" >
+		<TurnIn QuestName="The Dogs of War" QuestId="29304" TurnInName="General Taldris Moonfall" TurnInId="52824" />
+			</If>
+			<If Condition="((HasQuest(29143)) &amp;&amp; (IsQuestCompleted(29143)))" >
+		<TurnIn QuestName="Wisp Away" QuestId="29143" TurnInName="Rayne Feathersong" TurnInId="52467" />
+			</If>
+			<If Condition="((HasQuest(29142)) &amp;&amp; (IsQuestCompleted(29142)))" >
+		<TurnIn QuestName="Traitors Return" QuestId="29142" TurnInName="General Taldris Moonfall" TurnInId="52824" />
+			</If>
+			<If Condition="((HasQuest(29141)) &amp;&amp; (IsQuestCompleted(29141)))" >
+		<TurnIn QuestName="The Harder They Fall" QuestId="29141" TurnInName="General Taldris Moonfall" TurnInId="52824" />
+			</If>
+			<If Condition="((HasQuest(29255)) &amp;&amp; (IsQuestCompleted(29255)))" >
+		<TurnIn QuestName="Embergris" QuestId="29255" TurnInName="Avrilla" TurnInId="52489" />
+			</If>
+			<If Condition="((HasQuest(29257)) &amp;&amp; (IsQuestCompleted(29257)))" >
+		<TurnIn QuestName="Steal Magmolias" QuestId="29257" TurnInName="Avrilla" TurnInId="52489" />
+			</If>
+			<If Condition="((HasQuest()) &amp;&amp; (IsQuestCompleted()))" >
+			</If>
+			<If Condition="((HasQuest()) &amp;&amp; (IsQuestCompleted()))" >
+			</If>
+			<If Condition="((HasQuest()) &amp;&amp; (IsQuestCompleted()))" >
+			</If>
+			<If Condition="((HasQuest()) &amp;&amp; (IsQuestCompleted()))" >
+			</If>
+	
+	
+	
+	
+		<CustomBehavior File="UserSettings" PullDistance="25"  />
+	
+	
+	
+			<If Condition="(((HasQuest(29181)) || (HasQuest(29214))) &amp;&amp; (GetCurrencyAmount(416) &gt;= 150))" >
+				<CustomBehavior File="UserDialog" AllowBotStop="True" SoundCue="Exclamation" SoundCueInterval="1" 
+				Text="I noticed you have 150 tokens - please go and turn in your quest (In Hyjal)\n\nI went with the Shadow Wardens and I'll be developing that profile first" />
+			</If>
+	
+			<If Condition="(IsQuestCompleted(29214)) &amp;&amp; (HasQuest(29215))" >
+		<TurnIn QuestName="The Hunt Begins" QuestId="29215" TurnInName="Captain Saynna Stormrunner" TurnInId="52493" X="982.84" Y="368.9735" Z="38.06548" />
+			</If>
+	
+			<!-- This is the MobId, not QuestId -->
+			<While Condition="HasQuestAvailable(52824)" >
+				<CustomBehavior File="InteractWith" MobId="52824" />
+				<CustomBehavior File="RunMacro" Macro="/click GossipTitleButton1" />
+				<CustomBehavior File="RunMacro" Macro="/click QuestFrameAcceptButton" />
+			</While>
+			
+			<If Condition="((HasQuest(29205)) &amp;&amp; (!IsQuestCompleted(29205)))" >
+				<RunTo X="1157.52" Y="277.6692" Z="16.75616" />
+				<CustomBehavior File="UserDialog" QuestId="29205" AllowBotStop="True" SoundCue="Exclamation" SoundCueInterval="1" Text="Follow the npc's up and kill Pyrelord" />
+				<CustomBehavior File="Escort" QuestId="29205" MobId="52953" X="1157.52" Y="277.6692" Z="16.75616" /> <!-- There might be more than 1 npc.  I think keeper Talros is also helping out, maybe Turak, Tholo, and anren too -->
+				<CustomBehavior File="WaitTimer" WaitTime="15000" GoalText="Waiting for cutscene {TimeRemaining}" /> <!-- after killing 52998 Pyrelord --> 
+			</If>
+			<If Condition="((HasQuest(29205)) &amp;&amp; (IsQuestCompleted(29205)))" >
+		<TurnIn QuestName="The Forlorn Spire" QuestId="29205" TurnInName="Marin Bladewing" TurnInId="52494" X="1168.755" Y="162.3811" Z="60.06127" />
+			</If>
+			<!-- i'm not 100% sure if 29205 is a daily quest, but it shows up as a daily on the first day (kill Pyrelord and take over Forlorn Spire) -->
+			
+			
+			<If Condition="(IsQuestCompleted(29215))" >
+	<CustomBehavior File="LoadProfile" ProfileName="[Fly][N - Rep Quest] Shadow - Molten Front Firelands Dailies [Kick]" /> 
+			</If>
+
+
+
+
+
+
+
+
+
+
+	<CustomBehavior File="UserDialog" AllowBotStop="True" SoundCue="Exclamation" SoundCueInterval="1" Text="End of Line!\n\nYes, I fight for the users!" />
+		<!--
+		-->
+
+	
+	
+	
+	</QuestOrder>
+
+</HBProfile>

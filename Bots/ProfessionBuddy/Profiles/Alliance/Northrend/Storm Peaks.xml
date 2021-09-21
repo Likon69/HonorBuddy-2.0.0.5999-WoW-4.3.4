@@ -1,0 +1,1400 @@
+<HBProfile xsi:noNamespaceSchemaLocation="../Schemas/EchoSchema.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<!-- Original contribution by EchoTiger -->
+	<Name>Storm Peaks ($ShortHash$)</Name>
+
+	<DefaultNavType>Fly</DefaultNavType>
+
+	<MinDurability>0.3</MinDurability>
+	<MinFreeBagSlots>3</MinFreeBagSlots>
+
+	<SellGrey>true</SellGrey>
+	<SellWhite>true</SellWhite>
+	<SellGreen>true</SellGreen>
+	<SellBlue>true</SellBlue>
+	<SellPurple>false</SellPurple>
+
+	<MailGrey>false</MailGrey>
+	<MailWhite>true</MailWhite>
+	<MailGreen>true</MailGreen>
+	<MailBlue>true</MailBlue>
+	<MailPurple>true</MailPurple>
+
+	<TargetElites>true</TargetElites>
+
+	<AvoidMobs>
+	</AvoidMobs>
+
+	<Mailboxes>
+		<Mailbox X="8440.736" Y="-329.4271" Z="906.5062" /> <!-- Bouldercrag's Refuge -->
+		<Mailbox X="6126.475" Y="-1070.948" Z="403.1033" /> <!-- K3 -->
+	</Mailboxes>
+
+	<Vendors>
+		<!-- Storm Peaks: Frosthold -->
+		<Vendor Name="Dagni Oregleam" Id="29923" Type="Repair" X="6645.307" Y="-208.5279" Z="951.6395" />
+		<Vendor Name="Gunda Boldhammer" Id="29926" Type="Food" X="6671.14" Y="-200.3257" Z="950.9897" />
+		<!-- Storm Peaks: K3 -->
+		<Vendor Name="Smilin' Slirk Brassknob" Id="29904" Type="Food" X="6124.416" Y="-1080.962" Z="402.5415" />
+		<Vendor Name="Xark Bolthammer" Id="29907" Type="Repair" X="6097.559" Y="-1071.257" Z="404.4123" />
+		<!-- Storm Peaks: The Argent Vanguard -->
+		<Vendor Name="Halig Fireforge" Id="30436" Type="Repair" X="6202.67" Y="-7.335341" Z="410.1368" />
+		<Vendor Name="Sister Colleen Tulley" Id="30439" Type="Repair" X="6214.309" Y="7.556152" Z="410.163" />
+		<!-- Storm Peaks: Ulduar -->
+		<Vendor Name="Chester Copperpot" Id="32477" Type="Food" X="8893.612" Y="-1361.069" Z="1033.906" />
+		<Vendor Name="Slosh" Id="32478" Type="Food" X="8873.364" Y="-1366.144" Z="1033.575" />
+	</Vendors>
+
+	<Blackspots>
+		<Blackspot X="6749.429" Y="-1600.49" Z="807.0364" Radius="8" /> <!-- Brunnhildar Village where bot fails to land on platform lip and gets in an endless loop -->
+	</Blackspots>
+
+	<Blacklist>
+	</Blacklist>
+
+	<QuestOrder IgnoreCheckpoints="false" >
+		<!-- Check function status -->
+		<Code File="RunCode" Type="Definition">
+			<![CDATA[
+			private static bool? profileFunctionsEnabled => (bool?)AppDomain.CurrentDomain.GetData("QuestingProfiles_FunctionsEnabled");
+			private static bool IsStoreProfile(string path) => path.StartsWith("store://");
+			private static string Slashify(string path) => IsStoreProfile(path) ? path.Replace(@"\", "/") : path.Replace("/", @"\");
+
+			public __CompiledBatchClass__()
+			{
+				ActivateFunctions();
+			}
+
+			private static void ActivateFunctions()
+			{
+				if (profileFunctionsEnabled == null || profileFunctionsEnabled == false)
+				{
+					Bots.Professionbuddy.PBLog.Log(Colors.MediumPurple, "[Profile Message!]: ", Colors.Yellow, "Please stand by as the functions are being activated!");
+					LoadProfile(@"..\..\Functions\Activate Functions.xml");
+				}
+			}
+
+			private static void LoadProfile(string path)
+			{
+				var profile = GetNewPath(path);
+				if (!IsStoreProfile(profile) && !File.Exists(profile))
+				{
+					Bots.Professionbuddy.PBLog.Log(Colors.MediumPurple, "[Profile Message!]: ", Colors.Yellow, "Profile does not exist.\n" + profile);
+					return;
+				}
+
+				Bots.Professionbuddy.PBLog.Log(Colors.MediumPurple, "[Profile Message!]: ", Colors.Yellow, "Loading: " + profile);
+				ProfileManager.LoadNew(profile, false);
+			}
+
+			private static string GetNewPath(string path)
+			{
+				if (IsStoreProfile(path))
+					return Slashify(path);
+
+				var currentProfile = ProfileManager.XmlLocation;
+				if (IsStoreProfile(currentProfile))
+					return Slashify(currentProfile + "/../" + path);
+
+				var absolutePath = Path.Combine(Path.GetDirectoryName(currentProfile), path);
+				absolutePath = Path.GetFullPath(absolutePath);
+				var canonicalPath = new Uri(absolutePath).LocalPath;
+				return Slashify(canonicalPath);
+			}]]>
+		</Code>
+		<Code File="RunCode" Code="ActivateFunctions();" />
+		<!-- END Check function status -->
+
+		<If Condition="Me.IsHorde" >
+			<Code File="LoadProfile" ProfileName="..\..\Questing Autoloader.xml" />
+		</If>
+		<!-- RunCode Methods -->
+			<Code File="RunCode">
+			<![CDATA[
+				Bots.Professionbuddy.PBLog.Log(System.Windows.Media.Colors.MediumPurple, "> [Profile Initialization Status] ", System.Windows.Media.Colors.CornflowerBlue, "\n     Auto-Looting	:: Enabled\n     Looting	:: Enabled\n     Game Addons	:: Disabled");
+				Lua.DoString("SetCVar('AutoLootDefault', 1);");
+				Lua.DoString("SetCVar('autoDismountFlying', 1);");
+				CharacterSettings.Instance.LootMobs = true;
+				CharacterSettings.Instance.Save();
+				Logging.Write(System.Windows.Media.Colors.MediumPurple, "> [Ready to bot!]");
+			]]>
+			</Code>
+			<Code File="RunCode" Type="Definition">
+				<![CDATA[
+						bool DoQuest(params uint[] questIds)
+						{
+							foreach (var questId in questIds)
+							{
+								if (HasQuest(questId) && !IsQuestCompleted(questId)) return true;
+							}
+							return false;
+						}
+						bool NeedsQuest(params uint[] questIds)
+						{
+							foreach (var questId in questIds)
+							{
+								if (!HasQuest(questId) && !IsQuestCompleted(questId)) return true;
+							}
+							return false;
+						}
+						bool NeedsBreadcrumbQuest(params uint[] questIds)
+						{
+							foreach (var questId in questIds)
+							{
+								if (IsQuestCompleted(questId)) return false;
+							}
+							return true;
+						}
+						bool QuestDone(params uint[] questIds)
+						{
+							foreach (var questId in questIds)
+							{
+								if (HasQuest(questId) && IsQuestCompleted(questId)) return true;
+							}
+							return false;
+						}
+						bool QuestFlaggedCompleted(params uint[] questIds)
+						{
+							foreach (var questId in questIds)
+							{
+								return Lua.GetReturnVal<bool>($"return IsQuestFlaggedCompleted({questId});", 0);
+							}
+							return false;
+						}
+						async Task SkipCutscene(int preWait = 3000, int postWait = 3000)
+						{
+					// Add detection of cutscene here.
+							await Coroutine.Sleep(preWait);
+					// Test and improve the working method.
+							Lua.DoString("MovieFrame:StopMovie(); CinematicFrame_CancelCinematic(); StopCinematic();");
+							await Coroutine.Sleep(postWait);
+						}
+					]]>
+			</Code>
+		<!-- END RunCode Methods -->
+
+		<If Condition="!QuestDone(12870)" > <!-- Protect Relic of Ulduar from the AFK Mode sell logic -->
+			<Code File="RunCode">
+				<![CDATA[
+					var whitelist = (List<uint>)AppDomain.CurrentDomain.GetData("QuestingProfiles_AFKModeWhitelist");
+					whitelist.Add(42780);
+					AppDomain.CurrentDomain.SetData("QuestingProfiles_AFKModeWhitelist", whitelist);
+				]]>
+			</Code>
+		</If>
+
+		<If Condition="Me.ZoneId == 3711 &amp;&amp; !IsQuestCompleted(13007)"> <!-- Don't run if we're done in Storm Peaks already -->
+			<Code File="InteractWith" MobId="28574" NonCompeteDistance="0" PreInteractMountStrategy="Dismount" X="5504.018" Y="4746.764" Z="-194.4334" />
+			<Code File="Misc\RunLua" Lua="GetNumRoutes(24); TakeTaxiNode(24);" />
+		</If>
+
+		<PickUp QuestName="Clean Up" QuestId="12818" GiverName="Jeer Sparksocket" GiverId="29431" X="6100.173" Y="-1072.726" Z="403.9145" />
+
+		<If Condition="!IsQuestCompleted(12843)" > <!-- Don't set hearth to here if we're already done with this quest hub -->
+			<Code File="SetHearthstone" MobId="29904" AreaId="4418" X="6122.536" Y="-1079.142" Z="402.5634" />
+		</If>
+
+		<PickUp QuestName="They Took Our Men!" QuestId="12843" GiverName="Gretchen Fizzlespark" GiverId="29473" X="6115.325" Y="-1084.119" Z="402.6874" />
+		<PickUp QuestName="Equipment Recovery" QuestId="12844" GiverName="Gretchen Fizzlespark" GiverId="29473" X="6115.325" Y="-1084.119" Z="402.6874" />
+		<PickUp QuestName="Reclaimed Rations" QuestId="12827" GiverName="Ricket" GiverId="29428" X="6150.011" Y="-1069.788" Z="402.6683" />
+		<PickUp QuestName="Expression of Gratitude" QuestId="12836" GiverName="Ricket" GiverId="29428" X="6150.011" Y="-1069.788" Z="402.6683" />
+
+		<Code File="InteractWith" MobIds="191531, 191532, 191533, 191534, 191535, 191536, 191537" CollectionDistance="200" PreInteractMountStrategy="Dismount" InteractByLooting="true" QuestId="12818" QuestObjectiveIndex="1" >
+			<HuntingGrounds>
+				<Hotspot X="6099.536" Y="-928.5246" Z="386.8707" />
+				<Hotspot X="6188.743" Y="-923.0375" Z="395.5251" />
+				<Hotspot X="6023.216" Y="-865.5541" Z="357.703" />
+			</HuntingGrounds>
+		</Code>
+
+		<Code File="KillUntilComplete" MobId="30003" QuestId="12836" X="6135.377" Y="-331.2336" Z="436.3404" />
+
+		<Code File="InteractWith" MobId="191843" CollectionDistance="200" PreInteractMountStrategy="Dismount" QuestId="12827" QuestObjectiveIndex="1" >
+			<HuntingGrounds>
+				<Hotspot X="6145.675" Y="-333.6937" Z="436.3389" />
+				<Hotspot X="6126.579" Y="-429.226" Z="413.4729" />
+				<Hotspot X="6250.854" Y="-648.3079" Z="416.9152" />
+			</HuntingGrounds>
+		</Code>
+
+		<TurnIn QuestName="Clean Up" QuestId="12818" TurnInName="Jeer Sparksocket" TurnInId="29431" X="6100.652" Y="-1073.395" Z="403.8179" />
+		<!-- <PickUp QuestName="Just Around the Corner" QuestId="12819" GiverName="Jeer Sparksocket" GiverId="29431" X="6100.652" Y="-1073.395" Z="403.8179" /> Very doable, but myeh -->
+		<TurnIn QuestName="Reclaimed Rations" QuestId="12827" TurnInName="Ricket" TurnInId="29428" X="6148.677" Y="-1069.168" Z="402.6856" />
+		<TurnIn QuestName="Expression of Gratitude" QuestId="12836" TurnInName="Ricket" TurnInId="29428" X="6148.677" Y="-1069.168" Z="402.6856" />
+		<RecheckCheckpoints />
+		<PickUp QuestName="Ample Inspiration" QuestId="12828" GiverName="Ricket" GiverId="29428" X="6149.694" Y="-1070.935" Z="402.6509" />
+		<PickUp QuestName="Moving In" QuestId="12829" GiverName="Tore Rumblewrench" GiverId="29430" X="6401.117" Y="-1123.211" Z="425.9408" />
+		<PickUp QuestName="Ore Repossession" QuestId="12830" GiverName="Tore Rumblewrench" GiverId="29430" X="6401.117" Y="-1123.211" Z="425.9408" />
+
+		<While Condition="DoQuest(12828)" >
+			<Code File="InteractWith" MobId="191553" GossipOptions="1" NonCompeteDistance="0" PreInteractMountStrategy="Dismount" QuestId="12828" TerminateWhen="Me.HasAura(54584)" X="6401.377" Y="-1119.095" Z="425.6564" />
+			<Code File="InteractWith" MobState="Alive" WaitTime="5000" InteractByUsingItemId="40686" CollectionDistance="200" PreInteractMountStrategy="Dismount" QuestId="12828" X="6222.068" Y="-735.6066" Z="409.4177" TerminateWhen="!HasItem(40686) || Object(192694) != null || Object(191567) != null || Object(192693) != null" >
+				<PursuitList> <!-- This can be removed once MobState="Alive" is fixed.  Dead mammoths are showing up as alive currently. -->
+					<PursueUnit Id="29402" PursueWhen="!UNIT.HasAura(29266)" />
+				</PursuitList>
+			</Code>
+			<Code File="InteractWith" MobIds="192694, 192693, 191567" WaitForNpcs="false" InteractByLooting="true" CollectionDistance="200" PreInteractMountStrategy="Dismount" QuestId="12828" />
+		</While>
+
+		<Code File="InteractWith" MobId="191568" CollectionDistance="200" PreInteractMountStrategy="Dismount" InteractByLooting="true" QuestId="12844" QuestObjectiveIndex="1" >
+			<HuntingGrounds>
+				<Hotspot X="6752.271" Y="-1018.504" Z="766.3334" />
+				<Hotspot X="6826.409" Y="-1135.128" Z="794.2008" />
+				<Hotspot X="6855.442" Y="-979.8727" Z="789.1761" />
+			</HuntingGrounds>
+		</Code>
+
+		<While Condition="DoQuest(12843)" >
+			<!-- NOTE: <QuestKey> -->
+			<Code File="KillUntilComplete" MobIds="29323, 29331" QuestId="12843" TerminateWhen="GetItemCount(40641) &gt;= 5" >
+				<HuntingGrounds>
+					<Hotspot X="6752.271" Y="-1018.504" Z="766.3334" />
+					<Hotspot X="6826.409" Y="-1135.128" Z="794.2008" />
+					<Hotspot X="6855.442" Y="-979.8727" Z="789.1761" />
+				</HuntingGrounds>
+			</Code>
+
+			<Code File="InteractWith" MobIds="191544, 191545" CollectionDistance="200" Range="4" PreInteractMountStrategy="Dismount" QuestId="12843" QuestObjectiveIndex="1" TerminateWhen="!HasItem(40641)" >
+				<HuntingGrounds>
+					<Hotspot X="6752.271" Y="-1018.504" Z="766.3334" />
+					<Hotspot X="6826.409" Y="-1135.128" Z="794.2008" />
+					<Hotspot X="6855.442" Y="-979.8727" Z="789.1761" />
+				</HuntingGrounds>
+			</Code>
+		</While>
+
+		<If Condition="QuestDone(12843) &amp;&amp; Me.HearthstoneAreaId == 4418 &amp;&amp; Object(191545) != null" >
+			<Code File="UseHearthstone" WaitForCD="false" />
+		</If>
+
+		<TurnIn QuestName="They Took Our Men!" QuestId="12843" TurnInName="Gretchen Fizzlespark" TurnInId="29473" X="6116.461" Y="-1083.938" Z="402.6032" />
+		<PickUp QuestName="Leave No Goblin Behind" QuestId="12846" GiverName="Gretchen Fizzlespark" GiverId="29473" X="6116.461" Y="-1083.938" Z="402.6032" />
+		<TurnIn QuestName="Equipment Recovery" QuestId="12844" TurnInName="Gretchen Fizzlespark" TurnInId="29473" X="6116.461" Y="-1083.938" Z="402.6032" />
+		<TurnIn QuestName="Ample Inspiration" QuestId="12828" TurnInName="Ricket" TurnInId="29428" X="6149.112" Y="-1070.179" Z="402.6634" />
+
+		<While Condition="DoQuest(12829, 12830)" >
+			<If Condition="!Me.IsIndoors" >
+				<MoveTo X="6468.969" Y="-1034.916" Z="433.8634" />
+				<MoveTo Nav="Run" X="6537.376" Y="-1021.174" Z="433.1256" />
+			</If>
+			<Code File="KillUntilComplete" MovementBy="NavigatorOnly" TerminateWhen="!DoQuest(12829, 12830)" >
+				<HuntingGrounds>
+					<Hotspot X="6572.864" Y="-1023.517" Z="433.0027" />
+					<Hotspot X="6622.891" Y="-1284.322" Z="394.4758" />
+				</HuntingGrounds>
+				<PursuitList>
+					<PursueUnit Id="29413" PursueWhen="DoQuest(12830)" />
+					<PursueUnit Id="29412" PursueWhen="DoQuest(12829)" />
+					<PursueUnit Id="29411" PursueWhen="DoQuest(12829)" />
+				</PursuitList>
+			</Code>
+		</While>
+
+		<TurnIn QuestName="Moving In" QuestId="12829" TurnInName="Tore Rumblewrench" TurnInId="29430" X="6400.499" Y="-1121.628" Z="425.716" />
+		<TurnIn QuestName="Ore Repossession" QuestId="12830" TurnInName="Tore Rumblewrench" TurnInId="29430" X="6400.499" Y="-1121.628" Z="425.716" />
+		<RecheckCheckpoints />
+
+		<If Condition="QuestDone(12846)" >
+			<If Condition="!Me.IsIndoors" >
+				<MoveTo X="6897.244" Y="-1131.556" Z="801.2968" />
+				<MoveTo Nav="Run" X="6928.458" Y="-1209.567" Z="808.0966" />
+			</If>
+			<TurnIn QuestName="Leave No Goblin Behind" QuestId="12846" TurnInName="Lok&apos;lira the Crone" TurnInId="29481" X="6930.933" Y="-1205.946" Z="808.0836" />
+		</If>
+
+		<PickUp QuestName="The Crone&apos;s Bargain" QuestId="12841" GiverName="Lok&apos;lira the Crone" GiverId="29481" X="6931.239" Y="-1206.44" Z="808.1085" />
+		<Code File="KillUntilComplete" MobId="29518" QuestId="12841" >
+			<HuntingGrounds>
+				<Hotspot X="6932.478" Y="-1347.447" Z="831.1266" />
+				<Hotspot X="6981.004" Y="-1298.517" Z="819.8541" />
+			</HuntingGrounds>
+		</Code>
+		<TurnIn QuestName="The Crone&apos;s Bargain" QuestId="12841" TurnInName="Lok&apos;lira the Crone" TurnInId="29481" X="6931.012" Y="-1206.097" Z="808.0908" />
+
+		<PickUp QuestName="Mildred the Cruel" QuestId="12905" GiverName="Lok&apos;lira the Crone" GiverId="29481" X="6931.012" Y="-1206.097" Z="808.0908" />
+		<TurnIn QuestName="Mildred the Cruel" QuestId="12905" TurnInName="Mildred the Cruel" TurnInId="29885" X="6929.321" Y="-1320.8" Z="831.2205" />
+
+		<PickUp QuestName="Discipline" QuestId="12906" GiverName="Mildred the Cruel" GiverId="29885" X="6929.321" Y="-1320.8" Z="831.2205" />
+		<Code File="InteractWith" MobId="30146" Range="2" CollectionDistance="200" InteractByUsingItemId="42837" QuestId="12906" QuestObjectiveIndex="1" >
+			<HuntingGrounds>
+				<Hotspot X="6876.274" Y="-1291.496" Z="818.6411" />
+				<Hotspot X="6987.678" Y="-1299.496" Z="819.2332" />
+			</HuntingGrounds>
+		</Code>
+		<TurnIn QuestName="Discipline" QuestId="12906" TurnInName="Mildred the Cruel" TurnInId="29885" X="6929.248" Y="-1320.391" Z="831.2234" />
+
+		<PickUp QuestName="Examples to be Made" QuestId="12907" GiverName="Mildred the Cruel" GiverId="29885" X="6929.248" Y="-1320.391" Z="831.2234" />
+		<Code File="KillUntilComplete" MobId="30147" QuestId="12907" X="6932.816" Y="-1384.643" Z="830.2338" />
+		<TurnIn QuestName="Examples to be Made" QuestId="12907" TurnInName="Mildred the Cruel" TurnInId="29885" X="6930.162" Y="-1320.425" Z="831.2233" />
+
+		<PickUp QuestName="A Certain Prisoner" QuestId="12908" GiverName="Mildred the Cruel" GiverId="29885" X="6930.162" Y="-1320.425" Z="831.2233" />
+		<TurnIn QuestName="A Certain Prisoner" QuestId="12908" TurnInName="Lok&apos;lira the Crone" TurnInId="29481" X="6930.814" Y="-1207.037" Z="808.1113" />
+		<PickUp QuestName="A Change of Scenery" QuestId="12921" GiverName="Lok&apos;lira the Crone" GiverId="29481" X="6930.814" Y="-1207.037" Z="808.1113" />
+		<If Condition="QuestDone(12921) &amp;&amp; !Me.IsIndoors" >
+			<MoveTo X="6925.297" Y="-1536.112" Z="835.7397" />
+		</If>
+		<TurnIn Nav="Run" QuestName="A Change of Scenery" QuestId="12921" TurnInName="Lok&apos;lira the Crone" TurnInId="29975" X="6925.297" Y="-1536.112" Z="835.7397" />
+
+		<PickUp QuestName="Is That Your Goblin?" QuestId="12969" GiverName="Lok&apos;lira the Crone" GiverId="29975" X="6925.297" Y="-1536.112" Z="835.7397" />
+		<Code File="InteractWith" MobId="30154" GossipOptions="1" NonCompeteDistance="0" QuestId="12969" QuestObjectiveIndex="1" X="6893.164" Y="-1585.157" Z="820.6569" />
+		<TurnIn QuestName="Is That Your Goblin?" QuestId="12969" TurnInName="Lok&apos;lira the Crone" TurnInId="29975" X="6919.604" Y="-1538.371" Z="834.9908" />
+
+		<PickUp QuestName="The Hyldsmeet" QuestId="12970" GiverName="Lok&apos;lira the Crone" GiverId="29975" X="6919.604" Y="-1538.371" Z="834.9908" />
+		<Code File="InteractWith" MobId="29975" GossipOptions="1,1,1,1" NonCompeteDistance="0" QuestId="12970" QuestObjectiveIndex="1" X="6920.721" Y="-1536.483" Z="835.5316" />
+		<TurnIn QuestName="The Hyldsmeet" QuestId="12970" TurnInName="Lok&apos;lira the Crone" TurnInId="29975" X="6920.386" Y="-1538.903" Z="834.8568" />
+
+		<PickUp QuestName="Taking on All Challengers" QuestId="12971" GiverName="Lok&apos;lira the Crone" GiverId="29975" X="6920.386" Y="-1538.903" Z="834.8568" />
+		<Code File="InteractWith" MobId="30012" GossipOptions="1" WaitTime="2000" CollectionDistance="200" PreInteractMountStrategy="Dismount" QuestId="12971" QuestObjectiveIndex="1" X="7022.092" Y="-1747.239" Z="819.4403" />
+		<TurnIn QuestName="Taking on All Challengers" QuestId="12971" TurnInName="Lok&apos;lira the Crone" TurnInId="29975" X="6922.154" Y="-1537.832" Z="835.2129" />
+
+		<PickUp QuestName="You&apos;ll Need a Bear" QuestId="12972" GiverName="Lok&apos;lira the Crone" GiverId="29975" X="6922.154" Y="-1537.832" Z="835.2129" />
+		<PickUp QuestName="Off With Their Black Wings" QuestId="12942" GiverName="Iva the Vengeful" GiverId="29997" X="6777.942" Y="-1597.203" Z="820.4276" />
+		<PickUp QuestName="Yulda&apos;s Folly" QuestId="12968" GiverName="Iva the Vengeful" GiverId="29997" X="6777.942" Y="-1597.203" Z="820.4276" />
+		<PickUp QuestName="Aberrations" QuestId="12925" GiverName="Thyra Kvinnshal" GiverId="30041" X="6779.287" Y="-1601.469" Z="820.5189" />
+		<TurnIn Nav="Run" QuestName="You&apos;ll Need a Bear" QuestId="12972" TurnInName="Brijana" TurnInId="29592" X="7080.486" Y="-1941.49" Z="772.1866" />
+		<RecheckCheckpoints />
+
+		<PickUp QuestName="Going Bearback" QuestId="12851" GiverName="Brijana" GiverId="29592" X="7080.486" Y="-1941.49" Z="772.1866" />
+		<While Condition="DoQuest(12851)" >
+			<Code File="InteractWith" MobId="29598" NonCompeteDistance="0" PreInteractMountStrategy="Dismount" QuestId="12851" X="7081.563" Y="-1938.649" Z="772.2943" TerminateWhen="Me.InVehicle" />
+			<DisableBehavior Name="All" />
+			<Code File="RunCode"><![CDATA[
+				WoWUnit attackPoi = null;
+				while (DoQuest(12851) && Me.InVehicle)
+				{
+
+					if (!IsObjectiveComplete(1, 12851) && !IsObjectiveComplete(2, 12851))	
+						attackPoi = ObjectManager.GetObjectsOfType<WoWUnit>().OrderBy(x => x.DistanceSqr).FirstOrDefault(x => (x.Entry == 29358 || x.Entry == 29351) && x.IsAlive && !x.HasAura(54683) && x.DistanceSqr < 79f*79f);
+					else if (!IsObjectiveComplete(1, 12851))
+						attackPoi = ObjectManager.GetObjectsOfType<WoWUnit>().OrderBy(x => x.DistanceSqr).FirstOrDefault(x => x.Entry == 29358 && x.IsAlive && !x.HasAura(54683) && x.DistanceSqr < 79f*79f);
+					else if (!IsObjectiveComplete(2, 12851))
+						attackPoi = ObjectManager.GetObjectsOfType<WoWUnit>().OrderBy(x => x.DistanceSqr).FirstOrDefault(x => x.Entry == 29351 && x.IsAlive && !x.HasAura(54683) && x.DistanceSqr < 79f*79f);
+
+					if (attackPoi == null && Lua.GetReturnVal<bool>("return GetPetActionCooldown(2) == 0;", 0))
+						Lua.DoString("CastPetAction(2);");
+
+					if (attackPoi != null && Lua.GetReturnVal<bool>("return GetPetActionCooldown(1) == 0;", 0))
+					{
+						Lua.DoString("CastPetAction(1);");
+						SpellManager.ClickRemoteLocation(attackPoi.Location);
+					}
+
+					attackPoi = null;
+					await Coroutine.Yield();
+				}
+			]]> <!-- HB-API is returning incorrect values, so using Lua.-->
+			</Code>
+			<Code File="WaitTimer" WaitTime="120000" TerminateWhen="!Me.InVehicle" />
+			<EnableBehavior Name="All" />
+		</While>
+		<TurnIn QuestName="Going Bearback" QuestId="12851" TurnInName="Brijana" TurnInId="29592" X="7080.104" Y="-1943.214" Z="771.9979" />
+
+		<PickUp QuestName="Cold Hearted" QuestId="12856" GiverName="Brijana" GiverId="29592" X="7080.104" Y="-1943.214" Z="771.9979" />
+		<While Condition="DoQuest(12856)" >
+			<Code File="InteractWith" MobId="29708" CollectionDistance="300" QuestId="12856" X="7310.845" Y="-2756.393" Z="878.2722" TerminateWhen="Me.InVehicle" />
+			<DisableBehavior Name="All" />
+			<Code File="RunCode"><![CDATA[
+				WoWUnit prisonerPoi = null;
+				int prisonerCount = 0;
+				while (DoQuest(12856) && Me.InVehicle)
+				{
+					if (prisonerCount < 3)
+					{
+						if (prisonerPoi == null)
+							prisonerPoi = ObjectManager.GetObjectsOfType<WoWUnit>().OrderBy(x => x.DistanceSqr).FirstOrDefault(x => x.Entry == 29639 && (x.HasAura(55045) || x.HasAura(54894)));
+
+						if (prisonerPoi != null)
+						{
+							if (prisonerPoi.DistanceSqr > 49f*49f)
+							{
+								TreeRoot.StatusText = "Moving to free a prisoner.";
+								WoWMovement.ClickToMove(prisonerPoi.Location);
+							}
+							if (prisonerPoi.DistanceSqr <= 49f*49f && prisonerPoi.InLineOfSight)
+							{
+								TreeRoot.StatusText = "Freeing a prisoner.";
+								await CommonCoroutines.StopMoving();
+								prisonerPoi.Target();
+								Lua.DoString("CastPetAction(1);");
+								if (!prisonerPoi.HasAura(55045) && !prisonerPoi.HasAura(54894))
+								{
+									prisonerCount ++;
+									prisonerPoi = null;
+								}
+							}
+						}
+					}
+					if (prisonerCount >= 3)
+					{
+						TreeRoot.StatusText = "Returning home.";
+						if (Me.Y < -2569)
+							WoWMovement.ClickToMove(new Vector3(7306.258f, -2569.274f, 892.428f));
+
+						await Coroutine.Wait(TimeSpan.FromSeconds(60), () => !Me.InVehicle);
+						prisonerCount = 0;
+					}
+					await Coroutine.Yield();
+				}
+			]]> <!-- HB-API is returning incorrect values, so using Lua.-->
+			</Code>
+			<EnableBehavior Name="All" />
+		</While>
+		<TurnIn QuestName="Cold Hearted" QuestId="12856" TurnInName="Brijana" TurnInId="29592" X="7082.423" Y="-1941.857" Z="772.5594" />
+
+		<PickUp QuestName="Deemed Worthy" QuestId="13063" GiverName="Brijana" GiverId="29592" X="7082.423" Y="-1941.857" Z="772.5594" />
+		<TurnIn QuestName="Deemed Worthy" QuestId="13063" TurnInName="Astrid Bjornrittar" TurnInId="29839" X="6795.356" Y="-1697.132" Z="821.3065" />
+
+		<PickUp QuestName="Making a Harness" QuestId="12900" GiverName="Astrid Bjornrittar" GiverId="29839" X="6795.356" Y="-1697.132" Z="821.3065" />
+		<Code File="KillUntilComplete" MobId="29875" QuestId="12900" >
+			<HuntingGrounds>
+				<Hotspot X="6677.05" Y="-1593.369" Z="650.926" />
+				<Hotspot X="6593.877" Y="-1518.834" Z="656.6565" />
+			</HuntingGrounds>
+		</Code>
+		<TurnIn QuestName="Making a Harness" QuestId="12900" TurnInName="Astrid Bjornrittar" TurnInId="29839" X="6794.919" Y="-1696.828" Z="821.2875" />
+		<RecheckCheckpoints />
+
+		<PickUp QuestName="The Last of Her Kind" QuestId="12983" GiverName="Astrid Bjornrittar" GiverId="29839" X="6794.919" Y="-1696.828" Z="821.2875" />
+		<PickUp QuestName="The Slithering Darkness" QuestId="12989" GiverName="Astrid Bjornrittar" GiverId="29839" X="6794.919" Y="-1696.828" Z="821.2875" />
+
+		<While Condition="DoQuest(12983, 12989)" >
+			<If Condition="!Me.IsIndoors" >
+				<MoveTo X="7153.602" Y="-2135.321" Z="762.0702" />
+			</If>
+			<Code File="KillUntilComplete" MobId="29605" MovementBy="NavigatorOnly" QuestId="12989" >
+				<HuntingGrounds>
+					<Hotspot X="7308.447" Y="-2016.385" Z="764.2152" />
+					<Hotspot X="7193.143" Y="-2085.655" Z="765.4305" />
+				</HuntingGrounds>
+			</Code>
+			<Code File="InteractWith" MobId="29563" MovementBy="NavigatorOnly" QuestId="12983" X="7332.689" Y="-2065.967" Z="765.309" />
+			<Code File="WaitTimer" WaitTime="80000" QuestId="12983" />
+		</While>
+
+		<TurnIn QuestName="The Last of Her Kind" QuestId="12983" TurnInName="Astrid Bjornrittar" TurnInId="29839" X="6794.907" Y="-1696.874" Z="821.2857" />
+		<PickUp QuestName="The Warm-Up " QuestId="12996" GiverName="Astrid Bjornrittar" GiverId="29839" X="6794.907" Y="-1696.874" Z="821.2857" />
+		<TurnIn QuestName="The Slithering Darkness" QuestId="12989" TurnInName="Astrid Bjornrittar" TurnInId="29839" X="6794.907" Y="-1696.874" Z="821.2857" />
+		<RecheckCheckpoints />
+
+		<While Condition="DoQuest(12996)" >
+			<MoveTo X="6999.174" Y="-1767.008" Z="820.0167" />
+			<Code File="UseItem" ItemId="42481" TerminateWhen="Me.InVehicle" />
+			<DisableBehavior Name="All" />
+			<Code File="RunCode"><![CDATA[
+					WoWUnit kirgaraakPoi = ObjectManager.GetObjectsOfType<WoWUnit>().FirstOrDefault(x => x.Entry == 29352 && x.IsAlive);
+					while (DoQuest(12996) && Me.InVehicle && kirgaraakPoi != null)
+					{
+						if (Me.CurrentTarget != kirgaraakPoi)
+							kirgaraakPoi.Target();
+
+						if (kirgaraakPoi.DistanceSqr > 5f*5f)
+							WoWMovement.ClickToMove(kirgaraakPoi.Location);
+
+						if (kirgaraakPoi.DistanceSqr <= 5f*5f)
+						{
+							Me.SetFacing(kirgaraakPoi);
+
+							if (kirgaraakPoi != null && kirgaraakPoi.DistanceSqr > 8f*8f && Lua.GetReturnVal<bool>("return GetPetActionCooldown(6) == 0;", 0))
+								Lua.DoString("CastPetAction(6);");
+
+							if (kirgaraakPoi != null && Lua.GetReturnVal<bool>("return GetPetActionCooldown(4) == 0;", 0))
+								Lua.DoString("CastPetAction(4);");
+
+							if (kirgaraakPoi != null && Lua.GetReturnVal<bool>("return GetPetActionCooldown(5) == 0;", 0))
+								Lua.DoString("CastPetAction(5);");
+						}
+
+						await Coroutine.Yield();
+					}
+				]]>
+			</Code>
+			<EnableBehavior Name="All" />
+			<While Condition="Me.InVehicle" >
+				<Code File="EjectVeh" />
+			</While>
+		</While>
+
+		<TurnIn QuestName="The Warm-Up " QuestId="12996" TurnInName="Astrid Bjornrittar" TurnInId="29839" X="6796.038" Y="-1697.186" Z="821.3334" />
+
+		<PickUp QuestName="Into the Pit" QuestId="12997" GiverName="Astrid Bjornrittar" GiverId="29839" X="6796.038" Y="-1697.186" Z="821.3334" />
+		<While Condition="DoQuest(12997)" >
+			<MoveTo X="6957.627" Y="-1658.275" Z="810.8226" />
+			<Code File="UseItem" ItemId="42499" TerminateWhen="Me.InVehicle" />
+			<DisableBehavior Name="All" />
+			<Code File="RunCode"><![CDATA[
+				WoWUnit hyldsmeetUnitPoi = null;
+				while (DoQuest(12997) && Me.InVehicle)
+				{
+					if (hyldsmeetUnitPoi == null || hyldsmeetUnitPoi.IsDead)
+						hyldsmeetUnitPoi = ObjectManager.GetObjectsOfType<WoWUnit>().OrderBy(x => x.DistanceSqr).FirstOrDefault(x => x.Entry == 30174 && x.IsAlive);
+
+					if (hyldsmeetUnitPoi != null && hyldsmeetUnitPoi.IsAlive)
+					{
+						if (Me.CurrentTarget != hyldsmeetUnitPoi)
+							hyldsmeetUnitPoi.Target();
+
+						if (hyldsmeetUnitPoi.DistanceSqr > 10f*10f)
+							WoWMovement.ClickToMove(hyldsmeetUnitPoi.Location);
+
+						if (hyldsmeetUnitPoi.DistanceSqr <= 10f*10f)
+						{
+							Me.SetFacing(hyldsmeetUnitPoi);
+							await CommonCoroutines.StopMoving();
+
+							if (hyldsmeetUnitPoi != null && hyldsmeetUnitPoi.DistanceSqr > 8f*8f && Lua.GetReturnVal<bool>("return GetPetActionCooldown(6) == 0;", 0))
+								Lua.DoString("CastPetAction(6);");
+
+							if (hyldsmeetUnitPoi != null && Lua.GetReturnVal<bool>("return GetPetActionCooldown(4) == 0;", 0))
+								Lua.DoString("CastPetAction(4);");
+
+							if (hyldsmeetUnitPoi != null && Lua.GetReturnVal<bool>("return GetPetActionCooldown(5) == 0;", 0))
+								Lua.DoString("CastPetAction(5);");
+						}
+					}
+					await Coroutine.Yield();
+				}
+				]]>
+			</Code>
+			<EnableBehavior Name="All" />
+			<Code File="EjectVeh" />
+		</While>
+		<TurnIn QuestName="Into the Pit" QuestId="12997" TurnInName="Astrid Bjornrittar" TurnInId="29839" X="6794.889" Y="-1696.899" Z="821.286" />
+
+		<PickUp QuestName="Prepare for Glory" QuestId="13061" GiverName="Astrid Bjornrittar" GiverId="29839" X="6794.889" Y="-1696.899" Z="821.286" />
+		<TurnIn QuestName="Prepare for Glory" QuestId="13061" TurnInName="Lok&apos;lira the Crone" TurnInId="29975" X="6921.114" Y="-1537.989" Z="835.1387" />
+		<PickUp QuestName="Lok&apos;lira&apos;s Parting Gift" QuestId="13062" GiverName="Lok&apos;lira the Crone" GiverId="29975" X="6921.114" Y="-1537.989" Z="835.1387" />
+		<TurnIn QuestName="Lok&apos;lira&apos;s Parting Gift" QuestId="13062" TurnInName="Gretta the Arbiter" TurnInId="29796" X="7085.76" Y="-1776.738" Z="820.9234" />
+		<RecheckCheckpoints />
+
+		 <!--<If Condition="!IsQuestCompleted(13424)" > This is a daily, so we only want to do it if the quest after this one isn't complete 
+			<PickUp QuestName="Back to the Pit" QuestId="13424" GiverName="Gretta the Arbiter" GiverId="29796" X="7085.76" Y="-1776.738" Z="820.9234" />
+			<MoveTo X="6957.627" Y="-1658.275" Z="810.8226" />
+			<Code File="UseItem" ItemId="42499" TerminateWhen="Me.InVehicle" />
+			<DisableBehavior Name="All" />
+			<Code File="RunCode"><![CDATA[
+				WoWUnit hyldsmeetUnitPoi = null;
+				while (DoQuest(13424) && Me.InVehicle)
+				{
+					if (hyldsmeetUnitPoi == null || hyldsmeetUnitPoi.IsDead)
+						hyldsmeetUnitPoi = ObjectManager.GetObjectsOfType<WoWUnit>().OrderBy(x => x.DistanceSqr).FirstOrDefault(x => x.Entry == 30174 && x.IsAlive);
+
+					if (hyldsmeetUnitPoi != null && hyldsmeetUnitPoi.IsAlive)
+					{
+						if (Me.CurrentTarget != hyldsmeetUnitPoi)
+							hyldsmeetUnitPoi.Target();
+
+						if (hyldsmeetUnitPoi.DistanceSqr > 10f*10f)
+							WoWMovement.ClickToMove(hyldsmeetUnitPoi.Location);
+
+						if (hyldsmeetUnitPoi.DistanceSqr <= 10f*10f)
+						{
+							Me.SetFacing(hyldsmeetUnitPoi);
+							await CommonCoroutines.StopMoving();
+
+							if (hyldsmeetUnitPoi != null && hyldsmeetUnitPoi.DistanceSqr > 8f*8f && Lua.GetReturnVal<bool>("return GetPetActionCooldown(6) == 0;", 0))
+								Lua.DoString("CastPetAction(6);");
+
+							if (hyldsmeetUnitPoi != null && Lua.GetReturnVal<bool>("return GetPetActionCooldown(4) == 0;", 0))
+								Lua.DoString("CastPetAction(4);");
+
+							if (hyldsmeetUnitPoi != null && Lua.GetReturnVal<bool>("return GetPetActionCooldown(5) == 0;", 0))
+								Lua.DoString("CastPetAction(5);");
+						}
+					}
+					await Coroutine.Yield();
+				}
+				]]>
+			</Code>
+			<EnableBehavior Name="All" />
+			<Code File="EjectVeh" />
+		</If>
+		<If Condition="QuestDone(29796)" >
+			<TurnIn QuestName="Back to the Pit" QuestId="13424" TurnInName="Gretta the Arbiter" TurnInId="29796" X="7085.82" Y="-1776.649" Z="820.924" />
+			<Code File="UseItem" ItemId="44751" />
+		</If> -->
+
+
+		<PickUp QuestName="The Drakkensryd" QuestId="12886" GiverName="Gretta the Arbiter" GiverId="29796" X="7085.47" Y="-1775.094" Z="828.3397" />
+		<While Condition="DoQuest(12886)" >
+			<Code File="RunCode"><![CDATA[ TreeHooks.Instance.InsertHook("Questbot_Profile", 0, _drakensyrdHook ?? (_drakensyrdHook = new  CommonBehaviors.Actions.ActionRunCoroutine(ctx => DrakensyrdTask()))); ]]></Code>
+			<Code File="RunCode" Type="Definition" ><![CDATA[
+				private Styx.TreeSharp.Composite _drakensyrdHook;
+				private WoWUnit drakeriderPoi = null;
+				private WoWUnit drakeriderDrakePoi = null;
+				private WoWItem harpoonPoi => Me.BagItems.FirstOrDefault(x => x.Entry == 41058);
+
+				private async Task<bool> DrakensyrdTask()
+				{
+					if (!Me.InVehicle) return false;
+					drakeriderPoi = ObjectManager.GetObjectsOfType<WoWUnit>().OrderBy(x => x.DistanceSqr).FirstOrDefault(x => x.Entry == 29694 && x.DistanceSqr <= 99f*99f && x.IsAlive);
+					if (drakeriderPoi == null) return false;
+					if (drakeriderPoi.DistanceSqr < 10f*10f) return false;
+
+					if (drakeriderPoi.DistanceSqr >= 10f*10f)
+					{
+						drakeriderDrakePoi = ObjectManager.GetObjectsOfType<WoWUnit>().FirstOrDefault(x => x.Entry == 29625 && x.Location.DistanceSquared(drakeriderPoi.Location) < 10f*10f);
+						if (drakeriderDrakePoi == null) return false;
+						drakeriderDrakePoi.Target();
+						harpoonPoi.Use();
+						await Coroutine.Wait(10000, () => !Me.IsFalling);
+					}
+					return true;
+				}
+				]]>
+			</Code>
+			<While Condition="DoQuest(12886)" >
+				<Code File="InteractWith" MobId="29796" GossipOptions="1" NonCompeteDistance="0" QuestId="12886" X="7085.47" Y="-1775.094" Z="828.3397" TerminateWhen="Me.InVehicle" />
+				<Code File="KillUntilComplete" MobId="41058" MovementBy="None" QuestId="12886" TerminateWhen="drakeriderPoi == null || drakeriderPoi.IsDead" />
+				<Code File="WaitTimer" WaitTime="30000" TerminateWhen="drakeriderPoi != null" />
+			</While>
+		</While>
+		<If Condition="QuestDone(12886)" >
+			<Code File="RunCode"><![CDATA[ TreeHooks.Instance.RemoveHook("Questbot_Profile", _drakensyrdHook); ]]></Code>
+			<Code File="RunCode"><![CDATA[
+					WoWUnit ornamentPoi = null;
+					while (Me.InVehicle)
+					{
+						if (ornamentPoi == null)
+							ornamentPoi = ObjectManager.GetObjectsOfType<WoWUnit>().OrderBy(x => x.DistanceSqr).FirstOrDefault(x => x.Entry == 29754 && x.DistanceSqr <= 99f*99f);
+						if (ornamentPoi != null)
+						{
+							ornamentPoi.Target();
+							harpoonPoi.Use();
+							await Coroutine.Wait(10000, () => !Me.IsFalling && !Me.InVehicle);
+						}
+						else
+						{
+							drakeriderDrakePoi = ObjectManager.GetObjectsOfType<WoWUnit>().OrderByDescending(x => x.DistanceSqr).FirstOrDefault(x => x.Entry == 29625 && x.DistanceSqr <= 99f*99f && x.Z > Me.Z);
+							if (drakeriderDrakePoi != null)
+							{
+								drakeriderDrakePoi.Target();
+								harpoonPoi.Use();
+								await Coroutine.Wait(10000, () => !Me.IsFalling);
+							}
+						}
+						await Coroutine.Yield();
+					}
+				]]>
+			</Code>
+			<TurnIn QuestName="The Drakkensryd" QuestId="12886" TurnInName="Thorim" TurnInId="29445" X="7442.358" Y="-533.6326" Z="1896.851" />
+		</If>
+
+		<PickUp QuestName="Sibling Rivalry" QuestId="13064" GiverName="Thorim" GiverId="29445" X="7443.989" Y="-535.682" Z="1896.85" />
+		<Code File="InteractWith" MobId="29445" GossipOptions="1,1,1" NonCompeteDistance="0" QuestId="13064" QuestObjectiveIndex="1" X="7443.989" Y="-535.682" Z="1896.85" />
+		<TurnIn QuestName="Sibling Rivalry" QuestId="13064" TurnInName="Thorim" TurnInId="29445" X="7442.949" Y="-535.343" Z="1896.85" />
+
+		<!-- <PickUp QuestName="Mending Fences" QuestId="12915" GiverName="Thorim" GiverId="29445" X="7442.949" Y="-535.343" Z="1896.85" /> Too Risky -->
+
+		<Code File="KillUntilComplete" MobId="30046" QuestId="12968" X="7270.79" Y="139.5031" Z="784.6433" />
+
+		<PickUp QuestName="Valkyrion Must Burn" QuestId="12953" GiverName="Harpoon Crate" GiverId="192072" X="7272.075" Y="136.4072" Z="784.6395" />
+
+		<While Condition="DoQuest(12925)" >
+			<Code File="KillUntilComplete" MobId="29569" QuestId="12925" TerminateWhen="HasItem(41612)" >
+				<HuntingGrounds>
+					<Hotspot X="7387.25" Y="160.316" Z="771.6391" />
+					<Hotspot X="7350.622" Y="64.47357" Z="768.001" />
+					<Hotspot X="7253.573" Y="-2.860944" Z="772.6285" />
+				</HuntingGrounds>
+			</Code>
+			<Code File="InteractWith" NonCompeteDistance="0" CollectionDistance="200" PreInteractMountStrategy="Dismount" InteractByUsingItemId="41612" QuestId="12925" X="7432.697" Y="187.2568" Z="768.6882" TerminateWhen="!HasItem(41612)" >
+				<PursuitList>
+					<PursueGameObject Id="191840" PursueWhen="GAMEOBJECT.State == WoWGameObjectState.Ready" />
+				</PursuitList>
+			</Code>
+		</While>
+
+		<Code File="KillUntilComplete" MobId="29570" QuestId="12942" >
+			<HuntingGrounds>
+				<Hotspot X="7350.213" Y="141.6237" Z="785.274" />
+				<Hotspot X="7382.662" Y="284.75" Z="770.7054" />
+				<Hotspot X="7335.617" Y="-36.24355" Z="768.7664" />
+				<Hotspot X="7220.104" Y="-78.73867" Z="768.9071" />
+			</HuntingGrounds>
+		</Code>
+
+		<While Condition="DoQuest(12953)" >
+			<If Condition="!Me.InVehicle" >
+				<MoveTo X="7351.228" Y="-100.6602" Z="777.6393" />
+				<Code File="InteractWith" MobId="30066" NonCompeteDistance="5" CollectionDistance="5" QuestId="12953" X="7351.193" Y="-96.48249" Z="777.633" TerminateWhen="Me.InVehicle" />
+			</If>
+			<DisableBehavior Name="Combat" />
+			<Code File="Vehicles\CannonControl" MobId="30096" VehicleId="30066" MinAngle="-0.78539997339249" MaxAngle="1.3090000152588" Buttons="1" Velocity="100" QuestId="12953" TerminateWhen="!Me.InVehicle || Me.Combat" />
+			<Code File="EjectVeh" />
+			<EnableBehavior Name="Combat" />
+			<!-- 55934, aura the haystacks get when they are burning.  It would be nice if CannonControl allowed us to check stuff like this. -->
+		</While>
+
+		<If Condition="QuestDone(12942)" >
+			<MoveTo X="6754.453" Y="-1623.896" Z="811.7469" /> <!-- To avoid an issue where the bot gets stuck trying to get on the building ledge. -->
+			<TurnIn QuestName="Off With Their Black Wings" QuestId="12942" TurnInName="Iva the Vengeful" TurnInId="29997" X="6778.028" Y="-1599.225" Z="820.4236" />
+		</If>
+		<TurnIn QuestName="Yulda&apos;s Folly" QuestId="12968" TurnInName="Iva the Vengeful" TurnInId="29997" X="6778.028" Y="-1599.225" Z="820.4236" />
+		<TurnIn QuestName="Valkyrion Must Burn" QuestId="12953" TurnInName="Iva the Vengeful" TurnInId="29997" X="6778.028" Y="-1599.225" Z="820.4236" />
+		<TurnIn QuestName="Aberrations" QuestId="12925" TurnInName="Thyra Kvinnshal" TurnInId="30041" X="6778.028" Y="-1599.225" Z="820.4236" />
+		<RecheckCheckpoints />
+
+		<!-- Alliance, Frosthold below.  All the quests above are neutral -->
+		<PickUp QuestName="On Brann&apos;s Trail" QuestId="12854" GiverName="Archaeologist Andorin" GiverId="29650" X="6686.752" Y="-266.821" Z="956.2262" />
+		<PickUp QuestName="Offering Thanks" QuestId="12863" GiverName="Lagnus" GiverId="29743" X="6697.387" Y="-248.2091" Z="947.7634" />
+		<PickUp QuestName="Ancient Relics" QuestId="12870" GiverName="Rork Sharpchin" GiverId="29744" X="6684.773" Y="-211.0891" Z="949.1566" />
+
+		<If Condition="!IsQuestCompleted(12871)" > <!-- Don't set hearth to here if we're already done with this quest hub -->
+			<Code File="SetHearthstone" MobId="29926" AreaId="4428" X="6670.957" Y="-202.0658" Z="950.5195" />
+		</If>
+
+		<TurnIn QuestName="Offering Thanks" QuestId="12863" TurnInName="Glorthal Stiffbeard" TurnInId="29727" X="6648.705" Y="-231.3045" Z="948.6795" />
+		<PickUp QuestName="Missing Scouts" QuestId="12864" GiverName="Glorthal Stiffbeard" GiverId="29727" X="6648.705" Y="-231.3045" Z="948.6795" />
+		<PickUp QuestName="Loyal Companions" QuestId="12865" GiverName="Fjorlin Frostbrow" GiverId="29732" X="6608.942" Y="-280.1489" Z="985.2737" />
+
+		<Code File="InteractWith" MobId="29811" NonCompeteDistance="0" InteractBlacklistTimeInSeconds="1" GossipOptions="1,1,1" CollectionDistance="200" QuestId="12864" QuestObjectiveIndex="1" X="6534.012" Y="-747.4825" Z="610.587" />
+
+		<Code File="InteractWith" MobId="191708" InteractByLooting="true" InteractBlacklistTimeInSeconds="1" PreInteractMountStrategy="Dismount" QuestId="12854" QuestObjectiveIndex="1" X="7158.884" Y="-725.8159" Z="893.7598" />
+
+		<While Condition="DoQuest(12865)" >
+			<Code File="KillUntilComplete" MobIds="30445, 29469" QuestId="12865" TerminateWhen="GetItemCount(41340) &gt;= 8" >
+				<!-- NOTE <QuestKey -->
+				<HuntingGrounds>
+					<Hotspot X="7341.642" Y="-923.6987" Z="911.001" />
+					<Hotspot X="7447.075" Y="-850.5587" Z="915.2202" />
+					<Hotspot X="7589.733" Y="-874.3987" Z="911.8951" />
+					<Hotspot X="7349.094" Y="-1082.32" Z="905.0118" />
+					<Hotspot X="7471.781" Y="-1230.7" Z="906.6564" />
+				</HuntingGrounds>
+			</Code>
+			<MoveTo X="6651.197" Y="-478.5454" Z="1168.822" />
+			<Code File="InteractWith" MobId="29854" Range="4" InteractByUsingItemId="41340" CollectionDistance="15" PreInteractMountStrategy="Dismount" InteractBlacklistTimeInSeconds="1" QuestId="12865" QuestObjectiveIndex="1" X="6651.197" Y="-478.5454" Z="1168.822" TerminateWhen="!HasItem(41340)" />
+		</While>
+
+		<TurnIn QuestName="On Brann&apos;s Trail" QuestId="12854" TurnInName="Archaeologist Andorin" TurnInId="29650" X="6685.508" Y="-268.4308" Z="957.2428" />
+		<PickUp QuestName="Sniffing Out the Perpetrator" QuestId="12855" GiverName="Archaeologist Andorin" GiverId="29650" X="6685.508" Y="-268.4308" Z="957.2428" />
+		<If Condition="QuestDone(12870)" >
+			<TurnIn QuestName="Ancient Relics" QuestId="12870" TurnInName="Rork Sharpchin" TurnInId="29744" X="6684.773" Y="-211.0891" Z="949.1566" />
+			<Code File="RunCode">
+				<![CDATA[
+					var whitelist = (List<uint>)AppDomain.CurrentDomain.GetData("QuestingProfiles_AFKModeWhitelist");
+					if (whitelist.Contains(42780))
+					{
+						whitelist.Remove(42780);
+						AppDomain.CurrentDomain.SetData("QuestingProfiles_AFKModeWhitelist", whitelist);
+					}
+				]]>
+			</Code>
+		</If>
+		<TurnIn QuestName="Missing Scouts" QuestId="12864" TurnInName="Glorthal Stiffbeard" TurnInId="29727" X="6649.017" Y="-231.3638" Z="948.5309" />
+		<PickUp QuestName="Stemming the Aggressors" QuestId="12866" GiverName="Glorthal Stiffbeard" GiverId="29727" X="6649.017" Y="-231.3638" Z="948.5309" />
+		<TurnIn QuestName="Loyal Companions" QuestId="12865" TurnInName="Fjorlin Frostbrow" TurnInId="29732" X="6609.83" Y="-279.3756" Z="984.5888" />
+		<RecheckCheckpoints />
+		<PickUp QuestName="Baby Stealers" QuestId="12867" GiverName="Fjorlin Frostbrow" GiverId="29732" X="6609.83" Y="-279.3756" Z="984.5888" />
+
+		<Code File="InteractWith" MobIds="191770, 191773" InteractByLooting="true" PreInteractMountStrategy="Dismount" CollectionDistance="200" QuestId="12867" QuestObjectiveIndex="1" >
+			<HuntingGrounds>
+				<Hotspot X="6832.604" Y="-141.726" Z="733.0446" />
+				<Hotspot X="7019.896" Y="-243.5136" Z="774.6552" />
+				<Hotspot X="7069.903" Y="-516.5754" Z="730.9796" />
+				<Hotspot X="7058.42" Y="-678.8134" Z="730.9719" />
+			</HuntingGrounds>
+		</Code>
+
+		<Code File="KillUntilComplete" MobId="29792" QuestId="12866" >
+			<HuntingGrounds>
+				<Hotspot X="6832.604" Y="-141.726" Z="733.0446" />
+				<Hotspot X="7019.896" Y="-243.5136" Z="774.6552" />
+				<Hotspot X="7069.903" Y="-516.5754" Z="730.9796" />
+				<Hotspot X="7058.42" Y="-678.8134" Z="730.9719" />
+			</HuntingGrounds>
+			<PursuitList>
+				<PursueUnit Id="29792" PursueWhen="!IsObjectiveComplete(1, 12866)" />
+				<PursueUnit Id="29793" PursueWhen="!IsObjectiveComplete(2, 12866)" />
+			</PursuitList>
+		</Code>
+
+		<While Condition="DoQuest(12855)" >
+			<While Condition="!IsObjectiveComplete(1, 12855)" >
+				<MoveTo X="7155.736" Y="-748.3411" Z="891.1084" />
+				<Code File="WaitTimer" WaitTime="5000" TerminateWhen="!Me.Combat" />
+				<DisableBehavior Name="All" />
+				<Code File="UseItem" ItemId="41430" X="7155.736" Y="-748.3411" Z="891.1084" TerminateWhen="Me.InVehicle" />
+				<Code File="RunCode" Code="
+					while (DoQuest(12855) &amp;&amp; Me.InVehicle)
+					{
+						WoWUnit dwarfAgressor = ObjectManager.GetObjectsOfType&lt;WoWUnit&gt;().OrderBy(x =&gt; x.DistanceSqr).FirstOrDefault(x =&gt; (x.Entry == 29652 || x.Entry == 29696) &amp;&amp; x.IsAlive &amp;&amp; x.DistanceSqr &lt; 40f*40f);
+
+						if (dwarfAgressor == null)
+						{
+							await Coroutine.Sleep(200);
+							continue;
+						}
+						
+						if (StyxWoW.Me.CurrentTarget != dwarfAgressor)
+							dwarfAgressor.Target();
+
+						if (dwarfAgressor.IsValid &amp;&amp; Lua.GetReturnVal&lt;bool&gt;(&quot;return GetPetActionCooldown(1) == 0;&quot;, 0))
+						{
+							Lua.DoString(&quot;CastPetAction(1);&quot;);
+							await CommonCoroutines.SleepForRandomReactionTime();
+						}
+						if (dwarfAgressor.IsValid &amp;&amp; dwarfAgressor.DistanceSqr &lt; 30f*30f &amp;&amp; Lua.GetReturnVal&lt;bool&gt;(&quot;return GetPetActionCooldown(2) == 0;&quot;, 0))
+						{
+							Lua.DoString(&quot;CastPetAction(2);&quot;);
+							SpellManager.ClickRemoteLocation(WoWMathHelper.CalculatePointInFront(dwarfAgressor.Location, dwarfAgressor.Rotation, 3));
+							await CommonCoroutines.SleepForRandomReactionTime();
+						}
+						
+						await Coroutine.Sleep(200);
+					}
+				" /> <!-- HB-API is returning incorrect values, so using Lua.-->
+				<EnableBehavior Name="All" />
+				<Code File="WaitTimer" WaitTime="5000" QuestId="12855" QuestObjectiveIndex="1" />
+			</While>
+			<Code File="KillUntilComplete" MobId="29695" QuestId="12855" QuestObjectiveIndex="2" X="7309.517" Y="-1588.412" Z="942.8536" />
+		</While>
+
+		<If Condition="QuestDone(12855)" >
+			<If Condition="Unit(29579) == null" >
+				<Code File="ForcedDismount" />
+				<Code File="UseItem" ItemId="40971" TerminateWhen="Unit(29579) != null" />
+			</If>
+			<TurnIn QuestName="Sniffing Out the Perpetrator" QuestId="12855" TurnInName="Brann Bronzebeard" TurnInId="29579" X="7309.517" Y="-1588.412" Z="942.8536" />
+		</If>
+		<If Condition="NeedsQuest(12858)" >
+			<If Condition="Unit(29579) == null" >
+				<Code File="ForcedDismount" />
+				<Code File="UseItem" ItemId="40971" TerminateWhen="Unit(29579) != null" />
+			</If>
+			<PickUp QuestName="Pieces to the Puzzle" QuestId="12858" GiverName="Brann Bronzebeard" GiverId="29579" X="7309.517" Y="-1588.412" Z="942.8536" />
+		</If>
+
+		<While Condition="DoQuest(12858)" >
+			<Code File="KillUntilComplete" MobId="29724" QuestId="12858" TerminateWhen="GetItemCount(41130) &gt;= 6" >
+				<HuntingGrounds>
+					<Hotspot X="8159.566" Y="-825.7995" Z="955.6598" />
+					<Hotspot X="8114.177" Y="-917.3442" Z="955.7963" />
+					<Hotspot X="8262.729" Y="-821.7173" Z="923.8743" />
+					<Hotspot X="8252" Y="-976.6149" Z="923.875" />
+				</HuntingGrounds>
+			</Code>
+			<Code File="UseItem" ItemId="41130" QuestId="12858" TerminateWhen="!HasItem(41130)" />
+		</While>
+		<If Condition="QuestDone(12858)" >
+			<If Condition="Unit(29579) == null" >
+				<Code File="ForcedDismount" />
+				<Code File="UseItem" ItemId="40971" TerminateWhen="Unit(29579) != null" />
+			</If>
+			<TurnIn QuestName="Pieces to the Puzzle" QuestId="12858" TurnInName="Brann Bronzebeard" TurnInId="29579" X="8080.941" Y="-842.9305" Z="971.7382" />
+		</If>
+
+		<If Condition="NeedsQuest(12860)" >
+			<If Condition="Unit(29579) == null" >
+				<Code File="ForcedDismount" />
+				<Code File="UseItem" ItemId="40971" TerminateWhen="Unit(29579) != null" />
+			</If>
+			<PickUp QuestName="Data Mining" QuestId="12860" GiverName="Brann Bronzebeard" GiverId="29579" />
+		</If>
+
+		<Code File="InteractWith" MobId="29746" InteractByUsingItemId="41179" WaitTime="10000" PreInteractMountStrategy="Dismount" CollectionDistance="200" QuestId="12860" QuestObjectiveIndex="1" >
+			<HuntingGrounds>
+				<Hotspot X="8159.566" Y="-825.7995" Z="955.6598" />
+				<Hotspot X="8114.177" Y="-917.3442" Z="955.7963" />
+				<Hotspot X="8262.729" Y="-821.7173" Z="923.8743" />
+				<Hotspot X="8252" Y="-976.6149" Z="923.875" />
+			</HuntingGrounds>
+		</Code>
+
+		<If Condition="QuestDone(12860)" >
+			<If Condition="Unit(29579) == null" >
+				<Code File="ForcedDismount" />
+				<Code File="UseItem" ItemId="40971" TerminateWhen="Unit(29579) != null" />
+			</If>
+			<TurnIn QuestName="Data Mining" QuestId="12860" TurnInName="Brann Bronzebeard" TurnInId="29579" />
+		</If>
+
+		<If Condition="NeedsQuest(13415)" >
+			<If Condition="Unit(29579) == null" >
+				<Code File="ForcedDismount" />
+				<Code File="UseItem" ItemId="40971" TerminateWhen="Unit(29579) != null" />
+			</If>
+			<PickUp QuestName="The Library Console" QuestId="13415" GiverName="Brann Bronzebeard" GiverId="29579" />
+		</If>
+
+		<If Condition="QuestDone(13415)" >
+			<If Condition="!Me.IsIndoors" >
+				<MoveTo X="8064.536" Y="-843.2484" Z="971.7408" />
+			</If>
+			<MoveTo Nav="Run" X="7981.323" Y="-821.4858" Z="968.2516" />
+		</If>
+		<TurnIn QuestName="The Library Console" QuestId="13415" TurnInName="Inventor&apos;s Library Console" TurnInId="191760" X="7981.323" Y="-821.4858" Z="968.2516" />
+
+		<PickUp QuestName="Norgannon&apos;s Shell" QuestId="12872" GiverName="Inventor&apos;s Library Console" GiverId="191760" X="7981.657" Y="-821.636" Z="968.2505" />
+		<While Condition="DoQuest(12872)" >
+			<If Condition="!Me.IsIndoors" >
+				<MoveTo X="8064.536" Y="-843.2484" Z="971.7408" />
+			</If>
+			<MoveTo X="7982.994" Y="-821.3993" Z="968.2505" />
+			<Code File="UseItem" ItemId="44704" QuestId="12872" TerminateWhen="Unit(29775) != null" />
+			<Code File="KillUntilComplete" MobId="29775" QuestId="12872" X="7984.616" Y="-822.129" Z="968.1806" TerminateWhen="Unit(29775) == null" />
+		</While>
+		<If Condition="QuestDone(12872)" >
+			<If Condition="Unit(29579) == null" >
+				<Code File="ForcedDismount" />
+				<Code File="UseItem" ItemId="40971" TerminateWhen="Unit(29579) != null" />
+			</If>
+			<TurnIn QuestName="Norgannon&apos;s Shell" QuestId="12872" TurnInName="Brann Bronzebeard" TurnInId="29579" />
+		</If>
+
+		<If Condition="NeedsQuest(12871, 12885)" >
+			<If Condition="Unit(29579) == null" >
+				<Code File="ForcedDismount" />
+				<Code File="UseItem" ItemId="40971" TerminateWhen="Unit(29579) != null" />
+			</If>
+			<PickUp QuestName="Aid from the Explorers&apos; League" QuestId="12871" GiverName="Brann Bronzebeard" GiverId="29579" />
+			<PickUp QuestName="The Exiles of Ulduar" QuestId="12885" GiverName="Brann Bronzebeard" GiverId="29579" />
+		</If>
+
+		<TurnIn QuestName="The Exiles of Ulduar" QuestId="12885" TurnInName="Bouldercrag the Rockshaper" TurnInId="29801" X="8394.906" Y="-389.6594" Z="902.9836" />
+		<PickUp QuestName="Rare Earth" QuestId="12930" GiverName="Bouldercrag the Rockshaper" GiverId="29801" X="8395.884" Y="-389.2248" Z="902.9908" />
+
+		<If Condition="!QuestDone(12930)" > <!-- Protect Frostweave Cloth from the AFK Mode sell logic -->
+			<Code File="RunCode">
+				<![CDATA[
+					var whitelist = (List<uint>)AppDomain.CurrentDomain.GetData("QuestingProfiles_AFKModeWhitelist");
+					whitelist.Add(33470);
+					AppDomain.CurrentDomain.SetData("QuestingProfiles_AFKModeWhitelist", whitelist);
+				]]>
+			</Code>
+		</If>
+
+		<If Condition="QuestDone(12871, 12866, 12867) &amp;&amp; Me.HearthstoneAreaId == 4428 &amp;&amp; Unit(29801) != null" >
+			<Code File="UseHearthstone" WaitForCD="false" />
+		</If>
+
+		<TurnIn QuestName="Aid from the Explorers&apos; League" QuestId="12871" TurnInName="Lagnus" TurnInId="29743" X="6698.393" Y="-247.0847" Z="947.6675" />
+		<PickUp QuestName="The Frostborn King" QuestId="12873" GiverName="Lagnus" GiverId="29743" X="6698.393" Y="-247.0847" Z="947.6675" />
+		<TurnIn QuestName="Stemming the Aggressors" QuestId="12866" TurnInName="Glorthal Stiffbeard" TurnInId="29727" X="6648.16" Y="-231.7698" Z="948.8017" />
+		<TurnIn QuestName="Baby Stealers" QuestId="12867" TurnInName="Fjorlin Frostbrow" TurnInId="29732" X="6609.715" Y="-278.0537" Z="984.4144" />
+		<TurnIn QuestName="The Frostborn King" QuestId="12873" TurnInName="Yorg Stormheart" TurnInId="29593" X="6651.613" Y="-307.4183" Z="989.1326" />
+		<RecheckCheckpoints />
+
+		<PickUp QuestName="Fervor of the Frostborn" QuestId="12874" GiverName="Yorg Stormheart" GiverId="29593" X="6651.613" Y="-307.4183" Z="989.1326" />
+		<While Condition="DoQuest(12874)" >
+			<Code File="InteractWith" MobId="29732" GossipOptions="1" QuestId="12874" X="6609.587" Y="-280.1025" Z="984.9142" TerminateWhen="Unit(30142) != null" />
+			<Code File="WaitTimer" WaitTime="150000" TerminateWhen="!Me.InVehicle" />
+			<Code File="InteractWith" MobId="192243" InteractByLooting="true" NonCompeteDistance="0" X="8529.953" Y="-1965.707" Z="1467.547" TerminateWhen="HasItem(42624)" />
+			<Code File="Hooks\DoWhen" ActivityName="UseStormHammer" AllowUseDuringCombat="true" UseWhen="Me.CurrentTarget != null &amp;&amp; Me.CurrentTarget.Entry == 30142 &amp;&amp; Me.CurrentTarget.IsAlive &amp;&amp; Me.CurrentTarget.Aggro &amp;&amp; Me.BagItems.FirstOrDefault(x =&gt; x.Entry == 42624).CooldownTimeLeft == TimeSpan.Zero" >
+				<Code File="RunCode" Code="Me.BagItems.FirstOrDefault(x =&gt; x.Entry == 42624).Use();" />
+				<Code File="WaitTimer" WaitTime="750" />
+			</Code>
+			<Code File="KillUntilComplete" MobId="30142" QuestId="12874" X="8421.024" Y="-1965.836" Z="1463.253" />
+			<Code File="Hooks\DoWhen" ActivityName="UseStormHammer" Command="Remove" />
+		</While>
+		<TurnIn QuestName="Fervor of the Frostborn" QuestId="12874" TurnInName="Yorg Stormheart" TurnInId="29593" X="6652.518" Y="-307.7933" Z="989.1974" />
+
+		<PickUp QuestName="An Experienced Guide" QuestId="12875" GiverName="Yorg Stormheart" GiverId="29593" X="6652.518" Y="-307.7933" Z="989.1974" />
+		<PickUp QuestName="Unwelcome Guests" QuestId="12876" GiverName="Fjorlin Frostbrow" GiverId="29732" X="6609.198" Y="-278.5454" Z="984.7443" />
+
+		<While Condition="DoQuest(12876)" >
+			<If Condition="!Me.IsIndoors" >
+				<MoveTo X="7021.546" Y="-75.11736" Z="810.187" />
+			</If>
+			<Code File="KillUntilComplete" MobIds="29843, 29586" MovementBy="NavigatorOnly" QuestId="12876" >
+				<HuntingGrounds>
+						<Hotspot X="6992.225" Y="-10.87676" Z="809.603" />
+						<Hotspot X="6899.303" Y="34.08708" Z="791.9991" />
+				</HuntingGrounds>
+			</Code>
+		</While>
+
+		<If Condition="QuestDone(12875)" >
+			<If Condition="!Me.IsIndoors" >
+				<MoveTo X="7021.546" Y="-75.11736" Z="810.187" />
+			</If>
+			<TurnIn Nav="Run" QuestName="An Experienced Guide" QuestId="12875" TurnInName="Drom Frostgrip" TurnInId="29751" X="6946.893" Y="47.49581" Z="795.8265" />
+		</If>
+
+		<If Condition="NeedsQuest(12877)" >
+			<If Condition="!Me.IsIndoors" >
+				<MoveTo X="7021.546" Y="-75.11736" Z="810.187" />
+			</If>
+			<PickUp Nav="Run" QuestName="The Lonesome Watcher" QuestId="12877" GiverName="Drom Frostgrip" GiverId="29751" X="6946.893" Y="47.49581" Z="795.8265" />
+		</If>
+
+		<Code File="KillUntilComplete" MobId="29862" QuestId="12877" X="7015.728" Y="-76.99584" Z="808.9573" />
+
+		<TurnIn QuestName="The Lonesome Watcher" QuestId="12877" TurnInName="Creteus" TurnInId="30052" X="7365.976" Y="-943.7509" Z="905.6672" />
+		<PickUp QuestName="Fate of the Titans" QuestId="12986" GiverName="Creteus" GiverId="30052" X="7365.976" Y="-943.7509" Z="905.6672" />
+
+		<While Condition="DoQuest(12986)" >
+			<While Condition="!IsObjectiveComplete(2, 12986)" >
+				<MoveTo X="7498.395" Y="-1898.158" Z="1473.615" />
+				<Code File="UseItem" ItemId="42679" QuestId="12986" QuestObjectiveIndex="2" TerminateWhen="Unit(30313, u =&gt; u.CreatedByUnit == Me) != null" />
+				<Code File="WaitTimer" WaitTime="50000" QuestId="12986" QuestObjectiveIndex="2" />
+			</While>
+			<While Condition="!IsObjectiveComplete(3, 12986)" >
+				<MoveTo X="7980.485" Y="-2735.359" Z="1137.355" />
+				<Code File="UseItem" ItemId="42679" QuestId="12986" QuestObjectiveIndex="3" TerminateWhen="Unit(30313, u =&gt; u.CreatedByUnit == Me) != null" />
+				<Code File="WaitTimer" WaitTime="50000" QuestId="12986" QuestObjectiveIndex="3" />
+			</While>
+			<While Condition="!IsObjectiveComplete(4, 12986)" >
+				<MoveTo X="8194.368" Y="-1963.366" Z="1738.477" />
+				<Code File="UseItem" ItemId="42679" QuestId="12986" QuestObjectiveIndex="4" TerminateWhen="Unit(30313, u =&gt; u.CreatedByUnit == Me) != null" />
+				<Code File="WaitTimer" WaitTime="50000" QuestId="12986" QuestObjectiveIndex="4" />
+			</While>
+			<While Condition="!IsObjectiveComplete(1, 12986)" >
+				<MoveTo X="7861.201" Y="-1420.524" Z="1534.06" />
+				<Code File="UseItem" ItemId="42679" QuestId="12986" QuestObjectiveIndex="1" TerminateWhen="Unit(30313, u =&gt; u.CreatedByUnit == Me) != null" />
+				<Code File="WaitTimer" WaitTime="50000" QuestId="12986" QuestObjectiveIndex="1" />
+			</While>
+		</While>
+
+		<TurnIn QuestName="Fate of the Titans" QuestId="12986" TurnInName="Creteus" TurnInId="30052" X="7365.976" Y="-943.7509" Z="905.6672" />
+
+		<PickUp QuestName="The Hidden Relic" QuestId="12878" GiverName="Creteus" GiverId="30052" X="7365.976" Y="-943.7509" Z="905.6672" />
+		<If Condition="QuestDone(12878)" >
+			<If Condition="!Me.IsIndoors" >
+				<MoveTo X="7257.369" Y="-1109.251" Z="939.775" />
+			</If>
+			<TurnIn Nav="Run" QuestName="The Hidden Relic" QuestId="12878" TurnInName="The Guardian&apos;s Charge" TurnInId="30548" X="7133.243" Y="-1323.448" Z="916.3644" />
+		</If>
+
+		<If Condition="NeedsQuest(12879)" >
+			<If Condition="!Me.IsIndoors" >
+				<MoveTo X="7257.369" Y="-1109.251" Z="939.775" />
+			</If>
+			<PickUp Nav="Run" QuestName="Fury of the Frostborn King" QuestId="12879" GiverName="The Guardian&apos;s Charge" GiverId="30548" X="7133.243" Y="-1323.448" Z="916.3644" />
+		</If>
+
+		<TurnIn QuestName="Fury of the Frostborn King" QuestId="12879" TurnInName="Creteus" TurnInId="30082" X="7272.602" Y="-881.9955" Z="925.972" />
+		<PickUp QuestName="The Master Explorer" QuestId="12880" GiverName="Creteus" GiverId="30082" X="7272.602" Y="-881.9955" Z="925.972" />
+		<TurnIn QuestName="The Master Explorer" QuestId="12880" TurnInName="Brann Bronzebeard" TurnInId="30382" X="7520.835" Y="-969.7487" Z="479.1533" />
+		<RecheckCheckpoints />
+
+		<PickUp QuestName="The Brothers Bronzebeard" QuestId="12973" GiverName="Brann Bronzebeard" GiverId="30382" X="7520.7" Y="-970.0892" Z="479.1019" />
+		<While Condition="DoQuest(12973)" >
+			<Code File="InteractWith" MobId="30134" NonCompeteDistance="0" PreInteractMountStrategy="Dismount" QuestId="12973" X="7521.413" Y="-972.1139" Z="478.5847" TerminateWhen="Me.InVehicle  || (Unit(30408) != null &amp;&amp; Unit(30405) != null)" />
+			<Code File="KillUntilComplete" MobId="30136" MovementBy="None" QuestId="12973" TerminateWhen="!Me.InVehicle" />
+
+			<If Condition="Unit(30408) != null &amp;&amp; Unit(30405) != null" >
+				<MoveTo X="6693.697" Y="-299.5247" Z="989.323" />
+				<Code File="WaitTimer" WaitTime="180000" QuestId="12973" />
+			</If>
+		</While>
+		<TurnIn QuestName="The Brothers Bronzebeard" QuestId="12973" TurnInName="Velog Icebellow" TurnInId="30401" X="6650.997" Y="-307.9884" Z="989.2361" />
+
+		<TurnIn QuestName="Unwelcome Guests" QuestId="12876" TurnInName="Fjorlin Frostbrow" TurnInId="29732" X="6611.427" Y="-280.3257" Z="984.0598" />
+
+		<While Condition="DoQuest(12930)" >
+			<Code File="InteractWith" MobIds="191844, 191845" InteractByLooting="true" PreInteractMountStrategy="Dismount" Range="2" CollectionDistance="200" QuestId="12930" QuestObjectiveIndex="1" >
+				<HuntingGrounds>
+					<Hotspot X="8546.375" Y="-261.2175" Z="807.3447" />
+					<Hotspot X="8656.159" Y="-244.2761" Z="562.3036" />
+					<Hotspot X="8623.55" Y="8.673094" Z="542.0881" />
+					<Hotspot X="8577.074" Y="126.0489" Z="693.0005" />
+				</HuntingGrounds>
+			</Code>
+			<Code File="KillUntilComplete" MobId="29377" QuestId="12930" TerminateWhen="GetItemCount(33470) &gt;= 5" >
+				<HuntingGrounds>
+					<Hotspot X="8379.331" Y="-161.3644" Z="825.9949" />
+					<Hotspot X="8365.812" Y="-47.10135" Z="811.0393" />
+					<Hotspot X="8488.363" Y="-27.91723" Z="785.5683" />
+					<Hotspot X="8489.271" Y="-168.5402" Z="804.2169" />
+				</HuntingGrounds>
+			</Code>
+		</While>
+
+		<TurnIn QuestName="Rare Earth" QuestId="12930" TurnInName="Bouldercrag the Rockshaper" TurnInId="29801" X="8394.814" Y="-390.0124" Z="902.9807" />
+		<PickUp QuestName="Fighting Back" QuestId="12931" GiverName="Bouldercrag the Rockshaper" GiverId="29801" X="8394.814" Y="-390.0124" Z="902.9807" />
+		<PickUp QuestName="Relief for the Fallen" QuestId="12937" GiverName="Bouldercrag the Rockshaper" GiverId="29801" X="8394.814" Y="-390.0124" Z="902.9807" />
+
+		<Code File="SetHearthstone" MobId="29963" AreaId="4484" X="8426.41" Y="-355.5836" Z="906.4028" />
+
+		<Code File="InteractWith" MobId="30035" InteractByUsingItemId="41988" PreInteractMountStrategy="Dismount" CollectionDistance="200" QuestId="12937" QuestObjectiveIndex="1" >
+			<HuntingGrounds>
+				<Hotspot X="8380.605" Y="-158.8937" Z="824.3897" />
+				<Hotspot X="8378.187" Y="-25.35641" Z="805.2668" />
+				<Hotspot X="8423.299" Y="101.2115" Z="795.588" />
+			</HuntingGrounds>
+		</Code>
+
+		<Code File="KillUntilComplete" MobId="29382" QuestId="12931" >
+			<HuntingGrounds>
+				<Hotspot X="8380.605" Y="-158.8937" Z="824.3897" />
+				<Hotspot X="8378.187" Y="-25.35641" Z="805.2668" />
+				<Hotspot X="8423.299" Y="101.2115" Z="795.588" />
+			</HuntingGrounds>
+		</Code>
+
+		<TurnIn QuestName="Fighting Back" QuestId="12931" TurnInName="Bouldercrag the Rockshaper" TurnInId="29801" X="8394.384" Y="-390.727" Z="903.025" />
+		<TurnIn QuestName="Relief for the Fallen" QuestId="12937" TurnInName="Bouldercrag the Rockshaper" TurnInId="29801" X="8394.384" Y="-390.727" Z="903.025" />
+		<RecheckCheckpoints />
+		<PickUp QuestName="Slaves of the Stormforged" QuestId="12957" GiverName="Bouldercrag the Rockshaper" GiverId="29801" X="8394.384" Y="-390.727" Z="903.025" />
+		<PickUp QuestName="The Dark Ore" QuestId="12964" GiverName="Bouldercrag the Rockshaper" GiverId="29801" X="8394.384" Y="-390.727" Z="903.025" />
+
+		<While Condition="DoQuest(12964)" >
+			<If Condition="!Me.IsIndoors" >
+				<MoveTo X="7846.557" Y="-114.1202" Z="882.9071" />
+			</If>
+			<Code File="InteractWith" MobId="192058" MovementBy="NavigatorOnly" InteractByLooting="true" CollectionDistance="200" PreInteractMountStrategy="Dismount" QuestId="12964" QuestObjectiveIndex="1" >
+				<HuntingGrounds>
+					<Hotspot X="7838.968" Y="-105.5712" Z="882.4541" />
+					<Hotspot X="7824.937" Y="-41.1665" Z="882.6467" />
+					<Hotspot X="7733.886" Y="-21.98413" Z="867.1586" />
+				</HuntingGrounds>
+			</Code>
+		</While>
+
+		<While Condition="DoQuest(12957)" >
+			<If Condition="!Me.IsIndoors" >
+				<MoveTo X="7846.557" Y="-114.1202" Z="882.9071" />
+			</If>
+			<Code File="InteractWith" MobId="29384" MovementBy="NavigatorOnly" GossipOptions="1" CollectionDistance="200" PreInteractMountStrategy="Dismount" QuestId="12957" QuestObjectiveIndex="1" >
+				<HuntingGrounds>
+					<Hotspot X="7838.968" Y="-105.5712" Z="882.4541" />
+					<Hotspot X="7824.937" Y="-41.1665" Z="882.6467" />
+					<Hotspot X="7733.886" Y="-21.98413" Z="867.1586" />
+				</HuntingGrounds>
+			</Code>
+
+			<Code File="KillUntilComplete" MobId="29369" QuestId="12957" QuestObjectiveIndex="2" >
+				<HuntingGrounds>
+					<Hotspot X="7838.968" Y="-105.5712" Z="882.4541" />
+					<Hotspot X="7824.937" Y="-41.1665" Z="882.6467" />
+					<Hotspot X="7733.886" Y="-21.98413" Z="867.1586" />
+				</HuntingGrounds>
+			</Code>
+		</While>
+
+		<If Condition="QuestDone(12964, 12957) &amp;&amp; Me.HearthstoneAreaId == 4484 &amp;&amp; (Unit(29384) != null || Object(192058) != null)" >
+			<Code File="UseHearthstone" WaitForCD="false" />
+		</If>
+
+		<TurnIn QuestName="Slaves of the Stormforged" QuestId="12957" TurnInName="Bouldercrag the Rockshaper" TurnInId="29801" X="8394.17" Y="-391.1158" Z="903.0861" />
+		<TurnIn QuestName="The Dark Ore" QuestId="12964" TurnInName="Bouldercrag the Rockshaper" TurnInId="29801" X="8394.17" Y="-391.1158" Z="903.0861" />
+		<RecheckCheckpoints />
+		<PickUp QuestName="The Gifts of Loken" QuestId="12965" GiverName="Bouldercrag the Rockshaper" GiverId="29801" X="8394.17" Y="-391.1158" Z="903.0861" />
+		<PickUp QuestName="Facing the Storm" QuestId="12978" GiverName="Bruor Ironbane" GiverId="30152" X="8390.302" Y="-383.283" Z="903.1199" />
+
+		<Code File="InteractWith" MobId="192120" NonCompeteDistance="0" InteractBlacklistTimeInSeconds="1" QuestId="12965" QuestObjectiveIndex="1" X="8175.625" Y="130.6254" Z="897.9413" />
+		<Code File="InteractWith" MobId="192121" NonCompeteDistance="0" InteractBlacklistTimeInSeconds="1" QuestId="12965" QuestObjectiveIndex="2" X="7938.442" Y="-17.97992" Z="959.782" />
+		<Code File="InteractWith" MobId="192122" NonCompeteDistance="0" InteractBlacklistTimeInSeconds="1" QuestId="12965" QuestObjectiveIndex="3" X="7903.688" Y="95.70469" Z="1029.867" />
+
+		<Code File="KillUntilComplete" MobIds="29370, 29380" TerminateWhen="!DoQuest(12978) &amp;&amp; IsQuestCompleted(12979)" >
+			<HuntingGrounds>
+				<Hotspot X="7972.195" Y="96.68382" Z="1028.031" />
+				<Hotspot X="8092.806" Y="19.18379" Z="893.9586" />
+			</HuntingGrounds>
+		</Code>
+
+		<TurnIn QuestName="The Gifts of Loken" QuestId="12965" TurnInName="Bouldercrag the Rockshaper" TurnInId="29801" X="8395.063" Y="-390.5228" Z="902.9797" />
+		<TurnIn QuestName="Facing the Storm" QuestId="12978" TurnInName="Bruor Ironbane" TurnInId="30152" X="8390.035" Y="-385.0488" Z="903.1194" />
+		<TurnIn QuestName="Armor of Darkness" QuestId="12979" TurnInName="Bruor Ironbane" TurnInId="30152" X="8390.035" Y="-385.0488" Z="903.1194" />
+		<RecheckCheckpoints />
+
+		<PickUp QuestName="The Armor&apos;s Secrets" QuestId="12980" GiverName="Bruor Ironbane" GiverId="30152" X="8390.035" Y="-385.0488" Z="903.1194" />
+		<While Condition="DoQuest(12980)" >
+			<If Condition="DistanceTo(8263.426f, -440.3163f, 970.5511f) &gt; 110" >
+				<MoveTo X="8323.569" Y="-553.0508" Z="982.0056" />
+			</If>
+			<Code File="InteractWith" MobId="30190" NonCompeteDistance="0" MovementBy="NavigatorOnly" GossipOptions="1" QuestId="12980" QuestObjectiveIndex="1" X="8266.607" Y="-441.3017" Z="970.5823" />
+		</While>
+		<If Condition="QuestDone(12980)" >
+			<If Condition="Me.IsIndoors &amp;&amp; Unit(30190) != null" >
+				<MoveTo X="8346.521" Y="-562.4817" Z="982.0053" />
+			</If>
+			<TurnIn QuestName="The Armor&apos;s Secrets" QuestId="12980" TurnInName="Bruor Ironbane" TurnInId="30152" X="8392.438" Y="-382.4046" Z="903.049" />
+		</If>
+
+		<PickUp QuestName="Valduran the Stormborn" QuestId="12984" GiverName="Bouldercrag the Rockshaper" GiverId="29801" X="8393.507" Y="-389.4008" Z="903.0486" />
+		<While Condition="DoQuest(12984)" >
+			<If Condition="!Me.IsIndoors" >
+				<MoveTo X="7748.595" Y="81.65645" Z="1009.344" />
+			</If>
+			<Code File="UseItem" ItemId="42419" X="7727.51" Y="110.7957" Z="1010.636" TerminateWhen="Unit(29368, u =&gt; u.Attackable) != null" />
+			<Code File="WaitTimer" WaitTime="35000" TerminateWhen="Unit(29368, u =&gt; u.Attackable) != null" />
+			<Code File="KillUntilComplete" MobId="29368" QuestId="12984" X="7728.222" Y="111.3714" Z="1010.636" TerminateWhen="Unit(29368, u =&gt; !u.Attackable) != null" />
+		</While>
+
+		<If Condition="QuestDone(12984) &amp;&amp; Me.HearthstoneAreaId == 4484 &amp;&amp; Unit(29368) != null" >
+			<Code File="UseHearthstone" WaitForCD="false" />
+		</If>
+
+		<If Condition="QuestDone(12984)" >
+			<MoveTo X="8395.063" Y="-390.5228" Z="902.9797" />
+			<TurnIn QuestName="Valduran the Stormborn" QuestId="12984" TurnInName="Bouldercrag the Rockshaper" TurnInId="29801" X="8395.063" Y="-390.5228" Z="902.9797" />
+		</If>
+		<PickUp QuestName="Destroy the Forges!" QuestId="12988" GiverName="Bouldercrag the Rockshaper" GiverId="29801" X="8395.063" Y="-390.5228" Z="902.9797" />
+		<PickUp QuestName="Hit Them Where it Hurts" QuestId="12991" GiverName="Bruor Ironbane" GiverId="30152" X="8392.292" Y="-383.4521" Z="902.9904" />
+
+		<While Condition="DoQuest(12988)" >
+			<If Condition="!IsObjectiveComplete(1, 12988)" >
+				<MoveTo X="8029.706" Y="-223.4491" Z="847.4165" />
+				<Code File="ForcedDismount" />
+				<Code File="UseItemTargetLocation" MobId="30209" ItemId="42441" UseType="PointToPoint" QuestId="12988" QuestObjectiveIndex="1" X="8028.472" Y="-224.8431" Z="847.4593" ClickToX="8024.174" ClickToY="-220.2057" ClickToZ="849.3782" />
+			</If>
+			<If Condition="!IsObjectiveComplete(2, 12988)" >
+				<MoveTo X="8023.826" Y="-253.1086" Z="847.2867" />
+				<Code File="ForcedDismount" />
+				<Code File="UseItemTargetLocation" MobId="30211" ItemId="42441" UseType="PointToPoint" QuestId="12988" QuestObjectiveIndex="2" X="8023.826" Y="-253.1086" Z="847.2867" ClickToX="8021.413" ClickToY="-259.1406" ClickToZ="848.4938" />
+			</If>
+			<If Condition="!IsObjectiveComplete(3, 12988)" >
+				<MoveTo X="8009.348" Y="-304.9648" Z="848.0046" />
+				<Code File="ForcedDismount" />
+				<Code File="UseItemTargetLocation" MobId="30212" ItemId="42441" UseType="PointToPoint" QuestId="12988" QuestObjectiveIndex="3" X="8009.348" Y="-304.9648" Z="848.0046" ClickToX="8009.648" ClickToY="-309.9774" ClickToZ="850.0353"  />
+			</If>
+		</While>
+
+		<Code File="KillUntilComplete" MobId="29376" QuestId="12991" >
+			<HuntingGrounds>
+				<Hotspot X="8081.031" Y="-250.1976" Z="857.039" />
+				<Hotspot X="7998.124" Y="-291.723" Z="847.2338" />
+			</HuntingGrounds>
+		</Code>
+
+		<If Condition="QuestDone(12988, 12991) &amp;&amp; Me.HearthstoneAreaId == 4484 &amp;&amp; Unit(29376) != null" >
+			<Code File="UseHearthstone" WaitForCD="false" />
+		</If>
+
+		<TurnIn QuestName="Destroy the Forges!" QuestId="12988" TurnInName="Bouldercrag the Rockshaper" TurnInId="29801" X="8395.674" Y="-390.583" Z="902.9803" />
+		<TurnIn QuestName="Hit Them Where it Hurts" QuestId="12991" TurnInName="Bruor Ironbane" TurnInId="30152" X="8389.688" Y="-384.375" Z="903.1195" />
+
+		<PickUp QuestName="A Colossal Threat" QuestId="12993" GiverName="Bouldercrag the Rockshaper" GiverId="29801" X="8395.104" Y="-390.0906" Z="902.981" />
+		<Code File="InteractWith" MobId="192171" InteractByLooting="true" NonCompeteDistance="0" PreInteractMountStrategy="Dismount" QuestId="12993" QuestObjectiveIndex="1" X="8106.906" Y="-213.0181" Z="848.1974" />
+		<Code File="InteractWith" MobId="192172" InteractByLooting="true" NonCompeteDistance="0" PreInteractMountStrategy="Dismount" QuestId="12993" QuestObjectiveIndex="2" X="8025.706" Y="-285.2402" Z="849.0407" />
+		<TurnIn QuestName="A Colossal Threat" QuestId="12993" TurnInName="Bouldercrag the Rockshaper" TurnInId="29801" X="8395.735" Y="-389.2541" Z="902.9891" />
+
+		<PickUp QuestName="The Heart of the Storm" QuestId="12998" GiverName="Bouldercrag the Rockshaper" GiverId="29801" X="8395.735" Y="-389.2541" Z="902.9891" />
+		<While Condition="DoQuest(12998)" >
+			<If Condition="DoQuest(12998) &amp;&amp; Unit(29801) != null" >
+				<Code File="FlyTo" X="8494.334" Y="-374.1659" Z="946.7888" />
+			</If>
+			<If Condition="Object(192181) == null" >
+				<Code File="FlyTo" X="7155.379" Y="-463.5214" Z="954.6254" />
+				<Code File="MyCTM" X="7234.437" Y="-460.9258" Z="954.8806" />
+				<Code File="MyCTM" X="7310.001" Y="-454.9555" Z="900.7285" />
+				<Code File="MyCTM" X="7308.646" Y="-596.1565" Z="785.4083" />
+				<Code File="MyCTM" X="7309.023" Y="-724.2565" Z="791.6111" />
+			</If>
+			<Code File="InteractWith" MobId="192181" NonCompeteDistance="0" PreInteractMountStrategy="Dismount" QuestId="12998" QuestObjectiveIndex="1" X="7309.023" Y="-724.2565" Z="791.6111" />
+		</While>
+
+		<If Condition="DistanceTo(7309.333f, -721.2963f, 791.6102f) &lt;= 200" >
+			<If Condition="Me.HearthstoneAreaId == 4484" >
+				<Code File="UseHearthstone" WaitForCD="false" />
+			</If>
+			<If Condition="DistanceTo(7309.333f, -721.2963f, 791.6102f) &lt;= 200" >
+				<While Condition="!Me.Mounted" >
+					<Code File="ForcedMount" MountType="Flying" />
+				</While>
+				<Code File="MyCTM" X="7309.042" Y="-461.2775" Z="840.0389" />
+				<Code File="MyCTM" X="7284.261" Y="-456.2398" Z="922.5925" />
+				<Code File="MyCTM" X="7143.712" Y="-466.6248" Z="968.8696" />
+				<Code File="MyCTM" X="7144.932" Y="-547.6667" Z="997.8606" /> <!-- Final pull away from the entrance so the bot doesn't fly back in -->
+			</If>
+		</If>
+
+		<TurnIn QuestName="The Heart of the Storm" QuestId="12998" TurnInName="Bouldercrag the Rockshaper" TurnInId="29801" X="8394.995" Y="-390.0541" Z="902.9816" />
+
+		<PickUp QuestName="The Iron Colossus" QuestId="13007" GiverName="Bouldercrag the Rockshaper" GiverId="29801" X="8394.995" Y="-390.0541" Z="902.9816" />
+		<While Condition="DoQuest(13007)" >
+			<Code File="InteractWith" MobId="192262" NonCompeteDistance="0" PreInteractMountStrategy="Dismount" InteractBlacklistTimeInSeconds="1" QuestId="13007" X="8492.197" Y="-91.09685" Z="788.5424" TerminateWhen="Me.InVehicle" />
+			<DisableBehavior Name="All" />
+			<Code File="RunCode"><![CDATA[ TreeHooks.Instance.InsertHook("Questbot_Main", 0, _theironcolossus ?? (_theironcolossus = new  CommonBehaviors.Actions.ActionRunCoroutine(ctx => TheIronColossusTask()))); ]]></Code>
+			<Code File="RunCode" Type="Definition" >
+				<![CDATA[
+					private Styx.TreeSharp.Composite _theironcolossus;
+					private bool _needstoSubmerge = false;
+					private bool _needstoEmerge = false;
+					private readonly Vector3 _colossusspawnLocation = new Vector3(8250.302f, -87.07245f, 841.5595f);
+					private Vector3 _behindcolossusLocation = new Vector3(0f, 0f, 0f);
+					private WoWUnit _colossusPoi = null;
+					private WoWUnit _jormungarPoi = null;
+
+					private async Task<bool> TheIronColossusTask()
+					{
+						if (_colossusPoi != null && _colossusPoi.IsDead)
+							_colossusPoi = null;
+
+						if (_jormungarPoi != null && _jormungarPoi.IsDead)
+							_jormungarPoi = null;
+
+						if (!Me.InVehicle) return false;
+						if (!DoQuest(13007)) 
+						{
+							if (Me.InVehicle)
+								Lua.DoString("VehicleExit");
+							return false;
+						}
+
+						if (_needstoSubmerge && !_jormungarPoi.HasAura(56512))
+						{
+							_needstoSubmerge = false;
+							Lua.DoString("CastPetAction(1);");
+						}
+
+						if (_needstoEmerge && _jormungarPoi.HasAura(56512))
+						{
+							_needstoEmerge = false;
+							Lua.DoString("CastPetAction(1);");
+						}
+
+						if (_colossusPoi == null || !_colossusPoi.IsValid)
+							_colossusPoi = ObjectManager.GetObjectsOfType<WoWUnit>().FirstOrDefault(x => x.Entry == 30300 && x.IsAlive);
+
+						if (_jormungarPoi == null || !_jormungarPoi.IsValid)
+							_jormungarPoi = ObjectManager.GetObjectsOfType<WoWUnit>().FirstOrDefault(x => x.Entry == 30301 && x.CreatedByUnit == Me);
+
+						if (_colossusPoi == null && !Navigator.AtLocation(_colossusspawnLocation))
+						{
+							TreeRoot.StatusText = "Moving to Colossus spawn location";
+							_needstoSubmerge = true;
+							return (await CommonCoroutines.MoveTo(_colossusspawnLocation)).IsSuccessful();
+						}
+
+						if (_colossusPoi.DistanceSqr > 35f*35f)
+						{
+							TreeRoot.StatusText = "Engaging Colossus";
+							_needstoSubmerge = true;
+							return (await CommonCoroutines.MoveTo(_colossusPoi.Location)).IsSuccessful();
+						}
+
+						if (_colossusPoi.CastingSpellId == 61673)
+						{
+							TreeRoot.StatusText = "Moving away from Colossus slam";
+							_behindcolossusLocation = WoWMathHelper.CalculatePointBehind(_colossusPoi.Location, _colossusPoi.Rotation, 30);
+							if (Me.Location.DistanceSqr(_behindcolossusLocation) > 10f*10f);
+							{
+								_needstoSubmerge = true;
+								return (await CommonCoroutines.MoveTo(_behindcolossusLocation)).IsSuccessful();
+							}
+						}
+
+						if (_colossusPoi.IsAlive)
+						{
+							await CommonCoroutines.StopMoving();
+							_needstoEmerge = true;
+							Me.SetFacing(_colossusPoi.Location);
+							if (Me.CurrentTarget == null || Me.CurrentTarget.Entry != _colossusPoi.Entry)
+								_colossusPoi.Target();
+							Lua.DoString("if GetPetActionCooldown(3) == 0 then CastPetAction(3) else CastPetAction(2) end");
+							return true;
+						}
+
+						return true;						
+					}
+				]]>
+			</Code>
+
+			<Code File="WaitTimer" WaitTime="10000" QuestId="13007" />
+			<EnableBehavior Name="All" />
+
+			<If Condition="QuestDone(13007)" >
+				<Code File="RunCode"><![CDATA[ TreeHooks.Instance.RemoveHook("Questbot_Main", _theironcolossus); ]]></Code>
+				<Code File="EjectVeh" />
+			</If>
+		</While>
+		<TurnIn QuestName="The Iron Colossus" QuestId="13007" TurnInName="Bouldercrag the Rockshaper" TurnInId="29801" X="8395.649" Y="-388.9846" Z="902.9903" />
+
+		<Checkpoint Level="80" /> <!-- 80+ is loaded in the Icecrown profile, this is just here to make the bot skip everything for quicker loads. -->
+
+		<Code File="LoadProfile" ProfileName="Icecrown.xml" />
+
+	</QuestOrder>
+</HBProfile>

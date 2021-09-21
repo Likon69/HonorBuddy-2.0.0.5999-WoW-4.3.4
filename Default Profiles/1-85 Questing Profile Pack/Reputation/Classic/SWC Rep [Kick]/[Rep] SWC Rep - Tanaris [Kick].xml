@@ -1,0 +1,70 @@
+<HBProfile>
+	<Name>Tanaris - Southbreak Shore</Name>
+	
+	<Blackspots>
+		<Blackspot X="-8379.585" Y="-5031.247" Z="6.586738" Radius="3.009896" />
+		<Blackspot X="-8311.764" Y="-5032.251" Z="9.735109" Radius="4.943482" />
+    </Blackspots>
+	
+	<Vendors>
+
+	</Vendors>
+	
+  
+  <QuestOrder>
+	<!--
+	  <CustomBehavior File="UserDialog"  AllowBotStop="True" SoundCue="Asterisk" ExpiryTime="5" ExpiryAction="InputEnabled_Continue" UseMount="False" SoundCueInterval="1" Text="This profile is not meant to be AFK'd for a long period of time" />
+	-->
+			<CustomBehavior File="UserSettings" LootMobs="False" UseMount="True" PullDistance="35" TrainNewSkills="False" LearnFlightPaths="False" />
+	
+			<If Condition="Me.ZoneId != 440" >
+		<CustomBehavior File="FlyTo" X="-8440.782" Y="-4957.079" Z="2.452309" />
+			</If>
+		
+				<SetGrindArea>
+					<GrindArea>
+						<Factions>2258 230</Factions>
+						<Hotspots>
+							<Hotspot X="-8440.782" Y="-4957.079" Z="2.452309" />
+							<Hotspot X="-8416.346" Y="-5013.308" Z="3.390929" />
+							<Hotspot X="-8490.111" Y="-5066.555" Z="5.866433" />
+							<Hotspot X="-8411.037" Y="-5021.845" Z="3.016551" />
+							<Hotspot X="-8372.054" Y="-5045.519" Z="5.300199" />
+							<Hotspot X="-8367.69" Y="-5109.665" Z="3.442161" />
+							<Hotspot X="-8421.287" Y="-5154.418" Z="4.804834" />
+							<Hotspot X="-8367.369" Y="-5104.665" Z="3.505582" />
+							<Hotspot X="-8300.424" Y="-5101.695" Z="2.906972" />
+							<Hotspot X="-8316.424" Y="-5053.515" Z="6.566496" />
+							<Hotspot X="-8255.709" Y="-5079.818" Z="5.038378" />
+
+							<!-- end of the First place
+
+							<Hotspot X="-8116.728" Y="-5304.941" Z="0.5513803" />
+							<Hotspot X="-8072.677" Y="-5321.799" Z="0.7721248" />
+							<Hotspot X="-8088.966" Y="-5263.813" Z="0.6742567" />
+							<Hotspot X="-8040.908" Y="-5247.938" Z="1.140189" />
+							<Hotspot X="-8008.082" Y="-5236.587" Z="1.722019" />
+							<Hotspot X="-7986.144" Y="-5275.192" Z="0.574487" />
+							<Hotspot X="-8026.074" Y="-5293.466" Z="1.692286" />
+							<Hotspot X="-8011.09" Y="-5334.188" Z="0.6729267" />
+							<Hotspot X="-8077.633" Y="-5314.626" Z="0.551212" />
+							<Hotspot X="-8091.515" Y="-5271.828" Z="1.011202" />
+							<Hotspot X="-8012.998" Y="-5228.417" Z="1.462382" />
+							<Hotspot X="-8116.728" Y="-5304.941" Z="0.5513803" />
+							 -->
+							<!-- End of Second place -->
+							
+							<Hotspot X="-8316.966" Y="-5055.742" Z="6.280147" />
+							<Hotspot X="-8365.953" Y="-5069.329" Z="2.842237" />
+							<Hotspot X="-8406.12" Y="-5006.915" Z="2.672347" />
+							<Hotspot X="-8438.318" Y="-4950.64" Z="2.443561" />
+							<Hotspot X="-8440.782" Y="-4957.079" Z="2.452309" /> <!-- fight to beginning -->
+
+						</Hotspots>
+					</GrindArea>
+				</SetGrindArea>
+			<GrindTo Condition="False" GoalText="SWC Rep" />
+
+  </QuestOrder>
+
+</HBProfile>  

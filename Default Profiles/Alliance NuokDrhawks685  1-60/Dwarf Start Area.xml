@@ -1,0 +1,382 @@
+<HBProfile creator="Drhawks685">
+	<Name>Dwarf Start Area</Name>
+	<MinDurability>0.4</MinDurability>
+	<MinFreeBagSlots>3</MinFreeBagSlots>
+	<MinLevel>1</MinLevel>
+	<MaxLevel>86</MaxLevel>
+	<MailGrey>False</MailGrey>
+	<MailWhite>False</MailWhite>
+	<MailGreen>True</MailGreen>
+	<SellGrey>True</SellGrey>
+	<SellWhite>True</SellWhite>
+	<SellGreen>True</SellGreen>
+	<SellBlue>False</SellBlue>
+	<SellPurple>False</SellPurple>
+	
+	<AvoidMobs>
+	 <Mob Name="Tunnel Rat Lackey" Entry="44264"  />
+	<Mob Name="Bluegill Representative" Entry="44263" />
+	<Mob Name="Mosshide Representative" Entry="44262" />
+	<Mob Name="Cosmetic Mottled Raptor" Entry="40495" />
+	<Mob Name="Stickbone Berserker" Entry="44329" />
+	<Mob Name="Crazed Leper Gnome" Entry="46391" />
+	<Mob Name="Living Contamination" Entry="43089" />
+	<Mob Name="Araj the Summoner" Entry="1852" />
+	<Mob Name="Koltira Deathweaver" Entry="44452" />
+	<Mob Name="Senara Swiftsilver" Entry="48123" />
+	<Mob Name="Aoren Sunglow" Entry="46758" />
+	<Mob Name="Selara" Entry="44408"  />
+	<Mob Name="Ramah Goldenray" Entry="48122" />
+	<Mob Name="Quartermaster Kaoshin" Entry="48085" />
+	<Mob Name ="Stonard Grunt" Entry="866" />
+	<Mob Name ="Bonepicker Felfeeder" Entry="5983" />
+	<Mob Name="Horrid Abomination" Entry="36231" />
+	<Mob Name="Koroth the Hillbreaker" Entry="36528" />
+	<Mob Name="Koroth the Hillbreaker" Entry="36294" />
+	</AvoidMobs>
+	
+	<Mailboxes>
+	<!-- Kharanos Mailbox -->
+	<Mailbox X="-5603.603" Y="-512.9031" Z="401.6768" />
+	<!-- Thelsamar Mailbox -->
+	<Mailbox X="-5364.78" Y="-2953.748" Z="323.8507" />
+	<!-- Menethil Harbor Mailbox -->
+	<Mailbox X="-3792.943" Y="-838.8805" Z="-0.05157017" />
+	<!-- Wildhammer Keep Mailbox -->
+	<Mailbox X="293.83" Y="-2116.429" Z="121.8381" />
+	<!-- Stormfeather Outpost Mailbox -->
+	<Mailbox X="303.7507" Y="-4113.429" Z="118.3129" />
+	<!-- Chillwind Camp Mailbox -->
+	<Mailbox X="947.6384" Y="-1460.586" Z="62.53422" />
+	<!-- Lights hope Mailbox  -->
+	<Mailbox X="2289.696" Y="-5322.46" Z="89.91563" />
+	<!-- Fuselight-by-the-Sea -->
+	<Mailbox X="-6617.911" Y="-4690.531" Z="8.643024" />
+	</Mailboxes>
+	
+	<Vendors>
+	<!-- Human -->
+	<Vendor Name="Ashley Blank" Entry="43278" Type="Train" TrainClass="Hunter" X="-8924.651" Y="-149.9028" Z="81.36338" />
+	<Vendor Name="Llane Beshere" Entry="911" Type="Train" TrainClass="Warrior" X="-8918.364" Y="-208.4109" Z="82.1258" />
+	<Vendor Name="Brother Sammuel" Entry="925" Type="Train" TrainClass="Paladin" X="-8914.567" Y="-215.0163" Z="82.11678" />
+	<Vendor Name="Jorik Kerridan" Entry="915" Type="Train" TrainClass="Rogue" X="-8863.468" Y="-210.9055" Z="80.57269" />
+	<Vendor Name="Priestess Anetta" Entry="375" Type="Train" TrainClass="Priest" X="-8853.587" Y="-193.336" Z="81.93322" />
+	<Vendor Name="Khelden Bremen" Entry="198" Type="Train" TrainClass="Mage" X="-8851.57" Y="-188.234" Z="89.31389" />
+	<Vendor Name="Drusilla La Salle" Entry="459" Type="Train" TrainClass="Warlock" X="-8926.743" Y="-195.5889" Z="80.58879" />
+	<Vendor Name="Janos Hammerknuckle" Entry="78" Type="Repair" X="-8909.458" Y="-104.1632" Z="81.84879" />
+	
+	<!-- Worgen -->
+	<Vendor Name="Marie Allen" Entry="43558" Type="Repair" X="-2456.46" Y="1539.8" Z="18.69155" />
+	<Vendor Name="Karen Murray" Entry="42853" Type="Repair" X="-1354.778" Y="1203.944" Z="35.15623" />
+	<Vendor Name="Marie Allen" Entry="38783" Type="Repair" X="-1314.288" Y="2146.639" Z="6.887578" />
+	<Vendor Name="Samantha Buckley" Entry="36695" Type="Food" X="-1894.104" Y="2299.844" Z="44.16436" />
+    <Vendor Name="Huntsman Blake" Entry="35874" Type="Train" TrainClass="Hunter" X="-1670.313" Y="1297.233" Z="21.33171" />
+	<Vendor Name="Huntsman Blake" Entry="36629" Type="Train" TrainClass="Hunter" X="-1862.472" Y="2243.186" Z="42.32375" />
+    <Vendor Name="Loren the Fence" Entry="35871" Type="Train" TrainClass="Rogue" X="-1696.627" Y="1298.148" Z="20.2842" />
+    <Vendor Name="Sergeant Cleese" Entry="35839" Type="Train" TrainClass="Warrior" X="-1687.948" Y="1332.111" Z="15.13502" />
+	<Vendor Name="Sergeant Cleese" Entry="36651" Type="Train" TrainClass="Warrior" X="-1864.545" Y="2235.503" Z="42.3235" />
+    <Vendor Name="Vitus Darkwalker" Entry="35869" Type="Train" TrainClass="Warlock" X="-1688.852" Y="1297.922" Z="20.28586" />
+    <Vendor Name="Myriam Spellwaker" Entry="35872" Type="Train" TrainClass="Mage" X="-1690.356" Y="1328.24" Z="16.29859" />
+    <Vendor Name="Sister Almyra" Entry="35870" Type="Train" TrainClass="Priest" X="-1695.432" Y="1306.851" Z="19.78222" />
+	<Vendor Name="Sister Almyra" Entry="36632" Type="Train" TrainClass="Priest" X="-1895.778" Y="2306.538" Z="44.17108" />
+    <Vendor Name="Celestine of the Harvest" Entry="35873" Type="Train" TrainClass="Druid" X="-1697.469" Y="1308.936" Z="19.78265" />
+	<Vendor Name="Celestine of the Harvest" Entry="36628" Type="Train" TrainClass="Druid" X="-1878.58" Y="2298.418" Z="42.32362" />
+	<Vendor Name="Sister Almyra" Entry="38795" Type="Train" TrainClass="Priest" X="-2454.618" Y="1536.955" Z="25.03644" />
+	<Vendor Name="Huntsman Blake" Entry="38798" Type="Train" TrainClass="Hunter" X="-2437.955" Y="1537.361" Z="16.79407" />
+	<Vendor Name="Loren the Fence" Entry="38796" Type="Train" TrainClass="Rogue" X="-2430.38" Y="1544.134" Z="16.88406" />
+	<Vendor Name="Sergeant Cleese" Entry="38793" Type="Train" TrainClass="Warrior" X="-2442.507" Y="1567.884" Z="16.81032" />
+	<Vendor Name="Myriam Spellwaker" Entry="38794" Type="Train" TrainClass="Mage" X="-2483.625" Y="1581.184" Z="16.66482" />
+	<Vendor Name="Myriam Spellwaker" Entry="36631" Type="Train" TrainClass="Mage" X="-1872.325" Y="2303.998" Z="42.32134" />
+	<Vendor Name="Celestine of the Harvest" Entry="38799" Type="Train" TrainClass="Druid"  X="-2468.189" Y="1552.111" Z="16.76347" />
+	<Vendor Name="Vitus Darkwalker" Entry="38797" Type="Train" TrainClass="Warlock" X="-2444.295" Y="1497.804" Z="18.45912" />
+	<Vendor Name="Vitus Darkwalker" Entry="36652" Type="Train" TrainClass="Warlock" X="-1873.196" Y="2312.637" Z="42.27339" />
+	<Vendor Name="Gerard Walthorn" Entry="36717" Type="Repair" X="-1867.021" Y="2232.498" Z="42.32364" />
+	<Vendor Name="Benjamin Sykes" Entry="42953" Type="Food" X="-2095.238" Y="1296.852" Z="-83.93577" />
+
+	<!-- Dwarf -->
+	<Vendor Name="Thorgas Grimson" Entry="895" Type="Train" TrainClass="Hunter" X="-6091.788" Y="365.1413" Z="395.5414" />
+	<Vendor Name="Bromos Grummner" Entry="926" Type="Train" TrainClass="Paladin" X="-6120.679" Y="382.0895" Z="395.5435" />
+	<Vendor Name="Solm Hargrin" Entry="916" Type="Train" TrainClass="Rogue" X="-6093.748" Y="404.9183" Z="395.5375" />
+	<Vendor Name="Thran Khorman" Entry="912" Type="Train" TrainClass="Warrior" X="-6084.768" Y="382.1413" Z="395.5432" />
+	<Vendor Name="Saripal Smolderbrew" Entry="43455" Type="Train" TrainClass="Warlock" X="-6074.89" Y="388.547" Z="393.6033" />
+	<Vendor Name="Teegli Merrowith" Entry="37121" Type="Train" TrainClass="Mage" X="-6056.094" Y="388.1749" Z="392.7616" />
+	<Vendor Name="Teo Hammerstorm" Entry="37115" Type="Train" TrainClass="Shaman" X="-6051.206" Y="387.3906" Z="398.8733" />
+	<Vendor Name="Branstock Khalder" Entry="837" Type="Train" TrainClass="Priest" X="-6056.739" Y="393.548" Z="392.7603" />
+	<Vendor Name="Adlin Pridedrift" Entry="829" Type="Food" X="-6225.237" Y="320.3721" Z="383.1173" />
+	<Vendor Name="Durnan Furcutter" Entry="836" Type="Repair" X="-6056.377" Y="385.2125" Z="392.7625" />
+	<Vendor Name="Rybrad Coldbank" Entry="945" Type="Repair" X="-6101.101" Y="390.5695" Z="395.5436" />
+	
+	<!-- Gnome -->
+	<Vendor Name="Elly Sharpedge" Entry="42335" Type="Repair" X="-5168.75" Y="469.4097" Z="389.5963" />
+	<Vendor Name="Burdrak Harglhelm" Entry="3162" Type="Repair" X="-5367.575" Y="287.7031" Z="394.3148" />
+	<Vendor Name="Drill Sergeant Steamcrank" Entry="42324" Type="Train" TrainClass="Warrior" X="-5166.505" Y="458.7344" Z="391.1533" />
+	<Vendor Name="" Entry="42323" Type="Train" TrainClass="Priest" X="-5077.156" Y="477.2257" Z="401.7406" />
+	<Vendor Name="Kelsey Steelspark" Entry="42366" Type="Train" TrainClass="Rogue"	X="-5141.02" Y="502.714" Z="395.5452" />
+	<Vendor Name="Bipsi Frostflinger" Entry="42331" Type="Train" TrainClass="Mage" X="-5086.4" Y="446.071" Z="409.8239" />
+	<Vendor Name="Alamar Grimm" Entry="460" Type="Train" TrainClass="Warlock" X="-5195.21" Y="509.182" Z="387.7732" />
+	
+	<!-- Kharanos -->
+	<Vendor Name="Grawn Thromwyn" Entry="1273" Type="Repair" X="-5590.67" Y="-428.416" Z="397.3266" />
+	<Vendor Name="Turuk Amberstill" Entry="3177" Type="Repair" X="-5514.975" Y="-1295.747" Z="405.9352" />
+	<Vendor Name="Frast Dokner" Entry="1698" Type="Repair" X="-5714.372" Y="-1589.517" Z="383.2044" />
+	<Vendor Name="Monann Coldforge" Entry="43384" Type="Food" X="-5522.49" Y="-1930.35" Z="398.9589" />
+	<Vendor Name="Jade Ramalot" Entry="46996" Type="Repair" X="-4594.17" Y="-1714.2" Z="503.476" />
+	<Vendor Name="Grif Wildheart" Entry="1231" Type="Train" TrainClass="Hunter" X="-5618.542" Y="-454.0711" Z="407.6592" />
+	<Vendor Name="Halbin Frosthammer" Entry="43464" Type="Train" TrainClass="Shaman"  X="-5581.44" Y="-536.977" Z="403.5413" />
+	<Vendor Name="Azar Stronghammer" Entry="1232" Type="Train" TrainClass="Paladin" X="-5586.76" Y="-542.163" Z="403.5417" />
+	<Vendor Name="Magis Sparkmantle" Entry="1228" Type="Train" TrainClass="Mage" X="-5586.94" Y="-537.173" Z="403.5413" />
+	<Vendor Name="Granis Swiftaxe" Entry="1229" Type="Train" TrainClass="Warrior" X="-5605.73" Y="-530.385" Z="399.6557" />
+	<Vendor Name="Maxan Anvol" Entry="1226" Type="Train" TrainClass="Priest" X="-5590.56" Y="-529.656" Z="399.6527" />
+	<Vendor Name="Hogral Bakkan" Entry="1234" Type="Train" TrainClass="Rogue" X="-5604.44" Y="-540.3233" Z="399.0975" />
+	<Vendor Name="Gimrizz Shadowcog" Entry="5612"  Type="Train" TrainClass="Warlock" X="-5640.001" Y="-528.8012" Z="404.2961" />
+
+	<!--Ironforge-->
+	<Vendor Name="Braenna Flintcrag" Entry="5142" Type="Train" TrainClass="Priest" X="-4617.629" Y="-906.6656" Z="501.073" />
+    <Vendor Name="Brandur Ironhammer" Entry="5149" Type="Train" TrainClass="Paladin" X="-4601.648" Y="-896.4678" Z="502.7671" />
+    <Vendor Name="Dink" Entry="7312" Type="Train" TrainClass="Mage" X="-4614.484" Y="-928.3623" Z="501.0683" />
+    <Vendor Name="Darba the Crone" Entry="50729" Type="Train" TrainClass="Warlock" X="-4599.313" Y="-1107.486" Z="504.9388" />
+    <Vendor Name="Fenthwick" Entry="5167" Type="Train" TrainClass="Rogue" X="-4650.119" Y="-1120.803" Z="508.5508" />
+    <Vendor Name="Farseer Javad" Entry="23127" Type="Train" TrainClass="Shaman" X="-4720.412" Y="-1149.962" Z="502.448" />
+    <Vendor Name="Kelstrum Stonebreaker" Entry="1901" Type="Train" TrainClass="Warrior" X="-5044.874" Y="-1243.064" Z="507.7531" />
+    <Vendor Name="Olmin Burningbeard" Entry="5116" Type="Train" TrainClass="Hunter" X="-5010.387" Y="-1274.048" Z="507.7523" />
+	
+	<!-- Loch Modan -->
+	<Vendor Name="Thorvald Deepforge" Entry="6030" Type="Repair" X="-5854.738" Y="-2646.693" Z="308.9741" />
+	<Vendor Name="Morhan Coppertongue" Entry="167" Type="Repair" X="-5343.68" Y="-2932.134" Z="324.3619" />
+	<Vendor Name="Gothor Brumn" Entry="1362" Type="Repair" X="-4822.432" Y="-2659.405" Z="327.1299" />
+	<Vendor Name="Grenhild Darktalon" Entry="49808" Type="Train" TrainClass="Shaman" X="-5376.724" Y="-3003.167" Z="330.6352" />
+    <Vendor Name="Solbin Shadowcog" Entry="49791" Type="Train" TrainClass="Warlock" X="-5337.372" Y="-2983.408" Z="324.0803" />
+	<Vendor Name="Priestess Baerla" Entry="49784" Type="Train" TrainClass="Priest" X="-5331.785" Y="-2989.688" Z="325.1758" />
+    <Vendor Name="Grendin Swiftaxe" Entry="49781" Type="Train" TrainClass="Warrior" X="-5347.851" Y="-2930.248" Z="324.3611" />	
+    <Vendor Name="Belda Wildheart" Entry="49806" Type="Train" TrainClass="Hunter" X="-5372.601" Y="-2946.861" Z="324.3516" />
+    <Vendor Name="Faldoc Stonefaith" Entry="49793" Type="Train" TrainClass="Paladin" X="-5385.389" Y="-2969.505" Z="322.0596" />	
+    <Vendor Name="Gindle the Green" Entry="49786" Type="Train" TrainClass="Mage" X="-5378.679" Y="-2959.512" Z="322.0605" />
+    <Vendor Name="Galda Bronzeblade" Entry="49782" Type="Train" TrainClass="Rogue" X="-5379.384" Y="-2957.448" Z="322.0616" />
+	<Vendor Name="Aldren Cordon" Entry="1214" Type="Repair" X="-5702.525" Y="-3781.788" Z="322.819" />
+	<Vendor Name="Cliff Hadin" Entry="1687" Type="Repair" X="-5644.182" Y="-4284.025" Z="407.8123" />
+	
+	<!-- Wetlands -->
+	<Vendor Name="Darvish Quickhammer" Entry="43998" Type="Repair" X="-4112.06" Y="-2776.33" Z="17.92434" />
+	<Vendor Name="Jennabink Powerseam" Entry="1454" Type="Repair" X="-3775.439" Y="-805.4011" Z="0.6004186" />
+	<Vendor Name="Edwina Monzor" Entry="1462" Type="Repair" X="-3745.517" Y="-846.8663" Z="0.580714" />
+	<Vendor Name="Wenna Silkbeard" Entry="2679" Type="Repair" X="-2859.093" Y="-1448.462" Z="8.6065" />
+	<Vendor Name="Victorina" Entry="41622" Type="Repair" X="-3270.458" Y="-2787.835" Z="12.77861" />
+	<Vendor Name="Breg FullBeard" Entry="43997" Type="Food" X="-2651.13" Y="-2458.76" Z="80.1019" />
+	<Vendor Name="Cedric Bronzeflint" Entry="44001" Type="Food" X="-3241.76" Y="-1990.28" Z="50.54773" />
+
+	
+	<!-- Arathi Highlands -->
+	<Vendor Name="Jannos Ironwill" Entry="1471" Type="Repair" X="-1257.82" Y="-2546.45" Z="21.4542" />
+	
+	<!-- The Hinterlands -->
+	<Vendor Name="Harggan" Entry="8161" Type="Repair" X="311.295" Y="-2092.38" Z="123.2283" />
+	<Vendor Name="Brannik Ironbelly" Entry="12040" Type="Repair" X="333.38" Y="-4139.95" Z="117.2163" />
+	
+	<!-- Western Plaguelands -->
+	<Vendor Name="Leonard Porter" Entry="12942" Type="Repair" X="949.8846" Y="-1435.649" Z="62.58992" />
+	<Vendor Name="Foreman Milos" Entry="47721" Type="Repair" X="1408.33" Y="-1284.47" Z="61.46687" />
+	<Vendor Name="Gurt" Entry="47758" Type="Repair" X="1843.62" Y="-1762.78" Z="60.45281" />
+	<Vendor Name="Outfitter Mendelev" Entry="45149" Type="Repair" X="3010.41" Y="-1509.98" Z="146.2696" />
+	<Vendor Name="Morris Vant" Entry="45148" Type="Repair" X="2979.31" Y="-1491.73" Z="147.0424" />
+	
+	<!-- Eastern Plaguelands -->
+	<Vendor Name="Urk Gagbaz" Entry="45500" Type="Repair" X="1872.73" Y="-3699.23" Z="158.9659" />
+	<Vendor Name="Kathryn Humphries" Entry="47149" Type="Repair" X="2252.36" Y="-4456.02" Z="114.296" />
+	<Vendor Name="Vincent Randolph" Entry="47286" Type="Repair" X="2256.98" Y="-5292.6" Z="82.1395" />
+	<Vendor Name="Patricia Marshall" Entry="47144" Type="Repair" X="2567.37" Y="-4803.67" Z="108.8294" />
+	<Vendor Name="Dorris Manchester" Entry="47166" Type="Repair" X="3178.53" Y="-4342.51" Z="133.4253" />
+	<Vendor Name="Christine Gade" Entry="47106" Type="Repair" X="2968.8" Y="-3002.64" Z="127.2623" />
+	
+	<!-- Badlands -->
+	<Vendor Name="Colt Carbine" Entry="49920" Type="Repair" X="-6623.202" Y="-4706.712" Z="8.670415" />
+	<Vendor Name="Artie Steelbolt" Entry="48057" Type="Repair" X="-6600.45" Y="-3898.99" Z="379.1221" />
+	<Vendor Name="Vernon Farcavern" Entry="48090" Type="Repair" X="-6599.86" Y="-3414" Z="279.2871" />
+	<Vendor  Entry="48096" Type="Repair" X="-7042.65" Y="-2557.39" Z="252.3194" />
+	
+	<!-- Searing -->
+	<Vendor Name="Master Smith Burninate" Entry="14624" Type="Food" X="-6526.64" Y="-1185.78" Z="309.2663" />
+	<Vendor Name="Fergus Gravelsmash" Entry="47937" Type="Repair" X="-7093.68" Y="-1268.31" Z="270.4849" />
+
+	<!-- Burning -->
+	<Vendor Name="Felder Stover" Entry="1296" Type="Repair" X="-8366.36" Y="-2762.51" Z="187.5335" />
+	
+	<!-- Swamp -->
+	<Vendor Name="Dronk Drophammer" Entry="47059" Type="Repair" X="-9766.76" Y="-3901.64" Z="21.81462" />
+	<Vendor Name="Darbo Stableflux" Entry="47532" Type="Repair" X="-10200.2" Y="-4192.51" Z="22.28553" />
+	<Vendor Name="Sid Shillcopper" Entry="47547" Type="Food" X="-10822" Y="-3804.74" Z="21.9269" />
+	<Vendor Name="Hull Forgehammer" Entry="46702" Type="Repair" X="-10122.4" Y="-3826.35" Z="19.1014" />
+
+	<!-- Blasted Lands -->
+	<Vendor Name="Strumner Flintheel" Entry="5508" Type="Repair" X="-10951.8" Y="-3451.99" Z="66.76138" />
+	<Vendor Name="Quartermaster Apone" Entry="44344" Type="Food" X="-11806.4" Y="-3227.13" Z="-30.32623" />
+	<Vendor Name="Maurice Essman" Entry="44337" Type="Repair" X="-12749.4" Y="-2871.93" Z="1.809172" />
+	</Vendors>
+	
+	<BlackSpots>
+	<Blackspot X="-5516.001" Y="-3386.498" Z="278.4626" Radius="32.40734" />
+	<Blackspot X="-545.1632" Y="-4570.106" Z="11.93347" Radius="78.53169" />
+	<Blackspot X="1468.338" Y="-1406.357" Z="61.51985" Radius="53.40335" />
+	<Blackspot X="1546.37" Y="-1485.264" Z="63.03589" Radius="55.24517" />
+	<Blackspot X="1529.911" Y="-1627.633" Z="70.29951" Radius="79.41965" />
+	<Blackspot X="1563.263" Y="-1626.189" Z="67.84369" Radius="84.48022" />
+	<Blackspot X="1958.073" Y="-2405.169" Z="61.16305" Radius="7.710938" />
+	<Blackspot X="1974.155" Y="-2472.759" Z="61.24541" Radius="6.757856" />
+	<Blackspot X="1384.969" Y="-1521.306" Z="56.81214" Radius="23.125" />
+	<Blackspot X="-6913.565" Y="-3480.883" Z="242.563" Radius="85.37571" />
+	<Blackspot X="73.8718" Y="-2438.773" Z="124.9895" Radius="30" /> 
+    <Blackspot X="113.7116" Y="-2454.407" Z="121.8866" Radius="30" /> 
+    <Blackspot X="107.0908" Y="-2493.105" Z="120.5747" Radius="30" /> 
+    <Blackspot X="72.2145" Y="-2528.835" Z="118.8243" Radius="30" /> 
+    <Blackspot X="56.863" Y="-2476.407" Z="124.3176" Radius="30" /> 
+	<Blackspot X="-8085.75" Y="-1884.997" Z="134.6046" Radius="65.43249" />
+	<Blackspot X="-10437.79" Y="-3243.199" Z="22.87132" Radius="111.0495" />
+	<Blackspot X="-10408.71" Y="-2615.271" Z="22.71787" Radius="30.95999" />
+	<Blackspot X="-11250.71" Y="-3754.429" Z="1.632197" Radius="45.23685" />
+	<Blackspot X="-11258.76" Y="-3745.705" Z="8.525477" Radius="13.98042" />
+	<Blackspot X="-1469.433" Y="1411.747" Z="35.55615" Radius="1.97401" />
+	</BlackSpots>
+	
+<QuestOrder>
+	<PickUp QuestName="Hold the Line!" QuestId="24469" GiverName="" GiverId="37081" />
+	<Objective QuestName="Hold the Line!" QuestId="24469" Type="KillMob" MobId="37070" KillCount="6" />
+	<TurnIn QuestName="Hold the Line!" QuestId="24469" TurnInName="" TurnInId="37081" />
+	<PickUp QuestName="Give 'em What-For" QuestId="24470" GiverName="" GiverId="37081" />
+	<PickUp QuestName="Aid for the Wounded" QuestID="24471" GiverName="" GiverId="658" />
+	<While  Condition="!IsQuestCompleted(24471)">
+	<CustomBehavior File="UseItemOn" QuestId="24471" MobId="37080" ItemId="49743" NumOfTimes="1" WaitTime="2000" MobType="Npc" X="-6288.863" Y="386.9096" Z="381.4375" />
+	</While>
+	<Objective QuestName="Give 'em What-For" QuestId="24470" Type="KillMob" MobId="37073" KillCount="3" />
+	<TurnIn QuestName="Give 'em What-For" QuestId="24470" TurnInName="" TurnInId="37081" />
+	<TurnIn QuestName="Aid for the Wounded" QuestId="24471" TurnInName="" TurnInId="658" />
+	<PickUp QuestName="Lockdown in Anvilmar" QuestId="24473" GiverName="" GiverId="37081" />
+	<TurnIn QuestName="Lockdown in Anvilmar" QuestId="24473" TurnInName="" TurnInId="37087" />
+	<PickUp QuestName="Dwarven Artifacts" QuestId="24477" GiverName="" GiverId="1104" />
+	<PickUp QuestName="First Things First: We're Gonna Need Some Beer" QuestId="24474" GiverName="" GiverId="37087" />
+	<Objective QuestName="First Things First: We're Gonna Need Some Beer" QuestId="24474" Type="CollectItem" ItemId="49746" CollectCount="1" />
+	<Objective QuestName="First Things First: We're Gonna Need Some Beer" QuestId="24474" Type="CollectItem" ItemId="49744" CollectCount="1" />
+	<Objective QuestName="First Things First: We're Gonna Need Some Beer" QuestId="24474" Type="CollectItem" ItemId="49745" CollectCount="1" />
+	<Objective QuestName="Dwarven Artifacts" QuestId="24477" Type="CollectItem" ItemId="49749" CollectCount="5" />
+	<TurnIn QuestName="Dwarven Artifacts" QuestId="24477" TurnInName="" TurnInId="1104" />
+	<PickUp QuestName="Make Hay While the Sun Shines" QuestId="24486" GiverName="" GiverId="1104" />
+	<TurnIn QuestName="First Things First: We're Gonna Need Some Beer" QuestId="24474" TurnInName="" TurnInId="37087" />
+	<PickUp QuestName="All the Other Stuff" QuestId="24475" GiverId="37087" />
+	<If Condition="HasQuest(24475)" >
+	<SetGrindArea>
+      	<GrindArea>
+        <Factions>32 189</Factions>
+        <Hotspots>
+		<Hotspot X="-6154.688" Y="644.7463" Z="386.647" />
+		<Hotspot X="-6152.972" Y="784.4421" Z="391.3293" />
+		<Hotspot X="-6282.051" Y="689.4936" Z="384.69" />
+        </Hotspots>
+     	 </GrindArea>
+    	</SetGrindArea>
+   	 <Grindto Condition="IsQuestCompleted(24475)"/>
+	 <ClearGrindArea />
+	 </If>
+	
+	<Objective QuestName="Make Hay While the Sun Shines" QuestId="24486" Type="CollectItem" ItemId="49751" CollectCount="5" />
+	<TurnIn QuestName="Make Hay While the Sun Shines" QuestId="24486" TurnInName="" TurnInId="1104" />
+	<TurnIn QuestName="All the Other Stuff" QuestId="24475" TurnInName="" TurnInId="37087" />
+	<PickUp QuestName="Whitebeard Needs Ye" QuestId="24487" GiverName="" GiverId="37087" />
+	
+	<If Condition="(Me.Class == WoWClass.Hunter) &amp;&amp; (Me.Race == WoWRace.Dwarf)">
+	<PickUp QuestName="Etched Rune" QuestId="3108" GiverName="" GiverId="37087" />
+	<TurnIn QuestName="Etched Rune" QuestId="3108" TurnInName="" TurnInId="895" />
+	</If>
+	
+	<If Condition="Me.Class == (WoWClass.Shaman) &amp;&amp; (Me.Race == WoWRace.Dwarf)">
+	<PickUp QuestName="Empowered Rune" QuestId="24494" GiverName="" GiverId="37087" />
+	<TurnIn QuestName="Empowered Rune" QuestId="24494" TurnInName="" TurnInId="37115" />
+	</If>
+	
+	<If Condition="(Me.Class == WoWClass.Warlock) &amp;&amp; (Me.Race == WoWRace.Dwarf)">
+	<PickUp QuestName="Tainted Rune" QuestId="3115" GiverName="" GiverId="37087" />
+	<TurnIn QuestName="Tainted Rune" QuestId="3115" TurnInName="" TurnInId="43455" />
+	</If>
+	
+	<!-- Other not done -->
+	
+	<TurnIn QuestName="Whitebeard Needs Ye" QuestId="24487" TurnInName="" TurnInId="786" X="-6363.002" Y="567.0847" Z="385.7684" />
+	<PickUp QuestName="The Troll Menace" QuestId="182" GiverName="" GiverId="786" />
+	<PickUp QuestName="Trolling for Information" QuestId="24489" GiverName="" GiverId="1354" />
+	<PickUp QuestName="A Refugee's Quandary" QuestId="3361" GiverName="" GiverId="8416" />
+	<Objective QuestName="A Refugee's Quandary" QuestId="3361" Type="CollectItem" ItemId="10438" CollectCount="1" />
+	<Objective QuestName="Trolling for Information" QuestId="24489" Type="KillMob" MobId="37111" KillCount="1" />
+	<Objective QuestName="A Refugee's Quandary" QuestId="3361" Type="CollectItem" ItemId="16313" CollectCount="1" />
+	<Objective QuestName="Trolling for Information" QuestId="24489" Type="KillMob" MobId="37110" KillCount="1" />
+	<Objective QuestName="A Refugee's Quandary" QuestId="3361" Type="CollectItem" ItemId="16314" CollectCount="1" />
+	<Objective QuestName="Trolling for Information" QuestId="24489" Type="KillMob" MobId="37109" KillCount="1" />
+	<Objective QuestName="The Troll Menace" QuestId="182" Type="KillMob" MobId="706" KillCount="10" />
+	<TurnIn QuestName="The Troll Menace" QuestId="182" TurnInName="" TurnInId="786" />
+	<TurnIn QuestName="Trolling for Information" QuestId="24489" TurnInName="" TurnInId="1354" />
+	<TurnIn QuestName="A Refugee's Quandary" QuestId="3361" TurnInName="" TurnInId="8416" />
+	<PickUp QuestName="Ice and Fire" QuestId="218" GiverName="" GiverId="786" />
+	<Objective QuestName="Ice and Fire" QuestId="218" Type="KillMob" MobId="808" KillCount="1" />
+	<Objective QuestName="Ice and Fire" QuestId="218" Type="KillMob" MobId="37112" KillCount="1" />
+	
+	<If Condition="HasQuest(218)" >
+	<SetGrindArea>
+      	<GrindArea>
+        <TargetMinLevel>4</TargetMinLevel>
+        <TargetMaxLevel>6</TargetMaxLevel>
+        <Factions>190</Factions>
+        <Hotspots>
+        <RandomizeHotspots>True</RandomizeHotspots>
+        <Hotspot X="-6493.02" Y="482.9423" Z="388.403" />
+		<Hotspot X="-6576.915" Y="332.5347" Z="386.9232" />
+		<Hotspot X="-6530.08" Y="383.6189" Z="381.6636" />
+        </Hotspots>
+     	 </GrindArea>
+    	</SetGrindArea>
+   	 <Grindto Condition="IsQuestCompleted(218)"/>
+	 <ClearGrindArea />
+	 </If>
+	
+	<TurnIn QuestName="Ice and Fire" QuestId="218" TurnInName="" TurnInId="786" />
+	<PickUp QuestName="A Trip to Ironforge" QuestId="24490" GiverName="" GiverId="786" />
+	<TurnIn QuestName="A Trip to Ironforge" QuestId="24490" TurnInName="" TurnInId="6782"  X="-6248.838" Y="135.0416" Z="431.5902" />
+	<PickUp QuestName="Follow that Gyro-Copter!" QuestId="24491" GiverName="" GiverId="6782" />
+	<TurnIn QuestName="Follow that Gyro-Copter!" QuestId="24491" TurnInName="" TurnInId="37113"  X="-6245.788" Y="305.4635" Z="383.8545" />
+	<PickUp QuestName="Don't Forget About Us" QuestId="24493" GiverName="" GiverId="37087" />
+	<Objective QuestName="Pack Your Bags" QuestId="24492" Type="CollectItem" ItemId="49755" CollectCount="1" />
+	<Objective QuestName="Pack Your Bags" QuestId="24492" Type="CollectItem" ItemId="49754" CollectCount="1" />
+	<Objective QuestName="Pack Your Bags" QuestId="24492" Type="CollectItem" ItemId="49756" CollectCount="1" />
+	<TurnIn QuestName="Pack Your Bags" QuestId="24492" TurnInName="Milo Geartwinge" TurnInId="37113" />
+		<If Condition="HasQuest(24493)">
+				<CustomBehavior File="WaitTimer" WaitTime="90000" />
+		</If>
+	<TurnIn QuestName="Don't Forget About Us" QuestId="24493" TurnInName="Tharek Blackstone" TurnInId="1872" />
+
+
+	
+	<If Condition="IsQuestCompleted(24493)">
+	<CustomBehavior File="Message" Text="Loading Kharanos" LogColor="info" />
+	<CustomBehavior File="LoadProfile" ProfileName="Kharanos" />
+	</If>
+	</QuestOrder>
+	<!-- Overrides-->
+<Quest Id="24492" Name="Pack Your Bags">
+	<Objective Type="CollectItem" ItemId="49754" CollectCount="1">
+		<CollectFrom>
+		</CollectFrom>
+		<Hotspots>
+		<Hotspot X="-6047.792" Y="384.39" Z="398.8748" />
+		</Hotspots>
+	</Objective>
+	<Objective Type="CollectItem" ItemId="49755" CollectCount="1">
+		<CollectFrom>
+		</CollectFrom>
+		<Hotspots>
+		<Hotspot X="-6067.903" Y="398.3812" Z="392.7582" />
+		</Hotspots>
+	</Objective>
+	<Objective Type="CollectItem" ItemId="49756" CollectCount="1">
+		<CollectFrom>
+		</CollectFrom>
+		<Hotspots>
+		<Hotspot X="-6096.194" Y="403.3122" Z="395.598" />
+		</Hotspots>
+	</Objective>
+</Quest>
+	</HBProfile>

@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<DungeonBuddyProfile>
+  <Name>Lost City of the Tol'vir</Name>
+  <DungeonId>312</DungeonId>
+  <BossEncounters>
+	<Boss isFinal="false" entry="44577" name="General Husam" killOrder="1" optional="false" X="-10858" Y="-1364.31" Z="15.35391" />
+	<Boss isFinal="false" entry="43614" name="Lockmaw" killOrder="2" optional="true" X="-11058.1" Y="-1656.58" Z="0.745147" />
+	<!-- Augh changes from 45378 to 49045 when he becomes active -->
+	<!-- <Boss isFinal="false" entry="49045" name="Augh" killOrder="3" optional="true" X="-11058.96" Y="-1660.24" Z="0.7447528" /> -->
+    
+	<Boss isFinal="false" entry="43612" name="High Prophet Barim" killOrder="4" optional="false" X="-11018.6" Y="-1261.16" Z="13.32593" />
+	<!-- Use a Wind Tunnel to get up to Siamat -->
+	<Boss isFinal="true" entry="44819" name="Siamat" killOrder="5" optional="false" X="-10950.7" Y="-1397.774" Z="35.48912" />
+  </BossEncounters>
+  <Blackspots>
+    <!--<Blackspot X="-101.3791" Y="-703.8368" Z="9.095623" Radius="3.363508" />-->
+  </Blackspots>
+  <PullBlackspots>
+    <PullBlackspot X="-10742.7" Y="-1289.298" Z="15.35361" Radius="20.74739" />
+    <PullBlackspot X="-10711.13" Y="-1343.104" Z="15.74964" Radius="17.44904" />
+  </PullBlackspots>
+</DungeonBuddyProfile>

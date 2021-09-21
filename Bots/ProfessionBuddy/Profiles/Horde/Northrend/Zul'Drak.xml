@@ -1,0 +1,912 @@
+<HBProfile xsi:noNamespaceSchemaLocation="../Schemas/EchoSchema.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<!-- Original contribution by EchoTiger -->
+	<Name>Zul'Drak ($ShortHash$)</Name>
+
+	<DefaultNavType>Fly</DefaultNavType>
+
+	<MinDurability>0.3</MinDurability>
+	<MinFreeBagSlots>3</MinFreeBagSlots>
+
+	<SellGrey>true</SellGrey>
+	<SellWhite>true</SellWhite>
+	<SellGreen>true</SellGreen>
+	<SellBlue>true</SellBlue>
+	<SellPurple>false</SellPurple>
+
+	<MailGrey>false</MailGrey>
+	<MailWhite>true</MailWhite>
+	<MailGreen>true</MailGreen>
+	<MailBlue>true</MailBlue>
+	<MailPurple>true</MailPurple>
+
+	<TargetElites>true</TargetElites>
+
+	<AvoidMobs>
+	</AvoidMobs>
+
+	<Mailboxes>
+		<Mailbox X="5462.183" Y="-2599.91" Z="306.8172" /> <!-- The Argent Stand -->
+	</Mailboxes>
+
+	<Vendors>
+		<!-- Zul'drak: Ebon Watch -->
+		<Vendor Name="Spiked" Id="28867" Type="Food" X="5229.741" Y="-1315.265" Z="242.2767" />
+		<!-- Zul'drak: Light's Breach -->
+		<Vendor Name="Brady Ironcrock" Id="28811" Type="Food" X="5154.667" Y="-2202.71" Z="236.5398" />
+		<!-- Zul'drak: The Argent Stand -->
+		<Vendor Name="Arlen Brighthammer" Id="28796" Type="Repair" X="5410.7" Y="-2658.249" Z="303.954" />
+		<Vendor Name="Marissa Everwatch" Id="28791" Type="Food" X="5462.965" Y="-2639.05" Z="306.551" />
+		<!-- Zul'drak: Zim'Torga -->
+		<Vendor Name="Ba'kari" Id="28855" Type="Repair" X="5769.661" Y="-3572.947" Z="387.2393" />
+		<Vendor Name="Pan'ya" Id="29583" Type="Food" X="5761.111" Y="-3562.792" Z="387.0501" />
+		<Vendor Name="Sister Colleen Tulley" Entry="30439" Type="Food" X="6214.309" Y="7.556152" Z="410.1629" />
+	</Vendors>
+
+	<Blackspots>
+	</Blackspots>
+
+	<Blacklist>
+		<Mob Id="28243" Name="Thrym" Flags="Combat" />
+	</Blacklist>
+
+	<QuestOrder IgnoreCheckpoints="false" >
+		<!-- Check function status -->
+		<Code File="RunCode" Type="Definition">
+			<![CDATA[
+			private static bool? profileFunctionsEnabled => (bool?)AppDomain.CurrentDomain.GetData("QuestingProfiles_FunctionsEnabled");
+			private static bool IsStoreProfile(string path) => path.StartsWith("store://");
+			private static string Slashify(string path) => IsStoreProfile(path) ? path.Replace(@"\", "/") : path.Replace("/", @"\");
+
+			public __CompiledBatchClass__()
+			{
+				ActivateFunctions();
+			}
+
+			private static void ActivateFunctions()
+			{
+				if (profileFunctionsEnabled == null || profileFunctionsEnabled == false)
+				{
+					Bots.Professionbuddy.PBLog.Log(Colors.MediumPurple, "[Profile Message!]: ", Colors.Yellow, "Please stand by as the functions are being activated!");
+					LoadProfile(@"..\..\Functions\Activate Functions.xml");
+				}
+			}
+
+			private static void LoadProfile(string path)
+			{
+				var profile = GetNewPath(path);
+				if (!IsStoreProfile(profile) && !File.Exists(profile))
+				{
+					Bots.Professionbuddy.PBLog.Log(Colors.MediumPurple, "[Profile Message!]: ", Colors.Yellow, "Profile does not exist.\n" + profile);
+					return;
+				}
+
+				Bots.Professionbuddy.PBLog.Log(Colors.MediumPurple, "[Profile Message!]: ", Colors.Yellow, "Loading: " + profile);
+				ProfileManager.LoadNew(profile, false);
+			}
+
+			private static string GetNewPath(string path)
+			{
+				if (IsStoreProfile(path))
+					return Slashify(path);
+
+				var currentProfile = ProfileManager.XmlLocation;
+				if (IsStoreProfile(currentProfile))
+					return Slashify(currentProfile + "/../" + path);
+
+				var absolutePath = Path.Combine(Path.GetDirectoryName(currentProfile), path);
+				absolutePath = Path.GetFullPath(absolutePath);
+				var canonicalPath = new Uri(absolutePath).LocalPath;
+				return Slashify(canonicalPath);
+			}]]>
+		</Code>
+		<Code File="RunCode" Code="ActivateFunctions();" />
+		<!-- END Check function status -->
+
+		<If Condition="Me.IsAlliance" >
+			<Code File="LoadProfile" ProfileName="..\..\Questing Autoloader.xml" />
+		</If>
+		<!-- RunCode Methods -->
+			<Code File="RunCode">
+			<![CDATA[
+				Bots.Professionbuddy.PBLog.Log(System.Windows.Media.Colors.MediumPurple, "> [Profile Initialization Status] ", System.Windows.Media.Colors.CornflowerBlue, "\n     Auto-Looting	:: Enabled\n     Looting	:: Enabled\n     Game Addons	:: Disabled");
+				Lua.DoString("SetCVar('AutoLootDefault', 1);");
+				Lua.DoString("SetCVar('autoDismountFlying', 1);");
+				CharacterSettings.Instance.LootMobs = true;
+				CharacterSettings.Instance.Save();
+				Logging.Write(System.Windows.Media.Colors.MediumPurple, "> [Ready to bot!]");
+			]]>
+			</Code>
+			<Code File="RunCode" Type="Definition">
+				<![CDATA[
+						bool DoQuest(params uint[] questIds)
+						{
+							foreach (var questId in questIds)
+							{
+								if (HasQuest(questId) && !IsQuestCompleted(questId)) return true;
+							}
+							return false;
+						}
+						bool NeedsQuest(params uint[] questIds)
+						{
+							foreach (var questId in questIds)
+							{
+								if (!HasQuest(questId) && !IsQuestCompleted(questId)) return true;
+							}
+							return false;
+						}
+						bool NeedsBreadcrumbQuest(params uint[] questIds)
+						{
+							foreach (var questId in questIds)
+							{
+								if (IsQuestCompleted(questId)) return false;
+							}
+							return true;
+						}
+						bool QuestDone(params uint[] questIds)
+						{
+							foreach (var questId in questIds)
+							{
+								if (HasQuest(questId) && IsQuestCompleted(questId)) return true;
+							}
+							return false;
+						}
+						bool QuestFlaggedCompleted(params uint[] questIds)
+						{
+							foreach (var questId in questIds)
+							{
+								return Lua.GetReturnVal<bool>($"return IsQuestFlaggedCompleted({questId});", 0);
+							}
+							return false;
+						}
+						async Task SkipCutscene(int preWait = 3000, int postWait = 3000)
+						{
+					// Add detection of cutscene here.
+							await Coroutine.Sleep(preWait);
+					// Test and improve the working method.
+							Lua.DoString("MovieFrame:StopMovie(); CinematicFrame_CancelCinematic(); StopCinematic();");
+							await Coroutine.Sleep(postWait);
+						}
+					]]>
+			</Code>
+		<!-- END RunCode Methods -->
+
+
+		<Code File="KillUntilComplete" MobIds="29654, 29656" TerminateWhen="Me.Level &gt;= 74" >
+			<HuntingGrounds>
+				<Hotspot X="4995.352" Y="-2346.18" Z="247.395" />
+				<Hotspot X="5020.395" Y="-2250.583" Z="245.7511" />
+				<Hotspot X="4866.98" Y="-2347.626" Z="235.916" />
+				<Hotspot X="4718.237" Y="-2405.415" Z="235.3063" />
+			</HuntingGrounds>
+		</Code>
+
+		<PickUp QuestName="This Just In: Fire Still Hot!" QuestId="12859" GiverName="Elder Shaman Moky" GiverId="29733" X="5151.114" Y="-2195.371" Z="236.5382" />
+		<PickUp QuestName="In Search Of Answers" QuestId="12902" GiverName="Crusader Lord Lantinga" GiverId="29687" X="5145.286" Y="-2205.092" Z="236.5388" />
+		<PickUp QuestName="Trolls Is Gone Crazy!" QuestId="12861" GiverName="Chief Rageclaw" GiverId="29690" X="5147.551" Y="-2208.075" Z="236.55" />
+		<PickUp QuestName="Wanted: Ragemane&apos;s Flipper" QuestId="12857" GiverName="Wanted!" GiverId="191728" X="5149.607" Y="-2209.88" Z="236.6365" />
+		<TurnIn QuestName="In Search Of Answers" QuestId="12902" TurnInName="Orders From Drakuru" TurnInId="191766" X="4878.826" Y="-2344.615" Z="236.0287" />
+		<PickUp QuestName="Orders From Drakuru" QuestId="12883" GiverName="Orders From Drakuru" GiverId="191766" X="4878.826" Y="-2344.615" Z="236.0287" />
+
+		<While Condition="DoQuest(12861)" >
+			<Code File="KillUntilComplete" MobIds="29654, 29656" QuestId="12861" TerminateWhen="GetItemCount(41161) &gt;= 8" >
+				<!-- NOTE: <QuestKey> -->
+				<HuntingGrounds>
+					<Hotspot X="4995.352" Y="-2346.18" Z="247.395" />
+					<Hotspot X="5020.395" Y="-2250.583" Z="245.7511" />
+					<Hotspot X="4866.98" Y="-2347.626" Z="235.916" />
+					<Hotspot X="4718.237" Y="-2405.415" Z="235.3063" />
+				</HuntingGrounds>
+			</Code>
+			<Code File="InteractWith" MobId="29686" InteractByUsingItemId="41161" Range="2" AuraIdMissingFromMob="55085" PreInteractMountStrategy="Dismount" InteractBlacklistTimeInSeconds="1" CollectionDistance="200" NumOfTimes="16" QuestId="12861" >
+				<HuntingGrounds>
+					<Hotspot X="4829.973" Y="-2355.633" Z="237.8316" />
+					<Hotspot X="4906.366" Y="-2296.581" Z="243.6533" />
+					<Hotspot X="4982.554" Y="-2343.454" Z="246.5106" />
+				</HuntingGrounds>
+			</Code>
+		</While>
+
+		<While Condition="DoQuest(12859)" >
+			<Code File="InteractWith" MobId="29692" AuraIdOnMob="55049" Range="25" CollectionDistance="200" IgnoreLoSToTarget="true" PreInteractMountStrategy="Dismount" InteractByUsingItemId="41131" NumOfTimes="30" QuestId="12859" >
+				<HuntingGrounds>
+					<Hotspot X="4829.973" Y="-2355.633" Z="237.8316" />
+					<Hotspot X="4906.366" Y="-2296.581" Z="243.6533" />
+					<Hotspot X="4982.554" Y="-2343.454" Z="246.5106" />
+				</HuntingGrounds>
+			</Code>
+		</While>
+
+		<While Condition="DoQuest(12857)" >
+			<If Condition="!Me.IsSwimming" >
+				<MoveTo X="4856.208" Y="-2507.547" Z="231.8466" />
+			</If>
+			<Code File="KillUntilComplete" MobId="29664" MovementBy="NavigatorOnly" QuestId="12857" X="4856.208" Y="-2507.547" Z="231.8466" />
+		</While>
+
+		<TurnIn QuestName="Orders From Drakuru" QuestId="12883" TurnInName="Crusader Lord Lantinga" TurnInId="29687" X="5145.017" Y="-2205.311" Z="236.5394" />
+		<PickUp QuestName="The Ebon Watch" QuestId="12884" GiverName="Crusader Lord Lantinga" GiverId="29687" X="5145.017" Y="-2205.311" Z="236.5394" />
+		<PickUp QuestName="Crusader Forward Camp" QuestId="12894" GiverName="Crusader Lord Lantinga" GiverId="29687" X="5145.017" Y="-2205.311" Z="236.5394" />
+		<TurnIn QuestName="Trolls Is Gone Crazy!" QuestId="12861" TurnInName="Chief Rageclaw" TurnInId="29690" X="5147.746" Y="-2205.583" Z="236.5406" />
+		<TurnIn QuestName="Wanted: Ragemane&apos;s Flipper" QuestId="12857" TurnInName="Chief Rageclaw" TurnInId="29690" X="5147.746" Y="-2205.583" Z="236.5406" />
+		<TurnIn QuestName="This Just In: Fire Still Hot!" QuestId="12859" TurnInName="Elder Shaman Moky" TurnInId="29733" X="5151.76" Y="-2195.124" Z="236.539" />
+		<TurnIn QuestName="The Ebon Watch" QuestId="12884" TurnInName="Stefan Vadu" TurnInId="28518" X="5211.862" Y="-1306.276" Z="242.2431" />
+		<RecheckCheckpoints />
+		<PickUp QuestName="Kickin&apos; Nass and Takin&apos; Manes" QuestId="12630" GiverName="Stefan Vadu" GiverId="28518" X="5211.862" Y="-1306.276" Z="242.2431" />
+
+		<While Condition="DoQuest(12630)" >
+			<Code File="InteractWith" MobState="Dead" PreInteractMountStrategy="Dismount" Range="3" CollectionDistance="200" InteractByUsingItemId="38659" NumOfTimes="20" TerminateWhen="QuestDone(12630) || Unit(28521, u =&gt; u.CreatedByUnit == Me) == null" >
+				<HuntingGrounds>
+					<Hotspot X="5259.431" Y="-1431.124" Z="237.9865" />
+					<Hotspot X="5346.116" Y="-1571.75" Z="233.4914" />
+					<Hotspot X="5330.5" Y="-1696.544" Z="240.1192" />
+				</HuntingGrounds>
+				<PursuitList>
+					<PursueUnit Id="28519" PursueWhen="UNIT.IsAlive || UNIT.KilledByMe" />
+				</PursuitList>
+			</Code>
+
+			<Code File="KillUntilComplete" MobId="28519" TerminateWhen="IsQuestCompleted(12631)" >
+				<HuntingGrounds>
+					<Hotspot X="5259.431" Y="-1431.124" Z="237.9865" />
+					<Hotspot X="5346.116" Y="-1571.75" Z="233.4914" />
+					<Hotspot X="5330.5" Y="-1696.544" Z="240.1192" />
+				</HuntingGrounds>
+			</Code>
+
+			<If Condition="!QuestDone(12630) &amp;&amp; Unit(28521, u =&gt; u.CreatedByUnit == Me) == null" >
+				<Code File="InteractWith" MobId="28518" GossipOptions="1" NonCompeteDistance="0" X="5214.622" Y="-1304.801" Z="242.1438" />
+			</If>
+		</While>
+
+		<TurnIn QuestName="Kickin&apos; Nass and Takin&apos; Manes" QuestId="12630" TurnInName="Stefan Vadu" TurnInId="28518" X="5214.692" Y="-1304.882" Z="242.1372" />
+		<TurnIn QuestName="An Invitation, of Sorts..." QuestId="12631" TurnInName="Stefan Vadu" TurnInId="28518" X="5214.692" Y="-1304.882" Z="242.1372" />
+		<RecheckCheckpoints />
+		<PickUp QuestName="Near Miss" QuestId="12637" GiverName="Stefan Vadu" GiverId="28518" X="5214.692" Y="-1304.882" Z="242.1372" />
+		<PickUp QuestName="Taking a Stand" QuestId="12795" GiverName="Bloodrose Datura" GiverId="28532" X="5207.603" Y="-1312.817" Z="242.335" />
+
+		<While Condition="DoQuest(12637)" >
+			<Code File="InteractWith" MobId="28532" GossipOptions="1" NonCompeteDistance="0" QuestId="12637" X="5207.603" Y="-1312.817" Z="242.335" />
+		</While>
+
+		<TurnIn QuestName="Near Miss" QuestId="12637" TurnInName="Stefan Vadu" TurnInId="28518" X="5212.84" Y="-1303.984" Z="242.2721" />
+
+		<PickUp QuestName="You Can Run, But You Can&apos;t Hide" QuestId="12629" GiverName="Stefan Vadu" GiverId="28518" X="5212.84" Y="-1303.984" Z="242.2721" />
+		<While Condition="DoQuest(12629)" >
+			<Code File="InteractWith" MobId="29856" Range="3" CollectionDistance="200" PreInteractMountStrategy="Dismount" NumOfTimes="10" QuestId="12629" QuestObjectiveIndex="2" >
+				<HuntingGrounds>
+					<Hotspot X="5075.319" Y="-1570.983" Z="236.1417" />
+					<Hotspot X="5046.372" Y="-1671.231" Z="240.1292" />
+					<Hotspot X="5079.896" Y="-1747.839" Z="236.9408" />
+				</HuntingGrounds>
+			</Code>
+			<Code File="KillUntilComplete" MobId="28564" QuestId="12629" QuestObjectiveIndex="1" >
+				<HuntingGrounds>
+					<Hotspot X="5075.319" Y="-1570.983" Z="236.1417" />
+					<Hotspot X="5046.372" Y="-1671.231" Z="240.1292" />
+					<Hotspot X="5079.896" Y="-1747.839" Z="236.9408" />
+				</HuntingGrounds>
+			</Code>
+		</While>
+		<TurnIn QuestName="You Can Run, But You Can&apos;t Hide" QuestId="12629" TurnInName="Stefan Vadu" TurnInId="28518" X="5214.763" Y="-1304.481" Z="242.1562" />
+
+		<!-- Not worth it
+		<PickUp QuestName="Dressing Down" QuestId="12648" GiverName="Stefan Vadu" GiverId="28518" X="5214.763" Y="-1304.481" Z="242.1562" />
+		<Code File="Hooks\DoWhen" ActivityName="UseChoker" AllowUseWhileMounted="true" UseWhen="!Me.HasAura(51966) &amp;&amp; HasItem(38699) &amp;&amp; Unit(28589) != null" >
+			<UseMount Value="false" />
+			<Code File="RunCode" Code="await CommonCoroutines.LandAndDismount();" />
+			<Code File="UseItem" ItemId="38699" TerminateWhen="Me.HasAura(51966)" />
+		</Code>
+		<PickUp QuestName="Feedin&apos; Da Goolz" QuestId="12652" GiverName="Gristlegut" GiverId="28589" X="5158.064" Y="-1595.776" Z="238.8919" /> -->
+
+		<TurnIn QuestName="Crusader Forward Camp" QuestId="12894" TurnInName="Crusader MacKellar" TurnInId="29689" X="5535.883" Y="-1865.149" Z="238.2694" />
+		<PickUp QuestName="That&apos;s What Friends Are For..." QuestId="12903" GiverName="Crusader MacKellar" GiverId="29689" X="5535.883" Y="-1865.149" Z="238.2694" />
+		<PickUp QuestName="Making Something Out Of Nothing" QuestId="12901" GiverName="Engineer Reed" GiverId="29688" X="5540.438" Y="-1860.595" Z="238.2694" />
+		<PickUp QuestName="Light Won&apos;t Grant Me Vengeance" QuestId="12904" GiverName="Gerk" GiverId="29455" X="5751.106" Y="-1478.897" Z="234.252" />
+
+		<While Condition="!IsObjectiveComplete(3, 12903)" >
+			<MoveTo X="5690.738" Y="-1384.801" Z="233.2287" />
+		</While>
+
+		<While Condition="DoQuest(12901)" >
+			<Code File="InteractWith" MobIds="191780, 191781, 191782, 191783" InteractByLooting="true" PreInteractMountStrategy="Dismount" CollectionDistance="200" NumOfTimes="20" QuestId="12901" >
+				<HuntingGrounds>
+					<Hotspot X="5570.891" Y="-1429.98" Z="233.9783" />
+					<Hotspot X="5552.916" Y="-1538.788" Z="237.6665" />
+					<Hotspot X="5653.666" Y="-1572.474" Z="232.5288" />
+					<Hotspot X="5807.441" Y="-1532.723" Z="229.0466" />
+					<Hotspot X="5746.762" Y="-1349.395" Z="228.6035" />
+					<Hotspot X="5683.122" Y="-1449.041" Z="233.1447" />
+				</HuntingGrounds>
+			</Code>
+		</While>
+
+		<Code File="KillUntilComplete" MobIds="29450, 29451" QuestId="12904" >
+			<HuntingGrounds>
+				<Hotspot X="5701.856" Y="-1437.306" Z="234.4105" />
+				<Hotspot X="5749.668" Y="-1477.734" Z="233.9773" />
+				<Hotspot X="5736.697" Y="-1562.729" Z="229.549" />
+				<Hotspot X="5836.492" Y="-1609.707" Z="234.4916" />
+				<Hotspot X="5868.894" Y="-1702.357" Z="236.7504" />
+			</HuntingGrounds>
+		</Code>
+
+		<TurnIn QuestName="Light Won&apos;t Grant Me Vengeance" QuestId="12904" TurnInName="Gerk" TurnInId="29455" X="5751.085" Y="-1479.037" Z="234.2543" />
+
+		<While Condition="!IsObjectiveComplete(1, 12903)" >
+			<MoveTo X="5951.333" Y="-1851.638" Z="248.3103" />
+		</While>
+
+		<TurnIn QuestName="That&apos;s What Friends Are For..." QuestId="12903" TurnInName="Crusader MacKellar" TurnInId="29689" X="5538.266" Y="-1864.412" Z="238.2691" />
+		<TurnIn QuestName="Making Something Out Of Nothing" QuestId="12901" TurnInName="Engineer Reed" TurnInId="29688" X="5541.5" Y="-1861.143" Z="238.2691" />
+		<TurnIn QuestName="Taking a Stand" QuestId="12795" TurnInName="Commander Falstaav" TurnInId="28059" X="5439.697" Y="-2564.042" Z="303.1885" />
+		<RecheckCheckpoints />
+		<PickUp QuestName="Defend the Stand" QuestId="12503" GiverName="Commander Falstaav" GiverId="28059" X="5439.697" Y="-2564.042" Z="303.1885" />
+		<PickUp QuestName="Parachutes for the Argent Crusade" QuestId="12740" GiverName="Commander Falstaav" GiverId="28059" X="5439.697" Y="-2564.042" Z="303.1885" />
+		<PickUp QuestName="First Things First" QuestId="12792" GiverName="Commander Kunz" GiverId="28039" X="5450.832" Y="-2609.083" Z="306.909" />
+
+		<If Condition="!IsQuestCompleted(12596)" > <!-- Don't set hearth to here if we're already done with this quest hub -->
+			<Code File="SetHearthstone" MobId="28791" AreaId="4275" X="5461.21" Y="-2637.527" Z="306.5515" />
+		</If>
+
+		<PickUp QuestName="The Blessing of Zim&apos;Abwa" QuestId="12565" GiverName="Hexxer Ubungo" GiverId="28062" X="5479.771" Y="-2625.883" Z="306.9896" />
+
+		<While Condition="DoQuest(12740)" >
+			<Code File="InteractWith" MobIds="28028, 28029" MobState="Alive" InteractByUsingItemId="39615" PreInteractMountStrategy="Dismount" AuraIdMissingFromMob="53031" CollectionDistance="200" NumOfTimes="20" QuestId="12740" >
+				<HuntingGrounds>
+					<Hotspot X="5414.74" Y="-2520.193" Z="292.4195" />
+					<Hotspot X="5466.312" Y="-2460.35" Z="292.4193" />
+					<Hotspot X="5463.159" Y="-2354.887" Z="292.4196" />
+					<Hotspot X="5396.114" Y="-2367.148" Z="292.4196" />
+				</HuntingGrounds>
+			</Code>
+		</While>
+
+		<Code File="KillUntilComplete" MobIds="28022, 28023, 28026" TerminateWhen="!DoQuest(12503) &amp;&amp; (HasQuest(12565) ? GetItemCount(38551) &gt;= 10 : true)" >
+			<HuntingGrounds>
+				<Hotspot X="5414.74" Y="-2520.193" Z="292.4195" />
+				<Hotspot X="5466.312" Y="-2460.35" Z="292.4193" />
+				<Hotspot X="5463.159" Y="-2354.887" Z="292.4196" />
+				<Hotspot X="5396.114" Y="-2367.148" Z="292.4196" />
+			</HuntingGrounds>
+		</Code>
+
+		<While Condition="QuestDone(12655)" >
+			<Code File="InteractWith" MobId="190657" Range="34" NonCompeteDistance="0" X="6173.133" Y="-3556.806" Z="385.1992" TerminateWhen="!HasQuest(12655)" />
+			<Code File="RunCode" Code="QuestFrame.Instance.ClickContinue();" />
+			<Code File="WaitTimer" WaitTime="1000" />
+			<Code File="RunCode" Code="QuestFrame.Instance.CompleteQuest();" />
+		</While>
+		<TurnIn QuestName="Defend the Stand" QuestId="12503" TurnInName="Commander Falstaav" TurnInId="28059" X="5437.903" Y="-2565.938" Z="304.0571" />
+		<TurnIn QuestName="Parachutes for the Argent Crusade" QuestId="12740" TurnInName="Commander Falstaav" TurnInId="28059" X="5437.903" Y="-2565.938" Z="304.0571" />
+		<RecheckCheckpoints />
+		<PickUp QuestName="New Orders for Sergeant Stackhammer" QuestId="12505" GiverName="Commander Kunz" GiverId="28039" X="5450.412" Y="-2608.016" Z="306.9093" />
+		<PickUp QuestName="Pa&apos;Troll" QuestId="12596" GiverName="Commander Kunz" GiverId="28039" X="5450.412" Y="-2608.016" Z="306.9093" />
+		<PickUp QuestName="Trouble at the Altar of Sseratus" QuestId="12506" GiverName="Hexxer Ubungo" GiverId="28062" X="5480.241" Y="-2625.194" Z="307.013" />
+		<PickUp QuestName="Siphoning the Spirits" QuestId="12799" GiverName="Captain Arnath" GiverId="28045" X="5930.202" Y="-2382.231" Z="292.9023" />
+		<PickUp QuestName="Lab Work" QuestId="12557" GiverName="Alchemist Finklestein" GiverId="28205" X="5932.918" Y="-2352.291" Z="293.8406" />
+
+		<While Condition="DoQuest(12557)" >
+			<Code File="InteractWith" MobId="190462" InteractByLooting="true" MovementBy="NavigatorOnly" NonCompeteDistance="0" QuestId="12557" QuestObjectiveIndex="4" X="5892.457" Y="-2349.384" Z="293.8393" />
+			<Code File="InteractWith" MobId="190478" InteractByLooting="true" MovementBy="NavigatorOnly" NonCompeteDistance="0" QuestId="12557" QuestObjectiveIndex="1" X="5890.331" Y="-2346.182" Z="293.8393" />
+			<Code File="InteractWith" MobId="190473" InteractByLooting="true" MovementBy="NavigatorOnly" NonCompeteDistance="0" QuestId="12557" QuestObjectiveIndex="2" X="5890.212" Y="-2341.99" Z="293.8393" />
+			<Code File="InteractWith" MobId="190459" InteractByLooting="true" MovementBy="NavigatorOnly" NonCompeteDistance="0" QuestId="12557" QuestObjectiveIndex="3" X="5954.128" Y="-2345.087" Z="293.8398" />
+		</While>
+
+		<TurnIn QuestName="Lab Work" QuestId="12557" TurnInName="Alchemist Finklestein" TurnInId="28205" X="5934.63" Y="-2353.033" Z="293.8405" />
+
+		<Code File="KillUntilComplete" MobId="29129" QuestId="12799" >
+			<HuntingGrounds>
+				<Hotspot X="5644.835" Y="-2481.95" Z="287.5263" />
+				<Hotspot X="5619.863" Y="-2437.745" Z="287.7582" />
+				<Hotspot X="5637.241" Y="-2353.029" Z="286.8682" />
+			</HuntingGrounds>
+		</Code>
+
+		<TurnIn QuestName="Siphoning the Spirits" QuestId="12799" TurnInName="Captain Arnath" TurnInId="28045" X="5929.815" Y="-2382.155" Z="292.94" />
+		<PickUp QuestName="Stocking the Shelves" QuestId="12609" GiverName="Captain Arnath" GiverId="28045" X="5929.815" Y="-2382.155" Z="292.94" />
+		<PickUp QuestName="Clipping Their Wings" QuestId="12610" GiverName="Captain Arnath" GiverId="28045" X="5929.815" Y="-2382.155" Z="292.94" />
+
+		<Code File="KillUntilComplete" TerminateWhen="!DoQuest(12609, 12610)" >
+			<HuntingGrounds>
+				<Hotspot X="6039.96" Y="-2378.012" Z="292.7831" />
+				<Hotspot X="6116.072" Y="-2376.446" Z="293.7754" />
+				<Hotspot X="5979.457" Y="-2448.174" Z="292.9693" />
+				<Hotspot X="5828.196" Y="-2519.095" Z="294.0879" />
+				<Hotspot X="5743.358" Y="-2356.614" Z="288.5525" />
+			</HuntingGrounds>
+			<PursuitList>
+				<PursueUnit Id="28221" PursueWhen="!IsObjectiveComplete(1, 12609)" />
+				<PursueUnit Id="28233" PursueWhen="!IsObjectiveComplete(2, 12610)" />
+			</PursuitList>
+		</Code>
+
+		<TurnIn QuestName="Stocking the Shelves" QuestId="12609" TurnInName="Captain Arnath" TurnInId="28045" X="5930.356" Y="-2380.886" Z="293.8413" />
+		<TurnIn QuestName="Clipping Their Wings" QuestId="12610" TurnInName="Captain Arnath" TurnInId="28045" X="5930.356" Y="-2380.886" Z="293.8413" />
+		<TurnIn QuestName="New Orders for Sergeant Stackhammer" QuestId="12505" TurnInName="Sergeant Stackhammer" TurnInId="28056" X="6061.992" Y="-2616.461" Z="302.7487" />
+		<RecheckCheckpoints />
+		<PickUp QuestName="Argent Crusade, We Are Leaving!" QuestId="12504" GiverName="Sergeant Stackhammer" GiverId="28056" X="6061.992" Y="-2616.461" Z="302.7487" />
+		<PickUp QuestName="Mopping Up" QuestId="12508" GiverName="Corporal Maga" GiverId="28099" X="6062.999" Y="-2615.175" Z="302.7482" />
+
+		<While Condition="DoQuest(12504)" >
+			<Code File="InteractWith" MobId="28041" MobState="AliveNotInCombat" GossipOptions="1" NumOfTimes="20" QuestId="12504" >
+				<HuntingGrounds>
+					<Hotspot X="6133.881" Y="-2609.696" Z="293.1628" />
+					<Hotspot X="6203.637" Y="-2626.323" Z="293.163" />
+					<Hotspot X="6173.161" Y="-2513.481" Z="304.7111" />
+					<Hotspot X="6189.105" Y="-2742.868" Z="304.8217" />
+				</HuntingGrounds>
+			</Code>
+		</While>
+
+		<Code File="KillUntilComplete" MobId="28036" QuestId="12508" >
+			<HuntingGrounds>
+				<Hotspot X="6133.881" Y="-2609.696" Z="293.1628" />
+				<Hotspot X="6203.637" Y="-2626.323" Z="293.163" />
+				<Hotspot X="6173.161" Y="-2513.481" Z="304.7111" />
+				<Hotspot X="6189.105" Y="-2742.868" Z="304.8217" />
+			</HuntingGrounds>
+		</Code>
+
+		<While Condition="DoQuest(12506)" >
+			<MoveTo X="6337.872" Y="-2611.322" Z="318.1567" />
+			<MoveTo QuestId="12506" Nav="Run" X="6364.056" Y="-2612.904" Z="316.4031" />
+		</While>
+
+		<TurnIn QuestName="Argent Crusade, We Are Leaving!" QuestId="12504" TurnInName="Sergeant Stackhammer" TurnInId="28056" X="6067.383" Y="-2617.533" Z="302.9719" />
+		<TurnIn QuestName="Mopping Up" QuestId="12508" TurnInName="Corporal Maga" TurnInId="28099" X="6067.188" Y="-2615.963" Z="302.9172" />
+
+		<If Condition="QuestDone(12506) &amp;&amp; Me.HearthstoneAreaId == 4275 &amp;&amp; Unit(28099) != null" >
+			<Code File="UseHearthstone" WaitForCD="false" />
+		</If>
+
+		<TurnIn QuestName="Trouble at the Altar of Sseratus" QuestId="12506" TurnInName="Hexxer Ubungo" TurnInId="28062" X="5481.621" Y="-2624.458" Z="307.3799" />
+		<TurnIn QuestName="Strange Mojo" QuestId="12507" TurnInName="Hexxer Ubungo" TurnInId="28062" X="5481.621" Y="-2624.458" Z="307.3799" />
+		<RecheckCheckpoints />
+		<PickUp QuestName="Precious Elemental Fluids" QuestId="12510" GiverName="Hexxer Ubungo" GiverId="28062" X="5481.621" Y="-2624.458" Z="307.3799" />
+		<PickUp QuestName="The Drakkari Do Not Need Water Elementals!" QuestId="12562" GiverName="Sub-Lieutenant Jax" GiverId="28309" X="5378.058" Y="-2606.431" Z="303.9548" />
+
+		<While Condition="DoQuest(12510)" >
+			<Code File="KillUntilComplete" MobId="16570" QuestId="12510" TerminateWhen="GetItemCount(38323) &gt;= 3 || HasItem(38324) || Unit(28118, u =&gt; u.IsAlive) != null" >
+				<HuntingGrounds>
+					<Hotspot X="5195.012" Y="-2641.898" Z="288.3035" />
+					<Hotspot X="5137.987" Y="-2578.371" Z="288.548" />
+					<Hotspot X="5062.107" Y="-2683.641" Z="287.9807" />
+					<Hotspot X="5017.607" Y="-2804.855" Z="287.6975" />
+				</HuntingGrounds>
+			</Code>
+
+			<Code File="UseItem" ItemId="38323" TerminateWhen="GetItemCount(38323) &lt; 3 || HasItem(38324) || Unit(28118, u =&gt; u.IsAlive) != null" />
+			<Code File="UseItem" ItemId="38324" X="5146.611" Y="-2743.779" Z="287.9353" TerminateWhen="!HasItem(38324) || Unit(28118, u =&gt; u.IsAlive) != null" />
+
+			<Code File="KillUntilComplete" MobId="28118" QuestId="12510" TerminateWhen="Unit(28118, u =&gt; u.IsAlive) == null" />
+		</While>
+
+		<Code File="KillUntilComplete" MobId="28303" QuestId="12562" >
+			<HuntingGrounds>
+				<Hotspot X="5195.012" Y="-2641.898" Z="288.3035" />
+				<Hotspot X="5137.987" Y="-2578.371" Z="288.548" />
+				<Hotspot X="5062.107" Y="-2683.641" Z="287.9807" />
+				<Hotspot X="5017.607" Y="-2804.855" Z="287.6975" />
+			</HuntingGrounds>
+		</Code>
+
+		<TurnIn QuestName="The Drakkari Do Not Need Water Elementals!" QuestId="12562" TurnInName="Sub-Lieutenant Jax" TurnInId="28309" X="5376.189" Y="-2605.7" Z="303.9545" />
+		<TurnIn QuestName="Precious Elemental Fluids" QuestId="12510" TurnInName="Hexxer Ubungo" TurnInId="28062" X="5480.95" Y="-2624.511" Z="307.0583" />
+		<RecheckCheckpoints />
+		<PickUp QuestName="Mushroom Mixer" QuestId="12514" GiverName="Hexxer Ubungo" GiverId="28062" X="5480.95" Y="-2624.511" Z="307.0583" />
+		<!-- <PickUp QuestName="Gluttonous Lurkers" QuestId="12527" GiverName="Apprentice Pestlepot" GiverId="28204" X="5503.182" Y="-2664.368" Z="303.9542" /> Not worth it at all. -->
+
+		<While Condition="DoQuest(12514)" >
+			<Code File="InteractWith" MobIds="190399" CollectionDistance="200" PreInteractMountStrategy="Dismount" InteractByLooting="true" NumOfTimes="20" QuestId="12514" >
+				<HuntingGrounds>
+					<Hotspot X="5672.234" Y="-2787.947" Z="274.1264" />
+					<Hotspot X="5663.621" Y="-2864.465" Z="274.3799" />
+					<Hotspot X="5476.084" Y="-2770.21" Z="274.3784" />
+				</HuntingGrounds>
+			</Code>
+		</While>
+
+		<!-- Not worth it at all.
+		<While Condition="DoQuest(12527)" >
+			<Code File="InteractWith" MobId="28202" MobState="Alive" CollectionDistance="200" PreInteractMountStrategy="Dismount" NumOfTimes="50" QuestId="12527" TerminateWhen="GetItemCount(38380) &gt;= 25" >
+				<HuntingGrounds>
+					<Hotspot X="5672.234" Y="-2787.947" Z="274.1264" />
+					<Hotspot X="5663.621" Y="-2864.465" Z="274.3799" />
+					<Hotspot X="5476.084" Y="-2770.21" Z="274.3784" />
+				</HuntingGrounds>
+			</Code>
+
+			<While Condition="HasItem(38380)" >
+				<Code File="InteractWith" MobId="28145" MobState="Alive" InteractByUsingItemId="38380" CollectionDistance="200" PreInteractMountStrategy="Dismount" NumOfTimes="25" IgnoreCombat="true" InteractBlacklistTimeInSeconds="1" QuestId="12527" TerminateWhen="!HasItem(38380) || Me.HealthPercent &lt;= 40 || Unit(28203, u =&gt; u.IsAlive) != null" >
+					<HuntingGrounds>
+						<Hotspot X="5672.234" Y="-2787.947" Z="274.1264" />
+						<Hotspot X="5663.621" Y="-2864.465" Z="274.3799" />
+						<Hotspot X="5476.084" Y="-2770.21" Z="274.3784" />
+					</HuntingGrounds>
+				</Code>
+
+				<Code File="InteractWith" MobId="28203" MobState="Alive" InteractByLooting="true" QuestId="12527" TerminateWhen="Unit(28203, u =&gt; u.IsAlive) == null" />
+			</While> 
+		</While> -->
+
+		<TurnIn QuestName="Mushroom Mixer" QuestId="12514" TurnInName="Hexxer Ubungo" TurnInId="28062" X="5486.698" Y="-2626.644" Z="306.8128" />
+		<PickUp QuestName="Too Much of a Good Thing" QuestId="12516" GiverName="Hexxer Ubungo" GiverId="28062" X="5486.698" Y="-2626.644" Z="306.8128" />
+
+		<While Condition="DoQuest(12516)" >
+			<Code File="InteractWith" MobId="28068" InteractByUsingItemId="38332" Range="50" NonCompeteDistance="0" PreInteractMountStrategy="Dismount" QuestId="12516" X="6250.454" Y="-2673.662" Z="302.7492" TerminateWhen="Unit(28068, u =&gt; u.HasAura(54483)) != null" />
+			<Code File="KillUntilComplete" MobId="28068" QuestId="12516" X="6250.454" Y="-2673.662" Z="302.7492" TerminateWhen="Unit(28068, u =&gt; u.HasAura(54483)) == null" />
+		</While>
+
+		<If Condition="QuestDone(12516) &amp;&amp; Me.HearthstoneAreaId == 4275 &amp;&amp; Unit(28068) != null" >
+			<Code File="UseHearthstone" WaitForCD="false" />
+		</If>
+
+		<TurnIn QuestName="Too Much of a Good Thing" QuestId="12516" TurnInName="Hexxer Ubungo" TurnInId="28062" X="5484.287" Y="-2627.98" Z="306.9846" />
+		<PickUp QuestName="To the Witch Doctor" QuestId="12623" GiverName="Hexxer Ubungo" GiverId="28062" X="5484.287" Y="-2627.98" Z="306.9846" />
+
+		<PickUp QuestName="Creature Comforts" QuestId="12599" GiverName="Captain Grondel" GiverId="28043" X="5544.353" Y="-3001.592" Z="278.4223" />
+		<Code File="InteractWith" MobIds="190541, 190542, 190543" InteractByLooting="true" PreInteractMountStrategy="Dismount" QuestId="12599" QuestObjectiveIndex="1" >
+			<HuntingGrounds>
+				<Hotspot X="5580.305" Y="-2966.922" Z="276.5818" />
+				<Hotspot X="5638.302" Y="-2895.108" Z="274.3794" />
+				<Hotspot X="5758.26" Y="-2731.153" Z="276.5846" />
+				<Hotspot X="5831.867" Y="-2799.184" Z="274.4079" />
+			</HuntingGrounds>
+		</Code>
+		<TurnIn QuestName="Creature Comforts" QuestId="12599" TurnInName="Captain Grondel" TurnInId="28043" X="5543.956" Y="-3003.312" Z="278.183" />
+		<RecheckCheckpoints />
+
+		<PickUp QuestName="Something for the Pain" QuestId="12597" GiverName="Captain Brandon" GiverId="28042" X="5045.808" Y="-3037.614" Z="293.7871" />
+		<While Condition="DoQuest(12597)" >
+			<Code File="InteractWith" MobId="190534" InteractByLooting="true" CollectionDistance="200" PreInteractMountStrategy="Dismount" NumOfTimes="6" QuestId="12597" >
+				<HuntingGrounds>
+					<Hotspot X="5021.858" Y="-2830.574" Z="287.9849" />
+					<Hotspot X="4971.227" Y="-2755.821" Z="287.7623" />
+					<Hotspot X="5057.776" Y="-2665.247" Z="287.893" />
+					<Hotspot X="5114.541" Y="-2754.437" Z="287.6228" />
+				</HuntingGrounds>
+			</Code>
+		</While>
+		<TurnIn QuestName="Something for the Pain" QuestId="12597" TurnInName="Captain Brandon" TurnInId="28042" X="5041.687" Y="-3033.6" Z="293.788" />
+		<RecheckCheckpoints />
+
+		<PickUp QuestName="Throwing Down" QuestId="12598" GiverName="Captain Rupert" GiverId="28044" X="5255.226" Y="-3497.298" Z="291.6938" />
+		<PickUp QuestName="Leave No One Behind" QuestId="12512" GiverName="Dr. Rogers" GiverId="28125" X="5254.998" Y="-3528.315" Z="291.6926" />
+
+		<While Condition="!IsObjectiveComplete(2, 12512)" >
+			<Code File="InteractWith" MobId="28141" MobState="Alive" InteractByUsingItemId="38330" NonCompeteDistance="0" QuestId="12512" X="5158.224" Y="-3293.41" Z="280.8264" TerminateWhen="Me.HasAura(50679)" />
+			<MoveTo X="5256.51" Y="-3499.783" Z="291.7191"  />
+			<Code File="WaitTimer" WaitTime="30000" QuestId="12512" QuestObjectiveIndex="2" TerminateWhen="!Me.HasAura(50679)" />
+		</While>
+		<While Condition="!IsObjectiveComplete(3, 12512)" >
+			<Code File="InteractWith" MobId="28143" MobState="Alive" InteractByUsingItemId="38330" NonCompeteDistance="0" QuestId="12512" X="5191.664" Y="-3054.122" Z="281.3041" TerminateWhen="Me.HasAura(50693)" />
+			<MoveTo X="5256.51" Y="-3499.783" Z="291.7191"  />
+			<Code File="WaitTimer" WaitTime="30000" QuestId="12512" QuestObjectiveIndex="3" TerminateWhen="!Me.HasAura(50693)" />
+		</While>
+
+		<While Condition="DoQuest(12598)" >
+			<Code File="InteractWith" MobId="190555" InteractByUsingItemId="38574" PreInteractMountStrategy="Dismount" IgnoreLoSToTarget="true" NumOfTimes="10" QuestId="12598" >
+				<HuntingGrounds>
+					<Hotspot X="5426.037" Y="-3284.903" Z="292.9149" />
+					<Hotspot X="5329.918" Y="-3327.782" Z="295.7717" />
+				</HuntingGrounds>
+			</Code>
+		</While>
+
+		<While Condition="!IsObjectiveComplete(1, 12512)" >
+			<Code File="InteractWith" MobId="28133" MobState="Alive" InteractByUsingItemId="38330" NonCompeteDistance="0" QuestId="12512" X="5332.719" Y="-3147.517" Z="281.1601" TerminateWhen="Me.HasAura(50666)" />
+			<MoveTo X="5256.51" Y="-3499.783" Z="291.7191"  />
+			<Code File="WaitTimer" WaitTime="30000" QuestId="12512" QuestObjectiveIndex="1" TerminateWhen="!Me.HasAura(50666)" />
+		</While>
+
+		<TurnIn QuestName="Throwing Down" QuestId="12598" TurnInName="Captain Rupert" TurnInId="28044" X="5256.397" Y="-3500.402" Z="291.6941" />
+		<PickUp QuestName="Cocooned!" QuestId="12606" GiverName="Captain Rupert" GiverId="28044" X="5256.397" Y="-3500.402" Z="291.6941" />
+		<TurnIn QuestName="Leave No One Behind" QuestId="12512" TurnInName="Dr. Rogers" TurnInId="28125" X="5255.023" Y="-3527.621" Z="291.6917" />
+		<PickUp QuestName="Skimmer Spinnerets" QuestId="12553" GiverName="Specialist Cogwheel" GiverId="28284" X="5267.171" Y="-3510.219" Z="291.6942" />
+		<PickUp QuestName="Death to the Necromagi" QuestId="12552" GiverName="Sergeant Moonshard" GiverId="28283" X="5267.789" Y="-3500.378" Z="291.6823" />
+
+		<Code File="KillUntilComplete" TerminateWhen="!DoQuest(12552, 12553)" >
+			<HuntingGrounds>
+				<Hotspot X="5060.325" Y="-3432.516" Z="291.4901" />
+				<Hotspot X="5017.006" Y="-3442.66" Z="288.3692" />
+				<Hotspot X="4939.536" Y="-3443.47" Z="295.8252" />
+				<Hotspot X="4870.565" Y="-3372.552" Z="292.9232" />
+			</HuntingGrounds>
+			<PursuitList>
+				<PursueUnit Id="28257" PursueWhen="DoQuest(12552)" />
+				<PursueUnit Id="28258" PursueWhen="DoQuest(12553)" />
+			</PursuitList>
+		</Code>
+
+		<TurnIn QuestName="Death to the Necromagi" QuestId="12552" TurnInName="Sergeant Moonshard" TurnInId="28283" X="5266.068" Y="-3500.137" Z="291.6849" />
+		<PickUp QuestName="Malas the Corrupter" QuestId="12554" GiverName="Sergeant Moonshard" GiverId="28283" X="5266.068" Y="-3500.137" Z="291.6849" />
+		<TurnIn QuestName="Skimmer Spinnerets" QuestId="12553" TurnInName="Specialist Cogwheel" TurnInId="28284" X="5267.217" Y="-3507.254" Z="291.6924" />
+		<RecheckCheckpoints />
+		<PickUp QuestName="Crashed Sprayer" QuestId="12583" GiverName="Specialist Cogwheel" GiverId="28284" X="5267.217" Y="-3507.254" Z="291.6924" />
+		<PickUp QuestName="Pure Evil" QuestId="12584" GiverName="Captain Rupert" GiverId="28044" X="5258.919" Y="-3501.96" Z="291.5246" />
+
+		<While Condition="DoQuest(12606)" >
+			<Code File="KillUntilComplete" MobId="28413" QuestId="12606" >
+				<HuntingGrounds>
+					<Hotspot X="5426.037" Y="-3284.903" Z="292.9149" />
+					<Hotspot X="5329.918" Y="-3327.782" Z="295.7717" />
+				</HuntingGrounds>
+			</Code>
+		</While>
+
+		<Code File="InteractWith" MobId="190537" Range="14" MinRange="8" NonCompeteDistance="0" InteractBlacklistTimeInSeconds="1" PreInteractMountStrategy="Dismount" QuestId="12583" QuestObjectiveIndex="1" X="5144.91" Y="-3043.954" Z="278.5557" />
+
+		<TurnIn QuestName="Cocooned!" QuestId="12606" TurnInName="Captain Rupert" TurnInId="28044" X="5256.112" Y="-3498.18" Z="291.6344" />
+		<TurnIn QuestName="Crashed Sprayer" QuestId="12583" TurnInName="Specialist Cogwheel" TurnInId="28284" X="5266.966" Y="-3507.373" Z="291.6942" />
+		<!-- <PickUp QuestName="A Tangled Skein" QuestId="12555" GiverName="Specialist Cogwheel" GiverId="28284" X="5266.966" Y="-3507.373" Z="291.6942" /> HB3 can't handle this properly. -->
+
+		<Code File="InteractWith" MobId="190540" InteractByLooting="true" MovementBy="NavigatorOnly" PreInteractMountStrategy="Dismount" QuestId="12584" QuestObjectiveIndex="1" X="5038.918" Y="-3638.888" Z="299.3014" />
+
+		<Code File="KillUntilComplete" MobId="28255" QuestId="12554" X="5080.037" Y="-3645.896" Z="396.1212" />
+
+		<TurnIn QuestName="Malas the Corrupter" QuestId="12554" TurnInName="Sergeant Moonshard" TurnInId="28283" X="5266.847" Y="-3500.986" Z="291.6852" />
+
+		<If Condition="QuestDone(12596) &amp;&amp; Me.HearthstoneAreaId == 4275 &amp;&amp; Unit(28283) != null" >
+			<Code File="UseHearthstone" WaitForCD="false" />
+		</If>
+
+		<TurnIn QuestName="Pure Evil" QuestId="12584" TurnInName="Eitrigg" TurnInId="28244" X="5452.833" Y="-2638.618" Z="306.5515" />
+		<TurnIn QuestName="Pa&apos;Troll" QuestId="12596" TurnInName="Commander Kunz" TurnInId="28039" X="5450.715" Y="-2613.671" Z="306.9093" />
+		<TurnIn QuestName="To the Witch Doctor" QuestId="12623" TurnInName="Witch Doctor Khufu" TurnInId="28479" X="5739.233" Y="-3571.855" Z="386.7424" />
+		<RecheckCheckpoints />
+		<PickUp QuestName="Breaking Through Jin&apos;Alai" QuestId="12627" GiverName="Witch Doctor Khufu" GiverId="28479" X="5739.233" Y="-3571.855" Z="386.7424" />
+		<PickUp QuestName="The Blessing of Zim&apos;Torga" QuestId="12615" GiverName="Witch Doctor Khufu" GiverId="28479" X="5739.233" Y="-3571.855" Z="386.7424" />
+
+		<If Condition="GetItemCount(38551) &gt;= 10" >
+			<TurnIn QuestName="The Blessing of Zim&apos;Torga" QuestId="12615" TurnInName="Zim&apos;Torga" TurnInId="190602" X="5763.782" Y="-3578.994" Z="386.993" />
+		</If>
+
+		<Code File="SetHearthstone" MobId="29583" AreaId="4323" X="5762.983" Y="-3560.557" Z="387.0055" />
+
+		<PickUp QuestName="The Leaders at Jin&apos;Alai" QuestId="12622" GiverName="Scalper Ahunae" GiverId="28484" X="5793.984" Y="-3554.69" Z="387.1552" />
+
+		<While Condition="DoQuest(12627)" >
+			<Code File="InteractWith" MobId="190619" PreInteractMountStrategy="Dismount" NonCompeteDistance="0" InteractBlacklistTimeInSeconds="1" QuestId="12627" QuestObjectiveIndex="3" X="5617.181" Y="-3478.202" Z="350.3531" />
+			<Code File="InteractWith" MobId="190630" PreInteractMountStrategy="Dismount" NonCompeteDistance="0" InteractBlacklistTimeInSeconds="1" QuestId="12627" QuestObjectiveIndex="2" X="5531.26" Y="-3385.124" Z="350.3278" />
+			<Code File="InteractWith" MobId="190618" PreInteractMountStrategy="Dismount" NonCompeteDistance="0" InteractBlacklistTimeInSeconds="1" QuestId="12627" QuestObjectiveIndex="1" X="5496.791" Y="-3458.491" Z="350.3275" />
+			<Code File="InteractWith" MobId="190620" PreInteractMountStrategy="Dismount" NonCompeteDistance="0" InteractBlacklistTimeInSeconds="1" QuestId="12627" QuestObjectiveIndex="4" X="5583.74" Y="-3530.73" Z="350.3281" />
+		</While>
+
+		<While Condition="DoQuest(12622)" >
+			<Code File="InteractWith" MobId="190614" InteractByLooting="true" PreInteractMountStrategy="Dismount" WaitForNpcs="false" CollectionDistance="200" InteractBlacklistTimeInSeconds="1" QuestId="12622" QuestObjectiveIndex="1" />
+			<Code File="InteractWith" MobId="190613" InteractByLooting="true" PreInteractMountStrategy="Dismount" WaitForNpcs="false" CollectionDistance="200" InteractBlacklistTimeInSeconds="1" QuestId="12622" QuestObjectiveIndex="2" />
+			<Code File="InteractWith" MobId="190612" InteractByLooting="true" PreInteractMountStrategy="Dismount" WaitForNpcs="false" CollectionDistance="200" InteractBlacklistTimeInSeconds="1" QuestId="12622" QuestObjectiveIndex="3" />
+			<Code File="KillUntilComplete" MobIds="28388, 28504" QuestId="12622" TerminateWhen="Unit(28494, u =&gt; u.IsAlive) != null || Unit(28495, u =&gt; u.IsAlive) != null || Unit(28496, u =&gt; u.IsAlive) != null" >
+				<HuntingGrounds>
+					<Hotspot X="5573.224" Y="-3550.923" Z="352.4073" />
+					<Hotspot X="5553.863" Y="-3454.944" Z="350.4577" />
+					<Hotspot X="5537.23" Y="-3385.088" Z="350.7066" />
+				</HuntingGrounds>
+			</Code>
+
+			<Code File="KillUntilComplete" MobIds="28494, 28495, 28496" QuestId="12622" TerminateWhen="Unit(28494, u =&gt; u.IsAlive) == null &amp;&amp; Unit(28495, u =&gt; u.IsAlive) == null &amp;&amp; Unit(28496, u =&gt; u.IsAlive) == null" >
+				<HuntingGrounds>
+					<Hotspot X="5601.333" Y="-3491.972" Z="350.3279" />
+					<Hotspot X="5556.41" Y="-3462.011" Z="350.3274" />
+					<Hotspot X="5518.185" Y="-3424.462" Z="350.3278" />
+				</HuntingGrounds>
+			</Code>
+		</While>
+
+		<Code File="KillUntilComplete" MobIds="28388, 28504" TerminateWhen="HasQuest(12615) ? GetItemCount(38551) &gt;= 10 : true" >
+			<HuntingGrounds>
+				<Hotspot X="5573.224" Y="-3550.923" Z="352.4073" />
+				<Hotspot X="5553.863" Y="-3454.944" Z="350.4577" />
+				<Hotspot X="5537.23" Y="-3385.088" Z="350.7066" />
+			</HuntingGrounds>
+		</Code>
+
+		<If Condition="GetItemCount(38551) &gt;= 10" >
+			<TurnIn QuestName="The Blessing of Zim&apos;Torga" QuestId="12615" TurnInName="Zim&apos;Torga" TurnInId="190602" X="5763.782" Y="-3578.994" Z="386.993" />
+		</If>
+
+		<TurnIn QuestName="Breaking Through Jin&apos;Alai" QuestId="12627" TurnInName="Witch Doctor Khufu" TurnInId="28479" X="5739.291" Y="-3570.927" Z="386.7444" />
+		<PickUp QuestName="To Speak With Har&apos;koa" QuestId="12628" GiverName="Witch Doctor Khufu" GiverId="28479" X="5739.291" Y="-3570.927" Z="386.7444" />
+		<PickUp QuestName="Relics of the Snow Leopard Goddess" QuestId="12635" GiverName="Chronicler To&apos;kini" GiverId="28527" X="5743.158" Y="-3591.913" Z="386.6692" />
+		<TurnIn QuestName="The Leaders at Jin&apos;Alai" QuestId="12622" TurnInName="Scalper Ahunae" TurnInId="28484" X="5794.604" Y="-3554.473" Z="387.278" />
+		<PickUp QuestName="Sealing the Rifts" QuestId="12640" GiverName="Scalper Ahunae" GiverId="28484" X="5794.604" Y="-3554.473" Z="387.278" />
+		<PickUp QuestName="The Frozen Earth" QuestId="12639" GiverName="Element-Tamer Dagoda" GiverId="28480" X="5787.122" Y="-3564.752" Z="386.4976" />
+		<TurnIn QuestName="To Speak With Har&apos;koa" QuestId="12628" TurnInName="Har&apos;koa" TurnInId="28401" X="5329.675" Y="-3775.76" Z="371.3405" />
+		<RecheckCheckpoints />
+		<PickUp QuestName="But First My Offspring" QuestId="12632" GiverName="Har&apos;koa" GiverId="28401" X="5329.675" Y="-3775.76" Z="371.3405" />
+
+		<Code File="InteractWith" MobId="28404" MobState="Dead" PreInteractMountStrategy="Dismount" CollectionDistance="200" InteractByUsingItemId="38676" NumOfTimes="14" QuestId="12632" QuestObjectiveIndex="1" >
+			<HuntingGrounds>
+				<Hotspot X="5245.038" Y="-3704.243" Z="362.9936" />
+				<Hotspot X="5373.027" Y="-3703.086" Z="362.5129" />
+				<Hotspot X="5451.709" Y="-3815.943" Z="363.4738" />
+				<Hotspot X="5374.077" Y="-3950.369" Z="362.1386" />
+				<Hotspot X="5219.385" Y="-3975.6" Z="367.9944" />
+				<Hotspot X="5139.485" Y="-3822.729" Z="364.4876" />
+			</HuntingGrounds>
+		</Code>
+
+		<Code File="InteractWith" MobId="190633" InteractByLooting="true" NumOfTimes="20" QuestId="12635" QuestObjectiveIndex="1" >
+			<HuntingGrounds>
+				<Hotspot X="5245.038" Y="-3704.243" Z="362.9936" />
+				<Hotspot X="5373.027" Y="-3703.086" Z="362.5129" />
+				<Hotspot X="5451.709" Y="-3815.943" Z="363.4738" />
+				<Hotspot X="5374.077" Y="-3950.369" Z="362.1386" />
+				<Hotspot X="5219.385" Y="-3975.6" Z="367.9944" />
+				<Hotspot X="5139.485" Y="-3822.729" Z="364.4876" />
+			</HuntingGrounds>
+		</Code>
+
+		<TurnIn QuestName="But First My Offspring" QuestId="12632" TurnInName="Har&apos;koa" TurnInId="28401" X="5331.097" Y="-3783.92" Z="371.3459" />
+		<PickUp QuestName="Spirit of Rhunok" QuestId="12642" GiverName="Har&apos;koa" GiverId="28401" X="5331.097" Y="-3783.92" Z="371.3459" />
+
+		<If Condition="QuestDone(12635) &amp;&amp; Me.HearthstoneAreaId == 4323 &amp;&amp; Unit(28401) != null" >
+			<Code File="UseHearthstone" WaitForCD="false" />
+		</If>
+
+		<TurnIn QuestName="Relics of the Snow Leopard Goddess" QuestId="12635" TurnInName="Chronicler To&apos;kini" TurnInId="28527" X="5742.029" Y="-3591.628" Z="386.7076" />
+		<RecheckCheckpoints />
+		<PickUp QuestName="Plundering Their Own" QuestId="12650" GiverName="Chronicler To&apos;kini" GiverId="28527" X="5742.029" Y="-3591.628" Z="386.7076" />
+		<PickUp QuestName="Tails Up" QuestId="13549" GiverName="Chronicler To&apos;kini" GiverId="28527" X="5742.029" Y="-3591.628" Z="386.7076" />
+
+		<While Condition="DoQuest(13549)" >
+			<If Condition="DistanceTo(5405.18f, -4193.59f, 362.6366f) &gt; 300" >
+				<MoveTo X="5405.18" Y="-4193.59" Z="362.6366" />
+			</If>
+			<Code File="InteractWith" CollectionDistance="200" MobState="Alive" ProactiveCombatStrategy="NoClear" PreInteractMountStrategy="Dismount" MovementBy="NavigatorOnly" InteractByUsingItemId="44890" NumOfTimes="12" QuestId="13549" TerminateWhen="Unit(29327, u =&gt; u.IsNeutral) != null || Unit(29319, u =&gt; u.IsNeutral) != null" >
+				<HuntingGrounds>
+					<Hotspot X="5405.18" Y="-4193.59" Z="362.6366" />
+					<Hotspot X="5317.929" Y="-4269.65" Z="369.0148" />
+					<Hotspot X="5416.552" Y="-4404.679" Z="372.1064" />
+					<Hotspot X="5510.452" Y="-4443.527" Z="368.4514" />
+				</HuntingGrounds>
+				<PursuitList>
+					<PursueUnit Id="29327" PursueWhen="!IsObjectiveComplete(1, 13549)" />
+					<PursueUnit Id="29319" PursueWhen="!IsObjectiveComplete(2, 13549)" />
+				</PursuitList>
+			</Code>
+			<Code File="InteractWith" WaitForNpcs="false" MobState="Alive" GossipOptions="1" ProactiveCombatStrategy="NoClear" MovementBy="NavigatorOnly" CollectionDistance="200" QuestId="13549" >
+				<PursuitList>
+					<PursueUnit Id="29327" PursueWhen="!IsObjectiveComplete(1, 13549) &amp;&amp; UNIT.IsNeutral" />
+					<PursueUnit Id="29319" PursueWhen="!IsObjectiveComplete(2, 13549) &amp;&amp; UNIT.IsNeutral" />
+				</PursuitList>
+			</Code>
+		</While>
+
+		<If Condition="QuestDone(13549) &amp;&amp; Me.HearthstoneAreaId == 4323 &amp;&amp; Unit(29327) != null" >
+			<Code File="UseHearthstone" WaitForCD="false" />
+		</If>
+
+		<TurnIn QuestName="Tails Up" QuestId="13549" TurnInName="Chronicler To&apos;kini" TurnInId="28527" X="5742.782" Y="-3591.088" Z="386.6533" />
+		<PickUp QuestName="The Blessing of Zim&apos;Rhuk" QuestId="12655" GiverName="Witch Doctor Khufu" GiverId="28479" X="5739.367" Y="-3571.772" Z="386.743" />
+
+		<Code File="KillUntilComplete" MobId="28411" TerminateWhen="!DoQuest(12639, 12640)" >
+			<HuntingGrounds>
+				<Hotspot X="5919.768" Y="-3313.799" Z="362.7831" />
+				<Hotspot X="6048.223" Y="-3453.894" Z="364.5966" />
+				<Hotspot X="6093.022" Y="-3131.685" Z="362.1162" />
+			</HuntingGrounds>
+			<PursuitList>
+				<PursueUnit Id="28411" PursueWhen="DoQuest(12639)" />
+				<PursueUnit Id="28452" PursueWhen="DoQuest(12640)" />
+			</PursuitList>
+		</Code>
+
+		<TurnIn QuestName="Spirit of Rhunok" QuestId="12642" TurnInName="Spirit of Rhunok" TurnInId="28561" X="6365.301" Y="-3252.889" Z="388.7956" />
+
+		<PickUp QuestName="My Prophet, My Enemy" QuestId="12646" GiverName="Spirit of Rhunok" GiverId="28561" X="6365.301" Y="-3252.889" Z="388.7956" />
+		<While Condition="DoQuest(12646)" >
+			<MoveTo X="6086.282" Y="-3300.15" Z="347.4828" />
+			<Code File="KillUntilComplete" MobId="28442" QuestId="12646" X="6086.282" Y="-3300.15" Z="347.6837" />
+		</While>
+		<TurnIn QuestName="My Prophet, My Enemy" QuestId="12646" TurnInName="Spirit of Rhunok" TurnInId="28561" X="6359.033" Y="-3254.418" Z="388.7578" />
+		<RecheckCheckpoints />
+
+		<PickUp QuestName="An End to the Suffering" QuestId="12647" GiverName="Spirit of Rhunok" GiverId="28561" X="6359.033" Y="-3254.418" Z="388.7578" />
+		<While Condition="DoQuest(12647)" >
+			<Code File="KillUntilComplete" MobId="28575" QuestId="12647" X="6470.754" Y="-3271.401" Z="403.6328" TerminateWhen="HasItem(38696) || Unit(28416, u =&gt; u.IsAlive &amp;&amp; u.HasAura(45111)) != null" />
+			<Code File="InteractWith" MobId="28416" NonCompeteDistance="0" InteractByUsingItemId="38696" QuestId="12647" X="6477.695" Y="-3271.806" Z="403.7017" TerminateWhen="!HasItem(38696) || Unit(28416, u =&gt; u.HasAura(45111)) != null" />
+			<Code File="KillUntilComplete" MobId="28416" QuestId="12647" X="6477.695" Y="-3271.806" Z="403.7017" TerminateWhen="!HasItem(38696) || Unit(28416, u =&gt; !u.HasAura(45111)) != null" />
+		</While>
+		<TurnIn QuestName="An End to the Suffering" QuestId="12647" TurnInName="Spirit of Rhunok" TurnInId="28561" X="6387.289" Y="-3265.229" Z="389.073" />
+
+		<PickUp QuestName="Back to Har&apos;koa" QuestId="12653" GiverName="Spirit of Rhunok" GiverId="28561" X="6387.289" Y="-3265.229" Z="389.073" />
+
+		<Code File="KillUntilComplete" MobIds="28418, 28417" TerminateWhen="!DoQuest(12650) &amp;&amp; (HasQuest(12655)?GetItemCount(38551) &gt;= 10:true)" >
+			<HuntingGrounds>
+				<Hotspot X="6366.417" Y="-3196.457" Z="388.7143" />
+				<Hotspot X="6357.528" Y="-3352.228" Z="388.7149" />
+				<Hotspot X="6340.14" Y="-3264.424" Z="389.8223" />
+				<Hotspot X="6437.302" Y="-3419.527" Z="390.877" />
+				<Hotspot X="6521.656" Y="-3492.957" Z="389.041" />
+				<Hotspot X="6491.425" Y="-3035.346" Z="388.7151" />
+			</HuntingGrounds>
+		</Code>
+
+		<While Condition="QuestDone(12655)" >
+			<Code File="InteractWith" MobId="190657" Range="34" NonCompeteDistance="0" X="6173.133" Y="-3556.806" Z="385.1992" TerminateWhen="!HasQuest(12655)" />
+			<Code File="RunCode" Code="QuestFrame.Instance.ClickContinue();" />
+			<Code File="WaitTimer" WaitTime="1000" />
+			<Code File="RunCode" Code="QuestFrame.Instance.CompleteQuest();" />
+		</While>
+		<TurnIn QuestName="The Frozen Earth" QuestId="12639" TurnInName="Element-Tamer Dagoda" TurnInId="28480" X="5787.884" Y="-3565.832" Z="386.5013" />
+		<TurnIn QuestName="Sealing the Rifts" QuestId="12640" TurnInName="Scalper Ahunae" TurnInId="28484" X="5793.649" Y="-3554.139" Z="387.1346" />
+		<!--<PickUp QuestName="Scalps!" QuestId="12659" GiverName="Scalper Ahunae" GiverId="28484" X="5793.649" Y="-3554.139" Z="387.1346" />  Add these two back for Loremaster purposes.
+		<PickUp QuestName="Bringing Down Heb&apos;Jin" QuestId="12662" GiverName="Element-Tamer Dagoda" GiverId="28480" X="5788" Y="-3566.13" Z="386.5002" />-->
+		<TurnIn QuestName="Plundering Their Own" QuestId="12650" TurnInName="Chronicler To&apos;kini" TurnInId="28527" X="5743.183" Y="-3594.18" Z="386.7465" />
+		<TurnIn QuestName="Back to Har&apos;koa" QuestId="12653" TurnInName="Har&apos;koa" TurnInId="28401" X="5330.506" Y="-3783.594" Z="371.3466" />
+		<RecheckCheckpoints />
+
+		<PickUp QuestName="I Sense a Disturbance" QuestId="12665" GiverName="Har&apos;koa" GiverId="28401" X="5330.506" Y="-3783.594" Z="371.3466" />
+		<While Condition="DoQuest(12665)" >
+			<MoveTo X="5709.651" Y="-4369.515" Z="385.8022" />
+			<MoveTo X="5717.018" Y="-4395.283" Z="386.0857" />
+			<!--<Code File="InteractWith" MobId="28401" GossipOptions="1" NonCompeteDistance="0" QuestId="12665" X="5330.506" Y="-3783.594" Z="371.3466" />
+			<Code File="WaitTimer" WaitTime="66000" QuestId="12665" />
+			<Code File="EjectVeh" />-->
+		</While>
+		<TurnIn QuestName="I Sense a Disturbance" QuestId="12665" TurnInName="Har&apos;koa" TurnInId="28401" X="5332.54" Y="-3788.869" Z="371.3468" />
+
+		<PickUp QuestName="Preparations for the Underworld" QuestId="12666" GiverName="Har&apos;koa" GiverId="28401" X="5331.817" Y="-3781.514" Z="371.3461" />
+		<Code File="KillUntilComplete" MobIds="28402, 28403" QuestId="12666" >
+			<HuntingGrounds>
+				<Hotspot X="5394.254" Y="-3702.963" Z="362.0061" />
+				<Hotspot X="5335.817" Y="-3846.023" Z="370.7798" />
+				<Hotspot X="5349.371" Y="-3615.906" Z="363.8044" />
+				<Hotspot X="5408.958" Y="-3589.566" Z="363.8112" />
+				<Hotspot X="5486.782" Y="-3704.602" Z="361.9935" />
+				<Hotspot X="5537.25" Y="-3846.529" Z="372.0061" />
+				<Hotspot X="5193.94" Y="-3972.154" Z="366.3603" />
+			</HuntingGrounds>
+		</Code>
+		<TurnIn QuestName="Preparations for the Underworld" QuestId="12666" TurnInName="Har&apos;koa" TurnInId="28401" X="5332.606" Y="-3776.908" Z="371.3443" />
+		<RecheckCheckpoints />
+
+		<PickUp QuestName="Seek the Wind Serpent Goddess" QuestId="12667" GiverName="Har&apos;koa" GiverId="28401" X="5332.606" Y="-3776.908" Z="371.3443" />
+		<TurnIn QuestName="Seek the Wind Serpent Goddess" QuestId="12667" TurnInName="Quetz&apos;lun&apos;s Spirit" TurnInId="28030" X="5716.298" Y="-4356.206" Z="385.718" />
+
+		<PickUp QuestName="Setting the Stage" QuestId="12672" GiverName="Quetz&apos;lun&apos;s Spirit" GiverId="28030" X="5716.298" Y="-4356.206" Z="385.718" />
+		<Code File="InteractWith" MobIds="190717, 190718, 190719" InteractByLooting="true" PreInteractMountStrategy="Dismount" CollectionDistance="200" QuestId="12672" QuestObjectiveIndex="1" >
+			<HuntingGrounds>
+				<Hotspot X="5720.39" Y="-4286.1" Z="373.9956" />
+				<Hotspot X="5643.128" Y="-4429.871" Z="385.8032" />
+				<Hotspot X="5798.167" Y="-4437.009" Z="385.8018" />
+			</HuntingGrounds>
+		</Code>
+		<TurnIn QuestName="Setting the Stage" QuestId="12672" TurnInName="Quetz&apos;lun&apos;s Spirit" TurnInId="28030" X="5715.779" Y="-4358.385" Z="385.8018" />
+
+		<!-- Uncomment if pickups are uncommented
+		<While Condition="DoQuest(12662)" >
+			<Code File="InteractWith" MobId="190695" NonCompeteDistance="0" PreInteractMountStrategy="Dismount" QuestId="12662" QuestObjectiveIndex="1" X="5916.372" Y="-3806.912" Z="363.2224" TerminateWhen="Unit(28636, u =&gt; u.Attackable) != null" />
+			<Code File="KillUntilComplete" MobId="28636" QuestId="12662" X="5925.829" Y="-3814.771" Z="364.3341" TerminateWhen="Unit(28636, u =&gt; u.Attackable) == null" />
+		</While>
+
+		<Code File="InteractWith" MobIds="28600, 28465" MobState="Dead" CollectionDistance="200" InteractByUsingItemId="38731" PreInteractMountStrategy="Dismount" QuestId="12659" QuestObjectiveIndex="1" >
+			<HuntingGrounds>
+				<Hotspot X="5961.749" Y="-3850.364" Z="375.5788" />
+				<Hotspot X="5892.488" Y="-3750.745" Z="361.9605" />
+				<Hotspot X="5942.429" Y="-4009.274" Z="363.2645" />
+			</HuntingGrounds>
+		</Code>
+
+		<TurnIn QuestName="Bringing Down Heb&apos;Jin" QuestId="12662" TurnInName="Element-Tamer Dagoda" TurnInId="28480" X="5787.243" Y="-3566.867" Z="386.4966" />
+		<TurnIn QuestName="Scalps!" QuestId="12659" TurnInName="Scalper Ahunae" TurnInId="28484" X="5794.226" Y="-3553.906" Z="387.2504" /> -->
+
+		<Code File="KillUntilComplete" MobIds="28402, 28403" TerminateWhen="Me.Level &gt;= 76" >
+			<HuntingGrounds>
+				<Hotspot X="5394.254" Y="-3702.963" Z="362.0061" />
+				<Hotspot X="5335.817" Y="-3846.023" Z="370.7798" />
+				<Hotspot X="5349.371" Y="-3615.906" Z="363.8044" />
+				<Hotspot X="5408.958" Y="-3589.566" Z="363.8112" />
+				<Hotspot X="5486.782" Y="-3704.602" Z="361.9935" />
+				<Hotspot X="5537.25" Y="-3846.529" Z="372.0061" />
+				<Hotspot X="5193.94" Y="-3972.154" Z="366.3603" />
+			</HuntingGrounds>
+		</Code>
+
+		<Checkpoint Level="77" />
+
+		<Code File="LoadProfile" ProfileName="Sholazar Basin.xml" />
+
+	</QuestOrder>
+</HBProfile>

@@ -1,0 +1,332 @@
+<HBProfile creator="Kickazz006" version="1.0">
+	<Name>[A] BC 58-70 [Kick]</Name>
+	<MinLevel>55</MinLevel>
+	<MaxLevel>72</MaxLevel>
+	
+	<MinDurability>0.3</MinDurability>
+	<MinFreeBagSlots>2</MinFreeBagSlots>
+	
+	<SellGrey>True</SellGrey>
+	<SellWhite>True</SellWhite>
+	<SellGreen>False</SellGreen>
+	<SellBlue>False</SellBlue>
+	
+	<MailWhite>True</MailWhite>
+	<MailGreen>True</MailGreen>
+	<MailBlue>True</MailBlue>
+	<MailPurple>True</MailPurple>
+	
+	<TargetElites>False</TargetElites>
+  
+  <SubProfile> <!-- Hellfire - HH East Side 58-60 -->
+    <Name>Hellfire - HH East Side 58-60</Name>
+    <MinLevel>55</MinLevel>
+    <MaxLevel>60</MaxLevel>
+	
+	<Vendors> <!--  Honor Hold Food and Repair -->
+		<Vendor Name="Markus Scylan" Entry="22227" Type="Repair" X="-707.8071" Y="2716.121" Z="94.73695" />
+		<Vendor Name="Sid Limbardi" Entry="16826" Type="Food" X="-708.8713" Y="2739.131" Z="94.7337" />
+		<!--  BC Trainers -->
+		<Vendor Name="Irva" Entry="50020" Type="Train" TrainClass="Hunter" X="-1800.502" Y="5402.938" Z="-12.46546" />
+		<Vendor Name="Bratu" Entry="50025" Type="Train" TrainClass="Warrior" X="-1798.293" Y="5400.143" Z="-12.42766" />
+		<Vendor Name="Ordo" Entry="50023" Type="Train" TrainClass="Paladin" X="-1796.377" Y="5402.776" Z="-12.42766" />
+		<Vendor Name="Salha" Entry="50024" Type="Train" TrainClass="Priest" X="-1789.823" Y="5409.41" Z="-12.42695" />
+		<Vendor Name="Raluhi" Entry="50021" Type="Train" TrainClass="Mage" X="-1793.031" Y="5412.926" Z="-12.42746" />
+		<Vendor Name="Darahu" Entry="50019" Type="Train" TrainClass="Shaman" X="-1789" Y="5413.809" Z="-12.42763" />
+		<Vendor Name="Windstalker Ifram" Entry="50127" Type="Train" TrainClass="Rogue" X="-1877.934" Y="5358.721" Z="-12.42781" />
+		<Vendor Name="Baelir" Entry="50136" Type="Train" TrainClass="Druid" X="-1886.13" Y="5357.887" Z="-12.42621" />
+		<Vendor Name="Fel-Caller Guloto" Entry="50128" Type="Train" TrainClass="Warlock" X="-1892.142" Y="5371.018" Z="-12.4265" />
+	</Vendors>
+	
+	<Mailboxes> <!--  Honor Hold -->
+		<Mailbox X="-706.6517" Y="2699.225" Z="94.43571" />
+	</Mailboxes>
+	
+	<GrindArea>
+	 <Factions>14 954 1662</Factions> <!-- [Bird, Pig (Demon), Grunt] -->
+	 <TargetMinLevel>56</TargetMinLevel> 
+     <TargetMaxLevel>63</TargetMaxLevel>
+	 <Hotspots>
+		<Hotspot X="-665.6741" Y="2193.124" Z="32.92203" />
+		<Hotspot X="-672.286" Y="2064.453" Z="47.82843" />
+		<Hotspot X="-730.1094" Y="2190.978" Z="17.55754" />
+		<Hotspot X="-742.6524" Y="2255.179" Z="12.97359" />
+		<Hotspot X="-835.8957" Y="2261.361" Z="3.124129" />
+		<Hotspot X="-876.4026" Y="2387.903" Z="-2.741848" />
+		<Hotspot X="-907.567" Y="2495.926" Z="6.390637" />
+		<Hotspot X="-858.5093" Y="2515.686" Z="20.65628" />
+		<Hotspot X="-783.5746" Y="2460.825" Z="33.88888" />
+		<Hotspot X="-830.0991" Y="2383.475" Z="4.908151" />
+		<Hotspot X="-739.7699" Y="2310.162" Z="15.48457" />
+		<Hotspot X="-684.8182" Y="2157.674" Z="32.51173" />
+	 </Hotspots>
+	</GrindArea>
+	<AvoidMobs>
+ 		 <AvoidMob Name="Marauding Crust Burster" Entry="16857" />
+		 <AvoidMob Name="Crust Burster" Entry="16844" />
+         <AvoidMob Name="Fel Reaver" Entry="18733" />
+         <AvoidMob Name="Tagar Spinebreaker" Entry="19443" />      
+    </AvoidMobs>
+	<Blackspots>
+        <Blackspot X="-707.1925" Y="2699.073" Z="94.39796" Radius="100"/>
+		<Blackspot X="-422.3953" Y="2936.166" Z="11.71485" Radius="18.57582" />
+		<Blackspot X="-876.8398" Y="2298.733" Z="-5.818677" Radius="10.8415" />
+		<Blackspot X="-838.8138" Y="2344.653" Z="-11.84866" Radius="9.434082" />
+		<Blackspot X="-807.0389" Y="2360.336" Z="9.346716" Radius="7.12431" />
+		<Blackspot X="-898.2185" Y="2384.801" Z="-3.854852" Radius="6.44554" />
+		<Blackspot X="-894.2371" Y="2445.252" Z="-6.950549" Radius="7.486867" />
+		<Blackspot X="-889.4884" Y="2514.779" Z="12.57996" Radius="8.15979" />
+		<Blackspot X="-967.2278" Y="2533.781" Z="5.05039" Radius="9.38913" />
+		<Blackspot X="-1014.795" Y="2588.244" Z="-3.29726" Radius="12.16628" />
+		<Blackspot X="-816.9147" Y="2243.392" Z="6.076538" Radius="8.604698" />
+		<Blackspot X="-760.7026" Y="2255.178" Z="4.634545" Radius="5.5276" />
+		<Blackspot X="-759.0435" Y="2301.04" Z="0.520704" Radius="6.539887" />
+		<Blackspot X="-749.2888" Y="2186.409" Z="16.21106" Radius="5.06979" />
+		<Blackspot X="-701.2235" Y="2206.949" Z="21.54422" Radius="7.750825" />
+		<Blackspot X="-701.5437" Y="2150.092" Z="28.64856" Radius="5.394805" />
+	</Blackspots>
+  </SubProfile>
+
+  <SubProfile> <!--Zangar - Deadmire 60-63 -->
+    <Name>Zangar - Deadmire 60-63</Name>
+    <MinLevel>60</MinLevel>
+    <MaxLevel>63</MaxLevel>
+  
+    <Vendors> <!--  Cenarion Refuge -->
+		<Vendor Name="Fedryen Swiftspear" Entry="17904" Type="Repair" X="-198.9696" Y="5490.686" Z="21.84628"/>
+		<Vendor Name="Innkeeper Coryth Stoktron" Entry="18907" Type="Food" X="-174.478" Y="5529.211" Z="29.40756" />
+		<!--  BC Trainers -->
+		<Vendor Name="Irva" Entry="50020" Type="Train" TrainClass="Hunter" X="-1800.502" Y="5402.938" Z="-12.46546" />
+		<Vendor Name="Bratu" Entry="50025" Type="Train" TrainClass="Warrior" X="-1798.293" Y="5400.143" Z="-12.42766" />
+		<Vendor Name="Ordo" Entry="50023" Type="Train" TrainClass="Paladin" X="-1796.377" Y="5402.776" Z="-12.42766" />
+		<Vendor Name="Salha" Entry="50024" Type="Train" TrainClass="Priest" X="-1789.823" Y="5409.41" Z="-12.42695" />
+		<Vendor Name="Raluhi" Entry="50021" Type="Train" TrainClass="Mage" X="-1793.031" Y="5412.926" Z="-12.42746" />
+		<Vendor Name="Darahu" Entry="50019" Type="Train" TrainClass="Shaman" X="-1789" Y="5413.809" Z="-12.42763" />
+		<Vendor Name="Windstalker Ifram" Entry="50127" Type="Train" TrainClass="Rogue" X="-1877.934" Y="5358.721" Z="-12.42781" />
+		<Vendor Name="Baelir" Entry="50136" Type="Train" TrainClass="Druid" X="-1886.13" Y="5357.887" Z="-12.42621" />
+		<Vendor Name="Fel-Caller Guloto" Entry="50128" Type="Train" TrainClass="Warlock" X="-1892.142" Y="5371.018" Z="-12.4265" />
+    </Vendors>
+	
+	<Mailboxes> <!--  Cenarion Refuge -->
+		<Mailbox X="-197.3626" Y="5505.807" Z="22.53568" />
+    </Mailboxes>
+	
+    <Grindarea>
+     <Factions>1706 14</Factions> <!-- [Giant, Hydra, Marshfang] -->
+     <TargetMinLevel>60</TargetMinLevel> 
+     <TargetMaxLevel>65</TargetMaxLevel>
+     <Hotspots>
+		<Hotspot X="840.4827" Y="5498.345" Z="17.94206" />
+		<Hotspot X="729.2242" Y="5577.369" Z="7.942163" />
+		<Hotspot X="727.3555" Y="5507.115" Z="-1.701493" />
+		<Hotspot X="664.7463" Y="5534.458" Z="4.34106" />
+		<Hotspot X="655.243" Y="5482.905" Z="-14.39439" />
+		<Hotspot X="608.9163" Y="5460.52" Z="-9.219436" />
+		<Hotspot X="563.2162" Y="5531.13" Z="5.158976" />
+		<Hotspot X="525.9761" Y="5453.794" Z="-0.6791167" />
+		<Hotspot X="556.4457" Y="5409.395" Z="-12.53386" />
+		<Hotspot X="469.0216" Y="5415.449" Z="1.26642" />
+		<Hotspot X="501.109" Y="5356.438" Z="-6.37174" />
+		<Hotspot X="415.5558" Y="5328.921" Z="-0.4000049" />
+		<Hotspot X="481.099" Y="5292.535" Z="-1.893721" />
+		<Hotspot X="534.7456" Y="5217.628" Z="0.4126769" />
+		<Hotspot X="498.4431" Y="5173.217" Z="14.22287" />
+		<Hotspot X="571.5273" Y="5169.938" Z="14.77799" />
+		<Hotspot X="596.3987" Y="5250.325" Z="-13.44703" />
+		<Hotspot X="626.0639" Y="5154.722" Z="14.93707" />
+		<Hotspot X="689.4177" Y="5228.986" Z="-0.2948084" />
+		<Hotspot X="676.1445" Y="5333.563" Z="-24.00584" />
+		<Hotspot X="796.7844" Y="5277.252" Z="9.107589" />
+		<Hotspot X="862.8409" Y="5379.218" Z="2.880557" />
+		<Hotspot X="810.8895" Y="5420.872" Z="-0.7687582" />
+		<Hotspot X="742.1114" Y="5444.158" Z="-14.16239" />
+		<Hotspot X="740.0972" Y="5524.507" Z="-0.3131439" />
+     </Hotspots>
+    </Grindarea>
+  </SubProfile>
+  
+  <SubProfile> <!-- Terrokar - NE Allerian 63-66 -->
+    <Name>Terrokar - NE Allerian 63-66</Name>
+    <MinLevel>63</MinLevel>
+    <MaxLevel>66</MaxLevel>
+	
+    <Vendors> <!--  Allerian Stronghold -->
+		<Vendor Name="Innkeeper Biribi" Entry="19296" Type="Food" X="-2917.881" Y="4021.484" Z="0.4283262" />
+		<Vendor Name="Cecil Meyers" Entry="19056" Type="Repair" X="-2978.951" Y="4033.115" Z="3.573919" />
+		<!--  BC Trainers -->
+		<Vendor Name="Irva" Entry="50020" Type="Train" TrainClass="Hunter" X="-1800.502" Y="5402.938" Z="-12.46546" />
+		<Vendor Name="Bratu" Entry="50025" Type="Train" TrainClass="Warrior" X="-1798.293" Y="5400.143" Z="-12.42766" />
+		<Vendor Name="Ordo" Entry="50023" Type="Train" TrainClass="Paladin" X="-1796.377" Y="5402.776" Z="-12.42766" />
+		<Vendor Name="Salha" Entry="50024" Type="Train" TrainClass="Priest" X="-1789.823" Y="5409.41" Z="-12.42695" />
+		<Vendor Name="Raluhi" Entry="50021" Type="Train" TrainClass="Mage" X="-1793.031" Y="5412.926" Z="-12.42746" />
+		<Vendor Name="Darahu" Entry="50019" Type="Train" TrainClass="Shaman" X="-1789" Y="5413.809" Z="-12.42763" />
+		<Vendor Name="Windstalker Ifram" Entry="50127" Type="Train" TrainClass="Rogue" X="-1877.934" Y="5358.721" Z="-12.42781" />
+		<Vendor Name="Baelir" Entry="50136" Type="Train" TrainClass="Druid" X="-1886.13" Y="5357.887" Z="-12.42621" />
+		<Vendor Name="Fel-Caller Guloto" Entry="50128" Type="Train" TrainClass="Warlock" X="-1892.142" Y="5371.018" Z="-12.4265" />
+    </Vendors>
+	
+    <Mailboxes> <!--  Allerian Stronghold -->
+		<Mailbox X="-2930.488" Y="4008.443" Z="-1.354151" />
+    </Mailboxes>
+	
+    <Grindarea>
+     <Factions>14 49 38 7 1738</Factions> <!-- [Warp Stalker, Basilisk, Wolf, Moth] -->
+     <TargetMinLevel>62</TargetMinLevel> 
+     <TargetMaxLevel>67</TargetMaxLevel>
+     <Hotspots>
+		<Hotspot X="-1853.129" Y="3766.222" Z="14.80976" />
+		<Hotspot X="-1987.964" Y="3764.618" Z="-8.758578" />
+		<Hotspot X="-1998.677" Y="3692.41" Z="-54.44464" />
+		<Hotspot X="-2094.156" Y="3638.407" Z="-56.62184" />
+		<Hotspot X="-2107.442" Y="3729.153" Z="-27.86611" />
+		<Hotspot X="-2025.119" Y="3825.38" Z="0.7168409" />
+		<Hotspot X="-2133.434" Y="3860.015" Z="2.670524" />
+		<Hotspot X="-2194.651" Y="3835.576" Z="4.435771" />
+		<Hotspot X="-2217.259" Y="3768.801" Z="-16.33922" />
+		<Hotspot X="-2263.358" Y="3704.068" Z="-9.689729" />
+		<Hotspot X="-2127.869" Y="3647.978" Z="-50.2472" />
+		<Hotspot X="-2084.62" Y="3709.052" Z="-38.12491" />
+		<Hotspot X="-2207.24" Y="3569.273" Z="-30.54208" />
+		<Hotspot X="-2320.846" Y="3541.388" Z="-8.326702" />
+		<Hotspot X="-2242.706" Y="3443.983" Z="-21.56718" />
+		<Hotspot X="-2137.861" Y="3419.789" Z="-43.08821" />
+		<Hotspot X="-2145.1" Y="3354.26" Z="-42.03778" />
+		<Hotspot X="-2249.891" Y="3393.045" Z="-22.77084" />
+		<Hotspot X="-2195.261" Y="3270.536" Z="-24.20861" />
+		<Hotspot X="-2330.099" Y="3533.887" Z="-7.898357" />
+		<Hotspot X="-2270.267" Y="3642.525" Z="-9.668228" />
+		<Hotspot X="-2182.281" Y="3680.801" Z="-27.90749" />
+		<Hotspot X="-2113.36" Y="3658.35" Z="-50.70345" />
+     </Hotspots>
+    </Grindarea>
+	 <Blackspots>
+		<Blackspot X="-2085.903" Y="3471.419" Z="-73.32772" />
+		<Blackspot X="-2084.975" Y="3400.264" Z="-62.08189" Radius="20.00" />
+		<Blackspot X="-2076.127" Y="3559.952" Z="-72.12289" Radius="20.00" />
+		<Blackspot X="-2041.614" Y="3589.827" Z="-92.54433" Radius="20.00" />
+		<Blackspot X="-1982.443" Y="3620.543" Z="-98.99429" Radius="20.00" />
+		<Blackspot X="-1940.344" Y="3687.075" Z="-63.377" Radius="20.00" />
+		<Blackspot X="-1913.436" Y="3707.693" Z="-38.79287" Radius="20.00" />
+		<Blackspot X="-1852.769" Y="3718.917" Z="-3.68726" Radius="20.00" />
+		<Blackspot X="-2053.479" Y="3589.988" Z="-76.84942" Radius="20.00" />
+		<Blackspot X="-2073.184" Y="3544.979" Z="-67.71907" Radius="20.00" />
+		<Blackspot X="-2088.079" Y="3469.739" Z="-73.53368" Radius="20.00" />
+		<Blackspot X="-2061.153" Y="3384.591" Z="-63.96582" Radius="20.00" />
+		<Blackspot X="-2080.983" Y="3310.166" Z="-62.79928" Radius="20.00" />
+		<Blackspot X="-2084.238" Y="3249.652" Z="-58.81954" Radius="20.00" />
+		<Blackspot X="-2131.763" Y="3215.046" Z="-41.6452" Radius="20.00" />
+		<Blackspot X="-2146.065" Y="3133.611" Z="-35.9088" Radius="20.00" />
+	 </Blackspots>
+</SubProfile>
+  
+  <SubProfile> <!-- SMV - Illidari Point 66-70 -->
+   <Name>SMV - Illidari Point 66-70</Name>
+   <MinLevel>66</MinLevel>
+   <MaxLevel>72</MaxLevel>
+   
+   <Vendors> <!--  Wildhammer Stronghold -->
+		<Vendor Name="Mari Stonehand" Entry="19373" Type="Repair" X="-3966.329" Y="2201.351" Z="101.8694" />
+		<Vendor Name="Dreg Cloudsweeper" Entry="19352" Type="Food" X="-4084.32" Y="2186.968" Z="107.5019" />
+		<!--  BC Trainers in Shattrath -->
+		<Vendor Name="Irva" Entry="50020" Type="Train" TrainClass="Hunter" X="-1800.502" Y="5402.938" Z="-12.46546" />
+		<Vendor Name="Bratu" Entry="50025" Type="Train" TrainClass="Warrior" X="-1798.293" Y="5400.143" Z="-12.42766" />
+		<Vendor Name="Ordo" Entry="50023" Type="Train" TrainClass="Paladin" X="-1796.377" Y="5402.776" Z="-12.42766" />
+		<Vendor Name="Salha" Entry="50024" Type="Train" TrainClass="Priest" X="-1789.823" Y="5409.41" Z="-12.42695" />
+		<Vendor Name="Raluhi" Entry="50021" Type="Train" TrainClass="Mage" X="-1793.031" Y="5412.926" Z="-12.42746" />
+		<Vendor Name="Darahu" Entry="50019" Type="Train" TrainClass="Shaman" X="-1789" Y="5413.809" Z="-12.42763" />
+		<Vendor Name="Windstalker Ifram" Entry="50127" Type="Train" TrainClass="Rogue" X="-1877.934" Y="5358.721" Z="-12.42781" />
+		<Vendor Name="Baelir" Entry="50136" Type="Train" TrainClass="Druid" X="-1886.13" Y="5357.887" Z="-12.42621" />
+		<Vendor Name="Fel-Caller Guloto" Entry="50128" Type="Train" TrainClass="Warlock" X="-1892.142" Y="5371.018" Z="-12.4265" />
+   </Vendors>
+   
+   <Mailboxes> <!--  Wildhammer Stronghold -->
+		<Mailbox X="-4055.606" Y="2181.252" Z="110.2282" /> 
+   </Mailboxes>
+   
+   <Grindarea>
+    <Factions>90 14 1813</Factions> <!-- [Demon, Chimaera, Pig, Illidari] -->
+    <TargetMinLevel>64</TargetMinLevel> 
+    <TargetMaxLevel>71</TargetMaxLevel>
+    <Hotspots>
+		<Hotspot X="-3579.126" Y="2507.362" Z="73.11068" />
+		<Hotspot X="-3602.801" Y="2597.27" Z="75.02612" />
+		<Hotspot X="-3644.967" Y="2517.527" Z="75.77133" />
+		<Hotspot X="-3698.43" Y="2453.57" Z="80.98411" />
+		<Hotspot X="-3731.258" Y="2399.414" Z="79.12668" />
+		<Hotspot X="-3791.162" Y="2417.955" Z="87.72108" />
+		<Hotspot X="-3792.042" Y="2517.778" Z="80.95226" />
+		<Hotspot X="-3791.115" Y="2561.505" Z="91.53819" />
+		<Hotspot X="-3743.326" Y="2600.354" Z="90.2297" />
+		<Hotspot X="-3795.881" Y="2596.445" Z="90.11896" />
+		<Hotspot X="-3795.822" Y="2658.621" Z="101.7474" />
+		<Hotspot X="-3797.911" Y="2596.005" Z="90.10799" />
+		<Hotspot X="-3850.012" Y="2583.487" Z="92.00113" />
+		<Hotspot X="-3875.916" Y="2522.792" Z="86.65292" />
+		<Hotspot X="-3937.849" Y="2486.619" Z="107.9861" />
+		<Hotspot X="-4040.044" Y="2501.519" Z="134.4565" />
+		<Hotspot X="-4049.17" Y="2535.613" Z="133.0574" />
+		<Hotspot X="-4106.885" Y="2532.961" Z="140.6279" />
+		<Hotspot X="-4051.748" Y="2607.378" Z="128.7482" />
+		<Hotspot X="-4055.98" Y="2667.945" Z="134.4081" />
+		<Hotspot X="-3981.535" Y="2656.525" Z="117.1261" />
+		<Hotspot X="-3904.691" Y="2648.112" Z="106.533" />
+		<Hotspot X="-3887.501" Y="2567.932" Z="89.31571" />
+		<Hotspot X="-3797.012" Y="2495.721" Z="81.07166" />
+		<Hotspot X="-3725.091" Y="2372.604" Z="77.59219" />
+		<Hotspot X="-3632.383" Y="2433.266" Z="77.57005" />
+    </Hotspots>
+   </Grindarea>
+	 <Blackspots>
+		<Blackspot X="-3396.617" Y="2521.554" Z="62.64561" Radius="50.4659" />
+		<Blackspot X="-3305.938" Y="2480.669" Z="58.01428" Radius="50.23372" />
+		<Blackspot X="-3236.533" Y="2462.205" Z="63.21843" Radius="38.61916" />
+		<Blackspot X="-3175.293" Y="2444.44" Z="61.27551" Radius="35.98043" />
+		<Blackspot X="-3105.873" Y="2406.012" Z="61.32529" Radius="49.86422" />
+		<Blackspot X="-3304.529" Y="2571.792" Z="58.38689" Radius="42.17999" />
+		<Blackspot X="-3235.205" Y="2630.24" Z="62.68975" Radius="20.71016" />
+	 </Blackspots>
+	 <AvoidMobs>
+		<Mob Name="Infernal Attacker" Entry="21419" />
+		<Mob Name="Felfire Diemetradon" Entry="21408" />
+	 </AvoidMobs>
+  </SubProfile>
+
+  <Blackspots> <!--  Travelling Blackspots -->
+	<Blackspot X="-766.1572" Y="5283.095" Z="17.51245" Radius="50.00" /> <!--  Zangar traveling stuck points -->
+	<Blackspot X="-853.3792" Y="5334.81" Z="17.73959" Radius="50.00" />
+	<Blackspot X="-859.6401" Y="5253.229" Z="17.4858" Radius="50.00" />
+	<Blackspot X="-803.5801" Y="5181.735" Z="17.7381" Radius="50.00" />
+	<Blackspot X="-922.858" Y="5308.745" Z="17.52403" Radius="50.00" />
+	<Blackspot X="-1052.364" Y="5243.16" Z="22.63257" Radius="50.00" />
+	<Blackspot X="-2464.556" Y="4960.219" Z="32.13229" Radius="150.000" /> <!--  Terrokar traveling agro points -->
+	<Blackspot X="-1899.619" Y="3898.752" Z="3.958085" Radius="126.8201" />
+	<Blackspot X="-1869.779" Y="3818.305" Z="6.969765" Radius="73.40063" />
+  </Blackspots>
+
+  <!-- BC Trainers in Shattrath - Aldor
+	<Vendor Name="Irva" Entry="50020" Type="Train" TrainClass="Hunter" X="-1800.502" Y="5402.938" Z="-12.46546" />
+	<Vendor Name="Bratu" Entry="50025" Type="Train" TrainClass="Warrior" X="-1798.293" Y="5400.143" Z="-12.42766" />
+	<Vendor Name="Ordo" Entry="50023" Type="Train" TrainClass="Paladin" X="-1796.377" Y="5402.776" Z="-12.42766" />
+	<Vendor Name="Salha" Entry="50024" Type="Train" TrainClass="Priest" X="-1789.823" Y="5409.41" Z="-12.42695" />
+	<Vendor Name="Raluhi" Entry="50021" Type="Train" TrainClass="Mage" X="-1793.031" Y="5412.926" Z="-12.42746" />
+	<Vendor Name="Darahu" Entry="50019" Type="Train" TrainClass="Shaman" X="-1789" Y="5413.809" Z="-12.42763" />
+	<Vendor Name="Windstalker Ifram" Entry="50127" Type="Train" TrainClass="Rogue" X="-1877.934" Y="5358.721" Z="-12.42781" />
+	<Vendor Name="Baelir" Entry="50136" Type="Train" TrainClass="Druid" X="-1886.13" Y="5357.887" Z="-12.42621" />
+	<Vendor Name="Fel-Caller Guloto" Entry="50128" Type="Train" TrainClass="Warlock" X="-1892.142" Y="5371.018" Z="-12.4265" />
+	-->
+	
+	<!-- BC Trainers in Shattrath - Scryers
+		<Vendor Name="Blood Knight Argaron" Entry="50012" Type="Train" TrainClass="Paladin" X="-1933.781" Y="5442.609" Z="-12.42822" />
+		<Vendor Name="Tarlhir" Entry="50018" Type="Train" TrainClass="Warrior" X="-1937.597" Y="5452.868" Z="-12.42785" />
+		<Vendor Name="Pathstalker Arpalir" Entry="50016" Type="Train" TrainClass="Hunter" X="-1940.179" Y="5455.71" Z="-12.4273" />
+		<Vendor Name="Summoner Durael" Entry="50017" Type="Train" TrainClass="Warlock" X="-1928.88" Y="5460.494" Z="-12.42789" />
+		<Vendor Name="Matron Ismara" Entry="50013" Type="Train" TrainClass="Priest" X="-1926.564" Y="5462.838" Z="-12.43764" />
+		<Vendor Name="Alaressa" Entry="50010" Type="Train" TrainClass="Mage" X="-1925.172" Y="5459.78" Z="-12.47215" />
+		<Vendor Name="Luknar" Entry="50130" Type="Train" TrainClass="Shaman" X="-1890.248" Y="5367.875" Z="-12.42791" />
+		<Vendor Name="Muha" Entry="50137" Type="Train" TrainClass="Druid" X="-1889.01" Y="5358.967" Z="-12.42741" />
+		<Vendor Name="Windstalker Ifram" Entry="50127" Type="Train" TrainClass="Rogue" X="-1877.934" Y="5358.721" Z="-12.42781" />
+	-->
+	
+</HBProfile>
+	
+  

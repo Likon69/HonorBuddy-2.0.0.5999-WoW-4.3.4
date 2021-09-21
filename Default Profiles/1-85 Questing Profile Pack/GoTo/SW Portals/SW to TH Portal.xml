@@ -1,0 +1,17 @@
+<HBProfile>
+	<Name>SW to Twilight Highlands Portal</Name>
+	<MinLevel>1</MinLevel>
+	<MaxLevel>101</MaxLevel>
+	
+	<QuestOrder>
+
+			<If Condition="(Me.ZoneId == 1519)" >
+				<CustomBehavior File="FlyTo" DestName="Twilight Highlands Portal in SW" X="-8189.201" Y="415.6583" Z="116.8165" />
+				<CustomBehavior File="ForcedDismount" />
+				
+				<CustomBehavior File="InteractWith" MobId="207694" ObjectType="Gameobject" Range="5" X="-8189.201" Y="415.6583" Z="116.8165" />
+			</If>
+	
+	
+	</QuestOrder>
+</HBProfile>

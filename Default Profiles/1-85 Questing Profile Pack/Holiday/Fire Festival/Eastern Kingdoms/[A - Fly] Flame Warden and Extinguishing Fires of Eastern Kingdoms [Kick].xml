@@ -1,0 +1,253 @@
+<HBProfile>
+	<Name>[A] Flame Warden and Extinguishing EK[Kick]</Name>
+	<MinLevel>1</MinLevel>
+	<MaxLevel>86</MaxLevel>
+	
+	<MinDurability>0.1</MinDurability>
+	<MinFreeBagSlots>1</MinFreeBagSlots>
+	
+	
+	
+	<QuestOrder>
+
+	<CustomBehavior File="UserSettings" LootMobs="True" PullDistance="1" UseMount="False" TrainNewSkills="False" LearnFlightPaths="False" KillBetweenHotspots="True" LogoutForInactivity="False" />
+
+
+				<!-- Goldshire / EF Flame Warden -->
+				<CustomBehavior File="FlyTo" DestName="Elwynn Forest Flame Warden" X="-9396.608" Y="23.8935" Z="59.17491" />
+				<CustomBehavior File="ForcedDismount" />
+				<CustomBehavior File="InteractWith" MobId="25898" />
+				<CustomBehavior File="RunMacro" Macro="/click GossipTitleButton1" />
+				<CustomBehavior File="RunMacro" Macro="/click QuestFrameCompleteQuestButton" />	
+
+				<!-- Moonbrook / Westfall Flame Warden -->
+				<CustomBehavior File="FlyTo" DestName="Westfall Flame Warden" X="-10847.26" Y="1452.622" Z="42.06357" />
+				<CustomBehavior File="ForcedDismount" />
+				<CustomBehavior File="InteractWith" MobId="25910" />
+				<CustomBehavior File="RunMacro" Macro="/click GossipTitleButton1" />
+				<CustomBehavior File="RunMacro" Macro="/click QuestFrameCompleteQuestButton" />	
+
+				<!-- Grom'Gol Base Camp / N. STV Extinguish Horde Bonfire -->
+				<CustomBehavior File="FlyTo" DestName="Grom'Gol Base Camp Horde Bonfire" X="-12436.95" Y="75.21933" Z="5.542328" />
+				<CustomBehavior File="ForcedDismount" />
+				<CustomBehavior File="InteractWith" MobId="207983" ObjectType="Gameobject" Range="10" WaitTime="3000" />
+				<CustomBehavior File="RunMacro" Macro="/click GossipTitleButton1" />
+				<CustomBehavior File="RunMacro" Macro="/click QuestFrameCompleteQuestButton" />	
+
+				<!-- Fort Livingston / N. STV Flame Warden -->
+				<CustomBehavior File="FlyTo" DestName="Cape of STV Flame Warden" X="-12757.08" Y="-389.9047" Z="13.39248" />
+				<CustomBehavior File="ForcedDismount" />
+				<CustomBehavior File="InteractWith" MobId="51574" />
+				<CustomBehavior File="RunMacro" Macro="/click GossipTitleButton1" />
+				<CustomBehavior File="RunMacro" Macro="/click QuestFrameCompleteQuestButton" />	
+
+				<!-- BB / S. STV Flame Warden -->
+				<CustomBehavior File="FlyTo" DestName="Stranglethorn Flame Warden" X="-14300.95" Y="60.82663" Z="1.416853" />
+				<CustomBehavior File="ForcedDismount" />
+				<CustomBehavior File="InteractWith" MobId="25915" />
+				<CustomBehavior File="RunMacro" Macro="/click GossipTitleButton1" />
+				<CustomBehavior File="RunMacro" Macro="/click QuestFrameCompleteQuestButton" />	
+				
+				<!-- BB / S. STV Extinguish Horde Bonfire -->
+				<CustomBehavior File="FlyTo" DestName="Stranglethorn Horde Bonfire" X="-14375.23" Y="113.0657" Z="2.908114" />
+				<CustomBehavior File="ForcedDismount" />
+				<CustomBehavior File="InteractWith" MobId="187951" ObjectType="Gameobject" Range="10" WaitTime="3000" />
+				<CustomBehavior File="RunMacro" Macro="/click GossipTitleButton1" />
+				<CustomBehavior File="RunMacro" Macro="/click QuestFrameCompleteQuestButton" />	
+
+				<!-- Darkshire / Duskwood Flame Warden -->
+				<CustomBehavior File="FlyTo" DestName="Duskwood Flame Warden" X="-10705.7" Y="-1151.751" Z="24.92626" />
+				<CustomBehavior File="ForcedDismount" />
+				<CustomBehavior File="InteractWith" MobId="25896" />
+				<CustomBehavior File="RunMacro" Macro="/click GossipTitleButton1" />
+				<CustomBehavior File="RunMacro" Macro="/click QuestFrameCompleteQuestButton" />	
+
+				<!-- Nethergarde Keep / Blasted Lands Flame Warden -->
+				<CustomBehavior File="FlyTo" DestName="Blasted Lands Flame Warden" X="-10951.35" Y="-3233.583" Z="41.34812" />
+				<CustomBehavior File="ForcedDismount" />
+				<CustomBehavior File="InteractWith" MobId="25890" />
+				<CustomBehavior File="RunMacro" Macro="/click GossipTitleButton1" />
+				<CustomBehavior File="RunMacro" Macro="/click QuestFrameCompleteQuestButton" />	
+
+				<!-- Bogpaddle / SoS Flame Warden -->
+				<CustomBehavior File="FlyTo" DestName="SoS Flame Warden" X="-9793.199" Y="-3841.107" Z="21.90276" />
+				<CustomBehavior File="ForcedDismount" />
+				<CustomBehavior File="InteractWith" MobId="51602" />
+				<CustomBehavior File="RunMacro" Macro="/click GossipTitleButton1" />
+				<CustomBehavior File="RunMacro" Macro="/click QuestFrameCompleteQuestButton" />	
+
+				<!-- Bogpaddle / SoS Extinguish Horde Bonfire -->
+				<CustomBehavior File="FlyTo" DestName="SoS Horde Bonfire" X="-9774.787" Y="-4006.944" Z="21.85628" />
+				<CustomBehavior File="ForcedDismount" />
+				<CustomBehavior File="InteractWith" MobId="187969" ObjectType="Gameobject" Range="10" WaitTime="3000" />
+				<CustomBehavior File="RunMacro" Macro="/click GossipTitleButton1" />
+				<CustomBehavior File="RunMacro" Macro="/click QuestFrameCompleteQuestButton" />	
+
+				<!-- Lakeshire / Redridge Flame Warden -->
+				<CustomBehavior File="FlyTo" DestName="Redridge Flame Warden" X="-9430.941" Y="-2121.163" Z="66.00724" />
+				<CustomBehavior File="ForcedDismount" />
+				<CustomBehavior File="InteractWith" MobId="25904" />
+				<CustomBehavior File="RunMacro" Macro="/click GossipTitleButton1" />
+				<CustomBehavior File="RunMacro" Macro="/click QuestFrameCompleteQuestButton" />	
+
+				<!-- Morgan's Vigil / Burning Steppes Flame Warden -->
+				<CustomBehavior File="FlyTo" DestName="Burning Steppes Flame Warden" X="-8258.638" Y="-2613.956" Z="133.1685" />
+				<CustomBehavior File="ForcedDismount" />
+				<CustomBehavior File="InteractWith" MobId="25892" />
+				<CustomBehavior File="RunMacro" Macro="/click GossipTitleButton1" />
+				<CustomBehavior File="RunMacro" Macro="/click QuestFrameCompleteQuestButton" />	
+
+				<!-- Flame Crest / Burning Steppes Extinguish Horde Bonfire -->
+				<CustomBehavior File="FlyTo" DestName="Burning Steppes Horde Bonfire" X="-7603.103" Y="-2089.311" Z="126.3132" />
+				<CustomBehavior File="ForcedDismount" />
+				<CustomBehavior File="InteractWith" MobId="187956" ObjectType="Gameobject" Range="10" WaitTime="3000" />
+				<CustomBehavior File="RunMacro" Macro="/click GossipTitleButton1" />
+				<CustomBehavior File="RunMacro" Macro="/click QuestFrameCompleteQuestButton" />	
+
+				<!-- Dragon's Mount / Badlands Flame Warden -->
+				<CustomBehavior File="FlyTo" DestName="Badlands Flame Warden" X="-7000.593" Y="-2483.417" Z="242.0782" />
+				<CustomBehavior File="ForcedDismount" />
+				<CustomBehavior File="InteractWith" MobId="51585" />
+				<CustomBehavior File="RunMacro" Macro="/click GossipTitleButton1" />
+				<CustomBehavior File="RunMacro" Macro="/click QuestFrameCompleteQuestButton" />	
+				
+				<!-- New Kargath / Badlands Extinguish Horde Bonfire -->
+				<CustomBehavior File="FlyTo" DestName="Badlands Horde Bonfire" X="-6613.916" Y="-2646.739" Z="266.2849" />
+				<CustomBehavior File="ForcedDismount" />
+				<CustomBehavior File="InteractWith" MobId="187954" ObjectType="Gameobject" Range="10" WaitTime="3000" />
+				<CustomBehavior File="RunMacro" Macro="/click GossipTitleButton1" />
+				<CustomBehavior File="RunMacro" Macro="/click QuestFrameCompleteQuestButton" />	
+
+				<!-- Searing gorge?? -->
+
+				<!-- Kharanos / Dun Morogh Flame Warden -->
+				<CustomBehavior File="FlyTo" DestName="Dun Morogh Flame Warden" X="-5418.707" Y="-501.8575" Z="396.2868" />
+				<CustomBehavior File="ForcedDismount" />
+				<CustomBehavior File="InteractWith" MobId="25895" />
+				<CustomBehavior File="RunMacro" Macro="/click GossipTitleButton1" />
+				<CustomBehavior File="RunMacro" Macro="/click QuestFrameCompleteQuestButton" />	
+				
+				<!-- Ironforge?? -->
+
+				<!-- Thelsamar / Loch Modan Flame Warden -->
+				<CustomBehavior File="FlyTo" DestName="Loch Modan Flame Warden" X="-5244.096" Y="-2885.374" Z="339.0984" />
+				<CustomBehavior File="ForcedDismount" />
+				<CustomBehavior File="InteractWith" MobId="25902" />
+				<CustomBehavior File="RunMacro" Macro="/click GossipTitleButton1" />
+				<CustomBehavior File="RunMacro" Macro="/click QuestFrameCompleteQuestButton" />	
+
+				<!-- Menethil Harbor / Wetlands Flame Warden -->
+				<CustomBehavior File="FlyTo" DestName="Wetlands Flame Warden" X="-3448.197" Y="-949.9843" Z="9.171152" />
+				<CustomBehavior File="ForcedDismount" />
+				<CustomBehavior File="InteractWith" MobId="25911" />
+				<CustomBehavior File="RunMacro" Macro="/click GossipTitleButton1" />
+				<CustomBehavior File="RunMacro" Macro="/click QuestFrameCompleteQuestButton" />	
+
+				<!-- Bloodgulch / Twilight Highlands Extinguish Horde Bonfire -->
+				<CustomBehavior File="FlyTo" DestName="Twilight Highlands Horde Bonfire" X="-3791.64" Y="-5248.958" Z="36.48092" />
+				<CustomBehavior File="ForcedDismount" />
+				<CustomBehavior File="InteractWith" MobId="208090" ObjectType="Gameobject" Range="10" WaitTime="3000" />
+				<CustomBehavior File="RunMacro" Macro="/click GossipTitleButton1" />
+				<CustomBehavior File="RunMacro" Macro="/click QuestFrameCompleteQuestButton" />	
+
+				<!-- Thundermar / Twilight Highlands Flame Warden -->
+				<CustomBehavior File="FlyTo" DestName="Twilight Highlands Flame Warden" X="-3176.559" Y="-4928.955" Z="130.656" />
+				<CustomBehavior File="ForcedDismount" />
+				<CustomBehavior File="InteractWith" MobId="51650" />
+				<CustomBehavior File="RunMacro" Macro="/click GossipTitleButton1" />
+				<CustomBehavior File="RunMacro" Macro="/click QuestFrameCompleteQuestButton" />	
+
+				<!-- Refuge Point / Arathi Highlands Flame Warden -->
+				<CustomBehavior File="FlyTo" DestName="Arathi Highlands Flame Warden" X="-1204.281" Y="-2669.047" Z="44.75145" />
+				<CustomBehavior File="ForcedDismount" />
+				<CustomBehavior File="InteractWith" MobId="25887" />
+				<CustomBehavior File="RunMacro" Macro="/click GossipTitleButton1" />
+				<CustomBehavior File="RunMacro" Macro="/click QuestFrameCompleteQuestButton" />	
+
+				<!-- Hammerfall / Arathi Highlands Extinguish Horde Bonfire -->
+				<CustomBehavior File="FlyTo" DestName="Arathi Highlands Horde Bonfire" X="-1134.003" Y="-3524.209" Z="50.52457" />
+				<CustomBehavior File="ForcedDismount" />
+				<CustomBehavior File="InteractWith" MobId="187947" ObjectType="Gameobject" Range="10" WaitTime="3000" />
+				<CustomBehavior File="RunMacro" Macro="/click GossipTitleButton1" />
+				<CustomBehavior File="RunMacro" Macro="/click QuestFrameCompleteQuestButton" />	
+
+				<!-- Revantusk Village / Hinterlands Extinguish Horde Bonfire -->
+				<CustomBehavior File="FlyTo" DestName="Hinterlands Horde Bonfire" X="-446.8757" Y="-4521.858" Z="9.64745" />
+				<CustomBehavior File="ForcedDismount" />
+				<CustomBehavior File="InteractWith" MobId="187972" ObjectType="Gameobject" Range="10" WaitTime="3000" />
+				<CustomBehavior File="RunMacro" Macro="/click GossipTitleButton1" />
+				<CustomBehavior File="RunMacro" Macro="/click QuestFrameCompleteQuestButton" />	
+
+				<!-- Aerie Peak / Hinterlands Flame Warden -->
+				<CustomBehavior File="FlyTo" DestName="Hinterlands Flame Warden" X="177.7917" Y="-2129.253" Z="103.0328" />
+				<CustomBehavior File="ForcedDismount" />
+				<CustomBehavior File="InteractWith" MobId="25908" />
+				<CustomBehavior File="RunMacro" Macro="/click GossipTitleButton1" />
+				<CustomBehavior File="RunMacro" Macro="/click QuestFrameCompleteQuestButton" />	
+
+				<!-- Chillwind Camp / WPL Flame Warden -->
+				<CustomBehavior File="FlyTo" DestName="WPL Flame Warden" X="1008.811" Y="-1455.936" Z="61.5415" />
+				<CustomBehavior File="ForcedDismount" />
+				<CustomBehavior File="InteractWith" MobId="25909" />
+				<CustomBehavior File="RunMacro" Macro="/click GossipTitleButton1" />
+				<CustomBehavior File="RunMacro" Macro="/click QuestFrameCompleteQuestButton" />	
+				
+				<!-- The Bulwark / WPL Extinguish Horde Bonfire -->
+				<CustomBehavior File="FlyTo" DestName="WPL Horde Bonfire" X="1756.942" Y="-836.0293" Z="60.08029" />
+				<CustomBehavior File="ForcedDismount" />
+				<CustomBehavior File="InteractWith" MobId="207990" ObjectType="Gameobject" Range="10" WaitTime="3000" /> <!-- is this right -->
+				<CustomBehavior File="RunMacro" Macro="/click GossipTitleButton1" />
+				<CustomBehavior File="RunMacro" Macro="/click QuestFrameCompleteQuestButton" />	
+
+				<!-- Brill / Tirisfall Glades Extinguish Horde Bonfire -->
+				<CustomBehavior File="FlyTo" DestName="Tirisfall Glades Horde Bonfire" X="2269.7" Y="453.4776" Z="34.01701" />
+				<CustomBehavior File="ForcedDismount" />
+				<CustomBehavior File="InteractWith" MobId="187974" ObjectType="Gameobject" Range="10" WaitTime="3000" />
+				<CustomBehavior File="RunMacro" Macro="/click GossipTitleButton1" />
+				<CustomBehavior File="RunMacro" Macro="/click QuestFrameCompleteQuestButton" />	
+
+				<!-- Undercity Extinguish Horde Bonfire -->
+				<CustomBehavior File="FlyTo" DestName="Undercity Horde Bonfire" X="1828.865" Y="214.7762" Z="60.50576" />
+				<CustomBehavior File="ForcedDismount" />
+				<CustomBehavior File="InteractWith" MobId="181335" ObjectType="Gameobject" Range="10" WaitTime="3000" />
+
+				<!-- Sepulcher / Silverpine Forest Extinguish Horde Bonfire -->
+				<CustomBehavior File="FlyTo" DestName="Silverpine Horde Bonfire" X="580.934" Y="1362.335" Z="90.37743" />
+				<CustomBehavior File="ForcedDismount" />
+				<CustomBehavior File="InteractWith" MobId="187559" ObjectType="Gameobject" Range="10" WaitTime="3000" />
+				<CustomBehavior File="RunMacro" Macro="/click GossipTitleButton1" />
+				<CustomBehavior File="RunMacro" Macro="/click QuestFrameCompleteQuestButton" />	
+
+				<!-- Tarren Mill / Hillsbrad Foothills Extinguish Horde Bonfire -->
+				<CustomBehavior File="FlyTo" DestName="Hillsbrad Foothills Horde Bonfire" X="-134.2014" Y="-795.8675" Z="55.81349" />
+				<CustomBehavior File="ForcedDismount" />
+				<CustomBehavior File="InteractWith" MobId="187964" ObjectType="Gameobject" Range="10" WaitTime="3000" />
+				<CustomBehavior File="RunMacro" Macro="/click GossipTitleButton1" />
+				<CustomBehavior File="RunMacro" Macro="/click QuestFrameCompleteQuestButton" />	
+
+				<CustomBehavior File="FlyTo" DestName="Ghostlands Ent" X="3406.297" Y="-4444.098" Z="130.5925" />
+	<CustomBehavior File="UserDialog" AllowBotStop="True" SoundCue="Exclamation" SoundCueInterval="5" Text="Zone into the ghostlands and then press continue" />
+				
+				<!-- Tranquillien / Ghostlands Extinguish Horde Bonfire -->
+				<!-- <CustomBehavior File="FlyTo" DestName=" Horde Bonfire" X="7699.538" Y="-6836.705" Z="77.23497" /> -->
+				<RunTo DestName=" Horde Bonfire" X="7699.538" Y="-6836.705" Z="77.23497" />
+				<CustomBehavior File="ForcedDismount" />
+				<CustomBehavior File="InteractWith" MobId="187962" ObjectType="Gameobject" Range="10" WaitTime="3000" />
+				<CustomBehavior File="RunMacro" Macro="/click GossipTitleButton1" />
+				<CustomBehavior File="RunMacro" Macro="/click QuestFrameCompleteQuestButton" />	
+
+				<!-- North Sanctum / EW Extinguish Horde Bonfire -->
+				<!-- <CustomBehavior File="FlyTo" DestName="Eversong Woods Horde Bonfire" X="9388.901" Y="-6767.721" Z="15.1333" /> -->
+				<RunTo DestName="Eversong Woods Horde Bonfire" X="9388.901" Y="-6767.721" Z="15.1333" />
+				<CustomBehavior File="ForcedDismount" />
+				<CustomBehavior File="InteractWith" MobId="187960" ObjectType="Gameobject" Range="10" WaitTime="3000" />
+				<CustomBehavior File="RunMacro" Macro="/click GossipTitleButton1" />
+				<CustomBehavior File="RunMacro" Macro="/click QuestFrameCompleteQuestButton" />	
+
+	<CustomBehavior File="UserDialog" AllowBotStop="True" SoundCue="Exclamation" SoundCueInterval="1" Text="Grats on your ach!\n\nNow - don't forget to go into Silvermoon and get the fire from in there! (I can't fly you there atm)" />
+				<!-- X="9820.194" Y="-7264.771" Z="26.19308" /> id: 188129 -->
+
+
+
+	</QuestOrder>
+</HBProfile>

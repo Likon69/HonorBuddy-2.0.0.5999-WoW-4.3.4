@@ -1,0 +1,71 @@
+<HBProfile>
+	<Name>[A] Flame Warden of Outland [Kick]</Name>
+	<MinLevel>1</MinLevel>
+	<MaxLevel>86</MaxLevel>
+	
+	<MinDurability>0.1</MinDurability>
+	<MinFreeBagSlots>1</MinFreeBagSlots>
+	
+	
+	
+	<QuestOrder>
+
+	<CustomBehavior File="UserSettings" LootMobs="True" PullDistance="1" UseMount="False" TrainNewSkills="False" LearnFlightPaths="False" KillBetweenHotspots="True" LogoutForInactivity="False" />
+
+
+				<!-- Honor Hold / Hellfire Flame Warden -->
+				<CustomBehavior File="FlyTo" DestName="Hellfire Flame Warden" X="-531.6212" Y="2325.29" Z="40.11131" />
+				<CustomBehavior File="ForcedDismount" />
+				<CustomBehavior File="InteractWith" MobId="25900" />
+				<CustomBehavior File="RunMacro" Macro="/click GossipTitleButton1" />
+				<CustomBehavior File="RunMacro" Macro="/click QuestFrameCompleteQuestButton" />	
+
+				<!-- Wildhammer Stronghold / SMV Flame Warden -->
+				<CustomBehavior File="FlyTo" DestName="SMV Flame Warden" X="-3950.95" Y="2040.455" Z="95.06493" />
+				<CustomBehavior File="ForcedDismount" />
+				<CustomBehavior File="InteractWith" MobId="25905" />
+				<CustomBehavior File="RunMacro" Macro="/click GossipTitleButton1" />
+				<CustomBehavior File="RunMacro" Macro="/click QuestFrameCompleteQuestButton" />	
+
+				<!-- Allerian Stronghold / Terrokar Forest Flame Warden -->
+				<CustomBehavior File="FlyTo" DestName="Terrokar Forest Flame Warden" X="-2994.141" Y="4166.478" Z="5.827936" />
+				<CustomBehavior File="ForcedDismount" />
+				<CustomBehavior File="InteractWith" MobId="25907" />
+				<CustomBehavior File="RunMacro" Macro="/click GossipTitleButton1" />
+				<CustomBehavior File="RunMacro" Macro="/click QuestFrameCompleteQuestButton" />	
+
+				<!-- Telaar / Nagrand Flame Warden -->
+				<CustomBehavior File="FlyTo" DestName="Nagrand Flame Warden" X="-2513.17" Y="7550.653" Z="-1.377608" />
+				<CustomBehavior File="ForcedDismount" />
+				<CustomBehavior File="InteractWith" MobId="25903" />
+				<CustomBehavior File="RunMacro" Macro="/click GossipTitleButton1" />
+				<CustomBehavior File="RunMacro" Macro="/click QuestFrameCompleteQuestButton" />	
+
+				<!-- Telaar / Zangarmarsh Flame Warden -->
+				<CustomBehavior File="FlyTo" DestName="Zangarmarsh Flame Warden" X="193.4308" Y="6020.112" Z="22.08528" />
+				<CustomBehavior File="ForcedDismount" />
+				<CustomBehavior File="InteractWith" MobId="25912" />
+				<CustomBehavior File="RunMacro" Macro="/click GossipTitleButton1" />
+				<CustomBehavior File="RunMacro" Macro="/click QuestFrameCompleteQuestButton" />	
+
+				<!-- Sylvanaar / Blade's Edge Flame Warden -->
+				<CustomBehavior File="FlyTo" DestName="Blade's Edge Flame Warden" X="2025.354" Y="6587.622" Z="134.9606" />
+				<CustomBehavior File="ForcedDismount" />
+				<CustomBehavior File="InteractWith" MobId="25889" />
+				<CustomBehavior File="RunMacro" Macro="/click GossipTitleButton1" />
+				<CustomBehavior File="RunMacro" Macro="/click QuestFrameCompleteQuestButton" />	
+
+				<!-- Area 52 / Netherstorm Flame Warden -->
+				<CustomBehavior File="FlyTo" DestName="Netherstorm Flame Warden" X="3130.437" Y="3745.1" Z="141.4746" />
+				<CustomBehavior File="ForcedDismount" />
+				<CustomBehavior File="InteractWith" MobId="25913" />
+				<CustomBehavior File="RunMacro" Macro="/click GossipTitleButton1" />
+				<CustomBehavior File="RunMacro" Macro="/click QuestFrameCompleteQuestButton" />	
+
+
+
+
+	<CustomBehavior File="UserDialog" AllowBotStop="True" SoundCue="Exclamation" SoundCueInterval="1" Text="Grats on your ach!\n\nEnd of Line" />
+
+	</QuestOrder>
+</HBProfile>

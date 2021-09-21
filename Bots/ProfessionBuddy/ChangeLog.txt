@@ -1,0 +1,94 @@
+Professionbuddy 1.400
+* Fishing1-525 works once again.
+* [ProfessionSkill].Level nolonger includes skill bonus amount
+* Added [ProfessionSkill].Bonus. This returns the amount of skill points added to a skill level via items or buffs
+
+Professionbuddy 1.240
+* All 'Count' 'Amount' or 'Repeat' properties now accept any C# expression that returns the correct data type (System.Int32). This includes variables,function calls and more.
+* Multiprofile - the banker will mail the farmer gold if farmer has less than 200g
+* Multiprofile - the included profiles can now be easily replaced by copying your own profiles into the correct Zone and faction subfolder found in Honorbuddy\Bots\Professionbuddy\Profiles\HBProfiles\GatheringProfiles\
+* Multiprofile - attempt at a fix for the issue with getting stucked at a few portals.
+* MailItem will nolonger ignore MinFreeBagSlots
+* Added Vashjir to the list of zone supported by multiprofile.
+
+Professionbuddy 1.159
+* Changed Professionbuddy to a botbase and this change might break some profiles.Read below for fix.
+* Because Professionbuddy is now a bot all profiles that check name of current bot with 'TreeRoot.Current.Name' will have to use 'SecondaryBot.Name' instead
+* 'ChangeBot' still works fine but it now changes the 'SecondaryBot' in Professionbuddy (which is the bot that chosen from the dropdown list in Professionbuddy's UI)
+* Double-clicking a profile from the profile list will now load it.
+* When saving a profile the file name of the current profile will now be used in the save dialog.
+* Profile Settings will nolonger show obolete/unused settings.
+* Profile Settings are now displayed in a tab if the currently loaded profile has any settings attached to it.
+* Added a 'Category' property to Profile Settings. This is used by the property grid that shows the profile settings.
+* Profession buddy profiles can now be loaded from HB's 'Load Profile' button
+
+Professionbuddy 1.151
+* Reduced CPU usage on If/While Conditions.. should fix 'stop and go' behavior caused by PB when running huge profiles
+* Fixed sending of empty mail.
+* ChangeBotAction bug fixes.
+* Added a multiprofile that hearths when bags are full,mails items to banker, logs on banker and post items on ah, switches back to farmer and changes zone.
+* small bug fixes and tweaks. GetDefaultSettings
+
+Professionbuddy 1.134
+* Added an 'Ignore Stacksize Below' property to 'Sell Item On AH' Action. It will ignore all items stacks below the value when undercutting.
+* Mining-Herb(1-525) now automatically disables gathering of mines if maximum level of mining is higher than herbs maximum level and vice versa
+
+
+Professionbuddy 1.101
+* 'Buy Item','Buy Item from AH' and 'WithDraw Item From Bank' if set to buy/withdraw a specific item will subtract the amount player has bags from the amount to buy/withdraw if 'BuyAdditively' is set to false.
+
+Professionbuddy 1.71
+* Added a Cancel Auction action. 
+* Fixed a bug with 'Buy Item' action where it failed to work if buying 20 items.
+* Minor tweeks. 
+
+Professionbuddy 1.0.0.59
+* Mining/herb 1-525 profile changes
+* Fixed a bug with copying actions 
+* Added a 'Check for new mail' property to 'Get Mail' action, which will keep trying to get mail as long as the 'new mail' indicator is active.
+
+Professionbuddy 1.0.0.44
+* Any If/While Condition,Wait or Custom action compile errors will cause the effected action's font turn red in color and the compiler error is shown in a CompileError property within the action.
+* Fixed a bug that sometimes prevented the current botbase from running when it should have.
+* Fixed the profile Mining-Merb (1-300)flying-GB2.xml
+
+Professionbuddy 1.0.0.43
+* Added a PB Profile list tab 
+* Adjusted included PB profiles to work with recent While Condition fixes.
+* Added a 'Change Bot' Action.
+
+
+Professionbuddy 1.0.0.42
+* While Condition now works properly.
+* 'BuyItemFromAh','SellItemOnAh' and 'MailItem' should now work with all wow clients regardless of language.
+* Fixed a 'drag and drop' bug
+
+Professionbuddy 1.0.0.41
+* SellItem,BuyItem,BuyItemFromAh,GetMail and MailItem Action's Entry propery have been renamed to ItemID and now accept a comma separated list of item ids.
+* SellItemOnAH Action's ItemName Property was renamed to ItemID and now accepts a comma separated list of item ids
+* Allot of actions that close a frame upon completion nolonger do so.
+* When the start button is press in PB's GUI, PB will automatically load a HB profile that the current PB profile uses or an empty profile.
+
+Professionbuddy 1.0.0.40
+* fixed a bug with'While Condition' where it sometimes allowed execution of actions below it when it's Condtion was still true.
+
+
+Professionbuddy 1.0.0.39
+* Tweaked the [Alchemist](1-500)(Dalaran AH) profile
+* Added DataStore Propery to the api, read Guide for more info.
+
+Professionbuddy 1.0.0.38
+* Tweaked the [Alchemist](1-500)(Dalaran AH) profile
+* Fix a bug with CanCraft()
+* Added a wrapper for the Fishing skill. Fishing.MaxLevel and Fishing.Level can now be used from Conditionals
+* Added a 1-525 fishing profile, based in Dalaran, buys pole if none in bag, trains, venders,throws coins(experimental)
+* Fixed a bug that prevented 'BuyItem', 'SellItem' and 'Train Skill' from working properly while interacting with a NPC
+
+Professionbuddy 1.0.0.37
+* The 'Sell Item On Ah' now behaves correctly when its property 'Post if below MinBuyOut' property is set to false
+* 'Cast Spell' now works properly if it's property 'Repeat Type' is set to 'Craftable'
+* all Action properties that take an NPC ID now have a button that will autofill the property value with current targets ID when button is pressed.
+* Added SubRoutine support. Use the new 'Call SubRoutine' action to execute SubRoutines.
+* Added RefreshDataStore() to the API. It Imports a fresh copy of the DataStore database.
+* 'Get Mail' action no longer checks for the ingame 'New Mail' indicator
+* 'Buy Item' action will now subtract materials that bot has in its bag.

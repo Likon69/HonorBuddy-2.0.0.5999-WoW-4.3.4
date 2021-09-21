@@ -1,0 +1,139 @@
+<HBProfile>
+	<Name>[A] Flame Warden and Extinguishing Northrend [Kick]</Name>
+	<MinLevel>1</MinLevel>
+	<MaxLevel>86</MaxLevel>
+	
+	<MinDurability>0.1</MinDurability>
+	<MinFreeBagSlots>1</MinFreeBagSlots>
+	
+	
+	
+	<QuestOrder>
+
+	<CustomBehavior File="UserSettings" LootMobs="True" PullDistance="1" UseMount="False" TrainNewSkills="False" LearnFlightPaths="False" KillBetweenHotspots="True" LogoutForInactivity="False" />
+
+
+				<!-- Fizzcrank Airstrip / Borean Flame Warden -->
+				<CustomBehavior File="FlyTo" DestName="Borean Flame Warden" X="4123.968" Y="5399.146" Z="28.84127" />
+				<CustomBehavior File="ForcedDismount" />
+				<CustomBehavior File="InteractWith" MobId="32801" />
+				<CustomBehavior File="RunMacro" Macro="/click GossipTitleButton1" />
+				<CustomBehavior File="RunMacro" Macro="/click QuestFrameCompleteQuestButton" />	
+
+				<!-- Bor'gorok Outpost / Borean Extinguish Horde Bonfire -->
+				<CustomBehavior File="FlyTo" DestName="Borean Horde Bonfire" X="4439.892" Y="5621.048" Z="55.71478" />
+				<CustomBehavior File="ForcedDismount" />
+				<CustomBehavior File="InteractWith" MobId="194033" ObjectType="Gameobject" Range="10" WaitTime="3000" />
+				<CustomBehavior File="RunMacro" Macro="/click GossipTitleButton1" />
+				<CustomBehavior File="RunMacro" Macro="/click QuestFrameCompleteQuestButton" />	
+
+				<!-- River's Heart / Sholazar Basin Flame Warden -->
+				<CustomBehavior File="FlyTo" DestName="Sholazar Basin Flame Warden" X="5368.633" Y="4831.057" Z="-197.6357" />
+				<CustomBehavior File="ForcedDismount" />
+				<CustomBehavior File="InteractWith" MobId="32802" />
+				<CustomBehavior File="RunMacro" Macro="/click GossipTitleButton1" />
+				<CustomBehavior File="RunMacro" Macro="/click QuestFrameCompleteQuestButton" />	
+				
+				<!-- River's Heart / Sholazar Basin Extinguish Horde Bonfire -->
+				<CustomBehavior File="FlyTo" DestName="Sholazar Basin Horde Bonfire" X="5496.193" Y="4866.287" Z="-198.1532" />
+				<CustomBehavior File="ForcedDismount" />
+				<CustomBehavior File="InteractWith" MobId="194034" ObjectType="Gameobject" Range="10" WaitTime="3000" />
+				<CustomBehavior File="RunMacro" Macro="/click GossipTitleButton1" />
+				<CustomBehavior File="RunMacro" Macro="/click QuestFrameCompleteQuestButton" />	
+
+				<CustomBehavior File="FlyTo" DestName="Icecrown" X="6106.916" Y="2078.787" Z="956.1923" />
+
+				<!-- K3 / Storm Peaks  Flame Warden -->
+				<CustomBehavior File="FlyTo" DestName="Storm Peaks Flame Warden" X="6090.094" Y="-1100.845" Z="416.2886" />
+				<CustomBehavior File="ForcedDismount" />
+				<CustomBehavior File="InteractWith" MobId="32806" />
+				<CustomBehavior File="RunMacro" Macro="/click GossipTitleButton1" />
+				<CustomBehavior File="RunMacro" Macro="/click QuestFrameCompleteQuestButton" />	
+
+				<!-- K3 / Storm Peaks Extinguish Horde Bonfire -->
+				<CustomBehavior File="FlyTo" DestName="Storm Peaks Horde Bonfire" X="6142.439" Y="-1020.48" Z="408.4789" />
+				<CustomBehavior File="ForcedDismount" />
+				<CustomBehavior File="InteractWith" MobId="194043" ObjectType="Gameobject" Range="10" WaitTime="3000" />
+				<CustomBehavior File="RunMacro" Macro="/click GossipTitleButton1" />
+				<CustomBehavior File="RunMacro" Macro="/click QuestFrameCompleteQuestButton" />	
+
+				<!-- Sunreaver's Command / Crystalsong Forest Extinguish Horde Bonfire -->
+				<CustomBehavior File="FlyTo" DestName=" Horde Bonfire" X="5539.267" Y="-748.1262" Z="151.7633" />
+				<CustomBehavior File="ForcedDismount" />
+				<CustomBehavior File="InteractWith" MobId="194046" ObjectType="Gameobject" Range="10" WaitTime="3000" />
+				<CustomBehavior File="RunMacro" Macro="/click GossipTitleButton1" />
+				<CustomBehavior File="RunMacro" Macro="/click QuestFrameCompleteQuestButton" />	
+
+				<!-- Windrunners Overlook / Crystalsong Forest Flame Warden -->
+				<CustomBehavior File="FlyTo" DestName=" Flame Warden" X="5147.867" Y="-687.2969" Z="169.7115" />
+				<CustomBehavior File="ForcedDismount" />
+				<CustomBehavior File="InteractWith" MobId="32807" />
+				<CustomBehavior File="RunMacro" Macro="/click GossipTitleButton1" />
+				<CustomBehavior File="RunMacro" Macro="/click QuestFrameCompleteQuestButton" />	
+
+				<!-- Agmars Hammer / Dragonblight Extinguish Horde Bonfire -->
+				<CustomBehavior File="FlyTo" DestName="Dragonblight Horde Bonfire" X="3764.261" Y="1466.661" Z="92.67467" />
+				<CustomBehavior File="ForcedDismount" />
+				<CustomBehavior File="InteractWith" MobId="194037" ObjectType="Gameobject" Range="10" WaitTime="3000" />
+				<CustomBehavior File="RunMacro" Macro="/click GossipTitleButton1" />
+				<CustomBehavior File="RunMacro" Macro="/click QuestFrameCompleteQuestButton" />	
+
+				<!-- Wintergarde Keep / Dragonblight Flame Warden -->
+				<CustomBehavior File="FlyTo" DestName="Dragonblight Flame Warden" X="3940.71" Y="-591.5834" Z="240.8404" />
+				<CustomBehavior File="ForcedDismount" />
+				<CustomBehavior File="InteractWith" MobId="32803" />
+				<CustomBehavior File="RunMacro" Macro="/click GossipTitleButton1" />
+				<CustomBehavior File="RunMacro" Macro="/click QuestFrameCompleteQuestButton" />	
+
+				<!-- Argent Stand / Zul'Drak Flame Warden -->
+				<CustomBehavior File="FlyTo" DestName="Zul'Drak Flame Warden" X="5628.038" Y="-2613.774" Z="292.4189" />
+				<CustomBehavior File="ForcedDismount" />
+				<CustomBehavior File="InteractWith" MobId="32808" />
+				<CustomBehavior File="RunMacro" Macro="/click GossipTitleButton1" />
+				<CustomBehavior File="RunMacro" Macro="/click QuestFrameCompleteQuestButton" />	
+
+				<!-- Argent Stand / Zul'Drak Extinguish Horde Bonfire -->
+				<CustomBehavior File="FlyTo" DestName="Zul'Drak Horde Bonfire" X="5287.337" Y="-2757.071" Z="292.4192" />
+				<CustomBehavior File="ForcedDismount" />
+				<CustomBehavior File="InteractWith" MobId="194048" ObjectType="Gameobject" Range="10" WaitTime="3000" />
+				<CustomBehavior File="RunMacro" Macro="/click GossipTitleButton1" />
+				<CustomBehavior File="RunMacro" Macro="/click QuestFrameCompleteQuestButton" />	
+
+				<!-- Amberpine Lodge / Grizzly Hills Flame Warden -->
+				<CustomBehavior File="FlyTo" DestName="Grizzly Hills Flame Warden" X="3399.675" Y="-2886.461" Z="201.2697" />
+				<CustomBehavior File="ForcedDismount" />
+				<CustomBehavior File="InteractWith" MobId="32805" />
+				<CustomBehavior File="RunMacro" Macro="/click GossipTitleButton1" />
+				<CustomBehavior File="RunMacro" Macro="/click QuestFrameCompleteQuestButton" />	
+
+				<!-- Conquest Hold / Grizzly Hills Extinguish Horde Bonfire -->
+				<CustomBehavior File="FlyTo" DestName="Grizzly Hills Horde Bonfire" X="3374.573" Y="-2112.131" Z="123.3139" />
+				<CustomBehavior File="ForcedDismount" />
+				<CustomBehavior File="InteractWith" MobId="194042" ObjectType="Gameobject" Range="10" WaitTime="3000" />
+				<CustomBehavior File="RunMacro" Macro="/click GossipTitleButton1" />
+				<CustomBehavior File="RunMacro" Macro="/click QuestFrameCompleteQuestButton" />	
+
+				<!-- Camp Winterhoof / Howling Fjord Extinguish Horde Bonfire -->
+				<CustomBehavior File="FlyTo" DestName="Howling Fjord Horde Bonfire" X="2572.639" Y="-4332.419" Z="276.3951" />
+				<CustomBehavior File="ForcedDismount" />
+				<CustomBehavior File="InteractWith" MobId="194039" ObjectType="Gameobject" Range="10" WaitTime="3000" />
+				<CustomBehavior File="RunMacro" Macro="/click GossipTitleButton1" />
+				<CustomBehavior File="RunMacro" Macro="/click QuestFrameCompleteQuestButton" />	
+
+				<!-- Fort Wildervar / Howling Fjord Flame Warden -->
+				<CustomBehavior File="FlyTo" DestName="Howling Fjord Flame Warden" X="2465.15" Y="-4890.649" Z="261.8209" />
+				<CustomBehavior File="ForcedDismount" />
+				<CustomBehavior File="InteractWith" MobId="32804" />
+				<CustomBehavior File="RunMacro" Macro="/click GossipTitleButton1" />
+				<CustomBehavior File="RunMacro" Macro="/click QuestFrameCompleteQuestButton" />	
+
+
+
+	<CustomBehavior File="UserDialog" AllowBotStop="True" SoundCue="Exclamation" SoundCueInterval="1" Text="Grats on your ach!\n\nEnd of Line" />
+
+
+
+
+
+	</QuestOrder>
+</HBProfile>

@@ -1,0 +1,85 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Professionbuddy ChildrenCount="14">
+  <If Condition="TreeRoot.Current.Name != &quot;Questing&quot;" IgnoreCanRun="True" ChildrenCount="2">
+    <CustomAction Code="MessageBox.Show(&quot;Please switch bot to Questing to continue.&quot;);" />
+    <CustomAction Code="TreeRoot.Stop();" />
+  </If>
+  <If Condition="Me.GetSkill(Styx.SkillLine.Skinning).CurrentValue == 0 &amp;&amp; Me.GetSkill(Styx.SkillLine.Skinning).MaxValue == 0" IgnoreCanRun="True" ChildrenCount="4">
+    <FlyToAction Dismount="True" X="1842.883" Y="-4548.015" Z="24.4628" />
+    <TrainSkillAction NpcEntry="7088" X="1852.908" Y="-4570.059" Z="24.98076" />
+    <LoadProfileAction Path="HBProfiles\[H] SubProfile Skinning 1-525.xml" ProfileType="Honorbuddy" />
+    <FlyToAction Dismount="True" X="934.4364" Y="-4353.716" Z="17.48549" />
+  </If>
+  <If Condition="Me.GetSkill(Styx.SkillLine.Skinning).CurrentValue == 75 &amp;&amp; Me.GetSkill(Styx.SkillLine.Skinning).MaxValue == 75" IgnoreCanRun="True" ChildrenCount="4">
+    <FlyToAction Dismount="True" X="1842.883" Y="-4548.015" Z="24.4628" />
+    <TrainSkillAction NpcEntry="7088" X="1852.908" Y="-4570.059" Z="24.98076" />
+    <LoadProfileAction Path="HBProfiles\[H] SubProfile Skinning 1-525.xml" ProfileType="Honorbuddy" />
+    <FlyToAction Dismount="True" X="-191.3885" Y="-3461.67" Z="94.32069" />
+  </If>
+  <If Condition="Me.GetSkill(Styx.SkillLine.Skinning).CurrentValue == 125 &amp;&amp; Me.GetSkill(Styx.SkillLine.Skinning).MaxValue == 150" IgnoreCanRun="True" ChildrenCount="4">
+    <FlyToAction Dismount="True" X="1842.883" Y="-4548.015" Z="24.4628" />
+    <TrainSkillAction NpcEntry="7088" X="1852.908" Y="-4570.059" Z="24.98076" />
+    <LoadProfileAction Path="HBProfiles\[H] SubProfile Skinning 1-525.xml" ProfileType="Honorbuddy" />
+    <FlyToAction Dismount="True" X="2214.999" Y="-2444.7" Z="93.20721" />
+  </If>
+  <If Condition="Me.GetSkill(Styx.SkillLine.Skinning).CurrentValue == 185 &amp;&amp; Me.GetSkill(Styx.SkillLine.Skinning).MaxValue == 225" IgnoreCanRun="True" ChildrenCount="2">
+    <LoadProfileAction Path="HBProfiles\[H] SubProfile Skinning 1-525.xml" ProfileType="Honorbuddy" />
+    <FlyToAction Dismount="True" X="-2709.267" Y="-3465.458" Z="33.9972" />
+  </If>
+  <If Condition="Me.GetSkill(Styx.SkillLine.Skinning).CurrentValue == 205 &amp;&amp; Me.GetSkill(Styx.SkillLine.Skinning).MaxValue == 225" IgnoreCanRun="True" ChildrenCount="4">
+    <FlyToAction Dismount="True" X="1842.883" Y="-4548.015" Z="24.4628" />
+    <TrainSkillAction NpcEntry="7088" X="1852.908" Y="-4570.059" Z="24.98076" />
+    <LoadProfileAction Path="HBProfiles\[H] SubProfile Skinning 1-525.xml" ProfileType="Honorbuddy" />
+    <FlyToAction Dismount="True" X="-5374.572" Y="-3982.128" Z="87.20911" />
+  </If>
+  <If Condition="Me.GetSkill(Styx.SkillLine.Skinning).CurrentValue == 265 &amp;&amp; Me.GetSkill(Styx.SkillLine.Skinning).MaxValue == 300" IgnoreCanRun="True" ChildrenCount="2">
+    <LoadProfileAction Path="HBProfiles\[H] SubProfile Skinning 1-525.xml" ProfileType="Honorbuddy" />
+    <FlyToAction Dismount="True" X="-7107.761" Y="-2106.093" Z="-272.8078" />
+  </If>
+  <If Condition="Me.GetSkill(Styx.SkillLine.Skinning).CurrentValue == 300 &amp;&amp; Me.GetSkill(Styx.SkillLine.Skinning).MaxValue == 300" IgnoreCanRun="True" ChildrenCount="4">
+    <CustomAction Code="Lua.DoString(string.Format(&quot;RunMacroText(\&quot;{0}\&quot;)&quot; , &quot;/cast Hearthstone&quot;), 0);" />
+    <FlyToAction Dismount="True" X="1842.883" Y="-4548.015" Z="24.4628" />
+    <TrainSkillAction NpcEntry="7088" X="1852.908" Y="-4570.059" Z="24.98076" />
+    <LoadProfileAction Path="HBProfiles\[H] SubProfile Skinning 1-525.xml" ProfileType="Honorbuddy" />
+  </If>
+  <If Condition="Me.GetSkill(Styx.SkillLine.Skinning).CurrentValue == 300 &amp;&amp; Me.GetSkill(Styx.SkillLine.Skinning).MaxValue == 375" IgnoreCanRun="True" ChildrenCount="3">
+    <If Condition="Me.MapId != 530" IgnoreCanRun="True" ChildrenCount="4"> <!-- Flytta upp ett snepp -->
+      <FlyToAction Dismount="True" X="-485.5679" Y="2338.448" Z="52.08246" />
+      <MoveToAction MoveType="Location" Pathing="Navigator" Entry="0" X="1685.786" Y="-4125.882" Z="66.3412" />
+      <InteractionAction Entry="195142" InteractDelay="0" InteractType="GameObject" GameObjectType="MapObjectTransport" SpellFocus="Anvil" />
+      <FlyToAction Dismount="False" X="-11906.85" Y="-3215.02" Z="-14.23298" /> <!-- The Darkportal -->
+    </If>
+    <FlyToAction Dismount="True" X="1677.307" Y="-4105.983" Z="49.07329" />
+    <LoadProfileAction Path="HBProfiles\[H] SubProfile Skinning 1-525.xml" ProfileType="Honorbuddy" />
+  </If>
+  <If Condition="Me.GetSkill(Styx.SkillLine.Skinning).CurrentValue == 330 &amp;&amp; Me.GetSkill(Styx.SkillLine.Skinning).MaxValue == 375" IgnoreCanRun="True" ChildrenCount="2">
+    <FlyToAction Dismount="True" X="-1858.827" Y="3767.043" Z="13.51165" />
+    <LoadProfileAction Path="HBProfiles\[H] SubProfile Skinning 1-525.xml" ProfileType="Honorbuddy" />
+  </If>
+  <If Condition="Me.GetSkill(Styx.SkillLine.Skinning).CurrentValue == 375 &amp;&amp; Me.GetSkill(Styx.SkillLine.Skinning).MaxValue == 375" IgnoreCanRun="True" ChildrenCount="5">
+    <CustomAction Code="Lua.DoString(string.Format(&quot;RunMacroText(\&quot;{0}\&quot;)&quot; , &quot;/cast Hearthstone&quot;), 0);" />
+    <FlyToAction Dismount="True" X="1842.883" Y="-4548.015" Z="24.4628" />
+    <TrainSkillAction NpcEntry="7088" X="1852.908" Y="-4570.059" Z="24.98076" />
+    <LoadProfileAction Path="HBProfiles\CustomBehavior Borean Tundra zep.xml" ProfileType="Honorbuddy" />
+    <If Condition="Me.MapId == 571" IgnoreCanRun="True" ChildrenCount="2">
+      <LoadProfileAction Path="HBProfiles\[H] SubProfile Skinning 1-525.xml" ProfileType="Honorbuddy" />
+      <FlyToAction Dismount="True" X="2388.442" Y="6217.238" Z="47.50923" />
+    </If>
+  </If>
+  <If Condition="Me.GetSkill(Styx.SkillLine.Skinning).CurrentValue == 410 &amp;&amp; Me.GetSkill(Styx.SkillLine.Skinning).MaxValue == 450" IgnoreCanRun="True" ChildrenCount="1">
+    <If Condition="Me.MapId == 571" IgnoreCanRun="True" ChildrenCount="2">
+      <FlyToAction Dismount="True" X="5352.07" Y="5574.687" Z="-91.27075" />
+      <LoadProfileAction Path="HBProfiles\[H] SubProfile Skinning 1-525.xml" ProfileType="Honorbuddy" />
+    </If>
+  </If>
+  <If Condition="Me.GetSkill(Styx.SkillLine.Skinning).CurrentValue == 450 &amp;&amp; Me.GetSkill(Styx.SkillLine.Skinning).MaxValue == 450" IgnoreCanRun="True" ChildrenCount="4">
+    <CustomAction Code="Lua.DoString(string.Format(&quot;RunMacroText(\&quot;{0}\&quot;)&quot; , &quot;/cast Hearthstone&quot;), 0);" />
+    <FlyToAction Dismount="True" X="1842.883" Y="-4548.015" Z="24.4628" />
+    <TrainSkillAction NpcEntry="7088" X="1852.908" Y="-4570.059" Z="24.98076" />
+    <LoadProfileAction Path="HBProfiles\[H] SubProfile Skinning 1-525.xml" ProfileType="Honorbuddy" />
+  </If>
+  <If Condition="Me.GetSkill(Styx.SkillLine.Skinning).CurrentValue == 450 &amp;&amp; Me.GetSkill(Styx.SkillLine.Skinning).MaxValue == 600" IgnoreCanRun="True" ChildrenCount="2">
+    <FlyToAction Dismount="True" X="4719.215" Y="-1633.217" Z="1290.808" />
+    <LoadProfileAction Path="HBProfiles\[H] SubProfile Skinning 1-525.xml" ProfileType="Honorbuddy" />
+  </If>
+</Professionbuddy>

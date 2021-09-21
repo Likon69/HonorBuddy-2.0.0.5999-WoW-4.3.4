@@ -1,0 +1,569 @@
+<HBProfile xsi:noNamespaceSchemaLocation="../Schemas/EchoSchema.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<!-- Original contribution by EchoTiger -->
+	<Name>Zangarmarsh ($ShortHash$)</Name>
+
+	<DefaultNavType>Fly</DefaultNavType>
+
+	<MinDurability>0.3</MinDurability>
+	<MinFreeBagSlots>3</MinFreeBagSlots>
+
+	<SellGrey>true</SellGrey>
+	<SellWhite>true</SellWhite>
+	<SellGreen>true</SellGreen>
+	<SellBlue>true</SellBlue>
+	<SellPurple>false</SellPurple>
+
+	<MailGrey>false</MailGrey>
+	<MailWhite>true</MailWhite>
+	<MailGreen>true</MailGreen>
+	<MailBlue>true</MailBlue>
+	<MailPurple>true</MailPurple>
+
+	<TargetElites>true</TargetElites>
+
+	<AvoidMobs>
+	</AvoidMobs>
+
+	<Mailboxes>
+	</Mailboxes>
+
+	<Vendors>
+		<Vendor Name="Fedryen Swiftspear" Id="17904" Type="Repair" X="-198.9696" Y="5490.686" Z="21.84628" />
+		<Vendor Name="Innkeeper Coryth Stoktron" Id="18907" Type="Food" X="-174.478" Y="5529.211" Z="29.40756" />
+		<Vendor Name="Innkeeper Kerp" Id="18908" Type="Food" X="1056.379" Y="7370.99" Z="39.58504" />
+		<Vendor Name="Maktu" Id="18010" Type="Repair" X="1020.835" Y="7383.452" Z="36.24266" />
+	</Vendors>
+
+	<Blackspots>
+		<Blackspot X="748.8289" Y="6883.973" Z="-63.92831" Radius="10" /> <!-- Mortog Steamhead vendor -->
+	</Blackspots>
+
+	<Blacklist>
+		<Mob Name="Elder Juruti" Id="18197" Flags="Pull" />
+	</Blacklist>
+
+	<QuestOrder IgnoreCheckpoints="false" >
+		<!-- Check function status -->
+		<Code File="RunCode" Type="Definition">
+			<![CDATA[
+			private static bool? profileFunctionsEnabled => (bool?)AppDomain.CurrentDomain.GetData("QuestingProfiles_FunctionsEnabled");
+			private static bool IsStoreProfile(string path) => path.StartsWith("store://");
+			private static string Slashify(string path) => IsStoreProfile(path) ? path.Replace(@"\", "/") : path.Replace("/", @"\");
+
+			public __CompiledBatchClass__()
+			{
+				ActivateFunctions();
+			}
+
+			private static void ActivateFunctions()
+			{
+				if (profileFunctionsEnabled == null || profileFunctionsEnabled == false)
+				{
+					Bots.Professionbuddy.PBLog.Log(Colors.MediumPurple, "[Profile Message!]: ", Colors.Yellow, "Please stand by as the functions are being activated!");
+					LoadProfile(@"..\..\Functions\Activate Functions.xml");
+				}
+			}
+
+			private static void LoadProfile(string path)
+			{
+				var profile = GetNewPath(path);
+				if (!IsStoreProfile(profile) && !File.Exists(profile))
+				{
+					Bots.Professionbuddy.PBLog.Log(Colors.MediumPurple, "[Profile Message!]: ", Colors.Yellow, "Profile does not exist.\n" + profile);
+					return;
+				}
+
+				Bots.Professionbuddy.PBLog.Log(Colors.MediumPurple, "[Profile Message!]: ", Colors.Yellow, "Loading: " + profile);
+				ProfileManager.LoadNew(profile, false);
+			}
+
+			private static string GetNewPath(string path)
+			{
+				if (IsStoreProfile(path))
+					return Slashify(path);
+
+				var currentProfile = ProfileManager.XmlLocation;
+				if (IsStoreProfile(currentProfile))
+					return Slashify(currentProfile + "/../" + path);
+
+				var absolutePath = Path.Combine(Path.GetDirectoryName(currentProfile), path);
+				absolutePath = Path.GetFullPath(absolutePath);
+				var canonicalPath = new Uri(absolutePath).LocalPath;
+				return Slashify(canonicalPath);
+			}]]>
+		</Code>
+		<Code File="RunCode" Code="ActivateFunctions();" />
+		<!-- END Check function status -->
+
+		<If Condition="Me.IsHorde" >
+			<Code File="LoadProfile" ProfileName="..\..\Questing Autoloader.xml" />
+		</If>
+		<!-- RunCode Methods -->
+			<Code File="RunCode">
+			<![CDATA[
+				Bots.Professionbuddy.PBLog.Log(System.Windows.Media.Colors.MediumPurple, "> [Profile Initialization Status] ", System.Windows.Media.Colors.CornflowerBlue, "\n     Auto-Looting	:: Enabled\n     Looting	:: Enabled\n     Game Addons	:: Disabled");
+				Lua.DoString("SetCVar('AutoLootDefault', 1);");
+				Lua.DoString("SetCVar('autoDismountFlying', 1);");
+				CharacterSettings.Instance.LootMobs = true;
+				CharacterSettings.Instance.Save();
+				Logging.Write(System.Windows.Media.Colors.MediumPurple, "> [Ready to bot!]");
+			]]>
+			</Code>
+			<Code File="RunCode" Type="Definition">
+				<![CDATA[
+						bool DoQuest(params uint[] questIds)
+						{
+							foreach (var questId in questIds)
+							{
+								if (HasQuest(questId) && !IsQuestCompleted(questId)) return true;
+							}
+							return false;
+						}
+						bool NeedsQuest(params uint[] questIds)
+						{
+							foreach (var questId in questIds)
+							{
+								if (!HasQuest(questId) && !IsQuestCompleted(questId)) return true;
+							}
+							return false;
+						}
+						bool NeedsBreadcrumbQuest(params uint[] questIds)
+						{
+							foreach (var questId in questIds)
+							{
+								if (IsQuestCompleted(questId)) return false;
+							}
+							return true;
+						}
+						bool QuestDone(params uint[] questIds)
+						{
+							foreach (var questId in questIds)
+							{
+								if (HasQuest(questId) && IsQuestCompleted(questId)) return true;
+							}
+							return false;
+						}
+						bool QuestFlaggedCompleted(params uint[] questIds)
+						{
+							foreach (var questId in questIds)
+							{
+								return Lua.GetReturnVal<bool>($"return IsQuestFlaggedCompleted({questId});", 0);
+							}
+							return false;
+						}
+						async Task SkipCutscene(int preWait = 3000, int postWait = 3000)
+						{
+					// Add detection of cutscene here.
+							await Coroutine.Sleep(preWait);
+					// Test and improve the working method.
+							Lua.DoString("MovieFrame:StopMovie(); CinematicFrame_CancelCinematic(); StopCinematic();");
+							await Coroutine.Sleep(postWait);
+						}
+					]]>
+			</Code>
+		<!-- END RunCode Methods -->
+
+		<If Condition="!SpellManager.HasSpell(34090)" >
+			<Code File="Hooks\MountHook" state="true" />
+		</If>
+
+		<PickUp QuestName="The Umbrafen Tribe" QuestId="9747" GiverName="Ikeyen" GiverId="17956" X="-218.2415" Y="5431.521" Z="22.27505" />
+		<PickUp QuestName="Plants of Zangarmarsh" QuestId="9802" GiverName="Lauranna Thar'well" GiverId="17909" X="-217.7461" Y="5435.383" Z="21.81659" />
+		<PickUp QuestName="Leader of the Darkcrest" QuestId="9730" GiverName="Lauranna Thar'well" GiverId="182115" GiverType="Object" X="-238.2576" Y="5496.95" Z="25.69807" />
+		<PickUp QuestName="Leader of the Bloodscale" QuestId="9817" GiverName="Lauranna Thar'well" GiverId="182115" GiverType="Object" X="-238.2576" Y="5496.95" Z="25.69807" />
+		<PickUp QuestName="The Dying Balance" QuestId="9895" GiverName="Lethyn Moonfire" GiverId="17834" X="-181.1872" Y="5523.538" Z="29.40439" />
+
+		<Code File="SetHearthstone" MobId="18907" AreaId="8612" X="-176.017" Y="5526.564" Z="29.40432" />
+
+		<Code File="KillUntilComplete" MobId="18281" QuestId="9895" >
+			<HuntingGrounds>
+				<Hotspot X="-476.2592" Y="5351.734" Z="18.09087" />
+				<Hotspot X="-665.1328" Y="5332.016" Z="17.52738" />
+			</HuntingGrounds>
+		</Code>
+
+		<Code File="KillUntilComplete" MobId="18080" QuestId="9747" QuestObjectiveIndex="1" X="-1103.082" Y="5202.169" Z="57.19857" />
+
+		<Code File="KillUntilComplete" QuestId="9747" >
+			<HuntingGrounds>
+				<Hotspot X="-1056.645" Y="5227.68" Z="23.05342" />
+				<Hotspot X="-919.8035" Y="5306.31" Z="17.52" />
+				<Hotspot X="-814.8466" Y="5200.039" Z="19.05512" />
+				<Hotspot X="-761.003" Y="5313.776" Z="18.44009" />
+			</HuntingGrounds>
+			<PursuitList>
+				<PursueUnit Id="18077" PursueWhen="!IsObjectiveComplete(2, 9747)" />
+				<PursueUnit Id="18079" PursueWhen="!IsObjectiveComplete(3, 9747)" />
+				<PursueUnit Id="20115" PursueWhen="!IsObjectiveComplete(4, 9747)" />
+			</PursuitList>
+		</Code>
+
+		<TurnIn QuestName="The Umbrafen Tribe" QuestId="9747" TurnInName="Ikeyen" TurnInId="17956" X="-217.3651" Y="5432.532" Z="22.2192" />
+		<PickUp QuestName="A Damp, Dark Place" QuestId="9788" GiverName="Ikeyen" GiverId="17956" X="-217.3651" Y="5432.532" Z="22.2192" />
+		<PickUp QuestName="Saving the Sporeloks" QuestId="10096" GiverName="Lauranna Thar'well" GiverId="17909" X="-218.6027" Y="5435.641" Z="21.74787" />
+		<TurnIn QuestName="The Dying Balance" QuestId="9895" TurnInName="Lethyn Moonfire" TurnInId="17834" X="-182.1452" Y="5524.948" Z="29.40451" />
+		<PickUp QuestName="Safeguarding the Watchers" QuestId="9894" GiverName="Windcaller Blackhoof" GiverId="18070" X="-231.2933" Y="5436.102" Z="21.8378" />
+
+		<If Condition="!Me.IsIndoors &amp;&amp; DoQuest(9788, 9894, 10096, 9802)" >
+			<Code File="ForceSetVendor" DoSell="true" DoRepair="true" /> <!-- Don't want the bot getting stuck because it can't fly out of the cave -->
+			<MoveTo X="-1127.286" Y="5714.964" Z="59.38694" />
+			<Code File="ForcedDismount" />
+		</If>
+
+		<DefaultNavType Value="Run" /> <!-- Need run only to avoid issues with the cave -->
+
+		<Code File="InteractWith" MobId="182122" InteractByLooting="true" MovementBy="NavigatorOnly" NonCompeteDistance="0" QuestId="9788" X="-1344.425" Y="5926.637" Z="9.890832" />
+		<Code File="KillUntilComplete" MobId="18282" MovementBy="NavigatorOnly" QuestId="9894" X="-1235.14" Y="5803.71" Z="2.820427" />
+
+		<Code File="KillUntilComplete" MovementBy="NavigatorOnly" QuestId="10096" >
+			<HuntingGrounds>
+				<Hotspot X="-1282.63" Y="5839.856" Z="40.13837" />
+				<Hotspot X="-1189.195" Y="5828.065" Z="41.34869" />
+				<Hotspot X="-1247.201" Y="5789.844" Z="2.017291" />
+			</HuntingGrounds>
+			<PursuitList>
+				<PursueUnit Id="18137" PursueWhen="!IsObjectiveComplete(1, 10096)" />
+				<PursueUnit Id="18136" PursueWhen="!IsObjectiveComplete(2, 10096)" />
+			</PursuitList>
+		</Code>
+
+		<Code File="KillUntilComplete" MobIds="18137, 1836" MovementBy="NavigatorOnly" TerminateWhen="!HasQuest(9802) || GetItemCount(24401) &gt;= 10" >
+			<HuntingGrounds>
+				<Hotspot X="-1282.63" Y="5839.856" Z="40.13837" />
+				<Hotspot X="-1189.195" Y="5828.065" Z="41.34869" />
+				<Hotspot X="-1247.201" Y="5789.844" Z="2.017291" />
+			</HuntingGrounds>
+		</Code>
+
+		<If Condition="Me.HearthstoneAreaId == 8612 &amp;&amp; QuestDone(10096) &amp;&amp; Unit(18136) != null" >
+			<Code File="UseHearthstone" WaitForCd="false" />
+		</If>
+
+		<DefaultNavType Value="Fly" />
+
+		<TurnIn QuestName="Safeguarding the Watchers" QuestId="9894" TurnInName="Windcaller Blackhoof" TurnInId="18070" X="-232.7933" Y="5436.083" Z="22.07232" />
+		<TurnIn QuestName="A Damp, Dark Place" QuestId="9788" TurnInName="Ikeyen" TurnInId="17956" X="-218.2932" Y="5432.486" Z="22.18579" />
+		<TurnIn QuestName="Plants of Zangarmarsh" QuestId="9802" TurnInName="Lauranna Thar'well" TurnInId="17909" X="-219.334" Y="5435.695" Z="21.74734" />
+		<TurnIn QuestName="Saving the Sporeloks" QuestId="10096" TurnInName="Lauranna Thar'well" TurnInId="17909" X="-219.334" Y="5435.695" Z="21.74734" />
+		<PickUp QuestName="A Warm Welcome" QuestId="9728" GiverName="Warden Hamoot" GiverId="17858" X="-254.3678" Y="5501.563" Z="66.59966" />
+
+		<PickUp QuestName="Disturbance at Umbrafen Lake" QuestId="9716" GiverName="Ysiel Windsinger" GiverId="17841" X="-145.9726" Y="5532.628" Z="30.90692" />
+		<While Condition="DoQuest(9716)" >
+			<MoveTo X="-737.9863" Y="5924.183" Z="19.8003" />
+		</While>
+
+		<Code File="KillUntilComplete" MobId="18046" QuestId="9730" X="-363.2552" Y="6202.278" Z="26.28846" />
+		<Code File="KillUntilComplete" MobId="18044" QuestId="9817" X="563.5704" Y="6206.782" Z="26.69689" />
+
+		<Code File="KillUntilComplete" MobIds="18086, 18087, 20088, 20089" QuestId="9728" >
+			<HuntingGrounds>
+				<Hotspot X="547.0731" Y="6250.135" Z="21.7585" />
+				<Hotspot X="612.2796" Y="6337.641" Z="21.71535" />
+				<Hotspot X="-205.7693" Y="6261.412" Z="21.02572" />
+				<Hotspot X="-334.8169" Y="6259.521" Z="19.0243" />
+				<Hotspot X="-390.8463" Y="6371.946" Z="22.7699" />
+				<Hotspot X="-406.2854" Y="6225.845" Z="20.27036" />
+			</HuntingGrounds>
+		</Code>
+
+		<TurnIn QuestName="A Warm Welcome" QuestId="9728" TurnInName="Warden Hamoot" TurnInId="17858" X="-253.4541" Y="5500.991" Z="66.59911" />
+		<TurnIn QuestName="Leader of the Darkcrest" QuestId="9730" TurnInName="Warden Hamoot" TurnInId="17858" X="-253.4541" Y="5500.991" Z="66.59911" />
+		<TurnIn QuestName="Leader of the Bloodscale" QuestId="9817" TurnInName="Warden Hamoot" TurnInId="17858" X="-253.4541" Y="5500.991" Z="66.59911" />
+		<TurnIn QuestName="Disturbance at Umbrafen Lake" QuestId="9716" TurnInName="Ysiel Windsinger" TurnInId="17841" X="-146.0129" Y="5532.321" Z="30.9185" />
+		<RecheckCheckpoints />
+
+		<PickUp QuestName="As the Crow Flies" QuestId="9718" GiverName="Ysiel Windsinger" GiverId="17841" X="-146.0129" Y="5532.321" Z="30.9185" />
+		<While Condition="DoQuest(9718)" >
+			<MoveTo X="-146.0129" Y="5532.321" Z="30.9185" />
+			<Code File="UseItem" ItemId="25465" QuestId="9718" X="-146.0129" Y="5532.321" Z="30.9185" TerminateWhen="Me.OnTaxi" />
+			<Code File="WaitTimer" WaitTime="1000" QuestId="9718" />
+		</While>
+		<TurnIn QuestName="As the Crow Flies" QuestId="9718" TurnInName="Ysiel Windsinger" TurnInId="17841" X="-145.5907" Y="5533.025" Z="30.9258" />
+
+		<PickUp QuestName="Balance Must Be Preserved" QuestId="9720" GiverName="Ysiel Windsinger" GiverId="17841" X="-145.5907" Y="5533.025" Z="30.9258" />
+		<PickUp QuestName="Watcher Leesa'oh" QuestId="9697" GiverName="Lethyn Moonfire" GiverId="17834" X="-181.1319" Y="5525.485" Z="29.40425" />
+
+		<While Condition="DoQuest(9720)" >
+			<If Condition="!IsObjectiveComplete(1, 9720)" >
+				<MoveTo X="-759.5805" Y="5929.946" Z="20.21922" />
+				<Code File="ForcedDismount" />
+				<Code File="UseItem" ItemId="24355" QuestId="9720" QuestObjectiveIndex="1" X="-759.5805" Y="5929.946" Z="20.21922" />
+			</If>
+			<If Condition="!IsObjectiveComplete(4, 9720)" >
+				<MoveTo X="-216.3203" Y="6298.915" Z="21.22116" />
+				<Code File="ForcedDismount" />
+				<Code File="UseItem" ItemId="24355" QuestId="9720" QuestObjectiveIndex="4" X="-216.3203" Y="6298.915" Z="21.22116" />
+			</If>
+			<If Condition="!IsObjectiveComplete(3, 9720)" >
+				<MoveTo X="568.5353" Y="6355.619" Z="22.97812" />
+				<Code File="ForcedDismount" />
+				<Code File="UseItem" ItemId="24355" QuestId="9720" QuestObjectiveIndex="3" X="568.5353" Y="6355.619" Z="22.97812" />
+			</If>
+			<If Condition="!IsObjectiveComplete(2, 9720)" >
+				<MoveTo X="496.6034" Y="8193.358" Z="21.07487" />
+				<Code File="ForcedDismount" />
+				<Code File="UseItem" ItemId="24355" QuestId="9720" QuestObjectiveIndex="2" X="496.6034" Y="8193.358" Z="21.07487" />
+			</If>
+		</While>
+
+		<Code File="KillUntilComplete" MobIds="18088, 18340" TerminateWhen="!NeedsQuest(9731)" >
+			<HuntingGrounds>
+				<Hotspot X="505.6236" Y="8151.499" Z="20.71219" />
+				<Hotspot X="628.0932" Y="8141.14" Z="23.10466" />
+				<Hotspot X="697.2811" Y="8157.774" Z="23.23961" />
+			</HuntingGrounds>
+		</Code>
+
+		<While Condition="DoQuest(9731)" >
+			<MoveTo X="566.1945" Y="6943.969" Z="26.64113" />
+			<Code File="MyCTM" QuestId="9731" X="566.1945" Y="6943.969" Z="-7.589146" />
+			<Code File="AscendInWater" />
+			<MoveTo X="566.1945" Y="6943.969" Z="26.64113" />
+		</While>
+
+		<TurnIn QuestName="Balance Must Be Preserved" QuestId="9720" TurnInName="Ysiel Windsinger" TurnInId="17841" X="-146.3102" Y="5533.336" Z="30.92782" />
+		<TurnIn QuestName="Drain Schematics" QuestId="9731" TurnInName="Ysiel Windsinger" TurnInId="17841" X="-146.3102" Y="5533.336" Z="30.92782" />
+		<RecheckCheckpoints />
+		<PickUp QuestName="The Dead Mire" QuestId="9782" GiverName="Vindicator Idaar" GiverId="18004" X="257.8348" Y="6039.84" Z="131.6143" />
+		<PickUp QuestName="The Boha'mu Ruins" QuestId="9786" GiverName="Anchorite Ahuurn" GiverId="18003" X="279.3712" Y="6044.111" Z="130.2945" />
+		<PickUp QuestName="Unfinished Business" QuestId="9901" GiverName="Prospector Conall" GiverId="18295" X="280.0895" Y="6029.875" Z="130.2788" />
+		<PickUp QuestName="Fulgor Spores" QuestId="9777" GiverName="Ruam" GiverId="18007" X="299.5186" Y="6028.199" Z="131.6311" />
+		<PickUp QuestName="Too Many Mouths to Feed" QuestId="9781" GiverName="Haalrun" GiverId="18005" X="328.4911" Y="6067.723" Z="138.4341" />
+		<PickUp QuestName="Menacing Marshfangs" QuestId="9791" GiverName="Noraani" GiverId="18006" X="329.3415" Y="6074.039" Z="138.4341" />
+
+		<While Condition="DoQuest(9777)" >
+			<Code File="InteractWith" MobId="182116" PreInteractMountStrategy="Dismount" CollectionDistance="200" NumOfTimes="12" QuestId="9777" >
+				<HuntingGrounds>
+					<Hotspot X="251.0708" Y="6105.451" Z="19.47674" />
+					<Hotspot X="251.702" Y="6228.295" Z="17.67285" />
+					<Hotspot X="394.5449" Y="6284.759" Z="23.4565" />
+					<Hotspot X="415.6752" Y="6067.574" Z="17.41953" />
+					<Hotspot X="274.0457" Y="5908.647" Z="21.57965" />
+				</HuntingGrounds>
+			</Code>
+		</While>
+
+		<Code File="KillUntilComplete" MobId="18130" QuestId="9791" >
+			<HuntingGrounds>
+				<Hotspot X="443.0681" Y="5852.621" Z="23.41469" />
+				<Hotspot X="297.5428" Y="5832.962" Z="19.27119" />
+				<Hotspot X="179.4271" Y="5694.528" Z="22.1513" />
+				<Hotspot X="270.0659" Y="5583.489" Z="23.93551" />
+				<Hotspot X="241.7077" Y="5227.238" Z="21.89751" />
+				<Hotspot X="332.4232" Y="5161.003" Z="20.99276" />
+			</HuntingGrounds>
+			<PursuitList>
+				<PursueUnit Id="18280" PursueWhen="DoQuest(9901)" />
+			</PursuitList>
+		</Code>
+
+		<Code File="KillUntilComplete" MobId="18280" QuestId="9901" X="409.2992" Y="5618.349" Z="19.84682" />
+
+		<While Condition="DoQuest(9782)" >
+			<Code File="InteractWith" MobId="182119" InteractByLooting="true" CollectionDistance="200" PreInteractMountStrategy="Dismount" QuestId="9782" X="671.4008" Y="5404.48" Z="-26.5912" />
+		</While>
+
+		<!-- Mire Hydra comment -->
+
+		<TurnIn QuestName="The Dead Mire" QuestId="9782" TurnInName="Vindicator Idaar" TurnInId="18004" X="259.7536" Y="6040.709" Z="131.6146" />
+		<PickUp QuestName="An Unnatural Drought" QuestId="9783" GiverName="Vindicator Idaar" GiverId="18004" X="259.7536" Y="6040.709" Z="131.6146" />
+		<TurnIn QuestName="Unfinished Business" QuestId="9901" TurnInName="Prospector Conall" TurnInId="18295" X="280.8075" Y="6031.191" Z="130.2778" />
+		<PickUp QuestName="Blacksting's Bane" QuestId="9896" GiverName="Prospector Conall" GiverId="18295" X="280.8075" Y="6031.191" Z="130.2778" />
+		<TurnIn QuestName="Fulgor Spores" QuestId="9777" TurnInName="Ruam" TurnInId="18007" X="299.6185" Y="6026.746" Z="131.6113" />
+		<TurnIn QuestName="Menacing Marshfangs" QuestId="9791" TurnInName="Noraani" TurnInId="18006" X="328.0313" Y="6072.979" Z="138.4334" />
+		<RecheckCheckpoints />
+		<PickUp QuestName="Umbrafen Eel Filets" QuestId="9780" GiverName="Noraani" GiverId="18006" X="328.0313" Y="6072.979" Z="138.4334" />
+
+		<Code File="KillUntilComplete" MobIds="18124, 19402" QuestId="9783" >
+			<HuntingGrounds>
+				<Hotspot X="409.1007" Y="5343.705" Z="1.119498" />
+				<Hotspot X="565.7829" Y="5229.128" Z="-1.585853" />
+				<Hotspot X="755.9844" Y="5314.332" Z="-0.7018884" />
+				<Hotspot X="785.4316" Y="5478.1" Z="0.3459743" />
+				<Hotspot X="630.1578" Y="5513.622" Z="-1.094808" />
+			</HuntingGrounds>
+		</Code>
+
+		<Code File="Hooks\DoWhen" ActivityName="Drink_WaterBreathingPotion" LogExecution="false" UseWhen="DoQuest(9780, 9781) &amp;&amp; HasItem(25539) &amp;&amp; !Me.HasAura(22807) &amp;&amp; Me.IsSwimming" >
+			<Code File="UseItem" ItemId="25539" TerminateWhen="!HasItem(25539) &amp;&amp; Me.HasAura(22807)" />
+		</Code>
+
+		<If Condition="DoQuest(9780, 9781)" >
+			<MoveTo X="-128.5754" Y="5809.302" Z="16.22893" />
+			<DefaultNavType Value="Run" />
+			<Code File="KillUntilComplete" MovementBy="NavigatorOnly" TerminateWhen="!DoQuest(9780, 9781)" >
+				<HuntingGrounds>
+					<Hotspot X="-128.5754" Y="5809.302" Z="16" />
+					<Hotspot X="-198.0912" Y="5882.383" Z="16" />
+					<Hotspot X="-276.9196" Y="5830.792" Z="16" />
+					<Hotspot X="-338.7128" Y="5593.985" Z="16" />
+					<Hotspot X="-422.9256" Y="5582.572" Z="16" />
+					<Hotspot X="-567.5942" Y="5586.097" Z="16" />
+					<Hotspot X="-726.0601" Y="5601.538" Z="16" />
+				</HuntingGrounds>
+				<PursuitList>
+					<PursueUnit Id="18138" PursueWhen="DoQuest(9780)" />
+					<PursueUnit Id="18213" PursueWhen="DoQuest(9781)" />
+				</PursuitList>
+			</Code>
+			<Code File="AscendInWater" />
+			<DefaultNavType Value="Fly" />
+		</If>
+
+		<Code File="Hooks\DoWhen" ActivityName="Drink_WaterBreathingPotion" Command="Remove" />
+
+		<TurnIn QuestName="An Unnatural Drought" QuestId="9783" TurnInName="Vindicator Idaar" TurnInId="18004" X="259.8594" Y="6039.3" Z="131.6175" />
+		<!--<PickUp QuestName="The Fate of Tuurem" QuestId="9793" GiverName="Vindicator Idaar" GiverId="18004" X="259.8594" Y="6039.3" Z="131.6175" /> -->
+		<If Condition="IsQuestCompleted(9827)" >
+			<TurnIn QuestName="Withered Basidium" QuestId="9827" TurnInName="Ruam" TurnInId="18007" X="300.1729" Y="6029.439" Z="131.6302" />
+			<PickUp QuestName="Withered Flesh" QuestId="10355" GiverName="Ruam" GiverId="18007" X="300.1729" Y="6029.439" Z="131.6302" />
+		</If>
+		<TurnIn QuestName="Umbrafen Eel Filets" QuestId="9780" TurnInName="Noraani" TurnInId="18006" X="327.8799" Y="6073.155" Z="138.433" />
+		<TurnIn QuestName="Too Many Mouths to Feed" QuestId="9781" TurnInName="Haalrun" TurnInId="18005" X="328.1851" Y="6068.882" Z="138.433" />
+		<RecheckCheckpoints />
+
+		<Code File="KillUntilComplete" QuestId="10355" >
+			<HuntingGrounds>
+				<Hotspot X="409.1007" Y="5343.705" Z="1.119498" />
+				<Hotspot X="565.7829" Y="5229.128" Z="-1.585853" />
+				<Hotspot X="755.9844" Y="5314.332" Z="-0.7018884" />
+				<Hotspot X="785.4316" Y="5478.1" Z="0.3459743" />
+				<Hotspot X="630.1578" Y="5513.622" Z="-1.094808" />
+			</HuntingGrounds>
+			<PursuitList>
+				<PursueUnit Id="20324" PursueWhen="!IsObjectiveComplete(1, 10355)" />
+				<PursueUnit Id="18124" PursueWhen="!IsObjectiveComplete(2, 10355)" />
+				<PursueUnit Id="19402" PursueWhen="!IsObjectiveComplete(2, 10355)" />
+			</PursuitList>
+		</Code>
+
+		<If Condition="IsQuestCompleted(10355)" >
+			<TurnIn QuestName="Withered Flesh" QuestId="10355" TurnInName="Ruam" TurnInId="18007" X="300.2892" Y="6027.097" Z="131.6044" />
+		</If>
+
+		<Code File="KillUntilComplete" MobId="18283" QuestId="9896" X="-56.82386" Y="6978.692" Z="20.57703" />
+
+		<While Condition="DoQuest(9786)" >
+			<MoveTo X="-388.4176" Y="7257.521" Z="54.77454" />
+		</While>
+
+		<Code File="KillUntilComplete" MobId="18285" X="-58.63571" Y="7826.769" Z="22.99826" TerminateWhen="(Me.Level &gt;= 62)?IsQuestCompleted(9911):true" />
+
+		<If Condition="HasQuest(9911)" >
+			<TurnIn QuestName="The Count of the Marshes" QuestId="9911" TurnInName="Watcher Leesa'oh" TurnInId="17831" X="-281.4519" Y="8301.966" Z="19.75555" />
+		</If>
+		<TurnIn QuestName="Watcher Leesa'oh" QuestId="9697" TurnInName="Watcher Leesa'oh" TurnInId="17831" X="-281.5674" Y="8305.113" Z="19.79694" />
+		<PickUp QuestName="Observing the Sporelings" QuestId="9701" GiverName="Watcher Leesa'oh" GiverId="17831" X="-281.5674" Y="8305.113" Z="19.79694" />
+		<PickUp QuestName="The Sporelings' Plight" QuestId="9739" GiverName="Fahssn" GiverId="17923" X="-174.7358" Y="8520.393" Z="21.91934" />
+		<PickUp QuestName="Natural Enemies" QuestId="9743" GiverName="Fahssn" GiverId="17923" X="-174.7358" Y="8520.393" Z="21.91934" />
+
+		<While Condition="DoQuest(9739)" >
+			<Code File="InteractWith" MobId="182069" InteractByLooting="true" MovementBy="NavigatorOnly" PreInteractMountStrategy="Dismount" CollectionDistance="250" NumOfTimes="20" QuestId="9739" >
+				<HuntingGrounds>
+					<Hotspot X="-118.8169" Y="8616.394" Z="21.29154" />
+					<Hotspot X="-98.99194" Y="8769.581" Z="18.16509" />
+					<Hotspot X="-98.85748" Y="8899.129" Z="19.21131" />
+				</HuntingGrounds>
+			</Code>
+		</While>
+
+		<While Condition="DoQuest(9701)" >
+			<MoveTo X="-75.71963" Y="8800.684" Z="17.69161" />
+			<MoveTo X="-84.89407" Y="8788.492" Z="19.70688" />
+		</While>
+
+		<Code File="KillUntilComplete" MobIds="18125, 19519" MovementBy="NavigatorOnly" QuestId="9743" >
+			<HuntingGrounds>
+				<Hotspot X="-129.5957" Y="8598.399" Z="18.1165" />
+				<Hotspot X="-43.60754" Y="8682.581" Z="20.37807" />
+				<Hotspot X="-186.5622" Y="8830.767" Z="20.18322" />
+				<Hotspot X="-84.90067" Y="8914.785" Z="23.78579" />
+			</HuntingGrounds>
+		</Code>
+
+		<TurnIn QuestName="The Sporelings' Plight" QuestId="9739" TurnInName="Fahssn" TurnInId="17923" X="-188.5866" Y="8517.478" Z="21.68695" />
+		<TurnIn QuestName="Natural Enemies" QuestId="9743" TurnInName="Fahssn" TurnInId="17923" X="-188.5866" Y="8517.478" Z="21.68695" />
+		<TurnIn QuestName="Observing the Sporelings" QuestId="9701" TurnInName="Watcher Leesa'oh" TurnInId="17831" X="-280.8767" Y="8305.19" Z="19.83427" />
+		<RecheckCheckpoints />
+		<PickUp QuestName="A Question of Gluttony" QuestId="9702" GiverName="Watcher Leesa'oh" GiverId="17831" X="-280.8767" Y="8305.19" Z="19.83427" />
+
+		<While Condition="DoQuest(9702)" >
+			<Code File="InteractWith" MobIds="182031, 182256, 184578" InteractByLooting="true" PreInteractMountStrategy="Dismount" CollectionDistance="200" NumOfTimes="20" QuestId="9702" >
+				<HuntingGrounds>
+					<Hotspot X="-171.4627" Y="8099.902" Z="18.96778" />
+					<Hotspot X="-240.8984" Y="8013.037" Z="18.5326" />
+					<Hotspot X="-200.1654" Y="7916.66" Z="18.77793" />
+					<Hotspot X="-110.5851" Y="7949.77" Z="18.85867" />
+				</HuntingGrounds>
+			</Code>
+		</While>
+
+		<TurnIn QuestName="A Question of Gluttony" QuestId="9702" TurnInName="Watcher Leesa'oh" TurnInId="17831" X="-278.5073" Y="8303.309" Z="19.88393" />
+
+		<PickUp QuestName="Familiar Fungi" QuestId="9708" GiverName="Watcher Leesa'oh" GiverId="17831" X="-278.5073" Y="8303.309" Z="19.88393" />
+		<Code File="KillUntilComplete" MobIds="18117, 18118" QuestId="9708" >
+			<HuntingGrounds>
+				<Hotspot X="600.6594" Y="7886.385" Z="22.22612" />
+				<Hotspot X="691.2466" Y="7811.975" Z="22.72837" />
+				<Hotspot X="804.1135" Y="7733.094" Z="21.80097" />
+				<Hotspot X="907.1027" Y="7836.092" Z="22.23829" />
+			</HuntingGrounds>
+		</Code>
+		<TurnIn QuestName="Familiar Fungi" QuestId="9708" TurnInName="Watcher Leesa'oh" TurnInId="17831" X="-281.682" Y="8302.494" Z="19.75249" />
+
+		<PickUp QuestName="Stealing Back the Mushrooms" QuestId="9709" GiverName="Watcher Leesa'oh" GiverId="17831" X="-281.682" Y="8302.494" Z="19.75249" />
+		<Code File="InteractWith" MobId="182050" InteractByLooting="true" CollectionDistance="200" PreInteractMountStrategy="Dismount" QuestId="9709" QuestObjectiveIndex="1" >
+			<HuntingGrounds>
+				<Hotspot X="1617.883" Y="8604.48" Z="-25.75047" />
+				<Hotspot X="1645.389" Y="8506.95" Z="-53.79313" />
+			</HuntingGrounds>
+		</Code>
+		<TurnIn QuestName="Stealing Back the Mushrooms" QuestId="9709" TurnInName="Watcher Leesa'oh" TurnInId="17831" X="-281.7022" Y="8304.605" Z="19.7747" />
+
+		<TurnIn QuestName="The Boha'mu Ruins" QuestId="9786" TurnInName="Anchorite Ahuurn" TurnInId="18003" X="276.8478" Y="6045.534" Z="130.2943" />
+		<RecheckCheckpoints />
+		<PickUp QuestName="Secrets of the Daggerfen" QuestId="9848" GiverName="Timothy Daniels" GiverId="18019" X="974.0665" Y="7398.345" Z="29.48721" />
+		<PickUp QuestName="Ango'rosh Encroachment" QuestId="9835" GiverName="Ikuti" GiverId="18008" X="1021.437" Y="7367.317" Z="36.32693" />
+		<PickUp QuestName="Daggerfen Deviance" QuestId="10115" GiverName="Ikuti" GiverId="18008" X="1021.437" Y="7367.317" Z="36.32693" />
+
+		<Code File="InteractWith" MobId="182185" CollectionDistance="200" InteractByLooting="true" NonCompeteDistance="0" PreInteractMountStrategy="Dismount" QuestId="9848" QuestObjectiveIndex="2" X="1094.806" Y="8201.137" Z="22.52468" /> <!-- X="1199.972" Y="8132.736" Z="18.83197" /> -->
+		<Code File="InteractWith" MobId="182184" CollectionDistance="200" InteractByLooting="true" NonCompeteDistance="0" PreInteractMountStrategy="Dismount" QuestId="9848" QuestObjectiveIndex="1" X="1030.841" Y="8251.549" Z="57.65334" />
+
+		<Code File="KillUntilComplete" QuestId="10115" >
+			<HuntingGrounds>
+				<Hotspot X="1086.765" Y="8207.707" Z="22.16274" />
+				<Hotspot X="1086.765" Y="8207.707" Z="22.16274" />
+				<Hotspot X="1187.824" Y="8293.187" Z="17.70638" />
+				<Hotspot X="1033.384" Y="8261.06" Z="32.3899" />
+				<Hotspot X="1119.402" Y="8098.64" Z="17.8425" />
+			</HuntingGrounds>
+			<PursuitList>
+				<PursueUnit Id="18116" PursueWhen="!IsObjectiveComplete(1, 10115)" />
+				<PursueUnit Id="18115" PursueWhen="!IsObjectiveComplete(2, 10115)" />
+			</PursuitList>
+		</Code>
+
+		<Code File="KillUntilComplete" QuestId="9835" >
+			<HuntingGrounds>
+				<Hotspot X="1021.437" Y="7367.317" Z="36.32693" />
+				<Hotspot X="1007.731" Y="7624.203" Z="21.82757" />
+				<Hotspot X="870.1176" Y="7853.142" Z="22.27429" />
+				<Hotspot X="735.3332" Y="7867.076" Z="18.40001" />
+			</HuntingGrounds>
+			<PursuitList>
+				<PursueUnit Id="18118" PursueWhen="!IsObjectiveComplete(1, 9835)" />
+				<PursueUnit Id="18117" PursueWhen="!IsObjectiveComplete(2, 9835)" />
+			</PursuitList>
+		</Code>
+
+		<TurnIn QuestName="Secrets of the Daggerfen" QuestId="9848" TurnInName="Timothy Daniels" TurnInId="18019" X="976.2403" Y="7401.704" Z="29.54073" />
+		<TurnIn QuestName="Ango'rosh Encroachment" QuestId="9835" TurnInName="Ikuti" TurnInId="18008" X="1022.068" Y="7367.69" Z="36.32251" />
+		<PickUp QuestName="Overlord Gorefist" QuestId="9839" GiverName="Ikuti" GiverId="18008" X="1022.068" Y="7367.69" Z="36.32251" />
+		<TurnIn QuestName="Daggerfen Deviance" QuestId="10115" TurnInName="Ikuti" TurnInId="18008" X="1022.068" Y="7367.69" Z="36.32251" />
+
+		<Checkpoint Level="63" />
+
+		<Code File="LoadProfile" ProfileName="Terokkar Forest.xml" />
+
+	</QuestOrder>
+</HBProfile>

@@ -1,0 +1,114 @@
+﻿<HBProfile>
+	<Name>[QO] Bloodsail Buccaneers - Faldir's Cove B [Kick]</Name>
+   
+	<MinLevel>1</MinLevel>
+	<MaxLevel>86</MaxLevel>
+   
+	<MinDurability>0.2</MinDurability>
+	<MinFreeBagSlots>2</MinFreeBagSlots>
+	
+	<MailGrey>False</MailGrey>
+	<MailWhite>False</MailWhite>
+	<MailGreen>False</MailGreen>
+	<MailBlue>True</MailBlue>
+	<MailPurple>True</MailPurple>
+   
+	<SellGrey>True</SellGrey>
+	<SellWhite>True</SellWhite>
+	<SellGreen>True</SellGreen>
+	<SellBlue>False</SellBlue>
+	<SellPurple>False</SellPurple>
+   
+	<TargetElites>True</TargetElites>
+	<ContinentId>0</ContinentId>
+
+	<AvoidMobs>
+		<Mob Name="Lolo the Lookout" Entry="2766" />
+		<Mob Name="Deckhand Moishe" Entry="2778" />
+	</AvoidMobs>
+	<Blackspots>
+	</Blackspots>
+	
+	<Mailboxes>
+	</Mailboxes>
+ 
+	<Vendors>
+
+	</Vendors>
+	
+	
+	<QuestOrder>
+	
+	<CustomBehavior File="UserSettings" LootMobs="False" PullDistance="75" TrainNewSkills="False" LearnFlightPaths="False" KillBetweenHotspots="True" LogoutForInactivity="False" />
+				
+		<If Condition="Me.GetReputationLevelWith(87) &lt; Styx.WoWUnitReaction.Friendly" >
+			<CustomBehavior File="FlyTo" X="-2083.981" Y="-2063.22" Z="1.913148" Distance="100" />
+			<CustomBehavior File="ForcedDismount" />
+				<SetGrindArea>
+					<Grindarea>
+						<Factions>120 121 390</Factions> <!-- [Booty Bay] -->
+						<Hotspots>
+							<Hotspot X="-2089.944" Y="-2041.81" Z="3.488495" />
+							<Hotspot X="-2074.225" Y="-2076.199" Z="5.00552" />
+						</Hotspots>
+					</Grindarea>
+				</SetGrindArea>
+			<GrindTo Condition="Me.GetReputationLevelWith(87) &gt;= Styx.WoWUnitReaction.Friendly" GoalText="Grinding to Friendly" />
+		</If>
+
+		<If Condition="Me.GetReputationLevelWith(87) &gt;= Styx.WoWUnitReaction.Friendly" >
+			
+			<!-- Dressing the Part -->
+			<If Condition="((!HasQuest(9272)) &amp;&amp; (!IsQuestCompleted(9272)))" >
+				<CustomBehavior File="FlyTo" X="-14986.96" Y="261.293" Z="13.24983" />
+				<CustomBehavior File="ForcedDismount" />
+				<CustomBehavior File="InteractWith"  MobId="25809" NumOfTimes="1" CollectionDistance="50" X="-15023.35" Y="265.391" Z="7.919432" />
+				<CustomBehavior File="RunMacro" Macro="/click GossipTitleButton1" NumOfTimes="1" WaitTime="1000" />
+				<CustomBehavior File="RunMacro" Macro="/click QuestFrameCompleteQuestButton" NumOfTimes="1" WaitTime="1000" />
+			</If>
+			
+			<!-- do the 2 quests offered by hand? or at least 2nd by hand -->
+			<If Condition="((!HasQuest(4621)) &amp;&amp; (!IsQuestCompleted(4621)))" >
+				<CustomBehavior File="FlyTo" X="-14988.48" Y="264.9644" Z="13.34382" Distance="100" />
+				<CustomBehavior File="ForcedDismount" />
+		<PickUp QuestName="Avast Ye, Admiral!" QuestId="4621" GiverName="Fleet Master Firallon" GiverId="2546" />
+				<RunTo X="-14988.48" Y="264.9644" Z="13.34382" />
+			</If>
+			<If Condition="((HasQuest(4621)) &amp;&amp; (!IsQuestCompleted(4621)))" >
+				<CustomBehavior File="FlyTo" X="-14425.05" Y="495.1804" Z="75.59882" />
+		<CustomBehavior File="UserDialog"  AllowBotStop="True" SoundCue="Asterisk" SoundCueInterval="2" Text="Kill Baron and Fleet Master noobs. Good luck\n\nAfter you run away or rez, get to a safe place and press continue" />
+				<Objective QuestName="Avast Ye, Admiral!" QuestId="4621" Type="KillMob" MobId="2496" KillCount="1" />
+				<Objective QuestName="Avast Ye, Admiral!" QuestId="4621" Type="KillMob" MobId="2487" KillCount="1" />
+			</If>
+			<If Condition="((HasQuest(4621)) &amp;&amp; (IsQuestCompleted(4621)))" >
+				<CustomBehavior File="FlyTo" X="-14988.48" Y="264.9644" Z="13.34382" />
+				<CustomBehavior File="ForcedDismount" />
+		<TurnIn QuestName="Avast Ye, Admiral!" QuestId="4621" TurnInName="Fleet Master Firallon" TurnInId="2546" />			
+	<CustomBehavior File="UserDialog"  AllowBotStop="True" SoundCue="Asterisk" SoundCueInterval="2" Text="If you want to continue this faction to Exalted, Press continue.  Else... Grats!\n\nThere are 2 Parrots available from the vendor on the upper deck\n\n-Kick" />
+			</If>
+		</If>
+			
+	<CustomBehavior File="UserSettings" LootMobs="False" PullDistance="75" TrainNewSkills="False" LearnFlightPaths="False" KillBetweenHotspots="True" LogoutForInactivity="False" />
+
+		<If Condition="Me.GetReputationLevelWith(87) &lt; Styx.WoWUnitReaction.Exalted" >
+			<CustomBehavior File="FlyTo" X="-2083.981" Y="-2063.22" Z="1.913148" Distance="100" />
+			<CustomBehavior File="ForcedDismount" />
+				<SetGrindArea>
+					<Grindarea>
+						<Factions>121 390 120</Factions> <!-- [Booty Bay] -->
+						<Hotspots>
+							<Hotspot X="-2083.248" Y="-2052.468" Z="2.664677" />
+							<Hotspot X="-2083.248" Y="-2052.468" Z="2.664677" />
+						</Hotspots>
+					</Grindarea>
+				</SetGrindArea>
+			<GrindTo Condition="Me.GetReputationLevelWith(87) == Styx.WoWUnitReaction.Exalted" GoalText="Grinding to Exalted" />
+		</If>
+			
+		<If Condition="Me.GetReputationLevelWith(87) == Styx.WoWUnitReaction.Exalted" >
+			<CustomBehavior File="UserDialog" Title="title" AllowBotStop="True" SoundCue="Asterisk" SoundCueInterval="1" Text="You have reached Exalted\nIf you liked this profile, +rep is always appreciated" />
+		</If>
+	
+	</QuestOrder>
+
+</HBProfile>

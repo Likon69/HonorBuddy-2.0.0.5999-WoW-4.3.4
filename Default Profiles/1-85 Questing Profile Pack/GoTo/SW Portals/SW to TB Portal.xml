@@ -1,0 +1,17 @@
+<HBProfile>
+	<Name>SW to Tol Barad Portal</Name>
+	<MinLevel>1</MinLevel>
+	<MaxLevel>101</MaxLevel>
+	
+	<QuestOrder>
+
+			<If Condition="(Me.ZoneId == 1519)" >
+				<CustomBehavior File="FlyTo" DestName="Tol Barad Portal in SW" X="-8209.349" Y="447.6502" Z="117.7825" />
+				<CustomBehavior File="ForcedDismount" />
+				
+				<CustomBehavior File="InteractWith" MobId="206594" ObjectType="Gameobject" Range="5" X="-8209.349" Y="447.6502" Z="117.7825" />
+			</If>
+	
+	
+	</QuestOrder>
+</HBProfile>

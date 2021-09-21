@@ -1,0 +1,49 @@
+﻿<HBProfile creator="Zikke" version="1.1">
+	<Name>Pit of Saron Trash Endless Farm</Name>
+   
+	<MinLevel>1</MinLevel>
+	<MaxLevel>86</MaxLevel>
+   
+	<MinDurability>0.2</MinDurability>
+	<MinFreeBagSlots>0</MinFreeBagSlots>
+	
+    <SellGrey>True</SellGrey>
+    <SellWhite>False</SellWhite>
+    <SellGreen>False</SellGreen>
+    <MailWhite>True</MailWhite>
+    <MailGreen>True</MailGreen>
+    <MailBlue>True</MailBlue>
+    <MailPurple>True</MailPurple>
+   
+	<TargetElites>True</TargetElites>
+	
+	<AvoidMobs>
+		<Mob Name="Summon Enabler Stalker" Entry="53488" />
+	</AvoidMobs>
+	
+	<Blackspots>
+<Blackspot X="6420.105" Y="2363.119" Z="469.7899" Radius="20" />
+	</Blackspots>
+
+    <Mailboxes>
+	<Mailbox X="1607.681" Y="-4424.809" Z="13.6011" /> 
+    </Mailboxes>
+ 
+	<Vendors>
+	</Vendors>
+
+	<Factions></Factions>
+	
+	<QuestOrder>
+
+<While Condition="((HasQuest(14092)) &amp;&amp; (!IsQuestCompleted(14092)))" >
+	<CustomBehavior File="UseItemOn" QuestId="14092" ItemId="46893" MobId1="195309" ObjectType="GameObject" />
+	<!--<CustomBehavior File="CollectThings" MobId1="34920" CollectItemCount="1" CollectItemId="46889" />-->
+	  </While>
+	
+	</QuestOrder>
+
+	<ProtectedItems>
+	</ProtectedItems>
+
+</HBProfile>

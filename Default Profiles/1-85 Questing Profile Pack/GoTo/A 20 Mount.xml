@@ -1,0 +1,160 @@
+<HBProfile>
+	<Name>testing qo</Name>
+	<MinLevel>1</MinLevel>
+	<MaxLevel>86</MaxLevel>
+	
+	<MinDurability>0.1</MinDurability>
+	<MinFreeBagSlots>1</MinFreeBagSlots>
+	
+	<Blackspots>
+	</Blackspots>
+
+	
+	<QuestOrder>
+
+	<CustomBehavior File="UserSettings" LootMobs="False" TrainNewSkills="False" LearnFlightPaths="False" UseFlightPaths="False" PullDistance="10" />
+
+		<!-- Begin Mount Procedure -->
+		<If Condition="Me.GetSkill(Styx.SkillLine.Riding).CurrentValue == 0 &amp;&amp; Me.Silver &gt;= 450" >
+				<CustomBehavior File="ForceSetVendor" DoSell="True" DoRepair="True" DoMail="True" DoTrain="True" />
+		
+				<CustomBehavior File="Message" Text="Compiling Train 60 Speed Mount Function" LogColor="Orange" />
+
+				<If Condition="Me.Race == WoWRace.Human">
+					<RunTo X="-8780.128" Y="380.0052" Z="100.8152" />
+					<CustomBehavior File="InteractWith" MobId="43693" WaitTime="1000" CollectionDistance="50" X="-8780.128" Y="380.0052" Z="100.8152" />
+					<CustomBehavior File="ForceTrainRiding" MobId="43693" />
+					<CustomBehavior File="InteractWith" MobId="43694" BuyItemId="2411" WaitTime="5000" CollectionDistance="50" X="-8780.128" Y="380.0052" Z="100.8152" />
+					<If Condition="(HasItem(2411))" >
+						<CustomBehavior File="Misc\RunLua" Lua="UseItemByName(2411)" />
+					</If>
+				</If>
+				<If Condition="Me.Race == WoWRace.Gnome">
+					<RunTo X="-5454.171" Y="-621.048" Z="393.3968" />
+					<CustomBehavior File="ForceTrainRiding" MobId="7954" />
+					<CustomBehavior File="InteractWith" MobId="7955" BuyItemId="8595" WaitTime="5000" X="-5454.171" Y="-621.048" Z="393.3968" />
+					<If Condition="(HasItem(8595))" >
+						<CustomBehavior File="Misc\RunLua" Lua="UseItemByName(8595)" />
+					</If>
+				</If>
+				<If Condition="Me.Race == WoWRace.Dwarf">
+					<RunTo X="-5524.354" Y="-1349.868" Z="398.6641" />
+					<CustomBehavior File="ForceTrainRiding" MobId="4772" />
+					<CustomBehavior File="InteractWith" MobId="1261" BuyItemId="5873" WaitTime="5000" X="-5539.55" Y="-1322.55" Z="398.8653" />
+					<If Condition="(HasItem(5873))" >
+						<CustomBehavior File="Misc\RunLua" Lua="UseItemByName(5873)" />
+					</If>
+				</If>
+				<If Condition="Me.Race == WoWRace.NightElf">
+				 <!-- Get on at SW, off at Rut'theran Village (Darnassus) -->
+				 <If Condition="(Me.MapId == 0)" >
+					<RunTo X="-8642.231" Y="1327.733" Z="5.234008" />
+					<CustomBehavior File="UseTransport" TransportId="176310" 
+												WaitAtX="-8640.556" WaitAtY="1330.829" WaitAtZ="5.233207"
+												GetOffX="8177.54" GetOffY="1003.079" GetOffZ="6.646164" 
+												StandOnX="-8644.952" StandOnY="1348.11" StandOnZ="6.143094" 
+												TransportStartX="-8650.719" TransportStartY="1346.051" TransportStartZ="-0.0382334" 
+												TransportEndX="8162.587" TransportEndY="1005.365" TransportEndZ="0.0474023" />
+				 </If>
+			 	 <!-- To get inside of Darnassus -->
+				 <If Condition="(Me.MapId == 1)" >
+				  <While Condition="(Me.Z &lt; 100)" >
+					<RunTo X="8375.579" Y="997.6517" Z="27.45768" /> <!-- Red portal up to Darnassus -->
+					<RunTo X="8386.943" Y="999.6256" Z="29.80114" /> <!-- Inside portal -->
+					<CustomBehavior File="WaitTimer" WaitTime="5000" GoalText="Waiting for port up {TimeRemaining}" />
+				  </While>
+				  <If Condition="(Me.Z &gt; 1000)" >
+					<RunTo X="10129.78" Y="2526.595" Z="1324.828" />
+					<CustomBehavior File="ForceTrainRiding" MobId="4753" />
+					<CustomBehavior File="InteractWith" MobId="4730" BuyItemId="8629" WaitTime="5000" X="10129.91" Y="2533.245" Z="1323.271" />
+					<If Condition="(HasItem(8629))" >
+						<CustomBehavior File="Misc\RunLua" Lua="UseItemByName(8629)" />
+					</If>
+				  <While Condition="(Me.Z &gt; 1000)" >
+					<CustomBehavior File="Message" Text="Running through Darnassus Port" LogColor="Cornflowerblue" />
+
+					<RunTo X="9948.389" Y="2614.481" Z="1316.236" />
+					<CustomBehavior File="MyCTM" X="9947.438" Y="2621.536" Z="1317.558" />
+					<CustomBehavior File="WaitTimer" WaitTime="8000" GoalText="Waiting for port {TimeRemaining}" />
+				  </While>
+				  </If>
+				  <If Condition="(Me.Z &lt; 100)" >
+					<RunTo X="8180.102" Y="1002.678" Z="6.919619" />
+					<CustomBehavior File="UseTransport" TransportId="176310" 
+												WaitAtX="8177.54" WaitAtY="1003.079" WaitAtZ="6.646164" 
+												GetOffX="-8642.001" GetOffY="1330.353" GetOffZ="5.232954" 
+												StandOnX="8171.327" StandOnY="1005.99" StandOnZ="6.213342" 
+												TransportStartX="8162.587" TransportStartY="1005.365" TransportStartZ="0.005638145"
+												TransportEndX="-8650.719" TransportEndY="1346.051" TransportEndZ="-0.0382334" />
+				  </If>
+				 </If>
+				</If>
+				<If Condition="Me.Race == WoWRace.Draenei">
+				 <!-- Get on at SW, off at Rut'theran Village (Darnassus) -->
+				 <If Condition="(Me.MapId == 0)" >
+					<RunTo X="-8642.231" Y="1327.733" Z="5.234008" />
+					<CustomBehavior File="UseTransport" TransportId="176310" 
+												WaitAtX="-8640.556" WaitAtY="1330.829" WaitAtZ="5.233207"
+												GetOffX="8177.54" GetOffY="1003.079" GetOffZ="6.646164" 
+												StandOnX="-8644.952" StandOnY="1348.11" StandOnZ="6.143094" 
+												TransportStartX="-8650.719" TransportStartY="1346.051" TransportStartZ="-0.0382334" 
+												TransportEndX="8162.587" TransportEndY="1005.365" TransportEndZ="0.0474023" />
+				 </If>
+				 <!-- To get inside of Darnassus -->
+				 <If Condition="(Me.MapId == 1)" >
+				  <While Condition="(Me.Z &lt; 100) &amp;&amp; (Me.Z &gt; 0)" >
+					<RunTo X="8375.579" Y="997.6517" Z="27.45768" /> <!-- Red portal up to Darnassus -->
+					<RunTo X="8386.943" Y="999.6256" Z="29.80114" /> <!-- Inside portal -->
+					<CustomBehavior File="WaitTimer" WaitTime="5000" GoalText="Waiting for port up {TimeRemaining}" />
+				  </While>
+				  <If Condition="Me.ZoneId == 1657" > <!-- Darnassus -->
+					<RunTo X="9655.252" Y="2509.33" Z="1331.598" />
+					<CustomBehavior File="InteractWith" MobId="207995" ObjectType="Gameobject" Range="8" X="9655.252" Y="2509.33" Z="1331.598" />
+					<CustomBehavior File="WaitTimer" WaitTime="8000" GoalText="Waiting for  {TimeRemaining}" />
+				  </If>
+				 <If Condition="Me.ZoneId == 3557" > <!-- Exodar -->
+					<CustomBehavior File="Message" Text="Learning Draenei Mount" LogColor="Orange" />
+					
+					<RunTo X="-3981.769" Y="-11929.14" Z="-0.2419412" />
+					<CustomBehavior File="ForceTrainRiding" MobId="20914" />
+					<CustomBehavior File="InteractWith" MobId="17584" BuyItemId="28481" WaitTime="5000" CollectionDistance="50" X="-3981.769" Y="-11929.14" Z="-0.2419412" />
+					<If Condition="(HasItem(28481))" >
+						<CustomBehavior File="Misc\RunLua" Lua="UseItemByName(28481)" />
+					</If>
+				 
+					<CustomBehavior File="Message" Text="Running to Exodar's Portal to Darnassus" LogColor="Cornflowerblue" />
+				
+					<RunTo X="-4043.964" Y="-11570.73" Z="-138.4523" /> <!-- Exodar Portal to Darnassus -->
+					<CustomBehavior File="InteractWith" MobId="207996" ObjectType="Gameobject" Range="8" NumOfTimes="1" CollectionDistance="1000" X="-4043.964" Y="-11570.73" Z="-138.4523" />
+					<CustomBehavior File="WaitTimer" WaitTime="8000" GoalText="Waiting for port {TimeRemaining}" />
+				 </If>
+				  <While Condition="Me.ZoneId == 1657" > <!-- Darnassus -->
+					<RunTo X="9945.16" Y="2610.053" Z="1316.28" /> <!-- Red portal down to Rut Village -->
+					<RunTo X="9946.184" Y="2621.322" Z="1317.485" /> <!-- Inside portal -->
+					<CustomBehavior File="WaitTimer" WaitTime="5000" GoalText="Waiting for port up {TimeRemaining}" />
+				  </While>
+				  <If Condition="(Me.Z &lt; 100) &amp;&amp; (Me.Z &gt; 0)" >
+					<RunTo X="8180.102" Y="1002.678" Z="6.919619" />
+					<CustomBehavior File="UseTransport" TransportId="176310" 
+												WaitAtX="8177.54" WaitAtY="1003.079" WaitAtZ="6.646164" 
+												GetOffX="-8642.001" GetOffY="1330.353" GetOffZ="5.232954" 
+												StandOnX="8171.327" StandOnY="1005.99" StandOnZ="6.213342" 
+												TransportStartX="8162.587" TransportStartY="1005.365" TransportStartZ="0.005638145"
+												TransportEndX="-8650.719" TransportEndY="1346.051" TransportEndZ="-0.0382334" />
+				  </If>
+				  </If>
+				 </If>
+					<CustomBehavior File="UserSettings" UseMount="True" LootMobs="True" PullDistance="20" />
+
+		</If>
+		
+
+		
+		
+		
+	<CustomBehavior File="UserDialog" AllowBotStop="True" SoundCue="Exclamation" SoundCueInterval="1" Text="Load your other profile again!" />
+		
+
+	  
+	</QuestOrder>
+</HBProfile>

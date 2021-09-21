@@ -1,0 +1,66 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<HBProfile>
+  <Name>Silk Cloth - Badlands</Name>
+  <MinDurability>0.3</MinDurability>
+  <MinFreeBagSlots>2</MinFreeBagSlots>
+  <MinLevel>1</MinLevel>
+  <MaxLevel>86</MaxLevel>
+	<SellGrey>True</SellGrey>
+	<SellWhite>True</SellWhite>
+	<SellGreen>False</SellGreen>
+	<SellBlue>False</SellBlue>
+	<SellPurple>False</SellPurple>
+	
+	<MailWhite>True</MailWhite>
+	<MailGreen>True</MailGreen>
+	<MailBlue>True</MailBlue>
+	<MailPurple>True</MailPurple>  
+
+	<Vendors>
+<Vendor Name="Morhan Coppertongue" Entry="167" Type="Repair" X="-5343.68" Y="-2932.134" Z="324.3618" />
+	</Vendors>
+	
+	<Mailboxes>
+<Mailbox X="-5366.265" Y="-2952.955" Z="323.8294" />
+
+	</Mailboxes>
+
+  <GrindArea>
+    <TargetMinLevel>1</TargetMinLevel>
+    <TargetMaxLevel>86</TargetMaxLevel>
+    <Factions>54 59</Factions>
+    <Hotspots>
+<Hotspot X="-6068.198" Y="-3288.805" Z="258.8989" />
+<Hotspot X="-6077.924" Y="-3222.738" Z="262.8862" />
+<Hotspot X="-6094.05" Y="-3206.249" Z="255.9673" />
+<Hotspot X="-6091.958" Y="-3172.198" Z="255.6573" />
+<Hotspot X="-6073.875" Y="-3135.847" Z="254.3938" />
+<Hotspot X="-6078.579" Y="-3093.138" Z="250.5213" />
+<Hotspot X="-6111.521" Y="-3068.875" Z="248.7557" />
+<Hotspot X="-6089.481" Y="-3041.897" Z="250.3608" />
+<Hotspot X="-6070.096" Y="-3073.051" Z="247.7892" />
+<Hotspot X="-6091.32" Y="-3075.813" Z="242.0186" />
+<Hotspot X="-6084.904" Y="-3035.278" Z="232.9229" />
+<Hotspot X="-6084.892" Y="-3002.715" Z="230.2984" />
+<Hotspot X="-6102.29" Y="-2988.5" Z="225.0346" />
+<Hotspot X="-6139.816" Y="-3031.336" Z="223.8654" />
+<Hotspot X="-6144.466" Y="-3084.519" Z="226.3262" />
+<Hotspot X="-6178.894" Y="-3044.91" Z="220.3803" />
+<Hotspot X="-6194.266" Y="-3056.594" Z="214.0377" />
+<Hotspot X="-6218.255" Y="-3057.089" Z="217.1989" />
+<Hotspot X="-6181.402" Y="-3009.336" Z="224.3389" />
+    </Hotspots>
+  </GrindArea>
+
+
+           <ProtectedItems>
+           <Item name="Linen Cloth" entry="2589" /> 
+           <Item name="Wool Cloth" entry="2592" /> 
+           <Item name="Silk Cloth" entry="4306" /> 
+           </ProtectedItems>
+           <ForceMail>
+           <Item name="Wool Cloth" entry="2592" /> 
+           <Item name="Linen Cloth" entry="2589" />
+           <Item name="Silk Cloth" entry="4306" /> 
+           </ForceMail>
+</HBProfile>

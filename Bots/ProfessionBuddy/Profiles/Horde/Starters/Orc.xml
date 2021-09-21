@@ -1,0 +1,263 @@
+<HBProfile xsi:noNamespaceSchemaLocation="../Schemas/EchoSchema.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<!-- Original contribution by EchoTiger -->
+	<Name>Orc Starter ($ShortHash$)</Name>
+
+	<MinDurability>0.3</MinDurability>
+	<MinFreeBagSlots>3</MinFreeBagSlots>
+
+	<SellGrey>true</SellGrey>
+	<SellWhite>true</SellWhite>
+	<SellGreen>true</SellGreen>
+	<SellBlue>true</SellBlue>
+	<SellPurple>false</SellPurple>
+
+	<MailGrey>false</MailGrey>
+	<MailWhite>true</MailWhite>
+	<MailGreen>true</MailGreen>
+	<MailBlue>true</MailBlue>
+	<MailPurple>true</MailPurple>
+
+	<TargetElites>true</TargetElites>
+
+	<AvoidMobs>
+	</AvoidMobs>
+
+	<Mailboxes>
+	</Mailboxes>
+
+	<Vendors>
+	</Vendors>
+
+	<Blackspots>
+	</Blackspots>
+
+	<Blacklist>
+	</Blacklist>
+
+	<QuestOrder IgnoreCheckpoints="false" ContinuallySkipToCheckpoints="true" >
+		<!-- Check function status -->
+		<Code File="RunCode" Type="Definition">
+			<![CDATA[
+			private static bool? profileFunctionsEnabled => (bool?)AppDomain.CurrentDomain.GetData("QuestingProfiles_FunctionsEnabled");
+			private static bool IsStoreProfile(string path) => path.StartsWith("store://");
+			private static string Slashify(string path) => IsStoreProfile(path) ? path.Replace(@"\", "/") : path.Replace("/", @"\");
+
+			public __CompiledBatchClass__()
+			{
+				ActivateFunctions();
+			}
+
+			private static void ActivateFunctions()
+			{
+				if (profileFunctionsEnabled == null || profileFunctionsEnabled == false)
+				{
+					Bots.Professionbuddy.PBLog.Log(Colors.MediumPurple, "[Profile Message!]: ", Colors.Yellow, "Please stand by as the functions are being activated!");
+					LoadProfile(@"..\..\Functions\Activate Functions.xml");
+				}
+			}
+
+			private static void LoadProfile(string path)
+			{
+				var profile = GetNewPath(path);
+				if (!IsStoreProfile(profile) && !File.Exists(profile))
+				{
+					Bots.Professionbuddy.PBLog.Log(Colors.MediumPurple, "[Profile Message!]: ", Colors.Yellow, "Profile does not exist.\n" + profile);
+					return;
+				}
+
+				Bots.Professionbuddy.PBLog.Log(Colors.MediumPurple, "[Profile Message!]: ", Colors.Yellow, "Loading: " + profile);
+				ProfileManager.LoadNew(profile, false);
+			}
+
+			private static string GetNewPath(string path)
+			{
+				if (IsStoreProfile(path))
+					return Slashify(path);
+
+				var currentProfile = ProfileManager.XmlLocation;
+				if (IsStoreProfile(currentProfile))
+					return Slashify(currentProfile + "/../" + path);
+
+				var absolutePath = Path.Combine(Path.GetDirectoryName(currentProfile), path);
+				absolutePath = Path.GetFullPath(absolutePath);
+				var canonicalPath = new Uri(absolutePath).LocalPath;
+				return Slashify(canonicalPath);
+			}]]>
+		</Code>
+		<Code File="RunCode" Code="ActivateFunctions();" />
+		<!-- END Check function status -->
+
+		<If Condition="Me.IsAlliance" >
+			<Code File="LoadProfile" ProfileName="..\..\Questing Autoloader.xml" />
+		</If>
+		<!-- RunCode Methods -->
+			<Code File="RunCode">
+			<![CDATA[
+				Bots.Professionbuddy.PBLog.Log(System.Windows.Media.Colors.MediumPurple, "> [Profile Initialization Status] ", System.Windows.Media.Colors.CornflowerBlue, "\n     Auto-Looting	:: Enabled\n     Looting	:: Enabled\n     Game Addons	:: Disabled");
+				Lua.DoString("SetCVar('AutoLootDefault', 1);");
+				Lua.DoString("SetCVar('autoDismountFlying', 1);");
+				CharacterSettings.Instance.LootMobs = true;
+				CharacterSettings.Instance.Save();
+				Logging.Write(System.Windows.Media.Colors.MediumPurple, "> [Ready to bot!]");
+			]]>
+			</Code>
+			<Code File="RunCode" Type="Definition">
+				<![CDATA[
+						bool DoQuest(params uint[] questIds)
+						{
+							foreach (var questId in questIds)
+							{
+								if (HasQuest(questId) && !IsQuestCompleted(questId)) return true;
+							}
+							return false;
+						}
+						bool NeedsQuest(params uint[] questIds)
+						{
+							foreach (var questId in questIds)
+							{
+								if (!HasQuest(questId) && !IsQuestCompleted(questId)) return true;
+							}
+							return false;
+						}
+						bool NeedsBreadcrumbQuest(params uint[] questIds)
+						{
+							foreach (var questId in questIds)
+							{
+								if (IsQuestCompleted(questId)) return false;
+							}
+							return true;
+						}
+						bool QuestDone(params uint[] questIds)
+						{
+							foreach (var questId in questIds)
+							{
+								if (HasQuest(questId) && IsQuestCompleted(questId)) return true;
+							}
+							return false;
+						}
+						bool QuestFlaggedCompleted(params uint[] questIds)
+						{
+							foreach (var questId in questIds)
+							{
+								return Lua.GetReturnVal<bool>($"return IsQuestFlaggedCompleted({questId});", 0);
+							}
+							return false;
+						}
+						async Task SkipCutscene(int preWait = 3000, int postWait = 3000)
+						{
+					// Add detection of cutscene here.
+							await Coroutine.Sleep(preWait);
+					// Test and improve the working method.
+							Lua.DoString("MovieFrame:StopMovie(); CinematicFrame_CancelCinematic(); StopCinematic();");
+							await Coroutine.Sleep(postWait);
+						}
+					]]>
+			</Code>
+		<!-- END RunCode Methods -->
+
+
+		<PickUp QuestName="Your Place In The World" QuestId="25152" GiverName="Kaltunk" GiverId="10176" X="-618.518" Y="-4251.67" Z="38.718" />
+		<TurnIn QuestName="Your Place In The World" QuestId="25152" TurnInName="Gornek" TurnInId="3143" X="-601.4888" Y="-4246.486" Z="38.95587" />
+
+		<PickUp QuestName="Cutting Teeth" QuestId="25126" GiverName="Gornek" GiverId="3143" X="-601.4888" Y="-4246.486" Z="38.95587" />
+		<While Condition="DoQuest(25126)" >
+			<DisableBehavior Name="Loot" />
+			<Code File="KillUntilComplete" MobId="3098" QuestId="25126" X="-492.3602" Y="-4343.501" Z="38.99313" />
+			<EnableBehavior Name="Loot" />
+		</While>
+		<TurnIn QuestName="Cutting Teeth" QuestId="25126" TurnInName="Gornek" TurnInId="3143" X="-595.0386" Y="-4249.554" Z="38.95654" />
+
+		<PickUp QuestName="Invaders in Our Home" QuestId="25172" GiverName="Gornek" GiverId="3143" X="-595.0386" Y="-4249.554" Z="38.95654" />
+		<While Condition="DoQuest(25172)" >
+			<DisableBehavior Name="Loot" />
+			<Code File="KillUntilComplete" MobId="39317" QuestId="25172" >
+				<HuntingGrounds>
+					<Hotspot X="-697.0238" Y="-4266.36" Z="38.58712" />
+					<Hotspot X="-727.9263" Y="-4182.924" Z="30.08645" />
+				</HuntingGrounds>
+			</Code>
+			<EnableBehavior Name="Loot" />
+		</While>
+		<TurnIn QuestName="Invaders in Our Home" QuestId="25172" TurnInName="Gornek" TurnInId="3143" X="-596.3851" Y="-4250.415" Z="38.95618" />
+
+		<PickUp QuestName="Sting of the Scorpid" QuestId="25127" GiverName="Gornek" GiverId="3143" X="-596.3851" Y="-4250.415" Z="38.95618" />
+		<PickUp QuestName="Galgar&apos;s Cactus Apple Surprise" QuestId="25136" GiverName="Galgar" GiverId="9796" X="-563.7537" Y="-4223.57" Z="41.59048" />
+
+		<Code File="InteractWith" MobId="171938" CollectionDistance="200" InteractByLooting="true" PreInteractMountStrategy="Dismount" QuestId="25136" QuestObjectiveIndex="1" >
+			<HuntingGrounds>
+				<Hotspot X="-395.2452" Y="-4270.956" Z="50.2653" />
+				<Hotspot X="-404.6069" Y="-4165.924" Z="51.36276" />
+				<Hotspot X="-291.4646" Y="-4182.903" Z="52.63857" />
+			</HuntingGrounds>
+		</Code>
+
+		<Code File="KillUntilComplete" MobId="3124" QuestId="25127" >
+			<HuntingGrounds>
+				<Hotspot X="-395.2452" Y="-4270.956" Z="50.2653" />
+				<Hotspot X="-404.6069" Y="-4165.924" Z="51.36276" />
+				<Hotspot X="-291.4646" Y="-4182.903" Z="52.63857" />
+			</HuntingGrounds>
+		</Code>
+
+		<PickUp QuestName="Sarkoth" QuestId="25129" GiverName="Hana&apos;zua" GiverId="3287" X="-397.6655" Y="-4111.908" Z="50.17544" />
+		<Code File="KillUntilComplete" MobId="3281" QuestId="25129" X="-555.134" Y="-4105.038" Z="71.25594" />
+		<TurnIn QuestName="Sarkoth" QuestId="25129" TurnInName="Hana&apos;zua" TurnInId="3287" X="-401.0444" Y="-4111.048" Z="50.13127" />
+
+		<PickUp QuestName="Back to the Den" QuestId="25130" GiverName="Hana&apos;zua" GiverId="3287" X="-401.0444" Y="-4111.048" Z="50.13127" />
+		<If Condition="QuestDone(25130) &amp;&amp; Me.HearthstoneAreaId == 363 &amp;&amp; Unit(3287) != null" >
+			<Code File="UseHearthstone" WaitForCds="false" />
+		</If>
+
+		<TurnIn QuestName="Sting of the Scorpid" QuestId="25127" TurnInName="Gornek" TurnInId="3143" X="-600.4946" Y="-4246.126" Z="38.95629" />
+		<TurnIn QuestName="Back to the Den" QuestId="25130" TurnInName="Gornek" TurnInId="3143" X="-600.4946" Y="-4246.126" Z="38.95629" />
+		<PickUp QuestName="Hana&apos;zua" QuestId="25128" GiverName="Canaga Earthcaller" GiverId="5887" X="-626.7706" Y="-4207.086" Z="38.13482" />
+		<TurnIn QuestName="Galgar&apos;s Cactus Apple Surprise" QuestId="25136" TurnInName="Galgar" TurnInId="9796" X="-565.1686" Y="-4224.509" Z="41.43152" />
+		<PickUp QuestName="Vile Familiars" QuestId="25131" GiverName="Zureetha Fargaze" GiverId="3145" X="-574.2421" Y="-4259.012" Z="37.9632" />
+		<PickUp QuestName="Lazy Peons" QuestId="37446" GiverName="Foreman Thazz&apos;ril" GiverId="11378" X="-572.3614" Y="-4263.845" Z="38.06332" />
+
+		<Code File="InteractWith" MobId="10556" AuraIdOnMob="17743" Range="2" CollectionDistance="200" InteractByUsingItemId="16114" InteractBlacklistTimeInSeconds="1" QuestId="37446" QuestObjectiveIndex="1" >
+			<HuntingGrounds>
+				<Hotspot X="-640.2183" Y="-4348.577" Z="42.71794" />
+				<Hotspot X="-508.4733" Y="-4383.482" Z="46.54433" />
+				<Hotspot X="-339.9293" Y="-4421.483" Z="52.76396" />
+			</HuntingGrounds>
+		</Code>
+
+		<Code File="KillUntilComplete" MobId="3101" QuestId="25131" >
+			<HuntingGrounds>
+				<Hotspot X="-286.8987" Y="-4388.662" Z="57.47244" />
+				<Hotspot X="-206.8877" Y="-4300.415" Z="63.70576" />
+			</HuntingGrounds>
+		</Code>
+
+		<TurnIn QuestName="Hana&apos;zua" QuestId="25128" TurnInName="Hana&apos;zua" TurnInId="3287" X="-398.0338" Y="-4113.111" Z="50.1658" />
+		<TurnIn QuestName="Lazy Peons" QuestId="37446" TurnInName="Foreman Thazz&apos;ril" TurnInId="11378" X="-570.3971" Y="-4268.388" Z="37.96813" />
+		<TurnIn QuestName="Vile Familiars" QuestId="25131" TurnInName="Zureetha Fargaze" TurnInId="3145" X="-571.2792" Y="-4263.039" Z="38.17424" />
+		<PickUp QuestName="Burning Blade Medallion" QuestId="25132" GiverName="Zureetha Fargaze" GiverId="3145" X="-571.2792" Y="-4263.039" Z="38.17424" />
+		<PickUp QuestName="Thazz&apos;ril&apos;s Pick" QuestId="25135" GiverName="Foreman Thazz&apos;ril" GiverId="11378" X="-571.3143" Y="-4264.124" Z="38.11153" />
+
+		<Code File="InteractWith" MobId="178087" NonCompeteDistance="0" InteractByLooting="true" InteractBlacklistTimeInSeconds="1" QuestId="25135" QuestObjectiveIndex="1" X="-88.34402" Y="-4277.792" Z="64.601" />
+
+		<Code File="KillUntilComplete" QuestId="25132" >
+			<HuntingGrounds>
+				<Hotspot X="-98.70916" Y="-4293.755" Z="60.9591" />
+				<Hotspot X="-85.67622" Y="-4209.158" Z="49.94697" />
+			</HuntingGrounds>
+			<PursuitList>
+				<PursueUnit Id="3102" PursueWhen="!IsObjectiveComplete(1, 25132)" />
+				<PursueUnit Id="3183" Priority="10" PursueWhen="!IsObjectiveComplete(2, 25132)" />
+			</PursuitList>
+		</Code>
+
+		<TurnIn QuestName="Thazz&apos;ril&apos;s Pick" QuestId="25135" TurnInName="Foreman Thazz&apos;ril" TurnInId="11378" X="-567.558" Y="-4266.502" Z="38.6017" />
+		<TurnIn QuestName="Burning Blade Medallion" QuestId="25132" TurnInName="Zureetha Fargaze" TurnInId="3145" X="-569.9094" Y="-4262.885" Z="38.48481" />
+
+		<PickUp QuestName="Report to Sen&apos;jin Village" QuestId="25133" GiverName="Zureetha Fargaze" GiverId="3145" X="-569.9094" Y="-4262.885" Z="38.48481" />
+
+		<Checkpoint Level="5.5" /> <!-- Would be 5, but we don't want to level up inside of the cave and not turn in quests -->
+
+		<Code File="LoadProfile" ProfileName="..\Kalimdor\Durotar.xml" />
+
+
+	</QuestOrder>
+</HBProfile>

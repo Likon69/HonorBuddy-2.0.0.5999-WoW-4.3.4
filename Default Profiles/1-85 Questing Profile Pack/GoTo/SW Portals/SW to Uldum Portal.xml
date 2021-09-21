@@ -1,0 +1,17 @@
+<HBProfile>
+	<Name>SW to Uldum Portal</Name>
+	<MinLevel>1</MinLevel>
+	<MaxLevel>101</MaxLevel>
+	
+	<QuestOrder>
+
+			<If Condition="(Me.ZoneId == 1519)" >
+				<CustomBehavior File="FlyTo" DestName="Uldum Portal in SW" X="-8230.783" Y="420.0706" Z="117.6104" />
+				<CustomBehavior File="ForcedDismount" />
+				
+				<CustomBehavior File="InteractWith" MobId="207695" ObjectType="Gameobject" Range="5" X="-8230.783" Y="420.0706" Z="117.6104" />
+			</If>
+	
+	
+	</QuestOrder>
+</HBProfile>

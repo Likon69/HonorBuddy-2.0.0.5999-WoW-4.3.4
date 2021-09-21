@@ -1,0 +1,282 @@
+﻿<HBProfile>
+	<Name>[A - QO] Argent Tourny - Gnomer Valor [Kick]</Name>
+   
+	<MinLevel>1</MinLevel>
+	<MaxLevel>86</MaxLevel>
+   
+	<MinDurability>0.2</MinDurability>
+	<MinFreeBagSlots>2</MinFreeBagSlots>
+	
+	<MailGrey>False</MailGrey>
+	<MailWhite>False</MailWhite>
+	<MailGreen>False</MailGreen>
+	<MailBlue>True</MailBlue>
+	<MailPurple>True</MailPurple>
+   
+	<SellGrey>True</SellGrey>
+	<SellWhite>True</SellWhite>
+	<SellGreen>True</SellGreen>
+	<SellBlue>False</SellBlue>
+	<SellPurple>False</SellPurple>
+   
+	<TargetElites>True</TargetElites>
+
+	<AvoidMobs>
+	</AvoidMobs>
+	<Blackspots>
+	</Blackspots>
+	<Mailboxes>
+		<Mailbox X="8589.352" Y="697.2214" Z="547.2932" />
+	</Mailboxes>
+	<Vendors>
+		<Vendor Name="Brollen Wheatbeard" Entry="33599" Type="Repair" X="8548.112" Y="933.3629" Z="547.2943" />
+	</Vendors>
+
+	
+	
+	
+	<QuestOrder>
+	<!-- 
+	http://www.wowhead.com/blog=80946/argent-tournament-guide
+	-->
+	
+	  <If Condition="Me.IsHorde" >
+			<CustomBehavior File="RunMacro" Macro="/exit" NumOfTimes="1" WaitTime="500" />
+			<CustomBehavior File="RunMacro" Macro="/click StaticPopup1Button1" NumOfTimes="1" WaitTime="500" />
+			<CustomBehavior File="UserDialog"  Title="title" AllowBotStop="True" SoundCue="Asterisk" SoundCueInterval="2" Text="You must be Alliance to run this profile" />
+	  </If>
+
+	  <CustomBehavior File="UserSettings" LootMobs="True" PullDistance="35" TrainNewSkills="False" LearnFlightPaths="True" />
+				
+			<If Condition="Me.MapId == 0" >
+				<If Condition="(!HasQuest(13633))" >
+				<!-- If you're lazy like me, it will fly u to dock and use boat to borean -->
+				<CustomBehavior File="FlyTo" X="-8291.137" Y="1404.371" Z="4.731256" />
+				<CustomBehavior File="ForcedDismount" />
+				<!-- SW dock to Valiance Keep -->
+				<CustomBehavior File="UseTransport"
+								Entry="-8300.08, 1405.158, 4.422395"
+								Exit="2234.375, 5132.568, 5.343217"
+								Start="-8288.816, 1424.703, 0.04" 
+								End="2218.391, 5119.589, 0.04" 
+								Transport="190536" />
+				<CustomBehavior File="WaitTimer" WaitTime="5000" />
+			</If></If>
+
+			<!-- 25 Seals to next profile -->
+		<PickUp QuestName="The Valiant's Charge" QuestId="13717" GiverName="Jaelyne Evensong" GiverId="33592" />
+
+
+		<PickUp QuestName="At The Enemy's Gates" QuestId="13855" GiverName="Airae Starseeker" GiverId="33654" />
+		<PickUp QuestName="The Grand Melee" QuestId="13761" GiverName="Airae Starseeker" GiverId="33654" />
+		<PickUp QuestName="A Valiant's Field Training" QuestId="13760" GiverName="Illestria Bladesinger" GiverId="33652" />
+			<While Condition="HasQuestAvailable(33592)" >
+				<CustomBehavior File="InteractWith"  MobId="33592" NumOfTimes="1" CollectionDistance="200" WaitTime="1000" X="8629.572" Y="656.8497" Z="550.2505" />
+				<CustomBehavior File="RunMacro" Macro="/click GossipTitleButton1" NumOfTimes="1" WaitTime="1000" />
+				<CustomBehavior File="RunMacro" Macro="/click QuestFrameAcceptButton" NumOfTimes="1" WaitTime="1000" />
+			</While>
+			
+			<!-- Eadric the Pure Quests -->
+			<If Condition="((!HasQuest(13682)) &amp;&amp; (!IsQuestCompleted(13682)))" >
+				<CustomBehavior File="FlyTo" X="8484.761" Y="1057.067" Z="550.5325" />
+				<CustomBehavior File="ForcedDismount" />
+			</If>
+		<PickUp QuestName="Threat From Above" QuestId="13682" GiverName="Eadric the Pure" GiverId="33759" />
+		<PickUp QuestName="Battle Before The Citadel" QuestId="13861" GiverName="Eadric the Pure" GiverId="33759" />
+		<PickUp QuestName="Taking Battle To The Enemy" QuestId="13789" GiverName="Cellian Daybreak" GiverId="33763" />
+		<PickUp QuestName="Among the Champions" QuestId="13790" GiverName="Luuri" GiverId="33771" />
+			
+			
+			<If Condition="((HasQuest(13682)) &amp;&amp; (!IsQuestCompleted(13682)))" >
+				<!-- do before the 10 cursed quest -->
+				<CustomBehavior File="FlyTo" X="8017.991" Y="2682.542" Z="548.5018" />
+				<CustomBehavior File="UserDialog" QuestId="13682" SoundCue="Exclamation" SoundCueInterval="1" Text="Find and kill Chillmaw and his 3 buddies that spawn" />
+			</If>
+			<If Condition="((HasQuest(13760)) &amp;&amp; (!IsQuestCompleted(13760)))" >
+				<CustomBehavior File="FlyTo" X="7158.93" Y="2559.076" Z="398.3151" />
+				<CustomBehavior File="ForcedDismount" />
+				<Objective QuestName="A Valiant's Field Training" QuestId="13760" Type="KillMob" MobId="32255" KillCount="10" />
+			</If>
+			<If Condition="((HasQuest(13855)) &amp;&amp; (!IsQuestCompleted(13855)))" >
+				<CustomBehavior File="FlyTo" X="6439.218" Y="2368.915" Z="465.2995" />
+				<CustomBehavior File="ForcedDismount" />
+	<CustomBehavior File="UserDialog" AllowBotStop="True" SoundCue="Asterisk" SoundCueInterval="1" Text="Do this quest manually while on a horse and 3 Commanders" />
+			</If>
+			<If Condition="((HasQuest(13861)) &amp;&amp; (!IsQuestCompleted(13861)))" >
+				<CustomBehavior File="UserDialog" QuestId="13861" SoundCue="Exclamation" SoundCueInterval="1" Text="Kill 3 Commanders" />
+			</If>
+			<If Condition="((HasQuest(13748)) &amp;&amp; (!IsQuestCompleted(13748)))" >
+			  <If Condition="(!HasItem(45005))" >
+				<CustomBehavior File="FlyTo" X="5138.633" Y="-57.57318" Z="347.322" />
+				<CustomBehavior File="ForcedDismount" />
+				<Objective QuestName="The Edge Of Winter" QuestId="13748" Type="CollectItem" ItemId="45005" CollectCount="1" />
+			  </If>
+				
+			  <If Condition="(HasItem(45005))" >
+				<CustomBehavior File="FlyTo" X="2324.194" Y="-3947.636" Z="218.2623" Distance="1" />
+				<CustomBehavior File="ForcedDismount" />
+				<CustomBehavior File="UseItemOn" QuestId="13748" MobId="33303" ItemId="45005" NumOfTimes="1" WaitTime="8000" Range="5" CollectionDistance="50" X="2324.844" Y="-3944.382" Z="218.2621" />
+			  </If>
+			</If>
+			<!-- frog for valiant -->
+			<If Condition="((HasQuest(13746)) &amp;&amp; (!IsQuestCompleted(13746)))" >
+				<CustomBehavior File="FlyTo" X="3803.127" Y="-4349.656" Z="180.808" />
+				<CustomBehavior File="ForcedDismount" />
+			  <While Condition="((HasQuest(13746)) &amp;&amp; (!IsQuestCompleted(13746)))" >
+				<CustomBehavior File="Misc\RunLua" Lua="UseItemByName(44986)" WaitTime="1000" />
+				<CustomBehavior File="RunMacro" Macro="/tar Lake Frog\n/kiss\n/cleartarget" NumOfTimes="1" WaitTime="10000" />
+				<CustomBehavior File="InteractWith" MobId="33224" NumOfTimes="1" GossipOptions="1" WaitForNpcs="False" WaitTime="1000" CollectionDistance="100" X="3819.208" Y="-4361.081" Z="182.1844" />
+			  </While>
+			</If>
+			<!-- frog for valor -->
+			<If Condition="((HasQuest(13603)) &amp;&amp; (!IsQuestCompleted(13603)))" >
+				<CustomBehavior File="FlyTo" X="3803.127" Y="-4349.656" Z="180.808" />
+				<CustomBehavior File="ForcedDismount" />
+			  <While Condition="((HasQuest(13603)) &amp;&amp; (!IsQuestCompleted(13603)))" >
+				<CustomBehavior File="Misc\RunLua" Lua="UseItemByName(44986)" WaitTime="1000" />
+				<CustomBehavior File="RunMacro" Macro="/tar Lake Frog\n/kiss\n/cleartarget" NumOfTimes="1" WaitTime="10000" />
+				<CustomBehavior File="InteractWith" MobId="33224" NumOfTimes="1" GossipOptions="1" WaitForNpcs="False" WaitTime="1000" CollectionDistance="100" X="3819.208" Y="-4361.081" Z="182.1844" />
+			  </While>
+			</If>
+			<If Condition="((HasQuest(13758)) &amp;&amp; (!IsQuestCompleted(13758)))" >
+
+				
+			  <While Condition="((HasQuest(13758)) &amp;&amp; (!IsQuestCompleted(13758)))" >
+
+				<If Condition="(GetItemCount(45000) &lt;= 3)" >
+				<CustomBehavior File="FlyTo" Distance="3" QuestId="13758" X="6138.642" Y="1001.314" Z="148.1539" />
+				<CustomBehavior File="ForcedDismount" QuestId="13758" />
+				<CustomBehavior File="InteractWith" QuestId="13758" MobId="194213" WaitForNpcs="False" Range="10" ObjectType="Gameobject" NumOfTimes="1" CollectionDistance="10" X="6138.642" Y="1001.314" Z="148.1539" />
+				
+				<CustomBehavior File="FlyTo" Distance="3" QuestId="13758" X="6224.009" Y="1042.302" Z="148.2521" />
+				<CustomBehavior File="ForcedDismount" QuestId="13758" />
+				<CustomBehavior File="InteractWith" QuestId="13758" MobId="194213" WaitForNpcs="False" Range="10" ObjectType="Gameobject" NumOfTimes="1" CollectionDistance="10" X="6224.009" Y="1042.302" Z="148.2521" />
+				
+				<CustomBehavior File="FlyTo" Distance="3" QuestId="13758" X="6259.771" Y="995.2029" Z="149.3356" />
+				<CustomBehavior File="ForcedDismount" QuestId="13758" />
+				<CustomBehavior File="InteractWith" QuestId="13758" MobId="194213" WaitForNpcs="False" Range="10" ObjectType="Gameobject" NumOfTimes="1" CollectionDistance="10" X="6259.771" Y="995.2029" Z="149.3356" />
+				
+				<CustomBehavior File="FlyTo" Distance="3" X="6283.216" Y="974.5555" Z="159.504" />
+				<CustomBehavior File="ForcedDismount" QuestId="13758" />
+				<CustomBehavior File="InteractWith" QuestId="13758" MobId="194213" WaitForNpcs="False" Range="10" ObjectType="Gameobject" NumOfTimes="1" CollectionDistance="10" X="6283.216" Y="974.5555" Z="159.504" />
+				
+				<CustomBehavior File="FlyTo" Distance="3" QuestId="13758" X="6284.188" Y="917.3234" Z="150.0614" />
+				<CustomBehavior File="ForcedDismount" QuestId="13758" />
+				<CustomBehavior File="InteractWith" QuestId="13758" MobId="194213" WaitForNpcs="False" Range="10" ObjectType="Gameobject" NumOfTimes="1" CollectionDistance="10" X="6284.188" Y="917.3234" Z="150.0614" />
+				
+				<CustomBehavior File="FlyTo" Distance="3" QuestId="13758" X="6310.133" Y="880.6295" Z="149.0396" />
+				<CustomBehavior File="ForcedDismount" QuestId="13758" />
+				<CustomBehavior File="InteractWith" QuestId="13758" MobId="194213" WaitForNpcs="False" Range="10" ObjectType="Gameobject" NumOfTimes="1" CollectionDistance="10" X="6309.871" Y="880.2228" Z="149.0663" />
+				
+				<CustomBehavior File="FlyTo" Distance="3" QuestId="13758" X="6342.218" Y="860.8906" Z="150.7731" />
+				<CustomBehavior File="ForcedDismount" QuestId="13758" />
+				<CustomBehavior File="InteractWith" QuestId="13758" MobId="194213" WaitForNpcs="False" Range="10" ObjectType="Gameobject" NumOfTimes="1" CollectionDistance="10" X="6342.218" Y="860.8906" Z="150.7731" />
+				
+				<CustomBehavior File="FlyTo" Distance="3" QuestId="13758" X="6368.168" Y="857.0884" Z="162.5025" />
+				<CustomBehavior File="ForcedDismount" QuestId="13758" />
+				<CustomBehavior File="InteractWith" QuestId="13758" MobId="194213" WaitForNpcs="False" Range="10" ObjectType="Gameobject" NumOfTimes="1" CollectionDistance="15" X="6368.168" Y="857.0884" Z="162.5025" />
+				
+				</If>
+				
+				<If Condition="(GetItemCount(45000) &gt;= 4)" >
+
+				<CustomBehavior File="FlyTo" Name="get the sword" X="4601.406" Y="-1599.759" Z="156.9936" />
+				<!-- <CustomBehavior File="ForcedDismount" /> this fails in water -->
+				<CustomBehavior File="RunMacro" Macro="/dismount\n/cancelaura Flight Form\n/cancelaura Swift Flight Form" NumOfTimes="1" WaitTime="1000" />
+				<CustomBehavior File="Misc\RunLua" Lua="UseItemByName(45000)" WaitTime="1000" />
+				<CustomBehavior File="WaitTimer" WaitTime="20000" />
+				<CustomBehavior File="InteractWith" QuestId="13758" MobId="194238" ObjectType="Gameobject" NumOfTimes="1" CollectionDistance="50" X="4604.894" Y="-1598.469" Z="154.9988" />
+				
+				</If>
+				<CustomBehavior File="WaitTimer" WaitTime="5000" />
+
+			  </While>
+			</If>
+			
+			<If Condition="((HasQuest(13761)) &amp;&amp; (!IsQuestCompleted(13761)))" >
+			  <If Condition="(!HasItem(46069))" >
+				<CustomBehavior File="FlyTo" X="8594.644" Y="942.6311" Z="548.3071" />
+				<CustomBehavior File="ForcedDismount" />
+				<!-- get id of lance rack -->
+				<CustomBehavior File="InteractWith"  MobId="194618" ObjectType="Gameobject" NumOfTimes="1" CollectionDistance="50" X="8618.139" Y="897.5522" Z="546.9598" />
+			  </If>
+				<CustomBehavior File="FlyTo" Distance="5" X="8569.275" Y="655.3611" Z="547.8465" />
+				<CustomBehavior File="ForcedDismount" />
+				<CustomBehavior File="EquipItem" ItemId="46069" Slot="1" />
+				<CustomBehavior File="MountVehOnly" VehicleMountId="33794" X="8569.051" Y="667.72" Z="550.2842" />
+				<CustomBehavior File="WaitTimer" WaitTime="2000" />
+				
+	<CustomBehavior File="UserDialog"  AllowBotStop="True" SoundCue="Asterisk" SoundCueInterval="1" Text="You'll have to do this quest manually - defeat 3 valiants" />
+				<CustomBehavior File="EjectVeh" Eject="1" />
+				
+			</If>
+			<If Condition="((HasQuest(13790)) &amp;&amp; (!IsQuestCompleted(13790)))" >
+				<!-- Champion fights -->
+				<CustomBehavior File="FlyTo" Distance="5" X="8478.908" Y="952.3561" Z="547.2932" />
+				<CustomBehavior File="ForcedDismount" />
+	<CustomBehavior File="UserDialog"  AllowBotStop="True" SoundCue="Asterisk" SoundCueInterval="1" Text="You'll have to do this quest manually - defeat 4 champions" />
+			</If>
+			
+			<!-- Turn In the Dailies -->
+			<If Condition="((HasQuest(13760)) &amp;&amp; (IsQuestCompleted(13760)))" >
+				<CustomBehavior File="FlyTo" X="8582.106" Y="692.2238" Z="547.2957" />
+				<CustomBehavior File="ForcedDismount" />
+			</If>
+		<TurnIn QuestName="A Valiant's Field Training" QuestId="13760" TurnInName="Illestria Bladesinger" TurnInId="33652" />
+		<TurnIn QuestName="At The Enemy's Gates" QuestId="13855" TurnInName="Airae Starseeker" TurnInId="33654" />			
+			<If Condition="((HasQuest(13761)) &amp;&amp; (IsQuestCompleted(13761)))" >
+		<TurnIn QuestName="The Grand Melee" QuestId="13761" TurnInName="Airae Starseeker" TurnInId="33654" />
+			</If>
+			<If Condition="((HasQuest(13748)) &amp;&amp; (IsQuestCompleted(13748)))" >
+		<TurnIn QuestName="The Edge Of Winter" QuestId="13748" TurnInName="Ambrose Boltspark" TurnInId="33335" />			
+			</If>
+			<If Condition="((HasQuest(13758)) &amp;&amp; (IsQuestCompleted(13758)))" >
+		<TurnIn QuestName="A Worthy Weapon" QuestId="13758" TurnInName="Jaelyne Evensong" TurnInId="33592" />
+			</If>
+			<If Condition="((HasQuest(13746)) &amp;&amp; (IsQuestCompleted(13746)))" >
+		<TurnIn QuestName="A Blade Fit For A Champion" QuestId="13746" TurnInName="Ambrose Boltspark" TurnInId="33335" />
+			</If>
+
+			<!-- Eadric quests -->
+			<If Condition="((HasQuest(13861)) &amp;&amp; (IsQuestCompleted(13861)))" >
+				<CustomBehavior File="FlyTo" X="8484.761" Y="1057.067" Z="550.5325" />
+				<CustomBehavior File="ForcedDismount" />
+			</If>
+		<TurnIn QuestName="Battle Before The Citadel" QuestId="13861" TurnInName="Eadric the Pure" TurnInId="33759" />
+		<TurnIn QuestName="Threat From Above" QuestId="13682" TurnInName="Eadric the Pure" TurnInId="33759" />
+		<TurnIn QuestName="Among the Champions" QuestId="13790" TurnInName="Luuri" TurnInId="33771" />
+		<TurnIn QuestName="Taking Battle To The Enemy" QuestId="13789" TurnInName="Cellian Daybreak" TurnInId="33763" />			
+
+			
+			<If Condition="((HasQuest(13717)) &amp;&amp; (IsQuestCompleted(13717)))" >
+				<CustomBehavior File="FlyTo" X="8582.106" Y="692.2238" Z="547.2957" />
+				<CustomBehavior File="ForcedDismount" />
+		<TurnIn QuestName="The Valiant's Charge" QuestId="13717" TurnInName="Jaelyne Evensong" TurnInId="33592" />		
+		<PickUp QuestName="The Valiant's Challenge" QuestId="13725" GiverName="Jaelyne Evensong" GiverId="33592" />
+			</If>
+			<If Condition="((HasQuest(13725)) &amp;&amp; (!IsQuestCompleted(13725)))" >
+				<CustomBehavior File="FlyTo" X="8478.375" Y="953.702" Z="547.2943" />
+				<CustomBehavior File="ForcedDismount" />
+	<CustomBehavior File="UserDialog"  AllowBotStop="True" SoundCue="Asterisk" SoundCueInterval="1" Text="You'll have to do this quest manually - mount a horse, go to danny (northwest) and defeat 1 champion" />
+				<CustomBehavior File="EjectVeh" Eject="1" />
+			</If>
+			<If Condition="((HasQuest(13725)) &amp;&amp; (IsQuestCompleted(13725)))" >
+				<CustomBehavior File="FlyTo" X="8484.761" Y="1057.067" Z="550.5325" />
+				<CustomBehavior File="ForcedDismount" />
+		<TurnIn QuestName="The Valiant's Challenge" QuestId="13725" TurnInName="Jaelyne Evensong" TurnInId="33592" />		
+			</If>
+			
+			<If Condition="(IsQuestCompleted(13725))" >
+		<CustomBehavior File="LoadProfile" ProfileName="[A - QO] Argent Tourny - Champion [Kick]" /> 
+			</If>
+
+
+
+
+
+
+			<CustomBehavior File="UserDialog" Title="title" AllowBotStop="True" SoundCue="Asterisk" SoundCueInterval="1" Text="You have reached the end of the Darnassus profile" />
+	
+	</QuestOrder>
+
+</HBProfile>

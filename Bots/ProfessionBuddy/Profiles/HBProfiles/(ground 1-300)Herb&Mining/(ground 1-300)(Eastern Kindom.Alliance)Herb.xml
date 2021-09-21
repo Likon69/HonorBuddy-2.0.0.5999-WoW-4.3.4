@@ -1,0 +1,306 @@
+<HBProfile>
+	<!-- Run Bot in Quest Mode -->
+    <Name>Herb and Mining 1-300 Alliance ground</Name>
+	<MinDurability>0.3</MinDurability>
+	<MinFreeBagSlots>2</MinFreeBagSlots>
+	<SellGrey>True</SellGrey>
+	<SellWhite>True</SellWhite>
+	<SellGreen>False</SellGreen>
+	
+	<MailWhite>False</MailWhite>
+	<MailGreen>True</MailGreen>
+	<MailBlue>True</MailBlue>
+	<MailPurple>True</MailPurple>
+
+	<MinLevel>1</MinLevel>
+	<MaxLevel>86</MaxLevel>
+
+	<Mailboxes>
+		<!-- Ewynn Forest -->
+		<Mailbox X="-9455.054" Y="46.70951" Z="56.60733" />
+		<!-- Duskwood -->
+		<Mailbox X="-10547.32" Y="-1157.454" Z="27.89228" />
+		<!-- Bad Lands-->		
+		<MailBox X="-5364.666" Y="-2954.656" Z="323.8963" />
+		<!-- Blasted Lands -->
+		<Mailbox X="-10994.97" Y="-3386.575" Z="62.10819" />
+    </Mailboxes>
+   
+	<Vendors>
+		<!-- Ewynn Forest -->
+		<Vendor Name="Kurran Steele" Entry="74" Type="Repair" X="-9457.64" Y="99.6884" Z="58.34382" />
+		<!-- Duskwood -->
+		<Vendor Name="Gavin Gnarltree" Entry="225" Type="Repair" X="-10596.89" Y="-1154.147" Z="30.05965" />
+		<!-- Rebel Camp -->
+		<Vendor Name="Corporal Bluth" Entry="734" Type="Food" X="-11295.82" Y="-201.3427" Z="75.602" />
+		<!-- Bad Lands-->
+		<Vendor Name="Vernon Farcavern" Entry="48090" Type="Repair" X="-6599.86" Y="-3414" Z="279.288" />
+		<!-- Blasted Lands -->
+		<Vendor Name="Strumner Flintheel" Entry="5508" Type="Repair" X="-10951.8" Y="-3451.99" Z="66.76224" />
+	</Vendors>
+   
+	<Blackspots>
+		<!--Elwyn Forest -->
+		<Blackspot X="-9455.496" Y="526.5319" Z="56.07423" Radius="7.828245" />
+		<!-- Cape of Stranglethorn -->
+		<Blackspot X="-13861.74" Y="548.6624" Z="50.34254" Radius="10.75012" />		
+	</Blackspots>
+	<QuestOrder> 
+		<SetGrindArea>
+			<GrindArea>
+				<Name>Elwyn Forest Mining and Herb 1-75</Name> 
+				<LootRadius>100</LootRadius> 
+				<Hotspots>
+					<Hotspot X="-9203.423" Y="396.0092" Z="86.81639" />
+					<Hotspot X="-9314.868" Y="526.2546" Z="74.02094" />
+					<Hotspot X="-9439.286" Y="545.1699" Z="61.87978" />
+					<Hotspot X="-9491.195" Y="489.33" 	Z="51.61581" />
+					<Hotspot X="-9561.431" Y="442.8304" Z="49.5026" />
+					<Hotspot X="-9604.809" Y="527.126" 	Z="45.20313" />
+					<Hotspot X="-9546.361" Y="580.3876" Z="55.08123" />
+					<Hotspot X="-9517.105" Y="642.7665" Z="67.83486" />
+					<Hotspot X="-9545.631" Y="787.5774" Z="49.32146" />
+					<Hotspot X="-9676.026" Y="809.3736" Z="30.46527" />
+					<Hotspot X="-9704.282" Y="754.4118" Z="31.10261" />
+					<Hotspot X="-9888.128" Y="708.6328" Z="28.68747" />
+					<Hotspot X="-9883.041" Y="626.947" Z="40.6554" />
+					<Hotspot X="-9981.643" Y="636.1228" Z="37.88481" />
+					<Hotspot X="-10079.8" Y="620.3268" Z="39.2916" />
+					<Hotspot X="-10012.83" Y="492.5753" Z="27.9748" />
+					<Hotspot X="-9970.651" Y="336.9372" Z="35.91314" />
+					<Hotspot X="-9810.104" Y="316.2485" Z="38.07153" />
+					<Hotspot X="-9849.792" Y="233.1549" Z="18.95117" />
+					<Hotspot X="-9877.437" Y="61.7589" Z="32.05233" />
+					<Hotspot X="-9872.95" Y="130.7" Z="32.16803" />
+					<Hotspot X="-9953.896" Y="197.7719" Z="33.40258" />
+					<Hotspot X="-10036.24" Y="130.1284" Z="31.5767" />
+					<Hotspot X="-10023.33" Y="-16.47737" Z="34.16393" />
+					<Hotspot X="-9838.222" Y="-131.6086" Z="29.0574" />
+					<Hotspot X="-9808.81" Y="-237.9917" Z="38.58924" />
+					<Hotspot X="-9914.867" Y="-241.3793" Z="47.08804" />
+					<Hotspot X="-9912.088" Y="-296.8627" Z="32.95554" />
+					<Hotspot X="-9782.294" Y="-436.5453" Z="39.55923" />
+					<Hotspot X="-9713.45" Y="-504.5502" Z="53.86987" />
+					<Hotspot X="-9767.307" Y="-536.7921" Z="34.80668" />
+					<Hotspot X="-9762.438" Y="-620.1244" Z="39.3625" />
+					<Hotspot X="-9811.034" Y="-830.797" Z="41.00689" />
+					<Hotspot X="-9719.053" Y="-846.4323" Z="40.54873" />
+					<Hotspot X="-9587.321" Y="-788.0408" Z="41.78382" />
+					<Hotspot X="-9396.362" Y="-902.355" Z="61.5249" />
+					<Hotspot X="-9483.1" Y="-995.4756" Z="56.37682" />
+					<Hotspot X="-9339.061" Y="-787.5754" Z="65.9202" />
+					<Hotspot X="-9446.895" Y="-749.3528" Z="63.76996" />
+					<Hotspot X="-9420.167" Y="-688.3529" Z="65.58001" />
+					<Hotspot X="-9503.22" Y="-601.7761" Z="65.28437" />
+					<Hotspot X="-9449.813" Y="-575.9396" Z="66.3787" />
+					<Hotspot X="-9397.321" Y="-610.7555" Z="68.94295" />
+					<Hotspot X="-9326.07" Y="-468.0162" Z="70.86446" />
+					<Hotspot X="-9275.152" Y="-466.4794" Z="82.59113" />
+					<Hotspot X="-9301.54" Y="-342.7914" Z="70.15932" />
+					<Hotspot X="-9294.977" Y="-260.7921" Z="75.45181" />
+					<Hotspot X="-9121.254" Y="-127.32" Z="80.78349" />
+					<Hotspot X="-9120.136" Y="-0.3012844" Z="86.81204" />
+					<Hotspot X="-9227.087" Y="104.5461" Z="73.86702" />
+				</Hotspots>	
+			</GrindArea>
+		</SetGrindArea>
+		<GrindTo Condition="(Me.GetSkill(Styx.SkillLine.Herbalism).CurrentValue &gt;= 75)" />
+		<SetGrindArea>
+			<GrindArea>
+				<Name>Duskwood Mining and Herb 75-125</Name> 
+				<LootRadius>100</LootRadius> 
+				<Hotspots>
+					<Hotspot X="-10274.1" Y="-1283.516" Z="41.66133" />
+					<Hotspot X="-10209.23" Y="-952.4272" Z="36.79692" />
+					<Hotspot X="-10289.01" Y="-935.2645" Z="40.95272" />
+					<Hotspot X="-10428.29" Y="-1001.344" Z="43.95973" />
+					<Hotspot X="-10512.96" Y="-988.38" Z="45.42147" />
+					<Hotspot X="-10583.71" Y="-943.4543" Z="49.43317" />
+					<Hotspot X="-10662.29" Y="-905.1758" Z="56.76333" />
+					<Hotspot X="-10725.44" Y="-804.0214" Z="52.65823" />
+					<Hotspot X="-10931.1" Y="-794.936" Z="62.28883" />
+					<Hotspot X="-10800.78" Y="-682.8134" Z="40.941" />
+					<Hotspot X="-10729.98" Y="-596.4491" Z="53.10728" />
+					<Hotspot X="-10689.69" Y="-685.5015" Z="42.77338" />
+					<Hotspot X="-10616.09" Y="-732.2793" Z="53.4243" />
+					<Hotspot X="-10555.56" Y="-783.5687" Z="56.29462" />
+					<Hotspot X="-10482.3" Y="-777.1425" Z="57.92137" />
+					<Hotspot X="-10380.48" Y="-802.2546" Z="51.41643" />
+					<Hotspot X="-10278.34" Y="-744.4045" Z="45.04798" />
+					<Hotspot X="-10192.43" Y="-703.9741" Z="39.70375" />
+					<Hotspot X="-10096.22" Y="-575.4142" Z="56.5368" />
+					<Hotspot X="-10069.08" Y="-464.3831" Z="53.24807" />
+					<Hotspot X="-10164.71" Y="-206.9405" Z="36.29648" />
+					<Hotspot X="-10283.03" Y="-138.7838" Z="38.41494" />
+					<Hotspot X="-10246.61" Y="-64.60233" Z="38.94388" />
+					<Hotspot X="-10332.57" Y="36.34102" Z="48.55856" />
+					<Hotspot X="-10443.55" Y="39.67525" Z="45.61958" />
+					<Hotspot X="-10393.2" Y="-87.48647" Z="45.97885" />
+					<Hotspot X="-10721.71" Y="-106.3063" Z="34.87184" />
+					<Hotspot X="-10676.96" Y="23.64386" Z="36.36835" />
+					<Hotspot X="-10663.56" Y="169.1823" Z="43.13762" />
+					<Hotspot X="-10525.86" Y="293.8386" Z="31.2541" />
+					<Hotspot X="-10396.13" Y="158.544" Z="35.27779" />
+					<Hotspot X="-10357.75" Y="228.8124" Z="32.71592" />
+					<Hotspot X="-10265.5" Y="226.3801" Z="30.24118" />
+					<Hotspot X="-10229.65" Y="436.2748" Z="43.31455" />
+					<Hotspot X="-10410.21" Y="371.7596" Z="45.5644" />
+					<Hotspot X="-10550.19" Y="414.4922" Z="35.95524" />
+					<Hotspot X="-10599.13" Y="507.5141" Z="30.26683" />
+					<Hotspot X="-10946.12" Y="358.0689" Z="38.34588" />
+					<Hotspot X="-10921.83" Y="224.2251" Z="29.79045" />
+					<Hotspot X="-10953.31" Y="136.5787" Z="38.118" />
+					<Hotspot X="-11023.79" Y="216.1799" Z="27.35257" />
+					<Hotspot X="-11096.01" Y="321.3806" Z="31.18564" />
+					<Hotspot X="-11156.61" Y="164.9696" Z="33.70786" />
+					<Hotspot X="-11038.86" Y="-90.14726" Z="15.94768" />
+					<Hotspot X="-10965.56" Y="-27.46156" Z="13.73522" />
+					<Hotspot X="-10962.72" Y="-134.8076" Z="12.96237" />
+					<Hotspot X="-10781.14" Y="-242.4" Z="49.2806" />
+					<Hotspot X="-10822.78" Y="-362.5068" Z="58.76312" />
+					<Hotspot X="-10844.48" Y="-525.6782" Z="46.20304" />
+					<Hotspot X="-10995.23" Y="-540.8798" Z="33.35882" />
+					<Hotspot X="-11127.78" Y="-480.2042" Z="36.61218" />
+					<Hotspot X="-11142.41" Y="-720.8981" Z="58.17456" />
+					<Hotspot X="-11103.89" Y="-943.0872" Z="64.82317" />
+					<Hotspot X="-11052.67" Y="-1144.754" Z="38.8551" />
+					<Hotspot X="-11044.91" Y="-1354.342" Z="55.94698" />
+					<Hotspot X="-10974.03" Y="-1364.712" Z="53.87831" />
+					<Hotspot X="-10902.85" Y="-1276.829" Z="54.09795" />
+					<Hotspot X="-10878.9" Y="-1212.292" Z="42.52662" />
+					<Hotspot X="-10965.15" Y="-1127.759" Z="39.61849" />
+					<Hotspot X="-10873.72" Y="-1096.27" Z="41.46834" />
+					<Hotspot X="-10743.46" Y="-1099.56" Z="29.20872" />
+					<Hotspot X="-10711.28" Y="-1260.517" Z="29.83508" />
+					<Hotspot X="-10784.8" Y="-1355.454" Z="38.16375" />
+					<Hotspot X="-10423.19" Y="-1225.493" Z="46.10281" />
+				</Hotspots>	
+			</GrindArea>
+		</SetGrindArea>
+		<GrindTo Condition="(Me.GetSkill(Styx.SkillLine.Herbalism).CurrentValue &gt;= 125)" />
+
+		<SetGrindArea>
+			<GrindArea>
+				<Name>North Stranglethorn 125 -165 herb and mine</Name> 
+				<LootRadius>100</LootRadius> 
+				<Hotspots>
+					<Hotspot X="-11486.69" Y="-357.8045" Z="37.79138" />
+					<Hotspot X="-11541.83" Y="-476.1265" Z="44.41123" />
+					<Hotspot X="-11562.71" Y="-427.8498" Z="22.05814" />
+					<Hotspot X="-11616.71" Y="-360.4628" Z="20.72506" />
+					<Hotspot X="-11674.4" Y="-410.8907" Z="18.59602" />
+					<Hotspot X="-11655.48" Y="-520.9447" Z="22.18517" />
+					<Hotspot X="-11716.63" Y="-535.7929" Z="36.20799" />
+					<Hotspot X="-11783.68" Y="-485.3322" Z="26.08413" />
+					<Hotspot X="-11841.85" Y="-557.7835" Z="12.71776" />
+					<Hotspot X="-11712.69" Y="-673.6659" Z="50.22214" />
+					<Hotspot X="-11838.46" Y="-668.6338" Z="36.46103" />
+					<Hotspot X="-11899.49" Y="-762.7714" Z="33.39882" />
+					<Hotspot X="-11812.64" Y="-782.7396" Z="33.85634" />
+					<Hotspot X="-11814.64" Y="-889.655" Z="40.10321" />
+					<Hotspot X="-11530.33" Y="-847.8987" Z="68.22787" />
+					<Hotspot X="-11538.51" Y="-903.0626" Z="68.32626" />
+					<Hotspot X="-11450.19" Y="-904.915" Z="82.26376" />
+					<Hotspot X="-11443.2" Y="-834.447" Z="76.49982" />
+					<Hotspot X="-11494.09" Y="-756.1584" Z="62.06063" />
+				</Hotspots>	
+			</GrindArea>
+		</SetGrindArea>
+		<GrindTo Condition="(Me.GetSkill(Styx.SkillLine.Herbalism).CurrentValue &gt;= 160)" />
+
+		<SetGrindArea>
+			<GrindArea>
+				<Name>Cape of Stranglethorn 160 - 200 herb and mine</Name> 
+				<LootRadius>100</LootRadius> 
+				<Hotspots>
+					<Hotspot X="-13394.19" Y="180.8646" Z="21.06654" />
+					<Hotspot X="-13445.99" Y="293.2242" Z="31.20675" />
+					<Hotspot X="-13404.43" Y="372.912" Z="35.99056" />
+					<Hotspot X="-13654.77" Y="426.8658" Z="34.62626" />
+					<Hotspot X="-13754.72" Y="613.4243" Z="14.74896" />
+					<Hotspot X="-13817.65" Y="559.7335" Z="46.61323" />
+					<Hotspot X="-13878.97" Y="604.2017" Z="33.59188" />
+					<Hotspot X="-14009.42" Y="553.9335" Z="7.547438" />
+					<Hotspot X="-14157.61" Y="424.5658" Z="11.38984" />
+					<Hotspot X="-14228.07" Y="295.9258" Z="30.4041" />
+					<Hotspot X="-14156.09" Y="260.494" Z="12.08814" />
+					<Hotspot X="-14189.54" Y="164.3727" Z="9.149398" />
+					<Hotspot X="-14312.02" Y="147.2033" Z="8.362822" />
+					<Hotspot X="-14280.99" Y="88.21105" Z="7.980651" />
+					<Hotspot X="-14241.65" Y="-11.17093" Z="10.85507" />
+					<Hotspot X="-14159.42" Y="-78.70126" Z="2.46473" />
+					<Hotspot X="-13887.99" Y="-91.66163" Z="15.1863" />
+					<Hotspot X="-13956.94" Y="28.60138" Z="10.1549" />
+					<Hotspot X="-13909.01" Y="80.56697" Z="15.39551" />
+					<Hotspot X="-14022.41" Y="108.3847" Z="9.050534" />
+					<Hotspot X="-14066.92" Y="172.1845" Z="11.83712" />
+					<Hotspot X="-14009.45" Y="227.2278" Z="12.26222" />
+					<Hotspot X="-13941.45" Y="146.2324" Z="14.99" />
+					<Hotspot X="-13816.12" Y="118.4085" Z="22.20255" />
+					<Hotspot X="-13713" Y="129.4073" Z="23.78966" />
+					<Hotspot X="-13656.79" Y="173.0537" Z="17.39435" />
+					<Hotspot X="-13669.25" Y="285.3776" Z="38.0619" />
+					<Hotspot X="-13574.63" Y="308.5175" Z="42.99662" />
+				</Hotspots>	
+			</GrindArea>
+		</SetGrindArea>
+		<GrindTo Condition="(Me.GetSkill(Styx.SkillLine.Herbalism).CurrentValue &gt;= 200)" />
+
+		<SetGrindArea>
+			<GrindArea>	
+				<Name>BadLands 200 - 235 herb and mine</Name> 
+				<LootRadius>100</LootRadius> 
+				<Hotspots>
+					<Hotspot X="-6646.272" Y="-2651.894" Z="248.9077" />
+					<Hotspot X="-6802.315" Y="-2635.884" Z="242.8094" />
+					<Hotspot X="-6720.792" Y="-2775.478" Z="241.7212" />
+					<Hotspot X="-6779.293" Y="-2851.234" Z="242.1578" />
+					<Hotspot X="-6879.181" Y="-2803.735" Z="251.5772" />
+					<Hotspot X="-6887.925" Y="-2584.47" Z="243.0299" />
+					<Hotspot X="-6919.976" Y="-2491.483" Z="241.6803" />
+					<Hotspot X="-6975.209" Y="-2449.831" Z="243.9849" />
+					<Hotspot X="-6885.01" Y="-2308.138" Z="244.8375" />
+					<Hotspot X="-6907.835" Y="-2217.581" Z="248.9734" />
+					<Hotspot X="-6984.065" Y="-2325.044" Z="242.3256" />
+					<Hotspot X="-7222.265" Y="-2289.837" Z="245.5771" />
+					<Hotspot X="-7159.209" Y="-2418.257" Z="241.2766" />
+					<Hotspot X="-7184.736" Y="-2591.078" Z="246.625" />
+					<Hotspot X="-7102.643" Y="-2622.559" Z="264.2396" />
+					<Hotspot X="-7123.637" Y="-2695.975" Z="243.7387" />
+					<Hotspot X="-7026.944" Y="-2829.02" Z="209.3966" />
+					<Hotspot X="-6908.895" Y="-2983.111" Z="208.85" />
+					<Hotspot X="-6936.392" Y="-3079.887" Z="250.9357" />
+					<Hotspot X="-7151.545" Y="-3145.639" Z="255.2314" />
+					<Hotspot X="-7072.032" Y="-3656.414" Z="244.3541" />
+					<Hotspot X="-6365.489" Y="-3665.066" Z="243.7274" />
+					<Hotspot X="-6311.68" Y="-3491.526" Z="247.3431" />
+					<Hotspot X="-6302.582" Y="-3372.302" Z="243.8669" />
+					<Hotspot X="-6460.831" Y="-3220.398" Z="251.9704" />
+				</Hotspots>	
+			</GrindArea>
+		</SetGrindArea>	
+		<GrindTo Condition="(Me.GetSkill(Styx.SkillLine.Herbalism).CurrentValue &gt;= 260)" />
+		
+		<SetGrindArea>
+			<GrindArea>
+				<Name>Blasted Lands 235 - 300 herb and mine</Name> 
+				<LootRadius>100</LootRadius> 
+				<Hotspots>
+					<Hotspot X="-10536.67" Y="-2986.026" Z="24.36699" />
+					<Hotspot X="-10600.71" Y="-2749.46" Z="27.41384" />
+					<Hotspot X="-10477.95" Y="-2723.507" Z="23.19665" />
+					<Hotspot X="-10609.76" Y="-2606.973" Z="33.94624" />
+					<Hotspot X="-10674.38" Y="-2526.287" Z="26.9782" />
+					<Hotspot X="-10330.66" Y="-2557.95" Z="24.28656" />
+					<Hotspot X="-10103.21" Y="-2383.116" Z="26.78404" />
+					<Hotspot X="-10119.54" Y="-2589.641" Z="28.28759" />
+					<Hotspot X="-10178.86" Y="-2728.01" Z="24.45601" />
+					<Hotspot X="-9867.394" Y="-3693.979" Z="23.44807" />
+					<Hotspot X="-10091.7" Y="-2812.597" Z="22.48738" />
+
+				</Hotspots>	
+			</GrindArea>
+		</SetGrindArea>
+		<GrindTo Condition="(Me.GetSkill(Styx.SkillLine.Herbalism).CurrentValue &gt;= 303)" />		
+	</QuestOrder>
+</HBProfile>

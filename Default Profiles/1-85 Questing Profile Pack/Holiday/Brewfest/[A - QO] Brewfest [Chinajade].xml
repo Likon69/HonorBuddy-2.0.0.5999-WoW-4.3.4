@@ -1,0 +1,1039 @@
+<HBProfile>
+   <!-- Profile by Chinajade (last updated for 2011 Brewfest)
+   
+      PROFILE EXPECTATIONS:
+         * When using this profile, be certain to set the HonorBuddy bot to (select only one):
+                ( ) Grinding / Mixed
+                (*) Questing
+                ( ) PvP
+   
+         * This profile is appropriate for (check all that apply):
+                [X] Alliance   [ ] Achievement
+                [ ] Horde      [ ] Farming
+                               [ ] Leveling
+                               [ ] PvP
+                               [X] Questing
+                               [ ] Reputation
+                               [X] Seasonal
+							   
+		NOTES:
+		 * Gets as many Brewfest quests and achievements done as possible given the
+			existing HB-shipped behaviors.
+			You will be prompted to do the Ram-racing pre-quests, manually.   Unforunately,
+			these are not automatable given the current behaviors.
+			
+		 * We use variant timers between actions where appropriate to make it look
+			more 'human like'.
+
+		 * There are a _lot_ of scenery decorations to get hung up on.  Unfortunately,
+			the problem lies in HBcore's navigation, and blackspots will not help this.
+			Be careful trying to do this unattended.  Getting hung up on a scenery
+			decoration begs for attention in the Brewfest area with a lot of people around.
+			
+		 * We include coordinates for all the seasonal NPCs as there is a very high chance
+			they won't be in the user's Honorbuddy database.
+			
+		LICENSE:
+			This work is licensed under the
+				Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License.
+			also known as CC-BY-NC-SA.  To view a copy of this license, visit
+				http://creativecommons.org/licenses/by-nc-sa/3.0/
+			or send a letter to
+				Creative Commons
+				171 Second Street, Suite 300
+				San Francisco, California, 94105, USA.		
+    -->
+   <Name>Alliance Brewfest [Chinajade] $Revision$</Name>
+   <MinLevel>60</MinLevel>	<!-- 60, because we must fly in Classic -->
+   <MaxLevel>86</MaxLevel>
+   
+   <MinDurability>0.4</MinDurability>
+   <MinFreeBagSlots>2</MinFreeBagSlots>
+    
+   <MailGrey>False</MailGrey>
+   <MailWhite>False</MailWhite>
+   <MailGreen>True</MailGreen>
+   <MailBlue>True</MailBlue>
+   <MailPurple>True</MailPurple>
+   
+   <SellGrey>True</SellGrey>
+   <SellWhite>True</SellWhite>
+   <SellGreen>False</SellGreen>
+   <SellBlue>False</SellBlue>
+   <SellPurple>False</SellPurple>
+   
+   
+   <Blackspots>
+       <!-- Ramp in Darnasses otw to Auction House -->
+		<Blackspot X="9880.041" Y="2248.925" Z="1329.245" Radius="15" />
+   </Blackspots>
+   
+   <QuestOrder>	
+		<If Condition="!Me.IsAlliance" >
+			<CustomBehavior File="UserDialog" StopOnContinue="true"
+				Text="Sorry, this profile only works for Alliance at the moment." />
+		</If>
+		
+		<If Condition="!CanFly()" >
+			<CustomBehavior File="UserDialog" StopOnContinue="true"
+				Text="Your toon must be able to fly in Kalimdor and Eastern Kingdoms to use this profile." />
+		</If>
+		
+		<If Condition="Me.FreeBagSlots &lt; 4" >
+			<CustomBehavior File="UserDialog" StopOnContinue="true"
+				Text="You must have four free bag slots to start this profile.\nPlease make some room in your inventory and restart the profile." />
+		</If>
+		
+		<!-- WARN USER of HB bugs -->
+		<If Condition="true" >		<!-- change to 'Condition="false"' to turn off warning -->
+			<CustomBehavior File="UserDialog"
+				Text="Do NOT AFK this profile!\n\n* You should turn off any plugins that use Slowfall abilities\nOtherwise, the &quot;Drunken Stupor&quot; achievement will be acquired after you run out of Slowfall reagents (we keep trying until we get the achievement).\n\n* It goes into areas with many, many people around.\n\n* Honorbuddy navigation _loves_ to get stuck.\nThe Brewfest scenery decorations provide a wealth of opportunities for this.\n\n* Moving around while drunk causes you to fall a lot (and sometimes die), since Honorbuddy loves to path on the bloody edge of a dropoff. Honorbuddy navigation leaves no room for the error induced by drunkeness.\n\n* Honorbuddy occasionally has problems with Intercontinental travel, which is needed for one of the quests.\n\n* Honorbuddy occasionally gets confused about 'quest state'.\nIt will think something is incomplete when its done.  We've made the profile very stop/start friendly to work around this.\n\n* To turn this warning message off, edit the profile.  Look for a comment with the words &quot;WARN USER&quot; and change the 'true' to 'false'." />
+		</If>
+
+		<CustomBehavior File="UserSettings" Preset="NoDistractions" />
+		
+		<!-- Quest: Now ths is Racing... Almost! -->
+		<!-- Need to do this before we get drunk, otherwise it can fail -->
+		<If Condition="!IsQuestCompleted(11318)">
+			<CustomBehavior File="Message" UpdateGoalText="true" LogColor="CornflowerBlue"
+				Text="Working the &quot;Now this is Racing... Almost!&quot; quest." />
+				
+			<If Condition="HasQuest(11318) &amp;&amp; (GetItemCount(33306) &lt;= 0)" >
+				<CustomBehavior File="AbandonQuest" QuestId="11318" Type="All" />
+			</If>
+			
+			<CustomBehavior File="FlyTo" X="-5202.8" Y="-493.1665" Z="388.565" />
+			<CustomBehavior File="ForcedDismount" />
+			
+			<PickUp QuestName="Now this is Racing... Almost!" QuestId="11318"
+				GiverName="Neill Ramstein" GiverId="23558"
+				X="-5200.16" Y="-491.55" Z="388.48" />
+			
+			<!-- Trot -->
+			<CustomBehavior File="Message" UpdateGoalText="true" LogColor="CornflowerBlue"
+				Text="&quot;Now this is Racing... Almost!&quot;...Trot" />
+			<CustomBehavior File="Misc\RunLua" Lua="UseItemByName(33306)" />
+			<CustomBehavior File="Misc\RunLua" Lua="UseItemByName(33306)" />
+			
+			<CustomBehavior File="Misc\RunLua" Lua="UseItemByName(33306)" />
+			<CustomBehavior File="WaitTimer" WaitTime="1100" VariantTime="300" />
+			<CustomBehavior File="Misc\RunLua" Lua="UseItemByName(33306)" />
+			<CustomBehavior File="WaitTimer" WaitTime="1100" VariantTime="300" />
+			<CustomBehavior File="Misc\RunLua" Lua="UseItemByName(33306)" />
+			<CustomBehavior File="WaitTimer" WaitTime="1100" VariantTime="300" />
+			<CustomBehavior File="Misc\RunLua" Lua="UseItemByName(33306)" />
+			<CustomBehavior File="WaitTimer" WaitTime="1100" VariantTime="300" />
+			<CustomBehavior File="Misc\RunLua" Lua="UseItemByName(33306)" />
+			<CustomBehavior File="WaitTimer" WaitTime="1100" VariantTime="300" />
+			<CustomBehavior File="Misc\RunLua" Lua="UseItemByName(33306)" />
+			<CustomBehavior File="WaitTimer" WaitTime="1100" VariantTime="300" />
+			<CustomBehavior File="Misc\RunLua" Lua="UseItemByName(33306)" />
+			<CustomBehavior File="WaitTimer" WaitTime="1100" VariantTime="300" />
+			<CustomBehavior File="Misc\RunLua" Lua="UseItemByName(33306)" />
+			<CustomBehavior File="WaitTimer" WaitTime="1100" VariantTime="300" />
+			<CustomBehavior File="Misc\RunLua" Lua="UseItemByName(33306)" />
+			<CustomBehavior File="WaitTimer" WaitTime="1100" VariantTime="300" />
+			<CustomBehavior File="Misc\RunLua" Lua="UseItemByName(33306)" />
+			<CustomBehavior File="WaitTimer" WaitTime="1100" VariantTime="300" />
+			
+			<!-- Canter -->
+			<CustomBehavior File="Message" UpdateGoalText="true" LogColor="CornflowerBlue"
+				Text="&quot;Now this is Racing... Almost!&quot;...Canter" />
+			<CustomBehavior File="Misc\RunLua" Lua="UseItemByName(33306)" />
+			<CustomBehavior File="Misc\RunLua" Lua="UseItemByName(33306)" />
+			
+			<CustomBehavior File="Misc\RunLua" Lua="UseItemByName(33306)" />
+			<CustomBehavior File="WaitTimer" WaitTime="1100" VariantTime="300" />
+			<CustomBehavior File="Misc\RunLua" Lua="UseItemByName(33306)" />
+			<CustomBehavior File="WaitTimer" WaitTime="1100" VariantTime="300" />
+			<CustomBehavior File="Misc\RunLua" Lua="UseItemByName(33306)" />
+			<CustomBehavior File="WaitTimer" WaitTime="1100" VariantTime="300" />
+			<CustomBehavior File="Misc\RunLua" Lua="UseItemByName(33306)" />
+			<CustomBehavior File="WaitTimer" WaitTime="1100" VariantTime="300" />
+			<CustomBehavior File="Misc\RunLua" Lua="UseItemByName(33306)" />
+			<CustomBehavior File="WaitTimer" WaitTime="1100" VariantTime="300" />
+			<CustomBehavior File="Misc\RunLua" Lua="UseItemByName(33306)" />
+			<CustomBehavior File="WaitTimer" WaitTime="1100" VariantTime="300" />
+			<CustomBehavior File="Misc\RunLua" Lua="UseItemByName(33306)" />
+			<CustomBehavior File="WaitTimer" WaitTime="1100" VariantTime="300" />
+			<CustomBehavior File="Misc\RunLua" Lua="UseItemByName(33306)" />
+			<CustomBehavior File="WaitTimer" WaitTime="1100" VariantTime="300" />
+			<CustomBehavior File="Misc\RunLua" Lua="UseItemByName(33306)" />
+			<CustomBehavior File="WaitTimer" WaitTime="1100" VariantTime="300" />
+			<CustomBehavior File="Misc\RunLua" Lua="UseItemByName(33306)" />
+			<CustomBehavior File="WaitTimer" WaitTime="1100" VariantTime="300" />
+			
+			<!-- Gallop -->
+			<CustomBehavior File="Message" UpdateGoalText="true" LogColor="CornflowerBlue"
+				Text="&quot;Now this is Racing... Almost!&quot;...Gallop" />
+			<CustomBehavior File="Misc\RunLua" Lua="UseItemByName(33306)" />
+			<CustomBehavior File="Misc\RunLua" Lua="UseItemByName(33306)" />
+			
+			<CustomBehavior File="Misc\RunLua" Lua="UseItemByName(33306)" />
+			<CustomBehavior File="WaitTimer" WaitTime="1100" VariantTime="300" />
+			<CustomBehavior File="Misc\RunLua" Lua="UseItemByName(33306)" />
+			<CustomBehavior File="WaitTimer" WaitTime="1100" VariantTime="300" />
+			<CustomBehavior File="Misc\RunLua" Lua="UseItemByName(33306)" />
+			<CustomBehavior File="WaitTimer" WaitTime="1100" VariantTime="300" />
+			<CustomBehavior File="Misc\RunLua" Lua="UseItemByName(33306)" />
+			<CustomBehavior File="WaitTimer" WaitTime="1100" VariantTime="300" />
+			<CustomBehavior File="Misc\RunLua" Lua="UseItemByName(33306)" />
+			<CustomBehavior File="WaitTimer" WaitTime="1100" VariantTime="300" />
+			<CustomBehavior File="Misc\RunLua" Lua="UseItemByName(33306)" />
+			<CustomBehavior File="WaitTimer" WaitTime="1100" VariantTime="300" />
+			<CustomBehavior File="Misc\RunLua" Lua="UseItemByName(33306)" />
+			<CustomBehavior File="WaitTimer" WaitTime="1100" VariantTime="300" />
+			<CustomBehavior File="Misc\RunLua" Lua="UseItemByName(33306)" />
+			<CustomBehavior File="WaitTimer" WaitTime="1100" VariantTime="300" />
+			<CustomBehavior File="Misc\RunLua" Lua="UseItemByName(33306)" />
+			<CustomBehavior File="WaitTimer" WaitTime="1100" VariantTime="300" />
+			<CustomBehavior File="Misc\RunLua" Lua="UseItemByName(33306)" />
+			<CustomBehavior File="WaitTimer" WaitTime="1100" VariantTime="300" />
+			
+			<CustomBehavior File="ForcedDismount" />
+		</If>
+		
+		<If Condition="HasQuest(11318)" >			
+			<CustomBehavior File="FlyTo" X="-5202.8" Y="-493.1665" Z="388.565" />
+			<CustomBehavior File="ForcedDismount" />
+			
+			<If Condition="IsQuestCompleted(11318)" >
+				<TurnIn QuestName="Now this is Racing... Almost!" QuestId="11318"
+					TurnInName="Neill Ramstein" TurnInId="23558"
+					X="-5200.16" Y="-491.55" Z="388.48" />
+			<Else>
+				<CustomBehavior File="ForcedDismount" />
+				<CustomBehavior File="AbandonQuest" QuestId="11318" Type="All" />
+				<CustomBehavior File="UserDialog" StopOnContinue="true"
+					Text="We were UNABLE TO COMPLETE the &quot;Now this is Racing...Almost!&quot; quest successfully.\n\nMost likely, this is due to lag on your connection.  Your options are to restart the profile, and we'll try it again, or do it manually.\n\nIf you choose to do it manually, we've already abandoned our failed attempt.  Pick up &quot;Now this is Racing...Almost!&quot; from Neill Ramstein (directly in front of you)." />
+				</Else>
+			</If>
+		</If>
+		
+		
+		<!--
+		  ========== Achievements & non-Daily quests ==========
+		  -->
+		  
+		<!-- Achievement: Drunken Stupor -->
+		<While Condition="!IsAchievementCompleted(1260)" >
+			<CustomBehavior File="Message" UpdateGoalText="true" LogColor="CornflowerBlue"
+				Text="Working the &quot;Drunken Stupor!&quot; achievement." />
+				
+			<CustomBehavior File="UserDialog" ExpiryTime="30"
+					Text="You must TURN OFF any plugins that use SLOWFALL abilities...\n\nOtherwise, the achievement will be deferred until you run out of appropriate slowfall reagents.\n\n(This message will self-dismiss in a few seconds.)" />
+				
+			<If Condition="Me.HealthPercent &lt; 98" >
+				<CustomBehavior File="FlyTo" DestName="Sausage vendor"
+						X="-5137.198" Y="-603.7718" Z="397.7466" />
+				<CustomBehavior File="ForcedDismount" />
+				<While Condition="Me.HealthPercent &lt; 98" >
+					<CustomBehavior File="InteractWith" MobId="23481"
+						BuyItemId="33025" BuyItemCount="1" WaitTime="300" />
+					<CustomBehavior File="WaitTimer" WaitTime="0" VariantTime="1200" />
+					<CustomBehavior File="Misc\RunLua" Lua="CloseMerchant()" />
+					<CustomBehavior File="UseItem" ItemId="33025" />
+					<CustomBehavior File="WaitTimer" WaitTime="20000" VariantTime="10000" />
+				</While>
+				<!-- Avoid getting hung up in tent -->
+				<RunTo X="-5137.198" Y="-603.7718" Z="397.7466" />
+			</If>
+			
+			<If Condition="GetItemCount(33034) &lt; 10" >
+				<CustomBehavior File="FlyTo" DestName="Alcohol vendor"
+					X="-5142.769" Y="-582.5859" Z="397.1767" />
+				<CustomBehavior File="ForcedDismount" />
+				<CustomBehavior File="InteractWith" MobId="23511"
+					BuyItemId="33034" BuyItemCount="10" WaitTime="300" />
+				<CustomBehavior File="WaitTimer" WaitTime="0" VariantTime="1200" />
+				<!-- Avoid getting hung up in tent -->
+				<RunTo X="-5144.292" Y="-585.2562" Z="397.1783" />
+			</If>
+			<CustomBehavior File="Misc\RunLua" Lua="CloseMerchant()" />
+			
+			<CustomBehavior File="FlyTo" DestName="Drunken Stupor"
+				X="-5154.13" Y="-379.5135" Z="392.2523" />
+			<CustomBehavior File="ForcedDismount" />
+			
+			<While Condition="GetItemCount(33034) &gt; 0" >
+				<CustomBehavior File="UseItem" ItemId="33034" />
+				<CustomBehavior File="WaitTimer" WaitTime="100" VariantTime="700" />
+			</While>
+			
+			<CustomBehavior File="FlyTo" Distance="0.5"
+				X="-5154.13" Y="-379.5135" Z="457.7523" />
+			<CustomBehavior File="WaitTimer" WaitTime="1000" />
+			<CustomBehavior File="FlyTo" Distance="0.5"
+				X="-5154.13" Y="-379.5135" Z="457.7523" />
+			
+			<!-- Can't used "ForcedDismount" because we don't want automatic descent -->
+			<CustomBehavior File="Misc\RunLua" Lua="Dismount()" />
+			<!-- In case we're Druid... -->
+			<CustomBehavior File="Misc\RunLua" Lua="CancelShapeshiftForm()" /> 
+			
+			<CustomBehavior File="WaitTimer" WaitTime="5000" VariantTime="2000" />
+			<If Condition="!IsAchievementCompleted(1260)" >
+				<CustomBehavior File="UserDialog" ExpiryTime="30"
+					Text="We were FAILED TO GET the &quot;Drunken Stupor&quot; ACHIEVEMENT.\n\nThis can happen for numerous reasons.  Your options are:\n* Stop the profile, and do the achievement manually, or\n* Let the profile automatically try again in a few seconds" />
+			</If>
+		</While>
+
+		<!-- Achievements: Strange Brew & The Brewfest Diet -->
+		<If Condition="!IsAchievementCompleted(1184) &amp;&amp; !IsAchievementCompleted(1185)" >
+			<CustomBehavior File="Message" UpdateGoalText="true" LogColor="CornflowerBlue"
+				Text="Working &quot;The Brewfest Diet&quot; and the &quot;Strange Brew&quot; achievements." />	
+		<ElseIf Condition="!IsAchievementCompleted(1184)" >
+			<CustomBehavior File="Message" UpdateGoalText="true" LogColor="CornflowerBlue"
+				Text="Working the &quot;Strange Brew&quot; achievement." />			
+			</ElseIf>
+		<ElseIf Condition="!IsAchievementCompleted(1185)" >
+			<CustomBehavior File="Message" UpdateGoalText="true" LogColor="CornflowerBlue"
+				Text="Working &quot;The Brewfest Diet&quot; achievement." />	
+			</ElseIf>
+		</If>
+		
+		<If Condition="!IsAchievementCompleted(1184) || !IsAchievementCompleted(1185)" >
+			<!-- Spread out arrival to keep from looking like bots -->
+			<If Condition="Chance(25.0)">
+				<CustomBehavior File="FlyTo" X="-5161.457" Y="-593.9974" Z="398.037" />
+				<CustomBehavior File="ForcedDismount" />
+			<Else>
+				<CustomBehavior File="FlyTo" X="-5158.588" Y="-590.1633" Z="397.6331" />
+				<CustomBehavior File="ForcedDismount" />
+				</Else>
+			<Else>
+				<CustomBehavior File="FlyTo" X="-5165.363" Y="-598.9723" Z="398.1297" />
+				<CustomBehavior File="ForcedDismount" />
+				</Else>
+			<Else>
+				<CustomBehavior File="FlyTo" X="-5161.638" Y="-609.8235" Z="397.9398" />
+				<CustomBehavior File="ForcedDismount" />
+				</Else>
+			</If>
+		</If>
+		
+		<!-- Achievement: Strange Brew(Gordok) - Gordok Grog -->
+		<If Condition="!IsAchievementCompleted(1184,4)" >
+			<If Condition="GetItemCount(33034) &lt; 1" >
+				<CustomBehavior File="InteractWith" MobId="23511"
+					BuyItemId="33034" BuyItemCount="1" WaitTime="300" />
+				<CustomBehavior File="WaitTimer" WaitTime="0" VariantTime="1200" />
+			</If>
+			<CustomBehavior File="Misc\RunLua" Lua="CloseMerchant()" />
+			<CustomBehavior File="UseItem" ItemId="33034" />
+			<CustomBehavior File="WaitTimer" WaitTime="100" VariantTime="700" />
+		</If>
+		
+		<!-- Achievement: Strange Brew(Gordok) - Mudder's Milk -->
+		<If Condition="!IsAchievementCompleted(1184,5)" >
+			<If Condition="GetItemCount(33036) &lt; 1" >
+				<CustomBehavior File="InteractWith" MobId="23511"
+					BuyItemId="33036" BuyItemCount="1" WaitTime="300" />
+				<CustomBehavior File="WaitTimer" WaitTime="0" VariantTime="1200" />
+			</If>
+			<CustomBehavior File="Misc\RunLua" Lua="CloseMerchant()" />
+			<CustomBehavior File="UseItem" ItemId="33036" />
+			<CustomBehavior File="WaitTimer" WaitTime="100" VariantTime="700" />
+		</If>
+		
+		<!-- Achievement: Strange Brew(Gordok) - Ogre Mead -->
+		<If Condition="!IsAchievementCompleted(1184,6)" >
+			<If Condition="GetItemCount(33035) &lt; 1" >
+				<CustomBehavior File="InteractWith" MobId="23511"
+					BuyItemId="33035" BuyItemCount="1" WaitTime="300" />
+				<CustomBehavior File="WaitTimer" WaitTime="0" VariantTime="1200" />
+			</If>
+			<CustomBehavior File="Misc\RunLua" Lua="CloseMerchant()" />
+			<CustomBehavior File="UseItem" ItemId="33035" />
+			<CustomBehavior File="WaitTimer" WaitTime="100" VariantTime="700" />
+		</If>
+		
+		<!-- Achievement: The Brewfest Diet - Dried Sausage -->
+		<If Condition="!IsAchievementCompleted(1185,1)" >
+			<If Condition="GetItemCount(34063) &lt; 1">
+				<CustomBehavior File="InteractWith" MobId="23481"
+					BuyItemId="34063" BuyItemCount="1" WaitTime="300" />
+				<CustomBehavior File="WaitTimer" WaitTime="0" VariantTime="1200" />
+			</If>
+			<CustomBehavior File="Misc\RunLua" Lua="CloseMerchant()" />
+			<CustomBehavior File="UseItem" ItemId="34063" />
+			<CustomBehavior File="WaitTimer" WaitTime="100" VariantTime="700" />
+			<CustomBehavior File="Misc\RunLua" Lua="JumpOrAscendStart()" />
+		</If>
+		
+		<!-- Achievement: The Brewfest Diet - Pickled Sausage -->
+		<If Condition="!IsAchievementCompleted(1185,2)" >
+			<If Condition="GetItemCount(33024) &lt; 1">
+				<CustomBehavior File="InteractWith" MobId="23481"
+					BuyItemId="33024" BuyItemCount="1" WaitTime="300" />
+				<CustomBehavior File="WaitTimer" WaitTime="0" VariantTime="1200" />
+			</If>
+			<CustomBehavior File="Misc\RunLua" Lua="CloseMerchant()" />
+			<CustomBehavior File="UseItem" ItemId="33024" />
+			<CustomBehavior File="WaitTimer" WaitTime="100" VariantTime="700" />
+			<CustomBehavior File="Misc\RunLua" Lua="JumpOrAscendStart()" />
+		</If>
+		
+		<!-- Achievement: The Brewfest Diet - Savory Sausage -->
+		<If Condition="!IsAchievementCompleted(1185,3)" >
+			<If Condition="GetItemCount(33023) &lt; 1">
+				<CustomBehavior File="InteractWith" MobId="23481"
+					BuyItemId="33023" BuyItemCount="1" WaitTime="300" />
+				<CustomBehavior File="WaitTimer" WaitTime="0" VariantTime="1200" />
+			</If>
+			<CustomBehavior File="Misc\RunLua" Lua="CloseMerchant()" />
+			<CustomBehavior File="UseItem" ItemId="33023" />
+			<CustomBehavior File="WaitTimer" WaitTime="100" VariantTime="700" />
+			<CustomBehavior File="Misc\RunLua" Lua="JumpOrAscendStart()" />
+		</If>
+		
+		<!-- Achievement: The Brewfest Diet - Spicy Smoked Sausage -->
+		<If Condition="!IsAchievementCompleted(1185,5)" >
+			<If Condition="GetItemCount(33025) &lt; 1">
+				<CustomBehavior File="InteractWith" MobId="23481"
+					BuyItemId="33025" BuyItemCount="1" WaitTime="300" />
+				<CustomBehavior File="WaitTimer" WaitTime="0" VariantTime="1200" />
+			</If>
+			<CustomBehavior File="Misc\RunLua" Lua="CloseMerchant()" />
+			<CustomBehavior File="UseItem" ItemId="33025" />
+			<CustomBehavior File="WaitTimer" WaitTime="100" VariantTime="700" />
+			<CustomBehavior File="Misc\RunLua" Lua="JumpOrAscendStart()" />
+		</If>
+		
+		<!-- Achievement: The Brewfest Diet - Succulent Sausage -->
+		<If Condition="!IsAchievementCompleted(1185,6)" >
+			<If Condition="GetItemCount(34064) &lt; 1">
+				<CustomBehavior File="InteractWith" MobId="23481"
+					BuyItemId="34064" BuyItemCount="1" WaitTime="300" />
+				<CustomBehavior File="WaitTimer" WaitTime="0" VariantTime="1200" />
+			</If>
+			<CustomBehavior File="Misc\RunLua" Lua="CloseMerchant()" />
+			<CustomBehavior File="UseItem" ItemId="34064" />
+			<CustomBehavior File="WaitTimer" WaitTime="100" VariantTime="700" />
+			<CustomBehavior File="Misc\RunLua" Lua="JumpOrAscendStart()" />
+		</If>
+		
+		<!-- Achievement: The Brewfest Diet - The Golden Link -->
+		<If Condition="!IsAchievementCompleted(1185,8)" >
+			<If Condition="GetItemCount(33026) &lt; 1">
+				<CustomBehavior File="InteractWith" MobId="23481"
+					BuyItemId="33026" BuyItemCount="1" WaitTime="300" />
+				<CustomBehavior File="WaitTimer" WaitTime="0" VariantTime="1200" />
+			</If>
+			<CustomBehavior File="Misc\RunLua" Lua="CloseMerchant()" />
+			<CustomBehavior File="UseItem" ItemId="33026" />
+			<CustomBehavior File="WaitTimer" WaitTime="100" VariantTime="700" />
+			<CustomBehavior File="Misc\RunLua" Lua="JumpOrAscendStart()" />
+		</If>
+		
+		<!-- Achievement: Strange Brew(Thunderbrew) - Thunder 45 -->
+		<If Condition="!IsAchievementCompleted(1184,7)" >
+			<If Condition="GetItemCount(33031) &lt; 1" >
+				<CustomBehavior File="InteractWith" MobId="23510"
+					BuyItemId="33031" BuyItemCount="1" WaitTime="300" />
+				<CustomBehavior File="WaitTimer" WaitTime="0" VariantTime="1200" />
+			</If>
+			<CustomBehavior File="Misc\RunLua" Lua="CloseMerchant()" />
+			<CustomBehavior File="UseItem" ItemId="33031" />
+			<CustomBehavior File="WaitTimer" WaitTime="100" VariantTime="700" />
+			<!-- <CustomBehavior File="Misc\RunLua" Lua="JumpOrAscendStart()" /> -->
+		</If>
+		
+		<!-- Achievement: Strange Brew(Thunderbrew) - Thunderbrew Ale -->
+		<If Condition="!IsAchievementCompleted(1184,8)" >
+			<If Condition="GetItemCount(33032) &lt; 1" >
+				<CustomBehavior File="InteractWith" MobId="23510"
+					BuyItemId="33032" BuyItemCount="1" WaitTime="300" />
+				<CustomBehavior File="WaitTimer" WaitTime="0" VariantTime="1200" />
+			</If>
+			<CustomBehavior File="Misc\RunLua" Lua="CloseMerchant()" />
+			<CustomBehavior File="UseItem" ItemId="33032" />
+			<CustomBehavior File="WaitTimer" WaitTime="100" VariantTime="700" />
+			<!-- <CustomBehavior File="Misc\RunLua" Lua="JumpOrAscendStart()" /> -->
+		</If>
+		
+		<!-- Achievement: Strange Brew(Thunderbrew) - Thunderbrew Stout -->
+		<If Condition="!IsAchievementCompleted(1184,9)" >
+			<If Condition="GetItemCount(33033) &lt; 1" >
+				<CustomBehavior File="InteractWith" MobId="23510"
+					BuyItemId="33033" BuyItemCount="1" WaitTime="300" />
+				<CustomBehavior File="WaitTimer" WaitTime="0" VariantTime="1200" />
+			</If>
+			<CustomBehavior File="Misc\RunLua" Lua="CloseMerchant()" />
+			<CustomBehavior File="UseItem" ItemId="33033" />
+			<CustomBehavior File="WaitTimer" WaitTime="100" VariantTime="700" />
+			<!-- <CustomBehavior File="Misc\RunLua" Lua="JumpOrAscendStart()" /> -->
+		</If>
+		
+		<!-- Achievement: The Brewfest Diet - Spiced Onion Cheese -->
+		<If Condition="!IsAchievementCompleted(1185,4)" >
+			<If Condition="GetItemCount(34065) &lt; 1">
+				<CustomBehavior File="InteractWith" MobId="23521"
+					BuyItemId="34065" BuyItemCount="1" WaitTime="300" />
+				<CustomBehavior File="WaitTimer" WaitTime="0" VariantTime="1200" />
+			</If>
+			<CustomBehavior File="Misc\RunLua" Lua="CloseMerchant()" />
+			<CustomBehavior File="UseItem" ItemId="34065" />
+			<CustomBehavior File="WaitTimer" WaitTime="100" VariantTime="700" />
+			<CustomBehavior File="Misc\RunLua" Lua="JumpOrAscendStart()" />
+		</If>
+
+		<!-- Achievement: Strange Brew(Barleybrew) - Barleybrew Clear -->
+		<If Condition="!IsAchievementCompleted(1184,1)" >
+			<If Condition="GetItemCount(33030) &lt; 1" >
+				<CustomBehavior File="InteractWith" MobId="23482"
+					BuyItemId="33030" BuyItemCount="1" WaitTime="300" />
+				<CustomBehavior File="WaitTimer" WaitTime="0" VariantTime="1200" />
+			</If>
+			<CustomBehavior File="Misc\RunLua" Lua="CloseMerchant()" />
+			<CustomBehavior File="UseItem" ItemId="33030" />
+			<CustomBehavior File="WaitTimer" WaitTime="100" VariantTime="700" />
+			<!-- <CustomBehavior File="Misc\RunLua" Lua="JumpOrAscendStart()" /> -->
+		</If>
+		
+		<!-- Achievement: Strange Brew(Barleybrew) - Barleybrew Dark -->
+		<If Condition="!IsAchievementCompleted(1184,2)" >
+			<If Condition="GetItemCount(33029) &lt; 1" >
+				<CustomBehavior File="InteractWith" MobId="23482"
+					BuyItemId="33029" BuyItemCount="1" WaitTime="300" />
+				<CustomBehavior File="WaitTimer" WaitTime="0" VariantTime="1200" />
+			</If>
+			<CustomBehavior File="Misc\RunLua" Lua="CloseMerchant()" />
+			<CustomBehavior File="UseItem" ItemId="33029" />
+			<CustomBehavior File="WaitTimer" WaitTime="100" VariantTime="700" />
+			<!-- <CustomBehavior File="Misc\RunLua" Lua="JumpOrAscendStart()" /> -->
+		</If>
+
+		<!-- Achievement: Strange Brew(Barleybrew) - Barleybrew Light -->
+		<If Condition="!IsAchievementCompleted(1184,3)" >
+			<If Condition="GetItemCount(33028) &lt; 1" >
+				<CustomBehavior File="InteractWith" MobId="23482"
+					BuyItemId="33028" BuyItemCount="1" WaitTime="300" />
+				<CustomBehavior File="WaitTimer" WaitTime="0" VariantTime="1200" />
+			</If>
+			<CustomBehavior File="Misc\RunLua" Lua="CloseMerchant()" />
+			<CustomBehavior File="UseItem" ItemId="33028" />
+			<CustomBehavior File="WaitTimer" WaitTime="100" VariantTime="700" />
+			<!-- <CustomBehavior File="Misc\RunLua" Lua="JumpOrAscendStart()" /> -->
+		</If>
+		
+		<!-- Achievement: The Brewfest Diet - The Essential Brewfest Pretzel -->
+		<If Condition="!IsAchievementCompleted(1185,7)" >
+			<If Condition="GetItemCount(33043) &lt; 1">
+				<CustomBehavior File="InteractWith" MobId="23522"
+					BuyItemId="33043" BuyItemCount="1" WaitTime="300" />
+				<CustomBehavior File="WaitTimer" WaitTime="0" VariantTime="1200" />
+			</If>
+			<CustomBehavior File="Misc\RunLua" Lua="CloseMerchant()" />
+			<CustomBehavior File="UseItem" ItemId="33043" />
+			<CustomBehavior File="WaitTimer" WaitTime="100" VariantTime="700" />
+			<CustomBehavior File="Misc\RunLua" Lua="JumpOrAscendStart()" />
+		</If>
+
+		
+		<!--
+		    Pick up whatever quests are not complete
+		  -->
+		  
+		<If Condition="!IsQuestCompleted(11442)" >	<!-- Welcome to Brewfest! -->
+			<CustomBehavior File="InteractWith" MobId="24710"
+				X="-5184.68" Y="-562.37" Z="397.18" />
+			<CustomBehavior File="Misc\RunLua" Lua="SelectGossipAvailableQuest(1)" />
+			<CustomBehavior File="WaitTimer" WaitTime="300" VariantTime="900" />
+			<CustomBehavior File="Misc\RunLua" Lua="GetQuestReward(1)" />
+		</If>
+
+		<!-- Quest: Catch the Wild Wolpertinger -->
+		<If Condition="!IsQuestCompleted(11117)" >		
+			<PickUp QuestName="Catch the Wild Wolpertinger" QuestId="11117"
+				GiverName="Goldark Snipehunter" GiverId="23486"
+				X="-5172.92" Y="-562.57" Z="397.18" />
+				
+			<If Condition="GetItemCount(33034) &lt; 10" >
+				<CustomBehavior File="Message" UpdateGoalText="true" LogColor="CornflowerBlue"
+					Text="Getting alcohol for &quot;Catch the Wild Wolpertinger" />
+				<CustomBehavior File="FlyTo" X="-5145.721" Y="-584.1698" Z="397.1794" />
+				<CustomBehavior File="ForcedDismount" />
+				<CustomBehavior File="InteractWith" MobId="23511"
+					BuyItemId="33034" BuyItemCount="10" WaitTime="300" />
+				<CustomBehavior File="WaitTimer" WaitTime="0" VariantTime="1200" />
+				<CustomBehavior File="Misc\RunLua" Lua="CloseMerchant()" />
+				<RunTo X="-5145.721" Y="-584.1698" Z="397.1794" />
+			</If>
+			
+			<CustomBehavior File="FlyTo" DestName="Wolpertinger hunting grounds"
+				X="-5246.598" Y="-466.2682" Z="388.1418" />
+				
+			<While Condition="GetItemCount(33034) &gt; 0" >
+				<CustomBehavior File="UseItem" ItemId="33034" />
+				<CustomBehavior File="WaitTimer" WaitTime="100" VariantTime="700" />
+			</While>
+				
+			<While Condition="GetItemCount(32906) &lt; 5" >
+				<CustomBehavior File="UseItemOn" ItemId="32907" MobId="23487" Range="15"
+					X="-5184.68" Y="-562.37" Z="397.18" />
+			</While>
+		</If>
+		
+		<If Condition="HasQuest(11117)" >
+			<TurnIn QuestName="Catch the Wild Wolpertinger" QuestId="11117"
+					TurnInName="Goldark Snipehunter" TurnInId="23486"
+					X="-5172.92" Y="-562.57" Z="397.18" />
+					
+			<!-- Learn the minipet spell -->
+			<CustomBehavior File="UseItem" ItemId="32233" />
+		</If>
+
+		<!-- Quest: Chug and Chuck! -->
+		<If Condition="!IsQuestCompleted(12022)" > 
+			<CustomBehavior File="Message" UpdateGoalText="true" LogColor="CornflowerBlue"
+				Text="Working the &quot;Chug and Chuck!&quot; quest." />
+				
+			<PickUp QuestName="Chug and Chuck!" QuestId="12022"
+				GiverName="Boxey Boltspinner" GiverId="27215"
+				X="-5185.34" Y="-540.17" Z="397.12" />
+			
+			<RunTo X="-5180.94" Y="-543.478" Z="397.1476" />
+			<CustomBehavior File="ForcedDismount" />
+			
+			<While Condition="!IsQuestCompleted(12022)" >
+				<RunTo X="-5180.94" Y="-543.478" Z="397.1476" />
+
+				<If Condition="GetItemCount(33096) &lt; 1" > <!-- Grab a brew if we've none -->
+					<CustomBehavior File="InteractWith" WaitTime="300"
+						ObjectType="Gameobject" MobId="186189" />
+					<CustomBehavior File="WaitTimer" WaitTime="0" VariantTime="900" />
+				</If>
+				
+				<CustomBehavior File="UseItemOn" ItemId="33096" MobId="24108" Range="20" />
+			</While>
+
+			<TurnIn QuestName="Chug and Chuck!" QuestId="12022"
+					TurnInName="Boxey Boltspinner" TurnInId="27215"
+					X="-5185.34" Y="-540.17" Z="397.12" />				
+		</If>
+		
+
+<If Condition="false" > <!-- This was altered by Bliz in 2011, and needs rework -->
+		<!-- Quest: There and Back Again -->
+		<If Condition="!IsQuestCompleted(11122)" >
+			<CustomBehavior File="Message" UpdateGoalText="true" LogColor="CornflowerBlue"
+				Text="Working the &quot;There and Back Again!&quot; quest." />
+
+			<If Condition="!HasQuest(11122)" >
+				<CustomBehavior File="FlyTo" X="-5202.8" Y="-493.1665" Z="388.565" />
+				<CustomBehavior File="ForcedDismount" />
+				<PickUp QuestName="There and Back Again" QuestId="11122"
+					GiverName="Neill Ramstein" GiverId="23558"
+					X="-5200.16" Y="-491.55" Z="388.48" />
+				<CustomBehavior File="WaitTimer" WaitTime="1200" VariantTime="1200" />
+				<CustomBehavior File="ForcedDismount" />
+				<CustomBehavior File="ForcedMount" MountType="Flying" />
+			</If>
+				
+			<While Condition="!IsQuestCompleted(11122)" >
+				<!-- Pick up the barrel. Fan out, so we don't look botty -->
+				<If Condition="GetItemCount(33797) &lt;= 0" >
+
+					<If Condition="Chance(25.0)" >
+						<CustomBehavior File="FlyTo" DestName="Flynn Firebrew"
+							X="-5617.56" Y="-464.9861" Z="407.0759" />
+					<ElseIf Condition="Chance(25.0)" >
+						<CustomBehavior File="FlyTo" DestName="Flynn Firebrew"
+							X="-5614.32" Y="-473.0246" Z="406.122" />				
+						</ElseIf>
+					<ElseIf Condition="Chance(25.0)" >
+						<CustomBehavior File="FlyTo" DestName="Flynn Firebrew"
+							X="-5600.87" Y="-471.536" Z="398.5048" />				
+						</ElseIf>
+					<Else>
+						<CustomBehavior File="FlyTo" DestName="Flynn Firebrew"
+							X="-5601.164" Y="-465.4726" Z="405.0644" />
+						</Else>
+					</If>
+				</If>
+									
+				<!-- Drop off the barrel.  Fan out so we don't look botty -->
+				<While Condition="GetItemCount(33797) &gt; 0" >
+				
+					<If Condition="Chance(25.0)" >
+						<CustomBehavior File="FlyTo" DestName="Pol Amberstill"
+							X="-5202.8" Y="-493.1665" Z="388.565" />
+					<ElseIf Condition="Chance(25.0)" >
+						<CustomBehavior File="FlyTo" DestName="Pol Amberstill"
+							X="-5206.105" Y="-482.3152" Z="389.2061" />				
+						</ElseIf>
+					<ElseIf Condition="Chance(25.0)" >
+						<CustomBehavior File="FlyTo" DestName="Pol Amberstill"
+							X="-5207.537" Y="-484.9728" Z="393.9111" />				
+						</ElseIf>
+					<Else>
+						<CustomBehavior File="FlyTo" DestName="Pol Amberstill"
+							X="-5206.439" Y="-488.2514" Z="388.9058" />
+						</Else>
+					</If>
+
+					<CustomBehavior File="WaitTimer" WaitTime="0" VariantTime="500" />
+				</While>
+			</While>
+		</If>
+		
+		<If Condition="HasQuest(11122)" >
+			<TurnIn QuestName="There and Back Again" QuestId="11122"
+				TurnInName="Neill Ramstein" TurnInId="23558"
+				X="-5200.16" Y="-491.55" Z="388.48" />
+		</If>
+</If>
+		
+		
+		<!-- A New Supplier of Souvenirs -->
+		<If Condition="!IsQuestCompleted(29397)">
+			<If Condition="!HasQuest(29397)" >
+				<CustomBehavior File="Message" UpdateGoalText="true" LogColor="CornflowerBlue"
+					Text="Working the &quot;A New Supplier of Souvenirs!&quot; quest." />
+
+				<!-- Due to an HBcore bug, we have to pick up the quest the hard way...
+					The toon gets the quest, but HBcore keeps interacting with the questgiver.
+					This may happen because the questgiver has gossip dialogs also.
+				 -->
+				<!-- <PickUp QuestName="A New Supplier of Souvenirs" QuestId="29397"
+						GiverName="Pol Amberstill" GiverId="24468"
+						X="-5200.87" Y="-484.70" Z="388.80" /> -->
+				<CustomBehavior File="FlyTo" DestName="Pol Amberstill"
+					X="-5200.87" Y="-484.70" Z="388.80" />
+				<CustomBehavior File="ForcedDismount" />
+				<CustomBehavior File="InteractWith" MobId="24468" />
+				<CustomBehavior File="Misc\RunLua" Lua="SelectGossipAvailableQuest(1)" />
+				<CustomBehavior File="WaitTimer" WaitTime="300" VariantTime="900" />
+				<CustomBehavior File="Misc\RunLua" Lua="AcceptQuest()" />
+			</If>
+		</If>
+		
+		<If Condition="HasQuest(29397)">
+			<CustomBehavior File="FlyTo" DestName="Belbi Quikswitch"
+				X="-5172.527" Y="-620.5163" Z="397.1838" />
+			<CustomBehavior File="ForcedDismount" />		
+			<TurnIn QuestName="A New Supplier of Souvenirs" QuestId="29397"
+					TurnInName="Belbi Quikswitch" TurnInId="23710"
+					X="-5176.91" Y="-624.37" Z="397.86" />
+		</If>
+		
+		
+		<!-- Achievement: Have Keg, Will Travel -->
+		<If Condition="!IsAchievementCompleted(303)" >
+			<CustomBehavior File="Message" UpdateGoalText="true" LogColor="CornflowerBlue"
+					Text="Working the &quot;Have Keg, Will Travel&quot; achievement." />
+					
+			
+			<If Condition="GetItemCount(39476) &gt; 0" >	<!-- Fresh Goblin Brewfest Hops -->
+				<CustomBehavior File="ForcedDismount" />
+				<CustomBehavior File="ForcedMount" MountType="Ground" />
+				<CustomBehavior File="UseItem" ItemId="39476" />
+			<ElseIf Condition="GetItemCount(39477) &gt; 0" >	<!-- Fresh Dwarven Brewfest Hops -->
+				<CustomBehavior File="ForcedDismount" />
+				<CustomBehavior File="ForcedMount" MountType="Ground" />
+				<CustomBehavior File="UseItem" ItemId="39477" />
+				</ElseIf>
+			<ElseIf Condition="GetItemCount(37750) &gt; 0" > <!-- Fresh Brewfest Hops -->
+				<CustomBehavior File="ForcedDismount" />
+				<CustomBehavior File="ForcedMount" MountType="Ground" />
+				<CustomBehavior File="UseItem" ItemId="37750" />
+				</ElseIf>
+			<ElseIf Condition="GetItemCount(37816) &gt; 0" > <!-- Preserved Brewfest Hops -->
+				<CustomBehavior File="ForcedDismount" />
+				<CustomBehavior File="ForcedMount" MountType="Ground" />
+				<CustomBehavior File="UseItem" ItemId="37816" />
+				</ElseIf>
+			<ElseIf Condition="GetItemCount(37829) &gt;= 2"> <!-- Brewfest Prize Tokens -->
+				<CustomBehavior File="FlyTo" DestName="Belbi Quikswitch"
+					X="-5174.243" Y="-622.463" Z="397.1766" />
+				<CustomBehavior File="ForcedDismount" />
+				<CustomBehavior File="ForcedMount" MountType="Ground" />
+				<!-- Due to an HBcore bug, we have to buy the hard way...
+					This may happen because the questgiver has gossip dialogs also.
+				 -->
+				<CustomBehavior File="InteractWith" MobId="23710" />
+				<CustomBehavior File="Misc\RunLua" Lua="SelectGossipOption(4)" />
+				<CustomBehavior File="InteractWith" MobId="23710"
+					BuyItemId="37750" BuyItemCount="1" WaitTime="300" />
+				<CustomBehavior File="Misc\RunLua" Lua="CloseMerchant()" />
+				<CustomBehavior File="WaitTimer" WaitTime="0" VariantTime="700" />
+				<CustomBehavior File="Misc\RunLua" Lua="CloseMerchant()" />
+				<CustomBehavior File="ForcedMount" MountType="Ground" />
+				<CustomBehavior File="WaitTimer" WaitTime="1000" VariantTime="700" />
+				<CustomBehavior File="UseItem" ItemId="37750" />
+				</ElseIf>
+			<Else>
+				<CustomBehavior File="UserDialog"
+					Text="You do not have the &quot;Have Keg, Will Travel&quot; achievement.\n\nYou also don't have enough Brewfest Prize Tokens to claim the achievement.  For now we'll have to skip it, and we'll try again when you restart the profile.  Hopefully, by then you will have additional Brewfest Prize Tokens from doing Brewfest dailies." />
+				</Else>
+			</If>
+		</If>
+		
+		
+		<!-- Quest: Pink Elekks on Parade -->
+		<If Condition="!IsQuestCompleted(11118)" >
+			<CustomBehavior File="Message" UpdateGoalText="true" LogColor="CornflowerBlue"
+				Text="Working the &quot;Pink Elekks on Parade&quot; quest." />
+				
+			<If Condition="!HasQuest(11118)" >
+				<CustomBehavior File="FlyTo" DestName="Goldark Snipehunter"
+					X="-5172.92" Y="-562.57" Z="397.18" />
+				<CustomBehavior File="ForcedDismount" />
+				<PickUp QuestName="Pink Elekks on Parade" QuestId="11118"
+					GiverName="Goldark Snipehunter" GiverId="23486"
+					X="-5172.92" Y="-562.57" Z="397.18" />
+			</If>
+			
+			<!-- If Elwynn Elekks are needed... -->
+			<If Condition="!IsObjectiveComplete(2,11118)">
+				<CustomBehavior File="Message" UpdateGoalText="true" LogColor="CornflowerBlue"
+					Text="Working the Elwynn Forest Elekks." />
+					
+				<If Condition="Me.MapId == 0" >
+					<CustomBehavior File="FlyTo" DestName="Elwynn Forest Elekks"
+						X="-9125.615" Y="341.6986" Z="94.1765" />
+					<CustomBehavior File="ForcedDismount" />
+				<Else>
+					<CustomBehavior File="UserDialog" StopOnContinue="true"
+						Text="Whoops, you're not where we left you.\n\nPlease move to Eastern Kingdoms and start the profile again." />
+					</Else>
+				</If>
+					
+				<If Condition="GetItemCount(33034) &lt; 10" >
+					<CustomBehavior File="InteractWith" MobId="23511"
+						BuyItemId="33034" BuyItemCount="10" WaitTime="300" />
+					<CustomBehavior File="WaitTimer" WaitTime="0" VariantTime="1200" />
+				</If>
+				<CustomBehavior File="Misc\RunLua" Lua="CloseMerchant()" />
+				
+				<While Condition="GetItemCount(33034) &gt; 0" >
+					<CustomBehavior File="UseItem" ItemId="33034" />
+					<CustomBehavior File="WaitTimer" WaitTime="100" VariantTime="700" />
+				</While>
+				
+				<While Condition="!IsObjectiveComplete(2,11118)" >
+					<CustomBehavior File="UseItemOn" ItemId="32960" Range="15"
+						MobId1="23528" MobId2="23507" MobId3="23527" />
+					<!-- Sometimes, it takes the WoWclient a few secs to update status
+					     after using the ray. -->
+					<CustomBehavior File="WaitTimer" WaitTime="1500" VariantTime="1500" />
+				</While>
+			</If>
+			
+			<!-- If Teldrassil Elekks are needed... -->
+			<If Condition="!IsObjectiveComplete(3,11118)">
+				<CustomBehavior File="Message" UpdateGoalText="true" LogColor="CornflowerBlue"
+					Text="Working the Teldrassil Forest Elekks." />
+					
+				<!-- Move to Darnassas via Stormwind Harbor, if in Eastern Kingdoms -->
+				<If Condition="Me.MapId == 0" >
+					<CustomBehavior File="FlyTo" DestName="Stormwind Docks"
+						X="-8629.695" Y="1298.055" Z="5.536788" />
+					<CustomBehavior File="ForcedDismount" />
+					<CustomBehavior File="UseTransport"
+									TransportId="176310"
+									WaitAtX="-8641.42" WaitAtY="1325.966" WaitAtZ="5.23437"
+									TransportStartX="-8650.719" TransportStartY="1346.051" TransportStartZ="-0.04151175"
+									StandOnX="-8645.277" StandOnY="1339.042" StandOnZ="6.114784"
+									TransportEndX="8162.587" TransportEndY="1005.365" TransportEndZ="0.04256689"
+									GetOffX="8178.701" GetOffY="1003.521" GetOffZ="6.73991" />
+				</If>
+
+				<!-- If we're in Kalimdor, but not in Darnassas, fly to Rut'theran Village -->
+				<If Condition="(Me.MapId == 1) &amp;&amp; (Me.ZoneId != 1657)" >
+					<!-- We have to use MyCTM flying...
+						The Rut'theran portal doesn't work with GoThruPortal.
+						Flightor (e.g., FlyTo) has problems because we're on the edge of the map.
+					-->
+					<CustomBehavior File="FlyTo" DestName="Rut'theran boat dock"
+						X="8204.621" Y="1021.708" Z="31.24551" />
+					<CustomBehavior File="MyCTM" DestName="Teldrassil Brewfest"
+						X="8772.303" Y="1266.408" Z="1042.673" />
+					<CustomBehavior File="MyCTM" DestName="Teldrassil Brewfest"
+						X="8978.512" Y="1541.677" Z="1557.47" />
+					<CustomBehavior File="MyCTM" DestName="Teldrassil Brewfest"
+						X="9383.797" Y="1989.709" Z="1641.068" />
+					<CustomBehavior File="MyCTM" DestName="Teldrassil Brewfest"
+						X="9675.931" Y="2343.2" Z="1692.526" />
+					<CustomBehavior File="MyCTM" DestName="Teldrassil Brewfest"
+						X="9888.579" Y="2224.697" Z="1390.295" />
+				</If>
+				
+				<If Condition="Me.ZoneId != 1657">
+					<CustomBehavior File="UserDialog" StopOnContinue="true"
+						Text="Whoops, you're not where we left you.\n\nPlease move to Darnassas and start the profile again." />
+				</If>
+
+				<CustomBehavior File="FlyTo" DestName="Teldrassil Brewfest"
+						X="9973.107" Y="2205.384" Z="1329.092" />
+				<CustomBehavior File="ForcedDismount" />
+					
+				<If Condition="GetItemCount(33034) &lt; 10" >
+					<CustomBehavior File="InteractWith" MobId="23511"
+						BuyItemId="33034" BuyItemCount="10" WaitTime="300" />
+					<CustomBehavior File="WaitTimer" WaitTime="0" VariantTime="1200" />
+				</If>
+				<CustomBehavior File="Misc\RunLua" Lua="CloseMerchant()" />
+				
+				<While Condition="GetItemCount(33034) &gt; 0" >
+					<CustomBehavior File="UseItem" ItemId="33034" />
+					<CustomBehavior File="WaitTimer" WaitTime="100" VariantTime="700" />
+				</While>
+				
+				<While Condition="!IsObjectiveComplete(3,11118)" >
+					<CustomBehavior File="UseItemOn" ItemId="32960" Range="15"
+						MobId1="23528" MobId2="23507" MobId3="23527" />
+					<!-- Sometimes, it takes the WoWclient a few secs to update status
+					     after using the ray. -->
+					<CustomBehavior File="WaitTimer" WaitTime="1500" VariantTime="1500" />
+				</While>
+			</If>
+			
+			<!-- If Azuremyst Elekks are needed... -->
+			<If Condition="!IsObjectiveComplete(1,11118)">
+
+				<!-- If in Darnasses, use Exodar portal... -->
+				<If Condition="Me.ZoneId == 1657">
+					<!-- Flying has serious problems in Darnasses, we'll just run there.., -->
+					<RunTo DestName="Exodar Portal"
+						X="9658.931" Y="2508.835" Z="1331.616" />
+					<CustomBehavior File="InteractWith" ObjectType="Gameobject"
+						MobId="207995" />
+				</If>
+				
+				<!-- If in Exodar, move outside -->
+				<If Condition="Me.ZoneId != 3557" >
+					<CustomBehavior File="UserDialog" StopOnContinue="true"
+						Text="Whoops, you're not where we left you.\n\nPlease move to The Exodar and start the profile again." />
+				</If>
+				
+				<RunTo DestName="Azuremyst Brewfest"
+					X="-3986.956" Y="-11874.19" Z="0.3620152" />
+				<CustomBehavior File="ForcedDismount" />
+					
+				<If Condition="GetItemCount(33034) &lt; 10" >
+					<CustomBehavior File="InteractWith" MobId="23511"
+						BuyItemId="33034" BuyItemCount="10" WaitTime="300" />
+					<CustomBehavior File="WaitTimer" WaitTime="0" VariantTime="1200" />
+				</If>
+				<CustomBehavior File="Misc\RunLua" Lua="CloseMerchant()" />
+				
+				<RunTo X="-4020.01" Y="-11907.77" Z="-2.093034" />
+				<While Condition="GetItemCount(33034) &gt; 0" >
+					<CustomBehavior File="UseItem" ItemId="33034" />
+					<CustomBehavior File="WaitTimer" WaitTime="100" VariantTime="700" />
+				</While>
+				
+				<While Condition="!IsObjectiveComplete(1,11118)" >
+					<CustomBehavior File="UseItemOn" ItemId="32960" Range="15"
+						MobId1="23528" MobId2="23507" MobId3="23527" />
+					<!-- Sometimes, it takes the WoWclient a few secs to update status
+					     after using the ray. -->
+					<CustomBehavior File="WaitTimer" WaitTime="1500" VariantTime="1500" />				</While>
+			</If>
+		</If>
+			
+		<If Condition="HasQuest(11118)">
+			<CustomBehavior File="Message" UpdateGoalText="true" LogColor="CornflowerBlue"
+					Text="Turning in &quot;Pink Elekks on Parade&quot; quest." />
+					
+			<!-- If in Exodar/Azuremyst, move to Blasted Lands Portal -->
+			<If Condition="Me.ZoneId == 3557" >
+				<RunTo DestName="Blasted Lands Portal"
+					X="-4045.275" Y="-11575.06" Z="-138.4861" />
+				<CustomBehavior File="InteractWith" ObjectType="Gameobject"
+					MobId="195141" />
+			</If>
+					
+			
+			<!-- If in Darnassas, move to Blasted Lands Portal -->
+			<If Condition="Me.ZoneId == 1657" >
+				<!-- Flying has serious problems in Darnasses, we'll just run there.., -->
+				<RunTo DestName="Blasted Lands Portal"
+					X="9658.931" Y="2508.835" Z="1331.616" />
+				<CustomBehavior File="InteractWith" ObjectType="Gameobject"
+						MobId="195141" />
+			</If>
+
+				
+			<!-- If in EK, move to final destination -->
+			<If Condition="Me.MapId == 0" >
+				<CustomBehavior File="FlyTo" DestName="Goldark Snipehunter"
+					X="-5172.92" Y="-562.57" Z="397.18" />
+				<CustomBehavior File="ForcedDismount" />
+			<Else>
+				<CustomBehavior File="UserDialog" StopOnContinue="true"
+					Text="Whoops, you're not where we left you.\n\nPlease move to Eastern Kingdoms and start the profile again." />
+				</Else>
+			</If>
+
+			<TurnIn QuestName="A New Supplier of Souvenirs" QuestId="11118"
+				TurnInName="Goldark Snipehunter" TurnInId="23486"
+				X="-5172.92" Y="-562.57" Z="397.18" />
+		</If>
+		
+		<!-- Quest: This One Time, When I Was Drunk... -->
+		<!-- We can't pick this one up, because it requires a large team effort
+		     to do.  But, if the user has done this successfully, go turn it in
+			 for them.
+		  -->
+		<If Condition="HasQuest(12020)" >
+			<TurnIn QuestName="This One Time, When I Was Drunk..." QuestId="12020"
+					TurnInName="Boxey Boltspinner" TurnInId="27215"
+					X="-5185.34" Y="-540.17" Z="397.12" />
+		</If>
+		
+		
+		<!--
+		  ========== Daily quests ==========
+		  -->  
+
+
+		<!-- Brew for Brewfest -->
+		<!-- We tried several tricks, but it all boils down to the HBcore
+		     navigation system cannot keep up with the ram.  The ram is not
+			 really click-to-move, you can turn it left or right only, and the nav
+			 system isn't built for this.
+			 
+			 The observed effects are that the nav system will try to 'go back'
+			 to points it thinks it missed, or issue turn directives far too slowly
+			 and we regularly overshoot the destination waypoint.
+			 
+			 Both full-nav, and click-to-move techniques were attempted and all failed.
+			 The test machine was plenty powerful (quad-core i7 w/16G RWM), and the
+			 test machine isn't the problem.
+		 -->
+		
+		
+		<!-- Daily Quest: Bark for the XXXXX! -->
+		<!-- We tried several tricks, but it all boils down to the HBcore
+		     navigation system cannot keep up with the ram.  The ram is not
+			 really click-to-move, you can turn it left or right only, and the nav
+			 system isn't built for this.
+			 
+			 The observed effects are that the nav system will try to 'go back'
+			 to points it thinks it missed, or issue turn directives far too slowly
+			 and we regularly overshoot the destination waypoint.
+			 
+			 Both full-nav, and click-to-move techniques were attempted and all failed.
+			 The test machine was plenty powerful (quad-core i7 w/16G RWM), and the
+			 test machine isn't the problem.
+		 -->
+			
+		
+		<!--
+		  ========== All we can automate ==========
+		  -->
+		<CustomBehavior File="UserDialog" StopOnContinue="true"
+				Text="END of the line.  Here is what's left:\n\n* Quest: &quot;There and Back Again&quot;\nThis quest uses the same mechanics as the daily repeatable 'ram racing' quest.  As such, the Honorbuddy navigation system is not up to the task.\n\n* Quest: &quot;This One Time, When I Was Drunk...&quot;\nEvery 30mins the Dark Iron Dwarves will invade Brewfest.\nIf the players are successful in repelling them, there will be a part remaining on the ground that starts a quest.   Take it and simply turn it in.  If you already had this quest in your log, we've turned it on for you.\n\n* DAILY Quest: &quot;Brew for Brewfest&quot; quest\nYou must do the daily Ram races manually.\n\n* DAILY 'barking' quests\nThe daily 'barking' quest must be done manually.\n\n* DAILY Quest: &quot;Direbrew's Dire Brew&quot; quest\nYou must do Coren Direbrew dungeon by some other means.* When you get 200 Brewfest Prize Tokens, purchase a &quot;Brew of the Month&quot; membership." />
+		
+	</QuestOrder>
+   
+      
+	<!-- Helpful LUA Snippets...
+		/run print(GetAchievementCriteriaInfo(1184,1))
+		/run print(GetQuestLogLeaderBoard(1,GetQuestLogIndexByID(11118)))
+	  -->
+   
+</HBProfile>

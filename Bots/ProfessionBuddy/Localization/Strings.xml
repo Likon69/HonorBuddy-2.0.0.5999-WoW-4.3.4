@@ -1,0 +1,239 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<Localization>
+  <UI_FileOpen>Open</UI_FileOpen>
+  <UI_FileSave>Save</UI_FileSave>
+  <UI_Help>Help</UI_Help>
+  <UI_Copy>Copy</UI_Copy>
+  <UI_Cut>Cut</UI_Cut>
+  <UI_Paste>Paste</UI_Paste>
+  <UI_Delete>Delete</UI_Delete>
+  <UI_Settings>Settings</UI_Settings>
+  <UI_Profile>Profile</UI_Profile>
+  <UI_Profiles>Profiles</UI_Profiles>
+  <UI_Tradeskill>Tradeskill</UI_Tradeskill>
+  <UI_Ingredients>Ingredients</UI_Ingredients>
+  <UI_Need>Need</UI_Need>
+  <UI_Bags>Bags</UI_Bags>
+  <UI_Bank>Bank</UI_Bank>
+  <UI_Actions>Actions</UI_Actions>
+  <UI_Add>Add</UI_Add>
+  <UI_Reload>Reload</UI_Reload>
+  <UI_ProfileSettings>Profile Settings</UI_ProfileSettings>
+  <UI_LoadProfile>Load Profile</UI_LoadProfile>
+  <UI_Name>Name</UI_Name>
+  
+  <!-- Errors -->
+  <Error_NoItemEntries>No Item Entries are specified</Error_NoItemEntries>
+  <Error_SubroutineNotFound>Unable to find Subroutine with name</Error_SubroutineNotFound>
+  <Error_UnableToFindAuctioneer>Unable to find auctioneer, maybe he's dead?</Error_UnableToFindAuctioneer>
+  <Error_UnableToFindBank>Unable to find bank</Error_UnableToFindBank>
+  <Error_UnableToFindItemToCastOn>No item found to cast spell on</Error_UnableToFindItemToCastOn>
+  <Error_UnableToFindLocationFromDB>Unable to find location from Database</Error_UnableToFindLocationFromDB>
+  <Error_UnableToFindMailbox>Unable To find Mailbox</Error_UnableToFindMailbox>
+  <Error_UnableToFindProfile>Unable to find profile</Error_UnableToFindProfile>
+  <Error_UnableToFindSpellWithEntry>Unable to find a spell that matches Entry</Error_UnableToFindSpellWithEntry>
+
+  <!-- Common Action strings-->
+  <Action_Common_ActionType>Action Type</Action_Common_ActionType>
+  <Action_Common_All>All</Action_Common_All>
+  <Action_Common_Amount>Amount</Action_Common_Amount>
+  <Action_Common_AutoFindAH>Auto find AH</Action_Common_AutoFindAH>
+  <Action_Common_AutoFindBank>Auto find Bank</Action_Common_AutoFindBank>
+  <Action_Common_AutoFindMailbox>Auto find Mailbox</Action_Common_AutoFindMailbox>
+  <Action_Common_Bank>Bank</Action_Common_Bank>
+  <Action_Common_Banker>Banker</Action_Common_Banker>
+  <Action_Common_Buy>Buy</Action_Common_Buy>
+  <Action_Common_BuyAdditively>Buy Additively</Action_Common_BuyAdditively>
+  <Action_Common_Category>Category</Action_Common_Category>
+  <Action_Common_Code>Code</Action_Common_Code>
+  <Action_Common_Count>Count</Action_Common_Count>
+  <Action_Common_Craftable>Craftable</Action_Common_Craftable>
+  <Action_Common_Deposit>Deposit</Action_Common_Deposit>
+  <Action_Common_Entry>Entry</Action_Common_Entry>
+  <Action_Common_Epic>Epic</Action_Common_Epic>
+  <Action_Common_Global>Global</Action_Common_Global>
+  <Action_Common_GuildTab>Guild Tab</Action_Common_GuildTab>
+  <Action_Common_Hidden>Hidden</Action_Common_Hidden>
+  <Action_Common_IgnoreStackSizeBelow>Ignore Stacksize Below</Action_Common_IgnoreStackSizeBelow>
+  <Action_Common_ItemCategory>Item Category</Action_Common_ItemCategory>
+  <Action_Common_ItemEntries>Item Entries</Action_Common_ItemEntries>
+  <Action_Common_ItemEntry>Item Entry</Action_Common_ItemEntry>
+  <Action_Common_ItemQuality>Item Quality</Action_Common_ItemQuality>
+  <Action_Common_ItemsToWithdraw>Items to Withdraw</Action_Common_ItemsToWithdraw>
+  <Action_Common_ItemSubCategory>Item SubCategory</Action_Common_ItemSubCategory>
+  <Action_Common_ItemTarget>Item Target</Action_Common_ItemTarget>
+  <Action_Common_ItemType>Item Type</Action_Common_ItemType>
+  <Action_Common_Location>Location</Action_Common_Location>
+  <Action_Common_Mail>Mail</Action_Common_Mail>
+  <Action_Common_Material>Material</Action_Common_Material>
+  <Action_Common_MaxBuyout>Max Buyout</Action_Common_MaxBuyout>
+  <Action_Common_MinBuyout>Min Buyout</Action_Common_MinBuyout>
+  <Action_Common_MinFreeBagSlots>Min Free Bagslots</Action_Common_MinFreeBagSlots>
+  <Action_Common_Name>Name</Action_Common_Name>
+  <Action_Common_NpcEntry>Npc Entry</Action_Common_NpcEntry>
+  <Action_Common_Path>Path</Action_Common_Path>
+  <Action_Common_Rare>Rare</Action_Common_Rare>
+  <Action_Common_Repeat>Repeat</Action_Common_Repeat>
+  <Action_Common_Sell>Sell</Action_Common_Sell>
+  <Action_Common_Specific>Specific</Action_Common_Specific>
+  <Action_Common_SpecificItem>Specific Item</Action_Common_SpecificItem>
+  <Action_Common_SpellEntry>Spell Entry</Action_Common_SpellEntry>
+  <Action_Common_SpellName>Spell Name</Action_Common_SpellName>
+  <Action_Common_StackSize>Stack Size</Action_Common_StackSize>
+  <Action_Common_Summary>Summary</Action_Common_Summary>
+  <Action_Common_Timeout>Timeout</Action_Common_Timeout>
+  <Action_Common_Type>Type</Action_Common_Type>
+  <Action_Common_Uncommon>Uncommon</Action_Common_Uncommon>
+  <Action_Common_Use>Use</Action_Common_Use>
+  <Action_Common_UseCategory>Use Category</Action_Common_UseCategory>
+  <Action_Common_Withdraw>Withdraw</Action_Common_Withdraw>
+  <Action_Common_WithdrawAdditively>Withdraw Additively</Action_Common_WithdrawAdditively>
+
+  <!-- BuyItemAction-->
+  <Action_BuyItemAction_Help>This action will buy items from a merchant, either a specific item or any materials the merchant has that are needed for recipes in the action tree. If 'Buy Additively' is set to true this will buy the axact amount of items regardless of the item count player has in bags</Action_BuyItemAction_Help>
+  <Action_BuyItemAction_Name>Buy Item</Action_BuyItemAction_Name>
+
+  <!-- BuyItemFromAhAction -->
+  <Action_BuyItemFromAhAction_Help>This action will buy a either a specified item, ingredients that a recipe requires or whatevers in the material list from the Auction house if item is below specified maximum price. Item Entries contain the entries of the items or a recipe entry if buying materials for a recipe.'Bid On Item', if set to true will bid on an item if buyout price &gt; maxBuyout and minBid  &lt;= maxBuyout. 'Item Entries' accepts a comma separated list of Item entries. 'Buy Additively' if set to true will buy axact amount of items regardless of the item count player has in bags</Action_BuyItemFromAhAction_Help>
+  <Action_BuyItemFromAhAction_Name>Buy Item From AH</Action_BuyItemFromAhAction_Name>
+  <Action_BuyItemFromAhAction_BidOnItem>Bid On Items</Action_BuyItemFromAhAction_BidOnItem>
+
+  <!-- CallSubRoutine -->
+  <Action_CallSubRoutine_SubRoutineName>Subroutine Name</Action_CallSubRoutine_SubRoutineName>
+  <Action_CallSubRoutine_Name>Call SubRoutine</Action_CallSubRoutine_Name>
+  <Action_CallSubRoutine_Help>This action will execute a SubRoutine</Action_CallSubRoutine_Help>
+
+  <!-- CancelAuctionAction -->
+  <Action_CancelAuctionAction_Name>Cancel Auction</Action_CancelAuctionAction_Name>
+  <Action_CancelAuctionAction_Help>This action will cancel auctions that matches item entries or all auctions that belong to a category and optionally sub category if they have been undercut. 'Item Entries' takes a comma separated list of item entries. Set 'Use Category' to false and leave 'Item Entries' blank to cancel all undercut auctions. If the competition is at or below 'Min Buyout' than that auction is skipped.</Action_CancelAuctionAction_Help>
+
+  <!-- CastSpellAction -->
+  <Action_CastSpellAction_Name>Cast Spell</Action_CastSpellAction_Name>
+  <Action_CastSpellAction_Help>This action will cast the specified spell. This should only be used for recipes. To cast other spell use a Custom Action and SpellManager.Cast(). Repeat is the amount of times it will be casted depending on the repeat type used. If Repeat type is set to Specific it will cast the spell 'Repeat' times.
+    Craftable means it will automatically set 'Repeat' based on the number of times the recipe can be repeated with current materials in bags. Banker type uses the info from DataStore Wow addon and will repeat the spell based on how many of the crafted items you have on yourself or on your alts/bank/gbank.
+    So if for example you try to keep a stock 20 of each glyph on your bankers, your banker has 15 Glyph of Arcane Blast and you set repeat to 20, it will make 5 glyphs, The DataStore addon is required to used this mode
+  </Action_CastSpellAction_Help>
+  <Action_CastSpellAction_Casted>Casted</Action_CastSpellAction_Casted>
+  <Action_CastSpellAction_CastOnItem>Cast On Item</Action_CastSpellAction_CastOnItem>
+  <Action_CastSpellAction_RepeatType>Repeat Type</Action_CastSpellAction_RepeatType>
+
+  <!-- ChangeBotAction -->
+  <Action_ChangeBotAction_Name>Change Bot</Action_ChangeBotAction_Name>
+  <Action_ChangeBotAction_Help>This action will change to the bot specified with 'Bot Name' Property. 'Bot Name' can be a partial match</Action_ChangeBotAction_Help>
+  <Action_ChangeBotAction_BotName>Bot Name</Action_ChangeBotAction_BotName>
+
+  <!-- Comment -->
+  <Action_Comment_Name>Comment</Action_Comment_Name>
+  <Action_Comment_Help>This does nothing but add a comment</Action_Comment_Help>
+
+  <!-- CSharpAction -->
+  <Action_CSharpAction_CompileError>Compile Error</Action_CSharpAction_CompileError>
+
+  <!-- CustomAction -->
+  <Action_CustomAction_Name>Custom Action</Action_CustomAction_Name>
+  <Action_CustomAction_Help>This action will execute a valid C# statement once before moving to next action.</Action_CustomAction_Help>
+
+  <!-- Declaration -->
+  <Action_Declaration_Name>Declaration</Action_Declaration_Name>
+  <Action_Declaration_Help>This is useful to declare fields, properties, methods, classes or any other types in C#</Action_Declaration_Help>
+
+  <!-- DisenchantAction -->
+  <Action_DisenchantAction_Name>Disenchant</Action_DisenchantAction_Name>
+  <Action_DisenchantAction_Help>This action will Disenchant,Mill or Prospect items in the player's bags</Action_DisenchantAction_Help>
+  <Action_DisenchantAction_Mill>Mill</Action_DisenchantAction_Mill>
+  <Action_DisenchantAction_Prospect>Prospect</Action_DisenchantAction_Prospect>
+  <Action_DisenchantAction_Disenchant>Disenchant</Action_DisenchantAction_Disenchant>
+
+  <!-- FlyToAction -->
+  <Action_FlyToAction_Name>Fly To</Action_FlyToAction_Name>
+  <Action_FlyToAction_Help>This action relies on Flightor, the 3d navigator used by Gatherbuddy2. This action will fly your character to the selected location and dismount on arrival if Dismount is set to true. Be sure to make the target location outdoors and not underneath any obsticles.</Action_FlyToAction_Help>
+  <Action_FlyToAction_Dismount>Dismount on Arrival</Action_FlyToAction_Dismount>
+
+  <!-- GetItemFromBankAction -->
+  <Action_GetItemFromBankAction_Name>Withdraw Item From Bank</Action_GetItemFromBankAction_Name>
+  <Action_GetItemFromBankAction_Help>This action will withdraw the specified items from your personal or guild bank. It can also withdraw the items needed for your recipes in the action tree. 'Withdraw Additively' if set to true will buy axact amount of items regardless of item count player has in bags. All items will be withdrawn if 'Item Entries' is left blank</Action_GetItemFromBankAction_Help>
+  
+  <!-- GetMailAction -->
+  <Action_GetMailAction_Name>Get Mail</Action_GetMailAction_Name>
+  <Action_GetMailAction_Help>This action retrieves all mail in the mailbox, or only items that match the entries found in 'Item Entries'. Since mailboxes are not in the NPC database you need to be within 100 yards of a mailbox to 'autofind' it</Action_GetMailAction_Help>
+  <Action_GetMailAction_CheckNewMail>Check for New Mail</Action_GetMailAction_CheckNewMail>
+	
+  <!-- If -->
+  <FlowControl_If_Name>If</FlowControl_If_Name>
+  <FlowControl_If_LongName>If Condition</FlowControl_If_LongName>
+  <FlowControl_If_Help>'If Condition' will execute the actions it contains if the specified condition is true. 'Ignore Condition until done' basically will ignore the Condition if any of the actions it contains is running.If you need to repeat a set of actions then use 'While Condition' or nest this within a 'While Condition'</FlowControl_If_Help>
+  <FlowControl_If_Condition>Condition</FlowControl_If_Condition>
+  <FlowControl_If_IgnoreCanRun>Ignore Condition until done</FlowControl_If_IgnoreCanRun>
+	
+  <!-- InteractAction -->
+  <Action_InteractAction_Name>Interact</Action_InteractAction_Name>
+  <Action_InteractAction_Help>This action will cause your character to interact with a specific target. 'Interact Delay' is a time in milliseconds to wait before interacting with target. This can be also used to go to objects like forge/anvil or NPCs that are within 100 feet</Action_InteractAction_Help>
+  <Action_InteractAction_InteractDelay>Interact Delay</Action_InteractAction_InteractDelay>
+  <Action_InteractAction_InteractType>Interact Type</Action_InteractAction_InteractType>
+  <Action_InteractAction_GameobjectType>Game object Type</Action_InteractAction_GameobjectType>
+  <Action_InteractAction_SpellFocus>Spell Focus</Action_InteractAction_SpellFocus>
+	
+  <!-- LoadProfileAction -->
+  <Action_LoadProfileAction_Name>Load Profile</Action_LoadProfileAction_Name>
+  <Action_LoadProfileAction_Help>This action will load a profile, which can be either a Honorbuddy or Professionbuddy profile. Path needs to be relative to the currently loaded Professionbuddy profile and either in same folder or in a subfolder. If Path is empty and the profile type is Honorbuddy then an empty profile will be loaded.</Action_LoadProfileAction_Help>
+  <Action_LoadProfileAction_ProfileType>Profile Type</Action_LoadProfileAction_ProfileType>
+	
+  <!-- MailItemAction -->
+  <Action_MailItemAction_Name>Mail Item</Action_MailItemAction_Name>
+  <Action_MailItemAction_Help>This action will mail either all items with matching entries found in 'Item Entries' or by item category. Setting Amount to 0 will mail all items that match Entry. Note: Amount = axact number, not stacks. This mails items to the 'Mail Recipient' from Honorbuddy settings</Action_MailItemAction_Help>
+	
+  <!-- MoveToAction -->
+  <Action_MoveToAction_Name>Move To</Action_MoveToAction_Name>
+  <Action_MoveToAction_Help>This action will move your character to the selected location or if set to go to NearestXXX it will search the object manager and NPC database for the specific unit/object and move to it. It will also target NPCs so the interact action can be used right after this action finishes without having to specify an Npc Entry in it</Action_MoveToAction_Help>
+  <Action_MoveToAction_MoveToType>MoveTo Type</Action_MoveToAction_MoveToType>
+	
+  <!-- PutItemInBankAction -->
+  <Action_PutItemInBankAction_Name>Deposit Item in Bank</Action_PutItemInBankAction_Name>
+  <Action_PutItemInBankAction_Help>This action will deposit the specified item/s into your personal or guild bank. Set 'Guild Tab' to 0 to deposit in whichever tab has room</Action_PutItemInBankAction_Help>
+
+  <!-- SellItemAction -->
+  <Action_SellItemAction_Name>Sell Item</Action_SellItemAction_Name>
+  <Action_SellItemAction_Help>This action will sell items to a merchant. It will either sell a specified item time 'Count' stacks, or sell all grey/white/green quality items. This action will find the closest vendor if 'Npc Entry' is set to 0. 'Item Entries' takes a comma separated list of item entries</Action_SellItemAction_Help>
+  <Action_SellItemAction_SellItemType>Sell Item Type</Action_SellItemAction_SellItemType>
+	
+  <!-- SellItemOnAhAction -->
+  <Action_SellItemOnAhAction_Name>Sell Item To AH</Action_SellItemOnAhAction_Name>
+  <Action_SellItemOnAhAction_Help>This action will post either all items with matching entries found in 'Item Entries' or by item category and optionally sub catagory on the Auction house. If cheapest item on AH is below minimum buyout then the item is listed at min buyout if 'Post If Below Min Buyout' is set to 'true', else if the cheapest item is higher then the max buyout then the item is listed at max buyout, otherwise it's listed at lowest buyout minus undercut precent.'Item Entries' takes a comma separated list of item entries. All stacks of items below the 'Ignore StackSize Below' are ignored when undercutting auctions</Action_SellItemOnAhAction_Help>
+  <Action_SellItemOnAhAction_AuctionDuration>Auction Duration</Action_SellItemOnAhAction_AuctionDuration>
+  <Action_SellItemOnAhAction_BidPercent>Bid Percent</Action_SellItemOnAhAction_BidPercent>
+  <Action_SellItemOnAhAction_UndercutPercent>Undercut Percent</Action_SellItemOnAhAction_UndercutPercent>
+  <Action_SellItemOnAhAction_PostIfBelowMinBuyout>Post If Below MinBuyout</Action_SellItemOnAhAction_PostIfBelowMinBuyout>
+	
+  <!-- Settings -->
+  <Action_Settings_Name>Settings</Action_Settings_Name>
+  <Action_Settings_Help>This action adds a user customizable setting to Professionbuddy profiles</Action_Settings_Help>
+  <Action_Common_DefaultValue>Default Value</Action_Common_DefaultValue>
+  <Action_Common_SettingName>Setting Name</Action_Common_SettingName>
+  <Action_Common_SummaryExample>This is a summary of what this setting does</Action_Common_SummaryExample>
+	
+  <!-- StackItemsAction -->
+  <Action_StackItemsAction_Name>Stack Items</Action_StackItemsAction_Name>
+  <Action_StackItemsAction_Help>This action will stack up items in player's bags. Use this before Disenchanting/Milling/Prospecting</Action_StackItemsAction_Help>
+
+  <!-- SubRoutine -->
+  <Action_SubRoutine_Name>Subroutine</Action_SubRoutine_Name>
+  <Action_SubRoutine_SubroutineName>Subroutine Name</Action_SubRoutine_SubroutineName>
+  <Action_SubRoutine_Help>Subroutine can contain multiple actions which you can execute using the 'Call SubRoutine' action</Action_SubRoutine_Help>
+	
+  <!-- TrainSkillAction -->
+  <Action_TrainSkillAction_Name>Train Skill</Action_TrainSkillAction_Name>
+  <Action_TrainSkillAction_Help>This action will go to the trainer and train all available spells. Location can be left blank if the NPC is in the database.</Action_TrainSkillAction_Help>
+	
+  <!-- WaitAction -->
+  <Action_WaitAction_Name>Wait</Action_WaitAction_Name>
+  <Action_WaitAction_LongName>Wait until Condition</Action_WaitAction_LongName>
+  <Action_WaitAction_Help>This action will wait for an amount of time or until condition becomes true before moving to next action. Timeout is in milliseconds</Action_WaitAction_Help>
+  <Action_WaitAction_Condition>Until Condition</Action_WaitAction_Condition>
+	
+  <!-- While -->
+  <FlowControl_While_Name>While</FlowControl_While_Name>
+  <FlowControl_While_LongName>While Condition</FlowControl_While_LongName>
+  <FlowControl_While_Help>'While Condition' will repeatedly execute the actions it contains if the specified condition is true. 'Ignore Condition until done' basically will ignore the Condition if any of the actions it contains is running. The difference between this and the 'If Condition' is that this will auto reset all actions within it and all nested 'If/While' Conditions</FlowControl_While_Help>
+
+</Localization>

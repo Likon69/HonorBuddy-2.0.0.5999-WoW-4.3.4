@@ -1,0 +1,55 @@
+<HBProfile>
+    <Name>[QO - GrindArea] Volatile Fire and Junk Farm (Firelands) [Kick]</Name> 
+  
+    <MinLevel>80</MinLevel> 
+    <MaxLevel>86</MaxLevel> 
+    
+    <TargetElites>False</TargetElites>
+
+    <MinDurability>0.2</MinDurability>
+    <MinFreeBagSlots>3</MinFreeBagSlots>
+    
+    <SellGrey>True</SellGrey>
+    <SellWhite>False</SellWhite>
+    <SellGreen>False</SellGreen>
+
+	<Blackspots>
+	</Blackspots>
+	<AvoidMobs>
+		<Mob Name="Molten Behemoth" Entry="52552" />
+	</AvoidMobs>
+	<Vendors>
+		<Vendor Name="Zen'Vorka" Entry="52822" Type="Repair" X="979.8785" Y="375.066" Z="37.98084" />
+	</Vendors>
+	
+    
+	<!--
+	<Mailboxes>
+	</Mailboxes>
+	-->
+   
+   <!--
+	<Vendors>     
+	</Vendors>
+	-->
+	
+	<QuestOrder>
+   
+				<SetGrindArea><GrindArea>
+					<TargetMinLevel>80</TargetMinLevel>
+					<TargetMaxLevel>86</TargetMaxLevel>
+					<Factions></Factions> <!-- [2234] -->
+					<MaxDistance>60</MaxDistance>
+					<Hotspots>
+						<Hotspot X="1125.206" Y="410.419" Z="16.76255" />
+						<Hotspot X="1145.427" Y="362.7709" Z="17.19033" />
+						<Hotspot X="1125.249" Y="286.9732" Z="15.52258" />
+						<Hotspot X="1091.421" Y="294.7789" Z="16.76155" />
+						<Hotspot X="1151.622" Y="333.4159" Z="16.41386" />
+						<Hotspot X="1163.718" Y="385.5489" Z="16.46143" />
+					</Hotspots>
+				</GrindArea></SetGrindArea>
+			<GrindTo Condition="false" GoalText="Farming Volatile Fire" />
+							
+	</QuestOrder>
+</HBProfile>  

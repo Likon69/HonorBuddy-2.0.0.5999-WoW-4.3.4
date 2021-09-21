@@ -1,0 +1,83 @@
+<HBProfile>
+<Name>350-375 Outland Leather farm</Name>
+<MinDurability>0.4</MinDurability>
+<MinFreeBagSlots>1</MinFreeBagSlots>
+
+
+<MailGrey>false</MailGrey>
+<MailWhite>false</MailWhite>
+<MailGreen>false</MailGreen>
+<MailBlue>false</MailBlue>
+<MailPurple>false</MailPurple>
+
+<SellGrey>True</SellGrey>
+<SellWhite>True</SellWhite>
+<SellGreen>True</SellGreen>
+<SellBlue>false</SellBlue>
+<SellPurple>false</SellPurple>
+
+<Vendors>
+</Vendors>
+
+<Mailboxes>
+</Mailboxes>
+
+<Blackspots>
+</Blackspots>
+
+  <QuestOrder>
+    
+
+    <While Condition="(Me.Level &gt; 1)" >
+
+      <If Condition="(Me.FreeBagSlots &gt; 5)" >
+
+        <CustomBehavior File="FlyTo" DestName="Farm Area" X="-1886.11" Y="6594.746" Z="4.927755" />
+        <CustomBehavior File="ForcedDismount" />
+
+        <SetGrindArea>
+          <GrindArea>
+            <Factions>7 14 31</Factions>
+            <TargetMinLevel>1</TargetMinLevel>
+            <TargetMaxLevel>85</TargetMaxLevel>
+            <Hotspots>
+              <Hotspot X="-1886.11" Y="6594.746" Z="4.927755" />
+              <Hotspot X="-1767.289" Y="6678.652" Z="-23.91578" />
+              <Hotspot X="-1695.836" Y="6731.453" Z="-11.10211" />
+              <Hotspot X="-1542.582" Y="6763.841" Z="14.40806" />
+              <Hotspot X="-1604.736" Y="6826.567" Z="-3.037169" />
+              <Hotspot X="-1676.391" Y="6916.56" Z="-21.1349" />
+              <Hotspot X="-1601.846" Y="6909.573" Z="-13.04463" />
+              <Hotspot X="-1578.642" Y="6858.929" Z="-9.571345" />
+              <Hotspot X="-1552.2" Y="6929.157" Z="-10.94931" />
+              <Hotspot X="-1459.41" Y="6880.851" Z="4.371543" />
+              <Hotspot X="-1463.996" Y="6979.167" Z="7.011062" />
+              <Hotspot X="-1501.737" Y="7060.396" Z="10.16809" />
+              <Hotspot X="-1598.148" Y="7065.057" Z="4.706275" />
+              <Hotspot X="-1636.255" Y="7112.411" Z="5.066166" />
+              <Hotspot X="-1595.867" Y="7192.375" Z="5.617188" />
+              <Hotspot X="-1697.922" Y="7208.78" Z="3.350479" />
+              <Hotspot X="-1740.054" Y="7332.917" Z="-3.176657" />
+              <Hotspot X="-1714.405" Y="7419.355" Z="-8.622484" />
+              <Hotspot X="-1641.669" Y="7426.942" Z="-4.68861" />
+              <Hotspot X="-1628.724" Y="7483.242" Z="-6.139967" />
+              <Hotspot X="-1746.467" Y="7493.624" Z="-7.672245" />
+              <Hotspot X="-1624.6" Y="7584.739" Z="-10.5864" />
+              <Hotspot X="-1538.859" Y="7534.278" Z="-4.479387" />
+              <Hotspot X="-1417.996" Y="7499.776" Z="4.022493" />
+              <Hotspot X="-1299.571" Y="7521.741" Z="14.07882" />
+              <Hotspot X="-1397.72" Y="7662.457" Z="-4.704846" />
+              <Hotspot X="-1599.127" Y="7633.911" Z="-11.44528" />
+            </Hotspots>
+            </GrindArea>
+        </SetGrindArea>
+        <GrindTo Condition="Me.FreeBagSlots &lt;= 5" GoalText="Farming Leather." />
+      </If>
+
+
+
+    </While>
+
+
+  </QuestOrder>
+</HBProfile>

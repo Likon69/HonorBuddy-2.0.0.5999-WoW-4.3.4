@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<DungeonBuddyProfile>
+  <Name>The Vortex Pinnacle</Name>
+  <DungeonId>311</DungeonId>
+  <BossEncounters>
+	<!-- make sure you properly utilize the slip streams in this dungeon; IB kinda does this dungeon, but ends up falling off the side a lot -->
+	<Boss isFinal="false" entry="43878" name="Grand Vizier Ertan" killOrder="1" optional="false" X="-719.587" Y="4.32986" Z="635.6728" /> <!-- tornado's around him boss - gtfo when they converge on boss -->
+	<!-- make sure you drag the young storm drakes out of the green stuff that heals them 
+	<Vendor Name="Young Storm Dragon" Entry="45919" Type="Repair" X="-989.747" Y="-119.878" Z="694.9167" /> 
+	<Vendor Name="Young Storm Dragon" Entry="45919" Type="Repair" X="-1134.43" Y="27.9358" Z="704.7352" />-->
+	<Boss isFinal="false" entry="43873" name="Altairus" killOrder="2" optional="false" X="-1192.2" Y="54.16493" Z="744.2983" />
+	<Boss isFinal="true" entry="43875" name="Asaad" killOrder="3" optional="false" X="-622.729" Y="503.509" Z="646.6309" />
+  </BossEncounters>
+  <Blackspots>
+    <!--<Blackspot X="-101.3791" Y="-703.8368" Z="9.095623" Radius="3.363508" />-->
+  </Blackspots>
+</DungeonBuddyProfile>

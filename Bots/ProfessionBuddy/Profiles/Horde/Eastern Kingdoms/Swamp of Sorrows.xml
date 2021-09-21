@@ -1,0 +1,480 @@
+<HBProfile xsi:noNamespaceSchemaLocation="../Schemas/EchoSchema.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<!-- Original contribution by EchoTiger -->
+	<Name>Swamp of Sorrows ($ShortHash$)</Name>
+
+	<MinDurability>0.3</MinDurability>
+	<MinFreeBagSlots>3</MinFreeBagSlots>
+
+	<SellGrey>true</SellGrey>
+	<SellWhite>true</SellWhite>
+	<SellGreen>true</SellGreen>
+	<SellBlue>true</SellBlue>
+	<SellPurple>false</SellPurple>
+
+	<MailGrey>false</MailGrey>
+	<MailWhite>true</MailWhite>
+	<MailGreen>true</MailGreen>
+	<MailBlue>true</MailBlue>
+	<MailPurple>true</MailPurple>
+
+	<TargetElites>true</TargetElites>
+
+	<AvoidMobs>
+	</AvoidMobs>
+
+	<Mailboxes>
+	</Mailboxes>
+
+	<Vendors>
+	</Vendors>
+
+	<Blackspots>
+		<Blackspot X="-10855.92" Y="-4097.042" Z="22.88101" Radius="40" />
+		<Blackspot X="-10156.2" Y="-3733.59" Z="17.56" Radius="20" /> <!-- Peasant in Marshtide Watch Alliance Town -->
+		<Blackspot X="-10130.6" Y="-3791.82" Z="17.35964" Radius="40" /> <!-- Footmen inside of Marshtide Watch Alliance Town -->
+		<Blackspot X="2754.408" Y="-232.3247" Z="173.7659" Radius="40" /> <!-- Footmen inside of Marshtide Watch Alliance Town -->
+		<Blackspot X="2754.408" Y="-232.3247" Z="173.7659" Radius="40" /> <!-- Footmen inside of Marshtide Watch Alliance Town -->
+		<Blackspot X="-10209.79" Y="-3827.41" Z="17.48836" Radius="40" /> <!-- Path leading into Marshtide Watch Alliance Town -->
+		<Blackspot X="-10078.06" Y="-3793.55" Z="19.19389" Radius="40" /> <!-- Path leading into Marshtide Watch Alliance Town -->
+		<Blackspot X="-10200.56" Y="-3728.621" Z="19.61672" Radius="40" /> <!-- Path leading into Marshtide Watch Alliance Town -->
+		<Blackspot X="-10221.41" Y="-3762.233" Z="19.64359" Radius="40" /> <!-- Path leading into Marshtide Watch Alliance Town -->
+		<Blackspot X="-10407.87" Y="-2611.817" Z="22.36492" Radius="30.56689" /> <!-- Horde tower near Splinterspear Junction -->
+	</Blackspots>
+
+	<Blacklist>
+	</Blacklist>
+
+	<QuestOrder IgnoreCheckpoints="false" >
+		<!-- Check function status -->
+		<Code File="RunCode" Type="Definition">
+			<![CDATA[
+			private static bool? profileFunctionsEnabled => (bool?)AppDomain.CurrentDomain.GetData("QuestingProfiles_FunctionsEnabled");
+			private static bool IsStoreProfile(string path) => path.StartsWith("store://");
+			private static string Slashify(string path) => IsStoreProfile(path) ? path.Replace(@"\", "/") : path.Replace("/", @"\");
+
+			public __CompiledBatchClass__()
+			{
+				ActivateFunctions();
+			}
+
+			private static void ActivateFunctions()
+			{
+				if (profileFunctionsEnabled == null || profileFunctionsEnabled == false)
+				{
+					Bots.Professionbuddy.PBLog.Log(Colors.MediumPurple, "[Profile Message!]: ", Colors.Yellow, "Please stand by as the functions are being activated!");
+					LoadProfile(@"..\..\Functions\Activate Functions.xml");
+				}
+			}
+
+			private static void LoadProfile(string path)
+			{
+				var profile = GetNewPath(path);
+				if (!IsStoreProfile(profile) && !File.Exists(profile))
+				{
+					Bots.Professionbuddy.PBLog.Log(Colors.MediumPurple, "[Profile Message!]: ", Colors.Yellow, "Profile does not exist.\n" + profile);
+					return;
+				}
+
+				Bots.Professionbuddy.PBLog.Log(Colors.MediumPurple, "[Profile Message!]: ", Colors.Yellow, "Loading: " + profile);
+				ProfileManager.LoadNew(profile, false);
+			}
+
+			private static string GetNewPath(string path)
+			{
+				if (IsStoreProfile(path))
+					return Slashify(path);
+
+				var currentProfile = ProfileManager.XmlLocation;
+				if (IsStoreProfile(currentProfile))
+					return Slashify(currentProfile + "/../" + path);
+
+				var absolutePath = Path.Combine(Path.GetDirectoryName(currentProfile), path);
+				absolutePath = Path.GetFullPath(absolutePath);
+				var canonicalPath = new Uri(absolutePath).LocalPath;
+				return Slashify(canonicalPath);
+			}]]>
+		</Code>
+		<Code File="RunCode" Code="ActivateFunctions();" />
+		<!-- END Check function status -->
+
+		<If Condition="Me.IsAlliance" >
+			<Code File="LoadProfile" ProfileName="..\..\Questing Autoloader.xml" />
+		</If>
+		<!-- RunCode Methods -->
+			<Code File="RunCode">
+			<![CDATA[
+				Bots.Professionbuddy.PBLog.Log(System.Windows.Media.Colors.MediumPurple, "> [Profile Initialization Status] ", System.Windows.Media.Colors.CornflowerBlue, "\n     Auto-Looting	:: Enabled\n     Looting	:: Enabled\n     Game Addons	:: Disabled");
+				Lua.DoString("SetCVar('AutoLootDefault', 1);");
+				Lua.DoString("SetCVar('autoDismountFlying', 1);");
+				CharacterSettings.Instance.LootMobs = true;
+				CharacterSettings.Instance.Save();
+				Logging.Write(System.Windows.Media.Colors.MediumPurple, "> [Ready to bot!]");
+			]]>
+			</Code>
+			<Code File="RunCode" Type="Definition">
+				<![CDATA[
+						bool DoQuest(params uint[] questIds)
+						{
+							foreach (var questId in questIds)
+							{
+								if (HasQuest(questId) && !IsQuestCompleted(questId)) return true;
+							}
+							return false;
+						}
+						bool NeedsQuest(params uint[] questIds)
+						{
+							foreach (var questId in questIds)
+							{
+								if (!HasQuest(questId) && !IsQuestCompleted(questId)) return true;
+							}
+							return false;
+						}
+						bool NeedsBreadcrumbQuest(params uint[] questIds)
+						{
+							foreach (var questId in questIds)
+							{
+								if (IsQuestCompleted(questId)) return false;
+							}
+							return true;
+						}
+						bool QuestDone(params uint[] questIds)
+						{
+							foreach (var questId in questIds)
+							{
+								if (HasQuest(questId) && IsQuestCompleted(questId)) return true;
+							}
+							return false;
+						}
+						bool QuestFlaggedCompleted(params uint[] questIds)
+						{
+							foreach (var questId in questIds)
+							{
+								return Lua.GetReturnVal<bool>($"return IsQuestFlaggedCompleted({questId});", 0);
+							}
+							return false;
+						}
+						async Task SkipCutscene(int preWait = 3000, int postWait = 3000)
+						{
+					// Add detection of cutscene here.
+							await Coroutine.Sleep(preWait);
+					// Test and improve the working method.
+							Lua.DoString("MovieFrame:StopMovie(); CinematicFrame_CancelCinematic(); StopCinematic();");
+							await Coroutine.Sleep(postWait);
+						}
+					]]>
+			</Code>
+
+		<!-- END RunCode Methods -->
+
+
+		<If Condition="Me.ZoneId == 46" >
+			<PickUp QuestName="The Bogpaddle Bullet" QuestId="28570" GiverName="Kibler" GiverId="10260" X="-7463.918" Y="-2195.936" Z="165.0145" />
+			<While Condition="HasQuest(28570) &amp;&amp; Me.ZoneId == 46" >
+				<Code File="InteractWith" MobId="48948" GossipOptions="1" NonCompeteDistance="0" X="-8222.14" Y="-2934.606" Z="152.3545" />
+				<Code File="WaitTimer" WaitTime="60000" TerminateWhen="!Me.IsOnTransport" />
+			</While>
+		</If>
+		<If Condition="QuestDone(28570)" >
+			<TurnIn QuestName="The Bogpaddle Bullet" QuestId="28570" TurnInName="Trade Baron Silversnap" TurnInId="45786" X="-9781.936" Y="-3915.05" Z="21.68217" />
+		</If>
+
+		<PickUp QuestName="Maliciously Delicious" QuestId="27587" GiverName="Trade Baron Silversnap" GiverId="45786" X="-9781.936" Y="-3915.05" Z="21.68217" />
+
+		<If Condition="!IsQuestCompleted(27849)" > <!-- We're setting the hearthstone again later in the profile,  we don't want this fighting with the other set location -->
+			<Code File="SetHearthstone" MobId="47334" AreaId="5458" X="-9769.801" Y="-3880.129" Z="21.90582" />
+		</If>
+
+		<If Condition="NeedsQuest(27592)" >
+			<Code File="ForceSetVendor" DoSell="true" DoRepair="true" /> <!-- Clean up inventory before we do this CTM-based quest. -->
+			<PickUp QuestName="Drinks on the Rocks" QuestId="27592" GiverName="Brono Goodgroove" GiverId="46010" X="-9690.554" Y="-3928.403" Z="3.850955" />
+		</If>
+
+		<If Condition="DoQuest(27592)" >
+			<DisableBehavior Name="Vendor" />
+			<Code File="UseItem" ItemId="62795" QuestId="27592" TerminateWhen="!HasItem(62795)" />
+			<Code File="KillUntilComplete" MovementBy="ClickToMoveOnly" TerminateWhen="!DoQuest(27587, 27592)" >
+				<HuntingGrounds>
+					<Hotspot X="-9619.782" Y="-3951.169" Z="-22.60861" />
+					<Hotspot X="-9615.026" Y="-4011.673" Z="-20.42467" />
+					<Hotspot X="-9673.99" Y="-4018.528" Z="-8.548689" />
+					<Hotspot X="-9756.63" Y="-4095.666" Z="-11.00566" />
+				</HuntingGrounds>
+				<PursuitList>
+					<PursueUnit Id="922" PursueWhen="DoQuest(27592)" />
+					<PursueUnit Id="45809" PursueWhen="DoQuest(27587)" />
+				</PursuitList>
+			</Code>
+			<Code File="AscendInWater" />
+			<If Condition="Me.Z &lt; -1.90" >
+				<Code File="MyCTM" X="-9642.627" Y="-3982.858" Z="-1.619021" TerminateWhen="Me.Z &lt; -1.90" />
+				<Code File="MyCTM" X="-9680.395" Y="-3962.473" Z="2.772319" TerminateWhen="Me.Z &lt; -1.90" />
+			</If>
+			<EnableBehavior Name="Vendor" />
+		</If>
+
+		<TurnIn QuestName="Drinks on the Rocks" QuestId="27592" TurnInName="Brono Goodgroove" TurnInId="46010" X="-9687.334" Y="-3929.813" Z="3.223083" />
+		<TurnIn QuestName="Maliciously Delicious" QuestId="27587" TurnInName="Trade Baron Silversnap" TurnInId="45786" X="-9781.721" Y="-3914.348" Z="21.66754" />
+		<RecheckCheckpoints />
+		<PickUp QuestName="Mostly Harmless" QuestId="27536" GiverName="Trade Baron Silversnap" GiverId="45786" X="-9779.912" Y="-3915.506" Z="21.68784" />
+		<PickUp QuestName="Croc-Out" QuestId="27656" GiverName="Trade Baron Silversnap" GiverId="45786" X="-9779.912" Y="-3915.506" Z="21.68784" />
+		<PickUp QuestName="Tastes Like Strider" QuestId="27663" GiverName="Pierre Fishflay" GiverId="46182" X="-9743.717" Y="-3942.658" Z="22.83094" />
+		
+		<While Condition="DoQuest(27536)" >
+			<Code File="InteractWith" MobId="205545" Range="7.5" InteractByLooting="true" CollectionDistance="200" QuestId="27536" >
+				<HuntingGrounds>
+					<Hotspot X="-9838.81" Y="-3957.11" Z="21.9247" />
+					<Hotspot X="-9835.557" Y="-3955.576" Z="22.36046" />
+					<Hotspot X="-9910.393" Y="-4030.392" Z="19.04508" />
+					<Hotspot X="-10009.8" Y="-4112.052" Z="21.67832" />
+				</HuntingGrounds>
+			</Code>
+		</While>
+
+		<Code File="KillUntilComplete" MobId="45807" QuestId="27656" >
+			<HuntingGrounds>
+				<Hotspot X="-9838.81" Y="-3957.11" Z="21.9247" />
+				<Hotspot X="-9835.557" Y="-3955.576" Z="22.36046" />
+				<Hotspot X="-9910.393" Y="-4030.392" Z="19.04508" />
+				<Hotspot X="-10009.8" Y="-4112.052" Z="21.67832" />
+			</HuntingGrounds>
+		</Code>
+
+		<Code File="KillUntilComplete" MobId="45825" QuestId="27663" >
+			<HuntingGrounds>
+				<Hotspot X="-9970.8" Y="-4137.559" Z="22.06238" />
+				<Hotspot X="-9860.262" Y="-4069.75" Z="21.89465" />
+				<Hotspot X="-10092.43" Y="-4232.336" Z="23.79819" />
+				<Hotspot X="-10218.65" Y="-4277.093" Z="23.0036" />
+			</HuntingGrounds>
+		</Code>
+
+		<TurnIn QuestName="Tastes Like Strider" QuestId="27663" TurnInName="Pierre Fishflay" TurnInId="46182" X="-9741.54" Y="-3943.25" Z="22.41221" />
+		<TurnIn QuestName="Mostly Harmless" QuestId="27536" TurnInName="Trade Baron Silversnap" TurnInId="45786" X="-9781.394" Y="-3914.786" Z="21.68143" />
+		<TurnIn QuestName="Croc-Out" QuestId="27656" TurnInName="Trade Baron Silversnap" TurnInId="45786" X="-9781.394" Y="-3914.786" Z="21.68143" />
+		<PickUp QuestName="Crazy Larry" QuestId="27597" GiverName="Trade Baron Silversnap" GiverId="45786" X="-9781.394" Y="-3914.786" Z="21.68143" />
+		<TurnIn QuestName="Crazy Larry" QuestId="27597" TurnInName="Crazy Larry" TurnInId="45948" X="-10205.63" Y="-4187.337" Z="22.28627" />
+		<RecheckCheckpoints />
+		<PickUp QuestName="Kill Gil" QuestId="27598" GiverName="Crazy Larry" GiverId="45948" X="-10205.63" Y="-4187.337" Z="22.28627" />
+		<PickUp QuestName="Can't Take It With Them" QuestId="27599" GiverName="Crazy Larry" GiverId="45948" X="-10205.63" Y="-4187.337" Z="22.28627" />
+
+		<While Condition="DoQuest(27599)" >
+			<MoveTo X="-10049.1" Y="-4297" Z="5.183763" />
+			<Code File="InteractWith" MobId="46014" CollectionDistance="200" NumOfTimes="12" MovementBy="ClickToMoveOnly" InteractByLooting="true" QuestId="27599" TerminateWhen="Unit(46014) == null" >
+				<HuntingGrounds>
+					<Hotspot X="-10049.1" Y="-4297" Z="5.183763" />
+					<Hotspot X="-9964.33" Y="-4273.16" Z="3.260911" />
+				</HuntingGrounds>
+			</Code>
+		</While>
+
+		<Code File="KillUntilComplete" MobId="45701" QuestId="27598" >
+			<HuntingGrounds>
+				<Hotspot X="-10049.1" Y="-4297" Z="5.183763" />
+				<Hotspot X="-9964.33" Y="-4273.16" Z="3.260911" />
+			</HuntingGrounds>
+		</Code>
+
+		<TurnIn QuestName="Kill Gil" QuestId="27598" TurnInName="Crazy Larry" TurnInId="45948" X="-10205.07" Y="-4186.335" Z="22.28698" />
+		<TurnIn QuestName="Can't Take It With Them" QuestId="27599" TurnInName="Crazy Larry" TurnInId="45948" X="-10205.07" Y="-4186.335" Z="22.28698" />
+		<RecheckCheckpoints />
+
+		<PickUp QuestName="In With a Bang" QuestId="27600" GiverName="Crazy Larry" GiverId="45948" X="-10205.42" Y="-4186.808" Z="22.28699" />
+		<While Condition="DoQuest(27600)" >
+			<Code File="InteractWith" MobId="46245" GossipOptions="1" NonCompeteDistance="0" QuestId="27600" X="-10170.99" Y="-4175.218" Z="23.15152" TerminateWhen="Me.Y &lt; -4535" />
+			<DisableBehavior Name="Combat, Vendor" /> <!-- Avoid slow fall buffs -->
+			<Code File="WaitTimer" WaitTime="10000" TerminateWhen="Me.Y &lt; -4535" />
+			<EnableBehavior Name="Combat" />
+			<If Condition="!IsObjectiveComplete(1, 27600)" >
+				<MoveTo X="-9969.873" Y="-4546.761" Z="11.81089" /> <!-- Avoid getting stuck on the little cannon -->
+				<Code File="InteractWith" MobId="205826" InteractByLooting="true" QuestId="27600" QuestObjectiveIndex="1" X="-9955.886" Y="-4539.916" Z="12.03468" />
+			</If>
+			<Code File="InteractWith" MobId="205827" InteractByLooting="true" QuestId="27600" QuestObjectiveIndex="2" X="-10000.07" Y="-4562.037" Z="6.348693" />
+			<Code File="InteractWith" MobId="205828" InteractByLooting="true" QuestId="27600" QuestObjectiveIndex="3" X="-9988.551" Y="-4559.189" Z="-0.9703788" />
+		</While>
+		<If Condition="QuestDone(27600) &amp;&amp; Me.Y &lt; -4535" >
+			<Code File="InteractWith" MobId="206679" GossipOptions="1" NonCompeteDistance="0" X="-9969.2" Y="-4539.75" Z="11.6994" TerminateWhen="Me.Y &gt; -4170" />
+			<DisableBehavior Name="Combat" />
+			<Code File="WaitTimer" WaitTime="10000" TerminateWhen="Me.Y &gt; -4170" />
+			<EnableBehavior Name="Combat, Vendor" />
+		</If>
+		<TurnIn QuestName="In With a Bang" QuestId="27600" TurnInName="Crazy Larry" TurnInId="45948" X="-10204.6" Y="-4185.086" Z="22.28791" />
+
+		<PickUp QuestName="Baba Bogbrew" QuestId="27740" GiverName="Crazy Larry" GiverId="45948" X="-10204.6" Y="-4185.086" Z="22.28791" />
+		<If Condition="HasQuest(27740) &amp;&amp; Unit(46503) != null" >
+			<Code File="InteractWith" MobId="46503" GossipOptions="1" NonCompeteDistance="0" X="-10219.66" Y="-4160.443" Z="23.05205" />
+			<Code File="WaitTimer" WaitTime="17000" />
+		</If>
+		<TurnIn QuestName="Baba Bogbrew" QuestId="27740" TurnInName="Baba Bogbrew" TurnInId="46172" X="-10812.68" Y="-3816.085" Z="21.8911" />
+
+		<PickUp QuestName="Marshfin Madness" QuestId="27691" GiverName="Baba Bogbrew" GiverId="46172" X="-10812.29" Y="-3816.178" Z="21.89044" />
+		<Code File="KillUntilComplete" MobId="45967" QuestId="27691" >
+			<HuntingGrounds>
+				<Hotspot X="-10943.31" Y="-4028.762" Z="22.09299" />
+				<Hotspot X="-11043.56" Y="-4112.98" Z="1.382694" />
+				<Hotspot X="-10955.03" Y="-4159.491" Z="7.74519" />
+				<Hotspot X="-10868.33" Y="-4205.09" Z="4.906782" />
+				<Hotspot X="-10791.92" Y="-4241.429" Z="5.204055" />
+			</HuntingGrounds>
+		</Code>
+		<TurnIn QuestName="Marshfin Madness" QuestId="27691" TurnInName="Baba Bogbrew" TurnInId="46172" X="-10815.13" Y="-3815.974" Z="21.91875" />
+
+		<PickUp QuestName="The Darkest Depths" QuestId="27757" GiverName="Baba Bogbrew" GiverId="46172" X="-10815.13" Y="-3815.974" Z="21.91875" />
+		<Code File="KillUntilComplete" MobId="46371" QuestId="27757" X="-10977.43" Y="-3664.349" Z="27.53097" />
+		<If Condition="QuestDone(46371) &amp;&amp; Me.Z &gt; 20 &amp;&amp; Unit(46371) != null" >
+			<Code File="MyCTM" X="-10931.88" Y="-3680.264" Z="9.896886" />
+		</If>
+		<TurnIn QuestName="The Darkest Depths" QuestId="27757" TurnInName="Baba Bogbrew" TurnInId="46172" X="-10812.79" Y="-3813.393" Z="21.91144" />
+
+		<PickUp QuestName="Slithering Signs" QuestId="27818" GiverName="Baba Bogbrew" GiverId="46172" X="-10812.79" Y="-3813.393" Z="21.91144" />
+		<Code File="KillUntilComplete" MobId="46146" QuestId="27818" >
+			<HuntingGrounds>
+				<Hotspot X="-10908.74" Y="-3922.242" Z="23.31142" />
+				<Hotspot X="-10950.45" Y="-3941.017" Z="27.05993" />
+				<Hotspot X="-10668.86" Y="-3978.103" Z="22.2163" />
+				<Hotspot X="-10612.09" Y="-4096.746" Z="21.66372" />
+				<Hotspot X="-10551.04" Y="-4133.123" Z="21.39737" />
+			</HuntingGrounds>
+		</Code>
+		<TurnIn QuestName="Slithering Signs" QuestId="27818" TurnInName="Baba Bogbrew" TurnInId="46172" X="-10815.72" Y="-3817.015" Z="21.92054" />
+
+		<PickUp QuestName="The Dragon and the Temple" QuestId="27869" GiverName="Baba Bogbrew" GiverId="46172" X="-10815.54" Y="-3816.815" Z="21.91628" />
+		<TurnIn QuestName="The Dragon and the Temple" QuestId="27869" TurnInName="Lord Itharius" TurnInId="46071" X="-10450.89" Y="-3823.223" Z="17.87097" />
+		<!-- Skipping this minor hub and going to Marshtide Watch -->
+		<PickUp QuestName="Orcs and Humans" QuestId="27852" GiverName="Dispatch Commander Ruag" GiverId="7623" X="-10463.23" Y="-3322.68" Z="39.85403" />
+		<PickUp QuestName="Lumbering Oafs" QuestId="27853" GiverName="Dispatch Commander Ruag" GiverId="7623" X="-10463.23" Y="-3322.68" Z="39.85403" />
+
+		<Code File="KillUntilComplete" MobId="46487" QuestId="27853" >
+			<HuntingGrounds>
+				<Hotspot X="-10121.18" Y="-3581.82" Z="21.83029" />
+				<Hotspot X="-10120.13" Y="-3689.085" Z="22.89513" />
+				<Hotspot X="-10016.7" Y="-3834.5" Z="22.58144" />
+				<Hotspot X="-10098.59" Y="-3882.785" Z="23.36103" />
+				<Hotspot X="-9967.765" Y="-3762.924" Z="20.20641" />
+				<Hotspot X="-10036.96" Y="-3826.3" Z="22.95794" />
+			</HuntingGrounds>
+		</Code>
+
+		<Code File="KillUntilComplete" MobId="46164" QuestId="27852" >
+			<HuntingGrounds>
+				<Hotspot X="-10200.86" Y="-3670.045" Z="22.20041" />
+				<Hotspot X="-10279.02" Y="-3567.044" Z="19.11145" />
+				<Hotspot X="-10221.82" Y="-3510.898" Z="22.95617" />
+			</HuntingGrounds>
+		</Code>
+
+		<TurnIn QuestName="Orcs and Humans" QuestId="27852" TurnInName="Dispatch Commander Ruag" TurnInId="7623" X="-10463.53" Y="-3322.086" Z="39.85432" />
+		<TurnIn QuestName="Lumbering Oafs" QuestId="27853" TurnInName="Dispatch Commander Ruag" TurnInId="7623" X="-10463.53" Y="-3322.086" Z="39.85432" />
+		<RecheckCheckpoints />
+		<PickUp QuestName="Tides of Darkness" QuestId="27854" GiverName="Dispatch Commander Ruag" GiverId="7623" X="-10463.53" Y="-3322.086" Z="39.85432" />
+		<PickUp QuestName="Reinforcements Denied" QuestId="27855" GiverName="Dispatch Commander Ruag" GiverId="7623" X="-10463.53" Y="-3322.086" Z="39.85432" />
+		<PickUp QuestName="Marking the Fallen" QuestId="27856" GiverName="Dispatch Commander Ruag" GiverId="7623" X="-10463.53" Y="-3322.086" Z="39.85432" />
+
+		<Code File="InteractWith" MobId="46882" InteractByUsingItemId="62548" PreInteractMountStrategy="Dismount" CollectionDistance="200" QuestId="27856" QuestObjectiveIndex="1" >
+			<HuntingGrounds>
+				<Hotspot X="-10251.54" Y="-3514.399" Z="17.37418" />
+				<Hotspot X="-10370.21" Y="-3566.278" Z="20.05203" />
+				<Hotspot X="-10235.31" Y="-3623.16" Z="23.86456" />
+			</HuntingGrounds>
+		</Code>
+
+		<Code File="KillUntilComplete" MobId="46775" QuestId="27855" >
+			<HuntingGrounds>
+				<Hotspot X="-10276.73" Y="-3644.931" Z="22.2705" />
+				<Hotspot X="-10207.32" Y="-3642.008" Z="23.13906" />
+				<Hotspot X="-10168.54" Y="-3514.373" Z="22.47524" />
+			</HuntingGrounds>
+		</Code>
+
+		<Code File="KillUntilComplete" MobId="46414" QuestId="27854" >
+			<HuntingGrounds>
+				<Hotspot X="-10197.06" Y="-3555.251" Z="20.97275" />
+				<Hotspot X="-10276.29" Y="-3625.309" Z="22.66938" />
+				<Hotspot X="-10291.05" Y="-3542.724" Z="20.29528" />
+				<Hotspot X="-10175.94" Y="-3483.858" Z="22.14659" />
+			</HuntingGrounds>
+		</Code>
+
+		<TurnIn QuestName="Tides of Darkness" QuestId="27854" TurnInName="Dispatch Commander Ruag" TurnInId="7623" X="-10464.33" Y="-3323.256" Z="39.85344" />
+		<TurnIn QuestName="Reinforcements Denied" QuestId="27855" TurnInName="Dispatch Commander Ruag" TurnInId="7623" X="-10464.33" Y="-3323.256" Z="39.85344" />
+		<TurnIn QuestName="Marking the Fallen" QuestId="27856" TurnInName="Dispatch Commander Ruag" TurnInId="7623" X="-10464.33" Y="-3323.256" Z="39.85344" />
+		<RecheckCheckpoints />
+		<PickUp QuestName="We&apos;re Under Attack!" QuestId="27857" GiverName="Dispatch Commander Ruag" GiverId="7623" X="-10464.33" Y="-3323.256" Z="39.85344" />
+
+		<Code File="KillUntilComplete" MobId="46869" QuestId="27857" >
+			<HuntingGrounds>
+				<Hotspot X="-10496.23" Y="-3309.482" Z="20.21603" />
+				<Hotspot X="-10445.74" Y="-3254.625" Z="20.17851" />
+				<Hotspot X="-10414" Y="-3284.586" Z="21.08423" />
+			</HuntingGrounds>
+		</Code>
+
+		<TurnIn QuestName="We&apos;re Under Attack!" QuestId="27857" TurnInName="Dispatch Commander Ruag" TurnInId="7623" X="-10463.58" Y="-3323.609" Z="39.85371" />
+		<PickUp QuestName="Neeka Bloodscar" QuestId="27906" GiverName="Dispatch Commander Ruag" GiverId="7623" X="-10463.58" Y="-3323.609" Z="39.85371" />
+		<TurnIn QuestName="Neeka Bloodscar" QuestId="27906" TurnInName="Neeka Bloodscar" TurnInId="47041" X="-10405.67" Y="-2613.494" Z="43.23777" />
+		<RecheckCheckpoints />
+		<PickUp QuestName="Prayerblossom" QuestId="27907" GiverName="Neeka Bloodscar" GiverId="47041" X="-10405.67" Y="-2613.494" Z="43.23777" />
+		<PickUp QuestName="Secrets of the Mire" QuestId="27908" GiverName="Neeka Bloodscar" GiverId="47041" X="-10405.67" Y="-2613.494" Z="43.23777" />
+
+		<While Condition="DoQuest(27907)" >
+			<Code File="InteractWith" MobId="206503" CollectionDistance="200" PreInteractMountStrategy="Dismount" InteractByLooting="true" NumOfTimes="20" QuestId="27907" >
+				<HuntingGrounds>
+					<Hotspot X="-10351.19" Y="-2770.731" Z="22.1583" />
+					<Hotspot X="-10392.62" Y="-2940.188" Z="22.38055" />
+					<Hotspot X="-10357.08" Y="-3067.683" Z="22.80036" />
+					<Hotspot X="-10178.09" Y="-2995.717" Z="22.3196" />
+					<Hotspot X="-10190.37" Y="-2876.583" Z="18.99544" />
+				</HuntingGrounds>
+			</Code>
+		</While>
+
+		<Code File="KillUntilComplete" MobId="46997" QuestId="27908" >
+			<HuntingGrounds>
+				<Hotspot X="-10303.97" Y="-2745.363" Z="17.7354" />
+				<Hotspot X="-10202.97" Y="-2801.176" Z="17.37505" />
+				<Hotspot X="-10169.01" Y="-2919.172" Z="18.87033" />
+				<Hotspot X="-10130.09" Y="-3020.787" Z="17.87739" />
+				<Hotspot X="-10211.71" Y="-2974.951" Z="18.25645" />
+				<Hotspot X="-10303.77" Y="-2915.386" Z="17.42069" />
+				<Hotspot X="-10397.83" Y="-2855.658" Z="18.00135" />
+			</HuntingGrounds>
+		</Code>
+
+		<TurnIn QuestName="Prayerblossom" QuestId="27907" TurnInName="Neeka Bloodscar" TurnInId="47041" X="-10405.61" Y="-2613.549" Z="43.22884" />
+		<TurnIn QuestName="Secrets of the Mire" QuestId="27908" TurnInName="Neeka Bloodscar" TurnInId="47041" X="-10405.61" Y="-2613.549" Z="43.22884" />
+		<RecheckCheckpoints />
+		<PickUp QuestName="The Purespring" QuestId="27909" GiverName="Neeka Bloodscar" GiverId="47041" X="-10405.61" Y="-2613.549" Z="43.22884" />
+		<PickUp QuestName="Last Regrets" QuestId="27910" GiverName="Neeka Bloodscar" GiverId="47041" X="-10405.61" Y="-2613.549" Z="43.22884" />
+
+		<Code File="KillUntilComplete" MobId="46953" QuestId="27909" >
+			<HuntingGrounds>
+				<Hotspot X="-10471.49" Y="-2571.3" Z="19.64453" />
+				<Hotspot X="-10586.83" Y="-2569.983" Z="22.26049" />
+				<Hotspot X="-10546.01" Y="-2497.601" Z="23.23238" />
+			</HuntingGrounds>
+		</Code>
+
+		<Code File="KillUntilComplete" MobId="47053" QuestId="27910" X="-10100.45" Y="-2352.529" Z="25.70453" />
+
+		<TurnIn QuestName="The Purespring" QuestId="27909" TurnInName="Neeka Bloodscar" TurnInId="47041" X="-10405.41" Y="-2613.359" Z="43.18519" />
+		<TurnIn QuestName="Last Regrets" QuestId="27910" TurnInName="Neeka Bloodscar" TurnInId="47041" X="-10405.41" Y="-2613.359" Z="43.18519" />
+		<PickUp QuestName="With Dying Breath" QuestId="27911" GiverName="Neeka Bloodscar" GiverId="47041" X="-10405.41" Y="-2613.359" Z="43.18519" />
+		<TurnIn QuestName="With Dying Breath" QuestId="27911" TurnInName="Neeka Bloodscar" TurnInId="47041" X="-10405.41" Y="-2613.359" Z="43.18519" />
+		<PickUp QuestName="Ruag&apos;s Report" QuestId="27916" GiverName="Neeka Bloodscar" GiverId="47041" X="-10405.41" Y="-2613.359" Z="43.18519" />
+		<TurnIn QuestName="Ruag&apos;s Report" QuestId="27916" TurnInName="Dispatch Commander Ruag" TurnInId="7623" X="-10463.24" Y="-3322.937" Z="39.85476" />
+
+		<Code File="KillUntilComplete" MobIds="46164, 46840" TerminateWhen="Me.Level &gt;= 54" >
+			<HuntingGrounds>
+				<Hotspot X="-10200.86" Y="-3670.045" Z="22.20041" />
+				<Hotspot X="-10279.02" Y="-3567.044" Z="19.11145" />
+				<Hotspot X="-10221.82" Y="-3510.898" Z="22.95617" />
+			</HuntingGrounds>
+		</Code>
+
+		<Checkpoint Level="55" /> <!-- Checkpoint is normally 54, but we're adding 1 level to this one due to the lack of quests for getting to 58 -->
+		<If Condition="Me.Level &lt;= 55" >
+			<Code File="RunCode" Code="foreach (PlayerQuest quest in Me.QuestLog.GetAllQuests()) QuestLog.Instance.AbandonQuestById(quest.Id)" />
+		</If>
+		<Code File="LoadProfile" ProfileName="Blasted Lands.xml" />
+		
+	</QuestOrder>
+</HBProfile>

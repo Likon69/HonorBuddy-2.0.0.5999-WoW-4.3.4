@@ -1,0 +1,338 @@
+<HBProfile xsi:noNamespaceSchemaLocation="../Schemas/EchoSchema.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<!-- Original contribution by EchoTiger -->
+	<Name>Dun Morogh ($ShortHash$)</Name>
+
+	<MinDurability>0.3</MinDurability>
+	<MinFreeBagSlots>3</MinFreeBagSlots>
+
+	<SellGrey>true</SellGrey>
+	<SellWhite>true</SellWhite>
+	<SellGreen>true</SellGreen>
+	<SellBlue>true</SellBlue>
+	<SellPurple>false</SellPurple>
+
+	<MailGrey>false</MailGrey>
+	<MailWhite>true</MailWhite>
+	<MailGreen>true</MailGreen>
+	<MailBlue>true</MailBlue>
+	<MailPurple>true</MailPurple>
+
+	<TargetElites>true</TargetElites>
+
+	<AvoidMobs>
+	</AvoidMobs>
+
+	<Mailboxes>
+		<Mailbox Name="Kharanos" X="-5603.603" Y="-512.9031" Z="401.6768" />
+	</Mailboxes>
+
+	<Vendors>
+		<!-- Kharanos -->
+		<Vendor Name="Frast Dokner" Entry="1698" Type="Repair" X="-5714.372" Y="-1589.517" Z="383.2044" />
+		<Vendor Name="Grawn Thromwyn" Entry="1273" Type="Repair" X="-5590.67" Y="-428.416" Z="397.3266" />
+		<Vendor Name="Jade Ramalot" Entry="46996" Type="Repair" X="-4594.17" Y="-1714.2" Z="503.476" />
+		<Vendor Name="Monann Coldforge" Entry="43384" Type="Food" X="-5522.49" Y="-1930.35" Z="398.9589" />
+		<Vendor Name="Turuk Amberstill" Entry="3177" Type="Repair" X="-5514.975" Y="-1295.747" Z="405.9352" />
+	</Vendors>
+
+	<Blackspots>
+	</Blackspots>
+
+	<Blacklist>
+	</Blacklist>
+
+	<QuestOrder IgnoreCheckpoints="false" >
+		<!-- Check function status -->
+		<Code File="RunCode" Type="Definition">
+			<![CDATA[
+			private static bool? profileFunctionsEnabled => (bool?)AppDomain.CurrentDomain.GetData("QuestingProfiles_FunctionsEnabled");
+			private static bool IsStoreProfile(string path) => path.StartsWith("store://");
+			private static string Slashify(string path) => IsStoreProfile(path) ? path.Replace(@"\", "/") : path.Replace("/", @"\");
+
+			public __CompiledBatchClass__()
+			{
+				ActivateFunctions();
+			}
+
+			private static void ActivateFunctions()
+			{
+				if (profileFunctionsEnabled == null || profileFunctionsEnabled == false)
+				{
+					Bots.Professionbuddy.PBLog.Log(Colors.MediumPurple, "[Profile Message!]: ", Colors.Yellow, "Please stand by as the functions are being activated!");
+					LoadProfile(@"..\..\Functions\Activate Functions.xml");
+				}
+			}
+
+			private static void LoadProfile(string path)
+			{
+				var profile = GetNewPath(path);
+				if (!IsStoreProfile(profile) && !File.Exists(profile))
+				{
+					Bots.Professionbuddy.PBLog.Log(Colors.MediumPurple, "[Profile Message!]: ", Colors.Yellow, "Profile does not exist.\n" + profile);
+					return;
+				}
+
+				Bots.Professionbuddy.PBLog.Log(Colors.MediumPurple, "[Profile Message!]: ", Colors.Yellow, "Loading: " + profile);
+				ProfileManager.LoadNew(profile, false);
+			}
+
+			private static string GetNewPath(string path)
+			{
+				if (IsStoreProfile(path))
+					return Slashify(path);
+
+				var currentProfile = ProfileManager.XmlLocation;
+				if (IsStoreProfile(currentProfile))
+					return Slashify(currentProfile + "/../" + path);
+
+				var absolutePath = Path.Combine(Path.GetDirectoryName(currentProfile), path);
+				absolutePath = Path.GetFullPath(absolutePath);
+				var canonicalPath = new Uri(absolutePath).LocalPath;
+				return Slashify(canonicalPath);
+			}]]>
+		</Code>
+		<Code File="RunCode" Code="ActivateFunctions();" />
+		<!-- END Check function status -->
+
+		<If Condition="Me.IsHorde" >
+			<Code File="LoadProfile" ProfileName="..\..\Questing Autoloader.xml" />
+		</If>
+		<!-- RunCode Methods -->
+			<Code File="RunCode">
+			<![CDATA[
+				Bots.Professionbuddy.PBLog.Log(System.Windows.Media.Colors.MediumPurple, "> [Profile Initialization Status] ", System.Windows.Media.Colors.CornflowerBlue, "\n     Auto-Looting	:: Enabled\n     Looting	:: Enabled\n     Game Addons	:: Disabled");
+				Lua.DoString("SetCVar('AutoLootDefault', 1);");
+				Lua.DoString("SetCVar('autoDismountFlying', 1);");
+				CharacterSettings.Instance.LootMobs = true;
+				CharacterSettings.Instance.Save();
+				Logging.Write(System.Windows.Media.Colors.MediumPurple, "> [Ready to bot!]");
+			]]>
+			</Code>
+			<Code File="RunCode" Type="Definition">
+				<![CDATA[
+						bool DoQuest(params uint[] questIds)
+						{
+							foreach (var questId in questIds)
+							{
+								if (HasQuest(questId) && !IsQuestCompleted(questId)) return true;
+							}
+							return false;
+						}
+						bool NeedsQuest(params uint[] questIds)
+						{
+							foreach (var questId in questIds)
+							{
+								if (!HasQuest(questId) && !IsQuestCompleted(questId)) return true;
+							}
+							return false;
+						}
+						bool NeedsBreadcrumbQuest(params uint[] questIds)
+						{
+							foreach (var questId in questIds)
+							{
+								if (IsQuestCompleted(questId)) return false;
+							}
+							return true;
+						}
+						bool QuestDone(params uint[] questIds)
+						{
+							foreach (var questId in questIds)
+							{
+								if (HasQuest(questId) && IsQuestCompleted(questId)) return true;
+							}
+							return false;
+						}
+						bool QuestFlaggedCompleted(params uint[] questIds)
+						{
+							foreach (var questId in questIds)
+							{
+								return Lua.GetReturnVal<bool>($"return IsQuestFlaggedCompleted({questId});", 0);
+							}
+							return false;
+						}
+						async Task SkipCutscene(int preWait = 3000, int postWait = 3000)
+						{
+					// Add detection of cutscene here.
+							await Coroutine.Sleep(preWait);
+					// Test and improve the working method.
+							Lua.DoString("MovieFrame:StopMovie(); CinematicFrame_CancelCinematic(); StopCinematic();");
+							await Coroutine.Sleep(postWait);
+						}
+					]]>
+			</Code>
+		<!-- END RunCode Methods -->
+
+
+		<PickUp QuestName="Beer Basted Boar Ribs" QuestId="384" GiverName="Ragnar Thunderbrew" GiverId="1267" X="-5597.977" Y="-503.7419" Z="400.524" />
+		<PickUp QuestName="Frostmane Aggression" QuestId="25724" GiverName="Captain Tharran" GiverId="40950" X="-5644.56" Y="-491.9539" Z="396.6046" />
+		<PickUp QuestName="The Perfect Stout" QuestId="315" GiverName="Rejold Barleybrew" GiverId="1374" X="-5612.625" Y="-515.0015" Z="402.6714" />
+		<PickUp QuestName="Honor Students" QuestId="6387" GiverName="Gremlock Pilsnor" GiverId="1699" X="-5595.278" Y="-541.9609" Z="398.7645" />
+
+		<Code File="KillUntilComplete" MobId="1125" QuestId="384" QuestObjectiveIndex="1" >
+			<HuntingGrounds>
+				<Hotspot X="-5828.097" Y="-567.3305" Z="399.3621" />
+				<Hotspot X="-5871.171" Y="-611.9754" Z="399.7222" />
+				<Hotspot X="-5811.332" Y="-729.4813" Z="397.5724" />
+			</HuntingGrounds>
+		</Code>
+
+		<If Condition="!QuestDone(384)" >
+			<Code File="RunCode">
+				<![CDATA[
+					var whitelist = (List<uint>)AppDomain.CurrentDomain.GetData("QuestingProfiles_AFKModeWhitelist");
+					whitelist.Add(2894);
+					AppDomain.CurrentDomain.SetData("QuestingProfiles_AFKModeWhitelist", whitelist);
+				]]>
+			</Code>
+		</If>
+		<Code File="InteractWith" MobId="1247" InteractByBuyingItemId="2894" QuestId="384" NonCompeteDistance="0" QuestObjectiveIndex="2" X="-5600.383" Y="-530.5527" Z="399.6523" />
+
+		<TurnIn QuestName="Beer Basted Boar Ribs" QuestId="384" TurnInName="Ragnar Thunderbrew" TurnInId="1267" X="-5597.292" Y="-503.3854" Z="400.46" />
+
+		<Code File="InteractWith" MobId="276" CollectionDistance="200" InteractByLooting="true" PreInteractMountStrategy="Dismount" QuestId="315" QuestObjectiveIndex="1" >
+			<HuntingGrounds>
+				<Hotspot X="-5286.061" Y="-270.6925" Z="435.3946" />
+				<Hotspot X="-5331.155" Y="-223.2919" Z="440.3647" />
+				<Hotspot X="-5239.76" Y="-166.2364" Z="440.6589" />
+				<Hotspot X="-5190.341" Y="-214.5011" Z="435.0115" />
+			</HuntingGrounds>
+		</Code>
+
+		<Code File="KillUntilComplete" QuestId="25724" >
+			<HuntingGrounds>
+				<Hotspot X="-5286.061" Y="-270.6925" Z="435.3946" />
+				<Hotspot X="-5331.155" Y="-223.2919" Z="440.3647" />
+				<Hotspot X="-5239.76" Y="-166.2364" Z="440.6589" />
+				<Hotspot X="-5190.341" Y="-214.5011" Z="435.0115" />
+			</HuntingGrounds>
+			<PursuitList>
+				<PursueUnit Id="41121" PursueWhen="!IsObjectiveComplete(1, 25724)" />
+				<PursueUnit Id="41122" PursueWhen="!IsObjectiveComplete(2, 25724)" />
+			</PursuitList>
+		</Code>
+
+		<TurnIn QuestName="The Perfect Stout" QuestId="315" TurnInName="Rejold Barleybrew" TurnInId="1374" X="-5613.501" Y="-515.5118" Z="402.7477" />
+		<TurnIn QuestName="Frostmane Aggression" QuestId="25724" TurnInName="Captain Tharran" TurnInId="40950" X="-5646.845" Y="-491.1805" Z="396.567" />
+		<RecheckCheckpoints />
+		<PickUp QuestName="Culling the Wendigos" QuestId="25667" GiverName="Captain Tharran" GiverId="40950" X="-5646.845" Y="-491.1805" Z="396.567" />
+		<PickUp QuestName="Forced to Watch from Afar" QuestId="313" GiverName="Captain Tharran" GiverId="40950" X="-5646.845" Y="-491.1805" Z="396.567" />
+		<PickUp QuestName="Pilfered Supplies" QuestId="25668" GiverName="Quartermaster Glynna" GiverId="40951" X="-5643.829" Y="-491.6179" Z="396.6101" />
+
+		<Code File="InteractWith" MobIds="203130, 203129" CollectionDistance="200" InteractByLooting="true" QuestId="25668" QuestObjectiveIndex="1" >
+			<HuntingGrounds>
+				<Hotspot X="-5584.437" Y="-282.2769" Z="367.6995" />
+				<Hotspot X="-5526.957" Y="-222.0254" Z="354.8689" />
+				<Hotspot X="-5481.595" Y="-231.7867" Z="354.4252" />
+				<Hotspot X="-5495.628" Y="-263.713" Z="354.2174" />
+				<Hotspot X="-5513.711" Y="-334.6218" Z="353.9616" />
+			</HuntingGrounds>
+		</Code>
+
+		<Code File="KillUntilComplete" MobId="40941" QuestId="25667" QuestObjectiveIndex="1" >
+			<HuntingGrounds>
+				<Hotspot X="-5584.437" Y="-282.2769" Z="367.6995" />
+				<Hotspot X="-5526.957" Y="-222.0254" Z="354.8689" />
+				<Hotspot X="-5481.595" Y="-231.7867" Z="354.4252" />
+				<Hotspot X="-5495.628" Y="-263.713" Z="354.2174" />
+				<Hotspot X="-5513.711" Y="-334.6218" Z="353.9616" />
+			</HuntingGrounds>
+		</Code>
+
+		<Code File="InteractWith" MobId="40994" GossipOptions="1" NonCompeteDistance="0" InteractBlacklistTimeInSeconds="1" QuestId="313" QuestObjectiveIndex="2" X="-5503" Y="-271.5446" Z="354.2506" />
+		<Code File="InteractWith" MobId="40991" GossipOptions="1" NonCompeteDistance="0" InteractBlacklistTimeInSeconds="1" QuestId="313" QuestObjectiveIndex="1" X="-5496.834" Y="-266.5008" Z="354.256" />
+		<Code File="InteractWith" MobId="41056" GossipOptions="1" NonCompeteDistance="0" InteractBlacklistTimeInSeconds="1" QuestId="313" QuestObjectiveIndex="3" X="-5438.274" Y="-281.4995" Z="357.684" />
+
+		<TurnIn QuestName="Pilfered Supplies" QuestId="25668" TurnInName="Quartermaster Glynna" TurnInId="40951" X="-5641.496" Y="-490.811" Z="396.6538" />
+		<TurnIn QuestName="Culling the Wendigos" QuestId="25667" TurnInName="Captain Tharran" TurnInId="40950" X="-5645.617" Y="-491.9742" Z="396.5862" />
+		<TurnIn QuestName="Forced to Watch from Afar" QuestId="313" TurnInName="Captain Tharran" TurnInId="40950" X="-5645.617" Y="-491.9742" Z="396.5862" />
+		<RecheckCheckpoints />
+		<PickUp QuestName="Pushing Forward" QuestId="25792" GiverName="Captain Tharran" GiverId="40950" X="-5645.617" Y="-491.9742" Z="396.5862" />
+		<PickUp QuestName="Operation Recombobulation" QuestId="412" GiverName="Razzle Sprysprocket" GiverId="1269" X="-5636.297" Y="-472.3881" Z="397.7327" />
+
+		<Code File="InteractWith" MobId="41202" WaitTime="3000" CollectionDistance="200" InteractByUsingItemId="56009" QuestId="25792" QuestObjectiveIndex="1" >
+			<HuntingGrounds>
+				<Hotspot X="-5814.98" Y="-598.5957" Z="398.8112" />
+				<Hotspot X="-5848.587" Y="-691.2744" Z="398.7194" />
+				<Hotspot X="-5921.601" Y="-600.5469" Z="402.0624" />
+			</HuntingGrounds>
+		</Code>
+
+		<Code File="KillUntilComplete" MobId="41146" QuestId="412" QuestObjectiveIndex="1" >
+			<HuntingGrounds>
+				<Hotspot X="-5814.98" Y="-598.5957" Z="398.8112" />
+				<Hotspot X="-5848.587" Y="-691.2744" Z="398.7194" />
+				<Hotspot X="-5921.601" Y="-600.5469" Z="402.0624" />
+			</HuntingGrounds>
+		</Code>
+
+		<TurnIn QuestName="Pushing Forward" QuestId="25792" TurnInName="Captain Tharran" TurnInId="40950" X="-5647.297" Y="-492.4031" Z="396.6101" />
+		<TurnIn QuestName="Operation Recombobulation" QuestId="412" TurnInName="Razzle Sprysprocket" TurnInId="1269" X="-5635.721" Y="-472.0901" Z="397.7587" />
+		<PickUp QuestName="Help from Steelgrill&apos;s Depot" QuestId="25838" GiverName="Captain Tharran" GiverId="40950" X="-5644.377" Y="-490.3672" Z="396.579" />
+		<TurnIn QuestName="Help from Steelgrill&apos;s Depot" QuestId="25838" TurnInName="Delber Cranktoggle" TurnInId="41363" X="-5480.949" Y="-643.9736" Z="392.2907" />
+		<PickUp QuestName="The Ultrasafe Personnel Launcher" QuestId="25839" GiverName="Delber Cranktoggle" GiverId="41363" X="-5480.949" Y="-643.9736" Z="392.2907" />
+
+		<Code File="InteractWith" MobId="41398" PreInteractMountStrategy="Dismount" InteractBlacklistTimeInSeconds="1" QuestId="25839" QuestObjectiveIndex="1" X="-5461.268" Y="-641.7899" Z="393.4927" />
+
+		<TurnIn QuestName="The Ultrasafe Personnel Launcher" QuestId="25839" TurnInName="Slamp Wobblecog" TurnInId="41298" X="-5694.77" Y="-922.8881" Z="398.2894" />
+		<PickUp QuestName="Eliminate the Resistance" QuestId="25840" GiverName="Slamp Wobblecog" GiverId="41298" X="-5697.652" Y="-925.5058" Z="398.0813" />
+		<PickUp QuestName="Strike From Above" QuestId="25841" GiverName="Slamp Wobblecog" GiverId="41298" X="-5697.652" Y="-925.5058" Z="398.0813" />
+		<PickUp QuestName="The View from Down Here" QuestId="28868" GiverName="Snevik the Blade" GiverId="50601" X="-5697.652" Y="-925.5058" Z="398.0813" />
+
+		<While Condition="DoQuest(25841)" >
+			<If Condition="!IsObjectiveComplete(1, 25841)" >
+				<MoveTo X="-5720.405" Y="-1024.105" Z="394.8352" />
+				<Code File="UseItem" ItemId="56048" QuestId="25841" QuestObjectiveIndex="1" />
+			</If>
+			<If Condition="!IsObjectiveComplete(2, 25841)" >
+				<MoveTo X="-5810.806" Y="-956.6386" Z="393.4535" />
+				<Code File="UseItem" ItemId="56048" QuestId="25841" QuestObjectiveIndex="2" />
+			</If>
+		</While>
+	
+		<Code File="KillUntilComplete" MobId="41284" QuestId="25840" QuestObjectiveIndex="1" X="-5697.652" Y="-925.5058" Z="398.0813" />
+
+		<Code File="KillUntilComplete" MobId="41258" QuestId="25840" QuestObjectiveIndex="2" >
+			<HuntingGrounds>
+				<MoveTo X="-5810.806" Y="-956.6386" Z="393.4535" />
+				<MoveTo X="-5720.405" Y="-1024.105" Z="394.8352" />
+			</HuntingGrounds>
+		</Code>
+
+		<Code File="InteractWith" MobIds="41251" WaitTime="3000" CollectionDistance="200" InteractByUsingItemId="67249" QuestId="28868" QuestObjectiveIndex="1" >
+			<HuntingGrounds>
+				<MoveTo X="-5810.806" Y="-956.6386" Z="393.4535" />
+				<MoveTo X="-5720.405" Y="-1024.105" Z="394.8352" />
+			</HuntingGrounds>
+		</Code>
+
+		<TurnIn QuestName="The View from Down Here" QuestId="28868" TurnInName="Snevik the Blade" TurnInId="50601" X="-5696.198" Y="-926.5735" Z="398.165" />
+		<TurnIn QuestName="Eliminate the Resistance" QuestId="25840" TurnInName="Slamp Wobblecog" TurnInId="41298" X="-5694.611" Y="-924.4765" Z="398.2699" />
+		<TurnIn QuestName="Strike From Above" QuestId="25841" TurnInName="Slamp Wobblecog" TurnInId="41298" X="-5694.611" Y="-924.4765" Z="398.2699" />
+		<PickUp QuestName="A Hand at the Ranch" QuestId="25882" GiverName="Slamp Wobblecog" GiverId="41298" X="-5693.732" Y="-926.1118" Z="398.347" />
+		<TurnIn QuestName="A Hand at the Ranch" QuestId="25882" TurnInName="Sergeant Flinthammer" TurnInId="41578" X="-5540.225" Y="-1310.841" Z="398.3645" />
+		<RecheckCheckpoints />
+		<PickUp QuestName="It&apos;s Raid Night Every Night" QuestId="25932" GiverName="Sergeant Flinthammer" GiverId="41578" X="-5540.225" Y="-1310.841" Z="398.3645" />
+
+		<Code File="KillUntilComplete" MobId="41603" QuestId="25932" QuestObjectiveIndex="1" X="-5540.225" Y="-1310.841" Z="398.3645" />
+
+		<TurnIn QuestName="It&apos;s Raid Night Every Night" QuestId="25932" TurnInName="Sergeant Flinthammer" TurnInId="41578" X="-5540.293" Y="-1312.873" Z="398.5404" />
+		<TurnIn QuestName="Honor Students" QuestId="6387" TurnInName="Brolan Galebeard" TurnInId="43701" X="-5663.214" Y="-496.9324" Z="397.2365" />
+
+		<Checkpoint Level="10" />
+
+		<PickUp QuestName="Ride to Ironforge" QuestId="6391" GiverName="Brolan Galebeard" GiverId="43701" X="-5663.214" Y="-496.9324" Z="397.2365" />
+		<If Condition="QuestDone(6391) &amp;&amp; Me.ZoneId != 1537" >
+			<Code File="InteractWith" MobId="43701" NonCompeteDistance="0" X="-5663.214" Y="-496.9324" Z="397.2365" />
+			<Code File="Misc\RunLua" Lua="GetNumRoutes(4); TakeTaxiNode(4);" />
+		</If>
+		<TurnIn QuestName="Ride to Ironforge" QuestId="6391" TurnInName="Golnir Bouldertoe" TurnInId="4256" X="-4707.579" Y="-1121.152" Z="504.4477" />
+
+		<If Condition="Me.ZoneId == 1537" >
+			<Code File="InteractWith" MobId="1573" NonCompeteDistance="0" X="-4821.637" Y="-1153.336" Z="502.2104" />
+			<Code File="Misc\RunLua" Lua="GetNumRoutes(1); TakeTaxiNode(1);" />
+		</If>
+
+		<Code File="LoadProfile" ProfileName="Elwynn Forest.xml" />
+
+	</QuestOrder>
+</HBProfile>

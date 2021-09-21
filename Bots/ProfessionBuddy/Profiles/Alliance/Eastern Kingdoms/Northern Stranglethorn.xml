@@ -1,0 +1,572 @@
+<HBProfile xsi:noNamespaceSchemaLocation="../Schemas/EchoSchema.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<!-- Original contribution by EchoTiger -->
+	<Name>Northern Stranglethorn ($ShortHash$)</Name>
+
+	<MinDurability>0.3</MinDurability>
+	<MinFreeBagSlots>3</MinFreeBagSlots>
+
+	<SellGrey>true</SellGrey>
+	<SellWhite>true</SellWhite>
+	<SellGreen>true</SellGreen>
+	<SellBlue>true</SellBlue>
+	<SellPurple>false</SellPurple>
+
+	<MailGrey>false</MailGrey>
+	<MailWhite>true</MailWhite>
+	<MailGreen>true</MailGreen>
+	<MailBlue>true</MailBlue>
+	<MailPurple>true</MailPurple>
+
+	<TargetElites>true</TargetElites>
+
+	<AvoidMobs>
+	</AvoidMobs>
+
+	<Mailboxes>
+	</Mailboxes>
+
+	<Vendors>
+		<!-- N STV Vendors -->
+		<Vendor Name="Jaquilina Dramet" Entry="2483" Type="Repair" X="-11650.59" Y="-47.65972" Z="16.23889" />
+
+		<!-- Rebel Camp Vendors -->
+		<Vendor Name="Corporal Bluth" Entry="734" Type="Food" X="-11295.82" Y="-201.3427" Z="75.60257" />
+		<Vendor Name="Mabel Solaj" Entry="227" Type="Food" X="-10523.23" Y="-1170.426" Z="27.40962" />
+	</Vendors>
+
+	<Blackspots>
+		<Blackspot X="-11608.83" Y="-698.8854" Z="30.97597" Radius="9.5" />
+	</Blackspots>
+
+	<Blacklist>
+	</Blacklist>
+
+	<QuestOrder IgnoreCheckpoints="false" >
+		<!-- Check function status -->
+		<Code File="RunCode" Type="Definition">
+			<![CDATA[
+			private static bool? profileFunctionsEnabled => (bool?)AppDomain.CurrentDomain.GetData("QuestingProfiles_FunctionsEnabled");
+			private static bool IsStoreProfile(string path) => path.StartsWith("store://");
+			private static string Slashify(string path) => IsStoreProfile(path) ? path.Replace(@"\", "/") : path.Replace("/", @"\");
+
+			public __CompiledBatchClass__()
+			{
+				ActivateFunctions();
+			}
+
+			private static void ActivateFunctions()
+			{
+				if (profileFunctionsEnabled == null || profileFunctionsEnabled == false)
+				{
+					Bots.Professionbuddy.PBLog.Log(Colors.MediumPurple, "[Profile Message!]: ", Colors.Yellow, "Please stand by as the functions are being activated!");
+					LoadProfile(@"..\..\Functions\Activate Functions.xml");
+				}
+			}
+
+			private static void LoadProfile(string path)
+			{
+				var profile = GetNewPath(path);
+				if (!IsStoreProfile(profile) && !File.Exists(profile))
+				{
+					Bots.Professionbuddy.PBLog.Log(Colors.MediumPurple, "[Profile Message!]: ", Colors.Yellow, "Profile does not exist.\n" + profile);
+					return;
+				}
+
+				Bots.Professionbuddy.PBLog.Log(Colors.MediumPurple, "[Profile Message!]: ", Colors.Yellow, "Loading: " + profile);
+				ProfileManager.LoadNew(profile, false);
+			}
+
+			private static string GetNewPath(string path)
+			{
+				if (IsStoreProfile(path))
+					return Slashify(path);
+
+				var currentProfile = ProfileManager.XmlLocation;
+				if (IsStoreProfile(currentProfile))
+					return Slashify(currentProfile + "/../" + path);
+
+				var absolutePath = Path.Combine(Path.GetDirectoryName(currentProfile), path);
+				absolutePath = Path.GetFullPath(absolutePath);
+				var canonicalPath = new Uri(absolutePath).LocalPath;
+				return Slashify(canonicalPath);
+			}]]>
+		</Code>
+		<Code File="RunCode" Code="ActivateFunctions();" />
+		<!-- END Check function status -->
+
+		<If Condition="Me.IsHorde" >
+			<Code File="LoadProfile" ProfileName="..\..\Questing Autoloader.xml" />
+		</If>
+		<!-- RunCode Methods -->
+			<Code File="RunCode">
+			<![CDATA[
+				Bots.Professionbuddy.PBLog.Log(System.Windows.Media.Colors.MediumPurple, "> [Profile Initialization Status] ", System.Windows.Media.Colors.CornflowerBlue, "\n     Auto-Looting	:: Enabled\n     Looting	:: Enabled\n     Game Addons	:: Disabled");
+				Lua.DoString("SetCVar('AutoLootDefault', 1);");
+				Lua.DoString("SetCVar('autoDismountFlying', 1);");
+				CharacterSettings.Instance.LootMobs = true;
+				CharacterSettings.Instance.Save();
+				Logging.Write(System.Windows.Media.Colors.MediumPurple, "> [Ready to bot!]");
+			]]>
+			</Code>
+			<Code File="RunCode" Type="Definition">
+				<![CDATA[
+						bool DoQuest(params uint[] questIds)
+						{
+							foreach (var questId in questIds)
+							{
+								if (HasQuest(questId) && !IsQuestCompleted(questId)) return true;
+							}
+							return false;
+						}
+						bool NeedsQuest(params uint[] questIds)
+						{
+							foreach (var questId in questIds)
+							{
+								if (!HasQuest(questId) && !IsQuestCompleted(questId)) return true;
+							}
+							return false;
+						}
+						bool NeedsBreadcrumbQuest(params uint[] questIds)
+						{
+							foreach (var questId in questIds)
+							{
+								if (IsQuestCompleted(questId)) return false;
+							}
+							return true;
+						}
+						bool QuestDone(params uint[] questIds)
+						{
+							foreach (var questId in questIds)
+							{
+								if (HasQuest(questId) && IsQuestCompleted(questId)) return true;
+							}
+							return false;
+						}
+						bool QuestFlaggedCompleted(params uint[] questIds)
+						{
+							foreach (var questId in questIds)
+							{
+								return Lua.GetReturnVal<bool>($"return IsQuestFlaggedCompleted({questId});", 0);
+							}
+							return false;
+						}
+						async Task SkipCutscene(int preWait = 3000, int postWait = 3000)
+						{
+					// Add detection of cutscene here.
+							await Coroutine.Sleep(preWait);
+					// Test and improve the working method.
+							Lua.DoString("MovieFrame:StopMovie(); CinematicFrame_CancelCinematic(); StopCinematic();");
+							await Coroutine.Sleep(postWait);
+						}
+					]]>
+			</Code>
+		<!-- END RunCode Methods -->
+
+
+
+		<PickUp QuestName="Bad Medicine" QuestId="26732" GiverName="Brother Nimetz" GiverId="739" X="-11319.86" Y="-195.6343" Z="76.22142" />
+		<PickUp QuestName="The Fate of Kurzen" QuestId="26735" GiverName="Lieutenant Doren" GiverId="469" X="-11298.95" Y="-204.6719" Z="75.89412" />
+
+
+		<While Condition="DoQuest(26735)" >
+			<Code File="InteractWith" MobId="204826" NonCompeteDistance="0" QuestId="26735" QuestObjectiveIndex="1" X="-11595.08" Y="-623.0966" Z="28.36052" />
+			<Code File="InteractWith" MobId="204827" NonCompeteDistance="0" QuestId="26735" QuestObjectiveIndex="2" X="-11589.8" Y="-707.163" Z="30.973" />
+		</While>
+
+		<Code File="KillUntilComplete" MobIds="937, 940, 941, 942" QuestId="26732" >
+			<HuntingGrounds>
+				<Hotspot X="-11559.26" Y="-610.9103" Z="32.27207" />
+				<Hotspot X="-11657.99" Y="-621.7343" Z="30.04306" />
+			</HuntingGrounds>
+		</Code>
+
+
+		<TurnIn QuestName="Bad Medicine" QuestId="26732" TurnInName="Brother Nimetz" TurnInId="739" X="-11322.48" Y="-195.3204" Z="75.97365" />
+		<PickUp QuestName="Control Sample" QuestId="26733" GiverName="Brother Nimetz" GiverId="739" X="-11322.48" Y="-195.3204" Z="75.97365" />
+		<TurnIn QuestName="Just Hatched" QuestId="26738" TurnInName="Corporal Sethman" TurnInId="1422" X="-11314.12" Y="-185.6869" Z="75.22424" />
+		<PickUp QuestName="I Think She's Hungry" QuestId="26739" GiverName="Corporal Sethman" GiverId="1422" X="-11314.12" Y="-185.6869" Z="75.22424" />
+		<TurnIn QuestName="The Fate of Kurzen" QuestId="26735" TurnInName="Lieutenant Doren" TurnInId="469" X="-11300.13" Y="-205.333" Z="75.98889" />
+		<PickUp QuestName="Spared from Madness" QuestId="26736" GiverName="Lieutenant Doren" GiverId="469" X="-11300.13" Y="-205.333" Z="75.98889" />
+
+		<While Condition="DoQuest(26736)" >
+			<Code File="InteractWith" MobId="204828" NonCompeteDistance="0" QuestId="26736" X="-11570.67" Y="-577.2983" Z="33.6803" />
+		</While>
+
+		<Code File="Hooks\DoWhen" ActivityName="Summon_Hatchling" UseWhen="!Me.HasAura(79651) &amp;&amp; HasItem(58165) &amp;&amp; Me.ZoneId == 33" >
+			<Code File="UseItem" ItemId="58165" TerminateWhen="Me.HasAura(79651)" />
+		</Code>
+
+		<While Condition="DoQuest(26733, 26739)" >
+			<Code File="KillUntilComplete" MobId="689" TerminateWhen="!DoQuest(26733, 26739)" >
+				<HuntingGrounds>
+					<Hotspot X="-11632.85" Y="-740.3573" Z="32.49142" />
+					<Hotspot X="-11786.11" Y="-856.0439" Z="29.4635" />
+					<Hotspot X="-11493.35" Y="-745.7665" Z="65.08016" />
+				</HuntingGrounds>
+			</Code>
+		</While>
+		
+		<Code File="Hooks\DoWhen" ActivityName="Summon_Hatchling" Command="Disable" />
+
+		<TurnIn QuestName="Control Sample" QuestId="26733" TurnInName="Brother Nimetz" TurnInId="739" X="-11321.59" Y="-194.3359" Z="76.0237" />
+		<PickUp QuestName="The Source of the Madness" QuestId="26734" GiverName="Brother Nimetz" GiverId="739" X="-11321.59" Y="-194.3359" Z="76.0237" />
+		<TurnIn QuestName="I Think She's Hungry" QuestId="26739" TurnInName="Corporal Sethman" TurnInId="1422" X="-11314.71" Y="-184.9491" Z="75.1647" />
+		<PickUp QuestName="Deep Roots" QuestId="26744" GiverName="Corporal Sethman" GiverId="1422" X="-11314.71" Y="-184.9491" Z="75.1647" />
+		<TurnIn QuestName="Spared from Madness" QuestId="26736" TurnInName="Lieutenant Doren" TurnInId="469" X="-11299.07" Y="-206.0907" Z="76.00304" />
+		<PickUp QuestName="Stopping Kurzen's Legacy" QuestId="26737" GiverName="Lieutenant Doren" GiverId="469" X="-11299.07" Y="-206.0907" Z="76.00304" />
+
+		<While Condition="DoQuest(26737) || DoQuest(26734)" >
+			<Code File="RunCode" Code="RoutineManager.SetCapabilityState(CapabilityFlags.MultiMobPull, CapabilityState.Disallowed);" /> <!-- So we don't run half way across the cave pulling a mob that's 10feet under us. -->
+			<Code File="KillUntilComplete" MobId="43910" QuestId="26737" QuestObjectiveIndex="1" X="-11473.96" Y="-869.1649" Z="36.48154" />
+			<Code File="KillUntilComplete" MobId="43911" QuestId="26737" QuestObjectiveIndex="2" X="-11401.35" Y="-816.9705" Z="14.96462" />
+			<Code File="KillUntilComplete" MobId="43913" QuestId="26737" QuestObjectiveIndex="3" X="-11483.68" Y="-953.5226" Z="31.09152" />
+			<Code File="KillUntilComplete" MobId="43912" QuestId="26737" QuestObjectiveIndex="4" X="-11337.27" Y="-966.1823" Z="29.94649" />
+			<Code File="KillUntilComplete" MobIds="939, 941, 942, 978, 979, 43910, 43911, 43912, 43913" QuestId="26734" >
+				<HuntingGrounds>
+					<Hotspot X="-11473.96" Y="-869.1649" Z="36.48154" />
+					<Hotspot X="-11401.35" Y="-816.9705" Z="14.96462" />
+					<Hotspot X="-11483.68" Y="-953.5226" Z="31.09152" />
+					<Hotspot X="-11337.27" Y="-966.1823" Z="29.94649" />
+				</HuntingGrounds>
+			</Code>
+			<Code File="RunCode" Code="RoutineManager.SetCapabilityState(CapabilityFlags.MultiMobPull, CapabilityState.DontCare);" />
+		</While>
+
+		<TurnIn QuestName="The Source of the Madness" QuestId="26734" TurnInName="Brother Nimetz" TurnInId="739" X="-11321.8" Y="-195.4002" Z="76.03545" />
+		<TurnIn QuestName="Stopping Kurzen's Legacy" QuestId="26737" TurnInName="Lieutenant Doren" TurnInId="469" X="-11299.09" Y="-205.6732" Z="75.97153" />
+		<PickUp QuestName="Water Elementals" QuestId="26729" GiverName="Emerine Junis" GiverId="43885" X="-11300.69" Y="-208.5048" Z="76.20715" />
+		<PickUp QuestName="Krazek's Cookery" QuestId="26740" GiverName="Corporal Kaleb" GiverId="770" X="-11310.31" Y="-191.2823" Z="75.85532" />
+		<PickUp QuestName="Bloodscalp Insight" QuestId="26742" GiverName="Berrin Burnquill" GiverId="43886" X="-11343.92" Y="-220.1084" Z="75.24565" />
+		<TurnIn QuestName="Krazek's Cookery" QuestId="26740" TurnInName="Krazek" TurnInId="773" X="-11647.28" Y="-47.22532" Z="16.23836" />
+		<PickUp QuestName="Venture Company Mining" QuestId="26763" GiverName="Krazek" GiverId="773" X="-11647.28" Y="-47.22532" Z="16.23836" />
+		<PickUp QuestName="Welcome to the Jungle" QuestId="583" GiverName="Barnil Stonepot" GiverId="716" X="-11624.22" Y="-67.90694" Z="16.23836" />
+		<TurnIn QuestName="Welcome to the Jungle" QuestId="583" TurnInName="Hemet Nesingwary Jr." TurnInId="715" X="-11644.59" Y="-65.06401" Z="16.23836" />
+		<RecheckCheckpoints />
+		<PickUp QuestName="Raptor Hunting" QuestId="194" GiverName="Hemet Nesingwary Jr." GiverId="715" X="-11644.59" Y="-65.06401" Z="16.23836" />
+		<PickUp QuestName="Panther Hunting" QuestId="190" GiverName="Sir S. J. Erlgadin" GiverId="718" X="-11628.35" Y="-67.78829" Z="16.23872" />
+		<PickUp QuestName="The Green Hills of Stranglethorn" QuestId="26269" GiverName="Barnil Stonepot" GiverId="716" X="-11624.12" Y="-69.52681" Z="16.23872" />
+		<PickUp QuestName="Tiger Hunting" QuestId="185" GiverName="Ajeck Rouack" GiverId="717" X="-11633.58" Y="-77.23976" Z="16.23872" />
+		<PickUp QuestName="Supply and Demand" QuestId="26343" GiverName="Drizzlik" GiverId="2495" X="-11654.28" Y="-46.33139" Z="16.23911" />
+
+		<While Condition="DoQuest(26343)" >
+			<Code File="KillUntilComplete" MobId="1150" QuestId="26343" >
+				<HuntingGrounds>
+					<Hotspot X="-11611.09" Y="-135.9107" Z="14.41849" />
+					<Hotspot X="-11522.71" Y="-55.67451" Z="12.17534" />
+					<Hotspot X="-11580.98" Y="35.37261" Z="14.88413" />
+				</HuntingGrounds>
+			</Code>
+		</While>
+
+		<TurnIn QuestName="Supply and Demand" QuestId="26343" TurnInName="Drizzlik" TurnInId="2495" X="-11659.01" Y="-46.30883" Z="16.23785" />
+		<PickUp QuestName="Some Assembly Required" QuestId="26344" GiverName="Drizzlik" GiverId="2495" X="-11659.01" Y="-46.30883" Z="16.23785" />
+
+		<While Condition="DoQuest(185)" >
+			<Code File="KillUntilComplete" MobId="681" QuestId="185" >
+				<HuntingGrounds>
+					<Hotspot X="-11726.75" Y="-54.60395" Z="15.67074" />
+					<Hotspot X="-11674.41" Y="87.30333" Z="16.40318" />
+					<Hotspot X="-11601.42" Y="113.0024" Z="17.76903" />
+					<Hotspot X="-11690.59" Y="-65.70354" Z="17.40678" />
+					<Hotspot X="-11707.97" Y="-171.2706" Z="37.66011" />
+				</HuntingGrounds>
+			</Code>
+		</While>
+		<TurnIn QuestName="Tiger Hunting" QuestId="185" />
+		<PickUp QuestName="Tiger Stalking" QuestId="186" GiverName="Ajeck Rouack" GiverId="717" />
+
+		<While Condition="DoQuest(190)" >
+			<Code File="KillUntilComplete" MobId="683" QuestId="190" >
+				<HuntingGrounds>
+					<Hotspot X="-11790.51" Y="-165.3082" Z="10.22727" />
+					<Hotspot X="-11803.73" Y="-223.8176" Z="16.34327" />
+					<Hotspot X="-11811.44" Y="-255.0484" Z="16.38516" />
+					<Hotspot X="-11771.77" Y="-290.9279" Z="14.04866" />
+					<Hotspot X="-11727.5" Y="-226.4114" Z="39.46136" />
+					<Hotspot X="-11582.34" Y="-426.8831" Z="16.5598" />
+					<Hotspot X="-11613.5" Y="-455.791" Z="16.76613" />
+					<Hotspot X="-11709.22" Y="-472.1279" Z="16.54644" />
+					<Hotspot X="-11617.09" Y="-378.8362" Z="17.17383" />
+					<Hotspot X="-11515.46" Y="-280.3214" Z="38.67162" />
+				</HuntingGrounds>
+			</Code>
+		</While>
+		<TurnIn QuestName="Panther Hunting" QuestId="190" />
+		<PickUp QuestName="Panther Stalking" QuestId="191" GiverName="Ajeck Rouack" GiverId="717" />
+
+		<While Condition="DoQuest(186)" >
+			<Code File="KillUntilComplete" MobId="682" QuestId="186" >
+				<HuntingGrounds>
+					<Hotspot X="-11784.16" Y="-688.9999" Z="40.93209" />
+					<Hotspot X="-11855.14" Y="-764.3093" Z="33.80068" />
+					<Hotspot X="-11715.11" Y="-776.4238" Z="35.5542" />
+				</HuntingGrounds>
+			</Code>
+		</While>
+		<TurnIn QuestName="Tiger Stalking" QuestId="186" />
+		<PickUp QuestName="Tiger Prowess" QuestId="187" GiverName="Ajeck Rouack" GiverId="717" />
+
+		<While Condition="DoQuest(26344)" >
+			<Code File="KillUntilComplete" MobId="1152" QuestId="26344" >
+				<HuntingGrounds>
+					<Hotspot X="-11825.78" Y="-428.08" Z="12.2399" />
+					<Hotspot X="-11844.62" Y="-322.0514" Z="12.37802" />
+					<Hotspot X="-11923.15" Y="-322.6516" Z="7.776012" />
+					<Hotspot X="-11993.01" Y="-349.2326" Z="11.25834" />
+					<Hotspot X="-12082.37" Y="-424.4887" Z="8.792067" />
+				</HuntingGrounds>
+			</Code>
+		</While>
+
+		<TurnIn QuestName="Some Assembly Required" QuestId="26344" TurnInName="Drizzlik" TurnInId="2495" X="-11658.78" Y="-44.77361" Z="16.23884" />
+		<RecheckCheckpoints />
+		<PickUp QuestName="Excelsior" QuestId="26345" GiverName="Drizzlik" GiverId="2495" X="-11658.78" Y="-44.77361" Z="16.23884" />
+
+		<While Condition="DoQuest(187)" >
+			<Code File="KillUntilComplete" MobId="1085" QuestId="187" >
+				<HuntingGrounds>
+					<Hotspot X="-11832.01" Y="185.0187" Z="17.32015" />
+					<Hotspot X="-11978.33" Y="176.2361" Z="15.16508" />
+				</HuntingGrounds>
+			</Code>
+		</While>
+		<TurnIn QuestName="Tiger Prowess" QuestId="187" />
+		<PickUp QuestName="Tiger Mastery" QuestId="188" GiverName="Ajeck Rouack" GiverId="717" />
+		<Code File="KillUntilComplete" MobId="729" QuestId="188" >
+			<HuntingGrounds>
+				<Hotspot X="-11846.46" Y="194.7797" Z="14.85284" />
+				<Hotspot X="-11913.82" Y="106.3075" Z="17.30814" />
+				<Hotspot X="-11949.01" Y="144.9731" Z="21.02137" />
+			</HuntingGrounds>
+		</Code>
+
+
+		<While Condition="DoQuest(191)" >
+			<Code File="KillUntilComplete" MobId="736" QuestId="191" >
+				<HuntingGrounds>
+					<Hotspot X="-11740.25" Y="372.6636" Z="44.53782" />
+					<Hotspot X="-11606.8" Y="380.5433" Z="46.44502" />
+					<Hotspot X="-11537.62" Y="308.5981" Z="38.98893" />
+					<Hotspot X="-11640.53" Y="273.5347" Z="41.53266" />
+				</HuntingGrounds>
+			</Code>
+		</While>
+		<TurnIn QuestName="Panther Stalking" QuestId="191" />
+		<PickUp QuestName="Panther Prowess" QuestId="192" GiverName="Ajeck Rouack" GiverId="717" />
+
+		<While Condition="DoQuest(194)" >
+			<Code File="KillUntilComplete" MobId="685" QuestId="194" >
+				<HuntingGrounds>
+					<Hotspot X="-11792.92" Y="424.1548" Z="47.39228" />
+					<Hotspot X="-11869.68" Y="492.3004" Z="45.02847" />
+					<Hotspot X="-11846.51" Y="673.3763" Z="45.87722" />
+				</HuntingGrounds>
+			</Code>
+		</While>
+		<TurnIn QuestName="Raptor Hunting" QuestId="194" />
+		<PickUp QuestName="Raptor Stalking" QuestId="195" GiverName="Ajeck Rouack" GiverId="717" />
+
+		<While Condition="DoQuest(26744)" >
+			<Code File="InteractWith" MobId="57" InteractByLooting="true" QuestId="26744" X="-12024.4" Y="363.302" Z="1.70278" />
+		</While>
+
+		<Code File="Hooks\DoWhen" ActivityName="Summon_Hatchling" Command="Enable" />
+		<PickUp QuestName="Favored Skull" QuestId="26745" GiverName="Lashtail Hatchling" GiverId="42736" X="-12059.67" Y="380.1344" Z="2.572837" />
+
+		<While Condition="DoQuest(26742)" >
+			<Code File="KillUntilComplete" MobId="697" QuestId="26742" >
+				<HuntingGrounds>
+					<Hotspot X="-11981.91" Y="327.8334" Z="1.887993" />
+					<Hotspot X="-11989.99" Y="256.0074" Z="15.73351" />
+				</HuntingGrounds>
+			</Code>
+		</While>
+
+		<While Condition="DoQuest(26729)" >
+			<Code File="KillUntilComplete" MobId="691" QuestId="26729" >
+				<HuntingGrounds>
+					<Hotspot X="-12153.99" Y="812.0842" Z="8.295645" />
+					<Hotspot X="-12166.17" Y="919.7565" Z="2.132103" />
+				</HuntingGrounds>
+			</Code>
+		</While>
+		<If Condition="QuestDone(26729)" >
+			<Code File="UseItem" ItemId="60273" TerminateWhen="Unit(43885) != null" />
+			<TurnIn QuestName="Water Elementals" QuestId="26729" TurnInName="Emerine Junis" TurnInId="43885" X="-12134.46" Y="934.2318" Z="2.209945" />
+		</If>
+
+		<PickUp QuestName="You Can Take the Murloc Out of the Ocean..." QuestId="26730" GiverName="Emerine Junis" GiverId="43885" X="-12133.6" Y="931.3552" Z="1.868599" />
+		<TurnIn QuestName="Tiger Mastery" QuestId="188" TurnInName="Ajeck Rouack" TurnInId="717" X="-11640.95" Y="-81.16978" Z="16.24003" />
+		<TurnIn QuestName="Bloodscalp Insight" QuestId="26742" TurnInName="Berrin Burnquill" TurnInId="43886" X="-11346.3" Y="-220.9621" Z="75.42032" />
+		<PickUp QuestName="Sacred to the Bloodscalp" QuestId="26743" GiverName="Berrin Burnquill" GiverId="43886" X="-11346.3" Y="-220.9621" Z="75.42032" />
+		<TurnIn QuestName="Deep Roots" QuestId="26744" TurnInName="Corporal Sethman" TurnInId="1422" X="-11314.29" Y="-185.0142" Z="75.20006" />
+		<TurnIn QuestName="Favored Skull" QuestId="26745" TurnInName="Osborn Obnoticus" TurnInId="43884" X="-11308.43" Y="-191.5745" Z="75.47279" />
+		<RecheckCheckpoints />
+		<PickUp QuestName="A Nose for This Sort of Thing" QuestId="26746" GiverName="Osborn Obnoticus" GiverId="43884" X="-11308.43" Y="-191.5745" Z="75.47279" />
+
+		<If Condition="QuestDone(26269)" >
+			<TurnIn QuestName="The Green Hills of Stranglethorn" QuestId="26269" TurnInName="Barnil Stonepot" TurnInId="716" X="-11626.2" Y="-69.97148" Z="16.23836" />
+		</If>
+
+		<While Condition="DoQuest(26743)" >
+			<Code File="KillUntilComplete" MobId="702" QuestId="26743" >
+				<HuntingGrounds>
+					<Hotspot X="-11787.37" Y="34.93543" Z="15.96206" />
+					<Hotspot X="-11752.53" Y="115.8831" Z="22.97825" />
+					<Hotspot X="-11841.92" Y="107.1419" Z="16.71745" />
+					<Hotspot X="-11848.33" Y="53.05052" Z="15.0243" />
+				</HuntingGrounds>
+			</Code>
+		</While>
+
+		<While Condition="DoQuest(26746)" >
+			<MoveTo X="-11842.55" Y="75.3166" Z="15.78362" />
+			<UseMount Value="false" />
+			<Code File="WaitTimer" WaitTime="18000" TerminateWhen="Unit(42736, u =&gt; u.HasAura(82328)) != null" />
+			<Code File="InteractWith" QuestId="26746" MobId="42736" WaitForNpcs="false" WaitTimer="5000" CollectionDistance="200" />
+			<MoveTo X="-11816.52" Y="47.9091" Z="16.03949" />
+			<Code File="WaitTimer" WaitTime="18000" TerminateWhen="Unit(42736, u =&gt; u.HasAura(82328)) != null" />
+			<Code File="InteractWith" QuestId="26746" MobId="42736" WaitForNpcs="false" WaitTimer="5000" CollectionDistance="200" />
+			<MoveTo X="-11820.93" Y="103.5933" Z="16.48345" />
+			<Code File="WaitTimer" WaitTime="18000" TerminateWhen="Unit(42736, u =&gt; u.HasAura(82328)) != null" />
+			<Code File="InteractWith" QuestId="26746" MobId="42736" WaitForNpcs="false" WaitTimer="5000" CollectionDistance="200" />
+			<MoveTo X="-11864.81" Y="107.5302" Z="20.20002" />
+			<Code File="WaitTimer" WaitTime="18000" TerminateWhen="Unit(42736, u =&gt; u.HasAura(82328)) != null" />
+			<Code File="InteractWith" QuestId="26746" MobId="42736" WaitForNpcs="false" WaitTimer="5000" CollectionDistance="200" />
+			<UseMount Value="true" />
+		</While>
+
+		<While Condition="DoQuest(26730)" >
+			<Code File="KillUntilComplete" MobIds="4457, 4458, 4461" QuestId="26730" >
+				<HuntingGrounds>
+					<Hotspot X="-11977.96" Y="72.4131" Z="11.25852" />
+					<Hotspot X="-12057.11" Y="74.46061" Z="-4.557956" />
+					<Hotspot X="-12142.63" Y="11.25749" Z="-4.331188" />
+				</HuntingGrounds>
+			</Code>
+		</While>
+		<If Condition="QuestDone(26730)" >
+			<Code File="UseItem" ItemId="60273" TerminateWhen="Unit(43885) != null" />
+			<TurnIn QuestName="You Can Take the Murloc Out of the Ocean..." QuestId="26730" TurnInName="Emerine Junis" TurnInId="43885" X="-11968.92" Y="68.27425" Z="13.64498" />
+		</If>
+
+		<While Condition="DoQuest(195)" >
+			<Code File="KillUntilComplete" MobId="686" QuestId="195" >
+				<HuntingGrounds>
+					<Hotspot X="-12179.8" Y="-145.6739" Z="16.36476" />
+					<Hotspot X="-12072.47" Y="-204.9903" Z="20.54469" />
+					<Hotspot X="-12139.89" Y="214.8129" Z="15.76915" />
+					<Hotspot X="-12048.75" Y="178.9295" Z="18.20256" />
+				</HuntingGrounds>
+			</Code>
+		</While>
+		<TurnIn QuestName="Raptor Stalking" QuestId="195" />
+		<PickUp QuestName="Raptor Prowess" QuestId="196" GiverName="Ajeck Rouack" GiverId="717" />
+
+		<While Condition="DoQuest(26763)" >
+			<Code File="KillUntilComplete" MobId="1096" QuestId="26763" >
+				<HuntingGrounds>
+					<Hotspot X="-12052.75" Y="-620.5861" Z="13.53257" />
+					<Hotspot X="-11903.83" Y="-623.6826" Z="16.97678" />
+					<Hotspot X="-11955.09" Y="-707.5042" Z="17.91693" />
+				</HuntingGrounds>
+			</Code>
+		</While>
+
+		<While Condition="DoQuest(192)" >
+			<Code File="KillUntilComplete" MobId="684" QuestId="192" >
+				<HuntingGrounds>
+					<Hotspot X="-12289.24" Y="-721.2285" Z="16.42788" />
+					<Hotspot X="-12341.02" Y="-719.5842" Z="17.427" />
+					<Hotspot X="-12344.7" Y="-783.6655" Z="32.90751" />
+					<Hotspot X="-12325.4" Y="-820.4417" Z="32.73768" />
+					<Hotspot X="-12389.26" Y="-814.9001" Z="33.29208" />
+				</HuntingGrounds>
+			</Code>
+		</While>
+		<TurnIn QuestName="Panther Prowess" QuestId="192" />
+		<PickUp QuestName="Panther Mastery" QuestId="193" GiverName="Ajeck Rouack" GiverId="717" />
+
+		<While Condition="DoQuest(196)" >
+			<Code File="KillUntilComplete" MobId="687" QuestId="196" >
+				<HuntingGrounds>
+					<Hotspot X="-12406.25" Y="-676.4148" Z="16.39898" />
+					<Hotspot X="-12491.58" Y="-500.4675" Z="14.18305" />
+					<Hotspot X="-12342.94" Y="-432.9697" Z="13.40145" />
+					<Hotspot X="-12251.48" Y="-469.7477" Z="17.40902" />
+				</HuntingGrounds>
+			</Code>
+		</While>
+		<TurnIn QuestName="Raptor Prowess" QuestId="196" />
+		<PickUp QuestName="Raptor Mastery" QuestId="197" GiverName="Ajeck Rouack" GiverId="717" />
+
+		<While Condition="DoQuest(26345)" >
+			<Code File="KillUntilComplete" MobId="2635" QuestId="26345" >
+				<HuntingGrounds>
+					<Hotspot X="-12344.51" Y="-328.9264" Z="12.62783" />
+					<Hotspot X="-12452.65" Y="-305.8997" Z="10.63897" />
+					<Hotspot X="-12531.36" Y="-239.725" Z="12.2038" />
+				</HuntingGrounds>
+			</Code>
+		</While>
+
+		<While Condition="DoQuest(197)" >
+			<Code File="KillUntilComplete" MobId="730" QuestId="197" >
+				<HuntingGrounds>
+					<Hotspot X="-12665.44" Y="-674.4402" Z="40.82824" />
+					<Hotspot X="-12598.25" Y="-783.5777" Z="43.52068" />
+					<Hotspot X="-12727.63" Y="-801.837" Z="60.67216" />
+					<Hotspot X="-12734.32" Y="-880.6343" Z="55.71421" />
+				</HuntingGrounds>
+			</Code>
+		</While>
+
+		<While Condition="DoQuest(193)" >
+			<Code File="KillUntilComplete" MobId="728" QuestId="193" >
+				<HuntingGrounds>
+					<Hotspot X="-12397.61" Y="-794.4934" Z="34.11427" />
+					<Hotspot X="-12200.3" Y="-960.5427" Z="35.59977" />
+					<Hotspot X="-12015.85" Y="-916.6834" Z="38.12273" />
+				</HuntingGrounds>
+			</Code>
+		</While>
+
+		<TurnIn QuestName="Raptor Mastery" QuestId="197" TurnInName="Hemet Nesingwary Jr." TurnInId="715" X="-11646.8" Y="-69.5393" Z="16.23596" />
+		<TurnIn QuestName="Excelsior" QuestId="26345" TurnInName="Drizzlik" TurnInId="2495" X="-11656.55" Y="-45.35838" Z="16.23596" />
+		<TurnIn QuestName="Venture Company Mining" QuestId="26763" TurnInName="Krazek" TurnInId="773" X="-11648.71" Y="-46.6735" Z="16.23777" />
+		<PickUp QuestName="Return to Corporal Kaleb" QuestId="26765" GiverName="Krazek" GiverId="773" X="-11648.71" Y="-46.6735" Z="16.23777" />
+		<TurnIn QuestName="Panther Mastery" QuestId="193" TurnInName="Sir S. J. Erlgadin" TurnInId="718" X="-11628.9" Y="-51.26564" Z="16.23777" />
+		<TurnIn QuestName="Sacred to the Bloodscalp" QuestId="26743" TurnInName="Berrin Burnquill" TurnInId="43886" X="-11346.97" Y="-220.1129" Z="75.44467" />
+		<TurnIn QuestName="Return to Corporal Kaleb" QuestId="26765" TurnInName="Corporal Kaleb" TurnInId="770" X="-11311.58" Y="-190.2803" Z="75.93127" />
+		<TurnIn QuestName="A Nose for This Sort of Thing" QuestId="26746" TurnInName="Osborn Obnoticus" TurnInId="43884" X="-11308.66" Y="-190.5309" Z="75.48814" />
+		<RecheckCheckpoints />
+		<PickUp QuestName="The Mosh'Ogg Bounty" QuestId="26782" GiverName="Wulfred Harrys" GiverId="44018" X="-12828.77" Y="-440.5822" Z="12.96675" />
+		<PickUp QuestName="To the Cape!" QuestId="26805" GiverName="Wulfred Harrys" GiverId="44018" X="-12828.77" Y="-440.5822" Z="12.96675" />
+		<PickUp QuestName="The Mind's Eye" QuestId="26781" GiverName="Livingston Marshal" GiverId="44019" X="-12843.24" Y="-438.2998" Z="12.96968" />
+
+		<Code File="SetHearthstone" MobId="44019" AreaId="5320" X="-12843.24" Y="-438.2998" Z="12.96968" />
+
+		<While Condition="DoQuest(26782)" >
+			<Code File="InteractWith" MobId="204087" InteractWith="true" QuestId="26782" X="-12495.63" Y="-1009.572" Z="52.65781" />
+		</While>
+
+		<While Condition="DoQuest(26781)" >
+			<Code File="KillUntilComplete" MobId="818" QuestId="26781" X="-12341.8" Y="-1157.96" Z="3.05337" />
+		</While>
+
+		<If Condition="Me.HearthstoneAreaId == 5320 &amp;&amp; QuestDone(26781) &amp;&amp; !Me.MinimapZoneText.Contains(&quot;Fort Livingston&quot;)" >
+			<Code File="UseHearthstone" WaitForCD="false" />
+		</If>
+
+		<TurnIn QuestName="The Mosh'Ogg Bounty" QuestId="26782" TurnInName="Wulfred Harrys" TurnInId="44018" X="-12827.63" Y="-441.098" Z="12.96692" />
+		<TurnIn QuestName="The Mind's Eye" QuestId="26781" TurnInName="Livingston Marshal" TurnInId="44019" X="-12841.94" Y="-436.012" Z="12.98508" />
+
+		<Checkpoint Level="30.5" />
+		<If Condition="Me.Level &lt;= 31" >
+			<Code File="RunCode" Code="foreach (PlayerQuest quest in Me.QuestLog.GetAllQuests()) QuestLog.Instance.AbandonQuestById(quest.Id)" />
+		</If>
+		<Code File="LoadProfile" ProfileName="Cape of Stranglethorn.xml" />
+
+
+	</QuestOrder>
+</HBProfile>

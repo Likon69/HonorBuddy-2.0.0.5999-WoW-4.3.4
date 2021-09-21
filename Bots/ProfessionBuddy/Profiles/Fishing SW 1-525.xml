@@ -1,0 +1,65 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Professionbuddy ChildrenCount="14">
+  <MoveToAction MoveType="Location" Pathing="Navigator" Entry="0" X="-8801.354" Y="768.9965" Z="96.33865" />
+  <Comment Text="Let's get Started" />
+  <If Condition="Fishing.MaxLevel == 0" IgnoreCanRun="False" ChildrenCount="1">
+    <CallSubRoutine SubRoutineName="VenderAndTrain" />
+  </If>
+  <Comment Text="Turn on Auto Looting" />
+  <CustomAction Code="Lua.DoString(&quot;SetCVar(\&quot;AutoLootDefault\&quot;, 1)&quot;);" />
+  <CallSubRoutine SubRoutineName="EquipFishingPole" />
+  <Comment Text="Equip a fishing pole" />
+  <While Condition="Fishing.Level &lt; 525" IgnoreCanRun="True" ChildrenCount="6">
+    <Comment Text="Train if our fishing level is 25 or less from current max level " />
+    <Comment Text="Or if max level is 0 or bags are full then we vendor" />
+    <If Condition="(Fishing.Level == Fishing.MaxLevel &amp;&amp; Fishing.MaxLevel != 525) || Me.BagsFull" IgnoreCanRun="True" ChildrenCount="1">
+      <CallSubRoutine SubRoutineName="VenderAndTrain" />
+    </If>
+    <CustomAction Code="var1 = ObjectManager.GetObjectsOfType&lt;WoWGameObject&gt;().FirstOrDefault(u =&gt; u.SubType == WoWGameObjectType.FishingBobber &amp;&amp; u.CreatedByGuid == Me.Guid);" />
+    <If Condition="var1 != null &amp;&amp; ((WoWGameObject)var1).IsValid &amp;&amp; ((WoWFishingBobber)((WoWGameObject)var1).SubObj).IsBobbing" IgnoreCanRun="True" ChildrenCount="1">
+      <CustomAction Code="((WoWGameObject)var1).Interact();" />
+    </If>
+    <If Condition="var1 == null &amp;&amp; !Me.IsCasting" IgnoreCanRun="True" ChildrenCount="2">
+      <CustomAction Code="SpellManager.Cast(&quot;Fishing&quot;);" />
+      <WaitAction Condition="false" Timeout="1000" />
+    </If>
+  </While>
+  <If Condition="Fishing.Level == 525" IgnoreCanRun="True" ChildrenCount="2">
+    <CustomAction Code="Log(&quot;Level 525 fishing!! Logging out&quot;);" />
+    <CustomAction Code=" Lua.DoString(&quot;Logout()&quot;);TreeRoot.Stop();" />
+  </If>
+  <SubRoutine SubRoutineName="EquipFishingPole" ChildrenCount="2">
+    <CustomAction Code="Log(&quot;Equipting Fishing Pole&quot;);" />
+    <If Condition="Me.Inventory.Equipped.MainHand == null || Me.Inventory.Equipped.MainHand.ItemInfo.WeaponClass != WoWItemWeaponClass.FishingPole" IgnoreCanRun="True" ChildrenCount="6">
+      <CustomAction Code="var1 = Me.BagItems.FirstOrDefault(i =&gt; i.ItemInfo.WeaponClass == WoWItemWeaponClass.FishingPole);" />
+      <Comment Text="We have a fishing pole in bags, use it." />
+      <If Condition="var1 != null" IgnoreCanRun="True" ChildrenCount="1">
+        <CustomAction Code="((WoWItem)var1).UseContainerItem();" />
+      </If>
+      <Comment Text="No fishing pole in bags, lets go buy one." />
+      <If Condition="var1 == null" IgnoreCanRun="True" ChildrenCount="4">
+        <CustomAction Code="Log(&quot;Buying Fishing Pole&quot;);" />
+        <BuyItemAction NpcEntry="5494" X="-8803.257" Y="766.717" Z="96.33911" ItemID="6256" Count="1" BuyItemType="SpecificItem" BuyAdditively="True" />
+        <WaitAction Condition="false" Timeout="3000" />
+        <CustomAction Code="Lua.DoString(&quot;EquipItemByName(6256)&quot;);" />
+		<CustomAction Code="Lua.DoString(&quot;CloseMerchant()&quot;);" />
+      </If>
+      <WaitAction Condition="false" Timeout="2000" />
+    </If>
+  </SubRoutine>
+  <SubRoutine SubRoutineName="VenderAndTrain" ChildrenCount="6">
+    <CustomAction Code="Log(&quot;Training and Vendoring&quot;);" />
+    <TrainSkillAction NpcEntry="5493" X="-8802.007" Y="770.9219" Z="96.33821" />
+    <CustomAction Code="Lua.DoString(&quot;CloseTrainer()&quot;);" />
+    <WaitAction Condition="false" Timeout="2000" />
+    <SellItemAction NpcEntry="5494" X="-8803.257" Y="766.717" Z="96.33911" ItemID="6308,6289,6291,3385,858,6310,6309,6310" Count="0" SellItemType="Specific" />
+    <CustomAction Code="Lua.DoString(&quot;CloseMerchant()&quot;);" />
+  </SubRoutine>
+  <SubRoutine SubRoutineName="MoveToFishingSpot" ChildrenCount="3">
+    <CustomAction Code="Log(&quot;Moving to fishing spot&quot;);" />
+    <MoveToAction MoveType="Location" Pathing="Navigator" Entry="0" X="-8803.257" Y="766.717" Z="96.33911" />
+    <While Condition="DistanceTo(8803.257, 766.717, 96.33911) &gt;1.5" IgnoreCanRun="True" ChildrenCount="1">
+      <CustomAction Code="CTM(5700.00, 618.8751, 646.241);" />
+    </While>
+  </SubRoutine>
+</Professionbuddy>

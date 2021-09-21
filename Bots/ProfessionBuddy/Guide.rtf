@@ -1,0 +1,209 @@
+{\rtf1\ansi\ansicpg1252\deff0\nouicompat\deflang1033\deflangfe1033{\fonttbl{\f0\fswiss\fprq2\fcharset0 Calibri;}{\f1\fswiss\fprq2\fcharset0 Verdana;}{\f2\froman\fprq2\fcharset0 Times New Roman;}{\f3\fmodern\fprq1\fcharset0 Consolas;}{\f4\fswiss\fprq2\fcharset0 Arial Black;}{\f5\fswiss\fprq2\fcharset0 Arial;}{\f6\fswiss\fprq2\fcharset0 Microsoft Sans Serif;}{\f7\froman\fprq2\fcharset0 Cambria;}}
+{\colortbl ;\red192\green80\blue77;\red51\green51\blue51;\red255\green255\blue255;\red0\green128\blue0;\red0\green0\blue255;\red43\green145\blue175;\red0\green0\blue0;}
+{\*\generator Riched20 6.2.8250}{\*\mmathPr\mdispDef1\mwrapIndent1440 }\viewkind4\uc1 
+\pard\widctlpar\ul\b\f0\fs28 Introduction\par
+
+\pard\nowidctlpar\sa200\sl276\slmult1\ulnone\b0\fs24\lang9 Professionbuddy is a plugin designed to automate Tradeskill related tasks including but not limited to automatically leveling Tradeskills, disenchanting items, milling herbs or crafting a list of items.\par
+
+\pard\nowidctlpar\sa200 Tasks are built by drag and dropping Actions  onto the right pane and editing the actions to the desired settings.The user can then save the tasks to a profile as well as load profiles. ProfessionBuddy supports loading .zip files as well as saving to .zip. When a profile is saved to a .zip file any Honorbuddy/GB gathering profiles that the ProfessionBuddy profile uses is automatically added to the zip. This makes distributing multiple files much easier.\par
+Having basic knowledge of the C# language is recommended to build advanced profiles as well as some knowledge of Honorbuddy's API\par
+
+\pard\widctlpar\cf1\ul\b\par
+\cf2\highlight3\ulnone\f1\lang1033 How do I use ProfessionBuddy?\highlight0\b0\fs20\line\highlight3\ul\i note: I will use PB as an acronym for ProfessionBuddy\ulnone\i0 .\cf0\highlight0\f2\fs24\par
+
+\pard\cbpat3 
+{\pntext\f1 1.\tab}{\*\pn\pnlvlbody\pnf1\pnindent480\pnstart1\pndec{\pntxta.}}
+\fi-360\li600\ri600\cf2\f1\fs20 Run Honorbuddy and set bot to 'Professionbuddy' from the drop-down list\par
+{\pntext\f1 2.\tab}Open the PB window by clicking the 'Bot Config' button in HB\par
+{\pntext\f1 3.\tab}Select one of the profiles in the profile list on the left side of the config window and press 'Load Profile' button (or double-click it)\par
+{\pntext\f1 4.\tab}If the profile has any settings attached to it a new tab named 'Profile Settings' will be loaded in the right side of the window. Adjust the settings if needed and close PB's window\par
+{\pntext\f1 5.\tab}Press the 'Start' button in Honorbuddy\par
+
+\pard\nowidctlpar\sa200\cf0\f0\fs24\lang9\par
+
+\pard\widctlpar\ul\b\fs28\lang1033 How do I make profiles?\par
+
+\pard\nowidctlpar\sa200\ulnone\b0\fs24\lang9 You can drag and drop Actions from the Action List on the left to the Task List that's on the right side and then configure the action's settings to your likings in the PropertyGrid.\par
+There is a wide variety of Actions to choose from such as actions that will craft recipes, mill,disenchant,prospect, fly or run to locations, train, sell/buy from vendors and AH and more. There's also an "If Condition" and "While Condition" that can be used to perform actions under certain conditions.\par
+Once you have have all the actions that you need in the Task List hit the start button and Professionbuddy will perform all the actions in the Task List\par
+In order to make advanced profiles like one that levels a profession you need to know basic C#. If you have some experience with making quest orders then this shouldn't be a problem.\par
+
+\pard\widctlpar\ul\b\fs28\lang1033 Action Tab\par
+
+\pard\nowidctlpar\sa200\ulnone\b0\fs24\lang9 This tab shows a list of actions that can be placed in the Task List via drag and drop or using that \lquote add\rquote  button. This list also includes an 'If Condition' which will execute all the actions it contains if the \i condition\i0  is true. \par
+
+\pard\widctlpar\fs22  \ul\b\fs28\lang1033 Tradeskill Tab\fs22\par
+
+\pard\nowidctlpar\sa200\ulnone\b0\fs24\lang9 This Tab contains all your current tradeskills and all the learned recipes you bot has learned. There's a search filter text box to the upper left corner and a drop-down list of Categories to the upper right.\par
+The list has 3 different columns, Name, recipe repeatable count, and color representing the recipes difficulty. This list supports multiple selection which makes it easy to add allot of recipes to the Task list. To add the Recipes to the Task List you need to select them and then click the 'Add' button that is below the list.  To the left of the 'Add' button is a numeric value that represents the number of times the recipes will be repeated when added to the Task list.\par
+To the right of the 'Add' button is a drop down list with different modes that will alter the recipe's repeat behavior. The 1st and default mode, \i 'Specific'\i0  will attempt to repeat the recipe the specified number of times. \par
+The second mode \i 'Craftable'\i0  will repeat the recipe until it runs out of mats. \par
+The third and final mode \i 'Banker'\i0  is only available if the user has an addon called DataStore installed. It's available on Curse gaming and comes with that Altaholic Addon. It basically keeps track of inventory, auctions, mail and bank items for all your characters, and even has multiple account support. This mode is nice to restock your bankers with crafted goods to sell on AH for example. It checks to see how many of the crafted items you have on your alts and then it deducts the \i 'Repeat'\i0  amount from it. For example if you had 12 Flask of Steelskin on your alts and your \i 'Repeat'\i0  number is 20 it would makes 8 flasks. (20-12 =8). \par
+
+\pard\widctlpar\ul\b\fs28\lang1033 Task List\par
+
+\pard\nowidctlpar\sa200\ulnone\b0\fs24\lang9 The Task List is where all your 'If Condition's and Actions are. To change the properties of an action you must select it and then change the settings in the Property grid below. There are several keybind that make editing easier.\par
+
+\pard\widctlpar\ul\b\fs28\lang1033 Keybinds:\par
+
+\pard\nowidctlpar\sa200\ulnone\fs24\lang9 Shift + drag n drop\b0 : By default dropping an action on top of an 'If condition' places it inside that 'If Condition' this keybind cancels that effect.\par
+\b Ctrl + drag n drop: \b0 copies an action or an 'If Condition' and all of its actions\par
+\b Delete: \b0 deletes selected action/If Condition\par
+\b Esc: \b0 Clears current selection\par
+
+\pard\widctlpar\ul\b\fs28\lang1033 Property Grid\par
+
+\pard\nowidctlpar\sa200\ulnone\b0\fs24\lang9 This control shows the settings of the currently selected Action in the Task list. The settings are pretty much self-explanatory but if there's any doubt, check the actions detailed description below the Action list.\par
+There is one common setting that might need an explanation, Location. The Location setting is used by many actions and it describes a location in the game. It accepts a HotSpot style Tag or any combination of 3 numbers and automatically converts them to the correct format. Also the button with 3 dots '...' will automatically place the location of the player in the text edit box or the player's current target's location if he/she has one.\par
+
+\pard\widctlpar\ul\b\fs28\lang1033 API\par
+
+\pard\nowidctlpar\sa200\ulnone\b0\fs24\lang9 I have added quite a few small helper API for use with the 'If/While Condition's and Custom Actions. They are there to serve as shortcuts. You can also use HB's api if needed.\par
+
+\pard\widctlpar\ul\b\fs28\lang1033 If/While Condition\par
+
+\pard\nowidctlpar\sa200\ulnone\b0\fs24\lang9 The \i '\ul If/While Condition'\ulnone\i0\fs22\lang1033  will \fs24\lang9 runs the actions that they contain if an expression is true.\par
+Execution starts from the top action and goes down the list of actions that the\ul  If/While Condition \ulnone contains. If at any time the \i Condition\i0  becomes false then execution stops right away unless the property \i 'Ignore Execution Until done'\i0  is set to true in which case execution will ignore the \i Condition\i0  until it finishes executing the last action at the bottom of the list\par
+The \i While Condition\i0  will repeated execute a set of actions as long as its condition remains true.\par
+A \i While condition\i0  can repeatedly execute actions within while the \i If Condition\ul\i0  \ulnone cannot (unless it's embedded within a \i While Condition\i0 )\par
+
+\pard\widctlpar\ul\b\fs28 Custom Action\par
+\ulnone\b0\fs22 A Custom action will execute a C# statement \par
+\par
+\ul\b\fs28 Declaration\par
+\ulnone\b0\fs22 Declarations are used to define your own fields, properties, methods or other types\ul\b\fs28\par
+\ulnone\b0\fs22\par
+\ul\b\fs28\lang1033 SubRoutines\par
+
+\pard\nowidctlpar\sa200\ulnone\b0\fs24\lang9 Subroutines can contain a group of actions that you can execute by using 'Call Subroutine' action. This allows you to have more compact and organized profiles\par
+
+\pard\widctlpar\sa200\sl276\slmult1\ul\b\fs28\lang1033\par
+Useful stuff to use in If/While Conditions, Wait and Custom Actions\par
+
+\pard\widctlpar\lang9 Generic Tradeskill API \par
+
+\pard\nowidctlpar\sa200\ulnone\b0\fs24 The following tradeskills are currently supported and have wrappers for them \par
+Alchemy,Blacksmithing,Cooking,Enchanting,Engineering,FirstAid,Fishing,Herbalism,Inscription,Jewelcrafting,Leatherworking,Mining and Tailoring.\par
+Each of the listed tradeskills wrapers has 2 properties, Level and MaxLevel\par
+\b\f3\lang1033 [ProfessionName].\lang9 Level\lang1033  - \b0\f0 returns current level for mining. Mining can be used for any profession, example Mining.Level\par
+\b\f3 [ProfessionName].\lang9 Bonus\lang1033  \endash  \b0\f0 returns the bonus skill amount that is added from items or buffs\f3\par
+\b [ProfessionName].MaxLevel \b0 - \f0 returns the max skill level for a profession. The max skills are 75,150,225,300,375,450 and 525. \f3 Example Mining.MaxLevel\par
+\b\f0\lang9 CanRepeatNum (RecipeID)\b0   - returns the number of times the recipe can be repeated with current mats, RecipeID is the wowhead ID\par
+\b CanCraft (RecipeID) - \b0 checks if the player has the recipe, has the tools and mats to make it. returns a bool\par
+\b HasMats (RecipeID) \b0 - checks if the player has material for the recipe\par
+\b HasRecipe (RecipeID) \b0 - checks if the player has the specific recipe\par
+\b HasTools (RecipeID) \b0 - checks if the player has the tools need to craft the recipe.\par
+\b RecipeIsOnCD (RecipeID) \b0 - checks if the recipe is on cooldown\par
+
+\pard\widctlpar\ul\b\fs28\par
+HBRelog\par
+
+\pard\widctlpar\sl360\slmult1\ulnone\fs24 HBRelog.IsConnected \b0\endash  \lang1033 Returns true of there is an open IPC connection to HBRelog\fs22 .\par
+\b\fs24\lang9 HBRelog.CurrentProfileName \b0\endash\fs22\lang1033  \fs24 Name of the current HBRelog profile\cf4\f3\par
+\cf0\b\f0\lang9 HBRelog.RestartWow() \b0\endash\fs22\lang1033  \fs24 Restarts Wow and Honorbuddy\par
+\b\lang9 HBRelog.RestartHB() \b0\endash\fs22\lang1033  \fs24 Restarts Honorbuddy\par
+\b\lang9 String[] HBRelog.GetProfileNames() \b0\endash\fs22\lang1033  \fs24 returns an array of HBRelog profiles names\par
+\b\lang9 HBRelog.StartProfile(string profileName) \b0\endash\fs22\lang1033  \fs24 Starts a profile \par
+\b\lang9 HBRelog.StopProfile(string profileName) \b0\endash\fs22\lang1033  \fs24 Stops a profile\par
+\b\lang9 HBRelog.PauseProfile(string profileName) \b0\endash\fs22\lang1033  \fs24 Pauses a profile\par
+\b\lang9 HBRelog.IdleProfile(string profileName,TimeSpan time) \b0\endash\fs22\lang1033  \fs24 Idles a profile for \b\i time\b0\i0  duration\par
+\b\lang9 HBRelog.SetProfileStatus(string status) \b0\endash\fs22\lang1033  \fs24 Sets the current HBRelog profiles status text\par
+\b HBRelog.SkipCurrentTask(string profileName) \b0 - Skips the current task that is running for the specific profile.\par
+\b\lang9 ProfileStatus HBRelog.GetProfileStatus (string profileName) \b0\endash\fs22\lang1033  \fs24 returns the status of a profile\par
+
+\pard\widctlpar\i\fs20     ProfileStatus is an enum that is defined as..\f3   \tab     \par
+\i0\fs19     \cf5 public\cf0  \cf5 enum\cf0  \cf6 ProfileStatus\cf0\par
+    \{\par
+        Unknown,\par
+        Paused,\par
+        Running,\par
+        Stopped\par
+    \}\par
+\f0\fs24\par
+
+\pard\widctlpar\sl360\slmult1\b\lang9 HBRelog.Logon(string character) \b0\endash\fs22\lang1033  \fs24 Restarts Wow and logs on a character\b\lang9\par
+HBRelog.Logon(string character, string server) \b0\lang1033\par
+\b\lang9 HBRelog.Logon(string character, string server, string customClass) \b0\lang1033\par
+\b\lang9 HBRelog.Logon(string character, string server, string customClass,string botBase, string                                                 profilePath) \b0\lang1033\par
+
+\pard\widctlpar\fs22\par
+\ul\b\fs28\lang9 Non TradeSkill related API\par
+
+\pard\nowidctlpar\sa200\ulnone\fs24 HasNewMail  \b0 - This is a property that returns true if player has new mail.\par
+\b DataStore\b0  - This is a Dictionary<uint,int> that gets populated when PB starts up or when RefreshDataStore() is called. The dictionary key is an item ID and value is the number of items total that are on that server/faction.\par
+\b MailCount  \b0 - This property returns the number of mail in the inbox, requires mailbox to be open or recently visited.\par
+\b InbagCount (ItemID\b0 ) - Returns the number of items the player has in the bags that match ItemID\par
+\b InBankCount (ItemID\b0 ) - Returns the number of items the player has in personal bank that match ItemID. \par
+\b InGBankCount (ItemID\b0 ) - Returns the number of items the player has in guild bank that match ItemID. Requires Datastore WoW Addon. No \i RefreshDataStore()\i0  call is required\par
+\b InGBankCount (CharacterName,ItemID\b0 ) Same as above except it gives the choice to get item count on a character that isn\rquote t currently logged in game.\par
+\b OnAhCount (ItemID\b0 ) - Returns the number of items the player has on AH that match ItemID. Requires Datastore WoW Addon. No \i RefreshDataStore()\i0  call is required\par
+\b OnAhCount (CharacterName,ItemID\b0 ) Same as above except it gives the choice to get item count on a character that isn\rquote t currently logged in game.\par
+\b Log(string,params object[] args)\b0  - prints a message to Honorbuddy's Log\par
+\b Log(Color,string,params object[] args)\b0  - prints a message to Honorbuddy's Log using the specific color\par
+\b Log(Color headerColor,string header,Color msgColor,string msg,params object[] args)\b0  - prints a message to Honorbuddy's Log \par
+\b DistanceTo (x,y,z\b0 ) - returns distance to location\par
+\b MoveTo (x,y,z)\b0  - moves to location\par
+\b CTM (x,y,z)\b0  - uses Click-To-Move to go to location\par
+\b RefreshDataStore() \b0 - Imports a fresh copy of the DataStore database.\par
+\b SwitchToBot(string botName) \b0 - Switches to a the specified Bot\par
+\b SwitchCharacter(string character,string server,string botName) \b0\endash  Logs out and switches to character on server and use switch bot to \lquote botname\rquote\par
+\b Me\b0  - The localplayer object. e.g. ObjectManager.Me\par
+
+\pard\widctlpar\b var1,var2...var9\fs22  \b0 - I added 9 static 'object' type variables to store info to use later in code.\par
+For more readable profiles use declarations instead.\par
+\par
+\b\fs24 HasDataStoreAddon \fs22  \b0 return true If the WoW addon \lquote DataStore\rquote  is installed.\par
+\par
+
+\pard\nowidctlpar\sa200\b\fs24 Settings["Name"] \b0 - This is used in conjuction of the Settings Action from the action list. It returns the current value assigned to a setting that can be edited by the end user from a gui.You use a Settings Action to give it a type and default value. Since the type returned is an object type you must cast to the real type when reading the value from it. Example \i (bool)Settings["Level Mining"]\par
+\b\f4\par
+Other Misc Stuff from HB's API \b0\f5\fs18 - thanks to Inrego for the compilation.\i0\f0\fs22\par
+\b\fs24 Me.MapId == X       \b0\fs22 Check what continent I'm on.\par
+                                            0   = Eastern Kingdoms\par
+                                            1   = Kalimdor\par
+                                            530 = Outlands\par
+                                            571 = Northrend\par
+                             \par
+
+\pard\nowidctlpar\ri-900\sa200\tx9720\b\fs24 Me.ZoneId == X \b0\fs22\tab\tab Check what zone I'm in. ZoneIDs can be found on Wowhead.com\par
+
+\pard\nowidctlpar\sa200\b\fs24 Me.IsHorde / Me.IsAlliance  \tab\b0\fs22 Returns true/false.\par
+\b\fs24 Me.FreeNormalBagSlots\b0\fs22        \tab The number of free bag slots.\par
+\b\fs24 Lua.DoString(string.Format("RunMacroText(\\"\{0\}\\")", "/s hello"), 0);\fs22\par
+\b0 Input to the chat box. Chat strings can be inserted, or stuff like /use Hearthstone\par
+\b\fs24 Lua.DoString("RunMacro('Test')");\b0\fs22  \tab  Run the ingame macro named "test"\par
+\b Lua.DoString("UseItemByName(ItemID)");\b0  Use the item with given ItemID. ItemID can be found on Wowhead.com\par
+\b\fs24 ObjectManager.GetObjectsOfType<WoWGameObject>().FirstOrDefault(o => o.Entry == #objectID ) != null && ObjectManager.GetObjectsOfType<WoWGameObject>().FirstOrDefault(o => o.Entry == #objectID ).Location.Distance(new WoWPoint(x,y,z)) < #distance\par
+\b0\fs22 This line checks if the given #objectID is within #distance yards of the (x,y,z) coord.\par
+Example:\par
+\i Wait(\par
+ObjectManager.GetObjectsOfType<WoWGameObject>().FirstOrDefault(o => o.Entry == 190536 ) != null && ObjectManager.GetObjectsOfType<WoWGameObject>().FirstOrDefault(o => o.Entry == 190536 ).Location.Distance(new WoWPoint(-8288.816, 1424.703, -0.01198259)) < 3\par
+)\i0\par
+Will wait until the the boat with objectID 190536 is within 3 yards of (-8288.816, 1424.703, -0.01198259).\par
+This can be used for all boats and zeppelins. You can find the objectIDs and their coords in HB Developer Tools.\par
+
+\pard\widctlpar\ul\b\fs28 List of Portals \par
+
+\pard\nowidctlpar\sa200\ulnone\f6\fs20\lang1033 Stormwind\par
+
+\pard\widctlpar\b0\f7\fs22 Portal to Blasted Lands - ID:195141 Loc:<-9007.58, 871.8698, 129.6922>\par
+\cf7 Portal to Tol Barad - ID:206594 Loc:<-8208.7, 450.793, 117.667>\par
+\cf0 Portal to Twilight Highlands - ID:207694 Loc:<-8186.149, 413.7292, 116.7497>\par
+\cf7 Portal to Uldum - ID:207695 Loc:<-8233.281, 415.5955, 117.4477>\par
+Portal to Hyjal - ID:207692 Loc:<-8212.33, 399.0208, 117.273>\par
+Portal to Deepholm - ID:207693 Loc:<-8223.319, 451.1823, 117.4883>\par
+\par
+
+\pard\nowidctlpar\sa200\b\f6\fs20 Org \endash  thanks to Extacy,No1knowsy,imdasandman and Thumped\par
+
+\pard\widctlpar\cf0\b0\f7\fs22 Portal to Blasted Lands - ID:195142 Loc:<1768.45, -4325.86, -8.3711>\f0\par
+\f7 Portal to Tol Barad - ID:206595 Loc:<2031.22, -4330.87, 95.471>\par
+Portal to Moonglade - ID:206110 Loc:<1897.63, -4196.58, 37.2524>\par
+Portal to Twilight Highlands - ID:207686 Loc:<2029.233, -4379.827, 97.9757>\par
+Portal to Uldum - ID:207687 Loc:<2039.67, -4356.288, 98.00434>\par
+Portal to Hyjal - ID:207688 Loc:<2042.752, -4395.662, 97.93639>\par
+Portal to Deepholm - ID:207689 Loc:<2065.653, -4390.647, 98.04689>\par
+Portal to Vashj'ir - ID:207690 Loc:<2063.337, -4362.29, 98.11018>\f0\line\par
+\f7\par
+}
+ 

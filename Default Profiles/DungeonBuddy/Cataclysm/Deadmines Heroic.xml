@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<DungeonBuddyProfile>
+  <Name>Deadmines Heroic</Name>
+  <DungeonId>326</DungeonId>
+  <BossEncounters>
+	<Boss isFinal="false" entry="47162" name="Glubtok" killOrder="1" optional="false" X="-192.3281" Y="-450.2448" Z="54.43818" />
+	<Boss isFinal="false" entry="47297" name="Lumbering Oaf" killOrder="2" optional="false" X="-302.3611" Y="-516.3455" Z="51.94811" />
+	<!--<Boss isFinal="false" entry="47296" name="Helix Gearbreaker" killOrder="3" optional="false" X="-290.2065" Y="-500.9125" Z="50.27398" /> -->
+	<!-- someone has to get inside the prototype reaper and keep adds below ... after boss spawns -->
+	<Boss isFinal="false" entry="43778" name="Foe Reaper 5000" killOrder="3" optional="false" X="-209.8368" Y="-568.6215" Z="20.97682" /> <!-- X="-223.7503" Y="-559.3278" Z="51.22975" /> // move upstairs and tank him there -->
+	<Boss isFinal="false" entry="47626" name="Admiral Ripsnarl" killOrder="4" optional="false" X="-64.29949" Y="-822.9566" Z="41.15455" />
+	<!-- Go inside to pull cookie <Hotspot X="-82.50467" Y="-819.7598" Z="39.57944" />  -->
+	<Boss isFinal="false" entry="47739" name="Captain Cookie" killOrder="5" optional="false" X="-64.08521" Y="-820.4148" Z="42.70154" />
+	<!-- use 'a note from vanessa' X="-74.6561" Y="-819.9572" Z="40.21637" /> - gossipoptions 1 and then wait -->
+	<!-- script the 'event' to get back to the boat -->
+	<!--
+	<Vendor Name="Vanessa VanCleef" Entry="49429" Type="Repair" X="-65.0607" Y="-834.7755" Z="41.14687" /> // before we can kill her
+	<Vendor Name="Vanessa VanCleef" Entry="49541" Type="Repair" X="-70.98929" Y="-820.1119" Z="40.53299" /> // when we can kill her
+	-->
+	<Boss isFinal="true" entry="49541" name="Vanessa VanCleef" killOrder="6" optional="false" X="-70.98929" Y="-820.1119" Z="40.53299" />
+  </BossEncounters>
+  <Blackspots>
+    <!--<Blackspot X="-101.3791" Y="-703.8368" Z="9.095623" Radius="3.363508" />-->
+  </Blackspots>
+</DungeonBuddyProfile>

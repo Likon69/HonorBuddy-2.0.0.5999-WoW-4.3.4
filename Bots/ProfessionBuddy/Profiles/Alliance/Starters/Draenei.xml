@@ -1,0 +1,291 @@
+<HBProfile xsi:noNamespaceSchemaLocation="../Schemas/EchoSchema.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<!-- Original contribution by EchoTiger -->
+	<Name>Draenei Starter ($ShortHash$)</Name>
+
+	<MinDurability>0.3</MinDurability>
+	<MinFreeBagSlots>3</MinFreeBagSlots>
+
+	<SellGrey>true</SellGrey>
+	<SellWhite>true</SellWhite>
+	<SellGreen>true</SellGreen>
+	<SellBlue>true</SellBlue>
+	<SellPurple>false</SellPurple>
+
+	<MailGrey>false</MailGrey>
+	<MailWhite>true</MailWhite>
+	<MailGreen>true</MailGreen>
+	<MailBlue>true</MailBlue>
+	<MailPurple>true</MailPurple>
+
+	<TargetElites>true</TargetElites>
+
+	<AvoidMobs>
+	</AvoidMobs>
+
+	<Mailboxes>
+		<Mailbox Name="Ammen Vale" X="-4047.621" Y="-13778.11" Z="74.96189" />
+		<Mailbox Name="Azure Watch" X="-4148.807" Y="-12490.85" Z="44.4998" />
+		<Mailbox Name="Blood Watch" X="-2045.372" Y="-11873.75" Z="46.75649" />
+	</Mailboxes>
+
+	<Vendors>
+		<!-- Ammen Vale Vendors -->
+		<Vendor Name="Ryosh" Id="16920" Type="Food" X="-4174.875" Y="-13726.35" Z="74.55257" />
+		<Vendor Name="Aurok" Id="16917" Type="Repair" X="-4072.689" Y="-13755.99" Z="74.77484" />
+
+		<!-- Azure Watch Vendors -->
+		<Vendor Name="Caregiver Chellan" Id="16553" Type="Food" X="-4127.806" Y="-12467.68" Z="44.08744" />
+		<Vendor Name="Otonambusi" Id="18810" Type="Food" X="-4209.451" Y="-12456.21" Z="45.54395" />
+		<Vendor Name="Nabek" Id="17930" Type="Repair" X="-4235.529" Y="-12518.16" Z="46.20815" />
+		<Vendor Name="Diktynna" Id="17101" Type="Sell" X="-4266.344" Y="-12985.36" Z="2.272953" />
+		<!-- Fishing Guy -->
+
+		<!-- Kessel's Crossing Vendors -->
+		<Vendor Name="Little Azimi" Id="21145" Type="Food" X="-2655.952" Y="-12132.31" Z="16.91483" />
+
+		<!-- Odesyus' Landing Vendors -->
+		<Vendor Name="Blacksmith Calypso" Id="17245" Type="Repair" X="-4726.288" Y="-12387" Z="11.09189" />
+		<Vendor Name="Logan Daniel" Id="17489" Type="Food" X="-4720.671" Y="-12381.52" Z="10.99136" />
+
+		<!-- Blood Watch Vendors -->
+		<Vendor Name="Caregiver Topher Loaal" Id="17553" Type="Food" X="-2059.199" Y="-11897.04" Z="45.65863" />
+		<Vendor Name="Beega" Id="17667" Type="Repair" X="-1990.958" Y="-11814.47" Z="54.50079" />
+	</Vendors>
+
+	<Blackspots>
+	</Blackspots>
+
+	<Blacklist>
+	</Blacklist>
+
+	<QuestOrder IgnoreCheckpoints="false" ContinuallySkipToCheckpoints="true" >
+		<!-- Check function status -->
+		<Code File="RunCode" Type="Definition">
+			<![CDATA[
+			private static bool? profileFunctionsEnabled => (bool?)AppDomain.CurrentDomain.GetData("QuestingProfiles_FunctionsEnabled");
+			private static bool IsStoreProfile(string path) => path.StartsWith("store://");
+			private static string Slashify(string path) => IsStoreProfile(path) ? path.Replace(@"\", "/") : path.Replace("/", @"\");
+
+			public __CompiledBatchClass__()
+			{
+				ActivateFunctions();
+			}
+
+			private static void ActivateFunctions()
+			{
+				if (profileFunctionsEnabled == null || profileFunctionsEnabled == false)
+				{
+					Bots.Professionbuddy.PBLog.Log(Colors.MediumPurple, "[Profile Message!]: ", Colors.Yellow, "Please stand by as the functions are being activated!");
+					LoadProfile(@"..\..\Functions\Activate Functions.xml");
+				}
+			}
+
+			private static void LoadProfile(string path)
+			{
+				var profile = GetNewPath(path);
+				if (!IsStoreProfile(profile) && !File.Exists(profile))
+				{
+					Bots.Professionbuddy.PBLog.Log(Colors.MediumPurple, "[Profile Message!]: ", Colors.Yellow, "Profile does not exist.\n" + profile);
+					return;
+				}
+
+				Bots.Professionbuddy.PBLog.Log(Colors.MediumPurple, "[Profile Message!]: ", Colors.Yellow, "Loading: " + profile);
+				ProfileManager.LoadNew(profile, false);
+			}
+
+			private static string GetNewPath(string path)
+			{
+				if (IsStoreProfile(path))
+					return Slashify(path);
+
+				var currentProfile = ProfileManager.XmlLocation;
+				if (IsStoreProfile(currentProfile))
+					return Slashify(currentProfile + "/../" + path);
+
+				var absolutePath = Path.Combine(Path.GetDirectoryName(currentProfile), path);
+				absolutePath = Path.GetFullPath(absolutePath);
+				var canonicalPath = new Uri(absolutePath).LocalPath;
+				return Slashify(canonicalPath);
+			}]]>
+		</Code>
+		<Code File="RunCode" Code="ActivateFunctions();" />
+		<!-- END Check function status -->
+
+		<If Condition="Me.IsHorde" >
+			<Code File="LoadProfile" ProfileName="..\..\Questing Autoloader.xml" />
+		</If>
+		<!-- RunCode Methods -->
+			<Code File="RunCode">
+			<![CDATA[
+				Bots.Professionbuddy.PBLog.Log(System.Windows.Media.Colors.MediumPurple, "> [Profile Initialization Status] ", System.Windows.Media.Colors.CornflowerBlue, "\n     Auto-Looting	:: Enabled\n     Looting	:: Enabled\n     Game Addons	:: Disabled");
+				Lua.DoString("SetCVar('AutoLootDefault', 1);");
+				Lua.DoString("SetCVar('autoDismountFlying', 1);");
+				CharacterSettings.Instance.LootMobs = true;
+				CharacterSettings.Instance.Save();
+				Logging.Write(System.Windows.Media.Colors.MediumPurple, "> [Ready to bot!]");
+			]]>
+			</Code>
+			<Code File="RunCode" Type="Definition">
+				<![CDATA[
+						bool DoQuest(params uint[] questIds)
+						{
+							foreach (var questId in questIds)
+							{
+								if (HasQuest(questId) && !IsQuestCompleted(questId)) return true;
+							}
+							return false;
+						}
+						bool NeedsQuest(params uint[] questIds)
+						{
+							foreach (var questId in questIds)
+							{
+								if (!HasQuest(questId) && !IsQuestCompleted(questId)) return true;
+							}
+							return false;
+						}
+						bool NeedsBreadcrumbQuest(params uint[] questIds)
+						{
+							foreach (var questId in questIds)
+							{
+								if (IsQuestCompleted(questId)) return false;
+							}
+							return true;
+						}
+						bool QuestDone(params uint[] questIds)
+						{
+							foreach (var questId in questIds)
+							{
+								if (HasQuest(questId) && IsQuestCompleted(questId)) return true;
+							}
+							return false;
+						}
+						bool QuestFlaggedCompleted(params uint[] questIds)
+						{
+							foreach (var questId in questIds)
+							{
+								return Lua.GetReturnVal<bool>($"return IsQuestFlaggedCompleted({questId});", 0);
+							}
+							return false;
+						}
+						async Task SkipCutscene(int preWait = 3000, int postWait = 3000)
+						{
+					// Add detection of cutscene here.
+							await Coroutine.Sleep(preWait);
+					// Test and improve the working method.
+							Lua.DoString("MovieFrame:StopMovie(); CinematicFrame_CancelCinematic(); StopCinematic();");
+							await Coroutine.Sleep(postWait);
+						}
+					]]>
+			</Code>
+		<!-- END RunCode Methods -->
+
+
+		<PickUp QuestName="You Survived!" QuestId="9279" GiverName="Megelon" GiverId="16475" X="-3961.788" Y="-13928.98" Z="100.7402" />
+		<TurnIn QuestName="You Survived!" QuestId="9279" TurnInName="Proenitus" TurnInId="16477" X="-4037.6" Y="-13776.82" Z="75.0043" />
+
+		<PickUp QuestName="Replenishing the Healing Crystals" QuestId="9280" GiverName="Proenitus" GiverId="16477" X="-4037.505" Y="-13778.52" Z="74.76102" />
+		<Code File="KillUntilComplete" MobId="16520" QuestId="9280" >
+			<HuntingGrounds>
+				<Hotspot X="-3946.056" Y="-13774.74" Z="65.37843" />
+				<Hotspot X="-3991.702" Y="-13718.04" Z="65.88099" />
+				<Hotspot X="-3946.368" Y="-13605.04" Z="56.4021" />
+			</HuntingGrounds>
+		</Code>
+		<TurnIn QuestName="Replenishing the Healing Crystals" QuestId="9280" TurnInName="Proenitus" TurnInId="16477" X="-4034.249" Y="-13774.61" Z="75.15874" />
+
+		<PickUp QuestName="Urgent Delivery!" QuestId="9409" GiverName="Proenitus" GiverId="16477" X="-4036.939" Y="-13773.79" Z="75.24929" />
+		<TurnIn QuestName="Urgent Delivery!" QuestId="9409" TurnInName="Zalduun" TurnInId="16502" X="-4110.916" Y="-13764.71" Z="73.59566" />
+		<PickUp QuestName="Botanist Taerix" QuestId="9371" GiverName="Proenitus" GiverId="16477" X="-4035.502" Y="-13775.67" Z="75.16948" />
+		<TurnIn QuestName="Botanist Taerix" QuestId="9371" TurnInName="Botanist Taerix" TurnInId="16514" X="-4052.88" Y="-13721.78" Z="72.91409" />
+		<PickUp QuestName="Volatile Mutations" QuestId="10302" GiverName="Botanist Taerix" GiverId="16514" X="-4051.825" Y="-13722.83" Z="72.96222" />
+
+		<Code File="KillUntilComplete" MobId="16516" QuestId="10302" >
+			<HuntingGrounds>
+				<Hotspot X="-4273.402" Y="-13484.55" Z="47.30016" />
+				<Hotspot X="-4075.718" Y="-13554.34" Z="54.15063" />
+				<Hotspot X="-3989.625" Y="-13680.23" Z="61.97556" />
+			</HuntingGrounds>
+		</Code>
+
+		<TurnIn QuestName="Volatile Mutations" QuestId="10302" TurnInName="Botanist Taerix" TurnInId="16514" X="-4052.149" Y="-13721.76" Z="72.94621" />
+		<PickUp QuestName="What Must Be Done..." QuestId="9293" GiverName="Botanist Taerix" GiverId="16514" X="-4052.149" Y="-13721.76" Z="72.94621" />
+		<PickUp QuestName="Botanical Legwork" QuestId="9799" GiverName="Apprentice Vishael" GiverId="20233" X="-4056.9" Y="-13719.86" Z="72.81377" />
+		<PickUp QuestName="Spare Parts" QuestId="37445" GiverName="Technician Zhanaa" GiverId="17071" X="-4187.096" Y="-13732.43" Z="73.77409" />
+		<PickUp QuestName="Inoculation" QuestId="37444" GiverName="Vindicator Aldar" GiverId="16535" X="-4195.953" Y="-13734" Z="73.13354" />
+
+		<Code File="InteractWith" MobId="182127" InteractByLooting="true" CollectionDistance="200" QuestId="9799" QuestObjectiveIndex="1" >
+			<HuntingGrounds>
+				<Hotspot X="-4226.46" Y="-13469.44" Z="45.70782" />
+				<Hotspot X="-4102.595" Y="-13502.56" Z="50.59624" />
+			</HuntingGrounds>
+		</Code>
+
+		<Code File="KillUntilComplete" MobId="16517" QuestId="9293" >
+			<HuntingGrounds>
+				<Hotspot X="-4226.46" Y="-13469.44" Z="45.70782" />
+				<Hotspot X="-4102.595" Y="-13502.56" Z="50.59624" />
+			</HuntingGrounds>
+		</Code>
+
+		<TurnIn QuestName="Botanical Legwork" QuestId="9799" TurnInName="Apprentice Vishael" TurnInId="20233" X="-4055.427" Y="-13717.11" Z="72.73613" />
+		<TurnIn QuestName="What Must Be Done..." QuestId="9293" TurnInName="Botanist Taerix" TurnInId="16514" X="-4052.389" Y="-13721.24" Z="72.91808" />
+		<PickUp QuestName="Healing the Lake" QuestId="9294" GiverName="Botanist Taerix" GiverId="16514" X="-4052.389" Y="-13721.24" Z="72.91808" />
+
+		<While Condition="DoQuest(9294)" >
+			<MoveTo X="-4385.995" Y="-13658.41" Z="39.25186" />
+			<Code File="UseItem" ItemId="22955" QuestId="9294" />
+		</While>
+
+		<Code File="InteractWith" MobId="16518" WaitTime="3000" CollectionDistance="200" InteractByUsingItemId="22962" QuestId="37444" QuestObjectiveIndex="1" >
+			<HuntingGrounds>
+				<Hotspot X="-4431.083" Y="-13800.01" Z="82.26695" />
+				<Hotspot X="-4447.212" Y="-13885.91" Z="105.7788" />
+				<Hotspot X="-4518.228" Y="-14058.43" Z="108.6956" />
+				<Hotspot X="-4465.746" Y="-14084.74" Z="109.3869" />
+			</HuntingGrounds>
+		</Code>
+
+		<Code File="InteractWith" MobId="181283" InteractByLooting="true" CollectionDistance="200" QuestId="37445" QuestObjectiveIndex="1" >
+			<HuntingGrounds>
+				<Hotspot X="-4398.155" Y="-13961.66" Z="162.6418" />
+				<Hotspot X="-4432.117" Y="-13807.27" Z="82.19348" />
+				<Hotspot X="-4363.8" Y="-13827.91" Z="69.22305" />
+			</HuntingGrounds>
+		</Code>
+
+		<TurnIn QuestName="Inoculation" QuestId="37444" TurnInName="Vindicator Aldar" TurnInId="16535" X="-4191.606" Y="-13732.09" Z="73.19969" />
+		<TurnIn QuestName="Spare Parts" QuestId="37445" TurnInName="Technician Zhanaa" TurnInId="17071" X="-4189.853" Y="-13732.29" Z="73.34393" />
+		<PickUp QuestName="The Missing Scout" QuestId="9309" GiverName="Vindicator Aldar" GiverId="16535" X="-4192.59" Y="-13734.69" Z="73.79326" />
+		<TurnIn QuestName="Healing the Lake" QuestId="9294" TurnInName="Botanist Taerix" TurnInId="16514" X="-4053.599" Y="-13726.27" Z="73.28658" />
+		<TurnIn QuestName="The Missing Scout" QuestId="9309" TurnInName="Tolaan" TurnInId="16546" X="-4439.889" Y="-13436.98" Z="49.32527" />
+
+		<PickUp QuestName="The Blood Elves" QuestId="10303" GiverName="Tolaan" GiverId="16546" X="-4443.986" Y="-13432.67" Z="50.73561" />
+		<Code File="KillUntilComplete" MobId="16521" QuestId="10303" QuestObjectiveIndex="1" >
+			<HuntingGrounds>
+				<Hotspot X="-4504.291" Y="-13392.59" Z="53.35529" />
+				<Hotspot X="-4531.79" Y="-13303.24" Z="77.64996" />
+				<Hotspot X="-4555.705" Y="-13380.28" Z="84.39587" />
+			</HuntingGrounds>
+		</Code>
+		<TurnIn QuestName="The Blood Elves" QuestId="10303" TurnInName="Tolaan" TurnInId="16546" X="-4448.989" Y="-13426.83" Z="52.27454" />
+
+		<PickUp QuestName="Blood Elf Spy" QuestId="9311" GiverName="Tolaan" GiverId="16546" X="-4447.616" Y="-13428.1" Z="51.97735" />
+		<Code File="KillUntilComplete" MobId="16522" QuestId="9311" QuestObjectiveIndex="1" X="-4560.387" Y="-13303.7" Z="86.5507" />
+
+		<If Condition="HasItem(24414)" >
+			<PickUp QuestName="Blood Elf Plans" QuestId="9798" GiverName="Blood Elf Plans" GiverId="24414" GiverType="Item" />
+		</If>
+
+		<TurnIn QuestName="Blood Elf Spy" QuestId="9311" TurnInName="Vindicator Aldar" TurnInId="16535" X="-4197.535" Y="-13730.87" Z="71.86846" />
+		<TurnIn QuestName="Blood Elf Plans" QuestId="9798" TurnInName="Vindicator Aldar" TurnInId="16535" X="-4197.535" Y="-13730.87" Z="71.86846" />
+		<PickUp QuestName="The Emitter" QuestId="9312" GiverName="Vindicator Aldar" GiverId="16535" X="-4194.239" Y="-13734.46" Z="73.55318" />
+		<TurnIn QuestName="The Emitter" QuestId="9312" TurnInName="Technician Zhanaa" TurnInId="17071" X="-4186.615" Y="-13734.77" Z="74.25926" />
+
+		<PickUp QuestName="Travel to Azure Watch" QuestId="9313" GiverName="Technician Zhanaa" GiverId="17071" X="-4186.615" Y="-13734.77" Z="74.25926" />
+
+		<Checkpoint Level="5" />
+
+		<Code File="LoadProfile" ProfileName="..\Kalimdor\Azuremist Isle.xml" />
+		
+	</QuestOrder>
+</HBProfile>

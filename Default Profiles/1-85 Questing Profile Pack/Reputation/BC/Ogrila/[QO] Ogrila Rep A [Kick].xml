@@ -1,0 +1,592 @@
+﻿<HBProfile>
+	<Name>[QO] Ogri'la Rep A [Kick]</Name>
+	<!-- 
+	http://www.wowwiki.com/Ogri'la
+	-->
+   
+	<MinLevel>1</MinLevel>
+	<MaxLevel>86</MaxLevel>
+   
+	<MinDurability>0.2</MinDurability>
+	<MinFreeBagSlots>2</MinFreeBagSlots>
+	
+	<MailGrey>False</MailGrey>
+	<MailWhite>False</MailWhite>
+	<MailGreen>False</MailGreen>
+	<MailBlue>True</MailBlue>
+	<MailPurple>True</MailPurple>
+   
+	<SellGrey>True</SellGrey>
+	<SellWhite>True</SellWhite>
+	<SellGreen>True</SellGreen>
+	<SellBlue>False</SellBlue>
+	<SellPurple>False</SellPurple>
+   
+	<TargetElites>True</TargetElites>
+
+	<AvoidMobs>
+		<Mob Name="Wrath Corruptor" Id="22254" />
+	</AvoidMobs>
+	<Blackspots>
+	</Blackspots>
+
+	<Mailboxes>
+
+	</Mailboxes>
+ 
+	<Vendors>
+
+	</Vendors>
+	
+
+	<Quest Id="10996" Name="Maggoc's Treasure Chest">
+		<Objective Type="CollectItem" ItemId="32380" CollectCount="1">
+			<CollectFrom>
+				<Mob Name="Maggoc" Id="20600" />
+				<GameObject Id="185569"	Name="Maggocs Treasure Chest" />
+			</CollectFrom>
+			<Hotspots>
+				<Hotspot X="2461.641" Y="5321.145" Z="264.4685" />
+				<Hotspot X="2418.419" Y="5521.647" Z="266.2464" />
+				<Hotspot X="2196.88" Y="5671.956" Z="267.7571" />
+				<Hotspot X="2059.678" Y="5705.306" Z="268.3729" />
+				<Hotspot X="2211.105" Y="5660.212" Z="268.3134" />
+				<Hotspot X="2364.345" Y="5597.269" Z="264.3181" />
+				<Hotspot X="2394.342" Y="5388.265" Z="264.3425" />
+				<Hotspot X="2421.813" Y="5287.678" Z="263.4677" />
+				<Hotspot X="2144.844" Y="5140.867" Z="265.8154" />
+			</Hotspots>
+		</Objective>
+	</Quest>
+
+	<Quest Id="10995" Name="Grulloc Has Two Skulls">
+		<Objective Type="CollectItem" ItemId="32379" CollectCount="1">
+			<CollectFrom>
+				<GameObject Name="Grullocs Dragon Skull" Id="185567" />
+				<Mob Name="Grulloc" Id="20216" />
+			</CollectFrom>
+			<Hotspots>
+			</Hotspots>
+		</Objective>
+	</Quest>
+	
+	<Quest Id="10998" Name="Grim(oire) Business">
+		<Objective Type="CollectItem" ItemId="32358" CollectCount="1">
+			<CollectFrom>
+				<GameObject Name="Vimgols Grimoire" Id="185562" />
+				<Mob Name="Vimgol" Id="22911" />
+			</CollectFrom>
+			<Hotspots>
+				<Hotspot X="3304.798" Y="4645.032" Z="214.7365" />
+				<Hotspot X="3279.031" Y="4665.223" Z="214.1961" />
+				<Hotspot X="3256.195" Y="4653.317" Z="214.7503" />
+				<Hotspot X="3262.627" Y="4624.027" Z="214.5847" />
+				<Hotspot X="3294.297" Y="4619.685" Z="214.7346" />
+			</Hotspots>
+		</Objective>
+	</Quest>
+	
+	<Quest Id="11000" Name="Grim(oire) Business">
+		<Objective Type="CollectItem" ItemId="32383" CollectCount="1" >
+			<CollectFrom>
+				<GameObject Name="Skullocs Soul" Id="185577" />
+				<Mob Name="Skulloc" Id="22910" />
+			</CollectFrom>
+			<Hotspots>
+				<Hotspot X="3529.669" Y="5585.201" Z="-1.977203" />
+			</Hotspots>
+		</Objective>
+	</Quest>
+	
+	<Quest Id="10997" Name="Even Gronn Have Standards">
+		<Objective Type="CollectItem" ItemId="32382" CollectCount="1">
+			<CollectFrom>
+				<Mob Name="Slaag" Id="22199" />
+				<GameObject Name="Slaag's Standard" Id="185574" />
+			</CollectFrom>
+			<Hotspots>
+				<Hotspot X="-1635.31" Y="5978.914" Z="209.3544" />
+			</Hotspots>
+		</Objective>
+	</Quest>
+	
+	<Quest Id="11025" Name="The Crystals">
+		<Objective Type="CollectItem" ItemId="32569" CollectCount="5">
+			<CollectFrom>
+				<Mob Name="Apexis Flayer" Id="22175" />
+				<Mob Name="Shard-Hide Boar" Entry="22180" /> <!-- f 14 -->
+				<Mob Name="Aether Ray" Entry="22181" /> <!-- f 7 -->
+				<Mob Name="Gan'arg Analyzer" Entry="23386" /> <!-- f 90 -->
+			</CollectFrom>
+			<Hotspots>
+				<Hotspot X="2236.443" Y="7278.052" Z="366.7781" />
+				<Hotspot X="2122.43" Y="7249.11" Z="364.2032" />
+				<Hotspot X="2091.624" Y="7208.801" Z="364.4114" />
+				<Hotspot X="2156.896" Y="7126.237" Z="364.9569" />
+				<Hotspot X="2261.198" Y="7064.191" Z="365.1446" />
+				<Hotspot X="2309.148" Y="7117.355" Z="367.8533" />
+				<Hotspot X="2380.502" Y="7149.782" Z="364.4944" />
+				<Hotspot X="2462.643" Y="7232.06" Z="365.4796" />
+				<Hotspot X="2554.098" Y="7169.23" Z="364.9633" />
+				<Hotspot X="2625.95" Y="7103.087" Z="365.8425" />
+			</Hotspots>
+		</Objective>
+	</Quest>
+
+
+	<QuestOrder>
+	
+	<CustomBehavior File="UserSettings" LootMobs="True" PullDistance="35" TrainNewSkills="False" LearnFlightPaths="False" KillBetweenHotspots="True" LogoutForInactivity="False" />
+				
+
+		<If Condition="Me.GetReputationLevelWith(1038) &lt; Styx.WoWUnitReaction.Honored" >
+		
+			<If Condition="((!HasQuest(10984)) &amp;&amp; (!IsQuestCompleted(10984)))" >
+				<CustomBehavior File="FlyTo" X="-1896.204" Y="5330.318" Z="1.152675" />
+				<CustomBehavior File="ForcedDismount" />
+		<PickUp QuestName="Speak with the Ogre" QuestId="10984" GiverName="V'eru" GiverId="22497" X="-1901.389" Y="5397.81" Z="1.908651" />
+			</If>
+			<If Condition="((HasQuest(10984)) &amp;&amp; (IsQuestCompleted(10984)))" >
+				<RunTo X="-1896.751" Y="5326.9" Z="1.201552" />
+				<CustomBehavior File="FlyTo" X="-2042.951" Y="5258.301" Z="-40.09265" />
+				<CustomBehavior File="ForcedDismount" />
+		<TurnIn QuestName="Speak with the Ogre" QuestId="10984" TurnInName="Grok" TurnInId="22940" X="-2067.17" Y="5287.053" Z="-37.3229" />
+		<PickUp QuestName="Mog'dorg the Wizened" QuestId="10983" GiverName="Grok" GiverId="22940" />
+			</If>
+			<If Condition="((!HasQuest(10983)) &amp;&amp; (!IsQuestCompleted(10983)))" >
+				<CustomBehavior File="FlyTo" X="-2042.951" Y="5258.301" Z="-40.09265" />
+				<CustomBehavior File="ForcedDismount" />
+		<PickUp QuestName="Mog'dorg the Wizened" QuestId="10983" GiverName="Grok" GiverId="22940" />
+			</If>
+			<If Condition="((HasQuest(10983)) &amp;&amp; (IsQuestCompleted(10983)))" >
+				<CustomBehavior File="FlyTo" X="2783.608" Y="5839.496" Z="36.07721" />
+				<CustomBehavior File="ForcedDismount" />
+		<TurnIn QuestName="Mog'dorg the Wizened" QuestId="10983" TurnInName="Mog'dorg the Wizened" TurnInId="22941" X="2783.608" Y="5839.496" Z="36.07721" />
+		<PickUp QuestName="Grulloc Has Two Skulls" QuestId="10995" GiverName="Mog'dorg the Wizened" GiverId="22941" />
+		<PickUp QuestName="Maggoc's Treasure Chest" QuestId="10996" GiverName="Mog'dorg the Wizened" GiverId="22941" />
+		<PickUp QuestName="Even Gronn Have Standards" QuestId="10997" GiverName="Mog'dorg the Wizened" GiverId="22941" />
+			</If>
+			<If Condition="((!HasQuest(10995)) &amp;&amp; (!IsQuestCompleted(10995)))" >
+				<CustomBehavior File="FlyTo" X="2783.608" Y="5839.496" Z="36.07721" />
+				<CustomBehavior File="ForcedDismount" />
+		<PickUp QuestName="Grulloc Has Two Skulls" QuestId="10995" GiverName="Mog'dorg the Wizened" GiverId="22941" />
+			</If>
+			<If Condition="((!HasQuest(10995)) &amp;&amp; (!IsQuestCompleted(10995)))" >
+				<CustomBehavior File="FlyTo" X="2783.608" Y="5839.496" Z="36.07721" />
+				<CustomBehavior File="ForcedDismount" />
+		<PickUp QuestName="Maggoc's Treasure Chest" QuestId="10996" GiverName="Mog'dorg the Wizened" GiverId="22941" />
+			</If>
+			<If Condition="((!HasQuest(10995)) &amp;&amp; (!IsQuestCompleted(10995)))" >
+				<CustomBehavior File="FlyTo" X="2783.608" Y="5839.496" Z="36.07721" />
+				<CustomBehavior File="ForcedDismount" />
+		<PickUp QuestName="Even Gronn Have Standards" QuestId="10997" GiverName="Mog'dorg the Wizened" GiverId="22941" />
+			</If>
+			<If Condition="((HasQuest(10995)) &amp;&amp; (!IsQuestCompleted(10995)))" >
+				<CustomBehavior File="FlyTo" X="2684.243" Y="5548.613" Z="-4.101821" />
+				<CustomBehavior File="ForcedDismount" />
+				<Objective QuestName="Grulloc Has Two Skulls" QuestId="10995" Type="CollectItem" ItemId="32379" CollectCount="1" />
+			</If>
+			<If Condition="((HasQuest(10996)) &amp;&amp; (!IsQuestCompleted(10996)))" >
+				<CustomBehavior File="FlyTo" X="2461.641" Y="5321.145" Z="264.4685" />
+				<CustomBehavior File="ForcedDismount" />
+				<Objective QuestName="Maggoc's Treasure Chest" QuestId="10996" Type="CollectItem" ItemId="32380" CollectCount="1" />
+			</If>
+			<If Condition="((HasQuest(10997)) &amp;&amp; (!IsQuestCompleted(10997)))" >
+				<CustomBehavior File="FlyTo" X="-1568.431" Y="5986.321" Z="200.4004" />
+				<CustomBehavior File="ForcedDismount" />
+				<Objective QuestName="Even Gronn Have Standards" QuestId="10997" Type="CollectItem" ItemId="32382" CollectCount="1" />
+			</If>
+			<If Condition="((HasQuest(10995)) &amp;&amp; (IsQuestCompleted(10995)))" >
+				<CustomBehavior File="FlyTo" X="2782.334" Y="5841.101" Z="36.14522" />
+				<CustomBehavior File="ForcedDismount" />
+			</If>
+		<TurnIn QuestName="Grulloc Has Two Skulls" QuestId="10995" TurnInName="Mog'dorg the Wizened" TurnInId="22941" />
+		<TurnIn QuestName="Maggoc's Treasure Chest" QuestId="10996" TurnInName="Mog'dorg the Wizened" TurnInId="22941" />
+		<TurnIn QuestName="Even Gronn Have Standards" QuestId="10997" TurnInName="Mog'dorg the Wizened" TurnInId="22941" />
+			<If Condition="((!HasQuest(10998)) &amp;&amp; (!IsQuestCompleted(10998)))" >
+				<CustomBehavior File="FlyTo" X="2782.334" Y="5841.101" Z="36.14522" />
+				<CustomBehavior File="ForcedDismount" />
+		<PickUp QuestName="Grim(oire) Business" QuestId="10998" GiverName="Mog'dorg the Wizened" GiverId="22941" />
+			</If>
+			<If Condition="((HasQuest(10998)) &amp;&amp; (!IsQuestCompleted(10998)))" >
+				<CustomBehavior File="FlyTo" X="3281.096" Y="4639.872" Z="216.5324" />
+				<CustomBehavior File="ForcedDismount" />
+				<Objective QuestName="Grim(oire) Business" QuestId="10998" Type="CollectItem" ItemId="32358" CollectCount="1" />
+			</If>
+			<If Condition="((HasQuest(10998)) &amp;&amp; (IsQuestCompleted(10998)))" >
+				<CustomBehavior File="FlyTo" X="2782.334" Y="5841.101" Z="36.14522" />
+				<CustomBehavior File="ForcedDismount" />
+		<TurnIn QuestName="Grim(oire) Business" QuestId="10998" TurnInName="Mog'dorg the Wizened" TurnInId="22941" />
+		<PickUp QuestName="Into the Soulgrinder" QuestId="11000" GiverName="Mog'dorg the Wizened" GiverId="22941" />
+			</If>
+			<If Condition="((!HasQuest(11000)) &amp;&amp; (!IsQuestCompleted(11000)))" >
+				<CustomBehavior File="FlyTo" X="2782.334" Y="5841.101" Z="36.14522" />
+				<CustomBehavior File="ForcedDismount" />
+		<PickUp QuestName="Into the Soulgrinder" QuestId="11000" GiverName="Mog'dorg the Wizened" GiverId="22941" />
+			</If>
+			<If Condition="((HasQuest(11000)) &amp;&amp; (!IsQuestCompleted(11000)))" >
+				<CustomBehavior File="FlyTo" X="3529.669" Y="5585.201" Z="-1.977203" />
+				<CustomBehavior File="ForcedDismount" />
+				<CustomBehavior File="Misc\RunLua" Lua="UseItemByName(32467)" WaitTime="1000" />
+				
+	<!--
+	<CustomBehavior File="UserDialog"  AllowBotStop="True" SoundCue="Asterisk" SoundCueInterval="1" Text="use the book and kill the ghosts, then kill Skulloc when he spawns, and interact with his soul when he's dead.  press continue when done" />
+	-->		
+				<Objective QuestName="Into the Soulgrinder" QuestId="11000" Type="CollectItem" ItemId="32383" CollectCount="1" />
+				<Objective QuestName="Into the Soulgrinder" QuestId="11000" Type="CollectItem" ItemId="32467" CollectCount="1" />
+			</If>
+			<If Condition="((HasQuest(11000)) &amp;&amp; (IsQuestCompleted(11000)))" >
+				<CustomBehavior File="FlyTo" X="2782.334" Y="5841.101" Z="36.14522" />
+				<CustomBehavior File="ForcedDismount" />
+		<TurnIn QuestName="Into the Soulgrinder" QuestId="11000" TurnInName="Mog'dorg the Wizened" TurnInId="22941" />		
+		<PickUp QuestName="Ogre Heaven" QuestId="11009" GiverName="Mog'dorg the Wizened" GiverId="22941" />
+			</If>
+			<If Condition="((!HasQuest(11009)) &amp;&amp; (!IsQuestCompleted(11009)))" >
+				<CustomBehavior File="FlyTo" X="2782.334" Y="5841.101" Z="36.14522" />
+				<CustomBehavior File="ForcedDismount" />
+		<PickUp QuestName="Ogre Heaven" QuestId="11009" GiverName="Mog'dorg the Wizened" GiverId="22941" />
+			</If>
+			<If Condition="((HasQuest(11009)) &amp;&amp; (IsQuestCompleted(11009)))" >
+				<CustomBehavior File="FlyTo" X="2337.281" Y="7282.197" Z="365.6186" />
+				<CustomBehavior File="ForcedDismount" />
+		<TurnIn QuestName="Ogre Heaven" QuestId="11009" TurnInName="Chu'a'lor" TurnInId="23233" X="2333.708" Y="7285.747" Z="365.6183" />
+		<PickUp QuestName="The Crystals" QuestId="11025" GiverName="Chu'a'lor" GiverId="23233" />
+			</If>
+			<!-- We are now Neutral w/ Ogri'la -->
+		</If>
+			
+			
+			<If Condition="((!HasQuest(11025)) &amp;&amp; (!IsQuestCompleted(11025)))" >
+				<CustomBehavior File="FlyTo" X="2337.281" Y="7282.197" Z="365.6186" />
+				<CustomBehavior File="ForcedDismount" />
+		<PickUp QuestName="The Crystals" QuestId="11025" GiverName="Chu'a'lor" GiverId="23233" />
+			</If>
+			<If Condition="((HasQuest(11025)) &amp;&amp; (!IsQuestCompleted(11025)))" >
+				<CustomBehavior File="FlyTo" X="2236.443" Y="7278.052" Z="366.7781" />
+				<CustomBehavior File="ForcedDismount" />
+				<Objective QuestName="The Crystals" QuestId="11025" Type="CollectItem" ItemId="32569" CollectCount="5" />
+			</If>
+			<If Condition="((HasQuest(11025)) &amp;&amp; (IsQuestCompleted(11025)))" >
+				<CustomBehavior File="FlyTo" X="2337.281" Y="7282.197" Z="365.6186" />
+				<CustomBehavior File="ForcedDismount" />
+		<TurnIn QuestName="The Crystals" QuestId="11025" TurnInName="Chu'a'lor" TurnInId="23233" />
+		<PickUp QuestName="An Apexis Relic" QuestId="11058" GiverName="Chu'a'lor" GiverId="23233" />
+			</If>
+			<If Condition="((!HasQuest(11058)) &amp;&amp; (!IsQuestCompleted(11058)))" >
+				<CustomBehavior File="FlyTo" X="2337.281" Y="7282.197" Z="365.6186" />
+				<CustomBehavior File="ForcedDismount" />
+		<PickUp QuestName="An Apexis Relic" QuestId="11058" GiverName="Chu'a'lor" GiverId="23233" />
+			</If>
+			<If Condition="((!HasQuest(11030)) &amp;&amp; (!IsQuestCompleted(11030)))" >
+				<CustomBehavior File="FlyTo" X="2337.281" Y="7282.197" Z="365.6186" />
+				<CustomBehavior File="ForcedDismount" />
+		<PickUp QuestName="Our Boy Wants To Be A Skyguard Ranger" QuestId="11030" GiverName="Torkus" GiverId="23316" />
+			</If>
+			<If Condition="((HasQuest(11030)) &amp;&amp; (!IsQuestCompleted(11030)))" >
+				<If Condition="(GetItemCount(32569) &lt; 10)" >
+				<CustomBehavior File="FlyTo" X="1470.339" Y="7229.105" Z="370.062" />
+				<CustomBehavior File="ForcedDismount" />
+					<SetGrindArea>
+						<Grindarea>
+								<Factions>14 90</Factions> <!-- [Flayer, Demon] -->
+								<Hotspots>
+									<Hotspot X="1470.339" Y="7229.105" Z="370.062" />
+									<Hotspot X="1398.372" Y="7265.548" Z="364.3278" />
+									<Hotspot X="1323.321" Y="7220.896" Z="374.7846" />
+									<Hotspot X="1345.221" Y="7156.03" Z="372.2723" />
+									<Hotspot X="1458.344" Y="7237.145" Z="370.4799" />
+								</Hotspots>
+							</Grindarea>
+						</SetGrindArea>
+					<GrindTo Condition="(GetItemCount(32569) &gt;= 10)" GoalText="Getting 10 Apexis Shards" />
+				</If>
+				<If Condition="(GetItemCount(32569) &gt;= 10)" >
+					<RunTo X="1475.713" Y="7241.112" Z="374.431" />
+					<CustomBehavior File="InteractWith" QuestId="11030" MobId="185924" GossipOptions="1" ObjectType="Gameobject" NumOfTimes="1" CollectionDistance="50" X="1475.713" Y="7241.112" Z="374.431" />
+				</If>
+			</If>
+			<If Condition="((HasQuest(11030)) &amp;&amp; (IsQuestCompleted(11030)))" >
+				<CustomBehavior File="FlyTo" X="2337.281" Y="7282.197" Z="365.6186" />
+				<CustomBehavior File="ForcedDismount" />
+		<TurnIn QuestName="Our Boy Wants To Be A Skyguard Ranger" QuestId="11030" TurnInName="Torkus" TurnInId="23316" />
+		<PickUp QuestName="The Skyguard Outpost" QuestId="11062" GiverName="Chu'a'lor" GiverId="23233" />
+			</If>
+			<If Condition="((!HasQuest(11062)) &amp;&amp; (!IsQuestCompleted(11062)))" >
+				<CustomBehavior File="FlyTo" X="2337.281" Y="7282.197" Z="365.6186" />
+				<CustomBehavior File="ForcedDismount" />
+		<PickUp QuestName="The Skyguard Outpost" QuestId="11062" GiverName="Chu'a'lor" GiverId="23233" />
+			</If>
+			<If Condition="((HasQuest(11062)) &amp;&amp; (IsQuestCompleted(11062)))" >
+				<CustomBehavior File="FlyTo" X="2503.09" Y="7353.885" Z="380.5503" />
+				<CustomBehavior File="ForcedDismount" />
+		<TurnIn QuestName="The Skyguard Outpost" QuestId="11062" TurnInName="Sky Commander Keller" TurnInId="23334" />
+		<PickUp QuestName="Bombing Run" QuestId="11010" GiverName="Sky Sergeant Vanderlip" GiverId="23120" />
+			</If>
+			<If Condition="((!HasQuest(11010)) &amp;&amp; (!IsQuestCompleted(11010)))" >
+				<CustomBehavior File="FlyTo" X="2503.09" Y="7353.885" Z="380.5503" />
+				<CustomBehavior File="ForcedDismount" />
+		<PickUp QuestName="Bombing Run" QuestId="11010" GiverName="Sky Sergeant Vanderlip" GiverId="23120" />
+			</If>
+			<If Condition="((!HasQuest()) &amp;&amp; (!IsQuestCompleted()))" >
+				<CustomBehavior File="FlyTo" X="2337.281" Y="7282.197" Z="365.6186" />
+				<CustomBehavior File="ForcedDismount" />
+		<PickUp QuestName="A Father's Duty" QuestId="11061" GiverName="Torkus" GiverId="23316" />
+			</If>
+			<If Condition="((!HasQuest(11059)) &amp;&amp; (!IsQuestCompleted(11059)))" >
+				<CustomBehavior File="FlyTo" X="2337.281" Y="7282.197" Z="365.6186" />
+				<CustomBehavior File="ForcedDismount" />
+		<PickUp QuestName="Guardian of the Monument" QuestId="11059" GiverName="Chu'a'lor" GiverId="23233" />
+			</If>
+
+			<If Condition="((HasQuest(11061)) &amp;&amp; (!IsQuestCompleted(11061)))" >
+				<If Condition="(GetItemCount(32569) &lt; 10)" >
+				<CustomBehavior File="FlyTo" X="2236.443" Y="7278.052" Z="366.7781" />
+				<CustomBehavior File="ForcedDismount" />
+					<SetGrindArea>
+						<Grindarea>
+								<Factions>14 90</Factions> <!-- [Flayer, Demon] -->
+								<Hotspots>
+									<Hotspot X="2236.443" Y="7278.052" Z="366.7781" />
+									<Hotspot X="2122.43" Y="7249.11" Z="364.2032" />
+									<Hotspot X="2091.624" Y="7208.801" Z="364.4114" />
+									<Hotspot X="2156.896" Y="7126.237" Z="364.9569" />
+									<Hotspot X="2261.198" Y="7064.191" Z="365.1446" />
+									<Hotspot X="2309.148" Y="7117.355" Z="367.8533" />
+									<Hotspot X="2380.502" Y="7149.782" Z="364.4944" />
+									<Hotspot X="2462.643" Y="7232.06" Z="365.4796" />
+									<Hotspot X="2554.098" Y="7169.23" Z="364.9633" />
+									<Hotspot X="2625.95" Y="7103.087" Z="365.8425" />
+								</Hotspots>
+							</Grindarea>
+						</SetGrindArea>
+					<GrindTo Condition="(GetItemCount(32569) &gt;= 10)" GoalText="Getting 10 Apexis Shards" />
+				</If>
+				<If Condition="(GetItemCount(32569) &gt;= 10)" >
+					<CustomBehavior File="FlyTo" X="4015.902" Y="5890.32" Z="267.8724" />
+					<CustomBehavior File="InteractWith" QuestId="11061" MobId="185922" GossipOptions="1" ObjectType="Gameobject" NumOfTimes="1" CollectionDistance="50" X="4015.902" Y="5890.32" Z="267.8724" />
+				</If>
+			</If>
+			<If Condition="((HasQuest(11059)) &amp;&amp; (!IsQuestCompleted(11059)))" >
+				<If Condition="(GetItemCount(32569) &lt; 70)" >
+				<CustomBehavior File="FlyTo" X="2236.443" Y="7278.052" Z="366.7781" />
+				<CustomBehavior File="ForcedDismount" />
+					<SetGrindArea>
+						<Grindarea>
+								<Factions>14 90</Factions> <!-- [Flayer, Demon] -->
+								<Hotspots>
+									<Hotspot X="2236.443" Y="7278.052" Z="366.7781" />
+									<Hotspot X="2122.43" Y="7249.11" Z="364.2032" />
+									<Hotspot X="2091.624" Y="7208.801" Z="364.4114" />
+									<Hotspot X="2156.896" Y="7126.237" Z="364.9569" />
+									<Hotspot X="2261.198" Y="7064.191" Z="365.1446" />
+									<Hotspot X="2309.148" Y="7117.355" Z="367.8533" />
+									<Hotspot X="2380.502" Y="7149.782" Z="364.4944" />
+									<Hotspot X="2462.643" Y="7232.06" Z="365.4796" />
+									<Hotspot X="2554.098" Y="7169.23" Z="364.9633" />
+									<Hotspot X="2625.95" Y="7103.087" Z="365.8425" />
+								</Hotspots>
+							</Grindarea>
+						</SetGrindArea>
+					<GrindTo Condition="(GetItemCount(32569) &gt;= 70)" GoalText="Getting 70 Apexis Shards" />
+				</If>
+				<If Condition="(GetItemCount(32569) &gt;= 10)" >
+					<CustomBehavior File="FlyTo" X="2110.348" Y="7130.584" Z="375.0003" />
+	<CustomBehavior File="UserDialog" QuestId="11059" AllowBotStop="True" SoundCue="Asterisk" SoundCueInterval="1" Text="Play simon says with a small platform" />
+				</If>
+			</If>
+			<If Condition="((HasQuest(11061)) &amp;&amp; (!IsQuestCompleted(11061)))" >
+				<If Condition="(GetItemCount(32569) &lt; 50)" >
+				<CustomBehavior File="FlyTo" X="2236.443" Y="7278.052" Z="366.7781" />
+				<CustomBehavior File="ForcedDismount" />
+					<SetGrindArea>
+						<Grindarea>
+								<Factions>14 90</Factions> <!-- [Flayer, Demon] -->
+								<Hotspots>
+									<Hotspot X="2236.443" Y="7278.052" Z="366.7781" />
+									<Hotspot X="2122.43" Y="7249.11" Z="364.2032" />
+									<Hotspot X="2091.624" Y="7208.801" Z="364.4114" />
+									<Hotspot X="2156.896" Y="7126.237" Z="364.9569" />
+									<Hotspot X="2261.198" Y="7064.191" Z="365.1446" />
+									<Hotspot X="2309.148" Y="7117.355" Z="367.8533" />
+									<Hotspot X="2380.502" Y="7149.782" Z="364.4944" />
+									<Hotspot X="2462.643" Y="7232.06" Z="365.4796" />
+									<Hotspot X="2554.098" Y="7169.23" Z="364.9633" />
+									<Hotspot X="2625.95" Y="7103.087" Z="365.8425" />
+								</Hotspots>
+							</Grindarea>
+						</SetGrindArea>
+					<GrindTo Condition="(GetItemCount(32569) &gt;= 50)" GoalText="Getting 50 Apexis Shards" />
+				</If>
+				<If Condition="(GetItemCount(32569) &gt;= 35)" >
+					<CustomBehavior File="FlyTo" X="2110.348" Y="7130.584" Z="375.0003" />
+	<CustomBehavior File="UserDialog" QuestId="11061" AllowBotStop="True" SoundCue="Asterisk" SoundCueInterval="1" Text="Play simon says with the big platform" />
+				</If>
+			</If>
+			<If Condition="((HasQuest(11010)) &amp;&amp; (!IsQuestCompleted(11010)))" >
+				<CustomBehavior File="FlyTo" X="1505.898" Y="7256.877" Z="519.9388" />
+	<CustomBehavior File="UserDialog" QuestId="11010" AllowBotStop="True" SoundCue="Asterisk" SoundCueInterval="1" Text="bomb the cannonball stacks (look for hunters marks)" />
+			</If>
+			<If Condition="((HasQuest(11059)) &amp;&amp; (IsQuestCompleted(11059)))" >
+				<CustomBehavior File="FlyTo" X="2337.281" Y="7282.197" Z="365.6186" />
+				<CustomBehavior File="ForcedDismount" />
+		<TurnIn QuestName="An Apexis Relic" QuestId="11058" TurnInName="Chu'a'lor" TurnInId="23233" />
+			</If>
+			<If Condition="((HasQuest(11059)) &amp;&amp; (IsQuestCompleted(11059)))" >
+				<CustomBehavior File="FlyTo" X="2337.281" Y="7282.197" Z="365.6186" />
+				<CustomBehavior File="ForcedDismount" />
+		<TurnIn QuestName="Guardian of the Monument" QuestId="11059" TurnInName="Chu'a'lor" TurnInId="23233" />
+			</If>
+			<If Condition="((HasQuest(11061)) &amp;&amp; (IsQuestCompleted(11061)))" >
+				<CustomBehavior File="FlyTo" X="2337.281" Y="7282.197" Z="365.6186" />
+				<CustomBehavior File="ForcedDismount" />
+		<TurnIn QuestName="A Father's Duty" QuestId="11061" TurnInName="Torkus" TurnInId="23316" />
+			</If>
+			<If Condition="((!HasQuest(11079)) &amp;&amp; (!IsQuestCompleted(11079)))" >
+				<CustomBehavior File="FlyTo" X="2337.281" Y="7282.197" Z="365.6186" />
+				<CustomBehavior File="ForcedDismount" />
+		<PickUp QuestName="A Fel Whip For Gahk" QuestId="11079" GiverName="Gahk" GiverId="23300" />
+			</If>
+			<If Condition="((HasQuest(11079)) &amp;&amp; (!IsQuestCompleted(11079)))" >
+				<If Condition="(GetItemCount(32569) &lt; 35)" >
+				<CustomBehavior File="FlyTo" X="2821.444" Y="7093.078" Z="365.1276" />
+				<CustomBehavior File="ForcedDismount" />
+					<SetGrindArea>
+						<Grindarea>
+								<Factions>14 90</Factions> <!-- [Flayer, Demon] -->
+								<Hotspots>
+									<Hotspot X="2740.697" Y="7078.917" Z="366.0162" />
+									<Hotspot X="2900.133" Y="6978.824" Z="365.1084" />
+									<Hotspot X="3007.348" Y="6804.743" Z="373.9979" />
+									<Hotspot X="2959.108" Y="7129.993" Z="365.2077" />
+									<Hotspot X="2815.08" Y="7190.953" Z="366.8671" />
+									<Hotspot X="2922.358" Y="6997.267" Z="364.9799" />
+									<Hotspot X="2756.515" Y="7063.327" Z="365.3046" />
+								</Hotspots>
+							</Grindarea>
+						</SetGrindArea>
+					<GrindTo Condition="(GetItemCount(32569) &gt;= 35)" GoalText="Getting 35 Apexis Shards" />
+				</If>
+				<If Condition="(GetItemCount(32569) &gt;= 35)" >
+					<CustomBehavior File="FlyTo" X="2797.726" Y="7003.478" Z="370.478" />
+					<CustomBehavior File="ForcedDismount" />
+					<CustomBehavior File="InteractWith" QuestId="11079" MobId="185927" GossipOptions="1" ObjectType="Gameobject" NumOfTimes="1" CollectionDistance="50" X="2797.726" Y="7003.478" Z="370.478" />
+					<CustomBehavior File="WaitTimer" WaitTime="5000" />
+				</If>
+			</If>
+			<If Condition="((HasQuest(11079)) &amp;&amp; (IsQuestCompleted(11079)))" >
+				<CustomBehavior File="FlyTo" X="2337.281" Y="7282.197" Z="365.6186" />
+				<CustomBehavior File="ForcedDismount" />
+		<TurnIn QuestName="A Fel Whip For Gahk" QuestId="11079" TurnInName="Gahk" TurnInId="23300" />			
+		<PickUp QuestName="A Special Thank You" QuestId="11091" GiverName="Chu'a'lor" GiverId="23233" />
+			</If>
+			<If Condition="((!HasQuest(11091)) &amp;&amp; (!IsQuestCompleted(11091)))" >
+				<CustomBehavior File="FlyTo" X="2337.281" Y="7282.197" Z="365.6186" />
+				<CustomBehavior File="ForcedDismount" />
+		<PickUp QuestName="A Special Thank You" QuestId="11091" GiverName="Chu'a'lor" GiverId="23233" />
+			</If>
+			<If Condition="((HasQuest(11091)) &amp;&amp; (IsQuestCompleted(11091)))" >
+				<CustomBehavior File="FlyTo" X="2280.942" Y="7325.579" Z="366.4619" />
+				<CustomBehavior File="ForcedDismount" />
+		<TurnIn QuestName="A Special Thank You" QuestId="11091" TurnInName="Jho'nass" TurnInId="23428" />			
+			</If>
+			<If Condition="((HasQuest(11010)) &amp;&amp; (IsQuestCompleted(11010)))" >
+				<!-- Sha'tari Skyguard -->
+				<CustomBehavior File="FlyTo" X="2503.09" Y="7353.885" Z="380.5503" />
+				<CustomBehavior File="ForcedDismount" />
+		<TurnIn QuestName="Bombing Run" QuestId="11010" TurnInName="Sky Sergeant Vanderlip" TurnInId="23120" />		
+		<PickUp QuestName="Assault on Bash'ir Landing!" QuestId="11119" GiverName="Sky Commander Keller" GiverId="23334" />
+			</If>
+			<If Condition="((!HasQuest(11119)) &amp;&amp; (!IsQuestCompleted(11119)))" >
+				<CustomBehavior File="FlyTo" X="2503.09" Y="7353.885" Z="380.5503" />
+				<CustomBehavior File="ForcedDismount" />
+		<PickUp QuestName="Assault on Bash'ir Landing!" QuestId="11119" GiverName="Sky Commander Keller" GiverId="23334" />
+			</If>
+			<If Condition="((HasQuest()) &amp;&amp; (IsQuestCompleted()))" >
+				<CustomBehavior File="FlyTo" X="2522.303" Y="7328.975" Z="373.4338" />
+				<CustomBehavior File="ForcedDismount" />
+		<TurnIn QuestName="Assault on Bash'ir Landing!" QuestId="11119" TurnInName="Aether-tech Apprentice" TurnInId="23473" />			
+			</If>
+			<If Condition="((!HasQuest(11065)) &amp;&amp; (!IsQuestCompleted(11065)))" >
+				<CustomBehavior File="FlyTo" X="2547.357" Y="7325.614" Z="373.1975" />
+				<CustomBehavior File="ForcedDismount" />
+		<PickUp QuestName="Wrangle Some Aether Rays!" QuestId="11065" GiverName="Skyguard Khatie" GiverId="23335" />
+			</If>
+			<If Condition="((HasQuest(11065)) &amp;&amp; (!IsQuestCompleted(11065)))" >
+				<CustomBehavior File="FlyTo" X="2576.059" Y="7157.622" Z="365.4195" />
+	<CustomBehavior File="UserDialog" QuestId="11065" AllowBotStop="True" SoundCue="Asterisk" SoundCueInterval="1" Text="My toon kept killing the Rays before i could rangle them.  melee them and hopefully they don't die.  20% and useitem on them" />
+				<CustomBehavior File="CombatUseItemOn" QuestId="11065" MobId="22181" ItemId="32698" NpcState="Alive" NumOfTimes="1" WaitTime="5000" NpcHPLeft="50" CollectionDistance="500" X="2576.059" Y="7157.622" Z="365.4195" />
+			</If>
+			<If Condition="((HasQuest(11065)) &amp;&amp; (IsQuestCompleted(11065)))" >
+				<CustomBehavior File="FlyTo" X="2547.357" Y="7325.614" Z="373.1975" />
+				<CustomBehavior File="ForcedDismount" />
+		<TurnIn QuestName="Wrangle Some Aether Rays!" QuestId="11065" TurnInName="Skyguard Khatie" TurnInId="23335" />			
+			</If>
+			<If Condition="((!HasQuest(11078)) &amp;&amp; (!IsQuestCompleted(11078)))" >
+				<CustomBehavior File="FlyTo" X="2501.634" Y="7352.579" Z="380.3238" />
+				<CustomBehavior File="ForcedDismount" />
+		<PickUp QuestName="To Rule The Skies" QuestId="11078" GiverName="Sky Commander Keller" GiverId="23334" />
+			</If>
+			<If Condition="((HasQuest(11078)) &amp;&amp; (!IsQuestCompleted(11078)))" >
+				<If Condition="(GetItemCount(32569) &lt; 35)" >
+				<CustomBehavior File="FlyTo" X="2821.444" Y="7093.078" Z="365.1276" />
+				<CustomBehavior File="ForcedDismount" />
+					<SetGrindArea>
+						<Grindarea>
+								<Factions>14 90</Factions> <!-- [Flayer, Demon] -->
+								<Hotspots>
+									<Hotspot X="2740.697" Y="7078.917" Z="366.0162" />
+									<Hotspot X="2900.133" Y="6978.824" Z="365.1084" />
+									<Hotspot X="3007.348" Y="6804.743" Z="373.9979" />
+									<Hotspot X="2959.108" Y="7129.993" Z="365.2077" />
+									<Hotspot X="2815.08" Y="7190.953" Z="366.8671" />
+									<Hotspot X="2922.358" Y="6997.267" Z="364.9799" />
+									<Hotspot X="2756.515" Y="7063.327" Z="365.3046" />
+								</Hotspots>
+							</Grindarea>
+						</SetGrindArea>
+					<GrindTo Condition="(GetItemCount(32569) &gt;= 35)" GoalText="Getting 35 Apexis Shards" />
+				</If>
+				<If Condition="(GetItemCount(32569) &gt;= 35)" >
+					<CustomBehavior File="FlyTo" X="2430.656" Y="7004.162" Z="367.3903" />
+					<CustomBehavior File="ForcedDismount" />
+					<CustomBehavior File="InteractWith" QuestId="11078" MobId="185935" ObjectType="Gameobject" GossipOptions="1" NumOfTimes="1" CollectionDistance="50" X="2430.656" Y="7004.162" Z="367.3903" />
+					<CustomBehavior File="WaitTimer" WaitTime="10000" />
+				</If>
+			</If>
+			<If Condition="((HasQuest(11078)) &amp;&amp; (IsQuestCompleted(11078)))" >
+				<CustomBehavior File="FlyTo" X="2501.634" Y="7352.579" Z="380.3238" />
+				<CustomBehavior File="ForcedDismount" />
+		<TurnIn QuestName="To Rule The Skies" QuestId="11078" TurnInName="Sky Commander Keller" TurnInId="23334" />
+			</If>
+
+			<If Condition="Me.GetReputationLevelWith(1038) &gt;= Styx.WoWUnitReaction.Honored" >
+			<If Condition="((!HasQuest(11026)) &amp;&amp; (!IsQuestCompleted(11026)))" >
+				<CustomBehavior File="FlyTo" X="2501.634" Y="7352.579" Z="380.3238" />
+				<CustomBehavior File="ForcedDismount" />
+		<PickUp QuestName="Banish the Demons" QuestId="11026" GiverName="Kronk" GiverId="23253" />
+			</If>
+			<If Condition="((HasQuest(11026)) &amp;&amp; (!IsQuestCompleted(11026)))" >
+				<CustomBehavior File="FlyTo" X="1746.508" Y="7268.541" Z="364.554" />
+				<CustomBehavior File="ForcedDismount" />
+	<CustomBehavior File="UserDialog" QuestId="11026" AllowBotStop="True" SoundCue="Exclamation" SoundCueInterval="1" Text="Use the portal and then kill demons near it until quest is completed" />
+			</If>
+			<If Condition="((HasQuest(11026)) &amp;&amp; (IsQuestCompleted(11026)))" >
+				<CustomBehavior File="FlyTo" X="2317.132" Y="7279.319" Z="365.6171" />
+				<CustomBehavior File="ForcedDismount" />
+		<TurnIn QuestName="Banish the Demons" QuestId="11026" TurnInName="Kronk" TurnInId="23253" />
+			</If>
+			
+		<!-- 
+		Not even trying to farm these.  I killed 20 and not 1 dropped
+		-->
+
+			</If>
+
+
+		<If Condition="Me.GetReputationLevelWith(1038) == Styx.WoWUnitReaction.Exalted" >
+			<CustomBehavior File="UserDialog" Title="title" AllowBotStop="True" SoundCue="Asterisk" SoundCueInterval="1" Text="You have reached Exalted\nIf you liked this profile, +rep is always appreciated" />
+		</If>
+	
+	</QuestOrder>
+
+</HBProfile>

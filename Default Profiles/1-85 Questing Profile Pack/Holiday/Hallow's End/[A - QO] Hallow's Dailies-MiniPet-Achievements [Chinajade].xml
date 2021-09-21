@@ -1,0 +1,744 @@
+<HBProfile>
+   <!-- Profile by Chinajade (last updated for 2011 Hallow's End)
+   
+      PROFILE EXPECTATIONS:
+         * When using this profile, be certain to set the HonorBuddy bot to (select only one):
+                ( ) Grinding / Mixed
+                (*) Questing
+                ( ) PvP
+   
+         * This profile is appropriate for (check all that apply):
+                [X] Alliance   [ ] Achievement
+                [ ] Horde      [ ] Farming
+                               [ ] Leveling
+                               [ ] PvP
+                               [X] Questing
+                               [ ] Reputation
+                               [X] Seasonal
+							   
+		NOTES:
+		 * Does non-repeatable seasonal quests, achievements, and daily seasonal quests.
+		   As much as we can automate.
+		   
+		 * We use variant timers between actions where appropriate to make it look
+			more 'human like'.
+			
+		 * We include coordinates for all the seasonal NPCs as there is a very high chance
+			they won't be in the user's Honorbuddy database.
+			
+		LICENSE:
+			This work is licensed under the
+				Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License.
+			also known as CC-BY-NC-SA.  To view a copy of this license, visit
+				http://creativecommons.org/licenses/by-nc-sa/3.0/
+			or send a letter to
+				Creative Commons
+				171 Second Street, Suite 300
+				San Francisco, California, 94105, USA.		
+    -->
+   <Name>Hallow's Dailies-MiniPet-Achievements [Chinajade] $Revision$</Name>
+   <MinLevel>70</MinLevel>	<!-- 70, because we need a 'fast' mount -->
+   <MaxLevel>86</MaxLevel>
+   
+   <MinDurability>0.4</MinDurability>
+   <MinFreeBagSlots>2</MinFreeBagSlots>
+    
+   <MailGrey>False</MailGrey>
+   <MailWhite>False</MailWhite>
+   <MailGreen>True</MailGreen>
+   <MailBlue>True</MailBlue>
+   <MailPurple>True</MailPurple>
+   
+   <SellGrey>True</SellGrey>
+   <SellWhite>True</SellWhite>
+   <SellGreen>False</SellGreen>
+   <SellBlue>False</SellBlue>
+   <SellPurple>False</SellPurple>
+   
+   
+   <Blackspots>
+       <!-- Ramp in Darnasses otw to Auction House -->
+		<Blackspot X="9880.041" Y="2248.925" Z="1329.245" Radius="15" />
+   </Blackspots>
+   
+   <QuestOrder>
+		<CustomBehavior File="Message" LogColor="CornflowerBlue"
+			Text="Compiling quests" />
+			
+		<If Condition="!Me.IsAlliance" >
+			<CustomBehavior File="UserDialog" StopOnContinue="true"
+				Text="Sorry, this profile only works for Alliance at the moment." />
+		</If>
+		
+		<If Condition="!CanFly()" >
+			<CustomBehavior File="UserDialog" StopOnContinue="true"
+				Text="Your toon must be able to fly in Kalimdor and Eastern Kingdoms to use this profile." />
+		</If>
+
+		<If Condition="Me.FreeBagSlots &lt; 10" >
+			<CustomBehavior File="UserDialog" StopOnContinue="true"
+				Text="You must have 10 free bag slots to start this profile.\nPlease make some room in your inventory and restart the profile." />
+		</If>
+
+
+		<If Condition="!(Me.ZoneId == 12)" >
+			<If Condition="(!HasQuest(8311) &amp;&amp; !IsQuestCompleted(8311)) || (!HasQuest(29075) &amp;&amp; !IsQuestCompleted(29075)) || (!HasQuest(29371) &amp;&amp; !IsQuestCompleted(29371))|| (!HasQuest(29430) &amp;&amp; !IsQuestCompleted(29430)) || (!HasQuest(29144) &amp;&amp; !IsQuestCompleted(29144)) || (!HasQuest(29054) &amp;&amp; !IsQuestCompleted(29054))" >			
+
+				<If Condition="Me.MapId != 0" >
+					<CustomBehavior File="UserDialog" StopOnContinue="true"
+						Text="Our tasks are outside of Stormwind.\n\nPlease move to Eastern Kindoms and start the profile again." />
+				</If>
+
+				<CustomBehavior File="FlyTo" DestName="Gates of Stormwind"
+					X="-9105.388" Y="407.889" Z="92.64548" />
+				<CustomBehavior File="ForcedDismount" />
+			</If>
+		</If>
+		
+		<If Condition="!HasQuest(8311) &amp;&amp; !IsQuestCompleted(8311)" >
+			<Pickup QuestName="Hallow's End Treats for Jesper!" QuestId="8311"
+				GiverName="Jesper"  GiverId="15310"
+				X="-9105.973" Y="423.6476" Z="93.77649" />
+		</If>			
+		
+		<If Condition="!HasQuest(29075) &amp;&amp; !IsQuestCompleted(29075)" >	<!-- daily -->
+			<Pickup QuestName="A Time to Gain" QuestId="29075"
+				GiverName="Celestine of the Harvest"  GiverId="51665"
+				X="-9108.686" Y="423.3663" Z="93.99661" />
+		</If>	
+		
+		<If Condition="!HasQuest(29371) &amp;&amp; !IsQuestCompleted(29371)" >	<!-- daily -->
+			<Pickup QuestName="A Time to Lose" QuestId="29371"
+				GiverName="Keira"  GiverId="52064"
+				X="-9110.67" Y="421.8038" Z="94.06859" />
+		</If>	
+
+		<If Condition="!HasQuest(29430) &amp;&amp; !IsQuestCompleted(29430)" >
+			<Pickup QuestName="A Friend In Need" QuestId="29430"
+				GiverName="Gretchen Fenlow"  GiverId="51934"
+				X="-9117.248" Y="412.7083" Z="93.85802" />
+		</If>
+		
+		<If Condition="!HasQuest(29144) &amp;&amp; !IsQuestCompleted(29144)" >	<!-- daily -->
+			<Pickup QuestName="Clean Up in Stormwind" QuestId="29144"
+				GiverName="Gretchen Fenlow"  GiverId="51934"
+				X="-9117.248" Y="412.7083" Z="93.85802" />
+		</If>
+		
+		<If Condition="!HasQuest(29054) &amp;&amp; !IsQuestCompleted(29054)" >
+			<Pickup QuestName="Stink Bombs Away!" QuestId="29054"
+				GiverName="Gretchen Fenlow"  GiverId="51934"
+				X="-9117.248" Y="412.7083" Z="93.85802" />
+		</If>
+
+		<!-- Quest: A Time to Gain -->
+		<While Condition="HasQuest(29075) &amp;&amp; !IsQuestCompleted(29075)" >
+			<RunTo X="-9084.142" Y="401.8384" Z="93.08388" />
+			<CustomBehavior File="InteractWith"
+				MobId="208186" ObjectType="Gameobject" />
+		</While>
+		
+		<If Condition="HasQuest(29075)" >
+			<TurnIn QuestName="A Time to Gain" QuestId="29075"
+				TurnInName="Celestine of the Harvest"  TurnInId="51665"
+				X="-9108.686" Y="423.3663" Z="93.99661" />
+		</If>
+		
+		<!-- Quest: Stink Bombs Away! -->
+		<While Condition="!IsQuestCompleted(29054)" >
+			<CustomBehavior File="InteractWith" MobId="52548"
+				GossipOptions="1" />
+			<CustomBehavior File="WaitTimer" WaitTime="11000" VariantTime="5000" />
+			<While Condition="!IsQuestCompleted(29054) &amp;&amp; (Me.ZoneId == 1497)" >
+				<CustomBehavior File="Misc\RunLua" Lua="CastPetAction(1)" />
+				<CustomBehavior File="WaitTimer" WaitTime="500" VariantTime="500" />
+				<If Condition="LegacySpellManager.ClickRemoteLocation(Me.Location)" />
+				<CustomBehavior File="WaitTimer" WaitTime="3000" VariantTime="1500" />
+			</While>
+			<If Condition="Me.ZoneId == 1497">
+				<CustomBehavior File="Misc\RunLua" Lua="CastPetAction(6)" />
+			</If>
+		</While>
+		
+		<If Condition="HasQuest(29054)" >
+			<TurnIn QuestName="Stink Bombs Away!" QuestId="29054"
+				TurnInName="Gretchen Fenlow"  TurnInId="51934"
+				X="-9117.248" Y="412.7083" Z="93.85802" />
+		</If>
+		
+			
+		<!-- Quest: Clean Up in Stormwind -->
+		<While Condition="HasQuest(29144) &amp;&amp; !IsQuestCompleted(29144)" >
+
+			<If Condition="Chance(20.0)" >
+				<CustomBehavior File="FlyTo" DestName="Stormwind Trade District"
+					X="-8723.15" Y="427.6458" Z="98.12009" />
+			<ElseIf Condition="Chance(20.0)" >
+				<CustomBehavior File="FlyTo" DestName="Stormwind Keep"
+					X="-8442.049" Y="334.1038" Z="141.8436" />
+				</ElseIf>
+			<ElseIf Condition="Chance(20.0)" >
+				<CustomBehavior File="FlyTo" DestName="Stormwind Dwarven District"
+					X="-8395.685" Y="584.3401" Z="92.21215" />
+				</ElseIf>
+			<ElseIf Condition="Chance(20.0)" >
+				<CustomBehavior File="FlyTo" DestName="Stormwind Mage Quarter"
+					X="-8914.686" Y="957.2651" Z="117.5736" />
+				</ElseIf>
+			<Else>
+				<CustomBehavior File="FlyTo" DestName="Stormwind Cathedral Square"
+					X="-8581.469" Y="730.3497" Z="96.82936" />
+				</Else>
+			</If>
+			<CustomBehavior File="ForcedDismount" />
+			
+			<If Condition="!IsQuestCompleted(29144)" >
+				<CustomBehavior File="InteractWith" MobId="208200" ObjectType="Gameobject"
+					WaitForNpcs="false" WaitTime="10" />
+				<CustomBehavior File="WaitTimer" WaitTime="300" VariantTime="800" />
+				<CustomBehavior File="Misc\RunLua" Lua="UseItemByName(69191)" />
+				<CustomBehavior File="WaitTimer" WaitTime="500" VariantTime="500" />
+				<If Condition="LegacySpellManager.ClickRemoteLocation(Me.Location)" />
+			</If>
+			
+			<If Condition="!IsQuestCompleted(29144)" >
+				<CustomBehavior File="InteractWith" MobId="208200" ObjectType="Gameobject"
+					WaitForNpcs="false" WaitTime="10" />
+				<CustomBehavior File="WaitTimer" WaitTime="300" VariantTime="800" />
+				<CustomBehavior File="Misc\RunLua" Lua="UseItemByName(69191)" />
+				<CustomBehavior File="WaitTimer" WaitTime="500" VariantTime="500" />
+				<If Condition="LegacySpellManager.ClickRemoteLocation(Me.Location)" />
+			</If>
+			
+			<If Condition="!IsQuestCompleted(29144)" >
+				<CustomBehavior File="InteractWith" MobId="208200" ObjectType="Gameobject"
+					WaitForNpcs="false" WaitTime="10" />
+				<CustomBehavior File="WaitTimer" WaitTime="300" VariantTime="800" />
+				<CustomBehavior File="Misc\RunLua" Lua="UseItemByName(69191)" />
+				<CustomBehavior File="WaitTimer" WaitTime="500" VariantTime="500" />
+				<If Condition="LegacySpellManager.ClickRemoteLocation(Me.Location)" />
+			</If>
+			
+			<If Condition="!IsQuestCompleted(29144)" >
+				<CustomBehavior File="InteractWith" MobId="208200" ObjectType="Gameobject"
+					WaitForNpcs="false" WaitTime="10" />
+				<CustomBehavior File="WaitTimer" WaitTime="300" VariantTime="800" />
+				<CustomBehavior File="Misc\RunLua" Lua="UseItemByName(69191)" />
+				<CustomBehavior File="WaitTimer" WaitTime="500" VariantTime="500" />
+				<If Condition="LegacySpellManager.ClickRemoteLocation(Me.Location)" />
+			</If>
+		</While>
+
+
+		<!-- Quest: Hallow's End Treats for Jesper!: Stormwind Nougat -->
+		<If Condition="HasQuest(8311) &amp;&amp; !HasItem(20492)" >
+			<CustomBehavior File="FlyTo" DestName="Stormwind Inn"
+				X="-8857.192" Y="657.7342" Z="96.60722" />
+			<CustomBehavior File="ForcedDismount" />
+			
+			<If Condition="HasQuest(8356)" >
+				<CustomBehavior File="AbandonQuest" QuestId="8356" Type="All" />
+			</If>
+			<CustomBehavior File="WaitTimer" WaitTime="1000" VariantTime="2500" />
+			<Pickup QuestName="Flex for Nougat" QuestId="8356"
+				GiverName="Innkeeper Allison"  GiverId="6740" />
+			<CustomBehavior File="WaitTimer" WaitTime="1000" VariantTime="2500" />
+			<CustomBehavior File="RunMacro" Macro="/target Innkeeper\n/flex" />
+			<CustomBehavior File="WaitTimer" WaitTime="3000" VariantTime="2500" />
+			<TurnIn QuestName="Flexing for Nougat" QuestId="8356"
+				TurnInName="Innkeeper Allison"  TurnInId="6740" />				
+		</If>
+		
+		<!-- Quest Chain: Minipet -->
+		<If Condition="HasQuest(29430)" >
+			<TurnIn QuestName="A Friend in Need" QuestId="29430"
+			   TurnInName="Anson Hastings" TurnInId="53949"
+			   X="-8866.139" Y="679.5799" Z="97.9036" />
+		</If>
+		
+		<If Condition="!HasQuest(29392) &amp;&amp; !IsQuestCompleted(29392)" >
+			<Pickup QuestName="Missing Heirlooms" QuestId="29392"
+			   GiverName="Anson Hastings" GiverId="53949"
+			   X="-8866.139" Y="679.5799" Z="97.9036" />
+		</If>
+		
+		<If Condition="HasQuest(29392)" >
+			<CustomBehavior File="FlyTo" DestName="Courier's Boat"
+				X="-8480.229" Y="1339.333" Z="5.230462" />
+			<CustomBehavior File="ForcedDismount" />
+			<RunTo X="-8512.466" Y="1304.847" Z="6.09872" />
+			<TurnIn QuestName="Missing Heirlooms" QuestId="29392"
+				TurnInName="Hired Courier" TurnInId="53950"
+				X="-8514.993" Y="1305.21" Z="6.098406" />
+		</If>
+		
+		<If Condition="!HasQuest(29398) &amp;&amp; !IsQuestCompleted(29398)" >
+			<Pickup QuestName="Fencing the Goods" QuestId="29398"
+			   GiverName="Hired Courier" GiverId="53950"
+			   X="-8866.139" Y="679.5799" Z="97.9036" />
+			<RunTo DestName="off Courier's Boat"
+				X="-8480.229" Y="1339.333" Z="5.230462" />
+		</If>
+		
+		<If Condition="HasQuest(29398)" >
+			<!-- Spread out our approach since many people in the area... -->
+			<If Condition="Chance(25.0)" >
+				<CustomBehavior File="FlyTo" DestName="Auctioneer Fitch"
+					X="-8797.949" Y="638.2543" Z="94.37944" />
+			<ElseIf Condition="Chance(25.0)" >
+				<CustomBehavior File="FlyTo" DestName="Auctioneer Fitch"
+					X="-8790.609" Y="683.3631" Z="101.9193" />
+				</ElseIf>
+			<ElseIf Condition="Chance(25.0)" >
+				<CustomBehavior File="FlyTo" DestName="Auctioneer Fitch"
+					X="-8847.884" Y="605.9998" Z="92.81395" />
+				</ElseIf>
+			<Else>
+				<CustomBehavior File="FlyTo" DestName="Auctioneer Fitch"
+					X="-8868.953" Y="713.3129" Z="97.59542" />
+				</Else>
+			</If>
+			<CustomBehavior File="ForcedDismount" />
+			<RunTo X="-8815.621" Y="658.7954" Z="98.10232" />
+			<If Condition="!IsQuestCompleted(29398)">
+				<CustomBehavior File="InteractWith" MobId="8719"
+					GossipOptions="2" />
+			</If>
+			<While Condition="!IsQuestCompleted(29398)" >
+				<CustomBehavior File="WaitTimer" WaitTime="10000" VariantTime="7000"
+					GoalText="Waiting for Auctioneer Fitch" />
+			</While>
+			<TurnIn QuestName="Fencing the Goods" QuestId="29398"
+				TurnInName="Auctioneer Fitch" TurnInId="8719" />
+		</If>		
+		
+		<If Condition="!HasQuest(29399) &amp;&amp; !IsQuestCompleted(29399)" >
+			<Pickup QuestName="Shopping Around" QuestId="29399"
+			   GiverName="Auctioneer Fitch" GiverId="8719" />
+			<RunTo DestName="outside" X="-8846.378" Y="644.9734" Z="96.56713" />
+		</If>
+
+		<If Condition="HasQuest(29399)" >
+			<CustomBehavior File="FlyTo" DestName="The Shady Lady"
+				X="-8549.929" Y="623.9456" Z="101.4792" />
+			<CustomBehavior File="ForcedDismount" />
+			<RunTo DestName="The Shady Lady" X="-8532.978" Y="606.2695" Z="102.8774" />
+			<While Condition="!IsQuestCompleted(29399)" >
+				<CustomBehavior File="WaitTimer" WaitTime="10000" VariantTime="7000"
+					GoalText="Loitering for Quest complete" />
+			</While>
+			<TurnIn QuestName="Shopping Around" QuestId="29399"
+				TurnInName="Hudson Barnes" TurnInId="54021" />
+		</If>
+
+		<If Condition="!HasQuest(29402) &amp;&amp; !IsQuestCompleted(29402)" >
+			<Pickup QuestName="Taking Precautions" QuestId="29402"
+			   GiverName="Hudson Barnes" GiverId="54021"
+			   X="-8532.002" Y="608.059" Z="102.8771" />
+			<RunTo DestName="outside" X="-8549.929" Y="623.9456" Z="101.4792" />
+		</If>
+		
+		<If Condition="HasQuest(29402)" >
+			<While Condition="GetItemCount(71035) &lt; 5" >	<!-- Blood Nettle -->
+				<If Condition="Chance(33.3)" >
+					<CustomBehavior File="FlyTo" DestName="Blood Nettle grounds"
+						X="-8043.436" Y="785.0538" Z="67.15574" />
+				<ElseIf Condition="Chance(33.3)" >
+					<CustomBehavior File="FlyTo" DestName="Blood Nettle grounds"
+						X="-8076.485" Y="616.6597" Z="70.53027" />
+					</ElseIf>
+				<Else>
+					<CustomBehavior File="FlyTo" DestName="Blood Nettle grounds"
+						X="-8214.514" Y="817.9022" Z="73.01321" />
+					</Else>
+				</If>
+				<CustomBehavior File="ForcedDismount" />
+				<CustomBehavior File="CollectThings" CollectUntil="NoTargetsInArea"
+					ObjectId="209059" CollectItemId="71035" CollectItemCount="5" />
+			</While>
+			
+			<If Condition="(GetItemCount(17020) &lt; 5) || (GetItemCount(3371) &lt; 5)" >
+				<!-- Spread out our approach since many people in the area... -->
+				<If Condition="Chance(25.0)" >
+					<CustomBehavior File="FlyTo" DestName="Merchants"
+						X="-8797.949" Y="638.2543" Z="94.37944" />
+				<ElseIf Condition="Chance(25.0)" >
+					<CustomBehavior File="FlyTo" DestName="Merchants"
+						X="-8790.609" Y="683.3631" Z="101.9193" />
+					</ElseIf>
+				<ElseIf Condition="Chance(25.0)" >
+					<CustomBehavior File="FlyTo" DestName="Merchants"
+						X="-8847.884" Y="605.9998" Z="92.81395" />
+					</ElseIf>
+				<Else>
+					<CustomBehavior File="FlyTo" DestName="Merchants"
+						X="-8868.953" Y="713.3129" Z="97.59542" />
+					</Else>
+				</If>
+				<CustomBehavior File="ForcedDismount" />
+			</If>
+			
+			<If Condition="GetItemCount(17020) &lt; 5" >	<!-- Arcane Powder -->
+				<RunTo DestName="dumbass HBNav workaround"
+					X="-8852.922" Y="607.7866" Z="92.59505" />
+				<CustomBehavior File="InteractWith" MobId="1275"
+					BuyItemId="17020" BuyItemCount="5"
+					X="-8861.896" Y="624.5381" Z="95.99025" />
+				<CustomBehavior File="Misc\RunLua" Lua="CloseMerchant()" />
+				<RunTo DestName="outside" X="-8852.922" Y="607.7866" Z="92.59505" />
+			</If>
+
+			<If Condition="GetItemCount(3371) &lt; 5" >	<!-- Crystal Vial -->
+				<RunTo DestName="dumbass HBNav workaround"
+					X="-8836.829" Y="611.0883" Z="93.73184" />
+				<CustomBehavior File="InteractWith" MobId="1286"
+					BuyItemId="3371" BuyItemCount="5"
+					X="-8823.004" Y="598.5755" Z="95.57915"	/>
+				<CustomBehavior File="Misc\RunLua" Lua="CloseMerchant()" />
+				<RunTo DestName="outside" X="-8823.745" Y="616.9016" Z="94.79179" />
+			</If>
+			
+			<CustomBehavior File="FlyTo" DestName="The Shady Lady"
+				X="-8549.929" Y="623.9456" Z="101.4792" />
+			<CustomBehavior File="ForcedDismount" />
+			<RunTo DestName="The Shady Lady" X="-8532.978" Y="606.2695" Z="102.8774" />
+			<TurnIn QuestName="Taking Precautions" QuestId="29402"
+				TurnInName="Hudson Barnes" TurnInId="54021" />			
+		</If>
+		
+		<If Condition="!HasQuest(29403) &amp;&amp; !IsQuestCompleted(29403)" >
+			<Pickup QuestName="The Collector's Agent" QuestId="29403"
+			   GiverName="Hudson Barnes" GiverId="54021"
+			   X="-8532.002" Y="608.059" Z="102.8771" />
+			<RunTo DestName="outside" X="-8549.929" Y="623.9456" Z="101.4792" />
+		</If>
+		
+		<If Condition="HasQuest(29403)" >
+			<CustomBehavior File="FlyTo" DestName="Stormwind Cathedral"
+				X="-8591.328" Y="799.1527" Z="106.5042" />
+			<CustomBehavior File="ForcedDismount" />
+			<RunTo DestName="Stolen Crate in SW Cathedral Catacombs"
+				X="-8500.279" Y="762.4012" Z="72.39617" />
+			<While Condition="!IsQuestCompleted(29403)" >
+				<CustomBehavior File="WaitTimer" WaitTime="10000" VariantTime="7000" />
+			</While>
+			<TurnIn QuestName="The Collector's Agent" QuestId="29403"
+				TurnInName="StolenCrate" TurnInId="209072" TurnInType="Object" />
+		</If>
+		
+		<If Condition="!HasQuest(29411) &amp;&amp; !IsQuestCompleted(29411)" >
+			<Pickup QuestName="What Now?" QuestId="29411"
+			   GiverName="Stolen Crate" GiverId="209072" GiverType="Object"
+			   X="-8591.328" Y="799.1527" Z="106.5042" />
+			<RunTo DestName="outside" X="-8591.328" Y="799.1527" Z="106.5042" />
+		</If>
+		
+		<If Condition="HasQuest(29411)" >
+			<CustomBehavior File="FlyTo" DestName="Stormwind Inn"
+				X="-8857.192" Y="657.7342" Z="96.60722" />
+			<CustomBehavior File="ForcedDismount" />
+			<TurnIn QuestName="What Now?" QuestId="29411"
+			   TurnInName="Anson Hastings" TurnInId="53949" />
+			<CustomBehavior File="WaitTimer" WaitTime="2000" VariantTime="2000" />
+		</If>
+		
+		<If Condition="!HasQuest(29413) &amp;&amp; !IsQuestCompleted(29413)" >
+			<CustomBehavior File="InteractWith"
+				MobId="209076" ObjectType="Gameobject"
+				X="-8591.328" Y="799.1527" Z="106.5042"	/>
+			<CustomBehavior File="WaitTimer" WaitTime="1000" VariantTime="500" />
+			<CustomBehavior File="Misc\RunLua" Lua="GetQuestReward(1)" />
+			<CustomBehavior File="WaitTimer" WaitTime="1500" VariantTime="2000" />
+		</If>
+		
+		<If Condition="GetItemCount(71076) &gt; 0" >
+			<!-- Learn our new mini-pet spell -->
+			<CustomBehavior File="Misc\RunLua" Lua="UseItemByName(71076)" />
+			<CustomBehavior File="Message" LogColor="CornflowerBlue"
+				Text="Grats on the new &quot;Creepy Crate&quot; mini-pet!" />
+		</If>
+
+		<!-- Quest: Hallow's End Treats for Jesper!: Gnomeregan & Ironforge -->
+		<If Condition="HasQuest(8311) &amp;&amp; (!HasItem(20494) || !HasItem(20490))" >
+			<CustomBehavior File="FlyTo" DestName="Gates of Ironforge"
+				X="-5040.197" Y="-812.6722" Z="495.1284" />
+			<CustomBehavior File="ForcedDismount" />
+			<CustomBehavior File="UserSettings" UseMount="false" />
+			
+			<!-- Hallow's End Treats for Jesper!: Ironforge Mint -->
+			<If Condition="HasQuest(8311) &amp;&amp; !HasItem(20490)" >
+				<RunTo DestName="Ironforge Innkeeper"
+					X="-4841.147" Y="-861.3002" Z="501.914" />
+				<If Condition="HasQuest(8353)" >
+					<CustomBehavior File="AbandonQuest" QuestId="8353" Type="All" />
+				</If>
+				<CustomBehavior File="WaitTimer" WaitTime="1000" VariantTime="2500" />
+				<Pickup QuestName="Chicken Clucking for a Mint" QuestId="8353"
+					GiverName="Innkeeper Firebrew"  GiverId="5111" />
+				<CustomBehavior File="WaitTimer" WaitTime="1000" VariantTime="2500" />
+				<CustomBehavior File="RunMacro" Macro="/target Innkeeper\n/chicken" />
+				<CustomBehavior File="WaitTimer" WaitTime="3000" VariantTime="2500" />
+				<TurnIn QuestName="Chicken Clucking for a Mint" QuestId="8353"
+					TurnInName="Innkeeper Firebrew"  TurnInId="5111" />
+			</If>
+
+			<!-- Quest: Hallow's End Treats for Jesper!: Gnomeregan Gumdrop -->
+			<If Condition="HasQuest(8311) &amp;&amp; !HasItem(20494)" >
+				<RunTo DestName="Ironforge Mystic Ward"
+					X="-4589.013" Y="-999.1818" Z="503.6568"  />
+				<If Condition="HasQuest(8355)" >
+					<CustomBehavior File="AbandonQuest" QuestId="8355" Type="All" />
+				</If>
+				<CustomBehavior File="WaitTimer" WaitTime="1000" VariantTime="2500" />
+				<Pickup QuestName="Incoming Gumdrop" QuestId="8355"
+					GiverName="Talvash del Kissel"  GiverId="6826" />
+				<CustomBehavior File="WaitTimer" WaitTime="1000" VariantTime="2500" />
+				<CustomBehavior File="RunMacro" Macro="/target Talvash\n/train" />
+				<CustomBehavior File="WaitTimer" WaitTime="3000" VariantTime="2500" />
+				<TurnIn QuestName="Incoming Gumdrop" QuestId="8355"
+					TurnInName="Talvash del Kissel"  TurnInId="6826" />	
+			</If>
+			
+			<RunTo DestName="Gates of Ironforge" X="-5040.197" Y="-812.6722" Z="495.1284" />
+			<CustomBehavior File="UserSettings" Preset="UserOriginal" />
+		</If>
+		
+		<!-- Quest: A Time of Loss -->
+		<While Condition="HasQuest(29371) &amp;&amp; !IsQuestCompleted(29371)" >
+			<CustomBehavior File="FlyTo" DestName="Undercity Wickerman"
+				X="1765.216" Y="201.7121" Z="60.39965" />
+			<CustomBehavior File="ForcedDismount" />
+			<CustomBehavior File="UseItem" ItemId="68648" />
+			<CustomBehavior File="WaitTimer" WaitTime="500" VariantTime="500" />
+			<CustomBehavior File="FlyTo" DestName="airborne safety"
+				X="1765.216" Y="201.7121" Z="160.39965" />
+		</While>
+		
+				
+		
+		<!-- Quest: Hallow's End Treats for Jesper!: Darnassas Marzipan-->
+		<If Condition="HasQuest(8311) &amp;&amp; !HasItem(20496)" >
+			<!-- Move to Darnassas via Stormwind Harbor, if in Eastern Kingdoms -->
+			<If Condition="Me.MapId == 0" >
+				<CustomBehavior File="FlyTo" DestName="Stormwind Docks"
+					X="-8629.695" Y="1298.055" Z="5.536788" />
+				<CustomBehavior File="ForcedDismount" />
+				<CustomBehavior File="UseTransport"
+								TransportId="176310"
+								WaitAtX="-8641.42" WaitAtY="1325.966" WaitAtZ="5.23437"
+								TransportStartX="-8650.719" TransportStartY="1346.051" TransportStartZ="-0.04151175"
+								StandOnX="-8645.277" StandOnY="1339.042" StandOnZ="6.114784"
+								TransportEndX="8162.587" TransportEndY="1005.365" TransportEndZ="0.04256689"
+								GetOffX="8178.701" GetOffY="1003.521" GetOffZ="6.73991" />
+			</If>
+
+			<!-- If we're in Kalimdor, but not in Darnassas, fly to Rut'theran Village -->
+			<If Condition="(Me.MapId == 1) &amp;&amp; (Me.ZoneId != 1657)" >
+				<!-- We have to use MyCTM flying...
+					The Rut'theran portal doesn't work with GoThruPortal.
+					Flightor (e.g., FlyTo) has problems because we're on the edge of the map.
+				-->
+				<CustomBehavior File="FlyTo" DestName="Rut'theran boat dock"
+					X="8204.621" Y="1021.708" Z="31.24551" />
+				<CustomBehavior File="MyCTM" DestName="Darnassus"
+					X="8772.303" Y="1266.408" Z="1042.673" />
+				<CustomBehavior File="MyCTM" DestName="Darnassus"
+					X="8978.512" Y="1541.677" Z="1557.47" />
+				<CustomBehavior File="MyCTM" DestName="Darnassus"
+					X="9383.797" Y="1989.709" Z="1641.068" />
+				<CustomBehavior File="MyCTM" DestName="Darnassus"
+					X="9675.931" Y="2343.2" Z="1692.526" />
+				<CustomBehavior File="MyCTM" DestName="Darnassus"
+					X="9888.579" Y="2224.697" Z="1390.295" />
+				<CustomBehavior File="MyCTM" DestName="Darnassus"
+					X="10004.92" Y="2209.943" Z="1328.019" />
+				<CustomBehavior File="ForcedDismount" />
+			</If>
+			
+			<If Condition="Me.ZoneId != 1657">
+				<CustomBehavior File="UserDialog" StopOnContinue="true"
+					Text="Whoops, you're not where we left you.\n\nPlease move to Darnassas and start the profile again." />
+			</If>
+
+			<RunTo DestName="Darnassus Inn" X="10125.69" Y="2224.705" Z="1328.484" />
+			<CustomBehavior File="ForcedDismount" />
+			<If Condition="HasQuest(8357)" >
+				<CustomBehavior File="AbandonQuest" QuestId="8357" Type="All" />
+			</If>
+			<CustomBehavior File="WaitTimer" WaitTime="1000" VariantTime="2500" />
+			<Pickup QuestName="Dancing for Marzipan" QuestId="8357"
+				GiverName="Innkeeper Saelienne"  GiverId="6735" />
+			<CustomBehavior File="WaitTimer" WaitTime="1000" VariantTime="2500" />
+			<CustomBehavior File="RunMacro" Macro="/target Innkeeper\n/dance" />
+			<CustomBehavior File="WaitTimer" WaitTime="3000" VariantTime="2500" />
+			<TurnIn QuestName="Dancing for Marzipan" QuestId="8357"
+				TurnInName="Innkeeper Saelienne"  TurnInId="6735" />
+		</If>	
+
+		<!-- If we're still in Darnassus, move to SW via Blasted Lands Portal -->
+		<If Condition="Me.ZoneId == 1657">
+			<!-- Flying has serious problems in Darnasses, we'll just run there.., -->
+			<RunTo DestName="Blasted Lands Portal"
+				X="9658.931" Y="2508.835" Z="1331.616" />
+			<CustomBehavior File="InteractWith" ObjectType="Gameobject"
+					MobId="195141" />
+		</If>
+			
+		<CustomBehavior File="FlyTo" DestName="Gates of Stormwind"
+				X="-9105.388" Y="407.889" Z="92.64548" />
+
+		<If Condition="HasQuest(8311)" >
+			<TurnIn QuestName="Hallow's End Treats for Jesper!" QuestId="8311"
+				TurnInName="Jesper"  TurnInId="15310" />	
+		</If>			
+		
+		<If Condition="HasQuest(29075)" >
+			<TurnIn QuestName="A Time to Gain" QuestId="29075"
+				TurnInName="Celestine of the Harvest"  TurnInId="51665" />
+		</If>	
+		
+		<If Condition="HasQuest(29371)" >
+			<TurnIn QuestName="A Time to Lose" QuestId="29371"
+				TurnInName="Keira"  TurnInId="52064" />
+		</If>
+		
+		<If Condition="HasQuest(29054)" >
+			<TurnIn QuestName="Stink Bombs Away!" QuestId="29054"
+				TurnInName="Gretchen Fenlow"  TurnInId="51934"
+				X="-9117.248" Y="412.7083" Z="93.85802" />
+		</If>
+		
+		<If Condition="HasQuest(29144)" >	<!-- daily -->
+			<TurnIn QuestName="Clean Up in Stormwind" QuestId="29144"
+				TurnInName="Gretchen Fenlow"  TurnInId="51934"
+				X="-9117.248" Y="412.7083" Z="93.85802" />
+		</If>
+		
+		
+		
+		<!--
+		<If Condition="!(Me.ZoneId == 12)" >
+			<If Condition="(!HasQuest(8311) &amp;&amp; !IsQuestCompleted(8311)) || (!HasQuest(29075) &amp;&amp; !IsQuestCompleted(29075)) || (!HasQuest(29371) &amp;&amp; !IsQuestCompleted(29371))|| (!HasQuest(29430) &amp;&amp; !IsQuestCompleted(29430)) || (!HasQuest(29144) &amp;&amp; !IsQuestCompleted(29144)) || (!HasQuest(29054) &amp;&amp; !IsQuestCompleted(29054))" >			
+
+				<If Condition="Me.MapId != 0" >
+					<CustomBehavior File="UserDialog" StopOnContinue="true"
+						Text="Our tasks are outside of Stormwind.\n\nPlease move to Eastern Kindoms and start the profile again." />
+				</If>
+
+				<CustomBehavior File="FlyTo" DestName="Goldshire"
+					X="-9430.334" Y="53.16203" Z="56.64585" />
+				<CustomBehavior File="ForcedDismount" />
+			</If>
+		</If>
+		-->
+		
+		<!-- Quest: Fire Brigade Practice -->
+		<!--
+		<If Condition="!HasQuest(11360) &amp;&amp; !IsQuestCompleted(11360)" >
+			<Pickup QuestName="Fire Brigade Practice" QuestId="11360"
+				GiverName="Costumed Orphan Matron"  GiverId="24519"
+				X="-9105.973" Y="423.6476" Z="93.77649" />
+		</If>
+		
+		<If Condition="HasQuest(11360)" >
+			<While Condition="!IsQuestCompleted(11360)" >
+				<If Condition="GetItemCount(32971) &lt; 1" >
+					<CustomBehavior File="InteractWith"
+						MobId="186234" ObjectType="Gameobject" WaitTime="10"
+						X="-9374.562" Y="56.63796" Z="60.75373" />
+					<CustomBehavior File="WaitTimer" WaitTime="500" VariantTime="500" />
+				</If>
+				
+				<CustomBehavior File="UseItemTargetLocation" UseType="PointToObject"
+					MobId="23537" WaitTime="10"
+					ItemId="32971" Range="15" NumOfTimes="1"
+					X="-9332.429" Y="51.35927" Z="60.32919" />	
+				<CustomBehavior File="WaitTimer" WaitTime="500" VariantTime="500" />
+			</While>
+			
+			<TurnIn QuestName="Fire Brigade Practice" QuestId="11360"
+				TurnInName="Costumed Orphan Matron"  TurnInId="24519"
+				X="-9105.973" Y="423.6476" Z="93.77649" />			
+		</If>
+		-->
+
+
+		<!--
+		  ========== Whatever achievements we can get... ==========
+		  -->
+		  
+		<!-- Achievement: Out With It -->
+		<If Condition="!IsAchievementCompleted(288)" >
+			<If Condition="Me.HasAura(&quot;Upset Tummy&quot;)" >
+				<CustomBehavior File="UserDialog" AllowBotStop="true"
+					Text="You have the &quot;Upset Tummy&quot; buff...\n\nThis prevents us from getting the &quot;Out With It&quot; [http://www.wowhead.com/achievement=288] achievement for the moment.  Try again when the buff has worn off." />
+			<ElseIf Condition="GetItemCount(33226) &lt; 10" >
+				<CustomBehavior File="UserDialog" AllowBotStop="true"
+					Text="You do not have enough &quot;Tricky Treats&quot;...\n\nTricky Treats  [http://www.wowhead.com/item=33226] are required to get the &quot;Out With It&quot; achievement [http://www.wowhead.com/achievement=288].\n\n achievement for the moment.  Try again when you've the needed Tricky Treats in your inventory." />
+				</ElseIf>
+			<Else>
+				<While Condition="!Me.HasAura(&quot;Upset Tummy&quot;) &amp;&amp; (GetItemCount(33226) &gt; 1)" >
+					<CustomBehavior File="Misc\RunLua" Lua="UseItemByName(33226)" />
+					<CustomBehavior File="WaitTimer" WaitTime="4000" VariantTime="2000" />
+				</While>
+				</Else>
+			</If>
+		</If>
+		
+		<!-- Achievement: That Sparkling Smile -->
+		<If Condition="!IsAchievementCompleted(981)" >
+			<If Condition="GetItemCount(37604) &lt; 1" >
+				<CustomBehavior File="UserDialog" AllowBotStop="true"
+					Text="You do not have enough &quot;Tooth Picks&quot;...\n\nTooth Picks  [http://www.wowhead.com/item=37604] are required to get the &quot;That Sparkling Smile&quot; achievement[http://www.wowhead.com/achievement=981].\n\n achievement for the moment.  Try again when you've acquired a Tooth Pick in your inventory." />
+			<Else>
+				<CustomBehavior File="Misc\RunLua" Lua="UseItemByName(37604)" />
+				<CustomBehavior File="WaitTimer" WaitTime="4000" VariantTime="2000" />
+				</Else>
+			</If>
+		</If>
+		
+		<!-- Achievement: Sinister Calling -->
+		<If Condition="GetItemCount(42609) &gt; 1" >
+			<CustomBehavior File="Misc\RunLua" Lua="UseItemByName(42609)" />
+			<CustomBehavior File="WaitTimer" WaitTime="4000" VariantTime="2000" />
+			
+			<!-- Remove excess Sinister Squashlings from our inventory -->
+			<CustomBehavior File="Misc\RunLua" Lua="local id,n=0; for b=0,4 do for s=1,GetContainerNumSlots(b) do id=GetContainerItemID(b,s) if (id == 42609) then ClearCursor() PickupContainerItem(b,s) DeleteCursorItem() end end end" />
+			<CustomBehavior File="WaitTimer" WaitTime="500" VariantTime="2500" />
+		</If>
+			
+		
+		<!-- Deploy to a random place inside Stormwind -->
+		<If Condition="Chance(20.0)">
+			<CustomBehavior File="FlyTo" DestName="Elder's mailbox" X="-8859.798" Y="640.8622" Z="96.28608" />
+		<ElseIf Condition="Chance(20.0)">
+			<CustomBehavior File="FlyTo" DestName="Backgate Bank" X="-8360.063" Y="620.2231" Z="95.35557" />
+			</ElseIf>
+		<ElseIf Condition="Chance(20.0)">
+			<CustomBehavior File="FlyTo" DestName="Cathedral Square mailbox" X="-8657.595" Y="775.6388" Z="96.99747" />
+			</ElseIf>
+		<ElseIf Condition="Chance(20.0)">
+			<CustomBehavior File="FlyTo" DestName="Fishing pier mailbox"  X="-8826.954" Y="729.8922" Z="98.42244" />
+			</ElseIf>
+		<Else Condition="Chance(20.0)">
+			<CustomBehavior File="FlyTo" DestName="Canal mailbox" X="-8752.236" Y="561.497" Z="97.43406" />
+			</Else>
+		</If>
+		
+		<CustomBehavior File="ForcedDismount" />
+
+		<!--
+		  ========== All we can automate ==========
+		  -->
+		<CustomBehavior File="UserDialog" StopOnContinue="true" ExpiryTime="3600"
+				Text="END of the line." />
+		
+	</QuestOrder>
+   
+      
+	<!-- Helpful LUA Snippets...
+		/run print(GetAchievementCriteriaInfo(1184,1))
+		/run print(GetQuestLogLeaderBoard(1,GetQuestLogIndexByID(8311)))
+	  -->
+   
+</HBProfile>

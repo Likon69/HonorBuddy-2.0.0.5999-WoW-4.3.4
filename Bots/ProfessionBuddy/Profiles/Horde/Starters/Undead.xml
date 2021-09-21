@@ -1,0 +1,268 @@
+<HBProfile xsi:noNamespaceSchemaLocation="../Schemas/EchoSchema.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<!-- Original contribution by EchoTiger -->
+	<Name>Undead Starter ($ShortHash$)</Name>
+
+	<MinDurability>0.3</MinDurability>
+	<MinFreeBagSlots>3</MinFreeBagSlots>
+
+	<SellGrey>true</SellGrey>
+	<SellWhite>true</SellWhite>
+	<SellGreen>true</SellGreen>
+	<SellBlue>true</SellBlue>
+	<SellPurple>false</SellPurple>
+
+	<MailGrey>false</MailGrey>
+	<MailWhite>true</MailWhite>
+	<MailGreen>true</MailGreen>
+	<MailBlue>true</MailBlue>
+	<MailPurple>true</MailPurple>
+
+	<TargetElites>true</TargetElites>
+
+	<AvoidMobs>
+	</AvoidMobs>
+
+	<Mailboxes>
+	</Mailboxes>
+
+	<Vendors>
+	</Vendors>
+
+	<Blackspots>
+	</Blackspots>
+
+	<Blacklist>
+	</Blacklist>
+
+	<QuestOrder IgnoreCheckpoints="false" ContinuallySkipToCheckpoints="true" >
+		<!-- Check function status -->
+		<Code File="RunCode" Type="Definition">
+			<![CDATA[
+			private static bool? profileFunctionsEnabled => (bool?)AppDomain.CurrentDomain.GetData("QuestingProfiles_FunctionsEnabled");
+			private static bool IsStoreProfile(string path) => path.StartsWith("store://");
+			private static string Slashify(string path) => IsStoreProfile(path) ? path.Replace(@"\", "/") : path.Replace("/", @"\");
+
+			public __CompiledBatchClass__()
+			{
+				ActivateFunctions();
+			}
+
+			private static void ActivateFunctions()
+			{
+				if (profileFunctionsEnabled == null || profileFunctionsEnabled == false)
+				{
+					Bots.Professionbuddy.PBLog.Log(Colors.MediumPurple, "[Profile Message!]: ", Colors.Yellow, "Please stand by as the functions are being activated!");
+					LoadProfile(@"..\..\Functions\Activate Functions.xml");
+				}
+			}
+
+			private static void LoadProfile(string path)
+			{
+				var profile = GetNewPath(path);
+				if (!IsStoreProfile(profile) && !File.Exists(profile))
+				{
+					Bots.Professionbuddy.PBLog.Log(Colors.MediumPurple, "[Profile Message!]: ", Colors.Yellow, "Profile does not exist.\n" + profile);
+					return;
+				}
+
+				Bots.Professionbuddy.PBLog.Log(Colors.MediumPurple, "[Profile Message!]: ", Colors.Yellow, "Loading: " + profile);
+				ProfileManager.LoadNew(profile, false);
+			}
+
+			private static string GetNewPath(string path)
+			{
+				if (IsStoreProfile(path))
+					return Slashify(path);
+
+				var currentProfile = ProfileManager.XmlLocation;
+				if (IsStoreProfile(currentProfile))
+					return Slashify(currentProfile + "/../" + path);
+
+				var absolutePath = Path.Combine(Path.GetDirectoryName(currentProfile), path);
+				absolutePath = Path.GetFullPath(absolutePath);
+				var canonicalPath = new Uri(absolutePath).LocalPath;
+				return Slashify(canonicalPath);
+			}]]>
+		</Code>
+		<Code File="RunCode" Code="ActivateFunctions();" />
+		<!-- END Check function status -->
+
+		<If Condition="Me.IsAlliance" >
+			<Code File="LoadProfile" ProfileName="..\..\Questing Autoloader.xml" />
+		</If>
+		<!-- RunCode Methods -->
+			<Code File="RunCode">
+			<![CDATA[
+				Bots.Professionbuddy.PBLog.Log(System.Windows.Media.Colors.MediumPurple, "> [Profile Initialization Status] ", System.Windows.Media.Colors.CornflowerBlue, "\n     Auto-Looting	:: Enabled\n     Looting	:: Enabled\n     Game Addons	:: Disabled");
+				Lua.DoString("SetCVar('AutoLootDefault', 1);");
+				CharacterSettings.Instance.LootMobs = true;
+				CharacterSettings.Instance.Save();
+				Lua.DoString("for i=1,GetNumAddOns() do DisableAddOn(i) end ReloadUI();");
+				await Coroutine.Sleep(1500);
+				Logging.Write(System.Windows.Media.Colors.MediumPurple, "> [Ready to bot!]");
+			]]>
+			</Code>
+			<Code File="RunCode" Type="Definition">
+				<![CDATA[
+						bool DoQuest(params uint[] questIds)
+						{
+							foreach (var questId in questIds)
+							{
+								if (HasQuest(questId) && !IsQuestCompleted(questId)) return true;
+							}
+							return false;
+						}
+						bool NeedsQuest(params uint[] questIds)
+						{
+							foreach (var questId in questIds)
+							{
+								if (!HasQuest(questId) && !IsQuestCompleted(questId)) return true;
+							}
+							return false;
+						}
+						bool NeedsBreadcrumbQuest(params uint[] questIds)
+						{
+							foreach (var questId in questIds)
+							{
+								if (IsQuestCompleted(questId)) return false;
+							}
+							return true;
+						}
+						bool QuestDone(params uint[] questIds)
+						{
+							foreach (var questId in questIds)
+							{
+								if (HasQuest(questId) && IsQuestCompleted(questId)) return true;
+							}
+							return false;
+						}
+						bool QuestFlaggedCompleted(params uint[] questIds)
+						{
+							foreach (var questId in questIds)
+							{
+								return Lua.GetReturnVal<bool>($"return IsQuestFlaggedCompleted({questId});", 0);
+							}
+							return false;
+						}
+						async Task SkipCutscene(int preWait = 3000, int postWait = 3000)
+						{
+					// Add detection of cutscene here.
+							await Coroutine.Sleep(preWait);
+					// Test and improve the working method.
+							Lua.DoString("MovieFrame:StopMovie(); CinematicFrame_CancelCinematic(); StopCinematic();");
+							await Coroutine.Sleep(postWait);
+						}
+					]]>
+			</Code>
+		<!-- END RunCode Methods -->
+
+
+		<Code File="RunCode" Code="if (Me.HasAura(73523)) Me.GetAuraById(73523).TryCancelAura();" />
+
+		<PickUp QuestName="Fresh out of the Grave" QuestId="24959" GiverName="Agatha" GiverId="49044" X="1699.85" Y="1706.56" Z="135.928" />
+		<TurnIn QuestName="Fresh out of the Grave" QuestId="24959" TurnInName="Undertaker Mordo" TurnInId="1568" X="1692.539" Y="1676.172" Z="135.0358" />
+
+		<PickUp QuestName="The Shadow Grave" QuestId="28608" GiverName="Undertaker Mordo" GiverId="1568" X="1692.539" Y="1676.172" Z="135.0358" />
+		<Code File="InteractWith" MobId="207255" NonCompeteDistance="0" InteractByLooting="true" InteractBlacklistTimeInSeconds="1" QuestId="28608" QuestObjectiveIndex="1" X="1668.1" Y="1691.463" Z="120.719" />
+		<Code File="InteractWith" MobId="207256" NonCompeteDistance="0" InteractByLooting="true" InteractBlacklistTimeInSeconds="1" QuestId="28608" QuestObjectiveIndex="2" X="1668.1" Y="1691.463" Z="120.719" />
+		<TurnIn QuestName="The Shadow Grave" QuestId="28608" TurnInName="Undertaker Mordo" TurnInId="1568" X="1686.689" Y="1672.345" Z="135.7808" />
+
+		<PickUp QuestName="Those That Couldn&apos;t Be Saved" QuestId="26799" GiverName="Undertaker Mordo" GiverId="1568" X="1686.689" Y="1672.345" Z="135.7808" />
+		<Code File="KillUntilComplete" MobId="1501" QuestId="26799" >
+			<HuntingGrounds>
+				<Hotspot X="1720.283" Y="1695.303" Z="131.1642" />
+				<Hotspot X="1713.797" Y="1612.761" Z="121.8382" />
+			</HuntingGrounds>
+		</Code>
+		<TurnIn QuestName="Those That Couldn&apos;t Be Saved" QuestId="26799" TurnInName="Undertaker Mordo" TurnInId="1568" X="1691.816" Y="1671.674" Z="134.5768" />
+
+		<PickUp QuestName="Caretaker Caice" QuestId="28652" GiverName="Undertaker Mordo" GiverId="1568" X="1691.816" Y="1671.674" Z="134.5768" />
+		<TurnIn QuestName="Caretaker Caice" QuestId="28652" TurnInName="Caretaker Caice" TurnInId="2307" X="1685.019" Y="1650.197" Z="135.7822" />
+
+		<PickUp QuestName="The Wakening" QuestId="24960" GiverName="Caretaker Caice" GiverId="2307" X="1685.019" Y="1650.197" Z="135.7822" />
+		<Code File="InteractWith" MobId="49231" NonCompeteDistance="0" GossipOptions="1,1,1" InteractBlacklistTimeInSeconds="1" QuestId="24960" QuestObjectiveIndex="3" X="1739.249" Y="1701.386" Z="127.7903" />
+		<Code File="InteractWith" MobId="38895" NonCompeteDistance="0" GossipOptions="1,1" InteractBlacklistTimeInSeconds="1" QuestId="24960" QuestObjectiveIndex="1" X="1756.298" Y="1666.765" Z="121.3119" />
+		<Code File="InteractWith" MobId="49230" NonCompeteDistance="0" GossipOptions="1,1" InteractBlacklistTimeInSeconds="1" QuestId="24960" QuestObjectiveIndex="2" X="1754.844" Y="1643.352" Z="117.8795" />
+		<TurnIn QuestName="The Wakening" QuestId="24960" TurnInName="Caretaker Caice" TurnInId="2307" X="1686.605" Y="1650.343" Z="135.0558" />
+
+		<PickUp QuestName="Beyond the Graves" QuestId="25089" GiverName="Caretaker Caice" GiverId="2307" X="1686.605" Y="1650.343" Z="135.0558" />
+		<TurnIn QuestName="Beyond the Graves" QuestId="25089" TurnInName="Deathguard Saltain" TurnInId="1740" X="1858.655" Y="1602.073" Z="94.84836" />
+		<PickUp QuestName="Recruitment" QuestId="26800" GiverName="Deathguard Saltain" GiverId="1740" X="1858.655" Y="1602.073" Z="94.84836" />
+
+		<PickUp QuestName="Scourge on our Perimeter" QuestId="26801" GiverName="Shadow Priest Sarvis" GiverId="1569" X="1843.226" Y="1638.29" Z="97.29726" />
+
+		<Code File="KillUntilComplete" MobIds="1502, 1890" QuestId="26801" >
+			<HuntingGrounds>
+				<Hotspot X="1930.56" Y="1614.143" Z="82.07487" />
+				<Hotspot X="1921.605" Y="1555.36" Z="86.49697" />
+			</HuntingGrounds>
+		</Code>
+
+		<Code File="InteractWith" MobId="49340" CollectionDistance="200" QuestId="26800" QuestObjectiveIndex="1" >
+			<HuntingGrounds>
+				<Hotspot X="1930.56" Y="1614.143" Z="82.07487" />
+				<Hotspot X="1921.605" Y="1555.36" Z="86.49697" />
+			</HuntingGrounds>
+		</Code>
+
+		<TurnIn QuestName="Recruitment" QuestId="26800" TurnInName="Deathguard Saltain" TurnInId="1740" X="1865.378" Y="1604.244" Z="94.49268" />
+		<TurnIn QuestName="Scourge on our Perimeter" QuestId="26801" TurnInName="Shadow Priest Sarvis" TurnInId="1569" X="1843.292" Y="1636.31" Z="96.93366" />
+		<PickUp QuestName="Novice Elreth" QuestId="28651" GiverName="Shadow Priest Sarvis" GiverId="1569" X="1843.292" Y="1636.31" Z="96.93366" />
+		<TurnIn QuestName="Novice Elreth" QuestId="28651" TurnInName="Novice Elreth" TurnInId="1661" X="1845.468" Y="1636.252" Z="96.93366" />
+
+		<PickUp QuestName="The Truth of the Grave" QuestId="24961" GiverName="Novice Elreth" GiverId="1661" X="1845.468" Y="1636.252" Z="96.93366" />
+		<Code File="InteractWith" MobId="38910" NonCompeteDistance="0" GossipOptions="1" InteractBlacklistTimeInSeconds="1" QuestId="24961" QuestObjectiveIndex="1" X="1856.108" Y="1558.525" Z="99.0779" />
+		<TurnIn QuestName="The Truth of the Grave" QuestId="24961" TurnInName="Novice Elreth" TurnInId="1661" X="1845.339" Y="1636.113" Z="96.93364" />
+
+		<PickUp QuestName="The Executor In the Field" QuestId="28672" GiverName="Novice Elreth" GiverId="1661" X="1845.339" Y="1636.113" Z="96.93364" />
+		<TurnIn QuestName="The Executor In the Field" QuestId="28672" TurnInName="Executor Arren" TurnInId="1570" X="1997.818" Y="1544.757" Z="77.89249" />
+
+		<PickUp QuestName="The Damned" QuestId="26802" GiverName="Executor Arren" GiverId="1570" X="1997.818" Y="1544.757" Z="77.89249" />
+		<Code File="KillUntilComplete" QuestId="26802" >
+			<HuntingGrounds>
+				<Hotspot X="2054.443" Y="1479.386" Z="65.86863" />
+				<Hotspot X="2118.594" Y="1441.671" Z="64.08652" />
+			</HuntingGrounds>
+			<PursuitList>
+				<PursueUnit Id="1509" PursueWhen="!IsObjectiveComplete(1, 26802)" />
+				<PursueUnit Id="1513" PursueWhen="!IsObjectiveComplete(2, 26802)" />
+			</PursuitList>
+		</Code>
+		<TurnIn QuestName="The Damned" QuestId="26802" TurnInName="Executor Arren" TurnInId="1570" X="1998.979" Y="1541.452" Z="77.50513" />
+
+		<PickUp QuestName="Night Web&apos;s Hollow" QuestId="24973" GiverName="Executor Arren" GiverId="1570" X="1998.979" Y="1541.452" Z="77.50513" />
+		<Code File="KillUntilComplete" QuestId="24973" >
+			<HuntingGrounds>
+				<Hotspot X="2069.184" Y="1745.088" Z="79.35289" />
+				<Hotspot X="2022.788" Y="1899.3" Z="104.3818" />
+			</HuntingGrounds>
+			<PursuitList>
+				<PursueUnit Id="1504" PursueWhen="!IsObjectiveComplete(1, 24973)" />
+				<PursueUnit Id="1505" PursueWhen="!IsObjectiveComplete(2, 24973)" />
+			</PursuitList>
+		</Code>
+		<TurnIn QuestName="Night Web&apos;s Hollow" QuestId="24973" TurnInName="Executor Arren" TurnInId="1570" X="1997.094" Y="1546.594" Z="78.07383" />
+
+		<PickUp QuestName="No Better Than the Zombies" QuestId="24970" GiverName="Executor Arren" GiverId="1570" X="1997.094" Y="1546.594" Z="78.07383" />
+		<TurnIn QuestName="No Better Than the Zombies" QuestId="24970" TurnInName="Darnell" TurnInId="49425" X="1964.152" Y="1422.079" Z="66.49065" />
+
+		<PickUp QuestName="Assault on the Rotbrain Encampment" QuestId="24971" GiverName="Darnell" GiverId="49425" X="1964.152" Y="1422.079" Z="66.49065" />
+		<Code File="KillUntilComplete" QuestId="24971" X="1781.283" Y="1363.192" Z="87.7653" >
+			<PursuitList>
+				<PursueUnit Id="49424" PursueWhen="!IsObjectiveComplete(1, 24971)" />
+				<PursueUnit Id="49422" PursueWhen="!IsObjectiveComplete(2, 24971)" />
+				<PursueUnit Id="49423" PursueWhen="!IsObjectiveComplete(2, 24971)" />
+			</PursuitList>
+		</Code>
+		<TurnIn QuestName="Assault on the Rotbrain Encampment" QuestId="24971" TurnInName="Shadow Priest Sarvis" TurnInId="1569" X="1842.81" Y="1635.517" Z="96.93334" />
+
+		<PickUp QuestName="Vital Intelligence" QuestId="24972" GiverName="Shadow Priest Sarvis" GiverId="1569" X="1842.81" Y="1635.517" Z="96.93334" />
+		<TurnIn QuestName="Vital Intelligence" QuestId="24972" TurnInName="Deathguard Simmer" TurnInId="1519" X="2222.874" Y="1014.257" Z="37.12202" />
+
+		<Checkpoint Level="5" />
+
+		<Code File="LoadProfile" ProfileName="..\1-41 Autoloader.xml" />
+
+	</QuestOrder>
+
+</HBProfile>

@@ -1,0 +1,614 @@
+<HBProfile xsi:noNamespaceSchemaLocation="../Schemas/EchoSchema.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<!-- Original contribution by EchoTiger -->
+	<Name>Death Knight Starter ($ShortHash$)</Name>
+
+	<MinDurability>0.3</MinDurability>
+	<MinFreeBagSlots>3</MinFreeBagSlots>
+
+	<SellGrey>true</SellGrey>
+	<SellWhite>true</SellWhite>
+	<SellGreen>true</SellGreen>
+	<SellBlue>true</SellBlue>
+	<SellPurple>false</SellPurple>
+
+	<MailGrey>false</MailGrey>
+	<MailWhite>true</MailWhite>
+	<MailGreen>true</MailGreen>
+	<MailBlue>true</MailBlue>
+	<MailPurple>true</MailPurple>
+
+	<TargetElites>true</TargetElites>
+
+	<AvoidMobs>
+	</AvoidMobs>
+
+	<Mailboxes>
+	</Mailboxes>
+
+	<Vendors>
+	</Vendors>
+
+	<Blackspots>
+	</Blackspots>
+
+	<Blacklist>
+		<Mob Name="Stable Master Kitrik" Id="28683" Flags="Combat" />
+		<Mob Name="Scarlet Miner" Id="28819" Flags="Pull" />
+	</Blacklist>
+
+	<QuestOrder IgnoreCheckpoints="false" ContinuallySkipToCheckpoints="true" >
+		<!-- Check function status -->
+		<Code File="RunCode" Type="Definition">
+			<![CDATA[
+			private static bool? profileFunctionsEnabled => (bool?)AppDomain.CurrentDomain.GetData("QuestingProfiles_FunctionsEnabled");
+			private static bool IsStoreProfile(string path) => path.StartsWith("store://");
+			private static string Slashify(string path) => IsStoreProfile(path) ? path.Replace(@"\", "/") : path.Replace("/", @"\");
+
+			public __CompiledBatchClass__()
+			{
+				ActivateFunctions();
+			}
+
+			private static void ActivateFunctions()
+			{
+				if (profileFunctionsEnabled == null || profileFunctionsEnabled == false)
+				{
+					Bots.Professionbuddy.PBLog.Log(Colors.MediumPurple, "[Profile Message!]: ", Colors.Yellow, "Please stand by as the functions are being activated!");
+					LoadProfile(@"..\..\Functions\Activate Functions.xml");
+				}
+			}
+
+			private static void LoadProfile(string path)
+			{
+				var profile = GetNewPath(path);
+				if (!IsStoreProfile(profile) && !File.Exists(profile))
+				{
+					Bots.Professionbuddy.PBLog.Log(Colors.MediumPurple, "[Profile Message!]: ", Colors.Yellow, "Profile does not exist.\n" + profile);
+					return;
+				}
+
+				Bots.Professionbuddy.PBLog.Log(Colors.MediumPurple, "[Profile Message!]: ", Colors.Yellow, "Loading: " + profile);
+				ProfileManager.LoadNew(profile, false);
+			}
+
+			private static string GetNewPath(string path)
+			{
+				if (IsStoreProfile(path))
+					return Slashify(path);
+
+				var currentProfile = ProfileManager.XmlLocation;
+				if (IsStoreProfile(currentProfile))
+					return Slashify(currentProfile + "/../" + path);
+
+				var absolutePath = Path.Combine(Path.GetDirectoryName(currentProfile), path);
+				absolutePath = Path.GetFullPath(absolutePath);
+				var canonicalPath = new Uri(absolutePath).LocalPath;
+				return Slashify(canonicalPath);
+			}]]>
+		</Code>
+		<Code File="RunCode" Code="ActivateFunctions();" />
+		<!-- END Check function status -->
+
+		<If Condition="Me.IsHorde" >
+			<Code File="LoadProfile" ProfileName="..\..\Questing Autoloader.xml" />
+		</If>
+		<!-- RunCode Methods -->
+			<!--<Code File="RunCode">
+			<![CDATA[
+				Bots.Professionbuddy.PBLog.Log(System.Windows.Media.Colors.MediumPurple, "> [Profile Initialization Status] ", System.Windows.Media.Colors.CornflowerBlue, "\n     Auto-Looting	:: Enabled\n     Looting	:: Enabled\n     Game Addons	:: Disabled");
+				Lua.DoString("SetCVar('AutoLootDefault', 1);");
+				Lua.DoString("SetCVar('autoDismountFlying', 1);");
+				CharacterSettings.Instance.LootMobs = true;
+				CharacterSettings.Instance.Save();
+				Lua.DoString("for i=1,GetNumAddOns() do local relo=false if IsAddOnLoaded(i) then relo=true DisableAddOn(i) end if relo then relo=nil ReloadUI() end end");
+				await Coroutine.Sleep(1500);
+				Logging.Write(System.Windows.Media.Colors.MediumPurple, "> [Ready to bot!]");
+			]]>
+			</Code> -->
+			<Code File="RunCode" Type="Definition">
+				<![CDATA[
+						bool DoQuest(params uint[] questIds)
+						{
+							foreach (var questId in questIds)
+							{
+								if (HasQuest(questId) && !IsQuestCompleted(questId)) return true;
+							}
+							return false;
+						}
+						bool NeedsQuest(params uint[] questIds)
+						{
+							foreach (var questId in questIds)
+							{
+								if (!HasQuest(questId) && !IsQuestCompleted(questId)) return true;
+							}
+							return false;
+						}
+						bool NeedsBreadcrumbQuest(params uint[] questIds)
+						{
+							foreach (var questId in questIds)
+							{
+								if (IsQuestCompleted(questId)) return false;
+							}
+							return true;
+						}
+						bool QuestDone(params uint[] questIds)
+						{
+							foreach (var questId in questIds)
+							{
+								if (HasQuest(questId) && IsQuestCompleted(questId)) return true;
+							}
+							return false;
+						}
+						bool QuestFlaggedCompleted(params uint[] questIds)
+						{
+							foreach (var questId in questIds)
+							{
+								return Lua.GetReturnVal<bool>($"return IsQuestFlaggedCompleted({questId});", 0);
+							}
+							return false;
+						}
+						async Task SkipCutscene(int preWait = 3000, int postWait = 3000)
+						{
+					// Add detection of cutscene here.
+							await Coroutine.Sleep(preWait);
+					// Test and improve the working method.
+							Lua.DoString("MovieFrame:StopMovie(); CinematicFrame_CancelCinematic(); StopCinematic();");
+							await Coroutine.Sleep(postWait);
+						}
+					]]>
+			</Code>
+		<!-- END RunCode Methods -->
+
+
+		<PickUp QuestName="In Service Of The Lich King" QuestId="12593" GiverName="The Lich King" GiverId="25462" X="2349.655" Y="-5669.082" Z="426.0296" />
+		<TurnIn QuestName="In Service Of The Lich King" QuestId="12593" TurnInName="Instructor Razuvious" TurnInId="28357" X="2495.206" Y="-5605.694" Z="420.4313" />
+
+		<PickUp QuestName="The Emblazoned Runeblade" QuestId="12619" GiverName="Instructor Razuvious" GiverId="28357" X="2489.92" Y="-5573.324" Z="420.3495" />
+		<While Condition="DoQuest(12619)" >
+			<Code File="InteractWith" MobId="190584" NonCompeteDistance="0" InteractByLooting="true" PreInteractMountStrategy="Dismount" QuestId="12619" QuestObjectiveIndex="1" X="2488.404" Y="-5561.237" Z="420.6427" TerminateWhen="HasItem(38607)" />
+			<Code File="UseItem" ItemId="38607" QuestId="12619" QuestObjectiveIndex="1" X="2505.06" Y="-5563.245" Z="420.6449" />
+		</While>
+		<TurnIn QuestName="The Emblazoned Runeblade" QuestId="12619" TurnInName="Instructor Razuvious" TurnInId="28357" X="2492.479" Y="-5571.616" Z="420.4841" />
+
+		<PickUp QuestName="Runeforging: Preparation For Battle" QuestId="12842" GiverName="Instructor Razuvious" GiverId="28357" X="2492.479" Y="-5571.616" Z="420.4841" />
+		<While Condition="DoQuest(12842)" >
+			<MoveTo X="2505.427" Y="-5563.113" Z="420.6442" />
+			<Code File="PerformTradeskillOn" QuestId="12842" TradeSkillId="960" TradeSkillItemId="53343" CastOnItemId="38707" />
+		</While>
+		<TurnIn QuestName="Runeforging: Preparation For Battle" QuestId="12842" TurnInName="Instructor Razuvious" TurnInId="28357" X="2484.853" Y="-5556.69" Z="420.6442" />
+
+		<PickUp QuestName="The Endless Hunger" QuestId="12848" GiverName="Instructor Razuvious" GiverId="28357" X="2484.853" Y="-5556.69" Z="420.6442" />
+		<Code File="InteractWith" MobIds="191580, 191582, 191583, 191584, 191585, 191586, 191587, 191588" Range="3" NonCompeteDistance="0" InteractByUsingItemId="40732" PreInteractMountStrategy="Dismount" WaitTime="18000" QuestId="12848" QuestObjectiveIndex="1" X="2470.187" Y="-5584.372" Z="414.4511" /> <!-- MobIds="29565, 29566, 29567, 29519" -->
+		<TurnIn QuestName="The Endless Hunger" QuestId="12848" TurnInName="Instructor Razuvious" TurnInId="28357" X="2485.815" Y="-5566.056" Z="420.4525" />
+
+		<PickUp QuestName="The Eye Of Acherus" QuestId="12636" GiverName="Instructor Razuvious" GiverId="28357" X="2485.815" Y="-5566.056" Z="420.4525" />
+		<TurnIn QuestName="The Eye Of Acherus" QuestId="12636" TurnInName="The Lich King" TurnInId="25462" X="2348.355" Y="-5669.367" Z="426.0278" />
+
+		<PickUp QuestName="Death Comes From On High" QuestId="12641" GiverName="The Lich King" GiverId="25462" X="2348.355" Y="-5669.367" Z="426.0278" />
+		<While Condition="DoQuest(12641)" >
+			<Code File="ForcedDismount" />
+			<UseMount Value="false" />
+			<If Condition="!Me.HasAura(51852)">
+				<Code File="InteractWith" MobId="191609" NonCompeteDistance="0" X="2345.848" Y="-5696.338" Z="426.0303" />
+				<Code File="WaitTimer" WaitTime="25000" />
+			</If>
+			<Code File="Vehicles\VehicleMover" QuestId="12641" QuestObjectiveIndex="3" VehicleId="28511" AuraId_ProxyVehicle="51852" SpellId="51859" CastTime="9000" MovementBy="ClickToMoveOnly" X="1654.104" Y="-5996.521" Z="183.0229" />
+			<Code File="Vehicles\VehicleMover" QuestId="12641" QuestObjectiveIndex="1" VehicleId="28511" AuraId_ProxyVehicle="51852" SpellId="51859" CastTime="9000" MovementBy="ClickToMoveOnly" X="1799.286" Y="-6003.341" Z="170.4593"/>
+			<Code File="Vehicles\VehicleMover" QuestId="12641" QuestObjectiveIndex="2" VehicleId="28511" AuraId_ProxyVehicle="51852" SpellId="51859" CastTime="9000" MovementBy="ClickToMoveOnly" X="1592.047" Y="-5735.208" Z="196.1772"/>
+			<Code File="Vehicles\VehicleMover" QuestId="12641" QuestObjectiveIndex="4" VehicleId="28511" AuraId_ProxyVehicle="51852" SpellId="51859" CastTime="9000" MovementBy="ClickToMoveOnly" X="1384.774" Y="-5701.124" Z="199.2797"/>
+			<Code File="WaitTimer" WaitTime="5000"/>
+			<Code File="Misc\RunLua" Lua="CastSpellByID(52694)" />
+			<UseMount Value="true" />
+		</While>
+		<TurnIn QuestName="Death Comes From On High" QuestId="12641" TurnInName="The Lich King" TurnInId="25462" X="2348.873" Y="-5674.141" Z="426.0293" />
+
+		<PickUp QuestName="The Might Of The Scourge" QuestId="12657" GiverName="The Lich King" GiverId="25462" X="2348.873" Y="-5674.141" Z="426.0293" />
+		<TurnIn QuestName="The Might Of The Scourge" QuestId="12657" TurnInName="Highlord Darion Mograine" TurnInId="28444" X="2456.626" Y="-5596.498" Z="367.4011" />
+		<PickUp QuestName="Report To Scourge Commander Thalanor" QuestId="12850" GiverName="Highlord Darion Mograine" GiverId="28444" X="2456.626" Y="-5596.498" Z="367.4011" />
+
+		<If Condition="!IsQuestCompleted(12849)" >
+			<Code File="InteractWith" MobId="28472" NonCompeteDistance="0" PreInteractMountStrategy="Dismount" X="2524.08" Y="-5550.845" Z="377.0385" TerminateWhen="IsQuestCompleted(12849)" />
+			<Code File="RunCode" Code="QuestFrame.Instance.SelectAvailableQuest(0); await Coroutine.Sleep(750); QuestFrame.Instance.CompleteQuest();" />
+		</If>
+
+		<TurnIn QuestName="Report To Scourge Commander Thalanor" QuestId="12850" TurnInName="Scourge Commander Thalanor" TurnInId="28510" X="2368.762" Y="-5668.032" Z="382.2518" />
+
+		<PickUp QuestName="The Scarlet Harvest" QuestId="12670" GiverName="Scourge Commander Thalanor" GiverId="28510" X="2368.762" Y="-5668.032" Z="382.2518" />
+		<Code File="InteractWith" MobId="29488" PreInteractMountStrategy="Dismount" NonCompeteDistance="0" X="2350.808" Y="-5692.079" Z="382.2394" TerminateWhen="!HasQuest(12670) ? true : Me.Z &lt; 320" />
+		<TurnIn QuestName="The Scarlet Harvest" QuestId="12670" TurnInName="Prince Valanar" TurnInId="28377" X="2372.393" Y="-5703.151" Z="153.922" />
+
+		<PickUp QuestName="If Chaos Drives, Let Suffering Hold The Reins" QuestId="12678" GiverName="Prince Valanar" GiverId="28377" X="2372.393" Y="-5703.151" Z="153.922" />
+		<PickUp QuestName="Grand Theft Palomino" QuestId="12680" GiverName="Salanar the Horseman" GiverId="28653" X="2339.162" Y="-5689.065" Z="153.9224" />
+
+		<PickUp QuestName="Death&apos;s Challenge" QuestId="12733" GiverName="Olrun the Battlecaller" GiverId="29047" X="2371.692" Y="-5770.768" Z="151.3669" />
+		<Code File="InteractWith" MobId="28406" GossipOptions="1" CollectionDistance="200" NonCompeteDistance="0" PreInteractMountStrategy="Dismount" WaitTime="13000" QuestId="12733" QuestObjectiveIndex="1" >
+			<HuntingGrounds>
+				<Hotspot X="2345.681" Y="-5686.181" Z="153.9222" />
+				<Hotspot X="2393.972" Y="-5740.508" Z="153.9231" />
+			</HuntingGrounds>
+		</Code>
+		<TurnIn QuestName="Death&apos;s Challenge" QuestId="12733" TurnInName="Olrun the Battlecaller" TurnInId="29047" X="2372.712" Y="-5765.387" Z="151.3672" />
+
+		<PickUp QuestName="Tonight We Dine In Havenshire" QuestId="12679" GiverName="Orithos the Sky Darkener" GiverId="28647" X="2322.521" Y="-5743.292" Z="153.92" />
+
+		<While Condition="!IsQuestCompleted(12711)" >
+			<Code File="InteractWith" MobId="190917" NonCompeteDistance="0" PreInteractMountStrategy="Dismount" X="2115.019" Y="-5795.174" Z="99.64988" TerminateWhen="IsQuestCompleted(12711)" />
+			<Code File="RunCode" Code="QuestFrame.Instance.CompleteQuest();" />
+		</While>
+
+		<Code File="Hooks\Avoid" AvoidName="KirtrikAvoid" ObjectType="Npc" ObjectId="28683" Radius="20" />
+
+		<Code File="InteractWith" MobId="190691" CollectionDistance="200" NonCompeteDistance="0" InteractByLooting="true" PreInteractMountStrategy="Dismount" QuestId="12679" QuestObjectiveIndex="1" >
+			<HuntingGrounds>
+				<Hotspot X="2041.326" Y="-5847.049" Z="100.4434" />
+				<Hotspot X="1933.117" Y="-5823.95" Z="100.3739" />
+			</HuntingGrounds>
+		</Code>
+
+		<Code File="KillUntilComplete" QuestId="12678" >
+			<HuntingGrounds>
+				<Hotspot X="2078.673" Y="-5744.837" Z="99.46059" />
+				<Hotspot X="2139.78" Y="-5847.885" Z="101.3506" />
+				<Hotspot X="1989.338" Y="-5792.747" Z="100.9428" />
+				<Hotspot X="2199.467" Y="-5770.273" Z="101.478" />
+			</HuntingGrounds>
+			<PursuitList>
+				<PursueUnit Id="28557" PursueWhen="!IsObjectiveComplete(1, 12678)" />
+				<PursueUnit Id="28608" PursueWhen="!IsObjectiveComplete(1, 12678)" />
+				<PursueUnit Id="28609" PursueWhen="!IsObjectiveComplete(1, 12678)" />
+				<PursueUnit Id="28611" PursueWhen="!IsObjectiveComplete(1, 12678)" />
+				<PursueUnit Id="28576" PursueWhen="!IsObjectiveComplete(2, 12678)" />
+			</PursuitList>
+		</Code>
+
+		<Code File="Hooks\Avoid" AvoidName="KirtrikAvoid" Command="Remove" />
+
+		<While Condition="DoQuest(12680)" >
+			<Code File="InteractWith" MobId="28605" CollectionDistance="200" NonCompeteDistance="0" ProactiveCombatStrategy="ClearAll" PreInteractMountStrategy="Dismount" QuestId="12680" QuestObjectiveIndex="1" X="2215.517" Y="-5810.082" Z="101.3523" TerminateWhen="Me.InVehicle" />
+			<DisableBehavior Name="All" />
+			<Code File="TargetAndMoveToMob" MobId="28653" MoveWithinMaxRangeOfMob="1" NonCompeteDistance="0" X="2349.283" Y="-5700.748" Z="155.912" TerminateWhen="!Me.InVehicle" />
+			<Code File="Misc\RunLua" Lua="CastPetAction(1);" />
+			<EnableBehavior Name="All" />
+		</While>
+		<TurnIn QuestName="Grand Theft Palomino" QuestId="12680" TurnInName="Salanar the Horseman" TurnInId="28653" X="2342.95" Y="-5693.186" Z="153.9232" />
+
+		<PickUp QuestName="Into the Realm of Shadows" QuestId="12687" GiverName="Salanar the Horseman" GiverId="28653" X="2358.511" Y="-5710.078" Z="153.922" />
+		<While Condition="DoQuest(12687)" >
+			<Code File="KillUntilComplete" MobId="28768" QuestId="12687" X="2231.03" Y="-5795.15" Z="101.2543" TerminateWhen="Unit(28782, u =&gt; u.IsFriendly) != null" />
+			<Code File="InteractWith" MobId="28782" CollectionDistance="200" NonCompeteDistance="0" PreInteractMountStrategy="Dismount" QuestId="12687" QuestObjectiveIndex="1" X="2215.517" Y="-5810.082" Z="101.3523" TerminateWhen="Me.InVehicle" />
+			<DisableBehavior Name="All" />
+			<MoveTo X="2349.283" Y="-5700.748" Z="155.912" />
+			<Code File="Misc\RunLua" Lua="CastPetAction(1);" WaitTime="11000" QuestId="12687" />
+			<EnableBehavior Name="All" />
+		</While>
+		<TurnIn QuestName="Into the Realm of Shadows" QuestId="12687" TurnInName="Salanar the Horseman" TurnInId="28653" X="2352.068" Y="-5703.087" Z="153.9222" />
+
+		<TurnIn QuestName="If Chaos Drives, Let Suffering Hold The Reins" QuestId="12678" TurnInName="Prince Valanar" TurnInId="28377" X="2366.4" Y="-5704.159" Z="153.9223" />
+		<TurnIn QuestName="Tonight We Dine In Havenshire" QuestId="12679" TurnInName="Orithos the Sky Darkener" TurnInId="28647" X="2311.262" Y="-5726.539" Z="153.9153" />
+		<PickUp QuestName="Gothik the Harvester" QuestId="12697" GiverName="Prince Valanar" GiverId="28377" X="2367.715" Y="-5703.868" Z="153.9224" />
+		<TurnIn QuestName="Gothik the Harvester" QuestId="12697" TurnInName="Gothik the Harvester" TurnInId="28658" X="2350.955" Y="-5756.227" Z="153.9223" />
+
+		<PickUp QuestName="The Gift That Keeps On Giving" QuestId="12698" GiverName="Gothik the Harvester" GiverId="28658" X="2350.955" Y="-5756.227" Z="153.9223" />
+		<While Condition="DoQuest(12698)" >
+			<Code File="InteractWith" MobId="28819" Range="20" MobState="Alive" CollectionDistance="200" NonCompeteDistance="0" InteractByUsingItemId="39253" PreInteractMountStrategy="Dismount" WaitTime="5000" QuestId="12698" QuestObjectiveIndex="1" X="2449.184" Y="-5971.978" Z="94.4668" TerminateWhen="Me.Minions != null &amp;&amp; Me.Minions.Count(x =&gt; x.Entry == 28845) &gt;= 5" />
+			<MoveTo QuestId="12698" X="2350.4" Y="-5757.961" Z="153.9217" />
+		</While>
+		<TurnIn QuestName="The Gift That Keeps On Giving" QuestId="12698" TurnInName="Gothik the Harvester" TurnInId="28658" X="2350.4" Y="-5757.961" Z="153.9217" />
+
+		<PickUp QuestName="An Attack Of Opportunity" QuestId="12700" GiverName="Gothik the Harvester" GiverId="28658" X="2350.4" Y="-5757.961" Z="153.9217" />
+		<TurnIn QuestName="An Attack Of Opportunity" QuestId="12700" TurnInName="Prince Valanar" TurnInId="28377" X="2367.112" Y="-5704.113" Z="153.922" />
+
+		<PickUp QuestName="Massacre At Light&apos;s Point" QuestId="12701" GiverName="Prince Valanar" GiverId="28377" X="2367.112" Y="-5704.113" Z="153.922" />
+		<While Condition="DoQuest(12701)" >
+			<If Condition="Unit(28833, u =&gt; u.DistanceSqr &lt;= 30f*30f) == null" >
+				<Code File="InteractWith" MobId="190767" NonCompeteDistance="0" PreInteractMountStrategy="Dismount" QuestId="12701" QuestObjectiveIndex="1" X="2390.383" Y="-5897.012" Z="109.1992" TerminateWhen="Me.InVehicle" />
+				<DisableBehavior Name="All" />
+				<Code File="WaitTimer" WaitTime="80000" TerminateWhen="!Me.InVehicle" />
+			</If>
+			<DisableBehavior Name="All" />
+			<Code File="InteractWith" MobId="28833" Range="3" NonCompeteDistance="0" PreInteractMountStrategy="Dismount" InteractBlacklistTimeInSeconds="1" QuestId="12701" QuestObjectiveIndex="1" TerminateWhen="Me.InVehicle" />
+			<Code File="Vehicles\CannonControl" VehicleId="28833" MobId="28834" QuestId="12701" MaxAngle="0.4363" MinAngle="-0.4563" Gravity="15" Velocity="75" Buttons="2,1" ExitButton="5" TerminateWhen="!Me.InVehicle" />
+
+			<Code File="WaitTimer" WaitTime="10000" />
+			<Code File="WaitTimer" WaitTime="70000" VariantTime="10000" TerminateWhen="!Me.InVehicle" />
+			<EnableBehavior Name="All" />
+		</While>
+		<TurnIn QuestName="Massacre At Light&apos;s Point" QuestId="12701" TurnInName="Prince Valanar" TurnInId="28377" X="2367.111" Y="-5703.183" Z="153.9225" />
+
+		<PickUp QuestName="Victory At Death&apos;s Breach!" QuestId="12706" GiverName="Prince Valanar" GiverId="28377" X="2367.111" Y="-5703.183" Z="153.9225" />
+		<Code File="InteractWith" MobId="29501" NonCompeteDistance="0" PreInteractMountStrategy="Dismount" X="2408.402" Y="-5734.023" Z="153.9221" TerminateWhen="!HasQuest(12706) ? true : Me.Z &gt; 320" />
+		<TurnIn QuestName="Victory At Death&apos;s Breach!" QuestId="12706" TurnInName="Highlord Darion Mograine" TurnInId="28444" X="2457.378" Y="-5595.795" Z="367.3978" />
+
+		<PickUp QuestName="The Will Of The Lich King" QuestId="12714" GiverName="Highlord Darion Mograine" GiverId="28444" X="2457.378" Y="-5595.795" Z="367.3978" />
+		<Code File="InteractWith" MobId="29488" PreInteractMountStrategy="Dismount" NonCompeteDistance="0" X="2350.808" Y="-5692.079" Z="382.2394" TerminateWhen="!HasQuest(12714) ? true : Me.Z &lt; 320" />
+		<TurnIn QuestName="The Will Of The Lich King" QuestId="12714" TurnInName="Prince Valanar" TurnInId="28907" X="2319.92" Y="-5736.911" Z="153.9201" />
+
+		<PickUp QuestName="The Crypt of Remembrance" QuestId="12715" GiverName="Prince Valanar" GiverId="28907" X="2319.92" Y="-5736.911" Z="153.9201" />
+		<PickUp QuestName="The Plaguebringer&apos;s Request" QuestId="12716" GiverName="Noth the Plaguebringer" GiverId="28919" X="1987.437" Y="-5811.855" Z="100.8345" />
+		<TurnIn QuestName="The Crypt of Remembrance" QuestId="12715" TurnInName="Prince Keleseth" TurnInId="28911" X="1878.135" Y="-5761.824" Z="83.74572" />
+		<PickUp QuestName="Nowhere To Run And Nowhere To Hide" QuestId="12719" GiverName="Prince Keleseth" GiverId="28911" X="1878.135" Y="-5761.824" Z="83.74572" />
+		<PickUp QuestName="Lambs To The Slaughter" QuestId="12722" GiverName="Baron Rivendare" GiverId="28910" X="1875.957" Y="-5772.48" Z="84.02564" />
+
+		<Code File="InteractWith" MobId="190937" NonCompeteDistance="0" PreInteractMountStrategy="Dismount" InteractByLooting="true" InteractBlacklistTimeInSeconds="1" QuestId="12716" QuestObjectiveIndex="1" X="1784.568" Y="-5875.081" Z="109.4966" />
+		<Code File="InteractWith" MobId="190938" NonCompeteDistance="0" PreInteractMountStrategy="Dismount" InteractByLooting="true" InteractBlacklistTimeInSeconds="1" QuestId="12716" QuestObjectiveIndex="2" X="1815.48" Y="-6006.681" Z="117.659" />
+
+		<Code File="KillUntilComplete" MobId="28945" QuestId="12719" QuestObjectiveIndex="1" X="1576.575" Y="-5705.244" Z="121.6812" />
+
+		<Code File="InteractWith" MobId="190947" NonCompeteDistance="0" InteractByLooting="true" PreInteractMountStrategy="Dismount" InteractBlacklistTimeInSeconds="1" QuestId="12719" QuestObjectiveIndex="2" X="1589.447" Y="-5704.015" Z="123.0414" />
+
+		<Code File="KillUntilComplete" TerminateWhen="!DoQuest(12716, 12722)" >
+			<HuntingGrounds>
+				<Hotspot X="1665.921" Y="-5794.044" Z="116.1188" />
+				<Hotspot X="1726.036" Y="-5901.809" Z="116.1305" />
+				<Hotspot X="1609.725" Y="-5876.415" Z="116.714" />
+				<Hotspot X="1520.852" Y="-5808.65" Z="131.6324" />
+			</HuntingGrounds>
+			<PursuitList>
+				<PursueUnit Id="28940" PursueWhen="!IsObjectiveComplete(1, 12722)" />
+				<PursueUnit Id="28939" PursueWhen="!IsObjectiveComplete(1, 12722)" />
+				<PursueUnit Id="28610" PursueWhen="!IsObjectiveComplete(1, 12722)" />
+				<PursueUnit Id="28941" PursueWhen="!IsObjectiveComplete(2, 12722)" />
+				<PursueUnit Id="28942" PursueWhen="!IsObjectiveComplete(2, 12722)" />
+
+				<PursueUnit Id="28939" PursueWhen="DoQuest(12716)" />
+				<PursueUnit Id="28610" PursueWhen="DoQuest(12716)" />
+				<PursueUnit Id="28941" PursueWhen="DoQuest(12716)" />
+				<PursueUnit Id="28942" PursueWhen="DoQuest(12716)" />
+				<PursueUnit Id="28940" PursueWhen="DoQuest(12716)" />
+			</PursuitList>
+		</Code>
+
+		<TurnIn QuestName="Nowhere To Run And Nowhere To Hide" QuestId="12719" TurnInName="Prince Keleseth" TurnInId="28911" X="1876.857" Y="-5762.348" Z="83.74867" />
+		<PickUp QuestName="How To Win Friends And Influence Enemies" QuestId="12720" GiverName="Prince Keleseth" GiverId="28911" X="1876.857" Y="-5762.348" Z="83.74867" />
+		<TurnIn QuestName="Lambs To The Slaughter" QuestId="12722" TurnInName="Baron Rivendare" TurnInId="28910" X="1876.007" Y="-5773.048" Z="84.03043" />
+		<TurnIn QuestName="The Plaguebringer&apos;s Request" QuestId="12716" TurnInName="Noth the Plaguebringer" TurnInId="28919" X="1977.782" Y="-5815.186" Z="101.0061" />
+
+		<PickUp QuestName="Noth&apos;s Special Brew" QuestId="12717" GiverName="Noth the Plaguebringer" GiverId="28919" X="1977.782" Y="-5815.186" Z="101.0061" />
+		<TurnIn QuestName="Noth&apos;s Special Brew" QuestId="12717" TurnInName="Plague Cauldron" TurnInId="190936" X="1988.78" Y="-5822.903" Z="102.8579" />
+
+		<While Condition="DoQuest(12720)" >
+			<Code File="RunCode"><![CDATA[ TreeHooks.Instance.InsertHook("Questbot_Main", 0, _slowerCombatHook ?? (_slowerCombatHook = new  CommonBehaviors.Actions.ActionRunCoroutine(ctx => SlowCombatHook()))); ]]></Code>
+			<Code File="RunCode" Type="Definition">
+				<![CDATA[
+					private Styx.TreeSharp.Composite _slowerCombatHook;
+					private WoWUnit _submittedScarlet = null;
+
+					private async Task<bool> SlowCombatHook()
+					{
+						if (IsQuestCompleted(12720))
+							return false;
+
+						_submittedScarlet = ObjectManager.GetObjectsOfType<WoWUnit>().FirstOrDefault(x => (x.Entry == 28610 || x.Entry == 28936 || x.Entry == 28939 || x.Entry == 28940) && x.IsAlive && !x.Attackable && x.DistanceSqr <= 20f*20f);
+
+						if (_submittedScarlet != null && _submittedScarlet.IsValid)
+							return true;
+
+						if (StyxWoW.Me.Inventory.Equipped.MainHand == null || !(StyxWoW.Me.Inventory.Equipped.MainHand.Entry == 142274 || StyxWoW.Me.Inventory.Equipped.MainHand.Entry == 39371))
+							return false;
+
+						if (Me.HealthPercent <= 30)
+							return false;
+
+						if (Me.CurrentTarget != null && !Me.CurrentTarget.IsWithinMeleeRange)
+							return false;
+
+						if (Me.CurrentTarget != null && !Me.IsFacing(Me.CurrentTarget))
+							Me.SetFacing(Me.CurrentTarget.Location);
+
+						if (Me.Pet != null && Me.Pet.IsAutoAttacking)
+							WoWPetControl.SetStance(PetStance.Passive);
+
+						if (Me.IsAutoAttacking)
+							return true;
+
+						return false;
+					}
+				]]>
+			</Code>
+
+			<Code File="UseItem" ItemId="39418" TerminateWhen="HasItem(142274) || HasItem(39371)" />
+			<Code File="UserSettings" AutoEquipWeapons="false" />
+			<If Condition="HasItem(142274)" > <!-- Blood + Unholy -->
+				<Code File="EquipItem" ItemId="142274" />
+			</If>
+			<If Condition="HasItem(39371)" > <!-- Frost -->
+				<Code File="EquipItem" ItemId="39371" Slot="MainHandSlot" />
+				<Code File="EquipItem" ItemId="39371" Slot="SecondaryHandSlot" />
+			</If>
+			<DisableBehavior Name="Loot" />
+			<Code File="KillUntilComplete" MobIds="28610, 28936, 28939, 28940" QuestId="12720" TerminateWhen="!(StyxWoW.Me.Inventory.Equipped.MainHand.Entry == 142274 || StyxWoW.Me.Inventory.Equipped.MainHand.Entry == 39371)" >
+				<HuntingGrounds>
+					<Hotspot X="1660.332" Y="-5767.197" Z="116.2441" />
+					<Hotspot X="1606.308" Y="-5785.567" Z="116.2144" />
+					<Hotspot X="1728.055" Y="-5896.297" Z="116.1973" />
+					<Hotspot X="1649.162" Y="-5918.996" Z="118.1612" />
+				</HuntingGrounds>
+			</Code>
+			<Code File="UserSettings" AutoEquipWeapons="true" />
+			<EnableBehavior Name="Loot" />
+			<Code File="RunCode"><![CDATA[ TreeHooks.Instance.RemoveHook("Questbot_Main", _slowerCombatHook); ]]></Code>
+			<Code File="RunCode" Code="WoWPetControl.SetStance(PetStance.Assist);" />
+		</While>
+		<TurnIn QuestName="How To Win Friends And Influence Enemies" QuestId="12720" TurnInName="Prince Keleseth" TurnInId="28911" X="1877.241" Y="-5761.425" Z="83.74397" />
+
+		<PickUp QuestName="Behind Scarlet Lines" QuestId="12723" GiverName="Prince Keleseth" GiverId="28911" X="1877.241" Y="-5761.425" Z="83.74397" />
+		<TurnIn QuestName="Behind Scarlet Lines" QuestId="12723" TurnInName="Orbaz Bloodbane" TurnInId="28914" X="1402.112" Y="-5825.957" Z="137.188" />
+		<PickUp QuestName="The Path Of The Righteous Crusader" QuestId="12724" GiverName="Orbaz Bloodbane" GiverId="28914" X="1402.112" Y="-5825.957" Z="137.188" />
+		<PickUp QuestName="Brothers In Death" QuestId="12725" GiverName="Thassarian" GiverId="28913" X="1399.586" Y="-5825.633" Z="137.188" />
+		<TurnIn QuestName="Brothers In Death" QuestId="12725" TurnInName="Koltira Deathweaver" TurnInId="28912" X="1652.925" Y="-6040.363" Z="127.5837" />
+
+		<PickUp QuestName="Bloody Breakout" QuestId="12727" GiverName="Koltira Deathweaver" GiverId="28912" X="1652.925" Y="-6040.363" Z="127.5837" />
+		<While Condition="DoQuest(12727)" >
+			<Code File="KillUntilComplete" MobId="29001" QuestId="12727" X="1647.673" Y="-6043.431" Z="127.5837" TerminateWhen="Object(191092) != null" />
+			<Code File="InteractWith" MobId="191092" NonCompeteDistance="0" InteractByLooting="true" InteractBlacklistTimeInSeconds="1" QuestId="12727" QuestObjectiveIndex="1" X="1647.673" Y="-6043.431" Z="127.5837" TerminateWhen="Object(191092) == null" />
+		</While>
+
+		<Code File="InteractWith" MobId="191084" NonCompeteDistance="0" InteractByLooting="true" InteractBlacklistTimeInSeconds="1" PreInteractMountStrategy="Dismount" QuestId="12724" QuestObjectiveIndex="1" X="1647.367" Y="-6037.416" Z="149.9573" />
+
+		<TurnIn QuestName="Bloody Breakout" QuestId="12727" TurnInName="Thassarian" TurnInId="28913" X="1400.338" Y="-5825.824" Z="137.1879" />
+		<PickUp QuestName="A Cry For Vengeance!" QuestId="12738" GiverName="Thassarian" GiverId="28913" X="1400.338" Y="-5825.824" Z="137.1879" />
+		<TurnIn QuestName="The Path Of The Righteous Crusader" QuestId="12724" TurnInName="Orbaz Bloodbane" TurnInId="28914" X="1365.287" Y="-5720.808" Z="136.4151" />
+		<TurnIn QuestName="A Cry For Vengeance!" QuestId="12738" TurnInName="Knight Commander Plaguefist" TurnInId="29053" X="1365.287" Y="-5720.808" Z="136.4151" />
+
+		<If Condition="Me.Race == WoWRace.Human">
+			<If Condition="!IsQuestCompleted(12742)" >
+				<PickUp QuestName="A Special Surprise" QuestId="12742" GiverName="Knight Commander Plaguefist" GiverId="29053" X="1365.287" Y="-5720.808" Z="136.4151" />
+				<MoveTo X="1321.46" Y="-5741.371" Z="137.456" />
+				<Code File="KillUntilComplete" MobId="29061" QuestId="12742" X="1321.46" Y="-5741.371" Z="137.456" TerminateAtMaxRunTimeSecs="120000" />
+				<MoveTo X="1348.531" Y="-5754.407" Z="136.4477" /> <!-- Reset trigger -->
+				<TurnIn QuestName="A Special Surprise" QuestId="12742" TurnInName="Knight Commander Plaguefist" TurnInId="29053" X="1365.287" Y="-5720.808" Z="136.4151" />
+			</If>
+		</If>
+		<If Condition="Me.Race == WoWRace.NightElf">
+			<If Condition="!IsQuestCompleted(12743)" >
+				<PickUp QuestName="A Special Surprise" QuestId="12743" GiverName="Knight Commander Plaguefist" GiverId="29053" X="1365.287" Y="-5720.808" Z="136.4151" />
+				<MoveTo X="1319.091" Y="-5763.708" Z="137.815" />
+				<Code File="KillUntilComplete" MobId="29065" QuestId="12743" X="1319.091" Y="-5763.708" Z="137.815" TerminateAtMaxRunTimeSecs="120000" />
+				<MoveTo X="1348.531" Y="-5754.407" Z="136.4477" /> <!-- Reset trigger -->
+				<TurnIn QuestName="A Special Surprise" QuestId="12743" TurnInName="Knight Commander Plaguefist" TurnInId="29053" X="1365.287" Y="-5720.808" Z="136.4151" />
+			</If>
+		</If>
+		<If Condition="Me.Race == WoWRace.Dwarf">
+			<If Condition="!IsQuestCompleted(12744)" >
+				<PickUp QuestName="A Special Surprise" QuestId="12744" GiverName="Knight Commander Plaguefist" GiverId="29053" X="1365.287" Y="-5720.808" Z="136.4151" />
+				<MoveTo X="1330.559" Y="-5756.007" Z="137.4874" />
+				<Code File="KillUntilComplete" MobId="29067" QuestId="12744" X="1330.559" Y="-5756.007" Z="137.4874" TerminateAtMaxRunTimeSecs="120000" />
+				<MoveTo X="1348.531" Y="-5754.407" Z="136.4477" /> <!-- Reset trigger -->
+				<TurnIn QuestName="A Special Surprise" QuestId="12744" TurnInName="Knight Commander Plaguefist" TurnInId="29053" X="1365.287" Y="-5720.808" Z="136.4151" />
+			</If>
+		</If>
+		<If Condition="Me.Race == WoWRace.Gnome">
+			<If Condition="!IsQuestCompleted(12745)" >
+				<PickUp QuestName="A Special Surprise" QuestId="12745" GiverName="Knight Commander Plaguefist" GiverId="29053" X="1365.287" Y="-5720.808" Z="136.4151" />
+				<MoveTo X="1321.001" Y="-5753.735" Z="137.4113" />
+				<Code File="KillUntilComplete" MobId="29068" QuestId="12745" X="1321.001" Y="-5753.735" Z="137.4113" TerminateAtMaxRunTimeSecs="120000" />
+				<MoveTo X="1348.531" Y="-5754.407" Z="136.4477" /> <!-- Reset trigger -->
+				<TurnIn QuestName="A Special Surprise" QuestId="12745" TurnInName="Knight Commander Plaguefist" TurnInId="29053" X="1365.287" Y="-5720.808" Z="136.4151" />
+			</If>
+		</If>
+		<If Condition="Me.Race == WoWRace.Draenei">
+			<If Condition="!IsQuestCompleted(12746)" >
+				<PickUp QuestName="A Special Surprise" QuestId="12746" GiverName="Knight Commander Plaguefist" GiverId="29053" X="1365.287" Y="-5720.808" Z="136.4151" />
+				<MoveTo X="1328.646" Y="-5771.513" Z="137.7735" />
+				<Code File="KillUntilComplete" MobId="29070" QuestId="12746" X="1328.646" Y="-5771.513" Z="137.7735" TerminateAtMaxRunTimeSecs="120000" />
+				<MoveTo X="1348.531" Y="-5754.407" Z="136.4477" /> <!-- Reset trigger -->
+				<TurnIn QuestName="A Special Surprise" QuestId="12746" TurnInName="Knight Commander Plaguefist" TurnInId="29053" X="1365.287" Y="-5720.808" Z="136.4151" />
+			</If>
+		</If>
+		<If Condition="Me.Race == WoWRace.Worgen">
+			<If Condition="!IsQuestCompleted(28649)" >
+				<PickUp QuestName="A Special Surprise" QuestId="28649" GiverName="Knight Commander Plaguefist" GiverId="29053" X="1365.287" Y="-5720.808" Z="136.4151" />
+				<MoveTo X="1329.867" Y="-5760.66" Z="137.6738" />
+				<Code File="KillUntilComplete" MobId="49355" QuestId="28649" X="1329.867" Y="-5760.66" Z="137.6738" TerminateAtMaxRunTimeSecs="120000" />
+				<MoveTo X="1348.531" Y="-5754.407" Z="136.4477" /> <!-- Reset trigger -->
+				<TurnIn QuestName="A Special Surprise" QuestId="28649" TurnInName="Knight Commander Plaguefist" TurnInId="29053" X="1365.287" Y="-5720.808" Z="136.4151" />
+			</If>
+		</If>
+
+		<PickUp QuestName="A Sort Of Homecoming" QuestId="12751" GiverName="Knight Commander Plaguefist" GiverId="29053" X="1353.818" Y="-5727.4" Z="136.4154" />
+		<TurnIn QuestName="A Sort Of Homecoming" QuestId="12751" TurnInName="Thassarian" TurnInId="28913" X="1400.063" Y="-5826.53" Z="137.1876" />
+		<PickUp QuestName="Ambush At The Overlook" QuestId="12754" GiverName="Orbaz Bloodbane" GiverId="28914" X="1400.843" Y="-5826.54" Z="137.1876" />
+
+		<While Condition="DoQuest(12754)" >
+			<If Condition="!Me.HasAura(53061)" >
+				<MoveTo X="1437.194" Y="-5974.321" Z="114.0944" />
+				<Code File="UseItem" ItemId="39645" QuestId="12754" TerminateWhen="Unit(29076, u =&gt; u.IsAlive) != null" />
+			</If>
+			<Code File="KillUntilComplete" MobId="29076" QuestId="12754" X="1437.194" Y="-5974.321" Z="114.0944" TerminateWhen="Unit(29076, u =&gt; u.IsAlive) == null" />
+		</While>
+
+		<TurnIn QuestName="Ambush At The Overlook" QuestId="12754" TurnInName="Orbaz Bloodbane" TurnInId="28914" X="1402.516" Y="-5826.607" Z="137.1876" />
+
+		<PickUp QuestName="A Meeting With Fate" QuestId="12755" GiverName="Orbaz Bloodbane" GiverId="28914" X="1402.516" Y="-5826.607" Z="137.1876" />
+		<TurnIn QuestName="A Meeting With Fate" QuestId="12755" TurnInName="High General Abbendis" TurnInId="29077" X="1318.157" Y="-6120.53" Z="15.05003" />
+		<PickUp QuestName="The Scarlet Onslaught Emerges" QuestId="12756" GiverName="High General Abbendis" GiverId="29077" X="1318.157" Y="-6120.53" Z="15.05003" />
+		<If Condition="QuestDone(12756)" >
+			<MoveTo X="1405.048" Y="-5822.889" Z="131.3622" />
+			<TurnIn QuestName="The Scarlet Onslaught Emerges" QuestId="12756" TurnInName="Orbaz Bloodbane" TurnInId="28914" X="1401.977" Y="-5825.996" Z="137.1877" />
+		</If>
+
+		<PickUp QuestName="Scarlet Armies Approach..." QuestId="12757" GiverName="Orbaz Bloodbane" GiverId="28914" X="1401.977" Y="-5825.996" Z="137.1877" />
+		<If Condition="QuestDone(12757) &amp;&amp; Unit(28914) != null" >
+			<Code File="InteractWith" MobId="191155" NonCompeteDistance="0" X="1401.977" Y="-5825.996" Z="137.1877" />
+		</If>
+		<TurnIn QuestName="Scarlet Armies Approach..." QuestId="12757" TurnInName="Highlord Darion Mograine" TurnInId="28444" X="2455.907" Y="-5597.135" Z="367.4019" />
+
+		<PickUp QuestName="The Scarlet Apocalypse" QuestId="12778" GiverName="Highlord Darion Mograine" GiverId="28444" X="2455.907" Y="-5597.135" Z="367.4019" />
+		<Code File="InteractWith" MobId="29488" PreInteractMountStrategy="Dismount" NonCompeteDistance="0" X="2350.808" Y="-5692.079" Z="382.2394" TerminateWhen="!HasQuest(12778) ? true : Me.Z &lt; 320" />
+		<TurnIn QuestName="The Scarlet Apocalypse" QuestId="12778" TurnInName="The Lich King" TurnInId="29110" X="2313.688" Y="-5739.54" Z="159.6794" />
+
+		<PickUp QuestName="An End To All Things..." QuestId="12779" GiverName="The Lich King" GiverId="29110" X="2314.184" Y="-5738.92" Z="159.2826" />
+		<While Condition="DoQuest(12779)" >
+			<DisableBehavior Name="All" />
+			<!-- NOTE:  IMPROVE THIS.  This SpecificQuest behavior preforms VERY poorly as it casts the projectile before rotating to the target.
+					Replace it with a custom RunCode -->
+			<Code File="Hooks\DoWhen" ActivityName="SpamShot" TreeHookName="Botbase_Root" AllowUseInVehicle="true" UseAtInterval="250" >
+				<If Condition="Me.InVehicle &amp;&amp; Me.CurrentTarget != null &amp;&amp; Me.CurrentTarget.IsAlive" >
+					<Code File="Misc\RunLua" Lua="OverrideActionBarButton1:Click();" />
+				</If>
+			</Code>
+			<Code File="SpecificQuests\DeathknightStart\AnEndToAllThings" VehicleId="28670" ItemId="39700" AttackSpellIndex="1" HealSpellIndex="3" KillNpcId="29104" HealNpcId="29102">
+				<Start X="1800.488" Y="-5774.659" Z="180.3334" />
+				<End X="2329.742" Y="-5724.388" Z="153.9203" />
+				<Hop X="1704.216" Y="-5779.524" Z="170.5731" />
+				<Hop X="1491.774" Y="-5765.369" Z="170.3421" />
+				<Hop X="1571.101" Y="-5953.635" Z="170.7214" />
+				<Hop X="1804.955" Y="-5931.821" Z="170.8009" />
+			</Code>
+			<Code File="Hooks\DoWhen" ActivityName="SpamShot" Command="Remove" />
+			<EnableBehavior Name="All" />
+		</While>
+		<TurnIn QuestName="An End To All Things..." QuestId="12779" TurnInName="The Lich King" TurnInId="29110" X="2311.838" Y="-5739.884" Z="160.4388" />
+
+		<PickUp QuestName="The Lich King&apos;s Command" QuestId="12800" GiverName="The Lich King" GiverId="29110" X="2311.838" Y="-5739.884" Z="160.4388" />
+		<TurnIn QuestName="The Lich King&apos;s Command" QuestId="12800" TurnInName="Scourge Commander Thalanor" TurnInId="31082" X="2452.101" Y="-5125.353" Z="77.75299" />
+
+		<PickUp QuestName="The Light of Dawn" QuestId="12801" GiverName="Scourge Commander Thalanor" GiverId="31082" X="2452.101" Y="-5125.353" Z="77.75299" />
+		<While Condition="DoQuest(12801)" >
+			<While Condition="!Lua.GetReturnVal&lt;bool&gt;(&quot;return AlwaysUpFrame3Text ~= nil and AlwaysUpFrame3Text:IsVisible();&quot;, 0)" >
+				<Code File="InteractWith" MobId="29173" GossipOptions="1" WaitForNpcs="false" CollectionDistance="20" NonCompeteDistance="0" PreInteractMountStrategy="Dismount" X="2436.14" Y="-5134.87" Z="83.07302" TerminateWhen="Lua.GetReturnVal&lt;bool&gt;(&quot;return AlwaysUpFrame3Text ~= nil and AlwaysUpFrame3Text:IsVisible();&quot;, 0)" />
+			</While>
+			<If Condition="Lua.GetReturnVal&lt;bool&gt;(&quot;return AlwaysUpFrame3Text ~= nil and AlwaysUpFrame3Text:IsVisible();&quot;, 0)" >
+				<MoveTo X="2432.051" Y="-5137.988" Z="83.83815" />
+				<Code File="WaitTimer" WaitTime="360000" TerminateWhen="Unit(29173, u =&gt; u.DistanceSqr &lt; 30f*30f) == null" />
+			</If>
+			<Code File="KillUntilComplete" QuestId="12801" X="2280.839" Y="-5292.925" Z="83.78987" >
+				<PursuitList>
+					<PursueUnit PursueWhen="UNIT.Attackable" />
+				</PursuitList>
+			</Code>
+		</While>
+		<TurnIn QuestName="The Light of Dawn" QuestId="12801" TurnInName="Highlord Darion Mograine" TurnInId="29173" X="2266.495" Y="-5290.446" Z="82.16772" />
+
+		<PickUp QuestName="Taking Back Acherus" QuestId="13165" GiverName="Highlord Darion Mograine" GiverId="29173" X="2266.495" Y="-5290.446" Z="82.16772" />
+		<While Condition="QuestDone(13165) &amp;&amp; Unit(29173) != null" >
+			<Code File="RunCode" Code="SpellManager.Cast(50977);" />
+			<Code File="WaitTimer" WaitTime="3000" />
+			<Code File="InteractWith" NonCompeteDistance="0" WaitTimer="3000" TerminateWhen="Unit(31084) != null" >
+				<PursuitList>
+					<PursueGameObject Id="190942" PursueWhen="GAMEOBJECT.CreatedBy == Me" />
+				</PursuitList>
+			</Code>
+		</While>
+		<TurnIn QuestName="Taking Back Acherus" QuestId="13165" TurnInName="Highlord Darion Mograine" TurnInId="31084" X="2371.488" Y="-5652.525" Z="382.3846" />
+
+		<PickUp QuestName="The Battle For The Ebon Hold" QuestId="13166" GiverName="Highlord Darion Mograine" GiverId="31084" X="2371.488" Y="-5652.525" Z="382.3846" />
+		<Code File="KillUntilComplete" MobId="31099" QuestId="13166" QuestObjectiveIndex="1" X="2456.731" Y="-5589.407" Z="414.1213" />
+		<Code File="KillUntilComplete" MobIds="31096, 31098" QuestId="13166" >
+			<HuntingGrounds>
+				<Hotspot X="2420.47" Y="-5590.555" Z="420.5651" />
+				<Hotspot X="2499.159" Y="-5602.433" Z="420.5389" />
+			</HuntingGrounds>
+		</Code>
+		<TurnIn QuestName="The Battle For The Ebon Hold" QuestId="13166" TurnInName="Highlord Darion Mograine" TurnInId="31084" X="2378.729" Y="-5651.223" Z="382.4392" />
+
+		<PickUp QuestName="Where Kings Walk" QuestId="13188" GiverName="Highlord Darion Mograine" GiverId="31084" X="2378.729" Y="-5651.223" Z="382.4392" />
+		<If Condition="QuestDone(13188) &amp;&amp; Object(193053) != null" >
+			<Code File="InteractWith" MobId="193053" NonCompeteDistance="0" X="2328.982" Y="-5657.346" Z="382.2401" TerminateWhen="Object(193053) == null" />
+		</If>
+		<TurnIn QuestName="Where Kings Walk" QuestId="13188" TurnInName="Anduin Wrynn" TurnInId="107574" X="-8365.591" Y="235.4179" Z="156.6586" />
+
+		<Code File="LoadProfile" ProfileName="..\..\Questing Autoloader.xml" />
+
+	</QuestOrder>
+</HBProfile>

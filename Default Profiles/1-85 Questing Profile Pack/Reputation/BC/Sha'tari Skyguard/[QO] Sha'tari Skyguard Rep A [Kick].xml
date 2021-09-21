@@ -1,0 +1,512 @@
+﻿<HBProfile>
+	<Name>[QO] Sha'tari Skyguard Rep A [Kick]</Name>
+   
+	<MinLevel>1</MinLevel>
+	<MaxLevel>86</MaxLevel>
+   
+	<MinDurability>0.2</MinDurability>
+	<MinFreeBagSlots>2</MinFreeBagSlots>
+	
+	<MailGrey>False</MailGrey>
+	<MailWhite>False</MailWhite>
+	<MailGreen>False</MailGreen>
+	<MailBlue>True</MailBlue>
+	<MailPurple>True</MailPurple>
+   
+	<SellGrey>True</SellGrey>
+	<SellWhite>True</SellWhite>
+	<SellGreen>True</SellGreen>
+	<SellBlue>False</SellBlue>
+	<SellPurple>False</SellPurple>
+   
+	<TargetElites>True</TargetElites>
+
+	<AvoidMobs>
+		<Mob Name="Blackwind Warp Chaser" Entry="23219" />
+		<Mob Name="Skettis Kaliri" Entry="21804" />
+	</AvoidMobs>
+
+	<Blackspots>
+	</Blackspots>
+
+	<Mailboxes>
+	</Mailboxes>
+ 
+	<Vendors>
+		<Vendor Name="Grella" Entry="23367" Type="Repair" X="-3384.475" Y="3611.3" Z="275.9874" />
+	</Vendors>
+
+
+	<Quest Id="11096" Name="Threat from Above">
+		<Objective Type="KillMob" MobId="23450" KillCount="20">
+			<Hotspots>
+				<Hotspot X="-1602.048" Y="5987.573" Z="209.7726" />
+				<Hotspot X="-1532.811" Y="5994.209" Z="193.3728" />
+				<Hotspot X="-1489.065" Y="5907.307" Z="194.6135" />
+				<Hotspot X="-1490.979" Y="5849.793" Z="202.1178" />
+				<Hotspot X="-1450.759" Y="5912.92" Z="194.0237" />
+				<Hotspot X="-1385.706" Y="5845.151" Z="185.2484" />
+				<Hotspot X="-1333.322" Y="5786.868" Z="183.0933" />
+				<Hotspot X="-1370.313" Y="5636.057" Z="180.7686" />		
+			</Hotspots>
+		</Objective>
+	</Quest>
+
+	<Quest Id="11004" Name="World of Shadows">
+		<Objective Type="CollectItem" ItemId="32388" CollectCount="6">
+			<Hotspots>
+				<Hotspot X="-4068.029" Y="3392.732" Z="291.3378" />
+				<Hotspot X="-4037.896" Y="3320.999" Z="283.9868" />
+				<Hotspot X="-3980.318" Y="3284.15" Z="287.4099" />
+				<Hotspot X="-3857.188" Y="3294.483" Z="274.445" />
+				<Hotspot X="-3904.42" Y="3128.052" Z="328.2799" />
+				<Hotspot X="-4083.211" Y="3203.444" Z="296.6914" />
+				<Hotspot X="-4099.672" Y="3088.971" Z="316.911" />
+				<Hotspot X="-4156.194" Y="3026.381" Z="316.3811" />
+				<Hotspot X="-4029.307" Y="3144.122" Z="308.7712" />
+				<Hotspot X="-3981.431" Y="3077.621" Z="340.5073" />
+				<Hotspot X="-3913.032" Y="3020.373" Z="356.6836" />
+				<Hotspot X="-3962.826" Y="3024.476" Z="357.3753" />
+				<Hotspot X="-3899.512" Y="3125.694" Z="328.255" />
+				<Hotspot X="-3957.049" Y="3269.308" Z="290.6071" />
+				<Hotspot X="-4017.691" Y="3310.419" Z="284.1314" />
+				<Hotspot X="-4073.455" Y="3336.78" Z="284.0048" />
+				<Hotspot X="-4065.781" Y="3390.007" Z="290.3756" />
+			</Hotspots>
+		</Objective>
+	</Quest>
+ 
+	<Quest Id="11005" Name="Secrets of the Talonpriests">
+		<Objective Type="KillMob" MobId="23066" KillCount="1">
+			<Hotspots>
+				<Hotspot X="-3814.991" Y="3336.041" Z="324.0606" />
+			</Hotspots>
+		</Objective>
+		<Objective Type="KillMob" MobId="23067" KillCount="1">
+			<Hotspots>
+				<Hotspot X="-3966.986" Y="3306.647" Z="286.3247" />
+			</Hotspots>
+		</Objective>
+		<Objective Type="KillMob" MobId="23068" KillCount="1">
+			<Hotspots>
+				<Hotspot X="-3676.739" Y="3325.862" Z="308.3633" />
+ 			</Hotspots>
+		</Objective>
+	</Quest>			
+
+	<Quest Id="11056" Name="Hazzik's Bargain">
+		<Objective Type="CollectItem" ItemId="32687" CollectCount="1">
+			<CollectFrom>
+				<GameObject Name="Hazzik's Package" Id="185954" />
+			</CollectFrom>
+			<Hotspots>
+				<Hotspot X="-3884.893" Y="3043.044" Z="358.1394" />
+			</Hotspots>
+		</Objective>
+	</Quest>			
+
+ 
+	<QuestOrder>
+	
+	<CustomBehavior File="UserSettings" LootMobs="True" PullDistance="35" TrainNewSkills="False" LearnFlightPaths="False" KillBetweenHotspots="True" LogoutForInactivity="False" />
+	
+		<!-- This will stop the bot after you're Exalted -->
+		<If Condition="Me.GetReputationLevelWith(1031) == Styx.WoWUnitReaction.Exalted" >
+			<CustomBehavior File="UserDialog" Title="title" AllowBotStop="True" SoundCue="Asterisk" SoundCueInterval="1" Text="You have reached Exalted\nIf you liked this profile, +rep is always appreciated" />
+		</If>
+			
+		<If Condition="Me.GetReputationLevelWith(1031) &lt; Styx.WoWUnitReaction.Exalted" >
+			<!-- Non Repeatable quests -->
+			<If Condition="((!HasQuest(11096)) &amp;&amp; (!IsQuestCompleted(11096)))" >
+				<CustomBehavior File="FlyTo" X="-1841.645" Y="5298.662" Z="-12.42795" />
+				<CustomBehavior File="ForcedDismount" />
+		<PickUp QuestName="Threat from Above" QuestId="11096" GiverName="Yuula" GiverId="23449" />
+			</If>
+			<If Condition="((HasQuest(11096)) &amp;&amp; (!IsQuestCompleted(11096)))" >
+				<CustomBehavior File="FlyTo" X="-1521.214" Y="5945.294" Z="194.535" />
+				<CustomBehavior File="ForcedDismount" />
+				<Objective QuestName="Threat from Above" QuestId="11096" Type="KillMob" MobId="23450" KillCount="20" />
+			</If>
+			<If Condition="((HasQuest(11096)) &amp;&amp; (IsQuestCompleted(11096)))" >
+				<CustomBehavior File="FlyTo" X="-1841.645" Y="5298.662" Z="-12.42795" />
+				<CustomBehavior File="ForcedDismount" />
+		<TurnIn QuestName="Threat from Above" QuestId="11096" TurnInName="Yuula" TurnInId="23449" />
+		<PickUp QuestName="To Skettis!" QuestId="11098" GiverName="Yuula" GiverId="23449" />
+			</If>
+			<If Condition="((!HasQuest(11098)) &amp;&amp; (!IsQuestCompleted(11098)))" >
+				<CustomBehavior File="FlyTo" X="-1841.645" Y="5298.662" Z="-12.42795" />
+				<CustomBehavior File="ForcedDismount" />
+		<PickUp QuestName="To Skettis!" QuestId="11098" GiverName="Yuula" GiverId="23449" />
+			</If>
+			<If Condition="((HasQuest(11098)) &amp;&amp; (IsQuestCompleted(11098)))" >
+				<CustomBehavior File="FlyTo" X="-3395.321" Y="3597.655" Z="276.3321" />
+				<CustomBehavior File="ForcedDismount" />
+		<TurnIn QuestName="To Skettis!" QuestId="11098" TurnInName="Sky Sergeant Doryn" TurnInId="23048" />			
+			</If>
+
+			<If Condition="((!HasQuest(11004)) &amp;&amp; (!IsQuestCompleted(11004)))" >
+				<CustomBehavior File="FlyTo" X="-3395.321" Y="3597.655" Z="276.3321" />
+				<CustomBehavior File="ForcedDismount" />
+		<PickUp QuestName="World of Shadows" QuestId="11004" GiverName="Severin" GiverId="23042" />
+			</If>
+			<If Condition="((!HasQuest(11093)) &amp;&amp; (!IsQuestCompleted(11093)))" >
+				<CustomBehavior File="FlyTo" X="-3395.321" Y="3597.655" Z="276.3321" />
+				<CustomBehavior File="ForcedDismount" />
+		<PickUp QuestName="Hungry Nether Rays" QuestId="11093" GiverName="Skyguard Handler Deesak" GiverId="23415" />
+			</If>
+			<!-- Daily -->
+			<If Condition="((!HasQuest(11008)) &amp;&amp; (!IsQuestCompleted(11008)))" >
+				<CustomBehavior File="FlyTo" X="-3395.321" Y="3597.655" Z="276.3321" />
+				<CustomBehavior File="ForcedDismount" />
+		<PickUp QuestName="Fires Over Skettis" QuestId="11008" GiverName="Sky Sergeant Doryn" GiverId="23048" />
+			</If>
+			<!--
+			<If Condition="((!HasQuest(11085)) &amp;&amp; (!IsQuestCompleted(11085)))" >
+				<CustomBehavior File="FlyTo" X="-3692.649" Y="3785.318" Z="299.4701" />
+				<CustomBehavior File="ForcedDismount" />
+		<PickUp QuestName="Escape from Skettis" QuestId="11085" GiverName="Skyguard Prisoner" GiverId="23383" />
+			</If>
+			<If Condition="((HasQuest(11085)) &amp;&amp; (!IsQuestCompleted(11085)))" >
+				<CustomBehavior File="Escort" QuestId="11085" MobId="23383" X="-3692.649" Y="3785.318" Z="299.4701" />
+			</If>
+			-->
+			<If Condition="((HasQuest(11093)) &amp;&amp; (!IsQuestCompleted(11093)))" >
+				<CustomBehavior File="FlyTo" X="-4062.872" Y="3465.696" Z="281.5775" />
+				<CustomBehavior File="ForcedDismount" />
+				<UseItem QuestId="11093" ItemId="32834" X="-4062.872" Y="3465.696" Z="281.5775" />
+						<SetGrindArea>
+							<GrindArea>
+								<Factions>14</Factions>
+								<Hotspots>
+									<Hotspot X="-4064.484" Y="3474.422" Z="284.7403" />
+									<Hotspot X="-4118.457" Y="3470.882" Z="285.834" />
+									<Hotspot X="-4081.677" Y="3529.565" Z="289.5378" />
+									<Hotspot X="-4045.33" Y="3606.198" Z="291.2959" />
+									<Hotspot X="-3974.049" Y="3682.949" Z="288.6143" />
+									<Hotspot X="-4064.484" Y="3474.422" Z="284.7403" />
+								</Hotspots>
+							</GrindArea>
+						</SetGrindArea>
+					<GrindTo Condition="(IsQuestCompleted(11093))" GoalText="10 Nether Ray Meals" />
+			</If>
+
+			<If Condition="((HasQuest(11004)) &amp;&amp; (!IsQuestCompleted(11004)))" >
+				<CustomBehavior File="FlyTo" X="-4069.057" Y="3384.603" Z="288.8913" />
+				<CustomBehavior File="ForcedDismount" />
+						<SetGrindArea>
+							<GrindArea>
+								<Factions>16 90 91 1869 1881 1860 1861 1862</Factions>
+								<Hotspots>
+									<Hotspot X="-4068.029" Y="3392.732" Z="291.3378" />
+									<Hotspot X="-4037.896" Y="3320.999" Z="283.9868" />
+									<Hotspot X="-3980.318" Y="3284.15" Z="287.4099" />
+									<Hotspot X="-3857.188" Y="3294.483" Z="274.445" />
+									<Hotspot X="-3904.42" Y="3128.052" Z="328.2799" />
+									<Hotspot X="-4083.211" Y="3203.444" Z="296.6914" />
+									<Hotspot X="-4099.672" Y="3088.971" Z="316.911" />
+									<Hotspot X="-4156.194" Y="3026.381" Z="316.3811" />
+									<Hotspot X="-4029.307" Y="3144.122" Z="308.7712" />
+									<Hotspot X="-3981.431" Y="3077.621" Z="340.5073" />
+									<Hotspot X="-3913.032" Y="3020.373" Z="356.6836" />
+									<Hotspot X="-3962.826" Y="3024.476" Z="357.3753" />
+									<Hotspot X="-3899.512" Y="3125.694" Z="328.255" />
+									<Hotspot X="-3957.049" Y="3269.308" Z="290.6071" />
+									<Hotspot X="-4017.691" Y="3310.419" Z="284.1314" />
+									<Hotspot X="-4073.455" Y="3336.78" Z="284.0048" />
+									<Hotspot X="-4065.781" Y="3390.007" Z="290.3756" />
+								</Hotspots>
+							</GrindArea>
+						</SetGrindArea>
+					<GrindTo Condition="(IsQuestCompleted(11004))" GoalText="6 Shadow Dusts" />
+			</If>
+
+			<!--
+			<If Condition="((HasQuest(11008)) &amp;&amp; (!IsQuestCompleted(11008)))" >
+				<CustomBehavior File="FlyTo" X="-3998.922" Y="3436.714" Z="401.9122" />
+	<CustomBehavior File="UserDialog"  AllowBotStop="True" SoundCue="Asterisk" SoundCueInterval="2" Text="You'll have to do this quest manually.  Fly up a little and search for sparkling eggs at the top of roofs" />
+			</If>
+			-->
+			
+			<If Condition="((HasQuest(11093)) &amp;&amp; (IsQuestCompleted(11093)))" >
+				<CustomBehavior File="FlyTo" X="-3369.226" Y="3654.532" Z="284.5911" />
+				<CustomBehavior File="ForcedDismount" />
+		<TurnIn QuestName="Hungry Nether Rays" QuestId="11093" TurnInName="Skyguard Handler Deesak" TurnInId="23415" />
+			</If>
+			<If Condition="((HasQuest(11004)) &amp;&amp; (IsQuestCompleted(11004)))" >
+				<CustomBehavior File="FlyTo" X="-3395.321" Y="3597.655" Z="276.3321" />
+				<CustomBehavior File="ForcedDismount" />
+		<TurnIn QuestName="World of Shadows" QuestId="11004" TurnInName="Severin" TurnInId="23042" />
+			</If>
+			<If Condition="((HasQuest(11008)) &amp;&amp; (IsQuestCompleted(11008)))" >
+				<CustomBehavior File="FlyTo" X="-3395.321" Y="3597.655" Z="276.3321" />
+				<CustomBehavior File="ForcedDismount" />
+		<TurnIn QuestName="Fires Over Skettis" QuestId="11008" TurnInName="Sky Sergeant Doryn" TurnInId="23048" />
+			</If>
+			<If Condition="((HasQuest(11085)) &amp;&amp; (IsQuestCompleted(11085)))" >
+				<CustomBehavior File="FlyTo" X="-3395.321" Y="3597.655" Z="276.3321" />
+				<CustomBehavior File="ForcedDismount" />
+		<TurnIn QuestName="Escape from Skettis" QuestId="11085" TurnInName="Sky Sergeant Doryn" TurnInId="23048" />
+			</If>
+			
+			<If Condition="((!HasQuest(11005)) &amp;&amp; (!IsQuestCompleted(11005)))" >
+				<CustomBehavior File="FlyTo" X="-3395.321" Y="3597.655" Z="276.3321" />
+				<CustomBehavior File="ForcedDismount" />
+		<PickUp QuestName="Secrets of the Talonpriests" QuestId="11005" GiverName="Sky Commander Adaris" GiverId="23038" />
+			</If>
+			<If Condition="((HasQuest(11005)) &amp;&amp; (!IsQuestCompleted(11005)))" >
+				<CustomBehavior File="Misc\RunLua" Lua="UseItemByName(32446)" WaitTime="1000" />
+			
+				<CustomBehavior File="FlyTo" X="-3814.991" Y="3336.041" Z="324.0606" />
+				<CustomBehavior File="ForcedDismount" />
+				<Objective QuestName="Secrets of the Talonpriests" QuestId="11005" Type="KillMob" MobId="23066" KillCount="1" />
+				
+				<CustomBehavior File="FlyTo" X="-3966.986" Y="3306.647" Z="286.3247" />
+				<CustomBehavior File="ForcedDismount" />
+				<Objective QuestName="Secrets of the Talonpriests" QuestId="11005" Type="KillMob" MobId="23067" KillCount="1" />
+				
+				<CustomBehavior File="FlyTo" X="-3676.739" Y="3325.862" Z="308.3633" />
+				<CustomBehavior File="ForcedDismount" />
+				<Objective QuestName="Secrets of the Talonpriests" QuestId="11005" Type="KillMob" MobId="23068" KillCount="1" />
+			</If>
+			<If Condition="((HasQuest(11005)) &amp;&amp; (IsQuestCompleted(11005)))" >
+				<CustomBehavior File="FlyTo" X="-3395.321" Y="3597.655" Z="276.3321" />
+				<CustomBehavior File="ForcedDismount" />
+		<TurnIn QuestName="Secrets of the Talonpriests" QuestId="11005" TurnInName="Sky Commander Adaris" TurnInId="23038" />			
+			</If>
+			
+			<If Condition="(HasItem(32523))" >
+		<PickUp QuestName="Ishaal's Almanac" QuestId="11021" GiverName="Ishaal\'s Almanac" GiverId="32523" />
+			</If>
+			<If Condition="(HasQuest(11021))" >
+				<CustomBehavior File="FlyTo" X="-3397.678" Y="3613.834" Z="276.1902" />
+				<CustomBehavior File="ForcedDismount" />
+		<TurnIn QuestName="Ishaal's Almanac" QuestId="11021" TurnInName="Sky Commander Adaris" TurnInId="23038" />			
+		<PickUp QuestName="An Ally in Lower City" QuestId="11024" GiverName="Sky Commander Adaris" GiverId="23038" />
+			</If>
+			<If Condition="(HasQuest(11024))" >
+				<CustomBehavior File="FlyTo" X="-1658.926" Y="5438.33" Z="-40.40597" />
+				<CustomBehavior File="ForcedDismount" />
+		<TurnIn QuestName="An Ally in Lower City" QuestId="11024" TurnInName="Rilak the Redeemed" TurnInId="22292" />
+		<PickUp QuestName="Countdown to Doom" QuestId="11028" GiverName="Rilak the Redeemed" GiverId="22292" />
+			</If>
+			<If Condition="(HasQuest(11028))" >
+				<CustomBehavior File="FlyTo" X="-3397.678" Y="3613.834" Z="276.1902" />
+				<CustomBehavior File="ForcedDismount" />
+		<TurnIn QuestName="Countdown to Doom" QuestId="11028" TurnInName="Sky Commander Adaris" TurnInId="23038" />
+		<PickUp QuestName="Hazzik's Bargain" QuestId="11056" GiverName="Hazzik" GiverId="23306" />
+			</If>
+			<If Condition="((!HasQuest(11056)) &amp;&amp; (!IsQuestCompleted(11056)))" >
+				<CustomBehavior File="FlyTo" X="-3397.678" Y="3613.834" Z="276.1902" />
+				<CustomBehavior File="ForcedDismount" />
+		<PickUp QuestName="Hazzik's Bargain" QuestId="11056" GiverName="Hazzik" GiverId="23306" />
+			</If>
+			<If Condition="((HasQuest(11056)) &amp;&amp; (!IsQuestCompleted(11056)))" >
+				<CustomBehavior File="FlyTo" X="-3911.076" Y="3031.756" Z="356.7391" />
+				<CustomBehavior File="ForcedDismount" />
+				<Objective QuestName="Hazzik's Bargain" QuestId="11056" Type="CollectItem" ItemId="32687" CollectCount="1" />
+			</If>
+			<If Condition="((HasQuest(11056)) &amp;&amp; (IsQuestCompleted(11056)))" >
+				<CustomBehavior File="FlyTo" X="-3397.678" Y="3613.834" Z="276.1902" />
+				<CustomBehavior File="ForcedDismount" />
+		<TurnIn QuestName="Hazzik's Bargain" QuestId="11056" TurnInName="Hazzik" TurnInId="23306" />
+			</If>
+			<If Condition="((!HasQuest(11029)) &amp;&amp; (!IsQuestCompleted(11029)))" >
+				<CustomBehavior File="FlyTo" X="-3397.678" Y="3613.834" Z="276.1902" />
+				<CustomBehavior File="ForcedDismount" />
+		<PickUp QuestName="A Shabby Disguise" QuestId="11029" GiverName="Hazzik" GiverId="23306" />
+			</If>
+			<If Condition="((HasQuest(11029)) &amp;&amp; (!IsQuestCompleted(11029)))" >
+				<CustomBehavior File="FlyTo" X="-3886.034" Y="3480.572" Z="274.7623" />
+				<CustomBehavior File="ForcedDismount" />
+				<CustomBehavior File="Misc\RunLua" Lua="UseItemByName(32741)" WaitTime="1000" />
+				<RunTo X="-3879.108" Y="3474.246" Z="275.0208" />
+				<CustomBehavior File="MyCTM" X="-3870.047" Y="3462.952" Z="275.4349" />
+				
+				<CustomBehavior File="InteractWith" QuestId="11029" MobId="23363" NumOfTimes="1" GossipOptions="1" BuyItemId="32742" WaitTime="1000" CollectionDistance="50" X="-3867.538" Y="3464.76" Z="275.4328" />
+				<CustomBehavior File="MyCTM" X="-3882.396" Y="3478.244" Z="275.2042" />
+				<CustomBehavior File="RunMacro" Macro="/cancelaura Shabby Arakkoa Disguise" NumOfTimes="1" WaitTime="1000" />
+			</If>
+			<If Condition="((HasQuest(11029)) &amp;&amp; (IsQuestCompleted(11029)))" >
+				<CustomBehavior File="RunMacro" Macro="/cancelaura Shabby Arakkoa Disguise" NumOfTimes="1" WaitTime="1000" />
+				<CustomBehavior File="FlyTo" X="-3397.678" Y="3613.834" Z="276.1902" />
+				<CustomBehavior File="ForcedDismount" />
+		<TurnIn QuestName="A Shabby Disguise" QuestId="11029" TurnInName="Hazzik" TurnInId="23306" />
+			<!-- ignoring the next quest, the plugin will auto complete it while farming -->
+		<PickUp QuestName="Adversarial Blood" QuestId="11885" GiverName="Hazzik" GiverId="23306" />
+			</If>
+			<If Condition="((!HasQuest(11885)) &amp;&amp; (!IsQuestCompleted(11885)))" >
+				<CustomBehavior File="FlyTo" X="-3397.678" Y="3613.834" Z="276.1902" />
+				<CustomBehavior File="ForcedDismount" />
+		<PickUp QuestName="Adversarial Blood" QuestId="11885" GiverName="Hazzik" GiverId="23306" />
+			</If>
+			<!--
+			<If Condition="((HasQuest(11885)) &amp;&amp; (!IsQuestCompleted(11885)))" >
+				<CustomBehavior File="FlyTo" X="-4068.029" Y="3392.732" Z="291.3378" />
+				<CustomBehavior File="ForcedDismount" />
+				<Objective QuestName="Adversarial Blood" QuestId="11885" Type="KillMob" MobId="23161" KillCount="1" />
+				<Objective QuestName="Adversarial Blood" QuestId="11885" Type="KillMob" MobId="23165" KillCount="1" />
+				<Objective QuestName="Adversarial Blood" QuestId="11885" Type="KillMob" MobId="23163" KillCount="1" />
+				<Objective QuestName="Adversarial Blood" QuestId="11885" Type="KillMob" MobId="23162" KillCount="1" />
+			</If>
+			-->
+			
+			
+			<While Condition="Me.GetReputationLevelWith(1031) &lt; Styx.WoWUnitReaction.Exalted" >
+			
+			<!-- The bot will auto do these with the plugin enabled -->
+			<If Condition="((HasQuest(11885)) &amp;&amp; (IsQuestCompleted(11885)))" >
+				<CustomBehavior File="FlyTo" X="-3397.678" Y="3613.834" Z="276.1902" />
+				<CustomBehavior File="ForcedDismount" />
+		<TurnIn QuestName="Adversarial Blood" QuestId="11885" TurnInName="Hazzik" TurnInId="23306" />			
+			</If>
+			<If Condition="(IsQuestCompleted(11885))" >
+		<PickUp QuestName="Terokk's Downfall" QuestId="11073" GiverName="Sky Commander Adaris" GiverId="23038" />
+			</If>
+			<If Condition="((HasQuest(11073)) &amp;&amp; (!IsQuestCompleted(11073)))" >
+				<CustomBehavior File="FlyTo" X="-3783.128" Y="3505.344" Z="286.9921" />
+				<CustomBehavior File="ForcedDismount" />
+				<CustomBehavior File="InteractWith" QuestId="11073" MobId="185928" ObjectType="Gameobject" NumOfTimes="1" GossipOptions="1" CollectionDistance="50" X="-3783.128" Y="3505.344" Z="286.9921" />
+				<CustomBehavior File="WaitTimer" WaitTime="7000" />
+				<Objective QuestName="Terokk's Downfall" QuestId="11073" Type="KillMob" MobId="21838" KillCount="1" />
+			</If>
+			<If Condition="((HasQuest(11073)) &amp;&amp; (IsQuestCompleted(11073)))" >
+				<CustomBehavior File="FlyTo" X="-3397.678" Y="3613.834" Z="276.1902" />
+				<CustomBehavior File="ForcedDismount" />
+		<TurnIn QuestName="Terokk's Downfall" QuestId="11073" TurnInName="Sky Commander Adaris" TurnInId="23038" />			
+			</If>
+			
+				<!-- 11 minute respawn timer -->
+				<If Condition="(HasItem(32720))" >
+					<CustomBehavior File="FlyTo" X="-3783.128" Y="3505.344" Z="286.9921" Name="kill Terrok" />
+					<CustomBehavior File="ForcedDismount" />
+					<CustomBehavior File="Message" Text="Terrok has an 11 minute respawn timer, waiting for respawn (500 Rep)" LogColor="Red" />
+					<CustomBehavior File="InteractWith"  MobId="185928" ObjectType="Gameobject" NumOfTimes="1" GossipOptions="1" CollectionDistance="50" X="-3783.128" Y="3505.344" Z="286.9921" />
+					<CustomBehavior File="WaitTimer" WaitTime="7000" />
+					<CustomBehavior File="RunMacro" Macro="/tar Terrok\n/startattack" NumOfTimes="1" WaitTime="1000" />
+					<CustomBehavior File="WaitTimer" WaitTime="2000" />
+				</If>
+				
+				<If Condition="(GetItemCount(32388) &lt; 6)" >
+					<CustomBehavior File="FlyTo" X="-4068.029" Y="3392.732" Z="291.3378" Name="Farming start" />
+					<CustomBehavior File="ForcedDismount" />
+
+						<SetGrindArea>
+							<GrindArea>
+								<Factions>14 16 90 1869 1881 1860 1861 1862</Factions>
+								<Hotspots>
+									<Hotspot X="-4068.029" Y="3392.732" Z="291.3378" />
+									<Hotspot X="-4037.896" Y="3320.999" Z="283.9868" />
+									<Hotspot X="-3980.318" Y="3284.15" Z="287.4099" />
+									<Hotspot X="-3857.188" Y="3294.483" Z="274.445" />
+									<Hotspot X="-3904.42" Y="3128.052" Z="328.2799" />
+									<Hotspot X="-4083.211" Y="3203.444" Z="296.6914" />
+									<Hotspot X="-4099.672" Y="3088.971" Z="316.911" />
+									<Hotspot X="-4156.194" Y="3026.381" Z="316.3811" />
+									<Hotspot X="-4029.307" Y="3144.122" Z="308.7712" />
+									<Hotspot X="-3981.431" Y="3077.621" Z="340.5073" />
+									<Hotspot X="-3913.032" Y="3020.373" Z="356.6836" />
+									<Hotspot X="-3962.826" Y="3024.476" Z="357.3753" />
+									<Hotspot X="-3899.512" Y="3125.694" Z="328.255" />
+									<Hotspot X="-3957.049" Y="3269.308" Z="290.6071" />
+									<Hotspot X="-4017.691" Y="3310.419" Z="284.1314" />
+									<Hotspot X="-4073.455" Y="3336.78" Z="284.0048" />
+									<Hotspot X="-4065.781" Y="3390.007" Z="290.3756" />
+								</Hotspots>
+							</GrindArea>
+						</SetGrindArea>
+					<GrindTo Condition="(GetItemCount(32388) &gt;= 6)" GoalText="6 Shadow Dusts = 150 rep" />
+				</If>
+				
+				<!-- Shadow Dust -->
+				<While Condition="(GetItemCount(32388) &gt;= 6)" >
+					<CustomBehavior File="FlyTo" X="-3399.722" Y="3615.042" Z="276.3743" Name="Turn in Shadow Dust" />
+					<CustomBehavior File="InteractWith"  MobId="23042" NumOfTimes="1" CollectionDistance="50" WaitTime="1000" X="-3407.585" Y="3624.566" Z="278.0751" />
+					<CustomBehavior File="RunMacro" Macro="/click QuestFrameCompleteButton" NumOfTimes="1" WaitTime="1000" />
+					<CustomBehavior File="RunMacro" Macro="/click QuestFrameCompleteQuestButton" NumOfTimes="1" WaitTime="1000" />
+					<CustomBehavior File="WaitTimer" WaitTime="2000" />
+				</While>
+				
+				<!-- The items from the 4 mini bosses -->
+				<While Condition="((HasItem(32717)) &amp;&amp; (HasItem(32718)) &amp;&amp; (HasItem(32715)) &amp;&amp; (HasItem(32716)))" >
+					<CustomBehavior File="InteractWith"  MobId="23306" NumOfTimes="1" CollectionDistance="50" WaitTime="1000" X="-3407.585" Y="3624.566" Z="278.0751" />
+					<CustomBehavior File="RunMacro" Macro="/click GossipTitleButton1" NumOfTimes="1" WaitTime="1000" />
+					<CustomBehavior File="RunMacro" Macro="/click QuestFrameCompleteButton" NumOfTimes="1" WaitTime="1000" />
+					<CustomBehavior File="RunMacro" Macro="/click QuestFrameCompleteQuestButton" NumOfTimes="1" WaitTime="1000" />
+					<CustomBehavior File="WaitTimer" WaitTime="2000" />
+				</While>
+				
+			<If Condition="(Me.IsAlliance)" >
+				<If Condition="(Me.FreeBagSlots &lt;= 10)" >
+				
+					<CustomBehavior File="Message" Text="Doing a sell/mail run at Allerian Stronghold" LogColor="Red" />
+					
+					<CustomBehavior File="FlyTo" X="-2952.829" Y="4009.189" Z="0.08629808" Name="Mail Run" />
+					<CustomBehavior File="ForcedDismount" />
+
+					<SetVendor><Vendors>
+						<Vendor Name="Cecil Meyers" Entry="19056" Type="Repair" X="-2978.951" Y="4033.115" Z="3.573883" />
+					</Vendors></SetVendor>
+					<SetMailbox><Mailboxes>
+						<Mailbox X="-2931.671" Y="4008.319" Z="-1.318626" />
+					</Mailboxes></SetMailbox>
+					
+					<CustomBehavior File="ForceSetVendor" VendorType="Repair" />
+					<CustomBehavior File="ForceSetVendor" VendorType="Sell" />
+					<CustomBehavior File="ForceSetVendor" VendorType="Mail" />
+					<!-- <CustomBehavior File="ForceSetVendor" DoMail="True" DoSell="True" DoRepair="True" DoTrain="False" /> -->
+					
+					<ClearMailbox /><ClearVendor />
+				
+				</If>
+			</If>
+				
+			<If Condition="(Me.IsHorde)" >
+				<If Condition="(Me.FreeBagSlots &lt;= 10)" >
+				
+					<CustomBehavior File="Message" Text="Doing a sell/mail run at Stonebreaker Hold" LogColor="Red" />
+					
+					<CustomBehavior File="FlyTo" X="-2616.172" Y="4413.635" Z="35.41801" Name="Mail Run" />
+					<CustomBehavior File="ForcedDismount" />
+
+					<SetVendor><Vendors>
+						<Vendor Name="Bar Talet" Entry="18962" Type="Repair" X="-2639.384" Y="4425.386" Z="36.68298" />
+					</Vendors></SetVendor>
+					<SetMailbox><Mailboxes>
+						<Mailbox X="-2616.172" Y="4413.635" Z="35.41801" />
+					</Mailboxes></SetMailbox>
+					
+					<CustomBehavior File="ForceSetVendor" VendorType="Repair" />
+					<CustomBehavior File="ForceSetVendor" VendorType="Sell" />
+					<CustomBehavior File="ForceSetVendor" VendorType="Mail" />
+					<!-- <CustomBehavior File="ForceSetVendor" DoMail="True" DoSell="True" DoRepair="True" DoTrain="False" /> -->
+					
+					<ClearMailbox /><ClearVendor />
+				
+				</If>
+			</If>
+				
+				
+			</While>
+		</If>
+
+			<!-- This will stop the bot after you're Exalted -->
+			<If Condition="Me.GetReputationLevelWith(1031) == Styx.WoWUnitReaction.Exalted" >
+				<CustomBehavior File="UserDialog" Title="title" AllowBotStop="True" SoundCue="Asterisk" SoundCueInterval="1" Text="You have reached Exalted\nIf you liked this profile, +rep is always appreciated" />
+			</If>
+
+	</QuestOrder>
+	
+	<ProtectedItems>
+		<Item Name="Time-Lost Offering" Id="32720" />
+		<Item Name="Karrog's Spine" Id="32717" />
+		<Item Name="Vakkiz's Scale" Id="32718" />
+		<Item Name="Akkarai's Talons" Id="32715" />
+		<Item Name="Gezzarak's Claws" Id="32716" />
+		<Item Name="Time-Lost Scroll" Id="32620" />
+		<Item Name="Shadow Dust" Id="32388" />
+		<Item Name="Netherdust Pollen" Id="32468" />
+		<Item Name="Nethercite Ore" Id="32464" />
+		<Item Name="Nethercite Flayer Hide" Id="32470" />
+	</ProtectedItems>
+
+</HBProfile>

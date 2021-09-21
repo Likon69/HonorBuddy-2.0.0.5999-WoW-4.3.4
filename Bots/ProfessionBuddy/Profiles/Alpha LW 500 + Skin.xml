@@ -1,0 +1,1274 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Professionbuddy>
+  <Settings DefaultValue="False" Type="Boolean" Name="Mail to DE" Summary="This will mail all crafted/Looted Armor to DE toon" Category="Mail" Global="False" Hidden="False" />
+  <CustomAction Code="CharacterSettings.Instance.SkinMobs = true;" />
+  <CustomAction Code="CharacterSettings.Instance.LootMobs = true;" />
+  <CustomAction Code="Log(Color.GreenYellow, &quot;Welcome to [PB] Leatherworking + Skinning 1- 500&quot;);" />
+  <Declaration Code="int Skinning;" />
+  <Declaration Code="int Worgen;" />
+  <CustomAction Code="Skinning = Me.GetSkill(Styx.SkillLine.Skinning).CurrentValue;" />
+  <ChangeBotAction BotName="Questing" />
+  <If Condition="Me.Race == WoWRace.Worgen" IgnoreCanRun="True">
+    <CustomAction Code="Log(&quot;Im a Worgen. Skinning Level increaced by 15&quot;);" />
+    <CustomAction Code="Skinning = Skinning + 15;" />
+    <CustomAction Code="Log(&quot;Skinning Level is &quot;+Skinning+&quot;&quot;);" />
+    <CustomAction Code="Log(&quot;Leatherworking level is &quot;+Leatherworking.Level+&quot;&quot;);" />
+    <If Condition="Skinning == 15|| Skinning == 90 || Skinning== 165 || Skinning == 240 || Skinning == 315 || Skinning == 390 || Skinning == 440 || Skinning == 540" IgnoreCanRun="True">
+      <CustomAction Code="Log(Color.Orange,&quot;LW + Skin:&quot; ,Color.LimeGreen, &quot;Learning Skinning&quot;);" />
+      <If Condition="Me.IsHorde" IgnoreCanRun="True">
+        <If Condition="Me.MapId == 1" IgnoreCanRun="True">
+          <If Condition="Me.ZoneText != &quot;Orgrimmar&quot;" IgnoreCanRun="True">
+            <FlyToAction Dismount="True" Location="1850.182, -4565.552, 24.98125" />
+          </If>
+          <TrainSkillAction NpcEntry="7088" Location="1849.251, -4515.887, 24.05639" />
+        </If>
+        <If Condition="Me.MapId == 530" IgnoreCanRun="True" />
+      </If>
+      <If Condition="Me.IsAlliance" IgnoreCanRun="True">
+        <If Condition="Me.MapId == 0" IgnoreCanRun="True">
+          <If Condition="Me.ZoneText != &quot;Stormwind City&quot;" IgnoreCanRun="True">
+            <FlyToAction Dismount="True" Location="-8720.27, 429.3408, 97.97028" />
+          </If>
+          <TrainSkillAction NpcEntry="1292" Location="-8716.408, 469.4141, 98.61301" />
+        </If>
+        <If Condition="Me.MapId == 530" IgnoreCanRun="True">
+          <FlyToAction Dismount="True" Location="-721.657, 2745.256, 94.00251" />
+          <TrainSkillAction NpcEntry="18777" Location="-693.8341, 2724.696, 94.11031" />
+        </If>
+        <If Condition="Me.MapId == 571" IgnoreCanRun="True">
+          <FlyToAction Dismount="True" Location="2136.098, 5255.882, 19.44929" />
+          <TrainSkillAction NpcEntry="27000" Location="2136.098, 5255.882, 19.44929" />
+        </If>
+        <If Condition="Me.MapId == 732" IgnoreCanRun="True">
+          <MoveToAction Location="-344.7248, 1032.921, 22.13287" MoveType="Location" Pathing="Navigator" Entry="0" />
+          <InteractionAction InteractType="GameObject" Entry="208227" InteractDelay="10" GameObjectType="Transport" SpellFocus="Anvil" />
+          <WaitAction Condition="Me.MapId == 0" Timeout="20000" />
+          <TrainSkillAction NpcEntry="1292" Location="-8716.408, 469.4141, 98.61301" />
+        </If>
+      </If>
+    </If>
+  </If>
+  <If Condition="Me.Race != WoWRace.Worgen" IgnoreCanRun="True">
+    <CustomAction Code="Log(&quot;Leatherworking level is &quot;+Leatherworking.Level+&quot;&quot;);" />
+    <CustomAction Code="Log(&quot;Skinning Level is &quot;+Skinning+&quot;&quot;);" />
+  </If>
+  <If Condition="Leatherworking.Level &lt; 1" IgnoreCanRun="True">
+    <CustomAction Code="Log(Color.Orange,&quot;LW+Skin:&quot; , Color.LimeGreen, &quot;Learning Leatherworking&quot;);" />
+    <If Condition="Me.IsAlliance" IgnoreCanRun="True">
+      <If Condition="Me.ZoneText != &quot;Stormwind City&quot;" IgnoreCanRun="True">
+        <FlyToAction Dismount="True" Location="-8720.27, 429.3408, 97.97028" />
+      </If>
+      <TrainSkillAction NpcEntry="5564" Location="-8725.547, 477.4149, 98.61372" />
+    </If>
+    <If Condition="Me.IsHorde" IgnoreCanRun="True">
+      <If Condition="Me.ZoneText != &quot;Orgrimmar&quot;" IgnoreCanRun="True">
+        <FlyToAction Dismount="True" Location="1850.182, -4565.552, 24.98125" />
+      </If>
+      <TrainSkillAction NpcEntry="3365" Location="1850.182, -4565.552, 24.98125" />
+    </If>
+  </If>
+  <If Condition="Skinning &lt; 1" IgnoreCanRun="True">
+    <CustomAction Code="Log(Color.Orange,&quot;LW + Skin:&quot; ,Color.LimeGreen, &quot;Learning Skinning&quot;);" />
+    <If Condition="Me.IsAlliance" IgnoreCanRun="True">
+      <If Condition="Me.ZoneText != &quot;Stormwind City&quot;" IgnoreCanRun="True">
+        <FlyToAction Dismount="True" Location="-8720.27, 429.3408, 97.97028" />
+      </If>
+      <TrainSkillAction NpcEntry="1292" Location="-8716.408, 469.4141, 98.61301" />
+    </If>
+    <If Condition="Me.IsHorde" IgnoreCanRun="True">
+      <If Condition="Me.ZoneText != &quot;Orgrimmar&quot;" IgnoreCanRun="True">
+        <FlyToAction Dismount="True" Location="1850.182, -4565.552, 24.98125" />
+      </If>
+      <TrainSkillAction NpcEntry="7088" Location="1852.908, -4570.059, 24.981" />
+    </If>
+  </If>
+  <If Condition="Skinning == 75 || Skinning== 150 || Skinning == 225 || Skinning == 300 || Skinning == 375 || Skinning == 425 || Skinning == 525" IgnoreCanRun="True">
+    <CustomAction Code="Log(Color.Orange,&quot;LW + Skin:&quot; ,Color.LimeGreen, &quot;Learning Skinning&quot;);" />
+    <If Condition="Me.IsHorde" IgnoreCanRun="True">
+      <If Condition="Me.MapId == 1" IgnoreCanRun="True">
+        <If Condition="Me.ZoneText != &quot;Orgrimmar&quot;" IgnoreCanRun="True">
+          <FlyToAction Dismount="True" Location="1850.182, -4565.552, 24.98125" />
+        </If>
+        <TrainSkillAction NpcEntry="7088" Location="1849.251, -4515.887, 24.05639" />
+      </If>
+      <If Condition="Me.MapId == 530" IgnoreCanRun="True" />
+    </If>
+    <If Condition="Me.IsAlliance" IgnoreCanRun="True">
+      <If Condition="Me.MapId == 0" IgnoreCanRun="True">
+        <If Condition="Me.ZoneText != &quot;Stormwind City&quot;" IgnoreCanRun="True">
+          <FlyToAction Dismount="True" Location="-8720.27, 429.3408, 97.97028" />
+        </If>
+        <TrainSkillAction NpcEntry="1292" Location="-8716.408, 469.4141, 98.61301" />
+      </If>
+      <If Condition="Me.MapId == 530" IgnoreCanRun="True">
+        <FlyToAction Dismount="True" Location="-721.657, 2745.256, 94.00251" />
+        <TrainSkillAction NpcEntry="18777" Location="-693.8341, 2724.696, 94.11031" />
+      </If>
+      <If Condition="Me.MapId == 571" IgnoreCanRun="True">
+        <FlyToAction Dismount="True" Location="2136.098, 5255.882, 19.44929" />
+        <TrainSkillAction NpcEntry="27000" Location="2136.098, 5255.882, 19.44929" />
+      </If>
+      <If Condition="Me.MapId == 732" IgnoreCanRun="True">
+        <MoveToAction Location="-344.7248, 1032.921, 22.13287" MoveType="Location" Pathing="Navigator" Entry="0" />
+        <InteractionAction InteractType="GameObject" Entry="208227" InteractDelay="10" GameObjectType="Transport" SpellFocus="Anvil" />
+        <WaitAction Condition="Me.MapId == 0" Timeout="20000" />
+        <TrainSkillAction NpcEntry="1292" Location="-8716.408, 469.4141, 98.61301" />
+      </If>
+    </If>
+  </If>
+  <If Condition="InbagCount (7005) == 0" IgnoreCanRun="True">
+    <If Condition="Me.IsAlliance" IgnoreCanRun="True">
+      <CustomAction Code="Log(&quot;Buying Skinning Knife&quot;);" />
+      <BuyItemAction NpcEntry="5565" Location="-8722.868, 479.3223, 98.61314" ItemID="7005" BuyItemType="SpecificItem" Count="1" BuyAdditively="True" />
+    </If>
+    <If Condition="Me.IsHorde" IgnoreCanRun="True">
+      <BuyItemAction NpcEntry="3366" Location="1856.972, -4555.948, 24.981" ItemID="7005" BuyItemType="SpecificItem" Count="1" BuyAdditively="True" />
+    </If>
+  </If>
+  <While Condition="Me.FreeNormalBagSlots &lt;= 2" IgnoreCanRun="True">
+    <CallSubRoutine SubRoutineName="Sell" />
+  </While>
+  <!--Leatherworking Crafting-->
+  <While Condition="InbagCount (2318) &gt;= 260 &amp;&amp; Leatherworking.Level &gt;= 1 &amp;&amp; Leatherworking.Level &lt; 100" IgnoreCanRun="True">
+    <If Condition="Me.FreeNormalBagSlots &lt; 30" IgnoreCanRun="False">
+      <CallSubRoutine SubRoutineName="Sell" />
+    </If>
+    <If Condition="Leatherworking.Level &gt;= 1 &amp;&amp; Leatherworking.Level &lt; 30" IgnoreCanRun="True">
+      <CustomAction Code="Log(Color.Orange,&quot;LW + Skin:&quot;, Color.LimeGreen, &quot;Crafting Light Amor Kit X 30&quot;);" />
+      <CastSpellAction RepeatType="Specific" Repeat="30" Entry="2152" CastOnItem="False" ItemType="Chest" ItemId="0" />
+    </If>
+    <If Condition="Leatherworking.Level &gt;= 30 &amp;&amp; Leatherworking.Level &lt; 50" IgnoreCanRun="True">
+      <If Condition="!HasRecipe(9058)" IgnoreCanRun="True">
+        <CallSubRoutine SubRoutineName="Train Leather" />
+      </If>
+      <If Condition="InbagCount (2320) &lt; 20" IgnoreCanRun="True">
+        <CustomAction Code="Log(Color.Orange, &quot;LW + Skin:&quot;, Color.LimeGreen, &quot;Buying Course Thread&quot;);" />
+        <If Condition="Me.IsAlliance" IgnoreCanRun="True">
+          <If Condition="Me.ZoneText != &quot;Stormwind City&quot;" IgnoreCanRun="True">
+            <FlyToAction Dismount="True" Location="-8721.437, 436.2064, 97.69892" />
+          </If>
+          <BuyItemAction NpcEntry="5565" Location="-8722.868, 479.3223, 98.61378" ItemID="2320" BuyItemType="SpecificItem" Count="20" BuyAdditively="True" />
+        </If>
+        <If Condition="Me.IsHorde" IgnoreCanRun="True">
+          <If Condition="Me.ZoneText != &quot;Orgrimmar&quot;" IgnoreCanRun="True">
+            <FlyToAction Dismount="True" Location="1925.382, -4660.836, 33.285" />
+          </If>
+          <BuyItemAction NpcEntry="3366" Location="1856.972, -4555.948, 24.981" ItemID="2320" BuyItemType="SpecificItem" Count="20" BuyAdditively="True" />
+        </If>
+      </If>
+      <CustomAction Code="Log(Color.Orange,&quot;LW + Skin:&quot;, Color.LimeGreen, &quot;Crafting Handstitched Leather Cloak X 10&quot;);" />
+      <CastSpellAction RepeatType="Specific" Repeat="20" Entry="9058" CastOnItem="False" ItemType="Chest" ItemId="0" />
+      <WaitAction Condition="false" Timeout="1000" />
+    </If>
+    <If Condition="Leatherworking.Level &gt;= 50 &amp;&amp; Leatherworking.Level &lt; 55" IgnoreCanRun="True">
+      <If Condition="!HasRecipe (3753)" IgnoreCanRun="True">
+        <CallSubRoutine SubRoutineName="Train Leather" />
+      </If>
+      <If Condition="InbagCount (2320) &lt; 5" IgnoreCanRun="True">
+        <CustomAction Code="Log(Color.Orange, &quot;LW + Skin:&quot;, Color.LimeGreen, &quot;Buying Course Thread&quot;);" />
+        <If Condition="Me.IsAlliance" IgnoreCanRun="True">
+          <If Condition="Me.ZoneText != &quot;Stormwind City&quot;" IgnoreCanRun="True">
+            <FlyToAction Dismount="True" Location="-8721.437, 436.2064, 97.69892" />
+          </If>
+          <BuyItemAction NpcEntry="5565" Location="-8722.868, 479.3223, 98.61378" ItemID="2320" BuyItemType="SpecificItem" Count="5" BuyAdditively="True" />
+        </If>
+        <If Condition="Me.IsHorde" IgnoreCanRun="True">
+          <If Condition="Me.ZoneText != &quot;Orgrimmar&quot;" IgnoreCanRun="True">
+            <FlyToAction Dismount="True" Location="1925.382, -4660.836, 33.285" />
+          </If>
+          <BuyItemAction NpcEntry="3366" Location="1856.972, -4555.948, 24.981" ItemID="2320" BuyItemType="SpecificItem" Count="5" BuyAdditively="True" />
+        </If>
+      </If>
+      <CustomAction Code="Log(Color.Orange,&quot;LW + Skin:&quot;, Color.LimeGreen, &quot;Crafting Handstitched Leather Belt X 5&quot;);" />
+      <CastSpellAction RepeatType="Specific" Repeat="5" Entry="3753" CastOnItem="False" ItemType="Chest" ItemId="0" />
+    </If>
+    <If Condition="Leatherworking.Level &gt;= 55 &amp;&amp; Leatherworking.Level &lt; 85" IgnoreCanRun="True">
+      <If Condition="!HasRecipe (3756)" IgnoreCanRun="True">
+        <CallSubRoutine SubRoutineName="Train Leather" />
+      </If>
+      <If Condition="InbagCount (2320) &lt; 60" IgnoreCanRun="True">
+        <CustomAction Code="Log(Color.Orange, &quot;LW + Skin:&quot;, Color.LimeGreen, &quot;Buying Course Thread&quot;);" />
+        <If Condition="Me.IsAlliance" IgnoreCanRun="True">
+          <If Condition="Me.ZoneText != &quot;Stormwind City&quot;" IgnoreCanRun="True">
+            <FlyToAction Dismount="True" Location="-8721.437, 436.2064, 97.69892" />
+          </If>
+          <BuyItemAction NpcEntry="5565" Location="-8722.868, 479.3223, 98.61378" ItemID="2320" BuyItemType="SpecificItem" Count="60" BuyAdditively="True" />
+        </If>
+        <If Condition="Me.IsHorde" IgnoreCanRun="True">
+          <If Condition="Me.ZoneText != &quot;Orgrimmar&quot;" IgnoreCanRun="True">
+            <FlyToAction Dismount="True" Location="1925.382, -4660.836, 33.285" />
+          </If>
+          <BuyItemAction NpcEntry="3366" Location="1856.972, -4555.948, 24.981" ItemID="2320" BuyItemType="SpecificItem" Count="60" BuyAdditively="True" />
+        </If>
+      </If>
+      <CustomAction Code="Log(Color.Orange,&quot;LW + Skin:&quot;, Color.LimeGreen, &quot;Crafting Embossed Leather Gloves X 30&quot;);" />
+      <CastSpellAction RepeatType="Specific" Repeat="30" Entry="3756" CastOnItem="False" ItemType="Chest" ItemId="0" />
+      <WaitAction Condition="false" Timeout="1000" />
+    </If>
+    <If Condition="Leatherworking.Level &gt;= 85 &amp;&amp; Leatherworking.Level &lt; 100" IgnoreCanRun="True">
+      <If Condition="!HasRecipe(3763)" IgnoreCanRun="True">
+        <CallSubRoutine SubRoutineName="Train Leather" />
+      </If>
+      <If Condition="InbagCount (2320) &lt; 30" IgnoreCanRun="True">
+        <CustomAction Code="Log(Color.Orange, &quot;LW + Skin:&quot;, Color.LimeGreen, &quot;Buying Course Thread&quot;);" />
+        <If Condition="Me.IsAlliance" IgnoreCanRun="True">
+          <If Condition="Me.ZoneText != &quot;Stormwind City&quot;" IgnoreCanRun="True">
+            <FlyToAction Dismount="True" Location="-8721.437, 436.2064, 97.69892" />
+          </If>
+          <BuyItemAction NpcEntry="5565" Location="-8722.868, 479.3223, 98.61378" ItemID="2320" BuyItemType="SpecificItem" Count="30" BuyAdditively="True" />
+        </If>
+        <If Condition="Me.IsHorde" IgnoreCanRun="True">
+          <If Condition="Me.ZoneText != &quot;Orgrimmar&quot;" IgnoreCanRun="True">
+            <FlyToAction Dismount="True" Location="1925.382, -4660.836, 33.285" />
+          </If>
+          <BuyItemAction NpcEntry="3366" Location="1856.972, -4555.948, 24.981" ItemID="2320" BuyItemType="SpecificItem" Count="30" BuyAdditively="True" />
+        </If>
+      </If>
+      <CustomAction Code="Log(Color.Orange,&quot;LW + Skin:&quot;, Color.LimeGreen, &quot;Crafting Fine Leather Belt X 15 !!Save this for later!!&quot;);" />
+      <CastSpellAction RepeatType="Specific" Repeat="15" Entry="3763" CastOnItem="False" ItemType="Chest" ItemId="0" />
+      <If Condition="Me.IsAlliance" IgnoreCanRun="True">
+        <FlyToAction Dismount="True" Location="-8352.058, 622.5838, 95.35847" />
+      </If>
+      <If Condition="Me.IsHorde" IgnoreCanRun="True">
+        <FlyToAction Dismount="True" Location="1550.689, -4375.677, 17.20224" />
+      </If>
+      <PutItemInBankAction Category="TradeGoods" SubCategoryType="WoWItemTradeGoodsClass" SubCategory="None" Deposit="All" UseCategory="False" Bank="Personal" ItemID="4246" GuildTab="0" NpcEntry="0" Amount="0" AutoFindBank="True" Location="0, 0, 0" />
+    </If>
+  </While>
+  <While Condition="InbagCount (2319) &gt;= 60 &amp;&amp; Leatherworking.Level &gt;= 100 &amp;&amp; Leatherworking.Level &lt; 115&#xD;&#xA;" IgnoreCanRun="True">
+    <If Condition="Leatherworking.Level &gt;= 100 &amp;&amp; Leatherworking.Level &lt; 115" IgnoreCanRun="True">
+      <If Condition="Me.FreeNormalBagSlots &lt; 15" IgnoreCanRun="True">
+        <CallSubRoutine SubRoutineName="Sell" />
+      </If>
+      <If Condition="!HasRecipe(2165)" IgnoreCanRun="True">
+        <CallSubRoutine SubRoutineName="Train Leather" />
+      </If>
+      <If Condition="InbagCount (4289) &lt; 15" IgnoreCanRun="True">
+        <CustomAction Code="Log(Color.Orange, &quot;LW + Skin:&quot;, Color.LimeGreen, &quot;Buying Coarse Thread&quot;);" />
+        <If Condition="Me.IsAlliance" IgnoreCanRun="True">
+          <If Condition="Me.ZoneText != &quot;Stormwind City&quot;" IgnoreCanRun="True">
+            <FlyToAction Dismount="True" Location="-8721.437, 436.2064, 97.69892" />
+          </If>
+          <BuyItemAction NpcEntry="5565" Location="-8722.868, 479.3223, 98.61378" ItemID="2320" BuyItemType="SpecificItem" Count="15" BuyAdditively="True" />
+        </If>
+        <If Condition="Me.IsHorde" IgnoreCanRun="True">
+          <If Condition="Me.ZoneText != &quot;Orgrimmar&quot;" IgnoreCanRun="True">
+            <FlyToAction Dismount="True" Location="1925.382, -4660.836, 33.285" />
+          </If>
+          <BuyItemAction NpcEntry="3366" Location="1856.972, -4555.948, 24.98211" ItemID="2320" BuyItemType="SpecificItem" Count="15" BuyAdditively="True" />
+        </If>
+      </If>
+      <CustomAction Code="Log(Color.Orange,&quot;LW + Skin:&quot;, Color.LimeGreen, &quot;Crafting Medium Armor Kits X 15&quot;);" />
+      <CastSpellAction RepeatType="Specific" Repeat="15" Entry="2165" CastOnItem="False" ItemType="Chest" ItemId="0" />
+    </If>
+  </While>
+  <While Condition="InbagCount (2319) &gt;= 60  &amp;&amp; Leatherworking.Level &gt;= 115 &amp;&amp; Leatherworking.Level &lt; 130" IgnoreCanRun="True">
+    <If Condition="Leatherworking.Level &gt;= 115 &amp;&amp; Leatherworking.Level &lt; 130" IgnoreCanRun="True">
+      <If Condition="Me.FreeNormalBagSlots &lt; 15" IgnoreCanRun="True">
+        <CallSubRoutine SubRoutineName="Sell" />
+      </If>
+      <If Condition="!HasRecipe(2167)" IgnoreCanRun="True">
+        <CallSubRoutine SubRoutineName="Train Leather" />
+      </If>
+      <If Condition="InbagCount (2321) &lt; 30" IgnoreCanRun="True">
+        <CustomAction Code="Log(Color.Orange, &quot;LW + Skin:&quot;, Color.LimeGreen, &quot;Buying Fine Thread&quot;);" />
+        <If Condition="Me.IsAlliance" IgnoreCanRun="True">
+          <If Condition="Me.ZoneText != &quot;Stormwind City&quot;" IgnoreCanRun="True">
+            <FlyToAction Dismount="True" Location="-8721.437, 436.2064, 97.69892" />
+          </If>
+          <BuyItemAction NpcEntry="5565" Location="-8722.868, 479.3223, 98.61378" ItemID="2321" BuyItemType="SpecificItem" Count="30" BuyAdditively="True" />
+        </If>
+        <If Condition="Me.IsHorde" IgnoreCanRun="True">
+          <If Condition="Me.ZoneText != &quot;Orgrimmar&quot;" IgnoreCanRun="True">
+            <FlyToAction Dismount="True" Location="1925.382, -4660.836, 33.285" />
+          </If>
+          <BuyItemAction NpcEntry="3366" Location="1856.972, -4555.948, 24.98211" ItemID="2321" BuyItemType="SpecificItem" Count="30" BuyAdditively="True" />
+        </If>
+      </If>
+      <If Condition="InbagCount (4340) &lt; 15" IgnoreCanRun="True">
+        <CustomAction Code="Log(Color.Orange, &quot;LW + Skin:&quot;, Color.LimeGreen, &quot;Buying Grey Dye&quot;);" />
+        <If Condition="Me.IsHorde" IgnoreCanRun="True">
+          <If Condition="Me.ZoneText != &quot;Orgrimmar&quot;" IgnoreCanRun="True">
+            <FlyToAction Dismount="True" Location="1850.182, -4565.552, 24.98125" />
+          </If>
+          <BuyItemAction NpcEntry="3366" Location="1856.972, -4555.948, 24.98211" ItemID="4340" BuyItemType="SpecificItem" Count="15" BuyAdditively="True" />
+        </If>
+        <If Condition="Me.IsAlliance" IgnoreCanRun="True">
+          <If Condition="Me.ZoneText != &quot;Stormwind City&quot;" IgnoreCanRun="True">
+            <FlyToAction Dismount="True" Location="-8721.437, 436.2064, 97.69892" />
+          </If>
+          <BuyItemAction NpcEntry="5565" Location="-8722.868, 479.3223, 98.61378" ItemID="4340" BuyItemType="SpecificItem" Count="15" BuyAdditively="True" />
+        </If>
+      </If>
+      <CustomAction Code="Log(Color.Orange,&quot;LW + Skin:&quot;, Color.LimeGreen, &quot;Crafting Dark Leather Boots X 15&quot;);" />
+      <CastSpellAction RepeatType="Specific" Repeat="15" Entry="2167" CastOnItem="False" ItemType="Chest" ItemId="0" />
+    </If>
+  </While>
+  <While Condition="InbagCount (2319) &gt;= 310  &amp;&amp; Leatherworking.Level &gt;= 130 &amp;&amp; Leatherworking.Level &lt; 150" IgnoreCanRun="True">
+    <If Condition="Leatherworking.Level &gt;= 130 &amp;&amp; Leatherworking.Level &lt; 145" IgnoreCanRun="True">
+      <If Condition="Me.FreeNormalBagSlots &lt; 20" IgnoreCanRun="True">
+        <CallSubRoutine SubRoutineName="Sell" />
+      </If>
+      <If Condition="!HasRecipe(2168)" IgnoreCanRun="True">
+        <CallSubRoutine SubRoutineName="Train Leather" />
+      </If>
+      <If Condition="InbagCount (2321) &lt; 15" IgnoreCanRun="True">
+        <CustomAction Code="Log(Color.Orange, &quot;LW + Skin:&quot;, Color.LimeGreen, &quot;Buying Fine Thread&quot;);" />
+        <If Condition="Me.IsHorde" IgnoreCanRun="True">
+          <If Condition="Me.ZoneText != &quot;Orgrimmar&quot;" IgnoreCanRun="True">
+            <FlyToAction Dismount="True" Location="1925.382, -4660.836, 33.285" />
+          </If>
+          <BuyItemAction NpcEntry="3366" Location="1856.972, -4555.948, 24.98211" ItemID="2321" BuyItemType="SpecificItem" Count="30" BuyAdditively="True" />
+        </If>
+        <If Condition="Me.IsAlliance" IgnoreCanRun="True">
+          <If Condition="Me.ZoneText != &quot;Stormwind City&quot;" IgnoreCanRun="True">
+            <FlyToAction Dismount="True" Location="-8721.437, 436.2064, 97.69892" />
+          </If>
+          <BuyItemAction NpcEntry="5565" Location="-8722.868, 479.3223, 98.61378" ItemID="2321" BuyItemType="SpecificItem" Count="15" BuyAdditively="True" />
+        </If>
+      </If>
+      <If Condition="InbagCount (4340) &lt; 15" IgnoreCanRun="True">
+        <CustomAction Code="Log(Color.Orange, &quot;LW + Skin:&quot;, Color.LimeGreen, &quot;Buying Grey Dye&quot;);" />
+        <If Condition="Me.IsHorde" IgnoreCanRun="True">
+          <If Condition="Me.ZoneText != &quot;Orgrimmar&quot;" IgnoreCanRun="True">
+            <FlyToAction Dismount="True" Location="1850.182, -4565.552, 24.98125" />
+          </If>
+          <BuyItemAction NpcEntry="3366" Location="1856.972, -4555.948, 24.98211" ItemID="4340" BuyItemType="SpecificItem" Count="15" BuyAdditively="True" />
+        </If>
+        <If Condition="Me.IsAlliance" IgnoreCanRun="True">
+          <If Condition="Me.ZoneText != &quot;Stormwind City&quot;" IgnoreCanRun="True">
+            <FlyToAction Dismount="True" Location="-8721.437, 436.2064, 97.69892" />
+          </If>
+          <BuyItemAction NpcEntry="5565" Location="-8722.868, 479.3223, 98.61378" ItemID="4340" BuyItemType="SpecificItem" Count="15" BuyAdditively="True" />
+        </If>
+      </If>
+      <CustomAction Code="Log(Color.Orange,&quot;LW + Skin:&quot;, Color.LimeGreen, &quot;Crafting Dark Leather Cloak X 15&quot;);" />
+      <CastSpellAction RepeatType="Specific" Repeat="15" Entry="2168" CastOnItem="False" ItemType="Chest" ItemId="0" />
+    </If>
+    <If Condition="Leatherworking.Level &gt;= 145 &amp;&amp; Leatherworking.Level &lt; 150" IgnoreCanRun="True">
+      <If Condition="Me.FreeNormalBagSlots &lt; 20" IgnoreCanRun="True">
+        <CallSubRoutine SubRoutineName="Sell" />
+      </If>
+      <If Condition="!HasRecipe(3764)" IgnoreCanRun="True">
+        <CallSubRoutine SubRoutineName="Train Leather" />
+      </If>
+      <If Condition="InbagCount (2321) &lt; 20" IgnoreCanRun="True">
+        <CustomAction Code="Log(Color.Orange, &quot;LW + Skin:&quot;, Color.LimeGreen, &quot;Buying Fine Thread&quot;);" />
+        <If Condition="Me.IsAlliance" IgnoreCanRun="True">
+          <If Condition="Me.ZoneText != &quot;Stormwind City&quot;" IgnoreCanRun="True">
+            <FlyToAction Dismount="True" Location="-8721.437, 436.2064, 97.69892" />
+          </If>
+          <BuyItemAction NpcEntry="5565" Location="-8722.868, 479.3223, 98.61378" ItemID="2321" BuyItemType="SpecificItem" Count="20" BuyAdditively="True" />
+        </If>
+        <If Condition="Me.IsHorde" IgnoreCanRun="True">
+          <If Condition="Me.ZoneText != &quot;Orgrimmar&quot;" IgnoreCanRun="True">
+            <FlyToAction Dismount="True" Location="1925.382, -4660.836, 33.285" />
+          </If>
+          <BuyItemAction NpcEntry="3366" Location="1856.972, -4555.948, 24.98211" ItemID="2321" BuyItemType="SpecificItem" Count="20" BuyAdditively="True" />
+        </If>
+      </If>
+      <CustomAction Code="Log(Color.Orange,&quot;LW + Skin:&quot;, Color.LimeGreen, &quot;Crafting Hillmans Leather Gloves X 10&quot;);" />
+      <CastSpellAction RepeatType="Specific" Repeat="10" Entry="3764" CastOnItem="False" ItemType="Chest" ItemId="0" />
+    </If>
+  </While>
+  <While Condition="InbagCount (4235) &gt;= 20 &amp;&amp; Leatherworking.Level &gt;= 150 &amp;&amp; Leatherworking.Level &lt; 165" IgnoreCanRun="True">
+    <If Condition="Leatherworking.Level &gt;= 155 &amp;&amp; Leatherworking.Level &lt; 165" IgnoreCanRun="True">
+      <If Condition="Me.FreeNormalBagSlots &lt; 20" IgnoreCanRun="True">
+        <CallSubRoutine SubRoutineName="Sell" />
+      </If>
+      <If Condition="!HasRecipe(3818)" IgnoreCanRun="True">
+        <CallSubRoutine SubRoutineName="Train Leather" />
+      </If>
+      <If Condition="InbagCount (2321) &lt; 60" IgnoreCanRun="True">
+        <CustomAction Code="Log(Color.Orange, &quot;LW + Skin:&quot;, Color.LimeGreen, &quot;Buying Fine Thread&quot;);" />
+        <If Condition="Me.IsAlliance" IgnoreCanRun="True">
+          <If Condition="Me.ZoneText != &quot;Stormwind City&quot;" IgnoreCanRun="True">
+            <FlyToAction Dismount="True" Location="-8721.437, 436.2064, 97.69892" />
+          </If>
+          <BuyItemAction NpcEntry="5565" Location="-8722.868, 479.3223, 98.61378" ItemID="2321" BuyItemType="SpecificItem" Count="60" BuyAdditively="True" />
+        </If>
+        <If Condition="Me.IsHorde" IgnoreCanRun="True">
+          <If Condition="Me.ZoneText != &quot;Orgrimmar&quot;" IgnoreCanRun="True">
+            <FlyToAction Dismount="True" Location="1925.382, -4660.836, 33.285" />
+          </If>
+          <BuyItemAction NpcEntry="3366" Location="1856.972, -4555.948, 24.98211" ItemID="2321" BuyItemType="SpecificItem" Count="60" BuyAdditively="True" />
+        </If>
+      </If>
+      <CustomAction Code="Log(Color.Orange,&quot;LW + Skin:&quot;, Color.LimeGreen, &quot;Crafting Cured Heavy Hide X 20 !! Save this for later !!&quot;);" />
+      <CastSpellAction RepeatType="Specific" Repeat="20" Entry="3818" CastOnItem="False" ItemType="Chest" ItemId="0" />
+      <If Condition="Me.IsAlliance" IgnoreCanRun="True">
+        <FlyToAction Dismount="True" Location="-8352.058, 622.5838, 95.35847" />
+      </If>
+      <If Condition="Me.IsHorde" IgnoreCanRun="True">
+        <FlyToAction Dismount="True" Location="1550.689, -4375.677, 17.20224" />
+      </If>
+      <PutItemInBankAction Category="TradeGoods" SubCategoryType="WoWItemTradeGoodsClass" SubCategory="None" Deposit="All" UseCategory="False" Bank="Personal" ItemID="4236" GuildTab="0" NpcEntry="0" Amount="0" AutoFindBank="True" Location="0, 0, 0" />
+    </If>
+  </While>
+  <While Condition="InbagCount (4234) &gt;= 205 &amp;&amp; Leatherworking.Level &gt;= 165 &amp;&amp; Leatherworking.Level &lt; 200" IgnoreCanRun="True">
+    <If Condition="Leatherworking.Level &gt;= 165 &amp;&amp; Leatherworking.Level &lt; 180" IgnoreCanRun="True">
+      <If Condition="Me.FreeNormalBagSlots &lt; 20" IgnoreCanRun="True">
+        <CallSubRoutine SubRoutineName="Sell" />
+      </If>
+      <If Condition="!HasRecipe(3780)" IgnoreCanRun="True">
+        <CallSubRoutine SubRoutineName="Train Leather" />
+      </If>
+      <If Condition="InbagCount (2321) &lt; 30" IgnoreCanRun="True">
+        <CustomAction Code="Log(Color.Orange, &quot;LW + Skin:&quot;, Color.LimeGreen, &quot;Buying Salt&quot;);" />
+        <If Condition="Me.IsAlliance" IgnoreCanRun="True">
+          <If Condition="Me.ZoneText != &quot;Stormwind City&quot;" IgnoreCanRun="True">
+            <FlyToAction Dismount="True" Location="-8721.437, 436.2064, 97.69892" />
+          </If>
+          <BuyItemAction NpcEntry="5565" Location="-8722.868, 479.3223, 98.61378" ItemID="2321" BuyItemType="SpecificItem" Count="30" BuyAdditively="True" />
+        </If>
+        <If Condition="Me.IsHorde" IgnoreCanRun="True">
+          <If Condition="Me.ZoneText != &quot;Orgrimmar&quot;" IgnoreCanRun="True">
+            <FlyToAction Dismount="True" Location="1925.382, -4660.836, 33.285" />
+          </If>
+          <BuyItemAction NpcEntry="3366" Location="1856.972, -4555.948, 24.98211" ItemID="2321" BuyItemType="SpecificItem" Count="30" BuyAdditively="True" />
+        </If>
+      </If>
+      <CustomAction Code="Log(Color.Orange,&quot;LW + Skin:&quot;, Color.LimeGreen, &quot;Crafting Heavy Armor Kits X 15&quot;);" />
+      <CastSpellAction RepeatType="Specific" Repeat="20" Entry="3780" CastOnItem="False" ItemType="Chest" ItemId="0" />
+    </If>
+    <If Condition="Leatherworking.Level &gt;= 180 &amp;&amp; Leatherworking.Level &lt; 190" IgnoreCanRun="True">
+      <If Condition="Me.FreeNormalBagSlots &lt; 20" IgnoreCanRun="True">
+        <CallSubRoutine SubRoutineName="Sell" />
+      </If>
+      <If Condition="InbagCount (4236) &lt; 20" IgnoreCanRun="True">
+        <If Condition="Me.IsAlliance" IgnoreCanRun="True">
+          <FlyToAction Dismount="True" Location="-8352.058, 622.5838, 95.35847" />
+        </If>
+        <If Condition="Me.IsHorde" IgnoreCanRun="True">
+          <If Condition="Me.ZoneText != &quot;Orgrimmar&quot;" IgnoreCanRun="True">
+            <FlyToAction Dismount="True" Location="1925.382, -4660.836, 33.285" />
+          </If>
+          <BuyItemAction NpcEntry="3366" Location="1856.972, -4555.948, 24.98211" ItemID="2321" BuyItemType="SpecificItem" Count="60" BuyAdditively="True" />
+        </If>
+        <GetItemfromBankAction Withdraw="Amount" Bank="Personal" MinFreeBagSlots="2" GetItemfromBankType="SpecificItem" ItemID="4236" NpcEntry="0" Amount="20" AutoFindBank="True" WithdrawAdditively="True" Location="0, 0, 0" />
+      </If>
+      <If Condition="InbagCount (2321) &lt; 20" IgnoreCanRun="True">
+        <CustomAction Code="Log(Color.Orange, &quot;LW + Skin:&quot;, Color.LimeGreen, &quot;Buying Fine Thread&quot;);" />
+        <If Condition="Me.IsAlliance" IgnoreCanRun="True">
+          <If Condition="Me.ZoneText != &quot;Stormwind City&quot;" IgnoreCanRun="True">
+            <FlyToAction Dismount="True" Location="-8721.437, 436.2064, 97.69892" />
+          </If>
+          <BuyItemAction NpcEntry="5565" Location="-8722.868, 479.3223, 98.61378" ItemID="2321" BuyItemType="SpecificItem" Count="20" BuyAdditively="True" />
+        </If>
+        <If Condition="Me.IsHorde" IgnoreCanRun="True">
+          <If Condition="Me.ZoneText != &quot;Orgrimmar&quot;" IgnoreCanRun="True">
+            <FlyToAction Dismount="True" Location="1925.382, -4660.836, 33.285" />
+          </If>
+          <BuyItemAction NpcEntry="3366" Location="1856.972, -4555.948, 24.98211" ItemID="2321" BuyItemType="SpecificItem" Count="20" BuyAdditively="True" />
+        </If>
+      </If>
+      <CustomAction Code="Log(Color.Orange,&quot;LW + Skin:&quot;, Color.LimeGreen, &quot;Crafting Barbaric Shoulders X 10&quot;);" />
+      <CastSpellAction RepeatType="Specific" Repeat="20" Entry="7151" CastOnItem="False" ItemType="Chest" ItemId="0" />
+    </If>
+    <If Condition="Leatherworking.Level &gt;= 190 &amp;&amp; Leatherworking.Level &lt; 200" IgnoreCanRun="True">
+      <If Condition="Me.FreeNormalBagSlots &lt; 20" IgnoreCanRun="True">
+        <CallSubRoutine SubRoutineName="Sell" />
+      </If>
+      <If Condition="!HasRecipe (7156)" IgnoreCanRun="True">
+        <CallSubRoutine SubRoutineName="Train Leather" />
+      </If>
+      <If Condition="InbagCount (4291) &lt; 10" IgnoreCanRun="True">
+        <CustomAction Code="Log(Color.Orange, &quot;LW + Skin:&quot;, Color.LimeGreen, &quot;Buying Fine Thread&quot;);" />
+        <If Condition="Me.IsAlliance" IgnoreCanRun="True">
+          <If Condition="Me.ZoneText != &quot;Stormwind City&quot;" IgnoreCanRun="True">
+            <FlyToAction Dismount="True" Location="-8721.437, 436.2064, 97.69892" />
+          </If>
+          <BuyItemAction NpcEntry="5565" Location="-8722.868, 479.3223, 98.61378" ItemID="4291" BuyItemType="SpecificItem" Count="10" BuyAdditively="True" />
+        </If>
+        <If Condition="Me.IsHorde" IgnoreCanRun="True">
+          <If Condition="Me.ZoneText != &quot;Orgrimmar&quot;" IgnoreCanRun="True">
+            <FlyToAction Dismount="True" Location="1925.382, -4660.836, 33.285" />
+          </If>
+          <BuyItemAction NpcEntry="3366" Location="1856.972, -4555.948, 24.98211" ItemID="4291" BuyItemType="SpecificItem" Count="10" BuyAdditively="True" />
+        </If>
+      </If>
+      <CustomAction Code="Log(Color.Orange,&quot;LW + Skin:&quot;, Color.LimeGreen, &quot;Crafting Gaurdian Gloves X 10&quot;);" />
+      <CastSpellAction RepeatType="Specific" Repeat="10" Entry="7156" CastOnItem="False" ItemType="Chest" ItemId="0" />
+    </If>
+  </While>
+  <While Condition="InbagCount (4304) &gt;= 200 &amp;&amp; Leatherworking.Level &gt;= 200 &amp;&amp; Leatherworking.Level &lt; 235" IgnoreCanRun="True">
+    <If Condition="Leatherworking.Level &gt;= 200 &amp;&amp; Leatherworking.Level &lt; 205" IgnoreCanRun="True">
+      <If Condition="Me.FreeNormalBagSlots &lt; 5" IgnoreCanRun="True">
+        <CallSubRoutine SubRoutineName="Sell" />
+      </If>
+      <If Condition="!HasRecipe(10487)" IgnoreCanRun="True">
+        <CallSubRoutine SubRoutineName="Train Leather" />
+      </If>
+      <If Condition="InbagCount (4291) &lt; 5" IgnoreCanRun="True">
+        <CustomAction Code="Log(Color.Orange, &quot;LW + Skin:&quot;, Color.LimeGreen, &quot;Buying Silken Thread&quot;);" />
+        <If Condition="Me.ZoneText != &quot;Stormwind City&quot;" IgnoreCanRun="True">
+          <FlyToAction Dismount="True" Location="-8721.437, 436.2064, 97.69892" />
+        </If>
+        <BuyItemAction NpcEntry="5565" Location="-8722.868, 479.3223, 98.61378" ItemID="4291" BuyItemType="SpecificItem" Count="5" BuyAdditively="True" />
+      </If>
+      <CustomAction Code="Log(Color.Orange,&quot;LW + Skin:&quot;, Color.LimeGreen, &quot;Thick Armor Kit X 5&quot;);" />
+      <CastSpellAction RepeatType="Specific" Repeat="5" Entry="10487" CastOnItem="False" ItemType="Chest" ItemId="0" />
+    </If>
+    <If Condition="Leatherworking.Level &gt;= 205 &amp;&amp; Leatherworking.Level &lt; 235" IgnoreCanRun="True">
+      <If Condition="Me.FreeNormalBagSlots &lt; 35" IgnoreCanRun="True">
+        <CallSubRoutine SubRoutineName="Sell" />
+      </If>
+      <If Condition="!HasRecipe(10507)" IgnoreCanRun="True">
+        <CallSubRoutine SubRoutineName="Train Leather" />
+      </If>
+      <If Condition="InbagCount (4291) &lt; 70" IgnoreCanRun="True">
+        <CustomAction Code="Log(Color.Orange, &quot;LW + Skin:&quot;, Color.LimeGreen, &quot;Buying Silken Thread&quot;);" />
+        <If Condition="Me.ZoneText != &quot;Stormwind City&quot;" IgnoreCanRun="True">
+          <FlyToAction Dismount="True" Location="-8721.437, 436.2064, 97.69892" />
+        </If>
+        <BuyItemAction NpcEntry="5565" Location="-8722.868, 479.3223, 98.61378" ItemID="4291" BuyItemType="SpecificItem" Count="70" BuyAdditively="True" />
+      </If>
+      <CustomAction Code="Log(Color.Orange,&quot;LW + Skin:&quot;, Color.LimeGreen, &quot;Nightscape Headband X 35&quot;);" />
+      <CastSpellAction RepeatType="Specific" Repeat="35" Entry="10507" CastOnItem="False" ItemType="Chest" ItemId="0" />
+    </If>
+  </While>
+  <While Condition="InbagCount (4304) &gt;= 210 &amp;&amp; Leatherworking.Level &gt;= 235 &amp;&amp; Leatherworking.Level &lt; 250" IgnoreCanRun="True">
+    <If Condition="Leatherworking.Level &gt;= 235 &amp;&amp; Leatherworking.Level &lt; 250" IgnoreCanRun="True">
+      <If Condition="Me.FreeNormalBagSlots &lt; 15" IgnoreCanRun="True">
+        <CallSubRoutine SubRoutineName="Sell" />
+      </If>
+      <If Condition="!HasRecipe(10548)" IgnoreCanRun="True">
+        <CallSubRoutine SubRoutineName="Train Leather" />
+      </If>
+      <If Condition="InbagCount (4291) &lt; 60" IgnoreCanRun="True">
+        <CustomAction Code="Log(Color.Orange, &quot;LW + Skin:&quot;, Color.LimeGreen, &quot;Buying Silken Thread&quot;);" />
+        <If Condition="Me.ZoneText != &quot;Stormwind City&quot;" IgnoreCanRun="True">
+          <FlyToAction Dismount="True" Location="-8721.437, 436.2064, 97.69892" />
+        </If>
+        <BuyItemAction NpcEntry="5565" Location="-8722.868, 479.3223, 98.61378" ItemID="4291" BuyItemType="SpecificItem" Count="60" BuyAdditively="True" />
+      </If>
+      <CustomAction Code="Log(Color.Orange,&quot;LW + Skin:&quot;, Color.LimeGreen, &quot;Nightscape Headband X 15&quot;);" />
+      <CastSpellAction RepeatType="Specific" Repeat="18" Entry="10548" CastOnItem="False" ItemType="Chest" ItemId="0" />
+    </If>
+  </While>
+  <While Condition="InbagCount (8170) &gt;= 410 &amp;&amp; Leatherworking.Level &gt;= 250 &amp;&amp; Leatherworking.Level &lt; 300" IgnoreCanRun="True">
+    <If Condition="Leatherworking.Level &gt;= 250 &amp;&amp; Leatherworking.Level &lt; 265" IgnoreCanRun="True">
+      <If Condition="Me.FreeNormalBagSlots &lt; 18" IgnoreCanRun="True">
+        <CallSubRoutine SubRoutineName="Sell" />
+      </If>
+      <If Condition="!HasRecipe(19058)" IgnoreCanRun="True">
+        <CallSubRoutine SubRoutineName="Train Leather" />
+      </If>
+      <CustomAction Code="Log(Color.Orange,&quot;LW + Skin:&quot;, Color.LimeGreen, &quot;Rugged Armor Kit X 18&quot;);" />
+      <CastSpellAction RepeatType="Specific" Repeat="15" Entry="19058" CastOnItem="False" ItemType="Chest" ItemId="0" />
+    </If>
+    <If Condition="Leatherworking.Level &gt;= 265 &amp;&amp; Leatherworking.Level &lt; 290" IgnoreCanRun="True">
+      <If Condition="Me.FreeNormalBagSlots &lt; 25" IgnoreCanRun="True">
+        <CallSubRoutine SubRoutineName="Sell" />
+      </If>
+      <If Condition="!HasRecipe(19052)" IgnoreCanRun="True">
+        <CallSubRoutine SubRoutineName="Train Leather" />
+      </If>
+      <If Condition="InbagCount (2325) &lt; 25" IgnoreCanRun="True">
+        <CustomAction Code="Log(Color.Orange, &quot;LW + Skin:&quot;, Color.LimeGreen, &quot;Buying Black Dye&quot;);" />
+        <If Condition="Me.ZoneText != &quot;Stormwind City&quot;" IgnoreCanRun="True">
+          <FlyToAction Dismount="True" Location="-8721.437, 436.2064, 97.69892" />
+        </If>
+        <BuyItemAction NpcEntry="5565" Location="-8722.868, 479.3223, 98.61378" ItemID="2325" BuyItemType="SpecificItem" Count="25" BuyAdditively="True" />
+      </If>
+      <If Condition="InbagCount (14341) &lt; 25" IgnoreCanRun="True">
+        <CustomAction Code="Log(Color.Orange, &quot;LW + Skin:&quot;, Color.LimeGreen, &quot;Buying Rune Thread&quot;);" />
+        <If Condition="Me.ZoneText != &quot;Stormwind City&quot;" IgnoreCanRun="True">
+          <FlyToAction Dismount="True" Location="-8721.437, 436.2064, 97.69892" />
+        </If>
+        <BuyItemAction NpcEntry="5565" Location="-8722.868, 479.3223, 98.61378" ItemID="14341" BuyItemType="SpecificItem" Count="25" BuyAdditively="True" />
+      </If>
+      <CustomAction Code="Log(Color.Orange,&quot;LW + Skin:&quot;, Color.LimeGreen, &quot;Wicked Leather Bracers X 25&quot;);" />
+      <CastSpellAction RepeatType="Specific" Repeat="25" Entry="19052" CastOnItem="False" ItemType="Chest" ItemId="0" />
+    </If>
+    <If Condition="Leatherworking.Level &gt;= 290 &amp;&amp; Leatherworking.Level &lt; 300" IgnoreCanRun="True">
+      <If Condition="Me.FreeNormalBagSlots &lt; 10" IgnoreCanRun="True">
+        <CallSubRoutine SubRoutineName="Sell" />
+      </If>
+      <If Condition="!HasRecipe(19071)" IgnoreCanRun="True">
+        <CallSubRoutine SubRoutineName="Train Leather" />
+      </If>
+      <If Condition="InbagCount (2325) &lt; 10" IgnoreCanRun="True">
+        <CustomAction Code="Log(Color.Orange, &quot;LW + Skin:&quot;, Color.LimeGreen, &quot;Buying Black Dye&quot;);" />
+        <If Condition="Me.ZoneText != &quot;Stormwind City&quot;" IgnoreCanRun="True">
+          <FlyToAction Dismount="True" Location="-8721.437, 436.2064, 97.69892" />
+        </If>
+        <BuyItemAction NpcEntry="5565" Location="-8722.868, 479.3223, 98.61378" ItemID="2325" BuyItemType="SpecificItem" Count="10" BuyAdditively="True" />
+      </If>
+      <If Condition="InbagCount (14341) &lt; 10" IgnoreCanRun="True">
+        <CustomAction Code="Log(Color.Orange, &quot;LW + Skin:&quot;, Color.LimeGreen, &quot;Buying Rune Thread&quot;);" />
+        <If Condition="Me.ZoneText != &quot;Stormwind City&quot;" IgnoreCanRun="True">
+          <FlyToAction Dismount="True" Location="-8721.437, 436.2064, 97.69892" />
+        </If>
+        <BuyItemAction NpcEntry="5565" Location="-8722.868, 479.3223, 98.61378" ItemID="14341" BuyItemType="SpecificItem" Count="10" BuyAdditively="True" />
+      </If>
+      <CustomAction Code="Log(Color.Orange,&quot;LW + Skin:&quot;, Color.LimeGreen, &quot;Wicked Leather Headband X 10&quot;);" />
+      <CastSpellAction RepeatType="Specific" Repeat="10" Entry="19071" CastOnItem="False" ItemType="Chest" ItemId="0" />
+    </If>
+  </While>
+  <While Condition="InbagCount (21887) &gt;= 465 &amp;&amp; Leatherworking.Level &gt;= 300 &amp;&amp; Leatherworking.Level &lt; 350" IgnoreCanRun="True">
+    <If Condition="Leatherworking.Level &gt;= 300 &amp;&amp; Leatherworking.Level &lt; 325" IgnoreCanRun="True">
+      <If Condition="Me.FreeNormalBagSlots &lt; 25" IgnoreCanRun="True">
+        <CallSubRoutine SubRoutineName="Sell" />
+      </If>
+      <If Condition="!HasRecipe(32456)" IgnoreCanRun="True">
+        <CallSubRoutine SubRoutineName="Train Leather" />
+      </If>
+      <CustomAction Code="Log(Color.Orange,&quot;LW + Skin:&quot;, Color.LimeGreen, &quot;Crafting Knothide Armor Kit X 25 &quot;);" />
+      <CastSpellAction RepeatType="Specific" Repeat="25" Entry="32456" CastOnItem="False" ItemType="Chest" ItemId="0" />
+    </If>
+    <If Condition="Leatherworking.Level &gt;= 325 &amp;&amp; Leatherworking.Level &lt; 335" IgnoreCanRun="True">
+      <If Condition="Me.FreeNormalBagSlots &lt; 5" IgnoreCanRun="True">
+        <CallSubRoutine SubRoutineName="Sell" />
+      </If>
+      <If Condition="!HasRecipe(32455)" IgnoreCanRun="True">
+        <CallSubRoutine SubRoutineName="Train Leather" />
+      </If>
+      <CustomAction Code="Log(Color.Orange,&quot;LW + Skin:&quot;, Color.LimeGreen, &quot;Crafting Heavy Knothide Leather X 43&#xD;&#xA; &quot;);" />
+      <CastSpellAction RepeatType="Specific" Repeat="73" Entry="32455" CastOnItem="False" ItemType="Chest" ItemId="0" />
+    </If>
+    <If Condition="Leatherworking.Level &gt;= 335 &amp;&amp; Leatherworking.Level &lt; 350" IgnoreCanRun="True">
+      <If Condition="Me.FreeNormalBagSlots &lt; 5" IgnoreCanRun="True">
+        <CallSubRoutine SubRoutineName="Sell" />
+      </If>
+      <If Condition="!HasRecipe(32473)" IgnoreCanRun="True">
+        <CallSubRoutine SubRoutineName="Train Leather" />
+      </If>
+      <If Condition="InbagCount (14341) &lt; 60" IgnoreCanRun="True">
+        <MoveToAction Location="-719.1065, 2699.116, 95.50356" MoveType="Location" Pathing="Navigator" Entry="0" />
+        <BuyItemAction NpcEntry="18771" Location="-721.657, 2745.256, 94.00241" ItemID="14341" BuyItemType="SpecificItem" Count="60" BuyAdditively="True" />
+      </If>
+      <CustomAction Code="Log(Color.Orange,&quot;LW + Skin:&quot;, Color.LimeGreen, &quot;Crafting Think Drarnic Vest X 5&quot;);" />
+      <CastSpellAction RepeatType="Specific" Repeat="20" Entry="32473" CastOnItem="False" ItemType="Chest" ItemId="0" />
+    </If>
+  </While>
+  <While Condition="InbagCount (33568) &gt;= 132 &amp;&amp; Leatherworking.Level &gt;= 350 &amp;&amp; Leatherworking.Level &lt; 380" IgnoreCanRun="True">
+    <If Condition="Leatherworking.Level &gt;= 350 &amp;&amp; Leatherworking.Level &lt; 380" IgnoreCanRun="True">
+      <If Condition="Me.FreeNormalBagSlots &lt; 5" IgnoreCanRun="True">
+        <CallSubRoutine SubRoutineName="Sell" />
+      </If>
+      <If Condition="!HasRecipe(50962)" IgnoreCanRun="True">
+        <CallSubRoutine SubRoutineName="Train Leather" />
+      </If>
+      <CustomAction Code="Log(Color.Orange,&quot;LW + Skin:&quot;, Color.LimeGreen, &quot;Crafting Borean Armor Kit X 33 &quot;);" />
+      <CastSpellAction RepeatType="Specific" Repeat="33" Entry="50962" CastOnItem="False" ItemType="Chest" ItemId="0" />
+    </If>
+  </While>
+  <While Condition="InbagCount (33568) &gt;= 80 &amp;&amp; Leatherworking.Level &gt;= 380 &amp;&amp; Leatherworking.Level &lt; 390" IgnoreCanRun="True">
+    <If Condition="Leatherworking.Level &gt;= 380 &amp;&amp; Leatherworking.Level &lt; 390" IgnoreCanRun="True">
+      <If Condition="Me.FreeNormalBagSlots &lt; 10" IgnoreCanRun="True">
+        <CallSubRoutine SubRoutineName="Sell" />
+      </If>
+      <If Condition="!HasRecipe(50948)" IgnoreCanRun="True">
+        <CallSubRoutine SubRoutineName="Train Leather" />
+      </If>
+      <CustomAction Code="Log(Color.Orange,&quot;LW + Skin:&quot;, Color.LimeGreen, &quot;Crafting Arctic Boots X 10 &quot;);" />
+      <CastSpellAction RepeatType="Specific" Repeat="10" Entry="50948" CastOnItem="False" ItemType="Chest" ItemId="0" />
+    </If>
+  </While>
+  <While Condition="InbagCount (33568) &gt;= 120 &amp;&amp; Leatherworking.Level &gt;= 390 &amp;&amp; Leatherworking.Level &lt; 400" IgnoreCanRun="True">
+    <If Condition="Leatherworking.Level &gt;= 390 &amp;&amp; Leatherworking.Level &lt; 400" IgnoreCanRun="True">
+      <If Condition="Me.FreeNormalBagSlots &lt; 10" IgnoreCanRun="True">
+        <CallSubRoutine SubRoutineName="Sell" />
+      </If>
+      <If Condition="!HasRecipe(51571)" IgnoreCanRun="True">
+        <CallSubRoutine SubRoutineName="Train Leather" />
+      </If>
+      <CustomAction Code="Log(Color.Orange,&quot;LW + Skin:&quot;, Color.LimeGreen, &quot;Crafting Arctic Wristguards X 20 &quot;);" />
+      <CastSpellAction RepeatType="Specific" Repeat="10" Entry="51571" CastOnItem="False" ItemType="Chest" ItemId="0" />
+    </If>
+  </While>
+  <While Condition="Leatherworking.Level &gt;= 400 &amp;&amp; Leatherworking.Level &lt; 430" IgnoreCanRun="True">
+    <If Condition="InbagCount (38426) &lt; 30" IgnoreCanRun="True">
+      <FlyToAction Dismount="True" Location="2155.682, 5239.343, 19.49443" />
+      <CustomAction Code="Log(Color.Orange,&quot;LW + Skin:&quot;, Color.LimeGreen, &quot;Buying Eternium Thread X 30&quot;);" />
+      <BuyItemAction NpcEntry="27012" Location="2118.247, 5244.403, 19.44693" ItemID="38426" BuyItemType="SpecificItem" Count="30" BuyAdditively="True" />
+    </If>
+    <If Condition="!HasRecipe(57683)" IgnoreCanRun="True">
+      <CallSubRoutine SubRoutineName="Train Leather" />
+    </If>
+    <CustomAction Code="Log(Color.Orange,&quot;LW + Skin:&quot;, Color.LimeGreen, &quot;Casting FurLining:Agility on Arctic Wrists X 30 &quot;);" />
+    <CastSpellAction RepeatType="Specific" Repeat="30" Entry="57683" CastOnItem="True" ItemType="Wrist" ItemId="38433" />
+    <CustomAction Code="Lua.DoString(string.Format(&quot;RunMacroText(\&quot;{0}\&quot;)&quot;, &quot;/click StaticPopup1Button1&quot;), 0);" />
+    <WaitAction Condition="false" Timeout="6000" />
+  </While>
+  <While Condition="InbagCount (52976) &gt;= 100 &amp;&amp; Leatherworking.Level &gt;= 430 &amp;&amp; Leatherworking.Level &lt; 450" IgnoreCanRun="True">
+    <If Condition="!HasRecipe(78379)" IgnoreCanRun="True">
+      <CallSubRoutine SubRoutineName="Train Leather" />
+    </If>
+    <CustomAction Code="Log(Color.Orange,&quot;LW + Skin:&quot;, Color.LimeGreen, &quot;Crafting Savage Leather Armor Kit X 20 &quot;);" />
+    <CastSpellAction RepeatType="Specific" Repeat="20" Entry="78379" CastOnItem="False" ItemType="Chest" ItemId="0" />
+    <If Condition="Me.MapId == 0" IgnoreCanRun="True">
+      <CallSubRoutine SubRoutineName="SW to TB" />
+    </If>
+  </While>
+  <While Condition="InbagCount (52976) &gt;= 70 &amp;&amp; Leatherworking.Level &gt;= 450 &amp;&amp; Leatherworking.Level &lt; 460" IgnoreCanRun="True">
+    <If Condition="!HasRecipe(78410)" IgnoreCanRun="True">
+      <CallSubRoutine SubRoutineName="Train Leather" />
+    </If>
+    <If Condition="InbagCount (38426) &lt; 10" IgnoreCanRun="True">
+      <CustomAction Code="Log(Color.Orange, &quot;LW + Skin:&quot;, Color.LimeGreen, &quot;Buying Eternium Thread&quot;);" />
+      <CallSubRoutine SubRoutineName="TB to SW" />
+      <FlyToAction Dismount="True" Location="-8722.868, 479.3223, 98.61377" />
+      <BuyItemAction NpcEntry="5565" Location="-8722.868, 479.3223, 98.61378" ItemID="38426" BuyItemType="SpecificItem" Count="10" BuyAdditively="True" />
+    </If>
+    <CustomAction Code="Log(Color.Orange,&quot;LW + Skin:&quot;, Color.LimeGreen, &quot;Crafting Tsunami Boots X 10 &quot;);" />
+    <CastSpellAction RepeatType="Specific" Repeat="10" Entry="78410" CastOnItem="False" ItemType="Chest" ItemId="0" />
+    <If Condition="Me.MapId == 0" IgnoreCanRun="True">
+      <CallSubRoutine SubRoutineName="SW to TB" />
+    </If>
+  </While>
+  <While Condition="InbagCount (52976) &gt;= 70 &amp;&amp; Leatherworking.Level &gt;= 460 &amp;&amp; Leatherworking.Level &lt; 470" IgnoreCanRun="True">
+    <If Condition="!HasRecipe(78380)" IgnoreCanRun="True">
+      <CallSubRoutine SubRoutineName="Train Leather" />
+    </If>
+    <If Condition="InbagCount (38426) &lt; 10" IgnoreCanRun="True">
+      <CustomAction Code="Log(Color.Orange, &quot;LW + Skin:&quot;, Color.LimeGreen, &quot;Buying Eternium Thread&quot;);" />
+      <CallSubRoutine SubRoutineName="TB to SW" />
+      <FlyToAction Dismount="True" Location="-8722.868, 479.3223, 98.61377" />
+      <BuyItemAction NpcEntry="5565" Location="-8722.868, 479.3223, 98.61378" ItemID="38426" BuyItemType="SpecificItem" Count="10" BuyAdditively="True" />
+    </If>
+    <CustomAction Code="Log(Color.Orange,&quot;LW + Skin:&quot;, Color.LimeGreen, &quot;Crafting Savage CloakX 10 &quot;);" />
+    <CastSpellAction RepeatType="Specific" Repeat="10" Entry="78380" CastOnItem="False" ItemType="Chest" ItemId="0" />
+    <If Condition="Me.MapId == 0" IgnoreCanRun="True">
+      <CallSubRoutine SubRoutineName="SW to TB" />
+    </If>
+  </While>
+  <While Condition="InbagCount (52976) &gt;= 50 &amp;&amp; Leatherworking.Level &gt;= 470 &amp;&amp; Leatherworking.Level &lt; 475" IgnoreCanRun="True">
+    <If Condition="!HasRecipe(78407)" IgnoreCanRun="True">
+      <CallSubRoutine SubRoutineName="Train Leather" />
+    </If>
+    <If Condition="InbagCount (38426) &lt; 10" IgnoreCanRun="True">
+      <CustomAction Code="Log(Color.Orange, &quot;LW + Skin:&quot;, Color.LimeGreen, &quot;Buying Eternium Thread&quot;);" />
+      <CallSubRoutine SubRoutineName="TB to SW" />
+      <FlyToAction Dismount="True" Location="-8722.868, 479.3223, 98.61377" />
+      <BuyItemAction NpcEntry="5565" Location="-8722.868, 479.3223, 98.61378" ItemID="38426" BuyItemType="SpecificItem" Count="10" BuyAdditively="True" />
+    </If>
+    <CustomAction Code="Log(Color.Orange,&quot;LW + Skin:&quot;, Color.LimeGreen, &quot;Crafting Darkbrand Boots X 5 &quot;);" />
+    <CastSpellAction RepeatType="Specific" Repeat="5" Entry="78407" CastOnItem="False" ItemType="Chest" ItemId="0" />
+    <If Condition="Me.MapId == 0" IgnoreCanRun="True">
+      <CallSubRoutine SubRoutineName="SW to TB" />
+    </If>
+  </While>
+  <While Condition="InbagCount (52976) &gt;= 60 &amp;&amp; Leatherworking.Level &gt;= 475 &amp;&amp; Leatherworking.Level &lt; 480" IgnoreCanRun="True">
+    <If Condition="!HasRecipe(78411)" IgnoreCanRun="True">
+      <CallSubRoutine SubRoutineName="Train Leather" />
+    </If>
+    <If Condition="InbagCount (38426) &lt; 10" IgnoreCanRun="True">
+      <CustomAction Code="Log(Color.Orange, &quot;LW + Skin:&quot;, Color.LimeGreen, &quot;Buying Eternium Thread&quot;);" />
+      <CallSubRoutine SubRoutineName="TB to SW" />
+      <FlyToAction Dismount="True" Location="-8722.868, 479.3223, 98.61377" />
+      <BuyItemAction NpcEntry="5565" Location="-8722.868, 479.3223, 98.61378" ItemID="38426" BuyItemType="SpecificItem" Count="10" BuyAdditively="True" />
+    </If>
+    <CustomAction Code="Log(Color.Orange,&quot;LW + Skin:&quot;, Color.LimeGreen, &quot;Crafting Darkbrand Shoulders X 5 &quot;);" />
+    <CastSpellAction RepeatType="Specific" Repeat="5" Entry="78411" CastOnItem="False" ItemType="Chest" ItemId="0" />
+    <If Condition="Me.MapId == 0" IgnoreCanRun="True">
+      <CallSubRoutine SubRoutineName="SW to TB" />
+    </If>
+  </While>
+  <While Condition="InbagCount (52976) &gt;= 60 &amp;&amp; Leatherworking.Level &gt;= 480 &amp;&amp; Leatherworking.Level &lt; 485" IgnoreCanRun="True">
+    <If Condition="!HasRecipe(78428)" IgnoreCanRun="True">
+      <CallSubRoutine SubRoutineName="Train Leather" />
+    </If>
+    <If Condition="InbagCount (38426) &lt; 50" IgnoreCanRun="True">
+      <CustomAction Code="Log(Color.Orange, &quot;LW + Skin:&quot;, Color.LimeGreen, &quot;Buying Eternium Thread&quot;);" />
+      <CallSubRoutine SubRoutineName="TB to SW" />
+      <FlyToAction Dismount="True" Location="-8722.868, 479.3223, 98.61377" />
+      <BuyItemAction NpcEntry="5565" Location="-8722.868, 479.3223, 98.61378" ItemID="38426" BuyItemType="SpecificItem" Count="50" BuyAdditively="True" />
+    </If>
+    <CustomAction Code="Log(Color.Orange,&quot;LW + Skin:&quot;, Color.LimeGreen, &quot;Crafting Darkbrand Chestguard X 5 &quot;);" />
+    <CastSpellAction RepeatType="Specific" Repeat="5" Entry="78428" CastOnItem="False" ItemType="Chest" ItemId="0" />
+    <If Condition="Me.MapId == 0" IgnoreCanRun="True">
+      <CallSubRoutine SubRoutineName="SW to TB" />
+    </If>
+  </While>
+  <While Condition="InbagCount (56516) &gt;= 21 &amp;&amp; Leatherworking.Level &gt;= 490 &amp;&amp; Leatherworking.Level &lt; 496" IgnoreCanRun="True">
+    <If Condition="!HasRecipe (78433)" IgnoreCanRun="True">
+      <CallSubRoutine SubRoutineName="Train Leather" />
+    </If>
+    <If Condition="InbagCount (52327) &lt; 24" IgnoreCanRun="True">
+      <MoveToAction Location="-8361.469, 640.5372, 95.23518" MoveType="Location" Pathing="Navigator" Entry="0" />
+      <BuyItemFromAhAction ItemListType="Item" ItemID="52327" MaxBuyout="10g0s0c" Amount="24" BuyAdditively="True" AutoFindAh="True" BidOnItem="False" Location="0, 0, 0" />
+      <CallSubRoutine SubRoutineName="Mail" />
+    </If>
+    <CustomAction Code="Log(Color.Orange,&quot;LW + Skin:&quot;, Color.LimeGreen, &quot;Crafting Darkbrand Leggings X 2 &quot;);" />
+    <CastSpellAction RepeatType="Specific" Repeat="2" Entry="78433" CastOnItem="False" ItemType="Chest" ItemId="0" />
+  </While>
+  <While Condition="InbagCount (56516) &gt;= 8  &amp;&amp; Leatherworking.Level &gt;= 496 &amp;&amp; Leatherworking.Level &lt; 499" IgnoreCanRun="True">
+    <If Condition="!HasRecipe (78438)" IgnoreCanRun="True">
+      <CallSubRoutine SubRoutineName="Train Leather" />
+    </If>
+    <If Condition="InbagCount (52327) &lt; 4" IgnoreCanRun="True">
+      <MoveToAction Location="-8361.469, 640.5372, 95.23518" MoveType="Location" Pathing="Navigator" Entry="0" />
+      <BuyItemFromAhAction ItemListType="Item" ItemID="52327" MaxBuyout="100g0s0c" Amount="4" BuyAdditively="True" AutoFindAh="True" BidOnItem="False" Location="0, 0, 0" />
+      <BuyItemFromAhAction ItemListType="Item" ItemID="52326" MaxBuyout="100g0s0c" Amount="4" BuyAdditively="True" AutoFindAh="True" BidOnItem="False" Location="0, 0, 0" />
+      <CallSubRoutine SubRoutineName="Mail" />
+    </If>
+    <If Condition="InbagCount (52328) &lt; 4" IgnoreCanRun="True">
+      <MoveToAction Location="-8361.469, 640.5372, 95.23518" MoveType="Location" Pathing="Navigator" Entry="0" />
+      <BuyItemFromAhAction ItemListType="Item" ItemID="52328" MaxBuyout="100g0s0c" Amount="4" BuyAdditively="True" AutoFindAh="True" BidOnItem="False" Location="0, 0, 0" />
+      <CallSubRoutine SubRoutineName="Mail" />
+    </If>
+    <If Condition="InbagCount (52325) &lt; 4" IgnoreCanRun="True">
+      <MoveToAction Location="-8361.469, 640.5372, 95.23518" MoveType="Location" Pathing="Navigator" Entry="0" />
+      <BuyItemFromAhAction ItemListType="Item" ItemID="52325" MaxBuyout="100g0s0c" Amount="4" BuyAdditively="True" AutoFindAh="True" BidOnItem="False" Location="0, 0, 0" />
+      <CallSubRoutine SubRoutineName="Mail" />
+    </If>
+    <If Condition="InbagCount (52326) &lt; 4" IgnoreCanRun="True">
+      <MoveToAction Location="-8361.469, 640.5372, 95.23518" MoveType="Location" Pathing="Navigator" Entry="0" />
+      <BuyItemFromAhAction ItemListType="Item" ItemID="52326" MaxBuyout="100g0s0c" Amount="4" BuyAdditively="True" AutoFindAh="True" BidOnItem="False" Location="0, 0, 0" />
+      <CallSubRoutine SubRoutineName="Mail" />
+    </If>
+    <CustomAction Code="Log(Color.Orange,&quot;LW + Skin:&quot;, Color.LimeGreen, &quot;Crafting Cloak of Beasts  X 2 &quot;);" />
+    <CastSpellAction RepeatType="Specific" Repeat="2" Entry="78438" CastOnItem="False" ItemType="Chest" ItemId="0" />
+  </While>
+  <While Condition="InbagCount (56516) &gt;= 5 &amp;&amp; Leatherworking.Level &gt;= 499 &amp;&amp; Leatherworking.Level &lt; 500" IgnoreCanRun="True">
+    <If Condition="!HasRecipe (78424)" IgnoreCanRun="True">
+      <CallSubRoutine SubRoutineName="Train Leather" />
+    </If>
+    <CustomAction Code="Log(Color.Orange,&quot;LW + Skin:&quot;, Color.LimeGreen, &quot;Crafting Darkbrand Helm X 1 &quot;);" />
+    <CastSpellAction RepeatType="Specific" Repeat="1" Entry="78424" CastOnItem="False" ItemType="Chest" ItemId="0" />
+  </While>
+  <While Condition="InbagCount (72120) &gt;= 150 &amp;&amp; Leatherworking.Level &gt;= 526 &amp;&amp; Leatherworking.Level &lt; 570" IgnoreCanRun="True">
+    <If Condition="Leatherworking.Level &gt;= 526 &amp;&amp; Leatherworking.Level &lt; 536" IgnoreCanRun="True">
+      <If Condition="!HasRecipe (124577)" IgnoreCanRun="True">
+        <CallSubRoutine SubRoutineName="Train Leather" />
+      </If>
+      <CustomAction Code="Log(Color.Orange,&quot;LW + Skin:&quot;, Color.LimeGreen, &quot;Crafting Misthide Boots X 5&quot;);" />
+      <CastSpellAction RepeatType="Specific" Repeat="5" Entry="124577" CastOnItem="False" ItemType="Chest" ItemId="0" />
+    </If>
+    <If Condition="Leatherworking.Level &gt;=536 &amp;&amp; Leatherworking.Level &lt; 540" IgnoreCanRun="True">
+      <If Condition="!HasRecipe(124578)" IgnoreCanRun="True">
+        <CallSubRoutine SubRoutineName="Train Leather" />
+      </If>
+      <CustomAction Code="Log(Color.Orange,&quot;LW + Skin:&quot;, Color.LimeGreen, &quot;Crafting Misthide Belt X 2&quot;);" />
+      <CastSpellAction RepeatType="Specific" Repeat="2" Entry="124578" CastOnItem="False" ItemType="Chest" ItemId="0" />
+    </If>
+    <If Condition="Leatherworking.Level &gt;= 540 &amp;&amp; Leatherworking.Level &lt; 550" IgnoreCanRun="True">
+      <If Condition="!HasRecipe(124572)" IgnoreCanRun="True">
+        <CallSubRoutine SubRoutineName="Train Leather" />
+      </If>
+      <CustomAction Code="Log(Color.Orange,&quot;LW + Skin:&quot;, Color.LimeGreen, &quot;Crafting Misthide Shoulders X 5&quot;);" />
+      <CastSpellAction RepeatType="Specific" Repeat="5" Entry="124572" CastOnItem="False" ItemType="Chest" ItemId="0" />
+    </If>
+    <If Condition="Leatherworking.Level &gt;= 550 &amp;&amp; Leatherworking.Level &lt; 560" IgnoreCanRun="True">
+      <If Condition="!HasRecipe(124574)" IgnoreCanRun="True">
+        <CallSubRoutine SubRoutineName="Train Leather" />
+      </If>
+      <CustomAction Code="Log(Color.Orange,&quot;LW + Skin:&quot;, Color.LimeGreen, &quot;Crafting Misthide Gloves X 5&quot;);" />
+      <CastSpellAction RepeatType="Specific" Repeat="5" Entry="124574" CastOnItem="False" ItemType="Chest" ItemId="0" />
+    </If>
+    <If Condition="Leatherworking.Level &gt;= 560 &amp;&amp; Leatherworking.Level &lt; 564" IgnoreCanRun="True">
+      <If Condition="!HasRecipe(124575)" IgnoreCanRun="True">
+        <CallSubRoutine SubRoutineName="Train Leather" />
+      </If>
+      <CustomAction Code="Log(Color.Orange,&quot;LW + Skin:&quot;, Color.LimeGreen, &quot;Crafting Misthide Leggings X 2&quot;);" />
+      <CastSpellAction RepeatType="Specific" Repeat="2" Entry="124575" CastOnItem="False" ItemType="Chest" ItemId="0" />
+    </If>
+    <If Condition="Leatherworking.Level &gt;= 564 &amp;&amp; Leatherworking.Level &lt; 570" IgnoreCanRun="True">
+      <If Condition="!HasRecipe(124571)" IgnoreCanRun="True">
+        <CallSubRoutine SubRoutineName="Train Leather" />
+      </If>
+      <CustomAction Code="Log(Color.Orange,&quot;LW + Skin:&quot;, Color.LimeGreen, &quot;Crafting Misthide Helm X 3&quot;);" />
+      <CastSpellAction RepeatType="Specific" Repeat="3" Entry="124571" CastOnItem="False" ItemType="Chest" ItemId="0" />
+    </If>
+  </While>
+  <While Condition="InbagCount (72120) &gt;= 150 &amp;&amp; Leatherworking.Level &gt;= 570 &amp;&amp; Leatherworking.Level &lt; 600" IgnoreCanRun="True">
+    <If Condition="InbagCount(76061) &lt; 1" IgnoreCanRun="True">
+      <CustomAction Code="Log(&quot;Need Spirit of harmony to level from here... Please farm and start again&quot;);" />
+      <CustomAction Code="TreeRoot.Stop();" />
+    </If>
+    <If Condition="!HasRecipe (124610) &amp;&amp; InbagCount (76061) &gt;= 1" IgnoreCanRun="True">
+      <FlyToAction Dismount="True" Location="896.453, 334.351, 506.085" />
+      <MoveToAction Location="815.8021, 176.2535, 503.4641" MoveType="Location" Pathing="Navigator" Entry="0" />
+      <BuyItemAction NpcEntry="64094" Location="815.8021, 176.2535, 503.4641" ItemID="86248" BuyItemType="SpecificItem" Count="1" BuyAdditively="True" />
+      <CustomAction Code="Lua.DoString(&quot;UseItemByName(86248)&quot;);" />
+    </If>
+    <CustomAction Code="Log(Color.Orange,&quot;LW + Skin:&quot;, Color.LimeGreen, &quot;Crafting Contender's Belt X 10&quot;);" />
+    <CastSpellAction RepeatType="Specific" Repeat="10" Entry="124610" CastOnItem="False" ItemType="Chest" ItemId="0" />
+  </While>
+  <If Condition="Leatherworking.Level == 600" IgnoreCanRun="True">
+    <CustomAction Code="Log(&quot;Reached 600!! Thanks for using Alpha's Profile and if you liked it REP or Donate &quot;);" />
+    <CustomAction Code="TreeRoot.Stop();" />
+  </If>
+  <!--Farming Profiles-->
+  <If Condition="InbagCount (2318) &lt; 260 &amp;&amp; Leatherworking.Level &lt; 100 || InbagCount (2319) &lt; 60 &amp;&amp; Leatherworking.Level &gt;= 100 &amp;&amp; Leatherworking.Level &lt; 130 || InbagCount (2319) &lt; 250 &amp;&amp; Leatherworking.Level &gt;= 130 &amp;&amp; Leatherworking.Level &lt; 150 || InbagCount (4235) &lt; 20 &amp;&amp; Leatherworking.Level &gt;= 150 &amp;&amp; Leatherworking.Level &lt; 160 || InbagCount (2234) &lt; 205 &amp;&amp; Leatherworking.Level &gt;= 160 &amp;&amp; Leatherworking.Level &lt; 200 || InbagCount (4304) &lt; 410 &amp;&amp; Leatherworking.Level &gt;= 200 &amp;&amp; Leatherworking.Level &lt; 250 || InbagCount (8170) &lt; 410 &amp;&amp; Leatherworking.Level &gt;= 250 &amp;&amp; Leatherworking.Level &lt; 300 || InbagCount (21887) &lt; 315 &amp;&amp; Leatherworking.Level &gt;= 300 &amp;&amp; Leatherworking.Level &lt; 350 || InbagCount(33568) &lt; 950 &amp;&amp; Leatherworking.Level &gt;= 350 &amp;&amp; Leatherworking.Level &lt; 425 || InbagCount (52976) &lt; 1000 &amp;&amp; Leatherworking.Level &gt;= 425 &amp;&amp; Leatherworking.Level &lt; 500 || InbagCount (72120) &gt;= 1000 &amp;&amp; Leatherworking.Level &gt; 500" IgnoreCanRun="True">
+    <If Condition="Me.FreeNormalBagSlots &gt; 3" IgnoreCanRun="True">
+      <If Condition="Leatherworking.Level &gt;= 1 &amp;&amp; Leatherworking.Level &lt; 300" IgnoreCanRun="True">
+        <ChangeBotAction BotName="Questing" />
+        <If Condition="Me.IsAlliance" IgnoreCanRun="True">
+          <LoadProfileAction ProfileType="Honorbuddy" Path="HBProfiles\Skinning\Ally Skinning LW QO.xml" />
+        </If>
+        <If Condition="Me.IsHorde" IgnoreCanRun="True">
+          <LoadProfileAction ProfileType="Honorbuddy" Path="HBProfiles\Skinning\Horde Skinning Lw QO.xml" />
+        </If>
+      </If>
+      <If Condition="Leatherworking.Level &gt;= 300 &amp;&amp; Leatherworking.Level &lt; 350" IgnoreCanRun="True">
+        <If Condition="Me.MapId == 0" IgnoreCanRun="True">
+          <CallSubRoutine SubRoutineName="SW to Outlands" />
+        </If>
+        <If Condition="Me.MapId == 530" IgnoreCanRun="True">
+          <ChangeBotAction BotName="Questing" />
+          <LoadProfileAction ProfileType="Honorbuddy" Path="HBProfiles\Skinning\Ally Skinning LW QO.xml" />
+        </If>
+      </If>
+      <If Condition="Leatherworking.Level &gt;= 350 &amp;&amp; Leatherworking.Level &lt; 430" IgnoreCanRun="True">
+        <If Condition="Me.MapId == 530" IgnoreCanRun="True">
+          <If Condition="Me.IsAlliance" IgnoreCanRun="True">
+            <CallSubRoutine SubRoutineName="Outlands to SW" />
+          </If>
+        </If>
+        <If Condition="Me.MapId == 0" IgnoreCanRun="True">
+          <CallSubRoutine SubRoutineName="SW to Northrend" />
+        </If>
+        <If Condition="Me.MapId == 571" IgnoreCanRun="True">
+          <LoadProfileAction ProfileType="Honorbuddy" Path="HBProfiles\Skinning\Ally Skinning LW QO.xml" />
+        </If>
+      </If>
+      <If Condition="Leatherworking.Level &gt;= 430 &amp;&amp; Leatherworking.Level &lt; 500" IgnoreCanRun="True">
+        <If Condition="Me.MapId == 571" IgnoreCanRun="True">
+          <CallSubRoutine SubRoutineName="Northrend to SW" />
+        </If>
+        <If Condition="Me.MapId == 0" IgnoreCanRun="True">
+          <CallSubRoutine SubRoutineName="SW to TB" />
+        </If>
+        <If Condition="Me.MapId == 732" IgnoreCanRun="True">
+          <LoadProfileAction ProfileType="Honorbuddy" Path="HBProfiles\Skinning\Ally Skinning LW QO.xml" />
+        </If>
+      </If>
+      <If Condition="Leatherworking.Level &gt; 500" IgnoreCanRun="True">
+        <If Condition="Me.MapId == 0" IgnoreCanRun="True">
+          <CallSubRoutine SubRoutineName="SW to Pand" />
+        </If>
+        <If Condition="Me.MapId == 870" IgnoreCanRun="True">
+          <LoadProfileAction ProfileType="Honorbuddy" Path="HBProfiles\Skinning\Ally Skinning LW QO.xml" />
+        </If>
+      </If>
+    </If>
+  </If>
+  <!--Leather Compile-->
+  <While Condition="InbagCount (2934) &gt;= 3" IgnoreCanRun="True">
+    <CustomAction Code="Log(Color. Orange,&quot;LW + Skin:&quot;, Color.LimeGreen, &quot;Making Light Leather From Scraps&quot;);" />
+    <CastSpellAction RepeatType="Craftable" Repeat="1" Entry="2881" CastOnItem="False" ItemType="Chest" ItemId="0" />
+  </While>
+  <While Condition="InbagCount (2318) &gt;= 5 &amp;&amp; Leatherworking.Level &gt;= 100" IgnoreCanRun="True">
+    <If Condition="!HasRecipe (20648)" IgnoreCanRun="True">
+      <CallSubRoutine SubRoutineName="Train Leather" />
+    </If>
+    <CustomAction Code="Log(Color. Orange,&quot;LW + Skin:&quot;, Color.LimeGreen, &quot;Making Medium Leather from Light Leather&quot;);" />
+    <CastSpellAction RepeatType="Craftable" Repeat="1" Entry="20648" CastOnItem="False" ItemType="Chest" ItemId="0" />
+  </While>
+  <While Condition="InbagCount (2319) &gt;= 5 &amp;&amp; Leatherworking.Level &gt;= 160" IgnoreCanRun="True">
+    <If Condition="!HasRecipe (20649)" IgnoreCanRun="True">
+      <CallSubRoutine SubRoutineName="Train Leather" />
+    </If>
+    <CustomAction Code="Log(Color. Orange,&quot;LW + Skin:&quot;, Color.LimeGreen, &quot;Making Heavy Leather from Medium Leather&quot;);" />
+    <CastSpellAction RepeatType="Craftable" Repeat="1" Entry="20649" CastOnItem="False" ItemType="Chest" ItemId="0" />
+  </While>
+  <While Condition="InbagCount (4234) &gt;= 6 &amp;&amp; Leatherworking.Level &gt;= 200" IgnoreCanRun="True">
+    <If Condition="!HasRecipe (20650)" IgnoreCanRun="True">
+      <CallSubRoutine SubRoutineName="Train Leather" />
+    </If>
+    <CustomAction Code="Log(Color. Orange,&quot;LW + Skin:&quot;, Color.LimeGreen, &quot;Making Thick Leather from Heavy Leather&quot;);" />
+    <CastSpellAction RepeatType="Craftable" Repeat="1" Entry="20650" CastOnItem="False" ItemType="Chest" ItemId="0" />
+  </While>
+  <While Condition="InbagCount (4304) &gt;= 6 &amp;&amp; Leatherworking.Level &gt;= 250" IgnoreCanRun="True">
+    <If Condition="!HasRecipe (22331)" IgnoreCanRun="True">
+      <CallSubRoutine SubRoutineName="Train Leather" />
+    </If>
+    <CustomAction Code="Log(Color. Orange,&quot;LW + Skin:&quot;, Color.LimeGreen, &quot;Making Rugged Leather from Think Leather&quot;);" />
+    <CastSpellAction RepeatType="Craftable" Repeat="1" Entry="22331" CastOnItem="False" ItemType="Chest" ItemId="0" />
+  </While>
+  <While Condition="InbagCount (25649) &gt;= 5 &amp;&amp; Leatherworking.Level &gt;= 300" IgnoreCanRun="True">
+    <If Condition="!HasRecipe(32454)" IgnoreCanRun="True">
+      <CallSubRoutine SubRoutineName="Train Leather" />
+    </If>
+    <CustomAction Code="Log(Color. Orange,&quot;LW + Skin:&quot;, Color.LimeGreen, &quot;Making Knothide Leather from Knothide Scraps&quot;);" />
+    <CastSpellAction RepeatType="Craftable" Repeat="1" Entry="32454" CastOnItem="False" ItemType="Chest" ItemId="0" />
+  </While>
+  <While Condition="InbagCount (33567) &gt;= 5 &amp;&amp; Leatherworking.Level &gt;= 350" IgnoreCanRun="True">
+    <If Condition="!HasRecipe (64661)" IgnoreCanRun="True">
+      <CallSubRoutine SubRoutineName="Train Leather" />
+    </If>
+    <CustomAction Code="Log(Color. Orange,&quot;LW + Skin:&quot;, Color.LimeGreen, &quot;Making Borean Leather from Borean Scraps&quot;);" />
+    <CastSpellAction RepeatType="Craftable" Repeat="1" Entry="64661" CastOnItem="False" ItemType="Chest" ItemId="0" />
+  </While>
+  <While Condition="InbagCount (33568) &gt;= 6 &amp;&amp; Leatherworking.Level &gt;= 430" IgnoreCanRun="True">
+    <If Condition="!HasRecipe (50936)" IgnoreCanRun="True">
+      <CallSubRoutine SubRoutineName="Train Leather" />
+    </If>
+    <CustomAction Code="Log(Color. Orange,&quot;LW + Skin:&quot;, Color.LimeGreen, &quot;Making Heavy Borean Leather from Borean Leather&quot;);" />
+    <CastSpellAction RepeatType="Craftable" Repeat="1" Entry="50936" CastOnItem="False" ItemType="Chest" ItemId="0" />
+  </While>
+  <While Condition="InbagCount (52977) &gt;= 5 &amp;&amp; Leatherworking.Level &gt;= 430" IgnoreCanRun="True">
+    <If Condition="!HasRecipe (84950)" IgnoreCanRun="True">
+      <CallSubRoutine SubRoutineName="Train Leather" />
+    </If>
+    <CustomAction Code="Log(Color. Orange,&quot;LW + Skin:&quot;, Color.LimeGreen, &quot;Making Savage Leather From Scraps&quot;);" />
+    <CastSpellAction RepeatType="Craftable" Repeat="1" Entry="84950" CastOnItem="False" ItemType="Chest" ItemId="0" />
+  </While>
+  <While Condition="InbagCount (52976) &gt;= 5 &amp;&amp; Leatherworking.Level &gt;= 485" IgnoreCanRun="True">
+    <If Condition="!HasRecipe (78436)" IgnoreCanRun="True">
+      <CallSubRoutine SubRoutineName="Train Leather" />
+    </If>
+    <CustomAction Code="Log(Color. Orange,&quot;LW + Skin:&quot;, Color.LimeGreen, &quot;Making Heavy Savage Leather from Savage Leather&quot;);" />
+    <CastSpellAction RepeatType="Craftable" Repeat="1" Entry="78436" CastOnItem="False" ItemType="Chest" ItemId="0" />
+  </While>
+  <While Condition="InbagCount (72162) &gt;= 5 &amp;&amp; Leatherworking.Level &gt; 500" IgnoreCanRun="True">
+    <If Condition="!HasRecipe (124627)" IgnoreCanRun="True">
+      <CallSubRoutine SubRoutineName="Train Leather" />
+    </If>
+    <CustomAction Code="Log(Color. Orange,&quot;LW + Skin:&quot;, Color.LimeGreen, &quot;Making Exotic Leather from Sha Touched Leather&quot;);" />
+    <CastSpellAction RepeatType="Craftable" Repeat="1" Entry="124627" CastOnItem="False" ItemType="Chest" ItemId="0" />
+  </While>
+  <!--Subs-->
+  <SubRoutine SubRoutineName="Sell">
+    <If Condition="(bool)Settings[&quot;Mail to DE&quot;]" IgnoreCanRun="True">
+      <MailItemAction Category="Armor" SubCategoryType="WoWItemArmorClass" SubCategory="None" Mail="All" UseCategory="True" ItemID="" Amount="0" AutoFindMailBox="True" Location="0, 0, 0" />
+    </If>
+    <CustomAction Code="Log(Color.Orange, &quot;LW + Skin:&quot;, Color.LimeGreen, &quot;Selling stuff i dont need&quot;);" />
+    <If Condition="Me.IsAlliance" IgnoreCanRun="True">
+      <If Condition="Me.ZoneText == &quot;Stormwind City&quot;" IgnoreCanRun="True">
+        <MoveToAction Location="-8722.868, 479.3223, 98.6138" MoveType="Location" Pathing="Navigator" Entry="0" />
+        <SellItemAction Sell="All" NpcEntry="5565" Location="-8722.868, 479.3223, 98.6138" SellItemType="Greys" ItemID="" Count="0" />
+        <SellItemAction Sell="All" NpcEntry="5565" Location="-8722.868, 479.3223, 98.6138" SellItemType="Whites" ItemID="" Count="0" />
+      </If>
+      <If Condition="Me.ZoneText != &quot;Stormwind City&quot;" IgnoreCanRun="True">
+        <If Condition="Me.MapId == 0" IgnoreCanRun="True">
+          <If Condition="Skinning &lt;= 75" IgnoreCanRun="True">
+            <FlyToAction Dismount="True" Location="-9482.001, 68.00452, 56.30428" />
+            <SellItemAction Sell="All" NpcEntry="0" Location="-9482.001, 68.00452, 56.30428" SellItemType="Whites" ItemID="" Count="0" />
+            <SellItemAction Sell="All" NpcEntry="0" Location="-9482.001, 68.00452, 56.30428" SellItemType="Greys" ItemID="" Count="0" />
+            <SellItemAction Sell="All" NpcEntry="0" Location="-9482.001, 68.00452, 56.30428" SellItemType="Greens" ItemID="" Count="0" />
+          </If>
+          <If Condition="Skinning &gt;= 75 &amp;&amp; Skinning &lt;= 105" IgnoreCanRun="True">
+            <FlyToAction Dismount="True" Location="-10509.68, 1044.411, 60.5181" />
+            <SellItemAction Sell="All" NpcEntry="1668" Location="-10509.68, 1044.411, 60.5181" SellItemType="Whites" ItemID="" Count="0" />
+            <SellItemAction Sell="All" NpcEntry="1668" Location="-10509.68, 1044.411, 60.5181" SellItemType="Greys" ItemID="" Count="0" />
+            <SellItemAction Sell="All" NpcEntry="1668" Location="-10509.68, 1044.411, 60.5181" SellItemType="Greens" ItemID="" Count="0" />
+          </If>
+          <If Condition="Leatherworking.Level &gt;= 130 &amp;&amp; Leatherworking.Level &lt; 200" IgnoreCanRun="True">
+            <FlyToAction Dismount="True" Location="-11295.82, -201.3427, 75.60258" />
+            <SellItemAction Sell="All" NpcEntry="734" Location="-9482.001, 68.00452, 56.30428" SellItemType="Whites" ItemID="" Count="0" />
+            <SellItemAction Sell="All" NpcEntry="734" Location="-9482.001, 68.00452, 56.30428" SellItemType="Greys" ItemID="" Count="0" />
+            <SellItemAction Sell="All" NpcEntry="734" Location="-9482.001, 68.00452, 56.30428" SellItemType="Greens" ItemID="" Count="0" />
+          </If>
+          <If Condition="Leatherworking.Level &gt;= 200 &amp;&amp; Leatherworking.Level &lt; 300" IgnoreCanRun="True">
+            <FlyToAction Dismount="True" Location="-8354.43, -2734.1, 185.0967" />
+            <SellItemAction Sell="All" NpcEntry="3298" Location="-9482.001, 68.00452, 56.30428" SellItemType="Whites" ItemID="" Count="0" />
+            <SellItemAction Sell="All" NpcEntry="3298" Location="-9482.001, 68.00452, 56.30428" SellItemType="Greys" ItemID="" Count="0" />
+            <SellItemAction Sell="All" NpcEntry="3298" Location="-9482.001, 68.00452, 56.30428" SellItemType="Greens" ItemID="" Count="0" />
+          </If>
+        </If>
+        <If Condition="Me.MapId == 530" IgnoreCanRun="True">
+          <If Condition="Skinning &lt; 330" IgnoreCanRun="True">
+            <FlyToAction Dismount="True" Location="-709.1796, 2622.774, 89.76923" />
+            <SellItemAction Sell="All" NpcEntry="16823" Location="-9482.001, 68.00452, 56.30428" SellItemType="Whites" ItemID="" Count="0" />
+            <SellItemAction Sell="All" NpcEntry="16823" Location="-9482.001, 68.00452, 56.30428" SellItemType="Greys" ItemID="" Count="0" />
+            <SellItemAction Sell="All" NpcEntry="16823" Location="-9482.001, 68.00452, 56.30428" SellItemType="Greens" ItemID="" Count="0" />
+          </If>
+          <If Condition="Skinning &gt;= 330" IgnoreCanRun="True">
+            <FlyToAction Dismount="True" Location="-2549.372, 7358.587, 7.175109" />
+            <SellItemAction Sell="All" NpcEntry="19012" Location="-2539.096, 7355.121, 6.923663" SellItemType="Whites" ItemID="" Count="0" />
+            <SellItemAction Sell="All" NpcEntry="19012" Location="-2539.096, 7355.121, 6.923663" SellItemType="Greys" ItemID="" Count="0" />
+            <SellItemAction Sell="All" NpcEntry="19012" Location="-2539.096, 7355.121, 6.923663" SellItemType="Greens" ItemID="" Count="0" />
+          </If>
+        </If>
+        <If Condition="Me.MapId == 571" IgnoreCanRun="True">
+          <FlyToAction Dismount="True" Location="5563.625, 5746.081, -75.9202" />
+          <SellItemAction Sell="All" NpcEntry="28040" Location="5552.257, 5738.877, -76.21771" SellItemType="Greys" ItemID="" Count="0" />
+          <SellItemAction Sell="All" NpcEntry="28040" Location="5552.257, 5738.877, -76.21771" SellItemType="Whites" ItemID="" Count="0" />
+          <SellItemAction Sell="All" NpcEntry="28040" Location="5552.257, 5738.877, -76.21771" SellItemType="Greens" ItemID="" Count="0" />
+        </If>
+        <If Condition="Me.MapId == 732" IgnoreCanRun="True">
+          <MoveToAction Location="-372.5536, 1052.598, 21.97309" MoveType="Location" Pathing="Navigator" Entry="0" />
+          <SellItemAction Sell="All" NpcEntry="48251" Location="-374.3594, 1052.682, 21.98276" SellItemType="Greys" ItemID="" Count="0" />
+          <SellItemAction Sell="All" NpcEntry="48251" Location="-374.3594, 1052.682, 21.98276" SellItemType="Whites" ItemID="" Count="0" />
+          <SellItemAction Sell="All" NpcEntry="48251" Location="-374.3594, 1052.682, 21.98276" SellItemType="Greens" ItemID="" Count="0" />
+        </If>
+        <If Condition="Me.MapId == 870" IgnoreCanRun="True">
+          <FlyToAction Dismount="True" Location="-427.7268, 1904.588, 131.7462" />
+          <SellItemAction Sell="All" NpcEntry="67052" Location="-448.5972, 1908.825, 136.1267" SellItemType="Greys" ItemID="" Count="0" />
+          <SellItemAction Sell="All" NpcEntry="67052" Location="-448.5972, 1908.825, 136.1267" SellItemType="Whites" ItemID="" Count="0" />
+          <SellItemAction Sell="All" NpcEntry="67052" Location="-448.5972, 1908.825, 136.1267" SellItemType="Greens" ItemID="" Count="0" />
+        </If>
+      </If>
+    </If>
+    <If Condition="Me.IsHorde" IgnoreCanRun="True">
+      <If Condition="Me.ZoneText != &quot;Orgrimmar&quot;" IgnoreCanRun="True">
+        <If Condition="Me.MapId == 1" IgnoreCanRun="True">
+          <If Condition="Leatherworking.Level &lt; 75" IgnoreCanRun="True">
+            <FlyToAction Dismount="True" Location="-545.5059, -2654.319, 95.53005" />
+            <SellItemAction Sell="All" NpcEntry="3486" Location="-539.8406, -2672.23, 95.78751" SellItemType="Whites" ItemID="" Count="0" />
+            <SellItemAction Sell="All" NpcEntry="3486" Location="-539.8406, -2672.23, 95.78751" SellItemType="Greys" ItemID="" Count="0" />
+            <SellItemAction Sell="All" NpcEntry="3486" Location="-539.8406, -2672.23, 95.78751" SellItemType="Greens" ItemID="" Count="0" />
+          </If>
+          <If Condition="Leatherworking.Level &gt; 75 &amp;&amp; Leatherworking.Level &lt; 155" IgnoreCanRun="True">
+            <FlyToAction Dismount="True" Location="2323.121, -2544.995, 100.8106" />
+            <SellItemAction Sell="All" NpcEntry="6028" Location="2346.262, -2582.214, 103.0935" SellItemType="Whites" ItemID="" Count="0" />
+            <SellItemAction Sell="All" NpcEntry="6028" Location="2346.262, -2582.214, 103.0935" SellItemType="Greys" ItemID="" Count="0" />
+            <SellItemAction Sell="All" NpcEntry="6028" Location="2346.262, -2582.214, 103.0935" SellItemType="Greens" ItemID="" Count="0" />
+          </If>
+        </If>
+      </If>
+    </If>
+    <WaitAction Condition="Me.FreeBagSlots &gt; 2" Timeout="10000" />
+  </SubRoutine>
+  <SubRoutine SubRoutineName="Train Leather">
+    <CustomAction Code="Log(Color.Orange,&quot;LW+Skin:&quot; , Color.LimeGreen, &quot;Learning Leatherworking&quot;);" />
+    <If Condition="Me.IsAlliance" IgnoreCanRun="True">
+      <If Condition="Me.MapId == 0" IgnoreCanRun="True">
+        <If Condition="Me.ZoneText != &quot;Stormwind City&quot;" IgnoreCanRun="True">
+          <FlyToAction Dismount="True" Location="-8720.27, 429.3408, 97.97028" />
+        </If>
+        <TrainSkillAction NpcEntry="5564" Location="-8725.547, 477.4149, 98.61372" />
+      </If>
+      <If Condition="Me.MapId == 530" IgnoreCanRun="True">
+        <FlyToAction Dismount="True" Location="-724.5684, 2708.494, 95.97459" />
+        <TrainSkillAction NpcEntry="18771" Location="-721.657, 2745.256, 94.00251" />
+      </If>
+      <If Condition="Me.MapId == 571" IgnoreCanRun="True">
+        <FlyToAction Dismount="True" Location="2132.718, 5255.874, 19.44785" />
+        <TrainSkillAction NpcEntry="26998" Location="2132.718, 5255.874, 19.44724" />
+      </If>
+      <If Condition="Me.MapId == 732" IgnoreCanRun="True">
+        <MoveToAction Location="-344.7248, 1032.921, 22.13287" MoveType="Location" Pathing="Navigator" Entry="0" />
+        <InteractionAction InteractType="GameObject" Entry="208227" InteractDelay="10" GameObjectType="Transport" SpellFocus="Anvil" />
+        <WaitAction Condition="Me.MapId == 0" Timeout="20000" />
+        <TrainSkillAction NpcEntry="5564" Location="-8725.547, 477.4149, 98.61372" />
+      </If>
+      <If Condition="Me.MapId == 870" IgnoreCanRun="True">
+        <FlyToAction Dismount="True" Location="3079.188, 793.0452, 527.4886" />
+        <TrainSkillAction NpcEntry="65121" Location="3079.188, 793.0452, 527.4886" />
+      </If>
+    </If>
+    <If Condition="Me.IsHorde" IgnoreCanRun="True">
+      <If Condition="Me.MapId == 1" IgnoreCanRun="True">
+        <If Condition="Me.ZoneText != &quot;Orgrimmar&quot;" IgnoreCanRun="True">
+          <FlyToAction Dismount="True" Location="1925.382, -4660.836, 33.285" />
+        </If>
+        <TrainSkillAction NpcEntry="3365" Location="1850.182, -4565.552, 24.98108" />
+      </If>
+    </If>
+  </SubRoutine>
+  <SubRoutine SubRoutineName="Mail">
+    <If Condition="HasNewMail || MailCount &gt; 0" IgnoreCanRun="True">
+      <GetMailAction GetMailType="AllItems" ItemID="" CheckNewMail="True" MinFreeBagSlots="0" AutoFindMailBox="True" Location="0, 0, 0" />
+      <WaitAction Condition="false" Timeout="2000" />
+    </If>
+  </SubRoutine>
+  <!--Travel-->
+  <SubRoutine SubRoutineName="Pand to SW">
+    <If Condition="Me.MapId == 870" IgnoreCanRun="True">
+      <FlyToAction Dismount="True" Location="-309.3351, -1774.951, 62.58277" />
+      <InteractionAction InteractType="GameObject" Entry="210805" InteractDelay="10" GameObjectType="Mailbox" SpellFocus="Anvil" />
+      <WaitAction Condition="Me.MapId == 0" Timeout="20000" />
+    </If>
+  </SubRoutine>
+  <SubRoutine SubRoutineName="SW to Pand">
+    <If Condition="Me.MapId == 0" IgnoreCanRun="True">
+      <FlyToAction Dismount="True" Location="-8195.641, 529.4815, 117.3941" />
+      <InteractionAction InteractType="GameObject" Entry="215457" InteractDelay="10" GameObjectType="Mailbox" SpellFocus="Anvil" />
+      <WaitAction Condition="Me.MapId == 870" Timeout="20000" />
+    </If>
+  </SubRoutine>
+  <SubRoutine SubRoutineName="TB to SW">
+    <If Condition="Me.MapId == 732" IgnoreCanRun="True">
+      <MoveToAction Location="-344.7248, 1032.921, 22.13287" MoveType="Location" Pathing="Navigator" Entry="0" />
+      <InteractionAction InteractType="GameObject" Entry="208227" InteractDelay="10" GameObjectType="Transport" SpellFocus="Anvil" />
+      <WaitAction Condition="Me.MapId == 0" Timeout="20000" />
+      <TrainSkillAction NpcEntry="5564" Location="-8725.547, 477.4149, 98.61372" />
+    </If>
+  </SubRoutine>
+  <SubRoutine SubRoutineName="SW to TB">
+    <If Condition="Me.MapId == 0" IgnoreCanRun="True">
+      <CustomAction Code="Log(&quot;Flying to Portal to TB in SW&quot;);" />
+      <FlyToAction Dismount="True" Location="-8207.865, 451.0338, 117.6228" />
+      <InteractionAction InteractType="GameObject" Entry="206594" InteractDelay="10" GameObjectType="Transport" SpellFocus="Anvil" />
+      <WaitAction Condition="Me.ZoneText == &quot;Tol Barad&quot;" Timeout="25000" />
+    </If>
+    <If Condition="Me.MapId == 571" IgnoreCanRun="True">
+      <CallSubRoutine SubRoutineName="Northrend to SW" />
+    </If>
+  </SubRoutine>
+  <SubRoutine SubRoutineName="Outlands to SW">
+    <If Condition="Me.MapId == 530" IgnoreCanRun="True">
+      <CustomAction Code="Log(&quot;Using Portal back to SW&quot;);" />
+    </If>
+    <If Condition="Me.MapId==0" IgnoreCanRun="True">
+      <If Condition="Me.IsAlliance" IgnoreCanRun="True">
+        <FlyToAction Dismount="True" Location="-335.299, 985.499, 54.29087" />
+        <MoveToAction Location="-337.2916, 962.9234, 54.28607" MoveType="Location" Pathing="Navigator" Entry="0" />
+        <InteractionAction InteractType="GameObject" Entry="195139" InteractDelay="200" GameObjectType="Transport" SpellFocus="Anvil" />
+        <WaitAction Condition="Me.MapId == 0" Timeout="25000" />
+      </If>
+    </If>
+  </SubRoutine>
+  <SubRoutine SubRoutineName="SW to Outlands">
+    <If Condition="Me.MapId == 0" IgnoreCanRun="True">
+      <CustomAction Code="Log(Color. Orange,&quot;LW + Skin:&quot;, Color.LimeGreen, &quot;Moving to Outlands Portal&quot;);" />
+      <If Condition="Me.IsAlliance" IgnoreCanRun="True">
+        <MoveToAction Location="-9007.162, 871.0374, 129.6926" MoveType="Location" Pathing="Navigator" Entry="0" />
+        <InteractionAction InteractType="GameObject" Entry="195141" InteractDelay="0" GameObjectType="Transport" SpellFocus="Anvil" />
+      </If>
+      <FlyToAction Dismount="True" Location="-11895.9, -3206.984, -6.04731" />
+      <CustomAction Code="CTM (-11930.31,-3209.613,-1.836873);" />
+      <WaitAction Condition="Me.MapId == 530" Timeout="25000" />
+    </If>
+  </SubRoutine>
+  <SubRoutine SubRoutineName="Northrend to SW">
+    <If Condition="Me.MapId == 571" IgnoreCanRun="True">
+      <FlyToAction Dismount="True" Location="2232.188, 5135.341, 5.344332" />
+      <CustomAction Code="Log(&quot;Waiting for Boat&quot;);" />
+      <WaitAction Condition="ObjectManager.GetObjectsOfType&lt;WoWGameObject&gt;().FirstOrDefault(o =&gt; o.Entry == 190536 ) != null &amp;&amp; ObjectManager.GetObjectsOfType&lt;WoWGameObject&gt;().FirstOrDefault(o =&gt; o.Entry == 190536 ).Location.Distance(new WoWPoint(-8288.816, 1424.703, -0.01198259)) &lt; 3" Timeout="650000" />
+      <CustomAction Code="CTM(2225.18,5118.147,9.615541);" />
+      <WaitAction Condition="Me.MapId == 0" Timeout="650000" />
+      <FlyToAction Dismount="True" Location="-8825.161, 622.9095, 94.38611" />
+    </If>
+  </SubRoutine>
+  <SubRoutine SubRoutineName="SW to Northrend">
+    <If Condition="Me.MapId == 0" IgnoreCanRun="True">
+      <CustomAction Code="Log(&quot;Flying for Boat to Northrend&quot;);" />
+      <FlyToAction Dismount="True" Location="-8288.853, 1394.903, 4.548806" />
+      <CustomAction Code="Log(&quot;Waiting for Boat&quot;);" />
+      <WaitAction Condition="ObjectManager.GetObjectsOfType&lt;WoWGameObject&gt;().FirstOrDefault(o =&gt; o.Entry == 190536 ) != null &amp;&amp; ObjectManager.GetObjectsOfType&lt;WoWGameObject&gt;().FirstOrDefault(o =&gt; o.Entry == 190536 ).Location.Distance(new WoWPoint(-8288.816, 1424.703, -0.01198259)) &lt; 3" Timeout="650000" />
+      <CustomAction Code="CTM(-8294.051, 1424.353, 9.505318);" />
+      <WaitAction Condition="Me.MapId == 571" Timeout="650000" />
+      <FlyToAction Dismount="True" Location="2149.927, 5238.374, 19.44571" />
+    </If>
+  </SubRoutine>
+  <SubRoutine SubRoutineName="Org to Outlands">
+    <CustomAction Code="Log(&quot;Heading to Outlands from Org&quot;);" />
+    <If Condition="Me.MapId == 1" IgnoreCanRun="True">
+      <FlyToAction Dismount="True" Location="1662.198, -4132.378, 56.96952" />
+      <InteractionAction InteractType="GameObject" Entry="195142" InteractDelay="2000" GameObjectType="Transport" SpellFocus="Anvil" />
+      <WaitAction Condition="Me.MapId == 0" Timeout="20000" />
+    </If>
+  </SubRoutine>
+  <SubRoutine SubRoutineName="Org to Northrend" />
+  <SubRoutine SubRoutineName="Pand ot Org" />
+  <SubRoutine SubRoutineName="TB to Org" />
+  <SubRoutine SubRoutineName="Nothrend to Org" />
+  <SubRoutine SubRoutineName="Outlands to Org">
+    <CustomAction Code="Log(&quot;Heading to Org from Outlands&quot;);" />
+    <If Condition="Me.MapId == 530" IgnoreCanRun="True">
+      <FlyToAction Dismount="False" Location="-252.0331, 965.9687, 90.23502" />
+      <CustomAction Code="CTM(-247.3961, 890.3077, 96.21683);" />
+      <WaitAction Condition="Me.MapId == 0" Timeout="25000" />
+    </If>
+    <If Condition="Me.MapId == 0" IgnoreCanRun="True">
+      <CustomAction Code="Log(&quot;Heading to Kalimdor from Eastern Kingdoms&quot;);" />
+      <If Condition="Me.IsHorde" IgnoreCanRun="True">
+        <If Condition="DistanceTo(1696.929, 731.7497, 68.85725) &lt; 500" IgnoreCanRun="True">
+          <MoveToAction Location="1696.929, 731.7497, 68.85725" MoveType="Location" Pathing="Navigator" Entry="0" />
+        </If>
+        <FlyToAction Dismount="False" Location="2067.27, 285.2988, 97.03257" />
+        <WaitAction Condition="ObjectManager.GetObjectsOfType&lt;WoWGameObject&gt;().FirstOrDefault(o =&gt; o.Entry == 164871) != null &amp;&amp; ObjectManager.GetObjectsOfType&lt;WoWGameObject&gt;().FirstOrDefault(o =&gt; o.Entry == 164871).Location.Distance(new WoWPoint(2062.376, 292.998, 114.973)) &lt; 1" Timeout="6000000" />
+        <CustomAction Code="CTM(2068.119, 295.5195, 97.24951);" />
+      </If>
+      <WaitAction Condition="Me.MapId == 1" Timeout="6000000" />
+    </If>
+  </SubRoutine>
+  <SubRoutine SubRoutineName="Org to TB" />
+  <SubRoutine SubRoutineName="Org to Pand" />
+</Professionbuddy>

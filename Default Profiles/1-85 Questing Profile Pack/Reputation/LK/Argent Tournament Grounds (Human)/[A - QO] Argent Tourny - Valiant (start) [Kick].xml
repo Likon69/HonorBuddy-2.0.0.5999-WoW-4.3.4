@@ -1,0 +1,529 @@
+﻿<HBProfile>
+	<Name>[QO] [QO] Argent Tournament Rep - A [Kick]</Name>
+   
+	<MinLevel>1</MinLevel>
+	<MaxLevel>86</MaxLevel>
+   
+	<MinDurability>0.2</MinDurability>
+	<MinFreeBagSlots>2</MinFreeBagSlots>
+	
+	<MailGrey>False</MailGrey>
+	<MailWhite>False</MailWhite>
+	<MailGreen>False</MailGreen>
+	<MailBlue>True</MailBlue>
+	<MailPurple>True</MailPurple>
+   
+	<SellGrey>True</SellGrey>
+	<SellWhite>True</SellWhite>
+	<SellGreen>True</SellGreen>
+	<SellBlue>False</SellBlue>
+	<SellPurple>False</SellPurple>
+   
+	<TargetElites>True</TargetElites>
+
+	<AvoidMobs>
+	</AvoidMobs>
+	<Blackspots>
+	</Blackspots>
+	<Mailboxes>
+		<Mailbox X="8589.352" Y="697.2214" Z="547.2932" />
+	</Mailboxes>
+	<Vendors>
+		<Vendor Name="Brollen Wheatbeard" Entry="33599" Type="Repair" X="8548.112" Y="933.3629" Z="547.2943" />
+	</Vendors>
+
+	<Quest Id="13663" Name="The Black Knight's Orders">
+		<Objective Type="CollectItem" ItemId="45121" CollectCount="1">
+			<CollectFrom>
+			</CollectFrom>
+			<Hotspots>
+				<Hotspot X="9066.61" Y="2051.535" Z="67.22173" />
+			</Hotspots>
+		</Objective>
+		<Objective Type="CollectItem" ItemId="45122" CollectCount="1">
+			<CollectFrom>
+			</CollectFrom>
+			<Hotspots>
+				<Hotspot X="9066.61" Y="2051.535" Z="67.22173" />
+			</Hotspots>
+		</Objective>
+	</Quest>	
+	
+	<Quest Id="13671" Name="Training In The Field">
+		<Objective Type="KillMob" MobId="33192" KillCount="8">
+			<Hotspots>
+				<Hotspot X="7810.625" Y="1227.539" Z="439.7846" />
+				<Hotspot X="7868.898" Y="1223.998" Z="442.9734" />
+				<Hotspot X="7857.161" Y="1176.814" Z="443.8346" />
+				<Hotspot X="7771.599" Y="1186.907" Z="441.3311" />
+				<Hotspot X="7704.646" Y="1136.702" Z="439.5026" />
+				<Hotspot X="7712.535" Y="1050" Z="445.3232" />
+				<Hotspot X="7755.188" Y="979.4233" Z="447.5201" />
+				<Hotspot X="7821.679" Y="978.1979" Z="449.936" />
+				<Hotspot X="7895.965" Y="1037.567" Z="451.4633" />
+				<Hotspot X="7905.955" Y="1118.826" Z="447.4406" />
+				<Hotspot X="7926.466" Y="1177.508" Z="458.2458" />
+				<Hotspot X="7837.843" Y="1226.768" Z="439.6945" />				
+			</Hotspots>
+		</Objective>
+	</Quest>				
+	
+	
+	
+	
+	<QuestOrder>
+	<!-- 
+	http://www.wowhead.com/blog=80946/argent-tournament-guide
+	-->
+	
+	  <If Condition="Me.IsHorde" >
+			<CustomBehavior File="RunMacro" Macro="/exit" NumOfTimes="1" WaitTime="500" />
+			<CustomBehavior File="RunMacro" Macro="/click StaticPopup1Button1" NumOfTimes="1" WaitTime="500" />
+			<CustomBehavior File="UserDialog"  Title="title" AllowBotStop="True" SoundCue="Asterisk" SoundCueInterval="2" Text="You must be Alliance to run this profile" />
+	  </If>
+
+	  <CustomBehavior File="UserDialog"  AllowBotStop="True" SoundCue="Asterisk" SoundCueInterval="2" Text="Disable Auto Equip / Equip me and press continue" />
+
+	  <CustomBehavior File="UserSettings" LootMobs="True" PullDistance="35" TrainNewSkills="False" LearnFlightPaths="True" />
+				
+			<If Condition="Me.MapId == 0" >
+				<If Condition="(!HasQuest(13633))" >
+				<!-- If you're lazy like me, it will fly u to dock and use boat to borean -->
+				<CustomBehavior File="FlyTo" X="-8291.137" Y="1404.371" Z="4.731256" />
+				<CustomBehavior File="ForcedDismount" />
+				<!-- SW dock to Valiance Keep -->
+				<CustomBehavior File="UseTransport"
+								Entry="-8300.08, 1405.158, 4.422395"
+								Exit="2234.375, 5132.568, 5.343217"
+								Start="-8288.816, 1424.703, 0.04" 
+								End="2218.391, 5119.589, 0.04" 
+								Transport="190536" />
+				<CustomBehavior File="WaitTimer" WaitTime="5000" />
+			</If></If>
+
+				<!-- Non repeatable quests -->
+			<If Condition="((!HasQuest(13667)) &amp;&amp; (!IsQuestCompleted(13667)))" >
+				<CustomBehavior File="FlyTo" X="8485.399" Y="1053.806" Z="550.0589" />
+				<CustomBehavior File="ForcedDismount" />
+		<PickUp QuestName="The Argent Tournament" QuestId="13667" GiverName="Justicar Mariel Trueheart" GiverId="33817" />
+			</If>
+			<If Condition="((HasQuest(13667)) &amp;&amp; (IsQuestCompleted(13667)))" >
+				<CustomBehavior File="FlyTo" X="8584.941" Y="691.8286" Z="547.2936" />
+				<CustomBehavior File="ForcedDismount" />
+		<TurnIn QuestName="The Argent Tournament" QuestId="13667" TurnInName="Arcanist Taelis" TurnInId="33625" />				
+			</If>
+		<PickUp QuestName="Mastery Of Melee" QuestId="13828" GiverName="Arcanist Taelis" GiverId="33625" />
+		<PickUp QuestName="Mastery Of The Charge" QuestId="13837" GiverName="Avareth Swiftstrike" GiverId="33646" />
+		<PickUp QuestName="Mastery Of The Shield-Breaker" QuestId="13835" GiverName="Scout Shalyndria" GiverId="33647" />
+			<If Condition="((HasQuest(13828)) &amp;&amp; (!IsQuestCompleted(13828)))" >
+			  <If Condition="(!HasItem(46069))" >
+				<CustomBehavior File="FlyTo" X="8594.644" Y="942.6311" Z="548.3071" />
+				<CustomBehavior File="ForcedDismount" />
+				<!-- get id of lance rack -->
+				<CustomBehavior File="InteractWith"  MobId="194618" ObjectType="Gameobject" NumOfTimes="1" CollectionDistance="50" X="8618.139" Y="897.5522" Z="546.9598" />
+			  </If>
+				<CustomBehavior File="FlyTo" X="8594.644" Y="942.6311" Z="548.3071" />
+				<CustomBehavior File="ForcedDismount" />
+				<CustomBehavior File="EquipItem" ItemId="46069" Slot="1" />
+				<CustomBehavior File="MountVehOnly" NpcMountId="33843" X="8596.26" Y="938.7139" Z="548.7403" />
+				<RunTo X="8617.684" Y="898.5101" Z="546.9606" />
+				<CustomBehavior File="InteractWith" QuestId="13828" MobId="33973" NumOfTimes="1" GossipOptions="1" WaitTime="1000" CollectionDistance="50" X="8618.139" Y="897.5522" Z="546.9598" />
+				<RunTo X="8620.769" Y="908.1838" Z="546.9696" />
+				<CustomBehavior File="RunMacro" Macro="/tar Melee Target" NumOfTimes="1" WaitTime="1000" />
+			  <While Condition="((HasQuest(13828)) &amp;&amp; (!IsQuestCompleted(13828)))" >
+				<CustomBehavior File="Misc\RunLua" Lua="CastSpellByID(62552)" WaitTime="4000" NumOfTimes="3" />
+				<CustomBehavior File="Misc\RunLua" Lua="CastSpellByID(62544)" WaitTime="2000" NumOfTimes="1" />
+			  </While>
+				<CustomBehavior File="WaitTimer" WaitTime="3000" />
+				<CustomBehavior File="EjectVeh" Eject="1" />
+			</If>
+			<If Condition="((HasQuest(13835)) &amp;&amp; (!IsQuestCompleted(13835)))" >
+			  <If Condition="(!HasItem(46069))" >
+				<CustomBehavior File="FlyTo" X="8594.644" Y="942.6311" Z="548.3071" />
+				<CustomBehavior File="ForcedDismount" />
+				<!-- get id of lance rack -->
+				<CustomBehavior File="InteractWith"  MobId="194618" ObjectType="Gameobject" NumOfTimes="1" CollectionDistance="50" X="8618.139" Y="897.5522" Z="546.9598" />
+			  </If>
+				<CustomBehavior File="FlyTo" X="8594.644" Y="942.6311" Z="548.3071" />
+				<CustomBehavior File="ForcedDismount" />
+				<CustomBehavior File="EquipItem" ItemId="46069" Slot="1" />
+				<CustomBehavior File="MountVehOnly" NpcMountId="33843" X="8596.26" Y="938.7139" Z="548.7403" />
+				<RunTo X="8622.397" Y="856.3959" Z="546.96" />
+				<CustomBehavior File="InteractWith" QuestId="13835" MobId="33974" NumOfTimes="1" GossipOptions="1" WaitTime="1000" CollectionDistance="50" X="8622.397" Y="856.3959" Z="546.96" />
+				<RunTo X="8616.023" Y="889.2153" Z="546.9594" />
+				<RunTo X="8627.373" Y="868.8736" Z="546.9599" />
+				<CustomBehavior File="RunMacro" Macro="/tar Ranged Target" NumOfTimes="1" WaitTime="1000" />
+				<CustomBehavior File="Misc\RunLua" Lua="CastSpellByID(62575)" WaitTime="2000" NumOfTimes="10" />
+				<CustomBehavior File="EjectVeh" Eject="1" />
+			</If>
+			<If Condition="((HasQuest(13837)) &amp;&amp; (!IsQuestCompleted(13837)))" >
+			  <If Condition="(!HasItem(46069))" >
+				<CustomBehavior File="FlyTo" X="8594.644" Y="942.6311" Z="548.3071" />
+				<CustomBehavior File="ForcedDismount" />
+				<!-- get id of lance rack -->
+				<CustomBehavior File="InteractWith"  MobId="194618" ObjectType="Gameobject" NumOfTimes="1" CollectionDistance="50" X="8618.139" Y="897.5522" Z="546.9598" />
+			  </If>
+				<CustomBehavior File="FlyTo" X="8594.644" Y="942.6311" Z="548.3071" />
+				<CustomBehavior File="ForcedDismount" />
+				<CustomBehavior File="EquipItem" ItemId="46069" Slot="1" />
+				<CustomBehavior File="MountVehOnly" NpcMountId="33843" X="8596.26" Y="938.7139" Z="548.7403" />
+				<RunTo X="8634.643" Y="884.7522" Z="546.9652" />
+				<CustomBehavior File="InteractWith" QuestId="13835" MobId="33972" NumOfTimes="1" GossipOptions="1" WaitTime="1000" CollectionDistance="50" X="8634.643" Y="884.7522" Z="546.9652" />
+				<RunTo X="8597.623" Y="868.1798" Z="550.3389" />
+				<RunTo X="8626.404" Y="875.8491" Z="546.96" />
+			  <While Condition="((HasQuest(13837)) &amp;&amp; (!IsQuestCompleted(13837)))" >
+				<CustomBehavior File="RunMacro" Macro="/tar Charge Target" NumOfTimes="1" WaitTime="1000" />
+				<CustomBehavior File="Misc\RunLua" Lua="CastSpellByID(62575)" WaitTime="2000" NumOfTimes="2" />
+				<CustomBehavior File="Misc\RunLua" Lua="CastSpellByID(62960)" WaitTime="2000" NumOfTimes="1" />
+				<RunTo X="8597.623" Y="868.1798" Z="550.3389" />
+				<RunTo X="8626.404" Y="875.8491" Z="546.96" />
+			  </While>
+				<CustomBehavior File="EjectVeh" Eject="1" />
+			</If>
+			<If Condition="((HasQuest(13835)) &amp;&amp; (IsQuestCompleted(13835)))" >
+				<CustomBehavior File="FlyTo" X="8583.649" Y="691.8133" Z="547.2934" />
+				<CustomBehavior File="ForcedDismount" />
+			</If>
+		<TurnIn QuestName="Mastery Of The Shield-Breaker" QuestId="13835" TurnInName="Scout Shalyndria" TurnInId="33647" />
+		<TurnIn QuestName="Mastery Of The Charge" QuestId="13837" TurnInName="Avareth Swiftstrike" TurnInId="33646" />
+		<TurnIn QuestName="Mastery Of Melee" QuestId="13828" TurnInName="Arcanist Taelis" TurnInId="33625" />
+		<PickUp QuestName="Up To The Challenge" QuestId="13672" GiverName="Arcanist Taelis" GiverId="33625" />
+			<If Condition="((HasQuest(13672)) &amp;&amp; (IsQuestCompleted(13672)))" >
+				<CustomBehavior File="FlyTo" X="8583.649" Y="691.8133" Z="547.2934" />
+				<CustomBehavior File="ForcedDismount" />
+		<TurnIn QuestName="Up To The Challenge" QuestId="13672" TurnInName="Arcanist Taelis" TurnInId="33625" />
+			</If>
+			<If Condition="((!HasQuest(13633)) &amp;&amp; (!IsQuestCompleted(13633)))" >
+				<CustomBehavior File="FlyTo" X="8486.574" Y="1054.364" Z="549.9982" />
+				<CustomBehavior File="ForcedDismount" />
+		<PickUp QuestName="The Black Knight of Westfall?" QuestId="13633" GiverName="Crusader Rhydalla" GiverId="33417" />
+			</If>
+			<If Condition="((HasQuest(13633)) &amp;&amp; (!IsQuestCompleted(13633)))" >
+				<If Condition="Me.MapId == 571" >
+					<CustomBehavior File="FlyTo" X="2231.537" Y="5135.816" Z="5.345537" />
+					<CustomBehavior File="ForcedDismount" />
+					<!-- Valiance Keep to SW dock -->
+					<CustomBehavior File="UseTransport"
+									Entry="2234.375, 5132.568, 5.343217"
+									Exit="-8300.08, 1405.158, 4.422395"
+									Start="2218.391, 5119.589, 0.04" 
+									End="-8288.816, 1424.703, 0.04" 
+									Transport="190536" />
+				</If>
+				<If Condition="Me.MapId == 0" >
+					<CustomBehavior File="FlyTo" X="-11022.3" Y="1519.262" Z="43.02094" />
+					<CustomBehavior File="ForcedDismount" />
+					<RunTo X="-11024.59" Y="1541.981" Z="44.25169" />
+					<Objective QuestName="The Black Knight of Westfall?" QuestId="13633" Type="CollectItem" ItemId="45058" CollectCount="1" />
+					<!--
+					<CustomBehavior File="InteractWith" QuestId="13633" MobId="194340" ObjectType="Gameobject" NumOfTimes="1" CollectionDistance="50" X="-11024.59" Y="1541.981" Z="44.25169" />
+					-->
+					<RunTo X="-11022.3" Y="1519.262" Z="43.02094" />
+				</If>
+			</If>
+			<If Condition="((HasQuest(13633)) &amp;&amp; (IsQuestCompleted(13633)))" >
+				<If Condition="Me.MapId == 0" >
+					<CustomBehavior File="FlyTo" X="-8291.137" Y="1404.371" Z="4.731256" />
+					<CustomBehavior File="ForcedDismount" />
+					<!-- SW dock to Valiance Keep -->
+					<CustomBehavior File="UseTransport"
+									Entry="-8300.08, 1405.158, 4.422395"
+									Exit="2234.375, 5132.568, 5.343217"
+									Start="-8288.816, 1424.703, 0.04" 
+									End="2218.391, 5119.589, 0.04" 
+									Transport="190536" />
+					<CustomBehavior File="WaitTimer" WaitTime="5000" />
+				</If>
+				<If Condition="Me.MapId == 571" >
+					<CustomBehavior File="FlyTo" X="8486.574" Y="1054.364" Z="549.9982" />
+					<CustomBehavior File="ForcedDismount" />
+				</If>
+			</If>
+		<TurnIn QuestName="The Black Knight of Westfall?" QuestId="13633" TurnInName="Crusader Rhydalla" TurnInId="33417" />
+		<PickUp QuestName="The Seer's Crystal" QuestId="13641" GiverName="Crusader Rhydalla" GiverId="33417" />
+			<If Condition="((HasQuest(13641)) &amp;&amp; (!IsQuestCompleted(13641)))" >
+				<CustomBehavior File="FlyTo" X="5811.514" Y="186.6066" Z="177.8063" />
+				<CustomBehavior File="ForcedDismount" />
+				<Objective QuestName="The Seer's Crystal" QuestId="13641" Type="CollectItem" ItemId="45064" CollectCount="1" />
+			</If>
+			<If Condition="((HasQuest(13641)) &amp;&amp; (IsQuestCompleted(13641)))" >
+				<CustomBehavior File="FlyTo" X="8486.574" Y="1054.364" Z="549.9982" />
+				<CustomBehavior File="ForcedDismount" />
+			</If>
+		<TurnIn QuestName="The Seer's Crystal" QuestId="13641" TurnInName="Crusader Rhydalla" TurnInId="33417" />				
+		<PickUp QuestName="The Stories Dead Men Tell" QuestId="13643" GiverName="Crusader Rhydalla" GiverId="33417" />
+			<If Condition="((HasQuest(13643)) &amp;&amp; (!IsQuestCompleted(13643)))" >
+				<CustomBehavior File="FlyTo" X="8464.422" Y="457.2478" Z="596.0725" />
+				<CustomBehavior File="ForcedDismount" />
+				<Objective QuestName="The Stories Dead Men Tell" QuestId="13643" Type="UseObject" ObjectId="194537" UseCount="1" />
+				<Objective QuestName="The Stories Dead Men Tell" QuestId="13643" Type="UseObject" ObjectId="194539" UseCount="1" />
+				<Objective QuestName="The Stories Dead Men Tell" QuestId="13643" Type="UseObject" ObjectId="194538" UseCount="1" />
+			</If>
+			<If Condition="((HasQuest(13643)) &amp;&amp; (IsQuestCompleted(13643)))" >
+				<CustomBehavior File="FlyTo" X="8486.574" Y="1054.364" Z="549.9982" />
+				<CustomBehavior File="ForcedDismount" />
+			</If>
+		<TurnIn QuestName="The Stories Dead Men Tell" QuestId="13643" TurnInName="Crusader Rhydalla" TurnInId="33417" />		
+		<PickUp QuestName="There's Something About the Squire" QuestId="13654" GiverName="Crusader Rhydalla" GiverId="33417" />
+			<While Condition="((HasQuest(13654)) &amp;&amp; (!IsQuestCompleted(13654)))" >
+				<CustomBehavior File="FlyTo" X="5437.461" Y="420.8548" Z="167.9468" />
+				<CustomBehavior File="ForcedDismount" />
+				<Objective QuestName="There's Something About the Squire" QuestId="13654" Type="CollectItem" ItemId="45080" CollectCount="1" />
+				<CustomBehavior File="UseItemOn" QuestId="13654" MobId="33498" NpcState="Alive" ItemId="45080" NumOfTimes="1" WaitTime="1000" Range="5" CollectionDistance="50" X="5427.857" Y="401.0826" Z="167.9483" />
+				<CustomBehavior File="InteractWith" QuestId="13654" MobId="33498" NumOfTimes="1" CollectionDistance="50" WaitTime="1000" X="5427.857" Y="401.0826" Z="167.9483" />
+				<CustomBehavior File="WaitTimer" WaitTime="5000" />
+			</While>
+			<If Condition="((HasQuest(13654)) &amp;&amp; (IsQuestCompleted(13654)))" >
+				<CustomBehavior File="FlyTo" X="8486.574" Y="1054.364" Z="549.9982" />
+				<CustomBehavior File="ForcedDismount" />
+			</If>
+		<TurnIn QuestName="There's Something About the Squire" QuestId="13654" TurnInName="Crusader Rhydalla" TurnInId="33417" />		
+		<PickUp QuestName="The Black Knight's Orders" QuestId="13663" GiverName="Crusader Rhydalla" GiverId="33417" />
+			<If Condition="((HasQuest(13663)) &amp;&amp; (!IsQuestCompleted(13663)))" >
+			<!--
+				<CustomBehavior File="FlyTo" X="8523.047" Y="564.4668" Z="553.7081" />
+				<CustomBehavior File="ForcedDismount" />
+				<UseItem QuestId="13663" ItemId="45083" X="8523.047" Y="564.4668" Z="553.7081" />
+				<CustomBehavior File="WaitTimer" WaitTime="90000" />
+			-->
+				<Objective QuestName="The Black Knight's Orders" QuestId="13663" Type="CollectItem" ItemId="45121" CollectCount="1" />
+				<Objective QuestName="The Black Knight's Orders" QuestId="13663" Type="CollectItem" ItemId="45122" CollectCount="1" />
+			</If>
+			<If Condition="((HasQuest(13663)) &amp;&amp; (IsQuestCompleted(13663)))" >
+				<CustomBehavior File="FlyTo" X="8486.574" Y="1054.364" Z="549.9982" />
+				<CustomBehavior File="ForcedDismount" />
+			</If>
+		<TurnIn QuestName="The Black Knight's Orders" QuestId="13663" TurnInName="Crusader Rhydalla" TurnInId="33417" />
+			<!-- http://www.wowhead.com/quest=13664 requires Champion -->
+			
+			
+			
+			<If Condition="((!HasQuest(13666)) &amp;&amp; (!IsQuestCompleted(13666)))" >
+				<CustomBehavior File="FlyTo" X="8582.106" Y="692.2238" Z="547.2957" />
+				<CustomBehavior File="ForcedDismount" />
+			</If>
+		<PickUp QuestName="Training In The Field" QuestId="13671" GiverName="Avareth Swiftstrike" GiverId="33646" />
+		<PickUp QuestName="Learning The Reins" QuestId="13625" GiverName="Scout Shalyndria" GiverId="33647" />
+			<!--
+		<PickUp QuestName="A Blade Fit For A Champion" QuestId="13666" GiverName="Arcanist Taelis" GiverId="33625" />
+			-->
+			<!-- MobId, not quest(s) -->
+			<While Condition="HasQuestAvailable(33625)" >
+				<CustomBehavior File="InteractWith"  MobId="33625" NumOfTimes="1" CollectionDistance="200" WaitTime="1000" X="8616.222" Y="651.5604" Z="550.2505" />
+				<CustomBehavior File="RunMacro" Macro="/click GossipTitleButton1" NumOfTimes="1" WaitTime="1000" />
+				<CustomBehavior File="RunMacro" Macro="/click QuestFrameAcceptButton" NumOfTimes="1" WaitTime="1000" />
+			</While>
+			<While Condition="((HasQuest(13625)) &amp;&amp; (!IsQuestCompleted(13625)))" >
+			  <If Condition="(!HasItem(46069))" >
+				<CustomBehavior File="FlyTo" X="8594.644" Y="942.6311" Z="548.3071" />
+				<CustomBehavior File="ForcedDismount" />
+				<!-- get id of lance rack -->
+				<CustomBehavior File="InteractWith"  MobId="194618" ObjectType="Gameobject" NumOfTimes="1" CollectionDistance="50" X="8618.139" Y="897.5522" Z="546.9598" />
+			  </If>
+				<CustomBehavior File="FlyTo" X="8594.644" Y="942.6311" Z="548.3071" />
+				<CustomBehavior File="ForcedDismount" />
+				<CustomBehavior File="EquipItem" ItemId="46069" Slot="1" />
+				<CustomBehavior File="MountVehOnly" NpcMountId="33843" X="8596.26" Y="938.7139" Z="548.7403" />
+				<RunTo X="8617.684" Y="898.5101" Z="546.9606" />
+				<RunTo X="8620.769" Y="908.1838" Z="546.9696" />
+				<CustomBehavior File="RunMacro" Macro="/tar Melee Target" NumOfTimes="1" WaitTime="1000" />
+
+				<CustomBehavior File="Misc\RunLua" Lua="CastSpellByID(62552)" WaitTime="4000" NumOfTimes="3" />
+				<CustomBehavior File="Misc\RunLua" Lua="CastSpellByID(62544)" WaitTime="3000" NumOfTimes="1" />
+
+				<CustomBehavior File="Misc\RunLua" Lua="CastSpellByID(62552)" WaitTime="4000" NumOfTimes="1" />
+				<CustomBehavior File="Misc\RunLua" Lua="CastSpellByID(62544)" WaitTime="3000" NumOfTimes="1" />
+
+				<CustomBehavior File="Misc\RunLua" Lua="CastSpellByID(62552)" WaitTime="4000" NumOfTimes="1" />
+				<CustomBehavior File="Misc\RunLua" Lua="CastSpellByID(62544)" WaitTime="3000" NumOfTimes="1" />
+
+				<CustomBehavior File="Misc\RunLua" Lua="CastSpellByID(62552)" WaitTime="4000" NumOfTimes="3" />
+				<CustomBehavior File="Misc\RunLua" Lua="CastSpellByID(62544)" WaitTime="3000" NumOfTimes="1" />
+
+				<CustomBehavior File="Misc\RunLua" Lua="CastSpellByID(62552)" WaitTime="4000" NumOfTimes="1" />
+				<CustomBehavior File="Misc\RunLua" Lua="CastSpellByID(62544)" WaitTime="3000" NumOfTimes="1" />
+
+				<CustomBehavior File="Misc\RunLua" Lua="CastSpellByID(62552)" WaitTime="4000" NumOfTimes="1" />
+				<CustomBehavior File="Misc\RunLua" Lua="CastSpellByID(62544)" WaitTime="3000" NumOfTimes="1" />
+
+				<CustomBehavior File="WaitTimer" WaitTime="3000" />
+				<CustomBehavior File="EjectVeh" Eject="1" />
+
+				<CustomBehavior File="FlyTo" X="8594.644" Y="942.6311" Z="548.3071" />
+				<CustomBehavior File="ForcedDismount" />
+				<CustomBehavior File="EquipItem" ItemId="46069" Slot="1" />
+				<CustomBehavior File="MountVehOnly" NpcMountId="33843" X="8596.26" Y="938.7139" Z="548.7403" />
+				<RunTo X="8622.397" Y="856.3959" Z="546.96" />
+				<RunTo X="8616.023" Y="889.2153" Z="546.9594" />
+				<RunTo X="8627.373" Y="868.8736" Z="546.9599" />
+				<CustomBehavior File="RunMacro" Macro="/tar Ranged Target" NumOfTimes="1" WaitTime="1000" />
+				<CustomBehavior File="Misc\RunLua" Lua="CastSpellByID(62575)" WaitTime="2000" NumOfTimes="10" />
+				<CustomBehavior File="EjectVeh" Eject="1" />
+
+				<CustomBehavior File="FlyTo" X="8594.644" Y="942.6311" Z="548.3071" />
+				<CustomBehavior File="ForcedDismount" />
+				<CustomBehavior File="EquipItem" ItemId="46069" Slot="1" />
+				<CustomBehavior File="MountVehOnly" NpcMountId="33843" X="8596.26" Y="938.7139" Z="548.7403" />
+				<RunTo X="8634.643" Y="884.7522" Z="546.9652" />
+				<RunTo X="8597.623" Y="868.1798" Z="550.3389" />
+				<RunTo X="8626.404" Y="875.8491" Z="546.96" />
+
+				<CustomBehavior File="RunMacro" Macro="/tar Charge Target" NumOfTimes="1" WaitTime="1000" />
+				<CustomBehavior File="Misc\RunLua" Lua="CastSpellByID(62575)" WaitTime="2000" NumOfTimes="2" />
+				<CustomBehavior File="Misc\RunLua" Lua="CastSpellByID(62960)" WaitTime="2000" NumOfTimes="1" />
+				<RunTo X="8597.623" Y="868.1798" Z="550.3389" />
+				<RunTo X="8626.404" Y="875.8491" Z="546.96" />
+
+				<CustomBehavior File="RunMacro" Macro="/tar Charge Target" NumOfTimes="1" WaitTime="1000" />
+				<CustomBehavior File="Misc\RunLua" Lua="CastSpellByID(62575)" WaitTime="2000" NumOfTimes="2" />
+				<CustomBehavior File="Misc\RunLua" Lua="CastSpellByID(62960)" WaitTime="2000" NumOfTimes="1" />
+
+				<CustomBehavior File="EjectVeh" Eject="1" />
+				<CustomBehavior File="WaitTimer" WaitTime="6000" />
+			</While>
+			<If Condition="((HasQuest(13671)) &amp;&amp; (!IsQuestCompleted(13671)))" >
+				<CustomBehavior File="FlyTo" X="7810.625" Y="1227.539" Z="439.7846" />
+				<CustomBehavior File="ForcedDismount" />
+				<Objective QuestName="Training In The Field" QuestId="13671" Type="KillMob" MobId="33192" KillCount="8" />
+			</If>
+			<If Condition="((HasQuest(13666)) &amp;&amp; (!IsQuestCompleted(13666)))" >
+				<CustomBehavior File="FlyTo" X="3803.127" Y="-4349.656" Z="180.808" />
+				<CustomBehavior File="ForcedDismount" />
+				
+	<CustomBehavior File="UserDialog"  AllowBotStop="True" SoundCue="Asterisk" SoundCueInterval="1" Text="This quest is User done until HB 4512+ is out, press continue and the bot will kiss frogs, just interact with lady when she spawns" />
+	
+			  <While Condition="((HasQuest(13666)) &amp;&amp; (!IsQuestCompleted(13666)))" >
+				<CustomBehavior File="Misc\RunLua" Lua="UseItemByName(44986)" WaitTime="1000" />
+				<CustomBehavior File="RunMacro" Macro="/tar Lake Frog\n/kiss\n/cleartarget" NumOfTimes="1" WaitTime="10000" />
+				<!-- This works on dev copy
+	<CustomBehavior File="InteractWith" MobId="33224" NumOfTimes="1" GossipOptions="1" WaitForNpcs="False" WaitTime="1000" CollectionDistance="100" X="3819.208" Y="-4361.081" Z="182.1844" />
+			  -->
+			  </While>
+			</If>
+			<If Condition="((HasQuest(13669)) &amp;&amp; (!IsQuestCompleted(13669)))" >
+
+				<CustomBehavior File="FlyTo" X="6201.714" Y="973.8531" Z="164.7364" />
+				
+	<CustomBehavior File="UserDialog"  AllowBotStop="True" SoundCue="Asterisk" SoundCueInterval="1" Text="The looting part for this quest is User done until HB 4512+ is out, loot the 4 Winter Hyacinths\n\nPress continue after you have looted 4" />
+
+			<!-- enable in 4512+
+			  <While Condition="((HasQuest(13669)) &amp;&amp; (!IsQuestCompleted(13669)))" >
+				<CustomBehavior File="FlyTo" Distance="1" X="6138.642" Y="1001.314" Z="148.1539" />
+				<CustomBehavior File="ForcedDismount" />
+				<CustomBehavior File="InteractWith" QuestId="13669" MobId="194213" WaitForNpcs="False" ObjectType="Gameobject" NumOfTimes="1" CollectionDistance="50" X="6138.642" Y="1001.314" Z="148.1539" />
+				
+				<CustomBehavior File="FlyTo" Distance="1" X="6224.009" Y="1042.302" Z="148.2521" />
+				<CustomBehavior File="ForcedDismount" />
+				<CustomBehavior File="InteractWith" QuestId="13669" MobId="194213" WaitForNpcs="False" ObjectType="Gameobject" NumOfTimes="1" CollectionDistance="50" X="6224.009" Y="1042.302" Z="148.2521" />
+				
+				<CustomBehavior File="FlyTo" Distance="1" X="6259.771" Y="995.2029" Z="149.3356" />
+				<CustomBehavior File="ForcedDismount" />
+				<CustomBehavior File="InteractWith" QuestId="13669" MobId="194213" WaitForNpcs="False" ObjectType="Gameobject" NumOfTimes="1" CollectionDistance="50" X="6259.771" Y="995.2029" Z="149.3356" />
+				
+				<CustomBehavior File="FlyTo" Distance="1" X="6283.216" Y="974.5555" Z="159.504" />
+				<CustomBehavior File="ForcedDismount" />
+				<CustomBehavior File="InteractWith" QuestId="13669" MobId="194213" WaitForNpcs="False" ObjectType="Gameobject" NumOfTimes="1" CollectionDistance="50" X="6283.216" Y="974.5555" Z="159.504" />
+				
+				<CustomBehavior File="FlyTo" Distance="1" X="6284.188" Y="917.3234" Z="150.0614" />
+				<CustomBehavior File="ForcedDismount" />
+				<CustomBehavior File="InteractWith" QuestId="13669" MobId="194213" WaitForNpcs="False" ObjectType="Gameobject" NumOfTimes="1" CollectionDistance="50" X="6284.188" Y="917.3234" Z="150.0614" />
+				
+				<CustomBehavior File="FlyTo" Distance="1" X="6309.871" Y="880.2228" Z="149.0663" />
+				<CustomBehavior File="ForcedDismount" />
+				<CustomBehavior File="InteractWith" QuestId="13669" MobId="194213" WaitForNpcs="False" ObjectType="Gameobject" NumOfTimes="1" CollectionDistance="50" X="6309.871" Y="880.2228" Z="149.0663" />
+				
+				<CustomBehavior File="FlyTo" Distance="1" X="6342.218" Y="860.8906" Z="150.7731" />
+				<CustomBehavior File="ForcedDismount" />
+				<CustomBehavior File="InteractWith" QuestId="13669" MobId="194213" WaitForNpcs="False" ObjectType="Gameobject" NumOfTimes="1" CollectionDistance="50" X="6342.218" Y="860.8906" Z="150.7731" />
+				
+				<CustomBehavior File="FlyTo" Distance="1" X="6368.168" Y="857.0884" Z="162.5025" />
+				<CustomBehavior File="ForcedDismount" />
+				<CustomBehavior File="InteractWith" QuestId="13669" MobId="194213" WaitForNpcs="False" ObjectType="Gameobject" NumOfTimes="1" CollectionDistance="50" X="6368.168" Y="857.0884" Z="162.5025" />
+			  </While>
+			-->				
+
+				<CustomBehavior File="FlyTo" X="4601.406" Y="-1599.759" Z="156.9936" />
+				<CustomBehavior File="ForcedDismount" />
+				<CustomBehavior File="Misc\RunLua" Lua="UseItemByName(45000)" WaitTime="1000" />
+				<CustomBehavior File="WaitTimer" WaitTime="20000" />
+				<CustomBehavior File="InteractWith" QuestId="13669" MobId="194238" ObjectType="Gameobject" NumOfTimes="1" CollectionDistance="50" X="4604.894" Y="-1598.469" Z="154.9988" />
+				
+			</If>
+			<If Condition="((HasQuest(13670)) &amp;&amp; (!IsQuestCompleted(13670)))" >
+	<CustomBehavior File="UserDialog"  AllowBotStop="True" SoundCue="Asterisk" SoundCueInterval="1" Text="This quest is not yet supported.  please give me some time to script these, as there are 3 different ones that this npc offers" />
+			<!--
+				<CustomBehavior File="FlyTo" 
+				<CustomBehavior File="ForcedDismount" />
+			-->
+			</If>
+			
+			<!-- Turn In the Dailies -->
+			<If Condition="((HasQuest(13671)) &amp;&amp; (IsQuestCompleted(13671)))" >
+				<CustomBehavior File="FlyTo" X="8582.106" Y="692.2238" Z="547.2957" />
+				<CustomBehavior File="ForcedDismount" />
+			</If>
+		<TurnIn QuestName="Training In The Field" QuestId="13671" TurnInName="Avareth Swiftstrike" TurnInId="33646" />
+		<TurnIn QuestName="Learning The Reins" QuestId="13625" TurnInName="Scout Shalyndria" TurnInId="33647" />
+			<If Condition="((HasQuest(13670)) &amp;&amp; (IsQuestCompleted(13670)))" >
+		<TurnIn QuestName="The Edge Of Winter" QuestId="13670" TurnInName="Arcanist Taelis" TurnInId="33625" />
+			</If>
+			<If Condition="((HasQuest(13669)) &amp;&amp; (IsQuestCompleted(13669)))" >
+		<TurnIn QuestName="A Worthy Weapon" QuestId="13669" TurnInName="Arcanist Taelis" TurnInId="33625" />
+			</If>
+			<If Condition="((HasQuest(13666)) &amp;&amp; (IsQuestCompleted(13666)))" >
+		<TurnIn QuestName="A Blade Fit For A Champion" QuestId="13666" TurnInName="Arcanist Taelis" TurnInId="33625" />
+			</If>
+			
+			<!-- if we have the seals to continue, then do so -->
+			<If Condition="((HasQuest(13672)) &amp;&amp; (IsQuestCompleted(13672)))" >
+		<TurnIn QuestName="Up To The Challenge" QuestId="13672" TurnInName="Arcanist Taelis" TurnInId="33625" />
+		<PickUp QuestName="The Aspirant's Challenge" QuestId="13679" GiverName="Arcanist Taelis" GiverId="33625" />
+			</If>
+			<If Condition="((HasQuest(13679)) &amp;&amp; (!IsQuestCompleted(13679)))" >
+			  <If Condition="(!HasItem(46069))" >
+				<CustomBehavior File="FlyTo" X="8594.644" Y="942.6311" Z="548.3071" />
+				<CustomBehavior File="ForcedDismount" />
+				<!-- get id of lance rack -->
+				<CustomBehavior File="InteractWith"  MobId="194618" ObjectType="Gameobject" NumOfTimes="1" CollectionDistance="50" X="8618.139" Y="897.5522" Z="546.9598" />
+			  </If>
+				<CustomBehavior File="FlyTo" X="8594.644" Y="942.6311" Z="548.3071" />
+				<CustomBehavior File="ForcedDismount" />
+				<CustomBehavior File="EquipItem" ItemId="46069" Slot="1" />
+				<CustomBehavior File="MountVehOnly" NpcMountId="33843" X="8596.26" Y="938.7139" Z="548.7403" />
+
+				<RunTo X="8606.085" Y="963.6285" Z="549.4207" />
+				<CustomBehavior File="InteractWith" QuestId="13679" MobId="33447" NumOfTimes="1" WaitTime="1000" CollectionDistance="50" X="8606.085" Y="963.6285" Z="549.4207" />
+
+	<CustomBehavior File="UserDialog"  AllowBotStop="True" SoundCue="Asterisk" SoundCueInterval="1" Text="No behavior yet, press gossip(1) and defeat the valiant" />
+
+				<!-- <CustomBehavior File="InteractWith" QuestId="13679" MobId="33447" NumOfTimes="1" GossipOptions="1" WaitTime="1000" CollectionDistance="50" X="8606.085" Y="963.6285" Z="549.4207" /> -->
+				
+				<CustomBehavior File="EjectVeh" Eject="1" />
+
+			</If>
+			<If Condition="((HasQuest(13679)) &amp;&amp; (IsQuestCompleted(13679)))" >
+				<CustomBehavior File="FlyTo" X="8582.106" Y="692.2238" Z="547.2957" />
+				<CustomBehavior File="ForcedDismount" />
+		<TurnIn QuestName="The Aspirant's Challenge" QuestId="13679" TurnInName="Arcanist Taelis" TurnInId="33625" />
+		<PickUp QuestName="A Valiant Of Stormwind" QuestId="13684" GiverName="Arcanist Taelis" GiverId="33625" />
+			</If>
+			<If Condition="((HasQuest(13684)) &amp;&amp; (IsQuestCompleted(13684)))" >
+		<TurnIn QuestName="A Valiant Of Stormwind" QuestId="13684" TurnInName="Marshal Jacob Alerius" TurnInId="33225" />
+		<PickUp QuestName="The Valiant's Charge" QuestId="13718" GiverName="Marshal Jacob Alerius" GiverId="33225" />
+			</If>
+			
+			<If Condition="(IsQuestCompleted(13684))" >
+		<CustomBehavior File="LoadProfile" ProfileName="[A - QO] Argent Tourny - Valor [Kick]" /> 
+			</If>
+			
+			<If Condition="((HasQuest(13718)) &amp;&amp; (IsQuestCompleted(13718)))" >
+				<CustomBehavior File="FlyTo" X="8582.106" Y="692.2238" Z="547.2957" />
+				<CustomBehavior File="ForcedDismount" />
+		<TurnIn QuestName="The Valiant's Charge" QuestId="13718" TurnInName="Marshal Jacob Alerius" TurnInId="33225" />
+			</If>
+
+			<CustomBehavior File="UserDialog" Title="title" AllowBotStop="True" SoundCue="Asterisk" SoundCueInterval="1" Text="You have reached the end of the profile (for now, I'm still developing this profile)\nMake sure you replace your weapon(s)\n\nIf you liked this profile, +rep is always appreciated" />
+	
+	</QuestOrder>
+
+</HBProfile>

@@ -1,0 +1,63 @@
+<HBProfile>
+	<Name>Wool Cloth - StoneTalon</Name>
+	<MinLevel>0</MinLevel>
+	<MaxLevel>91</MaxLevel>
+	<ProtectedItems>
+		<Item Name="Linen Cloth" Entry="2589" />
+		<Item Name="Wool Cloth" Entry="2592" />
+	</ProtectedItems>
+	<MinDurability>0.3</MinDurability>
+	<MinFreeBagSlots>2</MinFreeBagSlots>
+	<MailGrey>False</MailGrey>
+	<MailWhite>True</MailWhite>
+	<MailGreen>True</MailGreen>
+	<MailBlue>True</MailBlue>
+	<MailPurple>True</MailPurple>
+	<SellGrey>True</SellGrey>
+	<SellWhite>True</SellWhite>
+	<SellGreen>True</SellGreen>
+	<SellBlue>False</SellBlue>
+	<SellPurple>False</SellPurple>
+	<TargetElites>False</TargetElites>
+	<AvoidMobs>
+		<Mob Name="Gnomebot Pounder" Entry="35203" />
+		<Mob Name="Gnome Engineer" Entry="35334" />
+	</AvoidMobs>
+	<Blackspots />
+	<Mailboxes />
+	<Vendors>
+		<Vendor Name="Barshuk Heavyhammer" Entry="41890" Type="Repair" X="859.012" Y="26.2778" Z="92.97345" />
+	</Vendors>
+	<QuestOrder>
+		<While Condition="(Me.Level &gt; 1)" >
+			<If Condition="(Me.IsHorde)" >
+				<CustomBehavior File="FlyTo" X="1180.668" Y="-410.2329" Z="15.71954" />
+				<CustomBehavior File="ForcedDismount" />
+				<SetGrindArea>
+					<GrindArea>
+						<GrindArea>124</GrindArea>
+						<TargetMinLevel>19</TargetMinLevel>
+						<TargetMaxLevel>32</TargetMaxLevel>
+                                                <MaxDistance>65</MaxDistance>
+						<Hotspots>
+							<Hotspot X="1180.668" Y="-410.2329" Z="15.71954" />
+							<Hotspot X="1227.373" Y="-480.766" Z="10.98762" />
+							<Hotspot X="1227.099" Y="-559.2361" Z="10.95148" />
+							<Hotspot X="1243.226" Y="-601.4811" Z="22.2864" />
+							<Hotspot X="1178.853" Y="-546.5036" Z="6.375455" />
+							<Hotspot X="1139.457" Y="-490.1891" Z="8.782235" />
+							<Hotspot X="1293.631" Y="-404.3453" Z="18.20241" />
+						</Hotspots>
+					</GrindArea>
+				</SetGrindArea>
+				<GrindTo Condition="(Me.LowestDurabilityPercent &lt; 0.3) || (Me.FreeBagSlots &lt;= 2)" GoalText="Wool Cloth - First Aid" />
+			</If>
+			<If Condition="(Me.LowestDurabilityPercent &lt; 0.3) || (Me.FreeBagSlots &lt; 3)" >
+				<CustomBehavior File="Message" Text="HB: Flying to Repair" LogColor="Orange" />
+				<CustomBehavior File="FlyTo" X="859.012" Y="26.2778" Z="92.97345" DestName="Somewhere over the rainbow" />
+				<CustomBehavior File="Message" Text="HB: Selling/Mailing/Repairing" LogColor="Orange" />
+				<CustomBehavior File="ForceSetVendor"  DoMail="true" DoRepair="true" DoSell="true" />
+			</If>
+		</While>
+	</QuestOrder>
+</HBProfile>

@@ -1,0 +1,1111 @@
+<HBProfile xsi:noNamespaceSchemaLocation="../Schemas/EchoSchema.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<!-- Original contribution by EchoTiger -->
+	<Name>Goblin Starter ($ShortHash$)</Name>
+
+	<MinDurability>0.3</MinDurability>
+	<MinFreeBagSlots>3</MinFreeBagSlots>
+
+	<SellGrey>true</SellGrey>
+	<SellWhite>true</SellWhite>
+	<SellGreen>true</SellGreen>
+	<SellBlue>true</SellBlue>
+	<SellPurple>false</SellPurple>
+
+	<MailGrey>false</MailGrey>
+	<MailWhite>true</MailWhite>
+	<MailGreen>true</MailGreen>
+	<MailBlue>true</MailBlue>
+	<MailPurple>true</MailPurple>
+
+	<TargetElites>true</TargetElites>
+
+	<AvoidMobs>
+	</AvoidMobs>
+
+	<Mailboxes>
+	</Mailboxes>
+
+	<Vendors>
+	</Vendors>
+
+	<Blackspots>
+		<Blackspot X="590.4363" Y="2938.699" Z="-7.561563" Radius="1" /> <!-- Monkey in bad location -->
+		<Blackspot X="532.4861" Y="2966.042" Z="23.17631" Radius="1" /> <!-- Monkey in bad location -->
+		<Blackspot X="742.2309" Y="1546.99" Z="129.193" Radius="2" /> <!-- Bonfire in Oomlot Village -->
+	</Blackspots>
+
+	<Blacklist>
+		<Mob Name="Strangle Vine" Id="35995" Flags="Combat" />
+		<Mob Name="Poison Spitter" Id="35896" Flags="Combat" />
+		<Mob Name="Freezya" Id="35897" Flags="Combat" />
+		<Mob Name="The Hammer" Id="36682" Flags="Pull" />
+		<Mob Name="Goblin Zombie" Id="38753" Flags="Combat" />
+		<Mob Name="Alliance Paratrooper" Id="39042" Flags="Pull" />
+	</Blacklist>
+
+	<QuestOrder IgnoreCheckpoints="false" >
+		<!-- Check function status -->
+		<Code File="RunCode" Type="Definition">
+			<![CDATA[
+			private static bool? profileFunctionsEnabled => (bool?)AppDomain.CurrentDomain.GetData("QuestingProfiles_FunctionsEnabled");
+			private static bool IsStoreProfile(string path) => path.StartsWith("store://");
+			private static string Slashify(string path) => IsStoreProfile(path) ? path.Replace(@"\", "/") : path.Replace("/", @"\");
+
+			public __CompiledBatchClass__()
+			{
+				ActivateFunctions();
+			}
+
+			private static void ActivateFunctions()
+			{
+				if (profileFunctionsEnabled == null || profileFunctionsEnabled == false)
+				{
+					Bots.Professionbuddy.PBLog.Log(Colors.MediumPurple, "[Profile Message!]: ", Colors.Yellow, "Please stand by as the functions are being activated!");
+					LoadProfile(@"..\..\Functions\Activate Functions.xml");
+				}
+			}
+
+			private static void LoadProfile(string path)
+			{
+				var profile = GetNewPath(path);
+				if (!IsStoreProfile(profile) && !File.Exists(profile))
+				{
+					Bots.Professionbuddy.PBLog.Log(Colors.MediumPurple, "[Profile Message!]: ", Colors.Yellow, "Profile does not exist.\n" + profile);
+					return;
+				}
+
+				Bots.Professionbuddy.PBLog.Log(Colors.MediumPurple, "[Profile Message!]: ", Colors.Yellow, "Loading: " + profile);
+				ProfileManager.LoadNew(profile, false);
+			}
+
+			private static string GetNewPath(string path)
+			{
+				if (IsStoreProfile(path))
+					return Slashify(path);
+
+				var currentProfile = ProfileManager.XmlLocation;
+				if (IsStoreProfile(currentProfile))
+					return Slashify(currentProfile + "/../" + path);
+
+				var absolutePath = Path.Combine(Path.GetDirectoryName(currentProfile), path);
+				absolutePath = Path.GetFullPath(absolutePath);
+				var canonicalPath = new Uri(absolutePath).LocalPath;
+				return Slashify(canonicalPath);
+			}]]>
+		</Code>
+		<Code File="RunCode" Code="ActivateFunctions();" />
+		<!-- END Check function status -->
+
+		<If Condition="Me.IsAlliance" >
+			<Code File="LoadProfile" ProfileName="..\..\Questing Autoloader.xml" />
+		</If>
+		<!-- RunCode Methods -->
+			<!--<Code File="RunCode">
+			<![CDATA[
+				Bots.Professionbuddy.PBLog.Log(System.Windows.Media.Colors.MediumPurple, "> [Profile Initialization Status] ", System.Windows.Media.Colors.CornflowerBlue, "\n     Auto-Looting	:: Enabled\n     Looting	:: Enabled\n     Game Addons	:: Disabled");
+				Lua.DoString("SetCVar('AutoLootDefault', 1);");
+				Lua.DoString("SetCVar('autoDismountFlying', 1);");
+				CharacterSettings.Instance.LootMobs = true;
+				CharacterSettings.Instance.Save();
+				Lua.DoString("for i=1,GetNumAddOns() do local relo=false if IsAddOnLoaded(i) then relo=true DisableAddOn(i) end if relo then relo=nil ReloadUI() end end");
+				await Coroutine.Sleep(1500);
+				Logging.Write(System.Windows.Media.Colors.MediumPurple, "> [Ready to bot!]");
+			]]>
+			</Code> -->
+			<Code File="RunCode" Type="Definition">
+				<![CDATA[
+						bool DoQuest(params uint[] questIds)
+						{
+							foreach (var questId in questIds)
+							{
+								if (HasQuest(questId) && !IsQuestCompleted(questId)) return true;
+							}
+							return false;
+						}
+						bool NeedsQuest(params uint[] questIds)
+						{
+							foreach (var questId in questIds)
+							{
+								if (!HasQuest(questId) && !IsQuestCompleted(questId)) return true;
+							}
+							return false;
+						}
+						bool NeedsBreadcrumbQuest(params uint[] questIds)
+						{
+							foreach (var questId in questIds)
+							{
+								if (IsQuestCompleted(questId)) return false;
+							}
+							return true;
+						}
+						bool QuestDone(params uint[] questIds)
+						{
+							foreach (var questId in questIds)
+							{
+								if (HasQuest(questId) && IsQuestCompleted(questId)) return true;
+							}
+							return false;
+						}
+						bool QuestFlaggedCompleted(params uint[] questIds)
+						{
+							foreach (var questId in questIds)
+							{
+								return Lua.GetReturnVal<bool>($"return IsQuestFlaggedCompleted({questId});", 0);
+							}
+							return false;
+						}
+						async Task SkipCutscene(int preWait = 3000, int postWait = 3000)
+						{
+					// Add detection of cutscene here.
+							await Coroutine.Sleep(preWait);
+					// Test and improve the working method.
+							Lua.DoString("MovieFrame:StopMovie(); CinematicFrame_CancelCinematic(); StopCinematic();");
+							await Coroutine.Sleep(postWait);
+						}
+					]]>
+			</Code>
+		<!-- END RunCode Methods -->
+
+
+		<PickUp QuestName="Taking Care of Business" QuestId="14138" GiverName="Sassy Hardwrench" GiverId="34668" X="-8423.85" Y="1363.87" Z="104.6781" />
+		<TurnIn QuestName="Taking Care of Business" QuestId="14138" TurnInName="Foreman Dampwick" TurnInId="34872" X="-8403.103" Y="1317.433" Z="101.6034" />
+		<PickUp QuestName="Trouble in the Mines" QuestId="14075" GiverName="Foreman Dampwick" GiverId="34872" X="-8403.103" Y="1317.433" Z="101.6034" />
+		<PickUp QuestName="Good Help is Hard to Find" QuestId="14069" GiverName="Foreman Dampwick" GiverId="34872" X="-8403.103" Y="1317.433" Z="101.6034" />
+
+		<Code File="InteractWith" MobIds="34830" CollectionDistance="200" PreInteractMountStrategy="Dismount" QuestId="14069" QuestObjectiveIndex="1" >
+			<HuntingGrounds>
+				<Hotspot X="-8453.722" Y="1182.837" Z="41.23799" />
+				<Hotspot X="-8506.529" Y="1241.66" Z="54.98811" />
+			</HuntingGrounds>
+		</Code>
+
+		<Code File="KillUntilComplete" MobId="34865" QuestId="14075" >
+			<HuntingGrounds>
+				<Hotspot X="-8566.145" Y="1272.711" Z="46.27357" />
+				<Hotspot X="-8636.743" Y="1344.623" Z="32.99758" />
+			</HuntingGrounds>
+		</Code>
+
+		<TurnIn QuestName="Trouble in the Mines" QuestId="14075" TurnInName="Foreman Dampwick" TurnInId="34872" X="-8403.916" Y="1313.553" Z="100.7659" />
+		<TurnIn QuestName="Good Help is Hard to Find" QuestId="14069" TurnInName="Foreman Dampwick" TurnInId="34872" X="-8403.916" Y="1313.553" Z="100.7659" />
+		<PickUp QuestName="Kaja&apos;Cola" QuestId="25473" GiverName="Foreman Dampwick" GiverId="34872" X="-8403.916" Y="1313.553" Z="100.7659" />
+		<If Condition="QuestDone(25473)" >
+			<TurnIn QuestName="Kaja&apos;Cola" QuestId="25473" TurnInName="Sassy Hardwrench" TurnInId="34668" X="-8423.656" Y="1363.036" Z="104.6788" />
+			<Code File="UseItem" ItemId="49884" TerminateWhen="!HasItem(49884)" />
+		</If>
+		<PickUp QuestName="Megs in Marketing" QuestId="28349" GiverName="Sassy Hardwrench" GiverId="34668" X="-8424.261" Y="1364.048" Z="104.6793" />
+		<TurnIn QuestName="Megs in Marketing" QuestId="28349" TurnInName="Megs Dreadshredder" TurnInId="34874" X="-8420.765" Y="1339.778" Z="102.4997" />
+
+		<Code File="Hooks\DoWhen" ActivityName="PunchIt" LogExecution="false" AllowUseInVehicle="true" UseWhen="Me.HasAura(66392) &amp;&amp; Me.IsMoving &amp;&amp; Me.PetSpells.Any(sp =&gt; sp.ActionBarIndex == 0) &amp;&amp; !Me.PetSpells.FirstOrDefault(sp =&gt; sp.ActionBarIndex == 0).Cooldown" >
+			<!-- <Code File="RunCode" Code="Me.PetSpells.FirstOrDefault(sp =&gt; sp.ActionBarIndex == 0).Spell.Cast();" /> -->
+			<Code File="Misc\RunLua" Lua="OverrideActionBarButton1:Click();" WaitTime="500" />
+		</Code>
+
+		<While Condition="NeedsQuest(14071)" > <!-- Rolling with my Homies -->
+			<!-- Setup this quest in this manner due to an issue where the quest won't trigger spawning the NPCs. -->
+			<!--<PickUp QuestName="Rolling with my Homies" QuestId="14071" GiverName="Megs Dreadshredder" GiverId="34874" X="-8420.236" Y="1340.621" Z="102.4914" /> -->
+			<Code File="InteractWith" MobId="34874" NonCompeteDistance="0" X="-8419.259" Y="1341.816" Z="102.9598" TerminateWhen="HasQuest(14071)" />
+			<!-- <Code File="RunCode" Code="QuestFrame.Instance.AcceptQuest();" /> -->
+			<Code File="Misc\RunLua" Lua="QuestFrameAcceptButton:Click();" />
+		</While>
+		<While Condition="DoQuest(14071)" >
+			<UseMount Value="false" />
+			<If Condition="!Me.HasAura(66392) &amp;&amp; !Me.IsSwimming" >
+				<Code File="UseItem" ItemId="46856" QuestId="14071" TerminateWhen="Me.HasAura(66392) || Me.IsSwimming" />
+			</If>
+			<Code File="InteractWith" MobId="34890" NonCompeteDistance="0" QuestId="14071" QuestObjectiveIndex="2" X="-8503.145" Y="1340.723" Z="102.3403" TerminateWhen="!Me.HasAura(66392) &amp;&amp; !Me.IsSwimming" />
+			<Code File="InteractWith" MobId="34954" NonCompeteDistance="0" QuestId="14071" QuestObjectiveIndex="4" X="-8177.021" Y="1318.377" Z="28.18247" TerminateWhen="!Me.HasAura(66392) &amp;&amp; !Me.IsSwimming" />
+			<Code File="InteractWith" MobId="34892" NonCompeteDistance="0" QuestId="14071" QuestObjectiveIndex="3" X="-8072.705" Y="1478.581" Z="9.529713" TerminateWhen="!Me.HasAura(66392) &amp;&amp; !Me.IsSwimming" />
+			<UseMount Value="true" />
+		</While>
+		<TurnIn QuestName="Rolling with my Homies" QuestId="14071" TurnInName="Megs Dreadshredder" TurnInId="34874" X="-8420.029" Y="1340.084" Z="102.4967" />
+
+		<If Condition="!HasMount(179245) &amp;&amp; !HasMount(179244)" >
+			<Code File="Hooks\DoWhen" ActivityName="SummonMotorcycle" LogExecution="false" UseWhen="!Me.HasAura(66392) &amp;&amp; !Me.IsSwimming &amp;&amp; Me.IsMoving &amp;&amp; !Me.IsIndoors &amp;&amp; HasItem(46856)" >
+				<Code File="RunCode" Code="await CommonCoroutines.StopMoving(); Me.BagItems.FirstOrDefault(x =&gt; x.Entry == 46856).Use(); await Coroutine.Wait(2000, () =&gt; Me.HasAura(66392));" />
+			</Code>
+		</If>
+
+		<PickUp QuestName="Report for Tryouts" QuestId="24567" GiverName="Megs Dreadshredder" GiverId="34874" X="-8420.029" Y="1340.084" Z="102.4967" />
+		<PickUp QuestName="Do it Yourself" QuestId="14070" GiverName="Sassy Hardwrench" GiverId="34668" X="-8423.614" Y="1364.976" Z="104.6798" />
+
+		<If Condition="Me.Gender == WoWGender.Female">
+			<PickUp QuestName="Off to the Bank" QuestId="26711" GiverName="Chip Endale" GiverId="35054" X="-8422.033" Y="1365.43" Z="104.6808" />
+			<TurnIn QuestName="Off to the Bank" QuestId="26711" TurnInName="FBoK Bank Teller" TurnInId="35120" X="-8374.461" Y="1725.294" Z="39.95017" />
+			<PickUp QuestName="The New You" QuestId="14110" GiverName="FBoK Bank Teller" GiverId="35120" X="-8374.461" Y="1725.294" Z="39.95017" />
+			<If Condition="HasQuest(14110)">
+				<!-- Interact dismounts are needed to prevent issues with Chauffeur mounts. -->
+				<Code File="InteractWith"  MobId="35120" Range="3" InteractByGossipOptions="1" PreInteractMountStrategy="Dismount" QuestId="14110" QuestObjectiveIndex="4"  X="-8375.822" Y="1728.147" Z="40.37962"/>
+				<Code File="InteractWith"  MobId="35128" Range="3" InteractByGossipOptions="1" PreInteractMountStrategy="Dismount" QuestId="14110" QuestObjectiveIndex="2"  X="-8231.323" Y="1620.245" Z="34.7084"/>
+				<Code File="InteractWith"  MobId="35130" Range="3" InteractByGossipOptions="1" PreInteractMountStrategy="Dismount" QuestId="14110" QuestObjectiveIndex="3"  X="-8143.078" Y="1583.531" Z="16.94905"/>
+				<Code File="InteractWith"  MobId="35126" Range="3" InteractByGossipOptions="1" PreInteractMountStrategy="Dismount" QuestId="14110" QuestObjectiveIndex="1"  X="-8142.792" Y="1658.632" Z="16.73927"/>
+			</If>
+		</If>
+		<If Condition="Me.Gender == WoWGender.Male">
+			<PickUp QuestName="Off to the Bank" QuestId="26712" GiverName="Candy Cane" GiverId="35053" X="-8425.496" Y="1366.09" Z="104.6819" />
+			<TurnIn QuestName="Off to the Bank" QuestId="26712" TurnInName="FBoK Bank Teller" TurnInId="35120" X="-8374.461" Y="1725.294" Z="39.95017" />
+			<PickUp QuestName="The New You" QuestId="14109" GiverName="FBoK Bank Teller" GiverId="35120" X="-8374.461" Y="1725.294" Z="39.95017" />
+			<If Condition="HasQuest(14109)">
+				<Code File="InteractWith" MobId="35120" Range="3" InteractByGossipOptions="1" PreInteractMountStrategy="Dismount" QuestId="14109" QuestObjectiveIndex="4" X="-8375.822" Y="1728.147" Z="40.37962"/>
+				<Code File="InteractWith" MobId="35128" Range="3" InteractByGossipOptions="1" PreInteractMountStrategy="Dismount" QuestId="14109" QuestObjectiveIndex="2" X="-8231.323" Y="1620.245" Z="34.7084"/>
+				<Code File="InteractWith" MobId="35130" Range="3" InteractByGossipOptions="1" PreInteractMountStrategy="Dismount" QuestId="14109" QuestObjectiveIndex="3" X="-8143.078" Y="1583.531" Z="16.94905"/>
+				<Code File="InteractWith" MobId="35126" Range="3" InteractByGossipOptions="1" PreInteractMountStrategy="Dismount" QuestId="14109" QuestObjectiveIndex="1" X="-8142.792" Y="1658.632" Z="16.73927"/>
+			</If>
+		</If>
+
+		<TurnIn QuestName="Report for Tryouts" QuestId="24567" TurnInName="Coach Crosscheck" TurnInId="37106" X="-8253.538" Y="1473.779" Z="42.14196" />
+
+		<PickUp QuestName="The Replacements" QuestId="24488" GiverName="Coach Crosscheck" GiverId="37106" X="-8253.538" Y="1473.779" Z="42.14196" />
+		<Code File="InteractWith" MobId="201603" CollectionDistance="200" InteractByLooting="true" NonCompeteDistance="0" PreInteractMountStrategy="Dismount" QuestId="24488" QuestObjectiveIndex="1" >
+			<HuntingGrounds>
+				<Hotspot X="-8366.215" Y="1503.67" Z="46.93016" />
+				<Hotspot X="-8148.034" Y="1569.619" Z="18.39837" />
+				<Hotspot X="-8451.118" Y="1602.207" Z="43.53804" />
+			</HuntingGrounds>
+		</Code>
+		<TurnIn QuestName="The Replacements" QuestId="24488" TurnInName="Coach Crosscheck" TurnInId="37106" X="-8253.497" Y="1469.901" Z="42.10915" />
+
+		<PickUp QuestName="Necessary Roughness" QuestId="24502" GiverName="Izzy" GiverId="34959" X="-8250.614" Y="1467.271" Z="41.95351" />
+		<While Condition="DoQuest(24502)" >
+			<Code File="Hooks\DoWhen" ActivityName="SummonMotorcycle" Command="Disable" />
+			<Code File="Hooks\DoWhen" ActivityName="PunchIt" Command="Disable" />
+			<Code File="EjectVeh" />
+			<Code File="Vehicles\MountVehOnly"  VehicleMountId="48526" X="-8250.91" Y="1484.29" Z="41.4168"/>
+			<Code File="Vehicles\NoControlVehicle" TypeId="3" QuestId="24502" TargetId="37114" NumOfTimes="99" AttackButton="1" GoHomeButton="1" MaxRange="100" />
+			<Code File="EjectVeh" />
+		</While>
+		<TurnIn QuestName="Necessary Roughness" QuestId="24502" />
+
+		<PickUp QuestName="Fourth and Goal" QuestId="24503" GiverName="Coach Crosscheck" GiverId="37106" X="-8253.538" Y="1473.779" Z="42.14196" />
+		<While Condition="DoQuest(24503)" >
+			<Code File="Vehicles\MountVehOnly" VehicleMountId="48526" X="-8250.91" Y="1484.29" Z="41.4168"/>
+			<Code File="WaitTimer" WaitTime="5000" />
+			<Code File="Misc\RunLua" Lua="OverrideActionBarButton1:Click();" WaitTime="1250" />
+			<If Condition="QuestDone(24503)" >
+				<Code File="EjectVeh" />
+			</If>
+		</While>
+		<TurnIn QuestName="Fourth and Goal" QuestId="24503" TurnInName="Coach Crosscheck" TurnInId="37106" X="-8250.396" Y="1472.494" Z="41.40216" />
+
+		<Code File="Hooks\DoWhen" ActivityName="SummonMotorcycle" Command="Enable" />
+		<Code File="Hooks\DoWhen" ActivityName="PunchIt" Command="Enable" />
+
+		<PickUp QuestName="Give Sassy the News" QuestId="24520" GiverName="Coach Crosscheck" GiverId="37106" X="-8250.396" Y="1472.494" Z="41.40216" />
+
+		<Code File="KillUntilComplete" MobId="34835" QuestId="14070" QuestObjectiveIndex="1" X="-8408.622" Y="1520.418" Z="50.81751" />
+		<Code File="KillUntilComplete" MobId="34878" QuestId="14070" QuestObjectiveIndex="4" X="-8465.487" Y="1566.568" Z="47.43917" />
+		<Code File="KillUntilComplete" MobId="34877" QuestId="14070" QuestObjectiveIndex="3" X="-8428.965" Y="1653.198" Z="45.74076" />
+		<Code File="KillUntilComplete" MobId="34876" QuestId="14070" QuestObjectiveIndex="2" X="-8365.417" Y="1630.31" Z="49.55024" />
+
+		<TurnIn QuestName="Give Sassy the News" QuestId="24520" TurnInName="Sassy Hardwrench" TurnInId="34668" X="-8423.595" Y="1363.102" Z="104.6777" />
+		<TurnIn QuestName="Do it Yourself" QuestId="14070" TurnInName="Sassy Hardwrench" TurnInId="34668" X="-8423.595" Y="1363.102" Z="104.6777" />
+
+		<If Condition="Me.Gender == WoWGender.Female">
+			<TurnIn QuestName="The New You" QuestId="14110" TurnInName="Chip Endale" TurnInId="35054" X="-8422.314" Y="1364.554" Z="104.684" />
+		</If>
+		<If Condition="Me.Gender == WoWGender.Male">
+			<TurnIn QuestName="The New You" QuestId="14109" TurnInName="Candy Cane" TurnInId="35053" X="-8425.495" Y="1365.604" Z="104.6806" />
+		</If>
+
+		<If Condition="Me.Gender == WoWGender.Male &amp;&amp; !Me.HasAura(66908) &amp;&amp; !IsQuestCompleted(14113)">
+			<Code File="AbandonQuest" QuestId="14113" Type="All" /> <!-- Allows player to get the party buff again. -->
+			<PickUp QuestName="Life of the Party" QuestId="14113" GiverName="Candy Cane" GiverId="35053" X="-8425.495" Y="1365.604" Z="104.6806" />
+			<Code File="Misc\RunLua" Lua="QuestFrameAcceptButton:Click();" /> <!-- This is required or else the player won't get the buff! -->
+		</If>
+		<If Condition="Me.Gender == WoWGender.Female &amp;&amp; !Me.HasAura(66908) &amp;&amp; !IsQuestCompleted(14153)">
+			<Code File="AbandonQuest" QuestId="14153" Type="All" /> <!-- Allows player to get the party buff again. -->
+			<PickUp QuestName="Life of the Party" QuestId="14153" GiverName="Chip Endale" GiverId="35054" X="-8422.314" Y="1364.554" Z="104.684" />
+			<Code File="Misc\RunLua" Lua="QuestFrameAcceptButton:Click();" /> <!-- This is required or else the player won't get the buff! -->
+		</If>
+
+		<Code File="Hooks\DoWhen" ActivityName="SummonMotorcycle" Command="Disable" />
+		<Code File="Hooks\DoWhen" ActivityName="PunchIt" Command="Disable" />
+
+		<While Condition="DoQuest(14113, 14153)" >
+			<MoveTo X="-8457.066" Y="1320.863" Z="101.6977" />
+			<!-- VariantQuestIds="14113, 14153" doesn't seem to work with this behavior -->
+			<Code File="ButtonPress\ButtonPressOnAura" QuestId="14113"
+				MobId="35186"
+				MobId2="35175"
+				MobId3="35201"
+				Button1TargetAuraId="75042"
+				Button2TargetAuraId="75044"
+				Button3TargetAuraId="75046"
+				Button4TargetAuraId="76048"
+				Button5TargetAuraId="75050"
+			/>
+			<Code File="ButtonPress\ButtonPressOnAura" QuestId="14153"
+				MobId="35186"
+				MobId2="35175"
+				MobId3="35201"
+				Button1TargetAuraId="75042"
+				Button2TargetAuraId="75044"
+				Button3TargetAuraId="75046"
+				Button4TargetAuraId="76048"
+				Button5TargetAuraId="75050"
+			/>
+		</While>
+
+		<If Condition="Me.Gender == WoWGender.Male" >
+			<TurnIn QuestName="Life of the Party" QuestId="14113" TurnInName="Chip Endale" TurnInId="34668" X="-8423.569" Y="1363.972" Z="104.6805" />
+		</If>
+		<If Condition="Me.Gender == WoWGender.Female" >
+			<TurnIn QuestName="Life of the Party" QuestId="14153" TurnInName="Sassy Hardwrench" TurnInId="34668" X="-8423.569" Y="1363.972" Z="104.6805" />
+		</If>
+
+		<PickUp QuestName="Pirate Party Crashers" QuestId="14115" GiverName="Sassy Hardwrench" GiverId="34668" X="-8423.569" Y="1363.972" Z="104.6805" />
+		<Code File="KillUntilComplete" MobId="35200" QuestId="14115" >
+			<HuntingGrounds>
+				<Hotspot X="-8459.42" Y="1318.813" Z="101.6978" />
+				<Hotspot X="-8511.014" Y="1367.542" Z="101.6978" />
+			</HuntingGrounds>
+		</Code>
+
+		<Code File="Hooks\DoWhen" ActivityName="SummonMotorcycle" Command="Enable" />
+		<Code File="Hooks\DoWhen" ActivityName="PunchIt" Command="Enable" />
+
+		<TurnIn QuestName="Pirate Party Crashers" QuestId="14115" TurnInName="Sassy Hardwrench" TurnInId="34668" X="-8424.857" Y="1361.02" Z="104.6747" />
+		<PickUp QuestName="The Uninvited Guest" QuestId="14116" GiverName="Sassy Hardwrench" GiverId="34668" X="-8424.377" Y="1363.766" Z="104.6793" />
+		<TurnIn QuestName="The Uninvited Guest" QuestId="14116" TurnInName="Trade Prince Gallywix" TurnInId="35222" X="-8423.376" Y="1365.566" Z="116.8737" />
+		<PickUp QuestName="A Bazillion Macaroons?!" QuestId="14120" GiverName="Trade Prince Gallywix" GiverId="35222" X="-8423.376" Y="1365.566" Z="116.8737" />
+		<TurnIn QuestName="A Bazillion Macaroons?!" QuestId="14120" TurnInName="Sassy Hardwrench" TurnInId="34668" X="-8426.853" Y="1324.344" Z="101.8828" />
+		<PickUp QuestName="The Great Bank Heist" QuestId="14122" GiverName="Sassy Hardwrench" GiverId="34668" X="-8425.08" Y="1324.97" Z="101.9032" />
+		<PickUp QuestName="Waltz Right In" QuestId="14123" GiverName="Slinky Sharpshiv" GiverId="34693" X="-8408.41" Y="1333.703" Z="102.1621" />
+		<PickUp QuestName="Robbing Hoods" QuestId="14121" GiverName="Megs Dreadshredder" GiverId="34874" X="-8434.185" Y="1318.328" Z="102.0996" />
+
+		<If Condition="!IsQuestCompleted(14121)" >
+			<Code File="RunCode" Code="
+				Logging.Write(System.Windows.Media.Colors.Yellow, &quot;[ProfileBase]: Disabling custom anti-stuck measures until this quest is complete.&quot;);
+				AppDomain.CurrentDomain.SetData(&quot;QuestingProfiles_AntiStuckToggle&quot;, false);
+			" />
+		</If>
+
+		<PickUp QuestName="Liberate the Kaja&apos;mite" QuestId="14124" GiverName="Foreman Dampwick" GiverId="34872" X="-8431.148" Y="1281.054" Z="103.2475" />
+		<While Condition="DoQuest(14124)" >
+			<Code File="UseItemTargetLocation" MobId="195488" ObjectType="GameObject" WaitTime="2000" UseType="ToObject" ItemId="48768" Range="4" MinRange="2" CollectionDistance="200" X="-8464.21" Y="1204.967" Z="42.80505" TerminateWhen="Object(195492, u =&gt; u.DistanceSqr &lt; 50f*50f) != null" />
+			<Code File="WaitTimer" WaitTime="2000" GoalText="Waiting for agro to clear {TimeRemaining}" />
+			<Code File="InteractWith" MobId="195492" CollectionDistance="200" QuestId="14124" QuestObjectiveIndex="1" X="-8464.21" Y="1204.967" Z="42.80505" TerminateWhen="Object(195492, u =&gt; u.DistanceSqr &lt; 50f*50f) == null" />
+		</While>
+		<TurnIn QuestName="Liberate the Kaja&apos;mite" QuestId="14124" TurnInName="Foreman Dampwick" TurnInId="34872" X="-8430.141" Y="1279.134" Z="102.6034" />
+
+		<While Condition="DoQuest(14121)" >
+			<UseMount Value="false" />
+			<DisableBehavior Name="Combat" />
+			<If Condition="!Me.HasAura(66392)" >
+				<Code File="UseItem" ItemId="46856" QuestId="14121" TerminateWhen="Me.HasAura(66392)" />
+			</If>
+
+			<MoveTo X="-8316.933" Y="1521.215" Z="47.31076" />
+
+			<Code File="RunCode">
+				<![CDATA[
+					WoWUnit looterPoi = null;
+
+					while (DoQuest(14121) && Me.HasAura(66392))
+					{
+						if (looterPoi == null || !looterPoi.IsValid || looterPoi.IsDead)
+							looterPoi = ObjectManager.GetObjectsOfType<WoWUnit>().FirstOrDefault(x => x.Entry == 35234 && x.IsAlive);
+						else
+							Navigator.MoveTo(looterPoi.Location);
+						await Coroutine.Yield();
+					}
+				]]>
+			</Code>
+			<UseMount Value="true" />
+			<EnableBehavior Name="Combat" />
+		</While>
+
+		<DisableBehavior Name="Pull" /> <!-- Hostile mobs everywhere, ignore them -->
+
+		<While Condition="DoQuest(14122)" >
+			<MoveTo X="-8373.546" Y="1727.475" Z="39.94706" />
+			<Code File="SpecificQuests\14122-Kezan-TheGreatBankHeist" QuestId="14122" />
+			<Code File="EjectVeh" />
+		</While>
+
+		<Code File="InteractWith" MobId="195518" NonCompeteDistance="0" InteractByLooting="true" PreInteractMountStrategy="Dismount" InteractBlacklistTimeInSeconds="1" QuestId="14123" QuestObjectiveIndex="3" X="-8007.084" Y="1861.446" Z="53.19723" />
+		<Code File="InteractWith" MobId="195516" NonCompeteDistance="0" InteractByLooting="true" PreInteractMountStrategy="Dismount" InteractBlacklistTimeInSeconds="1" QuestId="14123" QuestObjectiveIndex="2" X="-8048.229" Y="1953.668" Z="52.89242" />
+		<Code File="InteractWith" MobId="195515" NonCompeteDistance="0" InteractByLooting="true" PreInteractMountStrategy="Dismount" InteractBlacklistTimeInSeconds="1" QuestId="14123" QuestObjectiveIndex="1" X="-8146.503" Y="1903.05" Z="69.07405" />
+
+		<TurnIn QuestName="Waltz Right In" QuestId="14123" TurnInName="Slinky Sharpshiv" TurnInId="34693" X="-8400.672" Y="1337.777" Z="102.6352" />
+		<TurnIn QuestName="The Great Bank Heist" QuestId="14122" TurnInName="Sassy Hardwrench" TurnInId="34668" X="-8421.592" Y="1321.365" Z="102.8101" />
+		<If Condition="QuestDone(14121)" >
+			<TurnIn QuestName="Robbing Hoods" QuestId="14121" TurnInName="Megs Dreadshredder" TurnInId="34874" X="-8431.357" Y="1316.215" Z="102.8345" />
+			<Code File="RunCode" Code="
+				Logging.Write(System.Windows.Media.Colors.Yellow, &quot;[ProfileBase]: Re-enabling custom anti-stuck measures.&quot;);
+				AppDomain.CurrentDomain.SetData(&quot;QuestingProfiles_AntiStuckToggle&quot;, true);
+			" />
+		</If>
+
+		<EnableBehavior Name="Pull" />
+
+		<PickUp QuestName="447" QuestId="14125" GiverName="Sassy Hardwrench" GiverId="34668" X="-8427.787" Y="1321.446" Z="102.6287" />
+		<Code File="InteractWith" MobId="201735" NonCompeteDistance="0" PreInteractMountStrategy="Dismount" QuestId="14125" QuestObjectiveIndex="1" X="-8423.232" Y="1368.728" Z="104.6643" />
+		<Code File="InteractWith" MobId="201733" NonCompeteDistance="0" PreInteractMountStrategy="Dismount" QuestId="14125" QuestObjectiveIndex="2" X="-8404.376" Y="1370.996" Z="104.6868" />
+		<Code File="InteractWith" MobId="201734" NonCompeteDistance="0" PreInteractMountStrategy="Dismount" QuestId="14125" QuestObjectiveIndex="3" X="-8408.283" Y="1363.668" Z="117.2683" />
+		<Code File="InteractWith" MobId="201736" NonCompeteDistance="0" PreInteractMountStrategy="Dismount" QuestId="14125" QuestObjectiveIndex="4" X="-8425.124" Y="1324.23" Z="102.5594" />
+		<TurnIn QuestName="447" QuestId="14125" TurnInName="Claims Adjuster" TurnInId="37602" X="-8419.254" Y="1327.777" Z="102.6763" />
+
+		<PickUp QuestName="Life Savings" QuestId="14126" GiverName="Sassy Hardwrench" GiverId="34668" X="-8427.23" Y="1325.431" Z="102.4977" />
+
+		<Code File="Hooks\DoWhen" ActivityName="SummonMotorcycle" Command="Disable" />
+
+		<If Condition="HasQuest(14126) &amp;&amp; Unit(35222, u =&gt; u.DistanceSqr &lt; 30f*30f) == null" >
+			<MoveTo X="-7885.832" Y="1829.028" Z="4.961657" />
+			<Code File="EjectVeh" />
+			<Code File="InteractWith" MobId="207355" NonCompeteDistance="0" PreInteractMountStrategy="Dismount" X="-7885.835" Y="1830.723" Z="4.960352" TerminateWhen="Unit(35222, u =&gt; u.DistanceSqr &lt; 30f*30f) != null" />
+		</If>
+
+		<Code File="Hooks\DoWhen" ActivityName="PunchIt" Command="Disable" />
+
+		<If Condition="QuestDone(14126)" >
+			<TurnIn QuestName="Life Savings" QuestId="14126" TurnInName="Trade Prince Gallywix" TurnInId="35222" X="-7853.533" Y="1844.416" Z="7.331989" />
+			<Code File="RunCode" Code="await SkipCutscene();" />
+			<Code File="WaitTimer" WaitTime="45000" TerminateWhen="Unit(36608, u =&gt; u.QuestGiverStatus == QuestGiverStatus.Available) != null" />
+		</If>
+
+		<While Condition="!IsQuestCompleted(14239)" >
+			<Code File="InteractWith" MobId="36608" NonCompeteDistance="0" MovementBy="None" X="534.835" Y="3272.92" Z="0.171872" TerminateWhen="IsQuestCompleted(14239)" />
+			<Code File="RunCode" Code="QuestFrame.Instance.CompleteQuest();" />
+		</While>
+
+		<PickUp QuestName="Goblin Escape Pods" VariantQuestIds="14001, 14474" GiverName="Geargrinder Gizmo" GiverId="36600" X="534.835" Y="3272.92" Z="0.171872" />
+		<Code File="InteractWith" MobIds="195188" CollectionDistance="200" NonCompeteDistance="0" InteractByLooting="true" PreInteractMountStrategy="Dismount" VariantQuestIds="14001, 14474" QuestObjectiveIndex="1" >
+			<HuntingGrounds>
+				<Hotspot X="548.6962" Y="3327.155" Z="0" />
+				<Hotspot X="550.8958" Y="3248.118" Z="0" />
+				<Hotspot X="503.1528" Y="3345.603" Z="0" />
+				<Hotspot X="418.4323" Y="3142.503" Z="0" />
+			</HuntingGrounds>
+		</Code>
+		<TurnIn QuestName="Goblin Escape Pods" VariantQuestIds="14001, 14474" TurnInName="Sassy Hardwrench" TurnInId="35650" X="605.7563" Y="3127.536" Z="1.974595" />
+
+		<PickUp QuestName="Get Our Stuff Back!" QuestId="14014" GiverName="Sassy Hardwrench" GiverId="35650" X="605.7563" Y="3127.536" Z="1.974595" />
+		<PickUp QuestName="Monkey Business" QuestId="14019" GiverName="Bamm Megabomb" GiverId="35758" X="640.8893" Y="3125.128" Z="2.579411" />
+		<PickUp QuestName="It&apos;s Our Problem Now" QuestId="14473" GiverName="Maxx Avalanche" GiverId="35786" X="642.1855" Y="3126.852" Z="2.362417" />
+
+		<Code File="InteractWith" MobId="195201" CollectionDistance="200" NonCompeteDistance="0" InteractByLooting="true" PreInteractMountStrategy="Dismount" QuestId="14014" QuestObjectiveIndex="1" >
+			<HuntingGrounds>
+				<Hotspot X="761.4309" Y="3153.225" Z="9.160011" />
+				<Hotspot X="702.3186" Y="3069.395" Z="10.55541" />
+			</HuntingGrounds>
+		</Code>
+
+		<Code File="InteractWith" MobId="34699" CollectionDistance="200" NonCompeteDistance="0" InteractByUsingItemId="49028" PreInteractMountStrategy="Dismount" QuestId="14019" QuestObjectiveIndex="1" >
+			<HuntingGrounds>
+				<Hotspot X="761.4309" Y="3153.225" Z="9.160011" />
+				<Hotspot X="702.3186" Y="3069.395" Z="10.55541" />
+			</HuntingGrounds>
+		</Code>
+
+		<Code File="KillUntilComplete" MobId="36740" QuestId="14473" >
+			<HuntingGrounds>
+				<Hotspot X="761.4309" Y="3153.225" Z="9.160011" />
+				<Hotspot X="702.3186" Y="3069.395" Z="10.55541" />
+			</HuntingGrounds>
+		</Code>
+
+		<TurnIn QuestName="It&apos;s Our Problem Now" QuestId="14473" TurnInName="Maxx Avalanche" TurnInId="35786" X="648.0097" Y="3124.531" Z="2.764809" />
+		<TurnIn QuestName="Monkey Business" QuestId="14019" TurnInName="Bamm Megabomb" TurnInId="35758" X="643.736" Y="3121.194" Z="3.021929" />
+		<TurnIn QuestName="Get Our Stuff Back!" QuestId="14014" TurnInName="Sassy Hardwrench" TurnInId="35650" X="607.1116" Y="3126.777" Z="2.59519" />
+		<PickUp QuestName="Help Wanted" QuestId="14248" GiverName="Sassy Hardwrench" GiverId="35650" X="607.1116" Y="3126.777" Z="2.59519" />
+		<TurnIn QuestName="Help Wanted" QuestId="14248" TurnInName="Foreman Dampwick" TurnInId="35769" X="496.0839" Y="2973.325" Z="7.690713" />
+		<PickUp QuestName="Miner Troubles" QuestId="14021" GiverName="Foreman Dampwick" GiverId="35769" X="496.0839" Y="2973.325" Z="7.690713" />
+		<PickUp QuestName="Capturing the Unknown" QuestId="14031" GiverName="Foreman Dampwick" GiverId="35769" X="496.1054" Y="2974.036" Z="7.665245" />
+
+
+
+		<While Condition="DoQuest(14021)" >
+			<DisableBehavior Name="Pull" />
+			<Code File="InteractWith" MobId="35769" GossipOptions="1" NonCompeteDistance="0" PreInteractMountStrategy="Dismount" InteractBlacklistTimeInSeconds="1" QuestId="14021" QuestObjectiveIndex="1" X="495.4898" Y="2973.57" Z="7.701869" TerminateWhen="Unit(35813) != null" />
+			<Code File="Escort" QuestId="14021" MobId="35813" X="495.38" Y="2973.58" Z="7.705272" TerminateWhen="Unit(35813) == null" />
+			<EnableBehavior Name="Pull"/>
+		</While>
+
+		<PickUp QuestName="Orcs Can Write?" QuestId="14233" GiverName="Dead Orc Scout" GiverId="35837" X="653.0295" Y="2973.01" Z="1.807122" />
+
+		<PickUp QuestName="Capturing the Unknown" QuestId="14031" GiverName="Foreman Dampwick" GiverId="35769" X="496.0839" Y="2973.325" Z="7.690713" />
+		<While Condition="DoQuest(14031)" >
+			<UseItem ItemId="49887" QuestId="14031" X="567.7236" Y="2946.809" Z="-0.4024535" />
+			<UseItem ItemId="49887" QuestId="14031" X="571.9618" Y="2913.942" Z="-7.472542" />
+			<UseItem ItemId="49887" QuestId="14031" X="615.7415" Y="2852.979" Z="-7.230033" />
+			<UseItem ItemId="49887" QuestId="14031" X="650.839" Y="2966.914" Z="1.922367" />
+		</While>
+
+		<TurnIn QuestName="Miner Troubles" QuestId="14021" TurnInName="Foreman Dampwick" TurnInId="35769" X="494.5318" Y="2973.875" Z="7.735559" />
+		<TurnIn QuestName="Capturing the Unknown" QuestId="14031" TurnInName="Sassy Hardwrench" TurnInId="35650" X="604.8011" Y="3125.24" Z="2.489872" />
+		<TurnIn QuestName="Orcs Can Write?" QuestId="14233" TurnInName="Sassy Hardwrench" TurnInId="35650" X="604.8011" Y="3125.24" Z="2.489872" />
+		<PickUp QuestName="The Enemy of My Enemy" QuestId="14234" GiverName="Sassy Hardwrench" GiverId="35650" X="606.7833" Y="3126.626" Z="2.561068" />
+		<TurnIn QuestName="The Enemy of My Enemy" QuestId="14234" TurnInName="Aggra" TurnInId="35875" X="533.356" Y="2686.577" Z="107.1987" />
+		<PickUp QuestName="The Vicious Vale" QuestId="14235" GiverName="Aggra" GiverId="35875" X="533.356" Y="2686.577" Z="107.1987" />
+		<TurnIn QuestName="The Vicious Vale" QuestId="14235" TurnInName="Kilag Gorefang" TurnInId="35893" X="600.1314" Y="2783.417" Z="88.93581" />
+
+		<PickUp QuestName="Weed Whacker" QuestId="14236" GiverName="Kilag Gorefang" GiverId="35893" X="600.1314" Y="2783.417" Z="88.93581" />
+		<While Condition="DoQuest(14236)" >
+			<DisableBehavior Name="Combat, Loot" />
+			<If Condition="!Me.HasAura(68212)" >
+				<Code File="UseItem" ItemId="49108" TerminateWhen="Me.HasAura(68212)" />
+			</If>
+			<Code File="FlyTo" MovementBy="NavigatorOnly" QuestId="14236" TerminateWhen="!Me.HasAura(68212)" >
+				<DestinationChoices> 
+					<Hotspot X="664.2867" Y="2803.896" Z="87.09756" />
+					<Hotspot X="690.812" Y="2873.242" Z="85.87592" />
+					<Hotspot X="576.4406" Y="2896.812" Z="91.53377" />
+					<Hotspot X="563.6068" Y="2943.127" Z="93.81605" />
+					<Hotspot X="656.697" Y="2918.933" Z="92.39389" />
+					<Hotspot X="693.165" Y="2824.071" Z="86.39315" />
+					<Hotspot X="727.9011" Y="2845.751" Z="86.19466" />
+					<Hotspot X="717.4603" Y="2902.654" Z="89.90838" />
+				</DestinationChoices>
+			</Code>
+		</While>
+		<EnableBehavior Name="Combat, Loot" />
+		<TurnIn QuestName="Weed Whacker" QuestId="14236" TurnInName="Kilag Gorefang" TurnInId="35893" X="598.5666" Y="2785.584" Z="88.82387" />
+
+		<PickUp QuestName="Back to Aggra" QuestId="14303" GiverName="Kilag Gorefang" GiverId="35893" X="598.5666" Y="2785.584" Z="88.82387" />
+		<TurnIn QuestName="Back to Aggra" QuestId="14303" TurnInName="Aggra" TurnInId="35875" X="534.7847" Y="2686.894" Z="107.0887" />
+		<PickUp QuestName="Forward Movement" QuestId="14237" GiverName="Aggra" GiverId="35875" X="534.7847" Y="2686.894" Z="107.0887" />
+		<TurnIn QuestName="Forward Movement" QuestId="14237" TurnInName="Kilag Gorefang" TurnInId="35917" X="866.3517" Y="2821.378" Z="108.0233" />
+
+		<PickUp QuestName="Infrared = Infradead" QuestId="14238" GiverName="Kilag Gorefang" GiverId="35917" X="866.3517" Y="2821.378" Z="108.0233" />
+		<While Condition="DoQuest(14238)" >
+			<If Condition="!Me.HasAura(68212)" >
+				<MoveTo X="959.9599" Y="2994.862" Z="111.4403" />
+				<Code File="UseItem" ItemId="49611" X="959.9599" Y="2994.862" Z="111.4403" TerminateWhen="Me.HasAura(68376)" />
+			</If>
+			<Code File="KillUntilComplete" MobId="36092" QuestId="14238" TerminateWhen="!Me.HasAura(68376)" >
+				<HuntingGrounds>
+					<Hotspot X="869.0468" Y="2900.111" Z="101.3183" />
+					<Hotspot X="922.1335" Y="2995.457" Z="110.5423" />
+					<Hotspot X="1028.756" Y="3005.089" Z="116.3307" />
+				</HuntingGrounds>
+			</Code>
+		</While>
+		<TurnIn QuestName="Infrared = Infradead" QuestId="14238" TurnInName="Kilag Gorefang" TurnInId="35917" X="867.1948" Y="2823.032" Z="107.7572" />
+
+		<PickUp QuestName="To the Cliffs" QuestId="14240" GiverName="Kilag Gorefang" GiverId="35917" X="871.1033" Y="2848.917" Z="103.5415" />
+		<Code File="WaitTimer" WaitTime="60000" TerminateWhen="!Me.InVehicle || !HasQuest(14240)" />
+		<TurnIn QuestName="To the Cliffs" QuestId="14240" TurnInName="Scout Brax" TurnInId="36112" X="1079.183" Y="3240.068" Z="81.27268" />
+
+		<PickUp QuestName="Get to the Gyrochoppa!" QuestId="14241" GiverName="Scout Brax" GiverId="36112" X="1079.183" Y="3240.068" Z="81.27268" />
+		<Code File="KillUntilComplete" MobId="36129" QuestId="14241" X="860.1429" Y="3330.458" Z="7.813494" />
+		<TurnIn QuestName="Get to the Gyrochoppa!" QuestId="14241" TurnInName="Gyrochoppa" TurnInId="36127" X="851.8495" Y="3333.527" Z="7.060494" />
+
+		<PickUp QuestName="Precious Cargo" QuestId="14242" GiverName="Gyrochoppa" GiverId="36127" X="851.8495" Y="3333.527" Z="7.060494" />
+		<While Condition="DoQuest(14242)" >
+			<Code File="WaitTimer" WaitTime="25000" TerminateWhen="!Me.InVehicle" />
+			<Code File="InteractWith" MobId="36145" NonCompeteDistance="0" QuestId="14242" QuestObjectiveIndex="1" X="991.5357" Y="3849.384" Z="3.229193" />
+			<Code File="RunCode" Code="QuestFrame.Instance.Close();" />
+		</While>
+		<TurnIn QuestName="Precious Cargo" QuestId="14242" TurnInName="Thrall" TurnInId="36145" X="991.5357" Y="3849.384" Z="3.229193" />
+
+		<PickUp QuestName="Meet Me Up Top" QuestId="14326" GiverName="Thrall" GiverId="36145" X="991.5357" Y="3849.384" Z="3.229193" />
+		<TurnIn QuestName="Meet Me Up Top" QuestId="14326" TurnInName="Thrall" TurnInId="36161" X="982.2694" Y="3825.583" Z="8.93213" />
+
+		<PickUp QuestName="Warchief&apos;s Revenge" QuestId="14243" GiverName="Thrall" GiverId="36161" X="982.2694" Y="3825.583" Z="8.93213" />
+		<While Condition="DoQuest(14243)" >
+			<Code File="RunCode">
+				<![CDATA[
+					WoWUnit sailerPoi = null;
+					while (DoQuest(14243) && Me.InVehicle)
+					{
+						if (sailerPoi == null || !sailerPoi.IsValid || sailerPoi.IsDead)
+							sailerPoi = ObjectManager.GetObjectsOfType<WoWUnit>().OrderBy(x => x.DistanceSqr).FirstOrDefault(x => x.Entry == 36176);
+
+						if (sailerPoi != null && sailerPoi.IsValid && sailerPoi.IsAlive)
+						{
+							Lua.DoString("OverrideActionBarButton1:Click();");
+							SpellManager.ClickRemoteLocation(sailerPoi.Location);
+						}
+						await Coroutine.Yield();
+					}
+
+					await Coroutine.Wait(48000, () => !Me.InVehicle);
+				]]>
+			</Code>
+		</While>
+		<TurnIn QuestName="Warchief&apos;s Revenge" QuestId="14243" TurnInName="Thrall" TurnInId="36188" X="873.0084" Y="2764.225" Z="118.7411" />
+
+		<PickUp QuestName="Farewell, For Now" QuestId="14445" GiverName="Thrall" GiverId="36188" X="873.0084" Y="2764.225" Z="118.7411" />
+		<TurnIn QuestName="Farewell, For Now" QuestId="14445" TurnInName="Sassy Hardwrench" TurnInId="36425" X="849.3328" Y="2760.132" Z="115.7106" />
+
+		<PickUp QuestName="Up, Up &amp; Away!" QuestId="14244" GiverName="Sassy Hardwrench" GiverId="36425" X="849.3328" Y="2760.132" Z="115.7106" />
+		<Code File="InteractWith" MobId="196439" GossipOptions="1" NonCompeteDistance="0" PreInteractMountStrategy="Dismount" WaitTime="17000" QuestId="14244" QuestObjectiveIndex="1" X="870.3043" Y="2743.945" Z="122.4486" />
+		<TurnIn QuestName="Up, Up &amp; Away!" QuestId="14244" TurnInName="Foreman Dampwick" TurnInId="36470" X="943.0204" Y="2375.422" Z="5.236036" />
+
+		<PickUp QuestName="It&apos;s a Town-In-A-Box" QuestId="14245" GiverName="Foreman Dampwick" GiverId="36470" X="943.0204" Y="2375.422" Z="5.236036" />
+		<While Condition="DoQuest(14245)" >
+			<MoveTo X="913.7117" Y="2340.362" Z="5.074694" />
+			<Code File="InteractWith" MobId="201938" NonCompeteDistance="0" PreInteractMountStrategy="Dismount" MovementBy="ClickToMoveOnly" QuestId="14245" QuestObjectiveIndex="1" X="913.8493" Y="2331.825" Z="10.5914" />
+		</While>
+		<TurnIn QuestName="It&apos;s a Town-In-A-Box" QuestId="14245" TurnInName="Foreman Dampwick" TurnInId="36471" X="930.1497" Y="2335.087" Z="4.813368" />
+
+		<PickUp QuestName="Hobart Needs You" QuestId="27139" GiverName="Foreman Dampwick" GiverId="36471" X="929.6302" Y="2334.868" Z="4.749893" />
+		<TurnIn QuestName="Hobart Needs You" QuestId="27139" TurnInName="Hobart Grapplehammer" TurnInId="38120" X="920.5737" Y="2335.472" Z="3.530886" />
+
+		<PickUp QuestName="Cluster Cluck" QuestId="24671" GiverName="Hobart Grapplehammer" GiverId="38120" X="920.5737" Y="2335.472" Z="3.530886" />
+		<Code File="InteractWith" MobId="38111" CollectionDistance="200" NonCompeteDistance="0" InteractByUsingItemId="52712" PreInteractMountStrategy="Dismount" QuestId="24671" QuestObjectiveIndex="1" X="966.0105" Y="2309.46" Z="6.782138" />
+		<TurnIn QuestName="Cluster Cluck" QuestId="24671" TurnInName="Hobart Grapplehammer" TurnInId="38120" X="921.2241" Y="2335.133" Z="3.500678" />
+
+		<PickUp QuestName="Trading Up" QuestId="24741" GiverName="Bamm Megabomb" GiverId="38122" X="927.8493" Y="2338.909" Z="4.835596" />
+		<If Condition="DoQuest(24741)" >
+			<DisableBehavior Name="Pull" />
+			<While Condition="DoQuest(24741)" >
+				<Code File="InteractWith" CollectionDistance="200" NonCompeteDistance="0" InteractByUsingItemId="50232" PreInteractMountStrategy="Dismount" WaitTime="5000" QuestId="24741" QuestObjectiveIndex="1" TerminateWhen="Object(201974) != null" >
+					<HuntingGrounds>
+						<Hotspot X="826.8497" Y="2124.009" Z="83.85667" />
+						<Hotspot X="741.3925" Y="1996.697" Z="92.44532" />
+						<Hotspot X="618.4288" Y="2181.919" Z="64.24885" />
+					</HuntingGrounds>
+					<PursuitList>
+						<PursueGameObject Id="201972" PursueWhen="Unit(38187, u =&gt; u.IsAlive) != null &amp;&amp; GAMEOBJECT.Location.DistanceSqr(Unit(38187, u =&gt; u.IsAlive).Location) &lt;= 40f*40f" />
+					</PursuitList>
+				</Code>
+				<Code File="InteractWith" MobId="201974" CollectionDistance="200" InteractByLooting="true" PreInteractMountStrategy="Dismount" QuestId="24741" QuestObjectiveIndex="1" TerminateWhen="Object(201974) == null" />
+			</While>
+			<EnableBehavior Name="Pull" />
+		</If>
+
+		<TurnIn QuestName="Trading Up" QuestId="24741" TurnInName="Bamm Megabomb" TurnInId="38122" X="927.4736" Y="2338.563" Z="4.711437" />
+
+		<PickUp QuestName="The Biggest Egg Ever" QuestId="24744" GiverName="Hobart Grapplehammer" GiverId="38120" X="920.35" Y="2336.379" Z="3.604256" />
+		<While Condition="DoQuest(24744)" >
+			<Code File="KillUntilComplete" MobId="38224" QuestId="24744" TerminateWhen="Object(201977) != null" >
+				<HuntingGrounds>
+					<Hotspot X="1158.872" Y="2316.726" Z="0.206697" />
+					<Hotspot X="1242.674" Y="2380.694" Z="0.2115104" />
+				</HuntingGrounds>
+			</Code>
+			<Code File="InteractWith" MobId="201977" CollectionDistance="500" NonCompeteDistance="0" InteractByLooting="true" PreInteractMountStrategy="Dismount" QuestId="24744" QuestObjectiveIndex="1" TerminateWhen="Object(201977) == null" />
+		</While>
+
+		<If Condition="QuestDone(24744) &amp;&amp; Object(201977) != null" >
+			<Code File="UseHearthstone" WaitForCd="false" />
+		</If>
+
+		<TurnIn QuestName="The Biggest Egg Ever" QuestId="24744" TurnInName="Hobart Grapplehammer" TurnInId="38120" X="921.569" Y="2335.939" Z="3.566382" />
+
+		<PickUp QuestName="Who&apos;s Top of the Food Chain Now?" QuestId="24816" GiverName="Hobart Grapplehammer" GiverId="38120" X="921.569" Y="2335.939" Z="3.566382" />
+		<Code File="KillUntilComplete" MobId="36681" QuestId="24816" >
+			<HuntingGrounds>
+				<Hotspot X="983.4739" Y="2485.132" Z="-1.206601" />
+				<Hotspot X="1017.698" Y="2590.645" Z="-1.346219" />
+				<Hotspot X="1018.435" Y="2591.123" Z="-1.346219" />
+				<Hotspot X="1085.506" Y="2676.092" Z="-1.082445" />
+				<Hotspot X="991.8558" Y="2431.075" Z="-1.390545" />
+			</HuntingGrounds>
+		</Code>
+		<TurnIn QuestName="Who&apos;s Top of the Food Chain Now?" QuestId="24816" TurnInName="Assistant Greely" TurnInId="38124" X="909.4804" Y="2339.936" Z="4.41465" />
+
+		<PickUp QuestName="A Goblin in Shark&apos;s Clothing" QuestId="24817" GiverName="Assistant Greely" GiverId="38124" X="909.4804" Y="2339.936" Z="4.41465" />
+		<While Condition="DoQuest(24817)" >
+			<MoveTo X="918.5144" Y="2412.145" Z="0.8076695" />
+			<DisableBehavior Name="All" />
+
+			<Code File="InteractWith" MobId="202108" CollectionDistance="200" NonCompeteDistance="0" PreInteractMountStrategy="Dismount" QuestId="24817" QuestObjectiveIndex="2" X="916.2278" Y="2410.379" Z="1.022669" TerminateWhen="Me.InVehicle" />
+			<Code File="RunCode"><![CDATA[
+					WoWUnit thehammerPoi = ObjectManager.GetObjectsOfType<WoWUnit>().FirstOrDefault(x => x.Entry == 36682 && x.IsAlive);
+					while (DoQuest(24817) && Me.InVehicle && thehammerPoi != null)
+					{
+						if (Me.CurrentTarget != thehammerPoi)
+							thehammerPoi.Target();
+
+						if (thehammerPoi.DistanceSqr > 49f*49f)
+							WoWMovement.ClickToMove(thehammerPoi.Location);
+
+						if (thehammerPoi.DistanceSqr <= 49f*49f)
+						{
+							Me.SetFacing(thehammerPoi);
+							await CommonCoroutines.StopMoving();
+
+							if (thehammerPoi != null && Lua.GetReturnVal<bool>("return GetPetActionCooldown(1) == 0;", 0))
+								Lua.DoString("CastPetAction(1);");
+
+							if (thehammerPoi != null && Lua.GetReturnVal<bool>("return GetPetActionCooldown(2) == 0;", 0))
+								Lua.DoString("CastPetAction(2);");
+
+							if (thehammerPoi != null && Lua.GetReturnVal<bool>("return GetPetActionCooldown(3) == 0;", 0))
+								Lua.DoString("CastPetAction(3);");
+						}
+
+						await Coroutine.Yield();
+					}
+				]]>
+			</Code>
+			<MoveTo X="920.6348" Y="2397.507" Z="2.178147" />
+			<EnableBehavior Name="All" />
+		</While>
+		<TurnIn QuestName="A Goblin in Shark&apos;s Clothing" QuestId="24817" TurnInName="Hobart Grapplehammer" TurnInId="38120" X="920.8784" Y="2336.4" Z="3.639349" />
+
+		<PickUp QuestName="Invasion Imminent!" QuestId="24856" GiverName="Hobart Grapplehammer" GiverId="38120" X="920.8784" Y="2336.4" Z="3.639349" />
+		<TurnIn QuestName="Invasion Imminent!" QuestId="24856" TurnInName="Megs Dreadshredder" TurnInId="38432" X="682.4303" Y="2027.57" Z="51.09735" />
+
+		<PickUp QuestName="Bilgewater Cartel Represent" QuestId="24858" GiverName="Megs Dreadshredder" GiverId="38432" X="682.4303" Y="2027.57" Z="51.09735" />
+		<PickUp QuestName="Naga Hide" QuestId="24859" GiverName="Brett &quot;Coins&quot; McQuid" GiverId="38381" X="677.8505" Y="2026.88" Z="50.02124" />
+
+		<Code File="InteractWith" MobId="202133" CollectionDistance="200" NonCompeteDistance="0" InteractBlacklistTimeInSeconds="1" PreInteractMountStrategy="Dismount" QuestId="24858" QuestObjectiveIndex="1" >
+			<HuntingGrounds>
+				<Hotspot X="587.7186" Y="1943.542" Z="10.98104" />
+				<Hotspot X="480.489" Y="1940.554" Z="12.19976" />
+				<Hotspot X="489.6559" Y="1826.109" Z="1.694314" />
+			</HuntingGrounds>
+		</Code>
+
+		<Code File="KillUntilComplete" MobIds="38359, 38360" QuestId="24859" >
+			<HuntingGrounds>
+				<Hotspot X="587.7186" Y="1943.542" Z="10.98104" />
+				<Hotspot X="480.489" Y="1940.554" Z="12.19976" />
+				<Hotspot X="489.6559" Y="1826.109" Z="1.694314" />
+				<Hotspot X="415.5945" Y="2151.718" Z="2.511305" />
+			</HuntingGrounds>
+		</Code>
+
+		<TurnIn QuestName="Naga Hide" QuestId="24859" TurnInName="Brett &quot;Coins&quot; McQuid" TurnInId="38381" X="674.8165" Y="2024.47" Z="48.76679" />
+		<TurnIn QuestName="Bilgewater Cartel Represent" QuestId="24858" TurnInName="Megs Dreadshredder" TurnInId="38432" X="677.6021" Y="2025.358" Z="49.66618" />
+		<PickUp QuestName="Irresistible Pool Pony" QuestId="24864" GiverName="Megs Dreadshredder" GiverId="38432" X="677.6021" Y="2025.358" Z="49.66618" />
+
+		<While Condition="DoQuest(24864)" >
+			<If Condition="!Me.HasAura(71914)" >
+				<MoveTo X="462.6514" Y="1756.104" Z="-1.378262" />
+				<Code File="UseItem" ItemId="50602" X="462.6514" Y="1756.104" Z="-1.378262" TerminateWhen="Me.HasAura(71914)" />
+			</If>
+			<Code File="InteractWith" MobIds="38412, 44578" CollectionDistance="200" NonCompeteDistance="0" PreInteractMountStrategy="Dismount" MovementBy="ClickToMoveOnly" QuestId="24864" QuestObjectiveIndex="1" TerminateWhen="!Me.IsSwimming" >
+				<HuntingGrounds>
+					<Hotspot X="411.1941" Y="1710.399" Z="-45.30306" />
+					<Hotspot X="401.2524" Y="1611.642" Z="-49.7473" />
+				</HuntingGrounds>
+			</Code>
+			<Code File="MyCTM" X="476.9247" Y="1778.091" Z="0.5698587" TerminateWhen="!Me.IsSwimming" />
+		</While>
+
+		<TurnIn QuestName="Irresistible Pool Pony" QuestId="24864" TurnInName="Megs Dreadshredder" TurnInId="38432" X="676.0873" Y="2024.958" Z="49.25037" />
+
+		<PickUp QuestName="Surrender or Else!" QuestId="24868" GiverName="Megs Dreadshredder" GiverId="38432" X="676.0873" Y="2024.958" Z="49.25037" />
+		<While Condition="DoQuest(24868)" >
+			<DisableBehavior Name="Pull" />
+			<MoveTo X="155.2894" Y="1939.097" Z="5.365259" />
+			<EnableBehavior Name="Pull" />
+			<Code File="KillUntilComplete" MobId="38448" QuestId="24868" X="155.2894" Y="1939.097" Z="5.365259" />
+		</While>
+		<TurnIn QuestName="Surrender or Else!" QuestId="24868" TurnInName="Megs Dreadshredder" TurnInId="38432" X="680.8479" Y="2028.308" Z="50.82964" />
+
+		<PickUp QuestName="Get Back to Town" QuestId="24897" GiverName="Megs Dreadshredder" GiverId="38432" X="680.8479" Y="2028.308" Z="50.82964" />
+		<If Condition="QuestDone(24897) &amp;&amp; Unit(38432) != null" >
+			<Code File="UseHearthstone" WaitForCd="false" />
+		</If>
+		<TurnIn QuestName="Get Back to Town" QuestId="24897" TurnInName="Sassy Hardwrench" TurnInId="38387" X="925.7404" Y="2341.419" Z="4.900898" />
+
+		<PickUp QuestName="Town-In-A-Box: Under Attack" QuestId="24901" GiverName="Sassy Hardwrench" GiverId="38387" X="925.7404" Y="2341.419" Z="4.900898" />
+		<While Condition="DoQuest(24901)" >
+			<MoveTo X="938.9951" Y="2327.871" Z="5.024223" />
+			<Code File="Vehicles\MountVehOnly" VehicleMountId="38526" X="927.1685" Y="2323.339" Z="5.855754"/>
+			<Code File="Vehicles\NoControlVehicle" QuestId="24901" TargetId="38531" NumOfTimes="99" AttackButton="1" MaxRange="30" WaitTime="1600" />
+		</While>
+		<TurnIn QuestName="Town-In-A-Box: Under Attack" QuestId="24901" TurnInName="Sassy Hardwrench" TurnInId="38387" X="926.8967" Y="2341.219" Z="4.925244" />
+
+		<PickUp QuestName="Oomlot Village" QuestId="24924" GiverName="Sassy Hardwrench" GiverId="38387" X="926.8967" Y="2341.219" Z="4.925244" />
+		<TurnIn QuestName="Oomlot Village" QuestId="24924" TurnInName="Izzy" TurnInId="38647" X="717.4656" Y="1831.683" Z="104.1882" />
+		<PickUp QuestName="Free the Captives" QuestId="24925" GiverName="Izzy" GiverId="38647" X="717.4656" Y="1831.683" Z="104.1882" />
+		<PickUp QuestName="Send a Message" QuestId="24929" GiverName="Izzy" GiverId="38647" X="717.4656" Y="1831.683" Z="104.1882" />
+
+		<Code File="KillUntilComplete" MobId="38696" QuestId="24929" X="811.5811" Y="1545.955" Z="154.6862" />
+
+		<Code File="KillUntilComplete" MobId="38644" QuestId="24925" >
+			<HuntingGrounds>
+				<Hotspot X="731.5955" Y="1712.898" Z="115.1044" />
+				<Hotspot X="802.9618" Y="1706.754" Z="125.5936" />
+				<Hotspot X="817.7474" Y="1634.855" Z="151.539" />
+			</HuntingGrounds>
+		</Code>
+
+		<TurnIn QuestName="Free the Captives" QuestId="24925" TurnInName="Izzy" TurnInId="38647" X="717.5988" Y="1831.486" Z="104.2257" />
+		<TurnIn QuestName="Send a Message" QuestId="24929" TurnInName="Izzy" TurnInId="38647" X="717.5988" Y="1831.486" Z="104.2257" />
+		<PickUp QuestName="Oomlot Dealt With" QuestId="24937" GiverName="Izzy" GiverId="38647" X="717.5988" Y="1831.486" Z="104.2257" />
+		<TurnIn QuestName="Oomlot Dealt With" QuestId="24937" TurnInName="Sassy Hardwrench" TurnInId="38387" X="926.4222" Y="2341.706" Z="4.944965" />
+
+		<PickUp QuestName="Up the Volcano" QuestId="24940" GiverName="Sassy Hardwrench" GiverId="38387" X="926.4222" Y="2341.706" Z="4.944965" />
+		<If Condition="HasQuest(24940)" >
+			<DisableBehavior Name="Combat" />
+			<MoveTo X="1465.467" Y="2046.398" Z="225.5532" />
+			<EnableBehavior Name="Combat" />
+		</If>
+		<TurnIn QuestName="Up the Volcano" QuestId="24940" TurnInName="Coach Crosscheck" TurnInId="38738" X="1465.467" Y="2046.398" Z="225.5532" />
+
+		<PickUp QuestName="Zombies vs. Super Booster Rocket Boots" QuestId="24942" GiverName="Coach Crosscheck" GiverId="38738" X="1465.467" Y="2046.398" Z="225.5532" />
+		<While Condition="DoQuest(24942)" >
+			<DisableBehavior Name="Combat, Loot" />
+			<If Condition="!Me.HasAura(72887)" >
+				<MoveTo X="1478.407" Y="2029.637" Z="231.848" />
+				<Code File="UseItem" ItemId="52013" X="1478.407" Y="2029.637" Z="231.848" TerminateWhen="Me.HasAura(72887)" />
+			</If>
+			<MoveTo QuestId="24942" X="1474.23" Y="2006.76" Z="233.6723" />
+			<MoveTo QuestId="24942" X="1480.801" Y="1900.308" Z="251.9713" />
+			<MoveTo QuestId="24942" X="1484.791" Y="1763.833" Z="285.8267" />
+			<MoveTo QuestId="24942" X="1559.163" Y="1669.235" Z="281.5006" />
+			<MoveTo QuestId="24942" X="1609.77" Y="1824.481" Z="270.9835" />
+			<MoveTo QuestId="24942" X="1538.851" Y="1931.259" Z="249.9313" />
+		</While>
+		<EnableBehavior Name="Combat, Loot" />
+		<TurnIn QuestName="Zombies vs. Super Booster Rocket Boots" QuestId="24942" TurnInName="Coach Crosscheck" TurnInId="38738" X="1465.467" Y="2046.398" Z="225.5532" />
+
+		<PickUp QuestName="Three Little Pygmies" QuestId="24945" GiverName="Foreman Dampwick" GiverId="36471" X="1461.67" Y="2043.107" Z="226.312" />
+		<PickUp QuestName="Rockin&apos; Powder" QuestId="24946" GiverName="Assistant Greely" GiverId="38124" X="1457.492" Y="2046.479" Z="224.4865" />
+
+		<Code File="KillUntilComplete" MobId="38808" QuestId="24945" QuestObjectiveIndex="1" X="1670.945" Y="1699.37" Z="292.7066" />
+
+		<Code File="InteractWith" MobId="202351" CollectionDistance="200" NonCompeteDistance="0" InteractByLooting="true" PreInteractMountStrategy="Dismount" QuestId="24946" QuestObjectiveIndex="1" X="1469.435" Y="1752.107" Z="285.7801" />
+
+		<Code File="KillUntilComplete" MobId="38809" QuestId="24945" QuestObjectiveIndex="2" X="1450.18" Y="1721.865" Z="283.8478" />
+
+		<Code File="KillUntilComplete" MobId="38810" QuestId="24945" QuestObjectiveIndex="3" X="1297.508" Y="1512.125" Z="317.978" />
+
+		<TurnIn QuestName="Three Little Pygmies" QuestId="24945" TurnInName="Foreman Dampwick" TurnInId="36471" X="1462.973" Y="2043.416" Z="226.2903" />
+		<TurnIn QuestName="Rockin&apos; Powder" QuestId="24946" TurnInName="Assistant Greely" TurnInId="38124" X="1456.436" Y="2047.418" Z="223.9054" />
+
+		<PickUp QuestName="Rocket Boot Boost" QuestId="24952" GiverName="Coach Crosscheck" GiverId="38738" X="1461.423" Y="2045.037" Z="225.5544" />
+		<While Condition="DoQuest(24952)" >
+			<Code File="UseItem" ItemId="52032" QuestId="24952" X="1462.478" Y="2044.915" Z="225.6478" />
+			<Code File="WaitTimer" WaitTime="17000" TerminateWhen="!Me.HasAura(72971)" />
+		</While>
+		<TurnIn QuestName="Rocket Boot Boost" QuestId="24952" TurnInName="Hobart Grapplehammer" TurnInId="38120" X="1481.15" Y="1269.77" Z="106.779" />
+
+		<PickUp QuestName="Children of a Turtle God" QuestId="24954" GiverName="Hobart Grapplehammer" GiverId="38120" X="1481.15" Y="1269.77" Z="106.779" />
+		<Code File="KillUntilComplete" MobId="38845" QuestId="24954" >
+			<HuntingGrounds>
+				<Hotspot X="1510.951" Y="1346.778" Z="106.5879" />
+				<Hotspot X="1623.979" Y="1358.654" Z="108.0739" />
+				<Hotspot X="1599.668" Y="1433.59" Z="109.4145" />
+			</HuntingGrounds>
+		</Code>
+		<TurnIn QuestName="Children of a Turtle God" QuestId="24954" TurnInName="Hobart Grapplehammer" TurnInId="38120" X="1481.259" Y="1270.333" Z="106.7792" />
+
+		<PickUp QuestName="Volcanoth!" QuestId="24958" GiverName="Hobart Grapplehammer" GiverId="38120" X="1481.259" Y="1270.333" Z="106.7792" />
+		<While Condition="DoQuest(24958)" >
+			<DisableBehavior Name="Combat" />
+			<MoveTo X="1269.487" Y="1158.637" Z="117.5116" />
+			<Code File="InteractWith" MobId="38855" MobState="Alive" Range="59" InteractByUsingItemId="52043" InteractBlacklistTimeInSeconds="1" QuestId="24958" QuestObjectiveIndex="1" X="1269.487" Y="1158.637" Z="117.5116" />
+		</While>
+		<TurnIn QuestName="Volcanoth!" QuestId="24958" TurnInName="Sassy Hardwrench" TurnInId="38928" X="1163.752" Y="1093.947" Z="121.0292" />
+
+		<PickUp QuestName="Old Friends" QuestId="25023" GiverName="Sassy Hardwrench" GiverId="38928" X="1099.891" Y="1166.118" Z="156.6113" />
+		<Code File="WaitTimer" WaitTime="110000" TerminateWhen="!Me.InVehicle || !HasQuest(25023)" />
+		<TurnIn QuestName="Old Friends" QuestId="25023" TurnInName="Thrall" TurnInId="38935" X="1580.187" Y="2719.593" Z="83.24832" />
+
+		<PickUp QuestName="Repel the Paratroopers" QuestId="25024" GiverName="Thrall" GiverId="38935" X="1580.187" Y="2719.593" Z="83.24832" />
+		<PickUp QuestName="Mine Disposal, the Goblin Way" QuestId="25058" GiverName="Sassy Hardwrench" GiverId="38387" X="1619.008" Y="2698.554" Z="87.93737" />
+		<PickUp QuestName="The Heads of the SI:7" QuestId="25093" GiverName="Aggra" GiverId="39065" X="1575.827" Y="2742.722" Z="82.29195" />
+
+		<Code File="KillUntilComplete" MobId="39141" QuestId="25093" QuestObjectiveIndex="1" X="1592.948" Y="2917.697" Z="2.708853" />
+
+		<Code File="InteractWith" MobId="202472" CollectionDistance="200" NonCompeteDistance="0" InteractByUsingItemId="52280" PreInteractMountStrategy="Dismount" QuestId="25058" QuestObjectiveIndex="1" >
+			<HuntingGrounds>
+				<Hotspot X="1657.441" Y="2921.677" Z="3.424986" />
+				<Hotspot X="1796.728" Y="2949.223" Z="3.893282" />
+			</HuntingGrounds>
+		</Code>
+
+		<Code File="KillUntilComplete" MobId="39143" QuestId="25093" QuestObjectiveIndex="3" X="1855.882" Y="2986.102" Z="1.057219" />
+
+		<Code File="KillUntilComplete" MobId="39142" QuestId="25093" QuestObjectiveIndex="2" X="2033.802" Y="2866.806" Z="3.487461" />
+
+		<Code File="KillUntilComplete" MobId="39069" QuestId="25024" >
+			<HuntingGrounds>
+				<Hotspot X="2033.802" Y="2866.806" Z="3.487461" />
+				<Hotspot X="1876.614" Y="2894.764" Z="3.098593" />
+				<Hotspot X="1730.859" Y="2913.046" Z="4.049773" />
+				<Hotspot X="1609.349" Y="2863.155" Z="5.687129" />
+			</HuntingGrounds>
+		</Code>
+
+		<TurnIn QuestName="Mine Disposal, the Goblin Way" QuestId="25058" TurnInName="Sassy Hardwrench" TurnInId="38387" X="1623.29" Y="2700.084" Z="88.11543" />
+		<TurnIn QuestName="Repel the Paratroopers" QuestId="25024" TurnInName="Thrall" TurnInId="38935" X="1585.413" Y="2719.849" Z="83.22051" />
+		<TurnIn QuestName="The Heads of the SI:7" QuestId="25093" TurnInName="Aggra" TurnInId="39065" X="1577.437" Y="2743.713" Z="82.28823" />
+
+		<PickUp QuestName="The Pride of Kezan" QuestId="25066" GiverName="Sassy Hardwrench" GiverId="38387" X="1621.524" Y="2699.552" Z="88.01065" />
+		<While Condition="DoQuest(25066)" >
+			<Code File="InteractWith" MobId="38387" GossipOptions="1" NonCompeteDistance="0" PreInteractMountStrategy="Dismount" QuestId="25066" QuestObjectiveIndex="1" X="1619.505" Y="2697.07" Z="88.21132" TerminateWhen="Me.InVehicle" />
+			<Code File="SpecificQuests\25066-LostIsles-ThePrideofKezan" />
+			<Code File="EjectVeh" />
+			<Code File="WaitTimer" WaitTime="10000" TerminateWhen="!Me.IsFalling" />
+		</While>
+		<TurnIn QuestName="The Pride of Kezan" QuestId="25066" TurnInName="Sassy Hardwrench" TurnInId="38387" X="1622.823" Y="2700.918" Z="87.90159" />
+
+		<PickUp QuestName="The Warchief Wants You" QuestId="25098" GiverName="Sassy Hardwrench" GiverId="38387" X="1622.823" Y="2700.918" Z="87.90159" />
+		<TurnIn QuestName="The Warchief Wants You" QuestId="25098" TurnInName="Thrall" TurnInId="38935" X="1585.275" Y="2720.47" Z="83.21964" />
+
+		<PickUp QuestName="Borrow Bastia" QuestId="25099" GiverName="Thrall" GiverId="38935" X="1585.275" Y="2720.47" Z="83.21964" />
+		<TurnIn QuestName="Borrow Bastia" QuestId="25099" TurnInName="Kilag Gorefang" TurnInId="39066" X="1714.377" Y="2854.461" Z="15.25967" />
+
+		<PickUp QuestName="Let&apos;s Ride" QuestId="25100" GiverName="Kilag Gorefang" GiverId="39066" X="1714.377" Y="2854.461" Z="15.25967" />
+		<Code File="WaitTimer" WaitTime="85000" TerminateWhen="!Me.InVehicle || !HasQuest(25100)" />
+		<TurnIn QuestName="Let&apos;s Ride" QuestId="25100" TurnInName="Slinky Sharpshiv" TurnInId="38517" X="1831.693" Y="1958.991" Z="220.9467" />
+
+		<PickUp QuestName="The Gallywix Labor Mine" QuestId="25109" GiverName="Slinky Sharpshiv" GiverId="38517" X="1831.693" Y="1958.991" Z="220.9467" />
+		<If Condition="QuestDone(25109) &amp;&amp; Me.Z &gt;= 180" >
+			<MoveTo X="1857.068" Y="1910.329" Z="197.54" />
+			<Code File="MyCTM" X="1873.241" Y="1908.887" Z="172.6985" />
+		</If>
+		<TurnIn QuestName="The Gallywix Labor Mine" QuestId="25109" TurnInName="Assistant Greely" TurnInId="38124" X="1778.136" Y="1983.673" Z="172.8999" />
+
+		<PickUp QuestName="Kaja&apos;Cola Gives You IDEAS! (TM)" QuestId="25110" GiverName="Assistant Greely" GiverId="38124" X="1778.136" Y="1983.673" Z="172.8999" />
+		<Code File="InteractWith" MobIds="202553, 202554" CollectionDistance="200" NonCompeteDistance="0" InteractByLooting="true" PreInteractMountStrategy="Dismount" QuestId="25110" QuestObjectiveIndex="1" X="1824.543" Y="1903.049" Z="173.0138" />
+		<TurnIn QuestName="Kaja&apos;Cola Gives You IDEAS! (TM)" QuestId="25110" TurnInName="Assistant Greely" TurnInId="38124" X="1778.298" Y="1983.048" Z="172.9163" />
+
+		<PickUp QuestName="Morale Boost" QuestId="25122" GiverName="Assistant Greely" GiverId="39199" X="1778.298" Y="1983.048" Z="172.9163" />
+		<PickUp QuestName="Throw It On the Ground!" QuestId="25123" GiverName="Assistant Greely" GiverId="39199" X="1778.298" Y="1983.048" Z="172.9163" />
+
+		<While Condition="DoQuest(25122)" >
+			<Code File="InteractWith" CollectionDistance="300" NonCompeteDistance="0" InteractByUsingItemId="52484" PreInteractMountStrategy="Dismount" NumOfTimes="100" QuestId="25122" TerminateWhen="!HasItem(52484)" >
+				<HuntingGrounds>
+					<Hotspot  X="1916.72" Y="1811.404" Z="169.3334" />
+					<Hotspot X="1916.72" Y="1811.404" Z="169.3334" />
+					<Hotspot X="1764.874" Y="1807.102" Z="171.9759" />
+				</HuntingGrounds>
+				<PursuitList>
+					<PursueUnit Id="38441" PursueWhen="!IsObjectiveComplete(1, 25122)" />
+					<PursueUnit Id="38647" PursueWhen="!IsObjectiveComplete(2, 25122)" />
+					<PursueUnit Id="38746" PursueWhen="!IsObjectiveComplete(3, 25122)" />
+					<PursueUnit Id="38409" PursueWhen="!IsObjectiveComplete(4, 25122)" />
+					<PursueUnit Id="38745" PursueWhen="!IsObjectiveComplete(4, 25122)" />
+				</PursuitList>
+			</Code>
+
+			<Code File="InteractWith" MobId="202553" CollectionDistance="200" NonCompeteDistance="0" PreInteractMountStrategy="Dismount" QuestId="25122" TerminateWhen="GetItemCount(52484) &gt;= 9" >
+				<HuntingGrounds>
+					<Hotspot X="1753.922" Y="1950.973" Z="173.121" />
+					<Hotspot X="1781.128" Y="1818.59" Z="169.8928" />
+					<Hotspot X="1906.047" Y="1812.834" Z="171.0603" />
+				</HuntingGrounds>
+			</Code>
+		</While>
+
+		<While Condition="DoQuest(25123)" >
+			<Code File="KillUntilComplete" MobId="39194" QuestId="25123" X="1914.844" Y="1869.651" Z="173.4747" TerminateWhen="HasItem(52481) || Object(202574) != null" />
+			<Code File="InteractWith" MobId="202574" NonCompeteDistance="0" InteractByLooting="true" QuestId="25123" QuestObjectiveIndex="1" TerminateWhen="HasItem(52481) || Object(202574) == null" />
+			<Code File="InteractWith" MobId="39194" MobState="Dead" NonCompeteDistance="0" InteractByUsingItemId="52481" QuestId="25123" QuestObjectiveIndex="1" X="1914.844" Y="1869.651" Z="173.4747" TerminateWhen="!HasItem(52481)" />
+		</While>
+
+		<TurnIn QuestName="Morale Boost" QuestId="25122" TurnInName="Assistant Greely" TurnInId="39199" X="1913.416" Y="1856.041" Z="172.6707" />
+		<TurnIn QuestName="Throw It On the Ground!" QuestId="25123" TurnInName="Assistant Greely" TurnInId="39199" X="1913.416" Y="1856.041" Z="172.6707" />
+		<PickUp QuestName="Light at the End of the Tunnel" QuestId="25125" GiverName="Assistant Greely" GiverId="39199" X="1913.416" Y="1856.041" Z="172.6707" />
+		<TurnIn QuestName="Light at the End of the Tunnel" QuestId="25125" TurnInName="Mine Cart" TurnInId="39341" X="2056.071" Y="1841.222" Z="140.2392" />
+
+		<PickUp QuestName="Wild Mine Cart Ride" QuestId="25184" GiverName="Mine Cart" GiverId="39341" X="2056.071" Y="1841.222" Z="140.2392" />
+		<Code File="WaitTimer" WaitTime="19000" TerminateWhen="!Me.InVehicle || !HasQuest(25184)" />
+		<TurnIn QuestName="Wild Mine Cart Ride" QuestId="25184" TurnInName="Assistant Greely" TurnInId="38124" X="2368.677" Y="1928.872" Z="21.66338" />
+
+		<PickUp QuestName="Shredder Shutdown" QuestId="25200" GiverName="Assistant Greely" GiverId="38124" X="2368.677" Y="1928.872" Z="21.66338" />
+		<PickUp QuestName="The Ultimate Footbomb Uniform" QuestId="25201" GiverName="Coach Crosscheck" GiverId="38738" X="2369.342" Y="1926.065" Z="21.7128" />
+
+		<Code File="InteractWith" MobIds="202607, 202608" CollectionDistance="200" NonCompeteDistance="0" InteractByLooting="true" PreInteractMountStrategy="Dismount" QuestId="25201" QuestObjectiveIndex="1" >
+			<HuntingGrounds>
+				<Hotspot X="2340.478" Y="1938.956" Z="24.19395" />
+				<Hotspot X="2275.334" Y="1997.653" Z="26.03363" />
+				<Hotspot X="2239.712" Y="1917.913" Z="51.46482" />
+			</HuntingGrounds>
+		</Code>
+
+		<Code File="KillUntilComplete" MobId="39354" QuestId="25200" >
+			<HuntingGrounds>
+				<Hotspot X="2340.478" Y="1938.956" Z="24.19395" />
+				<Hotspot X="2275.334" Y="1997.653" Z="26.03363" />
+				<Hotspot X="2239.712" Y="1917.913" Z="51.46482" />
+			</HuntingGrounds>
+		</Code>
+
+		<TurnIn QuestName="Shredder Shutdown" QuestId="25200" TurnInName="Assistant Greely" TurnInId="38124" X="2367.433" Y="1928.708" Z="21.96053" />
+		<TurnIn QuestName="The Ultimate Footbomb Uniform" QuestId="25201" TurnInName="Coach Crosscheck" TurnInId="38738" X="2367.713" Y="1927.341" Z="21.99931" />
+
+		<PickUp QuestName="Release the Valves" QuestId="25204" GiverName="Assistant Greely" GiverId="38124" X="2367.713" Y="1927.341" Z="21.99931" />
+
+		<If Condition="Me.Gender == WoWGender.Female">
+			<PickUp QuestName="The Fastest Way to His Heart" QuestId="25202" GiverName="Izzy" GiverId="38647" X="2367.849" Y="1943.658" Z="20.80034" />
+		</If>
+		<If Condition="Me.Gender == WoWGender.Male">
+			<PickUp QuestName="What Kind of Name is Chip, Anyway?" QuestId="25203" GiverName="Ace" GiverId="38441" X="2362.836" Y="1938.9" Z="21.82179" />
+		</If>
+
+		<Code File="InteractWith" MobId="202609" NonCompeteDistance="0" PreInteractMountStrategy="Dismount" InteractBlacklistTimeInSeconds="1" QuestId="25204" QuestObjectiveIndex="1" X="2463.264" Y="2091.527" Z="14.60774" />
+		<Code File="InteractWith" MobId="202611" NonCompeteDistance="0" PreInteractMountStrategy="Dismount" InteractBlacklistTimeInSeconds="1" QuestId="25204" QuestObjectiveIndex="3" X="2484.557" Y="2099.877" Z="15.58433" />
+
+		<Code File="KillUntilComplete" MobId="39363" VariantQuestIds="25202, 25203" X="2465.947" Y="2126.697" Z="14.60732" />
+
+		<Code File="InteractWith" MobId="202612" NonCompeteDistance="0" PreInteractMountStrategy="Dismount" InteractBlacklistTimeInSeconds="1" QuestId="25204" QuestObjectiveIndex="4" X="2498.334" Y="2128.508" Z="14.91557" />
+		<Code File="InteractWith" MobId="202610" NonCompeteDistance="0" PreInteractMountStrategy="Dismount" InteractBlacklistTimeInSeconds="1" QuestId="25204" QuestObjectiveIndex="2" X="2526.253" Y="2116.541" Z="16.65523" />
+
+		<TurnIn QuestName="Release the Valves" QuestId="25204" TurnInName="Platform Control Panel" TurnInId="202613" X="2484.865" Y="2062.406" Z="14.77282" />
+
+		<PickUp QuestName="Good-bye, Sweet Oil" QuestId="25207" GiverName="Platform Control Panel" GiverId="202613" X="2485.129" Y="2063.439" Z="14.75358" />
+		<Code File="InteractWith" MobId="205061" NonCompeteDistance="0" PreInteractMountStrategy="Dismount" InteractBlacklistTimeInSeconds="1" QuestId="25207" QuestObjectiveIndex="1" X="2485.129" Y="2063.439" Z="14.75358" />
+
+		<If Condition="Me.Gender == WoWGender.Female">
+			<TurnIn QuestName="The Fastest Way to His Heart" QuestId="25202" TurnInName="Izzy" TurnInId="38647" X="2362.919" Y="1958.565" Z="21.68417" />
+		</If>
+		<If Condition="Me.Gender == WoWGender.Male">
+			<TurnIn QuestName="What Kind of Name is Chip, Anyway?" QuestId="25203" TurnInName="Ace" TurnInId="38441" X="2349.838" Y="1942.069" Z="23.31819" />
+		</If>
+
+		<TurnIn QuestName="Good-bye, Sweet Oil" QuestId="25207" TurnInName="Assistant Greely" TurnInId="38124" X="2368.543" Y="1929.037" Z="21.67896" />
+
+		<PickUp QuestName="The Slave Pits" QuestId="25213" GiverName="Assistant Greely" GiverId="38124" X="2368.543" Y="1929.037" Z="21.67896" />
+		<Code File="WaitTimer" WaitTime="35000" TerminateWhen="!Me.InVehicle || !HasQuest(25213)" />
+		<TurnIn QuestName="The Slave Pits" QuestId="25213" TurnInName="Sassy Hardwrench" TurnInId="38387" X="2118.834" Y="2410.163" Z="46.51616" />
+
+		<If Condition="Me.Gender == WoWGender.Female">
+			<PickUp QuestName="What Kind of Name is Candy, Anyway?" QuestId="25244" GiverName="Sassy Hardwrench" GiverId="38387" X="2118.834" Y="2410.163" Z="46.51616" />
+		</If>
+		<If Condition="Me.Gender == WoWGender.Male">
+			<PickUp QuestName="She Loves Me, She Loves Me NOT!" QuestId="25243" GiverName="Sassy Hardwrench" GiverId="38387" X="2118.834" Y="2410.163" Z="46.51616" />
+		</If>
+
+		<PickUp QuestName="Escape Velocity" QuestId="25214" GiverName="Hobart Grapplehammer" GiverId="38120" X="2118.759" Y="2405.988" Z="45.75505" />
+
+		<Code File="InteractWith" MobId="39456" CollectionDistance="200" NonCompeteDistance="0" PreInteractMountStrategy="Dismount" QuestId="25214" QuestObjectiveIndex="1" >
+			<HuntingGrounds>
+				<Hotspot X="2113.706" Y="2480.272" Z="10.9667" />
+				<Hotspot X="2097.054" Y="2583.052" Z="1.35285" />
+			</HuntingGrounds>
+		</Code>
+
+		<Code File="KillUntilComplete" MobId="39426" VariantQuestIds="25243, 25244" X="2059.649" Y="2591.166" Z="15.85785" />
+
+		<TurnIn QuestName="Escape Velocity" QuestId="25214" TurnInName="Hobart Grapplehammer" TurnInId="38120" X="2117.256" Y="2403.329" Z="45.83505" />
+
+		<If Condition="Me.Gender == WoWGender.Female">
+			<TurnIn QuestName="What Kind of Name is Candy, Anyway?" QuestId="25244" TurnInName="Sassy Hardwrench" TurnInId="38387" X="2118.583" Y="2410.79" Z="46.68458" />
+		</If>
+		<If Condition="Me.Gender == WoWGender.Male">
+			<TurnIn QuestName="She Loves Me, She Loves Me NOT!" QuestId="25243" TurnInName="Sassy Hardwrench" TurnInId="38387" X="2118.738" Y="2411.008" Z="46.75333" />
+		</If>
+
+		<PickUp QuestName="Final Confrontation" QuestId="25251" GiverName="Sassy Hardwrench" GiverId="38387" X="2118.583" Y="2410.79" Z="46.68458" />
+		<While Condition="DoQuest(25251)" >
+			<DisableBehavior Name="All" />
+			<If Condition="!Me.HasAura(&quot;The Ultimate Footbomb Uniform&quot;)" >
+				<Code File="InteractWith" MobId="39592" NonCompeteDistance="0" PreInteractMountStrategy="Dismount" InteractBlacklistTimeInSeconds="1" QuestId="25251" QuestObjectiveIndex="2" X="2123.724" Y="2403.597" Z="45.00877" TerminateWhen="Me.InVehicle" />
+				<Code File="FlyTo" MovementBy="NavigatorOnly" X="2397.013" Y="2525.716" Z="0.8408971" TerminateWhen="!Me.InVehicle" />
+				<Code File="MyCTM" X="2314.849" Y="2445.516" Z="17.20103" TerminateWhen="Unit(39582) != null" />
+			</If>
+			<Code File="SpecificQuests\25251-LostIsles-FinalConfrontation"/>
+			<Code File="EjectVeh" />
+			<EnableBehavior Name="All" />
+		</While>
+		<TurnIn QuestName="Final Confrontation" QuestId="25251" TurnInName="Sassy Hardwrench" TurnInId="38387" X="2119.353" Y="2411.111" Z="46.8313" />
+
+		<PickUp QuestName="Victory!" QuestId="25265" GiverName="Sassy Hardwrench" GiverId="38387" X="2119.353" Y="2411.111" Z="46.8313" />
+		<TurnIn QuestName="Victory!" QuestId="25265" TurnInName="Thrall" TurnInId="38935" X="2355.281" Y="2482.325" Z="11.16552" />
+
+		<PickUp QuestName="Warchief&apos;s Emissary" QuestId="25266" GiverName="Thrall" GiverId="38935" X="2355.281" Y="2482.325" Z="11.16552" />
+		<While Condition="Me.MapId == 648" >
+			<Code File="InteractWith" MobId="38387" GossipOptions="1" NonCompeteDistance="0" PreInteractMountStrategy="Dismount" X="2386.493" Y="2462.799" Z="11.42851" TerminateWhen="Me.MapId != 648" />
+		</While>
+		<TurnIn QuestName="Warchief&apos;s Emissary" QuestId="25266" TurnInName="Darkspear Loyalist" TurnInId="86884" X="1466.683" Y="-5011.915" Z="11.71758" />
+
+		<PickUp QuestName="Message for Saurfang" QuestId="25267" GiverName="Darkspear Loyalist" GiverId="86884" X="1436.401" Y="-4980.012" Z="14.5286" />
+		<Code File="WaitTimer" WaitTime="80000" TerminateWhen="!Me.InVehicle || !HasQuest(25267)" />
+		<TurnIn QuestName="Message for Saurfang" QuestId="25267" TurnInName="High Overlord Saurfang" TurnInId="14720" X="1661.55" Y="-4346.868" Z="26.33557" />
+
+		<Code File="LoadProfile" ProfileName="..\1-41 Autoloader.xml" />
+
+	</QuestOrder>
+</HBProfile>

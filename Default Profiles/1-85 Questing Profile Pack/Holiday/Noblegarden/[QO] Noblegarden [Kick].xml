@@ -1,0 +1,143 @@
+﻿<HBProfile>
+	<Name>[QO] Noblegarden [Kick]</Name>
+   
+	<MinLevel>1</MinLevel>
+	<MaxLevel>86</MaxLevel>
+   
+	<MinDurability>0.2</MinDurability>
+	<MinFreeBagSlots>2</MinFreeBagSlots>
+	
+	<MailGrey>False</MailGrey>
+	<MailWhite>False</MailWhite>
+	<MailGreen>False</MailGreen>
+	<MailBlue>True</MailBlue>
+	<MailPurple>True</MailPurple>
+   
+	<SellGrey>True</SellGrey>
+	<SellWhite>True</SellWhite>
+	<SellGreen>True</SellGreen>
+	<SellBlue>False</SellBlue>
+	<SellPurple>False</SellPurple>
+   
+	<TargetElites>True</TargetElites>
+
+	<AvoidMobs>
+	</AvoidMobs>
+	<Blackspots>
+		<Blackspot X="-9455.722" Y="45.24489" Z="56.7141" Radius="2.081783" /> <!-- goldshire mailbox -->
+	</Blackspots>
+
+	<Mailboxes>
+
+	</Mailboxes>
+ 
+	<Vendors>
+
+	</Vendors>
+	
+	<Quest Id="13480" Name="The Great Egg Hunt">
+		<Objective Type="CollectItem" ItemId="44806" CollectCount="20">
+			<CollectFrom>
+			</CollectFrom>
+			<Hotspots>
+				<Hotspot X="-9446.031" Y="47.44922" Z="57.09554" />
+				<Hotspot X="-9481.134" Y="48.15244" Z="57.14623" />
+				<Hotspot X="-9490.59" Y="2.03937" Z="58.10727" />
+				<Hotspot X="-9474.42" Y="-13.74485" Z="56.88443" />
+				<Hotspot X="-9450.656" Y="-16.51215" Z="58.20425" />
+				<Hotspot X="-9445.474" Y="46.28344" Z="57.19984" />
+				<Hotspot X="-9441.979" Y="72.80905" Z="56.31504" />
+				<Hotspot X="-9416.487" Y="126.8291" Z="59.74757" />
+				<Hotspot X="-9480.949" Y="135.5611" Z="56.60959" />
+				<Hotspot X="-9485.315" Y="59.19498" Z="56.2053" />
+			</Hotspots>
+		</Objective>
+	</Quest>
+
+	<Quest Id="13502" Name="A Tisket, a Tasket, a Noblegarden Basket">
+		<Objective Type="CollectItem" ItemId="44791" CollectCount="10">
+			<CollectFrom>
+			</CollectFrom>
+			<Hotspots>
+				<Hotspot X="-9446.031" Y="47.44922" Z="57.09554" />
+				<Hotspot X="-9481.134" Y="48.15244" Z="57.14623" />
+				<Hotspot X="-9490.59" Y="2.03937" Z="58.10727" />
+				<Hotspot X="-9474.42" Y="-13.74485" Z="56.88443" />
+				<Hotspot X="-9450.656" Y="-16.51215" Z="58.20425" />
+				<Hotspot X="-9445.474" Y="46.28344" Z="57.19984" />
+				<Hotspot X="-9441.979" Y="72.80905" Z="56.31504" />
+				<Hotspot X="-9416.487" Y="126.8291" Z="59.74757" />
+				<Hotspot X="-9480.949" Y="135.5611" Z="56.60959" />
+				<Hotspot X="-9485.315" Y="59.19498" Z="56.2053" />
+			</Hotspots>
+		</Objective>
+	</Quest>
+
+	<QuestOrder>
+
+	<CustomBehavior File="UserSettings" LootMobs="True" PullDistance="1" UseMount="False" TrainNewSkills="False" LearnFlightPaths="False" KillBetweenHotspots="True" LogoutForInactivity="False" />
+
+	
+			<If Condition="((!HasQuest(13484)) &amp;&amp; (!IsQuestCompleted(13484)))" >
+				<CustomBehavior File="FlyTo" X="-8831.468" Y="555.3558" Z="95.4536" />
+				<CustomBehavior File="ForcedDismount" />
+		<PickUp QuestName="Spring Collectors" QuestId="13484" GiverName="Human Commoner" GiverId="18927" X="-8831.468" Y="555.3558" Z="95.4536" />
+			</If>
+			<If Condition="((HasQuest(13484)) &amp;&amp; (IsQuestCompleted(13484)))" >
+				<CustomBehavior File="FlyTo" X="-9449.217" Y="46.45219" Z="57.54412" />
+				<CustomBehavior File="ForcedDismount" />
+		<TurnIn QuestName="Spring Collectors" QuestId="13484" TurnInName="Spring Collector" TurnInId="32799" />
+		<PickUp QuestName="The Great Egg Hunt" QuestId="13480" GiverName="Spring Collector" GiverId="32799" X="-9449.217" Y="46.45219" Z="57.54412" />
+			</If>
+			<If Condition="((!HasQuest(13480)) &amp;&amp; (!IsQuestCompleted(13480)))" >
+				<CustomBehavior File="FlyTo" X="-9449.217" Y="46.45219" Z="57.54412" />
+				<CustomBehavior File="ForcedDismount" />
+		<PickUp QuestName="The Great Egg Hunt" QuestId="13480" GiverName="Spring Collector" GiverId="32799" X="-9449.217" Y="46.45219" Z="57.54412" />
+			</If>
+			<If Condition="((!HasQuest(13502)) &amp;&amp; (!IsQuestCompleted(13502)))" >
+				<CustomBehavior File="FlyTo" X="-9449.217" Y="46.45219" Z="57.54412" />
+				<CustomBehavior File="ForcedDismount" />
+		<PickUp QuestName="A Tisket, a Tasket, a Noblegarden Basket" QuestId="13502" GiverName="Noblegarden Vendor" GiverId="32836" />
+			</If>
+			<!-- make sure the egg collector plugin is enabled -->
+			<If Condition="((HasQuest(13480)) &amp;&amp; (!IsQuestCompleted(13480)))" >
+				<Objective QuestName="The Great Egg Hunt" QuestId="13480" Type="CollectItem" ItemId="44806" CollectCount="20" />
+			</If>
+			<If Condition="((HasQuest(13502)) &amp;&amp; (!IsQuestCompleted(13502)))" >
+				<Objective QuestName="A Tisket, a Tasket, a Noblegarden Basket" QuestId="13502" Type="CollectItem" ItemId="44791" CollectCount="10" />
+			</If>
+			<If Condition="((HasQuest(13480)) &amp;&amp; (IsQuestCompleted(13480)))" >
+				<CustomBehavior File="FlyTo" X="-9449.217" Y="46.45219" Z="57.54412" />
+				<CustomBehavior File="ForcedDismount" />
+		<TurnIn QuestName="The Great Egg Hunt" QuestId="13480" TurnInName="Spring Collector" TurnInId="32799" X="-9449.217" Y="46.45219" Z="57.54412" />	
+			</If>
+			<If Condition="((HasQuest(13502)) &amp;&amp; (IsQuestCompleted(13502)))" >
+				<CustomBehavior File="FlyTo" X="-9449.217" Y="46.45219" Z="57.54412" />
+				<CustomBehavior File="ForcedDismount" />
+		<TurnIn QuestName="A Tisket, a Tasket, a Noblegarden Basket" QuestId="13502" TurnInName="Noblegarden Vendor" TurnInId="32836" X="-9451.579" Y="41.67638" Z="57.05564" />
+			</If>
+	
+	
+			<SetGrindArea>
+				<GrindArea>
+					<Factions></Factions>
+					<Hotspots>
+						<Hotspot X="-9446.031" Y="47.44922" Z="57.09554" />
+						<Hotspot X="-9481.134" Y="48.15244" Z="57.14623" />
+						<Hotspot X="-9490.59" Y="2.03937" Z="58.10727" />
+						<Hotspot X="-9474.42" Y="-13.74485" Z="56.88443" />
+						<Hotspot X="-9450.656" Y="-16.51215" Z="58.20425" />
+						<Hotspot X="-9445.474" Y="46.28344" Z="57.19984" />
+						<Hotspot X="-9441.979" Y="72.80905" Z="56.31504" />
+						<Hotspot X="-9416.487" Y="126.8291" Z="59.74757" />
+						<Hotspot X="-9480.949" Y="135.5611" Z="56.60959" />
+						<Hotspot X="-9485.315" Y="59.19498" Z="56.2053" />
+					</Hotspots>
+				</GrindArea>
+			</SetGrindArea>
+		<GrindTo Condition="True" GoalText="Getting Eggs" />
+	
+	
+	</QuestOrder>
+
+</HBProfile>

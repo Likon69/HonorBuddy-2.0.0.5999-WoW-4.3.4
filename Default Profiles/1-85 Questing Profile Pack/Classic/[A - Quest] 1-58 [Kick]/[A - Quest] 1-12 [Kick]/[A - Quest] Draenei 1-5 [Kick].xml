@@ -1,0 +1,319 @@
+<HBProfile>
+	<Name>[A - Quest] Draenei 1-5 [Kick]</Name>
+	<MinLevel>1</MinLevel>
+	<MaxLevel>86</MaxLevel>
+  
+	<MinDurability>0.2</MinDurability>
+	<MinFreeBagSlots>2</MinFreeBagSlots>
+  
+	<MailGrey>False</MailGrey>
+	<MailWhite>True</MailWhite>
+	<MailGreen>True</MailGreen>
+	<MailBlue>True</MailBlue>
+	<MailPurple>True</MailPurple>
+  
+	<SellGrey>True</SellGrey>
+	<SellWhite>True</SellWhite>
+	<SellGreen>True</SellGreen>
+	<SellBlue>False</SellBlue>
+	<SellPurple>False</SellPurple>
+  
+	<TargetElites>False</TargetElites>
+	<!-- <ContinentID>0</ContinentID> -->
+  
+	<AvoidMobs>
+		<Mob Name="Training Dummy" Entry="44703" /> <!-- Ammen Vale -->
+	</AvoidMobs>
+	
+	<Blackspots>
+		<!-- Ammen Vale Blackspots -->
+		<Blackspot X="-4181.443" Y="-13735.03" Z="74.70583" Radius="4.272882" />
+		<Blackspot X="-4058.534" Y="-13712.52" Z="73.21595" Radius="4.018531" />
+		<Blackspot X="-4179.901" Y="-13734.12" Z="74.52544" Radius="3.264168" /> <!-- tent -->
+		<!-- Azure Watch Blackspots -->
+		<Blackspot X="-4181.443" Y="-13735.03" Z="74.70583" Radius="4.272882" />
+		<Blackspot X="-4058.534" Y="-13712.52" Z="73.21595" Radius="4.018531" />
+		<Blackspot X="-4182.085" Y="-12499.44" Z="44.35985" Radius="4.693728" />
+		<Blackspot X="-4183.63" Y="-13736.32" Z="74.41099" Radius="3.822758" />
+		<Blackspot X="-4108.801" Y="-12461.35" Z="39.65593" Radius="9.141472" />
+		<Blackspot X="-4185.08" Y="-13738.31" Z="74.88866" Radius="5.165656" />
+		<Blackspot X="-3122.21" Y="-11914.92" Z="-0.343888" Radius="10.50159" />
+	</Blackspots>
+	
+	<Mailboxes>
+		<Mailbox X="-4047.621" Y="-13778.11" Z="74.96189" /><!-- Ammen Vale Mailbox -->
+		<Mailbox X="-4148.807" Y="-12490.85" Z="44.4998" /> <!-- Azure Watch Mailbox -->
+		<Mailbox X="-2045.372" Y="-11873.75" Z="46.75649" /> <!-- Blood Watch Mailbox -->
+	</Mailboxes>
+	
+	<Vendors>
+		<!-- Ammen Vale Vendors -->
+		<Vendor Name="Ryosh" Entry="16920" Type="Food" X="-4174.875" Y="-13726.35" Z="74.55257" />
+		<Vendor Name="Aurok" Entry="16917" Type="Repair" X="-4072.689" Y="-13755.99" Z="74.77484" />
+		<!-- Azure Watch Vendors -->
+		<Vendor Name="Caregiver Chellan" Entry="16553" Type="Food" X="-4127.806" Y="-12467.68" Z="44.08744" />
+		<Vendor Name="Otonambusi" Entry="18810" Type="Food" X="-4209.451" Y="-12456.21" Z="45.54395" />
+		<Vendor Name="Nabek" Entry="17930" Type="Repair" X="-4235.529" Y="-12518.16" Z="46.20815" />
+		<Vendor Name="Diktynna" Entry="17101" Type="Sell" X="-4266.344" Y="-12985.36" Z="2.272953" /> <!-- Fishing Guy -->
+		<!-- Kessel's Crossing Vendors -->
+		<Vendor Name="Little Azimi" Entry="21145" Type="Food" X="-2655.952" Y="-12132.31" Z="16.91483" />
+		<!-- Odesyus' Landing Vendors -->
+		<Vendor Name="Blacksmith Calypso" Entry="17245" Type="Repair" X="-4726.288" Y="-12387" Z="11.09189" />
+		<Vendor Name="Logan Daniel" Entry="17489" Type="Food" X="-4720.671" Y="-12381.52" Z="10.99136" />
+		<!-- Blood Watch Vendors -->
+		<Vendor Name="Caregiver Topher Loaal" Entry="17553" Type="Food" X="-2059.199" Y="-11897.04" Z="45.65863" />
+		<Vendor Name="Beega" Entry="17667" Type="Repair" X="-1990.958" Y="-11814.47" Z="54.50079" />
+		<!-- Ammen Vale Trainers -->
+		<Vendor Name="Aurelon" Entry="16501" Type="Train" TrainClass="Paladin" X="-4102.832" Y="-13743.94" Z="74.63537" />
+		<Vendor Name="Valaatu" Entry="16500" Type="Train" TrainClass="Mage" X="-4117.474" Y="-13739.6" Z="74.63228" />
+		<Vendor Name="Firmanvaar" Entry="17089" Type="Train" TrainClass="Shaman" X="-4127.279" Y="-13727.25" Z="74.67709" />
+		<Vendor Name="Kore" Entry="16503" Type="Train" TrainClass="Warrior" X="-4136.041" Y="-13739.75" Z="74.56142" />
+		<Vendor Name="Keilnei" Entry="16499" Type="Train" TrainClass="Hunter" X="-4143.191" Y="-13752.03" Z="74.54958" />
+		<Vendor Name="Zalduun" Entry="16502" Type="Train" TrainClass="Priest" X="-4111.922" Y="-13761.75" Z="73.56821" />
+		<!-- Azure Watch Trainers -->
+		<Vendor Name="Tullas" Entry="17483" Type="Train" TrainClass="Paladin" X="-4138.975" Y="-12468.51" Z="44.58279" />
+		<Vendor Name="Semid" Entry="17481" Type="Train" TrainClass="Mage" X="-4149.624" Y="-12530.11" Z="45.10626" />
+		<Vendor Name="Tuluun" Entry="17212" Type="Train" TrainClass="Shaman" X="-4162.33" Y="-12456.06" Z="44.26005" />
+		<Vendor Name="Ruada" Entry="17480" Type="Train" TrainClass="Warrior" X="-4165.045" Y="-12536.36" Z="44.83466" />
+		<Vendor Name="Acteon" Entry="17110" Type="Train" TrainClass="Hunter" X="-4203.647" Y="-12526.49" Z="45.44617" />
+		<Vendor Name="Guvan" Entry="17482" Type="Train" TrainClass="Priest" X="-4131.655" Y="-12478.64" Z="44.57547" />
+		<!-- Blood Watch Trainers -->
+		<Vendor Name="Adrihi" Entry="49964" Type="Train" TrainClass="Shaman" X="-2009.792" Y="-11809.37" Z="54.70385" />
+		<Vendor Name="Delemm" Entry="49957" Type="Train" TrainClass="Paladin" X="-2008.361" Y="-11811.92" Z="54.40524" />
+		<Vendor Name="Andrenatol" Entry="49962" Type="Train" TrainClass="Priest" X="-2006.564" Y="-11809.5" Z="55.30182" />
+		<Vendor Name="Viik" Entry="49961" Type="Train" TrainClass="Warrior" X="-1929.83" Y="-11855.97" Z="51.53552" />
+		<Vendor Name="Lennah" Entry="49959" Type="Train" TrainClass="Mage" X="-1927.17" Y="-11858.4" Z="51.45254" />
+		<Vendor Name="Shaniri" Entry="49966" Type="Train" TrainClass="Hunter" X="-2062.195" Y="-11867.56" Z="48.93736" />
+	</Vendors>
+	
+	<!-- Quest Overrides -->
+	<Quest Id="9303" Name="Inoculation">
+	<Objective QuestName="Inoculation" QuestId="9303" Type="UseItem" ItemId="22962" TargetId="16518" TargetType="Npc" UseCount="6">
+	  <CollectFrom />
+	  <MaximumHotspotTime>999999</MaximumHotspotTime>
+	  <Hotspots>
+		<Hotspot X="-4467.302" Y="-13674.04" Z="47.267" />
+		<Hotspot X="-4388.333" Y="-13714.73" Z="50.19876" />
+		<Hotspot X="-4388.255" Y="-13785.69" Z="52.16127" />
+		<Hotspot X="-4386.932" Y="-13788.55" Z="52.16208" />
+		<Hotspot X="-4356.977" Y="-13831.04" Z="69.22269" />
+		<Hotspot X="-4392.823" Y="-13959.64" Z="162.4714" />
+	  </Hotspots>
+	</Objective>
+	</Quest>
+	<Quest Id="10324" Name="The Great Moongraze Hunt">
+	<Objective QuestName="The Great Moongraze Hunt" QuestId="10324" Type="CollectItem" Name="Moongraze Buck Hide" ItemId="23677" CollectCount="6">
+	  <CollectFrom>
+		<Mob Id="17201" Name="Moongraze Buck" />
+	  </CollectFrom>
+	  <Hotspots>
+		<Hotspot X="-4048.356" Y="-12559.36" Z="41.83032" />
+		<Hotspot X="-3934.52" Y="-12469.18" Z="19.05866" />
+		<Hotspot X="-3851.509" Y="-12442.73" Z="5.32139" />
+		<Hotspot X="-3749.775" Y="-12445.84" Z="3.563402" />
+		<Hotspot X="-3681.186" Y="-12532.42" Z="7.494638" />
+		<Hotspot X="-3637.919" Y="-12582.95" Z="17.51973" />
+		<Hotspot X="-3630.722" Y="-12706.25" Z="6.457384" />
+		<Hotspot X="-3783.395" Y="-12612.53" Z="4.519953" />
+		<Hotspot X="-3791.334" Y="-12563.11" Z="4.373688" />
+		<Hotspot X="-3806.358" Y="-12476.8" Z="3.802488" />
+	  </Hotspots>
+	</Objective>
+	</Quest>
+	<Quest Id="9454" Name="The Great Moongraze Hunt">
+	<Objective QuestName="The Great Moongraze Hunt" QuestId="9454" Type="CollectItem" Name="Moongraze Stag Tenderloin" ItemId="23676" CollectCount="6">
+	  <CollectFrom>
+		<Mob Id="17200" Name="Moongraze Stag" />
+	  </CollectFrom>
+	  <Hotspots>
+		<Hotspot X="-4387.631" Y="-12477.09" Z="8.962174" />
+		<Hotspot X="-4327.606" Y="-12556.02" Z="25.63978" />
+		<Hotspot X="-4270.523" Y="-12646.27" Z="28.65309" />
+		<Hotspot X="-4293.799" Y="-12695.7" Z="23.44712" />
+		<Hotspot X="-4330.974" Y="-12775.25" Z="15.64985" />
+		<Hotspot X="-4325.724" Y="-12860.61" Z="9.213561" />
+		<Hotspot X="-4428.599" Y="-12855.88" Z="15.90868" />
+		<Hotspot X="-4506.166" Y="-12870.03" Z="10.50239" />
+		<Hotspot X="-4585.837" Y="-12763.38" Z="6.307399" />
+		<Hotspot X="-4593.789" Y="-12691.8" Z="4.851169" />
+		<Hotspot X="-4579.47" Y="-12607.57" Z="14.75208" />
+		<Hotspot X="-4543.436" Y="-12562.2" Z="12.32902" />
+		<Hotspot X="-4442.113" Y="-12512.39" Z="5.738379" />
+		<Hotspot X="-4443.318" Y="-12641.11" Z="17.06153" />
+	  </Hotspots>
+	</Objective>
+	</Quest>
+	<Quest Id="9463" Name="Medicinal Purpose">
+	<Objective QuestName="Medicinal Purpose" QuestId="9463" Type="CollectItem" Name="Root Trapper Vine" ItemId="23685" CollectCount="8">
+	  <CollectFrom>
+		<Mob Id="17196" Name="Root Trapper" />
+	  </CollectFrom>
+	  <Hotspots>
+		<Hotspot X="-4387.631" Y="-12477.09" Z="8.962174" />
+		<Hotspot X="-4327.606" Y="-12556.02" Z="25.63978" />
+		<Hotspot X="-4270.523" Y="-12646.27" Z="28.65309" />
+		<Hotspot X="-4293.799" Y="-12695.7" Z="23.44712" />
+		<Hotspot X="-4330.974" Y="-12775.25" Z="15.64985" />
+		<Hotspot X="-4325.724" Y="-12860.61" Z="9.213561" />
+		<Hotspot X="-4428.599" Y="-12855.88" Z="15.90868" />
+		<Hotspot X="-4506.166" Y="-12870.03" Z="10.50239" />
+		<Hotspot X="-4585.837" Y="-12763.38" Z="6.307399" />
+		<Hotspot X="-4593.789" Y="-12691.8" Z="4.851169" />
+		<Hotspot X="-4579.47" Y="-12607.57" Z="14.75208" />
+		<Hotspot X="-4543.436" Y="-12562.2" Z="12.32902" />
+		<Hotspot X="-4442.113" Y="-12512.39" Z="5.738379" />
+		<Hotspot X="-4443.318" Y="-12641.11" Z="17.06153" />
+	  </Hotspots>
+	</Objective>
+	</Quest>
+	<Quest Id="9506" Name="A Small Start">
+		<Objective Type="CollectItem" ItemId="23738" CollectCount="1">
+			<CollectFrom> <!-- Compass -->
+				<GameObject Name="Nautical Compass" Id="181675" />
+			</CollectFrom>
+			<Hotspots>
+				<Hotspot X="-4628.653" Y="-12923.51" Z="8.542675" />
+			</Hotspots>
+		</Objective>
+		<Objective Type="CollectItem" ItemId="23739" CollectCount="1">
+			<CollectFrom>
+				<GameObject Name="Nautical Map" Id="181674" />
+			</CollectFrom>
+			<Hotspots>
+				<Hotspot X="-4595.625" Y="-12882.04" Z="6.813238" />
+			</Hotspots>
+		</Objective>
+	</Quest>
+	<Quest Id="9515" Name="Warlord Sriss'tiz">
+		<Objective Type="KillMob" MobId="17298" KillCount="1">
+			<Hotspots>
+				<Hotspot X="-4823.359" Y="-11526.78" Z="-34.7664" />
+			</Hotspots>
+		</Objective>
+	</Quest>
+
+
+	<!-- End of Quest Overrides -->
+
+	<QuestOrder IgnoreCheckPoints="True" >
+	
+			<!-- Azuremyst Isle Quests -->
+			<CustomBehavior File="Message" Text="Compiling Azuremyst Isle Quests" LogColor="Green" />
+
+			<!-- Ammen Vale Quests -->
+			<CustomBehavior File="Message" Text="Compiling Ammen Vale Quests" LogColor="Cornflowerblue" />
+
+	<CustomBehavior File="UserSettings" LootMobs="True" TrainNewSkills="True" LearnFlightPaths="True" UseFlightPaths="True" />
+	
+		<!-- missing class specific quests and missing Rescue the Survivors! faction-specific quest -->
+		
+		<PickUp QuestName="You Survived!" QuestId="9279" GiverId="16475" GiverName="Megelon" X="-3961.696" Y="-13926.94" Z="100.8916"  />
+		<TurnIn QuestName="You Survived!" QuestId="9279" TurnInId="16477" TurnInName="Proenitus" X="-4039.4" Y="-13773.65" Z="75.22622" />
+		<PickUp QuestName="Replenishing the Healing Crystals" QuestId="9280" GiverId="16477" GiverName="Proenitus" X="-4039.4" Y="-13773.65" Z="75.22622" />
+			<Objective QuestName="Replenishing the Healing Crystals" QuestId="9280" Type="CollectItem" Name="Vial of Moth Blood" ItemId="22889" CollectCount="6" />
+		<TurnIn QuestName="Replenishing the Healing Crystals" QuestId="9280" TurnInId="16477" TurnInName="Proenitus" X="-4039.4" Y="-13773.65" Z="75.22622" />
+		<PickUp QuestName="Urgent Delivery!" QuestId="9409" GiverId="16477" GiverName="Proenitus" X="-4039.4" Y="-13773.65" Z="75.22622" />
+		<TurnIn QuestName="Urgent Delivery!" QuestId="9409" TurnInId="16502" TurnInName="Zalduun" X="-4111.922" Y="-13761.75" Z="73.56821" />
+		<PickUp QuestName="Botanist Taerix" QuestId="9371" GiverId="16477" GiverName="Proenitus" X="-4039.4" Y="-13773.65" Z="75.22622" />
+		<TurnIn QuestName="Botanist Taerix" QuestId="9371" TurnInId="16514" TurnInName="Botanist Taerix" X="-4057.034" Y="-13721.6" Z="72.8333" />
+		<PickUp QuestName="Volatile Mutations" QuestId="10302" GiverId="16514" GiverName="Botanist Taerix" X="-4057.034" Y="-13721.6" Z="72.8333" />
+			<Objective QuestName="Volatile Mutations" QuestId="10302" Type="KillMob" Name="Volatile Mutation" MobId="16516" KillCount="8" />
+		<TurnIn QuestName="Volatile Mutations" QuestId="10302" TurnInId="16514" TurnInName="Botanist Taerix" X="-4057.034" Y="-13721.6" Z="72.8333" />
+		<PickUp QuestName="What Must Be Done..." QuestId="9293" GiverId="16514" GiverName="Botanist Taerix" X="-4057.034" Y="-13721.6" Z="72.8333" />
+		<PickUp QuestName="Botanical Legwork" QuestId="9799" GiverId="20233" GiverName="Apprentice Vishael" X="-4059.43" Y="-13718.84" Z="72.88788" />
+		<PickUp QuestName="Spare Parts" QuestId="9305" GiverId="17071" GiverName="Technician Zhanaa" X="-4184.554" Y="-13733.05" Z="74.13895" />
+		<PickUp QuestName="Inoculation" QuestId="9303" GiverId="16535" GiverName="Vindicator Aldar" X="-4195.092" Y="-13735.76" Z="73.72334" />
+			<Objective QuestName="Botanical Legwork" QuestId="9799" Type="CollectItem" Name="Corrupted Flower" ItemId="24416" CollectCount="3" />
+			<Objective QuestName="What Must Be Done..." QuestId="9293" Type="CollectItem" Name="Lasher Sample" ItemId="22934" CollectCount="10" />
+		<TurnIn QuestName="Botanical Legwork" QuestId="9799" TurnInId="20233" TurnInName="Apprentice Vishael" X="-4059.43" Y="-13718.84" Z="72.88788" />
+		<TurnIn QuestName="What Must Be Done..." QuestId="9293" TurnInId="16514" TurnInName="Botanist Taerix" X="-4057.034" Y="-13721.6" Z="72.8333" />
+		<PickUp QuestName="Healing the Lake" QuestId="9294" GiverId="16514" GiverName="Botanist Taerix" X="-4057.034" Y="-13721.6" Z="72.8333" />
+			<While Condition="((HasQuest(9294)) &amp;&amp; (!IsQuestCompleted(9294)))" >
+				<UseItem QuestId="9294" ItemId="22955" TargetId="181433" TargetType="Gameobject" X="-4386.737" Y="-13646.35" Z="38.52915" />
+			</While>
+			<If Condition="((HasQuest(9303)) &amp;&amp; (!IsQuestCompleted(9303)))" >
+				<CustomBehavior File="UseItemOn" QuestId="9303" MobId="16518" ItemId="22962" NumOfTimes="100" WaitTime="5000" Range="8" CollectionDistance="1000" X="-4412.28" Y="-13715.37" Z="52.34776" />
+			</If>
+			<Objective QuestName="Spare Parts" QuestId="9305" Type="CollectItem" Name="Emitter Spare Part" ItemId="22978" CollectCount="4" />
+		<TurnIn QuestName="Healing the Lake" QuestId="9294" TurnInId="16514" TurnInName="Botanist Taerix" X="-4057.034" Y="-13721.6" Z="72.8333" />
+		<TurnIn QuestName="Spare Parts" QuestId="9305" TurnInId="17071" TurnInName="Technician Zhanaa" X="-4184.554" Y="-13733.05" Z="74.13895" />
+		<TurnIn QuestName="Inoculation" QuestId="9303" TurnInId="16535" TurnInName="Vindicator Aldar" X="-4195.092" Y="-13735.76" Z="73.72334" />
+		<PickUp QuestName="The Missing Scout" QuestId="9309" GiverId="16535" GiverName="Vindicator Aldar" X="-4195.092" Y="-13735.76" Z="73.72334" />
+			 <!-- female paladin - does this work for all classes? or no?  I saw like 10 spellid's for this damn spell (gift of the naaru); 220xp isn't much
+		<PickUp QuestName="Rescue the Survivors!" QuestId="9283" GiverName="Zalduun" GiverId="16502" />
+			<CustomBehavior File="CastSpellOn" QuestId="9283" SpellId="59542" MobId="16483" NumOfTimes="1" MobHpPercentLeft="10" MinRange="5" X="-3966.271" Y="-13832.96" Z="81.91421" />
+		<TurnIn QuestName="Rescue the Survivors!" QuestId="9283" TurnInName="Zalduun" TurnInId="16502" />
+			 -->
+			 <!-- ignoring class specific quests atm -->
+		<TurnIn QuestName="The Missing Scout" QuestId="9309" TurnInId="16546" TurnInName="Tolaan" X="-4445.659" Y="-13430.91" Z="51.25468" />
+		<PickUp QuestName="The Blood Elves" QuestId="10303" GiverId="16546" GiverName="Tolaan" X="-4445.659" Y="-13430.91" Z="51.25468" />
+			<Objective QuestName="The Blood Elves" QuestId="10303" Type="KillMob" Name="Blood Elf Scout" MobId="16521" KillCount="10" />
+		<TurnIn QuestName="The Blood Elves" QuestId="10303" TurnInId="16546" TurnInName="Tolaan" X="-4445.659" Y="-13430.91" Z="51.25468" />
+		<PickUp QuestName="Blood Elf Spy" QuestId="9311" GiverId="16546" GiverName="Tolaan" X="-4445.659" Y="-13430.91" Z="51.25468" />
+			<Objective QuestName="Blood Elf Spy" QuestId="9311" Type="KillMob" Name="Surveyor Candress" MobId="16522" KillCount="1" />
+		<TurnIn QuestName="Blood Elf Spy" QuestId="9311" TurnInId="16535" TurnInName="Vindicator Aldar" X="-4195.092" Y="-13735.76" Z="73.72334" />
+		<PickUp QuestName="The Emitter" QuestId="9312" GiverId="16535" GiverName="Vindicator Aldar" X="-4195.092" Y="-13735.76" Z="73.72334" />
+		<TurnIn QuestName="The Emitter" QuestId="9312" TurnInId="17071" TurnInName="Technician Zhanaa" X="-4184.554" Y="-13733.05" Z="74.13895" />
+		<PickUp QuestName="Travel to Azure Watch" QuestId="9313" GiverId="17071" GiverName="Technician Zhanaa" X="-4184.554" Y="-13733.05" Z="74.13895" />
+		<PickUp QuestName="Word from Azure Watch" QuestId="9314" GiverId="16554" GiverName="Aeun" X="-4260.659" Y="-13125.38" Z="37.05225" />
+		<TurnIn QuestName="Travel to Azure Watch" QuestId="9313" TurnInId="16551" TurnInName="Technician Dyvuun" X="-4158.356" Y="-12483.16" Z="45.37213" />
+		<TurnIn QuestName="Word from Azure Watch" QuestId="9314" TurnInId="16553" TurnInName="Caregiver Chellan" X="-4127.806" Y="-12467.68" Z="44.08625" />
+		
+
+			
+				<!-- Going to SW -->
+				<CustomBehavior File="Message" Text="Compiling GoTo SW functions" LogColor="Cornflowerblue" />
+				
+			 <If Condition="Me.ZoneId == 3524" > <!-- Azuremyst Isle -->
+				<CustomBehavior File="Message" Text="Running to Exodar FP" LogColor="Cornflowerblue" />
+			 
+				<RunTo X="-3865.313" Y="-11642.25" Z="-137.6485" /> <!-- Exodar FP -->
+			 </If>
+			 <If Condition="Me.ZoneId == 3557" > <!-- Exodar -->
+				<CustomBehavior File="Message" Text="Running to Exodar's Portal to Darnassus" LogColor="Cornflowerblue" />
+			
+				<RunTo X="-4043.964" Y="-11570.73" Z="-138.4523" /> <!-- Exodar Portal to Darnassus -->
+				<CustomBehavior File="InteractWith" MobId="207996" ObjectType="Gameobject" Range="8" NumOfTimes="1" CollectionDistance="1000" X="-4043.964" Y="-11570.73" Z="-138.4523" />
+				<CustomBehavior File="WaitTimer" WaitTime="8000" GoalText="Waiting for port {TimeRemaining}" />
+			 </If>
+				
+			 <If Condition="Me.ZoneId == 1657" > <!-- Darnassus -->
+				<CustomBehavior File="Message" Text="Running through Darnassus Port" LogColor="Cornflowerblue" />
+
+				<RunTo X="9948.389" Y="2614.481" Z="1316.236" />
+				<CustomBehavior File="MyCTM" X="9947.438" Y="2621.536" Z="1317.558" />
+				<CustomBehavior File="WaitTimer" WaitTime="8000" GoalText="Waiting for port {TimeRemaining}" />
+			 </If>
+			 <If Condition="Me.ZoneId == 141 &amp;&amp; (Me.Z &lt; 100)" > <!-- Teldrassil (Rut'theran Village) -->
+				<CustomBehavior File="Message" Text="Running to use boat to SW" LogColor="Cornflowerblue" />
+
+				<RunTo X="8177.54" Y="1003.079" Z="6.646164" />
+			 
+			 
+				<!-- Get on at Rut'theran Village, off at SW -->
+				<CustomBehavior File="UseTransport" TransportId="176310" 
+											WaitAtX="8177.54" WaitAtY="1003.079" WaitAtZ="6.646164" 
+											GetOffX="-8642.001" GetOffY="1330.353" GetOffZ="5.232954" 
+											StandOnX="8171.327" StandOnY="1005.99" StandOnZ="6.213342" 
+											TransportStartX="8162.587" TransportStartY="1005.365" TransportStartZ="0.005638145"
+											TransportEndX="-8650.719" TransportEndY="1346.051" TransportEndZ="-0.0382334" />
+			 </If>
+
+			 
+			 
+
+				<CustomBehavior File="Message" Text="Loading Kick's Human Profile" LogColor="Orange" />
+
+				<CustomBehavior File="LoadProfile" ProfileName="[A - Quest] EK 5-12 [Kick]" /> 
+				<CustomBehavior File="WaitTimer" WaitTime="10000" GoalText="Waiting for port {TimeRemaining}" />
+
+			
+			
+		
+	</QuestOrder>
+
+	<ProtectedItems>
+		<Item Name="Moongraze Stag Tenderloin" Entry="23676" />
+	</ProtectedItems>
+
+</HBProfile>

@@ -1,0 +1,776 @@
+<HBProfile xsi:noNamespaceSchemaLocation="../Schemas/EchoSchema.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<!-- Original contribution by EchoTiger -->
+	<Name>Hellfire Peninsula ($ShortHash$)</Name>
+
+	<DefaultNavType>Fly</DefaultNavType>
+
+	<MinDurability>0.3</MinDurability>
+	<MinFreeBagSlots>3</MinFreeBagSlots>
+
+	<SellGrey>true</SellGrey>
+	<SellWhite>true</SellWhite>
+	<SellGreen>true</SellGreen>
+	<SellBlue>true</SellBlue>
+	<SellPurple>false</SellPurple>
+
+	<MailGrey>false</MailGrey>
+	<MailWhite>true</MailWhite>
+	<MailGreen>true</MailGreen>
+	<MailBlue>true</MailBlue>
+	<MailPurple>true</MailPurple>
+
+	<TargetElites>true</TargetElites>
+
+	<AvoidMobs>
+	</AvoidMobs>
+
+	<Mailboxes>
+	</Mailboxes>
+
+	<Vendors>
+	</Vendors>
+
+	<Blackspots>
+		<Blackspot X="-1562.002" Y="3513.568" Z="15.89629" Radius="2.343957" /> <!-- Ravager Egg in bad place. -->
+		<Blackspot X="523.7429" Y="3881.689" Z="190.8877" Radius="24.34289" /> <!-- Mag'har Post -->
+		<Blackspot X="503.533" Y="3851.983" Z="192.9567" Radius="18.27359" /> <!-- Mag'har Post Entry -->
+		<Blackspot X="-5.400261" Y="2121.108" Z="123.7731" Radius="10.38054" /> <!-- Building roof near Reaver's Fall -->
+		<Blackspot X="-593.7089" Y="4112.464" Z="90.90209" Radius="2.819507" /> <!-- Tent in Falcon Watch behind Drenna Riverwind -->
+	</Blackspots>
+
+	<Blacklist>
+		<Mob Name="Female Kaliri Hatchling" Id="17034" Flags="Combat" /> <!-- For quest 'Birds of a Feather' -->
+	</Blacklist>
+
+	<QuestOrder IgnoreCheckpoints="false" >
+		<!-- Check function status -->
+		<Code File="RunCode" Type="Definition">
+			<![CDATA[
+			private static bool? profileFunctionsEnabled => (bool?)AppDomain.CurrentDomain.GetData("QuestingProfiles_FunctionsEnabled");
+			private static bool IsStoreProfile(string path) => path.StartsWith("store://");
+			private static string Slashify(string path) => IsStoreProfile(path) ? path.Replace(@"\", "/") : path.Replace("/", @"\");
+
+			public __CompiledBatchClass__()
+			{
+				ActivateFunctions();
+			}
+
+			private static void ActivateFunctions()
+			{
+				if (profileFunctionsEnabled == null || profileFunctionsEnabled == false)
+				{
+					Bots.Professionbuddy.PBLog.Log(Colors.MediumPurple, "[Profile Message!]: ", Colors.Yellow, "Please stand by as the functions are being activated!");
+					LoadProfile(@"..\..\Functions\Activate Functions.xml");
+				}
+			}
+
+			private static void LoadProfile(string path)
+			{
+				var profile = GetNewPath(path);
+				if (!IsStoreProfile(profile) && !File.Exists(profile))
+				{
+					Bots.Professionbuddy.PBLog.Log(Colors.MediumPurple, "[Profile Message!]: ", Colors.Yellow, "Profile does not exist.\n" + profile);
+					return;
+				}
+
+				Bots.Professionbuddy.PBLog.Log(Colors.MediumPurple, "[Profile Message!]: ", Colors.Yellow, "Loading: " + profile);
+				ProfileManager.LoadNew(profile, false);
+			}
+
+			private static string GetNewPath(string path)
+			{
+				if (IsStoreProfile(path))
+					return Slashify(path);
+
+				var currentProfile = ProfileManager.XmlLocation;
+				if (IsStoreProfile(currentProfile))
+					return Slashify(currentProfile + "/../" + path);
+
+				var absolutePath = Path.Combine(Path.GetDirectoryName(currentProfile), path);
+				absolutePath = Path.GetFullPath(absolutePath);
+				var canonicalPath = new Uri(absolutePath).LocalPath;
+				return Slashify(canonicalPath);
+			}]]>
+		</Code>
+		<Code File="RunCode" Code="ActivateFunctions();" />
+		<!-- END Check function status -->
+
+		<If Condition="Me.IsAlliance" >
+			<Code File="LoadProfile" ProfileName="..\..\Questing Autoloader.xml" />
+		</If>
+		<!-- RunCode Methods -->
+			<Code File="RunCode">
+			<![CDATA[
+				Bots.Professionbuddy.PBLog.Log(System.Windows.Media.Colors.MediumPurple, "> [Profile Initialization Status] ", System.Windows.Media.Colors.CornflowerBlue, "\n     Auto-Looting	:: Enabled\n     Looting	:: Enabled\n     Game Addons	:: Disabled");
+				Lua.DoString("SetCVar('AutoLootDefault', 1);");
+				Lua.DoString("SetCVar('autoDismountFlying', 1);");
+				CharacterSettings.Instance.LootMobs = true;
+				CharacterSettings.Instance.Save();
+				Logging.Write(System.Windows.Media.Colors.MediumPurple, "> [Ready to bot!]");
+			]]>
+			</Code>
+			<Code File="RunCode" Type="Definition">
+				<![CDATA[
+						bool DoQuest(params uint[] questIds)
+						{
+							foreach (var questId in questIds)
+							{
+								if (HasQuest(questId) && !IsQuestCompleted(questId)) return true;
+							}
+							return false;
+						}
+						bool NeedsQuest(params uint[] questIds)
+						{
+							foreach (var questId in questIds)
+							{
+								if (!HasQuest(questId) && !IsQuestCompleted(questId)) return true;
+							}
+							return false;
+						}
+						bool NeedsBreadcrumbQuest(params uint[] questIds)
+						{
+							foreach (var questId in questIds)
+							{
+								if (IsQuestCompleted(questId)) return false;
+							}
+							return true;
+						}
+						bool QuestDone(params uint[] questIds)
+						{
+							foreach (var questId in questIds)
+							{
+								if (HasQuest(questId) && IsQuestCompleted(questId)) return true;
+							}
+							return false;
+						}
+						bool QuestFlaggedCompleted(params uint[] questIds)
+						{
+							foreach (var questId in questIds)
+							{
+								return Lua.GetReturnVal<bool>($"return IsQuestFlaggedCompleted({questId});", 0);
+							}
+							return false;
+						}
+						async Task SkipCutscene(int preWait = 3000, int postWait = 3000)
+						{
+					// Add detection of cutscene here.
+							await Coroutine.Sleep(preWait);
+					// Test and improve the working method.
+							Lua.DoString("MovieFrame:StopMovie(); CinematicFrame_CancelCinematic(); StopCinematic();");
+							await Coroutine.Sleep(postWait);
+						}
+					]]>
+			</Code>
+		<!-- END RunCode Methods -->
+
+		<!-- Hooks -->
+			<Code File="Hooks\Avoid" AvoidName="FelReaver" ObjectId="18733" ObjectType="Npc" Radius="20" />
+		<!-- END Hooks -->
+
+		<Code File="Hooks\MountHook" state="true" />
+
+		<If Condition="NeedsQuest(10291)" > <!-- These quests become inactive if the player skipped to 'Report to Nazgrel' -->
+			<PickUp QuestName="Arrival in Outland" QuestId="10120" GiverName="Lieutenant General Orion" GiverId="19253" X="-235.7235" Y="1024.511" Z="54.32505" />
+			<TurnIn QuestName="Arrival in Outland" QuestId="10120" TurnInName="Vlagga Freyfeather" TurnInId="18930" X="-181.4803" Y="1027.04" Z="54.19284" />
+
+			<PickUp QuestName="Journey to Thrallmar" QuestId="10289" GiverName="Vlagga Freyfeather" GiverId="18930" X="-181.4803" Y="1027.04" Z="54.19284" />
+			<If Condition="QuestDone(10289) &amp;&amp; Unit(18930) != null" >
+				<Code File="InteractWith" MobId="18930" GossipOptions="1" NonCompeteDistance="0" X="-181.4803" Y="1027.04" Z="54.19284" TerminateWhen="Me.OnTaxi" />
+			</If>
+			<TurnIn QuestName="Journey to Thrallmar" QuestId="10289" TurnInName="General Krakork" TurnInId="19255" X="212.7095" Y="2648.508" Z="88.11078" />
+		</If>
+
+		<PickUp QuestName="Report to Nazgrel" QuestId="10291" GiverName="General Krakork" GiverId="19255" X="213.2184" Y="2651.113" Z="88.10147" />
+		<TurnIn QuestName="Report to Nazgrel" QuestId="10291" TurnInName="Nazgrel" TurnInId="3230" X="242.9662" Y="2693.537" Z="89.7411" />
+
+		<PickUp QuestName="Eradicate the Burning Legion" QuestId="10121" GiverName="Nazgrel" GiverId="3230" X="242.9662" Y="2693.537" Z="89.7411" />
+		<PickUp QuestName="Bonechewer Blood" QuestId="10450" GiverName="Vurtok Axebreaker" GiverId="21256" X="231.5309" Y="2694.108" Z="89.73343" />
+		<PickUp QuestName="I Work... For the Horde!" QuestId="10086" GiverName="Megzeg Nukklebust" GiverId="21283" X="146.8736" Y="2687.47" Z="85.24597" />
+
+		<Code File="SetHearthstone" MobId="16602" AreaId="3536" X="188.1802" Y="2613.198" Z="87.28363" />
+
+		<TurnIn QuestName="Eradicate the Burning Legion" QuestId="10121" TurnInName="Sergeant Shatterskull" TurnInId="19256" X="54.23981" Y="2545.754" Z="64.70891" />
+		<PickUp QuestName="Felspark Ravine" QuestId="10123" GiverName="Sergeant Shatterskull" GiverId="19256" X="54.23981" Y="2545.754" Z="64.70891" />
+
+		<Code File="KillUntilComplete" QuestId="10123" >
+			<HuntingGrounds>
+				<Hotspot X="151.2236" Y="2400.512" Z="55.21816" />
+				<Hotspot X="262.2061" Y="2313.617" Z="54.77474" />
+				<Hotspot X="243.0786" Y="2124.969" Z="40.72174" />
+			</HuntingGrounds>
+			<PursuitList>
+				<PursueUnit Id="19434" PursueWhen="!IsObjectiveComplete(1, 10123)" />
+				<PursueUnit Id="19136" PursueWhen="!IsObjectiveComplete(2, 10123)" />
+				<PursueUnit Id="19261" PursueWhen="!IsObjectiveComplete(3, 10123)" />
+			</PursuitList>
+		</Code>
+
+		<If Condition="QuestDone(10123) &amp;&amp; Me.HearthstoneAreaId == 3536 &amp;&amp; Unit(19434) != null" >
+			<Code File="UseHearthstone" WaitForCd="false" />
+		</If>
+
+		<TurnIn QuestName="Felspark Ravine" QuestId="10123" TurnInName="Sergeant Shatterskull" TurnInId="19256" X="56.65111" Y="2540.854" Z="64.53594" />
+		<PickUp QuestName="Forward Base: Reaver&apos;s Fall" QuestId="10124" GiverName="Sergeant Shatterskull" GiverId="19256" X="57.56276" Y="2541.126" Z="64.57784" />
+		<TurnIn QuestName="Forward Base: Reaver&apos;s Fall" QuestId="10124" TurnInName="Forward Commander To&apos;arch" TurnInId="19273" X="-22.65795" Y="2139.327" Z="113.2147" />
+
+		<PickUp QuestName="Disrupt Their Reinforcements" QuestId="10208" GiverName="Forward Commander To&apos;arch" GiverId="19273" X="-22.65795" Y="2139.327" Z="113.2147" />
+
+		<While Condition="DoQuest(10208)" >
+			<If Condition="Unit(19273) != null" >
+				<MoveTo X="-50.81289" Y="2084.984" Z="106.1124" /> <!-- Get away building that bot gets stuck on -->
+			</If>
+			<Code File="KillUntilComplete" MobIds="16950, 18975, 18981, 19190" QuestId="10208" TerminateWhen="GetItemCount(28513) &gt;= 8" >
+				<HuntingGrounds>
+					<Hotspot X="-72.02468" Y="1983.315" Z="85.70763" />
+					<Hotspot X="-43.90738" Y="1784.019" Z="51.11512" />
+					<Hotspot X="77.37204" Y="1800.643" Z="45.32809" />
+					<Hotspot X="118.1786" Y="1690.527" Z="36.22927" />
+				</HuntingGrounds>
+			</Code>
+			<Code File="InteractWith" MobId="184290" NonCompeteDistance="0" InteractBlacklistTimeInSeconds="1" PreInteractMountStrategy="Dismount" QuestId="10208" QuestObjectiveIndex="1" X="-84.78993" Y="1881.726" Z="72.19016" />
+			<Code File="InteractWith" MobId="184289" NonCompeteDistance="0" InteractBlacklistTimeInSeconds="1" PreInteractMountStrategy="Dismount" QuestId="10208" QuestObjectiveIndex="2" X="147.0052" Y="1718.116" Z="35.80159" />
+		</While>
+
+		<TurnIn QuestName="Disrupt Their Reinforcements" QuestId="10208" TurnInName="Forward Commander To&apos;arch" TurnInId="19273" X="-24.40631" Y="2137.627" Z="112.8683" />
+
+		<PickUp QuestName="Mission: Gateways Murketh and Shaadraz" QuestId="10129" GiverName="Forward Commander To&apos;arch" GiverId="19273" X="-24.40631" Y="2137.627" Z="112.8683" />
+		<While Condition="DoQuest(10129)" >
+			<If Condition="!HasItem(28038)" >
+				<Code File="AbandonQuest" QuestId="10129" />
+			</If>
+			<PickUp QuestName="Mission: The Murketh and Shaadraz Gateways" QuestId="10129" GiverName="Forward Commander Kingston" GiverId="19310" />
+			<Code File="SpecificQuests\10129-10146-Hellfire-MurkethAndShaadraz" QuestId="10129" TerminateWhen="!HasItem(28038)" />
+		</While>
+		<TurnIn QuestName="Mission: Gateways Murketh and Shaadraz" QuestId="10129" TurnInName="Forward Commander To&apos;arch" TurnInId="19273" X="-23.76578" Y="2138.239" Z="112.9949" />
+		<RecheckCheckpoints />
+
+		<While Condition="!IsQuestCompleted(10162)" >
+			<Code File="AbandonQuest" QuestId="10162" />
+			<PickUp QuestName="Mission: The Abyssal Shelf" QuestId="10162" GiverName="Forward Commander To&apos;arch" GiverId="19273" X="-23.76578" Y="2138.239" Z="112.9949" />
+			<If Condition="HasItem(28132)" >
+				<MoveTo X="-27.63495" Y="2129.876" Z="111.9617" />
+				<Code File="Misc\RunLua" Lua="Dismount();" />
+				<Code File="SpecificQuests\10162-10163-Hellfire-MissionTheAbyssalShelf" QuestId="10162" />
+			</If>
+		</While>
+		<TurnIn QuestName="Mission: The Abyssal Shelf" QuestId="10162" TurnInName="Forward Commander To&apos;arch" TurnInId="19273" X="-23.36894" Y="2139.879" Z="113.0232" />
+
+		<PickUp QuestName="Return to Thrallmar" QuestId="10388" GiverName="Forward Commander To&apos;arch" GiverId="19273" X="-23.36894" Y="2139.879" Z="113.0232" />
+		<TurnIn QuestName="Return to Thrallmar" QuestId="10388" TurnInName="Nazgrel" TurnInId="3230" X="243.1856" Y="2692.441" Z="89.73741" />
+		<PickUp QuestName="Forge Camp: Mageddon" QuestId="10390" GiverName="Nazgrel" GiverId="3230" X="243.1856" Y="2692.441" Z="89.73741" />
+
+		<Code File="KillUntilComplete" QuestId="10390" >
+			<HuntingGrounds>
+				<Hotspot X="404.6094" Y="2145.144" Z="116.8727" />
+				<Hotspot X="415.2988" Y="2261.055" Z="116.9711" />
+			</HuntingGrounds>
+			<PursuitList>
+				<PursueUnit Id="16947" PursueWhen="!IsObjectiveComplete(1, 10390)" />
+				<PursueUnit Id="20798" PursueWhen="!IsObjectiveComplete(2, 10390)" />
+			</PursuitList>
+		</Code>
+
+		<If Condition="QuestDone(10390) &amp;&amp; Me.HearthstoneAreaId == 3536 &amp;&amp; Unit(169471) != null || Unit(20798) != null" >
+			<Code File="UseHearthstone" WaitForCd="false" />
+		</If>
+
+		<TurnIn QuestName="Vile Plans" QuestId="10393" TurnInName="Magister Bloodhawk" TurnInId="21175" X="236.6453" Y="2689.684" Z="89.73248" />
+		<TurnIn QuestName="Forge Camp: Mageddon" QuestId="10390" TurnInName="Nazgrel" TurnInId="3230" X="242.0592" Y="2693.042" Z="89.74214" />
+		<RecheckCheckpoints />
+
+		<PickUp QuestName="Cannons of Rage" QuestId="10391" GiverName="Nazgrel" GiverId="3230" X="242.0592" Y="2693.042" Z="89.74214" />
+		<Code File="KillUntilComplete" MobId="22461" QuestId="10391" >
+			<HuntingGrounds>
+				<Hotspot X="404.6094" Y="2145.144" Z="116.8727" />
+				<Hotspot X="415.2988" Y="2261.055" Z="116.9711" />
+			</HuntingGrounds>
+		</Code>
+		<TurnIn QuestName="Cannons of Rage" QuestId="10391" TurnInName="Nazgrel" TurnInId="3230" X="241.8044" Y="2693.211" Z="89.74208" />
+
+		<PickUp QuestName="Doorway to the Abyss" QuestId="10392" GiverName="Nazgrel" GiverId="3230" X="241.8044" Y="2693.211" Z="89.74208" />
+		<While Condition="DoQuest(10392)" >
+			<Code File="KillUntilComplete" MobId="19298" QuestId="10392" X="546.8788" Y="2790.432" Z="217.8218" TerminateWhen="HasItem(29795)" />
+			<Code File="InteractWith" MobId="182935" NonCompeteDistance="0" InteractBlacklistTimeInSeconds="1" PreInteractMountStrategy="Dismount" QuestId="10392" QuestObjectiveIndex="2" X="522.6683" Y="2800.376" Z="214.3482" />
+		</While>
+		<TurnIn QuestName="Doorway to the Abyss" QuestId="10392" TurnInName="Nazgrel" TurnInId="3230" X="241.3253" Y="2693.223" Z="89.74499" />
+
+		<PickUp QuestName="Cruel&apos;s Intentions" QuestId="10136" GiverName="Nazgrel" GiverId="3230" X="241.3253" Y="2693.223" Z="89.74499" />
+		<PickUp QuestName="The Agony and the Darkness" QuestId="10389" GiverName="Magister Bloodhawk" GiverId="21175" X="242.8204" Y="2694.139" Z="89.74569" />
+
+		<While Condition="DoQuest(10086)" >
+			<Code File="InteractWith" InteractByLooting="true" PreInteractMountStrategy="Dismount" NumOfTimes="16" QuestId="10086" >
+				<HuntingGrounds>
+					<Hotspot X="-128.7925" Y="2661.149" Z="48.59092" />
+					<Hotspot X="-129.8171" Y="2535.819" Z="46.26995" />
+					<Hotspot X="-148.1952" Y="2356.86" Z="58.77351" />
+				</HuntingGrounds>
+				<PursuitList>
+					<PursueGameObject Id="182938" PursueWhen="!IsObjectiveComplete(1, 10086)" />
+					<PursueGameObject Id="182936" PursueWhen="!IsObjectiveComplete(2, 10086)" />
+				</PursuitList>
+			</Code>
+		</While>
+
+		<Code File="KillUntilComplete" MobIds="16925, 18952, 19701" QuestId="10450" >
+			<HuntingGrounds>
+				<Hotspot X="-128.7925" Y="2661.149" Z="48.59092" />
+				<Hotspot X="-129.8171" Y="2535.819" Z="46.26995" />
+				<Hotspot X="-148.1952" Y="2356.86" Z="58.77351" />
+			</HuntingGrounds>
+		</Code>
+
+		<TurnIn QuestName="I Work... For the Horde!" QuestId="10086" TurnInName="Megzeg Nukklebust" TurnInId="21283" X="143.6835" Y="2687.614" Z="85.35681" />
+		<PickUp QuestName="Burn It Up... For the Horde!" QuestId="10087" GiverName="Megzeg Nukklebust" GiverId="21283" X="143.6835" Y="2687.614" Z="85.35681" />
+		<TurnIn QuestName="Bonechewer Blood" QuestId="10450" TurnInName="Vurtok Axebreaker" TurnInId="21256" X="232.1627" Y="2691.606" Z="89.73164" />
+		<PickUp QuestName="Apothecary Zelana" QuestId="10449" GiverName="Vurtok Axebreaker" GiverId="21256" X="232.1627" Y="2691.606" Z="89.73164" />
+		<TurnIn QuestName="Apothecary Zelana" QuestId="10449" TurnInName="Apothecary Zelana" TurnInId="21257" X="33.32182" Y="2122.566" Z="125.9918" />
+
+		<PickUp QuestName="Spinebreaker Post" QuestId="10242" GiverName="Apothecary Zelana" GiverId="21257" X="33.32182" Y="2122.566" Z="125.9918" />
+		<If Condition="HasQuest(10242) &amp;&amp; Unit(19401) != null" >
+			<Code File="InteractWith" MobId="19401" GossipOptions="1" NonCompeteDistance="0" PreInteractMountStrategy="Dismount" X="-26.85961" Y="2127.764" Z="112.0731" />
+		</If>
+
+		<PickUp QuestName="The Warp Rifts" QuestId="10278" GiverName="Ogath the Mad" GiverId="19683" X="-1325.541" Y="2349.118" Z="88.95528" />
+		<PickUp QuestName="Make Them Listen" QuestId="10220" GiverName="Emissary Mordiba" GiverId="19682" X="-1329.975" Y="2351.459" Z="88.95529" />
+		<TurnIn QuestName="Spinebreaker Post" QuestId="10242" TurnInName="Apothecary Albreck" TurnInId="21279" X="-1332.666" Y="2378.68" Z="88.95121" />
+		<RecheckCheckpoints />
+		<PickUp QuestName="Boiling Blood" QuestId="10538" GiverName="Apothecary Albreck" GiverId="21279" X="-1332.666" Y="2378.68" Z="88.95121" />
+		<PickUp QuestName="Preparing the Salve" QuestId="9345" GiverName="Grelag" GiverId="16858" X="-1330.154" Y="2388.838" Z="88.94817" />
+		<PickUp QuestName="Wanted: Worg Master Kruush" QuestId="10809" GiverName="Wanted Poster" GiverId="185166" X="-1292.239" Y="2379.783" Z="79.59135" />
+
+		<Code File="InteractWith" MobId="181372" InteractByLooting="true" CollectionDistance="200" PreInteractMountStrategy="Dismount" QuestId="9345" QuestObjectiveIndex="1" >
+			<HuntingGrounds>
+				<Hotspot X="-1108.568" Y="2386.654" Z="24.0057" />
+				<Hotspot X="-940.9464" Y="2443.274" Z="2.185852" />
+				<Hotspot X="-822.0726" Y="2457.577" Z="20.27952" />
+				<Hotspot X="-742.1982" Y="2331.296" Z="18.1201" />
+				<Hotspot X="-743.202" Y="2147.142" Z="20.90437" />
+			</HuntingGrounds>
+		</Code>
+
+		<Code File="KillUntilComplete" QuestId="10220" >
+			<HuntingGrounds>
+				<Hotspot X="-1213.677" Y="2714.647" Z="-6.733519" />
+				<Hotspot X="-1367.958" Y="2727.479" Z="-26.92257" />
+				<Hotspot X="-1354.038" Y="2759.191" Z="-32.43863" />
+			</HuntingGrounds>
+			<PursuitList>
+				<PursueUnit Id="16904" PursueWhen="!IsObjectiveComplete(1, 10220)" />
+				<PursueUnit Id="16906" PursueWhen="!IsObjectiveComplete(2, 10220)" />
+				<PursueUnit Id="16905" PursueWhen="!IsObjectiveComplete(3, 10220)" />
+			</PursuitList>
+		</Code>
+
+		<Code File="KillUntilComplete" MobId="16906" TerminateWhen="IsQuestCompleted(10229)" >
+			<HuntingGrounds>
+				<Hotspot X="-1213.677" Y="2714.647" Z="-6.733519" />
+				<Hotspot X="-1367.958" Y="2727.479" Z="-26.92257" />
+				<Hotspot X="-1354.038" Y="2759.191" Z="-32.43863" />
+			</HuntingGrounds>
+		</Code>
+
+		<TurnIn QuestName="Preparing the Salve" QuestId="9345" TurnInName="Grelag" TurnInId="16858" X="-1327.701" Y="2391.069" Z="88.87932" />
+		<PickUp QuestName="Investigate the Crash" QuestId="10213" GiverName="Grelag" GiverId="16858" X="-1327.701" Y="2391.069" Z="88.87932" />
+		<TurnIn QuestName="Make Them Listen" QuestId="10220" TurnInName="Emissary Mordiba" TurnInId="19682" X="-1331.518" Y="2352.146" Z="88.95403" />
+		<TurnIn QuestName="Decipher the Tome" QuestId="10229" TurnInName="Althen the Historian" TurnInId="19736" X="-1332.237" Y="2353.94" Z="88.95403" />
+		<RecheckCheckpoints />
+
+		<PickUp QuestName="The Battle Horn" QuestId="10230" GiverName="Althen the Historian" GiverId="19736" X="-1332.237" Y="2353.94" Z="88.95403" />
+		<Code File="KillUntilComplete" MobId="16978" QuestId="10230" X="-1388.506" Y="2711.275" Z="-25.87996" />
+		<TurnIn QuestName="The Battle Horn" QuestId="10230" TurnInName="Althen the Historian" TurnInId="19736" X="-1332.229" Y="2353.329" Z="88.95435" />
+
+		<PickUp QuestName="Bloody Vengeance" QuestId="10250" GiverName="Althen the Historian" GiverId="19736" X="-1332.229" Y="2353.329" Z="88.95435" />
+		<While Condition="DoQuest(10250)" >
+			<MoveTo X="-1196.098" Y="2266.085" Z="47.66663" />
+			<Code File="UseItem" ItemId="28651" X="-1196.098" Y="2266.085" Z="47.66663" TerminateWhen="Unit(19862, u =&gt; u.IsAlive) != null" />
+			<Code File="KillUntilComplete" MobId="19862" WaitForNpcs="false" QuestId="10250" X="-1196.098" Y="2266.085" Z="47.66663" />
+		</While>
+		<TurnIn QuestName="Bloody Vengeance" QuestId="10250" TurnInName="Althen the Historian" TurnInId="19736" X="-1332.489" Y="2354.238" Z="88.95527" />
+
+		<PickUp QuestName="Honor the Fallen" QuestId="10258" GiverName="Althen the Historian" GiverId="19736" X="-1332.489" Y="2354.238" Z="88.95527" />
+		<TurnIn QuestName="Honor the Fallen" QuestId="10258" TurnInName="Commander Hogarth" TurnInId="19937" X="-1184.284" Y="2604.214" Z="29.19774" />
+
+		<Code File="KillUntilComplete" MobId="19442" QuestId="10809" X="-1046.307" Y="2017.464" Z="66.94019" />
+
+		<While Condition="DoQuest(10538)" >
+			<Code File="InteractWith" MobId="184715" NonCompeteDistance="0" NumOfTimes="12" InteractBlacklistTimeInSeconds="1" QuestId="10538" QuestObjectiveIndex="1" X="-978.1862" Y="2175.302" Z="15.36683" TerminateWhen="!HasItem(30425)" />
+
+			<Code File="KillUntilComplete" MobIds="16871, 19422, 19424" QuestId="10538" TerminateWhen="GetItemCount(30425) &gt;= 12" >
+				<HuntingGrounds>
+					<Hotspot X="-1119.059" Y="2097.431" Z="68.13219" />
+					<Hotspot X="-1015.884" Y="2031.993" Z="67.50201" />
+					<Hotspot X="-925.3328" Y="1955.923" Z="67.51738" />
+				</HuntingGrounds>
+			</Code>
+		</While>
+
+		<TurnIn QuestName="Wanted: Worg Master Kruush" QuestId="10809" TurnInName="Captain Darkhowl" TurnInId="22107" X="-1316.527" Y="2376.971" Z="88.22028" />
+		<PickUp QuestName="Zeth&apos;Gor Must Burn!" QuestId="10792" GiverName="Captain Darkhowl" GiverId="22107" X="-1316.527" Y="2376.971" Z="88.22028" />
+		<TurnIn QuestName="Boiling Blood" QuestId="10538" TurnInName="Apothecary Albreck" TurnInId="21279" X="-1330.715" Y="2382.188" Z="88.951" />
+		<RecheckCheckpoints />
+		<PickUp QuestName="Apothecary Antonivich" QuestId="10835" GiverName="Apothecary Albreck" GiverId="21279" X="-1330.715" Y="2382.188" Z="88.951" />
+		<!-- <PickUp QuestName="The Eyes of Grillok" QuestId="10813" GiverName="Zezzak" GiverId="22231" X="-1334.391" Y="2358.663" Z="88.95396" /> Not worth doing at all -->
+
+		<While Condition="DoQuest(10792)" >
+			<While Condition="!IsObjectiveComplete(2, 10792) &amp;&amp; HasItem(31346)" >
+				<MoveTo X="-939.5317" Y="1931.058" Z="69.76783" />
+				<Code File="ForcedDismount" />
+				<Code File="UseItem" ItemId="31346" QuestId="10792" QuestObjectiveIndex="2" X="-939.9185" Y="1931.352" Z="69.7831" />
+			</While>
+
+			<While Condition="!IsObjectiveComplete(4, 10792) &amp;&amp; HasItem(31346)" >
+				<MoveTo X="-1052.958" Y="2005.621" Z="66.96732" />
+				<Code File="ForcedDismount" />
+				<Code File="UseItem" ItemId="31346" QuestId="10792" QuestObjectiveIndex="4" X="-1052.958" Y="2005.621" Z="66.96732" />
+			</While>
+
+			<While Condition="!IsObjectiveComplete(3, 10792) &amp;&amp; HasItem(31346)" >
+				<MoveTo X="-1144.701" Y="2068.544" Z="69.0132" />
+				<Code File="ForcedDismount" />
+				<Code File="UseItem" ItemId="31346" QuestId="10792" QuestObjectiveIndex="3" X="-1144.701" Y="2068.544" Z="69.0132" />
+			</While>
+
+			<While Condition="!IsObjectiveComplete(1, 10792) &amp;&amp; HasItem(31346)" >
+				<MoveTo X="-1140.895" Y="1961.69" Z="78.23309" />
+				<Code File="ForcedDismount" />
+				<Code File="UseItem" ItemId="31346" QuestId="10792" QuestObjectiveIndex="1" X="-1140.895" Y="1961.69" Z="78.23309" />
+			</While>
+
+			<Code File="KillUntilComplete" MobId="16907" QuestId="10792" TerminateWhen="GetItemCount(31347) &gt;= 4 || GetItemCount(31346) &gt;= 4" > 
+				<HuntingGrounds>
+					<Hotspot X="-1069.347" Y="2030.186" Z="67.49723" />
+					<Hotspot X="-1176.324" Y="2108.143" Z="69.57578" />
+				</HuntingGrounds>
+			</Code>
+
+			<While Condition="DoQuest(10792) &amp;&amp; HasItem(31347) &amp;&amp; Me.FreeBagSlots &gt; 0" >
+				<MoveTo X="-903.6608" Y="1965.994" Z="68.81281" />
+				<Code File="UseItem" ItemId="31347" X="-903.5814" Y="1966.307" Z="68.81964" TerminateWhen="!HasItem(31347)" />
+				<Code File="MyCTM" X="-903.6608" Y="1965.994" Z="68.81281" />
+			</While>
+
+			<If Condition="QuestDone(10792)" >
+				<Code File="DeleteItems" Ids="31346, 31347" />
+			</If>
+		</While>
+
+		<!-- Not worth doing at all
+		<While Condition="DoQuest(10813)" >
+			<Code File="CombatUseItemOnV2" QuestId="10813" ItemId="31463" MobId="19440" UseWhenMobHasHealthPercent="100" MaxRangeToUseItem="20" UseItemStrategy="UseItemContinuouslyOnTargetDontDefend" RecallPetAtMobPercentHealth="100" WaitTimeAfterItemUse="5000" CollectionDistance="500">
+				<HuntingGrounds WaypointVisitStrategy="InOrder">
+					<Hotspot X="-1078.607" Y="2078.789" Z="64.86427" />
+					<Hotspot X="-1119.15" Y="2104.548" Z="68.39547" />
+					<Hotspot X="-1116.466" Y="2047.142" Z="67.28675" />
+					<Hotspot X="-1076.574" Y="2024.648" Z="67.59293" />
+					<Hotspot X="-1002.639" Y="2011.658" Z="66.93987" />
+					<Hotspot X="-927.7786" Y="1965.145" Z="68.24343" />
+					<Hotspot X="-1086.603" Y="2110.563" Z="62.47606" />
+				</HuntingGrounds>
+			</Code>
+		</While> -->
+
+		<TurnIn QuestName="Zeth&apos;Gor Must Burn!" QuestId="10792" TurnInName="Captain Darkhowl" TurnInId="22107" X="-1315.475" Y="2377.851" Z="87.85949" />
+		<TurnIn QuestName="Investigate the Crash" QuestId="10213" TurnInName="&quot;Screaming&quot; Screed Luckheed" TurnInId="19367" X="-1092.026" Y="3000.203" Z="8.190142" />
+		<RecheckCheckpoints />
+		<PickUp QuestName="In Case of Emergency..." QuestId="10161" GiverName="&quot;Screaming&quot; Screed Luckheed" GiverId="19367" X="-1092.026" Y="3000.203" Z="8.190142" />
+		<PickUp QuestName="Ravager Egg Roundup" QuestId="9349" GiverName="Legassi" GiverId="19344" X="-1090.809" Y="2997.264" Z="8.190142" />
+
+		<Code File="InteractWith" MobIds="183394, 183395, 183396, 183397" CollectionDistance="200" PreInteractMountStrategy="Dismount" QuestId="10161" QuestObjectiveIndex="1" >
+			<HuntingGrounds>
+				<Hotspot X="-950.184" Y="2550.112" Z="6.800122" />
+				<Hotspot X="-936.0728" Y="2403.546" Z="-0.4631375" />
+				<Hotspot X="-808.3281" Y="2285.81" Z="-17.83491" />
+			</HuntingGrounds>
+		</Code>
+
+		<TurnIn QuestName="In Case of Emergency..." QuestId="10161" TurnInName="&quot;Screaming&quot; Screed Luckheed" TurnInId="19367" X="-1094.677" Y="3001.737" Z="8.207534" />
+		<PickUp QuestName="Voidwalkers Gone Wild" QuestId="9351" GiverName="&quot;Screaming&quot; Screed Luckheed" GiverId="19367" X="-1094.677" Y="3001.737" Z="8.207534" />
+
+		<While Condition="DoQuest(10278)" >
+			<MoveTo Precision="1" X="-1384.23" Y="2947.385" Z="-15.89885" />
+			<Code File="RunCode"><![CDATA[
+					WoWItem riftGenerator = Me.BagItems.FirstOrDefault(x => x.Entry == 29027);
+					riftGenerator.Use();
+					SpellManager.ClickRemoteLocation(new Vector3(-1381.673f, 2947.257f, -15.06099f));
+				]]>
+			</Code>
+			<Code File="KillUntilComplete" MobId="20145" QuestId="10278" X="-1379.268" Y="2949.981" Z="-14.76973" TerminateWhen="Me.BagItems.FirstOrDefault(x =&gt; x.Entry == 29027).CooldownTimeLeft == TimeSpan.Zero" />
+		</While>
+
+		<Code File="KillUntilComplete" MobIds="16974, 16975" QuestId="9351" >
+			<HuntingGrounds>
+				<Hotspot X="-1354.331" Y="2954.432" Z="-5.062174" />
+				<Hotspot X="-1425.849" Y="3063.871" Z="-4.892005" />
+				<Hotspot X="-1384.359" Y="3146.535" Z="24.92095" />
+			</HuntingGrounds>
+		</Code>
+
+		<Code File="InteractWith" MobId="181385" InteractByLooting="true" PreInteractMountStrategy="Dismount" QuestId="9349" QuestObjectiveIndex="1" >
+			<HuntingGrounds>
+				<Hotspot X="-1402.437" Y="3401.646" Z="40.47516" />
+				<Hotspot X="-1518.278" Y="3494.342" Z="31.84731" />
+				<Hotspot X="-1622.478" Y="3645.016" Z="31.34392" />
+				<Hotspot X="-1655.772" Y="3801.312" Z="33.08644" />
+			</HuntingGrounds>
+		</Code>
+
+		<TurnIn QuestName="Voidwalkers Gone Wild" QuestId="9351" TurnInName="&quot;Screaming&quot; Screed Luckheed" TurnInId="19367" X="-1094.736" Y="3004.919" Z="8.363609" />
+		<TurnIn QuestName="Ravager Egg Roundup" QuestId="9349" TurnInName="Legassi" TurnInId="19344" X="-1091.383" Y="2996.747" Z="8.190117" />
+		<RecheckCheckpoints />
+
+		<PickUp QuestName="Helboar, the Other White Meat" QuestId="9361" GiverName="Legassi" GiverId="19344" X="-1091.383" Y="2996.747" Z="8.190117" />
+		<While Condition="DoQuest(9361)" >
+			<Code File="KillUntilComplete" MobId="16863" QuestId="9361" TerminateWhen="HasItem(23270)" >
+				<HuntingGrounds>
+					<Hotspot X="-1243.17" Y="2992.244" Z="12.79229" />
+					<Hotspot X="-1134.462" Y="3054.112" Z="21.77604" />
+					<Hotspot X="-1005.618" Y="2947.607" Z="5.661013" />
+					<Hotspot X="-839.2589" Y="3116.499" Z="9.715111" />
+				</HuntingGrounds>
+			</Code>
+
+			<Code File="UseItem" ItemId="23268" NumOfTimes="100" TerminateWhen="!HasItem(23270) || QuestDone(9361)" />
+
+			<If Condition="QuestDone(9361)" >
+				<Code File="DeleteItems" Ids="23720" />
+			</If>
+		</While>
+		<TurnIn QuestName="Helboar, the Other White Meat" QuestId="9361" TurnInName="Legassi" TurnInId="19344" X="-1092.487" Y="2995.363" Z="8.190696" />
+
+		<PickUp QuestName="Smooth as Butter" QuestId="9356" GiverName="Legassi" GiverId="19344" X="-1092.92" Y="2996.854" Z="8.19017" />
+		<Code File="KillUntilComplete" MobId="16972" QuestId="9356" >
+			<HuntingGrounds>
+				<Hotspot X="-950.184" Y="2550.112" Z="6.800122" />
+				<Hotspot X="-936.0728" Y="2403.546" Z="-0.4631375" />
+				<Hotspot X="-808.3281" Y="2285.81" Z="-17.83491" />
+			</HuntingGrounds>
+		</Code>
+		<TurnIn QuestName="Smooth as Butter" QuestId="9356" TurnInName="Legassi" TurnInId="19344" X="-1092.982" Y="2995.053" Z="8.189904" />
+
+		<TurnIn QuestName="The Warp Rifts" QuestId="10278" TurnInName="Ogath the Mad" TurnInId="19683" X="-1325.542" Y="2348.917" Z="88.95428" />
+
+		<PickUp QuestName="Void Ridge" QuestId="10294" GiverName="Ogath the Mad" GiverId="19683" X="-1325.542" Y="2348.917" Z="88.95428" />
+		<Code File="KillUntilComplete" MobIds="17014, 19527" QuestId="10294" >
+			<HuntingGrounds>
+				<Hotspot X="-775.0441" Y="1576.387" Z="47.60275" />
+				<Hotspot X="-854.6359" Y="1458.496" Z="27.05986" />
+				<Hotspot X="-1021.394" Y="1495.683" Z="38.70502" />
+				<Hotspot X="-1205.157" Y="1412.614" Z="27.18624" />
+			</HuntingGrounds>
+		</Code>
+		<TurnIn QuestName="Void Ridge" QuestId="10294" TurnInName="Ogath the Mad" TurnInId="19683" X="-1326.355" Y="2347.861" Z="88.95455" />
+
+		<PickUp QuestName="From the Abyss" QuestId="10295" GiverName="Ogath the Mad" GiverId="19683" X="-1326.355" Y="2347.861" Z="88.95455" />
+		<While Condition="DoQuest(10295)" >
+			<MoveTo X="-1232.834" Y="1359.574" Z="6.78404" />
+			<Code File="UseItem" ItemId="29226" QuestId="10295" X="-1232.834" Y="1359.574" Z="6.78404" TerminateWhen="Unit(16939) != null" />
+			<Code File="KillUntilComplete" MobId="16939" WaitForNpcs="false" QuestId="10295" X="-1232.834" Y="1359.574" Z="6.78404" />
+		</While>
+		<TurnIn QuestName="From the Abyss" QuestId="10295" TurnInName="Ogath the Mad" TurnInId="19683" X="-1325.708" Y="2348.743" Z="88.95617" />
+
+		<If Condition="HasQuest(10835) &amp;&amp; Me.HearthstoneAreaId == 3536 &amp;&amp; Unit(19683) != null" >
+			<Code File="UseHearthstone" WaitForCd="false" />
+		</If>
+
+		<TurnIn QuestName="Apothecary Antonivich" QuestId="10835" TurnInName="Apothecary Antonivich" TurnInId="16588" X="225.7266" Y="2835.028" Z="131.3407" />
+		<RecheckCheckpoints />
+		<PickUp QuestName="A Burden of Souls" QuestId="10864" GiverName="Apothecary Antonivich" GiverId="16588" X="225.7266" Y="2835.028" Z="131.3407" />
+
+		<PickUp QuestName="Outland Sucks!" QuestId="10236" GiverName="Foreman Razelcraz" GiverId="16915" X="427.358" Y="2890.712" Z="52.03823" />
+		<Code File="InteractWith" MobId="183934" InteractByLooting="true" CollectionDistance="200" PreInteractMountStrategy="Dismount" QuestId="10236" QuestObjectiveIndex="1" >
+			<HuntingGrounds>
+				<Hotspot X="230.5923" Y="3028.314" Z="-1.216848" />
+				<Hotspot X="11.43744" Y="3102.48" Z="-1.221408" />
+			</HuntingGrounds>
+		</Code>
+		<TurnIn QuestName="Outland Sucks!" QuestId="10236" TurnInName="Foreman Razelcraz" TurnInId="16915" X="430.6487" Y="2889.716" Z="52.18332" />
+
+		<PickUp QuestName="How to Serve Goblins" QuestId="10238" GiverName="Foreman Razelcraz" GiverId="16915" X="430.6487" Y="2889.716" Z="52.18332" />
+
+		<Code File="InteractWith" MobId="183936" NonCompeteDistance="0" InteractBlacklistTimeInSeconds="1" PreInteractMountStrategy="Dismount" QuestId="10238" QuestObjectiveIndex="1" X="71.17491" Y="3208.063" Z="32.02801" />
+		<Code File="InteractWith" MobId="183940" NonCompeteDistance="0" InteractBlacklistTimeInSeconds="1" PreInteractMountStrategy="Dismount" QuestId="10238" QuestObjectiveIndex="2" X="-72.49636" Y="3138.636" Z="-4.407283" />
+		<Code File="InteractWith" MobId="183941" NonCompeteDistance="0" InteractBlacklistTimeInSeconds="1" PreInteractMountStrategy="Dismount" QuestId="10238" QuestObjectiveIndex="3" X="-121.2788" Y="3086.252" Z="2.83837" />
+
+		<Code File="KillUntilComplete" MobIds="16878, 19414, 19415" QuestId="10864" >
+			<HuntingGrounds>
+				<Hotspot X="-97.34467" Y="3075.652" Z="-2.058445" />
+				<Hotspot X="-31.96126" Y="3150.56" Z="-1.30401" />
+				<Hotspot X="15.83795" Y="3237.267" Z="18.62827" />
+				<Hotspot X="85.58078" Y="3184.506" Z="25.16833" />
+			</HuntingGrounds>
+		</Code>
+
+		<TurnIn QuestName="A Burden of Souls" QuestId="10864" TurnInName="Apothecary Antonivich" TurnInId="16588" X="224.7942" Y="2835.178" Z="131.3409" />
+
+		<PickUp QuestName="The Demoniac Scryer" QuestId="10838" GiverName="Apothecary Antonivich" GiverId="16588" X="224.7942" Y="2835.178" Z="131.3409" />
+		<While Condition="DoQuest(10838)" >
+			<MoveTo X="-167.5154" Y="3198.147" Z="-70.3247" />
+			<Code File="UseItem" ItemId="31606" X="-167.5154" Y="3198.147" Z="-70.3247" TerminateWhen="Unit(22258, u =&gt; u.DistanceSqr &lt; 40f*40f) != null" />
+			<Code File="KillUntilComplete" MobIds="22259, 22273" QuestId="10838" X="-167.5154" Y="3198.147" Z="-70.3247" TerminateWhen="Unit(22258, u =&gt; u.DistanceSqr &lt; 40f*40f) == null || Unit(22258, u =&gt; u.DistanceSqr &lt; 40f*40f &amp;&amp; u.GetAllAuras().Count(x =&gt; x.SpellId == 38721) &gt;= 4) != null" />
+
+			<Code File="InteractWith" MobId="22258" GossipOptions="1" NonCompeteDistance="0" InteractBlacklistTimeInSeconds="5" PreInteractMountStrategy="Dismount" QuestId="10838" QuestObjectiveIndex="1" X="-167.5154" Y="3198.147" Z="-70.3247" TerminateWhen="Unit(22258, u =&gt; u.DistanceSqr &lt; 40f*40f &amp;&amp; u.GetAllAuras().Count(x =&gt; x.SpellId == 38721) &gt;= 4) == null" />
+		</While>
+		<If Condition="QuestDone(10838) &amp;&amp; Me.HearthstoneAreaId == 3536 &amp;&amp; Unit(22258) != null" >
+			<Code File="UseHearthstone" WaitForCd="false" />
+		</If>
+		<TurnIn QuestName="The Demoniac Scryer" QuestId="10838" TurnInName="Apothecary Antonivich" TurnInId="16588" X="226.0432" Y="2834.026" Z="131.341" />
+
+		<PickUp QuestName="Report to Nazgrel" QuestId="10875" GiverName="Apothecary Antonivich" GiverId="16588" X="226.0432" Y="2834.026" Z="131.341" />
+		<TurnIn QuestName="Report to Nazgrel" QuestId="10875" TurnInName="Nazgrel" TurnInId="3230" X="243.8936" Y="2694.918" Z="89.75249" />
+		<PickUp QuestName="The Assassin" QuestId="9400" GiverName="Nazgrel" GiverId="3230" X="242.7166" Y="2694.824" Z="89.75112" />
+		<TurnIn QuestName="How to Serve Goblins" QuestId="10238" TurnInName="Foreman Razelcraz" TurnInId="16915" X="428.0803" Y="2887.949" Z="52.19127" />
+		<RecheckCheckpoints />
+
+		<PickUp QuestName="Shizz Work" QuestId="10629" GiverName="Foreman Razelcraz" GiverId="16915" X="428.0803" Y="2887.949" Z="52.19127" />
+		<While Condition="DoQuest(10629)" >
+			<Code File="ForcedDismount" TerminateWhen="Unit(21847, u =&gt; u.CreatedByUnit == Me) != null" />
+			<Code File="UseItem" ItemId="30803" TerminateWhen="Unit(21847, u =&gt; u.CreatedByUnit == Me) != null" X="428.0803" Y="2887.949" Z="52.19127" />
+			<Code File="KillUntilComplete" MobId="16863" QuestId="10629" TerminateWhen="Object(184980) != null || Unit(21847, u =&gt; u.CreatedByUnit == Me) == null" >
+				<HuntingGrounds>
+					<Hotspot X="492.1641" Y="2923.299" Z="37.79787" />
+					<Hotspot X="442.0068" Y="3105.707" Z="19.15171" />
+					<Hotspot X="325.8787" Y="3082.879" Z="27.24856" />
+				</HuntingGrounds>
+			</Code>
+			<Code File="InteractWith" MobId="184980" CollectionDistance="200" InteractByLooting="true" PreInteractMountStrategy="Dismount" QuestId="10629" TerminateWhen="Object(184980) == null" />
+		</While>
+		<TurnIn QuestName="Shizz Work" QuestId="10629" TurnInName="Foreman Razelcraz" TurnInId="16915" X="428.9397" Y="2890.252" Z="52.17105" />
+
+		<PickUp QuestName="Beneath Thrallmar" QuestId="10630" GiverName="Foreman Razelcraz" GiverId="16915" X="428.9397" Y="2890.252" Z="52.17105" />
+		<While Condition="DoQuest(10630)" >
+			<If Condition="!Me.IsIndoors" >
+				<MoveTo X="385.9552" Y="2879.364" Z="53.84438" />
+			</If>
+			<Code File="KillUntilComplete" MobId="18976" MovementBy="NavigatorOnly" QuestId="10630" X="388.7134" Y="2740.448" Z="52.04387" />
+		</While>
+		<TurnIn QuestName="Beneath Thrallmar" QuestId="10630" TurnInName="Foreman Razelcraz" TurnInId="16915" X="426.2364" Y="2887.998" Z="52.19551" />
+
+		<While Condition="DoQuest(10087)" >
+			<While Condition="!IsObjectiveComplete(1, 10087)" >
+				<MoveTo X="-312.4218" Y="2388.391" Z="45.89419" />
+				<Code File="InteractWith" MobId="18849" Range="15" NonCompeteDistance="0" InteractBlacklistTimeInSeconds="1" InteractByUsingItemId="27479" PreInteractMountStrategy="Dismount" QuestId="10087" QuestObjectiveIndex="1" X="-312.4218" Y="2388.391" Z="45.89419" />
+			</While>
+			<While Condition="!IsObjectiveComplete(2, 10087)" >
+				<MoveTo X="-368.5593" Y="2700.844" Z="35.01163" />
+				<Code File="InteractWith" MobId="19008" Range="15" NonCompeteDistance="0" InteractBlacklistTimeInSeconds="1" InteractByUsingItemId="27479" PreInteractMountStrategy="Dismount" QuestId="10087" QuestObjectiveIndex="2" X="-368.5593" Y="2700.844" Z="35.01163" />
+			</While>
+		</While>
+		<If Condition="QuestDone(10087) &amp;&amp; Me.HearthstoneAreaId == 3536 &amp;&amp; Unit(18849) != null || Unit(19008) != null" >
+			<Code File="UseHearthstone" WaitForCd="false" />
+		</If>
+
+		<TurnIn QuestName="Burn It Up... For the Horde!" QuestId="10087" TurnInName="Megzeg Nukklebust" TurnInId="21283" X="144.7019" Y="2687.07" Z="85.28772" />
+		<TurnIn QuestName="The Assassin" QuestId="9400" TurnInName="Fel Orc Corpse" TurnInId="17062" X="-18.34294" Y="3803.448" Z="93.83727" />
+		<RecheckCheckpoints />
+		<PickUp QuestName="A Strange Weapon" QuestId="9401" GiverName="Fel Orc Corpse" GiverId="17062" X="-18.34294" Y="3803.448" Z="93.83727" />
+		<PickUp QuestName="Arelion&apos;s Journal" QuestId="9374" GiverName="Magistrix Carinda" GiverId="16793" X="-597.9214" Y="4175.689" Z="64.83069" />
+		<!-- <PickUp QuestName="Source of the Corruption" QuestId="9387" GiverName="Apothecary Azethen" GiverId="16794" X="-577.8846" Y="4152.69" Z="68.10797" /> Not worth it -->
+		<PickUp QuestName="In Need of Felblood" QuestId="9366" GiverName="Ryathen the Somber" GiverId="16791" X="-572.8157" Y="4148.277" Z="68.12413" />
+		<PickUp QuestName="Magic of the Arakkoa" QuestId="9396" GiverName="Arcanist Calesthris Dawnstar" GiverId="16792" X="-576.4152" Y="4145.944" Z="68.12179" />
+		<PickUp QuestName="Birds of a Feather" QuestId="9397" GiverName="Falconer Drenna Riverwind" GiverId="16790" X="-599.2269" Y="4107.181" Z="90.19289" />
+		<PickUp QuestName="Wanted: Blacktalon the Savage" QuestId="9466" GiverName="Wanted Poster" GiverId="181638" X="-595.8613" Y="4093.399" Z="91.67992" />
+		<PickUp QuestName="The Great Fissure" QuestId="9340" GiverName="Ranger Captain Venn&apos;ren" GiverId="16789" X="-588.7083" Y="4068.706" Z="143.2584" />
+
+		<While Condition="DoQuest(9374)" >
+			<Code File="InteractWith" MobId="184115" InteractByLooting="true" NonCompeteDistance="0" InteractBlacklistTimeInSeconds="1" PreInteractMountStrategy="Dismount" QuestId="9374" QuestObjectiveIndex="1" X="196.8638" Y="3473.205" Z="63.17901" TerminateWhen="HasItem(31955)" />
+			<Code File="UseItem" ItemId="31955" QuestId="9374" QuestObjectiveIndex="1" />
+			<Code File="RunCode" Code="LootFrame.Instance.LootAll();" />
+		</While>
+
+		<Code File="KillUntilComplete" MobIds="19191, 19192" QuestId="10136" X="383.5088" Y="3311.083" Z="74.52225" />
+
+		<Code File="KillUntilComplete" MobId="16951" TerminateWhen="!DoQuest(10389, 9366)" >
+			<HuntingGrounds>
+				<Hotspot X="387.7436" Y="3508.085" Z="63.58118" />
+				<Hotspot X="201.1459" Y="3440.096" Z="63.35624" />
+				<Hotspot X="171.6031" Y="3503.318" Z="61.89932" />
+				<Hotspot X="438.0582" Y="3539.753" Z="64.81601" />
+			</HuntingGrounds> 
+		</Code>
+
+		<Code File="KillUntilComplete" MobId="17057" QuestId="9466" X="-758.9781" Y="3815.764" Z="19.95012" />
+
+		<While Condition="DoQuest(9340)" >
+			<If Condition="Unit(16927) == null" >
+				<MoveTo X="-640.1154" Y="3774.862" Z="27.9747" />
+			</If>
+			<Code File="KillUntilComplete" MovementBy="NavigatorOnly" QuestId="9340" >
+				<HuntingGrounds>
+					<Hotspot X="-640.1154" Y="3774.862" Z="27.9747" />
+					<Hotspot X="-627.6509" Y="3621.336" Z="28.99513" />
+				</HuntingGrounds>
+				<PursuitList>
+					<PursueUnit Id="16927" PursueWhen="!IsObjectiveComplete(1, 9340)" />
+					<PursueUnit Id="16929" PursueWhen="!IsObjectiveComplete(2, 9340)" />
+				</PursuitList>
+			</Code>
+		</While>
+
+		<TurnIn QuestName="Wanted: Blacktalon the Savage" QuestId="9466" TurnInName="Ranger Captain Venn&apos;ren" TurnInId="16789" X="-588.4052" Y="4068.579" Z="143.2582" />
+		<TurnIn QuestName="The Great Fissure" QuestId="9340" TurnInName="Ranger Captain Venn&apos;ren" TurnInId="16789" X="-588.4052" Y="4068.579" Z="143.2582" />
+		<PickUp QuestName="Marking the Path" QuestId="9391" GiverName="Ranger Captain Venn&apos;ren" GiverId="16789" X="-588.4052" Y="4068.579" Z="143.2582" />
+		<TurnIn QuestName="Arelion&apos;s Journal" QuestId="9374" TurnInName="Magistrix Carinda" TurnInId="16793" X="-597.6576" Y="4176.757" Z="64.80378" />
+		<!-- <PickUp QuestName="Arelion&apos;s Secret" QuestId="10286" GiverName="Magistrix Carinda" GiverId="16793" X="-597.6576" Y="4176.757" Z="64.80378" /> Not worth it -->
+		<TurnIn QuestName="In Need of Felblood" QuestId="9366" TurnInName="Ryathen the Somber" TurnInId="16791" X="-573.0192" Y="4147.708" Z="68.12335" />
+		<RecheckCheckpoints />
+
+		<While Condition="DoQuest(9391)" >
+			<Code File="InteractWith" MobId="181581" NonCompeteDistance="0" InteractBlacklistTimeInSeconds="1" PreInteractMountStrategy="Dismount" QuestId="9391" QuestObjectiveIndex="1" X="-607.3379" Y="3993.428" Z="31.93778" />
+			<Code File="InteractWith" MobId="181580" NonCompeteDistance="0" InteractBlacklistTimeInSeconds="1" PreInteractMountStrategy="Dismount" QuestId="9391" QuestObjectiveIndex="2" X="-582.4312" Y="3783.833" Z="31.16959" />
+			<Code File="InteractWith" MobId="181579" NonCompeteDistance="0" InteractBlacklistTimeInSeconds="1" PreInteractMountStrategy="Dismount" QuestId="9391" QuestObjectiveIndex="3" X="-769.7674" Y="3673.832" Z="30.26431" />
+		</While>
+
+		<TurnIn QuestName="Marking the Path" QuestId="9391" TurnInName="Ranger Captain Venn&apos;ren" TurnInId="16789" X="-588.4052" Y="4068.579" Z="143.2582" />
+
+		<While Condition="DoQuest(9397)" >
+			<Code File="InteractWith" MobId="181582" CollectionDistance="200" PreInteractMountStrategy="Dismount" QuestId="9397" QuestObjectiveIndex="1" TerminateWhen="Unit(17034) != null" >
+				<HuntingGrounds>
+					<Hotspot X="-1047.938" Y="4196.074" Z="14.90869" />
+					<Hotspot X="-1158.457" Y="4210.167" Z="18.46018" />
+				</HuntingGrounds>
+			</Code>
+			<Code File="InteractWith" MobId="17034" MobState="Alive" CollectionDistance="200" WaitForNpcs="false" NonCompeteDistance="0" InteractByUsingItemId="23485" QuestId="9397" QuestObjectiveIndex="1" />
+		</While>
+
+		<Code File="KillUntilComplete" MobId="17084" X="-1132.166" Y="4213.147" Z="51.28037" TerminateWhen="!NeedsQuest(9418) || HasItem(23580)" />
+		<PickUp QuestName="Avruu's Orb" QuestId="9418" GiverType="Item" GiverId="23580" /> 
+		<If Condition="QuestDone(9418)" >
+			<Code File="InteractWith" MobId="181606" NonCompeteDistance="0" InteractBlacklistTimeInSeconds="1" PreInteractMountStrategy="Dismount" GossipOptions="1" NumOfTimes="500" X="-1323.881" Y="4047.082" Z="115.7337" TerminateWhen="Unit(17085) != null" />
+		</If>
+		<TurnIn QuestName="Avruu's Orb" QuestId="9418" TurnInName="Aeranas" TurnInId="17085" X="-1323.881" Y="4047.082" Z="115.7337" />
+
+		<Code File="KillUntilComplete" MobIds="16966, 16967" QuestId="9396" >
+			<HuntingGrounds>
+				<Hotspot X="-1283.278" Y="4079.81" Z="91.20277" />
+				<Hotspot X="-1188.931" Y="4046.784" Z="73.0621" />
+				<Hotspot X="-1125.786" Y="4201.223" Z="15.74502" />
+			</HuntingGrounds>
+		</Code>
+
+		<TurnIn QuestName="Magic of the Arakkoa" QuestId="9396" TurnInName="Arcanist Calesthris Dawnstar" TurnInId="16792" X="-578.2329" Y="4145.581" Z="68.11439" />
+		<TurnIn QuestName="Birds of a Feather" QuestId="9397" TurnInName="Falconer Drenna Riverwind" TurnInId="16790" X="-599.1125" Y="4109.929" Z="90.47141" />
+
+		<If Condition="QuestDone(9401, 10136, 10389) &amp;&amp; Me.HearthstoneAreaId == 3536 &amp;&amp; Unit(16790) != null" >
+			<Code File="UseHearthstone" WaitForCd="false" />
+		</If>
+
+		<TurnIn QuestName="The Agony and the Darkness" QuestId="10389" TurnInName="Magister Bloodhawk" TurnInId="21175" X="239.6503" Y="2689.937" Z="89.73489" />
+		<TurnIn QuestName="Cruel&apos;s Intentions" QuestId="10136" TurnInName="Nazgrel" TurnInId="3230" X="242.6701" Y="2693.319" Z="89.74057" />
+		<TurnIn QuestName="A Strange Weapon" QuestId="9401" TurnInName="Nazgrel" TurnInId="3230" X="242.6701" Y="2693.319" Z="89.74057" />
+		<PickUp QuestName="The Warchief&apos;s Mandate" QuestId="9405" GiverName="Nazgrel" GiverId="3230" X="242.6701" Y="2693.319" Z="89.74057" />
+		<TurnIn QuestName="The Warchief&apos;s Mandate" QuestId="9405" TurnInName="Far Seer Regulkut" TurnInId="16574" X="177.1085" Y="2734.736" Z="87.46038" />
+
+		<Checkpoint Level="61.5" />
+
+		<If Condition="!SpellManager.HasSpell(34090) &amp;&amp; Me.Gold &gt;= 225" >
+			<!-- Make sure we have flying before moving on -->
+			<MoveTo X="45.09896" Y="2741.531" Z="85.17035" />
+			<Code File="ForceTrainRiding" MobId="35093" X="45.09896" Y="2741.531" Z="85.17035" />
+		</If>
+
+		<Code File="DeleteItems" Ids="23270" />
+
+		<Code File="LoadProfile" ProfileName="Zangarmarsh.xml" />
+
+	</QuestOrder>
+</HBProfile>

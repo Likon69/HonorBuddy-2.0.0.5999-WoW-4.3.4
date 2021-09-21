@@ -1,0 +1,264 @@
+<HBProfile xsi:noNamespaceSchemaLocation="../Schemas/EchoSchema.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<!-- Original contribution by EchoTiger -->
+	<Name>Tauren Starter ($ShortHash$)</Name>
+
+	<MinDurability>0.3</MinDurability>
+	<MinFreeBagSlots>3</MinFreeBagSlots>
+
+	<SellGrey>true</SellGrey>
+	<SellWhite>true</SellWhite>
+	<SellGreen>true</SellGreen>
+	<SellBlue>true</SellBlue>
+	<SellPurple>false</SellPurple>
+
+	<MailGrey>false</MailGrey>
+	<MailWhite>true</MailWhite>
+	<MailGreen>true</MailGreen>
+	<MailBlue>true</MailBlue>
+	<MailPurple>true</MailPurple>
+
+	<TargetElites>true</TargetElites>
+
+	<AvoidMobs>
+	</AvoidMobs>
+
+	<Mailboxes>
+	</Mailboxes>
+
+	<Vendors>
+	</Vendors>
+
+	<Blackspots>
+	</Blackspots>
+
+	<Blacklist>
+	</Blacklist>
+
+	<QuestOrder IgnoreCheckpoints="false" ContinuallySkipToCheckpoints="true" >
+		<!-- Check function status -->
+		<Code File="RunCode" Type="Definition">
+			<![CDATA[
+			private static bool? profileFunctionsEnabled => (bool?)AppDomain.CurrentDomain.GetData("QuestingProfiles_FunctionsEnabled");
+			private static bool IsStoreProfile(string path) => path.StartsWith("store://");
+			private static string Slashify(string path) => IsStoreProfile(path) ? path.Replace(@"\", "/") : path.Replace("/", @"\");
+
+			public __CompiledBatchClass__()
+			{
+				ActivateFunctions();
+			}
+
+			private static void ActivateFunctions()
+			{
+				if (profileFunctionsEnabled == null || profileFunctionsEnabled == false)
+				{
+					Bots.Professionbuddy.PBLog.Log(Colors.MediumPurple, "[Profile Message!]: ", Colors.Yellow, "Please stand by as the functions are being activated!");
+					LoadProfile(@"..\..\Functions\Activate Functions.xml");
+				}
+			}
+
+			private static void LoadProfile(string path)
+			{
+				var profile = GetNewPath(path);
+				if (!IsStoreProfile(profile) && !File.Exists(profile))
+				{
+					Bots.Professionbuddy.PBLog.Log(Colors.MediumPurple, "[Profile Message!]: ", Colors.Yellow, "Profile does not exist.\n" + profile);
+					return;
+				}
+
+				Bots.Professionbuddy.PBLog.Log(Colors.MediumPurple, "[Profile Message!]: ", Colors.Yellow, "Loading: " + profile);
+				ProfileManager.LoadNew(profile, false);
+			}
+
+			private static string GetNewPath(string path)
+			{
+				if (IsStoreProfile(path))
+					return Slashify(path);
+
+				var currentProfile = ProfileManager.XmlLocation;
+				if (IsStoreProfile(currentProfile))
+					return Slashify(currentProfile + "/../" + path);
+
+				var absolutePath = Path.Combine(Path.GetDirectoryName(currentProfile), path);
+				absolutePath = Path.GetFullPath(absolutePath);
+				var canonicalPath = new Uri(absolutePath).LocalPath;
+				return Slashify(canonicalPath);
+			}]]>
+		</Code>
+		<Code File="RunCode" Code="ActivateFunctions();" />
+		<!-- END Check function status -->
+
+		<If Condition="Me.IsAlliance" >
+			<Code File="LoadProfile" ProfileName="..\..\Questing Autoloader.xml" />
+		</If>
+		<!-- RunCode Methods -->
+			<Code File="RunCode">
+			<![CDATA[
+				Bots.Professionbuddy.PBLog.Log(System.Windows.Media.Colors.MediumPurple, "> [Profile Initialization Status] ", System.Windows.Media.Colors.CornflowerBlue, "\n     Auto-Looting	:: Enabled\n     Looting	:: Enabled\n     Game Addons	:: Disabled");
+				Lua.DoString("SetCVar('AutoLootDefault', 1);");
+				Lua.DoString("SetCVar('autoDismountFlying', 1);");
+				CharacterSettings.Instance.LootMobs = true;
+				CharacterSettings.Instance.Save();
+				Logging.Write(System.Windows.Media.Colors.MediumPurple, "> [Ready to bot!]");
+			]]>
+			</Code>
+			<Code File="RunCode" Type="Definition">
+				<![CDATA[
+						bool DoQuest(params uint[] questIds)
+						{
+							foreach (var questId in questIds)
+							{
+								if (HasQuest(questId) && !IsQuestCompleted(questId)) return true;
+							}
+							return false;
+						}
+						bool NeedsQuest(params uint[] questIds)
+						{
+							foreach (var questId in questIds)
+							{
+								if (!HasQuest(questId) && !IsQuestCompleted(questId)) return true;
+							}
+							return false;
+						}
+						bool NeedsBreadcrumbQuest(params uint[] questIds)
+						{
+							foreach (var questId in questIds)
+							{
+								if (IsQuestCompleted(questId)) return false;
+							}
+							return true;
+						}
+						bool QuestDone(params uint[] questIds)
+						{
+							foreach (var questId in questIds)
+							{
+								if (HasQuest(questId) && IsQuestCompleted(questId)) return true;
+							}
+							return false;
+						}
+						bool QuestFlaggedCompleted(params uint[] questIds)
+						{
+							foreach (var questId in questIds)
+							{
+								return Lua.GetReturnVal<bool>($"return IsQuestFlaggedCompleted({questId});", 0);
+							}
+							return false;
+						}
+						async Task SkipCutscene(int preWait = 3000, int postWait = 3000)
+						{
+					// Add detection of cutscene here.
+							await Coroutine.Sleep(preWait);
+					// Test and improve the working method.
+							Lua.DoString("MovieFrame:StopMovie(); CinematicFrame_CancelCinematic(); StopCinematic();");
+							await Coroutine.Sleep(postWait);
+						}
+					]]>
+			</Code>
+		<!-- END RunCode Methods -->
+
+
+		<PickUp QuestName="The First Step" QuestId="14449" GiverName="Chief Hawkwind" GiverId="2981" X="-2913.882" Y="-257.4125" Z="59.46426" />
+		<TurnIn QuestName="The First Step" QuestId="14449" TurnInName="Grull Hawkwind" TurnInId="2980" X="-3011.569" Y="-460.7193" Z="44.88071" />
+
+		<PickUp QuestName="Rite of Strength" QuestId="14452" GiverName="Grull Hawkwind" GiverId="2980" X="-3011.569" Y="-460.7193" Z="44.88071" />
+		<Code File="KillUntilComplete" MobId="36943" QuestId="14452" >
+			<HuntingGrounds>
+				<Hotspot X="-3010.547" Y="-537.363" Z="44.59013" />
+				<Hotspot X="-2942.779" Y="-594.4091" Z="48.35432" />
+			</HuntingGrounds>
+		</Code>
+		<TurnIn QuestName="Rite of Strength" QuestId="14452" TurnInName="Grull Hawkwind" TurnInId="2980" X="-3011.569" Y="-460.7193" Z="44.88071" />
+
+		<PickUp QuestName="Our Tribe, Imprisoned" QuestId="24852" GiverName="Grull Hawkwind" GiverId="2980" X="-3014.825" Y="-467.5406" Z="44.63879" />
+		<While Condition="DoQuest(24852)" >
+			<DisableBehavior Name="Pull" />
+			<Code File="InteractWith" MobId="202112" CollectionDistance="200" QuestId="24852" QuestObjectiveIndex="1" >
+				<HuntingGrounds>
+					<Hotspot X="-2980.774" Y="-637.2737" Z="43.03579" />
+					<Hotspot X="-2926.979" Y="-674.4214" Z="46.36351" />
+					<Hotspot X="-3130.612" Y="-606.8148" Z="38.60238" />
+				</HuntingGrounds>
+			</Code>
+			<EnableBehavior Name="Pull" />
+		</While>
+		<TurnIn QuestName="Our Tribe, Imprisoned" QuestId="24852" TurnInName="Grull Hawkwind" TurnInId="2980" X="-3014.096" Y="-466.4911" Z="44.80344" />
+
+		<PickUp QuestName="Go to Adana" QuestId="14458" GiverName="Grull Hawkwind" GiverId="2980" X="-3014.096" Y="-466.4911" Z="44.80344" />
+		<TurnIn QuestName="Go to Adana" QuestId="14458" TurnInName="Adana Thunderhorn" TurnInId="36694" X="-3172.95" Y="-316.3729" Z="46.55291" />
+
+		<While Condition="NeedsQuest(14455, 14456)" >
+			<PickUp QuestName="Stop the Thorncallers" QuestId="14455" GiverName="Adana Thunderhorn" GiverId="36694" X="-3172.95" Y="-316.3729" Z="46.55291" />
+			<PickUp QuestName="Rite of Courage" QuestId="14456" GiverName="Adana Thunderhorn" GiverId="36694" X="-3172.95" Y="-316.3729" Z="46.55291" />
+		</While>
+		<Code File="KillUntilComplete" TerminateWhen="!DoQuest(14455, 14456)" >
+			<HuntingGrounds>
+				<Hotspot X="-3344.93" Y="-360.639" Z="56.79113" />
+				<Hotspot X="-3389.52" Y="-306.6911" Z="62.5074" />
+				<Hotspot X="-3305.799" Y="-336.9308" Z="54.65791" />
+				<Hotspot X="-3427.952" Y="-413.6075" Z="76.21561" />
+			</HuntingGrounds>
+			<PursuitList>
+				<PursueUnit Id="36697" PursueWhen="DoQuest(14455)" />
+				<PursueUnit Id="36708" PursueWhen="DoQuest(14456)" />
+			</PursuitList>
+		</Code>
+		<While Condition="QuestDone(14455, 14456)" >
+			<TurnIn QuestName="Rite of Courage" QuestId="14456" TurnInName="Adana Thunderhorn" TurnInId="36694" X="-3176.953" Y="-313.0642" Z="46.38595" />
+			<TurnIn QuestName="Stop the Thorncallers" QuestId="14455" TurnInName="Adana Thunderhorn" TurnInId="36694" X="-3176.953" Y="-313.0642" Z="46.38595" />
+		</While>
+
+		<While Condition="NeedsQuest(14459, 14461)" >
+			<PickUp QuestName="The Battleboars" QuestId="14459" GiverName="Adana Thunderhorn" GiverId="36694" X="-3176.953" Y="-313.0642" Z="46.38595" />
+			<PickUp QuestName="Feed of Evil" QuestId="14461" GiverName="Adana Thunderhorn" GiverId="36694" X="-3176.953" Y="-313.0642" Z="46.38595" />
+		</While>
+
+		<While Condition="DoQuest(14461)" >
+			<Code File="InteractWith" MobId="36727" InteractByUsingItemId="49539" Range="5" NonCompeteDistance="0" InteractBlacklistTimeInSeconds="1" QuestId="14461" QuestObjectiveIndex="1" X="-3361.041" Y="-234.6382" Z="61.45366" />
+			<Code File="InteractWith" MobId="37155" InteractByUsingItemId="49539" Range="5" NonCompeteDistance="0" InteractBlacklistTimeInSeconds="1" QuestId="14461" QuestObjectiveIndex="2" X="-3390.991" Y="-213.8656" Z="61.64237" />
+			<Code File="InteractWith" MobId="37156" InteractByUsingItemId="49539" Range="5" NonCompeteDistance="0" InteractBlacklistTimeInSeconds="1" QuestId="14461" QuestObjectiveIndex="3" X="-3403.38" Y="-262.7828" Z="61.52839" />
+		</While>
+
+		<Code File="KillUntilComplete" MobId="36696" QuestId="14459" >
+			<HuntingGrounds>
+				<Hotspot X="-3386.887" Y="-230.8796" Z="60.54503" />
+				<Hotspot X="-3369.133" Y="-280.5368" Z="61.55612" />
+			</HuntingGrounds>
+		</Code>
+
+		<While Condition="QuestDone(14459, 14461)" >
+			<TurnIn QuestName="The Battleboars" QuestId="14459" TurnInName="Adana Thunderhorn" TurnInId="36694" X="-3176.202" Y="-311.7177" Z="46.62113" />
+			<TurnIn QuestName="Feed of Evil" QuestId="14461" TurnInName="Adana Thunderhorn" TurnInId="36694" X="-3176.202" Y="-311.7177" Z="46.62113" />
+		</While>
+
+		<PickUp QuestName="Rite of Honor" QuestId="14460" GiverName="Adana Thunderhorn" GiverId="36694" X="-3176.202" Y="-311.7177" Z="46.62113" />
+		<Code File="KillUntilComplete" MobId="36712" QuestId="14460" QuestObjectiveIndex="1" X="-3128.52" Y="-58.50631" Z="45.44364" />
+		<TurnIn QuestName="Rite of Honor" QuestId="14460" TurnInName="Chief Hawkwind" TurnInId="2981" X="-2914.526" Y="-253.3296" Z="59.51802" />
+
+		<PickUp QuestName="Last Rites, First Rites" QuestId="24861" GiverName="Chief Hawkwind" GiverId="2981" X="-2914.526" Y="-253.3296" Z="59.51802" />
+		<While Condition="DoQuest(24861)" >
+			<MoveTo X="-2910.605" Y="-254.2194" Z="59.63737" />
+			<Code File="UseItem" ItemId="50465" QuestId="24861" />
+		</While>
+		<TurnIn QuestName="Last Rites, First Rites" QuestId="24861" TurnInName="Chief Hawkwind" TurnInId="2981" X="-2911.032" Y="-254.1168" Z="59.62164" />
+
+		<While Condition="NeedsQuest(23733)" >
+			<PickUp QuestName="Rites of the Earthmother" QuestId="23733" GiverName="Chief Hawkwind" GiverId="2981" X="-2911.032" Y="-254.1168" Z="59.62164" />
+		</While>
+		<TurnIn QuestName="Rites of the Earthmother" QuestId="23733" TurnInName="Dyami Windsoar" TurnInId="36803" X="-2932.918" Y="-37.43242" Z="190.0333" />
+
+		<PickUp QuestName="Rite of the Winds" QuestId="24215" GiverName="Dyami Windsoar" GiverId="36803" X="-2932.918" Y="-37.43242" Z="190.0333" />
+		<If Condition="QuestDone(24215) &amp;&amp; Unit(36803) != null" >
+			<MoveTo X="-2930.317" Y="-39.29258" Z="189.4208" />
+			<Code File="UseItem" ItemId="49652" />
+			<Code File="WaitTimer" WaitTime="45000" TerminateWhen="!Me.InVehicle" />
+		</If>
+		<TurnIn QuestName="Rite of the Winds" QuestId="24215" TurnInName="Ahmo Thunderhorn" TurnInId="36644" X="-2337.027" Y="-396.0383" Z="-8.145905" />
+
+		<!-- Not worth checkpointing because the above quest transports us to BLoodhoof Village. -->
+
+		<Checkpoint Level="6" />
+		
+		<Code File="LoadProfile" ProfileName="..\Kalimdor\Mulgore.xml" />
+
+
+	</QuestOrder>
+</HBProfile>

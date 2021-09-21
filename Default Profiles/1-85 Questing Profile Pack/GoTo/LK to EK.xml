@@ -1,0 +1,101 @@
+<HBProfile>
+	<Name>LK to EK [Kick]</Name>
+	<MinLevel>80</MinLevel>
+	<MaxLevel>86</MaxLevel>
+	
+	<MinDurability>0.1</MinDurability>
+	<MinFreeBagSlots>1</MinFreeBagSlots>
+	
+
+	<Vendors>
+		<!--Stormwind Trainers-->
+		<Vendor Name="Brother Joshua" Entry="5489" Type="Train" TrainClass="Priest" X="-8519.56" Y="862.8282" Z="109.8286" />
+		<Vendor Name="Osborne the Night Man" Entry="918" Type="Train" TrainClass="Rogue" X="-8752.939" Y="376.3212" Z="101.0491" />
+		<Vendor Name="Wu Shen" Entry="5479" Type="Train" TrainClass="Warrior" X="-8803.79" Y="330.7847" Z="115.4658" />
+		<Vendor Name="Ursula Deline" Entry="5495" Type="Train" TrainClass="Warlock" X="-8971.052" Y="1029.896" Z="101.4036" />
+		<Vendor Name="Lord Grayson Shadowbreaker" Entry="928" Type="Train" TrainClass="Paladin" X="-8516.007" Y="804.5712" Z="106.5188" />
+		<Vendor Name="Elsharin" Entry="5498" Type="Train" TrainClass="Mage" X="-9006.13" Y="885.3715" Z="29.62114" />
+		<Vendor Name="Einris Brightspear" Entry="5515" Type="Train" TrainClass="Hunter" X="-8416.09" Y="547.868" Z="95.44888" />
+		<!--Stormwind Only Classes Trainers-->
+		<!-- <Vendor Name="Celestine of the Harvest" Entry="44395" Type="Train" TrainClass="Druid" X="-8284.26" Y="724.349" Z="75.2835" /> -->
+		<Vendor Name="Sheldras Moontree" Entry="5504" Type="Train" TrainClass="Druid" X="-8575.113" Y="1246.201" Z="5.230695" />
+		<Vendor Name="Farseer Umbrua" Entry="20407" Type="Train" TrainClass="Shaman" X="-8359.28" Y="577.384" Z="104.249" />
+	
+		<Vendor Name="Gunther Weller" Entry="1289" Type="Repair" X="-8790.421" Y="607.3484" Z="96.77338" />
+	</Vendors>
+	
+	<Mailboxes>
+		<Mailbox X="-8861.914" Y="638.3568" Z="96.34637" />
+	</Mailboxes>
+	
+	<Blackspots>
+		<Blackspot X="-8862.166" Y="637.9529" Z="96.27942" Radius="3" />
+		<Blackspot X="-8825.209" Y="629.1733" Z="94.38562" Radius="15" />
+	</Blackspots>
+	
+	<QuestOrder>
+	
+		<CustomBehavior File="UserSettings" LearnFlightPaths="False" UseFlightPaths="False" TrainNewSkills="False" />
+				
+		 <If Condition="(Me.MapId == 571) &amp;&amp; (Me.Class == WoWClass.DeathKnight)" >
+			<While Condition="Me.Zone != 139" >
+				<CustomBehavior File="Misc\RunLua" Lua="CastSpellByID(50977)" />
+				<CustomBehavior File="WaitTimer" WaitTime="12000" GoalText="Waiting for port {TimeRemaining}" />
+				<CustomBehavior File="InteractWith" MobId="190942" ObjectType="Gameobject" Range="6" WaitForNpcs="False" />
+				<CustomBehavior File="WaitTimer" WaitTime="5000" GoalText="Waiting for port {TimeRemaining}" />
+			</While>
+			
+			<If Condition="Me.ZoneId == 139" >
+				<ClearVendor />
+				
+				<SetVendor>
+					<Vendors>
+						<Vendor Name="Lady Alistra" Entry="29195" Type="Repair" X="2488.616" Y="-5654.104" Z="376.9503" />
+					</Vendors>
+				</SetVendor>
+				
+				<CustomBehavior File="ForceSetVendor" DoTrain="True" />
+				<ClearVendor />
+			
+				<CustomBehavior File="UserSettings" UseFlightPaths="True" />
+				<CustomBehavior File="InteractWith" MobId="29480" X="2348.626" Y="-5669.289" Z="382.2406" />
+			 </If>
+				
+			  <If Condition="(Me.IsAlliance) &amp;&amp; (Me.MapId == 0)" >
+				<RunTo X="-8290.925" Y="1405.826" Z="4.721312" />
+			  </If>
+			  
+				<CustomBehavior File="UserSettings" UseFlightPaths="False" />
+		 </If>
+	 
+		 <If Condition="(Me.MapId == 571) &amp;&amp; (Me.Class != WoWClass.DeathKnight)" >
+			<CustomBehavior File="FlyTo" X="2231.537" Y="5135.816" Z="5.345537" />
+			<CustomBehavior File="ForcedDismount" />
+			<!-- Valiance Keep to SW dock -->
+			<CustomBehavior File="UseTransport"
+							Entry="2234.375, 5132.568, 5.343217"
+							Exit="-8300.08, 1405.158, 4.422395"
+							Start="2218.391, 5119.589, 0.04" 
+							End="-8288.816, 1424.703, 0.04" 
+							TransportId="190536" />
+		</If>
+			
+			<If Condition="Me.MapId == 0" >
+				<If Condition="Me.Class != WoWClass.DeathKnight">
+					<CustomBehavior File="UserSettings" TrainNewSkills="True" />
+					<CustomBehavior File="ForceSetVendor" DoTrain="True" DoSell="True" DoRepair="True" DoMail="True" />
+				</If>
+			
+				<If Condition="!SpellManager.HasSpell(&quot;Flight Master's License&quot;)">
+					<CustomBehavior File="ForceTrainRiding" MobId="43769" />
+					<CustomBehavior File="WaitTimer" WaitTime="5000" GoalText="Waiting for quest to complete {TimeRemaining}" />
+				</If>
+				<If Condition="!SpellManager.HasSpell(&quot;Flight Master's License&quot;)">
+	<CustomBehavior File="UserDialog" AllowBotStop="True" SoundCue="Exclamation" SoundCueInterval="1" Text="You need your cata flying license to continue!!!! Train it at SW Flight Path!" />
+				</If>
+			</If>
+				
+		<CustomBehavior File="LoadProfile" ProfileName="..\Cata\[Fly][N - Quest] Hyjal 80-82 [Kick]" /> 
+	  
+	</QuestOrder>
+</HBProfile>

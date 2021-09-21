@@ -1,0 +1,379 @@
+<HBProfile xsi:noNamespaceSchemaLocation="../Schemas/EchoSchema.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<!-- Original contribution by EchoTiger -->
+	<Name>Azuremist Isle ($ShortHash$)</Name>
+
+	<MinDurability>0.3</MinDurability>
+	<MinFreeBagSlots>3</MinFreeBagSlots>
+
+	<SellGrey>true</SellGrey>
+	<SellWhite>true</SellWhite>
+	<SellGreen>true</SellGreen>
+	<SellBlue>true</SellBlue>
+	<SellPurple>false</SellPurple>
+
+	<MailGrey>false</MailGrey>
+	<MailWhite>true</MailWhite>
+	<MailGreen>true</MailGreen>
+	<MailBlue>true</MailBlue>
+	<MailPurple>true</MailPurple>
+
+	<TargetElites>true</TargetElites>
+
+	<AvoidMobs>
+	</AvoidMobs>
+
+	<Mailboxes>
+	</Mailboxes>
+
+	<Vendors>
+	</Vendors>
+
+	<Blackspots>
+	</Blackspots>
+
+	<Blacklist>
+	</Blacklist>
+
+	<QuestOrder IgnoreCheckpoints="false" >
+		<!-- Check function status -->
+		<Code File="RunCode" Type="Definition">
+			<![CDATA[
+			private static bool? profileFunctionsEnabled => (bool?)AppDomain.CurrentDomain.GetData("QuestingProfiles_FunctionsEnabled");
+			private static bool IsStoreProfile(string path) => path.StartsWith("store://");
+			private static string Slashify(string path) => IsStoreProfile(path) ? path.Replace(@"\", "/") : path.Replace("/", @"\");
+
+			public __CompiledBatchClass__()
+			{
+				ActivateFunctions();
+			}
+
+			private static void ActivateFunctions()
+			{
+				if (profileFunctionsEnabled == null || profileFunctionsEnabled == false)
+				{
+					Bots.Professionbuddy.PBLog.Log(Colors.MediumPurple, "[Profile Message!]: ", Colors.Yellow, "Please stand by as the functions are being activated!");
+					LoadProfile(@"..\..\Functions\Activate Functions.xml");
+				}
+			}
+
+			private static void LoadProfile(string path)
+			{
+				var profile = GetNewPath(path);
+				if (!IsStoreProfile(profile) && !File.Exists(profile))
+				{
+					Bots.Professionbuddy.PBLog.Log(Colors.MediumPurple, "[Profile Message!]: ", Colors.Yellow, "Profile does not exist.\n" + profile);
+					return;
+				}
+
+				Bots.Professionbuddy.PBLog.Log(Colors.MediumPurple, "[Profile Message!]: ", Colors.Yellow, "Loading: " + profile);
+				ProfileManager.LoadNew(profile, false);
+			}
+
+			private static string GetNewPath(string path)
+			{
+				if (IsStoreProfile(path))
+					return Slashify(path);
+
+				var currentProfile = ProfileManager.XmlLocation;
+				if (IsStoreProfile(currentProfile))
+					return Slashify(currentProfile + "/../" + path);
+
+				var absolutePath = Path.Combine(Path.GetDirectoryName(currentProfile), path);
+				absolutePath = Path.GetFullPath(absolutePath);
+				var canonicalPath = new Uri(absolutePath).LocalPath;
+				return Slashify(canonicalPath);
+			}]]>
+		</Code>
+		<Code File="RunCode" Code="ActivateFunctions();" />
+		<!-- END Check function status -->
+
+		<If Condition="Me.IsHorde" >
+			<Code File="LoadProfile" ProfileName="..\..\Questing Autoloader.xml" />
+		</If>
+		<!-- RunCode Methods -->
+			<Code File="RunCode">
+			<![CDATA[
+				Bots.Professionbuddy.PBLog.Log(System.Windows.Media.Colors.MediumPurple, "> [Profile Initialization Status] ", System.Windows.Media.Colors.CornflowerBlue, "\n     Auto-Looting	:: Enabled\n     Looting	:: Enabled\n     Game Addons	:: Disabled");
+				Lua.DoString("SetCVar('AutoLootDefault', 1);");
+				Lua.DoString("SetCVar('autoDismountFlying', 1);");
+				CharacterSettings.Instance.LootMobs = true;
+				CharacterSettings.Instance.Save();
+				Logging.Write(System.Windows.Media.Colors.MediumPurple, "> [Ready to bot!]");
+			]]>
+			</Code>
+			<Code File="RunCode" Type="Definition">
+				<![CDATA[
+						bool DoQuest(params uint[] questIds)
+						{
+							foreach (var questId in questIds)
+							{
+								if (HasQuest(questId) && !IsQuestCompleted(questId)) return true;
+							}
+							return false;
+						}
+						bool NeedsQuest(params uint[] questIds)
+						{
+							foreach (var questId in questIds)
+							{
+								if (!HasQuest(questId) && !IsQuestCompleted(questId)) return true;
+							}
+							return false;
+						}
+						bool NeedsBreadcrumbQuest(params uint[] questIds)
+						{
+							foreach (var questId in questIds)
+							{
+								if (IsQuestCompleted(questId)) return false;
+							}
+							return true;
+						}
+						bool QuestDone(params uint[] questIds)
+						{
+							foreach (var questId in questIds)
+							{
+								if (HasQuest(questId) && IsQuestCompleted(questId)) return true;
+							}
+							return false;
+						}
+						bool QuestFlaggedCompleted(params uint[] questIds)
+						{
+							foreach (var questId in questIds)
+							{
+								return Lua.GetReturnVal<bool>($"return IsQuestFlaggedCompleted({questId});", 0);
+							}
+							return false;
+						}
+						async Task SkipCutscene(int preWait = 3000, int postWait = 3000)
+						{
+					// Add detection of cutscene here.
+							await Coroutine.Sleep(preWait);
+					// Test and improve the working method.
+							Lua.DoString("MovieFrame:StopMovie(); CinematicFrame_CancelCinematic(); StopCinematic();");
+							await Coroutine.Sleep(postWait);
+						}
+					]]>
+			</Code>
+		<!-- END RunCode Methods -->
+
+
+		<PickUp QuestName="Word from Azure Watch" QuestId="9314" GiverName="Aeun" GiverId="16554" X="-4260.792" Y="-13128.23" Z="37.07682" />
+		<If Condition="HasQuest(9313)" >
+			<TurnIn QuestName="Travel to Azure Watch" QuestId="9313" TurnInName="Technician Dyvuun" TurnInId="16551" X="-4157.686" Y="-12480.58" Z="45.24162" />
+		</If>
+		<TurnIn QuestName="Word from Azure Watch" QuestId="9314" TurnInName="Caregiver Chellan" TurnInId="16553" X="-4129.011" Y="-12468.35" Z="44.0862" />	
+		<PickUp QuestName="Beds, Bandages, and Beyond" QuestId="9603" GiverName="Caregiver Chellan" GiverId="16553" X="-4131.409" Y="-12470.71" Z="44.08617" />
+		<PickUp QuestName="Medicinal Purpose" QuestId="9463" GiverName="Anchorite Fateema" GiverId="17214" X="-4198.362" Y="-12471.08" Z="45.62859" />
+		<TurnIn QuestName="Beds, Bandages, and Beyond" QuestId="9603" TurnInName="Zaldaan" TurnInId="43991" X="-4127.82" Y="-12520.81" Z="44.27041" />
+		<PickUp QuestName="On the Wings of a Hippogryph" QuestId="9604" GiverName="Zaldaan" GiverId="43991" X="-4131.479" Y="-12523.45" Z="44.60783" />
+		<PickUp QuestName="The Great Moongraze Hunt" QuestId="9454" GiverName="Acteon" GiverId="17110" X="-4202.625" Y="-12528.95" Z="45.32304" />
+
+		<Code File="RunCode">
+			<![CDATA[
+				var whitelist = (List<uint>)AppDomain.CurrentDomain.GetData("QuestingProfiles_AFKModeWhitelist");
+				whitelist.Add(23676);
+				AppDomain.CurrentDomain.SetData("QuestingProfiles_AFKModeWhitelist", whitelist);
+			]]>
+		</Code>
+
+		<Code File="KillUntilComplete" TerminateWhen="!DoQuest(9454, 9463)" >
+			<HuntingGrounds>
+				<Hotspot X="-4470.86" Y="-12564.36" Z="4.416808" />
+				<Hotspot X="-4503.703" Y="-12669.4" Z="15.54053" />
+				<Hotspot X="-4422.919" Y="-12784.08" Z="19.22319" />
+				<Hotspot X="-4312.317" Y="-12870.36" Z="7.837624" />
+			</HuntingGrounds>
+			<PursuitList>
+				<PursueUnit Id="17196" PursueWhen="DoQuest(9463)" /> <!-- Vine quest -->
+				<PursueUnit Id="17200" PursueWhen="DoQuest(9454)" /> <!-- Stag quest -->
+			</PursuitList>
+		</Code>
+
+		<TurnIn QuestName="The Great Moongraze Hunt" QuestId="9454" TurnInName="Acteon" TurnInId="17110" X="-4201.758" Y="-12527.19" Z="45.22339" />
+		<PickUp QuestName="The Great Moongraze Hunt" QuestId="10324" GiverName="Acteon" GiverId="17110" X="-4202.633" Y="-12524.72" Z="45.45242" />
+		<TurnIn QuestName="Medicinal Purpose" QuestId="9463" TurnInName="Anchorite Fateema" TurnInId="17214" X="-4199.697" Y="-12471.85" Z="45.62825" />
+		<RecheckCheckpoints />
+		<PickUp QuestName="An Alternative Alternative" QuestId="9473" GiverName="Daedal" GiverId="17215" X="-4190.896" Y="-12471.46" Z="45.64289" />
+
+		<Code File="InteractWith" MobIds="181644" InteractByLooting="true" GossipOptions="1" CollectionDistance="200" QuestId="9473" QuestObjectiveIndex="1" >
+			<HuntingGrounds>
+			<Hotspot X="-4321.471" Y="-12465.86" Z="19.17778" />
+			<Hotspot X="-4353.492" Y="-12594.03" Z="17.19774" />
+			<Hotspot X="-4304.392" Y="-12701.92" Z="22.29454" />
+			</HuntingGrounds>
+		</Code>
+
+		<Code File="KillUntilComplete" MobId="17201" QuestId="10324" QuestObjectiveIndex="1" >
+			<HuntingGrounds>
+			<Hotspot X="-3901.307" Y="-12520.13" Z="29.80281" />
+			<Hotspot X="-3739.2" Y="-12563.51" Z="7.77319" />
+			<Hotspot X="-3861.194" Y="-12280.14" Z="3.352311" />
+			</HuntingGrounds>
+		</Code>
+
+		<TurnIn QuestName="An Alternative Alternative" QuestId="9473" TurnInName="Daedal" TurnInId="17215" X="-4190.536" Y="-12470.64" Z="45.58003" />
+		<TurnIn QuestName="The Great Moongraze Hunt" QuestId="10324" TurnInName="Acteon" TurnInId="17110" X="-4203.625" Y="-12524.92" Z="45.47784" />
+		<PickUp QuestName="On the Wings of a Hippogryph" QuestId="9604" GiverName="Daedal" GiverId="17215" X="-4192.035" Y="-12471.73" Z="45.65525" />
+		<PickUp QuestName="The Prophecy of Velen" QuestId="9505" GiverName="Daedal" GiverId="17215" X="-4190.012" Y="-12472.34" Z="45.67766" />
+		<TurnIn QuestName="The Prophecy of Velen" QuestId="9505" TurnInName="Admiral Odesyus" TurnInId="17240" X="-4698.113" Y="-12414.08" Z="11.54543" />
+		<PickUp QuestName="A Small Start" QuestId="9506" GiverName="Admiral Odesyus" GiverId="17240" X="-4698.113" Y="-12414.08" Z="11.54543" />
+		<PickUp QuestName="Cookie&apos;s Jumbo Gumbo" QuestId="9512" GiverName="&quot;Cookie&quot; McWeaksauce" GiverId="17246" X="-4708.595" Y="-12399.55" Z="11.84449" />
+
+		<Code File="InteractWith" MobId="181675" InteractByLooting="true" NonCompeteDistance="0" InteractBlacklistTimeInSeconds="1" QuestId="9506" QuestObjectiveIndex="1" X="-4627.26" Y="-12922.7" Z="8.631465" />
+		<Code File="InteractWith" MobId="181674" InteractByLooting="true" NonCompeteDistance="0" InteractBlacklistTimeInSeconds="1" QuestId="9506" QuestObjectiveIndex="2" X="-4596.081" Y="-12888.7" Z="7.313189" />
+
+		<Code File="KillUntilComplete" MobId="17216" QuestId="9512" QuestObjectiveIndex="1" >
+			<HuntingGrounds>
+			<Hotspot X="-4661.823" Y="-12717.75" Z="0.3424165" />
+			<Hotspot X="-4663.226" Y="-12647.12" Z="0.1743756" />
+			<Hotspot X="-4682.529" Y="-12567.39" Z="0.4688705" />
+			<Hotspot X="-4735.459" Y="-12511.18" Z="1.955105" />
+			</HuntingGrounds>
+		</Code>
+
+		<TurnIn QuestName="A Small Start" QuestId="9506" TurnInName="Admiral Odesyus" TurnInId="17240" X="-4701.952" Y="-12414.62" Z="11.67299" />
+		<PickUp QuestName="I&apos;ve Got a Plant" QuestId="9530" GiverName="Admiral Odesyus" GiverId="17240" X="-4701.952" Y="-12414.62" Z="11.67299" />
+		<TurnIn QuestName="Cookie&apos;s Jumbo Gumbo" QuestId="9512" TurnInName="&quot;Cookie&quot; McWeaksauce" TurnInId="17246" X="-4707.208" Y="-12401.43" Z="12.07156" />
+		<RecheckCheckpoints />
+		<PickUp QuestName="Reclaiming the Ruins" QuestId="9513" GiverName="Priestess Kyleen Il&apos;dinare" GiverId="17241" X="-4702.727" Y="-12418.08" Z="11.66864" />
+		<PickUp QuestName="Precious and Fragile Things Need Special Handling" QuestId="9523" GiverName="Archaeologist Adamant Ironheart" GiverId="17242" X="-4694.303" Y="-12421.55" Z="11.86297" />
+
+		<Code File="InteractWith" MobIds="181696" InteractByLooting="true" CollectionDistance="200" QuestId="9530" QuestObjectiveIndex="1" X="-4519.381" Y="-12373.31" Z="18.23684" />
+
+		<Code File="InteractWith" MobIds="181697" GossipOptions="1" NumOfTimes="6" QuestId="9530" QuestObjectiveIndex="2" >
+			<HuntingGrounds>
+			<Hotspot X="-4653.475" Y="-12344.11" Z="12.5447" />
+			<Hotspot X="-4570.63" Y="-12512.27" Z="7.86879" />
+			</HuntingGrounds>
+		</Code>
+
+		<Code File="KillUntilComplete" QuestId="9513" >
+			<HuntingGrounds>
+			<Hotspot X="-4888.91" Y="-12132.03" Z="2.192721" />
+			<Hotspot X="-4929.605" Y="-12068.62" Z="4.298759" />
+			<Hotspot X="-4954.192" Y="-12002.72" Z="9.8752" />
+			<Hotspot X="-5001.655" Y="-11883.57" Z="1.266548" />
+			</HuntingGrounds>
+			<PursuitList>
+			<PursueUnit Id="17194" PursueWhen="!IsObjectiveComplete(1, 9513)" />
+			<PursueUnit Id="17193" PursueWhen="!IsObjectiveComplete(2, 9513)" />
+			<PursueUnit Id="17195" PursueWhen="!IsObjectiveComplete(3, 9513)" />
+		</PursuitList>
+		</Code>
+
+		<Code File="InteractWith" MobId="181683" GossipOptions="1" CollectionDistance="200" QuestId="9523" QuestObjectiveIndex="1" >
+			<HuntingGrounds>
+			<Hotspot X="-4947.595" Y="-11802.7" Z="13.10028" />
+			<Hotspot X="-4939.793" Y="-11738.57" Z="23.5843" />
+			<Hotspot X="-4923.6" Y="-11690.52" Z="16.09429" />
+			</HuntingGrounds>
+		</Code>
+
+		<PickUp QuestName="Rune Covered Tablet" QuestId="9514" GiverName="Fyari" GiverId="24414" />
+
+		<TurnIn QuestName="Rune Covered Tablet" QuestId="9514" TurnInName="Priestess Kyleen Il&apos;dinare" TurnInId="17241" X="-4702.76" Y="-12417.57" Z="11.67327" />
+		<TurnIn QuestName="Reclaiming the Ruins" QuestId="9513" TurnInName="Priestess Kyleen Il&apos;dinare" TurnInId="17241" X="-4702.76" Y="-12417.57" Z="11.67327" />
+		<TurnIn QuestName="I&apos;ve Got a Plant" QuestId="9530" TurnInName="Admiral Odesyus" TurnInId="17240" X="-4698.637" Y="-12418.31" Z="11.63947" />
+		<TurnIn QuestName="Precious and Fragile Things Need Special Handling" QuestId="9523" TurnInName="Archaeologist Adamant Ironheart" TurnInId="17242" X="-4696.093" Y="-12421.34" Z="11.91029" />
+		<RecheckCheckpoints />
+		<PickUp QuestName="Warlord Sriss&apos;tiz" QuestId="9515" GiverName="Priestess Kyleen Il&apos;dinare" GiverId="17241" X="-4698.276" Y="-12419.15" Z="11.68509" />
+		<PickUp QuestName="Tree&apos;s Company" QuestId="9531" GiverName="Admiral Odesyus" GiverId="17240" X="-4698.276" Y="-12419.15" Z="11.68509" />
+
+		<Code File="KillUntilComplete" MobId="17298" QuestId="9515" QuestObjectiveIndex="1" X="-4802.262" Y="-11567.83" Z="-24.82836" />
+
+		<While Condition="DoQuest(9531)" >
+			<MoveTo X="-5083.38" Y="-11252.22" Z="0.578252" />
+			<Code File="UseItem" ItemId="23792" QuestId="9531" TerminateWhen="Me.HasAura(30298)" />
+			<Code File="WaitTimer" WaitTime="85000" QuestId="9531" />
+		</While>
+
+		<TurnIn QuestName="Tree&apos;s Company" QuestId="9531" TurnInName="Admiral Odesyus" TurnInId="17240" X="-4697.463" Y="-12414.45" Z="11.54316" />
+		<TurnIn QuestName="Warlord Sriss&apos;tiz" QuestId="9515" TurnInName="Priestess Kyleen Il&apos;dinare" TurnInId="17241" X="-4700.545" Y="-12416.23" Z="11.57938" />
+		<PickUp QuestName="Show Gnomercy" QuestId="9537" GiverName="Admiral Odesyus" GiverId="17240" X="-4700.545" Y="-12416.23" Z="11.57938" />
+
+		<Code File="InteractWith" MobId="17243" GossipOptions="1" QuestId="9537" QuestObjectiveIndex="1" X="-4684.814" Y="-12526.31" Z="2.834378" />
+		<TurnIn QuestName="Show Gnomercy" QuestId="9537" TurnInName="Admiral Odesyus" TurnInId="17240" X="-4699.403" Y="-12417.06" Z="11.57443" />
+		<PickUp QuestName="Deliver Them From Evil..." QuestId="9602" GiverName="Admiral Odesyus" GiverId="17240" X="-4698.652" Y="-12412.95" Z="11.58735" />
+		<TurnIn QuestName="Deliver Them From Evil..." QuestId="9602" TurnInName="Exarch Menelaous" TurnInId="17116" X="-4166.602" Y="-12418.47" Z="41.89302" />
+		<PickUp QuestName="Learning the Language" QuestId="9538" GiverName="Cryptographer Aurren" GiverId="17232" X="-4176.795" Y="-12511.87" Z="44.36175" />
+
+		<While Condition="DoQuest(9538)" >
+			<Code File="UseItem" ItemId="23818" QuestId="9538" />
+		</While>
+
+		<TurnIn QuestName="Learning the Language" QuestId="9538" TurnInName="Totem of Akida" TurnInId="17360" X="-4176.795" Y="-12511.87" Z="44.36175" />
+
+		<If Condition="QuestDone(9604) &amp;&amp; Me.ZoneId != 3557" >
+			<Code File="InteractWith" MobId="43991" NonCompeteDistance="0" PreInteractMountStrategy="Dismount" X="-4129.451" Y="-12522.36" Z="44.35905" />
+			<Code File="Misc\RunLua" Lua="GetNumRoutes(17); TakeTaxiNode(17);" />
+		</If>
+
+		<TurnIn QuestName="On the Wings of a Hippogryph" QuestId="9604" TurnInName="Nurguni" TurnInId="16768" X="-3962.085" Y="-11666.98" Z="-138.8432" />
+		<PickUp QuestName="Hippogryph Master Stephanos" QuestId="9605" GiverName="Nurguni" GiverId="16768" X="-3962.085" Y="-11666.98" Z="-138.845" />
+		<TurnIn QuestName="Hippogryph Master Stephanos" QuestId="9605" TurnInName="Stephanos" TurnInId="17555" X="-3866.348" Y="-11641.39" Z="-137.6585" />
+		<RecheckCheckpoints />
+
+		<PickUp QuestName="Return to Caregiver Chellan" QuestId="9606" GiverName="Stephanos" GiverId="17555" X="-3866.348" Y="-11641.39" Z="-137.6585" />
+		<If Condition="QuestDone(9606) &amp;&amp; Me.ZoneId == 3557" >
+			<Code File="InteractWith" MobId="17555" NonCompeteDistance="0" PreInteractMountStrategy="Dismount" X="-3867.665" Y="-11639.62" Z="-137.6658" />
+			<Code File="Misc\RunLua" Lua="GetNumRoutes(49); TakeTaxiNode(49);" />
+		</If>
+		<TurnIn QuestName="Return to Caregiver Chellan" QuestId="9606" TurnInName="Caregiver Chellan" TurnInId="16553" X="-4132.493" Y="-12471.14" Z="44.2158" />
+		<PickUp QuestName="Totem of Coo" QuestId="9539" GiverName="Totem of Akida" GiverId="17360" X="-4175.788" Y="-12513.62" Z="44.36617" />
+
+		<TurnIn QuestName="Totem of Coo" QuestId="9539" TurnInName="Totem of Coo" TurnInId="17361" X="-3924.567" Y="-12746.86" Z="96.27235" />
+		<PickUp QuestName="Totem of Tikti" QuestId="9540" GiverName="Totem of Coo" GiverId="17361" X="-3924.055" Y="-12746.25" Z="96.22475" />
+
+		<If Condition="QuestDone(9540) &amp;&amp; Me.HasAura(30424)" >
+			<MoveTo X="-3926.172" Y="-12759.14" Z="100.9093" />
+			<Code File="RunCode" Code="
+				Me.SetFacing(4.849409f);
+				await CommonCoroutines.LandAndDismount();
+				Lua.DoString(&quot;MoveForwardStart();&quot;);
+				await Coroutine.Sleep(750);
+				Lua.DoString(&quot;JumpOrAscendStart();&quot;);
+				await Coroutine.Wait(30000, () =&gt; !Me.IsFalling);
+			"/>
+		</If>
+		<TurnIn QuestName="Totem of Tikti" QuestId="9540" TurnInName="Totem of Tikti" TurnInId="17362" X="-3871.741" Y="-13122.05" Z="6.802888" />
+
+		<PickUp QuestName="Totem of Yor" QuestId="9541" GiverName="Totem of Tikti" GiverId="17362" X="-3871.741" Y="-13122.05" Z="6.802888" />
+
+		<If Condition="QuestDone(9541)" >
+			<MoveTo X="-4643.551" Y="-13006.26" Z="0.2350824" />
+			<Code File="MyCTM" X="-4635.467" Y="-13069.45" Z="-14.68804" />
+			<TurnIn QuestName="Totem of Yor" QuestId="9541" TurnInName="Totem of Yor" TurnInId="17363" X="-4635.467" Y="-13069.45" Z="-14.68804" />
+		</If>
+		<If Condition="NeedsQuest(9542)" >
+			<Code File="MyCTM" X="-4635.467" Y="-13069.45" Z="-14.68804" />
+			<PickUp QuestName="Totem of Vark" QuestId="9542" GiverName="Totem of Yor" GiverId="17363" X="-4637.39" Y="-13068.13" Z="-14.236" />
+			<Code File="AscendInWater" />
+		</If>
+		<TurnIn QuestName="Totem of Vark" QuestId="9542" TurnInName="Totem of Vark" TurnInId="17364" X="-4487.439" Y="-11644.69" Z="11.25044" />
+		<PickUp QuestName="The Prophecy of Akida" QuestId="9544" GiverName="Totem of Vark" GiverId="17364" X="-4487.439" Y="-11644.69" Z="11.25044" />
+
+		<While Condition="DoQuest(9544)" >
+			<!-- NOTE <QuestKey -->
+			<Code File="KillUntilComplete" MobIds="17184, 17185" QuestId="9544" TerminateWhen="GetItemCount(23801) &gt;= 8" >
+				<HuntingGrounds>
+					<Hotspot X="-4487.439" Y="-11644.69" Z="11.25044" />
+					<Hotspot X="-4580.891" Y="-11625.76" Z="17.77738" />
+					<Hotspot X="-4566.284" Y="-11537.21" Z="18.68945" />
+				</HuntingGrounds>
+			</Code>
+			<Code File="InteractWith" MobIds="181722, 181730, 181732, 181733, 181729, 181728, 181726, 181725, 181731, 181727, 181731" GossipOptions="1" CollectionDistance="200" QuestId="9544" QuestObjectiveIndex="1" TerminateWhen="!HasItem(23801)" >
+				<HuntingGrounds>
+					<Hotspot X="-4487.439" Y="-11644.69" Z="11.25044" />
+					<Hotspot X="-4580.891" Y="-11625.76" Z="17.77738" />
+					<Hotspot X="-4566.284" Y="-11537.21" Z="18.68945" />
+				</HuntingGrounds>
+			</Code>
+		</While>
+
+		<TurnIn QuestName="The Prophecy of Akida" QuestId="9544" TurnInName="Arugoo of the Stillpine" TurnInId="17114" X="-4177.519" Y="-12510.67" Z="44.3617" />
+
+		<Checkpoint Level="10" />
+
+		<Code File="LoadProfile" ProfileName="..\1-58 Autoloader.xml" />
+
+	</QuestOrder>
+</HBProfile>

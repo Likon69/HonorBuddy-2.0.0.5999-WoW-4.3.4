@@ -1,0 +1,114 @@
+<HBProfile>
+	<Name>BC to EK [Kick]</Name>
+	<MinLevel>58</MinLevel>
+	<MaxLevel>86</MaxLevel>
+	
+	<MinDurability>0</MinDurability>
+	<MinFreeBagSlots>0</MinFreeBagSlots>
+	
+	<MailGrey>False</MailGrey>
+	<MailWhite>False</MailWhite>
+	<MailGreen>True</MailGreen>
+	<MailBlue>True</MailBlue>
+	<MailPurple>True</MailPurple>
+	
+	<SellGrey>True</SellGrey>
+	<SellWhite>True</SellWhite>
+	<SellGreen>True</SellGreen>
+	<SellBlue>False</SellBlue>
+	<SellPurple>False</SellPurple>
+
+	<Vendors>
+		<!--Stormwind Trainers-->
+		<Vendor Name="Brother Joshua" Entry="5489" Type="Train" TrainClass="Priest" X="-8519.56" Y="862.8282" Z="109.8286" />
+		<Vendor Name="Osborne the Night Man" Entry="918" Type="Train" TrainClass="Rogue" X="-8752.939" Y="376.3212" Z="101.0491" />
+		<Vendor Name="Wu Shen" Entry="5479" Type="Train" TrainClass="Warrior" X="-8803.79" Y="330.7847" Z="115.4658" />
+		<Vendor Name="Ursula Deline" Entry="5495" Type="Train" TrainClass="Warlock" X="-8971.052" Y="1029.896" Z="101.4036" />
+		<Vendor Name="Lord Grayson Shadowbreaker" Entry="928" Type="Train" TrainClass="Paladin" X="-8516.007" Y="804.5712" Z="106.5188" />
+		<Vendor Name="Elsharin" Entry="5498" Type="Train" TrainClass="Mage" X="-9006.13" Y="885.3715" Z="29.62114" />
+		<Vendor Name="Einris Brightspear" Entry="5515" Type="Train" TrainClass="Hunter" X="-8416.09" Y="547.868" Z="95.44888" />
+		<!--Stormwind Only Classes Trainers-->
+		<!-- <Vendor Name="Celestine of the Harvest" Entry="44395" Type="Train" TrainClass="Druid" X="-8284.26" Y="724.349" Z="75.2835" /> -->
+		<Vendor Name="Sheldras Moontree" Entry="5504" Type="Train" TrainClass="Druid" X="-8575.113" Y="1246.201" Z="5.230695" />
+		<Vendor Name="Farseer Umbrua" Entry="20407" Type="Train" TrainClass="Shaman" X="-8359.28" Y="577.384" Z="104.249" />
+		
+		<Vendor Name="Gunther Weller" Entry="1289" Type="Repair" X="-8790.421" Y="607.3484" Z="96.77338" />
+	</Vendors>
+	
+	<Mailboxes>
+		<Mailbox X="-8861.914" Y="638.3568" Z="96.34637" />
+	</Mailboxes>
+	
+	<Blackspots>
+		<Blackspot X="-8862.166" Y="637.9529" Z="96.27942" Radius="3" />
+		<Blackspot X="-8825.209" Y="629.1733" Z="94.38562" Radius="15" />
+	</Blackspots>
+	
+	<QuestOrder>
+	
+		<CustomBehavior File="UserSettings" TrainNewSkills="False" LearnFlightPaths="False" />
+				
+			<If Condition="Me.MapId == 530 &amp;&amp; (Me.Class == WoWClass.DeathKnight)">
+			 <While Condition="Me.Zone != 139" >
+				<CustomBehavior File="Misc\RunLua" Lua="CastSpellByID(50977)" />
+				<CustomBehavior File="WaitTimer" WaitTime="12000" GoalText="Waiting for port {TimeRemaining}" />
+				<CustomBehavior File="InteractWith" MobId="190942" ObjectType="Gameobject" Range="6" WaitForNpcs="False" />
+				<CustomBehavior File="WaitTimer" WaitTime="5000" GoalText="Waiting for port {TimeRemaining}" />
+			 </While>
+			
+			 <If Condition="Me.ZoneId == 139" >
+				<ClearVendor />
+				
+				<SetVendor>
+					<Vendors>
+						<Vendor Name="Lady Alistra" Entry="29195" Type="Repair" X="2488.616" Y="-5654.104" Z="376.9503" />
+					</Vendors>
+				</SetVendor>
+				
+				<CustomBehavior File="ForceSetVendor" DoTrain="True" />
+				<ClearVendor />
+			
+				<CustomBehavior File="UserSettings" UseFlightPaths="True" />
+				<CustomBehavior File="InteractWith" MobId="29480" X="2348.626" Y="-5669.289" Z="382.2406" />
+			 </If>
+				
+			  <If Condition="(Me.IsAlliance) &amp;&amp; (Me.MapId == 0)" >
+				<RunTo X="-8290.925" Y="1405.826" Z="4.721312" />
+			  </If>
+			</If>
+				  
+			 <While Condition="Me.MapId == 530" >
+				<CustomBehavior File="FlyTo" X="-248.064" Y="930.2079" Z="84.37978" DestName="BC Portal" />
+				<CustomBehavior File="MyCTM" X="-247.1655" Y="897.484" Z="84.3497" />
+				<CustomBehavior File="WaitTimer" WaitTime="5000"/>
+			  <While Condition="Me.MapId == 530" >
+				<CustomBehavior File="MyCTM" X="-245.7161" Y="896.1308" Z="84.3497" />
+				<CustomBehavior File="WaitTimer" WaitTime="5000"/>
+			  </While>
+				<CustomBehavior File="WaitTimer" WaitTime="15000"/>
+			 </While>
+			
+			<If Condition="Me.MapId == 0" >
+				<If Condition="((!HasQuest(28709)) &amp;&amp; (!IsQuestCompleted(28709)))" >
+				<CustomBehavior File="FlyTo" X="-8829.578" Y="625.59" Z="94.23041" DestName="SW" />
+				<CustomBehavior File="ForcedDismount" />
+		<PickUp QuestName="Hero's Call: Northrend!" QuestId="28709" GiverName="Hero's Call Board" GiverId="206111" GiverType="Object" X="-8825.209" Y="629.1733" Z="94.38562" />
+				</If>
+				<If Condition="Me.Class != WoWClass.DeathKnight">
+					<CustomBehavior File="UserSettings" TrainNewSkills="True" />
+					<CustomBehavior File="ForceSetVendor" DoTrain="True" DoSell="True" DoRepair="True" DoMail="True" />
+				</If>
+				  
+				<CustomBehavior File="UserSettings" UseFlightPaths="False" />
+				
+				<CustomBehavior File="FlyTo" X="-8290.925" Y="1405.826" Z="4.721312" DestName="SW dock" />
+				<CustomBehavior File="ForcedDismount" />
+			 </If>
+			
+			<CustomBehavior File="LoadProfile" ProfileName="..\GoTo\EK to LK" /> 
+			
+
+	  
+	</QuestOrder>
+
+</HBProfile>

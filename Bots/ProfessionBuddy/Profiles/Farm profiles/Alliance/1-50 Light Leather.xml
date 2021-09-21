@@ -1,0 +1,84 @@
+<!-- Evelynn Forest Light Leather farming by Deathburn -->
+<HBProfile>
+<Name>1-50 Light Leather-Alliance</Name>
+<MinDurability>0.4</MinDurability>
+<MinFreeBagSlots>1</MinFreeBagSlots>
+
+
+<MailGrey>false</MailGrey>
+<MailWhite>false</MailWhite>
+<MailGreen>false</MailGreen>
+<MailBlue>false</MailBlue>
+<MailPurple>false</MailPurple>
+
+<SellGrey>True</SellGrey>
+<SellWhite>True</SellWhite>
+<SellGreen>True</SellGreen>
+<SellBlue>false</SellBlue>
+<SellPurple>false</SellPurple>
+
+<Vendors>
+  <Vendor Name="Rallik Finn" Entry="1198" Type="Repair" X="-9469.282" Y="-1355.242" Z="47.20448" />
+</Vendors>
+
+<Mailboxes>
+</Mailboxes>
+
+<Blackspots>
+</Blackspots>
+
+  <QuestOrder>
+    <While Condition="(Me.Level &gt; 1)" >
+
+      <If Condition="(Me.FreeBagSlots &gt; 5)" >
+
+        <CustomBehavior File="FlyTo"  X="-9460.816" Y="-534.2599" Z="120.6348" DestName="to farm Light leather." />
+        <CustomBehavior File="ForcedDismount" />
+
+        <SetGrindArea>
+          <GrindArea>
+            <TargetMinLevel>1</TargetMinLevel>
+            <TargetMaxLevel>86</TargetMaxLevel>
+            <Factions>44 38</Factions>
+            <!-- [] -->
+            <MaxDistance>45</MaxDistance>
+            <RandomizeHotspots>False</RandomizeHotspots>
+            <Hotspots>
+              <Hotspot X="-9449.913" Y="-533.4503" Z="66.71167" />
+              <Hotspot X="-9425.914" Y="-509.3896" Z="68.98174" />
+              <Hotspot X="-9371.025" Y="-594.4591" Z="68.0789" />
+              <Hotspot X="-9426.594" Y="-590.0414" Z="67.21556" />
+              <Hotspot X="-9472.887" Y="-581.2316" Z="67.32592" />
+              <Hotspot X="-9490.574" Y="-531.1252" Z="63.76237" />
+            </Hotspots>
+          </GrindArea>
+        </SetGrindArea>
+        <GrindTo Condition="(Me.FreeBagSlots &lt;= 5) || (Me.DurabilityPercent &lt;= 0.3)" GoalText="Farming Light Leather." />
+      </If>
+      <If Condition="(Me.FreeBagSlots &lt;= 5) || (Me.DurabilityPercent &lt;= 0.3)" >
+
+        <CustomBehavior File="Message" Text="Sell \ Repair." LogColor="Red" />
+
+        <CustomBehavior File="FlyTo" X="-9463.318" Y="-1349.133" Z="75.51675"   DestName="Repair Run" />
+        <CustomBehavior File="ForcedDismount" />
+
+        <SetVendor>
+          <Vendors>
+            <Vendor Name="Rallik Finn" Entry="1198" Type="Repair" X="-9469.282" Y="-1355.242" Z="47.20448" />
+          </Vendors>
+        </SetVendor>
+
+        <CustomBehavior File="ForceSetVendor" DoMail="False" DoSell="True" DoRepair="True" DoTrain="False" />
+
+        <ClearMailbox />
+        <ClearVendor />
+
+      </If>
+
+
+
+    </While>
+
+
+  </QuestOrder>
+</HBProfile>

@@ -1,0 +1,170 @@
+﻿<HBProfile>
+	<Name>[QO] Cenarion Circle - Silithus A [Kick]</Name>
+   
+	<MinLevel>1</MinLevel>
+	<MaxLevel>86</MaxLevel>
+   
+	<MinDurability>0.2</MinDurability>
+	<MinFreeBagSlots>2</MinFreeBagSlots>
+	
+	<MailGrey>False</MailGrey>
+	<MailWhite>False</MailWhite>
+	<MailGreen>False</MailGreen>
+	<MailBlue>True</MailBlue>
+	<MailPurple>True</MailPurple>
+   
+	<SellGrey>True</SellGrey>
+	<SellWhite>True</SellWhite>
+	<SellGreen>True</SellGreen>
+	<SellBlue>False</SellBlue>
+	<SellPurple>False</SellPurple>
+   
+	<TargetElites>True</TargetElites>
+
+	<AvoidMobs>
+	</AvoidMobs>
+	<Blackspots>
+		<Blackspot X="-6246.748" Y="30.13238" Z="10.56168" Radius="3.731228" />
+	</Blackspots>
+
+	<Mailboxes>
+
+	</Mailboxes>
+ 
+	<Vendors>
+
+	</Vendors>
+	
+	<Quest Id="8318" Name="Secret Communication">
+		<Objective Type="CollectItem" ItemId="20404" CollectCount="10">
+			<Hotspots>
+				<Hotspot X="-6414.597" Y="293.4403" Z="8.63738" /> <!-- outside camp -->
+				<Hotspot X="-6364.772" Y="250.494" Z="3.775813" />
+				<Hotspot X="-6304.005" Y="229.3379" Z="5.807431" />
+				<Hotspot X="-6337.706" Y="179.5293" Z="5.212106" />
+				<Hotspot X="-6384.083" Y="169.2122" Z="6.755428" />
+				<Hotspot X="-6401.881" Y="224.0942" Z="5.567259" />
+				<Hotspot X="-6451.325" Y="215.7637" Z="4.214141" />
+				<Hotspot X="-6469.52" Y="248.3168" Z="4.271239" />
+				<Hotspot X="-6386.115" Y="208.7629" Z="2.907744" />
+				<Hotspot X="-6332.934" Y="169.8838" Z="5.125364" />
+				<Hotspot X="-6313.894" Y="145.8801" Z="14.03305" /> <!-- just outside cave -->
+				<Hotspot X="-6294.505" Y="111.5464" Z="15.37499" /> <!-- just inside cave -->
+				<Hotspot X="-6294.666" Y="69.87094" Z="12.90141" />
+				<Hotspot X="-6246.366" Y="20.32126" Z="8.722819" />
+				<Hotspot X="-6255.106" Y="61.72909" Z="17.26195" />
+				<Hotspot X="-6245.435" Y="20.8994" Z="8.895886" />
+				<Hotspot X="-6266.991" Y="-28.29591" Z="-1.382161" />
+				<Hotspot X="-6239.468" Y="-45.9248" Z="-5.94055" />
+				<Hotspot X="-6251.842" Y="-4.063636" Z="-10.58366" />
+				<Hotspot X="-6293.831" Y="38.31116" Z="-10.51576" />
+				<Hotspot X="-6285.029" Y="-3.305875" Z="1.178922" />
+				<Hotspot X="-6325.188" Y="7.768752" Z="6.508828" /> <!-- end of cave, hotspotting to entrance -->
+				<Hotspot X="-6290.161" Y="-8.431961" Z="1.266992" />
+				<Hotspot X="-6293.78" Y="39.41599" Z="-10.57819" />
+				<Hotspot X="-6233.281" Y="-17.76945" Z="-8.815617" />
+				<Hotspot X="-6237.558" Y="-49.51668" Z="-5.940467" />
+				<Hotspot X="-6262.622" Y="-11.51884" Z="1.406675" />
+				<Hotspot X="-6239.347" Y="23.97476" Z="9.119099" />
+				<Hotspot X="-6255.62" Y="64.45605" Z="17.26221" />
+				<Hotspot X="-6246.018" Y="18.68019" Z="8.717124" />
+				<Hotspot X="-6294.361" Y="68.53712" Z="12.58667" />
+				<Hotspot X="-6304.832" Y="128.3194" Z="14.03956" /> <!-- at entrance of cave -->
+				<Hotspot X="-6414.597" Y="293.4403" Z="8.63738" /> <!-- outside camp -->
+			</Hotspots>
+		</Objective>
+	</Quest>
+	
+	<QuestOrder>
+	
+				<CustomBehavior File="UserSettings" LootMobs="True" PullDistance="35" TrainNewSkills="False" LearnFlightPaths="True" />
+				
+			<If Condition="Me.GetReputationLevelWith(609) &lt; Styx.WoWUnitReaction.Exalted" >
+				<!-- Non repeatable quest -->
+				<If Condition="((!HasQuest(8318)) &amp;&amp; (!IsQuestCompleted(8318)))" >
+					<CustomBehavior File="FlyTo" X="-6836.007" Y="845.5305" Z="48.99781" />
+					<CustomBehavior File="ForcedDismount" />
+		<PickUp QuestName="Secret Communication" QuestId="8318" GiverName="Bor Wildmane" GiverId="15306" X="-6836.007" Y="845.5305" Z="48.99781" />
+				</If>
+				<If Condition="((HasQuest(8318)) &amp;&amp; (!IsQuestCompleted(8318)))" >
+					<CustomBehavior File="FlyTo" X="-6414.597" Y="293.4403" Z="8.63738" />
+					<CustomBehavior File="ForcedDismount" />
+					<Objective QuestName="Secret Communication" QuestId="8318" Type="CollectItem" ItemId="20404" CollectCount="10" />
+				</If>
+				<If Condition="((HasQuest(8318)) &amp;&amp; (IsQuestCompleted(8318)))" >
+					<CustomBehavior File="FlyTo" X="-6836.007" Y="845.5305" Z="48.99781" />
+					<CustomBehavior File="ForcedDismount" />
+		<TurnIn QuestName="Secret Communication" QuestId="8318" TurnInName="Bor Wildmane" TurnInId="15306" X="-6836.007" Y="845.5305" Z="48.99781" />
+				</If>
+
+			</If>
+				
+				
+			<!-- Farming for Farming for Twilight Texts - 10 for each turnin -->
+			<While Condition="Me.GetReputationLevelWith(609) &lt; Styx.WoWUnitReaction.Exalted" >
+			
+				<If Condition="(GetItemCount(20404) &lt; 30)" >
+					<CustomBehavior File="FlyTo" X="-6414.597" Y="293.4403" Z="8.63738" />
+					<CustomBehavior File="ForcedDismount" />
+					<CustomBehavior File="SetPullDistance" Distance="35" />
+						<SetGrindArea>
+							<Grindarea>
+								<TargetMinLevel>45</TargetMinLevel> 
+								<TargetMaxLevel>65</TargetMaxLevel>
+								<Factions>16</Factions> <!-- [Twilights] -->
+								<Hotspots>
+									<Hotspot X="-6414.597" Y="293.4403" Z="8.63738" /> <!-- outside camp -->
+									<Hotspot X="-6364.772" Y="250.494" Z="3.775813" />
+									<Hotspot X="-6304.005" Y="229.3379" Z="5.807431" />
+									<Hotspot X="-6337.706" Y="179.5293" Z="5.212106" />
+									<Hotspot X="-6384.083" Y="169.2122" Z="6.755428" />
+									<Hotspot X="-6401.881" Y="224.0942" Z="5.567259" />
+									<Hotspot X="-6451.325" Y="215.7637" Z="4.214141" />
+									<Hotspot X="-6469.52" Y="248.3168" Z="4.271239" />
+									<Hotspot X="-6386.115" Y="208.7629" Z="2.907744" />
+									<Hotspot X="-6332.934" Y="169.8838" Z="5.125364" />
+									<Hotspot X="-6313.894" Y="145.8801" Z="14.03305" /> <!-- just outside cave -->
+									<Hotspot X="-6294.505" Y="111.5464" Z="15.37499" /> <!-- just inside cave -->
+									<Hotspot X="-6294.666" Y="69.87094" Z="12.90141" />
+									<Hotspot X="-6246.366" Y="20.32126" Z="8.722819" />
+									<Hotspot X="-6255.106" Y="61.72909" Z="17.26195" />
+									<Hotspot X="-6245.435" Y="20.8994" Z="8.895886" />
+									<Hotspot X="-6266.991" Y="-28.29591" Z="-1.382161" />
+									<Hotspot X="-6239.468" Y="-45.9248" Z="-5.94055" />
+									<Hotspot X="-6251.842" Y="-4.063636" Z="-10.58366" />
+									<Hotspot X="-6293.831" Y="38.31116" Z="-10.51576" />
+									<Hotspot X="-6285.029" Y="-3.305875" Z="1.178922" />
+									<Hotspot X="-6325.188" Y="7.768752" Z="6.508828" /> <!-- end of cave, hotspotting to entrance -->
+									<Hotspot X="-6290.161" Y="-8.431961" Z="1.266992" />
+									<Hotspot X="-6293.78" Y="39.41599" Z="-10.57819" />
+									<Hotspot X="-6233.281" Y="-17.76945" Z="-8.815617" />
+									<Hotspot X="-6237.558" Y="-49.51668" Z="-5.940467" />
+									<Hotspot X="-6262.622" Y="-11.51884" Z="1.406675" />
+									<Hotspot X="-6239.347" Y="23.97476" Z="9.119099" />
+									<Hotspot X="-6255.62" Y="64.45605" Z="17.26221" />
+									<Hotspot X="-6246.018" Y="18.68019" Z="8.717124" />
+									<Hotspot X="-6294.361" Y="68.53712" Z="12.58667" />
+									<Hotspot X="-6304.832" Y="128.3194" Z="14.03956" /> <!-- at entrance of cave -->
+									<Hotspot X="-6414.597" Y="293.4403" Z="8.63738" /> <!-- outside camp -->
+								</Hotspots>
+							</Grindarea>
+						</SetGrindArea>
+					<GrindTo Condition="(GetItemCount(20404) &gt;= 30)" GoalText="Getting 30 Text's" />
+				</If>
+				
+					<CustomBehavior File="FlyTo" X="-6836.007" Y="845.5305" Z="48.99781" />
+				<While Condition="(GetItemCount(20404) &gt;= 10) &amp;&amp; (Me.GetReputationLevelWith(609) &lt; Styx.WoWUnitReaction.Exalted)" >
+					<CustomBehavior File="InteractWith"  MobId="15306" NumOfTimes="1" CollectionDistance="50" WaitTime="1000" X="-6836.007" Y="845.5305" Z="48.99781" />
+					<CustomBehavior File="RunMacro" Macro="/click GossipTitleButton1" NumOfTimes="1" WaitTime="1000" />
+					<CustomBehavior File="RunMacro" Macro="/click QuestFrameCompleteButton" NumOfTimes="1" WaitTime="1000" />
+					<CustomBehavior File="RunMacro" Macro="/click QuestFrameCompleteQuestButton" NumOfTimes="1" WaitTime="1000" />
+					<CustomBehavior File="WaitTimer" WaitTime="3000" />
+				</While>
+			</While>
+			
+			<If Condition="Me.GetReputationLevelWith(609) == Styx.WoWUnitReaction.Exalted" >
+				<CustomBehavior File="UserDialog" Title="title" AllowBotStop="True" SoundCue="Asterisk" SoundCueInterval="1" Text="You have reached Exalted\nIf you liked this profile, +rep is always appreciated" />
+			</If>
+	
+	</QuestOrder>
+</HBProfile>

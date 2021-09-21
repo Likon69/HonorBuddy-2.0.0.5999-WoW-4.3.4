@@ -1,0 +1,516 @@
+<HBProfile>
+	<Name>[H - Quest] 5-12 Durotar [Kick]</Name>
+	<MinDurability>0.2</MinDurability>
+	<MinFreeBagSlots>2</MinFreeBagSlots>
+	<MinLevel>1</MinLevel>
+	<MaxLevel>86</MaxLevel>
+	<MailGrey>False</MailGrey>
+	<MailWhite>False</MailWhite>
+	<MailGreen>True</MailGreen>
+	<SellGrey>True</SellGrey>
+	<SellWhite>True</SellWhite>
+	<SellGreen>True</SellGreen>
+	<SellBlue>False</SellBlue>
+	<SellPurple>False</SellPurple>
+	
+	<AvoidMobs>
+	<!--Orc Questgiver Bot Wants Dead-->
+		<Mob Name="Rezlak" Entry="3293"/><!--Orc Training Dummy-->
+	</AvoidMobs>
+	
+	<Mailboxes>
+	<!--Sen'jin Village Mailbox-->
+		<Mailbox X="-816.5651" Y="-4926.866" Z="19.88713"/>
+	<!--Razor Hill Mailbox-->
+		<Mailbox X="321.0783" Y="-4708.963" Z="14.15302"/>
+	</Mailboxes>
+	
+	<Blackspots>
+		<Blackspot X="-796.1955" Y="-4905.333" Z="19.5411" Radius="5" />
+		<Blackspot X="845.4785" Y="-4768.02" Z="37.84758" Radius="5" />
+		<Blackspot X="-188.4103" Y="-5103.829" Z="21.32771" Radius="40" />
+		<Blackspot X="1201.564" Y="-4246.877" Z="22.68234" Radius="9.993239" />
+		<Blackspot X="1600.477" Y="-4369.628" Z="21.04583" Radius="7.354329" />
+		<Blackspot X="1284.119" Y="-4595.935" Z="21.71741" Radius="24.57922" />
+		<Blackspot X="380.4524" Y="-4822.192" Z="13.53342" Radius="5.172547" />
+		<!--Orgrimmar behind call to arms sign, all horde profiles-->
+		<Blackspot X="1602.093" Y="-4364.747" Z="21.11923" Radius="1.703826" />
+		<!--Orgrimmar behind mailbox south gate-->
+		<Blackspot X="1375.742" Y="-4353.486" Z="27.41977" Radius="3.750432" />
+		<!--Durotar-->
+		<!--Razor hill road sign.-->
+		<Blackspot X="305.8457" Y="-4741.798" Z="10.29788" Radius="1.193193" />
+		<!--Fallen tree and stuff near Sen'Jin Village-->
+		<Blackspot X="-875.3654" Y="-4810.698" Z="16.05026" Radius="16.59042" />
+		<Blackspot X="-802.0122" Y="-4979.135" Z="17.74392" Radius="4.573921" />
+		<Blackspot X="-801.71" Y="-5023.281" Z="13.36308" Radius="4.609337" />
+		<!--Valley of Trials Middle Fire-->
+		<Blackspot X="-602.3636" Y="-4250.66" Z="38.95682" Radius="3.759537"/>
+		<!--Durotar Blackspots-->
+		<Blackspot X="373.5913" Y="-4712.287" Z="16.10571" Radius="10.30227" />
+
+		<!--Sen'jin Village Fence-->
+		<Blackspot X="-768.1917" Y="-4881.526" Z="20.29184" Radius="7.254548"/>
+		<Blackspot X="-767.4973" Y="-4880.469" Z="20.56847" Radius="4.278707"/>
+		
+		<!--Troll Starting Area-->
+		<Blackspot X="-1135.981" Y="-5414.498" Z="13.00538" Radius="2.300135" />
+		<Blackspot X="-1150.384" Y="-5519.188" Z="11.58836" Radius="2.494276" />
+		<Blackspot X="-1168.537" Y="-5269.622" Z="0.8604383" Radius="3.024951" />		
+		<!--Harpy Nest-->
+		<Blackspot X="-2639.21" Y="-1405.313" Z="32.07373" Radius="3.31264"/>
+		<!--Cold Hearth Manor Sign-->
+		<Blackspot X="2188.518" Y="661.0852" Z="33.29134" Radius="4.017753"/>	
+		
+		<Blackspot X="-997.5801" Y="-4806.947" Z="12.77734" Radius="13.84446" />
+	</Blackspots>
+
+	<Vendors>
+	<!--Valley of Trials Vendors-->
+		<Vendor Name="Zlagk" Entry="3882" Type="Food" X="-560.1253" Y="-4217.204" Z="41.59082"/>
+   		<Vendor Name="Huklah" Entry="3160" Type="Repair" X="-590.3455" Y="-4227.319" Z="38.3847"/>
+	<!--Valley of Trials Trainers-->
+		<Vendor Name="Acrypha" Entry="39206" Type="Train" TrainClass="Mage" X="-625.296" Y="-4210.167" Z="38.13415"/>
+		<Vendor Name="Shikrik" Entry="3157" Type="Train" TrainClass="Shaman" X="-623.9393" Y="-4203.878" Z="38.13462"/>
+		<Vendor Name="Rwag" Entry="3155" Type="Train" TrainClass="Rogue" X="-617.059" Y="-4202.635" Z="38.13412"/>
+		<Vendor Name="Karranisha" Entry="39214" Type="Train" TrainClass="Hunter" X="-635.4618" Y="-4227.521" Z="38.13442"/>
+		<Vendor Name="Frang" Entry="3153" Type="Train" TrainClass="Warrior" X="-640.1024" Y="-4229.821" Z="38.13398"/>
+		<Vendor Name="Nartok" Entry="3156" Type="Train" TrainClass="Warlock" X="-590.8021" Y="-4203.484" Z="38.42764"/>
+	<!--Sen'jin Village Vendors-->
+		<Vendor Name="K'waii" Entry="3186" Type="Food" X="-779.0314" Y="-4938.931" Z="22.24688" />
+		<Vendor Name="Trayexir" Entry="10369" Type="Repair" X="-769.1502" Y="-4948.526" Z="22.84936"/>
+	<!--Sen'jin Village Trainers-->
+		<Vendor Name="Bomsanchu" Entry="50002" Type="Train" TrainClass="Mage" X="-789.2239" Y="-4943.434" Z="38.28099"/>
+		<Vendor Name="Cona" Entry="50011" Type="Train" TrainClass="Shaman" X="-841.7292" Y="-4937.272" Z="20.98561"/>
+		<Vendor Name="Munalti" Entry="50015" Type="Train" TrainClass="Rogue" X="-778.5746" Y="-4926.359" Z="22.90205"/>
+		<Vendor Name="Jamai" Entry="50004" Type="Train" TrainClass="Hunter" X="-790.0643" Y="-4908.497" Z="19.60824"/>
+		<Vendor Name="Yeniss" Entry="50006" Type="Train" TrainClass="Warrior" X="-773.3785" Y="-4947.198" Z="22.881"/>
+		<Vendor Name="Gusini" Entry="49998" Type="Train" TrainClass="Warlock" X="-785.9184" Y="-4939.8" Z="38.28124"/>
+		<Vendor Name="Parata" Entry="50001" Type="Train" TrainClass="Priest" X="-784.3837" Y="-4944.821" Z="38.28099"/>
+		<Vendor Name="Den'chulu" Entry="49997" Type="Train" TrainClass="Druid" X="-844.0104" Y="-4932.819" Z="20.98573"/>
+
+	<!--Razor Hill Vendors-->
+		<Vendor Name="Innkeeper Grosk" Entry="6928" Type="Food" X="340.3629" Y="-4686.287" Z="16.48928"/>
+		<Vendor Name="Ghrawt" Entry="3165" Type="Repair" X="362.1046" Y="-4763.842" Z="12.46936"/>
+	<!--Razor Hill Trainers-->
+		<Vendor Name="Un'Thuwa" Entry="5880" Type="Train" TrainClass="Mage" X="334.717" Y="-4767.622" Z="12.63494"/>
+		<Vendor Name="Swart" Entry="3173" Type="Train" TrainClass="Shaman" X="307.1142" Y="-4839.906" Z="10.52414"/>
+		<Vendor Name="Kaplak" Entry="3170" Type="Train" TrainClass="Rogue" X="268.1285" Y="-4710.936" Z="17.76733"/>
+		<Vendor Name="Thotar" Entry="3171" Type="Train" TrainClass="Hunter" X="275.3385" Y="-4703.997" Z="11.90343"/>
+		<Vendor Name="Tarshaw Jaggedscar" Entry="3169" Type="Train" TrainClass="Warrior" X="311.3524" Y="-4827.792" Z="9.580641"/>
+		<Vendor Name="Dhugru Gorelust" Entry="3172" Type="Train" TrainClass="Warlock" X="356.192" Y="-4837.954" Z="11.08876"/>
+		<Vendor Name="Tai'jin" Entry="3706" Type="Train" TrainClass="Priest" X="294.8838" Y="-4831.495" Z="10.52398"/>
+		<Vendor Name="Jabul" Entry="44380" Type="Train" TrainClass="Druid" X="342.061" Y="-4771.4" Z="12.63463" />
+		
+	<!-- Orgrimmar Vendor -->
+		<Vendor Name="Trak'gen" Entry="3313" Type="Food" X="1528.89" Y="-4442.89" Z="24.02194" />
+		<Vendor Name="Urtharo" Entry="3314" Type="Repair" X="1639.75" Y="-4316.71" Z="21.12019" />
+	<!--Orgrimmar Trainers-->
+		<Vendor Name="Zevrost" Type="Train" TrainClass="Warlock" Entry="3326" X="1848.788" Y="-4360.646" Z="-14.72255"/>
+		<Vendor Name="Marud" Type="Train" TrainClass="Mage" Entry="47247" X="1764.56" Y="-4349.509" Z="-7.769643"/>
+		<Vendor Name="Seer Liwatha" Type="Train" TrainClass="Priest" Entry="44735" X="1863.46" Y="-4297.75" Z="23.74968"/>
+		<Vendor Name="Lothan Silverblade" Entry="43012" Type="Train" TrainClass="Warrior" X="9521.21" Y="-6865.33" Z="18.75"/>
+		<Vendor Name="Sahi Cloudsinger" Entry="44740" Type="Train" TrainClass="Shaman" X="1884.15" Y="-4282.4" Z="23.5918"/>
+		<Vendor Name="Gordul" Type="Train" TrainClass="Rogue" Entry="47233" X="1773.21" Y="-4282.96" Z="7.892303"/>
+		<Vendor Name="Nohi Plainswalker" Type="Train" TrainClass="Hunter" Entry="44743"  X="1872.89" Y="-4281.46" Z="23.76952"/>
+		<Vendor Name="Sunwalker Atohmo" Type="Train" TrainClass="Paladin" Entry="44725"  X="1863.88" Y="-4292.69" Z="23.78126"/>
+		<Vendor Name="Shalla Whiteleaf" Type="Train" TrainClass="Druid" Entry="44726"  X="1888.95" Y="-4285.25" Z="23.55553"/>
+	</Vendors>
+
+	<!-- Quest Overrides -->
+	<Quest Id="835" Name="Securing the Lines">
+		<Objective Type="KillMob" MobId="41007" KillCount="12">
+			<Hotspots>
+				<Hotspot X="937.4349" Y="-4604.769" Z="18.74153" />
+				<Hotspot X="848.7505" Y="-4675.528" Z="11.38481" />
+				<Hotspot X="892.0631" Y="-4815.617" Z="16.7729" />
+				<Hotspot X="1025.933" Y="-4808.149" Z="13.42153" />
+				<Hotspot X="1105.975" Y="-4680.975" Z="18.26805" />
+			</Hotspots>
+		</Objective>
+	</Quest>
+	<Quest Id="25232" Name="The Burning Blade">
+		<Objective Type="CollectItem" ItemId="52564" CollectCount="6">
+			<CollectFrom>
+				<Mob Name="Burning Blade Neophyte" Id="3196"/>
+				<Mob Name="Burning Blade Cultist" Id="3199"/>
+				<Mob Name="Burning Blade Thug" Id="3195"/>
+			</CollectFrom>
+			<Hotspots>
+				<Hotspot X="826.1715" Y="-4752.954" Z="38.05418"/>
+				<Hotspot X="868.2561" Y="-4713.745" Z="32.07032"/>
+				<Hotspot X="915.6884" Y="-4707.076" Z="23.62165"/>
+			</Hotspots>
+		</Objective>
+	</Quest>
+	<Quest Id="25170" Name="Cleaning Up the Coastline">
+		<Objective Type="CollectItem" ItemId="4888" CollectCount="5">
+			<CollectFrom>
+				<Mob Name="Surf Crawler" Id="3106"/>
+			</CollectFrom>
+			<Hotspots>
+				<Hotspot X="-940.4305" Y="-5025.34" Z="0.5951656"/>
+				<Hotspot X="-963.2187" Y="-4970.255" Z="3.901804"/>
+				<Hotspot X="-983.215" Y="-4921.299" Z="1.55611"/>
+				<Hotspot X="-1007.044" Y="-4888.319" Z="1.827502"/>
+				<Hotspot X="-1069.113" Y="-4838.082" Z="8.589549"/>
+			</Hotspots>
+		</Objective>
+	</Quest>
+	<Quest Id="25173" Name="From Bad to Worse">
+		<Objective Type="KillMob" MobId="39269" KillCount="1">
+			<Hotspots>
+				<Hotspot X="-247.652" Y="-5098.101" Z="41.34685" />
+			</Hotspots>
+		</Objective>
+		<Objective Type="KillMob" MobId="39267" KillCount="6">
+			<Hotspots>
+				<Hotspot X="-101.632" Y="-4967.81" Z="20.21225" />
+				<Hotspot X="-172.7203" Y="-5009.552" Z="21.07496" />
+				<Hotspot X="-239.7819" Y="-4987.842" Z="21.2928" />
+				<Hotspot X="-242.598" Y="-5031.791" Z="21.45509" />
+				<Hotspot X="-288.1207" Y="-5071.251" Z="19.74535" />
+				<Hotspot X="-289.5376" Y="-5085.534" Z="20.40385" />
+				<Hotspot X="-287.2529" Y="-5107.443" Z="19.92339" />
+				<Hotspot X="-300.1008" Y="-5135.337" Z="18.57587" />
+				<Hotspot X="-263.7523" Y="-5171.421" Z="14.89293" />
+				<Hotspot X="-190.0004" Y="-5205.239" Z="-0.6795582" />
+				<Hotspot X="-146.265" Y="-5103.966" Z="20.27381" />
+			</Hotspots>
+		</Objective>
+		<Objective Type="KillMob" MobId="39268" KillCount="6">
+			<Hotspots>
+				<Hotspot X="-101.632" Y="-4967.81" Z="20.21225" />
+				<Hotspot X="-172.7203" Y="-5009.552" Z="21.07496" />
+				<Hotspot X="-239.7819" Y="-4987.842" Z="21.2928" />
+				<Hotspot X="-242.598" Y="-5031.791" Z="21.45509" />
+				<Hotspot X="-288.1207" Y="-5071.251" Z="19.74535" />
+				<Hotspot X="-289.5376" Y="-5085.534" Z="20.40385" />
+				<Hotspot X="-287.2529" Y="-5107.443" Z="19.92339" />
+				<Hotspot X="-300.1008" Y="-5135.337" Z="18.57587" />
+				<Hotspot X="-263.7523" Y="-5171.421" Z="14.89293" />
+				<Hotspot X="-190.0004" Y="-5205.239" Z="-0.6795582" />
+				<Hotspot X="-146.265" Y="-5103.966" Z="20.27381" />
+			</Hotspots>
+		</Objective>
+	</Quest>
+	<Quest Id="25176" Name="Exploiting the Situation">
+		<Objective Type="CollectItem" ItemId="52558" CollectCount="6">
+			<Hotspots>
+				<Hotspot X="-101.632" Y="-4967.81" Z="20.21225" />
+				<Hotspot X="-172.7203" Y="-5009.552" Z="21.07496" />
+				<Hotspot X="-239.7819" Y="-4987.842" Z="21.2928" />
+				<Hotspot X="-242.598" Y="-5031.791" Z="21.45509" />
+				<Hotspot X="-288.1207" Y="-5071.251" Z="19.74535" />
+				<Hotspot X="-289.5376" Y="-5085.534" Z="20.40385" />
+				<Hotspot X="-287.2529" Y="-5107.443" Z="19.92339" />
+				<Hotspot X="-300.1008" Y="-5135.337" Z="18.57587" />
+				<Hotspot X="-263.7523" Y="-5171.421" Z="14.89293" />
+				<Hotspot X="-190.0004" Y="-5205.239" Z="-0.6795582" />
+				<Hotspot X="-146.265" Y="-5103.966" Z="20.27381" />
+			</Hotspots>
+		</Objective>
+	</Quest>
+	<Quest Id="25193" Name="Lost But Not Forgotten">
+	<Objective Type="CollectItem" ItemId="60615" CollectCount="250">
+		<CollectFrom>
+		</CollectFrom>
+		<Hotspots>
+			<Hotspot X="583.7078" Y="-4029.753" Z="16.17263" />
+			<Hotspot X="543.3358" Y="-3918.194" Z="16.90298" />
+			<Hotspot X="527.2538" Y="-3842.002" Z="19.42868" />
+			<Hotspot X="436.1201" Y="-3790.646" Z="16.05134" />
+		</Hotspots>
+	</Objective>
+	</Quest>
+	<Quest Id="25190" Name="Raggaran's Rage">
+	<Objective Type="KillMob" MobId="3111" KillCount="4">
+		<Hotspots>
+			<Hotspot X="48.60363" Y="-4309.986" Z="38.77962" />
+			<Hotspot X="90.19646" Y="-4452.159" Z="32.57343" />
+		</Hotspots>
+	</Objective>
+	<Objective Type="KillMob" MobId="3112" KillCount="4">
+		<Hotspots>
+			<Hotspot X="48.60363" Y="-4309.986" Z="38.77962" />
+			<Hotspot X="90.19646" Y="-4452.159" Z="32.57343" />
+		</Hotspots>
+	</Objective>
+	</Quest>
+	<Quest Id="25195" Name="That's the End of That Raptor">
+	<Objective Type="KillMob" MobId="39385" KillCount="1">
+		<Hotspots>
+			<Hotspot X="693.0333" Y="-3886.897" Z="17.91958" />
+			<Hotspot X="728.8959" Y="-3827.205" Z="19.7178" />
+			<Hotspot X="797.1446" Y="-3874.434" Z="19.80032" />
+			<Hotspot X="755.8289" Y="-3938.603" Z="19.79457" />
+		</Hotspots>
+	</Objective>
+	</Quest>
+	<Quest Id="834" Name="Winds in the Desert">
+	<Objective Type="CollectItem" ItemId="4918" CollectCount="5">
+		<CollectFrom>
+		</CollectFrom>
+		<Hotspots>
+			<Hotspot X="1023.6" Y="-4571.38" Z="19.99458" />
+			<Hotspot X="946.1659" Y="-4605.054" Z="19.5398" />
+			<Hotspot X="871.6071" Y="-4629.883" Z="13.99926" />
+		</Hotspots>
+	</Objective>
+	</Quest>
+	<Quest Id="25262" Name="Skull Rock">
+	<Objective Type="CollectItem" ItemId="4871" CollectCount="6">
+		<CollectFrom>
+			<Mob Name="Burning Blade Apprentice" Entry="3198" />
+						<Mob Name="Burning Blade Fanatic" Entry="3197" />
+		</CollectFrom>
+		<Hotspots>
+			<Hotspot X="1426.895" Y="-4711.825" Z="-1.046058" />
+			<Hotspot X="1468.773" Y="-4767.716" Z="8.447803" />
+			<Hotspot X="1514.656" Y="-4740.498" Z="14.87267" />
+		</Hotspots>
+	</Objective>
+	</Quest>
+	<Quest Id="25168" Name="Purge the Valley">
+		<Objective Type="KillMob" MobId="39262" KillCount="12">
+			<Hotspots>
+				<Hotspot X="-979.8417" Y="-4418.34" Z="29.26435" />
+				<Hotspot X="-932.9365" Y="-4488.18" Z="29.43037" />
+				<Hotspot X="-1055.753" Y="-4597.529" Z="25.82224" />
+			</Hotspots>
+		</Objective>
+	</Quest>
+
+	
+	<QuestOrder IgnoreCheckPoints="True" >
+	
+	<CustomBehavior File="UserSettings" LootMobs="True" TrainNewSkills="True" LearnFlightPaths="True" UseFlightPaths="True" PullDistance="25" />
+
+			<If Condition="((!HasQuest(25167)) &amp;&amp; (!IsQuestCompleted(25167)))" >
+				<CustomBehavior File="InteractWith" MobId="6929" GossipOptions="1" X="1573.266" Y="-4439.158" Z="16.05683" />
+				<CustomBehavior File="RunMacro" Macro="/click StaticPopup1Button1" NumOfTimes="1" WaitTime="5000"/> <!-- Set Hearth to Org -->
+			</If>
+		<PickUp QuestName="Breaking the Chain" QuestId="25167" GiverName="Master Gadrin" GiverId="3188" />
+		<PickUp QuestName="Cleaning Up the Coastline" QuestId="25170" GiverName="Bom'bay" GiverId="10578" />
+			<Objective QuestName="Cleaning Up the Coastline" QuestId="25170" Type="CollectItem" ItemId="4888" CollectCount="5" />
+			<Objective QuestName="Breaking the Chain" QuestId="25167" Type="KillMob" MobId="39251" KillCount="3" />
+			<Objective QuestName="Breaking the Chain" QuestId="25167" Type="KillMob" MobId="39245" KillCount="5" />
+		<TurnIn QuestName="Cleaning Up the Coastline" QuestId="25170" TurnInName="Bom'bay" TurnInId="10578" />
+		<!--<PickUp QuestName="Never Trust a Big Barb and a Smile" QuestId="25165" GiverName="Bom'bay" GiverId="10578" />-->
+		<TurnIn QuestName="Breaking the Chain" QuestId="25167" TurnInName="Master Gadrin" TurnInId="3188" />
+		<PickUp QuestName="Purge the Valley" QuestId="25168" GiverName="Master Gadrin" GiverId="3188" />
+		<PickUp QuestName="The War of Northwatch Aggression" QuestId="25169" GiverName="Lar Prowltusk" GiverId="3140" />
+		<!--
+			<CustomBehavior File="CombatUseItemOn" QuestId="25165" MobId="3125" ItemId="52505" MobHpPercentLeft="95" MaxRange="15" X="-822.3665" Y="-4723.379" Z="22.64923" />
+		<TurnIn QuestName="Never Trust a Big Barb and a Smile" QuestId="25165" TurnInName="Bom'bay" TurnInId="10578" />
+		-->
+			<Objective QuestName="The War of Northwatch Aggression" QuestId="25169" Type="UseObject" ObjectId="3189" UseCount="1" />
+			<Objective QuestName="The War of Northwatch Aggression" QuestId="25169" Type="UseObject" ObjectId="3190" UseCount="1" />
+			<Objective QuestName="The War of Northwatch Aggression" QuestId="25169" Type="UseObject" ObjectId="3192" UseCount="1" />
+			<Objective QuestName="Purge the Valley" QuestId="25168" Type="KillMob" MobId="39262" KillCount="12" />
+		<TurnIn QuestName="The War of Northwatch Aggression" QuestId="25169" TurnInName="Lar Prowltusk" TurnInId="3140" />
+		<TurnIn QuestName="Purge the Valley" QuestId="25168" TurnInName="Master Gadrin" TurnInId="3188" />
+		<PickUp QuestName="Riding On" QuestId="25171" GiverName="Master Gadrin" GiverId="3188" />
+			<If Condition="IsQuestCompleted(25171) &amp;&amp; HasQuest(25171)">
+				<CustomBehavior File="InteractWith" MobId="10676" GossipOptions="1" X="-822.191" Y="-4887.371" Z="19.44942" />
+				<CustomBehavior File="WaitTimer" WaitTime="70000" />
+			</If>
+		<TurnIn QuestName="Riding On" QuestId="25171" TurnInName="Gar'Thok" TurnInId="3139" />
+		<PickUp QuestName="From Bad to Worse" QuestId="25173" GiverName="Gar'Thok" GiverId="3139" />
+			<If Condition="Me.Race == WoWRace.Orc || WoWRace.Troll">
+		<PickUp QuestName="Meats to Orgrimmar" QuestId="6365" GiverName="Grimtak" GiverId="3881" />
+			</If>
+		<PickUp QuestName="Exploiting the Situation" QuestId="25176" GiverName="Gail Nozzywig" GiverId="39423" />
+			<If Condition="(HasQuest(6365))" >
+		<TurnIn QuestName="Meats to Orgrimmar" QuestId="6365" TurnInName="Burok" TurnInId="41140" />
+			</If>
+			<Objective QuestName="From Bad to Worse" QuestId="25173" Type="KillMob" MobId="39269" KillCount="1" />
+			<Objective QuestName="Exploiting the Situation" QuestId="25176" Type="CollectItem" ItemId="52558" CollectCount="6" />
+			<Objective QuestName="From Bad to Worse" QuestId="25173" Type="KillMob" MobId="39267" KillCount="6" />
+			<Objective QuestName="From Bad to Worse" QuestId="25173" Type="KillMob" MobId="39268" KillCount="6" />
+		<TurnIn QuestName="From Bad to Worse" QuestId="25173" TurnInName="Gar'Thok" TurnInId="3139" />
+		<PickUp QuestName="Storming the Beaches" QuestId="25177" GiverName="Gar'Thok" GiverId="3139" />
+		<TurnIn QuestName="Exploiting the Situation" QuestId="25176" TurnInName="Gail Nozzywig" TurnInId="39423" />
+		<PickUp QuestName="Shipwreck Searching" QuestId="25178" GiverName="Gail Nozzywig" GiverId="39423" />
+			<!-- spam tries to pickup the quest
+		<PickUp QuestName="Loss Reduction" QuestId="25179" GiverName="Razor Hill Grunt" GiverId="39270" X="307.9023" Y="-5050.374" Z="7.201921" /> -->
+			<While Condition="((!HasQuest(25179)) &amp;&amp; (!IsQuestCompleted(25179)))" >
+				<CustomBehavior File="InteractWith" MobId="39270" CollectionDistance="1000" X="309.3386" Y="-5059.447" Z="6.191809" />
+				<CustomBehavior File="RunMacro" Macro="/click QuestFrameAcceptButton" />
+			</While>
+			<If Condition="HasQuest(25179) &amp;&amp; !IsQuestCompleted(25179)">
+				<CustomBehavior File="InteractWith" QuestId="25179" NumOfTimes="100" MobId="39270" CollectionDistance="1000" X="309.3386" Y="-5059.447" Z="6.191809" />
+			</If>
+			<Objective QuestName="Shipwreck Searching" QuestId="25178" Type="CollectItem" ItemId="4863" CollectCount="4" />
+			<Objective QuestName="Storming the Beaches" QuestId="25177" Type="KillMob" MobId="39272" KillCount="11" />
+		<TurnIn QuestName="Shipwreck Searching" QuestId="25178" TurnInName="Gail Nozzywig" TurnInId="39423" />
+		<PickUp QuestName="Thonk" QuestId="25227" GiverName="Gail Nozzywig" GiverId="39423" />
+		<TurnIn QuestName="Storming the Beaches" QuestId="25177" TurnInName="Gar'Thok" TurnInId="3139" />
+		<TurnIn QuestName="Loss Reduction" QuestId="25179" TurnInName="Gar'Thok" TurnInId="3139" />
+			<If Condition="Me.Race == WoWRace.Orc || WoWRace.Troll">
+		<PickUp QuestName="Ride to Orgrimmar" QuestId="6384" GiverName="Burok" GiverId="41140" />
+		<TurnIn QuestName="Ride to Orgrimmar" QuestId="6384" TurnInName="Innkeeper Gryshka" TurnInId="6929" />
+		<PickUp QuestName="Doras the Wind Rider Master" QuestId="6385" GiverName="Innkeeper Gryshka" GiverId="6929" />
+		<TurnIn QuestName="Doras the Wind Rider Master" QuestId="6385" TurnInName="Doras" TurnInId="3310" />
+		<PickUp QuestName="Return to Razor Hill" QuestId="6386" GiverName="Doras" GiverId="3310" />
+		<TurnIn QuestName="Return to Razor Hill" QuestId="6386" TurnInName="Grimtak" TurnInId="3881" />
+			</If>
+		<TurnIn QuestName="Thonk" QuestId="25227" TurnInName="Thonk" TurnInId="39323" />
+		<PickUp QuestName="Lost in the Floods" QuestId="25187" GiverName="Thonk" GiverId="39323" />
+			<While Condition="HasQuest(25187) &amp;&amp; !IsQuestCompleted(25187)">
+				<RunTo X="394.2006" Y="-4582.459" Z="76.60069" />
+				<CustomBehavior File="Misc\RunLua" Lua="UseItemByName(52514)" />
+				<CustomBehavior File="WaitTimer" WaitTime="30000" />
+			</While>
+		<TurnIn QuestName="Lost in the Floods" QuestId="25187" TurnInName="Thonk" TurnInId="39323" />
+		<PickUp QuestName="Watershed Patrol" QuestId="25188" GiverName="Thonk" GiverId="39323" />
+		<PickUp QuestName="Lost But Not Forgotten" QuestId="25193" GiverName="Misha Tor'kren" GiverId="3193" />
+			<Objective QuestName="Lost But Not Forgotten" QuestId="25193" Type="CollectItem" ItemId="60615" CollectCount="250" />
+		<TurnIn QuestName="Lost But Not Forgotten" QuestId="25193" TurnInName="Misha Tor'kren" TurnInId="3193" />
+		<PickUp QuestName="Spirits Be Praised" QuestId="25189" GiverName="Grandmatron Tekla" GiverId="39325" X="562.0121" Y="-4103.38" Z="16.7572" />
+			<While Condition="((HasQuest(25189)) &amp;&amp; (!IsQuestCompleted(25189)))" >
+				<CustomBehavior File="Escort" QuestId="25189" MobId="39325" X="563.5504" Y="-4104.283" Z="16.76228" />
+				<CustomBehavior File="WaitTimer" WaitTime="2000" GoalText="Waiting for  {TimeRemaining}" />
+				<CustomBehavior File="AbandonQuest" QuestId="25189" Type="Failed" />
+				<CustomBehavior File="WaitTimer" WaitTime="5000" GoalText="Waiting for  {TimeRemaining}" />
+		<PickUp QuestName="Spirits Be Praised" QuestId="25189" GiverName="Grandmatron Tekla" GiverId="39325" X="562.0121" Y="-4103.38" Z="16.7572" />
+				<CustomBehavior File="WaitTimer" WaitTime="5000" GoalText="Waiting for  {TimeRemaining}" />
+			</While>
+		<TurnIn QuestName="Spirits Be Praised" QuestId="25189" TurnInName="Raggaran" TurnInId="39326" />
+		<PickUp QuestName="Raggaran's Rage" QuestId="25190" GiverName="Raggaran" GiverId="39326" />
+			<Objective QuestName="Raggaran's Rage" QuestId="25190" Type="KillMob" MobId="3111" KillCount="4" />
+			<Objective QuestName="Raggaran's Rage" QuestId="25190" Type="KillMob" MobId="3112" KillCount="4" />
+		<TurnIn QuestName="Raggaran's Rage" QuestId="25190" TurnInName="Raggaran" TurnInId="39326" />
+		<PickUp QuestName="Raggaran's Fury" QuestId="25192" GiverName="Raggaran" GiverId="39326" />
+			<Objective QuestName="Raggaran's Fury" QuestId="25192" Type="KillMob" MobId="3113" KillCount="5" />
+			<Objective QuestName="Raggaran's Fury" QuestId="25192" Type="KillMob" MobId="3114" KillCount="5" />
+		<TurnIn QuestName="Raggaran's Fury" QuestId="25192" TurnInName="Raggaran" TurnInId="39326" />
+		<PickUp QuestName="Unbidden Visitors" QuestId="25194" GiverName="Zen'Taji" GiverId="39324" />
+				<!-- interactwith isn't right clicking this mob for some reason
+			<While Condition="((HasQuest(25194)) &amp;&amp; (!IsQuestCompleted(25194)))" >
+				<CustomBehavior File="InteractWith" QuestId="25194" MobId="39337" NumOfTimes="100" WaitForNpcs="False" CollectionDistance="1000" Range="3" MobState="Alive" WaitTime="10000" X="287.1787" Y="-3812.052" Z="18.4396" />
+				<CustomBehavior File="InteractWith" QuestId="25194" MobId="39337" NumOfTimes="100" WaitForNpcs="False" CollectionDistance="1000" Range="3" MobState="Alive" WaitTime="10000" X="441.242" Y="-3881.277" Z="17.20918" />
+				<CustomBehavior File="KillUntilComplete" QuestId="25194" MobId1="39337" X="287.1787" Y="-3812.052" Z="18.4396" />
+			</While>
+				-->
+			<If Condition="((HasQuest(25194)) &amp;&amp; (!IsQuestCompleted(25194)))" >
+				<SetGrindArea>
+					<GrindArea>
+						<Factions>190</Factions>
+						<Hotspots>
+							<Hotspot X="278.5434" Y="-3801.08" Z="19.88509" />
+							<Hotspot X="410.7498" Y="-3829.14" Z="21.23164" />
+							<Hotspot X="514.1813" Y="-3813.404" Z="18.90358" />
+							<Hotspot X="571.5527" Y="-3807.337" Z="20.74952" />
+							<Hotspot X="664.3518" Y="-3810.85" Z="20.16442" />
+							<Hotspot X="745.4044" Y="-3814.902" Z="19.52565" />
+						</Hotspots>
+					</GrindArea>
+				</SetGrindArea>
+				<GrindTo Condition="((HasQuest(25194)) &amp;&amp; (IsQuestCompleted(25194)))" />
+			</If>
+		<TurnIn QuestName="Unbidden Visitors" QuestId="25194" TurnInName="Zen'Taji" TurnInId="39324" />
+		<PickUp QuestName="That's the End of That Raptor" QuestId="25195" GiverName="Zen'Taji" GiverId="39324" />
+			<Objective QuestName="That's the End of That Raptor" QuestId="25195" Type="KillMob" MobId="39385" KillCount="1" />
+		<TurnIn QuestName="That's the End of That Raptor" QuestId="25195" TurnInName="Zen'Taji" TurnInId="39324" />
+		<TurnIn QuestName="Watershed Patrol" QuestId="25188" TurnInName="Thonk" TurnInId="39323" />
+		<PickUp QuestName="The Burning Blade" QuestId="25232" GiverName="Orgnil Soulscar" GiverId="3142" />
+			<Objective QuestName="The Burning Blade" QuestId="25232" Type="CollectItem" ItemId="52564" CollectCount="6" />
+		<TurnIn QuestName="The Burning Blade" QuestId="25232" TurnInName="Orgnil Soulscar" TurnInId="3142" />
+		<PickUp QuestName="The Dranoshar Blockade" QuestId="25196" GiverName="Orgnil Soulscar" GiverId="3142" />
+		<PickUp QuestName="Winds in the Desert" QuestId="834" GiverName="Rezlak" GiverId="3293" />
+		<PickUp QuestName="Securing the Lines" QuestId="835" GiverName="Rezlak" GiverId="3293" />
+			<Objective QuestName="Winds in the Desert" QuestId="834" Type="CollectItem" ItemId="4918" CollectCount="5" />
+			<CustomBehavior File="KillUntilComplete" QuestId="835" MobId="3116" MobId2="3115" X="986.0096" Y="-4585.85" Z="17.36679" />
+		<TurnIn QuestName="Winds in the Desert" QuestId="834" TurnInName="Rezlak" TurnInId="3293" />
+		<TurnIn QuestName="Securing the Lines" QuestId="835" TurnInName="Rezlak" TurnInId="3293" />
+		<TurnIn QuestName="The Dranosh'ar Blockade" QuestId="25196" TurnInName="Gor the Enforcer" TurnInId="39379" />
+		<PickUp QuestName="Fizzled" QuestId="25260" GiverName="Gor the Enforcer" GiverId="39379" />
+		<PickUp QuestName="Thunder Down Under" QuestId="25236" GiverName="Gor the Enforcer" GiverId="39379" />
+		<PickUp QuestName="The Wolf and The Kodo" QuestId="25205" GiverName="Shin Stonepillar" GiverId="39380" />
+			<If Condition="((HasQuest(25205)) &amp;&amp; (!IsQuestCompleted(25205)))" >
+				<CustomBehavior File="InteractWith" MobId="39380" GossipOptions="1" WaitTime="5000" X="1287.98" Y="-4336.36" Z="34.0345" />
+				<CustomBehavior File="InteractWith" MobId="39365" X="1299.623" Y="-4796.138" Z="20.00671" /> <!-- I'm in a 'vehicle' -->
+				<CustomBehavior File="WaitTimer" WaitTime="30000" />
+			</If>
+		<TurnIn QuestName="The Wolf and The Kodo" QuestId="25205" TurnInName="Shin Stonepillar" TurnInId="39380" />
+		<PickUp QuestName="Ignoring the Warnings" QuestId="25206" GiverName="Gor the Enforcer" GiverId="39379" />
+			<CustomBehavior File="KillUntilComplete" QuestId="25206" MobId="39595" MobId2="39596" X="1214.193" Y="-4062.862" Z="21.65043" />
+			<If Condition="((HasQuest(25236)) &amp;&amp; (!IsQuestCompleted(25236)))" >
+				<RunTo X="707.2346" Y="-4035.578" Z="16.29455" />
+
+				<CustomBehavior File="CollectThings" CollectUntil="QuestComplete" QuestId="25236" MobId="39464" >
+					<Hotspot X="707.2346" Y="-4035.578" Z="7.421495" />
+					<Hotspot X="762.011" Y="-4031.479" Z="3.404415" />
+					<Hotspot X="813.2483" Y="-4038.423" Z="-7.257572" />
+					<Hotspot X="832.4775" Y="-4021.047" Z="-3.93867" />
+					<Hotspot X="924.4889" Y="-4022.882" Z="-12.74761" />
+					<Hotspot X="954.3832" Y="-4080.268" Z="-10.90613" />
+					<Hotspot X="944.1726" Y="-4144.896" Z="-9.10369" />
+					<Hotspot X="964.1655" Y="-4178.843" Z="-7.596215" />
+					<Hotspot X="953.7584" Y="-4210.396" Z="-8.155228" />
+					<Hotspot X="922.4935" Y="-4164.634" Z="-6.155645" />
+					<Hotspot X="944.1726" Y="-4144.896" Z="-9.10369" />
+					<Hotspot X="954.3832" Y="-4080.268" Z="-10.90613" />
+					<Hotspot X="924.4889" Y="-4022.882" Z="-12.74761" />
+					<Hotspot X="832.4775" Y="-4021.047" Z="-3.93867" />
+					<Hotspot X="813.2483" Y="-4038.423" Z="-7.257572" />
+					<Hotspot X="762.011" Y="-4031.479" Z="3.404415" />
+					<Hotspot X="707.2346" Y="-4035.578" Z="7.421495" />
+				</CustomBehavior>
+				<CustomBehavior File="AscendInWater" />
+
+				<!-- I may need to add a few conditions for where my x / y is for the corners of this pool area is - if people bug report it -->
+				<CustomBehavior File="MyCTM" X="956.3652" Y="-4077.486" Z="15.67288" />
+			</If>
+			<While Condition="((HasQuest(25260)) &amp;&amp; (!IsQuestCompleted(25260)))" >
+				<RunTo X="886.1001" Y="-4181.209" Z="16.2387" />
+				<CustomBehavior File="InteractWith" MobId="3203" Nav="CTM" GossipOptions="1, 1" WaitTime="4000" X="868.7257" Y="-4189.314" Z="-9.325073" />
+				<CustomBehavior File="MyCTM" X="886.1001" Y="-4181.209" Z="16.2387" />
+			</While>
+		<TurnIn QuestName="Fizzled" QuestId="25260" TurnInName="Gor the Enforcer" TurnInId="39379" />
+		<PickUp QuestName="Margoz" QuestId="25261" GiverName="Gor the Enforcer" GiverId="39379" />
+		<TurnIn QuestName="Thunder Down Under" QuestId="25236" TurnInName="Gor the Enforcer" TurnInId="39379" />
+		<TurnIn QuestName="Ignoring the Warnings" QuestId="25206" TurnInName="Gor the Enforcer" TurnInId="39379" />
+		<PickUp QuestName="Margoz" QuestId="25261" GiverName="Gor the Enforcer" GiverId="39379" />
+		<!-- Ignoring 'Beyond Durotor' 25648 -->
+		<TurnIn QuestName="Margoz" QuestId="25261" TurnInName="Margoz" TurnInId="3208" />
+		<PickUp QuestName="Skull Rock" QuestId="25262" GiverName="Margoz" GiverId="3208" />
+		<PickUp QuestName="Sent for Help" QuestId="25256" GiverName="Vek'nag" GiverId="39604" />
+		<TurnIn QuestName="Sent for Help" QuestId="25256" TurnInName="Spiketooth" TurnInId="39590" />
+		<PickUp QuestName="Ghislania" QuestId="25257" GiverName="Spiketooth" GiverId="39590" />
+		<PickUp QuestName="Griswold Hanniston" QuestId="25258" GiverName="Spiketooth" GiverId="39590" />
+		<PickUp QuestName="Gaur Icehorn" QuestId="25259" GiverName="Spiketooth" GiverId="39590" />
+			<CustomBehavior File="KillUntilComplete" QuestId="25258" MobId1="39353" X="1021.506" Y="-5084.249" Z="2.359997" />
+			<CustomBehavior File="KillUntilComplete" QuestId="25257" MobId1="39351" X="1009.731" Y="-5115.81" Z="-0.03965031" />
+			<CustomBehavior File="KillUntilComplete" QuestId="25259" MobId1="39352" X="983.4586" Y="-5103.006" Z="3.746449" />
+		<TurnIn QuestName="Ghislania" QuestId="25257" TurnInName="Spiketooth" TurnInId="39590" />
+		<TurnIn QuestName="Griswold Hanniston" QuestId="25258" TurnInName="Spiketooth" TurnInId="39590" />
+		<TurnIn QuestName="Gaur Icehorn" QuestId="25259" TurnInName="Spiketooth" TurnInId="39590" />
+			<Objective QuestName="Skull Rock" QuestId="25262" Type="CollectItem" ItemId="4871" CollectCount="6" />
+		<TurnIn QuestName="Skull Rock" QuestId="25262" TurnInName="Margoz" TurnInId="3208" />
+		<PickUp QuestName="Neeru Fireblade" QuestId="25263" GiverName="Margoz" GiverId="3208" />
+			<If Condition="((!HasQuest(25648)) &amp;&amp; (!IsQuestCompleted(25648)))" >
+		<PickUp QuestName="Warchiefs Command: Northern Barrens" QuestId="28494" GiverType="Object" GiverName="Warchief's Command Board" GiverId="206109" X="1597.307" Y="-4371.851" Z="21.16051" />
+			</If>
+		<TurnIn QuestName="Neeru Fireblade" QuestId="25263" TurnInName="Neeru Fireblade" TurnInId="3216" />
+		<PickUp QuestName="Ak'Zeloth" QuestId="25264" GiverName="Neeru Fireblade" GiverId="3216" />
+		<PickUp QuestName="Conscript of the Horde" QuestId="840" GiverName="Takrin Pathseeker" GiverId="3336" />
+		<TurnIn QuestName="Conscript of the Horde" QuestId="840" TurnInName="Kargal Battlescar" TurnInId="3337" />
+			<If Condition="((HasQuest(28494)) &amp;&amp; (IsQuestCompleted(28494)))" >
+		<TurnIn QuestName="Warchief's Command: Northern Barrens!" QuestId="28494" TurnInName="Kargal Battlescar" TurnInId="3337" />
+			</If>
+		<PickUp QuestName="In Defense of Far Watch" QuestId="871" GiverName="Kargal Battlescar" GiverId="3337"/>
+		<TurnIn QuestName="Ak'Zeloth" QuestId="25264" TurnInName="Ak'Zeloth" TurnInId="3521" />
+		
+			<If Condition="Me.Race == WoWRace.Tauren &amp;&amp; Me.Level &lt;= 15">
+				<CustomBehavior File="DeleteItems" Ids="57199,57198,57220" /> <!-- Crap that I can't delete from Tauren Starter -->
+			</If>
+
+		
+			<CustomBehavior File="LoadProfile" ProfileName="..\[H - Quest] 12-58 K-EK [Kick]" />
+	
+		
+	</QuestOrder>
+
+</HBProfile>

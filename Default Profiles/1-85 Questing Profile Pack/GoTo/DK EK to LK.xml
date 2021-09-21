@@ -1,0 +1,54 @@
+<HBProfile>
+	<Name>DK EK to LK [Kick]</Name>
+	<MinLevel>58</MinLevel>
+	<MaxLevel>86</MaxLevel>
+	
+	<MinDurability>0.2</MinDurability>
+	<MinFreeBagSlots>2</MinFreeBagSlots>
+	
+	<MailGrey>False</MailGrey>
+	<MailWhite>False</MailWhite>
+	<MailGreen>True</MailGreen>
+	
+	<SellGrey>True</SellGrey>
+	<SellWhite>True</SellWhite>
+	<SellGreen>True</SellGreen>
+	<SellBlue>False</SellBlue>
+	<SellPurple>False</SellPurple>
+
+	<QuestOrder>
+	
+		<CustomBehavior File="UserSettings" LearnFlightPaths="False" UseFlightPaths="False" TrainNewSkills="False" />
+				
+			<If Condition="Me.MapId == 0" >
+				<!-- SW dock to Valiance Keep -->
+				<CustomBehavior File="UseTransport" TransportId="190536" 
+								WaitAtX="-8300.08" WaitAtY="1405.158" WaitAtZ="4.422395"
+								GetOffX="2234.375" GetOffY="5132.568" GetOffZ="5.343217"
+								TransportStartX="-8288.816" TransportStartY="1424.703" TransportStartZ="0.04" 
+								TransportEndX="2218.391" TransportEndY="5119.589" TransportEndZ="0.04" />	
+				<CustomBehavior File="WaitTimer" WaitTime="5000" />
+			</If>
+			
+		<If Condition="Me.MapId == 571" >
+			<If Condition="(HasQuest(28709))" >
+		<TurnIn QuestName="Hero's Call: Northrend!" QuestId="28709" TurnInName="Recruitment Officer Blythe" TurnInId="25307" />
+		<PickUp QuestName="Enlistment Day" QuestId="11672" GiverName="Recruitment Officer Blythe" GiverId="25307" X="2300.503" Y="5239.977" Z="11.33996" />
+			</If>
+		
+				<!-- Train riding -->
+				<If Condition="(!HasSpell(54197))">
+					<If Condition="Me.Gold &gt;= 501" >
+						<RunTo X="2274.391" Y="5174.106" Z="11.17985" />
+						<CustomBehavior File="InteractWith" MobId="35133" WaitTime="1000" CollectionDistance="50" X="2274.391" Y="5174.106" Z="11.17985" />
+						<CustomBehavior File="ForceTrainRiding" MobId="35133" />
+					</If>
+				</If>
+			
+		</If>
+		
+		<CustomBehavior File="LoadProfile" ProfileName="..\LK\[Fly][A - Quest] LK 68-80 [Kick]" /> 
+
+	  
+	</QuestOrder>
+</HBProfile>

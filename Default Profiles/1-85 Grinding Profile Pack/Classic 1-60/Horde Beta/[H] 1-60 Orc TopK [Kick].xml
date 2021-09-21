@@ -1,0 +1,2199 @@
+<HBProfile creator="Kickazz006" version="0.1 Beta">
+	<!-- 
+			Special thanks to KillaKaz for helping me with the level flow
+			This profile starts in in the Orc starting area in Durator
+	-->
+	<Name>[H] 1-60 Grind TopK</Name>
+	<MinLevel>1</MinLevel>
+	<MaxLevel>62</MaxLevel>
+	
+	<MinDurability>0.2</MinDurability>
+	<MinFreeBagSlots>2</MinFreeBagSlots>
+	<!-- Notes for Kick 
+	<Blackspot X="" Y="" Z="" Radius="" />
+	-->
+	<MailGrey>False</MailGrey>
+	<MailWhite>False</MailWhite>
+	<MailGreen>True</MailGreen>
+	<MailBlue>True</MailBlue>
+	<MailPurple>True</MailPurple>
+	
+	<SellGrey>True</SellGrey>
+	<SellWhite>True</SellWhite>
+	<SellGreen>False</SellGreen>
+	<SellBlue>False</SellBlue>
+	<SellPurple>False</SellPurple>
+	
+	<TargetElites>False</TargetElites>
+	<!-- <ContinentID>1</ContinentID> -->
+	<SubProfile> <!-- SW Durotar - VoT 1-3 -->
+		<Name>VoT 1-3</Name> <!-- Valley of Trials - Orc starting area -->
+		<MinLevel>1</MinLevel>
+		<MaxLevel>3</MaxLevel>
+		<Vendors> <!-- VoT -->
+			<Vendor Name="Kzan Thornslash" Entry="3159" Type="Repair" X="-590.2934" Y="-4224.389" Z="38.28957" />
+			<Vendor Name="Zlagk" Entry="3882" Type="Food" X="-560.1253" Y="-4217.204" Z="41.59083" />
+			<!-- VoT Trainers -->
+			<Vendor Name="Nartok" Entry="3156" Type="Train" TrainClass="Warlock" X="-590.8021" Y="-4203.484" Z="38.42772" />
+			<Vendor Name="Rwag" Entry="3155" Type="Train" TrainClass="Rogue" X="-617.059" Y="-4202.635" Z="38.13419" />
+			<Vendor Name="Shikrik" Entry="3157" Type="Train" TrainClass="Shaman" X="-623.9393" Y="-4203.878" Z="38.13438" />
+			<Vendor Name="Acrypha" Entry="39206" Type="Train" TrainClass="Mage" X="-625.296" Y="-4210.167" Z="38.13409" />
+			<Vendor Name="Karranisha" Entry="39214" Type="Train" TrainClass="Hunter" X="-635.4618" Y="-4227.521" Z="38.13442" />
+			<Vendor Name="Frang" Entry="3153" Type="Train" TrainClass="Warrior" X="-640.1024" Y="-4229.821" Z="38.13384" />
+		<!-- Razor Hill -->	<Vendor Name="Jabul" Entry="44380" Type="Train" TrainClass="Druid" X="342.061" Y="-4771.4" Z="12.6346" />
+		<!-- Razor Hill -->	<Vendor Name="Tai'jin" Entry="3706" Type="Train" TrainClass="Priest" X="294.8838" Y="-4831.495" Z="10.52397" />
+		<!-- Org --> <Vendor Name="Sunwalker Atohmo" Entry="44725" Type="Train" TrainClass="Paladin" X="1863.88" Y="-4292.69" Z="23.78161" />
+		</Vendors>
+		<Mailboxes> <!-- VoT -->
+			<Mailbox X="-599.6041" Y="-4207.143" Z="38.61245" />
+		</Mailboxes>
+		<GrindArea>
+			<TargetMinLevel>1</TargetMinLevel>
+			<TargetMaxLevel>3</TargetMaxLevel>
+			<Factions>189 188 190</Factions> <!-- [Pig, Scout] -->
+			<Hotspots>
+				<Hotspot X="-681.6833" Y="-4266.655" Z="38.68036" />
+				<Hotspot X="-708.8718" Y="-4219.865" Z="40.15913" />
+				<Hotspot X="-696.2065" Y="-4131.017" Z="30.1792" />
+				<Hotspot X="-752.3873" Y="-4171.934" Z="30.16143" />
+				<Hotspot X="-757.5209" Y="-4249.407" Z="45.44014" />
+				<Hotspot X="-802.0045" Y="-4281.543" Z="59.6065" />
+				<Hotspot X="-768.35" Y="-4303.865" Z="52.07267" />
+				<Hotspot X="-707.017" Y="-4335.709" Z="45.45692" />
+				<Hotspot X="-676.0767" Y="-4283.685" Z="40.73251" />
+			</Hotspots>
+		</GrindArea>
+		<AvoidMobs>
+			<Mob Name="Training Dummy" Entry="44820" />
+		</AvoidMobs>
+	</SubProfile>
+	
+	<SubProfile> <!-- SW Durotar - VoT 3-5 -->
+		<Name>VoT 3-5</Name> <!-- Valley of Trials - Orc starting area -->
+		<MinLevel>3</MinLevel>
+		<MaxLevel>5</MaxLevel>
+		<Vendors> <!-- VoT -->
+			<Vendor Name="Kzan Thornslash" Entry="3159" Type="Repair" X="-590.2934" Y="-4224.389" Z="38.28957" />
+			<Vendor Name="Zlagk" Entry="3882" Type="Food" X="-560.1253" Y="-4217.204" Z="41.59083" />
+			<!-- VoT Trainers -->
+			<Vendor Name="Nartok" Entry="3156" Type="Train" TrainClass="Warlock" X="-590.8021" Y="-4203.484" Z="38.42772" />
+			<Vendor Name="Rwag" Entry="3155" Type="Train" TrainClass="Rogue" X="-617.059" Y="-4202.635" Z="38.13419" />
+			<Vendor Name="Shikrik" Entry="3157" Type="Train" TrainClass="Shaman" X="-623.9393" Y="-4203.878" Z="38.13438" />
+			<Vendor Name="Acrypha" Entry="39206" Type="Train" TrainClass="Mage" X="-625.296" Y="-4210.167" Z="38.13409" />
+			<Vendor Name="Karranisha" Entry="39214" Type="Train" TrainClass="Hunter" X="-635.4618" Y="-4227.521" Z="38.13442" />
+			<Vendor Name="Frang" Entry="3153" Type="Train" TrainClass="Warrior" X="-640.1024" Y="-4229.821" Z="38.13384" />
+		<!-- Razor Hill -->	<Vendor Name="Jabul" Entry="44380" Type="Train" TrainClass="Druid" X="342.061" Y="-4771.4" Z="12.6346" />
+		<!-- Razor Hill -->	<Vendor Name="Tai'jin" Entry="3706" Type="Train" TrainClass="Priest" X="294.8838" Y="-4831.495" Z="10.52397" />
+		<!-- Org --> <Vendor Name="Sunwalker Atohmo" Entry="44725" Type="Train" TrainClass="Paladin" X="1863.88" Y="-4292.69" Z="23.78161" />
+		</Vendors>
+		<Mailboxes> <!-- VoT -->
+			<Mailbox X="-599.6041" Y="-4207.143" Z="38.61245" />
+		</Mailboxes>
+		<GrindArea>
+			<TargetMinLevel>3</TargetMinLevel>
+			<TargetMaxLevel>3</TargetMaxLevel>
+			<Factions>7</Factions> <!-- [Scorpion, Vile Familiar] -->
+			<Hotspots>
+				<Hotspot X="-481.9944" Y="-4227.795" Z="49.54736" />
+				<Hotspot X="-467.7976" Y="-4142.825" Z="51.02475" />
+				<Hotspot X="-430.8433" Y="-4062.557" Z="50.68355" />
+				<Hotspot X="-365.768" Y="-4055.845" Z="51.14634" />
+				<Hotspot X="-332.3485" Y="-4123.099" Z="51.00919" />
+				<Hotspot X="-268.4438" Y="-4173.135" Z="53.6465" />
+				<Hotspot X="-336.7049" Y="-4179.688" Z="53.02816" />
+				<Hotspot X="-398.3466" Y="-4168.664" Z="51.41514" />
+				<Hotspot X="-386.8488" Y="-4211.971" Z="54.81701" />
+				<Hotspot X="-449.7776" Y="-4218.131" Z="49.17107" />
+			</Hotspots>
+		</GrindArea>
+		<AvoidMobs>
+			<Mob Name="Training Dummy" Entry="44820" />
+		</AvoidMobs>
+	</SubProfile>
+  
+	<SubProfile> <!-- E Durotar - Razor Hill 5-8 -->
+		<Name>Razor Hill 5-8</Name>
+		<MinLevel>5</MinLevel>
+		<MaxLevel>8</MaxLevel>
+		<Vendors> <!-- Razor Hill -->
+			<Vendor Name="Innkeeper Grosk" Entry="6928" Type="Food" X="340.3629" Y="-4686.287" Z="16.4891" />
+			<Vendor Name="Wuark" Entry="3167" Type="Repair" X="358.1284" Y="-4706.727" Z="14.39416" />  
+			<!-- Razor Hill Trainers -->
+			<Vendor Name="Dhugru Gorelust" Entry="3172" Type="Train" TrainClass="Warlock" X="356.192" Y="-4837.954" Z="11.09003" />
+			<Vendor Name="Swart" Entry="3173" Type="Train" TrainClass="Shaman" X="307.1142" Y="-4839.906" Z="10.52483" />
+			<Vendor Name="Tarshaw Jaggedscar" Entry="3169" Type="Train" TrainClass="Warrior" X="311.3524" Y="-4827.792" Z="9.58133" />
+			<Vendor Name="Un'Thuwa" Entry="5880" Type="Train" TrainClass="Mage" X="334.717" Y="-4767.622" Z="12.63564" />
+			<Vendor Name="Thotar" Entry="3171" Type="Train" TrainClass="Hunter" X="275.3385" Y="-4703.997" Z="11.90329" />
+			<Vendor Name="Kaplak" Entry="3170" Type="Train" TrainClass="Rogue" X="268.1285" Y="-4710.936" Z="17.76719" />
+			<Vendor Name="Jabul" Entry="44380" Type="Train" TrainClass="Druid" X="342.061" Y="-4771.4" Z="12.6346" />
+			<Vendor Name="Tai'jin" Entry="3706" Type="Train" TrainClass="Priest" X="294.8838" Y="-4831.495" Z="10.52397" />
+		<!-- Org --> <Vendor Name="Sunwalker Atohmo" Entry="44725" Type="Train" TrainClass="Paladin" X="1863.88" Y="-4292.69" Z="23.78161" />
+		</Vendors>
+		<Mailboxes> <!--Razor Hill -->
+			<Mailbox X="323.218" Y="-4707.395" Z="14.81331" />
+		</Mailboxes>
+		<GrindArea>
+			<TargetMinLevel>5</TargetMinLevel>
+			<TargetMaxLevel>10</TargetMaxLevel>
+			<Factions>109 189 188 413</Factions> <!-- Quilboar, Pig, Scorpion -->
+			<Hotspots>
+				<Hotspot X="-289.4909" Y="-4837.226" Z="34.95063" />
+				<Hotspot X="-263.51" Y="-4887.911" Z="27.87053" />
+				<Hotspot X="-195.4618" Y="-4865.333" Z="26.57131" />
+				<Hotspot X="-129.563" Y="-4860.45" Z="20.40621" />
+				<Hotspot X="-49.34752" Y="-4857.972" Z="23.03148" />
+				<Hotspot X="10.61908" Y="-4872.753" Z="23.04322" />
+				<Hotspot X="65.77229" Y="-4850.65" Z="20.25683" />
+				<Hotspot X="119.8313" Y="-4802.154" Z="17.41861" />
+				<Hotspot X="135.2334" Y="-4688.374" Z="23.16319" />
+				<Hotspot X="81.22168" Y="-4680.176" Z="35.70269" />
+				<Hotspot X="8.876478" Y="-4707.182" Z="31.54303" />
+				<Hotspot X="-23.62993" Y="-4633.834" Z="40.57396" />
+				<Hotspot X="-93.05276" Y="-4648.088" Z="35.7562" />
+				<Hotspot X="-166.6423" Y="-4685.035" Z="32.79641" />
+				<Hotspot X="-238.7996" Y="-4751.942" Z="28.84923" />
+				<Hotspot X="-340.6729" Y="-4771.554" Z="36.47412" />
+				<Hotspot X="-376.5709" Y="-4825.859" Z="36.10753" />
+			</Hotspots>
+		</GrindArea>
+		<Blackspots>
+			<Blackspot X="379.2579" Y="-4705.734" Z="15.951" Radius="5" /> <!-- Stuck at Razorhill Repair -->
+		</Blackspots>
+	</SubProfile>
+  
+	<SubProfile> <!-- N Durotar - S. of Org 8-11 -->
+		<Name>S. of Orgrimmar 8-11</Name> <!-- N. of Drygulch Ravine / Thunder Ridge -->
+		<MinLevel>8</MinLevel>
+		<MaxLevel>11</MaxLevel>
+		<Vendors> <!--Razor Hill -->
+			<Vendor Name="Innkeeper Grosk" Entry="6928" Type="Food" X="340.3629" Y="-4686.287" Z="16.4891" />
+			<Vendor Name="Wuark" Entry="3167" Type="Repair" X="358.1284" Y="-4706.727" Z="14.39416" /> 
+			<!-- Crossroads Trainers -->
+			<Vendor Name="Egnom" Entry="50029" Type="Train" TrainClass="Mage" X="-429.2691" Y="-2662.823" Z="96.57784" />
+			<Vendor Name="Chintoka" Entry="50028" Type="Train" TrainClass="Warlock" X="-430.3038" Y="-2659.688" Z="96.58514" />
+			<Vendor Name="Tarmod" Entry="50032" Type="Train" TrainClass="Hunter" X="-434.6354" Y="-2680.118" Z="96.18735" />
+			<Vendor Name="Sunwalker Lonaki" Entry="50035" Type="Train" TrainClass="Paladin" X="-535.9566" Y="-2640.979" Z="95.8503" />
+			<Vendor Name="Musu Gentlemoon" Entry="50034" Type="Train" TrainClass="Druid" X="-539.4583" Y="-2643.507" Z="95.80042" />
+			<Vendor Name="Zumolo" Entry="50031" Type="Train" TrainClass="Priest" X="-522.4011" Y="-2641.29" Z="95.78765" />
+			<Vendor Name="Brulla" Entry="50022" Type="Train" TrainClass="Shaman" X="-520.2188" Y="-2642.453" Z="95.78797" />
+			<Vendor Name="Dargad" Entry="50027" Type="Train" TrainClass="Rogue" X="-431.3785" Y="-2680.99" Z="96.03146" />
+			<Vendor Name="Ging" Entry="50033" Type="Train" TrainClass="Warrior" X="-397.0208" Y="-2640.786" Z="96.22285" />
+		</Vendors>
+		<Mailboxes> <!--Razor Hill -->
+			<Mailbox X="323.218" Y="-4707.395" Z="14.81331" />
+		</Mailboxes>
+		<GrindArea>
+			<TargetMinLevel>7</TargetMinLevel>
+			<TargetMaxLevel>12</TargetMaxLevel>
+			<Factions>14 48 189 188 413 514 109 190</Factions> <!-- [Raptor, Croc, Pig, Scorpion, Harpy, Razormane, Ambient] -->
+			<Hotspots>
+				<Hotspot X="776.5881" Y="-4186.346" Z="23.59561" />
+				<Hotspot X="780.9955" Y="-4283.793" Z="17.83923" />
+				<Hotspot X="735.8277" Y="-4340.571" Z="20.99335" />
+				<Hotspot X="785.8557" Y="-4358.896" Z="16.82907" />
+				<Hotspot X="864.1336" Y="-4369.293" Z="17.47013" />
+				<Hotspot X="878.0155" Y="-4313.372" Z="20.23609" />
+				<Hotspot X="928.8552" Y="-4346.176" Z="18.71834" />
+				<Hotspot X="1000.167" Y="-4365.796" Z="15.931" />
+				<Hotspot X="1056.333" Y="-4359.117" Z="19.31701" />
+				<Hotspot X="1092.875" Y="-4442.656" Z="21.04439" />
+				<Hotspot X="1068.039" Y="-4526.355" Z="16.87351" />
+				<Hotspot X="1057.214" Y="-4565.627" Z="17.11465" />
+				<Hotspot X="1135.748" Y="-4552.992" Z="17.83619" />
+				<Hotspot X="1196.758" Y="-4590.7" Z="18.77352" />
+				<Hotspot X="1226.403" Y="-4660.755" Z="15.93714" />
+				<Hotspot X="1261.972" Y="-4631.702" Z="18.30607" />
+				<Hotspot X="1293.024" Y="-4687.623" Z="19.4446" />
+				<Hotspot X="1359.404" Y="-4634.873" Z="25.55192" />
+				<Hotspot X="1313.758" Y="-4568.682" Z="23.32995" />
+				<Hotspot X="1317.723" Y="-4480.629" Z="23.94606" />
+				<Hotspot X="1291.336" Y="-4420.124" Z="26.58997" />
+				<Hotspot X="1248.573" Y="-4377.258" Z="28.27003" />
+				<Hotspot X="1223.762" Y="-4443.788" Z="23.85952" />
+				<Hotspot X="1170.339" Y="-4426.948" Z="25.07173" />
+				<Hotspot X="1075.841" Y="-4349.396" Z="22.51083" />
+				<Hotspot X="1088.489" Y="-4224.838" Z="19.74962" />
+				<Hotspot X="1118.48" Y="-4173.159" Z="20.28434" />
+				<Hotspot X="1003.245" Y="-4367.662" Z="16.33184" />
+				<Hotspot X="901.6807" Y="-4379.121" Z="15.75463" />
+				<Hotspot X="806.1296" Y="-4369.569" Z="14.31817" />
+				<Hotspot X="718.3656" Y="-4352.221" Z="22.25014" />
+				<Hotspot X="642.7048" Y="-4341.075" Z="18.93536" />
+			</Hotspots>
+		</GrindArea>
+		<Blackspots>
+			<Blackspot X="379.2579" Y="-4705.734" Z="15.951" Radius="5" /> <!-- Stuck at Razorhill Repair -->
+		</Blackspots>
+	</SubProfile>
+  
+	<SubProfile> <!-- E Barrens - Farwatch Post 11-13 -->
+		<Name>Farwatch Post 11-13</Name>
+		<MinLevel>11</MinLevel>
+		<MaxLevel>13</MaxLevel>
+		<Vendors> <!-- Far Watch Post -->
+			<Vendor Name="Martang" Entry="43949" Type="Repair" X="296.017" Y="-3650.72" Z="27.32866" /> <!-- Is this a repair guy ?? -->
+			<!-- Nozzlepot's Outpost - North of Farwatch
+			<Vendor Name="Frazzik" Entry="43957" Type="Repair" X="1167.52" Y="-3401.44" Z="91.66696" />
+			-->
+			<!-- Crossroads Trainers -->
+			<Vendor Name="Egnom" Entry="50029" Type="Train" TrainClass="Mage" X="-429.2691" Y="-2662.823" Z="96.57784" />
+			<Vendor Name="Chintoka" Entry="50028" Type="Train" TrainClass="Warlock" X="-430.3038" Y="-2659.688" Z="96.58514" />
+			<Vendor Name="Tarmod" Entry="50032" Type="Train" TrainClass="Hunter" X="-434.6354" Y="-2680.118" Z="96.18735" />
+			<Vendor Name="Sunwalker Lonaki" Entry="50035" Type="Train" TrainClass="Paladin" X="-535.9566" Y="-2640.979" Z="95.8503" />
+			<Vendor Name="Musu Gentlemoon" Entry="50034" Type="Train" TrainClass="Druid" X="-539.4583" Y="-2643.507" Z="95.80042" />
+			<Vendor Name="Zumolo" Entry="50031" Type="Train" TrainClass="Priest" X="-522.4011" Y="-2641.29" Z="95.78765" />
+			<Vendor Name="Brulla" Entry="50022" Type="Train" TrainClass="Shaman" X="-520.2188" Y="-2642.453" Z="95.78797" />
+			<Vendor Name="Dargad" Entry="50027" Type="Train" TrainClass="Rogue" X="-431.3785" Y="-2680.99" Z="96.03146" />
+			<Vendor Name="Ging" Entry="50033" Type="Train" TrainClass="Warrior" X="-397.0208" Y="-2640.786" Z="96.22285" />
+		</Vendors>
+		<Mailboxes> <!--Razor Hill -->
+			<Mailbox X="323.218" Y="-4707.395" Z="14.81331" />
+		</Mailboxes>
+		<GrindArea>
+			<TargetMinLevel>10</TargetMinLevel>
+			<TargetMaxLevel>14</TargetMaxLevel>
+			<Factions>189 188 48</Factions> <!-- [Plainstrider, Zhevra, Raptor] -->
+			<Hotspots>
+				<Hotspot X="367.8229" Y="-3674.264" Z="29.49524" />
+				<Hotspot X="441.052" Y="-3685.979" Z="27.18472" />
+				<Hotspot X="470.6711" Y="-3625.422" Z="29.22686" />
+				<Hotspot X="399.6889" Y="-3615.686" Z="28.842" />
+				<Hotspot X="301.0345" Y="-3565.308" Z="26.87031" />
+				<Hotspot X="268.2593" Y="-3482.891" Z="27.5918" />
+				<Hotspot X="209.7825" Y="-3385.438" Z="38.51076" />
+				<Hotspot X="212.5683" Y="-3308.115" Z="57.20553" />
+				<Hotspot X="257.5645" Y="-3267.821" Z="64.85242" />
+				<Hotspot X="234.4404" Y="-3193.167" Z="82.41348" />
+				<Hotspot X="306.6643" Y="-3149.86" Z="90.74773" />
+				<Hotspot X="169.6992" Y="-3160.744" Z="90.72553" />
+				<Hotspot X="61.46483" Y="-3150.718" Z="91.56441" />
+				<Hotspot X="115.6053" Y="-3258.821" Z="67.69118" />
+				<Hotspot X="135.8812" Y="-3396.328" Z="36.98292" />
+				<Hotspot X="133.7646" Y="-3472.059" Z="30.48241" />
+				<Hotspot X="79.14855" Y="-3534.914" Z="30.7384" />
+				<Hotspot X="107.8613" Y="-3600.459" Z="28.51694" />
+				<Hotspot X="205.9373" Y="-3557.784" Z="27.18564" />
+				<Hotspot X="291.6606" Y="-3587.992" Z="27.92696" />
+			</Hotspots>
+		</GrindArea>
+	</SubProfile>
+    
+	<SubProfile> <!-- C Barrens - Crossroads 13-15 -->
+		<Name>Crossroads 13-15</Name>
+		<MinLevel>13</MinLevel>
+		<MaxLevel>15</MaxLevel>
+		<Vendors> <!-- Crossroads -->
+			<Vendor Name="Innkeeper Boorand Plainswind" Entry="3934" Type="Food" X="-407.1227" Y="-2645.225" Z="96.22269" />
+			<Vendor Name="Halija Whitestrider" Entry="3486" Type="Repair" X="-539.8406" Y="-2672.23" Z="95.78741" />
+			<!-- Crossroads Trainers -->
+			<Vendor Name="Egnom" Entry="50029" Type="Train" TrainClass="Mage" X="-429.2691" Y="-2662.823" Z="96.57784" />
+			<Vendor Name="Chintoka" Entry="50028" Type="Train" TrainClass="Warlock" X="-430.3038" Y="-2659.688" Z="96.58514" />
+			<Vendor Name="Tarmod" Entry="50032" Type="Train" TrainClass="Hunter" X="-434.6354" Y="-2680.118" Z="96.18735" />
+			<Vendor Name="Sunwalker Lonaki" Entry="50035" Type="Train" TrainClass="Paladin" X="-535.9566" Y="-2640.979" Z="95.8503" />
+			<Vendor Name="Musu Gentlemoon" Entry="50034" Type="Train" TrainClass="Druid" X="-539.4583" Y="-2643.507" Z="95.80042" />
+			<Vendor Name="Zumolo" Entry="50031" Type="Train" TrainClass="Priest" X="-522.4011" Y="-2641.29" Z="95.78765" />
+			<Vendor Name="Brulla" Entry="50022" Type="Train" TrainClass="Shaman" X="-520.2188" Y="-2642.453" Z="95.78797" />
+			<Vendor Name="Dargad" Entry="50027" Type="Train" TrainClass="Rogue" X="-431.3785" Y="-2680.99" Z="96.03146" />
+			<Vendor Name="Ging" Entry="50033" Type="Train" TrainClass="Warrior" X="-397.0208" Y="-2640.786" Z="96.22285" />
+		</Vendors>
+		<Mailboxes> <!-- Crossroads -->
+			<Mailbox X="-442.7595" Y="-2649.292" Z="95.86579" />
+		</Mailboxes>
+		<GrindArea>
+			<TargetMinLevel>11</TargetMinLevel>
+			<TargetMaxLevel>15</TargetMaxLevel>
+			<Factions>16 189 188 48 15</Factions> <!-- [Tiger, Giraffe, Raptor, Kodo] -->
+			<Hotspots>
+				<Hotspot X="-533.0444" Y="-2792.051" Z="92.74191" />
+				<Hotspot X="-616.2578" Y="-2743.792" Z="93.04259" />
+				<Hotspot X="-695.9761" Y="-2857.526" Z="92.97402" />
+				<Hotspot X="-691.6608" Y="-2913.935" Z="97.90121" />
+				<Hotspot X="-770.8087" Y="-2907.078" Z="93.60493" />
+				<Hotspot X="-678.8259" Y="-2991.985" Z="95.97552" />
+				<Hotspot X="-642.2314" Y="-3041.936" Z="91.79426" />
+				<Hotspot X="-696.4638" Y="-3052.419" Z="95.7262" />
+				<Hotspot X="-693.9978" Y="-3088.164" Z="92.40183" />
+				<Hotspot X="-721.7185" Y="-3148.442" Z="94.3484" />
+				<Hotspot X="-744.5549" Y="-3132.433" Z="91.90337" />
+				<Hotspot X="-802.5342" Y="-3138.68" Z="92.38494" />
+				<Hotspot X="-833.8574" Y="-3182.187" Z="91.66785" />
+				<Hotspot X="-933.1694" Y="-3226.699" Z="91.7858" />
+				<Hotspot X="-914.4268" Y="-3274.993" Z="94.74774" />
+				<Hotspot X="-913.3196" Y="-3090.855" Z="96.42958" />
+				<Hotspot X="-972.2275" Y="-3080.683" Z="95.71233" />
+				<Hotspot X="-1024.148" Y="-3109.769" Z="91.77345" />
+				<Hotspot X="-1081.673" Y="-3149.963" Z="94.06679" />
+				<Hotspot X="-1066.228" Y="-3066.915" Z="93.05574" />
+				<Hotspot X="-1042.756" Y="-3011.907" Z="93.84782" />
+				<Hotspot X="-987.1577" Y="-2987.275" Z="93.20525" />
+				<Hotspot X="-940.3664" Y="-2944.614" Z="93.38232" />
+				<Hotspot X="-985.4227" Y="-2930.17" Z="94.06667" />
+				<Hotspot X="-996.7925" Y="-2865.997" Z="91.66787" />
+				<Hotspot X="-1035.966" Y="-2826.242" Z="91.66803" />
+				<Hotspot X="-1007.305" Y="-2802.235" Z="96.62653" />
+				<Hotspot X="-974.0776" Y="-2845.414" Z="91.66784" />
+				<Hotspot X="-970.4741" Y="-2771.924" Z="94.22424" />
+				<Hotspot X="-895.4993" Y="-2802.227" Z="94.65395" />
+				<Hotspot X="-846.2362" Y="-2815.543" Z="93.16708" />
+				<Hotspot X="-836.6966" Y="-2881.467" Z="91.66782" />
+				<Hotspot X="-799.7488" Y="-2948.734" Z="93.92905" />
+				<Hotspot X="-814.0455" Y="-2999.189" Z="92.64928" />
+				<Hotspot X="-711.9313" Y="-3026.921" Z="96.00724" />
+				<Hotspot X="-648.7452" Y="-3055.851" Z="92.75504" />
+				<Hotspot X="-599.8176" Y="-3088.338" Z="91.66673" />
+			</Hotspots>
+		</GrindArea>
+	</SubProfile>
+
+	<SubProfile> <!-- NE Barrens 15-17 -->
+		<Name>NE Barrens 15-17</Name> <!-- Between Far Watch Post and Sludge Fen / Nozzlepot's Outpost -->
+		<MinLevel>15</MinLevel>
+		<MaxLevel>17</MaxLevel>
+		<Vendors> <!-- Nozzlepot's Outpost -->
+			<Vendor Name="Frazzik" Entry="43957" Type="Repair" X="1167.52" Y="-3401.44" Z="91.66696" />
+			<!-- Crossroads Trainers -->
+			<Vendor Name="Egnom" Entry="50029" Type="Train" TrainClass="Mage" X="-429.2691" Y="-2662.823" Z="96.57784" />
+			<Vendor Name="Chintoka" Entry="50028" Type="Train" TrainClass="Warlock" X="-430.3038" Y="-2659.688" Z="96.58514" />
+			<Vendor Name="Tarmod" Entry="50032" Type="Train" TrainClass="Hunter" X="-434.6354" Y="-2680.118" Z="96.18735" />
+			<Vendor Name="Sunwalker Lonaki" Entry="50035" Type="Train" TrainClass="Paladin" X="-535.9566" Y="-2640.979" Z="95.8503" />
+			<Vendor Name="Musu Gentlemoon" Entry="50034" Type="Train" TrainClass="Druid" X="-539.4583" Y="-2643.507" Z="95.80042" />
+			<Vendor Name="Zumolo" Entry="50031" Type="Train" TrainClass="Priest" X="-522.4011" Y="-2641.29" Z="95.78765" />
+			<Vendor Name="Brulla" Entry="50022" Type="Train" TrainClass="Shaman" X="-520.2188" Y="-2642.453" Z="95.78797" />
+			<Vendor Name="Dargad" Entry="50027" Type="Train" TrainClass="Rogue" X="-431.3785" Y="-2680.99" Z="96.03146" />
+			<Vendor Name="Ging" Entry="50033" Type="Train" TrainClass="Warrior" X="-397.0208" Y="-2640.786" Z="96.22285" />
+		</Vendors>
+		<Mailboxes> <!--Crossroads -->
+			<Mailbox X="-442.7595" Y="-2649.292" Z="95.86579" />
+		</Mailboxes>
+		<GrindArea>
+			<TargetMinLevel>14</TargetMinLevel>
+			<TargetMaxLevel>18</TargetMaxLevel>
+			<Factions>1999 48 47 38 189 188 15</Factions> <!-- [Plainstrider, Raptor, Venture Co., Hyena, Giraffe, Kodo] -->
+			<Hotspots>
+				<Hotspot X="367.5749" Y="-3146.866" Z="91.67249" />
+				<Hotspot X="380.3027" Y="-3211.627" Z="91.66697" />
+				<Hotspot X="385.3022" Y="-3257.287" Z="93.59119" />
+				<Hotspot X="440.7826" Y="-3257.132" Z="92.68336" />
+				<Hotspot X="423.2953" Y="-3297.319" Z="91.72191" />
+				<Hotspot X="408.0926" Y="-3352.646" Z="91.72459" />
+				<Hotspot X="376.5908" Y="-3404.376" Z="92.82455" />
+				<Hotspot X="415.2145" Y="-3404.421" Z="93.46163" />
+				<Hotspot X="404.2501" Y="-3459.538" Z="93.07092" />
+				<Hotspot X="443.7014" Y="-3467.295" Z="91.70855" />
+				<Hotspot X="492.4386" Y="-3503.186" Z="94.4994" />
+				<Hotspot X="548.1959" Y="-3502.052" Z="93.45887" />
+				<Hotspot X="608.8557" Y="-3533.364" Z="92.98891" />
+				<Hotspot X="691.3373" Y="-3565.086" Z="93.60551" />
+				<Hotspot X="767.8712" Y="-3552.687" Z="93.25504" />
+				<Hotspot X="837.7491" Y="-3564.201" Z="92.57654" />
+				<Hotspot X="895.09" Y="-3539.626" Z="92.18427" />
+				<Hotspot X="963.4677" Y="-3520.467" Z="93.36889" />
+				<Hotspot X="1012.98" Y="-3460.589" Z="90.64165" />
+				<Hotspot X="1040.741" Y="-3361.54" Z="91.76814" />
+				<Hotspot X="1089.065" Y="-3302.022" Z="91.66812" />
+				<Hotspot X="1149.57" Y="-3302.83" Z="91.83278" />
+				<Hotspot X="1171.599" Y="-3242.582" Z="92.48775" />
+				<Hotspot X="1151.139" Y="-3225.126" Z="91.77976" />
+				<Hotspot X="1172.059" Y="-3167.246" Z="91.87688" />
+				<Hotspot X="1203.296" Y="-3073.844" Z="95.51286" />
+				<Hotspot X="1184.068" Y="-3111.949" Z="93.04601" />
+				<Hotspot X="1163.349" Y="-3187.675" Z="91.66325" />
+				<Hotspot X="1122.144" Y="-3286.481" Z="91.86958" />
+				<Hotspot X="1064.35" Y="-3257.541" Z="92.11266" />
+				<Hotspot X="1001.446" Y="-3219.479" Z="91.82104" />
+				<Hotspot X="955.6298" Y="-3188.974" Z="91.67468" />
+				<Hotspot X="924.0417" Y="-3143.292" Z="94.44231" />
+				<Hotspot X="914.377" Y="-3071.105" Z="91.71729" />
+				<Hotspot X="925.2351" Y="-3004.574" Z="92.77042" />
+				<Hotspot X="949.2568" Y="-2954.183" Z="91.66696" />
+				<Hotspot X="964.403" Y="-2894.913" Z="91.66684" />
+				<Hotspot X="1032.609" Y="-2915.833" Z="91.6667" />
+				<Hotspot X="1066.555" Y="-2958.326" Z="93.54955" />
+				<Hotspot X="1152.061" Y="-2993.642" Z="92.21746" />
+				<Hotspot X="1210.138" Y="-3032.055" Z="94.07504" />
+				<Hotspot X="1266.963" Y="-3095.178" Z="92.51492" />
+				<Hotspot X="1173.084" Y="-3123.75" Z="93.77221" />
+				<Hotspot X="1154.057" Y="-3238.749" Z="91.79775" />
+				<Hotspot X="1119.083" Y="-3330.898" Z="91.72007" />
+				<Hotspot X="1083.272" Y="-3282.211" Z="91.70421" />
+				<Hotspot X="1073.853" Y="-3335.526" Z="91.71432" />
+				<Hotspot X="1033.112" Y="-3374.409" Z="91.66687" />
+				<Hotspot X="997.5009" Y="-3434.678" Z="91.66772" />
+				<Hotspot X="1019.144" Y="-3497.898" Z="89.79964" />
+				<Hotspot X="942.5049" Y="-3531.68" Z="93.89542" />
+				<Hotspot X="864.5033" Y="-3545.361" Z="93.12553" />
+				<Hotspot X="793.1946" Y="-3568.111" Z="91.75379" />
+				<Hotspot X="731.1713" Y="-3564.912" Z="92.34972" />
+				<Hotspot X="629.9175" Y="-3554.143" Z="91.8909" />
+				<Hotspot X="579.7197" Y="-3520.55" Z="93.34654" />
+				<Hotspot X="525.6672" Y="-3500.887" Z="93.70599" />
+				<Hotspot X="453.257" Y="-3489.867" Z="91.74895" />
+				<Hotspot X="448.4789" Y="-3445.736" Z="92.05224" />
+				<Hotspot X="393.9511" Y="-3435.134" Z="95.04211" />
+				<Hotspot X="433.225" Y="-3403.014" Z="91.66697" />
+				<Hotspot X="372.5696" Y="-3384.694" Z="92.33645" />
+				<Hotspot X="379.5754" Y="-3342.722" Z="93.11209" />
+				<Hotspot X="410.6625" Y="-3316.188" Z="92.89154" />
+				<Hotspot X="424.1329" Y="-3274.673" Z="92.319" />
+				<Hotspot X="458.5894" Y="-3205.142" Z="91.66783" />
+				<Hotspot X="534.0321" Y="-3158.218" Z="91.66799" />
+				<Hotspot X="552.566" Y="-3071.617" Z="91.75399" />
+				<Hotspot X="464.7281" Y="-3130.221" Z="95.34733" />
+				<Hotspot X="360.6216" Y="-3152.714" Z="91.60789" />
+			</Hotspots>
+		</GrindArea>
+		<AvoidMobs>
+			<Mob Name="Taskmaster Fizzule" Entry="7233" />
+		</AvoidMobs>
+	</SubProfile>
+  
+	<SubProfile> <!-- NW Barrens 17-20 -->
+		<Name>NW Barrens 17-20</Name> <!-- NW Barrens / Dry Hills -->
+		<MinLevel>17</MinLevel>
+		<MaxLevel>20</MaxLevel>
+		<Vendors> <!-- Crossroads -->
+			<Vendor Name="Innkeeper Boorand Plainswind" Entry="3934" Type="Food" X="-407.1227" Y="-2645.225" Z="96.22269" />
+			<Vendor Name="Halija Whitestrider" Entry="3486" Type="Repair" X="-539.8406" Y="-2672.23" Z="95.78741" />
+			<!-- Crossroads Trainers -->
+			<Vendor Name="Egnom" Entry="50029" Type="Train" TrainClass="Mage" X="-429.2691" Y="-2662.823" Z="96.57784" />
+			<Vendor Name="Chintoka" Entry="50028" Type="Train" TrainClass="Warlock" X="-430.3038" Y="-2659.688" Z="96.58514" />
+			<Vendor Name="Tarmod" Entry="50032" Type="Train" TrainClass="Hunter" X="-434.6354" Y="-2680.118" Z="96.18735" />
+			<Vendor Name="Sunwalker Lonaki" Entry="50035" Type="Train" TrainClass="Paladin" X="-535.9566" Y="-2640.979" Z="95.8503" />
+			<Vendor Name="Musu Gentlemoon" Entry="50034" Type="Train" TrainClass="Druid" X="-539.4583" Y="-2643.507" Z="95.80042" />
+			<Vendor Name="Zumolo" Entry="50031" Type="Train" TrainClass="Priest" X="-522.4011" Y="-2641.29" Z="95.78765" />
+			<Vendor Name="Brulla" Entry="50022" Type="Train" TrainClass="Shaman" X="-520.2188" Y="-2642.453" Z="95.78797" />
+			<Vendor Name="Dargad" Entry="50027" Type="Train" TrainClass="Rogue" X="-431.3785" Y="-2680.99" Z="96.03146" />
+			<Vendor Name="Ging" Entry="50033" Type="Train" TrainClass="Warrior" X="-397.0208" Y="-2640.786" Z="96.22285" />
+		</Vendors>
+		<Mailboxes> <!-- Crossroads -->
+			<Mailbox X="-442.7595" Y="-2649.292" Z="95.86579" />
+		</Mailboxes>
+		<GrindArea>
+			<TargetMinLevel>14</TargetMinLevel>
+			<TargetMaxLevel>19</TargetMaxLevel>
+			<Factions>1999 48 47 38 189 188 15 514 16</Factions> <!-- [Plainstrider, Raptor, Venture Co., Hyena, Giraffe, Zhevra, Kodo, Harpy, Lion] -->
+			<Hotspots>
+				<Hotspot X="618.5908" Y="-2084.738" Z="92.08915" />
+				<Hotspot X="679.9512" Y="-2059.63" Z="91.66764" />
+				<Hotspot X="684.2396" Y="-2020.092" Z="91.66793" />
+				<Hotspot X="619.1746" Y="-2044.202" Z="91.68237" />
+				<Hotspot X="639.3017" Y="-1982.725" Z="93.7983" />
+				<Hotspot X="705.1607" Y="-1974.571" Z="91.90052" />
+				<Hotspot X="740.6097" Y="-1909.401" Z="93.50012" />
+				<Hotspot X="698.9515" Y="-1840.82" Z="91.66774" />
+				<Hotspot X="670.9529" Y="-1906.025" Z="91.66774" />
+				<Hotspot X="634.061" Y="-1859.002" Z="92.68426" />
+				<Hotspot X="590.7955" Y="-1863.727" Z="91.66742" />
+				<Hotspot X="610.0558" Y="-1938.048" Z="91.66772" />
+				<Hotspot X="529.5217" Y="-1966.345" Z="93.10311" />
+				<Hotspot X="470.244" Y="-1985.897" Z="91.72875" />
+				<Hotspot X="432.9171" Y="-1959.629" Z="91.66767" />
+				<Hotspot X="372.008" Y="-1946.258" Z="91.66689" />
+				<Hotspot X="410.3881" Y="-1849.434" Z="91.66875" />
+				<Hotspot X="475.6362" Y="-1824.433" Z="91.66757" />
+				<Hotspot X="527.1362" Y="-1753.723" Z="91.66791" />
+				<Hotspot X="546.2218" Y="-1711.963" Z="92.14981" />
+				<Hotspot X="594.4355" Y="-1774.472" Z="92.24236" />
+				<Hotspot X="614.8024" Y="-1683.916" Z="91.66802" />
+				<Hotspot X="534.7222" Y="-1652.956" Z="91.66762" />
+				<Hotspot X="541.7748" Y="-1733.636" Z="91.66763" />
+				<Hotspot X="495.9109" Y="-1825.743" Z="91.74063" />
+				<Hotspot X="564.7505" Y="-1873.394" Z="91.85186" />
+				<Hotspot X="644.3086" Y="-2008.712" Z="93.97284" />
+				<Hotspot X="671.9272" Y="-2101.719" Z="92.26859" />
+			</Hotspots>
+		</GrindArea>
+	</SubProfile>
+  
+    <SubProfile> <!-- S/SE Ashenvale 20-23 -->
+		<Name>S/SE Ashenvale 20-23</Name>
+		<MinLevel>20</MinLevel>
+		<MaxLevel>23</MaxLevel>
+		<Vendors> <!-- Splintertree Post -->
+			<Vendor Name="Innkeeper Kaylisk" Entry="12196" Type="Food" X="2341.864" Y="-2566.989" Z="103.0935" />
+			<Vendor Name="Burkrum" Entry="6028" Type="Repair" X="2346.262" Y="-2582.214" Z="103.0934" />
+			<!-- Crossroads Trainers -->
+			<Vendor Name="Egnom" Entry="50029" Type="Train" TrainClass="Mage" X="-429.2691" Y="-2662.823" Z="96.57784" />
+			<Vendor Name="Chintoka" Entry="50028" Type="Train" TrainClass="Warlock" X="-430.3038" Y="-2659.688" Z="96.58514" />
+			<Vendor Name="Tarmod" Entry="50032" Type="Train" TrainClass="Hunter" X="-434.6354" Y="-2680.118" Z="96.18735" />
+			<Vendor Name="Sunwalker Lonaki" Entry="50035" Type="Train" TrainClass="Paladin" X="-535.9566" Y="-2640.979" Z="95.8503" />
+			<Vendor Name="Musu Gentlemoon" Entry="50034" Type="Train" TrainClass="Druid" X="-539.4583" Y="-2643.507" Z="95.80042" />
+			<Vendor Name="Zumolo" Entry="50031" Type="Train" TrainClass="Priest" X="-522.4011" Y="-2641.29" Z="95.78765" />
+			<Vendor Name="Brulla" Entry="50022" Type="Train" TrainClass="Shaman" X="-520.2188" Y="-2642.453" Z="95.78797" />
+			<Vendor Name="Dargad" Entry="50027" Type="Train" TrainClass="Rogue" X="-431.3785" Y="-2680.99" Z="96.03146" />
+			<Vendor Name="Ging" Entry="50033" Type="Train" TrainClass="Warrior" X="-397.0208" Y="-2640.786" Z="96.22285" />
+		</Vendors>
+		<Mailboxes> <!-- Splintertree Post -->
+			<Mailbox X="2331.519" Y="-2545.71" Z="102.248" />
+		</Mailboxes>
+		<GrindArea>
+			<TargetMinLevel>19</TargetMinLevel>
+			<TargetMaxLevel>23</TargetMaxLevel>
+			<Factions>14 16</Factions> <!-- [Slime, Nightelf] -->
+			<Hotspots>
+				<Hotspot X="1593.715" Y="-2523.391" Z="102.1622" />
+				<Hotspot X="1620.982" Y="-2559.185" Z="97.32226" />
+				<Hotspot X="1632.511" Y="-2518.756" Z="96.73387" />
+				<Hotspot X="1681.081" Y="-2498.543" Z="99.17628" />
+				<Hotspot X="1717.556" Y="-2500.894" Z="94.11049" />
+				<Hotspot X="1748.31" Y="-2433.662" Z="97.86481" />
+				<Hotspot X="1754.896" Y="-2382.202" Z="103.2027" />
+				<Hotspot X="1746.162" Y="-2352.381" Z="112.2204" />
+				<Hotspot X="1769.027" Y="-2287.977" Z="104.0296" />
+				<Hotspot X="1806.025" Y="-2326.233" Z="115.4803" />
+				<Hotspot X="1797.206" Y="-2375.752" Z="97.67603" />
+				<Hotspot X="1827.176" Y="-2404.14" Z="88.44683" />
+				<Hotspot X="1816.522" Y="-2423.797" Z="88.88347" />
+				<Hotspot X="1862.398" Y="-2407.941" Z="85.84221" />
+				<Hotspot X="1883.169" Y="-2416.999" Z="82.55044" />
+				<Hotspot X="1872.631" Y="-2448.663" Z="76.7359" />
+				<Hotspot X="1841.568" Y="-2489.014" Z="69.8947" />
+				<Hotspot X="1815.329" Y="-2511.748" Z="79.40899" />
+				<Hotspot X="1809.275" Y="-2535.095" Z="79.92073" />
+				<Hotspot X="1829.956" Y="-2554.407" Z="76.9528" />
+				<Hotspot X="1789.435" Y="-2567.82" Z="84.06338" />
+				<Hotspot X="1834.969" Y="-2589.45" Z="80.92352" />
+				<Hotspot X="1862.236" Y="-2579.065" Z="76.35707" />
+				<Hotspot X="1830.845" Y="-2606.996" Z="85.73159" />
+				<Hotspot X="1856.547" Y="-2634.208" Z="88.24963" />
+				<Hotspot X="1842.491" Y="-2646.99" Z="92.21918" />
+				<Hotspot X="1875.66" Y="-2652.783" Z="92.16134" />
+				<Hotspot X="1861.249" Y="-2692.64" Z="93.55186" />
+				<Hotspot X="1859.214" Y="-2705.153" Z="94.61143" />
+				<Hotspot X="1853.351" Y="-2754.098" Z="95.45039" />
+				<Hotspot X="1882.981" Y="-2774.711" Z="99.90884" />
+				<Hotspot X="1918.518" Y="-2744.633" Z="108.7978" />
+				<Hotspot X="1943.198" Y="-2695.02" Z="106.2824" />
+				<Hotspot X="1983.387" Y="-2657.074" Z="98.88452" />
+				<Hotspot X="2036.469" Y="-2700.646" Z="109.1892" />
+				<Hotspot X="2068.392" Y="-2683.822" Z="102.6227" />
+				<Hotspot X="1983.851" Y="-2662.809" Z="100.6132" />
+				<Hotspot X="1987.798" Y="-2606.468" Z="91.54346" />
+				<Hotspot X="1970.983" Y="-2564.376" Z="82.80293" />
+				<Hotspot X="1951.167" Y="-2512.032" Z="79.48679" />
+				<Hotspot X="1926.501" Y="-2496.088" Z="75.42854" />
+				<Hotspot X="1861.115" Y="-2532.392" Z="70.50055" />
+				<Hotspot X="1818.52" Y="-2564.083" Z="80.32642" />
+				<Hotspot X="1774.175" Y="-2578.563" Z="86.21297" />
+				<Hotspot X="1693.114" Y="-2547.508" Z="93.24608" />
+				<Hotspot X="1643.422" Y="-2492.105" Z="99.36935" />
+			</Hotspots>
+		</GrindArea>
+		<AvoidMobs>
+			<Mob Name="Gaivan Shadewalker" Entry="33777" />
+			<Mob Name="Sharptalon" Entry="12676" />
+			<Mob Name="Raging Ancient" Entry="33688" />
+		</AvoidMobs>
+		<Blackspots>
+			<Blackspot X="1769.986" Y="-2659.492" Z="108.0894" Radius="30.00" /> <!-- Gaian Ally NPC -->
+			<Blackspot X="2141.671" Y="-2512.109" Z="91.01784" Radius="27.44078" />
+			<Blackspot X="2158.669" Y="-2441.114" Z="106.2692" Radius="38.77913" Height="23.89124" />
+			<Blackspot X="2148.1" Y="-2498.658" Z="83.60991" Radius="41.73451" />
+		</Blackspots>
+	</SubProfile>
+
+    <SubProfile> <!-- S/SW Ashenvale 23-26 -->
+		<Name>S/SW Ashenvale 23-26</Name> <!-- SE of Silverwind Refuge -->
+		<MinLevel>23</MinLevel>
+		<MaxLevel>26</MaxLevel>
+		<Vendors> <!-- Splintertree Post -->
+			<Vendor Name="Innkeeper Kaylisk" Entry="12196" Type="Food" X="2341.864" Y="-2566.989" Z="103.0935" />
+			<Vendor Name="Burkrum" Entry="6028" Type="Repair" X="2346.262" Y="-2582.214" Z="103.0934" />
+			<!-- Crossroads Trainers -->
+			<Vendor Name="Egnom" Entry="50029" Type="Train" TrainClass="Mage" X="-429.2691" Y="-2662.823" Z="96.57784" />
+			<Vendor Name="Chintoka" Entry="50028" Type="Train" TrainClass="Warlock" X="-430.3038" Y="-2659.688" Z="96.58514" />
+			<Vendor Name="Tarmod" Entry="50032" Type="Train" TrainClass="Hunter" X="-434.6354" Y="-2680.118" Z="96.18735" />
+			<Vendor Name="Sunwalker Lonaki" Entry="50035" Type="Train" TrainClass="Paladin" X="-535.9566" Y="-2640.979" Z="95.8503" />
+			<Vendor Name="Musu Gentlemoon" Entry="50034" Type="Train" TrainClass="Druid" X="-539.4583" Y="-2643.507" Z="95.80042" />
+			<Vendor Name="Zumolo" Entry="50031" Type="Train" TrainClass="Priest" X="-522.4011" Y="-2641.29" Z="95.78765" />
+			<Vendor Name="Brulla" Entry="50022" Type="Train" TrainClass="Shaman" X="-520.2188" Y="-2642.453" Z="95.78797" />
+			<Vendor Name="Dargad" Entry="50027" Type="Train" TrainClass="Rogue" X="-431.3785" Y="-2680.99" Z="96.03146" />
+			<Vendor Name="Ging" Entry="50033" Type="Train" TrainClass="Warrior" X="-397.0208" Y="-2640.786" Z="96.22285" />
+		</Vendors>
+		<Mailboxes> <!-- Splintertree Post -->
+			<Mailbox X="2331.519" Y="-2545.71" Z="102.248" />
+		</Mailboxes>
+		<GrindArea>
+			<TargetMinLevel>21</TargetMinLevel>
+			<TargetMaxLevel>25</TargetMaxLevel>
+			<Factions>82 38 22 2136</Factions> <!-- [Furbolg, Wolf, Spider, Ambient (Blink Dragon)] -->
+			<Hotspots>
+				<Hotspot X="2025.482" Y="-1615.651" Z="65.27828" />
+				<Hotspot X="2036.227" Y="-1564.673" Z="64.33778" />
+				<Hotspot X="2003.204" Y="-1529.562" Z="68.20524" />
+				<Hotspot X="1980.331" Y="-1555.995" Z="63.52327" />
+				<Hotspot X="1948.503" Y="-1566.063" Z="63.14814" />
+				<Hotspot X="1904.329" Y="-1564.101" Z="65.71929" />
+				<Hotspot X="1878.794" Y="-1587.194" Z="67.43734" />
+				<Hotspot X="1844.588" Y="-1610.612" Z="68.95502" />
+				<Hotspot X="1820.1" Y="-1578.572" Z="76.26299" />
+				<Hotspot X="1792.828" Y="-1551.372" Z="77.65037" />
+				<Hotspot X="1765.97" Y="-1501.701" Z="96.70773" />
+				<Hotspot X="1752.458" Y="-1593.583" Z="85.41273" />
+				<Hotspot X="1691.673" Y="-1594.373" Z="99.6933" />
+				<Hotspot X="1759.396" Y="-1600.255" Z="84.60181" />
+				<Hotspot X="1794.925" Y="-1563.005" Z="75.60777" />
+				<Hotspot X="1851.144" Y="-1612.184" Z="67.42836" />
+				<Hotspot X="1899.418" Y="-1592.077" Z="62.11423" />
+				<Hotspot X="1902.173" Y="-1650.224" Z="59.2104" />
+				<Hotspot X="1926.733" Y="-1666.432" Z="60.47261" />
+				<Hotspot X="1968.985" Y="-1683.697" Z="65.49573" />
+				<Hotspot X="2000.547" Y="-1723.921" Z="64.32587" />
+				<Hotspot X="2009.692" Y="-1702.969" Z="66.53518" />
+				<Hotspot X="2049.27" Y="-1727.753" Z="73.07663" />
+				<Hotspot X="2027.117" Y="-1592.639" Z="64.30056" />
+				<Hotspot X="2026.278" Y="-1544.98" Z="66.11958" />
+				<Hotspot X="2003.812" Y="-1498.642" Z="75.1636" />
+				<Hotspot X="2034.735" Y="-1491.365" Z="82.17548" />
+				<Hotspot X="1999.065" Y="-1472.05" Z="80.5318" />
+				<Hotspot X="1974.096" Y="-1428.287" Z="88.94736" />
+				<Hotspot X="1933.333" Y="-1444.657" Z="87.7882" />
+				<Hotspot X="1941.902" Y="-1399.151" Z="92.6804" />
+				<Hotspot X="1882.601" Y="-1405.122" Z="91.09822" />
+				<Hotspot X="1788.914" Y="-1450.68" Z="114.5539" />
+				<Hotspot X="1724.764" Y="-1487.792" Z="111.6887" />
+				<Hotspot X="1764.773" Y="-1506.181" Z="95.7049" />
+				<Hotspot X="1797.787" Y="-1564.984" Z="75.38454" />
+				<Hotspot X="1718.293" Y="-1601.504" Z="93.17622" />
+				<Hotspot X="1800.7" Y="-1564.339" Z="75.40096" />
+				<Hotspot X="1844.979" Y="-1601.949" Z="70.12661" />
+				<Hotspot X="1896.141" Y="-1593.985" Z="62.18303" />
+			</Hotspots>
+		</GrindArea>
+		<AvoidMobs>
+			<Mob Name="Gaivan Shadewalker" Entry="33777" />
+			<Mob Name="Sharptalon" Entry="12676" />
+			<Mob Name="Raging Ancient" Entry="33688" />
+		</AvoidMobs>
+		<Blackspots>
+			<Blackspot X="1769.986" Y="-2659.492" Z="108.0894" Radius="30.00" /> <!-- Gaian Ally NPC -->
+			<Blackspot X="-1168.924" Y="-1887.88" Z="79.1167" Radius="10.00" /> <!-- Grasping Overgrowth -->
+			<Blackspot X="-1346.197" Y="-2045.651" Z="77.1843" Radius="15.00" />
+			<Blackspot X="-1378.758" Y="-2028.435" Z="79.47298" Radius="15.00" />
+			<Blackspot X="-1433.167" Y="-2103.591" Z="85.3693" Radius="15.00" />
+			<Blackspot X="-1495.228" Y="-2218.92" Z="92.43893" Radius="10.00" />
+			<Blackspot X="-1377.034" Y="-2111.178" Z="80.54936" Radius="10.00" />
+			<Blackspot X="-1346.509" Y="-2042.085" Z="78.00132" Radius="15.00" />
+			<Blackspot X="-1241.029" Y="-1947.777" Z="80.68813" Radius="11.00" />
+			<Blackspot X="-1336.001" Y="-1868.687" Z="92.69514" Radius="15.00" />
+			<Blackspot X="-1345.513" Y="-1903.697" Z="92.09203" Radius="15.00" />
+			<Blackspot X="-1514.327" Y="-1827.438" Z="92.87822" Radius="10.00" />
+			<Blackspot X="-1561.331" Y="-1902.754" Z="95.04482" Radius="15.00" />
+			<Blackspot X="-1620.262" Y="-1838.529" Z="91.54479" Radius="15.00" />
+			<Blackspot X="-1590.317" Y="-1993.256" Z="92.38375" Radius="10.00" />
+			<Blackspot X="-1528.763" Y="-2056.597" Z="93.39456" Radius="15.00" />
+			<Blackspot X="-1555.212" Y="-2114.21" Z="94.30112" Radius="15.00" />
+			<Blackspot X="-1555.822" Y="-2115.195" Z="94.28154" Radius="15.00" />
+			<Blackspot X="-1527.001" Y="-2056.011" Z="93.52807" Radius="15.00" /> <!-- End of Grasping Overgrowth -->
+			<Blackspot X="2141.671" Y="-2512.109" Z="91.01784" Radius="27.44078" />
+			<Blackspot X="2158.669" Y="-2441.114" Z="106.2692" Radius="38.77913" Height="23.89124" />
+			<Blackspot X="1215.98" Y="356.5678" Z="50.45325" Radius="30" Height="25.14793" />
+			<Blackspot X="1211.69" Y="441.8845" Z="77.5078" Radius="44.62166" />
+			<Blackspot X="1148.5" Y="427.5649" Z="81.81433" Radius="47.67144" />
+			<Blackspot X="2148.1" Y="-2498.658" Z="83.60991" Radius="41.73451" />
+		</Blackspots>
+  </SubProfile>
+  
+	<SubProfile> <!-- S Stonetalon 26-29 -->
+		<Name>S Stonetalon 26-29</Name> <!-- SE of Sun Rock Retreat - Webwinder Hallow -->
+		<MinLevel>26</MinLevel>
+		<MaxLevel>29</MaxLevel>
+		<Vendors> <!--Sun Rock Retreat-->
+			<Vendor Name="Innkeeper Jayka" Entry="7731" Type="Food" X="893.6522" Y="927.9465" Z="106.2578" />
+			<Vendor Name="Borand" Entry="9549" Type="Repair" X="992.1812" Y="1030.96" Z="105.5857" />
+			<!-- Crossroads Trainers -->
+			<Vendor Name="Egnom" Entry="50029" Type="Train" TrainClass="Mage" X="-429.2691" Y="-2662.823" Z="96.57784" />
+			<Vendor Name="Chintoka" Entry="50028" Type="Train" TrainClass="Warlock" X="-430.3038" Y="-2659.688" Z="96.58514" />
+			<Vendor Name="Tarmod" Entry="50032" Type="Train" TrainClass="Hunter" X="-434.6354" Y="-2680.118" Z="96.18735" />
+			<Vendor Name="Sunwalker Lonaki" Entry="50035" Type="Train" TrainClass="Paladin" X="-535.9566" Y="-2640.979" Z="95.8503" />
+			<Vendor Name="Musu Gentlemoon" Entry="50034" Type="Train" TrainClass="Druid" X="-539.4583" Y="-2643.507" Z="95.80042" />
+			<Vendor Name="Zumolo" Entry="50031" Type="Train" TrainClass="Priest" X="-522.4011" Y="-2641.29" Z="95.78765" />
+			<Vendor Name="Brulla" Entry="50022" Type="Train" TrainClass="Shaman" X="-520.2188" Y="-2642.453" Z="95.78797" />
+			<Vendor Name="Dargad" Entry="50027" Type="Train" TrainClass="Rogue" X="-431.3785" Y="-2680.99" Z="96.03146" />
+			<Vendor Name="Ging" Entry="50033" Type="Train" TrainClass="Warrior" X="-397.0208" Y="-2640.786" Z="96.22285" />
+		</Vendors>
+		<Mailboxes> <!--Sun Rock Retreat-->
+			<Mailbox X="926.7538" Y="902.3291" Z="104.8978" />
+		</Mailboxes>
+		<GrindArea>
+			<TargetMinLevel>23</TargetMinLevel>
+			<TargetMaxLevel>29</TargetMaxLevel>
+			<Factions>634 22 14</Factions> <!-- [Ram, Spider, Bird] -->
+			<Hotspots>
+				<Hotspot X="847.9073" Y="470.9433" Z="84.02766" />
+				<Hotspot X="840.3251" Y="507.2111" Z="88.86251" />
+				<Hotspot X="799.8825" Y="555.5385" Z="77.10231" />
+				<Hotspot X="806.3954" Y="583.2131" Z="75.84053" />
+				<Hotspot X="772.1788" Y="568.9517" Z="77.91091" />
+				<Hotspot X="749.3358" Y="526.6833" Z="78.36629" />
+				<Hotspot X="714.8845" Y="550.1651" Z="75.96164" />
+				<Hotspot X="695.8224" Y="512.0889" Z="77.11376" />
+				<Hotspot X="650.9644" Y="507.403" Z="76.63133" />
+				<Hotspot X="713.1361" Y="467.4799" Z="75.67947" />
+				<Hotspot X="671.2422" Y="443.7451" Z="77.09517" />
+				<Hotspot X="656.9871" Y="474.8323" Z="79.74776" />
+				<Hotspot X="661.5652" Y="515.1883" Z="76.33643" />
+				<Hotspot X="703.187" Y="545.1699" Z="76.74168" />
+				<Hotspot X="682.3205" Y="578.7114" Z="78.16039" />
+				<Hotspot X="658.2068" Y="602.519" Z="75.68253" />
+				<Hotspot X="645.8591" Y="569.6194" Z="78.04431" />
+				<Hotspot X="629.6886" Y="596.0743" Z="75.80903" />
+				<Hotspot X="620.7574" Y="636.6936" Z="75.76675" />
+				<Hotspot X="584.5995" Y="627.1831" Z="71.20008" />
+				<Hotspot X="568.6096" Y="660.3992" Z="75.0775" />
+				<Hotspot X="540.6767" Y="653.8517" Z="77.47665" />
+				<Hotspot X="534.9754" Y="598.5646" Z="75.66878" />
+				<Hotspot X="483.1804" Y="677.1959" Z="77.58062" />
+				<Hotspot X="459.4462" Y="659.9617" Z="73.47756" />
+				<Hotspot X="430.8766" Y="638.1419" Z="77.77639" />
+				<Hotspot X="464.7044" Y="603.8341" Z="74.34301" />
+				<Hotspot X="445.4646" Y="573.5199" Z="77.5679" />
+				<Hotspot X="434.2036" Y="544.9725" Z="88.08463" />
+				<Hotspot X="482.6754" Y="548.647" Z="76.9659" />
+				<Hotspot X="476.3777" Y="516.1595" Z="75.70921" />
+				<Hotspot X="468.8173" Y="484.7571" Z="75.67719" />
+				<Hotspot X="496.2702" Y="488.6606" Z="76.49012" />
+				<Hotspot X="508.1559" Y="518.1635" Z="76.41401" />
+				<Hotspot X="539.3391" Y="534.4015" Z="80.01035" />
+				<Hotspot X="558.7097" Y="543.6292" Z="77.13985" />
+				<Hotspot X="583.4497" Y="546.7942" Z="78.39602" />
+				<Hotspot X="552.7064" Y="519.1931" Z="78.79383" />
+				<Hotspot X="550.7579" Y="476.8154" Z="76.79309" />
+				<Hotspot X="530.7504" Y="452.0549" Z="79.51588" />
+				<Hotspot X="483.3943" Y="438.1893" Z="77.79674" />
+				<Hotspot X="478.6225" Y="399.8771" Z="74.47055" />
+				<Hotspot X="512.4383" Y="330.7726" Z="53.00539" />
+				<Hotspot X="488.4653" Y="314.6981" Z="52.84339" />
+				<Hotspot X="451.763" Y="299.1313" Z="48.88947" />
+				<Hotspot X="422.176" Y="289.5917" Z="50.82536" />
+				<Hotspot X="404.1744" Y="370.9598" Z="49.4405" />
+				<Hotspot X="416.0293" Y="299.5947" Z="48.39558" />
+				<Hotspot X="466.845" Y="321.9506" Z="50.3606" />
+				<Hotspot X="499.2604" Y="316.1713" Z="52.38958" />
+				<Hotspot X="532.5175" Y="328.2392" Z="53.55593" />
+				<Hotspot X="578.0424" Y="296.955" Z="50.8393" />
+				<Hotspot X="613.9823" Y="360.98" Z="52.47793" />
+				<Hotspot X="581.0748" Y="392.0077" Z="60.48377" />
+				<Hotspot X="596.7024" Y="458.6328" Z="75.96062" />
+				<Hotspot X="655.9451" Y="446.9698" Z="76.44862" />
+				<Hotspot X="695.1473" Y="483.8284" Z="76.6272" />
+				<Hotspot X="740.395" Y="474.3082" Z="75.77059" />
+				<Hotspot X="776.598" Y="394.3623" Z="73.15016" />
+				<Hotspot X="809.0583" Y="440.1889" Z="81.19579" />
+				<Hotspot X="832.4479" Y="486.8922" Z="87.1481" />
+			</Hotspots>
+		</GrindArea>
+		<Blackspots>
+			<Blackspot X="663.4271" Y="254.6588" Z="35.1959" Radius="35.00" />
+			<Blackspot X="1922.267" Y="-319.9583" Z="109.6438" Radius="57.24147" />
+			<Blackspot X="773.9475" Y="249.7056" Z="25.02869" Radius="50.48946" />
+			<Blackspot X="940.8324" Y="428.2661" Z="71.98637" Radius="36.4868" />
+			<Blackspot X="1215.98" Y="356.5678" Z="50.45325" Radius="30" Height="25.14793" />
+			<Blackspot X="1211.69" Y="441.8845" Z="77.5078" Radius="44.62166" />
+			<Blackspot X="1148.5" Y="427.5649" Z="81.81433" Radius="47.67144" />
+			<Blackspot X="891.1041" Y="366.3463" Z="25" Radius="40" />
+			<Blackspot X="982.7708" Y="422.5963" Z="80" Radius ="50" />
+			<Blackspot X="957.7708" Y="237.1796" Z="25" Radius="50" />
+			<Blackspot X="1005.688" Y="-114.9048" Z="80" Radius="45" />
+		</Blackspots>
+	</SubProfile>
+  
+	<SubProfile> <!-- SE Stonetalon 29-31 -->
+		<Name>SE Stonetalon 29-31</Name> <!-- SE of Sun Rock Retreat - Webwinder Hallow -->
+		<MinLevel>29</MinLevel>
+		<MaxLevel>31</MaxLevel>
+		<Vendors> <!--Sun Rock Retreat-->
+			<Vendor Name="Innkeeper Jayka" Entry="7731" Type="Food" X="893.6522" Y="927.9465" Z="106.2578" />
+			<Vendor Name="Borand" Entry="9549" Type="Repair" X="992.1812" Y="1030.96" Z="105.5857" />
+			<!-- Crossroads Trainers -->
+			<Vendor Name="Egnom" Entry="50029" Type="Train" TrainClass="Mage" X="-429.2691" Y="-2662.823" Z="96.57784" />
+			<Vendor Name="Chintoka" Entry="50028" Type="Train" TrainClass="Warlock" X="-430.3038" Y="-2659.688" Z="96.58514" />
+			<Vendor Name="Tarmod" Entry="50032" Type="Train" TrainClass="Hunter" X="-434.6354" Y="-2680.118" Z="96.18735" />
+			<Vendor Name="Sunwalker Lonaki" Entry="50035" Type="Train" TrainClass="Paladin" X="-535.9566" Y="-2640.979" Z="95.8503" />
+			<Vendor Name="Musu Gentlemoon" Entry="50034" Type="Train" TrainClass="Druid" X="-539.4583" Y="-2643.507" Z="95.80042" />
+			<Vendor Name="Zumolo" Entry="50031" Type="Train" TrainClass="Priest" X="-522.4011" Y="-2641.29" Z="95.78765" />
+			<Vendor Name="Brulla" Entry="50022" Type="Train" TrainClass="Shaman" X="-520.2188" Y="-2642.453" Z="95.78797" />
+			<Vendor Name="Dargad" Entry="50027" Type="Train" TrainClass="Rogue" X="-431.3785" Y="-2680.99" Z="96.03146" />
+			<Vendor Name="Ging" Entry="50033" Type="Train" TrainClass="Warrior" X="-397.0208" Y="-2640.786" Z="96.22285" />
+		</Vendors>
+		<Mailboxes> <!--Sun Rock Retreat-->
+			<Mailbox X="926.7538" Y="902.3291" Z="104.8978" />
+		</Mailboxes>
+		<GrindArea>
+			<TargetMinLevel>25</TargetMinLevel>
+			<TargetMaxLevel>32</TargetMaxLevel>
+			<Factions>634 22 14</Factions> <!-- [Ram, Spider, Bird] -->
+			<Hotspots>
+				<Hotspot X="547.2338" Y="319.0543" Z="52.56116" />
+				<Hotspot X="497.4353" Y="316.7622" Z="52.33957" />
+				<Hotspot X="455.7028" Y="299.2605" Z="49.24219" />
+				<Hotspot X="419.6633" Y="293.3092" Z="49.69572" />
+				<Hotspot X="398.2747" Y="368.0708" Z="47.81882" />
+				<Hotspot X="353.039" Y="337.0793" Z="48.5477" />
+				<Hotspot X="305.3756" Y="314.6725" Z="59.11536" />
+				<Hotspot X="291.425" Y="343.3001" Z="62.44278" />
+				<Hotspot X="255.0732" Y="331.0291" Z="55.48021" />
+				<Hotspot X="224.1535" Y="320.5795" Z="49.5136" />
+				<Hotspot X="171.3031" Y="331.8629" Z="47.85414" />
+				<Hotspot X="117.2376" Y="287.7427" Z="49.92029" />
+				<Hotspot X="267.5994" Y="242.2747" Z="64.58871" />
+				<Hotspot X="215.3387" Y="180.7614" Z="67.52389" />
+				<Hotspot X="204.1324" Y="137.5086" Z="68.57837" />
+				<Hotspot X="186.8801" Y="119.6085" Z="72.15606" />
+				<Hotspot X="200.0133" Y="75.01991" Z="55.69131" />
+				<Hotspot X="124.7142" Y="-9.346941" Z="47.98471" />
+				<Hotspot X="100.3861" Y="94.37366" Z="30.48597" />
+				<Hotspot X="32.90019" Y="73.8719" Z="33.38457" />
+				<Hotspot X="66.72688" Y="16.12701" Z="37.58996" />
+				<Hotspot X="51.98221" Y="-90.8283" Z="44.75592" />
+				<Hotspot X="14.73151" Y="-127.0661" Z="36.71571" />
+				<Hotspot X="-10.82615" Y="-120.2452" Z="36.43206" />
+				<Hotspot X="19.07179" Y="-129.1116" Z="37.16145" />
+				<Hotspot X="30.69236" Y="-176.5071" Z="28.22998" />
+				<Hotspot X="84.40157" Y="-146.3135" Z="41.55566" />
+				<Hotspot X="103.6459" Y="-106.5772" Z="47.8763" />
+				<Hotspot X="139.6933" Y="-73.93441" Z="41.86234" />
+				<Hotspot X="146.0431" Y="-22.33439" Z="46.5428" />
+				<Hotspot X="159.9147" Y="46.17077" Z="45.00259" />
+				<Hotspot X="196.0662" Y="73.47463" Z="53.4578" />
+				<Hotspot X="192.0345" Y="119.7378" Z="74.30045" />
+				<Hotspot X="188.6432" Y="143.9556" Z="63.86532" />
+				<Hotspot X="189.7637" Y="177.1412" Z="65.37479" />
+				<Hotspot X="215.798" Y="228.6568" Z="67.28811" />
+				<Hotspot X="244.093" Y="335.3836" Z="51.80101" />
+				<Hotspot X="286.853" Y="293.0671" Z="58.31319" />
+				<Hotspot X="344.1059" Y="344.6935" Z="48.65829" />
+				<Hotspot X="346.5444" Y="347.005" Z="47.97318" />
+				<Hotspot X="388.3385" Y="374.3521" Z="48.03389" />
+				<Hotspot X="418.2884" Y="346.4669" Z="48.19141" />
+				<Hotspot X="404.1594" Y="303.334" Z="46.73236" />
+				<Hotspot X="443.971" Y="304.8432" Z="47.80771" />
+				<Hotspot X="502.7094" Y="333.4405" Z="52.42901" />
+				<Hotspot X="574.7614" Y="309.6644" Z="49.42803" />
+			</Hotspots>
+		</GrindArea>
+		<Blackspots>
+			<Blackspot X="663.4271" Y="254.6588" Z="35.1959" Radius="35.00" />
+			<Blackspot X="1922.267" Y="-319.9583" Z="109.6438" Radius="57.24147" />
+			<Blackspot X="773.9475" Y="249.7056" Z="25.02869" Radius="50.48946" />
+			<Blackspot X="940.8324" Y="428.2661" Z="71.98637" Radius="36.4868" />
+			<Blackspot X="1215.98" Y="356.5678" Z="50.45325" Radius="30" Height="25.14793" />
+			<Blackspot X="1211.69" Y="441.8845" Z="77.5078" Radius="44.62166" />
+			<Blackspot X="1148.5" Y="427.5649" Z="81.81433" Radius="47.67144" />
+			<Blackspot X="891.1041" Y="366.3463" Z="25" Radius="40" />
+			<Blackspot X="982.7708" Y="422.5963" Z="80" Radius ="50" />
+			<Blackspot X="957.7708" Y="237.1796" Z="25" Radius="50" />
+			<Blackspot X="1005.688" Y="-114.9048" Z="80" Radius="45" />
+		</Blackspots>
+	</SubProfile>
+  
+	<SubProfile> <!-- N S-Barrens 31-34 -->
+		<Name>N S-Barrens 31-34</Name>
+		<MinLevel>31</MinLevel>
+		<MaxLevel>34</MaxLevel>
+		<Vendors> <!-- Camp Una'fe -->
+			<Vendor Name="Turrana" Entry="44296" Type="Food" X="-1428.21" Y="-1928.81" Z="93.435" />
+			<Vendor Name="Murhane" Entry="44286" Type="Repair" X="-1475.59" Y="-1912.52" Z="95.14594" />
+			<!-- Optional Vendors
+			<Vendor Name="Innkeeper Hurnahet" Entry="44270" Type="Food" X="-785.29" Y="-1552.46" Z="140.4069" /> // Hunter's Hill Food
+			<Vendor Name="Ramja Skyspinner" Entry="44285" Type="Repair" X="-812.585" Y="-1573.87" Z="140.3627" /> // Hunter's Hill Clothier (does this guy repair??)
+			-->
+			<!-- Crossroads Trainers -->
+			<Vendor Name="Egnom" Entry="50029" Type="Train" TrainClass="Mage" X="-429.2691" Y="-2662.823" Z="96.57784" />
+			<Vendor Name="Chintoka" Entry="50028" Type="Train" TrainClass="Warlock" X="-430.3038" Y="-2659.688" Z="96.58514" />
+			<Vendor Name="Tarmod" Entry="50032" Type="Train" TrainClass="Hunter" X="-434.6354" Y="-2680.118" Z="96.18735" />
+			<Vendor Name="Sunwalker Lonaki" Entry="50035" Type="Train" TrainClass="Paladin" X="-535.9566" Y="-2640.979" Z="95.8503" />
+			<Vendor Name="Musu Gentlemoon" Entry="50034" Type="Train" TrainClass="Druid" X="-539.4583" Y="-2643.507" Z="95.80042" />
+			<Vendor Name="Zumolo" Entry="50031" Type="Train" TrainClass="Priest" X="-522.4011" Y="-2641.29" Z="95.78765" />
+			<Vendor Name="Brulla" Entry="50022" Type="Train" TrainClass="Shaman" X="-520.2188" Y="-2642.453" Z="95.78797" />
+			<Vendor Name="Dargad" Entry="50027" Type="Train" TrainClass="Rogue" X="-431.3785" Y="-2680.99" Z="96.03146" />
+			<Vendor Name="Ging" Entry="50033" Type="Train" TrainClass="Warrior" X="-397.0208" Y="-2640.786" Z="96.22285" />
+		</Vendors>
+		<Mailboxes>
+			<Mailbox X="-791.758" Y="-1559.344" Z="141.0423" /> <!-- Hunter's Hill - N S-Barrens -->
+		</Mailboxes>
+		<GrindArea>
+			<TargetMinLevel>29</TargetMinLevel>
+			<TargetMaxLevel>35</TargetMaxLevel>
+			<Factions>14 38 16 48 189 188 111</Factions> <!-- [Rhino, Hyena, Plant/Bog, Raptor, Plainstrider/Giraffe, Quilboar] -->
+			<Hotspots>
+				<Hotspot X="-1519.305" Y="-1995.711" Z="91.95286" />
+				<Hotspot X="-1555.503" Y="-1988.505" Z="92.766" />
+				<Hotspot X="-1577.521" Y="-2035.877" Z="90.88717" />
+				<Hotspot X="-1604.388" Y="-2019.55" Z="92.38126" />
+				<Hotspot X="-1662.881" Y="-1998.772" Z="91.77479" />
+				<Hotspot X="-1646.489" Y="-1958.817" Z="94.31795" />
+				<Hotspot X="-1626.74" Y="-1919.421" Z="92.37556" />
+				<Hotspot X="-1600.731" Y="-1878.433" Z="93.42469" />
+				<Hotspot X="-1563.112" Y="-1856.024" Z="92.37901" />
+				<Hotspot X="-1513.146" Y="-1863.503" Z="95.41987" />
+				<Hotspot X="-1472.56" Y="-1827.862" Z="93.49323" />
+				<Hotspot X="-1438.966" Y="-1790.461" Z="92.59007" />
+				<Hotspot X="-1407.142" Y="-1815.488" Z="93.25603" />
+				<Hotspot X="-1366.673" Y="-1803.392" Z="91.23956" />
+				<Hotspot X="-1326.006" Y="-1791.417" Z="91.67469" />
+				<Hotspot X="-1303.403" Y="-1749.162" Z="92.27026" />
+				<Hotspot X="-1256.488" Y="-1773.719" Z="91.54307" />
+				<Hotspot X="-1229.972" Y="-1756.314" Z="92.16462" />
+				<Hotspot X="-1182.998" Y="-1760.245" Z="89.33425" />
+				<Hotspot X="-1145.5" Y="-1774.006" Z="87.39858" />
+				<Hotspot X="-1102.692" Y="-1756.765" Z="84.33552" />
+				<Hotspot X="-1027.863" Y="-1762.717" Z="86.68893" />
+				<Hotspot X="-983.7057" Y="-1760.784" Z="84.89035" />
+				<Hotspot X="-969.2992" Y="-1737.504" Z="86.92613" />
+				<Hotspot X="-914.78" Y="-1756.755" Z="85.37781" />
+				<Hotspot X="-991.9373" Y="-1800.741" Z="81.71834" />
+				<Hotspot X="-1063.018" Y="-1836.876" Z="78.02733" />
+				<Hotspot X="-1130.964" Y="-1855.659" Z="79.34145" />
+				<Hotspot X="-1174.237" Y="-1921.06" Z="78.65078" />
+				<Hotspot X="-1207.284" Y="-1958.867" Z="81.6876" />
+				<Hotspot X="-1255.044" Y="-1999.735" Z="77.4256" />
+				<Hotspot X="-1261.784" Y="-2051.695" Z="75.03292" />
+				<Hotspot X="-1263.569" Y="-2089.348" Z="75.99452" />
+				<Hotspot X="-1335.066" Y="-2091.736" Z="74.5471" />
+				<Hotspot X="-1370.85" Y="-2154.115" Z="79.29528" />
+				<Hotspot X="-1354.593" Y="-2190.491" Z="77.48735" />
+				<Hotspot X="-1406.49" Y="-2181.926" Z="85.15884" />
+				<Hotspot X="-1447.129" Y="-2205.452" Z="89.62874" />
+				<Hotspot X="-1552.431" Y="-2205.947" Z="95.39097" />
+				<Hotspot X="-1547.143" Y="-2252.449" Z="93.23921" />
+				<Hotspot X="-1543.911" Y="-2292.206" Z="92.04776" />
+				<Hotspot X="-1537.306" Y="-2321.289" Z="92.37625" />
+				<Hotspot X="-1530.2" Y="-2346.916" Z="92.02038" />
+				<Hotspot X="-1529.99" Y="-2384.659" Z="92.65432" />
+				<Hotspot X="-1533.988" Y="-2427.134" Z="90.71039" />
+				<Hotspot X="-1494.103" Y="-2440.089" Z="85.53883" />
+				<Hotspot X="-1440.486" Y="-2476.032" Z="88.73633" />
+				<Hotspot X="-1490.611" Y="-2506.698" Z="86.35525" />
+				<Hotspot X="-1474.796" Y="-2552.273" Z="85.09663" />
+				<Hotspot X="-1513.75" Y="-2568.015" Z="86.83334" />
+				<Hotspot X="-1555.377" Y="-2590.513" Z="89.5312" />
+				<Hotspot X="-1572.986" Y="-2540.816" Z="89.2811" />
+				<Hotspot X="-1614.41" Y="-2542.235" Z="94.51539" />
+				<Hotspot X="-1616.022" Y="-2484.063" Z="95.47546" />
+				<Hotspot X="-1639.736" Y="-2443.704" Z="92.25954" />
+				<Hotspot X="-1648.386" Y="-2411.382" Z="93.98221" />
+				<Hotspot X="-1690.568" Y="-2396.878" Z="92.98743" />
+				<Hotspot X="-1701.704" Y="-2361.323" Z="91.5757" />
+				<Hotspot X="-1741.124" Y="-2372.677" Z="91.328" />
+				<Hotspot X="-1790.484" Y="-2338.839" Z="92.80432" />
+				<Hotspot X="-1843.249" Y="-2387.185" Z="96.43114" />
+				<Hotspot X="-1772.744" Y="-2425.772" Z="94.18525" />
+				<Hotspot X="-1736.367" Y="-2480.829" Z="94.34022" />
+				<Hotspot X="-1704.616" Y="-2505.994" Z="86.0098" />
+				<Hotspot X="-1735.166" Y="-2520.142" Z="92.33827" />
+				<Hotspot X="-1761.414" Y="-2560.655" Z="90.48398" />
+				<Hotspot X="-1832.565" Y="-2573.399" Z="91.83165" />
+				<Hotspot X="-1796.087" Y="-2639.096" Z="94.34126" />
+				<Hotspot X="-1747.666" Y="-2635.391" Z="90.04778" />
+				<Hotspot X="-1712.142" Y="-2595.25" Z="91.82937" />
+				<Hotspot X="-1736.575" Y="-2509.245" Z="93.80276" />
+				<Hotspot X="-1795.597" Y="-2450.037" Z="91.98599" />
+				<Hotspot X="-1854.403" Y="-2414.835" Z="96.13035" />
+				<Hotspot X="-1906.058" Y="-2387.235" Z="97.09218" />
+				<Hotspot X="-1978.03" Y="-2390.941" Z="92.12252" />
+				<Hotspot X="-2024.956" Y="-2360.071" Z="92.60633" />
+				<Hotspot X="-2080.921" Y="-2351.7" Z="91.69685" />
+				<Hotspot X="-1967.606" Y="-2306.374" Z="95.56384" />
+				<Hotspot X="-1923.696" Y="-2257.253" Z="96.20121" />
+				<Hotspot X="-1886.391" Y="-2235.369" Z="94.82638" />
+				<Hotspot X="-1855.675" Y="-2241.271" Z="95.54993" />
+				<Hotspot X="-1867.905" Y="-2181.667" Z="92.57369" />
+				<Hotspot X="-1841.088" Y="-2147.704" Z="91.14429" />
+				<Hotspot X="-1828.28" Y="-2066.118" Z="91.81825" />
+				<Hotspot X="-1726.559" Y="-2060.01" Z="92.41267" />
+				<Hotspot X="-1680.424" Y="-2061.864" Z="93.44588" />
+				<Hotspot X="-1646.979" Y="-2053.058" Z="91.78615" />
+				<Hotspot X="-1598.564" Y="-2067.331" Z="94.30991" />
+				<Hotspot X="-1544.704" Y="-2015.619" Z="93.53979" />
+			</Hotspots>
+		</GrindArea>
+		<Blackspots>
+			<Blackspot X="663.4271" Y="254.6588" Z="35.1959" Radius="35.00" />
+			<Blackspot X="-1168.924" Y="-1887.88" Z="79.1167" Radius="10.00" /> <!-- Grasping Overgrowth -->
+			<Blackspot X="-1346.197" Y="-2045.651" Z="77.1843" Radius="15.00" />
+			<Blackspot X="-1378.758" Y="-2028.435" Z="79.47298" Radius="15.00" />
+			<Blackspot X="-1433.167" Y="-2103.591" Z="85.3693" Radius="15.00" />
+			<Blackspot X="-1495.228" Y="-2218.92" Z="92.43893" Radius="10.00" />
+			<Blackspot X="-1377.034" Y="-2111.178" Z="80.54936" Radius="10.00" />
+			<Blackspot X="-1346.509" Y="-2042.085" Z="78.00132" Radius="15.00" />
+			<Blackspot X="-1241.029" Y="-1947.777" Z="80.68813" Radius="11.00" />
+			<Blackspot X="-1336.001" Y="-1868.687" Z="92.69514" Radius="15.00" />
+			<Blackspot X="-1345.513" Y="-1903.697" Z="92.09203" Radius="15.00" />
+			<Blackspot X="-1514.327" Y="-1827.438" Z="92.87822" Radius="10.00" />
+			<Blackspot X="-1561.331" Y="-1902.754" Z="95.04482" Radius="15.00" />
+			<Blackspot X="-1620.262" Y="-1838.529" Z="91.54479" Radius="15.00" />
+			<Blackspot X="-1590.317" Y="-1993.256" Z="92.38375" Radius="10.00" />
+			<Blackspot X="-1528.763" Y="-2056.597" Z="93.39456" Radius="15.00" />
+			<Blackspot X="-1555.212" Y="-2114.21" Z="94.30112" Radius="15.00" />
+			<Blackspot X="-1555.822" Y="-2115.195" Z="94.28154" Radius="15.00" />
+			<Blackspot X="-1527.001" Y="-2056.011" Z="93.52807" Radius="15.00" /> <!-- End of Grasping Overgrowth -->
+			<Blackspot X="-311.0412" Y="-1217.538" Z="69.73289" Radius="45.6127" Height="25.91365" /> <!-- [A] Honor's Stand North Ent -->
+			<Blackspot X="-537.2946" Y="-1584.227" Z="70" Radius="45" /> <!--[A] Honor's Stand South Ent -->
+			<Blackspot X="-505.1039" Y="-1529.947" Z="90.59777" Radius="30" />
+			<Blackspot X="-517.9703" Y="-1396.389" Z="139.4715" Radius="30.00" />
+			<Blackspot X="-390.701" Y="-1341.694" Z="91.97382" Radius="30.00" />
+			<Blackspot X="-372.2886" Y="-1589.793" Z="90.58139" Radius="30.00" />
+			<Blackspot X="-459.7886" Y="-1498.331" Z="90.7511" Radius="30" />
+			<Blackspot X="-383.5608" Y="-1471.352" Z="87.66762" Radius="30" />
+			<Blackspot X="-399.4678" Y="-1400.374" Z="92.45267" Radius="30" />
+			<Blackspot X="-317.4331" Y="-1426.159" Z="87.88629" Radius="30" />
+			<Blackspot X="-296.9178" Y="-1517.154" Z="88.74348" Radius="30" />
+			<Blackspot X="-563.5533" Y="-1616.583" Z="81.02219" Radius="30" /> <!-- Honor's Stand End -->
+			<Blackspot X="-2356.572" Y="-3872.768" Z="2.459679" Radius="25.00" /> <!-- Northwatch Hold -->
+			<Blackspot X="-2281.42" Y="-3870.329" Z="6.428104" Radius="25.00" />
+			<Blackspot X="-2373.365" Y="-3836.542" Z="2.177123" Radius="25.00" />
+			<Blackspot X="-2328.638" Y="-3795.852" Z="27.79066" Radius="25.00" />
+			<Blackspot X="-2336.958" Y="-3739.605" Z="45.69995" Radius="25.00" />
+			<Blackspot X="-2296.611" Y="-3699.718" Z="68.54159" Radius="25.00" />
+			<Blackspot X="-2249.114" Y="-3718.811" Z="84.29533" Radius="25.00" />
+			<Blackspot X="-2215.993" Y="-3722.322" Z="91.25734" Radius="25.00" />
+			<Blackspot X="-2184" Y="-3684.401" Z="89.64754" Radius="25.00" />
+			<Blackspot X="-2148.639" Y="-3642.358" Z="90.13619" Radius="25.00" />
+			<Blackspot X="-2126.83" Y="-3612.94" Z="94.27085" Radius="25.00" />
+			<Blackspot X="-2128.596" Y="-3555.532" Z="98.20186" Radius="25.00" />
+			<Blackspot X="-2119.932" Y="-3483.328" Z="92.20837" Radius="25.00" />
+			<Blackspot X="-2075.046" Y="-3463.106" Z="92.18868" Radius="25.00" />
+			<Blackspot X="-2036.081" Y="-3447.64" Z="80.07161" Radius="25.00" />
+			<Blackspot X="-2034.409" Y="-3505.187" Z="95.33363" Radius="25.00" />
+			<Blackspot X="-2051.658" Y="-3575.435" Z="38.91081" Radius="25.00" />
+			<Blackspot X="-2015.403" Y="-3606.565" Z="21.75966" Radius="25.00" />
+			<Blackspot X="-1983.427" Y="-3618.207" Z="21.76341" Radius="25.00" />
+			<Blackspot X="-2027.477" Y="-3669.505" Z="21.81938" Radius="25.00" />
+			<Blackspot X="-2051.87" Y="-3693.566" Z="22.22987" Radius="25.00" />
+			<Blackspot X="-2011.15" Y="-3743.547" Z="3.855485" Radius="25.00" />
+			<Blackspot X="-1944.109" Y="-3675.222" Z="8.950975" Radius="25.00" />
+			<Blackspot X="-1911.495" Y="-3611.421" Z="10.75173" Radius="25.00" />
+			<Blackspot X="-1926.258" Y="-3546.058" Z="21.84818" Radius="25.00" />
+			<Blackspot X="-2029.016" Y="-3442.518" Z="75.48484" Radius="25.00" /> <!-- End of Northwatch Hold -->
+			<Blackspot X="-3074.754" Y="-2365.697" Z="95.18004" Radius="40.00" /> <!-- Fort Triumph -->
+			<Blackspot X="-3115.998" Y="-2319.186" Z="93.11007" Radius="40.00" />
+			<Blackspot X="-3146.093" Y="-2289.22" Z="92.75793" Radius="40.00" />
+			<Blackspot X="-3155.894" Y="-2223.273" Z="95.70605" Radius="40.00" />
+			<Blackspot X="-3105.086" Y="-2141.685" Z="105.964" Radius="40.00" />
+			<Blackspot X="-3166.201" Y="-2155.067" Z="103.2626" Radius="40.00" />
+			<Blackspot X="-3240.246" Y="-2181.876" Z="96.47351" Radius="40.00" />
+			<Blackspot X="-3301.603" Y="-2111.917" Z="100.0868" Radius="40.00" />
+			<Blackspot X="-3344.507" Y="-2057.672" Z="104.7793" Radius="40.00" />
+			<Blackspot X="-3357.667" Y="-1995.955" Z="87.45116" Radius="25.00" />
+			<Blackspot X="-3306.922" Y="-1980.445" Z="95.08981" Radius="40.00" />
+			<Blackspot X="-3248.35" Y="-1990.94" Z="105.1908" Radius="40.00" />
+			<Blackspot X="-3176.472" Y="-2012.034" Z="106.4561" Radius="20.00" />
+			<Blackspot X="-3126.318" Y="-2073.61" Z="119.8248" Radius="40.00" />
+			<Blackspot X="-3072.306" Y="-2105.375" Z="117.9353" Radius="40.00" />
+			<Blackspot X="-3113.422" Y="-2137.789" Z="116.5681" Radius="40.00" />
+			<Blackspot X="-3148.861" Y="-2159.859" Z="114.4184" Radius="40.00" /> <!-- End of Fort Triumph -->
+		</Blackspots>
+		<AvoidMobs>
+			<Mob Name="Grasping Overgrowth" Entry="37548" /> <!-- Tentacles -->
+			<Mob Name="Northwatch Recon" Entry="37585" /> <!-- Ally Guards -->
+		</AvoidMobs>
+	</SubProfile>
+  
+	<SubProfile> <!-- SE S-Barrens 34-36 -->
+		<Name>SE S-Barrens 34-36</Name>
+		<MinLevel>34</MinLevel>
+		<MaxLevel>36</MaxLevel>
+		<Vendors> <!-- Desolation Hold -->
+			<Vendor Name="Innkeeper Lhakadd" Entry="44276" Type="Food" X="-3220.69" Y="-1663.86" Z="99.90488" />
+			<Vendor Name="Terndak" Entry="44287" Type="Repair" X="-3267.02" Y="-1714.96" Z="92.30496" />
+			<!-- Crossroads Trainers -->
+			<Vendor Name="Egnom" Entry="50029" Type="Train" TrainClass="Mage" X="-429.2691" Y="-2662.823" Z="96.57784" />
+			<Vendor Name="Chintoka" Entry="50028" Type="Train" TrainClass="Warlock" X="-430.3038" Y="-2659.688" Z="96.58514" />
+			<Vendor Name="Tarmod" Entry="50032" Type="Train" TrainClass="Hunter" X="-434.6354" Y="-2680.118" Z="96.18735" />
+			<Vendor Name="Sunwalker Lonaki" Entry="50035" Type="Train" TrainClass="Paladin" X="-535.9566" Y="-2640.979" Z="95.8503" />
+			<Vendor Name="Musu Gentlemoon" Entry="50034" Type="Train" TrainClass="Druid" X="-539.4583" Y="-2643.507" Z="95.80042" />
+			<Vendor Name="Zumolo" Entry="50031" Type="Train" TrainClass="Priest" X="-522.4011" Y="-2641.29" Z="95.78765" />
+			<Vendor Name="Brulla" Entry="50022" Type="Train" TrainClass="Shaman" X="-520.2188" Y="-2642.453" Z="95.78797" />
+			<Vendor Name="Dargad" Entry="50027" Type="Train" TrainClass="Rogue" X="-431.3785" Y="-2680.99" Z="96.03146" />
+			<Vendor Name="Ging" Entry="50033" Type="Train" TrainClass="Warrior" X="-397.0208" Y="-2640.786" Z="96.22285" />
+		</Vendors>
+		<Mailboxes> <!-- Desolation Hold -->
+			<Mailbox X="-3232.626" Y="-1669.596" Z="99.28673" />
+		</Mailboxes>
+		<GrindArea>
+			<TargetMinLevel>32</TargetMinLevel>
+			<TargetMaxLevel>36</TargetMaxLevel>
+			<Factions>15 14 91 109 189 188 1814</Factions> <!-- [Kodo, Serpent, Rhino, Rock Elemental, Quilboar, Pig, Pathfinder Pig] -->
+			<Hotspots>
+				<Hotspot X="-3411.212" Y="-1853.437" Z="93.99503" />
+				<Hotspot X="-3446.611" Y="-1815.054" Z="92.09052" />
+				<Hotspot X="-3479.473" Y="-1850.179" Z="92.34904" />
+				<Hotspot X="-3515.177" Y="-1874.427" Z="95.22939" />
+				<Hotspot X="-3543.015" Y="-1841.168" Z="91.66705" />
+				<Hotspot X="-3564.621" Y="-1897.246" Z="93.74432" />
+				<Hotspot X="-3585.175" Y="-1937.649" Z="92.66782" />
+				<Hotspot X="-3597.492" Y="-1969.216" Z="91.66674" />
+				<Hotspot X="-3427.864" Y="-1955.641" Z="93.7072" />
+				<Hotspot X="-3510.909" Y="-1984.626" Z="94.67395" />
+				<Hotspot X="-3555.425" Y="-2046.054" Z="91.81425" />
+				<Hotspot X="-3602.341" Y="-2090.689" Z="93.45672" />
+				<Hotspot X="-3637.858" Y="-2109.593" Z="95.61893" />
+				<Hotspot X="-3694.529" Y="-2125.405" Z="95.1529" />
+				<Hotspot X="-3740.986" Y="-2108.349" Z="91.83414" />
+				<Hotspot X="-3792.355" Y="-2117.945" Z="93.78808" />
+				<Hotspot X="-3851.731" Y="-2121.802" Z="95.25758" />
+				<Hotspot X="-3901.256" Y="-2117.5" Z="93.37527" />
+				<Hotspot X="-3984.762" Y="-2108.527" Z="95.16046" />
+				<Hotspot X="-3863.088" Y="-2013.265" Z="93.85051" />
+				<Hotspot X="-3845.583" Y="-1961.044" Z="92.53405" />
+				<Hotspot X="-3792.758" Y="-1961.01" Z="95.13447" />
+				<Hotspot X="-3716.48" Y="-1985.237" Z="95.03796" />
+				<Hotspot X="-3740.913" Y="-1932.958" Z="92.12558" />
+				<Hotspot X="-3665.002" Y="-1961.565" Z="91.66712" />
+				<Hotspot X="-3746.655" Y="-1866.974" Z="92.48218" />
+				<Hotspot X="-3739.359" Y="-1822.81" Z="93.72805" />
+				<Hotspot X="-3751.856" Y="-1778.07" Z="93.48881" />
+				<Hotspot X="-3784.288" Y="-1771.594" Z="93.18364" />
+				<Hotspot X="-3824.309" Y="-1752.335" Z="94.14678" />
+				<Hotspot X="-3849.286" Y="-1700.517" Z="92.58348" />
+				<Hotspot X="-3898.591" Y="-1731.168" Z="91.88493" />
+				<Hotspot X="-3939.551" Y="-1752.665" Z="93.70737" />
+				<Hotspot X="-3951.791" Y="-1793.703" Z="91.66776" />
+				<Hotspot X="-3918.282" Y="-1829.852" Z="93.90742" />
+				<Hotspot X="-3873.612" Y="-1864.848" Z="93.78078" />
+				<Hotspot X="-3850.573" Y="-1922.796" Z="92.03973" />
+				<Hotspot X="-3849.263" Y="-1998.621" Z="91.81461" />
+				<Hotspot X="-3844.268" Y="-2060.364" Z="91.67775" />
+				<Hotspot X="-3712.039" Y="-2032.334" Z="91.66776" />
+				<Hotspot X="-3591.619" Y="-2028.557" Z="91.70063" />
+				<Hotspot X="-3523.515" Y="-1939.326" Z="93.348" />
+				<Hotspot X="-3466.489" Y="-1884.723" Z="95.83682" />
+				<Hotspot X="-3404.572" Y="-1887.412" Z="95.704" />
+			</Hotspots>
+		</GrindArea>
+		<Blackspots>
+			<Blackspot X="-311.0412" Y="-1217.538" Z="69.73289" Radius="45.6127" Height="25.91365" /> <!-- [A] Honor's Stand North Ent -->
+			<Blackspot X="-537.2946" Y="-1584.227" Z="70" Radius="45" /> <!--[A] Honor's Stand South Ent -->
+			<Blackspot X="-505.1039" Y="-1529.947" Z="90.59777" Radius="30" />
+			<Blackspot X="-517.9703" Y="-1396.389" Z="139.4715" Radius="30.00" />
+			<Blackspot X="-390.701" Y="-1341.694" Z="91.97382" Radius="30.00" />
+			<Blackspot X="-372.2886" Y="-1589.793" Z="90.58139" Radius="30.00" />
+			<Blackspot X="-459.7886" Y="-1498.331" Z="90.7511" Radius="30" />
+			<Blackspot X="-383.5608" Y="-1471.352" Z="87.66762" Radius="30" />
+			<Blackspot X="-399.4678" Y="-1400.374" Z="92.45267" Radius="30" />
+			<Blackspot X="-317.4331" Y="-1426.159" Z="87.88629" Radius="30" />
+			<Blackspot X="-296.9178" Y="-1517.154" Z="88.74348" Radius="30" />
+			<Blackspot X="-563.5533" Y="-1616.583" Z="81.02219" Radius="30" /> <!-- Honor's Stand End -->
+			<Blackspot X="1215.98" Y="356.5678" Z="50.45325" Radius="30" Height="25.14793" />
+			<Blackspot X="1211.69" Y="441.8845" Z="77.5078" Radius="44.62166" />
+			<Blackspot X="1148.5" Y="427.5649" Z="81.81433" Radius="47.67144" />
+			<Blackspot X="-2356.572" Y="-3872.768" Z="2.459679" Radius="25.00" /> <!-- Northwatch Hold -->
+			<Blackspot X="-2281.42" Y="-3870.329" Z="6.428104" Radius="25.00" />
+			<Blackspot X="-2373.365" Y="-3836.542" Z="2.177123" Radius="25.00" />
+			<Blackspot X="-2328.638" Y="-3795.852" Z="27.79066" Radius="25.00" />
+			<Blackspot X="-2336.958" Y="-3739.605" Z="45.69995" Radius="25.00" />
+			<Blackspot X="-2296.611" Y="-3699.718" Z="68.54159" Radius="25.00" />
+			<Blackspot X="-2249.114" Y="-3718.811" Z="84.29533" Radius="25.00" />
+			<Blackspot X="-2215.993" Y="-3722.322" Z="91.25734" Radius="25.00" />
+			<Blackspot X="-2184" Y="-3684.401" Z="89.64754" Radius="25.00" />
+			<Blackspot X="-2148.639" Y="-3642.358" Z="90.13619" Radius="25.00" />
+			<Blackspot X="-2126.83" Y="-3612.94" Z="94.27085" Radius="25.00" />
+			<Blackspot X="-2128.596" Y="-3555.532" Z="98.20186" Radius="25.00" />
+			<Blackspot X="-2119.932" Y="-3483.328" Z="92.20837" Radius="25.00" />
+			<Blackspot X="-2075.046" Y="-3463.106" Z="92.18868" Radius="25.00" />
+			<Blackspot X="-2036.081" Y="-3447.64" Z="80.07161" Radius="25.00" />
+			<Blackspot X="-2034.409" Y="-3505.187" Z="95.33363" Radius="25.00" />
+			<Blackspot X="-2051.658" Y="-3575.435" Z="38.91081" Radius="25.00" />
+			<Blackspot X="-2015.403" Y="-3606.565" Z="21.75966" Radius="25.00" />
+			<Blackspot X="-1983.427" Y="-3618.207" Z="21.76341" Radius="25.00" />
+			<Blackspot X="-2027.477" Y="-3669.505" Z="21.81938" Radius="25.00" />
+			<Blackspot X="-2051.87" Y="-3693.566" Z="22.22987" Radius="25.00" />
+			<Blackspot X="-2011.15" Y="-3743.547" Z="3.855485" Radius="25.00" />
+			<Blackspot X="-1944.109" Y="-3675.222" Z="8.950975" Radius="25.00" />
+			<Blackspot X="-1911.495" Y="-3611.421" Z="10.75173" Radius="25.00" />
+			<Blackspot X="-1926.258" Y="-3546.058" Z="21.84818" Radius="25.00" />
+			<Blackspot X="-2029.016" Y="-3442.518" Z="75.48484" Radius="25.00" /> <!-- End of Northwatch Hold -->
+			<Blackspot X="-3074.754" Y="-2365.697" Z="95.18004" Radius="40.00" /> <!-- Fort Triumph -->
+			<Blackspot X="-3115.998" Y="-2319.186" Z="93.11007" Radius="40.00" />
+			<Blackspot X="-3146.093" Y="-2289.22" Z="92.75793" Radius="40.00" />
+			<Blackspot X="-3155.894" Y="-2223.273" Z="95.70605" Radius="40.00" />
+			<Blackspot X="-3105.086" Y="-2141.685" Z="105.964" Radius="40.00" />
+			<Blackspot X="-3166.201" Y="-2155.067" Z="103.2626" Radius="40.00" />
+			<Blackspot X="-3240.246" Y="-2181.876" Z="96.47351" Radius="40.00" />
+			<Blackspot X="-3301.603" Y="-2111.917" Z="100.0868" Radius="40.00" />
+			<Blackspot X="-3344.507" Y="-2057.672" Z="104.7793" Radius="40.00" />
+			<Blackspot X="-3357.667" Y="-1995.955" Z="87.45116" Radius="25.00" />
+			<Blackspot X="-3306.922" Y="-1980.445" Z="95.08981" Radius="40.00" />
+			<Blackspot X="-3248.35" Y="-1990.94" Z="105.1908" Radius="40.00" />
+			<Blackspot X="-3176.472" Y="-2012.034" Z="106.4561" Radius="20.00" />
+			<Blackspot X="-3126.318" Y="-2073.61" Z="119.8248" Radius="40.00" />
+			<Blackspot X="-3072.306" Y="-2105.375" Z="117.9353" Radius="40.00" />
+			<Blackspot X="-3113.422" Y="-2137.789" Z="116.5681" Radius="40.00" />
+			<Blackspot X="-3148.861" Y="-2159.859" Z="114.4184" Radius="40.00" /> <!-- End of Fort Triumph -->
+			
+		</Blackspots>
+		<AvoidMobs>
+			<Mob Name="Triumph Vanguard" Entry="37923" /> <!-- Ally Guards -->
+		</AvoidMobs>
+	</SubProfile>
+	
+	<SubProfile> <!-- NW Duswallow Marsh 36-38 -->
+		<Name>NW Dustwallow Marsh 36-38</Name> <!-- Just SE of Brackenwall Village -->
+		<MinLevel>36</MinLevel>
+		<MaxLevel>38</MaxLevel>
+		<Vendors> <!-- Brackenwall Village -->
+			<Vendor Name="&quot;Little&quot; Logok" Entry="24208" Type="Food" X="-3165.606" Y="-2911.76" Z="35.05634" />
+			<Vendor Name="Zulrg" Entry="4884" Type="Repair" X="-3146.327" Y="-2873.776" Z="34.27466" />
+			<!-- Mudsprocket -->
+			<!-- <Vendor Name="Axle" Entry="23995" Type="Food" X="-4630.091" Y="-3176.113" Z="41.22022" />
+				 <Vendor Name="Razbo Rustgear" Entry="23571" Type="Repair" X="-4603.661" Y="-3210.939" Z="34.92594" />
+			-->
+			<!-- Crossroads Trainers -->
+			<Vendor Name="Egnom" Entry="50029" Type="Train" TrainClass="Mage" X="-429.2691" Y="-2662.823" Z="96.57784" />
+			<Vendor Name="Chintoka" Entry="50028" Type="Train" TrainClass="Warlock" X="-430.3038" Y="-2659.688" Z="96.58514" />
+			<Vendor Name="Tarmod" Entry="50032" Type="Train" TrainClass="Hunter" X="-434.6354" Y="-2680.118" Z="96.18735" />
+			<Vendor Name="Sunwalker Lonaki" Entry="50035" Type="Train" TrainClass="Paladin" X="-535.9566" Y="-2640.979" Z="95.8503" />
+			<Vendor Name="Musu Gentlemoon" Entry="50034" Type="Train" TrainClass="Druid" X="-539.4583" Y="-2643.507" Z="95.80042" />
+			<Vendor Name="Zumolo" Entry="50031" Type="Train" TrainClass="Priest" X="-522.4011" Y="-2641.29" Z="95.78765" />
+			<Vendor Name="Brulla" Entry="50022" Type="Train" TrainClass="Shaman" X="-520.2188" Y="-2642.453" Z="95.78797" />
+			<Vendor Name="Dargad" Entry="50027" Type="Train" TrainClass="Rogue" X="-431.3785" Y="-2680.99" Z="96.03146" />
+			<Vendor Name="Ging" Entry="50033" Type="Train" TrainClass="Warrior" X="-397.0208" Y="-2640.786" Z="96.22285" />
+		</Vendors>
+		<Mailboxes> <!-- Brackenwall Village -->
+			<Mailbox X="-3157.598" Y="-2894.157" Z="33.7773" />
+			<!-- Mudsprocket
+			<Mailbox X="-4598.598" Y="-3179.178" Z="34.89818" /> -->
+		</Mailboxes>
+		<GrindArea>
+			<TargetMinLevel>35</TargetMinLevel>
+			<TargetMaxLevel>38</TargetMaxLevel>
+			<Factions>22 16 14</Factions> <!-- [Spider, Croc, Serpent] -->
+			<Hotspots>
+				<Hotspot X="-3604.445" Y="-2806.014" Z="30.95715" />
+				<Hotspot X="-3628.158" Y="-2841.431" Z="36.65778" />
+				<Hotspot X="-3600.032" Y="-2866.827" Z="35.04361" />
+				<Hotspot X="-3591.89" Y="-2907.125" Z="38.21748" />
+				<Hotspot X="-3591.415" Y="-2950.432" Z="38.35678" />
+				<Hotspot X="-3611.78" Y="-2969.942" Z="33.18565" />
+				<Hotspot X="-3631.063" Y="-2955.095" Z="34.68508" />
+				<Hotspot X="-3668.767" Y="-2990.992" Z="32.52438" />
+				<Hotspot X="-3712.312" Y="-3025.011" Z="33.13166" />
+				<Hotspot X="-3679.612" Y="-3026.96" Z="38.07971" />
+				<Hotspot X="-3640.618" Y="-3025.436" Z="34.18376" />
+				<Hotspot X="-3650.91" Y="-3056.591" Z="40.40134" />
+				<Hotspot X="-3700.843" Y="-3069.189" Z="36.36561" />
+				<Hotspot X="-3725.156" Y="-3050.461" Z="32.8907" />
+				<Hotspot X="-3735.431" Y="-3098.812" Z="35.2128" />
+				<Hotspot X="-3735.034" Y="-3135.476" Z="38.36469" />
+				<Hotspot X="-3761.933" Y="-3175.111" Z="39.7992" />
+				<Hotspot X="-3759.948" Y="-3204.956" Z="29.15987" />
+				<Hotspot X="-3716.021" Y="-3223.289" Z="32.37465" />
+				<Hotspot X="-3722.323" Y="-3257.521" Z="36.48113" />
+				<Hotspot X="-3743.187" Y="-3301.156" Z="35.25998" />
+				<Hotspot X="-3733.706" Y="-3336.828" Z="35.12661" />
+				<Hotspot X="-3696.019" Y="-3339.435" Z="31.80604" />
+				<Hotspot X="-3671.457" Y="-3315.761" Z="35.59086" />
+				<Hotspot X="-3648.263" Y="-3292.179" Z="42.89017" />
+				<Hotspot X="-3605.065" Y="-3325.279" Z="33.29673" />
+				<Hotspot X="-3559.531" Y="-3368.976" Z="38.57342" />
+				<Hotspot X="-3525.569" Y="-3348.841" Z="39.2701" />
+				<Hotspot X="-3488.264" Y="-3324.143" Z="35.3835" />
+				<Hotspot X="-3484.103" Y="-3282.043" Z="36.52665" />
+				<Hotspot X="-3490.492" Y="-3243.866" Z="35.26817" />
+				<Hotspot X="-3524.054" Y="-3219.422" Z="32.55801" />
+				<Hotspot X="-3543.068" Y="-3190.497" Z="41.37056" />
+				<Hotspot X="-3574.877" Y="-3218.598" Z="35.0102" />
+				<Hotspot X="-3624.932" Y="-3236.748" Z="33.41232" />
+				<Hotspot X="-3688.309" Y="-3248.252" Z="33.15985" />
+				<Hotspot X="-3693.918" Y="-3225.808" Z="30.76891" />
+				<Hotspot X="-3729.073" Y="-3217.089" Z="33.35681" />
+				<Hotspot X="-3723.886" Y="-3258.594" Z="37.21363" />
+				<Hotspot X="-3768.079" Y="-3175.589" Z="41.57527" />
+				<Hotspot X="-3709.166" Y="-3141.207" Z="42.49212" />
+				<Hotspot X="-3714.453" Y="-3099.917" Z="36.87483" />
+				<Hotspot X="-3685.752" Y="-3060.281" Z="38.2859" />
+				<Hotspot X="-3654.932" Y="-3067.678" Z="38.57246" />
+				<Hotspot X="-3625.251" Y="-3019.539" Z="30.64678" />
+				<Hotspot X="-3583.898" Y="-3038.708" Z="34.23074" />
+				<Hotspot X="-3557.236" Y="-2999.986" Z="36.28516" />
+				<Hotspot X="-3520.568" Y="-2980.951" Z="34.89123" />
+				<Hotspot X="-3555.857" Y="-2950.07" Z="34.54838" />
+				<Hotspot X="-3569.96" Y="-2904.066" Z="37.47727" />
+				<Hotspot X="-3584.188" Y="-2878.346" Z="31.62256" />
+				<Hotspot X="-3538.719" Y="-2885.406" Z="31.69066" />
+				<Hotspot X="-3481.134" Y="-2826.906" Z="36.8648" />
+				<Hotspot X="-3486.864" Y="-2797.489" Z="37.32125" />
+				<Hotspot X="-3453.207" Y="-2779.611" Z="34.10983" />
+				<Hotspot X="-3489.557" Y="-2767.945" Z="30.61287" />
+				<Hotspot X="-3512.635" Y="-2765.424" Z="30.30224" />
+				<Hotspot X="-3528.384" Y="-2714.115" Z="32.95055" />
+				<Hotspot X="-3485.946" Y="-2753.094" Z="30.40947" />
+				<Hotspot X="-3458.138" Y="-2752.157" Z="30.718" />
+				<Hotspot X="-3470.142" Y="-2804.066" Z="34.07801" />
+				<Hotspot X="-3443.599" Y="-2839.164" Z="34.86798" />
+				<Hotspot X="-3542.104" Y="-2894.267" Z="30.7481" />
+				<Hotspot X="-3600.583" Y="-2904.809" Z="38.46696" />
+				<Hotspot X="-3626.89" Y="-2848.665" Z="34.19992" />
+				<Hotspot X="-3603.181" Y="-2826.691" Z="32.74924" />
+				<Hotspot X="-3568.494" Y="-2812.174" Z="33.67139" />
+				<Hotspot X="-3540.778" Y="-2753.362" Z="33.00482" />
+				<Hotspot X="-3535.743" Y="-2712.407" Z="32.59651" />
+			</Hotspots>
+		</GrindArea>
+		<Blackspots>
+			<Blackspot X="-505.1039" Y="-1529.947" Z="90.59777" Radius="30" />
+			<Blackspot X="-517.9703" Y="-1396.389" Z="139.4715" Radius="30.00" />
+			<Blackspot X="-390.701" Y="-1341.694" Z="91.97382" Radius="30.00" />
+			<Blackspot X="-372.2886" Y="-1589.793" Z="90.58139" Radius="30.00" />
+			<Blackspot X="-459.7886" Y="-1498.331" Z="90.7511" Radius="30" />
+			<Blackspot X="-383.5608" Y="-1471.352" Z="87.66762" Radius="30" />
+			<Blackspot X="-399.4678" Y="-1400.374" Z="92.45267" Radius="30" />
+			<Blackspot X="-317.4331" Y="-1426.159" Z="87.88629" Radius="30" />
+			<Blackspot X="-296.9178" Y="-1517.154" Z="88.74348" Radius="30" />
+			<Blackspot X="-563.5533" Y="-1616.583" Z="81.02219" Radius="30" /> <!-- Honor's Stand End -->
+			<Blackspot X="-3669.857" Y="-2766.11" Z="35.96542" Radius="15" /> <!-- Ally guards at bridge -->
+			<Blackspot X="-3787.154" Y="-3901.314" Z="7.253653" Radius="20.00" /> <!-- roadway ally guards -->
+			<Blackspot X="-3783.333" Y="-3830.715" Z="32.52421" Radius="20.00" />
+			<Blackspot X="-3788.729" Y="-3773.138" Z="35.00" Radius="20.00" />
+			<Blackspot X="-3796.25" Y="-3765.334" Z="38.69057" Radius="1.00" />
+			<Blackspot X="-3801.321" Y="-3716.237" Z="43.36456" Radius="20.00" />
+			<Blackspot X="-3810.178" Y="-3652.888" Z="43.61423" Radius="20.00" />
+			<Blackspot X="-3815.095" Y="-3590.734" Z="42.64334" Radius="20.00" />
+			<Blackspot X="-3815.973" Y="-3534.094" Z="42.95956" Radius="20.00" />
+			<Blackspot X="-3808.155" Y="-3467.459" Z="42.67154" Radius="20.00" />
+			<Blackspot X="-3804.418" Y="-3407.963" Z="38.3643" Radius="20.00" />
+			<Blackspot X="-3809.688" Y="-3334.096" Z="38.71811" Radius="20.00" />
+			<Blackspot X="-3818.23" Y="-3276.528" Z="38.70144" Radius="20.00" />
+			<Blackspot X="-3816.3" Y="-3212.276" Z="38.94635" Radius="15.00" />
+			<Blackspot X="-3804.964" Y="-3158.674" Z="38.71993" Radius="15.00" />
+			<Blackspot X="-3804.323" Y="-3104.742" Z="39.14402" Radius="20.00" />
+			<Blackspot X="-3789.865" Y="-3042.435" Z="38.70708" Radius="20.00" />
+			<Blackspot X="-3763.248" Y="-2989.31" Z="38.19898" Radius="20.00" />
+			<Blackspot X="-3720.057" Y="-2927.579" Z="36.66048" Radius="20.00" />
+			<Blackspot X="-3699.538" Y="-2870.777" Z="40.06959" Radius="25.00" />
+			<Blackspot X="-3680.196" Y="-2807.317" Z="36.73886" Radius="20.00" /> <!-- end of roadway -->
+			<Blackspot X="-2356.572" Y="-3872.768" Z="2.459679" Radius="25.00" /> <!-- Northwatch Hold -->
+			<Blackspot X="-2281.42" Y="-3870.329" Z="6.428104" Radius="25.00" />
+			<Blackspot X="-2373.365" Y="-3836.542" Z="2.177123" Radius="25.00" />
+			<Blackspot X="-2328.638" Y="-3795.852" Z="27.79066" Radius="25.00" />
+			<Blackspot X="-2336.958" Y="-3739.605" Z="45.69995" Radius="25.00" />
+			<Blackspot X="-2296.611" Y="-3699.718" Z="68.54159" Radius="25.00" />
+			<Blackspot X="-2249.114" Y="-3718.811" Z="84.29533" Radius="25.00" />
+			<Blackspot X="-2215.993" Y="-3722.322" Z="91.25734" Radius="25.00" />
+			<Blackspot X="-2184" Y="-3684.401" Z="89.64754" Radius="25.00" />
+			<Blackspot X="-2148.639" Y="-3642.358" Z="90.13619" Radius="25.00" />
+			<Blackspot X="-2126.83" Y="-3612.94" Z="94.27085" Radius="25.00" />
+			<Blackspot X="-2128.596" Y="-3555.532" Z="98.20186" Radius="25.00" />
+			<Blackspot X="-2119.932" Y="-3483.328" Z="92.20837" Radius="25.00" />
+			<Blackspot X="-2075.046" Y="-3463.106" Z="92.18868" Radius="25.00" />
+			<Blackspot X="-2036.081" Y="-3447.64" Z="80.07161" Radius="25.00" />
+			<Blackspot X="-2034.409" Y="-3505.187" Z="95.33363" Radius="25.00" />
+			<Blackspot X="-2051.658" Y="-3575.435" Z="38.91081" Radius="25.00" />
+			<Blackspot X="-2015.403" Y="-3606.565" Z="21.75966" Radius="25.00" />
+			<Blackspot X="-1983.427" Y="-3618.207" Z="21.76341" Radius="25.00" />
+			<Blackspot X="-2027.477" Y="-3669.505" Z="21.81938" Radius="25.00" />
+			<Blackspot X="-2051.87" Y="-3693.566" Z="22.22987" Radius="25.00" />
+			<Blackspot X="-2011.15" Y="-3743.547" Z="3.855485" Radius="25.00" />
+			<Blackspot X="-1944.109" Y="-3675.222" Z="8.950975" Radius="25.00" />
+			<Blackspot X="-1911.495" Y="-3611.421" Z="10.75173" Radius="25.00" />
+			<Blackspot X="-1926.258" Y="-3546.058" Z="21.84818" Radius="25.00" />
+			<Blackspot X="-2029.016" Y="-3442.518" Z="75.48484" Radius="25.00" /> <!-- End of Northwatch Hold -->
+			<Blackspot X="-3074.754" Y="-2365.697" Z="95.18004" Radius="40.00" /> <!-- Fort Triumph -->
+			<Blackspot X="-3115.998" Y="-2319.186" Z="93.11007" Radius="40.00" />
+			<Blackspot X="-3146.093" Y="-2289.22" Z="92.75793" Radius="40.00" />
+			<Blackspot X="-3155.894" Y="-2223.273" Z="95.70605" Radius="40.00" />
+			<Blackspot X="-3105.086" Y="-2141.685" Z="105.964" Radius="40.00" />
+			<Blackspot X="-3166.201" Y="-2155.067" Z="103.2626" Radius="40.00" />
+			<Blackspot X="-3240.246" Y="-2181.876" Z="96.47351" Radius="40.00" />
+			<Blackspot X="-3301.603" Y="-2111.917" Z="100.0868" Radius="40.00" />
+			<Blackspot X="-3344.507" Y="-2057.672" Z="104.7793" Radius="40.00" />
+			<Blackspot X="-3357.667" Y="-1995.955" Z="87.45116" Radius="25.00" />
+			<Blackspot X="-3306.922" Y="-1980.445" Z="95.08981" Radius="40.00" />
+			<Blackspot X="-3248.35" Y="-1990.94" Z="105.1908" Radius="40.00" />
+			<Blackspot X="-3176.472" Y="-2012.034" Z="106.4561" Radius="20.00" />
+			<Blackspot X="-3126.318" Y="-2073.61" Z="119.8248" Radius="40.00" />
+			<Blackspot X="-3072.306" Y="-2105.375" Z="117.9353" Radius="40.00" />
+			<Blackspot X="-3113.422" Y="-2137.789" Z="116.5681" Radius="40.00" />
+			<Blackspot X="-3148.861" Y="-2159.859" Z="114.4184" Radius="40.00" /> <!-- End of Fort Triumph -->
+		</Blackspots>
+		<AvoidMobs>
+			<Mob Name="Grimtotem Destroyer" Entry="23594" />
+			<Mob Name="Theramore Highway Guard" Entry="39138" />
+		</AvoidMobs>
+	</SubProfile>
+	
+	<SubProfile> <!-- S/SE Dustwallow Marsh 38-43 -->
+		<Name>S/SE Dustwallow Marsh 38-43</Name> <!-- East of Mudsprocket -->
+		<MinLevel>38</MinLevel>
+		<MaxLevel>43</MaxLevel>
+		<Vendors> <!-- Mudsprocket -->
+			<Vendor Name="Axle" Entry="23995" Type="Food" X="-4630.091" Y="-3176.113" Z="41.22022" />
+			<Vendor Name="Razbo Rustgear" Entry="23571" Type="Repair" X="-4603.661" Y="-3210.939" Z="34.92594" />
+			<!-- Crossroads Trainers -->
+			<Vendor Name="Egnom" Entry="50029" Type="Train" TrainClass="Mage" X="-429.2691" Y="-2662.823" Z="96.57784" />
+			<Vendor Name="Chintoka" Entry="50028" Type="Train" TrainClass="Warlock" X="-430.3038" Y="-2659.688" Z="96.58514" />
+			<Vendor Name="Tarmod" Entry="50032" Type="Train" TrainClass="Hunter" X="-434.6354" Y="-2680.118" Z="96.18735" />
+			<Vendor Name="Sunwalker Lonaki" Entry="50035" Type="Train" TrainClass="Paladin" X="-535.9566" Y="-2640.979" Z="95.8503" />
+			<Vendor Name="Musu Gentlemoon" Entry="50034" Type="Train" TrainClass="Druid" X="-539.4583" Y="-2643.507" Z="95.80042" />
+			<Vendor Name="Zumolo" Entry="50031" Type="Train" TrainClass="Priest" X="-522.4011" Y="-2641.29" Z="95.78765" />
+			<Vendor Name="Brulla" Entry="50022" Type="Train" TrainClass="Shaman" X="-520.2188" Y="-2642.453" Z="95.78797" />
+			<Vendor Name="Dargad" Entry="50027" Type="Train" TrainClass="Rogue" X="-431.3785" Y="-2680.99" Z="96.03146" />
+			<Vendor Name="Ging" Entry="50033" Type="Train" TrainClass="Warrior" X="-397.0208" Y="-2640.786" Z="96.22285" />
+		</Vendors>
+		<Mailboxes> <!-- Mudsprocket -->
+			<Mailbox X="-4598.598" Y="-3179.178" Z="34.89818" />
+		</Mailboxes>
+		<GrindArea>
+			<TargetMinLevel>35</TargetMinLevel>
+			<TargetMaxLevel>42</TargetMaxLevel>
+			<Factions>22 16 14 103</Factions> <!-- [Spider, Croc, Serpent, Dragonkin] -->
+			<Hotspots>
+				<Hotspot X="-4213.032" Y="-3154.006" Z="30.71777" />
+				<Hotspot X="-4268.085" Y="-3165.576" Z="30.7404" />
+				<Hotspot X="-4307.971" Y="-3174.598" Z="35.04979" />
+				<Hotspot X="-4351.749" Y="-3165.397" Z="32.38302" />
+				<Hotspot X="-4318.676" Y="-3194.269" Z="41.43235" />
+				<Hotspot X="-4268.6" Y="-3232.016" Z="32.29665" />
+				<Hotspot X="-4241.086" Y="-3198.708" Z="37.97462" />
+				<Hotspot X="-4195.056" Y="-3207.531" Z="30.69255" />
+				<Hotspot X="-4189.445" Y="-3235.776" Z="36.17847" />
+				<Hotspot X="-4149.927" Y="-3247.287" Z="30.7549" />
+				<Hotspot X="-4181.063" Y="-3267.105" Z="32.03453" />
+				<Hotspot X="-4218.841" Y="-3295.102" Z="31.27249" />
+				<Hotspot X="-4230.409" Y="-3350.752" Z="32.19617" />
+				<Hotspot X="-4189.035" Y="-3379.58" Z="30.88045" />
+				<Hotspot X="-4171.717" Y="-3409.864" Z="31.07643" />
+				<Hotspot X="-4145.356" Y="-3403.782" Z="30.53271" />
+				<Hotspot X="-4140.407" Y="-3461.201" Z="39.6857" />
+				<Hotspot X="-4107.917" Y="-3501.073" Z="37.06271" />
+				<Hotspot X="-4135.015" Y="-3543.056" Z="34.1032" />
+				<Hotspot X="-4130.793" Y="-3585.49" Z="38.67271" />
+				<Hotspot X="-4160.604" Y="-3621.992" Z="34.23249" />
+				<Hotspot X="-4225.847" Y="-3635.721" Z="31.42003" />
+				<Hotspot X="-4261.622" Y="-3606.711" Z="33.74445" />
+				<Hotspot X="-4304.89" Y="-3593.607" Z="32.00078" />
+				<Hotspot X="-4327.569" Y="-3564.682" Z="33.79426" />
+				<Hotspot X="-4392.294" Y="-3566.537" Z="42.41028" />
+				<Hotspot X="-4421.219" Y="-3600.626" Z="32.66921" />
+				<Hotspot X="-4451.025" Y="-3604.693" Z="35.4293" />
+				<Hotspot X="-4467.7" Y="-3621.075" Z="31.09711" />
+				<Hotspot X="-4496.019" Y="-3602.987" Z="30.74049" />
+				<Hotspot X="-4510.541" Y="-3573.959" Z="30.77477" />
+				<Hotspot X="-4493.196" Y="-3547.554" Z="39.55661" />
+				<Hotspot X="-4451.653" Y="-3529.72" Z="31.57715" />
+				<Hotspot X="-4505.163" Y="-3505.714" Z="31.48103" />
+				<Hotspot X="-4498.41" Y="-3469.169" Z="36.08794" />
+				<Hotspot X="-4513.138" Y="-3450.797" Z="28.95265" />
+				<Hotspot X="-4535.435" Y="-3436.647" Z="32.14191" />
+				<Hotspot X="-4576.673" Y="-3456.659" Z="31.47839" />
+				<Hotspot X="-4546.197" Y="-3521.953" Z="31.96371" />
+				<Hotspot X="-4519.754" Y="-3581.522" Z="32.23084" />
+				<Hotspot X="-4497.076" Y="-3642.469" Z="33.25233" />
+				<Hotspot X="-4521.459" Y="-3672.421" Z="39.03822" />
+				<Hotspot X="-4571.384" Y="-3665.883" Z="30.76213" />
+				<Hotspot X="-4584.682" Y="-3720.825" Z="31.05332" />
+				<Hotspot X="-4551.027" Y="-3754.029" Z="31.62971" />
+				<Hotspot X="-4506.653" Y="-3690.397" Z="39.0335" />
+				<Hotspot X="-4472.86" Y="-3731.514" Z="33.14701" />
+				<Hotspot X="-4409.133" Y="-3712.981" Z="39.31839" />
+				<Hotspot X="-4446.164" Y="-3604.089" Z="34.92372" />
+				<Hotspot X="-4420.465" Y="-3536.388" Z="38.32528" />
+				<Hotspot X="-4379.277" Y="-3476.959" Z="40.03128" />
+				<Hotspot X="-4336.066" Y="-3434.705" Z="36.67654" />
+				<Hotspot X="-4287.324" Y="-3403.637" Z="42.74648" />
+				<Hotspot X="-4238.051" Y="-3365.777" Z="34.30985" />
+				<Hotspot X="-4224.052" Y="-3305.372" Z="33.00174" />
+				<Hotspot X="-4192.78" Y="-3275.944" Z="31.28202" />
+				<Hotspot X="-4145.544" Y="-3243.329" Z="30.4664" />
+				<Hotspot X="-4200.961" Y="-3187.068" Z="34.55366" />
+				<Hotspot X="-4207.509" Y="-3116.868" Z="33.31454" />
+			</Hotspots>
+		</GrindArea>
+		<Blackspots>
+			<Blackspot X="-3669.857" Y="-2766.11" Z="35.96542" Radius="15" /> <!-- Ally Bridge -->
+			<Blackspot X="-4186.081" Y="-3295.474" Z="30.62067" Radius="10" />
+			<Blackspot X="-4408.435" Y="-3304.199" Z="40" Radius="50" /> <!-- Dustwallow Whelp Hill -->
+			<Blackspot X="-3787.154" Y="-3901.314" Z="7.253653" Radius="20.00" /> <!-- road -->
+			<Blackspot X="-3783.333" Y="-3830.715" Z="32.52421" Radius="20.00" />
+			<Blackspot X="-3788.729" Y="-3773.138" Z="35.00" Radius="20.00" />
+			<Blackspot X="-3796.25" Y="-3765.334" Z="38.69057" Radius="1.00" />
+			<Blackspot X="-3801.321" Y="-3716.237" Z="43.36456" Radius="20.00" />
+			<Blackspot X="-3810.178" Y="-3652.888" Z="43.61423" Radius="20.00" />
+			<Blackspot X="-3815.095" Y="-3590.734" Z="42.64334" Radius="20.00" />
+			<Blackspot X="-3815.973" Y="-3534.094" Z="42.95956" Radius="20.00" />
+			<Blackspot X="-3808.155" Y="-3467.459" Z="42.67154" Radius="20.00" />
+			<Blackspot X="-3804.418" Y="-3407.963" Z="38.3643" Radius="20.00" />
+			<Blackspot X="-3809.688" Y="-3334.096" Z="38.71811" Radius="20.00" />
+			<Blackspot X="-3818.23" Y="-3276.528" Z="38.70144" Radius="20.00" />
+			<Blackspot X="-3816.3" Y="-3212.276" Z="38.94635" Radius="15.00" />
+			<Blackspot X="-3804.964" Y="-3158.674" Z="38.71993" Radius="15.00" />
+			<Blackspot X="-3804.323" Y="-3104.742" Z="39.14402" Radius="20.00" />
+			<Blackspot X="-3789.865" Y="-3042.435" Z="38.70708" Radius="20.00" />
+			<Blackspot X="-3763.248" Y="-2989.31" Z="38.19898" Radius="20.00" />
+			<Blackspot X="-3720.057" Y="-2927.579" Z="36.66048" Radius="20.00" />
+			<Blackspot X="-3699.538" Y="-2870.777" Z="40.06959" Radius="25.00" />
+			<Blackspot X="-3680.196" Y="-2807.317" Z="36.73886" Radius="20.00" /> <!-- end of road -->
+			<Blackspot X="-2356.572" Y="-3872.768" Z="2.459679" Radius="25.00" /> <!-- Northwatch Hold -->
+			<Blackspot X="-2281.42" Y="-3870.329" Z="6.428104" Radius="25.00" />
+			<Blackspot X="-2373.365" Y="-3836.542" Z="2.177123" Radius="25.00" />
+			<Blackspot X="-2328.638" Y="-3795.852" Z="27.79066" Radius="25.00" />
+			<Blackspot X="-2336.958" Y="-3739.605" Z="45.69995" Radius="25.00" />
+			<Blackspot X="-2296.611" Y="-3699.718" Z="68.54159" Radius="25.00" />
+			<Blackspot X="-2249.114" Y="-3718.811" Z="84.29533" Radius="25.00" />
+			<Blackspot X="-2215.993" Y="-3722.322" Z="91.25734" Radius="25.00" />
+			<Blackspot X="-2184" Y="-3684.401" Z="89.64754" Radius="25.00" />
+			<Blackspot X="-2148.639" Y="-3642.358" Z="90.13619" Radius="25.00" />
+			<Blackspot X="-2126.83" Y="-3612.94" Z="94.27085" Radius="25.00" />
+			<Blackspot X="-2128.596" Y="-3555.532" Z="98.20186" Radius="25.00" />
+			<Blackspot X="-2119.932" Y="-3483.328" Z="92.20837" Radius="25.00" />
+			<Blackspot X="-2075.046" Y="-3463.106" Z="92.18868" Radius="25.00" />
+			<Blackspot X="-2036.081" Y="-3447.64" Z="80.07161" Radius="25.00" />
+			<Blackspot X="-2034.409" Y="-3505.187" Z="95.33363" Radius="25.00" />
+			<Blackspot X="-2051.658" Y="-3575.435" Z="38.91081" Radius="25.00" />
+			<Blackspot X="-2015.403" Y="-3606.565" Z="21.75966" Radius="25.00" />
+			<Blackspot X="-1983.427" Y="-3618.207" Z="21.76341" Radius="25.00" />
+			<Blackspot X="-2027.477" Y="-3669.505" Z="21.81938" Radius="25.00" />
+			<Blackspot X="-2051.87" Y="-3693.566" Z="22.22987" Radius="25.00" />
+			<Blackspot X="-2011.15" Y="-3743.547" Z="3.855485" Radius="25.00" />
+			<Blackspot X="-1944.109" Y="-3675.222" Z="8.950975" Radius="25.00" />
+			<Blackspot X="-1911.495" Y="-3611.421" Z="10.75173" Radius="25.00" />
+			<Blackspot X="-1926.258" Y="-3546.058" Z="21.84818" Radius="25.00" />
+			<Blackspot X="-2029.016" Y="-3442.518" Z="75.48484" Radius="25.00" /> <!-- End of Northwatch Hold -->
+			<Blackspot X="-3074.754" Y="-2365.697" Z="95.18004" Radius="40.00" /> <!-- Fort Triumph -->
+			<Blackspot X="-3115.998" Y="-2319.186" Z="93.11007" Radius="40.00" />
+			<Blackspot X="-3146.093" Y="-2289.22" Z="92.75793" Radius="40.00" />
+			<Blackspot X="-3155.894" Y="-2223.273" Z="95.70605" Radius="40.00" />
+			<Blackspot X="-3105.086" Y="-2141.685" Z="105.964" Radius="40.00" />
+			<Blackspot X="-3166.201" Y="-2155.067" Z="103.2626" Radius="40.00" />
+			<Blackspot X="-3240.246" Y="-2181.876" Z="96.47351" Radius="40.00" />
+			<Blackspot X="-3301.603" Y="-2111.917" Z="100.0868" Radius="40.00" />
+			<Blackspot X="-3344.507" Y="-2057.672" Z="104.7793" Radius="40.00" />
+			<Blackspot X="-3357.667" Y="-1995.955" Z="87.45116" Radius="25.00" />
+			<Blackspot X="-3306.922" Y="-1980.445" Z="95.08981" Radius="40.00" />
+			<Blackspot X="-3248.35" Y="-1990.94" Z="105.1908" Radius="40.00" />
+			<Blackspot X="-3176.472" Y="-2012.034" Z="106.4561" Radius="20.00" />
+			<Blackspot X="-3126.318" Y="-2073.61" Z="119.8248" Radius="40.00" />
+			<Blackspot X="-3072.306" Y="-2105.375" Z="117.9353" Radius="40.00" />
+			<Blackspot X="-3113.422" Y="-2137.789" Z="116.5681" Radius="40.00" />
+			<Blackspot X="-3148.861" Y="-2159.859" Z="114.4184" Radius="40.00" /> <!-- End of Fort Triumph -->
+		</Blackspots>
+		<AvoidMobs>
+			<Mob Name="Grimtotem Destroyer" Entry="23594" />
+			<Mob Name="Theramore Highway Guard" Entry="39138" />
+		</AvoidMobs>
+	</SubProfile>
+  
+	<SubProfile> <!-- S Felwood 43-45 -->
+		<Name>S Felwood 43-45</Name>
+		<MinLevel>43</MinLevel>
+		<MaxLevel>45</MaxLevel>
+		<Vendors> <!-- Emerald Sanctuary -->
+			<Vendor Name="Kamar" Entry="48608" Type="Repair" X="4003.65" Y="-1319.84" Z="246.2257" />
+			<Vendor Name="Muurald" Entry="48607" Type="Food" X="4004.54" Y="-1324.23" Z="246.2259" />
+			<!-- Crossroads Trainers -->
+			<Vendor Name="Egnom" Entry="50029" Type="Train" TrainClass="Mage" X="-429.2691" Y="-2662.823" Z="96.57784" />
+			<Vendor Name="Chintoka" Entry="50028" Type="Train" TrainClass="Warlock" X="-430.3038" Y="-2659.688" Z="96.58514" />
+			<Vendor Name="Tarmod" Entry="50032" Type="Train" TrainClass="Hunter" X="-434.6354" Y="-2680.118" Z="96.18735" />
+			<Vendor Name="Sunwalker Lonaki" Entry="50035" Type="Train" TrainClass="Paladin" X="-535.9566" Y="-2640.979" Z="95.8503" />
+			<Vendor Name="Musu Gentlemoon" Entry="50034" Type="Train" TrainClass="Druid" X="-539.4583" Y="-2643.507" Z="95.80042" />
+			<Vendor Name="Zumolo" Entry="50031" Type="Train" TrainClass="Priest" X="-522.4011" Y="-2641.29" Z="95.78765" />
+			<Vendor Name="Brulla" Entry="50022" Type="Train" TrainClass="Shaman" X="-520.2188" Y="-2642.453" Z="95.78797" />
+			<Vendor Name="Dargad" Entry="50027" Type="Train" TrainClass="Rogue" X="-431.3785" Y="-2680.99" Z="96.03146" />
+			<Vendor Name="Ging" Entry="50033" Type="Train" TrainClass="Warrior" X="-397.0208" Y="-2640.786" Z="96.22285" />
+		</Vendors>
+		<Mailboxes> <!-- Wildheart Point -->
+			<Mailbox X="4732.481" Y="-871.7399" Z="343.4669" />
+		</Mailboxes>
+		<GrindArea>
+			<TargetMinLevel>43</TargetMinLevel>
+			<TargetMaxLevel>45</TargetMaxLevel>
+			<Factions>7 38 44</Factions> <!-- [Bird, Wolf, Bear] -->
+			<Hotspots>
+				<Hotspot X="3602.326" Y="-1484.71" Z="175.0378" />
+				<Hotspot X="3652.431" Y="-1450.676" Z="181.4967" />
+				<Hotspot X="3733.86" Y="-1508.651" Z="198.8269" />
+				<Hotspot X="3680.206" Y="-1598.747" Z="209.1275" />
+				<Hotspot X="3651.615" Y="-1621.916" Z="210.5444" />
+				<Hotspot X="3619.275" Y="-1578.103" Z="186.3201" />
+				<Hotspot X="3684.797" Y="-1584.069" Z="202.7387" />
+				<Hotspot X="3759.996" Y="-1531.292" Z="206.7342" />
+				<Hotspot X="3808.953" Y="-1517.432" Z="215.4364" />
+				<Hotspot X="3846.355" Y="-1515.449" Z="224.5866" />
+				<Hotspot X="3847.991" Y="-1499.303" Z="220.248" />
+				<Hotspot X="3881.939" Y="-1486.13" Z="218.7129" />
+				<Hotspot X="3916.283" Y="-1440.684" Z="218.4438" />
+				<Hotspot X="3884.016" Y="-1429.321" Z="214.0881" />
+				<Hotspot X="3935.573" Y="-1425.554" Z="232.7439" />
+				<Hotspot X="3952.733" Y="-1393.003" Z="233.9577" />
+				<Hotspot X="3935.759" Y="-1451.087" Z="234.4118" />
+				<Hotspot X="3939.181" Y="-1527.204" Z="252.2664" />
+				<Hotspot X="3937.795" Y="-1588.235" Z="262.0042" />
+				<Hotspot X="3901.739" Y="-1621.034" Z="259.53" />
+				<Hotspot X="3824.335" Y="-1674.751" Z="254.9999" />
+				<Hotspot X="3794.057" Y="-1713.464" Z="266.8917" />
+				<Hotspot X="3678.334" Y="-1583.79" Z="202.0242" />
+				<Hotspot X="3603.974" Y="-1565.197" Z="180.3839" />
+				<Hotspot X="3606.005" Y="-1486.952" Z="175.7755" />
+				<Hotspot X="3902.951" Y="-1288.616" Z="220.627" />
+				<Hotspot X="3937.335" Y="-1182.178" Z="242.6064" />
+				<Hotspot X="3977.697" Y="-1174.924" Z="261.2926" />
+				<Hotspot X="3997.794" Y="-1201.305" Z="265.788" />
+				<Hotspot X="4023.561" Y="-1187.839" Z="275.1457" />
+				<Hotspot X="4048.991" Y="-1205.25" Z="281.6126" />
+				<Hotspot X="4081.171" Y="-1193.289" Z="287.6935" />
+				<Hotspot X="4117.733" Y="-1155.731" Z="292.9698" />
+				<Hotspot X="4182.14" Y="-1141.388" Z="312.1915" />
+				<Hotspot X="4176.857" Y="-1092.498" Z="300.3431" />
+				<Hotspot X="4181.428" Y="-1043.936" Z="291.0949" />
+				<Hotspot X="4217.022" Y="-1021.095" Z="294.2501" />
+				<Hotspot X="4264.554" Y="-1002.548" Z="302.0208" />
+				<Hotspot X="4288.758" Y="-1056.224" Z="320.0205" />
+				<Hotspot X="4278.268" Y="-947.8202" Z="301.0729" />
+				<Hotspot X="4216.763" Y="-1006.804" Z="295.3492" />
+				<Hotspot X="4181.873" Y="-1032.864" Z="290.1815" />
+				<Hotspot X="4127.942" Y="-1032.125" Z="282.68" />
+				<Hotspot X="4061.985" Y="-1081.315" Z="268.459" />
+				<Hotspot X="4013.952" Y="-1102.115" Z="267.932" />
+				<Hotspot X="3996.652" Y="-1129.728" Z="268.2361" />
+				<Hotspot X="3994.646" Y="-1177.543" Z="266.3224" />
+				<Hotspot X="3941.279" Y="-1176.974" Z="244.517" />
+				<Hotspot X="3864.899" Y="-1181.084" Z="231.2221" />
+				<Hotspot X="3897.316" Y="-1210.198" Z="230.2913" />
+				<Hotspot X="3904.748" Y="-1331.948" Z="216.3238" />
+				<Hotspot X="3919.591" Y="-1360.614" Z="221.0845" />
+				<Hotspot X="3875.656" Y="-1419.934" Z="212.1275" />
+				<Hotspot X="3766.8" Y="-1395.097" Z="203.8242" />
+			</Hotspots>
+		</GrindArea>
+		<Blackspots>
+			<Blackspot X="-3669.857" Y="-2766.11" Z="35.96542" Radius="15" /> <!-- Ally Bridge -->
+			<Blackspot X="-4186.081" Y="-3295.474" Z="30.62067" Radius="10" />
+			<Blackspot X="-4408.435" Y="-3304.199" Z="40" Radius="50" /> <!-- Duswallow Whelp Hill -->
+			<Blackspot X="-2356.572" Y="-3872.768" Z="2.459679" Radius="25.00" /> <!-- Northwatch Hold -->
+			<Blackspot X="-2281.42" Y="-3870.329" Z="6.428104" Radius="25.00" /> <!-- Road -->
+			<Blackspot X="-2373.365" Y="-3836.542" Z="2.177123" Radius="25.00" />
+			<Blackspot X="-2328.638" Y="-3795.852" Z="27.79066" Radius="25.00" />
+			<Blackspot X="-2336.958" Y="-3739.605" Z="45.69995" Radius="25.00" />
+			<Blackspot X="-2296.611" Y="-3699.718" Z="68.54159" Radius="25.00" />
+			<Blackspot X="-2249.114" Y="-3718.811" Z="84.29533" Radius="25.00" />
+			<Blackspot X="-2215.993" Y="-3722.322" Z="91.25734" Radius="25.00" />
+			<Blackspot X="-2184" Y="-3684.401" Z="89.64754" Radius="25.00" />
+			<Blackspot X="-2148.639" Y="-3642.358" Z="90.13619" Radius="25.00" />
+			<Blackspot X="-2126.83" Y="-3612.94" Z="94.27085" Radius="25.00" />
+			<Blackspot X="-2128.596" Y="-3555.532" Z="98.20186" Radius="25.00" />
+			<Blackspot X="-2119.932" Y="-3483.328" Z="92.20837" Radius="25.00" />
+			<Blackspot X="-2075.046" Y="-3463.106" Z="92.18868" Radius="25.00" />
+			<Blackspot X="-2036.081" Y="-3447.64" Z="80.07161" Radius="25.00" />
+			<Blackspot X="-2034.409" Y="-3505.187" Z="95.33363" Radius="25.00" />
+			<Blackspot X="-2051.658" Y="-3575.435" Z="38.91081" Radius="25.00" />
+			<Blackspot X="-2015.403" Y="-3606.565" Z="21.75966" Radius="25.00" />
+			<Blackspot X="-1983.427" Y="-3618.207" Z="21.76341" Radius="25.00" />
+			<Blackspot X="-2027.477" Y="-3669.505" Z="21.81938" Radius="25.00" />
+			<Blackspot X="-2051.87" Y="-3693.566" Z="22.22987" Radius="25.00" />
+			<Blackspot X="-2011.15" Y="-3743.547" Z="3.855485" Radius="25.00" />
+			<Blackspot X="-1944.109" Y="-3675.222" Z="8.950975" Radius="25.00" />
+			<Blackspot X="-1911.495" Y="-3611.421" Z="10.75173" Radius="25.00" />
+			<Blackspot X="-1926.258" Y="-3546.058" Z="21.84818" Radius="25.00" /> <!-- end of road -->
+			<Blackspot X="-2029.016" Y="-3442.518" Z="75.48484" Radius="25.00" /> <!-- End of Northwatch Hold -->
+			<Blackspot X="-3074.754" Y="-2365.697" Z="95.18004" Radius="40.00" /> <!-- Fort Triumph -->
+			<Blackspot X="-3115.998" Y="-2319.186" Z="93.11007" Radius="40.00" />
+			<Blackspot X="-3146.093" Y="-2289.22" Z="92.75793" Radius="40.00" />
+			<Blackspot X="-3155.894" Y="-2223.273" Z="95.70605" Radius="40.00" />
+			<Blackspot X="-3105.086" Y="-2141.685" Z="105.964" Radius="40.00" />
+			<Blackspot X="-3166.201" Y="-2155.067" Z="103.2626" Radius="40.00" />
+			<Blackspot X="-3240.246" Y="-2181.876" Z="96.47351" Radius="40.00" />
+			<Blackspot X="-3301.603" Y="-2111.917" Z="100.0868" Radius="40.00" />
+			<Blackspot X="-3344.507" Y="-2057.672" Z="104.7793" Radius="40.00" />
+			<Blackspot X="-3357.667" Y="-1995.955" Z="87.45116" Radius="25.00" />
+			<Blackspot X="-3306.922" Y="-1980.445" Z="95.08981" Radius="40.00" />
+			<Blackspot X="-3248.35" Y="-1990.94" Z="105.1908" Radius="40.00" />
+			<Blackspot X="-3176.472" Y="-2012.034" Z="106.4561" Radius="20.00" />
+			<Blackspot X="-3126.318" Y="-2073.61" Z="119.8248" Radius="40.00" />
+			<Blackspot X="-3072.306" Y="-2105.375" Z="117.9353" Radius="40.00" />
+			<Blackspot X="-3113.422" Y="-2137.789" Z="116.5681" Radius="40.00" />
+			<Blackspot X="-3148.861" Y="-2159.859" Z="114.4184" Radius="40.00" /> <!-- End of Fort Triumph -->
+		</Blackspots>
+		<AvoidMobs>
+			<Mob Name="Grimtotem Destroyer" Entry="23594" />
+			<Mob Name="Theramore Highway Guard" Entry="39138" />
+			<Mob Name="Impsy" Entry="47339" />
+		</AvoidMobs>
+	</SubProfile>
+
+	<SubProfile> <!-- C Felwood 45-47 -->
+		<Name>C Felwood 45-47</Name>
+		<MinLevel>45</MinLevel>
+		<MaxLevel>47</MaxLevel>
+		<Vendors> <!-- Emerald Sanctuary -->
+			<Vendor Name="Kamar" Entry="48608" Type="Repair" X="4003.65" Y="-1319.84" Z="246.2257" />
+			<Vendor Name="Muurald" Entry="48607" Type="Food" X="4004.54" Y="-1324.23" Z="246.2259" />
+			<!-- Crossroads Trainers -->
+			<Vendor Name="Egnom" Entry="50029" Type="Train" TrainClass="Mage" X="-429.2691" Y="-2662.823" Z="96.57784" />
+			<Vendor Name="Chintoka" Entry="50028" Type="Train" TrainClass="Warlock" X="-430.3038" Y="-2659.688" Z="96.58514" />
+			<Vendor Name="Tarmod" Entry="50032" Type="Train" TrainClass="Hunter" X="-434.6354" Y="-2680.118" Z="96.18735" />
+			<Vendor Name="Sunwalker Lonaki" Entry="50035" Type="Train" TrainClass="Paladin" X="-535.9566" Y="-2640.979" Z="95.8503" />
+			<Vendor Name="Musu Gentlemoon" Entry="50034" Type="Train" TrainClass="Druid" X="-539.4583" Y="-2643.507" Z="95.80042" />
+			<Vendor Name="Zumolo" Entry="50031" Type="Train" TrainClass="Priest" X="-522.4011" Y="-2641.29" Z="95.78765" />
+			<Vendor Name="Brulla" Entry="50022" Type="Train" TrainClass="Shaman" X="-520.2188" Y="-2642.453" Z="95.78797" />
+			<Vendor Name="Dargad" Entry="50027" Type="Train" TrainClass="Rogue" X="-431.3785" Y="-2680.99" Z="96.03146" />
+			<Vendor Name="Ging" Entry="50033" Type="Train" TrainClass="Warrior" X="-397.0208" Y="-2640.786" Z="96.22285" />
+		</Vendors>
+		<Mailboxes> <!-- Wildheart Point -->
+			<Mailbox X="4732.481" Y="-871.7399" Z="343.4669" />
+		</Mailboxes>
+		<GrindArea>
+			<TargetMinLevel>44</TargetMinLevel>
+			<TargetMaxLevel>48</TargetMaxLevel>
+			<Factions>7 38 44 14 1434</Factions> <!-- [Bird, Wolf, Bear, Ooze, Jaedenar] -->
+			<Hotspots>
+				<Hotspot X="4480.698" Y="-873.5067" Z="301.2331" />
+				<Hotspot X="4458.284" Y="-908.9426" Z="303.9465" />
+				<Hotspot X="4415.868" Y="-947.8412" Z="315.1319" />
+				<Hotspot X="4432.728" Y="-988.5879" Z="327.0528" />
+				<Hotspot X="4442.654" Y="-936.5883" Z="308.4086" />
+				<Hotspot X="4471.923" Y="-940.9016" Z="319.666" />
+				<Hotspot X="4512.128" Y="-918.6949" Z="306.4425" />
+				<Hotspot X="4516.59" Y="-972.0485" Z="327.1866" />
+				<Hotspot X="4563.471" Y="-946.6045" Z="325.5824" />
+				<Hotspot X="4617.274" Y="-926.4146" Z="326.4517" />
+				<Hotspot X="4637.851" Y="-899.7202" Z="327.2189" />
+				<Hotspot X="4616.07" Y="-860.9139" Z="312.3841" />
+				<Hotspot X="4666.93" Y="-811.4331" Z="307.1739" />
+				<Hotspot X="4734.937" Y="-783.2149" Z="302.0551" />
+				<Hotspot X="4781.711" Y="-762.9551" Z="299.0988" />
+				<Hotspot X="4873.366" Y="-727.0156" Z="301.4057" />
+				<Hotspot X="4846.693" Y="-713.3481" Z="294.6805" />
+				<Hotspot X="4874.644" Y="-650.3235" Z="297.2498" />
+				<Hotspot X="4872.37" Y="-616.5471" Z="306.8417" />
+				<Hotspot X="4885.246" Y="-598.8292" Z="308.4211" />
+				<Hotspot X="4918.357" Y="-588.2621" Z="316.4716" />
+				<Hotspot X="4915.274" Y="-644.7719" Z="308.2086" />
+				<Hotspot X="4850.798" Y="-714.4163" Z="296.0071" />
+				<Hotspot X="4773.982" Y="-768.7279" Z="299.1878" />
+				<Hotspot X="4663.63" Y="-786.3006" Z="299.9421" />
+				<Hotspot X="4594.507" Y="-767.4251" Z="264.2587" />
+				<!-- ooze pool map -->
+				<Hotspot X="4590.648" Y="-756.0204" Z="261.3546" />
+				<Hotspot X="4609.571" Y="-704.7471" Z="259.2241" />
+				<Hotspot X="4618.538" Y="-663.8235" Z="260.68" />
+				<Hotspot X="4550.339" Y="-655.7713" Z="259.7194" />
+				<Hotspot X="4532.545" Y="-672.2618" Z="260.0255" />
+				<Hotspot X="4524.261" Y="-716.5718" Z="262.5581" />
+				<Hotspot X="4516.163" Y="-761.8907" Z="261.0727" />
+				<Hotspot X="4519.072" Y="-791.6934" Z="268.5178" />
+				<Hotspot X="4491.983" Y="-860.4402" Z="298.1003" />
+				<!-- end of ooze map -->
+				<Hotspot X="4562.999" Y="-779.7447" Z="265.1745" />
+				<Hotspot X="4515.667" Y="-776.6289" Z="263.759" />
+				<Hotspot X="4453.541" Y="-755.4093" Z="261.3392" />
+				<Hotspot X="4426.388" Y="-722.6124" Z="265.2502" />
+				<Hotspot X="4429.409" Y="-681.5535" Z="265.8978" />
+				<Hotspot X="4409.725" Y="-626.4054" Z="264.4224" />
+				<Hotspot X="4375.29" Y="-590.7955" Z="266.2871" />
+				<Hotspot X="4340.846" Y="-597.4045" Z="265.289" />
+				<Hotspot X="4363.625" Y="-502.1712" Z="303.9264" />
+				<Hotspot X="4312.091" Y="-513.1691" Z="300.5211" />
+				<Hotspot X="4264.889" Y="-533.7751" Z="301.5623" />
+				<Hotspot X="4324.109" Y="-670.8365" Z="275.0121" />
+				<Hotspot X="4213.126" Y="-796.4995" Z="256.9065" />
+				<Hotspot X="4189.608" Y="-786.8502" Z="258.664" />
+				<Hotspot X="4181.449" Y="-849.515" Z="258.8202" />
+				<Hotspot X="4159.889" Y="-859.3389" Z="258.0293" />
+				<Hotspot X="4119.603" Y="-884.8774" Z="255.7886" />
+				<Hotspot X="4079.837" Y="-875.1026" Z="259.5822" />
+				<Hotspot X="4190.704" Y="-965.1459" Z="287.543" />
+				<Hotspot X="4269.907" Y="-930.0863" Z="298.667" />
+			</Hotspots>
+		</GrindArea>
+		<AvoidMobs>
+			<Mob Name="Impsy" Entry="47339" />
+		</AvoidMobs>
+	</SubProfile>
+	
+	<SubProfile> <!-- NC Felwood 47-49 -->
+		<Name>NC Felwood 47-49</Name>
+		<MinLevel>47</MinLevel>
+		<MaxLevel>49</MaxLevel>
+		<Vendors> <!-- Wisperwind Grove -->
+			<Vendor Name="Chaewel" Entry="48573" Type="Repair" X="6079.8" Y="-823.891" Z="414.8031" />
+			<Vendor Name="Innkeeper Wylaria" Entry="48215" Type="Food" X="6063.87" Y="-924.089" Z="414.771" />
+			<!-- Crossroads Trainers -->
+			<Vendor Name="Egnom" Entry="50029" Type="Train" TrainClass="Mage" X="-429.2691" Y="-2662.823" Z="96.57784" />
+			<Vendor Name="Chintoka" Entry="50028" Type="Train" TrainClass="Warlock" X="-430.3038" Y="-2659.688" Z="96.58514" />
+			<Vendor Name="Tarmod" Entry="50032" Type="Train" TrainClass="Hunter" X="-434.6354" Y="-2680.118" Z="96.18735" />
+			<Vendor Name="Sunwalker Lonaki" Entry="50035" Type="Train" TrainClass="Paladin" X="-535.9566" Y="-2640.979" Z="95.8503" />
+			<Vendor Name="Musu Gentlemoon" Entry="50034" Type="Train" TrainClass="Druid" X="-539.4583" Y="-2643.507" Z="95.80042" />
+			<Vendor Name="Zumolo" Entry="50031" Type="Train" TrainClass="Priest" X="-522.4011" Y="-2641.29" Z="95.78765" />
+			<Vendor Name="Brulla" Entry="50022" Type="Train" TrainClass="Shaman" X="-520.2188" Y="-2642.453" Z="95.78797" />
+			<Vendor Name="Dargad" Entry="50027" Type="Train" TrainClass="Rogue" X="-431.3785" Y="-2680.99" Z="96.03146" />
+			<Vendor Name="Ging" Entry="50033" Type="Train" TrainClass="Warrior" X="-397.0208" Y="-2640.786" Z="96.22285" />
+		</Vendors>
+		<Mailboxes> <!-- Wisperwind Grove -->
+			<Mailbox X="6077.656" Y="-886.6307" Z="411.8455" />
+		</Mailboxes>
+		<GrindArea>
+			<TargetMinLevel>46</TargetMinLevel>
+			<TargetMaxLevel>50</TargetMaxLevel>
+			<Factions>7 38 44 14 1434 16 90</Factions> <!-- [Bird, Deer, Wolf, Bear, Ooze, Bug, Jaedenar, Fire, Infernal] -->
+			<Hotspots>
+				<Hotspot X="5753.82" Y="-663.3364" Z="371.7538" />
+				<Hotspot X="5794.832" Y="-634.403" Z="374.843" />
+				<Hotspot X="5817.755" Y="-669.2092" Z="373.6872" />
+				<Hotspot X="5788.833" Y="-713.5094" Z="381.7527" />
+				<Hotspot X="5806.771" Y="-730.3488" Z="382.915" />
+				<Hotspot X="5830.889" Y="-725.8172" Z="384.481" />
+				<Hotspot X="5862.727" Y="-727.6617" Z="387.3101" />
+				<Hotspot X="5866.769" Y="-702.4079" Z="379.9191" />
+				<Hotspot X="5893.728" Y="-706.1033" Z="381.4265" />
+				<Hotspot X="5866.965" Y="-655.4218" Z="376.8867" />
+				<Hotspot X="5840.088" Y="-710.4326" Z="380.1176" />
+				<Hotspot X="5817.951" Y="-746.6444" Z="388.7739" />
+				<Hotspot X="5825.184" Y="-822.6216" Z="405.8448" />
+				<Hotspot X="5855.266" Y="-862.5668" Z="410.513" />
+				<Hotspot X="5871.84" Y="-915.0851" Z="412.4542" />
+				<Hotspot X="5851.153" Y="-944.9943" Z="412.345" />
+				<Hotspot X="5851.501" Y="-987.5692" Z="412.4588" />
+				<Hotspot X="5880.609" Y="-1023.407" Z="413.1009" />
+				<Hotspot X="5883.181" Y="-1083.807" Z="411.5508" />
+				<Hotspot X="5873.059" Y="-1157.181" Z="405.1484" />
+				<Hotspot X="5844.135" Y="-1192.325" Z="404.7112" />
+				<Hotspot X="5798.069" Y="-1217.126" Z="402.8851" />
+				<Hotspot X="5852.531" Y="-1225.821" Z="404.3732" />
+				<Hotspot X="5881.512" Y="-1245.443" Z="403.7809" />
+				<Hotspot X="5882.615" Y="-1285.139" Z="409.7301" />
+				<Hotspot X="5914.2" Y="-1288.46" Z="407.514" />
+				<Hotspot X="5910.634" Y="-1307.217" Z="413.1053" />
+				<Hotspot X="5918.16" Y="-1346.46" Z="419.1363" />
+				<Hotspot X="5961.615" Y="-1374.188" Z="425.0604" />
+				<Hotspot X="5986.612" Y="-1351.666" Z="421.3214" />
+				<Hotspot X="5989.495" Y="-1311.999" Z="409.7633" />
+				<Hotspot X="5971.79" Y="-1266.696" Z="381.5043" />
+				<Hotspot X="6011.466" Y="-1245.047" Z="379.0315" />
+				<Hotspot X="6011.896" Y="-1197.354" Z="375.1699" />
+				<Hotspot X="6040.551" Y="-1204.408" Z="374.0186" />
+				<Hotspot X="6077.447" Y="-1177.96" Z="373.4515" />
+				<Hotspot X="6109.946" Y="-1146.898" Z="373.1971" />
+				<Hotspot X="6114.458" Y="-1103.588" Z="379.5728" />
+				<Hotspot X="6062.374" Y="-1100.779" Z="381.3646" />
+				<Hotspot X="6020.657" Y="-1129.029" Z="380.9595" />
+				<Hotspot X="5970.073" Y="-1141.352" Z="382.9027" />
+				<Hotspot X="5897.518" Y="-1160.953" Z="403.2915" />
+				<Hotspot X="5891.173" Y="-1087.222" Z="410.5074" />
+				<Hotspot X="5939.707" Y="-1041.731" Z="411.5811" />
+				<Hotspot X="5878.919" Y="-997.3085" Z="412.2206" />
+				<Hotspot X="5849.447" Y="-974.6344" Z="412.2641" />
+				<Hotspot X="5859.419" Y="-936.9488" Z="412.942" />
+				<Hotspot X="5863.113" Y="-879.3124" Z="412.3321" />
+				<Hotspot X="5822.088" Y="-812.5573" Z="403.6396" />
+				<Hotspot X="5810.314" Y="-736.7375" Z="386.2496" />
+				<Hotspot X="5817.646" Y="-673.1107" Z="373.9096" />
+				<Hotspot X="5796.646" Y="-640.842" Z="374.3092" />
+				<Hotspot X="5715.25" Y="-632.6602" Z="367.9459" />
+				<Hotspot X="5717.558" Y="-584.353" Z="372.1752" />
+				<Hotspot X="5649.585" Y="-516.7193" Z="375.6581" />
+				<Hotspot X="5621.779" Y="-508.9359" Z="372.7902" />
+				<Hotspot X="5610.659" Y="-554.2748" Z="364.6212" />
+				<Hotspot X="5506.685" Y="-557.0459" Z="359.9761" />
+				<Hotspot X="5484.466" Y="-524.5583" Z="366.8433" />
+				<Hotspot X="5456.537" Y="-560.5781" Z="359.7845" />
+				<Hotspot X="5432.649" Y="-618.1295" Z="352.4026" />
+				<Hotspot X="5503.436" Y="-634.1371" Z="351.2458" />
+				<Hotspot X="5565.375" Y="-638.6118" Z="344.7282" />
+				<Hotspot X="5655.289" Y="-617.0635" Z="365.1072" />
+				<Hotspot X="5701.671" Y="-623.8035" Z="365.9646" />
+				<Hotspot X="5764.799" Y="-671.9754" Z="373.6579" />
+			</Hotspots>
+		</GrindArea>
+		<AvoidMobs>
+			<Mob Name="Impsy" Entry="47339" />
+		</AvoidMobs>
+	</SubProfile>
+
+	<SubProfile> <!-- NE Felwood 49-51 -->
+		<Name>NE Felwood 49-51</Name>
+		<MinLevel>49</MinLevel>
+		<MaxLevel>51</MaxLevel>
+		<Vendors> <!-- Ironree Clearing -->
+			<Vendor Name="Kester Killbomb" Entry="48228" Type="Repair" X="6859.46" Y="-1569.65" Z="496.9932" /> <!-- Moves -->
+			<Vendor Name="Spinz Shredbark" Entry="48238" Type="Repair" X="6905.98" Y="-1603.3" Z="503.9637" /> <!-- Moves -->
+			<Vendor Name="Muzz Flimspan" Entry="48236" Type="Food" X="6898.012" Y="-1579.819" Z="503.161" /> <!-- Stationary -->
+			<!-- Crossroads Trainers -->
+			<Vendor Name="Egnom" Entry="50029" Type="Train" TrainClass="Mage" X="-429.2691" Y="-2662.823" Z="96.57784" />
+			<Vendor Name="Chintoka" Entry="50028" Type="Train" TrainClass="Warlock" X="-430.3038" Y="-2659.688" Z="96.58514" />
+			<Vendor Name="Tarmod" Entry="50032" Type="Train" TrainClass="Hunter" X="-434.6354" Y="-2680.118" Z="96.18735" />
+			<Vendor Name="Sunwalker Lonaki" Entry="50035" Type="Train" TrainClass="Paladin" X="-535.9566" Y="-2640.979" Z="95.8503" />
+			<Vendor Name="Musu Gentlemoon" Entry="50034" Type="Train" TrainClass="Druid" X="-539.4583" Y="-2643.507" Z="95.80042" />
+			<Vendor Name="Zumolo" Entry="50031" Type="Train" TrainClass="Priest" X="-522.4011" Y="-2641.29" Z="95.78765" />
+			<Vendor Name="Brulla" Entry="50022" Type="Train" TrainClass="Shaman" X="-520.2188" Y="-2642.453" Z="95.78797" />
+			<Vendor Name="Dargad" Entry="50027" Type="Train" TrainClass="Rogue" X="-431.3785" Y="-2680.99" Z="96.03146" />
+			<Vendor Name="Ging" Entry="50033" Type="Train" TrainClass="Warrior" X="-397.0208" Y="-2640.786" Z="96.22285" />
+		</Vendors>
+		<Mailboxes> <!-- Wisperwind Grove -->
+			<Mailbox X="6077.656" Y="-886.6307" Z="411.8455" />
+		</Mailboxes>
+		<GrindArea>
+			<TargetMinLevel>46</TargetMinLevel>
+			<TargetMaxLevel>51</TargetMaxLevel>
+			<Factions>7 38 44 14 1434 16 90 82</Factions> <!-- [Bird, Deer, Wolf, Bear, Ooze, Bug, Jaedenar, Fire, Infernal, Furbolg] -->
+			<Hotspots>
+			<Hotspot X="6642.276" Y="-1939.128" Z="548.4653" />
+				<Hotspot X="6633.47" Y="-1987.858" Z="551.4906" />
+				<Hotspot X="6675.99" Y="-1963.041" Z="551.2312" />
+				<Hotspot X="6708.497" Y="-1966.598" Z="554.1816" />
+				<Hotspot X="6691.501" Y="-1988.353" Z="560.5023" />
+				<Hotspot X="6731.728" Y="-1953.643" Z="550.2833" />
+				<Hotspot X="6745.956" Y="-1957.944" Z="550.9211" />
+				<Hotspot X="6779.131" Y="-1945.698" Z="550.9156" />
+				<Hotspot X="6787.207" Y="-1985.877" Z="563.187" />
+				<Hotspot X="6808.867" Y="-2013.696" Z="567.7047" />
+				<Hotspot X="6880.049" Y="-2028.139" Z="577.9402" />
+				<Hotspot X="6902.733" Y="-2014.008" Z="584.0329" />
+				<Hotspot X="6828.102" Y="-2004.019" Z="567.9774" />
+				<Hotspot X="6800.228" Y="-1953.297" Z="550.1912" />
+				<Hotspot X="6836.937" Y="-1954.123" Z="550.467" />
+				<Hotspot X="6854.295" Y="-1922.979" Z="550.9199" />
+				<Hotspot X="6896.449" Y="-1932.384" Z="572.4818" />
+				<Hotspot X="6905.017" Y="-1862.573" Z="568.3734" />
+				<Hotspot X="6904.869" Y="-1820.857" Z="569.9032" />
+				<Hotspot X="6884.86" Y="-1818.034" Z="568.0476" />
+				<Hotspot X="6853.513" Y="-1824.647" Z="564.1389" />
+				<Hotspot X="6816.427" Y="-1828.919" Z="560.225" />
+				<Hotspot X="6800.79" Y="-1838.38" Z="557.082" />
+				<Hotspot X="6815.44" Y="-1859.115" Z="550.9203" />
+				<Hotspot X="6787.533" Y="-1872.518" Z="550.7758" />
+				<Hotspot X="6748.298" Y="-1889.913" Z="549.7563" />
+				<Hotspot X="6711.791" Y="-1900.413" Z="548.8433" />
+				<Hotspot X="6711.645" Y="-1956.347" Z="551.9092" />
+				<Hotspot X="6705.126" Y="-1978.943" Z="559.0029" />
+				<Hotspot X="6675.028" Y="-1961.177" Z="551.1372" />
+				<Hotspot X="6652.356" Y="-1949.164" Z="549.6769" />
+				<Hotspot X="6604.958" Y="-1910.283" Z="546.0215" />
+			</Hotspots>
+		</GrindArea>
+		<AvoidMobs>
+			<Mob Name="Impsy" Entry="47339" />
+		</AvoidMobs>
+	</SubProfile>
+
+	<SubProfile> <!-- NE Winterspring 51-54 -->
+		<Name>NE Winterspring 51-54</Name>
+		<MinLevel>51</MinLevel>
+		<MaxLevel>54</MaxLevel>
+		<Vendors> <!-- Goodgrub Smoking Pit --> <!-- are these friendly to horde -->
+			<Vendor Name="Trapper Kiefer" Entry="50094" Type="Repair" X="7636.76" Y="-4429.5" Z="623.8745" />
+			<Vendor Name="Barbie Cutesazz" Entry="50092" Type="Food" X="7637.553" Y="-4433.038" Z="623.8745" />
+			<!-- Crossroads Trainers -->
+			<Vendor Name="Egnom" Entry="50029" Type="Train" TrainClass="Mage" X="-429.2691" Y="-2662.823" Z="96.57784" />
+			<Vendor Name="Chintoka" Entry="50028" Type="Train" TrainClass="Warlock" X="-430.3038" Y="-2659.688" Z="96.58514" />
+			<Vendor Name="Tarmod" Entry="50032" Type="Train" TrainClass="Hunter" X="-434.6354" Y="-2680.118" Z="96.18735" />
+			<Vendor Name="Sunwalker Lonaki" Entry="50035" Type="Train" TrainClass="Paladin" X="-535.9566" Y="-2640.979" Z="95.8503" />
+			<Vendor Name="Musu Gentlemoon" Entry="50034" Type="Train" TrainClass="Druid" X="-539.4583" Y="-2643.507" Z="95.80042" />
+			<Vendor Name="Zumolo" Entry="50031" Type="Train" TrainClass="Priest" X="-522.4011" Y="-2641.29" Z="95.78765" />
+			<Vendor Name="Brulla" Entry="50022" Type="Train" TrainClass="Shaman" X="-520.2188" Y="-2642.453" Z="95.78797" />
+			<Vendor Name="Dargad" Entry="50027" Type="Train" TrainClass="Rogue" X="-431.3785" Y="-2680.99" Z="96.03146" />
+			<Vendor Name="Ging" Entry="50033" Type="Train" TrainClass="Warrior" X="-397.0208" Y="-2640.786" Z="96.22285" />
+		</Vendors>
+		<Mailboxes> <!-- Everlook -->
+			<Mailbox X="6707.655" Y="-4667.22" Z="721.3485" />
+		</Mailboxes>
+		<GrindArea>
+			<TargetMinLevel>49</TargetMinLevel>
+			<TargetMaxLevel>55</TargetMaxLevel>
+			<Factions>7 16 14</Factions> <!-- [Bird, Bear, Boomkin, Chimaera] -->
+			<Hotspots>
+				<Hotspot X="7398.542" Y="-4683.472" Z="628.1865" />
+				<Hotspot X="7454.367" Y="-4688.446" Z="638.6012" />
+				<Hotspot X="7486.162" Y="-4748.478" Z="661.8536" />
+				<Hotspot X="7416.387" Y="-4787.299" Z="667.7889" />
+				<Hotspot X="7391.3" Y="-4750.782" Z="656.2627" />
+				<Hotspot X="7342.735" Y="-4726.327" Z="660.494" />
+				<Hotspot X="7312.834" Y="-4749.2" Z="671.349" />
+				<Hotspot X="7293.939" Y="-4772.684" Z="677.4506" />
+				<Hotspot X="7265.441" Y="-4815.669" Z="685.101" />
+				<Hotspot X="7278.562" Y="-4849.859" Z="693.5336" />
+				<Hotspot X="7300.896" Y="-4888.543" Z="710.8432" />
+				<Hotspot X="7268.655" Y="-4907.183" Z="715.2969" />
+				<Hotspot X="7245.367" Y="-4936.221" Z="724.6913" />
+				<Hotspot X="7212" Y="-4901.453" Z="713.2486" />
+				<Hotspot X="7183.575" Y="-4854.654" Z="697.2764" />
+				<Hotspot X="7170.811" Y="-4882.917" Z="702.9747" />
+				<Hotspot X="7129.024" Y="-4876.853" Z="698.4026" />
+				<Hotspot X="7139.688" Y="-4926.178" Z="707.8106" />
+				<Hotspot X="7107.651" Y="-4946.704" Z="715.1045" />
+				<Hotspot X="7078.264" Y="-4938.929" Z="727.7676" />
+				<Hotspot X="7092.086" Y="-4978.371" Z="720.2191" />
+				<Hotspot X="7058.255" Y="-5022.078" Z="712.7621" />
+				<Hotspot X="7022.458" Y="-5038.429" Z="704.785" />
+				<Hotspot X="6994.588" Y="-5077.738" Z="709.5928" />
+				<Hotspot X="6955.51" Y="-5136.113" Z="694.7264" />
+				<Hotspot X="7005.223" Y="-5087.199" Z="707.5079" />
+				<Hotspot X="7056.988" Y="-5101.911" Z="709.6479" />
+				<Hotspot X="7086.615" Y="-5049.458" Z="712.1894" />
+				<Hotspot X="7113.499" Y="-4981.329" Z="716.9484" />
+				<Hotspot X="7168.747" Y="-4978.472" Z="730.8499" />
+				<Hotspot X="7216.828" Y="-5019.759" Z="737.1148" />
+				<Hotspot X="7266.625" Y="-5018.62" Z="732.5533" />
+				<Hotspot X="7246.05" Y="-5057.592" Z="736.0933" />
+				<Hotspot X="7329.16" Y="-5052.626" Z="725.5051" />
+				<Hotspot X="7374.002" Y="-5061.535" Z="727.626" />
+				<Hotspot X="7413.898" Y="-5044.563" Z="733.2395" />
+				<Hotspot X="7449.485" Y="-5047.942" Z="729.5904" />
+				<Hotspot X="7456.063" Y="-5126.23" Z="742.2825" />
+				<Hotspot X="7491.31" Y="-5143.254" Z="748.6297" />
+				<Hotspot X="7496.164" Y="-5074.718" Z="728.5845" />
+				<Hotspot X="7523.328" Y="-5039.727" Z="715.5956" />
+				<Hotspot X="7594.522" Y="-5018.971" Z="705.7993" />
+				<Hotspot X="7597.218" Y="-4976.95" Z="701.042" />
+				<Hotspot X="7576.622" Y="-4939.864" Z="692.4866" />
+				<Hotspot X="7549.585" Y="-4910.351" Z="692.0637" />
+				<Hotspot X="7511.194" Y="-4859.713" Z="690.4438" />
+				<Hotspot X="7493.002" Y="-4809.39" Z="685.1446" />
+				<Hotspot X="7495.97" Y="-4733.136" Z="660.6185" />
+				<Hotspot X="7526.066" Y="-4688.102" Z="658.6995" />
+				<Hotspot X="7560.284" Y="-4647.479" Z="649.8016" />
+				<Hotspot X="7513.708" Y="-4610.482" Z="631.1035" />
+				<Hotspot X="7514.859" Y="-4564.719" Z="616.1233" />
+				<Hotspot X="7442.304" Y="-4593.311" Z="607.2679" />
+				<Hotspot X="7419.983" Y="-4666.546" Z="627.6281" />
+				<Hotspot X="7435.942" Y="-4708.731" Z="638.945" />
+			</Hotspots>
+		</GrindArea>
+		<AvoidMobs>
+			<Mob Name="Impsy" Entry="47339" />
+		</AvoidMobs>
+	</SubProfile>
+	
+	<SubProfile> <!-- S Winterspring 54-60 -->
+		<Name>S Winterspring 54-60</Name>
+		<MinLevel>54</MinLevel>
+		<MaxLevel>62</MaxLevel>
+		<Vendors> <!-- Beryl Egress by Mazthoril -->
+			<Vendor Name="Daleohm" Entry="50129" Type="Repair" X="6176.922" Y="-4564.302" Z="713.3443" />
+			<Vendor Name="Maseel" Entry="50126" Type="Food" X="6179.932" Y="-4564.688" Z="713.3453" />
+			<!-- Crossroads Trainers -->
+			<Vendor Name="Egnom" Entry="50029" Type="Train" TrainClass="Mage" X="-429.2691" Y="-2662.823" Z="96.57784" />
+			<Vendor Name="Chintoka" Entry="50028" Type="Train" TrainClass="Warlock" X="-430.3038" Y="-2659.688" Z="96.58514" />
+			<Vendor Name="Tarmod" Entry="50032" Type="Train" TrainClass="Hunter" X="-434.6354" Y="-2680.118" Z="96.18735" />
+			<Vendor Name="Sunwalker Lonaki" Entry="50035" Type="Train" TrainClass="Paladin" X="-535.9566" Y="-2640.979" Z="95.8503" />
+			<Vendor Name="Musu Gentlemoon" Entry="50034" Type="Train" TrainClass="Druid" X="-539.4583" Y="-2643.507" Z="95.80042" />
+			<Vendor Name="Zumolo" Entry="50031" Type="Train" TrainClass="Priest" X="-522.4011" Y="-2641.29" Z="95.78765" />
+			<Vendor Name="Brulla" Entry="50022" Type="Train" TrainClass="Shaman" X="-520.2188" Y="-2642.453" Z="95.78797" />
+			<Vendor Name="Dargad" Entry="50027" Type="Train" TrainClass="Rogue" X="-431.3785" Y="-2680.99" Z="96.03146" />
+			<Vendor Name="Ging" Entry="50033" Type="Train" TrainClass="Warrior" X="-397.0208" Y="-2640.786" Z="96.22285" />
+		</Vendors>
+		<Mailboxes> <!-- Everlook -->
+			<Mailbox X="6707.655" Y="-4667.22" Z="721.3485" />
+		</Mailboxes>
+		<GrindArea>
+			<TargetMinLevel>53</TargetMinLevel>
+			<TargetMaxLevel>58</TargetMaxLevel>
+			<Factions>7 16 14 778</Factions> <!-- [Bird, Bear, Boomkin, Chimaera, Frost Giant] -->
+			<Hotspots>
+				<Hotspot X="5727.267" Y="-4843.336" Z="780.0555" />
+				<Hotspot X="5714.855" Y="-4872.95" Z="790.4525" />
+				<Hotspot X="5707.812" Y="-4898.149" Z="798.3666" />
+				<Hotspot X="5698.08" Y="-4934.596" Z="803.3178" />
+				<Hotspot X="5711.366" Y="-4971.16" Z="807.2441" />
+				<Hotspot X="5727.536" Y="-4983.701" Z="809.7236" />
+				<Hotspot X="5686.695" Y="-4998.453" Z="807.0162" />
+				<Hotspot X="5688.708" Y="-5025.12" Z="808.5013" />
+				<Hotspot X="5677.979" Y="-4996.484" Z="806.9882" />
+				<Hotspot X="5637.298" Y="-5009.26" Z="809.1082" />
+				<Hotspot X="5658.621" Y="-4984.696" Z="807.7201" />
+				<Hotspot X="5639.878" Y="-4964.982" Z="808.4809" />
+				<Hotspot X="5674.449" Y="-4950.237" Z="804.3399" />
+				<Hotspot X="5617.323" Y="-4943.604" Z="813.2314" />
+				<Hotspot X="5566.862" Y="-4932.629" Z="832.4902" />
+				<Hotspot X="5531.782" Y="-4965.542" Z="844.5021" />
+				<Hotspot X="5507.784" Y="-4953.192" Z="849.9773" />
+				<Hotspot X="5521.979" Y="-4922.422" Z="843.8653" />
+				<!-- <Hotspot X="5447.657" Y="-4928.858" Z="873.5417" /> 
+				<Hotspot X="5387.07" Y="-4885.833" Z="835.4117" />
+				<Hotspot X="5386.795" Y="-4825.31" Z="808.0269" />
+				<Hotspot X="5387.086" Y="-4776.565" Z="809.5458" />
+				<Hotspot X="5354.505" Y="-4754.969" Z="811.671" />
+				<Hotspot X="5388.81" Y="-4730.625" Z="806.7812" />
+				<Hotspot X="5500.869" Y="-4678.054" Z="789.7537" />
+				<Hotspot X="5512.719" Y="-4634.728" Z="800.3101" />
+				<Hotspot X="5476.663" Y="-4637.672" Z="799.1979" />
+				<Hotspot X="5462.028" Y="-4604.459" Z="810.9713" />
+				<Hotspot X="5437.74" Y="-4563.343" Z="813.8013" />
+				<Hotspot X="5489.89" Y="-4588.269" Z="826.1232" />
+				<Hotspot X="5526.424" Y="-4559.776" Z="799.5435" /> --> <!-- These giants punt you off of the ledge -->
+				<Hotspot X="5698.08" Y="-4934.596" Z="803.3178" /> <!-- Lets use old points for a quick fix -->
+				<Hotspot X="5727.267" Y="-4843.336" Z="780.0555" /> <!-- Lets use old points for a quick fix -->
+				<Hotspot X="5659.351" Y="-4620.495" Z="770.3283" /> <!-- Lets use old points for a quick fix -->
+				<Hotspot X="5554.611" Y="-4526.855" Z="772.8759" /> <!-- Start of real points -->
+				<Hotspot X="5590.56" Y="-4479.284" Z="763.1479" />
+				<Hotspot X="5543.035" Y="-4484.511" Z="759.5571" />
+				<Hotspot X="5504.045" Y="-4496.339" Z="753.9918" />
+				<Hotspot X="5452.815" Y="-4504.911" Z="742.8822" />
+				<Hotspot X="5397.385" Y="-4511.443" Z="725.0651" />
+				<Hotspot X="5357.891" Y="-4535.372" Z="704.5132" />
+				<Hotspot X="5338.587" Y="-4587.277" Z="691.5815" />
+				<Hotspot X="5331.55" Y="-4647.079" Z="691.7491" />
+				<Hotspot X="5295.855" Y="-4681.68" Z="692.9849" />
+				<Hotspot X="5283.815" Y="-4714.147" Z="690.2986" />
+				<Hotspot X="5287.904" Y="-4747.184" Z="693.3519" />
+				<Hotspot X="5274.75" Y="-4787.117" Z="690.3319" />
+				<Hotspot X="5224.49" Y="-4782.602" Z="691.7545" />
+				<Hotspot X="5246.966" Y="-4829.946" Z="690.8214" />
+				<Hotspot X="5271.479" Y="-4821.33" Z="690.7413" />
+				<Hotspot X="5283.405" Y="-4746.919" Z="691.507" />
+				<Hotspot X="5285.082" Y="-4707.341" Z="690.6304" />
+				<Hotspot X="5316.973" Y="-4656.959" Z="691.5529" />
+				<Hotspot X="5343.461" Y="-4577.794" Z="692.4249" />
+				<Hotspot X="5360.685" Y="-4525.746" Z="709.4188" />
+				<Hotspot X="5415.002" Y="-4505.887" Z="730.8619" />
+				<Hotspot X="5465.693" Y="-4499.367" Z="746.5028" />
+				<Hotspot X="5508.43" Y="-4497.011" Z="754.4187" />
+				<Hotspot X="5555.245" Y="-4490.221" Z="758.4829" />
+				<Hotspot X="5592.614" Y="-4503.533" Z="760.4406" />
+				<Hotspot X="5608.784" Y="-4571.607" Z="771.9323" />
+				<Hotspot X="5603.841" Y="-4600.624" Z="775.0228" />
+				<Hotspot X="5643.166" Y="-4581.785" Z="768.5605" />
+				<Hotspot X="5659.351" Y="-4620.495" Z="770.3283" />
+				<Hotspot X="5610.222" Y="-4691.723" Z="781.5969" />
+				<Hotspot X="5609.468" Y="-4763.044" Z="779.5185" />
+			</Hotspots>
+		</GrindArea>
+	</SubProfile>
+
+	<!-- Trainers
+		// VoT Trainers 
+		<Vendor Name="Nartok" Entry="3156" Type="Train" TrainClass="Warlock" X="-590.8021" Y="-4203.484" Z="38.42772" />
+		<Vendor Name="Rwag" Entry="3155" Type="Train" TrainClass="Rogue" X="-617.059" Y="-4202.635" Z="38.13419" />
+		<Vendor Name="Shikrik" Entry="3157" Type="Train" TrainClass="Shaman" X="-623.9393" Y="-4203.878" Z="38.13438" />
+		<Vendor Name="Acrypha" Entry="39206" Type="Train" TrainClass="Mage" X="-625.296" Y="-4210.167" Z="38.13409" />
+		<Vendor Name="Karranisha" Entry="39214" Type="Train" TrainClass="Hunter" X="-635.4618" Y="-4227.521" Z="38.13442" />
+		<Vendor Name="Frang" Entry="3153" Type="Train" TrainClass="Warrior" X="-640.1024" Y="-4229.821" Z="38.13384" />
+	// Razor Hill 	<Vendor Name="Jabul" Entry="44380" Type="Train" TrainClass="Druid" X="342.061" Y="-4771.4" Z="12.6346" />
+	// Razor Hill 	<Vendor Name="Tai'jin" Entry="3706" Type="Train" TrainClass="Priest" X="294.8838" Y="-4831.495" Z="10.52397" />
+	// Org  <Vendor Name="Sunwalker Atohmo" Entry="44725" Type="Train" TrainClass="Paladin" X="1863.88" Y="-4292.69" Z="23.78161" />
+
+		// Razor Hill Trainers 
+		<Vendor Name="Dhugru Gorelust" Entry="3172" Type="Train" TrainClass="Warlock" X="356.192" Y="-4837.954" Z="11.09003" />
+		<Vendor Name="Swart" Entry="3173" Type="Train" TrainClass="Shaman" X="307.1142" Y="-4839.906" Z="10.52483" />
+		<Vendor Name="Tarshaw Jaggedscar" Entry="3169" Type="Train" TrainClass="Warrior" X="311.3524" Y="-4827.792" Z="9.58133" />
+		<Vendor Name="Un'Thuwa" Entry="5880" Type="Train" TrainClass="Mage" X="334.717" Y="-4767.622" Z="12.63564" />
+		<Vendor Name="Thotar" Entry="3171" Type="Train" TrainClass="Hunter" X="275.3385" Y="-4703.997" Z="11.90329" />
+		<Vendor Name="Kaplak" Entry="3170" Type="Train" TrainClass="Rogue" X="268.1285" Y="-4710.936" Z="17.76719" />
+		<Vendor Name="Jabul" Entry="44380" Type="Train" TrainClass="Druid" X="342.061" Y="-4771.4" Z="12.6346" />
+		<Vendor Name="Tai'jin" Entry="3706" Type="Train" TrainClass="Priest" X="294.8838" Y="-4831.495" Z="10.52397" />
+	// Org  <Vendor Name="Sunwalker Atohmo" Entry="44725" Type="Train" TrainClass="Paladin" X="1863.88" Y="-4292.69" Z="23.78161" />
+
+		// Crossroads Trainers 
+		<Vendor Name="Egnom" Entry="50029" Type="Train" TrainClass="Mage" X="-429.2691" Y="-2662.823" Z="96.57784" />
+		<Vendor Name="Chintoka" Entry="50028" Type="Train" TrainClass="Warlock" X="-430.3038" Y="-2659.688" Z="96.58514" />
+		<Vendor Name="Tarmod" Entry="50032" Type="Train" TrainClass="Hunter" X="-434.6354" Y="-2680.118" Z="96.18735" />
+		<Vendor Name="Sunwalker Lonaki" Entry="50035" Type="Train" TrainClass="Paladin" X="-535.9566" Y="-2640.979" Z="95.8503" />
+		<Vendor Name="Musu Gentlemoon" Entry="50034" Type="Train" TrainClass="Druid" X="-539.4583" Y="-2643.507" Z="95.80042" />
+		<Vendor Name="Zumolo" Entry="50031" Type="Train" TrainClass="Priest" X="-522.4011" Y="-2641.29" Z="95.78765" />
+		<Vendor Name="Brulla" Entry="50022" Type="Train" TrainClass="Shaman" X="-520.2188" Y="-2642.453" Z="95.78797" />
+		<Vendor Name="Dargad" Entry="50027" Type="Train" TrainClass="Rogue" X="-431.3785" Y="-2680.99" Z="96.03146" />
+		<Vendor Name="Ging" Entry="50033" Type="Train" TrainClass="Warrior" X="-397.0208" Y="-2640.786" Z="96.22285" />
+		
+		// Orgrimmar Trainers 
+		<Vendor Name="Marud" Entry="47247" Type="Train" TrainClass="Mage" X="1764.56" Y="-4349.509" Z="-7.769573" />
+		<Vendor Name="Gest" Entry="3327" Type="Train" TrainClass="Rogue" X="1777.26" Y="-4280.41" Z="7.691677" />
+		<Vendor Name="Mirket" Entry="3325" Type="Train" TrainClass="Warlock" X="1836.67" Y="-4361.48" Z="-14.65565" />
+		<Vendor Name="Shalla Whiteleaf" Entry="44726" Type="Train" TrainClass="Druid" X="1888.95" Y="-4285.25" Z="23.55561" />
+		<Vendor Name="Sahi Cloudsinger" Entry="44740" Type="Train" TrainClass="Shaman" X="1884.15" Y="-4282.4" Z="23.59196" />
+		<Vendor Name="Nohi Plainswalker" Entry="44743" Type="Train" TrainClass="Hunter" X="1872.89" Y="-4281.46" Z="23.76961" />
+		<Vendor Name="Nahu Ragehoof" Entry="44723" Type="Train" TrainClass="Warrior" X="1868.09" Y="-4284.32" Z="23.77243" />
+		<Vendor Name="Sunwalker Atohmo" Entry="44725" Type="Train" TrainClass="Paladin" X="1863.88" Y="-4292.69" Z="23.78161" />
+		<Vendor Name="Seer Liwatha" Entry="44735" Type="Train" TrainClass="Priest" X="1863.46" Y="-4297.75" Z="23.74977" />
+
+	-->
+</HBProfile>

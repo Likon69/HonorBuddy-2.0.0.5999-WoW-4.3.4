@@ -1,0 +1,261 @@
+﻿<HBProfile>
+	<Name>[QO] Argent Tournament Rep - A [Kick]</Name>
+   
+	<MinLevel>1</MinLevel>
+	<MaxLevel>86</MaxLevel>
+   
+	<MinDurability>0.2</MinDurability>
+	<MinFreeBagSlots>2</MinFreeBagSlots>
+	
+	<MailGrey>False</MailGrey>
+	<MailWhite>False</MailWhite>
+	<MailGreen>False</MailGreen>
+	<MailBlue>True</MailBlue>
+	<MailPurple>True</MailPurple>
+   
+	<SellGrey>True</SellGrey>
+	<SellWhite>True</SellWhite>
+	<SellGreen>True</SellGreen>
+	<SellBlue>False</SellBlue>
+	<SellPurple>False</SellPurple>
+   
+	<TargetElites>True</TargetElites>
+
+	<AvoidMobs>
+	</AvoidMobs>
+	<Blackspots>
+	</Blackspots>
+	<Mailboxes>
+		<Mailbox X="8589.352" Y="697.2214" Z="547.2932" />
+	</Mailboxes>
+	<Vendors>
+		<Vendor Name="Brollen Wheatbeard" Entry="33599" Type="Repair" X="8548.112" Y="933.3629" Z="547.2943" />
+	</Vendors>
+
+	
+	
+	
+	<QuestOrder>
+	<!-- 
+	http://www.wowhead.com/blog=80946/argent-tournament-guide
+	-->
+	
+	  <If Condition="Me.IsHorde" >
+			<CustomBehavior File="RunMacro" Macro="/exit" NumOfTimes="1" WaitTime="500" />
+			<CustomBehavior File="RunMacro" Macro="/click StaticPopup1Button1" NumOfTimes="1" WaitTime="500" />
+			<CustomBehavior File="UserDialog"  Title="title" AllowBotStop="True" SoundCue="Asterisk" SoundCueInterval="2" Text="You must be Alliance to run this profile" />
+	  </If>
+
+	  <CustomBehavior File="UserDialog"  AllowBotStop="True" SoundCue="Asterisk" SoundCueInterval="2" Text="Disable Auto Equip / Equip me and press continue" />
+
+	  <CustomBehavior File="UserSettings" LootMobs="True" PullDistance="35" TrainNewSkills="False" LearnFlightPaths="True" />
+				
+			<If Condition="Me.MapId == 0" >
+				<If Condition="(!HasQuest(13633))" >
+				<!-- If you're lazy like me, it will fly u to dock and use boat to borean -->
+				<CustomBehavior File="FlyTo" X="-8291.137" Y="1404.371" Z="4.731256" />
+				<CustomBehavior File="ForcedDismount" />
+				<!-- SW dock to Valiance Keep -->
+				<CustomBehavior File="UseTransport"
+								Entry="-8300.08, 1405.158, 4.422395"
+								Exit="2234.375, 5132.568, 5.343217"
+								Start="-8288.816, 1424.703, 0.04" 
+								End="2218.391, 5119.589, 0.04" 
+								Transport="190536" />
+				<CustomBehavior File="WaitTimer" WaitTime="5000" />
+			</If></If>
+
+			<!-- 25 Seals to next profile -->
+			<If Condition="((HasQuest(13718)) &amp;&amp; (IsQuestCompleted(13718)))" >
+				<CustomBehavior File="FlyTo" X="8582.106" Y="692.2238" Z="547.2957" />
+				<CustomBehavior File="ForcedDismount" />
+		<TurnIn QuestName="The Valiant's Charge" QuestId="13718" TurnInName="Marshal Jacob Alerius" TurnInId="33225" />
+			</If>
+
+			<If Condition="((!HasQuest(13847)) &amp;&amp; (!IsQuestCompleted(13847)))" >
+				<CustomBehavior File="FlyTo" X="8582.106" Y="692.2238" Z="547.2957" />
+				<CustomBehavior File="ForcedDismount" />
+			</If>
+		<PickUp QuestName="At The Enemy's Gates" QuestId="13847" GiverName="Captain Joseph Holley" GiverId="33223" />
+		<PickUp QuestName="A Valiant's Field Training" QuestId="13592" GiverName="Sir Marcus Barlowe" GiverId="33222" />
+			<If Condition="Me.Race == WoWRace.Human">
+		<PickUp QuestName="The Grand Melee" QuestId="13665" GiverName="Captain Joseph Holley" GiverId="33223" />
+			</If>
+			<While Condition="HasQuestAvailable(33225)" >
+				<CustomBehavior File="InteractWith"  MobId="33225" NumOfTimes="1" CollectionDistance="200" WaitTime="1000" X="8626.668" Y="642.0759" Z="550.1888" />
+				<CustomBehavior File="RunMacro" Macro="/click GossipTitleButton1" NumOfTimes="1" WaitTime="1000" />
+				<CustomBehavior File="RunMacro" Macro="/click QuestFrameAcceptButton" NumOfTimes="1" WaitTime="1000" />
+			</While>
+			<If Condition="((HasQuest(13592)) &amp;&amp; (!IsQuestCompleted(13592)))" >
+				<CustomBehavior File="FlyTo" X="7158.93" Y="2559.076" Z="398.3151" />
+				<CustomBehavior File="ForcedDismount" />
+				<Objective QuestName="A Valiant's Field Training" QuestId="13592" Type="KillMob" MobId="32255" KillCount="10" />
+			</If>
+			<If Condition="((HasQuest(13847)) &amp;&amp; (!IsQuestCompleted(13847)))" >
+				<CustomBehavior File="FlyTo" X="6439.218" Y="2368.915" Z="465.2995" />
+				<CustomBehavior File="ForcedDismount" />
+	<CustomBehavior File="UserDialog" Title="title" AllowBotStop="True" SoundCue="Asterisk" SoundCueInterval="1" Text="I recommend that you do this quest manually while on a horse.  But if you're strong enough to solo them, press continue" />
+				<Objective QuestName="At The Enemy's Gates" QuestId="13847" Type="KillMob" MobId="33438" KillCount="15" />
+				<Objective QuestName="At The Enemy's Gates" QuestId="13847" Type="KillMob" MobId="33550" KillCount="10" />
+				<Objective QuestName="At The Enemy's Gates" QuestId="13847" Type="KillMob" MobId="33429" KillCount="3" />
+			</If>
+			<If Condition="((HasQuest(13600)) &amp;&amp; (!IsQuestCompleted(13600)))" >
+
+				<CustomBehavior File="FlyTo" X="6201.714" Y="973.8531" Z="164.7364" />
+				
+	<CustomBehavior File="UserDialog"  AllowBotStop="True" SoundCue="Asterisk" SoundCueInterval="1" Text="The looting part for this quest is User done until HB 4512+ is out, loot the 4 Winter Hyacinths\n\nPress continue after you have looted 4" />
+
+			<!-- enable in 4512+
+			  <While Condition="((HasQuest(13600)) &amp;&amp; (!IsQuestCompleted(13600)))" >
+				<CustomBehavior File="FlyTo" Distance="1" X="6138.642" Y="1001.314" Z="148.1539" />
+				<CustomBehavior File="ForcedDismount" />
+				<CustomBehavior File="InteractWith" QuestId="13600" MobId="194213" WaitForNpcs="False" ObjectType="Gameobject" NumOfTimes="1" CollectionDistance="50" X="6138.642" Y="1001.314" Z="148.1539" />
+				
+				<CustomBehavior File="FlyTo" Distance="1" X="6224.009" Y="1042.302" Z="148.2521" />
+				<CustomBehavior File="ForcedDismount" />
+				<CustomBehavior File="InteractWith" QuestId="13600" MobId="194213" WaitForNpcs="False" ObjectType="Gameobject" NumOfTimes="1" CollectionDistance="50" X="6224.009" Y="1042.302" Z="148.2521" />
+				
+				<CustomBehavior File="FlyTo" Distance="1" X="6259.771" Y="995.2029" Z="149.3356" />
+				<CustomBehavior File="ForcedDismount" />
+				<CustomBehavior File="InteractWith" QuestId="13600" MobId="194213" WaitForNpcs="False" ObjectType="Gameobject" NumOfTimes="1" CollectionDistance="50" X="6259.771" Y="995.2029" Z="149.3356" />
+				
+				<CustomBehavior File="FlyTo" Distance="1" X="6283.216" Y="974.5555" Z="159.504" />
+				<CustomBehavior File="ForcedDismount" />
+				<CustomBehavior File="InteractWith" QuestId="13600" MobId="194213" WaitForNpcs="False" ObjectType="Gameobject" NumOfTimes="1" CollectionDistance="50" X="6283.216" Y="974.5555" Z="159.504" />
+				
+				<CustomBehavior File="FlyTo" Distance="1" X="6284.188" Y="917.3234" Z="150.0614" />
+				<CustomBehavior File="ForcedDismount" />
+				<CustomBehavior File="InteractWith" QuestId="13600" MobId="194213" WaitForNpcs="False" ObjectType="Gameobject" NumOfTimes="1" CollectionDistance="50" X="6284.188" Y="917.3234" Z="150.0614" />
+				
+				<CustomBehavior File="FlyTo" Distance="1" X="6309.871" Y="880.2228" Z="149.0663" />
+				<CustomBehavior File="ForcedDismount" />
+				<CustomBehavior File="InteractWith" QuestId="13600" MobId="194213" WaitForNpcs="False" ObjectType="Gameobject" NumOfTimes="1" CollectionDistance="50" X="6309.871" Y="880.2228" Z="149.0663" />
+				
+				<CustomBehavior File="FlyTo" Distance="1" X="6342.218" Y="860.8906" Z="150.7731" />
+				<CustomBehavior File="ForcedDismount" />
+				<CustomBehavior File="InteractWith" QuestId="13600" MobId="194213" WaitForNpcs="False" ObjectType="Gameobject" NumOfTimes="1" CollectionDistance="50" X="6342.218" Y="860.8906" Z="150.7731" />
+				
+				<CustomBehavior File="FlyTo" Distance="1" X="6368.168" Y="857.0884" Z="162.5025" />
+				<CustomBehavior File="ForcedDismount" />
+				<CustomBehavior File="InteractWith" QuestId="13600" MobId="194213" WaitForNpcs="False" ObjectType="Gameobject" NumOfTimes="1" CollectionDistance="50" X="6368.168" Y="857.0884" Z="162.5025" />
+			  </While>
+			-->				
+
+				<CustomBehavior File="FlyTo" X="4601.406" Y="-1599.759" Z="156.9936" />
+				<CustomBehavior File="ForcedDismount" />
+				<CustomBehavior File="Misc\RunLua" Lua="UseItemByName(45000)" WaitTime="1000" />
+				<CustomBehavior File="WaitTimer" WaitTime="20000" />
+				<CustomBehavior File="InteractWith" QuestId="13600" MobId="194238" ObjectType="Gameobject" NumOfTimes="1" CollectionDistance="50" X="4604.894" Y="-1598.469" Z="154.9988" />
+				
+			</If>
+			<If Condition="((HasQuest(13616)) &amp;&amp; (!IsQuestCompleted(13616)))" >
+			  <If Condition="(!HasItem(45005))" >
+				<CustomBehavior File="FlyTo" X="5138.633" Y="-57.57318" Z="347.322" />
+				<CustomBehavior File="ForcedDismount" />
+				<Objective QuestName="The Edge Of Winter" QuestId="13616" Type="CollectItem" ItemId="45005" CollectCount="1" />
+			  </If>
+				
+			  <If Condition="(HasItem(45005))" >
+				<CustomBehavior File="FlyTo" X="2324.844" Y="-3944.382" Z="218.2621" />
+				<CustomBehavior File="ForcedDismount" />
+				<CustomBehavior File="UseItemOn" QuestId="13616" MobId="33303" ItemId="45005" NumOfTimes="1" WaitTime="5000" Range="5" CollectionDistance="50" X="2324.844" Y="-3944.382" Z="218.2621" />
+			  </If>
+			</If>
+			<If Condition="((HasQuest(13603)) &amp;&amp; (!IsQuestCompleted(13603)))" >
+				<CustomBehavior File="FlyTo" X="3803.127" Y="-4349.656" Z="180.808" />
+				<CustomBehavior File="ForcedDismount" />
+				
+	<CustomBehavior File="UserDialog"  AllowBotStop="True" SoundCue="Asterisk" SoundCueInterval="1" Text="This quest is User done until HB 4512+ is out, press continue and the bot will kiss frogs, just interact with lady when she spawns" />
+	
+			  <While Condition="((HasQuest(13603)) &amp;&amp; (!IsQuestCompleted(13603)))" >
+				<CustomBehavior File="Misc\RunLua" Lua="UseItemByName(44986)" WaitTime="1000" />
+				<CustomBehavior File="RunMacro" Macro="/tar Lake Frog\n/kiss\n/cleartarget" NumOfTimes="1" WaitTime="10000" />
+				<!-- This works on dev copy
+	<CustomBehavior File="InteractWith" MobId="33224" NumOfTimes="1" GossipOptions="1" WaitForNpcs="False" WaitTime="1000" CollectionDistance="100" X="3819.208" Y="-4361.081" Z="182.1844" />
+			  -->
+			  </While>
+			</If>
+			<If Condition="((HasQuest(13665)) &amp;&amp; (!IsQuestCompleted(13665)))" >
+			  <If Condition="(!HasItem(46069))" >
+				<CustomBehavior File="FlyTo" X="8594.644" Y="942.6311" Z="548.3071" />
+				<CustomBehavior File="ForcedDismount" />
+				<!-- get id of lance rack -->
+				<CustomBehavior File="InteractWith"  MobId="194618" ObjectType="Gameobject" NumOfTimes="1" CollectionDistance="50" X="8618.139" Y="897.5522" Z="546.9598" />
+			  </If>
+				<CustomBehavior File="FlyTo" Distance="100" X="8564.568" Y="675.5427" Z="547.6245" />
+				<CustomBehavior File="ForcedDismount" />
+				<CustomBehavior File="EquipItem" ItemId="46069" Slot="1" />
+				<CustomBehavior File="MountVehOnly" NpcMountId="33800" X="8564.568" Y="675.5427" Z="547.6245" />
+				<RunTo X="8656.979" Y="723.1112" Z="549.3882" />
+				
+	<CustomBehavior File="UserDialog"  AllowBotStop="True" SoundCue="Asterisk" SoundCueInterval="1" Text="You'll have to do this quest manually - defeat 3 champions" />
+				<CustomBehavior File="EjectVeh" Eject="1" />
+				
+			</If>
+			
+			<!-- Turn In the Dailies -->
+			<If Condition="((HasQuest(13592)) &amp;&amp; (IsQuestCompleted(13592)))" >
+				<CustomBehavior File="FlyTo" X="8582.106" Y="692.2238" Z="547.2957" />
+				<CustomBehavior File="ForcedDismount" />
+			</If>
+		<TurnIn QuestName="A Valiant's Field Training" QuestId="13592" TurnInName="Sir Marcus Barlowe" TurnInId="33222" />
+		<TurnIn QuestName="At The Enemy's Gates" QuestId="13847" TurnInName="Captain Joseph Holley" TurnInId="33223" />
+			<If Condition="((HasQuest(13665)) &amp;&amp; (IsQuestCompleted(13665)))" >
+		<TurnIn QuestName="The Grand Melee" QuestId="13665" TurnInName="Captain Joseph Holley" TurnInId="33223" />
+			</If>
+			<If Condition="((HasQuest(13616)) &amp;&amp; (IsQuestCompleted(13616)))" >
+		<TurnIn QuestName="The Edge Of Winter" QuestId="13616" TurnInName="Marshal Jacob Alerius" TurnInId="33225" />			
+			</If>
+			<If Condition="((HasQuest(13600)) &amp;&amp; (IsQuestCompleted(13600)))" >
+		<TurnIn QuestName="A Worthy Weapon" QuestId="13600" TurnInName="Marshal Jacob Alerius" TurnInId="33225" />
+			</If>
+
+			<If Condition="(IsQuestCompleted(13718))" >
+		<PickUp QuestName="The Valiant's Challenge" QuestId="13699" GiverName="Marshal Jacob Alerius" GiverId="33225" />
+			</If>
+			<If Condition="((HasQuest(13699)) &amp;&amp; (!IsQuestCompleted(13699)))" >
+			  <If Condition="(!HasItem(46069))" >
+				<CustomBehavior File="FlyTo" X="8594.644" Y="942.6311" Z="548.3071" />
+				<CustomBehavior File="ForcedDismount" />
+				<!-- get id of lance rack -->
+				<CustomBehavior File="InteractWith"  MobId="194618" ObjectType="Gameobject" NumOfTimes="1" CollectionDistance="50" X="8618.139" Y="897.5522" Z="546.9598" />
+			  </If>
+				<CustomBehavior File="FlyTo" X="8468.743" Y="934.3065" Z="547.6943" />
+				<CustomBehavior File="ForcedDismount" />
+				<CustomBehavior File="EquipItem" ItemId="46069" Slot="1" />
+	<CustomBehavior File="UserDialog" QuestId="13699" AllowBotStop="True" SoundCue="Asterisk" SoundCueInterval="1" Text="You'll have to do this quest manually, jump on your race's mount, then go speak with danny (nw from you)" />
+				<CustomBehavior File="EjectVeh" Eject="1" />
+			</If>
+			<If Condition="((HasQuest(13699)) &amp;&amp; (IsQuestCompleted(13699)))" >
+				<CustomBehavior File="FlyTo" X="8582.106" Y="692.2238" Z="547.2957" />
+				<CustomBehavior File="ForcedDismount" />
+		<TurnIn QuestName="The Valiant's Challenge" QuestId="13699" TurnInName="Marshal Jacob Alerius" TurnInId="33225" />
+		<PickUp QuestName="A Champion Rises" QuestId="13702" GiverName="Marshal Jacob Alerius" GiverId="33225" />
+			</If>
+			<If Condition="((HasQuest(13702)) &amp;&amp; (IsQuestCompleted(13702)))" >
+				<CustomBehavior File="FlyTo" X="8484.522" Y="1057.379" Z="550.7315" />
+				<CustomBehavior File="ForcedDismount" />
+		<TurnIn QuestName="A Champion Rises" QuestId="13702" TurnInName="Justicar Mariel Trueheart" TurnInId="33817" />
+		<PickUp QuestName="Eadric the Pure" QuestId="13794" GiverName="Justicar Mariel Trueheart" GiverId="33817" />
+			</If>
+			<If Condition="((HasQuest(13794)) &amp;&amp; (IsQuestCompleted(13794)))" >
+		<TurnIn QuestName="Eadric the Pure" QuestId="13794" TurnInName="Eadric the Pure" TurnInId="33759" />
+			</If>
+
+
+			<If Condition="(IsQuestCompleted(13684))" >
+		<CustomBehavior File="LoadProfile" ProfileName="[A - QO] Argent Tourny - Champion [Kick]" /> 
+			</If>
+
+
+
+
+
+
+
+
+			<CustomBehavior File="UserDialog" Title="title" AllowBotStop="True" SoundCue="Asterisk" SoundCueInterval="1" Text="You have reached the end of the profile (for now, I'm still developing this profile)\n\nIf you're not Human, you'll have to manually pickup your race quest\nMake sure you replace your weapon(s)\n\nIf you liked this profile, +rep is always appreciated" />
+	
+	</QuestOrder>
+
+</HBProfile>

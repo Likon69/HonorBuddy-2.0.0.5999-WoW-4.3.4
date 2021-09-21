@@ -1,0 +1,236 @@
+<HBProfile xsi:noNamespaceSchemaLocation="../Schemas/EchoSchema.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<!-- Original contribution by EchoTiger -->
+	<Name>Human Starter ($ShortHash$)</Name>
+
+	<MinDurability>0.3</MinDurability>
+	<MinFreeBagSlots>3</MinFreeBagSlots>
+
+	<SellGrey>true</SellGrey>
+	<SellWhite>true</SellWhite>
+	<SellGreen>true</SellGreen>
+	<SellBlue>true</SellBlue>
+	<SellPurple>false</SellPurple>
+
+	<MailGrey>false</MailGrey>
+	<MailWhite>true</MailWhite>
+	<MailGreen>true</MailGreen>
+	<MailBlue>true</MailBlue>
+	<MailPurple>true</MailPurple>
+
+	<TargetElites>true</TargetElites>
+
+	<AvoidMobs>
+	</AvoidMobs>
+
+	<Mailboxes>
+		<Mailbox Name="Northsire" X="-8908.27" Y="-129.904" Z="80.91549" />
+	</Mailboxes>
+
+	<Vendors>
+		<Vendor Name="Dermot Johns" Id="190" Type="Repair" X="-8897.71" Y="-115.3281" Z="81.84091" />
+		<Vendor Name="Brother Danil" Id="152" Type="Food" X="-8901.59" Y="-112.716" Z="81.84885" />
+	</Vendors>
+
+	<Blackspots>
+	</Blackspots>
+
+	<Blacklist>
+	</Blacklist>
+
+	<QuestOrder IgnoreCheckpoints="false" ContinuallySkipToCheckpoints="true" >
+		<!-- Check function status -->
+		<Code File="RunCode" Type="Definition">
+			<![CDATA[
+			private static bool? profileFunctionsEnabled => (bool?)AppDomain.CurrentDomain.GetData("QuestingProfiles_FunctionsEnabled");
+			private static bool IsStoreProfile(string path) => path.StartsWith("store://");
+			private static string Slashify(string path) => IsStoreProfile(path) ? path.Replace(@"\", "/") : path.Replace("/", @"\");
+
+			public __CompiledBatchClass__()
+			{
+				ActivateFunctions();
+			}
+
+			private static void ActivateFunctions()
+			{
+				if (profileFunctionsEnabled == null || profileFunctionsEnabled == false)
+				{
+					Bots.Professionbuddy.PBLog.Log(Colors.MediumPurple, "[Profile Message!]: ", Colors.Yellow, "Please stand by as the functions are being activated!");
+					LoadProfile(@"..\..\Functions\Activate Functions.xml");
+				}
+			}
+
+			private static void LoadProfile(string path)
+			{
+				var profile = GetNewPath(path);
+				if (!IsStoreProfile(profile) && !File.Exists(profile))
+				{
+					Bots.Professionbuddy.PBLog.Log(Colors.MediumPurple, "[Profile Message!]: ", Colors.Yellow, "Profile does not exist.\n" + profile);
+					return;
+				}
+
+				Bots.Professionbuddy.PBLog.Log(Colors.MediumPurple, "[Profile Message!]: ", Colors.Yellow, "Loading: " + profile);
+				ProfileManager.LoadNew(profile, false);
+			}
+
+			private static string GetNewPath(string path)
+			{
+				if (IsStoreProfile(path))
+					return Slashify(path);
+
+				var currentProfile = ProfileManager.XmlLocation;
+				if (IsStoreProfile(currentProfile))
+					return Slashify(currentProfile + "/../" + path);
+
+				var absolutePath = Path.Combine(Path.GetDirectoryName(currentProfile), path);
+				absolutePath = Path.GetFullPath(absolutePath);
+				var canonicalPath = new Uri(absolutePath).LocalPath;
+				return Slashify(canonicalPath);
+			}]]>
+		</Code>
+		<Code File="RunCode" Code="ActivateFunctions();" />
+		<!-- END Check function status -->
+
+		<If Condition="Me.IsHorde" >
+			<Code File="LoadProfile" ProfileName="..\..\Questing Autoloader.xml" />
+		</If>
+		<!-- RunCode Methods -->
+			<Code File="RunCode">
+			<![CDATA[
+				Bots.Professionbuddy.PBLog.Log(System.Windows.Media.Colors.MediumPurple, "> [Profile Initialization Status] ", System.Windows.Media.Colors.CornflowerBlue, "\n     Auto-Looting	:: Enabled\n     Looting	:: Enabled\n     Game Addons	:: Disabled");
+				Lua.DoString("SetCVar('AutoLootDefault', 1);");
+				Lua.DoString("SetCVar('autoDismountFlying', 1);");
+				CharacterSettings.Instance.LootMobs = true;
+				CharacterSettings.Instance.Save();
+				Logging.Write(System.Windows.Media.Colors.MediumPurple, "> [Ready to bot!]");
+			]]>
+			</Code>
+			<Code File="RunCode" Type="Definition">
+				<![CDATA[
+						bool DoQuest(params uint[] questIds)
+						{
+							foreach (var questId in questIds)
+							{
+								if (HasQuest(questId) && !IsQuestCompleted(questId)) return true;
+							}
+							return false;
+						}
+						bool NeedsQuest(params uint[] questIds)
+						{
+							foreach (var questId in questIds)
+							{
+								if (!HasQuest(questId) && !IsQuestCompleted(questId)) return true;
+							}
+							return false;
+						}
+						bool NeedsBreadcrumbQuest(params uint[] questIds)
+						{
+							foreach (var questId in questIds)
+							{
+								if (IsQuestCompleted(questId)) return false;
+							}
+							return true;
+						}
+						bool QuestDone(params uint[] questIds)
+						{
+							foreach (var questId in questIds)
+							{
+								if (HasQuest(questId) && IsQuestCompleted(questId)) return true;
+							}
+							return false;
+						}
+						bool QuestFlaggedCompleted(params uint[] questIds)
+						{
+							foreach (var questId in questIds)
+							{
+								return Lua.GetReturnVal<bool>($"return IsQuestFlaggedCompleted({questId});", 0);
+							}
+							return false;
+						}
+						async Task SkipCutscene(int preWait = 3000, int postWait = 3000)
+						{
+					// Add detection of cutscene here.
+							await Coroutine.Sleep(preWait);
+					// Test and improve the working method.
+							Lua.DoString("MovieFrame:StopMovie(); CinematicFrame_CancelCinematic(); StopCinematic();");
+							await Coroutine.Sleep(postWait);
+						}
+					]]>
+			</Code>
+		<!-- END RunCode Methods -->
+
+		<!-- Variant Order: 1)NotHuman 2)Warrior 3)Hunter 4)Warlock 5)Rogue 6)Paladin 7)Priest 8)Mage 9)Monk -->
+		<PickUp QuestName="Beating Them Back!" VariantQuestIds="29078, 28765, 28766, 28767, 28764, 28762, 28763, 28757, 31139" GiverName="Marshal McBride" GiverId="197" X="-8913.424" Y="-137.5417" Z="80.80978" />
+			<Code File="KillUntilComplete" MobId="49871" VariantQuestIds="29078, 28765, 28766, 28767, 28764, 28762, 28763, 28757, 31139" >
+				<HuntingGrounds>
+					<Hotspot X="-8845.634" Y="-104.9537" Z="82.17284" />
+					<Hotspot X="-8889.754" Y="-63.98954" Z="85.63864" />
+					<Hotspot X="-8930.753" Y="-58.64423" Z="89.80518" />
+				</HuntingGrounds>
+			</Code>
+		<TurnIn QuestName="Beating Them Back!" VariantQuestIds="29078, 28765, 28766, 28767, 28764, 28762, 28763, 28757, 31139" TurnInName="Marshal McBride" TurnInId="197" X="-8913.424" Y="-137.5417" Z="80.80978" />
+
+		<PickUp QuestName="Lions for Lambs" VariantQuestIds="29079, 28774, 28759, 28773, 28772, 28770, 28771, 28769, 31140" GiverName="Marshal McBride" GiverId="197" X="-8913.424" Y="-137.5417" Z="80.80978" />
+		<While Condition="DoQuest(29079, 28774, 28759, 28773, 28772, 28770, 28771, 28769, 31140)" >
+			<Code File="KillUntilComplete" MobId="49874" VariantQuestIds="29079, 28774, 28759, 28773, 28772, 28770, 28771, 28769, 31140" >
+				<HuntingGrounds>
+					<Hotspot X="-8821.861" Y="-118.1839" Z="81.07479" />
+					<Hotspot X="-8791.521" Y="-78.24496" Z="89.06188" />
+					<Hotspot X="-8820.999" Y="-45.91148" Z="89.47006" />
+					<Hotspot X="-8915.696" Y="-65.0357" Z="87.42548" />
+				</HuntingGrounds>
+			</Code>
+		</While>
+		<TurnIn QuestName="Lions for Lambs" VariantQuestIds="29079, 28774, 28759, 28773, 28772, 28770, 28771, 28769, 31140" TurnInName="Marshal McBride" TurnInId="197" X="-8913.424" Y="-137.5417" Z="80.80978" />
+
+		<PickUp QuestName="Join the Battle!" VariantQuestIds="29080, 28789, 28780, 28788, 28787, 28785, 28786, 28784, 31143" GiverName="Marshal McBride" GiverId="197" X="-8913.424" Y="-137.5417" Z="80.80978" />
+		<TurnIn QuestName="Join the Battle!" VariantQuestIds="29080, 28789, 28780, 28788, 28787, 28785, 28786, 28784, 31143" TurnInName="Sergeant Willem" TurnInId="823" X="-8827.837" Y="-158.6233" Z="79.85905" />
+
+		<PickUp QuestName="They Sent Assassins" VariantQuestIds="29081, 28797, 28791, 28796, 28795, 28793, 28794, 28792, 31144" GiverName="Sergeant Willem" GiverId="823" X="-8827.837" Y="-158.6233" Z="79.85905" />
+		<While Condition="DoQuest(29081, 28797, 28791, 28796, 28795, 28793, 28794, 28792, 31144)" >
+			<Code File="KillUntilComplete" MobId="50039" VariantQuestIds="29081, 28797, 28791, 28796, 28795, 28793, 28794, 28792, 31144" >
+				<HuntingGrounds>
+					<Hotspot X="-8758.018" Y="-167.1537" Z="84.39441" />
+					<Hotspot X="-8737.729" Y="-201.1385" Z="87.76439" />
+					<Hotspot X="-8793.842" Y="-210.241" Z="82.7071" />
+				</HuntingGrounds>
+			</Code>
+		</While>
+		<TurnIn QuestName="They Sent Assassins" VariantQuestIds="29081, 28797, 28791, 28796, 28795, 28793, 28794, 28792, 31144" TurnInName="Sergeant Willem" TurnInId="823" X="-8827.837" Y="-158.6233" Z="79.85905" />
+
+		<PickUp QuestName="The Rear is Clear" VariantQuestIds="29083, 28823, 28817, 28822, 28821, 28819, 28820, 28818, 31145" GiverName="Sergeant Willem" GiverId="823" X="-8827.837" Y="-158.6233" Z="79.85905" />
+		<TurnIn QuestName="The Rear is Clear" VariantQuestIds="29083, 28823, 28817, 28822, 28821, 28819, 28820, 28818, 31145" TurnInName="Marshal McBride" TurnInId="197" X="-8913.424" Y="-137.5417" Z="80.80978" />
+
+		<PickUp QuestName="Blackrock Invasion" QuestId="26389" GiverName="Marshal McBride" GiverId="197" X="-8827.837" Y="-158.6233" Z="79.85905" />
+		<PickUp QuestName="Extinguishing Hope" QuestId="26391" GiverName="Milly Osworth" GiverId="9296" X="-8923.88" Y="-135.8889" Z="81.02888" />
+
+		<While Condition="DoQuest(26391)" >
+			<Code File="InteractWith" MobId="42940" Range="10" InteractByUsingItemId="58362" NumOfTimes="500" CollectionDistance="500" QuestId="26391" ProactiveCombatStrategy="ClearAll" X="-9063.322" Y="-277.0595" Z="73.64384" TerminateWhen="IsQuestCompleted(26389)" />
+			<Code File="InteractWith" MobId="42940" Range="10" InteractByUsingItemId="58362" NumOfTimes="500" CollectionDistance="500" QuestId="26391" ProactiveCombatStrategy="ClearMobsTargetingUs" X="-9063.322" Y="-277.0595" Z="73.64384" />
+		</While>
+		<While Condition="DoQuest(26389)" >
+			<Code File="KillUntilComplete" MobId="42937" QuestId="26389" >
+				<HuntingGrounds>
+					<Hotspot X="-9040.773" Y="-285.641" Z="74.41951" />
+					<Hotspot X="-9086.801" Y="-307.1897" Z="73.33006" />
+					<Hotspot X="-9093.738" Y="-376.7223" Z="73.97292" />
+				</HuntingGrounds>
+			</Code>
+		</While>
+
+		<TurnIn QuestName="Extinguishing Hope" QuestId="26391" TurnInName="Milly Osworth" TurnInId="9296" X="-8923.88" Y="-135.8889" Z="81.02888" />
+		<TurnIn QuestName="Blackrock Invasion" QuestId="26389" TurnInName="Marshal McBride" TurnInId="197" X="-8913.424" Y="-137.5417" Z="80.81001" />
+
+		<PickUp QuestName="Ending the Invasion!" QuestId="26390" GiverName="Marshal McBride" GiverId="197" X="-8913.424" Y="-137.5417" Z="80.81001" />
+		<While Condition="DoQuest(26390)" >
+			<Code File="KillUntilComplete" MobId="42938" QuestId="26390" X="-8883.111" Y="-442.0399" Z="68.05946" />
+		</While>
+		<TurnIn QuestName="Ending the Invasion!" QuestId="26390" TurnInName="Marshal McBride" TurnInId="197" X="-8913.424" Y="-137.5417" Z="80.80973" />
+
+		<PickUp QuestName="Report to Goldshire" QuestId="54" GiverName="Marshal McBride" GiverId="197" X="-8913.424" Y="-137.5417" Z="80.80973" />
+
+		<Checkpoint Level="5" /> <!-- Goldshire -->
+
+		<Code File="LoadProfile" ProfileName="..\Eastern Kingdoms\Elwynn Forest.xml" />
+
+	</QuestOrder>
+</HBProfile>

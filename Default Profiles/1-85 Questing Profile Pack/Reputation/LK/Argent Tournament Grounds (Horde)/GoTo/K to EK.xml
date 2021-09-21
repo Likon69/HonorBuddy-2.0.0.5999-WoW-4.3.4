@@ -1,0 +1,47 @@
+<HBProfile>
+  <Name>H K to EK</Name>
+
+	<MinLevel>1</MinLevel>
+	<MaxLevel>86</MaxLevel>
+
+	<MinDurability>0.2</MinDurability>
+	<MinFreeBagSlots>2</MinFreeBagSlots>
+
+	<MailGrey>False</MailGrey>
+	<MailWhite>False</MailWhite>
+	<MailGreen>False</MailGreen>
+	<MailBlue>False</MailBlue>
+	<MailPurple>False</MailPurple>
+
+	<SellGrey>False</SellGrey>
+	<SellWhite>False</SellWhite>
+	<SellGreen>False</SellGreen>
+	<SellBlue>False</SellBlue>
+	<SellPurple>False</SellPurple>
+
+	<TargetElites>False</TargetElites>
+
+	<AvoidMobs>
+	</AvoidMobs>
+	<Blackspots>
+	</Blackspots>
+	<Mailboxes>
+	</Mailboxes>
+	<Vendors>
+	</Vendors>
+	<QuestOrder>		
+		<CustomBehavior File="FlyTo" X="1768.656" Y="-4343.217" Z="102.0792" />
+		<CustomBehavior File="ForcedDismount" />
+		<CustomBehavior File="Message" Text="Running to Org Zepp to UC" LogColor="Cornflowerblue" />
+		<RunTo X="1840.225" Y="-4390.912" Z="135.2337" />
+		<CustomBehavior File="Message" Text="Waiting for Orc Zepp to UC - don't interact!" LogColor="Orange" />
+		<CustomBehavior File="UseTransport" 
+			TransportId="164871"
+			WaitAtX="1840.127" WaitAtY="-4386.9" WaitAtZ="135.2329"
+			TransportStartX="1833.509" TransportStartY="-4391.543" TransportStartZ="152.7679"
+			StandOnX="1834.595" StandOnY="-4385.989" StandOnZ="135.0105"
+			TransportEndX="2062.376" TransportEndY="292.998" TransportEndZ="114.973"
+			GetOffX="2070.155" GetOffY="289.2588" GetOffZ="97.0315"
+		/>
+	</QuestOrder>		
+</HBProfile>

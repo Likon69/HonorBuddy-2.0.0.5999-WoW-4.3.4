@@ -1,0 +1,389 @@
+<HBProfile>
+   <!-- Profile by Chinajade (last updated for 2011 Hallow's End)
+   
+      PROFILE EXPECTATIONS:
+         * When using this profile, be certain to set the HonorBuddy bot to (select only one):
+                ( ) Grinding / Mixed
+                (*) Questing
+                ( ) PvP
+   
+         * This profile is appropriate for (check all that apply):
+                [X] Alliance   [ ] Achievement
+                [X] Horde      [ ] Farming
+                               [ ] Leveling
+                               [ ] PvP
+                               [X] Questing
+                               [ ] Reputation
+                               [ ] Seasonal
+							   
+		NOTES:
+		 * Acquires the Alliance Balloon [http://www.wowhead.com/item=72042]
+		   or the Horde Balloon [http://www.wowhead.com/item=72045] minipet.
+		   
+		 * We use variant timers between actions where appropriate to make it look
+			more 'human like'.
+			
+		LICENSE:
+			This work is licensed under the
+				Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License.
+			also known as CC-BY-NC-SA.  To view a copy of this license, visit
+				http://creativecommons.org/licenses/by-nc-sa/3.0/
+			or send a letter to
+				Creative Commons
+				171 Second Street, Suite 300
+				San Francisco, California, 94105, USA.		
+    -->
+   <Name>Blown Away Minipet [Chinajade] $Revision$</Name>
+   <MinLevel>10</MinLevel>	<!-- 70, because we need a 'fast' mount -->
+   <MaxLevel>100</MaxLevel>
+   
+   <MinDurability>0.4</MinDurability>
+   <MinFreeBagSlots>2</MinFreeBagSlots>
+    
+   <MailGrey>False</MailGrey>
+   <MailWhite>False</MailWhite>
+   <MailGreen>True</MailGreen>
+   <MailBlue>True</MailBlue>
+   <MailPurple>True</MailPurple>
+   
+   <SellGrey>True</SellGrey>
+   <SellWhite>True</SellWhite>
+   <SellGreen>False</SellGreen>
+   <SellBlue>False</SellBlue>
+   <SellPurple>False</SellPurple>
+   
+   
+   <Blackspots>
+       <!-- Ramp in Darnasses otw to Auction House -->
+		<Blackspot X="9880.041" Y="2248.925" Z="1329.245" Radius="15" />
+		
+		<!-- Orgrimmar: Cleft of Shadow -->
+		<Blackspot X="1758.469" Y="-4306.335" Z="6.681192" Radius="30" />
+		<Blackspot X="1802.301" Y="-4335.668" Z="-11.13987" Radius="50" />
+		<Blackspot X="1840.377" Y="-4404.775" Z="4.310957" Radius="30" />
+   </Blackspots>
+   
+   <QuestOrder>
+		<CustomBehavior File="Message" LogColor="CornflowerBlue"
+			Text="Compiling quests" />
+			
+		<If Condition="Me.FreeBagSlots &lt; 2" >
+			<CustomBehavior File="UserDialog" StopOnContinue="true"
+				Text="You must have 2 free bag slots to start this profile.\nPlease make some room in your inventory and restart the profile." />
+		</If>
+
+		
+		<!--
+		  ========== ALLIANCE ==========
+		  -->
+		<If Condition="Me.IsAlliance" >
+			<If Condition="IsQuestCompleted(29412) &amp;&amp; !HasItem(72042)" >
+				<!-- display the companion -->
+				<CustomBehavior File="Misc\RunLua" Lua="for i=1,GetNumCompanions(&quot;CRITTER&quot;) do _,_,spellId,_,_,_=GetCompanionInfo(&quot;CRITTER&quot;,i); if (spellId == 101986) then CallCompanion(&quot;CRITTER&quot;, i) break end end" />
+
+				<CustomBehavior File="UserDialog" StopOnContinue="true"
+					Text="You already have the &quot;Alliance Balloon&quot; minipet. [http://www.wowhead.com/item=72042]" />
+			</If>
+			
+			<If Condition="Me.MapId != 0" >
+				<CustomBehavior File="UserDialog" StopOnContinue="true"
+					Text="Please move to Eastern Kingdoms, and restart the profile." />
+				
+			<ElseIf Condition="(Me.ZoneId != 1519) &amp;&amp; !CanFly()" >
+				<CustomBehavior File="UserDialog" StopOnContinue="true"
+					Text="The toon is too low for us to safely move you to Stormwind.\n\nPlease move to Stormwind manually, and restart the profile." />
+				</ElseIf>				
+			</If>
+			
+			<If Condition="!HasQuest(29412) &amp;&amp; !IsQuestCompleted(29412)" >
+				<If Condition="CanFly()" >
+					<CustomBehavior File="FlyTo" DestName="Stormwind Cathedral"
+						X="-8611.528" Y="706.9344" Z="96.71185"  />
+					<CustomBehavior File="ForcedDismount" />
+				</If>			
+				<Pickup QuestName="Blown Away" QuestId="29412"
+					GiverName="Vin"  GiverId="54117"
+					X="-8606.632" Y="699.4549" Z="97.02701" />
+			</If>
+			
+			<If Condition="HasQuest(29412) &amp;&amp; !IsQuestCompleted(29412)" >
+				<CustomBehavior File="UserSettings" UseMount="false" />
+				<CustomBehavior File="ForcedDismount" />
+				
+				<CustomBehavior File="CollectThings"
+					RandomizeStartingHotspot="true"
+					QuestId="29412" CollectUntil="QuestComplete"
+					ObjectId="209242"
+					HuntingGroundRadius="35" NonCompeteDistance="7"
+					CollectItemId="71034" CollectItemCount="5" >
+					
+					<!-- Cathedral district -->
+					<Hotspot Name="Cathedral District fishing dock" StartPoint="true"
+						X="-8511.612" Y="755.7997" Z="99.97105" />
+					<Hotspot Name="Cathedral District NE corner"
+						X="-8487.98" Y="725.7591" Z="98.36971" />
+						
+					<!-- Dwarven District -->
+					<Hotspot Name="The Shady Lady"
+						X="-8536.425" Y="607.6456" Z="102.8778" />
+					<Hotspot Name="Cutthroat Alley"
+						X="-8527.669" Y="591.5082" Z="101.4927" />
+					<Hotspot Name="Stonehand Mining" StartPoint="true"
+						X="-8419.524" Y="669.4157" Z="94.84315" />	
+					<Hotspot Name="Deeprun Tram"
+						X="-8398.785" Y="570.9624" Z="92.08311" />
+					<Hotspot Name="Stormwind Keep"
+						X="-8552.596" Y="476.0231" Z="104.2569" />						
+					<!-- Old Town -->
+					<Hotspot Name="Old Town north entrance" StartPoint="true"
+						X="-8643.741" Y="480.0649" Z="102.582" />
+					<Hotspot Name="Pig and Whistle Tavern"
+						X="-8645.129" Y="428.4146" Z="101.6144" />	
+					<Hotspot Name="Limited Immunity"
+						X="-8704.27" Y="401.598" Z="100.7589" />	
+					<Hotspot Name="Old Town west entrance"
+						X="-8696.353" Y="475.2361" Z="95.4076" />
+					<Hotspot Name="Canal water fountain"
+						X="-8792.185" Y="479.5576" Z="97.15359" />
+						
+					<!-- Trade District -->
+					<Hotspot Name="Trade District east entrance" StartPoint="true"
+						X="-8769.479" Y="606.9111" Z="97.15215" />
+					<Hotspot Name="Trade District north entrance"
+						X="-8775.748" Y="668.7895" Z="103.3133" />
+					<Hotspot Name="Canal Tailor and Fit Shop"
+						X="-8750.958" Y="721.0527" Z="98.16564" />
+					<Hotspot Name="Trade District west entrance"
+						X="-8845.096" Y="723.1747" Z="97.45924" />
+					
+					<!-- Mage Quarter -->
+					<Hotspot Name="Mage Quarter east entrance"
+						X="-8909.531" Y="790.8226" Z="87.5058" />
+					<Hotspot Name="Mage Quarter 3-way"
+						X="-8909.455" Y="846.7176" Z="96.19976" />	
+					<Hotspot Name="Larson's Clothiers" StartPoint="true"
+						X="-8982.866" Y="837.2986" Z="105.76" />	
+					<Hotspot Name="The Blue Recluse"
+						X="-9023.885" Y="854.6338" Z="105.5642" />
+					<Hotspot Name="Ancient Curios"
+						X="-9007.253" Y="950.1976" Z="110.078" />
+					<Hotspot Name="The Slaughtered Lamb"
+						X="-8935.313" Y="970.7444" Z="117.3977" />
+					<Hotspot Name="Mage Quarter north entrance"
+						X="-8894.188" Y="913.4932" Z="110.7583" />
+					
+					<!-- The (burned out) Park -->
+					<Hotspot Name="The Park south bridge"
+						X="-8815.044" Y="955.4481" Z="99.2606" />
+					<Hotspot Name="The Park east bridge"
+						X="-8735.949" Y="891.3859" Z="100.6497" />
+				</CustomBehavior>
+
+				<CustomBehavior File="UserSettings" Preset="UserOriginal" />
+			</If>
+			
+			<If Condition="HasQuest(29412) &amp;&amp; IsQuestCompleted(29412)" >
+				<If Condition="CanFly()" >
+					<CustomBehavior File="FlyTo" DestName="Stormwind Cathedral"
+						X="-8611.528" Y="706.9344" Z="96.71185"  />
+					<CustomBehavior File="ForcedDismount" />
+				</If>
+
+				<TurnIn QuestName="Blown Away" QuestId="29412"
+					TurnInName="Vin"  TurnInId="54117"
+					X="-8606.632" Y="699.4549" Z="97.02701" />
+				<CustomBehavior File="WaitTimer" WaitTime="1000" VariantTime="1500" />
+			</If>
+				
+			<If Condition="HasItem(72042)" >
+				<!-- Learn our new mini-pet spell -->
+				<CustomBehavior File="Misc\RunLua" Lua="UseItemByName(72042)" />
+				<CustomBehavior File="WaitTimer" WaitTime="1500" VariantTime="1500" />
+				<CustomBehavior File="Message" LogColor="CornflowerBlue"
+					Text="Grats on the new &quot;Alliance Ballopon&quot; mini-pet!" />
+				<CustomBehavior File="WaitTimer" WaitTime="1500" VariantTime="1500" />
+			</If>
+					
+			<!-- Display the companion... -->
+			<CustomBehavior File="Misc\RunLua" Lua="for i=1,GetNumCompanions(&quot;CRITTER&quot;) do _,_,spellId,_,_,_=GetCompanionInfo(&quot;CRITTER&quot;,i); if (spellId == 101986) then CallCompanion(&quot;CRITTER&quot;, i) break end end" />
+			<CustomBehavior File="WaitTimer" WaitTime="1500" VariantTime="1500" />
+		
+			<!-- Deploy to a random place inside Stormwind... -->
+			<If Condition="Chance(20.0)">
+				<CustomBehavior File="FlyTo" DestName="Elder's mailbox"
+					X="-8859.798" Y="640.8622" Z="96.28608" />
+			<ElseIf Condition="Chance(20.0)">
+				<CustomBehavior File="FlyTo" DestName="Backgate Bank"
+					X="-8360.063" Y="620.2231" Z="95.35557" />
+				</ElseIf>
+			<ElseIf Condition="Chance(20.0)">
+				<CustomBehavior File="FlyTo" DestName="Cathedral Square mailbox"
+					X="-8657.595" Y="775.6388" Z="96.99747" />
+				</ElseIf>
+			<ElseIf Condition="Chance(20.0)">
+				<CustomBehavior File="FlyTo" DestName="Fishing pier mailbox"
+					X="-8826.954" Y="729.8922" Z="98.42244" />
+				</ElseIf>
+			<Else Condition="Chance(20.0)">
+				<CustomBehavior File="FlyTo" DestName="Canal mailbox"
+					X="-8752.236" Y="561.497" Z="97.43406" />
+				</Else>
+			</If>
+			
+			<CustomBehavior File="ForcedDismount" />
+		
+		<!--
+		  ========== HORDE ==========
+		  -->
+		<ElseIf Condition="Me.IsHorde" >
+			<If Condition="IsQuestCompleted(29401) &amp;&amp; !HasItem(72042)" >
+				<!-- display the companion -->
+				<CustomBehavior File="Misc\RunLua" Lua="for i=1,GetNumCompanions(&quot;CRITTER&quot;) do _,_,spellId,_,_,_=GetCompanionInfo(&quot;CRITTER&quot;,i); if (spellId == 101989) then CallCompanion(&quot;CRITTER&quot;, i) break end end" />
+
+				<CustomBehavior File="UserDialog" StopOnContinue="true"
+					Text="You already have the &quot;Horde Balloon&quot; minipet. [http://www.wowhead.com/item=72045]" />
+			</If>
+			
+			<If Condition="Me.MapId != 1" >
+				<CustomBehavior File="UserDialog" StopOnContinue="true"
+					Text="Please move to Kalimdor, and restart the profile." />
+				
+			<ElseIf Condition="(Me.ZoneId != 1637) &amp;&amp; !CanFly()" >
+				<CustomBehavior File="UserDialog" StopOnContinue="true"
+					Text="The toon is too low for us to safely move you to Orgrimmar.\n\nPlease move to Orgrimmar manually, and restart the profile." />
+				</ElseIf>				
+			</If>
+			
+			<If Condition="!HasQuest(29401) &amp;&amp; !IsQuestCompleted(29401)" >
+				<If Condition="CanFly()" >
+					<CustomBehavior File="FlyTo" DestName="Valley of Wisdom"
+						X="1941.681" Y="-4346.333" Z="24.03115" />
+					<CustomBehavior File="ForcedDismount" />
+				</If>			
+				<Pickup QuestName="Blown Away" QuestId="29401"
+					GiverName="Jaga"  GiverId="54004"
+					X="1943.504" Y="-4343.382" Z="24.04261" />
+			</If>
+			
+			<If Condition="HasQuest(29401) &amp;&amp; !IsQuestCompleted(29401)" >
+				<CustomBehavior File="UserSettings" UseMount="false" />
+				<CustomBehavior File="ForcedDismount" />
+				
+				<CustomBehavior File="CollectThings"
+					RandomizeStartingHotspot="true"
+					QuestId="29401" CollectUntil="QuestComplete"
+					ObjectId="209058"
+					HuntingGroundRadius="50" NonCompeteDistance="7"
+					CollectItemId="71034" CollectItemCount="5" >
+					
+					<!-- Valley of Honor -->
+					<Hotspot Name="The Wyvern's Tail" StartPoint="true"
+						X="1930.933" Y="-4723.336" Z="35.9381" />
+					<Hotspot Name="The Burning Anvil"
+						X="2053.129" Y="-4834.064" Z="27.47155" />
+					<Hotspot Name="Orgrimmar Rear Gate mailbox"
+						X="2475.128" Y="-4835.991" Z="138.2321" />
+					
+					<!-- The Drag -->
+					<Hotspot Name="Nogg's Machine Shop" StartPoint="true"
+						X="1842.053" Y="-4522.964" Z="23.96594" />
+					<Hotspot Name="Framed building mailbox"
+						X="1729.753" Y="-4496.687" Z="31.19408" />
+					<Hotspot Name="Elevator mailbox"
+						X="1692.802" Y="-4288.086" Z="30.07902" />
+					<Hotspot Name="Hall of Legends mailbox"
+						X="1654.833" Y="-4235.468" Z="52.05011" />
+					
+					<!-- Valley of Strength -->
+					<!-- We intentionally skip this area, as there are waaaaay
+						 too many people hanging out here, and waaay too many objects
+						 for HBnav to get hung up on.
+					  -->
+					  
+					<!-- Valley of Spirits -->
+					<Hotspot Name="Gnome trike dealer" StartingPoint="true"
+						X="1485.164" Y="-4169.819" Z="52.63356" />
+					<Hotspot Name="Zamja (Cooking Trainer)"
+						X="1703.262" Y="-4079.331" Z="48.82549" />
+					<Hotspot Name="Orgrimmar Barrens entrance"
+						X="1738.413" Y="-4022.121" Z="49.66384" />
+				</CustomBehavior>
+
+				<CustomBehavior File="UserSettings" Preset="UserOriginal" />
+			</If>
+			
+			<If Condition="HasQuest(29401) &amp;&amp; IsQuestCompleted(29401)" >
+				<If Condition="CanFly()" >
+					<CustomBehavior File="FlyTo" DestName="Valley of Wisdom"
+						X="1941.681" Y="-4346.333" Z="24.03115" />
+					<CustomBehavior File="ForcedDismount" />
+				</If>
+
+				<TurnIn QuestName="Blown Away" QuestId="29401"
+					TurnInName="Jaga"  TurnInId="54004"
+					X="1943.504" Y="-4343.382" Z="24.04261"  />
+				<CustomBehavior File="WaitTimer" WaitTime="1000" VariantTime="1500" />
+			</If>
+				
+			<If Condition="HasItem(72045)" >
+				<!-- Learn our new mini-pet spell -->
+				<CustomBehavior File="ForcedDismount" />
+				<CustomBehavior File="Misc\RunLua" Lua="UseItemByName(72042)" />
+				<CustomBehavior File="WaitTimer" WaitTime="1500" VariantTime="1500" />
+				<CustomBehavior File="Message" LogColor="CornflowerBlue"
+					Text="Grats on the new &quot;Horde Balloon&quot; mini-pet!" />
+				<CustomBehavior File="WaitTimer" WaitTime="1500" VariantTime="1500" />
+			</If>
+					
+			<!-- Display the companion... -->
+			<CustomBehavior File="Misc\RunLua" Lua="for i=1,GetNumCompanions(&quot;CRITTER&quot;) do _,_,spellId,_,_,_=GetCompanionInfo(&quot;CRITTER&quot;,i); if (spellId == 101989) then CallCompanion(&quot;CRITTER&quot;, i) break end end" />
+			<CustomBehavior File="WaitTimer" WaitTime="1500" VariantTime="1500" />
+			
+			<!-- Deploy to a random place inside Orgrimmar... -->
+			<If Condition="Chance(20.0)">
+				<CustomBehavior File="FlyTo" DestName="Valley of Honor mailbox"
+					X="1891.145" Y="-4550.409" Z="30.36392" />
+			<ElseIf Condition="Chance(20.0)">
+				<CustomBehavior File="FlyTo" DestName="The Wyvern's Tail mailbox"
+					X="1929.545" Y="-4719.393" Z="35.96167" />
+				</ElseIf>
+			<ElseIf Condition="Chance(20.0)">
+				<CustomBehavior File="FlyTo" DestName="Framed Building mailbox"
+					X="1729.753" Y="-4496.687" Z="31.19408" />
+				</ElseIf>
+			<ElseIf Condition="Chance(20.0)">
+				<CustomBehavior File="FlyTo" DestName="Elevator mailbox" 
+					X="1692.802" Y="-4288.086" Z="30.07902"  />
+				</ElseIf>
+			<Else Condition="Chance(20.0)">
+				<CustomBehavior File="FlyTo" DestName="Hall of Legends mailbox"
+					X="1654.833" Y="-4235.468" Z="52.05011" />
+				</Else>
+			</If>
+			
+			<CustomBehavior File="ForcedDismount" />
+			</ElseIf>
+			
+			
+		<Else>
+			<CustomBehavior File="UserDialog" StopOnContinue="true"
+				Text="Unable to proceed.\n\nHonorbuddy is unable to determine your faction." />
+			</Else>
+		</If>
+
+		
+		<!--
+		  ========== All we can automate ==========
+		  -->
+		<CustomBehavior File="UserDialog" StopOnContinue="true" ExpiryTime="3600"
+				Text="END of the line." />
+		
+	</QuestOrder>
+   
+      
+	<!-- Helpful LUA Snippets...
+		/run print(GetAchievementCriteriaInfo(1184,1))
+		/run print(GetQuestLogLeaderBoard(1,GetQuestLogIndexByID(8311)))
+	  -->
+   
+</HBProfile>

@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<DungeonBuddyProfile>
+  <Name>End Time Heroic</Name>
+  <DungeonId>435</DungeonId>
+  <BossEncounters>
+    <!-- random 2 of the first 4 - bronze is always last -->
+    <Boss isFinal="false" entry="54445" name="Echo of Jaina" killOrder="1" optional="true"  /> <!-- Azure - ranged or heals - stand in red bubble as soon as it spawns.  don't stand in front of ice lance x3 -->
+    <Boss isFinal="false" entry="54544" name="Echo of Tyrande" killOrder="2" optional="true"  /> <!-- Emerald - interrupt the cast that dbm says to, don't stand in front of ice lance x3 -->
+    <Boss isFinal="false" entry="54431" name="Echo of Baine" killOrder="3" optional="true" /> <!-- Obsidian - use the totem that spawns to stun the boss.  stand on one of the 3 platforms so u don't die from lava -->
+    <Boss isFinal="false" entry="54123" name="Echo of Sylvanas" killOrder="4" optional="true" /> <!-- Ruby - most ppl go for add at X="3840.03" Y="943.6741" Z="55.81268" /> when the purple stuff spawns -->
+    <Boss isFinal="true" entry="54432" name="Murozond" killOrder="5" optional="false" X="4181.117" Y="-420.2193" Z="138.3806" /> <!-- Bronze - don't stand in yellow stuff.  kill dragon.  pop the hourglass (ranged or heals) every 20% or when lust/hero is not up.  always pop lust / hero -->
+  </BossEncounters>
+  <Blackspots>
+    <!--<Blackspot X="-101.3791" Y="-703.8368" Z="9.095623" Radius="3.363508" />-->
+  </Blackspots>
+  <PullBlackspots>
+    <PullBlackspot  X="4389.746" Y="1302.391" Z="147.8516" Radius="10" /> <!-- trash pull off to the side by Echo Of Baine -->
+  </PullBlackspots>
+</DungeonBuddyProfile>

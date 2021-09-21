@@ -1,0 +1,60 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<HBProfile>
+  <Name>Netherweave Cloth- Terokkar Forest</Name>
+  <MinDurability>0.3</MinDurability>
+  <MinFreeBagSlots>2</MinFreeBagSlots>
+  <MinLevel>1</MinLevel>
+  <MaxLevel>86</MaxLevel>
+	<SellGrey>True</SellGrey>
+	<SellWhite>True</SellWhite>
+	<SellGreen>False</SellGreen>
+	<SellBlue>False</SellBlue>
+	<SellPurple>False</SellPurple>
+	
+	<MailWhite>True</MailWhite>
+	<MailGreen>True</MailGreen>
+	<MailBlue>True</MailBlue>
+	<MailPurple>True</MailPurple>  
+	<Vendors>
+<Vendor Name="Cecil Meyers" Entry="19056" Type="Repair" X="-2978.951" Y="4033.115" Z="3.573949" />
+	</Vendors>
+	
+	<Mailboxes>
+<Mailbox X="-2930.579" Y="4008.391" Z="-1.350504" />
+
+	</Mailboxes>
+
+  <GrindArea>
+    <TargetMinLevel>1</TargetMinLevel>
+    <TargetMaxLevel>86</TargetMaxLevel>
+    <Factions>51</Factions>
+    <Hotspots>
+<Hotspot X="-2278.73" Y="4209.308" Z="1.466863" />
+<Hotspot X="-2180.271" Y="4235.327" Z="6.24856" />
+<Hotspot X="-2152.572" Y="4129.648" Z="7.815862" />
+<Hotspot X="-2213.006" Y="4327.453" Z="1.244303" />
+<Hotspot X="-2146.396" Y="4266.45" Z="4.118364" />
+<Hotspot X="-2052.267" Y="4271.896" Z="5.415471" />
+<Hotspot X="-2036.506" Y="4347.122" Z="3.04403" />
+<Hotspot X="-1933.426" Y="4227.786" Z="0.1219848" />
+    </Hotspots>
+  </GrindArea>
+
+
+           <ProtectedItems>
+           <Item name="Linen Cloth" entry="2589" /> 
+           <Item name="Wool Cloth" entry="2592" /> 
+           <Item name="Silk Cloth" entry="4306" /> 
+           <Item name="Mageweave Cloth" entry="4338" /> 
+           <Item name="Runecloth" entry="14047" /> 
+           <Item name="Netherweave Cloth" entry="21877" /> 
+           </ProtectedItems>
+           <ForceMail>
+           <Item name="Wool Cloth" entry="2592" /> 
+           <Item name="Linen Cloth" entry="2589" />
+           <Item name="Silk Cloth" entry="4306" /> 
+           <Item name="Mageweave Cloth" entry="4338" /> 
+           <Item name="Runecloth" entry="14047" /> 
+           <Item name="Netherweave Cloth" entry="21877" /> 
+           </ForceMail>
+</HBProfile>

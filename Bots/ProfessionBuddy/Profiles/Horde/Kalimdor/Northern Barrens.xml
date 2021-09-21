@@ -1,0 +1,713 @@
+<HBProfile xsi:noNamespaceSchemaLocation="../Schemas/EchoSchema.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<!-- Original contribution by EchoTiger -->
+	<Name>Northern Barrens ($ShortHash$)</Name>
+
+	<MinDurability>0.3</MinDurability>
+	<MinFreeBagSlots>3</MinFreeBagSlots>
+
+	<SellGrey>true</SellGrey>
+	<SellWhite>true</SellWhite>
+	<SellGreen>true</SellGreen>
+	<SellBlue>true</SellBlue>
+	<SellPurple>false</SellPurple>
+
+	<MailGrey>false</MailGrey>
+	<MailWhite>true</MailWhite>
+	<MailGreen>true</MailGreen>
+	<MailBlue>true</MailBlue>
+	<MailPurple>true</MailPurple>
+
+	<TargetElites>true</TargetElites>
+
+	<AvoidMobs>
+	</AvoidMobs>
+
+	<Mailboxes>
+	</Mailboxes>
+
+	<Vendors>
+	</Vendors>
+
+	<Blackspots>
+		<Blackspot X="-137.6838" Y="-3629.467" Z="26.68369" Radius="3.355408" /> <!-- Spikey Bonfire south of Far Watch Post -->
+		<Blackspot X="-349.3403" Y="-3545.826" Z="31.0062"  Radius="1" /><!-- Supply crate for quest  "Supplies for the Crossroads(5041)" in a bad spot. -->
+	</Blackspots>
+
+	<Blacklist>
+	</Blacklist>
+
+	<QuestOrder IgnoreCheckpoints="false" >
+		<!-- Check function status -->
+		<Code File="RunCode" Type="Definition">
+			<![CDATA[
+			private static bool? profileFunctionsEnabled => (bool?)AppDomain.CurrentDomain.GetData("QuestingProfiles_FunctionsEnabled");
+			private static bool IsStoreProfile(string path) => path.StartsWith("store://");
+			private static string Slashify(string path) => IsStoreProfile(path) ? path.Replace(@"\", "/") : path.Replace("/", @"\");
+
+			public __CompiledBatchClass__()
+			{
+				ActivateFunctions();
+			}
+
+			private static void ActivateFunctions()
+			{
+				if (profileFunctionsEnabled == null || profileFunctionsEnabled == false)
+				{
+					Bots.Professionbuddy.PBLog.Log(Colors.MediumPurple, "[Profile Message!]: ", Colors.Yellow, "Please stand by as the functions are being activated!");
+					LoadProfile(@"..\..\Functions\Activate Functions.xml");
+				}
+			}
+
+			private static void LoadProfile(string path)
+			{
+				var profile = GetNewPath(path);
+				if (!IsStoreProfile(profile) && !File.Exists(profile))
+				{
+					Bots.Professionbuddy.PBLog.Log(Colors.MediumPurple, "[Profile Message!]: ", Colors.Yellow, "Profile does not exist.\n" + profile);
+					return;
+				}
+
+				Bots.Professionbuddy.PBLog.Log(Colors.MediumPurple, "[Profile Message!]: ", Colors.Yellow, "Loading: " + profile);
+				ProfileManager.LoadNew(profile, false);
+			}
+
+			private static string GetNewPath(string path)
+			{
+				if (IsStoreProfile(path))
+					return Slashify(path);
+
+				var currentProfile = ProfileManager.XmlLocation;
+				if (IsStoreProfile(currentProfile))
+					return Slashify(currentProfile + "/../" + path);
+
+				var absolutePath = Path.Combine(Path.GetDirectoryName(currentProfile), path);
+				absolutePath = Path.GetFullPath(absolutePath);
+				var canonicalPath = new Uri(absolutePath).LocalPath;
+				return Slashify(canonicalPath);
+			}]]>
+		</Code>
+		<Code File="RunCode" Code="ActivateFunctions();" />
+		<!-- END Check function status -->
+
+		<If Condition="Me.IsAlliance" >
+			<Code File="LoadProfile" ProfileName="..\..\Questing Autoloader.xml" />
+		</If>
+		<!-- RunCode Methods -->
+			<Code File="RunCode">
+			<![CDATA[
+				Bots.Professionbuddy.PBLog.Log(System.Windows.Media.Colors.MediumPurple, "> [Profile Initialization Status] ", System.Windows.Media.Colors.CornflowerBlue, "\n     Auto-Looting	:: Enabled\n     Looting	:: Enabled\n     Game Addons	:: Disabled");
+				Lua.DoString("SetCVar('AutoLootDefault', 1);");
+				Lua.DoString("SetCVar('autoDismountFlying', 1);");
+				CharacterSettings.Instance.LootMobs = true;
+				CharacterSettings.Instance.Save();
+				Logging.Write(System.Windows.Media.Colors.MediumPurple, "> [Ready to bot!]");
+			]]>
+			</Code>
+			<Code File="RunCode" Type="Definition">
+				<![CDATA[
+						bool DoQuest(params uint[] questIds)
+						{
+							foreach (var questId in questIds)
+							{
+								if (HasQuest(questId) && !IsQuestCompleted(questId)) return true;
+							}
+							return false;
+						}
+						bool NeedsQuest(params uint[] questIds)
+						{
+							foreach (var questId in questIds)
+							{
+								if (!HasQuest(questId) && !IsQuestCompleted(questId)) return true;
+							}
+							return false;
+						}
+						bool NeedsBreadcrumbQuest(params uint[] questIds)
+						{
+							foreach (var questId in questIds)
+							{
+								if (IsQuestCompleted(questId)) return false;
+							}
+							return true;
+						}
+						bool QuestDone(params uint[] questIds)
+						{
+							foreach (var questId in questIds)
+							{
+								if (HasQuest(questId) && IsQuestCompleted(questId)) return true;
+							}
+							return false;
+						}
+						bool QuestFlaggedCompleted(params uint[] questIds)
+						{
+							foreach (var questId in questIds)
+							{
+								return Lua.GetReturnVal<bool>($"return IsQuestFlaggedCompleted({questId});", 0);
+							}
+							return false;
+						}
+						async Task SkipCutscene(int preWait = 3000, int postWait = 3000)
+						{
+					// Add detection of cutscene here.
+							await Coroutine.Sleep(preWait);
+					// Test and improve the working method.
+							Lua.DoString("MovieFrame:StopMovie(); CinematicFrame_CancelCinematic(); StopCinematic();");
+							await Coroutine.Sleep(postWait);
+						}
+					]]>
+			</Code>
+		<!-- END RunCode Methods -->
+
+
+		<If Condition="Me.ZoneId == 14 &amp;&amp; !IsQuestCompleted(871)" >
+			<PickUp QuestName="Conscript of the Horde" QuestId="840" GiverName="Takrin Pathseeker" GiverId="3336" X="272.2234" Y="-4652.725" Z="13.64311" />
+		</If>
+		<If Condition="HasQuest(840)" >
+			<TurnIn QuestName="Conscript of the Horde" QuestId="840" TurnInName="Kargal Battlescar" TurnInId="3337" X="303.195" Y="-3690.786" Z="26.82329" />
+		</If>
+
+		<PickUp QuestName="In Defense of Far Watch" QuestId="871" GiverName="Kargal Battlescar" GiverId="3337" X="303.195" Y="-3690.786" Z="26.82329" />
+		<PickUp QuestName="Plainstrider Menace" QuestId="844" GiverName="Halga Bloodeye" GiverId="34258" X="323.0797" Y="-3675.758" Z="27.18298" />
+
+		<Code File="KillUntilComplete" MobId="3244" QuestId="844" >
+			<HuntingGrounds>
+				<Hotspot X="349.9063" Y="-3610.142" Z="30.11017" />
+				<Hotspot X="435.9098" Y="-3697.432" Z="27.46366" />
+				<Hotspot X="546.2756" Y="-3696.371" Z="27.02507" />
+				<Hotspot X="644.2819" Y="-3736.944" Z="25.56827" />
+				<Hotspot X="195.2322" Y="-3549.287" Z="27.18505" />
+			</HuntingGrounds>
+		</Code>
+
+		<TurnIn QuestName="Plainstrider Menace" QuestId="844" TurnInName="Halga Bloodeye" TurnInId="34258" X="323.596" Y="-3676.555" Z="27.18486" />
+		<PickUp QuestName="Through Fire and Flames" QuestId="13878" GiverName="Dorak" GiverId="34284" X="70.20017" Y="-3622.975" Z="28.24563" />
+
+		<Code File="InteractWith" MobIds="195001, 195003, 195004" NonCompeteDistance="0" QuestId="13878" QuestObjectiveIndex="1" X="-8.631075" Y="-3634.448" Z="27.46404" />
+
+		<Code File="KillUntilComplete" MobId="3267" QuestId="871" QuestObjectiveIndex="1" >
+			<HuntingGrounds>
+				<Hotspot X="4.334973" Y="-3652.651" Z="27.73341" />
+				<Hotspot X="10.27159" Y="-3575.544" Z="27.30854" />
+			</HuntingGrounds>
+		</Code>
+
+		<Code File="KillUntilComplete" MobId="3265" QuestId="871" QuestObjectiveIndex="2" >
+			<HuntingGrounds>
+				<Hotspot X="-92.25272" Y="-3604.559" Z="27.93333" />
+				<Hotspot X="-76.63585" Y="-3700.394" Z="28.16613" />
+				<Hotspot X="-200.9757" Y="-3657.514" Z="28.00134" />
+				<Hotspot X="-282.1289" Y="-3780.431" Z="30.866" />
+			</HuntingGrounds>
+		</Code>
+
+		<TurnIn QuestName="Through Fire and Flames" QuestId="13878" TurnInName="Dorak" TurnInId="34284" X="67.19035" Y="-3639.868" Z="27.54217" />
+		<TurnIn QuestName="In Defense of Far Watch" QuestId="871" TurnInName="Kargal Battlescar" TurnInId="3337" X="296.7494" Y="-3684.503" Z="27.32942" />
+		<RecheckCheckpoints />
+		<PickUp QuestName="The Far Watch Offensive" QuestId="872" GiverName="Kargal Battlescar" GiverId="3337" X="296.7494" Y="-3684.503" Z="27.32942" />
+		<PickUp QuestName="Supplies for the Crossroads" QuestId="5041" GiverName="Halga Bloodeye" GiverId="34258" X="322.8399" Y="-3679.198" Z="27.18347" />
+
+		<Code File="KillUntilComplete" MobId="3438" QuestId="872" QuestObjectiveIndex="3" X="-278.7052" Y="-3486.846" Z="57.3718" />
+
+		<Code File="InteractWith" MobId="175708" CollectionDistance="200" QuestId="5041" QuestObjectiveIndex="1" >
+			<HuntingGrounds>
+				<Hotspot X="-278.7052" Y="-3486.846" Z="57.3718" />
+				<Hotspot X="-218.7504" Y="-3525.098" Z="24.16878" />
+				<Hotspot X="-338.6496" Y="-3464.02" Z="37.97475" />
+			</HuntingGrounds>
+		</Code>
+
+		<Code File="KillUntilComplete" QuestId="872" >
+			<HuntingGrounds>
+				<Hotspot X="-278.7052" Y="-3486.846" Z="57.3718" />
+				<Hotspot X="-218.7504" Y="-3525.098" Z="24.16878" />
+				<Hotspot X="-338.6496" Y="-3464.02" Z="37.97475" />
+			</HuntingGrounds>
+			<PursuitList>
+				<PursueUnit Id="3268" PursueWhen="!IsObjectiveComplete(1, 872)" />
+				<PursueUnit Id="3266" PursueWhen="!IsObjectiveComplete(2, 872)" />
+			</PursuitList>
+		</Code>
+
+		<TurnIn QuestName="The Far Watch Offensive" QuestId="872" TurnInName="Kargal Battlescar" TurnInId="3337" X="301.3201" Y="-3681.048" Z="27.28037" />
+		<TurnIn QuestName="Supplies for the Crossroads" QuestId="5041" TurnInName="Halga Bloodeye" TurnInId="34258" X="321.4728" Y="-3678.582" Z="27.18301" />
+		<RecheckCheckpoints />
+
+		<PickUp QuestName="Crossroads Caravan Pickup" QuestId="13949" GiverName="Halga Bloodeye" GiverId="34258" X="321.4728" Y="-3678.582" Z="27.18301" />
+		<While Condition="DoQuest(13949)" >
+			<Code File="InteractWith" MobId="34258" NonCompeteDistance="0" GossipOptions="1" QuestId="13949" X="327.9951" Y="-3681.452" Z="27.21037" TerminateWhen="Me.InVehicle || Unit(34430) != null" />
+			<Code File="InteractWith" MobId="34430" NonCompeteDistance="0" QuestId="13949" X="321.0882" Y="-3680.196" Z="27.18465" TerminateWhen="Me.InVehicle || Unit(34430) == null" />
+			<DisableBehavior Name="Combat" />
+			<Code File="WaitTimer" WaitTime="95000" TerminateWhen="!Me.InVehicle" />
+			<EnableBehavior Name="Combat" />
+		</While>
+		<TurnIn QuestName="Crossroads Caravan Pickup" QuestId="13949" TurnInName="Kranal Fiss" TurnInId="5907" X="260.6373" Y="-3044.371" Z="96.279" />
+
+		<PickUp QuestName="Drag it Out of Them" QuestId="13961" GiverName="Togrik" GiverId="34513" X="264.5242" Y="-3047.969" Z="96.6838" />
+		<While Condition="DoQuest(13961)" >
+			<Code File="InteractWith" MobId="34503" ProactiveCombatStrategy="NoClear" CollectionDistance="200" MobState="AliveNotInCombat" InteractByUsingItemId="46722" QuestId="13961" QuestObjectiveIndex="1" X="192.2673" Y="-2829.924" Z="92.86688" TerminateWhen="Unit(34503, u =&gt; u.HasAura(65581)) != null || Me.HasAura(65601)" />
+			<Code File="InteractWith" MobId="34503" ProactiveCombatStrategy="NoClear" AuraIdOnMob="65581" CollectionDistance="200" GossipOptions="1" QuestId="13961" QuestObjectiveIndex="1" TerminateWhen="Unit(34503, u =&gt; u.HasAura(65581)) == null || Me.HasAura(65601)" />
+			<If Condition="Me.HasAura(65601)" >
+				<MoveTo X="265.2787" Y="-3050.375" Z="96.88245" />
+			</If>
+		</While>
+		<TurnIn QuestName="Drag it Out of Them" QuestId="13961" TurnInName="Togrik" TurnInId="34513" X="265.2787" Y="-3050.375" Z="96.88245" />
+
+		<PickUp QuestName="By Hook Or By Crook" QuestId="13963" GiverName="Togrik" GiverId="34513" X="264.8751" Y="-3050.098" Z="96.851" />
+		<Code File="InteractWith" MobId="34523" GossipOptions="5" NonCompeteDistance="0" QuestId="13963" QuestObjectiveIndex="1" X="279.8669" Y="-3053.37" Z="96.03004" />
+		<TurnIn QuestName="By Hook Or By Crook" QuestId="13963" TurnInName="Togrik" TurnInId="34513" X="266.6751" Y="-3053.003" Z="97.20863" />
+
+		<PickUp QuestName="The Tortusk Takedown" QuestId="13968" GiverName="Togrik" GiverId="34513" X="266.6751" Y="-3053.003" Z="97.20863" />
+		<PickUp QuestName="Grol&apos;dom&apos;s Missing Kodo" QuestId="13969" GiverName="Kranal Fiss" GiverId="5907" X="262.8692" Y="-3046.765" Z="96.55736" />
+		<PickUp QuestName="Consumed by Hatred" QuestId="899" GiverName="Mankrik" GiverId="3432" X="237.66" Y="-2971.41" Z="93.6823" />
+		<!--<PickUp QuestName="Crossroads Caravan Delivery" QuestId="13975" GiverName="Rocco Whipshank" GiverId="34578" X="218.0919" Y="-2937.571" Z="91.84724" /> NOTE: Add support -->
+		<PickUp QuestName="The Grol&apos;dom Militia" QuestId="13973" GiverName="Una Wolfclaw" GiverId="34560" X="242.328" Y="-2901.867" Z="97.95946" />
+
+		<Code File="KillUntilComplete" MobIds="34503, 3269" TerminateWhen="!DoQuest(899, 13973)" >
+			<HuntingGrounds>
+				<Hotspot X="149.6951" Y="-2861.864" Z="93.59021" />
+				<Hotspot X="306.4159" Y="-2717.984" Z="93.03135" />
+				<Hotspot X="-20.8272" Y="-2917.336" Z="91.67773" />
+				<Hotspot X="-56.4278" Y="-2863.558" Z="91.6669" />
+				<Hotspot X="-73.41738" Y="-2900.241" Z="93.0775" />
+			</HuntingGrounds>
+		</Code>
+
+		<TurnIn QuestName="The Grol&apos;dom Militia" QuestId="13973" TurnInName="Una Wolfclaw" TurnInId="34560" X="238.0387" Y="-2901.016" Z="98.09653" />
+		<TurnIn QuestName="Consumed by Hatred" QuestId="899" TurnInName="Mankrik" TurnInId="3432" X="234.6211" Y="-2968.862" Z="92.69163" />
+		<TurnIn QuestName="Grol&apos;dom&apos;s Missing Kodo" QuestId="13969" TurnInName="Grol&apos;dom Kodo" TurnInId="34547" X="-70.79099" Y="-3130.981" Z="91.66741" />
+		<RecheckCheckpoints />
+		<PickUp QuestName="Animal Services" QuestId="13970" GiverName="Grol&apos;dom Kodo" GiverId="34547" X="-70.79099" Y="-3130.981" Z="91.66741" />
+
+		<Code File="KillUntilComplete" MobId="34544" QuestId="13968" QuestObjectiveIndex="1" X="-27.79186" Y="-3350.987" Z="92.00436" />
+
+		<Code File="InteractWith" MobId="195118" CollectionDistance="200" InteractByLooting="true" QuestId="13970" QuestObjectiveIndex="1" >
+			<HuntingGrounds>
+				<Hotspot X="-27.79186" Y="-3350.987" Z="92.00436" />
+				<Hotspot X="-213.3998" Y="-3334.87" Z="91.66706" />
+			</HuntingGrounds>
+		</Code>
+
+		<TurnIn QuestName="Animal Services" QuestId="13970" TurnInName="Grol&apos;dom Kodo" TurnInId="34547" X="-75.47252" Y="-3136.012" Z="91.66656" />
+		<PickUp QuestName="The Kodo&apos;s Return" QuestId="13971" GiverName="Grol&apos;dom Kodo" GiverId="34547" X="-75.47252" Y="-3136.012" Z="91.66656" />
+		<TurnIn QuestName="The Kodo&apos;s Return" QuestId="13971" TurnInName="Kranal Fiss" TurnInId="5907" X="260.3907" Y="-3043.865" Z="96.22902" />
+		<TurnIn QuestName="The Tortusk Takedown" QuestId="13968" TurnInName="Togrik" TurnInId="34513" X="263.9016" Y="-3050.574" Z="96.87013" />
+
+		<RecheckCheckpoints />
+		<Checkpoint Level="13" />
+
+		<PickUp QuestName="The Zhevra" QuestId="845" GiverName="Sergra Darkthorn" GiverId="3338" X="-478.3557" Y="-2669.124" Z="97.18944" />
+		<PickUp QuestName="Hunting the Huntress" QuestId="903" GiverName="Sergra Darkthorn" GiverId="3338" X="-478.3557" Y="-2669.124" Z="97.18944" />
+		<PickUp QuestName="The Forgotten Pools" QuestId="870" GiverName="Tonga Runetotem" GiverId="3448" X="-440.0162" Y="-2642.506" Z="96.38975" />
+		<PickUp QuestName="Fungal Spores" QuestId="848" GiverName="Apothecary Helbrim" GiverId="3390" X="-425.5644" Y="-2594.674" Z="95.98141" />
+
+		<Code File="KillUntilComplete" MobId="3242" QuestId="845" >
+			<HuntingGrounds>
+				<Hotspot X="-449.7686" Y="-2478.623" Z="93.87598" />
+				<Hotspot X="-391.4386" Y="-2414.788" Z="97.08038" />
+				<Hotspot X="-315.19" Y="-2283.12" Z="95.87601" />
+			</HuntingGrounds>
+		</Code>
+
+		<Code File="KillUntilComplete" MobIds="62131, 3415" QuestId="903" >
+			<HuntingGrounds>
+				<Hotspot X="-301.0385" Y="-2218.87" Z="96.60644" />
+				<Hotspot X="-390.1288" Y="-2340.883" Z="95.97615" />
+				<Hotspot X="-447.2873" Y="-2351.559" Z="94.12405" />
+				<Hotspot X="-526.6766" Y="-2446.874" Z="91.73373" />
+			</HuntingGrounds>
+		</Code>
+
+		<TurnIn QuestName="The Zhevra" QuestId="845" TurnInName="Sergra Darkthorn" TurnInId="3338" X="-483.8539" Y="-2666.823" Z="97.36142" />
+		<TurnIn QuestName="Hunting the Huntress" QuestId="903" TurnInName="Sergra Darkthorn" TurnInId="3338" X="-483.8539" Y="-2666.823" Z="97.36142" />
+		<PickUp QuestName="Echeyakee" QuestId="881" GiverName="Sergra Darkthorn" GiverId="3338" X="-483.8539" Y="-2666.823" Z="97.36142" />
+
+		<While Condition="DoQuest(881)" >
+			<MoveTo X="126.0077" Y="-2546.221" Z="91.66805" />
+			<Code File="UseItem" ItemId="10327" QuestId="881" X="126.0077" Y="-2546.221" Z="91.66805" TerminateWhen="Unit(3475, u =&gt; u.IsAlive) != null" />
+		</While>
+
+		<PickUp QuestName="Kolkar Leaders" QuestId="850" GiverName="Telar Highstrider" GiverId="34841" X="34.04396" Y="-1986.603" Z="107.9434" />
+		<PickUp QuestName="A Little Diversion" QuestId="13992" GiverName="Ta&apos;jari" GiverId="34613" X="54.43712" Y="-1957.004" Z="92.87574" />
+
+		<While Condition="DoQuest(870)" >
+			<MoveTo QuestId="870" X="90.7557" Y="-1943.281" Z="87.67769" />
+			<Code File="MyCTM" QuestId="870" X="90.68644" Y="-1943.044" Z="79.84391" />
+			<Code File="AscendInWater" />
+		</While>
+
+		<Code File="InteractWith" MobId="3640" CollectionDistance="200" InteractByLooting="true" QuestId="848" QuestObjectiveIndex="1" >
+			<HuntingGrounds>
+				<Hotspot X="44.79152" Y="-1966.769" Z="93.97401" />
+				<Hotspot X="135.6858" Y="-1912.173" Z="93.84275" />
+			</HuntingGrounds>
+		</Code>
+
+		<Code File="KillUntilComplete" MobId="3394" QuestId="850" X="1.587484" Y="-1693.821" Z="93.14523" />
+
+		<Code File="KillUntilComplete" MobIds="3272, 3273" QuestId="13992" >
+			<HuntingGrounds>
+				<Hotspot X="-52.35948" Y="-1640.353" Z="92.53879" />
+				<Hotspot X="-211.6885" Y="-1661.583" Z="107.1199" />
+				<Hotspot X="-154.8765" Y="-1798.112" Z="91.6868" />
+				<Hotspot X="52.485" Y="-1879.818" Z="95.04147" />
+				<Hotspot X="12.69156" Y="-1877.169" Z="94.02261" />
+			</HuntingGrounds>
+		</Code>
+
+		<TurnIn QuestName="A Little Diversion" QuestId="13992" TurnInName="Ta&apos;jari" TurnInId="34613" X="55.43628" Y="-1951.53" Z="91.37077" />	
+		<TurnIn QuestName="Kolkar Leaders" QuestId="850" TurnInName="Telar Highstrider" TurnInId="34841" X="28.85193" Y="-1982.526" Z="109.3439" />
+		<TurnIn QuestName="Fungal Spores" QuestId="848" TurnInName="Apothecary Helbrim" TurnInId="3390" X="-424.5562" Y="-2593.837" Z="95.98862" />
+		<PickUp QuestName="In Fungus We Trust" QuestId="13998" GiverName="Apothecary Helbrim" GiverId="3390" X="-424.5562" Y="-2593.837" Z="95.98862" />
+		<TurnIn QuestName="The Forgotten Pools" QuestId="870" TurnInName="Tonga Runetotem" TurnInId="3448" X="-436.1368" Y="-2637.405" Z="96.06926" />
+		<PickUp QuestName="A Growing Problem" QuestId="13988" GiverName="Tonga Runetotem" GiverId="3448" X="-436.1368" Y="-2637.405" Z="96.06926" />
+		<TurnIn QuestName="Echeyakee" QuestId="881" TurnInName="Sergra Darkthorn" TurnInId="3338" X="-478.4539" Y="-2668.079" Z="97.14265" />
+		<RecheckCheckpoints />
+		<PickUp QuestName="Into the Raptor&apos;s Den" QuestId="905" GiverName="Sergra Darkthorn" GiverId="3338" X="-478.4539" Y="-2668.079" Z="97.14265" />
+
+		<While Condition="DoQuest(905)" >
+			<Code File="InteractWith" MobId="3254" InteractByLooting="true" NumOfTimes="500" QuestId="905" TerminateWhen="HasItem(5165)" >
+				<HuntingGrounds>
+					<Hotspot X="-928.4673" Y="-2577.663" Z="94.79376" />
+					<Hotspot X="-1032.34" Y="-2601.024" Z="91.61605" />
+				</HuntingGrounds>
+			</Code>
+
+			<If Condition="!IsObjectiveComplete(2, 905)" >
+				<MoveTo X="-1103.178" Y="-2559.286" Z="117.6692" />
+				<Code File="UseItem" ItemId="5165" QuestId="905" X="-1103.178" Y="-2559.286" Z="117.6692" TerminateWhen="!HasItem(5165)" />
+			</If>
+			<If Condition="!IsObjectiveComplete(1, 905)" >
+				<MoveTo X="-1065.981" Y="-2649.296" Z="91.85226" />
+				<Code File="UseItem" ItemId="5165" QuestId="905" X="-1065.981" Y="-2649.296" Z="91.85226" TerminateWhen="!HasItem(5165)" />
+			</If>
+			<If Condition="!IsObjectiveComplete(3, 905)" >
+				<MoveTo X="-1054.615" Y="-2589.79" Z="91.61989" />
+				<Code File="UseItem" ItemId="5165" QuestId="905" X="-1054.615" Y="-2589.79" Z="91.61989" TerminateWhen="!HasItem(5165)" />
+			</If>
+		</While>
+
+		<While Condition="DoQuest(13998)" >
+			<MoveTo X="-1118.325" Y="-2895.468" Z="94.2987" />
+			<Code File="UseItem" ItemId="46789" QuestId="13998" />
+		</While>
+
+		<PickUp QuestName="Flushing Out Verog" QuestId="14072" GiverName="Shoe" GiverId="34638" X="-1193.175" Y="-2966.569" Z="89.68684" />
+
+		<While Condition="!IsQuestCompleted(13995)" >
+			<PickUp QuestName="King of Centaur Mountain" QuestId="13995" GiverName="Gorgal Angerscar" GiverId="34634" X="-1195.089" Y="-2964.216" Z="89.1098" />
+			<Code File="KillUntilComplete" MobIds="3272, 3273, 34635" QuestId="13995" X="-1184.108" Y="-2923.587" Z="108.3849" TerminateWhen="Unit(34634, u =&gt; u.HasQuestCursor) != null" />
+			<If Condition="!QuestDone(13995)" >
+				<Code File="AbandonQuest" QuestId="13995" />
+			</If>
+		</While>
+
+		<Code File="InteractWith" MobId="195240" InteractByLooting="true" CollectionDistance="200" QuestId="14072" QuestObjectiveIndex="1" >
+			<HuntingGrounds>
+				<Hotspot X="-1102.672" Y="-2824.177" Z="94.49415" />
+				<Hotspot X="-1272.833" Y="-2826.047" Z="93.26489" />
+				<Hotspot X="-1393.588" Y="-2744.368" Z="91.70089" />
+				<Hotspot X="-1545.732" Y="-2897.343" Z="95.39277" />
+				<Hotspot X="-1493.407" Y="-3019.695" Z="91.84247" />
+			</HuntingGrounds>
+		</Code>
+
+		<TurnIn QuestName="King of Centaur Mountain" QuestId="13995" TurnInName="Shoe" TurnInId="34638" X="-1191.777" Y="-2965.215" Z="90.26147" />
+		<TurnIn QuestName="Flushing Out Verog" QuestId="14072" TurnInName="Shoe" TurnInId="34638" X="-1191.777" Y="-2965.215" Z="90.26147" />
+
+		<PickUp QuestName="Verog the Dervish" QuestId="851" GiverName="Shoe" GiverId="34638" X="-1191.777" Y="-2965.215" Z="90.26147" />
+		<Code File="KillUntilComplete" MobIds="34846, 3395" QuestId="851" X="-1208.709" Y="-2746.177" Z="102.263" />
+		<TurnIn QuestName="Verog the Dervish" QuestId="851" TurnInName="Shoe" TurnInId="34638" X="-1190.999" Y="-2966.731" Z="90.53741" />
+
+		<While Condition="DoQuest(13988)" >
+			<MoveTo X="-1441.539" Y="-3358.432" Z="213.5079" />
+			<MoveTo X="-1474.605" Y="-3297.044" Z="210.7673" />
+			<Code File="UseItem" ItemId="46782" QuestId="13988" TerminateWhen="Unit(34615, u =&gt; u.CreatedByUnit == Me) != null" />
+			<Code File="WaitTimer" WaitTime="15000" QuestId="13988" />
+		</While>
+
+		<TurnIn QuestName="A Growing Problem" QuestId="13988" TurnInName="Jerrik Highmountain" TurnInId="34626" X="-1458.142" Y="-3285.936" Z="209.6786" />
+		<RecheckCheckpoints />
+		<PickUp QuestName="The Stagnant Oasis" QuestId="877" GiverName="Jerrik Highmountain" GiverId="34626" X="-1458.142" Y="-3285.936" Z="209.6786" />
+		<PickUp QuestName="Altered Beings" QuestId="880" GiverName="Jerrik Highmountain" GiverId="34626" X="-1458.142" Y="-3285.936" Z="209.6786" />
+
+		<While Condition="DoQuest(877)" >
+			<MoveTo X="-1256.154" Y="-3052.003" Z="88.09695" />
+			<MoveTo X="-1273.689" Y="-3015.588" Z="85.80779" />
+			<Code File="InteractWith" MobId="3737" NonCompeteDistance="0" MovementBy="ClickToMoveOnly" InteractBlacklistTimeInSeconds="1" QuestId="877" QuestObjectiveIndex="1" X="-1275.507" Y="-3012.399" Z="72.94173" />
+			<Code File="AscendInWater" QuestId="877" />
+		</While>
+
+		<Code File="KillUntilComplete" MobId="3461" QuestId="880" >
+			<HuntingGrounds>
+				<Hotspot X="-1225.669" Y="-3041.392" Z="92.43385" />
+				<Hotspot X="-1337.831" Y="-3015.64" Z="92.29224" />
+				<Hotspot X="-1242.565" Y="-2953.748" Z="91.00994" />
+			</HuntingGrounds>
+		</Code>
+
+		<TurnIn QuestName="Into the Raptor&apos;s Den" QuestId="905" TurnInName="Sergra Darkthorn" TurnInId="3338" X="-483.9854" Y="-2665.907" Z="97.29471" />
+		<PickUp QuestName="The Purloined Payroll" QuestId="13991" GiverName="Sergra Darkthorn" GiverId="3338" X="-483.9854" Y="-2665.907" Z="97.29471" />
+		<TurnIn QuestName="The Stagnant Oasis" QuestId="877" TurnInName="Tonga Runetotem" TurnInId="3448" X="-440.9587" Y="-2642.487" Z="96.29422" />
+		<TurnIn QuestName="Altered Beings" QuestId="880" TurnInName="Tonga Runetotem" TurnInId="3448" X="-440.9587" Y="-2642.487" Z="96.29422" />
+		<TurnIn QuestName="In Fungus We Trust" QuestId="13998" TurnInName="Apothecary Helbrim" TurnInId="3390" X="-425.3262" Y="-2594.857" Z="96.0146" />
+		<PickUp QuestName="Who&apos;s Shroomin&apos; Who?" QuestId="13999" GiverName="Apothecary Helbrim" GiverId="3390" X="-425.3262" Y="-2594.857" Z="96.0146" />
+		<TurnIn QuestName="The Purloined Payroll" QuestId="13991" TurnInName="Gazrog" TurnInId="3464" X="-974.0643" Y="-3640.049" Z="18.6178" />
+		<PickUp QuestName="Investigate the Wreckage" QuestId="14066" GiverName="Gazrog" GiverId="3464" X="-974.0643" Y="-3640.049" Z="18.6178" />
+		<TurnIn QuestName="Who&apos;s Shroomin&apos; Who?" QuestId="13999" TurnInName="Sashya" TurnInId="34651" X="-1051.938" Y="-3652.315" Z="23.87802" />
+		<RecheckCheckpoints />
+		<PickUp QuestName="A Captain&apos;s Vengeance" QuestId="891" GiverName="Captain Thalo&apos;thas Brightsun" GiverId="3339" X="-1026.9" Y="-3685.766" Z="23.49368" />
+		<PickUp QuestName="It&apos;s Gotta be the Horn" QuestId="865" GiverName="Mebok Mizzyrix" GiverId="3446" X="-932.6679" Y="-3696.599" Z="7.897919" />
+		<!-- <PickUp QuestName="WANTED: Cap&apos;n Garvey" QuestId="895" GiverName="WANTED" GiverId="3972" X="-924.3777" Y="-3719.187" Z="9.132319" /> Not worth it -->
+		<PickUp QuestName="Club Foote" QuestId="14034" GiverName="Gazlowe" GiverId="3391" X="-839.0759" Y="-3726.802" Z="26.32391" />
+		<PickUp QuestName="Find Baron Longshore" QuestId="14045" GiverName="Gazlowe" GiverId="3391" X="-839.0759" Y="-3726.802" Z="26.32391" />
+		<!-- <PickUp QuestName="Southsea Freebooters" QuestId="887" GiverName="Wharfmaster Dizzywig" GiverId="3453" X="-982.4397" Y="-3794.285" Z="5.203799" /> Not worth it -->
+		<!-- <PickUp QuestName="Take it up with Tony" QuestId="14052" GiverName="Wharfmaster Dizzywig" GiverId="3453" X="-982.4397" Y="-3794.285" Z="5.203799" /> Not worth it -->
+
+		<Code File="InteractWith" MobId="34754" GossipOptions="1" NonCompeteDistance="0" InteractBlacklistTimeInSeconds="1" QuestId="14034" QuestObjectiveIndex="1" X="-1049.826" Y="-3648.347" Z="23.87791" />
+
+		<TurnIn QuestName="Club Foote" QuestId="14034" TurnInName="Gazlowe" TurnInId="3391" X="-839.2782" Y="-3727.23" Z="26.33024" />
+
+		<PickUp QuestName="Love it or Limpet" QuestId="14038" GiverName="Gazlowe" GiverId="3391" X="-839.2782" Y="-3727.23" Z="26.33024" />
+		<If Condition="DoQuest(14066)" >
+			<MoveTo X="-759.4887" Y="-3581.577" Z="93.68862" />
+		</If>
+
+		<TurnIn QuestName="Investigate the Wreckage" QuestId="14066" X="-756.9533" Y="-3584.133" Z="93.40555" />
+		<PickUp QuestName="To Track a Thief" QuestId="869" GiverName="Gazrog" GiverId="3464" X="-974.0643" Y="-3640.049" Z="18.6178" />
+
+		<PickUp QuestName="Waptor Twapping" QuestId="14068" GiverName="Kala&apos;ma" GiverId="34828" X="-615.4235" Y="-3364.521" Z="91.49722" />
+
+		<If Condition="DoQuest(869)" >
+			<MoveTo X="-552.1996" Y="-3397.553" Z="91.69029" />
+		</If>
+		<TurnIn QuestName="To Track a Thief" QuestId="869" TurnInName="Gazrog" TurnInId="3464" X="-974.0643" Y="-3640.049" Z="18.6178" />
+
+		<PickUp QuestName="The Stolen Silver" QuestId="14067" GiverName="Gazrog" GiverId="3464" X="-974.0643" Y="-3640.049" Z="18.6178" />
+		<Code File="InteractWith" MobId="195224" InteractByLooting="true" NonCompeteDistance="0" QuestId="14067" QuestObjectiveIndex="3" X="-444.4554" Y="-3459.76" Z="94.60668" />
+
+		<While Condition="DoQuest(14068)" >
+			<Code File="InteractWith" MobId="195239" NonCompeteDistance="0" InteractByLooting="true" WaitForNpcs="false" QuestId="14068" />
+			<Code File="InteractWith" MobIds="3255, 3256, 44164" GossipOptions="1" Range="20" InteractByUsingItemId="46853" QuestId="14068" QuestObjectiveIndex="1" TerminateWhen="Object(195239) != null" >
+				<HuntingGrounds>
+					<Hotspot X="-414.4106" Y="-3516.711" Z="93.63634" />
+					<Hotspot X="-474.763" Y="-3507.199" Z="94.73861" />
+					<Hotspot X="-457.2234" Y="-3409.577" Z="91.66774" />
+					<Hotspot X="-364.9098" Y="-3436.587" Z="93.07494" />
+				</HuntingGrounds>
+			</Code>
+		</While>
+
+		<Code File="KillUntilComplete" MobId="34829" QuestId="865" >
+			<HuntingGrounds>
+				<Hotspot X="-444.5926" Y="-3514.573" Z="95.25948" />
+				<Hotspot X="-551.4169" Y="-3543.823" Z="91.66911" />
+				<Hotspot X="-584.3837" Y="-3442.965" Z="91.66502" />
+			</HuntingGrounds>
+		</Code>
+
+		<Code File="KillUntilComplete" QuestId="14067" >
+			<HuntingGrounds>
+				<Hotspot X="-581.2874" Y="-3502.459" Z="92.2718" />
+				<Hotspot X="-457.6423" Y="-3472.174" Z="94.1465" />
+				<Hotspot X="-414.0686" Y="-3555.308" Z="91.83952" />
+				<Hotspot X="-343.4312" Y="-3444.052" Z="91.66903" />
+				<Hotspot X="-247.8191" Y="-3476.939" Z="92.65945" />
+			</HuntingGrounds>
+			<PursuitList>
+				<PursueUnit Id="44164" PursueWhen="!IsObjectiveComplete(1, 14067)" />
+				<PursueUnit Id="3256" PursueWhen="!IsObjectiveComplete(2, 14067)" />
+			</PursuitList>
+		</Code>
+
+		<TurnIn QuestName="Waptor Twapping" QuestId="14068" TurnInName="Kala&apos;ma" TurnInId="34828" X="-612.1895" Y="-3365.816" Z="91.34338" />
+		<TurnIn QuestName="The Stolen Silver" QuestId="14067" TurnInName="Gazrog" TurnInId="3464" X="-974.0646" Y="-3638.766" Z="18.7534" />
+		<TurnIn QuestName="It&apos;s Gotta be the Horn" QuestId="865" TurnInName="Mebok Mizzyrix" TurnInId="3446" X="-932.1151" Y="-3693.359" Z="7.690305" />
+		<RecheckCheckpoints />
+
+		<Code File="KillUntilComplete" MobId="34752" QuestId="891" QuestObjectiveIndex="2" X="-1415.988" Y="-3845.222" Z="18.83276" />
+
+		<TurnIn QuestName="Find Baron Longshore" QuestId="14045" TurnInName="Baron Longshore" TurnInId="3467" X="-1454.505" Y="-3818.554" Z="21.48399" />
+
+		<PickUp QuestName="The Baron&apos;s Demands" QuestId="14046" GiverName="Baron Longshore" GiverId="3467" X="-1454.505" Y="-3818.554" Z="21.48399" />
+		<Code File="InteractWith" MobId="3467" GossipOptions="2" NonCompeteDistance="0" QuestId="14046" QuestObjectiveIndex="1" X="-1454.505" Y="-3818.554" Z="21.48399" />
+		<TurnIn QuestName="The Baron&apos;s Demands" QuestId="14046" TurnInName="Baron Longshore" TurnInId="3467" X="-1454.406" Y="-3820.026" Z="21.4462" />
+
+		<PickUp QuestName="A Most Unusual Map" QuestId="14049" GiverName="Baron Longshore" GiverId="3467" X="-1454.406" Y="-3820.026" Z="21.4462" />
+
+		<Code File="InteractWith" MobId="195205" InteractByLooting="true" NonCompeteDistance="0" QuestId="14049" QuestObjectiveIndex="1" X="-1315.15" Y="-3784.249" Z="19.31913" />
+
+		<Code File="KillUntilComplete" MobId="34753" QuestId="891" QuestObjectiveIndex="1" >
+			<HuntingGrounds>
+				<Hotspot X="-1521.623" Y="-3901.984" Z="13.32134" />
+				<Hotspot X="-1406.875" Y="-3864.618" Z="15.56585" />
+			</HuntingGrounds>
+		</Code>
+
+		<While Condition="DoQuest(14038)" >
+			<Code File="UseItem" ItemId="46829" QuestId="14038" X="-1467.617" Y="-3964.969" Z="-2.134642" />
+		</While>
+
+		<TurnIn QuestName="Love it or Limpet" QuestId="14038" TurnInName="Gazlowe" TurnInId="3391" X="-839.0759" Y="-3726.802" Z="26.32391" />
+		<PickUp QuestName="Ammo Kerblammo" QuestId="14042" GiverName="Gazlowe" GiverId="3391" X="-839.0759" Y="-3726.802" Z="26.32391" />
+
+		<Code File="InteractWith" MobId="195203" InteractByLooting="true" CollectionDistance="200" QuestId="14042" QuestObjectiveIndex="1" >
+			<HuntingGrounds>
+				<Hotspot X="-1557.759" Y="-3891.041" Z="15.71326" />
+				<Hotspot X="-1386.244" Y="-3901.499" Z="10.9369" />
+				<Hotspot X="-1314.14" Y="-3855.672" Z="14.76829" />
+			</HuntingGrounds>
+		</Code>
+
+		<Code File="KillUntilComplete" MobIds="3385, 3386, 34706, 34707" QuestId="891" >
+			<HuntingGrounds>
+				<Hotspot X="-1615.139" Y="-3889.05" Z="14.10955" />
+				<Hotspot X="-1530.277" Y="-3835.365" Z="20.40713" />
+				<Hotspot X="-1373.711" Y="-3823.908" Z="21.83541" />
+			</HuntingGrounds>
+		</Code>
+
+		<TurnIn QuestName="A Captain&apos;s Vengeance" QuestId="891" TurnInName="Captain Thalo&apos;thas Brightsun" TurnInId="3339" X="-1029.512" Y="-3690.048" Z="24.06237" />
+		<TurnIn QuestName="A Most Unusual Map" QuestId="14049" TurnInName="Gazlowe" TurnInId="3391" X="-839.4797" Y="-3727.316" Z="26.33033" />
+		<TurnIn QuestName="Ammo Kerblammo" QuestId="14042" TurnInName="Gazlowe" TurnInId="3391" X="-839.4797" Y="-3727.316" Z="26.33033" />
+		<RecheckCheckpoints />
+
+		<PickUp QuestName="Gazlowe&apos;s Fortune" QuestId="14050" GiverName="Gazlowe" GiverId="3391" X="-839.4797" Y="-3727.316" Z="26.33033" />
+		<Code File="InteractWith" MobId="195206" InteractByLooting="true" QuestId="14050" QuestObjectiveIndex="1" X="-1156.382" Y="-3607.572" Z="94.36111" />
+		<TurnIn QuestName="Gazlowe&apos;s Fortune" QuestId="14050" TurnInName="Gazlowe" TurnInId="3391" X="-837.8544" Y="-3727.146" Z="26.31759" />
+
+		<PickUp QuestName="Raging River Ride" QuestId="26769" GiverName="Gazlowe" GiverId="3391" X="-838.5939" Y="-3727.644" Z="26.32415" />
+		<While Condition="DoQuest(26769)" >
+			<Code File="InteractWith" MobId="44057" NonCompeteDistance="0" QuestId="26769" X="-705.8523" Y="-3985.979" Z="19.45798" TerminateWhen="Me.InVehicle" />
+			<Code File="WaitTimer" WaitTime="120000" TerminateWhen="!Me.InVehicle" />
+		</While>
+		<TurnIn QuestName="Raging River Ride" QuestId="26769" TurnInName="Nozzlepot" TurnInId="34698" X="1164.142" Y="-3390.03" Z="91.66747" />
+
+		<PickUp QuestName="Sludge Investigation" QuestId="29087" GiverName="Nozzlepot" GiverId="34698" X="1164.142" Y="-3390.03" Z="91.66747" />
+		<PickUp QuestName="Hyena Extermination" QuestId="29088" GiverName="Nozzlepot" GiverId="34698" X="1164.142" Y="-3390.03" Z="91.66747" />
+
+		<Code File="SetHearthstone" AreaId="5117" MobId="43945" X="1170.95" Y="-3390.877" Z="91.75791" />
+
+		<PickUp QuestName="Competition Schmompetition" QuestId="29086" GiverName="Sputtervalve" GiverId="3442" X="1143.534" Y="-3379.332" Z="92.28184" />
+		<PickUp QuestName="Samophlange" QuestId="29021" GiverName="Sputtervalve" GiverId="3442" X="1143.534" Y="-3379.332" Z="92.28184" />
+
+		<Code File="InteractWith" MobId="52171" CollectionDistance="200" QuestId="29087" QuestObjectiveIndex="1" >
+			<HuntingGrounds>
+				<Hotspot X="1051.959" Y="-3221.979" Z="90.97295" />
+				<Hotspot X="1109.16" Y="-3087.31" Z="84.89444" />
+				<Hotspot X="974.0541" Y="-3047.062" Z="89.51173" />
+			</HuntingGrounds>
+		</Code>
+
+		<TurnIn QuestName="Sludge Investigation" QuestId="29087" />
+		<PickUp QuestName="Sludge Beast!" QuestId="29089" GiverName="Nozzlepot" GiverId="34698" X="1164.142" Y="-3390.03" Z="91.66747" />
+
+		<While Condition="DoQuest(29089)" >
+			<MoveTo X="1072.32" Y="-3151.864" Z="78.20453" />
+			<Code File="InteractWith" MobId="208343" MovementBy="ClickToMoveOnly" CollectionDistance="200" QuestId="29089" QuestObjectiveIndex="1" X="1066.04" Y="-3141.474" Z="78.25607" TerminateWhen="!Me.IsSwimming" />
+			<Code File="AscendInWater" />
+		</While>
+
+		<Code File="KillUntilComplete" MobIds="3282, 3284, 3295" QuestId="29086" >
+			<HuntingGrounds>
+				<Hotspot X="1051.959" Y="-3221.979" Z="90.97295" />
+				<Hotspot X="1109.16" Y="-3087.31" Z="84.89444" />
+				<Hotspot X="974.0541" Y="-3047.062" Z="89.51173" />
+			</HuntingGrounds>
+		</Code>
+
+		<!-- Skipping Ignition quest because it's terribly designed and not worth wasting time on -->
+
+		<Code File="KillUntilComplete" MobId="4127" QuestId="29088" >
+			<HuntingGrounds>
+				<Hotspot X="931.787" Y="-2947.668" Z="91.66713" />
+				<Hotspot X="863.825" Y="-2845.694" Z="94.91705" />
+				<Hotspot X="820.6279" Y="-2919.962" Z="91.66741" />
+			</HuntingGrounds>
+		</Code>
+
+		<TurnIn QuestName="Samophlange" QuestId="29021" TurnInName="Control Console" TurnInId="4141" X="825.9291" Y="-2692.041" Z="91.66702" />
+
+		<PickUp QuestName="Samophlange" QuestId="29022" GiverName="Control Console" GiverId="4141" X="825.9291" Y="-2692.041" Z="91.66702" />
+		<Code File="InteractWith" MobId="4072" NonCompeteDistance="0" InteractBlacklistTimeInSeconds="1" QuestId="29022" QuestObjectiveIndex="1" X="827.0928" Y="-2679.767" Z="91.66702" />
+		<Code File="InteractWith" MobId="61935" NonCompeteDistance="0" InteractBlacklistTimeInSeconds="1" QuestId="29022" QuestObjectiveIndex="3" X="842.4742" Y="-2673.783" Z="91.66702" />
+		<Code File="InteractWith" MobId="61936" NonCompeteDistance="0" InteractBlacklistTimeInSeconds="1" QuestId="29022" QuestObjectiveIndex="2" X="844.5134" Y="-2687.885" Z="91.66682" />
+		<TurnIn QuestName="Samophlange" QuestId="29022" TurnInName="Control Console" TurnInId="4141" X="826.6239" Y="-2690.035" Z="91.72895" />
+
+		<PickUp QuestName="Samophlange" QuestId="29023" GiverName="Control Console" GiverId="4141" X="826.6239" Y="-2690.035" Z="91.72895" />
+		<Code File="KillUntilComplete" MobId="3471" QuestId="29023" X="902.1215" Y="-2737.732" Z="100.2152" />
+		<TurnIn QuestName="Samophlange" QuestId="29023" TurnInName="Control Console" TurnInId="4141" X="825.8276" Y="-2690.054" Z="91.74178" />
+
+		<PickUp QuestName="Samophlange" QuestId="29024" GiverName="Control Console" GiverId="4141" X="825.8276" Y="-2690.054" Z="91.74178" />
+
+		<If Condition="QuestDone(29024) &amp;&amp; Me.HearthstoneAreaId == 5117 &amp;&amp; Object(4141) != null" >
+			<Code File="UseHearthstone" WaitForCD="false" />
+		</If>
+
+		<TurnIn QuestName="Sludge Beast!" QuestId="29089" TurnInName="Nozzlepot" TurnInId="34698" X="1165.551" Y="-3390.81" Z="91.66758" />
+		<TurnIn QuestName="Hyena Extermination" QuestId="29088" TurnInName="Nozzlepot" TurnInId="34698" X="1165.551" Y="-3390.81" Z="91.66758" />
+		<TurnIn QuestName="Competition Schmompetition" QuestId="29086" TurnInName="Sputtervalve" TurnInId="3442" X="1144.096" Y="-3380.039" Z="92.23664" />
+		<TurnIn QuestName="Samophlange" QuestId="29024" TurnInName="Sputtervalve" TurnInId="3442" X="1144.096" Y="-3380.039" Z="92.23664" />
+		<PickUp QuestName="Samophlange Repair" QuestId="14003" GiverName="Sputtervalve" GiverId="3442" X="1144.096" Y="-3380.039" Z="92.23664" />
+		<TurnIn QuestName="Samophlange Repair" QuestId="14003" TurnInName="Brak Blusterpipe" TurnInId="34674" X="1157.829" Y="-3395.607" Z="91.66702" />
+		<RecheckCheckpoints />
+
+		<PickUp QuestName="Wenikee Boltbucket" QuestId="29026" GiverName="Brak Blusterpipe" GiverId="34674" X="1157.829" Y="-3395.607" Z="91.66702" />
+		<If Condition="QuestDone(29026)" >
+			<Code File="InteractWith" MobId="34674" GossipOptions="1" WaitTime="6000" NonCompeteDistance="0" X="1158.551" Y="-3397.162" Z="91.66702" />
+		</If>
+		<TurnIn QuestName="Wenikee Boltbucket" QuestId="29026" TurnInName="Wenikee Boltbucket" TurnInId="9316" X="856.9946" Y="-2343.748" Z="92.04479" />
+
+		<PickUp QuestName="Nugget Slugs" QuestId="29027" GiverName="Wenikee Boltbucket" GiverId="9316" X="856.9946" Y="-2343.748" Z="92.04479" />
+		<PickUp QuestName="A Burning Threat" QuestId="29090" GiverName="Brogor" GiverId="52192" X="846.8597" Y="-2342.339" Z="92.37898" />
+
+		<Code File="InteractWith" MobId="161752" InteractByLooting="true" CollectionDistance="200" QuestId="29027" QuestObjectiveIndex="1" >
+			<HuntingGrounds>
+				<Hotspot X="747.1536" Y="-2234.654" Z="92.43059" />
+				<Hotspot X="613.2498" Y="-2249.069" Z="91.66763" />
+				<Hotspot X="614.1954" Y="-2188.729" Z="91.66703" />
+			</HuntingGrounds>
+		</Code>
+
+		<Code File="KillUntilComplete" MobIds="3379, 3380" QuestId="29090" >
+			<HuntingGrounds>
+				<Hotspot X="624.3754" Y="-2241.968" Z="92.40032" />
+				<Hotspot X="558.7527" Y="-2124.782" Z="91.84199" />
+				<Hotspot X="562.2012" Y="-2062.598" Z="91.66685" />
+			</HuntingGrounds>
+		</Code>
+
+		<TurnIn QuestName="A Burning Threat" QuestId="29090" TurnInName="Brogor" TurnInId="52192" X="846.7704" Y="-2342.425" Z="92.37173" />
+		<TurnIn QuestName="Nugget Slugs" QuestId="29027" TurnInName="Wenikee Boltbucket" TurnInId="9316" X="853.7911" Y="-2345.961" Z="91.95737" />
+		<RecheckCheckpoints />
+
+		<PickUp QuestName="Return to Samophlanger" QuestId="14004" GiverName="Wenikee Boltbucket" GiverId="9316" X="853.7911" Y="-2345.961" Z="91.95737" />
+		<If Condition="QuestDone(14004)" >
+			<Code File="InteractWith" MobId="9316" WaitTime="5000" GossipOptions="1" X="853.3732" Y="-2345.488" Z="91.99766" />
+		</If>
+		<TurnIn QuestName="Return to Samophlanger" QuestId="14004" TurnInName="Sputtervalve" TurnInId="3442" X="1144.271" Y="-3379.672" Z="92.237" />
+
+		<PickUp QuestName="Read the Manual" QuestId="14006" GiverName="Sputtervalve" GiverId="3442" X="1144.271" Y="-3379.672" Z="92.237" />
+		<PickUp QuestName="Miner&apos;s Fortune" QuestId="29015" GiverName="Brak Blusterpipe" GiverId="34674" X="1156.919" Y="-3396.646" Z="91.66705" />
+
+		<Code File="KillUntilComplete" MobIds="3283, 3286" TerminateWhen="!DoQuest(29015) &amp;&amp; (HasItem(11147) &amp;&amp; GetItemCount(11148) &gt;=5)" >
+			<HuntingGrounds>
+				<Hotspot X="1244.431" Y="-3645.904" Z="92.23777" />
+				<Hotspot X="1309.507" Y="-3606.659" Z="92.21947" />
+				<Hotspot X="1343.265" Y="-3594.56" Z="91.66892" />
+				<Hotspot X="1398.247" Y="-3453.674" Z="93.55444" />
+			</HuntingGrounds>
+		</Code>
+
+		<Code File="UseItem" ItemId="11148" QuestId="14006" TerminateWhen="GetItemCount(11148) &lt; 5" />
+
+		<TurnIn QuestName="Miner&apos;s Fortune" QuestId="29015" TurnInName="Brak Blusterpipe" TurnInId="34674" X="1155.735" Y="-3400.098" Z="91.66707" />
+		<TurnIn QuestName="Read the Manual" QuestId="14006" TurnInName="Sputtervalve" TurnInId="3442" X="1142.957" Y="-3380.735" Z="92.26962" />
+
+		<Checkpoint Level="21" />
+
+		<Code File="DeleteItems" Ids="5088" />
+
+		<Code File="LoadProfile" ProfileName="Ashenvale.xml" />
+
+	</QuestOrder>
+</HBProfile>
+

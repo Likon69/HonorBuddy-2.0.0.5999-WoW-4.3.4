@@ -1,0 +1,47 @@
+<HBProfile>
+  <Name>H EK to LK</Name>
+
+	<MinLevel>1</MinLevel>
+	<MaxLevel>86</MaxLevel>
+
+	<MinDurability>0.2</MinDurability>
+	<MinFreeBagSlots>2</MinFreeBagSlots>
+
+	<MailGrey>False</MailGrey>
+	<MailWhite>False</MailWhite>
+	<MailGreen>False</MailGreen>
+	<MailBlue>False</MailBlue>
+	<MailPurple>False</MailPurple>
+
+	<SellGrey>False</SellGrey>
+	<SellWhite>False</SellWhite>
+	<SellGreen>False</SellGreen>
+	<SellBlue>False</SellBlue>
+	<SellPurple>False</SellPurple>
+
+	<TargetElites>False</TargetElites>
+
+	<AvoidMobs>
+	</AvoidMobs>
+	<Blackspots>
+	</Blackspots>
+	<Mailboxes>
+	</Mailboxes>
+	<Vendors>
+	</Vendors>
+	<QuestOrder>
+		<CustomBehavior File="FlyTo" X="2036.99" Y="299.9215" Z="54.13479" />
+		<CustomBehavior File="ForcedDismount" />
+		<CustomBehavior File="Message" Text="Running to Howling Fjord Zepp from UC" LogColor="Cornflowerblue" />
+		<RunTo X="2060.931" Y="361.9963" Z="82.50146" />
+		<CustomBehavior File="Message" Text="Waiting for Zepp to Howling Fjord - don't interact!" LogColor="Orange" />
+		<CustomBehavior File="UseTransport" 
+			TransportId="181689"
+			WaitAtX="2060.931" WaitAtY="361.9963" WaitAtZ="82.50146"
+			TransportStartX="2056.493" TransportStartY="381.6347" TransportStartZ="100.362"
+			StandOnX="2058.682" StandOnY="371.8202" StandOnZ="82.52834"
+			TransportEndX="1989.353" TransportEndY="-6082.776" TransportEndZ="85.59646"
+			GetOffX="1975.661" GetOffY="-6097.837" GetOffZ="67.15333"
+		/>
+	</QuestOrder>
+</HBProfile>

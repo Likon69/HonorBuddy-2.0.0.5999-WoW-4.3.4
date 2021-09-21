@@ -1,0 +1,141 @@
+<HBProfile>
+<Name>105-135 Meidum Leather-Alliance</Name>
+<MinDurability>0.4</MinDurability>
+<MinFreeBagSlots>1</MinFreeBagSlots>
+
+
+<MailGrey>false</MailGrey>
+<MailWhite>false</MailWhite>
+<MailGreen>false</MailGreen>
+<MailBlue>false</MailBlue>
+<MailPurple>false</MailPurple>
+
+<SellGrey>True</SellGrey>
+<SellWhite>True</SellWhite>
+<SellGreen>True</SellGreen>
+<SellBlue>false</SellBlue>
+<SellPurple>false</SellPurple>
+
+<Vendors>
+</Vendors>
+
+<Mailboxes>
+</Mailboxes>
+
+<Blackspots>
+</Blackspots>
+
+  <QuestOrder>
+    
+
+    <While Condition="(Me.Level &gt; 1)" >
+
+      <If Condition="(Me.FreeBagSlots &gt; 5)" >
+
+        <CustomBehavior File="FlyTo" DestName="Farm Area" X="-10068.49" Y="-254.3596" Z="129.6647" />
+        <CustomBehavior File="ForcedDismount" />
+
+        <SetGrindArea>
+          <GrindArea>
+            <TargetMinLevel>1</TargetMinLevel>
+            <TargetMaxLevel>86</TargetMaxLevel>
+            <Factions>38</Factions>
+            <MaxDistance>45</MaxDistance>
+            <RandomizeHotspots>False</RandomizeHotspots>
+            <Hotspots>
+              <Hotspot X="-9926.116" Y="-1695.649" Z="22.97017" />
+              <Hotspot X="-9912.771" Y="-1768.645" Z="32.12413" />
+              <Hotspot X="-9982.13" Y="-1710.15" Z="27.35047" />
+              <Hotspot X="-10014.87" Y="-1673.089" Z="30.28931" />
+              <Hotspot X="-10020.26" Y="-1600.278" Z="32.25587" />
+              <Hotspot X="-9952.896" Y="-1591.395" Z="29.31221" />
+              <Hotspot X="-9972.919" Y="-1553.059" Z="27.51498" />
+              <Hotspot X="-10007.76" Y="-1508.549" Z="29.74335" />
+              <Hotspot X="-10042.83" Y="-1441.983" Z="29.19605" />
+              <Hotspot X="-10042.31" Y="-1370.095" Z="29.04033" />
+              <Hotspot X="-10046.42" Y="-1297.009" Z="30.97382" />
+              <Hotspot X="-10108.53" Y="-1270.751" Z="29.51727" />
+              <Hotspot X="-10043.31" Y="-1231.316" Z="29.07565" />
+              <Hotspot X="-10044.95" Y="-1191.777" Z="29.56542" />
+              <Hotspot X="-10044.71" Y="-1142.731" Z="29.23804" />
+              <Hotspot X="-10075.33" Y="-1106.832" Z="28.7328" />
+              <Hotspot X="-10051.44" Y="-1045.033" Z="28.25253" />
+              <Hotspot X="-10086.63" Y="-1025.012" Z="32.16104" />
+              <Hotspot X="-10120.66" Y="-975.6288" Z="32.09806" />
+              <Hotspot X="-10058.9" Y="-963.3929" Z="34.53672" />
+              <Hotspot X="-10018.89" Y="-957.1539" Z="29.39417" />
+              <Hotspot X="-10036.65" Y="-895.8156" Z="33.30318" />
+              <Hotspot X="-10082.98" Y="-901.608" Z="35.80597" />
+              <Hotspot X="-10136.14" Y="-914.5132" Z="34.65869" />
+              <Hotspot X="-10136.09" Y="-960.3381" Z="31.80387" />
+              <Hotspot X="-10199.63" Y="-976.2916" Z="36.14519" />
+              <Hotspot X="-10219.99" Y="-1021.292" Z="32.03933" />
+              <Hotspot X="-10231.76" Y="-950.4543" Z="37.79209" />
+              <Hotspot X="-10242.96" Y="-893.196" Z="36.13042" />
+              <Hotspot X="-10219.97" Y="-870.2596" Z="41.16904" />
+              <Hotspot X="-10197.21" Y="-840.8852" Z="42.02546" />
+              <Hotspot X="-10181.53" Y="-789.8684" Z="45.70173" />
+              <Hotspot X="-10125.86" Y="-801.2908" Z="36.57192" />
+              <Hotspot X="-10066.45" Y="-831.0767" Z="36.31736" />
+              <Hotspot X="-10048.87" Y="-864.4763" Z="34.51636" />
+              <Hotspot X="-10009.73" Y="-858.1799" Z="30.02235" />
+              <Hotspot X="-9990.949" Y="-805.1486" Z="28.10014" />
+              <Hotspot X="-9989.885" Y="-759.204" Z="30.49004" />
+              <Hotspot X="-10052.32" Y="-739.7487" Z="36.61999" />
+              <Hotspot X="-10123.4" Y="-717.0942" Z="41.94709" />
+              <Hotspot X="-10115.78" Y="-683.4827" Z="44.6024" />
+              <Hotspot X="-10081.05" Y="-681.1119" Z="37.75928" />
+              <Hotspot X="-10002.6" Y="-692.0652" Z="35.03407" />
+              <Hotspot X="-9957.059" Y="-683.6439" Z="29.5661" />
+              <Hotspot X="-9963.605" Y="-616.341" Z="34.21157" />
+              <Hotspot X="-9983.646" Y="-596.0478" Z="38.20391" />
+              <Hotspot X="-10017.64" Y="-626.243" Z="40.56673" />
+              <Hotspot X="-10052.97" Y="-605.2977" Z="44.42616" />
+              <Hotspot X="-10025.04" Y="-566.3351" Z="44.24185" />
+              <Hotspot X="-9981.385" Y="-517.5344" Z="39.36047" />
+              <Hotspot X="-9950.762" Y="-503.0972" Z="30.55637" />
+              <Hotspot X="-9975.688" Y="-454.87" Z="25.76377" />
+              <Hotspot X="-10010.37" Y="-441.4009" Z="31.71942" />
+              <Hotspot X="-10053.75" Y="-468.9838" Z="48.60239" />
+              <Hotspot X="-10037.43" Y="-375.3502" Z="28.4767" />
+              <Hotspot X="-10053.67" Y="-325.8018" Z="29.36052" />
+              <Hotspot X="-10074.72" Y="-295.4091" Z="30.96775" />
+              <Hotspot X="-10065.29" Y="-265.0197" Z="29.70981" />
+              <Hotspot X="-10070.75" Y="-234.8424" Z="31.63417" />
+              <Hotspot X="-10098.89" Y="-206.7364" Z="30.47458" />
+              <Hotspot X="-10070.14" Y="-185.7688" Z="28.59105" />
+              <Hotspot X="-10108.87" Y="-150.233" Z="29.61342" />
+              <Hotspot X="-10118.4" Y="-91.09659" Z="26.54906" />
+              <Hotspot X="-10109.97" Y="-36.37171" Z="22.11353" />
+            </Hotspots>
+          </GrindArea>
+        </SetGrindArea>
+        <GrindTo Condition="(Me.FreeBagSlots &lt;= 5) || (Me.DurabilityPercent &lt;= 0.3)" GoalText="Farming Light Leather." />
+      </If>
+      <If Condition="(Me.FreeBagSlots &lt;= 5) || (Me.DurabilityPercent &lt;= 0.3)" >
+
+        <CustomBehavior File="Message" Text="Sell \ Repair." LogColor="Red" />
+
+        <CustomBehavior File="FlyTo" X="-9463.318" Y="-1349.133" Z="75.51675"   DestName="Repair Run" />
+        <CustomBehavior File="ForcedDismount" />
+
+        <SetVendor>
+          <Vendors>
+            <Vendor Name="Rallik Finn" Entry="1198" Type="Repair" X="-9469.282" Y="-1355.242" Z="47.20448" />
+          </Vendors>
+        </SetVendor>
+
+        <CustomBehavior File="ForceSetVendor" DoMail="False" DoSell="True" DoRepair="True" DoTrain="False" />
+
+        <ClearMailbox />
+        <ClearVendor />
+
+      </If>
+
+
+
+    </While>
+
+
+  </QuestOrder>
+</HBProfile>

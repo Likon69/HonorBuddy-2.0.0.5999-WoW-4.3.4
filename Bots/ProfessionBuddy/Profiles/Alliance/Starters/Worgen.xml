@@ -1,0 +1,920 @@
+<HBProfile xsi:noNamespaceSchemaLocation="../Schemas/EchoSchema.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<!-- Original contribution by EchoTiger -->
+	<Name>Worgen Starter ($ShortHash$)</Name>
+
+	<MinDurability>0.3</MinDurability>
+	<MinFreeBagSlots>3</MinFreeBagSlots>
+
+	<SellGrey>true</SellGrey>
+	<SellWhite>true</SellWhite>
+	<SellGreen>true</SellGreen>
+	<SellBlue>true</SellBlue>
+	<SellPurple>false</SellPurple>
+
+	<MailGrey>false</MailGrey>
+	<MailWhite>true</MailWhite>
+	<MailGreen>true</MailGreen>
+	<MailBlue>true</MailBlue>
+	<MailPurple>true</MailPurple>
+
+	<TargetElites>true</TargetElites>
+
+	<AvoidMobs>
+	</AvoidMobs>
+
+	<Mailboxes>
+	</Mailboxes>
+
+	<Vendors>
+	</Vendors>
+
+	<Blackspots>
+		<Blackspot X="833.6476" Y="4105.708" Z="205.9275" Radius="1" /> <!-- Defaced scroll in bad location -->
+		<Blackspot X="1376.848" Y="3674.168" Z="87.92664" Radius="1" /> <!-- Hanging Hozen -->
+		<Blackspot X="1370.387" Y="3662.507" Z="97.81139" Radius="5" /> <!-- Hozen on Roof -->
+		<Blackspot X="1263.536" Y="4311.373" Z="225.9749" Radius="1" /> <!-- Stolen Firework Bundle in bad location -->
+		<Blackspot X="-1792.895" Y="1399.261" Z="20.29551" Radius="4" /> <!-- Small barricade in Gilneas City -->
+	</Blackspots>
+
+	<Blacklist>
+		<Mob Name="Deepscale Fleshripper" Id="60858" Flags="Pull" />
+		<Mob Name="Bloodfang Ripper" Id="35505" Flags="Combat" /> <!-- Apart of the mass worgen pile --> 
+		<Mob Name="Bloodfang Stalker" Id="51277" Flags="Combat" /> <!-- Apart of the mass worgen pile -->
+		<Mob Name="Bloodfang Stalker" Id="35229" Flags="Combat" /> <!-- Apart of the mass worgen pile -->
+		<Mob Name="Horrid Abomination" Id="36231" Flags="Pull" />
+		<Mob Name="Koroth The Hill Breaker" Id="36528" Flags="Combat" />
+		<Mob Name="Koroth The Hill Breaker" Id="36294" Flags="Combat" />
+		<Mob Name="Veteran Dark Ranger" Id="38022" Flags="Pull" />
+		<Mob Name="Orc Raider" Id="37916" Flags="Combat" />
+		<Mob Name="Riding War Wolf" Id="37939" Flags="Combat" />
+		<Mob Name="Wolfmaw Outrider" Id="37938" Flags="Combat" />
+		<Mob Name="Orcish War Machine" Id="37921" Flags="Combat" />	
+	</Blacklist>
+
+	<QuestOrder IgnoreCheckpoints="false" ContinuallySkipToCheckpoints="true" >
+		<!-- Check function status -->
+		<Code File="RunCode" Type="Definition">
+			<![CDATA[
+			private static bool? profileFunctionsEnabled => (bool?)AppDomain.CurrentDomain.GetData("QuestingProfiles_FunctionsEnabled");
+			private static bool IsStoreProfile(string path) => path.StartsWith("store://");
+			private static string Slashify(string path) => IsStoreProfile(path) ? path.Replace(@"\", "/") : path.Replace("/", @"\");
+
+			public __CompiledBatchClass__()
+			{
+				ActivateFunctions();
+			}
+
+			private static void ActivateFunctions()
+			{
+				if (profileFunctionsEnabled == null || profileFunctionsEnabled == false)
+				{
+					Bots.Professionbuddy.PBLog.Log(Colors.MediumPurple, "[Profile Message!]: ", Colors.Yellow, "Please stand by as the functions are being activated!");
+					LoadProfile(@"..\..\Functions\Activate Functions.xml");
+				}
+			}
+
+			private static void LoadProfile(string path)
+			{
+				var profile = GetNewPath(path);
+				if (!IsStoreProfile(profile) && !File.Exists(profile))
+				{
+					Bots.Professionbuddy.PBLog.Log(Colors.MediumPurple, "[Profile Message!]: ", Colors.Yellow, "Profile does not exist.\n" + profile);
+					return;
+				}
+
+				Bots.Professionbuddy.PBLog.Log(Colors.MediumPurple, "[Profile Message!]: ", Colors.Yellow, "Loading: " + profile);
+				ProfileManager.LoadNew(profile, false);
+			}
+
+			private static string GetNewPath(string path)
+			{
+				if (IsStoreProfile(path))
+					return Slashify(path);
+
+				var currentProfile = ProfileManager.XmlLocation;
+				if (IsStoreProfile(currentProfile))
+					return Slashify(currentProfile + "/../" + path);
+
+				var absolutePath = Path.Combine(Path.GetDirectoryName(currentProfile), path);
+				absolutePath = Path.GetFullPath(absolutePath);
+				var canonicalPath = new Uri(absolutePath).LocalPath;
+				return Slashify(canonicalPath);
+			}]]>
+		</Code>
+		<Code File="RunCode" Code="ActivateFunctions();" />
+		<!-- END Check function status -->
+
+		<If Condition="Me.IsHorde" >
+			<Code File="LoadProfile" ProfileName="..\..\Questing Autoloader.xml" />
+		</If>
+		<!-- RunCode Methods -->
+			<!--<Code File="RunCode">
+			<![CDATA[
+				Bots.Professionbuddy.PBLog.Log(System.Windows.Media.Colors.MediumPurple, "> [Profile Initialization Status] ", System.Windows.Media.Colors.CornflowerBlue, "\n     Auto-Looting	:: Enabled\n     Looting	:: Enabled\n     Game Addons	:: Disabled");
+				Lua.DoString("SetCVar('AutoLootDefault', 1);");
+				Lua.DoString("SetCVar('autoDismountFlying', 1);");
+				CharacterSettings.Instance.LootMobs = true;
+				CharacterSettings.Instance.Save();
+				Lua.DoString("for i=1,GetNumAddOns() do local relo=false if IsAddOnLoaded(i) then relo=true DisableAddOn(i) end if relo then relo=nil ReloadUI() end end");
+				await Coroutine.Sleep(1500);
+				Logging.Write(System.Windows.Media.Colors.MediumPurple, "> [Ready to bot!]");
+			]]>
+			</Code> -->
+			<Code File="RunCode" Type="Definition">
+				<![CDATA[
+						bool DoQuest(params uint[] questIds)
+						{
+							foreach (var questId in questIds)
+							{
+								if (HasQuest(questId) && !IsQuestCompleted(questId)) return true;
+							}
+							return false;
+						}
+						bool NeedsQuest(params uint[] questIds)
+						{
+							foreach (var questId in questIds)
+							{
+								if (!HasQuest(questId) && !IsQuestCompleted(questId)) return true;
+							}
+							return false;
+						}
+						bool NeedsBreadcrumbQuest(params uint[] questIds)
+						{
+							foreach (var questId in questIds)
+							{
+								if (IsQuestCompleted(questId)) return false;
+							}
+							return true;
+						}
+						bool QuestDone(params uint[] questIds)
+						{
+							foreach (var questId in questIds)
+							{
+								if (HasQuest(questId) && IsQuestCompleted(questId)) return true;
+							}
+							return false;
+						}
+						bool QuestFlaggedCompleted(params uint[] questIds)
+						{
+							foreach (var questId in questIds)
+							{
+								return Lua.GetReturnVal<bool>($"return IsQuestFlaggedCompleted({questId});", 0);
+							}
+							return false;
+						}
+						async Task SkipCutscene(int preWait = 3000, int postWait = 3000)
+						{
+					// Add detection of cutscene here.
+							await Coroutine.Sleep(preWait);
+					// Test and improve the working method.
+							Lua.DoString("MovieFrame:StopMovie(); CinematicFrame_CancelCinematic(); StopCinematic();");
+							await Coroutine.Sleep(postWait);
+						}
+					]]>
+			</Code>
+		<!-- END RunCode Methods -->
+
+
+		<PickUp QuestName="Lockdown!" QuestId="14078" GiverName="Prince Liam Greymane" GiverId="34850" X="-1451.57" Y="1406.092" Z="35.5561" />
+		<TurnIn QuestName="Lockdown!" QuestId="14078" TurnInName="Lieutenant Walden" TurnInId="34863" X="-1405.816" Y="1443.998" Z="35.5561" />
+		<PickUp QuestName="Something&apos;s Amiss" QuestId="14091" GiverName="Lieutenant Walden" GiverId="34863" X="-1405.816" Y="1443.998" Z="35.5561" />
+		<TurnIn QuestName="Something&apos;s Amiss" QuestId="14091" TurnInName="Prince Liam Greymane" TurnInId="34913" X="-1434.611" Y="1403.992" Z="35.5559" />
+		<PickUp QuestName="All Hell Breaks Loose" QuestId="14093" GiverName="Prince Liam Greymane" GiverId="34913" X="-1434.611" Y="1403.992" Z="35.5559" />
+		<PickUp QuestName="Evacuate the Merchant Square" QuestId="14098" GiverName="Prince Liam Greymane" GiverId="34913" X="-1434.611" Y="1403.992" Z="35.5559" />
+		<PickUp QuestName="Salvage the Supplies" QuestId="14094" GiverName="Gwen Armstead" GiverId="34936" X="-1466.134" Y="1401.141" Z="35.5564" />
+
+
+		<Code File="InteractWith" MobId="195327" Range="2" CollectionDistance="200" NonCompeteDistance="0" PreInteractMountStrategy="Dismount" QuestId="14098" QuestObjectiveIndex="1" >
+			<HuntingGrounds>
+				<Hotspot X="-1444.058" Y="1412.052" Z="35.5559" />
+				<Hotspot X="-1552.063" Y="1407.079" Z="35.5559" />
+			</HuntingGrounds>
+		</Code>
+
+		<Code File="InteractWith" MobId="195306" CollectionDistance="200" NonCompeteDistance="0" PreInteractMountStrategy="Dismount" QuestId="14094" QuestObjectiveIndex="1" >
+			<HuntingGrounds>
+				<Hotspot X="-1444.058" Y="1412.052" Z="35.5559" />
+				<Hotspot X="-1552.063" Y="1407.079" Z="35.5559" />
+			</HuntingGrounds>
+		</Code>
+
+		<Code File="KillUntilComplete" MobId="34884" QuestId="14093" >
+			<HuntingGrounds>
+				<Hotspot X="-1444.058" Y="1412.052" Z="35.5559" />
+				<Hotspot X="-1552.063" Y="1407.079" Z="35.5559" />
+			</HuntingGrounds>
+		</Code>
+
+		<TurnIn QuestName="Salvage the Supplies" QuestId="14094" TurnInName="Gwen Armstead" TurnInId="34936" X="-1466.171" Y="1400.458" Z="35.55613" />
+		<TurnIn QuestName="All Hell Breaks Loose" QuestId="14093" TurnInName="Prince Liam Greymane" TurnInId="34913" X="-1442.302" Y="1401.162" Z="35.55613" />
+		<TurnIn QuestName="Evacuate the Merchant Square" QuestId="14098" TurnInName="Prince Liam Greymane" TurnInId="34913" X="-1442.302" Y="1401.162" Z="35.55613" />
+		<PickUp QuestName="Royal Orders" QuestId="14099" GiverName="Prince Liam Greymane" GiverId="34913" X="-1442.302" Y="1401.162" Z="35.55613" />
+		<TurnIn QuestName="Royal Orders" QuestId="14099" TurnInName="Gwen Armstead" TurnInId="35840" X="-1631.606" Y="1305.795" Z="19.66369" />
+
+		<If Condition="Me.Class == WoWClass.Druid">
+			<PickUp QuestName="The Winds Know Your Name... Apparently" QuestId="14280" GiverName="Gwen Armstead" GiverId="35840" X="-1631.606" Y="1305.795" Z="19.66369" />
+			<TurnIn QuestName="The Winds Know Your Name... Apparently" QuestId="14280" TurnInName="Celestine of the Harvest" TurnInId="35873" X="-1685.269" Y="1305.989" Z="19.78265" />
+			<PickUp QuestName="Safety in Numbers" QuestId="14291" GiverName="Celestine of the Harvest" GiverId="35873" X="-1685.269" Y="1305.989" Z="19.78265" />
+		</If>
+
+		<If Condition="Me.Class == WoWClass.Hunter">
+			<PickUp QuestName="Someone's Keeping Track of You" QuestId="14275" GiverName="Gwen Armstead" GiverId="35840" X="-1631.606" Y="1305.795" Z="19.66369" />
+			<TurnIn QuestName="Someone's Keeping Track of You" QuestId="14275" TurnInName="Huntsman Blake" TurnInId="35874" X="-1685.269" Y="1305.989" Z="19.78265" />
+			<PickUp QuestName="Safety in Numbers" QuestId="14290" GiverName="Huntsman Blake" GiverId="35874" X="-1685.269" Y="1305.989" Z="19.78265" />
+		</If>
+
+		<If Condition="Me.Class == WoWClass.Mage">
+			<PickUp QuestName="Arcane Inquiries" QuestId="14277" GiverName="Gwen Armstead" GiverId="35840" X="-1631.606" Y="1305.795" Z="19.66369" />
+			<TurnIn QuestName="Arcane Inquiries" QuestId="14277" TurnInName="Myriam Spellwaker" TurnInId="35872" X="-1685.269" Y="1305.989" Z="19.78265" />
+			<PickUp QuestName="Safety in Numbers" QuestId="14288" GiverName="Myriam Spellwaker" GiverId="35872" X="-1685.269" Y="1305.989" Z="19.78265" />
+		</If>
+
+		<If Condition="Me.Class == WoWClass.Priest">
+			<PickUp QuestName="Seek the Sister" QuestId="14278" GiverName="Gwen Armstead" GiverId="35840" X="-1631.606" Y="1305.795" Z="19.66369" />
+			<TurnIn QuestName="Seek the Sister" QuestId="14278" TurnInName="Sister Almyra" TurnInId="35870" X="-1685.269" Y="1305.989" Z="19.78265" />
+			<PickUp QuestName="Safety in Numbers" QuestId="14289" GiverName="Sister Almyra" GiverId="35870" X="-1685.269" Y="1305.989" Z="19.78265" />
+		</If>
+
+		<If Condition="Me.Class == WoWClass.Rogue">
+			<PickUp QuestName="Someone's Looking for You" QuestId="14269" GiverName="Gwen Armstead" GiverId="35840" X="-1631.606" Y="1305.795" Z="19.66369" />
+			<TurnIn QuestName="Someone's Looking for You" QuestId="14269" TurnInName="Loren the Fence" TurnInId="35871" X="-1685.269" Y="1305.989" Z="19.78265" />
+			<PickUp QuestName="Safety in Numbers" QuestId="14285" GiverName="Loren the Fence" GiverId="35871" X="-1685.269" Y="1305.989" Z="19.78265" />
+		</If>
+
+		<If Condition="Me.Class == WoWClass.Warlock">
+			<PickUp QuestName="Shady Associates" QuestId="14273" GiverName="Gwen Armstead" GiverId="35840" X="-1631.606" Y="1305.795" Z="19.66369" />
+			<TurnIn QuestName="Shady Associates" QuestId="14273" TurnInName="Vitus Darkwalker" TurnInId="35869" X="-1685.269" Y="1305.989" Z="19.78265" />
+			<PickUp QuestName="Safety in Numbers" QuestId="14287" GiverName="Vitus Darkwalker" GiverId="35869" X="-1685.269" Y="1305.989" Z="19.78265" />
+		</If>
+
+		<If Condition="Me.Class == WoWClass.Warrior">
+			<PickUp QuestName="Your Instructor" QuestId="14265" GiverName="Gwen Armstead" GiverId="35840" X="-1631.606" Y="1305.795" Z="19.66369" />
+			<TurnIn QuestName="Your Instructor" QuestId="14265" TurnInName="Sergeant Cleese" TurnInId="35839" X="-1685.269" Y="1305.989" Z="19.78265" />
+			<PickUp QuestName="Safety in Numbers" QuestId="14286" GiverName="Sergeant Cleese" GiverId="35839" X="-1685.269" Y="1305.989" Z="19.78265" />
+		</If>
+
+		<!-- Variant order is the same order as the above -->
+		<TurnIn QuestName="Safety in Numbers" VariantQuestIds="14291, 14290, 14288, 14289, 14285, 14287, 14286" TurnInName="King Genn Greymane" TurnInId="35112" X="-1763.46" Y="1345.315" Z="19.95766" />
+		<PickUp QuestName="Old Divisions" QuestId="14157" GiverName="King Genn Greymane" GiverId="35112" X="-1763.46" Y="1345.315" Z="19.95766" />
+		<PickUp QuestName="While You&apos;re At It" QuestId="24930" GiverName="Lord Godfrey" GiverId="35115" X="-1764.465" Y="1349.761" Z="19.83781" />
+		<TurnIn QuestName="Old Divisions" QuestId="14157" TurnInName="Captain Broderick" TurnInId="50371" X="-1752.323" Y="1417.368" Z="23.01911" />
+		<PickUp QuestName="The Prison Rooftop" QuestId="28850" GiverName="Captain Broderick" GiverId="50371" X="-1752.323" Y="1417.368" Z="23.01911" />
+		<TurnIn QuestName="The Prison Rooftop" QuestId="28850" TurnInName="Lord Darius Crowley" TurnInId="35077" X="-1680.742" Y="1444.299" Z="52.28718" />
+
+		<PickUp QuestName="By the Skin of His Teeth" QuestId="14154" GiverName="Lord Darius Crowley" GiverId="35077" X="-1680.742" Y="1444.299" Z="52.28718" />
+		<Code File="KillUntilComplete" MobIds="35170, 35456" QuestId="14154" X="-1680.742" Y="1444.299" Z="52.28718" />
+		<TurnIn QuestName="By the Skin of His Teeth" QuestId="14154" TurnInName="Lord Darius Crowley" TurnInId="35077" X="-1678.265" Y="1439.801" Z="52.28718" />
+
+		<PickUp QuestName="Brothers In Arms" QuestId="26129" GiverName="Lord Darius Crowley" GiverId="35077" X="-1677.975" Y="1441.406" Z="52.28718" />
+
+		<Code File="KillUntilComplete" MobId="35118" QuestId="24930" >
+			<HuntingGrounds>
+				<Hotspot X="-1704.068" Y="1421.14" Z="21.66854" />
+				<Hotspot X="-1750.147" Y="1390.082" Z="19.78192" />
+			</HuntingGrounds>
+		</Code>
+
+		<TurnIn QuestName="While You&apos;re At It" QuestId="24930" TurnInName="Lord Godfrey" TurnInId="35115" X="-1763.492" Y="1353.324" Z="19.78497" />
+		<TurnIn QuestName="Brothers In Arms" QuestId="26129" TurnInName="King Genn Greymane" TurnInId="35112" X="-1764.028" Y="1349.97" Z="19.8306" />
+		<PickUp QuestName="The Rebel Lord&apos;s Arsenal" QuestId="14159" GiverName="King Genn Greymane" GiverId="35112" X="-1764.028" Y="1349.97" Z="19.8306" />
+		<TurnIn QuestName="The Rebel Lord&apos;s Arsenal" QuestId="14159" TurnInName="Josiah Avery" TurnInId="35369" X="-1810.057" Y="1429.278" Z="12.46174" />
+
+		<PickUp QuestName="From the Shadows" QuestId="14204" GiverName="Lorna Crowley" GiverId="35378" X="-1791.182" Y="1427.697" Z="12.84292" />
+		<Code File="KillUntilComplete" MobId="35463" QuestId="14204" >
+			<HuntingGrounds>
+				<Hotspot X="-1806.613" Y="1471.832" Z="19.23492" />
+				<Hotspot X="-1733.271" Y="1504.461" Z="26.19594" />
+				<Hotspot X="-1730.413" Y="1477.605" Z="24.30953" />
+				<Hotspot X="-1760.461" Y="1473.992" Z="22.68073" />
+			</HuntingGrounds>
+		</Code>
+		<TurnIn QuestName="From the Shadows" QuestId="14204" TurnInName="Lorna Crowley" TurnInId="35378" X="-1789.615" Y="1429.83" Z="14.17713" />
+
+		<PickUp QuestName="Message to Greymane" QuestId="14214" GiverName="Lorna Crowley" GiverId="35378" X="-1789.615" Y="1429.83" Z="14.17713" />
+		<TurnIn QuestName="Message to Greymane" QuestId="14214" TurnInName="King Genn Greymane" TurnInId="35550" X="-1802.145" Y="1410.269" Z="19.87767" />
+
+		<PickUp QuestName="Save Krennan Aranas" QuestId="14293" GiverName="King Genn Greymane" GiverId="35550" X="-1794.456" Y="1389.783" Z="21.88663" />
+		<While Condition="DoQuest(14293)" >
+			<DisableBehavior Name="All" />
+			<Code File="InteractWith" MobId="35550" GossipOptions="1" NonCompeteDistance="0" PreInteractMountStrategy="Dismount" InteractBlacklistTimeInSeconds="1" QuestId="14293" QuestObjectiveIndex="1" X="-1802.338" Y="1409.869" Z="19.87548" TerminateWhen="Me.InVehicle" />
+
+			<Code File="WaitTimer" WaitTime="60000" TerminateWhen="!Me.InVehicle || Unit(35753, u =&gt; u.DistanceSqr &lt; 10f*10f) != null" />
+			<Code File="Misc\RunLua" Lua="OverrideActionBarButton1:Click();" />
+			<Code File="WaitTimer" WaitTime="60000" TerminateWhen="!Me.InVehicle" />
+			<EnableBehavior Name="All" />
+		</While>
+		<TurnIn QuestName="Save Krennan Aranas" QuestId="14293" TurnInName="Lord Godfrey" TurnInId="35906" X="-1779.91" Y="1437.957" Z="20.29717" />
+
+		<PickUp QuestName="Time to Regroup" QuestId="14294" GiverName="Lord Godfrey" GiverId="35906" X="-1781.412" Y="1438.409" Z="20.25164" />
+		<TurnIn QuestName="Time to Regroup" QuestId="14294" TurnInName="King Genn Greymane" TurnInId="35911" X="-1742.319" Y="1658.813" Z="20.47931" />
+
+		<PickUp QuestName="Sacrifices" QuestId="14212" GiverName="Lord Darius Crowley" GiverId="35552" X="-1737.961" Y="1657.943" Z="20.47841" />
+		<While Condition="DoQuest(14212)" >
+			<Code File="InteractWith" MobIds="44427, 44429" NonCompeteDistance="0" PreInteractMountStrategy="Dismount" QuestId="14212" QuestObjectiveIndex="1" X="-1740.596" Y="1657.564" Z="20.47829" TerminateWhen="Me.InVehicle" />
+			<DisableBehavior Name="All" />
+			<Code File="RunCode">
+				<![CDATA[
+					WoWUnit worgenPoi = null;
+					while (DoQuest(14212) && Me.InVehicle)
+					{
+						if (worgenPoi == null || !worgenPoi.IsValid || worgenPoi.IsDead || worgenPoi.DistanceSqr >= 40f*40f)
+							worgenPoi = ObjectManager.GetObjectsOfType<WoWUnit>().OrderBy(x => x.DistanceSqr < 40f*40f).FirstOrDefault(x => x.Entry == 44427 || x.Entry == 35229);
+
+						if (worgenPoi != null && worgenPoi.IsValid && worgenPoi.IsAlive)
+						{
+							Lua.DoString("OverrideActionBarButton1:Click();");
+							SpellManager.ClickRemoteLocation(worgenPoi.Location);
+							await Coroutine.Sleep(1600);
+						}
+						await Coroutine.Yield();
+					}
+				]]>
+			</Code>
+			<Code File="WaitTimer" WaitTime="60000" TerminateWhen="!Me.InVehicle" />
+			<EnableBehavior Name="All" />
+		</While>
+		<TurnIn QuestName="Sacrifices" QuestId="14212" TurnInName="Tobias Mistmantle" TurnInId="35618" X="-1538.812" Y="1575.501" Z="29.07841" />
+
+		<PickUp QuestName="By Blood and Ash" QuestId="14218" GiverName="Tobias Mistmantle" GiverId="35618" X="-1538.812" Y="1575.501" Z="29.07841" />
+		<While Condition="DoQuest(14218)" >
+			<!-- IMPROVE THIS.  CannonControl is pretty bad at controlling this. -->
+			<Code File="RunCode" Code="if (Me.HasAura(768)) Me.GetAuraById(768).TryCancelAura();" />
+			<DisableBehavior Name="Combat" /> <!-- Supress casting shapeshifts -->
+			<Code File="InteractWith" MobId="35317" NonCompeteDistance="0" PreInteractMountStrategy="Dismount" InteractBlacklistTimeInSeconds="1" QuestId="14218" QuestObjectiveIndex="1" X="-1527.046" Y="1574.219" Z="26.53974" TerminateWhen="Me.InVehicle" />
+			<Code File="Vehicles\CannonControl" VehicleId="35317"  MobId="35229" MaxAngle="0.436" MinAngle="-0.6109" Buttons="1" Velocity="100" Gravity="8" X="-1524.081" Y="1569.992" Z="26.53791" QuestId="14218" TerminateAtMaxRunTimeSecs="60" />
+			<EnableBehavior Name="Combat" />
+		</While>
+		<TurnIn QuestName="By Blood and Ash" QuestId="14218" TurnInName="Tobias Mistmantle" TurnInId="35618" X="-1538.74" Y="1576.597" Z="28.82314" />
+
+		<PickUp QuestName="Never Surrender, Sometimes Retreat" QuestId="14221" GiverName="Tobias Mistmantle" GiverId="35618" X="-1538.74" Y="1576.597" Z="28.82314" />
+		<TurnIn QuestName="Never Surrender, Sometimes Retreat" QuestId="14221" TurnInName="Lord Darius Crowley" TurnInId="35566" X="-1617.541" Y="1500.127" Z="32.73221" />
+
+		<PickUp QuestName="Last Stand" QuestId="14222" GiverName="Lord Darius Crowley" GiverId="35566" X="-1617.541" Y="1500.127" Z="32.73221" />
+		<Code File="KillUntilComplete" MobId="35627" QuestId="14222" X="-1587.647" Y="1528.794" Z="29.23008" />
+		<If Condition="QuestDone(14222)" >
+			<TurnIn QuestName="Last Stand" QuestId="14222" TurnInName="Lord Darius Crowley" TurnInId="35566" X="-1617.247" Y="1500.163" Z="32.64284" />
+			<DisableBehavior Name="Combat" /> <!-- Singular will hog up the bot, causing the cutscene skip to not run -->
+			<Code File="WaitTimer" WaitTime="1000" /> <!-- Yeild the bot for the loading screen. -->
+			<Code File="RunCode" Code="await SkipCutscene();" />
+		</If>
+
+		<While Condition="!IsQuestCompleted(14375)" >
+			<DisableBehavior Name="Combat" /> <!-- Singular will hog up the bot, causing the quest to not complete. -->
+			<Code File="InteractWith" MobId="36332" NonCompeteDistance="0" InteractBlacklistTimeInSeconds="1" MovementBy="None" X="-1818.4" Y="2294.25" Z="42.2135" TerminateWhen="IsQuestCompleted(14375)" />
+			<Code File="RunCode" Code="QuestFrame.Instance.CompleteQuest();" />
+		</While>
+
+		<EnableBehavior Name="Combat" />
+
+		<PickUp QuestName="Among Humans Again" QuestId="14313" GiverName="Lord Godfrey" GiverId="36170" X="-1837.105" Y="2292.435" Z="42.21067" />
+		<TurnIn QuestName="Among Humans Again" QuestId="14313" TurnInName="Krennan Aranas" TurnInId="36132" X="-1862.544" Y="2264.951" Z="44.20426" />
+		<PickUp QuestName="In Need of Ingredients" QuestId="14320" GiverName="Krennan Aranas" GiverId="36132" X="-1862.544" Y="2264.951" Z="44.20426" />
+		<If Condition="QuestDone(14320)" >
+			<TurnIn QuestName="In Need of Ingredients" QuestId="14320" TurnInName="Crate of Mandrake Essence" TurnInId="196394" X="-1924.334" Y="2406.719" Z="29.94202" />
+			<Code File="RunCode" Code="await SkipCutscene(1500)" />
+		</If>
+
+		<PickUp QuestName="Invasion" QuestId="14321" GiverName="Slain Watchman" GiverId="36205" X="-1921.826" Y="2406.482" Z="29.89786" />
+		<TurnIn QuestName="Invasion" QuestId="14321" TurnInName="Gwen Armstead" TurnInId="34571" X="-1862.679" Y="2265.526" Z="44.20712" />
+		<PickUp QuestName="Kill or Be Killed" QuestId="14336" GiverName="Gwen Armstead" GiverId="34571" X="-1862.679" Y="2265.526" Z="44.20712" />
+		<TurnIn QuestName="Kill or Be Killed" QuestId="14336" TurnInName="Prince Liam Greymane" TurnInId="36140" X="-1930.749" Y="2318.921" Z="36.80188" />
+		<PickUp QuestName="Hold the Line" QuestId="14347" GiverName="Prince Liam Greymane" GiverId="36140" X="-1930.749" Y="2318.921" Z="36.80188" />
+		<PickUp QuestName="You Can&apos;t Take &apos;Em Alone" QuestId="14348" GiverName="Prince Liam Greymane" GiverId="36140" X="-1930.749" Y="2318.921" Z="36.80188" />
+
+		<While Condition="DoQuest(14348)" >
+			<Code File="InteractWith" MobId="196403" CollectionDistance="200" NonCompeteDistance="0" InteractByLooting="true" PreInteractMountStrategy="Dismount" QuestId="14348" QuestObjectiveIndex="1" TerminateWhen="HasItem(49202)" >
+				<HuntingGrounds>
+					<Hotspot X="-1926.747" Y="2356.517" Z="32.44646" />
+					<Hotspot X="-1963.081" Y="2314.494" Z="32.82494" />
+				</HuntingGrounds>
+			</Code>
+			<Code File="InteractWith" MobId="36231" MobState="Alive" Range="19" CollectionDistance="200" NonCompeteDistance="0" InteractByUsingItemId="49202" PreInteractMountStrategy="Dismount" QuestId="14348" QuestObjectiveIndex="1" TerminateWhen="!HasItem(49202)" >
+				<HuntingGrounds>
+					<Hotspot X="-1926.747" Y="2356.517" Z="32.44646" />
+					<Hotspot X="-1963.081" Y="2314.494" Z="32.82494" />
+				</HuntingGrounds>
+			</Code>
+		</While>
+
+		<Code File="KillUntilComplete" MobId="34511" QuestId="14347" X="-1926.152" Y="2320.807" Z="37.18565" />
+
+		<TurnIn QuestName="Hold the Line" QuestId="14347" TurnInName="Prince Liam Greymane" TurnInId="36140" X="-1930.812" Y="2322.382" Z="36.38161" />
+		<TurnIn QuestName="You Can&apos;t Take &apos;Em Alone" QuestId="14348" TurnInName="Prince Liam Greymane" TurnInId="36140" X="-1930.812" Y="2322.382" Z="36.38161" />
+		<PickUp QuestName="Holding Steady" QuestId="14366" GiverName="Prince Liam Greymane" GiverId="36140" X="-1930.812" Y="2322.382" Z="36.38161" />
+		<TurnIn QuestName="Holding Steady" QuestId="14366" TurnInName="Gwen Armstead" TurnInId="34571" X="-1863.3" Y="2265.841" Z="44.20374" />
+		<PickUp QuestName="The Allens&apos; Storm Cellar" QuestId="14367" GiverName="Gwen Armstead" GiverId="34571" X="-1863.3" Y="2265.841" Z="44.20374" />
+		<TurnIn QuestName="The Allens&apos; Storm Cellar" QuestId="14367" TurnInName="Lord Godfrey" TurnInId="36290" X="-1873.646" Y="2532.97" Z="-6.363115" />
+		<PickUp QuestName="Unleash the Beast" QuestId="14369" GiverName="Lord Godfrey" GiverId="36290" X="-1873.646" Y="2532.97" Z="-6.363115" />
+		<PickUp QuestName="Two By Sea" QuestId="14382" GiverName="Lord Godfrey" GiverId="36290" X="-1873.646" Y="2532.97" Z="-6.363115" />
+		<PickUp QuestName="Save the Children!" QuestId="14368" GiverName="Melinda Hammond" GiverId="36291" X="-1873.646" Y="2532.97" Z="-6.363115" />
+
+		<Code File="InteractWith" MobId="36289" NonCompeteDistance="0" InteractBlacklistTimeInSeconds="1" QuestId="14368" QuestObjectiveIndex="3" X="-1932.761" Y="2539.769" Z="1.392359" />
+		<Code File="InteractWith" MobId="36288" NonCompeteDistance="0" InteractBlacklistTimeInSeconds="1" QuestId="14368" QuestObjectiveIndex="2" X="-1928.572" Y="2560.313" Z="12.73847" />
+		<Code File="InteractWith" MobId="36287" NonCompeteDistance="0" InteractBlacklistTimeInSeconds="1" QuestId="14368" QuestObjectiveIndex="1" X="-1986.13" Y="2510.299" Z="1.392502" />
+
+
+		<While Condition="DoQuest(14382)" >
+			<Code File="InteractWith" CollectionDistance="200" QuestId="14382" TerminateWhen="Me.InVehicle" >
+				<HuntingGrounds>
+					<Hotspot X="-2018.948" Y="2643.801" Z="-1.468046" />
+					<Hotspot X="-2074.285" Y="2560.56" Z="1.462946" />
+				</HuntingGrounds>
+				<PursuitList>
+					<PursueUnit Id="36283" Priority="500" PursueWhen="UNIT.CanInteract" />
+					<PursueUnit Id="36292" Priority="1" PursueWhen="UNIT.IsAlive" />
+				</PursuitList>
+			</Code>
+			<If Condition="!IsObjectiveComplete(1, 14382) &amp;&amp; Me.InVehicle" >
+				<DisableBehavior Name="Combat" />
+				<MoveTo Precision="1" X="-2056.638" Y="2612.483" Z="0.5991626" />
+				<Code File="RunCode" Code="
+					Me.SetFacing(2.487444f);
+					await Coroutine.Sleep(1000);
+					Lua.DoString(&quot;CastPetAction(1);&quot;);
+					await Coroutine.Sleep(1000);
+					await Coroutine.Wait(5000, () =&gt; !Me.IsFalling);
+				" />
+				<EnableBehavior Name="Combat" />
+				<Code File="KillUntilComplete" MobId="36397" QuestId="14382" QuestObjectiveIndex="1" X="-2100.524" Y="2691.794" Z="1.313946" />
+				<MoveTo X="-2117.377" Y="2660.349" Z="8.179961" />
+				<Code File="MyCTM" X="-2107.742" Y="2656.368" Z="0.5985863" />
+			</If>
+			<If Condition="!IsObjectiveComplete(2, 14382) &amp;&amp; Me.InVehicle" >
+				<DisableBehavior Name="Combat" />
+				<MoveTo Precision="1" X="-2127.422" Y="2559.176" Z="7.34024" />
+				<Code File="RunCode" Code="
+					Me.SetFacing(3.122394f);
+					await Coroutine.Sleep(1000);
+					Lua.DoString(&quot;CastPetAction(1);&quot;);
+					await Coroutine.Sleep(1000);
+					await Coroutine.Wait(5000, () =&gt; !Me.IsFalling);
+				" />
+				<EnableBehavior Name="Combat" />
+				<Code File="KillUntilComplete" MobId="36399" QuestId="14382" QuestObjectiveIndex="2" X="-2197.342" Y="2594.982" Z="1.723538" />
+				<MoveTo X="-2219.336" Y="2561.437" Z="8.662561" />
+				<Code File="MyCTM" X="-2207.892" Y="2557.509" Z="0.9501605" />
+			</If>
+		</While>
+
+		<Code File="KillUntilComplete" MobId="36236" QuestId="14369" >
+			<HuntingGrounds>
+				<Hotspot X="-2137.397" Y="2504.383" Z="4.759549" />
+				<Hotspot X="-2030.201" Y="2596.979" Z="0.1748711" />
+				<Hotspot X="-1996.349" Y="2646.748" Z="-0.4565261" />
+			</HuntingGrounds>
+		</Code>
+
+		<TurnIn QuestName="Save the Children!" QuestId="14368" TurnInName="Melinda Hammond" TurnInId="36291" X="-1874.966" Y="2532.349" Z="-6.38817" />
+		<TurnIn QuestName="Unleash the Beast" QuestId="14369" TurnInName="Lord Godfrey" TurnInId="36290" X="-1873.939" Y="2531.022" Z="-6.389361" />
+		<TurnIn QuestName="Two By Sea" QuestId="14382" TurnInName="Lord Godfrey" TurnInId="36290" X="-1873.939" Y="2531.022" Z="-6.389361" />
+
+		<PickUp QuestName="Leader of the Pack" QuestId="14386" GiverName="Lord Godfrey" GiverId="36290" X="-1873.939" Y="2531.022" Z="-6.389361" />
+		<While Condition="DoQuest(14386)" >
+			<Code File="InteractWith" MobId="36312" Range="50" NonCompeteDistance="0" InteractByUsingItemId="49240" InteractBlacklistTimeInSeconds="1" PreInteractMountStrategy="Dismount" QuestId="14386" QuestObjectiveIndex="1" X="-1946.227" Y="2647.006" Z="1.10984" TerminateWhen="Unit(36405) != null" />
+			<Code File="KillUntilComplete" MobId="36312" QuestId="14386" X="-1946.227" Y="2647.006" Z="1.10984" TerminateWhen="Unit(36405) == null" />
+		</While>
+		<TurnIn QuestName="Leader of the Pack" QuestId="14386" TurnInName="Lord Godfrey" TurnInId="36290" X="-1873.501" Y="2532.311" Z="-6.365287" />
+
+		<PickUp QuestName="As the Land Shatters" QuestId="14396" GiverName="Lord Godfrey" GiverId="36290" X="-1873.501" Y="2532.311" Z="-6.365287" />
+		<TurnIn QuestName="As the Land Shatters" QuestId="14396" TurnInName="Prince Liam Greymane" TurnInId="36451" X="-1894.786" Y="2524.302" Z="1.673815" />
+
+		<PickUp QuestName="Gasping for Breath" QuestId="14395" GiverName="Prince Liam Greymane" GiverId="36451" X="-1894.786" Y="2524.302" Z="1.673815" />
+		<Code File="RunCode" Code="AppDomain.CurrentDomain.SetData(&quot;QuestingProfiles_AntiStuckToggle&quot;, false);" />
+		<While Condition="DoQuest(14395)" >
+			<MoveTo X="-1928.118" Y="2504.391" Z="2.383482" />
+			<Code File="MyCTM" QuestId="14395" X="-1945.608" Y="2531.583" Z="-1.615632" /> <!-- Get into water -->
+			<Code File="InteractWith" MobId="36440" MovementBy="ClickToMoveOnly" CollectionDistance="200" QuestId="14395" QuestObjectiveIndex="1" X="4845.033" Y="3815.449" Z="763.4963" TerminateWhen="Me.HasAura(68735)" />
+			<Code File="MyCTM" QuestId="14395" X="-1937.774" Y="2517.827" Z="-1.524461" /> <!-- Get out of water clear of debris -->
+			<Code File="MyCTM" QuestId="14395" X="-1928.118" Y="2504.391" Z="2.383482" /> <!-- Get out of water -->
+		</While>
+		<Code File="RunCode" Code="AppDomain.CurrentDomain.SetData(&quot;QuestingProfiles_AntiStuckToggle&quot;, true);" />
+		<TurnIn QuestName="Gasping for Breath" QuestId="14395" TurnInName="Prince Liam Greymane" TurnInId="36451" X="-1899.975" Y="2521.622" Z="1.657364" />
+
+		<PickUp QuestName="Evacuation" QuestId="14397" GiverName="Prince Liam Greymane" GiverId="36451" X="-1899.975" Y="2521.622" Z="1.657364" />
+		<TurnIn QuestName="Evacuation" QuestId="14397" TurnInName="Gwen Armstead" TurnInId="36452" X="-1902.368" Y="2259.712" Z="42.36026" />
+		<PickUp QuestName="Grandma Wahl" QuestId="14398" GiverName="Gwen Armstead" GiverId="36452" X="-1902.368" Y="2259.712" Z="42.36026" />
+		<PickUp QuestName="The Hayward Brothers" QuestId="14403" GiverName="Gwen Armstead" GiverId="36452" X="-1902.368" Y="2259.712" Z="42.36026" />
+		<PickUp QuestName="The Crowley Orchard" QuestId="14406" GiverName="Gwen Armstead" GiverId="36452" X="-1902.368" Y="2259.712" Z="42.36026" />
+		<TurnIn QuestName="The Crowley Orchard" QuestId="14406" TurnInName="Lorna Crowley" TurnInId="36457" X="-2058.952" Y="2257.712" Z="22.35568" />
+
+		<PickUp QuestName="The Hungry Ettin" QuestId="14416" GiverName="Lorna Crowley" GiverId="36457" X="-2058.952" Y="2257.712" Z="22.35568" />
+		<If Condition="DoQuest(14416)" >
+			<Code File="Hooks\Avoid" AvoidName="KorothTheHillBreaker" ObjectId="36528" ObjectType="Npc" Radius="25" AvoidWhen="!Me.InVehicle" />
+			<Code File="Hooks\DoWhen" ActivityName="RoundUpHorse" AllowUseInVehicle="true" UseWhen="Me.InVehicle &amp;&amp; Me.CurrentTarget != null &amp;&amp; Me.CurrentTarget.Entry == 36540 &amp;&amp; Me.CurrentTarget.DistanceSqr &lt;= 19f*19f" >
+				<Code File="Misc\RunLua" Lua="OverrideActionBarButton1:Click();" WaitTime="500" />
+				<!-- We could add a code to blacklist the current target, that way the InteractWith immediately goes to the next one.
+					This would be a nice speed optimization method. -->
+			</Code>
+			<While Condition="DoQuest(14416)" >
+				<Code File="InteractWith" MobId="36540" CollectionDistance="200" NonCompeteDistance="10" PreInteractMountStrategy="Dismount" QuestId="14416" QuestObjectiveIndex="1" X="-2115.109" Y="2175.368" Z="25.8185" TerminateWhen="Me.Minions.Count(x =&gt; x.Entry == 36555 || x.Entry == 36540) &gt;= 5" />
+				<MoveTo Precision="3.01" X="-2058.952" Y="2257.712" Z="22.35568" />
+				<Code File="WaitTimer" WaitTime="2000" QuestId="14416" />
+			</While>
+			<Code File="Hooks\Avoid" AvoidName="KorothTheHillBreaker" Command="Remove" />
+			<Code File="Hooks\DoWhen" ActivityName="RoundUpHorse" Command="Remove" />
+		</If>
+		<TurnIn QuestName="The Hungry Ettin" QuestId="14416" TurnInName="Lorna Crowley" TurnInId="36457" X="-2058.753" Y="2256.815" Z="22.39903" />
+
+		<TurnIn QuestName="Grandma Wahl" QuestId="14398" TurnInName="Grandma Wahl" TurnInId="36458" X="-2119.612" Y="2416.066" Z="12.18631" />
+
+		<PickUp QuestName="Grandma&apos;s Lost It Alright" QuestId="14399" GiverName="Grandma Wahl" GiverId="36458" X="-2119.612" Y="2416.066" Z="12.18631" />
+		<Code File="InteractWith" MobId="196473" NonCompeteDistance="0" InteractByLooting="true" PreInteractMountStrategy="Dismount" InteractBlacklistTimeInSeconds="1" QuestId="14399" QuestObjectiveIndex="1" X="-2153.966" Y="2374.854" Z="10.88992" />
+		<TurnIn QuestName="Grandma&apos;s Lost It Alright" QuestId="14399" TurnInName="Grandma Wahl" TurnInId="36458" X="-2120.297" Y="2415.759" Z="12.1869" />
+
+		<PickUp QuestName="I Can&apos;t Wear This" QuestId="14400" GiverName="Grandma Wahl" GiverId="36458" X="-2120.297" Y="2415.759" Z="12.1869" />
+		<Code File="InteractWith" MobId="196472" NonCompeteDistance="0" InteractByLooting="true" PreInteractMountStrategy="Dismount" InteractBlacklistTimeInSeconds="1" QuestId="14400" QuestObjectiveIndex="1" X="-2119.114" Y="2431.097" Z="10.86071" />
+		<TurnIn QuestName="I Can&apos;t Wear This" QuestId="14400" TurnInName="Grandma Wahl" TurnInId="36458" X="-2119.06" Y="2415.724" Z="12.18352" />
+
+		<PickUp QuestName="Grandma&apos;s Cat" QuestId="14401" GiverName="Grandma Wahl" GiverId="36458" X="-2119.06" Y="2415.724" Z="12.18352" />
+		<Code File="InteractWith" MobId="36459" NonCompeteDistance="0" InteractByLooting="true" PreInteractMountStrategy="Dismount" InteractBlacklistTimeInSeconds="1" QuestId="14401" QuestObjectiveIndex="1" X="-2104.05" Y="2335.803" Z="7.485602" />
+		<TurnIn QuestName="Grandma&apos;s Cat" QuestId="14401" TurnInName="Grandma Wahl" TurnInId="36458" X="-2120.262" Y="2415.89" Z="12.18752" />
+
+		<TurnIn QuestName="The Hayward Brothers" QuestId="14403" TurnInName="Sebastian Hayward" TurnInId="36456" X="-2303.289" Y="2280.618" Z="-0.1225691" />
+		<PickUp QuestName="Not Quite Shipshape" QuestId="14404" GiverName="Sebastian Hayward" GiverId="36456" X="-2303.289" Y="2280.618" Z="-0.1225691" />
+		<PickUp QuestName="Washed Up" QuestId="14412" GiverName="Sebastian Hayward" GiverId="36456" X="-2303.289" Y="2280.618" Z="-0.1225691" />
+
+		<While Condition="DoQuest(14404)" >
+			<DisableBehavior Name="Pull" />
+			<Code File="InteractWith" MobId="196809" NonCompeteDistance="0" InteractByLooting="true" PreInteractMountStrategy="Dismount" InteractBlacklistTimeInSeconds="1" QuestId="14404" QuestObjectiveIndex="2" X="-2341.124" Y="2302.006" Z="0.5287679" />
+			<Code File="InteractWith" MobId="196810" NonCompeteDistance="0" InteractByLooting="true" PreInteractMountStrategy="Dismount" InteractBlacklistTimeInSeconds="1" QuestId="14404" QuestObjectiveIndex="1" X="-2360.401" Y="2263.151" Z="1.646069" />
+			<Code File="InteractWith" MobId="196808" NonCompeteDistance="0" InteractByLooting="true" PreInteractMountStrategy="Dismount" InteractBlacklistTimeInSeconds="1" QuestId="14404" QuestObjectiveIndex="3" X="-2337.215" Y="2260.335" Z="0.3306035" />
+			<EnableBehavior Name="Pull" />
+		</While>
+
+		<Code File="KillUntilComplete" MobId="36488" QuestId="14412" X="-2330.443" Y="2283.571" Z="0.3625028" />
+
+		<TurnIn QuestName="Not Quite Shipshape" QuestId="14404" TurnInName="Sebastian Hayward" TurnInId="36456" X="-2304.636" Y="2280.275" Z="-0.008492114" />
+		<TurnIn QuestName="Washed Up" QuestId="14412" TurnInName="Sebastian Hayward" TurnInId="36456" X="-2304.636" Y="2280.275" Z="-0.008492114" />
+		<PickUp QuestName="Escape By Sea" QuestId="14405" GiverName="Sebastian Hayward" GiverId="36456" X="-2304.636" Y="2280.275" Z="-0.008492114" />
+		<TurnIn QuestName="Escape By Sea" QuestId="14405" TurnInName="Gwen Armstead" TurnInId="36452" X="-1904.089" Y="2253.429" Z="42.32125" />
+
+		<PickUp QuestName="To Greymane Manor" QuestId="14465" GiverName="Gwen Armstead" GiverId="36452" X="-1869.993" Y="2285.711" Z="44.30418" />
+		<Code File="WaitTimer" WaitTime="40000" TerminateWhen="!Me.InVehicle" />
+		<TurnIn QuestName="To Greymane Manor" QuestId="14465" TurnInName="Queen Mia Greymane" TurnInId="36606" X="-1585.012" Y="2552.994" Z="130.2177" />
+
+		<PickUp QuestName="The King&apos;s Observatory" QuestId="14466" GiverName="Queen Mia Greymane" GiverId="36606" X="-1584.734" Y="2553.685" Z="130.2189" />
+		<TurnIn QuestName="The King&apos;s Observatory" QuestId="14466" TurnInName="King Genn Greymane" TurnInId="36743" X="-1520.446" Y="2605.367" Z="203.5248" />
+
+		<While Condition="!IsQuestCompleted(14467)" >
+			<Code File="InteractWith" MobId="36743" NonCompeteDistance="0" InteractBlacklistTimeInSeconds="1" X="-1520.446" Y="2605.367" Z="203.5248" TerminateWhen="IsQuestCompleted(14467)" />
+			<Code File="RunCode" Code="QuestFrame.Instance.CompleteQuest();" />
+			<Code File="RunCode" Code="await SkipCutscene();" />
+		</While>
+
+		<PickUp QuestName="Exodus" QuestId="24438" GiverName="King Genn Greymane" GiverId="36743" X="-1520.446" Y="2605.367" Z="203.5248" />
+		<If Condition="QuestDone(24438) &amp;&amp; Unit(36743) != null" >
+			<Code File="InteractWith" MobId="44928" NonCompeteDistance="0" PreInteractMountStrategy="Dismount" X="-1667.596" Y="2526.704" Z="97.92116" />
+			<code File="WaitTimer" WaitTime="85000" TerminateWhen="!Me.InVehicle" />
+		</If>
+		<TurnIn QuestName="Exodus" QuestId="24438" TurnInName="Prince Liam Greymane" TurnInId="37065" X="-2218.57" Y="1810.778" Z="11.82871" />
+
+		<PickUp QuestName="Stranded at the Marsh" QuestId="24468" GiverName="Prince Liam Greymane" GiverId="37065" X="-2218.57" Y="1810.778" Z="11.82871" />
+		<Code File="KillUntilComplete" QuestId="24468" >
+			<HuntingGrounds>
+				<Hotspot X="-2089.55" Y="1757.557" Z="5.211653" />
+				<Hotspot X="-2001.143" Y="1803.16" Z="7.976587" />
+			</HuntingGrounds>
+			<PursuitList>
+				<PursueUnit Id="37078" PursueWhen="UNIT.CurrentTarget != null &amp;&amp; UNIT.CurrentTarget.Entry == 37067" />
+			</PursuitList>
+		</Code>
+		<TurnIn QuestName="Stranded at the Marsh" QuestId="24468" TurnInName="Prince Liam Greymane" TurnInId="37065" X="-2219.097" Y="1808.898" Z="11.75075" />
+
+		<PickUp QuestName="Introductions Are in Order" QuestId="24472" GiverName="Prince Liam Greymane" GiverId="37065" X="-2219.097" Y="1808.898" Z="11.75075" />
+
+		<Code File="InteractWith" MobId="201594" NonCompeteDistance="0" InteractByLooting="true" PreInteractMountStrategy="Dismount" QuestId="24472" QuestObjectiveIndex="2" X="-2281.627" Y="1968.057" Z="97.00723" />
+
+		<Code File="KillUntilComplete" MobId="36293" QuestId="24472" >
+			<HuntingGrounds>
+				<Hotspot X="-2369.66" Y="1982.614" Z="71.78805" />
+				<Hotspot X="-2310.37" Y="1906.557" Z="65.18941" />
+				<Hotspot X="-2301.247" Y="1843.684" Z="28.94965" />
+			</HuntingGrounds>
+		</Code>
+
+		<TurnIn QuestName="Introductions Are in Order" QuestId="24472" TurnInName="Prince Liam Greymane" TurnInId="37065" X="-2226.538" Y="1807.939" Z="11.79117" />
+		<PickUp QuestName="Stormglen" QuestId="24483" GiverName="Prince Liam Greymane" GiverId="37065" X="-2215.62" Y="1807.509" Z="11.7469" />
+		<TurnIn QuestName="Stormglen" QuestId="24483" TurnInName="Gwen Armstead" TurnInId="37102" X="-2460.481" Y="1556.724" Z="18.68257" />
+		<PickUp QuestName="Pest Control" QuestId="24484" GiverName="Gwen Armstead" GiverId="37102" X="-2460.481" Y="1556.724" Z="18.68257" />
+
+		<If Condition="Me.HearthstoneAreaId != 4731 &amp;&amp; !IsQuestCompleted(24673)" >
+			<Code File="InteractWith" MobId="38792" NonCompeteDistance="0" PreInteractMountStrategy="Dismount" X="-2456.291" Y="1552.974" Z="18.6926" />
+			<Code File="Misc\RunLua" Lua="StaticPopup1Button1:Click();" />
+		</If>
+
+		<PickUp QuestName="Pieces of the Past" QuestId="24495" GiverName="Lorna Crowley" GiverId="37815" X="-2459.231" Y="1546.349" Z="18.6952" />
+
+		<Code File="InteractWith" MobIds="201607" CollectionDistance="200" NonCompeteDistance="0" InteractByLooting="true" PreInteractMountStrategy="Dismount" QuestId="24495" QuestObjectiveIndex="1" >
+			<HuntingGrounds>
+				<Hotspot X="-2468.671" Y="1485.511" Z="16.39214" />
+				<Hotspot X="-2456.433" Y="1400.813" Z="16.79344" />
+				<Hotspot X="-2453.538" Y="1328.236" Z="16.79469" />
+			</HuntingGrounds>
+		</Code>
+
+		<Code File="KillUntilComplete" MobId="36813" QuestId="24484" >
+			<HuntingGrounds>
+				<Hotspot X="-2468.671" Y="1485.511" Z="16.39214" />
+				<Hotspot X="-2456.433" Y="1400.813" Z="16.79344" />
+				<Hotspot X="-2453.538" Y="1328.236" Z="16.79469" />
+			</HuntingGrounds>
+		</Code>
+
+		<TurnIn QuestName="Pieces of the Past" QuestId="24495" TurnInName="Lorna Crowley" TurnInId="37815" X="-2457.353" Y="1542.612" Z="18.69031" />
+		<TurnIn QuestName="Pest Control" QuestId="24484" TurnInName="Gwen Armstead" TurnInId="37102" X="-2456.815" Y="1553.299" Z="18.69178" />
+
+		<PickUp QuestName="Queen-Sized Troubles" QuestId="24501" GiverName="Gwen Armstead" GiverId="37102" X="-2456.815" Y="1553.299" Z="18.69178" />
+		<Code File="KillUntilComplete" MobId="37045" QuestId="24501" X="-2252.016" Y="1297.466" Z="3.088634" />
+
+		<If Condition="QuestDone(24501) &amp;&amp; Unit(37045) != null" >
+			<DisableBehavior Name="Pull" />
+			<Code File="UseHearthstone" WaitForCD="false" />
+			<EnableBehavior Name="Pull" />
+			<TurnIn QuestName="Queen-Sized Troubles" QuestId="24501" TurnInName="Gwen Armstead" TurnInId="37102" X="-2456.825" Y="1552.919" Z="18.69221" />
+		</If>
+
+		<PickUp QuestName="The Blackwald" QuestId="24578" GiverName="Lorna Crowley" GiverId="37815" X="-2458.86" Y="1547.251" Z="18.69485" />
+		<TurnIn QuestName="The Blackwald" QuestId="24578" TurnInName="Belysra Starbreeze" TurnInId="37822" X="-2276.057" Y="1445.814" Z="-3.731763" />
+
+		<PickUp QuestName="Losing Your Tail" QuestId="24616" GiverName="Belysra Starbreeze" GiverId="37822" X="-2276.057" Y="1445.814" Z="-3.731763" />
+		<While Condition="DoQuest(24616)" >
+			<Code File="Hooks\DoWhen" ItemId="49944" AllowUseDuringCombat="true" UseWhen="Me.HasAura(70794)" />
+			<MoveTo X="-2267.783" Y="1444.595" Z="-4.554601" />
+			<!-- I don't know why, but the navigation server instantly thorttles the user here for 30 seconds. -->
+			<Code File="MyCTM" X="-2237.65" Y="1437.351" Z="-23.07371" TerminateWhen="Me.HasAura(70794)" />
+			<MoveTo X="-2240.872" Y="1430.621" Z="-22.7516" />
+			<Code File="KillUntilComplete" MobId="37953" X="-2240.872" Y="1430.621" Z="-22.7516" QuestId="24616" />
+			<Code File="Hooks\DoWhen" ItemId="49944" Command="Remove" />
+		</While>
+		<TurnIn QuestName="Losing Your Tail" QuestId="24616" TurnInName="Belysra Starbreeze" TurnInId="37822" X="-2274.978" Y="1445.874" Z="-3.847469" />
+
+		<PickUp QuestName="Tal&apos;doren, the Wild Home" QuestId="24617" GiverName="Belysra Starbreeze" GiverId="37822" X="-2277.838" Y="1447.802" Z="-3.627898" />
+		<TurnIn QuestName="Tal&apos;doren, the Wild Home" QuestId="24617" TurnInName="Lord Darius Crowley" TurnInId="37195" X="-2072.964" Y="1279.456" Z="-85.56441" />
+
+		<PickUp QuestName="At Our Doorstep" QuestId="24627" GiverName="Lord Darius Crowley" GiverId="37195" X="-2072.964" Y="1279.456" Z="-85.56441" />
+		<PickUp QuestName="Preparations" QuestId="24628" GiverName="Vassandra Stormclaw" GiverId="37873" X="-2065.243" Y="1262.938" Z="-85.53685" />
+
+		<Code File="InteractWith" MobIds="201914" CollectionDistance="50" NonCompeteDistance="0" InteractByLooting="true" PreInteractMountStrategy="Dismount" QuestId="24628" QuestObjectiveIndex="1" >
+			<HuntingGrounds>
+				<Hotspot X="-2068.377" Y="1476.37" Z="-60.49623" />
+				<Hotspot X="-2177.306" Y="1529.858" Z="-50.72734" />
+				<Hotspot X="-2210.406" Y="1601.775" Z="-39.15048" />
+			</HuntingGrounds>
+		</Code>
+
+		<Code File="KillUntilComplete" MobId="37757" QuestId="24627" >
+			<HuntingGrounds>
+				<Hotspot X="-2080.092" Y="1375.981" Z="-74.93567" />
+				<Hotspot X="-2068.377" Y="1476.37" Z="-60.49623" />
+				<Hotspot X="-2177.306" Y="1529.858" Z="-50.72734" />
+				<Hotspot X="-2210.406" Y="1601.775" Z="-39.15048" />
+			</HuntingGrounds>
+		</Code>
+
+		<TurnIn QuestName="At Our Doorstep" QuestId="24627" TurnInName="Lord Darius Crowley" TurnInId="37195" X="-2069.806" Y="1281.132" Z="-85.67728" />
+		<PickUp QuestName="Take Back What&apos;s Ours" QuestId="24646" GiverName="Lord Darius Crowley" GiverId="37195" X="-2069.806" Y="1281.132" Z="-85.67728" />
+		<TurnIn QuestName="Preparations" QuestId="24628" TurnInName="Vassandra Stormclaw" TurnInId="37873" X="-2064.872" Y="1263.793" Z="-85.53667" />
+
+		<While Condition="DoQuest(24646)" >
+			<Code File="UseItem" ItemId="50134" QuestId="24646" X="-2123.117" Y="1578.59" Z="-49.57484" TerminateWhen="Unit(38029) != null" />
+			<Code File="WaitTimer" WaitTime="8000" QuestId="24646" />
+			<Code File="InteractWith" MobId="201939" NonCompeteDistance="0" InteractByLooting="true" PreInteractMountStrategy="Dismount" InteractBlacklistTimeInSeconds="1" QuestId="24646" QuestObjectiveIndex="1" X="-2120.431" Y="1629.142" Z="-42.23295" />
+		</While>
+
+		<TurnIn QuestName="Take Back What&apos;s Ours" QuestId="24646" TurnInName="Lord Darius Crowley" TurnInId="37195" X="-2070.909" Y="1281.097" Z="-85.64366" />
+
+		<PickUp QuestName="Neither Human Nor Beast" QuestId="24593" GiverName="Lord Darius Crowley" GiverId="37195" X="-2070.909" Y="1281.097" Z="-85.64366" />
+		<Code File="InteractWith" MobId="201950" NonCompeteDistance="0" PreInteractMountStrategy="Dismount" InteractBlacklistTimeInSeconds="1" QuestId="24593" QuestObjectiveIndex="1" X="-2062.256" Y="1271.587" Z="-85.65663" />
+		<Code File="InteractWith" MobId="201951" NonCompeteDistance="0" PreInteractMountStrategy="Dismount" InteractBlacklistTimeInSeconds="1" QuestId="24593" QuestObjectiveIndex="2" X="-2067.41" Y="1263.548" Z="-85.44184" />
+		<Code File="InteractWith" MobId="201952" NonCompeteDistance="0" PreInteractMountStrategy="Dismount" InteractBlacklistTimeInSeconds="1" QuestId="24593" QuestObjectiveIndex="3" X="-2073.714" Y="1266.002" Z="-85.21655" />
+		<TurnIn QuestName="Neither Human Nor Beast" QuestId="24593" TurnInName="Lord Darius Crowley" TurnInId="37195" X="-2072.849" Y="1274.386" Z="-85.28439" />
+
+		<PickUp QuestName="Return to Stormglen" QuestId="24673" GiverName="Lord Darius Crowley" GiverId="37195" X="-2072.849" Y="1274.386" Z="-85.28439" />
+		<If Condition="QuestDone(24673) &amp;&amp; Me.HearthstoneAreaId == 4731 &amp;&amp; Unit(37102) == null" >
+			<Code File="UseHearthstone" WaitForCD="false" /> 
+		</If>
+		<TurnIn QuestName="Return to Stormglen" QuestId="24673" TurnInName="Gwen Armstead" TurnInId="37102" X="-2456.291" Y="1552.974" Z="18.6926" />
+
+		<PickUp QuestName="Onwards and Upwards" QuestId="24672" GiverName="Gwen Armstead" GiverId="37102" X="-2456.291" Y="1552.974" Z="18.6926" />
+		<If Condition="QuestDone(24672)" >
+			<DisableBehavior Name="Combat" />
+			<TurnIn QuestName="Onwards and Upwards" QuestId="24672" TurnInName="Krennan Aranas" TurnInId="37874" X="-2216.398" Y="1150.948" Z="49.16198" />
+			<EnableBehavior Name="Combat" />
+		</If>
+
+		<PickUp QuestName="Betrayal at Tempest&apos;s Reach" QuestId="24592" GiverName="Krennan Aranas" GiverId="37874" X="-2216.398" Y="1150.948" Z="49.16198" />
+		<!--<While Condition="DoQuest(24592)" >
+			<Code File="Hooks\DoWhen" ItemId="50218" UseWhen="!Me.HasAura(70456)" />
+			<Code File="Hooks\Avoid" AvoidName="AvoidMastiff" ObjectId="37718" ObjectType="Npc" Radius="10" />
+		</While> -->
+		<Code File="KillUntilComplete" MobId="37735" QuestId="24592" QuestObjectiveIndex="1" X="-2090.448" Y="758.9672" Z="94.39804" />
+		<Code File="KillUntilComplete" MobId="37733" QuestId="24592" QuestObjectiveIndex="2" X="-1919.245" Y="982.1656" Z="77.73804" />
+		<TurnIn QuestName="Betrayal at Tempest&apos;s Reach" QuestId="24592" TurnInName="King Genn Greymane" TurnInId="37876" X="-2045.038" Y="973.8537" Z="70.06621" />
+
+		<PickUp QuestName="Flank the Forsaken" QuestId="24677" GiverName="King Genn Greymane" GiverId="37876" X="-2045.038" Y="973.8537" Z="70.06621" />
+		<If Condition="QuestDone(24677) &amp;&amp; Unit(38764) != null" >
+			<Code File="InteractWith" MobId="38764" GossipOptions="1" NonCompeteDistance="0" PreInteractMountStrategy="Dismount" X="-2043.142" Y="976.3991" Z="70.06621" TerminateWhen="Me.InVehicle" />
+			<Code File="WaitTimer" WaitTime="105000" TerminateWhen="!Me.InVehicle" />
+		</If>
+		<TurnIn QuestName="Flank the Forsaken" QuestId="24677" TurnInName="Lorna Crowley" TurnInId="37783" X="-1368.486" Y="1206.571" Z="35.55976" />
+
+		<PickUp QuestName="Liberation Day" QuestId="24575" GiverName="Lorna Crowley" GiverId="37783" X="-1368.486" Y="1206.571" Z="35.55976" />
+		<PickUp QuestName="Slaves to No One" QuestId="24674" GiverName="Marcus" GiverId="37803" X="-1370.055" Y="1206.83" Z="35.55976" />
+		<PickUp QuestName="Last Meal" QuestId="24675" GiverName="Magda Whitewall" GiverId="38143" X="-1367.459" Y="1213.465" Z="35.5487" />
+
+		<Code File="KillUntilComplete" MobId="37786" QuestId="24675" >
+			<HuntingGrounds>
+				<Hotspot X="-1506.687" Y="1140.532" Z="31.31387" />
+				<Hotspot X="-1557.086" Y="1036.56" Z="21.53952" />
+				<Hotspot X="-1445.094" Y="1007.791" Z="14.98035" />
+				<Hotspot X="-1341.068" Y="1034.033" Z="24.98674" />
+			</HuntingGrounds>
+		</Code>
+
+		<Code File="KillUntilComplete" MobId="37802" QuestId="24674" X="-1194.57" Y="907.4514" Z="22.74736" />
+
+		<While Condition="DoQuest(24575)" >
+			<Code File="InteractWith" MobId="201775" CollectionDistance="200" NonCompeteDistance="0" PreInteractMountStrategy="Dismount" QuestId="24575" QuestObjectiveIndex="1" TerminateWhen="!HasItem(49881)" >
+				<HuntingGrounds>
+					<Hotspot X="-1135.155" Y="1005.73" Z="44.95318" />
+					<Hotspot X="-1073.677" Y="950.5286" Z="42.80764" />
+					<Hotspot X="-1080.513" Y="865.7488" Z="36.94695" />
+					<Hotspot X="-1172.267" Y="890.218" Z="22.28046" />
+				</HuntingGrounds>
+			</Code>
+			<Code File="InteractWith" MobId="37701" InteractByLooting="true" CollectionDistance="200" NumOfTimes="30" QuestId="24575" TerminateWhen="GetItemCount(49881) &gt;= 5"  >
+				<HuntingGrounds>
+					<Hotspot X="-1135.155" Y="1005.73" Z="44.95318" />
+					<Hotspot X="-1073.677" Y="950.5286" Z="42.80764" />
+					<Hotspot X="-1080.513" Y="865.7488" Z="36.94695" />
+					<Hotspot X="-1172.267" Y="890.218" Z="22.28046" />
+				</HuntingGrounds>
+			</Code>
+		</While>
+
+		<TurnIn QuestName="Slaves to No One" QuestId="24674" TurnInName="Marcus" TurnInId="37803" X="-1369.739" Y="1204.219" Z="35.55809" />
+		<TurnIn QuestName="Liberation Day" QuestId="24575" TurnInName="Lorna Crowley" TurnInId="37783" X="-1368.456" Y="1206.276" Z="35.55809" />
+		<TurnIn QuestName="Last Meal" QuestId="24675" TurnInName="Magda Whitewall" TurnInId="38143" X="-1366.517" Y="1213.755" Z="35.53679" />
+
+		<PickUp QuestName="Push Them Out" QuestId="24676" GiverName="Lorna Crowley" GiverId="37783" X="-1367.497" Y="1210.251" Z="35.55453" />
+		<Code File="KillUntilComplete" MobId="37686" QuestId="24676" QuestObjectiveIndex="2" X="-1134.866" Y="1146.952" Z="24.28277" />
+		<Code File="KillUntilComplete" MobId="37685" QuestId="24676" QuestObjectiveIndex="3" X="-1115.571" Y="1106.74" Z="24.51386" />
+		<Code File="KillUntilComplete" MobId="37692" QuestId="24676" >
+			<HuntingGrounds>
+				<Hotspot X="-1130.526" Y="1112.137" Z="24.3866" />
+				<Hotspot X="-1170.281" Y="1153.927" Z="24.28369" />
+			</HuntingGrounds>
+		</Code>
+		<TurnIn QuestName="Push Them Out" QuestId="24676" TurnInName="Lorna Crowley" TurnInId="37783" X="-1371.84" Y="1211.442" Z="35.55802" />
+
+		<PickUp QuestName="The Battle for Gilneas City" QuestId="24904" GiverName="Lorna Crowley" GiverId="37783" X="-1371.84" Y="1211.442" Z="35.55802" />
+		<While Condition="DoQuest(24904)" >
+			<If Condition="!Me.HasAura(72069)" >
+				<MoveTo X="-1390.441" Y="1231.996" Z="35.55811" />
+				<Code File="WaitTimer" WaitTime="600000" TerminateWhen="Unit(38218) != null || Unit(38553) == null" /> <!-- Wait for event to be ready -->
+				<Code File="InteractWith" MobId="38553" GossipOptions="1" NonCompeteDistance="0" WaitForNpcs="false" />
+			</If>
+			<Code File="RunCode"><![CDATA[ TreeHooks.Instance.InsertHook("Questbot_Profile", 0, _ctmSimpleEscort ?? (_ctmSimpleEscort = new  CommonBehaviors.Actions.ActionRunCoroutine(ctx => CTMSimpleEscort()))); ]]></Code>
+			<Code File="RunCode" Type="Definition" ><![CDATA[
+					private Styx.TreeSharp.Composite _ctmSimpleEscort;
+					private WoWUnit _escortPoi;
+					private Vector3 _antiThrottleCoordinate;
+					private Stopwatch _throttleTimer = new Stopwatch();
+					private Random rnd = new Random();
+
+					public async Task<bool> CTMSimpleEscort()
+					{
+						if (NeedsQuest(24904) || QuestDone(24904)) return false;
+						if (!_throttleTimer.IsRunning)
+							_throttleTimer.Start();
+						if (_escortPoi == null || !_escortPoi.IsValid)
+						{
+							_escortPoi = ObjectManager.GetObjectsOfType<WoWUnit>().FirstOrDefault(unit => unit.Entry == 38415 || unit.Entry == 38218 || unit.Entry == 38470);
+							if (_escortPoi == null) return false;
+							_antiThrottleCoordinate = _escortPoi.Location;
+						}
+						if (_throttleTimer.Elapsed > TimeSpan.FromSeconds(3) && _antiThrottleCoordinate.DistanceSquared(_escortPoi.Location) > 30f * 30f)
+						{
+							_throttleTimer.Restart();
+							_antiThrottleCoordinate = _escortPoi.Location;
+						}
+						if (_escortPoi.DistanceSqr > 30f * 30f || !_escortPoi.InLineOfSight)
+						{
+							TreeRoot.StatusText = $"Moving to {_escortPoi.Name}.";
+							return (await CommonCoroutines.MoveTo(_antiThrottleCoordinate)).IsSuccessful();
+						}
+						if (_escortPoi.DistanceSqr <= 30f * 30f)
+						{
+							TreeRoot.StatusText = $"Following {_escortPoi.Name}.";
+							if (!_escortPoi.IsMoving && _escortPoi.DistanceSqr <= 8f*8f)
+							{
+								if (_escortPoi.CurrentTarget != null && _escortPoi.CurrentTarget.IsAlive && _escortPoi.CurrentTarget != BotPoi.Current.AsObject)
+									BotPoi.Current = new BotPoi(_escortPoi.CurrentTarget, PoiType.Kill, Bots.Quest.QuestOrder.QuestOrder.Instance.NavType);
+								return true;				
+							}
+							await Coroutine.Sleep(rnd.Next(487, 1655));
+							WoWMovement.ClickToMove(WoWMathHelper.CalculatePointBehind(_escortPoi.Location, _escortPoi.Rotation, 3f));
+							return true;
+						}
+						return true;
+					}
+			]]>
+			</Code>
+			<Code File="WaitTimer" WaitTime="60000" QuestId="24904" TerminateWhen="Unit(38415) == null &amp;&amp; Unit(38218) == null &amp;&amp; Unit(38469) == null" />
+			<Code File="RunCode"><![CDATA[ TreeHooks.Instance.RemoveHook("Questbot_Profile", _ctmSimpleEscort); ]]></Code>
+		</While>
+		<TurnIn QuestName="The Battle for Gilneas City" QuestId="24904" TurnInName="Lorna Crowley" TurnInId="38611" X="-1662.187" Y="1593.643" Z="23.12992" />
+
+		<PickUp QuestName="The Hunt For Sylvanas" QuestId="24902" GiverName="Lorna Crowley" GiverId="38611" X="-1662.187" Y="1593.643" Z="23.12992" />
+		<While Condition="DoQuest(24902)" >
+			<MoveTo QuestId="24902" X="-1499.439" Y="1578.161" Z="20.48539" />
+			<Code File="WaitTimer" WaitTime="30000" QuestId="24902" />
+			<MoveTo QuestId="24902" X="-1603.198" Y="1530.375" Z="29.23073" />
+			<Code File="WaitTimer" WaitTime="95000" QuestId="24902" />
+		</While>
+		<TurnIn QuestName="The Hunt For Sylvanas" QuestId="24902" TurnInName="Lorna Crowley" TurnInId="38611" X="-1662.699" Y="1591.171" Z="23.12613" />
+
+		<PickUp QuestName="Vengeance or Survival" QuestId="24903" GiverName="Lorna Crowley" GiverId="38611" X="-1662.699" Y="1591.171" Z="23.12613" />
+		<TurnIn QuestName="Vengeance or Survival" QuestId="24903" TurnInName="King Genn Greymane" TurnInId="38539" X="-1645.813" Y="1648.331" Z="21.46729" />
+
+		<PickUp QuestName="Slowing the Inevitable" QuestId="24920" GiverName="King Genn Greymane" GiverId="38539" X="-1645.813" Y="1648.331" Z="21.46729" />
+		<While Condition="DoQuest(24920)">
+			<Code File="Vehicles\NoControlVehicle" VehicleMountId="38615" TargetId="38287" AttackButton="1" OftenToUse="2000" NumOfTimes="6" VehicleId="38540" MaxRange="100" TypeId="2" />
+			<Code File="Vehicles\NoControlVehicle" VehicleMountId="38615" TargetId="38363" AttackButton="1" OftenToUse="2000" NumOfTimes="20" GoHomeButton="5" VehicleId="38540" MaxRange="100" TypeId="2" />
+			<Code File="Vehicles\NoControlVehicle" VehicleMountId="38615" TargetId="38363" AttackButton="5" OftenToUse="2000" VehicleId="38540" MaxRange="100" TypeId="2" />
+		</While>
+		<TurnIn QuestName="Slowing the Inevitable" QuestId="24920" TurnInName="King Genn Greymane" TurnInId="38539" X="-1646.947" Y="1647.8" Z="21.46717" />
+
+		<PickUp QuestName="Knee-Deep" QuestId="24678" GiverName="King Genn Greymane" GiverId="38539" X="-1646.947" Y="1647.8" Z="21.46717" />
+		<If Condition="QuestDone(24678) &amp;&amp; Unit(38539) != null" >
+			<DisableBehavior Name="Combat" />
+			<Code File="Hooks\DoWhen" ItemId="50220" AllowUseDuringCombat="true" UseAtInterval="500" />
+			<MoveTo X="-1727.629" Y="1874.253" Z="17.89092" />
+			<EnableBehavior Name="Combat" />
+			<Code File="Hooks\DoWhen" ItemId="50220" Command="Remove" />
+		</If>
+		<TurnIn QuestName="Knee-Deep" QuestId="24678" TurnInName="Krennan Aranas" TurnInId="38144" X="-1727.629" Y="1874.253" Z="17.89092" />
+
+		<PickUp QuestName="Laid to Rest" QuestId="24602" GiverName="Krennan Aranas" GiverId="38144" X="-1727.629" Y="1874.253" Z="17.89092" />
+		<Code File="InteractWith" MobId="201871" CollectionDistance="200" NonCompeteDistance="0" InteractByLooting="true" PreInteractMountStrategy="Dismount" QuestId="24602" QuestObjectiveIndex="1" >
+			<HuntingGrounds>
+				<Hotspot X="-1681.911" Y="1934.364" Z="28.49471" />
+				<Hotspot X="-1610.182" Y="1847.88" Z="5.644666" />
+				<Hotspot X="-1562.123" Y="1900.733" Z="4.372123" />
+			</HuntingGrounds>
+		</Code>
+		<TurnIn QuestName="Laid to Rest" QuestId="24602" TurnInName="Krennan Aranas" TurnInId="38144" X="-1724.68" Y="1873.136" Z="17.8289" />
+
+		<PickUp QuestName="Patriarch&apos;s Blessing" QuestId="24679" GiverName="Krennan Aranas" GiverId="38144" X="-1724.68" Y="1873.136" Z="17.8289" />
+		<While Condition="DoQuest(24679)" >
+			<Code File="UseItem" ItemId="51956" QuestId="24679" X="-1644.127" Y="1903.565" Z="29.99298" />
+			<Code File="RunCode" Code="await SkipCutscene();" />
+		</While>
+		<TurnIn QuestName="Patriarch&apos;s Blessing" QuestId="24679" TurnInName="Krennan Aranas" TurnInId="38144" X="-1724.18" Y="1872.09" Z="17.79893" />
+
+		<PickUp QuestName="Keel Harbor" QuestId="24680" GiverName="Krennan Aranas" GiverId="38144" X="-1724.18" Y="1872.09" Z="17.79893" />
+		<TurnIn QuestName="Keel Harbor" QuestId="24680" TurnInName="Lord Darius Crowley" TurnInId="38149" X="-1326.282" Y="2119.982" Z="5.631312" />
+
+		<PickUp QuestName="They Have Allies, But So Do We" QuestId="24681" GiverName="Lord Darius Crowley" GiverId="38149" X="-1326.282" Y="2119.982" Z="5.631312" />
+		<While Condition="DoQuest(24681)">
+			<!-- This really needs to be improved.  Right now it's handled so poorly due to vehicles having no anti-stuck -->
+			<DisableBehavior Name="Combat" />		
+			<Code File="InteractWith" MobId="38150" NonCompeteDistance="0" QuestId="24681" X="-1329.487" Y="2115.918" Z="5.632293" TerminateWhen="Me.InVehicle" />
+			<While Condition="DoQuest(24681) &amp;&amp; Me.InVehicle" >
+				<If Condition="Unit(38149) != null" >
+					<MoveTo QuestId="24681" X="-1334.213" Y="2144.721" Z="7.64784" />
+					<MoveTo QuestId="24681" X="-1347.531" Y="2165.764" Z="15.51351" />
+				</If>
+				<MoveTo QuestId="24681" X="-1383.552" Y="2432.025" Z="72.33658" />
+				<Code File="Vehicles\CannonControl" QuestId="24681" MobId="37939" MobId2="37916" MobId3="37921" ExitButton="3" Gravity="35" Velocity="78" VehicleId="37927" MinAngle="-0.09" MaxAngle="1.04" Buttons="2,1" TerminateWhen="!Me.InVehicle" />
+				<MoveTo X="-1331.647" Y="2206.959" Z="24.95814" />
+			</While>			
+			<Code File="EjectVeh" />
+			<EnableBehavior Name="Combat" />
+		</While>
+		<TurnIn QuestName="They Have Allies, But So Do We" QuestId="24681" TurnInName="Lord Darius Crowley" TurnInId="38149" X="-1327.332" Y="2120.146" Z="5.631183" />
+
+		<PickUp QuestName="Endgame" QuestId="26706" GiverName="Lorna Crowley" GiverId="43727" X="-1301.762" Y="2128.381" Z="5.546798" />
+		<While Condition="DoQuest(26706)" >
+			<!-- This entire thing is on a scripted timer.  No point to do any of it, so just stand idle until it is done. -->
+			<If Condition="Me.Z &lt; 30" >
+				<Code File="RunCode"><![CDATA[
+					Bots.Professionbuddy.PBLog.Log(System.Windows.Media.Colors.MediumPurple, "[Profile Notification]: ", System.Windows.Media.Colors.CornflowerBlue, "Waiting for event to start, this may take some time.");
+					]]>
+				</Code>
+				<Code File="Vehicles\MountVehOnly" QuestId="26706" VehicleMountId="43747" X="-1286.587" Y="2130.113" Z="5.547534" />
+			</If>
+			<Code File="WaitTimer" WaitTime="65000" TerminateWhen="!Me.InVehicle" />
+			<Code File="WaitTimer" WaitTime="330000" TerminateWhen="!Me.IsOnTransport" />
+		</While>
+		<TurnIn QuestName="Endgame" QuestId="26706" TurnInName="Lorna Crowley" TurnInId="43727" X="-1303.799" Y="2127.413" Z="5.639084" />
+
+		<While Condition="!IsQuestCompleted(14434) &amp;&amp; Me.MapId == 654" > <!-- Checking MapId because the player can skip this quest -->
+			<Code File="InteractWith" MobId="36616" NonCompeteDistance="0" X="-1289.916" Y="2101.995" Z="5.348265" TerminateWhen="Me.MapId != 654" />
+			<Code File="RunCode" Code="QuestFrame.Instance.SelectAvailableQuest(0); await Coroutine.Sleep(750); QuestFrame.Instance.CompleteQuest();" />
+		</While>
+
+		<Code File="LoadProfile" ProfileName="..\..\Questing Autoloader.xml" />
+
+	</QuestOrder>
+</HBProfile>

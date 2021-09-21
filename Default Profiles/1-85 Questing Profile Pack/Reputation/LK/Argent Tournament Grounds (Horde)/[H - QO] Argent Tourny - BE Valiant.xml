@@ -1,0 +1,513 @@
+<HBProfile>
+  <Name>[H - QO] Argent Tourny - Silvermoon Valiant</Name>
+  <MinLevel>1</MinLevel>
+  <MaxLevel>86</MaxLevel>
+  <MinDurability>0.2</MinDurability>
+  <MinFreeBagSlots>2</MinFreeBagSlots>
+  <MailGrey>False</MailGrey>
+  <MailWhite>False</MailWhite>
+  <MailGreen>False</MailGreen>
+  <MailBlue>True</MailBlue>
+  <MailPurple>True</MailPurple>
+  <SellGrey>True</SellGrey>
+  <SellWhite>True</SellWhite>
+  <SellGreen>True</SellGreen>
+  <SellBlue>False</SellBlue>
+  <SellPurple>False</SellPurple>
+  <TargetElites>True</TargetElites>
+  <AvoidMobs></AvoidMobs>
+  <Blackspots>
+    <Blackspot X="6415.789" Y="2360.435" Z="471.6999" Radius="27.70644" />
+  </Blackspots>
+  <Mailboxes>
+    <Mailbox X="8452.817" Y="683.8055" Z="547.2831" />
+  </Mailboxes>
+  <Vendors>
+    <Vendor Name="Brollen Wheatbeard" Entry="33599" Type="Repair" X="8548.112" Y="933.3629" Z="547.2943" />
+  </Vendors>
+  <Quest Id="13810" Name="Taking Battle To The Enemy">
+    <Objective Type="KillMob" MobId="35297" KillCount="15">
+      <Hotspots>
+        <Hotspot X="8523.643" Y="1394.315" Z="642.1589" />
+        <Hotspot X="8554.881" Y="1458.198" Z="642.6511" />
+        <Hotspot X="8560.257" Y="1562.118" Z="643.9575" />
+        <Hotspot X="8562.568" Y="1651.121" Z="642.4687" />
+        <Hotspot X="8523.643" Y="1394.315" Z="642.1589" />
+      </Hotspots>
+    </Objective>
+  </Quest>
+  <Quest Id="13809" Name="Threat from Above">
+    <Objective Type="KillMob" MobId="33687" KillCount="1">
+      <Hotspots>
+        <Hotspot X="8094.036" Y="2643.771" Z="539.4556"/>
+      </Hotspots>
+    </Objective>
+  </Quest>
+  <Quest Id="14142" Name="You've Really Done It This Time, Kul">
+    <Objective Type="KillMob" MobId="34956" KillCount="1">
+      <Hotspots>
+        <Hotspot X="8523.643" Y="1394.315" Z="642.1589" />
+        <Hotspot X="8554.881" Y="1458.198" Z="642.6511" />
+        <Hotspot X="8560.257" Y="1562.118" Z="643.9575" />
+        <Hotspot X="8562.568" Y="1651.121" Z="642.4687" />
+        <Hotspot X="8523.643" Y="1394.315" Z="642.1589" />
+      </Hotspots>
+    </Objective>
+    <Objective Type="KillMob" MobId="34716" KillCount="4">
+      <Hotspots>
+        <Hotspot X="8523.643" Y="1394.315" Z="642.1589" />
+        <Hotspot X="8554.881" Y="1458.198" Z="642.6511" />
+        <Hotspot X="8560.257" Y="1562.118" Z="643.9575" />
+        <Hotspot X="8562.568" Y="1651.121" Z="642.4687" />
+        <Hotspot X="8523.643" Y="1394.315" Z="642.1589" />
+      </Hotspots>
+    </Objective>
+    <Objective Type="CollectItem" ItemId="46895" CollectCount="5">
+      <Hotspots>
+        <Hotspot X="8523.643" Y="1394.315" Z="642.1589" />
+        <Hotspot X="8554.881" Y="1458.198" Z="642.6511" />
+        <Hotspot X="8560.257" Y="1562.118" Z="643.9575" />
+        <Hotspot X="8562.568" Y="1651.121" Z="642.4687" />
+        <Hotspot X="8523.643" Y="1394.315" Z="642.1589" />
+      </Hotspots>
+    </Objective>
+  </Quest>
+  <Quest Id="14112" Name="What Do You Feed a Yeti, Anyway?">
+    <Objective Type="CollectItem" ItemId="47036" CollectCount="5">
+      <CollectFrom>
+        <GameObject Name="Bucket of Fresh Chum" Id="195352" />
+      </CollectFrom>
+      <Hotspots>
+        <Hotspot X="9072.107" Y="1265.382" Z="4.103769" />
+        <Hotspot X="9096.114" Y="1236.88" Z="5.161266" />
+      </Hotspots>
+    </Objective>
+  </Quest>
+  <Quest Id="14143" Name="A Leg Up">
+    <Objective Type="CollectItem" ItemId="46859" CollectCount="10">
+      <CollectFrom>
+        <Mob Name="Kvaldir Mist Binder" Id="34839" />
+        <Mob Name="Kvaldir Reaver" Id="34838" />
+        <GameObject Name="Stolen Tallstrider Leg" Id="195274" />
+      </CollectFrom>
+      <Hotspots>
+        <Hotspot X="9949.973" Y="1108.078" Z="30.92166" />
+        <Hotspot X="10030.94" Y="988.2128" Z="6.612703" />
+        <Hotspot X="10122.75" Y="857.87" Z="24.31038" />
+        <Hotspot X="10234.35" Y="781.5357" Z="71.19129" />
+        <Hotspot X="10389.43" Y="758.4886" Z="66.87479" />
+      </Hotspots>
+    </Objective>
+  </Quest>
+  <Quest Id="14140" Name="Stop The Aggressors">
+    <Objective Type="KillMob" MobId="34838" KillCount="10">
+      <Hotspots>
+        <Hotspot X="9949.973" Y="1108.078" Z="30.92166" />
+        <Hotspot X="10030.94" Y="988.2128" Z="6.612703" />
+        <Hotspot X="10122.75" Y="857.87" Z="24.31038" />
+        <Hotspot X="10234.35" Y="781.5357" Z="71.19129" />
+        <Hotspot X="10389.43" Y="758.4886" Z="66.87479" />
+      </Hotspots>
+    </Objective>
+  </Quest>
+  <Quest Id="14136" Name="Rescue at Sea">
+    <Objective Type="KillMob" MobId="34947" KillCount="8">
+      <Hotspots>
+        <Hotspot X="9580.048" Y="924.3602" Z="3.458944" />
+        <Hotspot X="9572.568" Y="955.5597" Z="4.261158" />
+      </Hotspots>
+    </Objective>
+    <Objective Type="KillMob" MobId="34907" KillCount="3">
+      <Hotspots>
+        <Hotspot X="9580.048" Y="924.3602" Z="3.458944" />
+        <Hotspot X="9572.568" Y="955.5597" Z="4.261158" />
+      </Hotspots>
+    </Objective>
+  </Quest>
+  <QuestOrder>
+    <!-- http://www.wowhead.com/blog=80946/argent-tournament-guide -->
+    <If Condition="Me.IsAlliance" >
+      <CustomBehavior File="RunMacro" Macro="/exit" NumOfTimes="1" WaitTime="500" />
+      <CustomBehavior File="RunMacro" Macro="/click StaticPopup1Button1" NumOfTimes="1" WaitTime="500" />
+      <CustomBehavior File="UserDialog"  Title="title" AllowBotStop="True" SoundCue="Asterisk" SoundCueInterval="2" Text="You must be Horde to run this profile" />
+    </If>
+    <If Condition="Me.MapId == 1">
+      <CustomBehavior File="FlyTo" X="1768.656" Y="-4343.217" Z="102.0792" />
+      <CustomBehavior File="ForcedDismount" />
+      <CustomBehavior File="Message" Text="Running to Org Zepp to Borean" LogColor="Cornflowerblue" />
+      <RunTo X="1763.389" Y="-4283.858" Z="133.1073" />
+      <CustomBehavior File="Message" Text="Waiting for Org Zepp to Borean - don't interact!" LogColor="Orange" />
+      <CustomBehavior File="UseTransport" 
+TransportId="186238"
+WaitAtX="1763.203" WaitAtY="-4284.529" WaitAtZ="133.1072" 
+TransportStartX="1775.066" TransportStartY="-4299.745" TransportStartZ="151.0326" 
+StandOnX="1770.22" StandOnY="-4292.056" StandOnZ="133.1872" 
+TransportEndX="2837.908" TransportEndY="6187.443" TransportEndZ="140.1648" 
+GetOffX="2836.831" GetOffY="6185.15" GetOffZ="121.9923" 
+/>
+    </If>
+    <If Condition="Me.MapId == 0">
+      <CustomBehavior File="FlyTo" X="2036.99" Y="299.9215" Z="54.13479" />
+      <CustomBehavior File="ForcedDismount" />
+      <CustomBehavior File="Message" Text="Running to Howling Fjord Zepp from UC" LogColor="Cornflowerblue" />
+      <RunTo X="2060.931" Y="361.9963" Z="82.50146" />
+      <CustomBehavior File="Message" Text="Waiting for Zepp to Howling Fjord - don't interact!" LogColor="Orange" />
+      <CustomBehavior File="UseTransport" 
+TransportId="181689"
+WaitAtX="2060.931" WaitAtY="361.9963" WaitAtZ="82.50146"
+TransportStartX="2056.493" TransportStartY="381.6347" TransportStartZ="100.362"
+StandOnX="2058.682" StandOnY="371.8202" StandOnZ="82.52834"
+TransportEndX="1989.353" TransportEndY="-6082.776" TransportEndZ="85.59646"
+GetOffX="1975.661" GetOffY="-6097.837" GetOffZ="67.15333"
+/>
+    </If>
+    <CustomBehavior File="UserSettings" LootMobs="True" PullDistance="35" TrainNewSkills="False" LearnFlightPaths="True" />
+    <!-- Pickup quests -->
+    <If Condition="((!HasQuest(13859)) &amp;&amp; (!IsQuestCompleted(13859)))" >
+      <CustomBehavior File="FlyTo" X="8452.034" Y="689.4864" Z="547.2928"  />
+      <CustomBehavior File="ForcedDismount" />
+    </If>
+    <PickUp QuestName="At The Enemy's Gates" QuestId="13859" GiverName="Handler Dretch" GiverId="33547" />
+    <PickUp QuestName="The Grand Melee" QuestId="13787" GiverName="Handler Dretch" GiverId="33547" />
+    <PickUp QuestName="A Valiant's Field Training" QuestId="13786" GiverName="Sarah Chalke" GiverId="33541" />
+    <While Condition="HasQuestAvailable(33373)" >
+      <CustomBehavior File="InteractWith"  MobId="33373" NumOfTimes="1" CollectionDistance="200" WaitTime="1000" X="8429.721" Y="649.4797" Z="550.4333" />
+      <CustomBehavior File="RunMacro" Macro="/click GossipTitleButton1" NumOfTimes="1" WaitTime="1000" />
+      <CustomBehavior File="RunMacro" Macro="/click QuestFrameAcceptButton" NumOfTimes="1" WaitTime="1000" />
+    </While>
+    <!-- SunReavers Dailies -->
+    <While Condition="HasQuestAvailable(34771)" >
+      <CustomBehavior File="InteractWith"  MobId="34771" NumOfTimes="1" CollectionDistance="200" WaitTime="1000" X="8420.013" Y="674.2396" Z="550.3787" />
+      <CustomBehavior File="RunMacro" Macro="/click GossipTitleButton1" NumOfTimes="1" WaitTime="1000" />
+      <CustomBehavior File="RunMacro" Macro="/click QuestFrameAcceptButton" NumOfTimes="1" WaitTime="1000" />
+    </While>
+    <While Condition="HasQuestAvailable(34914)" >
+      <CustomBehavior File="InteractWith"  MobId="34914" NumOfTimes="1" CollectionDistance="200" WaitTime="1000" X="8422.031" Y="672.8629" Z="550.4484"/>
+      <CustomBehavior File="RunMacro" Macro="/click GossipTitleButton1" NumOfTimes="1" WaitTime="1000" />
+      <CustomBehavior File="RunMacro" Macro="/click QuestFrameAcceptButton" NumOfTimes="1" WaitTime="1000" />
+    </While>
+    <!-- Eadric the Pure Quests -->
+    <If Condition="((!HasQuest(13862)) &amp;&amp; (!IsQuestCompleted(13862)))" >
+      <CustomBehavior File="FlyTo" X="8484.761" Y="1057.067" Z="550.5325" />
+      <CustomBehavior File="ForcedDismount" />
+    </If>
+    <PickUp QuestName="Threat From Above" QuestId="13809" GiverName="Eadric the Pure" GiverId="33759" />
+    <PickUp QuestName="Battle Before The Citadel" QuestId="13862" GiverName="Eadric the Pure" GiverId="33759" />
+    <PickUp QuestName="Among the Champions" QuestId="13811" GiverName="Luuri" GiverId="33771" />
+    <PickUp QuestName="Taking Battle To The Enemy" QuestId="13810" GiverName="Cellian Daybreak" GiverId="33763" />
+    <!-- breakfast of champions -->
+    <If Condition="((HasQuest(14092)) &amp;&amp; (!IsQuestCompleted(14092)))" >
+      <CustomBehavior File="FlyTo" X="7439.561" Y="-1241.729" Z="906.528"  />
+      <CustomBehavior File="ForcedDismount" />
+      <While Condition="((HasQuest(14092)) &amp;&amp; (!IsQuestCompleted(14092)))" >
+		<CustomBehavior File="UseItemOn" QuestId="14092" ItemId="46893" MobId1="195309" ObjectType="GameObject" />
+      </While>
+    </If>
+    <If Condition="((HasQuest(14141)) &amp;&amp; (!IsQuestCompleted(14141)))" >
+      <CustomBehavior File="FlyTo" Name="get Snobalds" X="6345.042" Y="-1211.781" Z="427.6479" />
+      <CustomBehavior File="ForcedDismount" />
+      <CustomBehavior File="UserSettings" PullDistance="1" />
+      <While Condition="((HasQuest(14141)) &amp;&amp; (!IsObjectiveComplete(1,14141)))" >
+        <CustomBehavior File="UseItemOn" QuestId="14141" MobId="29618" ItemId="46885" NpcState="Alive" NumOfTimes="1" WaitTime="1000" Range="20" CollectionDistance="100" X="6345.042" Y="-1211.781" Z="427.6479" />
+      </While>
+      <CustomBehavior File="FlyTo" X="8452.034" Y="689.4864" Z="547.2928"  />
+      <CustomBehavior File="ForcedDismount" />
+      <TurnIn QuestName="Gormok Wants His Snobolds" QuestId="14141" TurnInName="Tylos Dawnrunner" TurnInId="34914" />
+    </If>
+    <!-- Taking Battle To The Enemy -->
+    <If Condition="((HasQuest(13810)) &amp;&amp; (!IsQuestCompleted(13810)))" >
+      <CustomBehavior File="FlyTo" X="8513.477" Y="1376.757" Z="641.6046" />
+      <CustomBehavior File="ForcedDismount" />
+      <CustomBehavior File="UserSettings" PullDistance="25" />
+      <Objective QuestName="Taking Battle To The Enemy" QuestId="13810" Type="KillMob" MobId="35297" KillCount="15" />
+    </If>
+    <While Condition="((HasQuest(14142)) &amp;&amp; (!IsQuestCompleted(14142)))" >
+      <If Condition="(GetItemCount(46895) &lt; 5)" >
+        <CustomBehavior File="FlyTo" X="8528.181" Y="1399.574" Z="642.043" />
+        <CustomBehavior File="ForcedDismount" />
+        <CustomBehavior File="Message" Text="Gathering keys" LogColor="Red" />
+        <Objective QuestName="You've Really Done It This Time, Kul" QuestId="14142" Type="CollectItem" ItemId="46895" CollectCount="5" />
+      </If>
+      <If Condition="(GetItemCount(46895) &gt;= 5)" >
+        <CustomBehavior File="FlyTo" X="8457.35" Y="1624.415" Z="670.4252" />
+        <CustomBehavior File="ForcedDismount" />
+        <RunTo X="8467.618" Y="1634.375" Z="671.2118" />
+        <RunTo X="8456.201" Y="1626.777" Z="670.5983" />
+        <CustomBehavior File="WaitTimer" WaitTime="2000" />
+        <CustomBehavior File="InteractWith" QuestId="14142" MobId="195310" ObjectType="Gameobject" NumOfTimes="1" Range="8" CollectionDistance="15" X="8457.35" Y="1624.415" Z="670.4252" />
+        <CustomBehavior File="FlyTo" X="8561.451" Y="1511.688" Z="642.2645" />
+        <CustomBehavior File="ForcedDismount" />
+        <CustomBehavior File="WaitTimer" WaitTime="2000" />
+        <CustomBehavior File="InteractWith" QuestId="14142" MobId="195310" ObjectType="Gameobject" NumOfTimes="10" Range="8" CollectionDistance="35" X="8561.451" Y="1511.688" Z="642.2645" />
+        <CustomBehavior File="WaitTimer" WaitTime="5000" />
+      </If>
+    </While>
+    <!-- what do you feed a yeti-->
+    <While Condition="((HasQuest(14145)) &amp;&amp; (!IsQuestCompleted(14145)))" >
+      <If Condition="(!HasItem(47036))" >
+        <CustomBehavior File="FlyTo" X="9026.815" Y="806.8649" Z="4.915782"/>
+        <CustomBehavior File="ForcedDismount" />
+        <CustomBehavior File="Message" Text="You're not lagging, it's collecting chum from the bucket" LogColor="Red" />
+		
+		<While Condition="((GetItemCount(47036)) &lt; 7)" >
+			<CustomBehavior File="InteractWith" QuestId="14145" MobId="195353" ObjectType="Gameobject" NumOfTimes="1" Range="8" CollectionDistance="15" WaitTime="500" />
+		</While>
+      </If>
+      <If Condition="(HasItem(47036))" >
+        <CustomBehavior File="FlyTo" X="8998.096" Y="827.0797" Z="6.31492" />
+        <CustomBehavior File="ForcedDismount" />
+        <CustomBehavior File="WaitTimer" WaitTime="2000"/>
+        <UseItem QuestId="14145" ItemId="47036" X="8998.096" Y="827.0797" Z="-1.6466"  />
+        <CustomBehavior File="WaitTimer" WaitTime="3000"/>
+      </If>
+    </While>
+    <!--rescue at sea -->
+    <If Condition="((HasQuest(14136)) &amp;&amp; (!IsQuestCompleted(14136)))" >
+      <CustomBehavior File="FlyTo" X="9455.615" Y="1201.332" Z="4.200914"  />
+      <CustomBehavior File="ForcedDismount" />
+      <Objective QuestName="Rescue at Sea" QuestId="14136" Type="KillMob" MobId="34947" KillCount="8" />
+      <Objective QuestName="Rescue at Sea" QuestId="14136" Type="KillMob" MobId="34907" KillCount="3" />
+    </If>
+    <!--  the lights mercy-->
+    <If Condition="((HasQuest(14144)) &amp;&amp; (!IsQuestCompleted(14144)))" >
+      <CustomBehavior File="FlyTo" X="9959.951" Y="1115.933" Z="31.96863" />
+      <CustomBehavior File="ForcedDismount" />
+      <While Condition="((HasQuest(14144)) &amp;&amp; (!IsQuestCompleted(14144)))" >
+        <CustomBehavior File="UseItemOn" QuestId="14144" MobId="34852" ItemId="46870" NumOfTimes="1" WaitTime="3000" Range="5" CollectionDistance="500" X="10263.18" Y="772.379" Z="73.11924" />
+      </While>
+    </If>
+    <!--  a leg up-->
+    <If Condition="((HasQuest(14143)) &amp;&amp; (!IsQuestCompleted(14143)))" >
+      <CustomBehavior File="FlyTo" X="9949.973" Y="1108.078" Z="30.92166" />
+      <CustomBehavior File="ForcedDismount" />
+      <Objective QuestName="A Leg Up" QuestId="14143" Type="CollectItem" ItemId="46859" CollectCount="10" />
+    </If>
+    <!-- Stop The Aggressors -->
+    <If Condition="((HasQuest(14140)) &amp;&amp; (!IsQuestCompleted(14140)))" >
+      <CustomBehavior File="FlyTo" X="9949.973" Y="1108.078" Z="30.92166" />
+      <CustomBehavior File="ForcedDismount" />
+      <Objective QuestName="Stop The Aggressors" QuestId="14140" Type="KillMob" MobId="34838" KillCount="10" />
+    </If>
+    <!-- drop item from Kvaldir -->
+    <If Condition="((!HasQuest(24442)) &amp;&amp; (!IsQuestCompleted(24442)))" >
+      <CustomBehavior File="FlyTo" X="9949.973" Y="1108.078" Z="30.92166" />
+      <CustomBehavior File="ForcedDismount" />
+      <If Condition="(!HasItem(49676))" >
+        <CustomBehavior File="Message" Text="Grinding for item drop" LogColor="Red" />
+        <SetGrindArea>
+          <GrindArea>
+            <Factions>1885</Factions>
+            <!-- [Vyrkul] -->
+            <Hotspots>
+              <Hotspot X="9949.973" Y="1108.078" Z="30.92166" />
+              <Hotspot X="10030.94" Y="988.2128" Z="6.612703" />
+              <Hotspot X="10122.75" Y="857.87" Z="24.31038" />
+              <Hotspot X="10234.35" Y="781.5357" Z="71.19129" />
+              <Hotspot X="10389.43" Y="758.4886" Z="66.87479" />
+            </Hotspots>
+          </GrindArea>
+        </SetGrindArea>
+        <GrindTo Condition="(HasItem(49676))" Name="Getting Quest DropItem" />
+      </If>
+      <If Condition="(HasItem(49676))" >
+        <PickUp QuestName="Battle Plans Of The Kvaldir" QuestId="24442" GiverType="Item" GiverName="Kvaldir Attack Plans" GiverId="49676" />
+      </If></If>
+      <!-- battle plans -->
+      <If Condition="((HasQuest(24442)) &amp;&amp; (!IsQuestCompleted(24442)))" >
+        <CustomBehavior File="FlyTo" X="10133.24" Y="1207.722" Z="79.17584" />
+        <CustomBehavior File="ForcedDismount" />
+        <Objective QuestName="Battle Plans Of The Kvaldir" QuestId="24442" Type="CollectItem" ItemId="49678" CollectCount="1" />
+      </If>
+      <!-- end sun reavers -->
+	  <!-- threat from above, stand here and the dragon will aggro you so we dont have to deal with HB blacklisting it cause its flying-->
+      <If Condition="((HasQuest(13809)) &amp;&amp; (!IsQuestCompleted(13809)))" >
+        <CustomBehavior File="FlyTo" Distance="1" X="8088.455" Y="2651.012" Z="540.6049"  />
+        <While Condition="(!IsQuestCompleted(13809))">
+      </While>
+    </If>
+      <!-- A Valiant's Field Training -->
+      <If Condition="((HasQuest(13786)) &amp;&amp; (!IsQuestCompleted(13786)))" >
+        <CustomBehavior File="FlyTo" X="7158.93" Y="2559.076" Z="398.3151" />
+        <CustomBehavior File="ForcedDismount" />
+        <Objective QuestName="A Valiant's Field Training" QuestId="13786" Type="KillMob" MobId="32255" KillCount="10" />
+      </If>
+      <!-- At The Enemy's Gates -->
+      <If Condition="((HasQuest(13859)) &amp;&amp; (!IsQuestCompleted(13859)))" >
+        <CustomBehavior File="FlyTo" X="6439.218" Y="2368.915" Z="465.2995" />
+        <CustomBehavior File="ForcedDismount" />
+        <CustomBehavior File="AtTheEnemysGates" QuestId="13859" X="6440.211" Y="2390.161" Z="467.4843" />
+      </If>
+      <!-- Battle Before The Citadel -->
+      <If Condition="((HasQuest(13862)) &amp;&amp; (!IsQuestCompleted(13862)))" >
+        <!--<CustomBehavior File="UserDialog" QuestId="13862" SoundCue="Exclamation" SoundCueInterval="1" Text="Kill 3 Commanders" />-->
+
+		<CustomBehavior File="BattleofTheCitadel" QuestId="13862" X="6429.059" Y="2376.351" Z="466.2415" />
+      </If>
+      <!-- A Worthy Weapon -->
+      <If Condition="((HasQuest(13784)) &amp;&amp; (!IsQuestCompleted(13784)))" >
+        <CustomBehavior File="FlyTo" X="6201.714" Y="973.8531" Z="164.7364" />
+        <While Condition="((HasQuest(13784)) &amp;&amp; (!IsQuestCompleted(13784))) &amp;&amp; (GetItemCount(45000) &lt; 4)" >
+          <If Condition="(GetItemCount(45000) &lt; 4)" >
+            <CustomBehavior File="FlyTo" Distance="1" X="6138.642" Y="1001.314" Z="148.1539" />
+            <CustomBehavior File="ForcedDismount" />
+            <CustomBehavior File="InteractWith" MobId="194213" WaitForNpcs="False" ObjectType="Gameobject" NumOfTimes="1" CollectionDistance="5" X="6138.642" Y="1001.314" Z="148.1539" />
+          </If>
+          <If Condition="(GetItemCount(45000) &lt; 4)" >
+            <CustomBehavior File="FlyTo" Distance="1" X="6224.009" Y="1042.302" Z="148.2521" />
+            <CustomBehavior File="ForcedDismount" />
+            <CustomBehavior File="InteractWith" MobId="194213" WaitForNpcs="False" ObjectType="Gameobject" NumOfTimes="1" CollectionDistance="5" X="6224.009" Y="1042.302" Z="148.2521" />
+          </If>
+          <If Condition="(GetItemCount(45000) &lt; 4)" >
+            <CustomBehavior File="FlyTo" Distance="1" X="6259.771" Y="995.2029" Z="149.3356" />
+            <CustomBehavior File="ForcedDismount" />
+            <CustomBehavior File="InteractWith" MobId="194213" WaitForNpcs="False" ObjectType="Gameobject" NumOfTimes="1" CollectionDistance="5" X="6259.771" Y="995.2029" Z="149.3356" />
+          </If>
+          <If Condition="(GetItemCount(45000) &lt; 4)" >
+            <CustomBehavior File="FlyTo" Distance="1" X="6283.216" Y="974.5555" Z="159.504" />
+            <CustomBehavior File="ForcedDismount" />
+            <CustomBehavior File="InteractWith" MobId="194213" WaitForNpcs="False" ObjectType="Gameobject" NumOfTimes="1" CollectionDistance="5" X="6283.216" Y="974.5555" Z="159.504" />
+          </If>
+          <If Condition="(GetItemCount(45000) &lt; 4)" >
+            <CustomBehavior File="FlyTo" Distance="1" X="6284.188" Y="917.3234" Z="150.0614" />
+            <CustomBehavior File="ForcedDismount" />
+            <CustomBehavior File="InteractWith" MobId="194213" WaitForNpcs="False" ObjectType="Gameobject" NumOfTimes="1" CollectionDistance="5" X="6284.188" Y="917.3234" Z="150.0614" />
+          </If>
+          <If Condition="(GetItemCount(45000) &lt; 4)" >
+            <CustomBehavior File="FlyTo" Distance="1" X="6309.871" Y="880.2228" Z="149.0663" />
+            <CustomBehavior File="ForcedDismount" />
+            <CustomBehavior File="InteractWith" MobId="194213" WaitForNpcs="False" ObjectType="Gameobject" NumOfTimes="1" CollectionDistance="5" X="6309.871" Y="880.2228" Z="149.0663" />
+          </If>
+          <If Condition="(GetItemCount(45000) &lt; 4)" >
+            <CustomBehavior File="FlyTo" Distance="1" X="6342.218" Y="860.8906" Z="150.7731" />
+            <CustomBehavior File="ForcedDismount" />
+            <CustomBehavior File="InteractWith" MobId="194213" WaitForNpcs="False" ObjectType="Gameobject" NumOfTimes="1" CollectionDistance="5" X="6342.218" Y="860.8906" Z="150.7731" />
+          </If>
+          <If Condition="(GetItemCount(45000) &lt; 4)" >
+            <CustomBehavior File="FlyTo" Distance="1" X="6368.168" Y="857.0884" Z="162.5025" />
+            <CustomBehavior File="ForcedDismount" />
+            <CustomBehavior File="InteractWith" MobId="194213" WaitForNpcs="False" ObjectType="Gameobject" NumOfTimes="1" CollectionDistance="5" X="6368.168" Y="857.0884" Z="162.5025" />
+          </If>
+        </While>
+        <CustomBehavior File="FlyTo" X="4601.406" Y="-1599.759" Z="156.9936" />
+        <CustomBehavior File="ForcedDismount" />
+        <CustomBehavior File="Misc\RunLua" Lua="UseItemByName(45000)" WaitTime="1000" />
+        <CustomBehavior File="WaitTimer" WaitTime="20000" />
+        <CustomBehavior File="InteractWith" MobId="194238" ObjectType="Gameobject" NumOfTimes="1" CollectionDistance="50" X="4604.894" Y="-1598.469" Z="154.9988" />
+      </If>
+      <!-- The Edge Of Winter -->
+      <If Condition="((HasQuest(13780)) &amp;&amp; (!IsQuestCompleted(13780)))" >
+        <If Condition="(!HasItem(45005))" >
+          <CustomBehavior File="FlyTo" X="5138.633" Y="-57.57318" Z="347.322" />
+          <CustomBehavior File="ForcedDismount" />
+          <Objective QuestName="The Edge Of Winter" QuestId="13780" Type="CollectItem" ItemId="45005" CollectCount="1" />
+        </If>
+        <If Condition="(HasItem(45005))" >
+          <CustomBehavior File="FlyTo" X="2324.844" Y="-3944.382" Z="218.2621" />
+          <CustomBehavior File="ForcedDismount" />
+          <CustomBehavior File="UseItemOn" QuestId="13780" MobId="33303" ItemId="45005" NumOfTimes="1" WaitTime="5000" Range="5" CollectionDistance="50" X="2324.844" Y="-3944.382" Z="218.2621" />
+        </If></If>
+        <!-- A Blade Fit For A Champion -->
+        <If Condition="((HasQuest(13783)) &amp;&amp; (!IsQuestCompleted(13783)))" >
+          <CustomBehavior File="FlyTo" X="3803.127" Y="-4349.656" Z="180.808" />
+          <CustomBehavior File="ForcedDismount" />
+          <While Condition="((HasQuest(13783)) &amp;&amp; (!IsQuestCompleted(13783)))" >
+            <CustomBehavior File="Misc\RunLua" Lua="UseItemByName(44986)" WaitTime="1000" />
+            <CustomBehavior File="RunMacro" Macro="/tar Lake Frog\n/kiss\n/cleartarget" NumOfTimes="1" WaitTime="10000" />
+            <CustomBehavior File="InteractWith" MobId="33224" NumOfTimes="1" GossipOptions="1" WaitForNpcs="False" WaitTime="1000" CollectionDistance="100" X="3819.208" Y="-4361.081" Z="182.1844" />
+          </While>
+        </If>
+        <!-- The Grand Melee -->
+        <If Condition="((HasQuest(13787)) &amp;&amp; (!IsQuestCompleted(13787)))" >
+          <CustomBehavior File="FlyTo" Distance="5" X="8452.826" Y="692.9032" Z="547.2931"  />
+          <CustomBehavior File="ForcedDismount" />
+          <CustomBehavior File="TheGrandMelee" QuestId="13787" Enemys="33384,33306,33285,33382,33383" EnemysDebuff="64816,64811,64812,64813,64815" X="8426.872" Y="711.7554" Z="547.294" />
+          <CustomBehavior File="EjectVeh" />
+        </If>
+        <!-- Among the Champions -->
+        <If Condition="((HasQuest(13811)) &amp;&amp; (!IsQuestCompleted(13811)))" >
+          <!-- Champion fights -->
+          <CustomBehavior File="FlyTo" Distance="5" X="8478.908" Y="952.3561" Z="547.2932" />
+          <CustomBehavior File="ForcedDismount" />
+          <CustomBehavior File="TheGrandMelee" QuestId="13811"  Enemys="33744,33745,33746,33749,33740,33743,33747,33738" EnemysDebuff="64811,64812,64813,64816,64809,64810,64814,64805" X="8485.926" Y="920.0826" Z="547.2928" />
+          <CustomBehavior File="EjectVeh" />
+        </If>
+        <!-- Turn In the Dailies -->
+        <If Condition="((HasQuest(13859)) &amp;&amp; (IsQuestCompleted(13859)))
+|| ((HasQuest(13783)) &amp;&amp; (IsQuestCompleted(13783)))
+|| ((HasQuest(13784)) &amp;&amp; (IsQuestCompleted(13784)))
+|| ((HasQuest(13780)) &amp;&amp; (IsQuestCompleted(13780)))
+|| ((HasQuest(13786)) &amp;&amp; (IsQuestCompleted(13786)))
+|| ((HasQuest(13787)) &amp;&amp; (IsQuestCompleted(13787)))"
+>
+          <CustomBehavior File="FlyTo" X="8452.034" Y="689.4864" Z="547.2928" />
+          <CustomBehavior File="ForcedDismount" />
+        </If>
+        <!-- sun reavers hand in -->
+        <If Condition="((HasQuest(24442)) &amp;&amp; (IsQuestCompleted(24442)))" >
+          <CustomBehavior File="FlyTo" X="8484.284" Y="1057.527" Z="550.8971" />
+          <CustomBehavior File="ForcedDismount" />
+          <TurnIn QuestName="Battle Plans Of The Kvaldir" QuestId="24442" TurnInName="Justicar Mariel Trueheart" TurnInId="33817" />
+        </If>
+        <If Condition="((HasQuest(14142)) &amp;&amp; (IsQuestCompleted(14142)))" >
+          <CustomBehavior File="FlyTo" X="8452.034" Y="689.4864" Z="547.2928" />
+          <CustomBehavior File="ForcedDismount" />
+          <TurnIn QuestName="You've Really Done It This Time, Kul" QuestId="14142" TurnInName="Narasi Snowdawn" TurnInId="34771" />
+        </If>
+        <If Condition="((HasQuest(14136)) &amp;&amp; (IsQuestCompleted(14136)))" >
+          <TurnIn QuestName="Rescue at Sea" QuestId="14136" TurnInName="Girana the Blooded" TurnInId="34771" />
+        </If>
+        <If Condition="((HasQuest(14144)) &amp;&amp; (IsQuestCompleted(14144)))" >
+          <TurnIn QuestName="The Light's Mercy" QuestId="14144" TurnInName="Girana the Blooded" TurnInId="34771" />
+        </If>
+        <If Condition="((HasQuest(14143)) &amp;&amp; (IsQuestCompleted(14143)))" >
+          <TurnIn QuestName="A Leg Up" QuestId="14143" TurnInName="Girana the Blooded" TurnInId="34771" />
+        </If>
+        <If Condition="((HasQuest(14140)) &amp;&amp; (IsQuestCompleted(14140)))" >
+          <TurnIn QuestName="Stop The Aggressors" QuestId="14140" TurnInName="Girana the Blooded" TurnInId="34771" />
+        </If>
+        <If Condition="((HasQuest(14145)) &amp;&amp; (IsQuestCompleted(14145)))" >
+          <TurnIn QuestName="What Do You Feed a Yeti, Anyway?" QuestId="14145" TurnInName="Tylos Dawnrunner" TurnInId="34914" />
+        </If>
+        <If Condition="((HasQuest(14092)) &amp;&amp; (IsQuestCompleted(14092)))" >
+          <TurnIn QuestName="Breakfast Of Champions" QuestId="14092" TurnInName="Tylos Dawnrunner" TurnInId="34914" />
+        </If>
+        <!-- sun reavers hand in -->
+        <If Condition="((HasQuest(13859)) &amp;&amp; (IsQuestCompleted(13859)))" >
+          <TurnIn QuestName="At The Enemy's Gates" QuestId="13859" TurnInName="Aneera Thuron" TurnInId="33547" />
+        </If>
+        <If Condition="((HasQuest(13783)) &amp;&amp; (IsQuestCompleted(13783)))" >
+          <TurnIn QuestName="A Blade Fit For A Champion" QuestId="13783" TurnInName="Deathstalker Visceri" TurnInId="33373" />
+        </If>
+        <If Condition="((HasQuest(13784)) &amp;&amp; (IsQuestCompleted(13784)))" >
+          <TurnIn QuestName="A Worthy Weapon" QuestId="13784" TurnInName="Deathstalker Visceri" TurnInId="33373" />
+        </If>
+        <If Condition="((HasQuest(13780)) &amp;&amp; (IsQuestCompleted(13780)))" >
+          <TurnIn QuestName="The Edge Of Winter" QuestId="13780" TurnInName="Deathstalker Visceri" TurnInId="33373" />
+        </If>
+        <If Condition="((HasQuest(13786)) &amp;&amp; (IsQuestCompleted(13786)))" >
+          <TurnIn QuestName="A Valiant's Field Training" QuestId="13786" TurnInName="Sarah Chalke" TurnInId="33541" />
+        </If>
+        <If Condition="((HasQuest(13787)) &amp;&amp; (IsQuestCompleted(13787)))" >
+          <TurnIn QuestName="The Grand Melee" QuestId="13787" TurnInName="Aneera Thuron" TurnInId="33547" />
+        </If>
+        <If Condition="((HasQuest(13862)) &amp;&amp; (IsQuestCompleted(13862)))
+|| ((HasQuest(13811)) &amp;&amp; (IsQuestCompleted(13811)))
+|| ((HasQuest(13810)) &amp;&amp; (IsQuestCompleted(13810)))" >
+          <CustomBehavior File="FlyTo" X="8484.761" Y="1057.067" Z="550.5325" />
+          <CustomBehavior File="ForcedDismount" />
+        </If>
+        <If Condition="((HasQuest(13862)) &amp;&amp; (IsQuestCompleted(13862)))" >
+          <CustomBehavior File="SpecialTurnIn" LootId="1" QuestName="Battle Before The Citadel" QuestId="13862" TurnInName="Eadric the Pure" TurnInId="33759" />
+        </If>
+        <If Condition="((HasQuest(13811)) &amp;&amp; (IsQuestCompleted(13811)))" >
+          <CustomBehavior File="SpecialTurnIn" LootId="1" QuestName="Among the Champions" QuestId="13811" TurnInName="Luuri" TurnInId="33771" />
+        </If>
+        <If Condition="((HasQuest(13810)) &amp;&amp; (IsQuestCompleted(13810)))" >
+          <CustomBehavior File="SpecialTurnIn" LootId="1" QuestName="Taking Battle To The Enemy" QuestId="13810" TurnInName="Cellian Daybreak" TurnInId="33763" />
+        </If>
+        <If Condition="((HasQuest(13809)) &amp;&amp; (IsQuestCompleted(13809)))" >
+          <CustomBehavior File="SpecialTurnIn" LootId="1" QuestName="Threat From Above" QuestId="13809" TurnInName="Eadric the Pure" TurnInId="33759" />
+        </If>
+        <CustomBehavior File="UserDialog" Title="title" AllowBotStop="True" SoundCue="Asterisk" SoundCueInterval="1" Text="You have reached the end of the profile" />
+      </QuestOrder>
+    </HBProfile>

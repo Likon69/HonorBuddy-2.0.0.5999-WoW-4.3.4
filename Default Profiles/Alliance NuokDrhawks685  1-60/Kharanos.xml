@@ -1,0 +1,213 @@
+<HBProfile creator="Nuok">
+	<Name>Kharanos</Name>
+	<MinDurability>0.4</MinDurability>
+	<MinFreeBagSlots>3</MinFreeBagSlots>
+	<MinLevel>1</MinLevel>
+	<MaxLevel>86</MaxLevel>
+	<MailGrey>False</MailGrey>
+	<MailWhite>False</MailWhite>
+	<MailGreen>True</MailGreen>
+	<SellGrey>True</SellGrey>
+	<SellWhite>True</SellWhite>
+	<SellGreen>True</SellGreen>
+	<SellBlue>False</SellBlue>
+	<SellPurple>False</SellPurple>
+	
+	<AvoidMobs>
+	<Mob Name="Crazed Leper Gnome" Entry="46391" />
+	<Mob Name="Living Contamination" Entry="43089" />
+	</AvoidMobs>
+  
+	<Vendors>
+	<!-- Kharanos -->
+	<Vendor Name="Grawn Thromwyn" Entry="1273" Type="Repair" X="-5590.67" Y="-428.416" Z="397.3266" />
+	<Vendor Name="Turuk Amberstill" Entry="3177" Type="Repair" X="-5514.975" Y="-1295.747" Z="405.9352" />
+	<Vendor Name="Frast Dokner" Entry="1698" Type="Repair" X="-5714.372" Y="-1589.517" Z="383.2044" />
+	<Vendor Name="Monann Coldforge" Entry="43384" Type="Food" X="-5522.49" Y="-1930.35" Z="398.9589" />
+	<Vendor Name="Jade Ramalot" Entry="46996" Type="Repair" X="-4594.17" Y="-1714.2" Z="503.476" />
+	<Vendor Name="Grif Wildheart" Entry="1231" Type="Train" TrainClass="Hunter" X="-5618.542" Y="-454.0711" Z="407.6592" />
+	<Vendor Name="Halbin Frosthammer" Entry="43464" Type="Train" TrainClass="Shaman"  X="-5581.44" Y="-536.977" Z="403.5413" />
+	<Vendor Name="Azar Stronghammer" Entry="1232" Type="Train" TrainClass="Paladin" X="-5586.76" Y="-542.163" Z="403.5417" />
+	<Vendor Name="Magis Sparkmantle" Entry="1228" Type="Train" TrainClass="Mage" X="-5586.94" Y="-537.173" Z="403.5413" />
+	<Vendor Name="Granis Swiftaxe" Entry="1229" Type="Train" TrainClass="Warrior" X="-5605.73" Y="-530.385" Z="399.6557" />
+	<Vendor Name="Maxan Anvol" Entry="1226" Type="Train" TrainClass="Priest" X="-5590.56" Y="-529.656" Z="399.6527" />
+	<Vendor Name="Hogral Bakkan" Entry="1234" Type="Train" TrainClass="Rogue" X="-5604.44" Y="-540.3233" Z="399.0975" />
+	<Vendor Name="Gimrizz Shadowcog" Entry="5612"  Type="Train" TrainClass="Warlock" X="-5640.001" Y="-528.8012" Z="404.2961" />	</Vendors>
+	
+	<QuestOrder>
+	<CustomBehavior File="Message" Text="Kharanos" LogColor="info" />
+	<CustomBehavior File="Message" Text="This profile has train skills turned on by default, you can turn it off in the subprofile" LogColor="info" />
+	<CustomBehavior File="UserSettings" LootMobs="True" TrainNewSkills="True" LearnFlightPaths="True" UseFlightPaths="True" />
+	
+	
+	<If Condition="HasQuest(24493)">
+	<TurnIn QuestName="Don't Forget About Us" QuestId="24493" TurnInName="" TurnInId="1872" />
+	</If>
+	<PickUp QuestName="Frostmane Aggression" QuestId="25724" GiverName="Captain Tharran" GiverId="40950" />
+	<If Condition="HasItem(57540)" >
+	<UseItem ItemId="57540" QuestName="Frostmane Aggression" QuestId="25724" X="-5644.756" Y="-489.7663" Z="396.5433"  />
+	</If>
+	<PickUp QuestName="The Perfect Stout" QuestId="315" GiverName="Rejold Barleybrew" GiverId="1374" />
+	<PickUp QuestName="Beer Basted Boar Ribs" QuestId="384" GiverName="Ragnar Thunderbrew" GiverId="1267" />
+	<Objective QuestName="Beer Basted Boar Ribs" QuestId="384" Type="CollectItem" ItemId="2894" CollectCount="1" />
+	<PickUp QuestName="Bound for Kharanos" QuestId="26380" GiverName="Ciara Deepstone" GiverId="42933" X="-5410.673" Y="-307.8981" Z="400.5795" />
+	<Objective QuestName="Beer Basted Boar Ribs" QuestId="384" Type="CollectItem" ItemId="60496" CollectCount="4" />
+	<Objective QuestName="The Perfect Stout" QuestId="315" Type="CollectItem" ItemId="2676" CollectCount="7" />
+	<Objective QuestName="Frostmane Aggression" QuestId="25724" Type="KillMob" MobId="41121" KillCount="5" />
+	<Objective QuestName="Frostmane Aggression" QuestId="25724" Type="KillMob" MobId="41122" KillCount="7" />
+	<Objective QuestName="Beer Basted Boar Ribs" QuestId="384" Type="CollectItem" ItemId="2894" CollectCount="1" />
+	<TurnIn QuestName="Beer Basted Boar Ribs" QuestId="384" TurnInName="Ragnar Thunderbrew" TurnInId="1267" />
+	<TurnIn QuestName="The Perfect Stout" QuestId="315" TurnInName="Rejold Barleybrew" TurnInId="1374" />
+	<TurnIn QuestName="Bound for Kharanos" QuestId="26380" TurnInName="Innkeeper Belm" TurnInId="1247" />
+	<TurnIn QuestName="Frostmane Aggression" QuestId="25724" TurnInName="" TurnInId="40950" />
+	<PickUp QuestName="Culling the Wendigos" QuestId="25667" GiverName="Captain Tharran" GiverId="40950" />
+	<PickUp QuestName="Forced to Watch from Afar" QuestId="313" GiverName="Captain Tharran" GiverId="40950" />
+	<PickUp QuestName="Pilfered Supplies" QuestId="25668" GiverName="Quartermaster Glynna" GiverId="40951" />
+	<While Condition="!IsQuestCompleted(313)" >
+	<CustomBehavior File="InteractWith" QuestId="313" MobId="40991" ObjectType="Npc" NumOfTimes="1" GossipOptions="1,1" X="-5480.44" Y="-225.6743" Z="354.3435" />
+	<CustomBehavior File="InteractWith" QuestId="313" MobId="40994" ObjectType="Npc" NumOfTimes="1" GossipOptions="1,1" X="-5480.44" Y="-225.6743" Z="354.3435" />
+	<CustomBehavior File="InteractWith" QuestId="313" MobId="41056" ObjectType="Npc" NumOfTimes="1" GossipOptions="1,1" X="-5394.766" Y="-272.9124" Z="362.6872" />
+	</While>
+	<Objective QuestName="Culling the Wendigos" QuestId="25667" Type="KillMob" MobId="40941" KillCount="10" />
+	<Objective QuestName="Pilfered Supplies" QuestId="25668" Type="CollectItem" ItemId="55151" CollectCount="6" />
+	<TurnIn QuestName="Culling the Wendigos" QuestId="25667" TurnInName="Captain Tharran" TurnInId="40950" />
+	<TurnIn QuestName="Forced to Watch from Afar" QuestId="313" TurnInName="Captain Tharran" TurnInId="40950" />
+	<TurnIn QuestName="Pilfered Supplies" QuestId="25668" TurnInName="Quartermaster Glynna" TurnInId="40951" />
+	<PickUp QuestName="Pushing Forward" QuestId="25792" GiverName="Captain Tharran" GiverId="40950" />
+	<PickUp QuestName="Operation Recombobulation" QuestId="412" GiverName="Razzle Sprysprocket" GiverId="1269" />
+	<CustomBehavior File="UseItemOn" QuestId="25792"  MobId="41202" ItemId="56009" NumOfTimes="4" WaitTime="2000" MobType="Npc" X="-5809.751" Y="-658.8117" Z="397.8244"  />
+	<Objective QuestName="Operation Recombobulation" QuestId="412" Type="CollectItem" ItemId="3084" CollectCount="8" />
+	<TurnIn QuestName="Operation Recombobulation" QuestId="412" TurnInName="Razzle Sprysprocket" TurnInId="1269" />
+	<TurnIn QuestName="Pushing Forward" QuestId="25792" TurnInName="Captain Tharran" TurnInId="40950" />
+	<PickUp QuestName="Help from Steelgrill's Depot" QuestId="25838" GiverName="Captain Tharran" GiverId="40950" />
+	<If Condition="HasQuest(25838)" >
+	<CustomBehavior File="ForceSetVendor" VendorType="Repair" />
+	</If>
+	<TurnIn QuestName="Help from Steelgrill's Depot" QuestId="25838" TurnInName="Delber Cranktoggle" TurnInId="41363" X="-5479.412" Y="-645.6684" Z="392.3269" />
+	<PickUp QuestName="The Ultrasafe Personnel Launcher" QuestId="25839" GiverName="Delber Cranktoggle" GiverId="41363" X="-5479.412" Y="-645.6684" Z="392.3269" />
+	<CustomBehavior File="InteractWith" QuestId="25839" MobId="41398" NumOfTimes="1" ObjectType="Npc" X="-5464.174" Y="-644.5703" Z="394.3766"  />
+	<TurnIn QuestName="The Ultrasafe Personnel Launcher" QuestId="25839" TurnInName="Slamp Wobblecog" TurnInId="41298" X="-5695.066" Y="-923.9097" Z="398.2473"  />
+	<PickUp QuestName="Eliminate the Resistance" QuestId="25840" GiverName="Slamp Wobblecog" GiverId="41298" />
+	<PickUp QuestName="Strike From Above" QuestId="25841" GiverName="Slamp Wobblecog" GiverId="41298" />
+	
+	<If Condition="(!HasQuest(28868)) &amp;&amp; (HasQuest(25841))" >
+	<CustomBehavior File="BasicInteractWith" MobId="50601" MoveTo="true"   />
+	<CustomBehavior File="WaitTimer" WaitTime="2000" />
+	<CustomBehavior File="RunMacro"
+    Macro="/run SelectGossipAvailableQuest(1)\n/run SelectGossipActiveQuest(1)\n/run CompleteQuest()\n/run SelectGossipOption(1)\n/run AcceptQuest()\n/run GetQuestReward(1)"
+    NumOfTimes="1"
+    WaitTime="2000" />
+	<CustomBehavior File="WaitTimer" WaitTime="2000" />
+	</If>
+	<If Condition="!HasQuest(28868)" >
+	<CustomBehavior File="UserDialog"
+                   QuestId="25841"
+                   Text="Failed to pickup the quest, please pickup the quest to continue\nQuestName=&quot;Strike From Above&quot; QuestId=&quot;25841&quot; GiverName=&quot;Slamp Wobblecog&quot;"
+                   Title="Your Bot Needs Help"
+                   AllowBotStop="false"
+                   SoundCue="Asterisk"
+                   SoundCueInterval="1" />
+	</If>
+	
+	<UseItem ItemId="56048" QuestName="Strike From Above" QuestId="25841" X="-5807.761" Y="-962.1463" Z="393.4534" />
+	<CustomBehavior File="UseItemOn" QuestId="28868"  MobId="41251" ItemId="67249" NumOfTimes="50" WaitTime="2000" MobType="Npc" X="-5719.766" Y="-1020.673" Z="394.834"  />
+	<UseItem ItemId="56048" QuestName="Strike From Above" QuestId="25841" X="-5716.689" Y="-1020.708" Z="394.8347" />
+	<Objective QuestName="Eliminate the Resistance" QuestId="25840" Type="KillMob" MobId="41284" KillCount="1" />
+	<Objective QuestName="Eliminate the Resistance" QuestId="25840" Type="KillMob" MobId="41258" KillCount="5" />
+	<TurnIn QuestName="Eliminate the Resistance" QuestId="25840" TurnInName="Slamp Wobblecog" TurnInId="41298" />
+	<TurnIn QuestName="Strike From Above" QuestId="25841" TurnInName="Slamp Wobblecog" TurnInId="41298" />
+	<TurnIn QuestName="The View from Down Here" QuestId="28868" TurnInName="Snevik the Blade" TurnInId="50601" />
+	<PickUp QuestName="A Hand at the Ranch" QuestId="25882" GiverName="Slamp Wobblecog" GiverId="41298" />
+	<TurnIn QuestName="A Hand at the Ranch" QuestId="25882" TurnInName="Sergeant Flinthammer" TurnInId="41578" />
+	
+	<If Condition="!IsQuestCompleted(25932)" >
+	<While Condition="!HasQuest(25932)" >
+	<RunTo   X="-5542.47" Y="-1315.174" Z="398.483" />
+	<CustomBehavior File="BasicInteractWith" MobId="41578" MoveTo="true"   />
+	<CustomBehavior File="WaitTimer" WaitTime="2000" />
+	<CustomBehavior File="RunMacro"
+    Macro="/run SelectGossipAvailableQuest(1)\n/run SelectGossipActiveQuest(1)\n/run CompleteQuest()\n/run SelectGossipOption(1)\n/run AcceptQuest()\n/run GetQuestReward(1)"
+    NumOfTimes="1"
+    WaitTime="2000" />
+	<CustomBehavior File="WaitTimer" WaitTime="2000" />
+	</While>
+	</If>
+	
+	<Objective QuestName="It's Raid Night Every Night" QuestId="25932" Type="KillMob" MobId="42169" KillCount="1" />
+	<TurnIn QuestName="It's Raid Night Every Night" QuestId="25932" TurnInName="Sergeant Flinthammer" TurnInId="41578" />
+	<PickUp QuestName="Protecting the Herd" QuestId="314" GiverName="Rudra Amberstill" GiverId="1265" />
+	<Objective QuestName="Protecting the Herd" QuestId="314" Type="CollectItem" ItemId="3627" CollectCount="1" />
+	<TurnIn QuestName="Protecting the Herd" QuestId="314" TurnInName="Rudra Amberstill" TurnInId="1265" />
+	<PickUp QuestName="Priceless Treasures" QuestId="25937" GiverName="Prospector Drugan" GiverId="50631" />
+	<PickUp QuestName="The Public Servant" QuestId="433" GiverName="Senator Mehr Stonehallow" GiverId="1977" />
+	<PickUp QuestName="Those Blasted Troggs!" QuestId="432" GiverName="" GiverId="1254" />
+	<Objective QuestName="Priceless Treasures" QuestId="25937" Type="CollectItem" ItemId="56225" CollectCount="8" />
+	<CustomBehavior File="UseItemOn" QuestId="433"  MobId="41671" ItemId="56222" NumOfTimes="70" WaitTime="2000" MobType="Npc" X="-5653.378" Y="-1686.96" Z="360.7957" />
+	<Objective QuestName="Those Blasted Troggs!" QuestId="432" Type="KillMob" MobId="1115" KillCount="8" />
+	<Objective QuestName="Those Blasted Troggs!" QuestId="432" Type="KillMob" MobId="1117" KillCount="8" />
+	<TurnIn QuestName="Priceless Treasures" QuestId="25937" TurnInName="Prospector Drugan" TurnInId="50631" />
+	<TurnIn QuestName="The Public Servant" QuestId="433" TurnInName="" TurnInId="1977" />
+	<TurnIn QuestName="Those Blasted Troggs!" QuestId="432" TurnInName="" TurnInId="1254" />
+	<PickUp QuestName="Trouble at the Lake" QuestId="25986" GiverName="Senator Mehr Stonehallow" GiverId="1977" />
+	<TurnIn QuestName="Trouble at the Lake" QuestId="25986" TurnInName="" TurnInId="41786" />
+	<PickUp QuestName="Entombed in Ice" QuestId="25978" GiverName="" GiverId="41786" />
+	<PickUp QuestName="Dealing with the Surge" QuestId="25979" GiverName="" GiverId="41804" />
+	<Objective QuestName="Entombed in Ice" QuestId="25978" Type="KillMob" MobId="41768" KillCount="6" />
+	<Objective QuestName="Dealing with the Surge" QuestId="25979" Type="KillMob" MobId="41762" KillCount="6" />
+	<TurnIn QuestName="Entombed in Ice" QuestId="25978" TurnInName="" TurnInId="41786" />
+	<TurnIn QuestName="Dealing with the Surge" QuestId="25979" TurnInName="" TurnInId="41804" />
+	<PickUp QuestName="Dark Iron Scheming" QuestId="25997" GiverName="" GiverId="41786" />
+	<Objective QuestName="Dark Iron Scheming" QuestId="25997" Type="CollectItem" ItemId="56264" CollectCount="1" />
+	<Objective QuestName="Dark Iron Scheming" QuestId="25997" Type="KillMob" MobId="6123" KillCount="5" />
+	<TurnIn QuestName="Dark Iron Scheming" QuestId="25997" TurnInName="" TurnInId="41786" />
+	
+		<If Condition="IsQuestCompleted(25997)">
+	<CustomBehavior File="Message" Text="Loading 12-60" LogColor="info" />
+	<CustomBehavior File="LoadProfile" ProfileName="12-60" />
+	</If>
+	</QuestOrder>
+	
+<Quest Id="384" Name="Beer Basted Boar Ribs">
+	<Objective Type="CollectItem" ItemId="60496" CollectCount="4">
+		<CollectFrom>
+		</CollectFrom>
+		<Hotspots>
+		<Hotspot X="-5401.393" Y="-441.0527" Z="396.4907" />
+		<Hotspot X="-5354.91" Y="-450.0751" Z="388.3327" />
+		<Hotspot X="-5303.795" Y="-447.3769" Z="393.4432" />
+		<Hotspot X="-5222.861" Y="-465.5818" Z="386.3315" />
+		<Hotspot X="-5573.19" Y="-382.2065" Z="408.2929" />
+		<Hotspot X="-5712.768" Y="-332.1988" Z="365.1234" />
+		<Hotspot X="-5745.473" Y="-295.5232" Z="359.1727" />
+		</Hotspots>
+	</Objective>
+	<Objective Type="CollectItem" ItemId="2894" CollectCount="1">
+		<CollectFrom>
+		<Vendor Name="Innkeeper Belm" Id="1247" />
+		</CollectFrom>
+		<Hotspots>
+		<Hotspot X="-5599.248" Y="-530.2335" Z="399.6524" />
+		</Hotspots>
+	</Objective>
+</Quest>
+<Quest Id="432" Name="Those Blasted Troggs!">
+	<Objective Type="KillMob" MobId="1115" KillCount="8">
+		<Hotspots>
+		<Hotspot X="-5770.327" Y="-1642.883" Z="359.1939" />
+		</Hotspots>
+	</Objective>
+	<Objective Type="KillMob" MobId="1117" KillCount="8">
+		<Hotspots>
+		<Hotspot X="-5711.338" Y="-1688.513" Z="361.4428" />
+		
+		</Hotspots>
+	</Objective>
+</Quest>
+
+
+	<If Condition="IsQuestCompleted(25997)">
+	<CustomBehavior File="Message" Text="Loading 12-60" LogColor="info" />
+	<CustomBehavior File="LoadProfile" ProfileName="12-60" />
+	</If>
+	
+</HBProfile>

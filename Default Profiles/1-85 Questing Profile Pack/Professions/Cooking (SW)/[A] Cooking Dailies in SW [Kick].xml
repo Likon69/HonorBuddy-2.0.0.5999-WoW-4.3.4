@@ -1,0 +1,228 @@
+<HBProfile>
+	<Name>[A] Cooking Dailies - SW [Kick]</Name>
+	<MinLevel>1</MinLevel>
+	<MaxLevel>86</MaxLevel>
+  
+	<MinDurability>0.2</MinDurability>
+	<MinFreeBagSlots>2</MinFreeBagSlots>
+  
+	<MailGrey>False</MailGrey>
+	<MailWhite>True</MailWhite>
+	<MailGreen>True</MailGreen>
+	<MailBlue>True</MailBlue>
+	<MailPurple>True</MailPurple>
+  
+	<SellGrey>True</SellGrey>
+	<SellWhite>True</SellWhite>
+	<SellGreen>True</SellGreen>
+	<SellBlue>False</SellBlue>
+	<SellPurple>False</SellPurple>
+  
+	<TargetElites>False</TargetElites>
+	<!-- <ContinentID>0</ContinentID> -->
+  
+	<QuestOrder IgnoreCheckpoints="True" >
+	
+	  <If Condition="Me.IsHorde" >
+			<CustomBehavior File="RunMacro" Macro="/exit" NumOfTimes="1" WaitTime="500" />
+			<CustomBehavior File="RunMacro" Macro="/click StaticPopup1Button1" NumOfTimes="1" WaitTime="500" />
+			<CustomBehavior File="UserDialog"  Title="title" AllowBotStop="True" SoundCue="Asterisk" SoundCueInterval="1" Text="You must be Alliance to run this profile" />
+	  </If>
+	  
+			<While Condition="HasQuestAvailable(42288)" >
+				<CustomBehavior File="InteractWith" MobId="42288" NumOfTimes="1" CollectionDistance="200" WaitTime="1000" X="-8825.265" Y="844.9476" Z="99.78278" />
+				<CustomBehavior File="RunMacro" Macro="/click GossipTitleButton1" NumOfTimes="1" WaitTime="1000" />
+				<CustomBehavior File="RunMacro" Macro="/click QuestFrameAcceptButton" NumOfTimes="1" WaitTime="1000" />
+			</While>
+
+			
+			<While Condition="((HasQuest(26183)) &amp;&amp; (!IsQuestCompleted(26183)))" >
+				<CustomBehavior File="FlyTo" QuestId="26183" X="-8848.99" Y="767.3871" Z="96.81339" />
+				<CustomBehavior File="ForcedDismount" QuestId="26183" />
+				<CustomBehavior File="InteractWith" QuestId="26183" MobId="203762" WaitForNpcs="False" ObjectType="Gameobject" NumOfTimes="12" CollectionDistance="20" X="-8848.99" Y="767.3871" Z="96.81339" />
+
+				<CustomBehavior File="FlyTo" QuestId="26183" X="-8908" Y="850.7413" Z="96.3979" />
+				<CustomBehavior File="ForcedDismount" QuestId="26183" />
+				<CustomBehavior File="InteractWith" QuestId="26183" MobId="203762" WaitForNpcs="False" ObjectType="Gameobject" NumOfTimes="12" CollectionDistance="20" X="-8908" Y="850.7413" Z="96.3979" />
+
+				<CustomBehavior File="FlyTo" QuestId="26183" X="-8861.36" Y="955.9171" Z="103.212" />
+				<CustomBehavior File="ForcedDismount" QuestId="26183" />
+				<CustomBehavior File="InteractWith" QuestId="26183" MobId="203762" WaitForNpcs="False" ObjectType="Gameobject" NumOfTimes="12" CollectionDistance="20" X="-8861.36" Y="955.9171" Z="103.212" />
+
+				<CustomBehavior File="FlyTo" QuestId="26183" X="-8726.228" Y="786.4771" Z="97.36276" />
+				<CustomBehavior File="ForcedDismount" QuestId="26183" />
+				<CustomBehavior File="InteractWith" QuestId="26183" MobId="203762" WaitForNpcs="False" ObjectType="Gameobject" NumOfTimes="12" CollectionDistance="20" X="-8726.228" Y="786.4771" Z="97.36276" />
+
+				<CustomBehavior File="FlyTo" QuestId="26183" X="-8590.796" Y="861.515" Z="96.95536" />
+				<CustomBehavior File="ForcedDismount" QuestId="26183" />
+				<CustomBehavior File="InteractWith" QuestId="26183" MobId="203762" WaitForNpcs="False" ObjectType="Gameobject" NumOfTimes="12" CollectionDistance="20" X="-8590.796" Y="861.515" Z="96.95536" />
+
+				<CustomBehavior File="FlyTo" QuestId="26183" X="-8643.233" Y="730.9759" Z="96.83466" />
+				<CustomBehavior File="ForcedDismount" QuestId="26183" />
+				<CustomBehavior File="InteractWith" QuestId="26183" MobId="203762" WaitForNpcs="False" ObjectType="Gameobject" NumOfTimes="12" CollectionDistance="20" X="-8643.233" Y="730.9759" Z="96.83466" />
+
+				<CustomBehavior File="FlyTo" QuestId="26183" X="-8491.696" Y="712.588" Z="97.32837" />
+				<CustomBehavior File="ForcedDismount" QuestId="26183" />
+				<CustomBehavior File="InteractWith" QuestId="26183" MobId="203762" WaitForNpcs="False" ObjectType="Gameobject" NumOfTimes="12" CollectionDistance="20" X="-8491.696" Y="712.588" Z="97.32837" />
+
+				<CustomBehavior File="FlyTo" QuestId="26183" X="-8392.057" Y="644.2701" Z="95.04441" />
+				<CustomBehavior File="ForcedDismount" QuestId="26183" />
+				<CustomBehavior File="InteractWith" QuestId="26183" MobId="203762" WaitForNpcs="False" ObjectType="Gameobject" NumOfTimes="12" CollectionDistance="20" X="-8392.057" Y="644.2701" Z="95.04441" />
+
+				<CustomBehavior File="FlyTo" QuestId="26183" X="-8589.692" Y="555.5637" Z="102.2153" />
+				<CustomBehavior File="ForcedDismount" QuestId="26183" />
+				<CustomBehavior File="InteractWith" QuestId="26183" MobId="203762" WaitForNpcs="False" ObjectType="Gameobject" NumOfTimes="12" CollectionDistance="20" X="-8589.692" Y="555.5637" Z="102.2153" />
+
+				<CustomBehavior File="FlyTo" QuestId="26183" X="-8638.021" Y="457.3213" Z="102.3068" />
+				<CustomBehavior File="ForcedDismount" QuestId="26183" />
+				<CustomBehavior File="InteractWith" QuestId="26183" MobId="203762" WaitForNpcs="False" ObjectType="Gameobject" NumOfTimes="12" CollectionDistance="20" X="-8638.021" Y="457.3213" Z="102.3068" />
+
+				<CustomBehavior File="FlyTo" QuestId="26183" X="-8721.268" Y="403.3272" Z="97.94804" />
+				<CustomBehavior File="ForcedDismount" QuestId="26183" />
+				<CustomBehavior File="InteractWith" QuestId="26183" MobId="203762" WaitForNpcs="False" ObjectType="Gameobject" NumOfTimes="12" CollectionDistance="20" X="-8721.268" Y="403.3272" Z="97.94804" />
+
+				<CustomBehavior File="FlyTo" QuestId="26183" X="-8788.535" Y="468.7566" Z="97.23609" />
+				<CustomBehavior File="ForcedDismount" QuestId="26183" />
+				<CustomBehavior File="InteractWith" QuestId="26183" MobId="203762" WaitForNpcs="False" ObjectType="Gameobject" NumOfTimes="12" CollectionDistance="20" X="-8788.535" Y="468.7566" Z="97.23609" />
+
+				<CustomBehavior File="FlyTo" QuestId="26183" X="-8724.069" Y="581.3706" Z="97.8051" />
+				<CustomBehavior File="ForcedDismount" QuestId="26183" />
+				<CustomBehavior File="InteractWith" QuestId="26183" MobId="203762" WaitForNpcs="False" ObjectType="Gameobject" NumOfTimes="12" CollectionDistance="20" X="-8724.069" Y="581.3706" Z="97.8051" />
+
+				<CustomBehavior File="WaitTimer" WaitTime="2000" />
+			</While>
+			<If Condition="((HasQuest(26153)) &amp;&amp; (!IsQuestCompleted(26153)))" >
+				<!-- Penny's Pumpkin Pancakes -->
+				<CustomBehavior File="FlyTo" Name="Pumpkin Patch" X="-8101.731" Y="780.2896" Z="67.2523" />
+				<CustomBehavior File="ForcedDismount" />
+				<Objective QuestName="Penny's Pumpkin Pancakes" QuestId="26153" Type="CollectItem" ItemId="57137" CollectCount="6" />
+			</If>
+			<While Condition="((HasQuest(26192)) &amp;&amp; (!IsQuestCompleted(26192)))" >
+				<!-- Orphans Like Cookies Too! -->
+				<CustomBehavior File="FlyTo" QuestId="26192" X="-8380.628" Y="613.234" Z="95.17715" />
+				<CustomBehavior File="InteractWith" QuestId="26192" MobId="203801" WaitForNpcs="False" Range="10" ObjectType="Gameobject" NumOfTimes="4" CollectionDistance="100" X="-8380.628" Y="613.234" Z="95.17715" />
+				
+				<CustomBehavior File="FlyTo" QuestId="26192" X="-8643.49" Y="428.6735" Z="101.6193" />
+				<CustomBehavior File="InteractWith" QuestId="26192" MobId="203801" WaitForNpcs="False" Range="10" ObjectType="Gameobject" NumOfTimes="4" CollectionDistance="100" X="-8643.49" Y="428.6735" Z="101.6193" />
+				
+				<CustomBehavior File="FlyTo" QuestId="26192" X="-8839.628" Y="612.8966" Z="93.10394" />
+				<CustomBehavior File="InteractWith" QuestId="26192" MobId="203801" WaitForNpcs="False" Range="10" ObjectType="Gameobject" NumOfTimes="4" CollectionDistance="100" X="-8839.628" Y="612.8966" Z="93.10394" />
+				
+				<CustomBehavior File="FlyTo" QuestId="26192" X="-9033.808" Y="849.2762" Z="107.1087" />
+				<CustomBehavior File="InteractWith" QuestId="26192" MobId="203801" WaitForNpcs="False" Range="10" ObjectType="Gameobject" NumOfTimes="4" CollectionDistance="100" X="-9033.808" Y="849.2762" Z="107.1087" />
+				
+				<CustomBehavior File="FlyTo" QuestId="26192" X="-8939.758" Y="984.3801" Z="121.9316" />
+				<CustomBehavior File="InteractWith" QuestId="26192" MobId="203801" WaitForNpcs="False" Range="10" ObjectType="Gameobject" NumOfTimes="4" CollectionDistance="100" X="-8939.758" Y="984.3801" Z="121.9316" />
+			</While>
+			<If Condition="((HasQuest(26177)) &amp;&amp; (!IsQuestCompleted(26177)))" >
+				<CustomBehavior File="FlyTo" X="-8897.132" Y="715.9642" Z="102.0343" />
+				<CustomBehavior File="RunMacro" Macro="/dismount\n/cancelaura Flight Form\n/cancelaura Swift Flight Form" NumOfTimes="1" WaitTime="1000" />
+			 <While Condition="((HasQuest(26177)) &amp;&amp; (!IsQuestCompleted(26177)))" >
+				<CustomBehavior File="InteractWith" QuestId="26177" MobId="42339" NumOfTimes="3" CollectionDistance="500" WaitTime="1000" X="-8744.308" Y="780.3948" Z="92.96433" />
+				<CustomBehavior File="InteractWith" QuestId="26177" MobId="42339" NumOfTimes="3" CollectionDistance="500" WaitTime="1000" X="-8612.897" Y="550.7734" Z="92.63896" />
+			 </While>
+			</If>
+			<While Condition="((HasQuest(26190)) &amp;&amp; (!IsQuestCompleted(26190)))" >
+			
+				<CustomBehavior File="FlyTo" QuestId="26190"  Distance="2" X="-8671.227" Y="914.0311" Z="96.25711" />
+				<CustomBehavior File="ForcedDismount" QuestId="26190" />
+				<CustomBehavior File="InteractWith" QuestId="26190" MobId="203800" WaitForNpcs="False" ObjectType="Gameobject" NumOfTimes="1" CollectionDistance="15" X="-8671.227" Y="914.0311" Z="96.25711" />
+				
+				<CustomBehavior File="FlyTo" QuestId="26190"  Distance="2" X="-8539.996" Y="1264.99" Z="4.544658" />
+				<CustomBehavior File="ForcedDismount" QuestId="26190" />
+				<CustomBehavior File="InteractWith" QuestId="26190" MobId="203800" WaitForNpcs="False" ObjectType="Gameobject" NumOfTimes="1" CollectionDistance="15" X="-8539.996" Y="1264.99" Z="4.544658" />
+				
+				<CustomBehavior File="FlyTo" QuestId="26190"  Distance="2" X="-8231.862" Y="1264.988" Z="4.54791" />
+				<CustomBehavior File="ForcedDismount" QuestId="26190" />
+				<CustomBehavior File="InteractWith" QuestId="26190" MobId="203800" WaitForNpcs="False" ObjectType="Gameobject" NumOfTimes="1" CollectionDistance="15" X="-8231.862" Y="1264.988" Z="4.54791" />
+				
+				<CustomBehavior File="FlyTo" QuestId="26190"  Distance="2" X="-8259.753" Y="477.937" Z="116.178" />
+				<CustomBehavior File="ForcedDismount" QuestId="26190" />
+				<CustomBehavior File="InteractWith" QuestId="26190" MobId="203800" WaitForNpcs="False" ObjectType="Gameobject" NumOfTimes="1" CollectionDistance="15" X="-8259.753" Y="477.937" Z="116.178" />
+				
+				<CustomBehavior File="FlyTo" QuestId="26190"  Distance="2" X="-8469.592" Y="515.4538" Z="97.08972" />
+				<CustomBehavior File="ForcedDismount" QuestId="26190" />
+				<CustomBehavior File="InteractWith" QuestId="26190" MobId="203800" WaitForNpcs="False" ObjectType="Gameobject" NumOfTimes="1" CollectionDistance="15" X="-8469.592" Y="515.4538" Z="97.08972" />
+				
+				<CustomBehavior File="FlyTo" QuestId="26190"  Distance="2" X="-8580.045" Y="435.289" Z="97.04913" />
+				<CustomBehavior File="ForcedDismount" QuestId="26190" />
+				<CustomBehavior File="InteractWith" QuestId="26190" MobId="203800" WaitForNpcs="False" ObjectType="Gameobject" NumOfTimes="1" CollectionDistance="15" X="-8580.045" Y="435.289" Z="97.04913" />
+				
+				<CustomBehavior File="FlyTo" QuestId="26190"  Distance="2" X="-8749.522" Y="526.6212" Z="96.72818" />
+				<CustomBehavior File="ForcedDismount" QuestId="26190" />
+				<CustomBehavior File="InteractWith" QuestId="26190" MobId="203800" WaitForNpcs="False" ObjectType="Gameobject" NumOfTimes="1" CollectionDistance="15" X="-8749.522" Y="526.6212" Z="96.72818" />
+				
+				<CustomBehavior File="FlyTo" QuestId="26190"  Distance="2" X="-8790.067" Y="769.3633" Z="96.33887" />
+				<CustomBehavior File="ForcedDismount" QuestId="26190" />
+				<CustomBehavior File="InteractWith" QuestId="26190" MobId="203800" WaitForNpcs="False" ObjectType="Gameobject" NumOfTimes="1" CollectionDistance="15" X="-8790.067" Y="769.3633" Z="96.33887" />
+				
+			</While>
+			
+			
+			
+			
+			<If Condition="((HasQuest(26183)) &amp;&amp; (IsQuestCompleted(26183)))" >
+				<CustomBehavior File="FlyTo" Name="Turn in quest" X="-8828.162" Y="844.7129" Z="99.55173" />
+				<CustomBehavior File="ForcedDismount" />
+		<TurnIn QuestName="The King's Cider" QuestId="26183" TurnInName="Robby Flay" TurnInId="42288" />
+			</If>
+			<If Condition="((HasQuest(26190)) &amp;&amp; (IsQuestCompleted(26190)))" >
+				<CustomBehavior File="FlyTo" Name="Turn in quest" X="-8828.162" Y="844.7129" Z="99.55173" />
+				<CustomBehavior File="ForcedDismount" />
+		<TurnIn QuestName="A Fisherman's Feast" QuestId="26190" TurnInName="Robby Flay" TurnInId="42288" />
+			</If>
+			<If Condition="((HasQuest(26177)) &amp;&amp; (IsQuestCompleted(26177)))" >
+				<CustomBehavior File="FlyTo" Name="Turn in quest" X="-8828.162" Y="844.7129" Z="99.55173" />
+				<CustomBehavior File="ForcedDismount" />
+		<TurnIn QuestName="Feeling Crabby?" QuestId="26177" TurnInName="Robby Flay" TurnInId="42288" />
+			</If>
+			<If Condition="((HasQuest(26192)) &amp;&amp; (IsQuestCompleted(26192)))" >
+				<CustomBehavior File="FlyTo" Name="Turn in quest" X="-8828.162" Y="844.7129" Z="99.55173" />
+				<CustomBehavior File="ForcedDismount" />
+		<TurnIn QuestName="Orphans Like Cookies Too!" QuestId="26192" TurnInName="Robby Flay" TurnInId="42288" />
+			</If>
+			<If Condition="((HasQuest(26153)) &amp;&amp; (IsQuestCompleted(26153)))" >
+				<CustomBehavior File="FlyTo" Name="Turn in quest" X="-8828.162" Y="844.7129" Z="99.55173" />
+				<CustomBehavior File="ForcedDismount" />
+		<TurnIn QuestName="Penny's Pumpkin Pancakes" QuestId="26153" TurnInName="Robby Flay" TurnInId="42288" />
+			</If>
+	
+	<CustomBehavior File="UserDialog" AllowBotStop="True" SoundCueInterval="1" Text="End of Line" />
+	
+	<!-- fishin' dailies:
+
+		<PickUp QuestName="Big Gulp" QuestId="26488" GiverName="Catherine Leland" GiverId="5494" />
+		<Objective QuestName="Big Gulp" QuestId="26488" Type="CollectItem" ItemId="58864" CollectCount="1" />
+		<Objective QuestName="Big Gulp" QuestId="26488" Type="CollectItem" ItemId="58856" CollectCount="1" />
+		<FlyTo X="-8985.136" Y="407.4563" Z="73.08955" />
+		<RunTo X="-8982.789" Y="410.8324" Z="71.88472" /> // face the water runto \\
+
+		<FlyTo X="-8801.841" Y="767.9167" Z="96.33894" /> // flyto once complete \\
+		<TurnIn QuestName="Big Gulp" QuestId="26488" TurnInName="Catherine Leland" TurnInId="5494" />
+		<Vendor Name="Catherine Leland" Entry="5494" Type="Repair" X="-8803.257" Y="766.717" Z="96.33804" />	
+		
+		
+	
+		<PickUp QuestName="Diggin' For Worms" QuestId="26420" GiverName="Catherine Leland" GiverId="5494" />
+		<Flyto X="-8153.214" Y="717.6205" Z="69.51754" />
+		204281	Worm Mound	- fish!
+			<Objective QuestName="Diggin' For Worms" QuestId="26420" Type="CollectItem" ItemId="58787" CollectCount="1" />
+			<Objective QuestName="Diggin' For Worms" QuestId="26420" Type="CollectItem" ItemId="58788" CollectCount="1" />
+		<TurnIn QuestName="Diggin' For Worms" QuestId="26420" TurnInName="Catherine Leland" TurnInId="5494" />
+		
+		
+
+		<PickUp QuestName="Thunder Falls" QuestId="26536" GiverName="Catherine Leland" GiverId="5494" />
+		<FlyTo X="-9323.712" Y="603.5793" Z="122.3131" />
+		<RunTo X="-9324.785" Y="607.5486" Z="120.6591" />
+		<Objective QuestName="Thunder Falls" QuestId="26536" Type="CollectItem" ItemId="58899" CollectCount="4" />
+		<TurnIn QuestName="Thunder Falls" QuestId="26536" TurnInName="Catherine Leland" TurnInId="5494" />
+			
+			
+	-->
+	  
+	  
+
+	</QuestOrder>
+
+</HBProfile>

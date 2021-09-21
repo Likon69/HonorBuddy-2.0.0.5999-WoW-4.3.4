@@ -1,0 +1,47 @@
+<HBProfile>
+  <Name>H LK to K</Name>
+
+	<MinLevel>1</MinLevel>
+	<MaxLevel>86</MaxLevel>
+
+	<MinDurability>0.2</MinDurability>
+	<MinFreeBagSlots>2</MinFreeBagSlots>
+
+	<MailGrey>False</MailGrey>
+	<MailWhite>False</MailWhite>
+	<MailGreen>False</MailGreen>
+	<MailBlue>False</MailBlue>
+	<MailPurple>False</MailPurple>
+
+	<SellGrey>False</SellGrey>
+	<SellWhite>False</SellWhite>
+	<SellGreen>False</SellGreen>
+	<SellBlue>False</SellBlue>
+	<SellPurple>False</SellPurple>
+
+	<TargetElites>False</TargetElites>
+
+	<AvoidMobs>
+	</AvoidMobs>
+	<Blackspots>
+	</Blackspots>
+	<Mailboxes>
+	</Mailboxes>
+	<Vendors>
+	</Vendors>
+	<QuestOrder>				
+			<CustomBehavior File="FlyTo" X="1768.656" Y="-4343.217" Z="102.0792" />
+			<CustomBehavior File="ForcedDismount" />
+			<CustomBehavior File="Message" Text="Running to Org Zepp to Borean" LogColor="Cornflowerblue" />
+			<RunTo X="1763.389" Y="-4283.858" Z="133.1073" />
+			<CustomBehavior File="Message" Text="Waiting for Org Zepp to Borean - don't interact!" LogColor="Orange" />
+			<CustomBehavior File="UseTransport" 
+				TransportId="186238"
+				WaitAtX="1763.203" WaitAtY="-4284.529" WaitAtZ="133.1072" 
+				TransportStartX="1775.066" TransportStartY="-4299.745" TransportStartZ="151.0326" 
+				StandOnX="1770.22" StandOnY="-4292.056" StandOnZ="133.1872" 
+				TransportEndX="2837.908" TransportEndY="6187.443" TransportEndZ="140.1648" 
+				GetOffX="2836.831" GetOffY="6185.15" GetOffZ="121.9923" 
+			/>
+	</QuestOrder>
+</HBProfile>

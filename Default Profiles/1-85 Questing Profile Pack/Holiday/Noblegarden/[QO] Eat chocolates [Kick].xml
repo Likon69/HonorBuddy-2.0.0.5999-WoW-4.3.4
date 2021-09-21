@@ -1,0 +1,14 @@
+<HBProfile>
+
+	
+	<QuestOrder>
+			<While Condition="(HasItem(44791))" >
+				<CustomBehavior File="Misc\RunLua" Lua="UseItemByName(44791)" WaitTime="1000" />
+			</While>
+
+	<CustomBehavior File="UserDialog"  AllowBotStop="True" SoundCue="Asterisk" SoundCueInterval="1" Text="I eated all of meh chocolates QQ" />
+
+
+	</QuestOrder>
+	
+</HBProfile>

@@ -1,0 +1,32 @@
+<HBProfile>
+	<Name>To Outland</Name>
+	<MinDurability>0.1</MinDurability>
+	<MinFreeBagSlots>1</MinFreeBagSlots>
+	<MinLevel>1</MinLevel>
+	<MaxLevel>86</MaxLevel>
+	<MailGrey>False</MailGrey>
+	<MailWhite>False</MailWhite>
+	<MailGreen>True</MailGreen>
+	<SellGrey>True</SellGrey>
+	<SellWhite>True</SellWhite>
+	<SellGreen>True</SellGreen>
+	<SellBlue>False</SellBlue>
+	<SellPurple>False</SellPurple>
+
+	<QuestOrder>
+	
+			<If Condition="Me.MapId == 1">
+				<CustomBehavior File="InteractWith" MobId="195142" WaitTime="5000" ObjectType="Gameobject" X="1685.18" Y="-4123.42" Z="66.3376" />
+			</If>
+			<If Condition="!IsQuestCompleted(9407)">
+		<PickUp QuestName="Through the Dark Portal" QuestId="9407" GiverName="Warlord Dar'toon" GiverId="19254" />
+			</If>
+			<RunTo QuestId="9407" X="-11894.86" Y="-3207.23" Z="-14.6287" />
+			<CustomBehavior File="MyCTM" QuestId="9407" X="-11913.86" Y="-3209.951" Z="-14.66572" />
+			<RunTo X="-11906.85" Y="-3215.02" Z="-14.23298" />
+			<CustomBehavior File="WaitTimer" WaitTime="10000" />
+			
+			<CustomBehavior File="LoadProfile" ProfileName="..\..\..\BC\[Fly][H - Quest] BC 58-70 [Kick]" />
+			
+	</QuestOrder>
+</HBProfile>

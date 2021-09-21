@@ -1,0 +1,47 @@
+<HBProfile>
+  <Name>H EK to K</Name>
+
+	<MinLevel>1</MinLevel>
+	<MaxLevel>86</MaxLevel>
+
+	<MinDurability>0.2</MinDurability>
+	<MinFreeBagSlots>2</MinFreeBagSlots>
+
+	<MailGrey>False</MailGrey>
+	<MailWhite>False</MailWhite>
+	<MailGreen>False</MailGreen>
+	<MailBlue>False</MailBlue>
+	<MailPurple>False</MailPurple>
+
+	<SellGrey>False</SellGrey>
+	<SellWhite>False</SellWhite>
+	<SellGreen>False</SellGreen>
+	<SellBlue>False</SellBlue>
+	<SellPurple>False</SellPurple>
+
+	<TargetElites>False</TargetElites>
+
+	<AvoidMobs>
+	</AvoidMobs>
+	<Blackspots>
+	</Blackspots>
+	<Mailboxes>
+	</Mailboxes>
+	<Vendors>
+	</Vendors>
+	<QuestOrder>
+		<CustomBehavior File="FlyTo" X="2036.99" Y="299.9215" Z="54.13479" />
+		<CustomBehavior File="ForcedDismount" />
+		<CustomBehavior File="Message" Text="Running to UC Zepp to Org" LogColor="Cornflowerblue" />
+		<RunTo X="2067.232" Y="286.1159" Z="97.03087" />				
+		<CustomBehavior File="Message" Text="Waiting for Zepp to Org - don't interact!" LogColor="Orange" />
+		<CustomBehavior File="UseTransport" 
+			TransportId="164871"
+			WaitAtX="2070.155" WaitAtY="289.2588" WaitAtZ="97.0315"
+			TransportStartX="2062.376" TransportStartY="292.998" TransportStartZ="114.973"
+			StandOnX="2067.979" StandOnY="295.2747" StandOnZ="97.23677"
+			TransportEndX="1833.509" TransportEndY="-4391.543" TransportEndZ="152.7679"
+			GetOffX="1840.225" GetOffY="-4390.912" GetOffZ="135.2337"
+		/>
+	</QuestOrder>		
+</HBProfile>	   

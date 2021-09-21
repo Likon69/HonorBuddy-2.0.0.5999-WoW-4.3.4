@@ -1,0 +1,66 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<HBProfile>
+  <Name>Embersilk Cloth - Twilight Highlands</Name>
+  <MinDurability>0.3</MinDurability>
+  <MinFreeBagSlots>2</MinFreeBagSlots>
+  <MinLevel>1</MinLevel>
+  <MaxLevel>86</MaxLevel>
+	<SellGrey>True</SellGrey>
+	<SellWhite>True</SellWhite>
+	<SellGreen>False</SellGreen>
+	<SellBlue>False</SellBlue>
+	<SellPurple>False</SellPurple>
+	
+	<MailWhite>True</MailWhite>
+	<MailGreen>True</MailGreen>
+	<MailBlue>True</MailBlue>
+	<MailPurple>True</MailPurple>  
+	<Vendors>
+<Vendor Name="Caelyb Coppercrag" Entry="49592" Type="Repair" X="-3177.95" Y="-5021.481" Z="121.2318" />
+	</Vendors>
+	
+	<Mailboxes>
+<Mailbox X="-3208.949" Y="-5045.932" Z="120.5393" />
+
+	</Mailboxes>
+
+  <GrindArea>
+    <TargetMinLevel>1</TargetMinLevel>
+    <TargetMaxLevel>86</TargetMaxLevel>
+    <Factions>45</Factions>
+
+    <Hotspots>
+<Hotspot X="-3202.552" Y="-4603.82" Z="157.9762" />
+<Hotspot X="-3179.687" Y="-4502.015" Z="177.9776" />
+<Hotspot X="-3300.933" Y="-4488.701" Z="170.4934" />
+<Hotspot X="-3407.548" Y="-4446.918" Z="176.163" />
+<Hotspot X="-3301.149" Y="-4488.919" Z="170.4742" />
+<Hotspot X="-3148.005" Y="-4502.001" Z="179.763" />
+<Hotspot X="-3092.186" Y="-4533.196" Z="182.1741" />
+<Hotspot X="-3012.011" Y="-4433.289" Z="182.759" />
+<Hotspot X="-2948.626" Y="-4403.687" Z="181.8452" />
+    </Hotspots>
+  </GrindArea>
+
+
+           <ProtectedItems>
+           <Item name="Linen Cloth" entry="2589" /> 
+           <Item name="Wool Cloth" entry="2592" /> 
+           <Item name="Silk Cloth" entry="4306" /> 
+           <Item name="Mageweave Cloth" entry="4338" /> 
+           <Item name="Runecloth" entry="14047" /> 
+           <Item name="Netherweave Cloth" entry="21877" /> 
+           <Item name="Frostweave Cloth" entry="33470" /> 
+           <Item name="Embersilk Cloth" entry="53010" /> 
+           </ProtectedItems>
+           <ForceMail>
+           <Item name="Wool Cloth" entry="2592" /> 
+           <Item name="Linen Cloth" entry="2589" />
+           <Item name="Silk Cloth" entry="4306" /> 
+           <Item name="Mageweave Cloth" entry="4338" /> 
+           <Item name="Runecloth" entry="14047" /> 
+           <Item name="Netherweave Cloth" entry="21877" /> 
+           <Item name="Frostweave Cloth" entry="33470" /> 
+           <Item name="Embersilk Cloth" entry="53010" /> 
+           </ForceMail>
+</HBProfile>

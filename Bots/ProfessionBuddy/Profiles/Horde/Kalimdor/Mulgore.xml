@@ -1,0 +1,327 @@
+<HBProfile xsi:noNamespaceSchemaLocation="../Schemas/EchoSchema.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<!-- Original contribution by EchoTiger -->
+	<Name>Mulgore ($ShortHash$)</Name>
+
+	<MinDurability>0.3</MinDurability>
+	<MinFreeBagSlots>3</MinFreeBagSlots>
+
+	<SellGrey>true</SellGrey>
+	<SellWhite>true</SellWhite>
+	<SellGreen>true</SellGreen>
+	<SellBlue>true</SellBlue>
+	<SellPurple>false</SellPurple>
+
+	<MailGrey>false</MailGrey>
+	<MailWhite>true</MailWhite>
+	<MailGreen>true</MailGreen>
+	<MailBlue>true</MailBlue>
+	<MailPurple>true</MailPurple>
+
+	<TargetElites>true</TargetElites>
+
+	<AvoidMobs>
+	</AvoidMobs>
+
+	<Mailboxes>
+	</Mailboxes>
+
+	<Vendors>
+		<Vendor Name="Skorn Whitecloud" Entry="3052" Type="Repair" X="-794.7656" Y="-503.5469" Z="-32.27547" />
+		<Vendor Name="Harant Ironbrace" Entry="3080" Type="Repair" X="-2284.468" Y="-310.2602" Z="-9.424864" />
+	</Vendors>
+
+	<Blackspots>
+	</Blackspots>
+
+	<Blacklist>
+	</Blacklist>
+
+	<QuestOrder IgnoreCheckpoints="false" >
+		<!-- Check function status -->
+		<Code File="RunCode" Type="Definition">
+			<![CDATA[
+			private static bool? profileFunctionsEnabled => (bool?)AppDomain.CurrentDomain.GetData("QuestingProfiles_FunctionsEnabled");
+			private static bool IsStoreProfile(string path) => path.StartsWith("store://");
+			private static string Slashify(string path) => IsStoreProfile(path) ? path.Replace(@"\", "/") : path.Replace("/", @"\");
+
+			public __CompiledBatchClass__()
+			{
+				ActivateFunctions();
+			}
+
+			private static void ActivateFunctions()
+			{
+				if (profileFunctionsEnabled == null || profileFunctionsEnabled == false)
+				{
+					Bots.Professionbuddy.PBLog.Log(Colors.MediumPurple, "[Profile Message!]: ", Colors.Yellow, "Please stand by as the functions are being activated!");
+					LoadProfile(@"..\..\Functions\Activate Functions.xml");
+				}
+			}
+
+			private static void LoadProfile(string path)
+			{
+				var profile = GetNewPath(path);
+				if (!IsStoreProfile(profile) && !File.Exists(profile))
+				{
+					Bots.Professionbuddy.PBLog.Log(Colors.MediumPurple, "[Profile Message!]: ", Colors.Yellow, "Profile does not exist.\n" + profile);
+					return;
+				}
+
+				Bots.Professionbuddy.PBLog.Log(Colors.MediumPurple, "[Profile Message!]: ", Colors.Yellow, "Loading: " + profile);
+				ProfileManager.LoadNew(profile, false);
+			}
+
+			private static string GetNewPath(string path)
+			{
+				if (IsStoreProfile(path))
+					return Slashify(path);
+
+				var currentProfile = ProfileManager.XmlLocation;
+				if (IsStoreProfile(currentProfile))
+					return Slashify(currentProfile + "/../" + path);
+
+				var absolutePath = Path.Combine(Path.GetDirectoryName(currentProfile), path);
+				absolutePath = Path.GetFullPath(absolutePath);
+				var canonicalPath = new Uri(absolutePath).LocalPath;
+				return Slashify(canonicalPath);
+			}]]>
+		</Code>
+		<Code File="RunCode" Code="ActivateFunctions();" />
+		<!-- END Check function status -->
+
+		<If Condition="Me.IsAlliance" >
+			<Code File="LoadProfile" ProfileName="..\..\Questing Autoloader.xml" />
+		</If>
+		<!-- RunCode Methods -->
+			<Code File="RunCode">
+			<![CDATA[
+				Bots.Professionbuddy.PBLog.Log(System.Windows.Media.Colors.MediumPurple, "> [Profile Initialization Status] ", System.Windows.Media.Colors.CornflowerBlue, "\n     Auto-Looting	:: Enabled\n     Looting	:: Enabled\n     Game Addons	:: Disabled");
+				Lua.DoString("SetCVar('AutoLootDefault', 1);");
+				Lua.DoString("SetCVar('autoDismountFlying', 1);");
+				CharacterSettings.Instance.LootMobs = true;
+				CharacterSettings.Instance.Save();
+				Logging.Write(System.Windows.Media.Colors.MediumPurple, "> [Ready to bot!]");
+			]]>
+			</Code>
+			<Code File="RunCode" Type="Definition">
+				<![CDATA[
+						bool DoQuest(params uint[] questIds)
+						{
+							foreach (var questId in questIds)
+							{
+								if (HasQuest(questId) && !IsQuestCompleted(questId)) return true;
+							}
+							return false;
+						}
+						bool NeedsQuest(params uint[] questIds)
+						{
+							foreach (var questId in questIds)
+							{
+								if (!HasQuest(questId) && !IsQuestCompleted(questId)) return true;
+							}
+							return false;
+						}
+						bool NeedsBreadcrumbQuest(params uint[] questIds)
+						{
+							foreach (var questId in questIds)
+							{
+								if (IsQuestCompleted(questId)) return false;
+							}
+							return true;
+						}
+						bool QuestDone(params uint[] questIds)
+						{
+							foreach (var questId in questIds)
+							{
+								if (HasQuest(questId) && IsQuestCompleted(questId)) return true;
+							}
+							return false;
+						}
+						bool QuestFlaggedCompleted(params uint[] questIds)
+						{
+							foreach (var questId in questIds)
+							{
+								return Lua.GetReturnVal<bool>($"return IsQuestFlaggedCompleted({questId});", 0);
+							}
+							return false;
+						}
+						async Task SkipCutscene(int preWait = 3000, int postWait = 3000)
+						{
+					// Add detection of cutscene here.
+							await Coroutine.Sleep(preWait);
+					// Test and improve the working method.
+							Lua.DoString("MovieFrame:StopMovie(); CinematicFrame_CancelCinematic(); StopCinematic();");
+							await Coroutine.Sleep(postWait);
+						}
+					]]>
+			</Code>
+		<!-- END RunCode Methods -->
+
+
+		<PickUp QuestName="Sharing the Land" QuestId="14438" GiverName="Ahmo Thunderhorn" GiverId="36644" X="-2337.819" Y="-396.3541" Z="-8.176229" />
+		<PickUp QuestName="Poison Water" QuestId="20440" GiverName="Mull Thunderhorn" GiverId="2948" X="-2342.488" Y="-440.2077" Z="-6.321799" />
+		<PickUp QuestName="Swoop Hunting" QuestId="761" GiverName="Harken Windtotem" GiverId="2947" X="-2306.744" Y="-449.5577" Z="-5.438176" />
+
+		<Code File="SetHearthstone" MobId="6747" AreaId="222" X="-2361.601" Y="-349.7208" Z="-8.956824" />
+
+		<Code File="KillUntilComplete" MobId="2956" QuestId="20440" QuestObjectiveIndex="2" >
+			<HuntingGrounds>
+				<Hotspot X="-2425.177" Y="-720.7369" Z="-3.735548" />
+				<Hotspot X="-2536.373" Y="-882.5558" Z="-8.304329" />
+				<Hotspot X="-2573.586" Y="-982.9845" Z="-1.694715" />
+			</HuntingGrounds>
+		</Code>
+
+		<Code File="KillUntilComplete" MobId="2958" QuestId="20440" QuestObjectiveIndex="1" >
+			<HuntingGrounds>
+				<Hotspot X="-2554.641" Y="-1053.18" Z="-5.173489" />
+				<Hotspot X="-2594.36" Y="-1008.126" Z="-5.24239" />
+			</HuntingGrounds>
+		</Code>
+
+		<Code File="KillUntilComplete" MobId="2970" QuestId="761" >
+			<HuntingGrounds>
+				<Hotspot X="-2624.16" Y="-956.981" Z="-5.927583" />
+				<Hotspot X="-2659.586" Y="-1011.716" Z="-6.061637" />
+				<Hotspot X="-2505.885" Y="-993.4991" Z="-8.518744" />
+			</HuntingGrounds>
+		</Code>
+
+		<Code File="KillUntilComplete" MobIds="2949, 2950, 2951, 5786" QuestId="14438" >
+			<HuntingGrounds>
+				<Hotspot X="-2741.352" Y="-806.1871" Z="0.3064761" />
+				<Hotspot X="-2745.812" Y="-686.0849" Z="2.920932" />
+				<Hotspot X="-2720.08" Y="-484.1293" Z="2.680651" />
+				<Hotspot X="-2740.17" Y="-440.712" Z="-4.168908" />
+				<Hotspot X="-2739.762" Y="-391.9511" Z="1.561213" />
+			</HuntingGrounds>
+		</Code>
+
+
+		<TurnIn QuestName="Sharing the Land" QuestId="14438" TurnInName="Ahmo Thunderhorn" TurnInId="36644" X="-2338.18" Y="-395.308" Z="-8.137374" />
+		<PickUp QuestName="The Restless Earth" QuestId="14491" GiverName="Ahmo Thunderhorn" GiverId="36644" X="-2338.18" Y="-395.308" Z="-8.137374" />
+		<PickUp QuestName="Morin Cloudstalker" QuestId="24459" GiverName="Ahmo Thunderhorn" GiverId="36644" X="-2338.18" Y="-395.308" Z="-8.137374" />
+		<PickUp QuestName="Dangers of the Windfury" QuestId="743" GiverName="Ruul Eagletalon" GiverId="2985" X="-2392.703" Y="-386.1229" Z="-2.736204" />
+		<TurnIn QuestName="Poison Water" QuestId="20440" TurnInName="Mull Thunderhorn" TurnInId="2948" X="-2344.266" Y="-444.3888" Z="-6.431953" />
+		<PickUp QuestName="Winterhoof Cleansing" QuestId="24440" GiverName="Mull Thunderhorn" GiverId="2948" X="-2344.266" Y="-444.3888" Z="-6.431953" />
+		<TurnIn QuestName="Swoop Hunting" QuestId="761" TurnInName="Harken Windtotem" TurnInId="2947" X="-2307.529" Y="-451.5084" Z="-5.438323" />
+		<PickUp QuestName="Mazzranache" QuestId="26188" GiverName="Maur Raincaller" GiverId="3055" X="-2230.125" Y="-370.0204" Z="-9.424594" />
+		<!--<PickUp QuestName="Kyle&apos;s Gone Missing!" QuestId="11129" GiverName="Ahab Wheathoof" GiverId="23618" X="-2101.438" Y="-430.7628" Z="-6.524886" /> Not worth it -->
+
+		<While Condition="DoQuest(24440)" >
+			<MoveTo X="-2535.674" Y="-709.6184" Z="-8.659107" />
+			<Code File="UseItem" ItemId="5411" QuestId="24440" X="-2535.674" Y="-709.6184" Z="-8.659107" />
+		</While>
+
+		<!--
+		<While Condition="DoQuest(11129)" >
+			<Code File="KillUntilComplete" MobId="2956" QuestId="11129" TerminateWhen="HasItem(33009)" >
+				<HuntingGrounds>
+					<Hotspot X="-2453.039" Y="-751.2943" Z="-4.763108" />
+					<Hotspot X="-2485.286" Y="-682.9621" Z="-4.369946" />
+					<Hotspot X="-2479.982" Y="-816.6168" Z="-7.428411" />
+					<Hotspot X="-2383.772" Y="-745.6995" Z="-2.145648" />
+				</HuntingGrounds>
+			</Code>
+		</While> -->
+
+		<TurnIn QuestName="Morin Cloudstalker" QuestId="24459" TurnInName="Morin Cloudstalker" TurnInId="2988" X="-2367.066" Y="-902.4799" Z="-9.409003" />
+		<PickUp QuestName="The Ravaged Caravan" QuestId="749" GiverName="Morin Cloudstalker" GiverId="2988" X="-2367.066" Y="-902.4799" Z="-9.409003" />
+
+		<Code File="KillUntilComplete" MobIds="2962, 2963" QuestId="743" >
+			<HuntingGrounds>
+				<Hotspot X="-2657.713" Y="-1394.787" Z="21.27809" />
+				<Hotspot X="-2704.693" Y="-1389.626" Z="33.42657" />
+				<Hotspot X="-2686.826" Y="-1302.972" Z="32.1671" />
+				<Hotspot X="-2708.987" Y="-1210" Z="13.04914" />
+			</HuntingGrounds>
+		</Code>
+
+		<If Condition="QuestDone(743) &amp;&amp; Me.HearthstoneAreaId == 222 &amp;&amp; (Unit(2962) != null || Unit(2963) != null)" >
+			<Code File="UseHearthstone" WaitForCD="false" />
+		</If>
+
+		<TurnIn QuestName="Dangers of the Windfury" QuestId="743" TurnInName="Ruul Eagletalon" TurnInId="2985" X="-2391.481" Y="-384.3568" Z="-2.97244" />
+		<TurnIn QuestName="Winterhoof Cleansing" QuestId="24440" TurnInName="Mull Thunderhorn" TurnInId="2948" X="-2347.358" Y="-443.8553" Z="-6.376612" />
+		<PickUp QuestName="Thunderhorn Totem" QuestId="24441" GiverName="Mull Thunderhorn" GiverId="2948" X="-2347.358" Y="-443.8553" Z="-6.376612" />
+		<TurnIn QuestName="The Ravaged Caravan" QuestId="749" TurnInName="Sealed Supply Crate" TurnInId="2908" X="-1924.674" Y="-715.2639" Z="3.670311" />
+		<RecheckCheckpoints />
+		<While Condition="NeedsQuest(751)" >
+			<PickUp QuestName="The Ravaged Caravan" QuestId="751" GiverName="Sealed Supply Crate" GiverId="2908" X="-1924.674" Y="-715.2639" Z="3.670311" />
+		</While>
+
+		<Code File="KillUntilComplete" TerminateWhen="!DoQuest(24441, 26188)" >
+			<HuntingGrounds>
+				<Hotspot X="-1981.897" Y="-784.2761" Z="-9.184482" />
+				<Hotspot X="-2077.744" Y="-820.0251" Z="-6.636988" />
+				<Hotspot X="-1950.213" Y="-882.3112" Z="0.4140325" />
+				<Hotspot X="-1854.785" Y="-786.5392" Z="-6.981503" />
+				<Hotspot X="-1721.016" Y="-721.5222" Z="-9.454651" />
+				<Hotspot X="-1680.681" Y="-617.598" Z="-25.95644" />
+				<Hotspot X="-1618.531" Y="-481.4398" Z="-28.63692" />
+				<Hotspot X="-1676.571" Y="-420.2276" Z="-22.75653" />
+			</HuntingGrounds>
+			<PursuitList>
+				<PursueUnit Id="2959" PursueWhen="!IsObjectiveComplete(1, 24441)" />
+				<PursueUnit Id="3035" PursueWhen="!IsObjectiveComplete(2, 24441) || DoQuest(26188)" />
+			</PursuitList>
+		</Code>
+
+		<Code File="InteractWith" MobId="36845" CollectionDistance="200" InteractByUsingItemId="49647" QuestId="14491" QuestObjectiveIndex="1" >
+			<HuntingGrounds>
+				<Hotspot X="-1960.719" Y="412.5808" Z="134.472" />
+				<Hotspot X="-1913.78" Y="397.8806" Z="134.24" />
+				<Hotspot X="-1913.145" Y="345.9749" Z="104.6355" />
+			</HuntingGrounds>
+		</Code>
+
+		<If Condition="QuestDone(14491) &amp;&amp; Me.HearthstoneAreaId == 222 &amp;&amp; Unit(36845) != null" >
+			<Code File="UseHearthstone" WaitForCD="false" />
+		</If>
+
+		<TurnIn QuestName="Mazzranache" QuestId="26188" TurnInName="Maur Raincaller" TurnInId="3055" X="-2230.426" Y="-372.9789" Z="-9.424651" />
+		<TurnIn QuestName="The Restless Earth" QuestId="14491" TurnInName="Ahmo Thunderhorn" TurnInId="36644" X="-2333.721" Y="-396.2482" Z="-8.098535" />
+		<TurnIn QuestName="Thunderhorn Totem" QuestId="24441" TurnInName="Mull Thunderhorn" TurnInId="2948" X="-2342.719" Y="-443.2981" Z="-6.394755" />
+		<TurnIn QuestName="The Ravaged Caravan" QuestId="751" TurnInName="Morin Cloudstalker" TurnInId="2988" X="-2367.033" Y="-901.2125" Z="-9.412201" />
+		<RecheckCheckpoints />
+		<PickUp QuestName="The Venture Co." QuestId="26179" GiverName="Morin Cloudstalker" GiverId="2988" X="-2367.033" Y="-901.2125" Z="-9.412201" />
+		<PickUp QuestName="Supervisor Fizsprocket" QuestId="26180" GiverName="Morin Cloudstalker" GiverId="2988" X="-2367.033" Y="-901.2125" Z="-9.412201" />
+
+		<Code File="KillUntilComplete" MobId="3051" QuestId="26180" X="-1869.249" Y="-1122.088" Z="96.60719" />
+
+		<Code File="KillUntilComplete" MobId="2978" QuestId="26179" >
+			<HuntingGrounds>
+				<Hotspot X="-1979.417" Y="-1067.587" Z="47.31954" />
+				<Hotspot X="-1920.464" Y="-1010.275" Z="44.47511" />
+				<Hotspot X="-1937.955" Y="-986.3585" Z="36.51741" />
+			</HuntingGrounds>
+		</Code>
+
+		<TurnIn QuestName="The Venture Co." QuestId="26179" TurnInName="Morin Cloudstalker" TurnInId="2988" X="-2358.176" Y="-905.1871" Z="-8.30873" />
+		<TurnIn QuestName="Supervisor Fizsprocket" QuestId="26180" TurnInName="Morin Cloudstalker" TurnInId="2988" X="-2358.176" Y="-905.1871" Z="-8.30873" />
+		<PickUp QuestName="A Bundle of Hides" QuestId="6361" GiverName="Varg Windwhisper" GiverId="3079" X="-2281.691" Y="-310.9077" Z="-9.423866" />
+		<TurnIn QuestName="A Bundle of Hides" QuestId="6361" TurnInName="Tak" TurnInId="40809" X="-2301.104" Y="-378.4596" Z="-9.141974" />
+
+		<PickUp QuestName="Ride to Thunder Bluff" QuestId="6362" GiverName="Tak" GiverId="40809" X="-2299.594" Y="-378.5527" Z="-9.13238" />
+		<If Condition="QuestDone(6362) &amp;&amp; Unit(40809) != null" >
+			<Code File="InteractWith" MobId="40809" NonCompeteDistance="0" X="-2299.594" Y="-378.5527" Z="-9.13238" />
+			<Code File="Misc\RunLua" Lua="GetNumRoutes(1); TakeTaxiNode(1);" />
+		</If>
+		<TurnIn QuestName="Ride to Thunder Bluff" QuestId="6362" TurnInName="Ahanu" TurnInId="8359" X="-1237.508" Y="44.01908" Z="126.9472" />
+
+		<PickUp QuestName="Tal the Wind Rider Master" QuestId="6363" GiverName="Ahanu" GiverId="8359" X="-1237.508" Y="44.01908" Z="126.9472" />
+		<TurnIn QuestName="Tal the Wind Rider Master" QuestId="6363" TurnInName="Tal" TurnInId="2995" X="-1196.437" Y="28.54594" Z="176.9491" />
+
+		<Checkpoint Level="10" />
+
+		<If Condition="Me.ZoneId == 1638 || Me.ZoneId == 215" >
+			<Code File="InteractWith" MobId="2995" NonCompeteDistance="0" X="-1197.21" Y="29.71" Z="176.9496" />
+			<Code File="Misc\RunLua" Lua="GetNumRoutes(39); TakeTaxiNode(39);" />
+		</If>
+
+		<Code File="LoadProfile" ProfileName="Durotar.xml" />
+
+
+
+	</QuestOrder>
+</HBProfile>

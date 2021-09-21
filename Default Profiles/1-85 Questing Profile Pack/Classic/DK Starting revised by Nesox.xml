@@ -1,0 +1,721 @@
+<HBProfile>
+    <Name>Deathknight Starting Zone</Name>
+    <MinLevel>55</MinLevel>
+    <MaxLevel>99</MaxLevel>
+	<MinDurability>0.3</MinDurability>
+	<MinFreeBagSlots>3</MinFreeBagSlots>
+	<SellGrey>True</SellGrey>
+	<SellWhite>True</SellWhite>
+	<SellGreen>True</SellGreen>
+	<MailWhite>True</MailWhite>
+	<MailGreen>True</MailGreen>
+	<MailBlue>True</MailBlue>
+	<MailPurple>True</MailPurple>
+	<TargetElites>False</TargetElites>
+  
+  
+
+  <!--
+  1 In Service Of The Lich King (Works!//Nesox)
+  2 The Emblazoned Runeblade (Works!//Nesox)
+  3 Runeforging: Preparation For Battle (Works!//Nesox)
+  4 The Endless Hunger (Works!//Nesox)
+  5 The Eye Of Acherus (Works!//Nesox)
+  6 Death Comes From On High (Works!//Nesox)
+  7 The Might Of The Scourge (Works!//Nesox)
+  8 Report To Scourge Commander Thalanor (Works!//Nesox)
+  9 The Scarlet Harvest (Works!//Nesox)
+  10 Grand Theft Palomino (Works!//Nesox)
+  11 Into the Realm of Shadows (Works!//Works)
+  12 Tonight We Dine In Havenshire (Works!//Works)
+  13 Death's Challenge (Works!//Nesox)
+  14 If Chaos Drives, Let Suffering Hold The Reins (Works!//Works)
+  15 Gothik the Harvester (Works!//Works)
+  16 The Gift That Keeps On Giving (Works!//Nesox, works but could be better)
+  17 An Attack Of Opportunity (Works!//Nesox)
+  18 Massacre At Light's Point (Works!//Nesox)
+  19 Victory At Death's Breach! (Works!//Nesox)
+  20 The Will Of The Lich King (Works!//Nesox)
+  21 The Crypt of Remembrance (Works!//Nesox)
+  22 Nowhere To Run And Nowhere To Hide (Works!//Nesox)
+  23 The Plaguebringer's Request (Works!//Nesox)
+  24 Noth's Special Brew (Works!//Nesox)
+  25 How To Win Friends And Influence Enemies (Works!//Nesox)
+  26 Behind Scarlet Lines (Works!//Nesox)
+  27 The Path Of The Righteous Crusader (Works!//Nesox)
+  28 Brothers In Death (Works!//Nesox)
+  29 Bloody Breakout (Works!//Nesox)
+  30 A Cry For Vengeance! (Works!//Nesox)
+  31 A Special Surprise (Works!//Nesox)
+  32 A Sort Of Homecoming (Works!//Nesox)
+  33 Ambush At The Overlook (Works!//Nesox)
+  34 A Meeting With Fate (Works!//Nesox)
+  35 The Scarlet Onslaugh Emerges (Works!//Nesox)
+  36 Scarlet Armies Approach (Works!//Nesox)
+  37 An End To All Things... (Works!)
+  38 The Lich King's Command (Works!)
+  **39 The Light of Dawn (Needs to wait for battle)
+  40 Taking Back Acherus (Works!)
+  **41 The Battle For The Ebon Hold (Mostly works)
+  42 Where Kings Walk (Works!)
+  42 Warchief's Blessing (Works!)-->
+	
+    <Blackspots>
+      <!-- Stable Master Kitrik -->
+      <Blackspot X="2205.902" Y="-5836.951" Z="101.2655" Radius="54.42151" />
+      <!-- To avoid running from EPL to train -->
+      <Blackspot X="1678.345" Y="-5225.244" Z="103.0381" Radius="111.6113" />
+      <!-- Catapult stuck location -->
+      <Blackspot X="1668.165" Y="-5986.603" Z="132.9881" Radius="5.831489" />
+      <!-- A house in the farm -->
+      <Blackspot X="2110.562" Y="-5805.603" Z="99.98003" Radius="8.231499" />
+      <!-- A small object somewhere -->
+      <Blackspot X="1881.318" Y="-5760.919" Z="104.4788" Radius="4.00" />
+      <Blackspot X="2164.056" Y="-5697.714" Z="105.9447" Radius="13.63633" />
+      <Blackspot X="2073.775" Y="-6029.043" Z="16.69491" Radius="48.66691" Height="14.14731" />
+      <Blackspot X="1948.122" Y="-5971.526" Z="91.98698" Radius="15.43968" />
+      <Blackspot X="2053.501" Y="-5783.61" Z="101.3919" Radius="15.69214" />
+      <Blackspot X="1639.395" Y="-5847.581" Z="116.1873" Radius="18.69113" />
+      <Blackspot X="1758.225" Y="-5873.512" Z="116.1236" Radius="30.69964" />
+      <Blackspot X="1777.866" Y="-5923.742" Z="116.1065" Radius="5.556122" />
+      <Blackspot X="1827.418" Y="-5918.569" Z="110.0699" Radius="5.324455" />
+    </Blackspots>
+    <AvoidMobs>
+      <Mob Name="Stable Master Kitrik" Entry="28683" />
+	  <Mob Name="Initiate's Training Dummy" Entry="32541" />
+    </AvoidMobs>
+    <Vendors>
+      <Vendor Name="Hargus the Gimp" Entry="28760" Type="Repair" X="2344.974" Y="-5720.853" Z="153.9221" />
+      <Vendor Name="Master Siegesmith Corvus" Entry="28500" Type="Repair" X="2437.862" Y="-5647.141" Z="420.6466" />
+      <Vendor Name="Lady Alistra" Entry="28471" Type="Train" TrainClass="DeathKnight" X="2506.222" Y="-5663.199" Z="377.0364" />
+    </Vendors>
+
+	<!-- Quest Overrides -->
+  <Quest Id="12722" Name="Lambs To The Slaughter">
+    <Objective Type="KillMob" MobId="28986" KillCount ="15">
+      <TargetMinLevel>30</TargetMinLevel>
+      <TargetMaxLevel>60</TargetMaxLevel>
+      <Hotspots>
+        <Hotspot X="1749.125" Y="-5878.692" Z="116.0421" />
+        <Hotspot X="1647.12" Y="-5805.044" Z="117.1233" />
+        <Hotspot X="1656.584" Y="-5878.257" Z="117.1397" />
+        <Hotspot X="1749.042" Y="-5800.559" Z="117.1222" />
+      </Hotspots>
+    </Objective>
+  </Quest>
+  <Quest Id="12619" Name="The Emblazoned Runeblade">
+    <Objective Type="CollectItem" ItemId="38607" CollectCount="1">
+      <CollectFrom>
+        <GameObject Id="38607" Name="Battle-Worn Sword" />
+      </CollectFrom>
+      <Hotspots>
+        <Hotspot X="2480.637" Y="-5519.732" Z="420.555" />
+        <Hotspot X="2469.787" Y="-5516.843" Z="420.6473" />
+        <Hotspot X="2455.687" Y="-5524.298" Z="420.6519" />
+        <Hotspot X="2505.237" Y="-5565.766" Z="420.6448" />
+      </Hotspots>
+    </Objective>
+  </Quest>
+  <Quest Id="12679" Name="Tonight We Dine In Havenshire">
+    <Objective Type="CollectItem" ItemId="39160" CollectCount="15">
+      <CollectFrom>
+        <GameObject Id="190691" Name="Saronite Arrow" />
+      </CollectFrom>
+      <Hotspots>
+        <Hotspot X="2035.39" Y="-5826.451" Z="100.8859" />
+      </Hotspots>
+    </Objective>
+  </Quest>
+  <Quest Id="13166" Name="The Battle For The Ebon Hold">
+    <Objective Type="KillMob" MobId="31099" KillCount="1">
+      <Hotspots>
+        <Hotspot X="2457.822" Y="-5595.729" Z="414.1211" />
+      </Hotspots>
+    </Objective>
+    <Objective Type="KillMob" MobId="31100" KillCount="10">
+      <Hotspots>
+        <Hotspot X="2457.822" Y="-5595.729" Z="414.1211" />
+        <Hotspot X="2430.786" Y="-5615.876" Z="420.4196" />
+        <Hotspot X="2420.809" Y="-5584.71" Z="420.5626" />
+      </Hotspots>
+    </Objective>
+  </Quest>
+  <Quest Id="12678" Name="If Chaos Drives, Let Suffering Hold The Reins">
+    <Objective Type="KillMob" MobId="28577" KillCount="10">
+      <TargetMinLevel>25</TargetMinLevel>
+      <TargetMaxLevel>60</TargetMaxLevel>
+      <Hotspots>
+        <Hotspot X="2045.651" Y="-5755.138" Z="98.59373" />
+        <Hotspot X="1961.975" Y="-5762" Z="102.5041" />
+        <Hotspot X="1884.566" Y="-5831.351" Z="101.4175" />
+        <Hotspot X="1899.357" Y="-5907.45" Z="101.7827" />
+        <Hotspot X="2002.96" Y="-5903.604" Z="103.8897" />
+      </Hotspots>
+    </Objective>
+    <Objective Type="KillMob" MobId="28576" KillCount="10">
+      <TargetMinLevel>25</TargetMinLevel>
+      <TargetMaxLevel>60</TargetMaxLevel>
+      <Hotspots>
+        <Hotspot X="2111.812" Y="-5742.849" Z="99.66351" />
+      </Hotspots>
+    </Objective>
+  </Quest>
+
+    <QuestOrder>
+	
+ 		<CustomBehavior File="Message" Text="Loading Profile: DK Starting revised by Nesox" LogColor="Cornflowerblue" />
+		
+			<If Condition="(Me.Class != WoWClass.DeathKnight)" >
+				<CustomBehavior File="UserDialog" AllowBotStop="True" StopOnContinue="True" SoundCue="Exclamation" SoundCueInterval="1" Text="LOL Y U LOAD DK PROFILE? U NO DK!!! NOOB! ROFL" />
+			</If>
+			
+			<CustomBehavior File="RunMacro" Macro="/script SetCVar('AutoLootDefault', 1)" NumOfTimes="1" WaitTime="1000" />
+			
+		<If Condition="Me.Level &lt;= 58" >
+			<CustomBehavior File="DisablePlugin" Names="AutoEquip2" />
+			<CustomBehavior File="UserDialog" AllowBotStop="False" SoundCue="Exclamation" SoundCueInterval="2" ExpiryTime="10" ExpiryAction="InputEnabled_Continue" Text="Disabling AutoEquip2 until we're in Outlands (DO NOT ENABLE AE2!!!!!!)" />
+		</If>
+			
+     <If Condition="HasQuest(12779)">
+        <DisableRepair />
+      </If>
+      <CustomBehavior File="UserSettings" LootMobs="true" TrainNewSkills="true"/>
+      <!-- In Service Of The Lich King - http://www.wowhead.com/quest=12593 -->
+      <PickUp QuestName="In Service Of The Lich King" QuestId="12593" GiverName="The Lich King" GiverId="25462" X="2345.299" Y="-5671.679" Z="426.0301" />
+      <TurnIn QuestName="In Service Of The Lich King" QuestId="12593" TurnInName="Instructor Razuvious" TurnInId="28357" />
+
+      <!-- The Emblazoned Runeblade - http://www.wowhead.com/quest=12619 -->
+      <PickUp QuestName="The Emblazoned Runeblade" QuestId="12619" GiverName="Razuvious" GiverId="28357" />
+      <Objective QuestName="The Emblazoned Runeblade" QuestId="12619" Type="CollectItem" ItemId="38607" CollectCount="1" />
+      <UseItem QuestName="The Emblazoned Runeblade" QuestId="12619" ItemId="38607" X="2504.884" Y="-5562.919" Z="420.6457" />
+      <If Condition="HasQuest(12619)" >
+        <CustomBehavior File="WaitTimer" WaitTime="12000" />
+      </If>
+      <TurnIn QuestName="The Emblazoned Runeblade" QuestId="12619" TurnInName="Razuvious" TurnInId="28357" />
+
+      <!-- Runeforging: Preparation For Battle - http://www.wowhead.com/quest=12842 -->
+      <PickUp QuestName="Runeforging: Preparation For Battle" QuestId="12842" GiverName="Razuvious" GiverId="28357" />
+      <If Condition="HasQuest(12842)" >
+        <MoveTo QuestId="12842" X="2505.115" Y="-5563.931" Z="420.6445" />
+        <CustomBehavior File="WaitTimer" WaitTime="1000" />
+        <CustomBehavior File="PerformTradeskillOn" QuestId="12842" TradeSkillId="53428" TradeSkillItemId="53341" NumOfTimes="1" CastOnItemId="38707" /> <!-- Runeforging = 53428, spell 53341 is Rune of Cinderglacier (the 'item' that we make, essentially), 38707 is our 2h sword -->
+      </If>
+      <TurnIn QuestName="Runeforging: Preparation For Battle" QuestId="12842" TurnInName="Razuvious" TurnInId="28357" />
+
+      <!-- The Endless Hunger - http://www.wowhead.com/quest=12848 -->
+      <PickUp QuestName="The Endless Hunger" QuestId="12848" GiverName="Razuvious" GiverId="28357" />
+      <While Condition="HasQuest(12848) &amp;&amp; !IsQuestCompleted(12848)" >
+        <CustomBehavior File="EquipItem" ItemId="38707" Slot="MainHandSlot" />
+        <CustomBehavior File="UseGameObject" QuestId="12848" ObjectId="191577" NumOfTimes="1" X="2463" Y="-5569" Z="417" />
+        <CustomBehavior File="WaitTimer" WaitTime="16000" />
+      </While>
+      <TurnIn QuestName="The Endless Hunger" QuestId="12848" TurnInName="Razuvious" TurnInId="28357" />
+
+      <!-- The Eye Of Acherus - http://www.wowhead.com/quest=12636 -->
+      <PickUp QuestName="The Eye Of Acherus" QuestId="12636" GiverName="Razuvious" GiverId="28357" />
+      <TurnIn QuestName="The Eye Of Acherus" QuestId="12636" TurnInName="The Lich King" TurnInId="25462" X="2345.299" Y="-5671.679" Z="426.0314" />
+
+      <!-- Death Comes From On High - http://www.wowhead.com/quest=12641 -->
+      <PickUp QuestName="Death Comes From On High" QuestId="12641" GiverName="The Lich King" GiverId="25462" />
+      <If Condition="HasQuest(12641) &amp;&amp; !IsQuestCompleted(12641)" >
+        <CustomBehavior File="InteractWith" MobId = "191609" QuestId="12641" ObjectType="GameObject" NumOfTimes = "1" CollectionDistance = "4" X="2345.848" Y="-5696.338" Z="426.0303" />
+        <CustomBehavior File="WaitTimer" WaitTime="25000" />
+        <CustomBehavior File="Vehicles\VehicleMover" VehicleId="28511" UseNavigator="false" SpellId="51859" CastTime="7000" X="1654.104" Y="-5996.521" Z="183.0229"/>
+        <CustomBehavior File="Vehicles\VehicleMover" VehicleId="28511" UseNavigator="false" SpellId="51859" CastTime="7000" X="1799.286" Y="-6003.341" Z="170.4593"/>
+        <CustomBehavior File="Vehicles\VehicleMover" VehicleId="28511" UseNavigator="false" SpellId="51859" CastTime="7000" X="1592.047" Y="-5735.208" Z="196.1772"/>
+        <CustomBehavior File="Vehicles\VehicleMover" VehicleId="28511" UseNavigator="false" SpellId="51859" CastTime="7000" X="1384.774" Y="-5701.124" Z="199.2797"/>
+        <CustomBehavior File="WaitTimer" WaitTime="5000"/>
+        <CustomBehavior File="Misc\RunLua" Lua="CastSpellByID(52694)" />
+      </If>
+      <TurnIn QuestName="Death Comes From On High" QuestId="12641" TurnInName="The Lich King" TurnInId="25462" />-->
+
+      <!-- The Might Of The Scourge - http://www.wowhead.com/quest=12657 -->
+      <PickUp QuestName="The Might Of The Scourge" QuestId="12657" GiverName="The Lich King" GiverId="25462" />
+      <TurnIn QuestName="The Might Of The Scourge" QuestId="12657" TurnInName="Highlord Darion Mograine" TurnInId="28444" />
+
+      <!-- Report To Scourge Commander Thalanor - http://www.wowhead.com/quest=12850 -->
+      <PickUp QuestName="Report To Scourge Commander Thalanor" QuestId="12850" GiverName="Highlord Darion Mograine" GiverId="28444" />
+      <TurnIn QuestName="Report To Scourge Commander Thalanor" QuestId="12850" TurnInName="Scourge Commander Thalanor" TurnInId="28510" />
+
+      <!-- The Scarlet Harvest - http://www.wowhead.com/quest=12670 -->
+      <PickUp QuestName="The Scarlet Harvest" QuestId="12670" GiverName="Scourge Commander Thalanor" GiverId="28510" />
+      <TurnIn QuestName="The Scarlet Harvest" QuestId="12670" TurnInName="Prince Valanar" TurnInId="28377" />
+      <CustomBehavior File="EquipItem" ItemId="38662" Slot="NeckSlot" />
+
+      <!-- Death's Challenge - http://www.wowhead.com/quest=12733 -->
+      <PickUp QuestName="Death's Challenge" QuestId="12733" GiverName="Olrun the Battlecaller" GiverId="29047" />
+      <!-- Tonight We Dine In Havenshire - http://www.wowhead.com/quest=12679 -->
+      <PickUp QuestName="Tonight We Dine In Havenshire" QuestId="12679" GiverName="Orithos the Sky Darkener" GiverId="28647" />
+      <!-- Grand Theft Palomino - http://www.wowhead.com/quest=12680 -->
+      <PickUp QuestName="Grand Theft Palomino" QuestId="12680" GiverName="Salanar the Horseman" GiverId="28653" />
+      <!-- If Chaos Drives, Let Suffering Hold The Reins - http://www.wowhead.com/quest=12678 -->
+      <PickUp QuestName="If Chaos Drives, Let Suffering Hold The Reins" QuestId="12678" GiverName="Prince Valanar" GiverId="28377" />
+
+      <While Condition="HasQuest(12733) &amp;&amp; !IsQuestCompleted(12733)" >
+        <CustomBehavior File="InteractWith" MobId="28406" ObjectType="Npc" GossipOptions="1" NotMoving="true" NumOfTimes="1" CollectionDistance="50" X="2351.905" Y="-5698.78" Z="153.9228"  />
+        <CustomBehavior File="WaitTimer" WaitTime="10000" />
+      </While>
+      <TurnIn QuestName="Death's Challenge" QuestId="12733" TurnInName="Olrun the Battlecaller" TurnInId="29047" />
+
+      <While Condition="HasQuest(12680) &amp;&amp; !IsQuestCompleted(12680)" >
+		<RunTo X="2175.955" Y="-5769.175" Z="101.3312" />
+        <CustomBehavior File="DeathknightStart\WaitForPatrol" AvoidMobId="28683" AvoidDistance="85" X="2175.955" Y="-5769.175" Z="101.3312" />
+        <CustomBehavior File="Vehicles\VehicleMover" VehicleId = "28605" VehicleId2 = "28606" VehicleId3 = "28607" UseNavigator = "true" MobId = "28653" SpellId = "52264" Hop = "true" X="2347.104" Y="-5695.789" Z="155.9568" />
+        <CustomBehavior File="Misc\RunLua" Lua= "VehicleExit()" />
+        <CustomBehavior File="WaitTimer" WaitTime="5000" />
+      </While>
+      <TurnIn QuestName="Grand Theft Palomino" QuestId="12680" TurnInName="Salanar the Horseman" TurnInId="28653" />
+
+      <!-- Into the Realm of Shadows - http://www.wowhead.com/quest=12687 -->
+      <PickUp QuestName="Into the Realm of Shadows" QuestId="12687" GiverName="Salanar the Horseman" GiverId="28653" />
+      <If Condition="HasQuest(12687)">
+        <CustomBehavior File="UserSettings" LootMobs="false" />
+      </If>
+      <While Condition= "HasQuest(12687) &amp;&amp; !IsQuestCompleted(12687)" >
+        <If Condition="!Me.HasAura(&quot;Realm of Shadows&quot;)" >
+          <CustomBehavior File="InteractWith" MobId="28653" ObjectType="Npc" NumOfTimes="1" CollectionDistance="100" X="2336.86" Y="-5686.712" Z="153.9225" />
+          <CustomBehavior File="Misc\RunLua" Lua= "SelectGossipOptions(1)" />
+        </If>
+        <CustomBehavior File="DeathknightStart\IntoTheRealmofShadows" X="2180.931" Y="-5726.148" Z="104.5497" />
+        <CustomBehavior File="Vehicles\VehicleMover" VehicleId = "28782" UseNavigator = "true" SpellId = "52362" Hop="True" X="2358.639" Y="-5708.643" Z="153.9229" />
+      </While>
+      <TurnIn QuestName="Into the Realm of Shadows" QuestId="12687" TurnInName="Salanar the Horseman" TurnInId="28653" />
+      <CustomBehavior File="UserSettings" LootMobs="true" />
+      <CustomBehavior File="EquipItem" ItemId="39208" Slot="RangedSlot" />
+
+      <Objective QuestName="Tonight We Dine In Havenshire" QuestId="12679" Type="CollectItem" ItemId="39160" CollectCount="15" />
+      <Objective QuestName="If Chaos Drives, Let Suffering Hold The Reins" QuestId="12678" Type="KillMob" MobId="28763" KillCount="10" />
+      <Objective QuestName="If Chaos Drives, Let Suffering Hold The Reins" QuestId="12678" Type="KillMob" MobId="28764" KillCount="10" />
+      <TurnIn QuestName="If Chaos Drives, Let Suffering Hold The Reins" QuestId="12678" TurnInName="Prince Valanar" TurnInId="28377" />
+      <TurnIn QuestName="Tonight We Dine In Havenshire" QuestId="12679" TurnInName="Orithos the Sky Darkener" TurnInId="28647" />
+
+      <!-- Gothik the Harvester - http://www.wowhead.com/quest=12697 -->
+      <PickUp QuestName="Gothik the Harvester" QuestId="12697" GiverName="Prince Valanar" GiverId="28377" />
+      <TurnIn QuestName="Gothik the Harvester" QuestId="12697" TurnInName="Gothik the Harvester" TurnInId="28658" />
+
+      <CustomBehavior File="EquipItem" ItemId="38671" Slot="Finger0Slot" />
+      <CustomBehavior File="EquipItem" ItemId="39320" Slot="BackSlot" />
+
+      <!-- The Gift That Keeps On Giving - http://www.wowhead.com/quest=12698 -->
+      <PickUp QuestName="The Gift That Keeps On Giving" QuestId="12698" GiverName="Gothik the Harvester" GiverId="28658" />
+      <If Condition = "HasQuest(12698)" >
+        <If Condition ="Me.Minions != null &amp;&amp; Me.Minions.Count &lt; 5">
+          <CustomBehavior File="DeathknightStart\TheGiftThatKeepsOnGiving" MobId = "28819" ItemId="39253" MinionCount = "5" HasGroundTarget ="true" NumOfTimes="200" X="2434.626" Y="-5929.263" Z="96.8934" />
+        </If>
+        <RunTo X="2348.769" Y="-5758.279" Z="153.9225" />
+        <If Condition ="!IsQuestCompleted(12698) &amp;&amp; Me.Minions != null &amp;&amp; Me.Minions.Count &lt; 5">
+          <CustomBehavior File="DeathknightStart\TheGiftThatKeepsOnGiving" MobId = "28819" ItemId="39253" WaitTime="7000" MinionCount = "5" HasGroundTarget ="true" NumOfTimes="200" X="2434.626" Y="-5929.263" Z="96.8934" />
+        </If>
+        <TurnIn QuestName="The Gift That Keeps On Giving" QuestId="12698" TurnInName="Gothik the Harvester" TurnInId="28658" />
+      </If>
+
+      <!-- An Attack Of Opportunity - http://www.wowhead.com/quest=12700 -->
+      <PickUp QuestName="An Attack Of Opportunity" QuestId="12700" GiverName="Gothik the Harvester" GiverId="28658" />
+      <TurnIn QuestName="An Attack Of Opportunity" QuestId="12700" TurnInName="Prince Valanar" TurnInId="28377" />
+      <CustomBehavior File="EquipItem" ItemId="38674" Slot="Trinket1Slot" />
+
+      <!-- Massacre At Light's Point - http://www.wowhead.com/quest=12701 -->
+      <PickUp QuestName="Massacre At Light's Point" QuestId="12701" GiverName="Prince Valanar" GiverId="28377" />
+      <If Condition="HasQuest(12701) &amp;&amp; !IsQuestCompleted(12701)" >
+        <CustomBehavior File="UseGameObject" QuestId="12701" ObjectId="190767" NumOfTimes="1" X="2391.104" Y="-5900.058" Z="109.1245" />
+        <CustomBehavior File="WaitTimer" WaitTime="75000" />
+        <CustomBehavior File="InteractWith" MobId="28833" ObjectType="Npc" NumOfTimes="1" CollectionDistance="50" X="2264.77" Y="-6189.184" Z="13.61233"   />
+        <CustomBehavior File="Vehicles\CannonControl" VehicleId="28833" QuestId="12701" MaxAngle="0.55" MinAngle="0.32" Buttons="2,1" ExitButton="5" />
+        <CustomBehavior File="WaitTimer" WaitTime="60000" />
+      </If>
+      <TurnIn QuestName="Massacre At Light's Point" QuestId="12701" TurnInName="Prince Valanar" TurnInId="28377" />
+
+      <!-- Victory At Death's Breach! - http://www.wowhead.com/quest=12706 -->
+      <PickUp QuestName="Victory At Death's Breach!" QuestId="12706" GiverName="Prince Valanar" GiverId="28377" />
+      <TurnIn QuestName="Victory At Death's Breach!" QuestId="12706" TurnInName="Highlord Darion Mograine" TurnInId="28444" />
+
+      <!-- The Will Of The Lich King - http://www.wowhead.com/quest=12714 -->
+      <PickUp QuestName="The Will Of The Lich King" QuestId="12714" GiverName="Highlord Darion Mograine" GiverId="28444" />
+      <If Condition="HasQuest(12714)" >
+        <CustomBehavior File="EquipItem" ItemId="38666" />
+        <CustomBehavior File="EquipItem" ItemId="38669" />
+      </If>
+      <TurnIn QuestName="The Will Of The Lich King" QuestId="12714" TurnInName="Prince Valanar" TurnInId="28907" />
+
+      <!-- The Crypt of Remembrance - http://www.wowhead.com/quest=12715 -->
+      <PickUp QuestName="The Crypt of Remembrance" QuestId="12715" GiverName="Prince Valanar" GiverId="28907" />
+      <!-- The Plaguebringer's Request - http://www.wowhead.com/quest=12716 -->
+      <PickUp QuestName="The Plaguebringer's Request" QuestId="12716" GiverName="Noth the Plaguebringer" GiverId="28919" X="1982.74" Y="-5815.542" Z="100.8911" />
+      <TurnIn QuestName="The Crypt of Remembrance" QuestId="12715" TurnInName="Prince Keleseth" TurnInId="28911" X="1879.399" Y="-5765.102" Z="83.77534" />
+
+      <!-- Nowhere To Run And Nowhere To Hide - http://www.wowhead.com/quest=12719 -->
+      <PickUp QuestName="Nowhere To Run And Nowhere To Hide" QuestId="12719" GiverName="Prince Keleseth" GiverId="28911" />
+      <!-- Lambs To The Slaughter - http://www.wowhead.com/quest=12722 -->
+      <PickUp QuestName="Lambs To The Slaughter" QuestId="12722" GiverName="Baron Rivendare" GiverId="28910" />
+
+      <Objective QuestName="Nowhere To Run And Nowhere To Hide" QuestId="12719" Type="KillMob" MobId="28945" KillCount="1" />
+      <Objective QuestName="Nowhere To Run And Nowhere To Hide" QuestId="12719" Type="CollectItem" ItemId="39362" CollectCount="1" />
+	  <!-- <Objective QuestName="Lambs To The Slaughter" QuestId="12722" Type="KillMob" MobId="28986" KillCount="15" /> -->
+      <Objective QuestName="Lambs To The Slaughter" QuestId="12722" Type="KillMob" MobId="28984" KillCount="10" />
+	  <CustomBehavior File="KillUntilComplete" QuestId="12722" MobId1="28942" MobId2="28939" MobId3="28610" MobId4="28946" X="1620.13" Y="-5785.031" Z="116.1579" />
+      <Objective QuestName="The Plaguebringer's Request" QuestId="12716" Type="CollectItem" ItemId="39324" CollectCount="1" />
+      <Objective QuestName="The Plaguebringer's Request" QuestId="12716" Type="CollectItem" ItemId="39326" CollectCount="1" />
+      <Objective QuestName="The Plaguebringer's Request" QuestId="12716" Type="CollectItem" ItemId="39328" CollectCount="10" />
+
+      <TurnIn QuestName="Nowhere To Run And Nowhere To Hide" QuestId="12719" TurnInName="Prince Keleseth" TurnInId="28911" />
+      <!-- How To Win Friends And Influence Enemies - http://www.wowhead.com/quest=12720 -->
+      <PickUp QuestName="How To Win Friends And Influence Enemies" QuestId="12720" GiverName="Prince Keleseth" GiverId="28911" />
+
+      <TurnIn QuestName="Lambs To The Slaughter" QuestId="12722" TurnInName="Baron Rivendare" TurnInId="28910" />
+      <TurnIn QuestName="The Plaguebringer's Request" QuestId="12716" TurnInName="Noth the Plaguebringer" TurnInId="28919" />
+
+      <!-- Noth's Special Brew - http://www.wowhead.com/quest=12717 -->
+      <PickUp QuestName="Noth's Special Brew" QuestId="12717" GiverName="Noth the Plaguebringer" GiverId="28919" />
+      <TurnIn QuestName="Noth's Special Brew"  NpcName="Plague Cauldron" QuestId="12717" TurnInType="Object" TurnInId="190936" />
+
+      <If Condition="HasQuest(12720) &amp;&amp; !IsQuestCompleted(12720)" >
+        <!-- We like to manually equip items for some reason! -->
+        <CustomBehavior File="EquipItem" ItemId="38668" />
+		<CustomBehavior File="WaitTimer" WaitTime="2000" GoalText="Waiting for  {TimeRemaining}" />
+       <CustomBehavior File="EquipItem" ItemId="38670" />
+        <!-- Open the box of weapons -->
+        <CustomBehavior File="Misc\RunLua" Lua="UseItemByName(39418)" />
+        <CustomBehavior File="WaitTimer" WaitTime="2000" />
+        <CustomBehavior File="Misc\RunLua" Lua="for i=1,GetNumLootItems() do LootSlot(i) end" />
+        <CustomBehavior File="WaitTimer" WaitTime="2000" />
+        <!-- Equip the weapons -->
+        <CustomBehavior File="EquipItem" ItemId="39371" />
+ 		<CustomBehavior File="WaitTimer" WaitTime="2000" GoalText="Waiting for  {TimeRemaining}" />
+		<CustomBehavior File="EquipItem" ItemId="39371" />
+        <!-- find and beat these NPCs until quest completes around the location -->
+        <CustomBehavior File="DeathknightStart\FindAndBeatNpcs" MobId="28610" MobId2="28936" MobId3="28939" QuestId="12720" X="1669.565" Y="-5896.56" Z="116.1651" />
+        <!--Equip the main weapon -->
+        <CustomBehavior File="EquipItem" ItemId="38707" />
+      </If>
+      <TurnIn QuestName="How To Win Friends And Influence Enemies" QuestId="12720" TurnInName="Prince Keleseth" TurnInId="28911" />
+
+      <CustomBehavior File="EquipItem" ItemId="38672" Slot="Finger1Slot" />
+
+      <!-- Behind Scarlet Lines - http://www.wowhead.com/quest=12723 -->
+      <PickUp QuestName="Behind Scarlet Lines" QuestId="12723" GiverName="Prince Keleseth" GiverId="28911" />
+      <TurnIn QuestName="Behind Scarlet Lines" QuestId="12723" TurnInName="Orbaz Bloodbane" TurnInId="28914" />
+
+      <!-- The Path Of The Righteous Crusader - http://www.wowhead.com/quest=12724 -->
+      <PickUp QuestName="The Path Of The Righteous Crusader" QuestId="12724" GiverName="Orbaz Bloodbane" GiverId="28914" />
+      <!-- Brothers In Death - http://www.wowhead.com/quest=12725 -->
+      <PickUp QuestName="Brothers In Death" QuestId="12725" GiverName="Thassarian" GiverId="28913" />
+      <TurnIn QuestName="Brothers In Death" QuestId="12725" TurnInName="Koltira Deathweaver" TurnInId="28912" X="1655.967" Y="-6038.763" Z="128.6401" />
+      <Objective QuestName="The Path Of The Righteous Crusader" QuestId="12724" Type="CollectItem" ItemId="39504" CollectCount="1" />
+      <TurnIn QuestName="The Path Of The Righteous Crusader" QuestId="12724" TurnInName="Orbaz Bloodbane" TurnInId="28914" />
+      <CustomBehavior File="EquipItem" ItemId="38667" />
+      <!-- Bloody Breakout - http://www.wowhead.com/quest=12727 -->
+      <PickUp QuestName="Bloody Breakout" QuestId="12727" GiverName="Koltira Deathweaver" GiverId="28912" />
+		  <While Condition="HasQuest(12727) &amp;&amp; !IsQuestCompleted(12727)" >
+			<CustomBehavior File="InteractWith" MobId="28912" GossipOptions="1" WaitForNpcs="False" X="1652.649" Y="-6035.982" Z="127.5845" />
+			<CustomBehavior File="InteractWith" ObjectType="Gameobject" MobId="191092" WaitForNpcs="False" Loot="True" X="1652.649" Y="-6035.982" Z="127.5845" />
+		  </While>
+      <TurnIn QuestName="Bloody Breakout" QuestId="12727" TurnInName="Thassarian" TurnInId="28913" />
+
+      <!-- A Cry For Vengeance! - http://www.wowhead.com/quest=12738 -->
+      <PickUp QuestName="A Cry For Vengeance!" QuestId="12738" GiverName="Thassarian" GiverId="28913" />
+      <TurnIn QuestName="A Cry For Vengeance!" QuestId="12738" TurnInName="Knight Commander Plaguefist" TurnInId="29053" />
+      <CustomBehavior File="EquipItem" ItemId="38665" />
+
+      <!-- Alliance -->
+      <If Condition="Me.Race == WoWRace.Human">
+        <PickUp QuestName="A Special Surprise" QuestId="12742" GiverName="Knight Commander Plaguefist" GiverId="29053" />
+        <If Condition="HasQuest(12742)" >
+          <MoveTo QuestId="12742" X="1322.76" Y="-5743.032" Z="137.4825" />
+          <CustomBehavior File="WaitTimer" WaitTime="65000" />
+          <Objective QuestName="A Special Surprise" QuestId="12742" Type="KillMob" MobId="29061" KillCount="1" />
+          <TurnIn QuestName="A Special Surprise" QuestId="12742" TurnInName="Knight Commander Plaguefist" TurnInId="29053" />
+        </If>
+      </If>
+      <If Condition="Me.Race == WoWRace.NightElf">
+        <PickUp QuestName="A Special Surprise" QuestId="12743" GiverName="Knight Commander Plaguefist" GiverId="29053" />
+        <If Condition="HasQuest(12743)" >
+          <MoveTo QuestId="12743" X="1320.915" Y="-5763.294" Z="137.7958" />
+          <CustomBehavior File="WaitTimer" WaitTime="65000" />
+          <Objective QuestName="A Special Surprise" QuestId="12743" Type="KillMob" MobId="29065" KillCount="1" />
+          <TurnIn QuestName="A Special Surprise" QuestId="12743" TurnInName="Knight Commander Plaguefist" TurnInId="29053" />
+        </If>
+      </If>
+      <If Condition="Me.Race == WoWRace.Dwarf">
+        <PickUp QuestName="A Special Surprise" QuestId="12744" GiverName="Knight Commander Plaguefist" GiverId="29053" />
+        <If Condition="HasQuest(12744)" >
+          <MoveTo QuestId="12744" X="1328.813" Y="-5756.786" Z="137.5204" />
+          <CustomBehavior File="WaitTimer" WaitTime="65000" />
+          <Objective QuestName="A Special Surprise" QuestId="12744" Type="KillMob" MobId="29067" KillCount="1" />
+          <TurnIn QuestName="A Special Surprise" QuestId="12744" TurnInName="Knight Commander Plaguefist" TurnInId="29053" />
+        </If>
+      </If>
+      <If Condition="Me.Race == WoWRace.Gnome">
+        <PickUp QuestName="A Special Surprise" QuestId="12745" GiverName="Knight Commander Plaguefist" GiverId="29053" />
+        <If Condition="HasQuest(12745)" >
+          <MoveTo QuestId="12745" X="1323.075" Y="-5753.536" Z="137.4002" />
+          <CustomBehavior File="WaitTimer" WaitTime="65000" />
+          <Objective QuestName="A Special Surprise" QuestId="12745" Type="KillMob" MobId="29068" KillCount="1" />
+          <TurnIn QuestName="A Special Surprise" QuestId="12745" TurnInName="Knight Commander Plaguefist" TurnInId="29053" />
+        </If>
+      </If>
+      <If Condition="Me.Race == WoWRace.Draenei">
+        <PickUp QuestName="A Special Surprise" QuestId="12746" GiverName="Knight Commander Plaguefist" GiverId="29053" />
+        <If Condition="HasQuest(12746)" >
+          <MoveTo QuestId="12746" X="1328.571" Y="-5770.191" Z="137.7798" />
+          <CustomBehavior File="WaitTimer" WaitTime="65000" />
+          <Objective QuestName="A Special Surprise" QuestId="12746" Type="KillMob" MobId="29070" KillCount="1" />
+          <TurnIn QuestName="A Special Surprise" QuestId="12746" TurnInName="Knight Commander Plaguefist" TurnInId="29053" />
+        </If>
+      </If>
+      <If Condition="Me.Race == WoWRace.Worgen">
+        <PickUp QuestName="A Special Surprise" QuestId="28649" GiverName="Knight Commander Plaguefist" GiverId="29053" />
+        <If Condition="HasQuest(28649)" >
+          <MoveTo QuestId="28649" X="1329.528" Y="-5760.226" Z="137.6601" />
+          <CustomBehavior File="WaitTimer" WaitTime="65000" />
+          <Objective QuestName="A Special Surprise" QuestId="28649" Type="KillMob" MobId="49355" KillCount="1" />
+          <TurnIn QuestName="A Special Surprise" QuestId="28649" TurnInName="Knight Commander Plaguefist" TurnInId="29053" />
+        </If>
+      </If>
+      <!-- Horde -->
+      <If Condition="Me.Race == WoWRace.BloodElf">
+        <PickUp QuestName="A Special Surprise" QuestId="12747" GiverName="Knight Commander Plaguefist" GiverId="29053" />
+        <If Condition="HasQuest(12747)" >
+          <MoveTo QuestId="12747" X="1329.184" Y="-5764.597" Z="137.8205" />
+          <CustomBehavior File="WaitTimer" WaitTime="65000" />
+          <Objective QuestName="A Special Surprise" QuestId="12747" Type="KillMob" MobId="29074" KillCount="1" />
+          <TurnIn QuestName="A Special Surprise" QuestId="12747" TurnInName="Knight Commander Plaguefist" TurnInId="29053" />
+        </If>
+      </If>
+      <If Condition="Me.Race == WoWRace.Orc">
+        <PickUp QuestName="A Special Surprise" QuestId="12748" GiverName="Knight Commander Plaguefist" GiverId="29053" />
+        <If Condition="HasQuest(12748)" >
+          <MoveTo QuestId="12748" X="1330.117" Y="-5748.344" Z="137.3985" />
+          <CustomBehavior File="WaitTimer" WaitTime="65000" />
+          <Objective QuestName="A Special Surprise" QuestId="12748" Type="KillMob" MobId="29072" KillCount="1" />
+          <TurnIn QuestName="A Special Surprise" QuestId="12748" TurnInName="Knight Commander Plaguefist" TurnInId="29053" />
+        </If>
+      </If>
+      <If Condition="Me.Race == WoWRace.Troll">
+        <PickUp QuestName="A Special Surprise" QuestId="12749" GiverName="Knight Commander Plaguefist" GiverId="29053" />
+        <If Condition="HasQuest(12749)" >
+          <MoveTo QuestId="12749" X="1324.012" Y="-5749.29" Z="137.3751"  />
+          <CustomBehavior File="WaitTimer" WaitTime="65000" />
+          <Objective QuestName="A Special Surprise" QuestId="12749" Type="KillMob" MobId="29073" KillCount="1" />
+          <TurnIn QuestName="A Special Surprise" QuestId="12749" TurnInName="Knight Commander Plaguefist" TurnInId="29053" />
+        </If>
+      </If>
+      <If Condition="Me.Race == WoWRace.Undead">
+        <PickUp QuestName="A Special Surprise" QuestId="12750" GiverName="Knight Commander Plaguefist" GiverId="29053" />
+        <If Condition="HasQuest(12750)" >
+          <MoveTo QuestId="12750" X="1330.277" Y="-5742.156" Z="137.5444" />
+          <CustomBehavior File="WaitTimer" WaitTime="65000" />
+          <Objective QuestName="A Special Surprise" QuestId="12750" Type="KillMob" MobId="29071" KillCount="1" />
+          <TurnIn QuestName="A Special Surprise" QuestId="12750" TurnInName="Knight Commander Plaguefist" TurnInId="29053" />
+        </If>
+      </If>
+      <If Condition="Me.Race == WoWRace.Tauren">
+        <PickUp QuestName="A Special Surprise" QuestId="12739" GiverName="Knight Commander Plaguefist" GiverId="29053" />
+        <If Condition="HasQuest(12739)" >
+          <MoveTo QuestId="12739" X="1320.289" Y="-5769.147" Z="137.7749" />
+          <CustomBehavior File="WaitTimer" WaitTime="65000" />
+          <Objective QuestName="A Special Surprise" QuestId="12739" Type="KillMob" MobId="29032" KillCount="1" />
+          <TurnIn QuestName="A Special Surprise" QuestId="12739" TurnInName="Knight Commander Plaguefist" TurnInId="29053" />
+        </If>
+      </If>
+      <If Condition="Me.Race == WoWRace.Goblin">
+        <PickUp QuestName="A Special Surprise" QuestId="28650" GiverName="Knight Commander Plaguefist" GiverId="29053" />
+        <If Condition="HasQuest(28650)" >
+          <MoveTo QuestId="28650" X="1322.655" Y="-5759.51" Z="137.6409" />
+          <CustomBehavior File="WaitTimer" WaitTime="65000" />
+          <Objective QuestName="A Special Surprise" QuestId="28650" Type="KillMob" MobId="49356" KillCount="1" />
+          <TurnIn QuestName="A Special Surprise" QuestId="28650" TurnInName="Knight Commander Plaguefist" TurnInId="29053" />
+        </If>
+      </If>
+      <!-- End Race Quest -->
+
+      <!-- A Sort Of Homecoming - http://www.wowhead.com/quest=12751 -->
+      <PickUp QuestName="A Sort Of Homecoming" QuestId="12751" GiverName="Knight Commander Plaguefist" GiverId="29053" />
+      <TurnIn QuestName="A Sort Of Homecoming" QuestId="12751" TurnInName="Thassarian" TurnInId="28913" />
+
+      <!-- Ambush At The Overlook - http://www.wowhead.com/quest=12754 -->
+      <PickUp QuestName="Ambush At The Overlook" QuestId="12754" GiverName="Orbaz Bloodbane" GiverId="28914" />
+      <If Condition="HasQuest(12754) &amp;&amp; !IsQuestCompleted(12754)">
+        <UseItem QuestName="A Vision of the Past" QuestId="12754" ItemId="39645" X="1481.461" Y="-5989.479" Z="116.5384" />
+        <CustomBehavior File="WaitTimer" WaitTime="12000" />
+      </If>
+		<If Condition="((HasQuest(12754)) &amp;&amp; (IsQuestCompleted(12754)))" >
+			<RunTo X="1405.699" Y="-5819.216" Z="131.2088" />
+			<CustomBehavior File="ForcedDismount" />
+		</If>
+     <TurnIn QuestName="Ambush At The Overlook" QuestId="12754" TurnInName="Orbaz Bloodbane" TurnInId="28914" />
+
+      <!-- A Meeting With Fate - http://www.wowhead.com/quest=12755 -->
+      <PickUp QuestName="A Meeting With Fate" QuestId="12755" GiverName="Orbaz Bloodbane" GiverId="28914" />
+      <TurnIn QuestName="A Meeting With Fate" QuestId="12755" TurnInName="High General Abbendis" TurnInId="29077" />
+
+      <!-- The Scarlet Onslaught Emerges - http://www.wowhead.com/quest=12756 -->
+      <PickUp QuestName="The Scarlet Onslaught Emerges" QuestId="12756" GiverName="High General Abbendis" GiverId="29077" />
+      <TurnIn QuestName="The Scarlet Onslaught Emerges" QuestId="12756" TurnInName="Orbaz Bloodbane" TurnInId="28914" />
+
+      <!-- Scarlet Armies Approach... - http://www.wowhead.com/quest=12757 -->
+      <PickUp QuestName="Scarlet Armies Approach..." QuestId="12757" GiverName="Orbaz Bloodbane" GiverId="28914" />
+      <TurnIn QuestName="Scarlet Armies Approach..." QuestId="12757" TurnInName="Highlord Darion Mograine" TurnInId="28444" />
+      <CustomBehavior File="EquipItem" ItemId="38663" />
+
+      <!-- The Scarlet Apocalypse - http://www.wowhead.com/quest=12778 -->
+      <PickUp QuestName="The Scarlet Apocalypse" QuestId="12778" GiverName="Highlord Darion Mograine" GiverId="28444" />
+      <TurnIn QuestName="The Scarlet Apocalypse" QuestId="12778" TurnInName="The Lich King" TurnInId="29110" />
+
+      <DisableRepair />
+      <!-- An End To All Things... - http://www.wowhead.com/quest=12779 -->
+      <PickUp QuestName="An End To All Things..." QuestId="12779" GiverName="The Lich King" GiverId="29110" X="2310.267" Y="-5742.212" Z="161.2074" />
+      <If Condition="HasQuest(12779)">
+      <If Condition="!Me.IsOutdoors">
+        <MoveTo X="2324.595" Y="-5729.186" Z="153.9202" />
+      </If>
+        <CustomBehavior File="DeathknightStart\AnEndToAllThings" VehicleId="28670" ItemId="39700" AttackSpellId="53114" HealSpellId="53110" KillNpcId="29104" HealNpcId="29102">
+          <Start X="1800.488" Y="-5774.659" Z="170.3334" />
+          <End X="1752.615" Y="-5823.563" Z="234.6956" />
+          <End X="2322.576" Y="-5731.191" Z="153.9209" />
+          <End X="2322.576" Y="-5731.191" Z="153.9209" />
+          <Hop X="1704.216" Y="-5779.524" Z="160.5731" />
+          <Hop X="1491.774" Y="-5765.369" Z="160.3421" />
+          <Hop X="1571.101" Y="-5953.635" Z="160.7214" />
+          <Hop X="1804.955" Y="-5931.821" Z="160.8009" />
+        </CustomBehavior>
+        <MoveTo X="2324.595" Y="-5729.186" Z="153.9202" />
+      </If>
+      <TurnIn QuestName="An End To All Things..." QuestId="12779" TurnInName="The Lich King" TurnInId="29110" />
+      <EnableRepair />
+
+      <!-- The Lich King's Command - http://www.wowhead.com/quest=12800 -->
+      <PickUp QuestName="The Lich King's Command" QuestId="12800" GiverName="The Lich King" GiverId="29110" />
+      <TurnIn QuestName="The Lich King's Command" QuestId="12800" TurnInName="Scourge Commander Thalanor" TurnInId="31082" />
+      <CustomBehavior File="UserSettings" TrainNewSkills="false" />
+      <!-- The Light of Dawn - http://www.wowhead.com/quest=12801 -->
+      <PickUp QuestName="The Light of Dawn" QuestId="12801" GiverName="Scourge Commander Thalanor" GiverId="31082" />
+      <If Condition="HasQuest(12801) &amp;&amp; !IsQuestCompleted(12801)" >
+        <CustomBehavior File="EquipItem" ItemId="38661" />
+        <CustomBehavior File="DeathknightStart\TheLightOfDawn" QuestId="12801" />
+      </If>
+      <TurnIn QuestName="The Light of Dawn" QuestId="12801" TurnInName="Highlord Darion Mograine" TurnInId="29173" X="2261.529" Y="-5284.931" Z="81.80493" />
+
+      <CustomBehavior File="EquipItem" ItemId="38632" />
+      <CustomBehavior File="EquipItem" ItemId="38633" />
+
+      <!-- Taking Back Acherus - http://www.wowhead.com/quest=13165 -->
+      <PickUp QuestName="Taking Back Acherus" QuestId="13165" GiverName="Highlord Darion Mograine" GiverId="29173" />
+      <If Condition="HasQuest(13165)" >
+        <CustomBehavior File="Misc\RunLua" Lua = "CastSpellByID(50977)" />
+        <CustomBehavior File="WaitTimer" WaitTime="11000" />
+        <CustomBehavior File="UseGameObject" ObjectId="190942" NumOfTimes="1" X="0" Y="0" Z="0" />
+      </If>
+      <TurnIn QuestName="Taking Back Acherus" QuestId="13165" TurnInName="Highlord Darion Mograine" TurnInId="31084" />
+
+      <DisableRepair />
+      <!-- The Battle For The Ebon Hold - http://www.wowhead.com/quest=13166 -->
+      <PickUp QuestName="The Battle For The Ebon Hold" QuestId="13166" GiverName="Highlord Darion Mograine" GiverId="31084" />
+      <If Condition="HasQuest(13166) &amp;&amp; !IsQuestCompleted(13166)" >
+        <Objective QuestName="The Battle For The Ebon Hold" QuestId="13166" Type="KillMob" MobId="31099" KillCount="1" />
+        <Objective QuestName="The Battle For The Ebon Hold" QuestId="13166" Type="KillMob" MobId="31100" KillCount="10" />
+      </If>
+      <TurnIn QuestName="The Battle For The Ebon Hold" QuestId="13166" TurnInName="Highlord Darion Mograine" TurnInId="31084" X="2375.382" Y="-5650.722" Z="382.4389"  />
+
+      <If Condition="Me.IsHorde">
+        <!-- Warchief's Blessing - http://www.wowhead.com/quest=13189 -->
+        <PickUp QuestName="Warchief's Blessing" QuestId="13189" GiverName="Highlord Darion Mograine" GiverId="31084" X="2375.382" Y="-5650.722" Z="382.4389" />
+        <ElseIf Condition="Me.IsAlliance" >
+          <!-- Where Kings Walk - http://www.wowhead.com/quest=13188 -->
+          <PickUp QuestName="Where Kings Walk" QuestId="13188" GiverName="Highlord Darion Mograine" GiverId="31084" X="2375.382" Y="-5650.722" Z="382.4389" />
+        </ElseIf>
+      </If>
+
+      <!-- Horde -->
+ 		<If Condition="Me.IsHorde" >
+     <If Condition="HasQuest(13189) &amp;&amp; Me.ZoneId == 139" >
+ 		<CustomBehavior File="UserSettings" PullDistance="1" />
+		<CustomBehavior File="InteractWith" MobId="193052" ObjectType="Gameobject" NumOfTimes="1" CollectionDistance="4" X="2348.233" Y="-5695.629" Z="382.2405" />
+		<CustomBehavior File="WaitTimer" WaitTime="20000" />
+     </If>
+      <If Condition="HasQuest(13189)" >
+			<CustomBehavior File="UserSettings" PullDistance="1" />
+			<CustomBehavior File="NoCombatMoveTo" X="1669.178" Y="-4343.229" Z="28.36206" />
+		<TurnIn QuestName="Warchief's Blessing" QuestId="13189" TurnInName="Garrosh Hellscream" TurnInId="39605" X="1669.178" Y="-4343.229" Z="28.36206" />
+				<CustomBehavior File="InteractWith" MobId="6929" GossipOptions="1" X="1573.266" Y="-4439.158" Z="16.05683" />
+				<CustomBehavior File="RunMacro" Macro="/click StaticPopup1Button1" NumOfTimes="1" WaitTime="5000"/> <!-- Set Hearth to Org -->
+      </If>
+				
+		<If Condition="(Me.Level &lt;= 60)" >
+			 <If Condition="(Me.ZoneId == 1637)" > <!-- Org -->
+				<RunTo X="1772.016" Y="-4328.45" Z="-8.219744" />
+				<CustomBehavior File="InteractWith" MobId="195142" ObjectType="Gameobject" Range="2" NumOfTimes="1" CollectionDistance="1000" X="1772.016" Y="-4328.45" Z="-8.219744" />
+				<CustomBehavior File="WaitTimer" WaitTime="10000" GoalText="Waiting for port {TimeRemaining}" />
+			 </If>
+			 <If Condition="Me.MapId == 0" >
+				<RunTo X="-11895.44" Y="-3206.936" Z="-14.64132" />
+				<CustomBehavior File="WaitTimer" WaitTime="1000" />
+				<CustomBehavior File="MyCTM" X="-11908.09" Y="-3208.854" Z="-14.83002" />
+				<CustomBehavior File="WaitTimer" WaitTime="10000" />
+			<While Condition="Me.MapId == 0" >
+			 <If Condition="Me.MapId == 0" >
+				<RunTo X="-11895.44" Y="-3206.936" Z="-14.64132" />
+				<CustomBehavior File="WaitTimer" WaitTime="1000" />
+			  </If>
+			  <If Condition="Me.MapId == 0" >
+				<CustomBehavior File="MyCTM" X="-11908.09" Y="-3208.854" Z="-14.83002" />
+				<CustomBehavior File="WaitTimer" WaitTime="1000" />
+			  </If>
+			 <If Condition="Me.MapId == 0" >
+				<CustomBehavior File="WaitTimer" WaitTime="15000" />
+			 </If>
+			</While>
+			 </If>
+			
+				<EnableRepair />
+				<CustomBehavior File="UserSettings" TrainNewSkills="False" PullDistance="25" />
+				<CustomBehavior File="EnablePlugin" Names="AutoEquip2" />
+				<CustomBehavior File="DeleteItems" Ids="39327,39328" /> <!-- DK Profile -->
+		</If>
+				<CustomBehavior File="LoadProfile" ProfileName="..\BC\[Fly][H - Quest] BC 58-70 [Kick]" />
+		</If>
+
+      <!-- Alliance -->
+ 		<If Condition="Me.IsAlliance" >
+      <If Condition="HasQuest(13188) &amp;&amp; Me.ZoneId == 139" >
+		<CustomBehavior File="UserSettings" PullDistance="1" />
+        <CustomBehavior File="InteractWith" MobId="193053" ObjectType="Gameobject" NumOfTimes="1" CollectionDistance="4"  X="2324.699" Y="-5659.518" Z="382.2405" />
+		<CustomBehavior File="WaitTimer" WaitTime="10000" />
+      </If>
+      <If Condition="HasQuest(13188)">
+			<CustomBehavior File="UserSettings" PullDistance="1" />
+			<CustomBehavior File="NoCombatMoveTo" X="-8363.06" Y="232.236" Z="156.9907" />
+ 		<TurnIn QuestId="13188" QuestName="Where Kings Walk" TurnInName="King Varian Wrynn" TurnInId="29611" X="-8363.06" Y="232.236" Z="156.9907" />
+				<CustomBehavior File="InteractWith" MobId="6740" GossipOptions="1" X="-8867.786" Y="673.6729" Z="97.90324" />
+				<CustomBehavior File="RunMacro" Macro="/click StaticPopup1Button1" NumOfTimes="1" WaitTime="5000"/> <!-- Set Hearth to SW -->
+		</If>
+			<If Condition="(Me.Level &lt;= 60)" >
+			<If Condition="Me.ZoneId == 1519" >
+				<RunTo X="-9006.36" Y="869.7172" Z="129.693" />
+				<CustomBehavior File="InteractWith" MobId="195141" ObjectType="Gameobject" Range="8" NumOfTimes="1" WaitTime="10000" CollectionDistance="1000" X="-9006.36" Y="869.7172" Z="129.693" />
+			</If>
+			<While Condition="Me.MapId == 0" >
+			 <If Condition="Me.MapId == 0" >
+				<RunTo X="-11895.44" Y="-3206.936" Z="-14.64132" />
+				<CustomBehavior File="WaitTimer" WaitTime="1000" />
+			  </If>
+			  <If Condition="Me.MapId == 0" >
+				<CustomBehavior File="MyCTM" X="-11908.09" Y="-3208.854" Z="-14.83002" />
+				<CustomBehavior File="WaitTimer" WaitTime="1000" />
+			  </If>
+			 <If Condition="Me.MapId == 0" >
+				<CustomBehavior File="WaitTimer" WaitTime="15000" />
+			 </If>
+			</While>
+	  
+				<EnableRepair />
+				<CustomBehavior File="UserSettings" TrainNewSkills="False" PullDistance="25" />
+				<CustomBehavior File="EnablePlugin" Names="AutoEquip2" />
+				<CustomBehavior File="DeleteItems" Ids="39327,39328" /> <!-- DK Profile -->
+			</If>
+				<CustomBehavior File="LoadProfile" ProfileName="..\BC\[Fly][A - Quest] BC 58-70 [Kick]" />
+		</If>
+	  
+	  
+    </QuestOrder>
+	
+</HBProfile>

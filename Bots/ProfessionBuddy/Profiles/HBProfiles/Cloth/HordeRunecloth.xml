@@ -1,0 +1,135 @@
+<HBProfile creator="Atticus" version="1.0">
+	<Name>Horde - Runecloth Silithus</Name>
+	<MinLevel>0</MinLevel>
+	<MaxLevel>91</MaxLevel>
+	<ProtectedItems>
+		<Item Name="Linen Cloth" Entry="2589"/>
+		<Item Name="Wool Cloth" Entry="2592"/>
+		<Item Name="Silk Cloth" Entry="4306"/>
+		<Item Name="Mageweave Cloth" Entry="4338"/>
+		<Item Name="Runecloth" Entry="14047"/>
+	</ProtectedItems>
+	<MinDurability>0.3</MinDurability>
+	<MinFreeBagSlots>2</MinFreeBagSlots>
+	<MailGrey>False</MailGrey>
+	<MailWhite>True</MailWhite>
+	<MailGreen>True</MailGreen>
+	<MailBlue>True</MailBlue>
+	<MailPurple>True</MailPurple>
+	<SellGrey>True</SellGrey>
+	<SellWhite>True</SellWhite>
+	<SellGreen>True</SellGreen>
+	<SellBlue>False</SellBlue>
+	<SellPurple>False</SellPurple>
+	<TargetElites>False</TargetElites>
+	<Blackspots>
+		<Blackspot X="4092.35" Y="-3920.816" Z="176.1428" Radius="23.63587" />
+	</Blackspots>
+	<AvoidMobs>
+		<Mob Name="Brittle Skeleton" Entry="25377" />
+	</AvoidMobs>
+	<Mailboxes>
+		<Mailbox X="-6838.577" Y="733.5445" Z="42.12314" />
+	</Mailboxes>
+	<Vendors>
+		<Vendor Name="Vargus" Entry="15176" Type="Repair" X="-6860.931" Y="5281.168" Z="42.4725" />
+	</Vendors>
+	<QuestOrder>
+		<While Condition="(Me.IsHorde)">
+			<If Condition="(Me.MapId != 1)">
+				<CustomBehavior File="Message" Text="HB: We are not on Kalimdor" LogColor="Orange"/>
+				<CustomBehavior File="ForcedDismount"/>
+				<CustomBehavior File="RunMacro" Macro="/use Hearthstone" NumOfTimes="1" WaitTime="10000"/>
+				<CustomBehavior File="WaitTimer" WaitTime="10000"/>
+			</If>
+			<If Condition="(Me.MapId == 1) &amp;&amp; (Me.ZoneId == 1637)">
+				<If Condition="!HasQuest(28112) &amp;&amp; IsQuestCompleted(28112)">
+					<CustomBehavior File="Message" Text="HB: Using Uldum Portal" LogColor="Orange"/>
+					<CustomBehavior File="FlyTo" X="2038.541" Y="-4360.08" Z="98.05457" DestName="Orgrimmar Portal Platform"/>
+					<CustomBehavior File="ForcedDismount"/>
+					<CustomBehavior File="InteractWith" ObjectType="Gameobject" MobId="207687" NumOfTimes="1" Range="5" WaitTime="10000" CollectionDistance="10" X="2039.67" Y="-4356.288" Z="98.00434"/>
+					<CustomBehavior File="WaitTimer" WaitTime="10000"/>
+				</If>
+			</If>
+			<If Condition="(Me.LowestDurabilityPercent &gt;= 0.3) &amp;&amp; (Me.FreeBagSlots &gt;= 3)" >
+				<CustomBehavior File="FlyTo" X="-6321.616" Y="274.3166" Z="9.972027" />
+				<CustomBehavior File="ForcedDismount"/>
+				<SetGrindArea>
+					<GrindArea>
+						<GrindArea>16</GrindArea>
+						<TargetMinLevel>1</TargetMinLevel>
+						<TargetMaxLevel>87</TargetMaxLevel>
+                                                <MaxDistance>65</MaxDistance>
+						<Hotspots>
+							<Hotspot X="-6906.062" Y="1127.369" Z="1.632577" />
+							<Hotspot X="-6913.402" Y="1170.452" Z="2.913146" />
+							<Hotspot X="-6917.669" Y="1217.647" Z="1.310179" />
+							<Hotspot X="-6955.298" Y="1255.302" Z="1.031748" />
+							<Hotspot X="-6998.684" Y="1256.438" Z="0.4683436" />
+							<Hotspot X="-7023.203" Y="1247.83" Z="1.110136" />
+							<Hotspot X="-7057.188" Y="1204.344" Z="0.3499202" />
+							<Hotspot X="-7015.536" Y="1189.718" Z="7.793996" />
+							<Hotspot X="-6979.744" Y="1199.118" Z="11.17448" />
+							<Hotspot X="-6955.951" Y="1178.134" Z="10.44885" />
+							<Hotspot X="-6982.978" Y="1142.066" Z="9.838247" />
+							<Hotspot X="-6952.452" Y="1094.453" Z="2.263893" />
+							<Hotspot X="-6926.351" Y="1149.923" Z="4.164363" />
+							<Hotspot X="-6943.584" Y="1240.065" Z="5.374056" />
+							<Hotspot X="-7003.012" Y="1260.198" Z="0.4286717" />
+							<Hotspot X="-7061.36" Y="1214.766" Z="0.5031782" />
+							<Hotspot X="-7064.675" Y="1164.016" Z="3.190082" />
+							<Hotspot X="-7044.156" Y="1116.241" Z="4.452384" />
+							<Hotspot X="-6995.127" Y="1136.005" Z="8.933262" />
+							<Hotspot X="-7004.347" Y="1187.195" Z="12.63285" />
+							<Hotspot X="-6971.927" Y="1201.962" Z="9.339166" />
+							<Hotspot X="-6961.557" Y="1163.137" Z="11.02677" />
+							<Hotspot X="-6751.928" Y="1533.641" Z="5.203244" />
+							<Hotspot X="-6685.055" Y="1540.334" Z="7.94239" />
+							<Hotspot X="-6689.982" Y="1604.28" Z="8.024236" />
+							<Hotspot X="-6738.436" Y="1590.796" Z="9.333626" />
+							<Hotspot X="-6796.803" Y="1602.077" Z="3.804546" />
+							<Hotspot X="-6812.362" Y="1662.839" Z="6.365827" />
+							<Hotspot X="-6758.254" Y="1689.412" Z="4.47823" />
+							<Hotspot X="-6697.248" Y="1672.371" Z="7.510926" />
+							<Hotspot X="-6474.508" Y="236.8289" Z="2.275892" />
+							<Hotspot X="-6423.457" Y="278.2097" Z="7.140694" />
+							<Hotspot X="-6366.876" Y="261.9552" Z="4.489816" />
+							<Hotspot X="-6321.616" Y="274.3166" Z="9.972027" />
+							<Hotspot X="-6323.402" Y="215.4697" Z="4.448642" />
+							<Hotspot X="-6394.754" Y="217.3222" Z="4.281543" />
+							<Hotspot X="-6397.732" Y="179.593" Z="7.194008" />
+							<Hotspot X="-6354.061" Y="162.2992" Z="6.22646" />
+							<Hotspot X="-6313.797" Y="151.376" Z="13.19988" />
+							<Hotspot X="-6294.05" Y="100.8743" Z="17.16668" />
+							<Hotspot X="-6293.497" Y="67.72952" Z="12.18399" />
+							<Hotspot X="-6268.897" Y="43.84953" Z="9.422574" />
+							<Hotspot X="-6241.269" Y="21.1904" Z="8.804556" />
+							<Hotspot X="-6253.967" Y="61.48086" Z="17.26177" />
+							<Hotspot X="-6259.1" Y="-5.72128" Z="3.04113" />
+							<Hotspot X="-6237.684" Y="-47.35397" Z="-5.940918" />
+							<Hotspot X="-6235.594" Y="-18.32843" Z="-9.166678" />
+							<Hotspot X="-6252.495" Y="-1.896005" Z="-10.34373" />
+							<Hotspot X="-6284.162" Y="26.13048" Z="-10.50527" />
+							<Hotspot X="-6295.433" Y="13.4013" Z="-4.443449" />
+							<Hotspot X="-6321.309" Y="3.897734" Z="6.508694" />
+							<Hotspot X="-7972.879" Y="1860.1" Z="3.932863" />
+							<Hotspot X="-7966.467" Y="1894.876" Z="2.2798" />
+							<Hotspot X="-7933.687" Y="1951.99" Z="7.019344" />
+							<Hotspot X="-7868.283" Y="1895.081" Z="4.153967" />
+							<Hotspot X="-7829.276" Y="1874.138" Z="4.954101" />
+							<Hotspot X="-7923.914" Y="1880.522" Z="10.40452" />
+							<Hotspot X="-7918.676" Y="1908.458" Z="5.644786" />
+						</Hotspots>
+					</GrindArea>
+				</SetGrindArea>
+				<GrindTo Condition="(Me.LowestDurabilityPercent &lt; 0.3) || (Me.FreeBagSlots &lt;= 2)" GoalText="Runecloth - First Aid"/>
+			</If>
+			<If Condition="(Me.LowestDurabilityPercent &lt; 0.3) || (Me.FreeBagSlots &lt; 3)" >
+				<CustomBehavior File="Message" Text="HB: Flying to Repair" LogColor="Orange" />
+				<CustomBehavior File="FlyTo" X="-6860.931" Y="5281.168" Z="42.4725" DestName="Somewhere over the rainbow" />
+				<CustomBehavior File="Message" Text="HB: Selling/Mailing/Repairing" LogColor="Orange" />
+				<CustomBehavior File="ForceSetVendor"  DoMail="true" DoRepair="true" DoSell="true" />
+			</If>
+		</While>
+	</QuestOrder>
+</HBProfile>  

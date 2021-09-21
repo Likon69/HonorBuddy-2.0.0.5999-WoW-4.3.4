@@ -1,0 +1,358 @@
+<HBProfile xsi:noNamespaceSchemaLocation="../Schemas/EchoSchema.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<!-- Original contribution by EchoTiger -->
+	<Name>Icecrown ($ShortHash$)</Name>
+
+	<DefaultNavType>Fly</DefaultNavType>
+
+	<MinDurability>0.3</MinDurability>
+	<MinFreeBagSlots>3</MinFreeBagSlots>
+
+	<SellGrey>true</SellGrey>
+	<SellWhite>true</SellWhite>
+	<SellGreen>true</SellGreen>
+	<SellBlue>true</SellBlue>
+	<SellPurple>false</SellPurple>
+
+	<MailGrey>false</MailGrey>
+	<MailWhite>true</MailWhite>
+	<MailGreen>true</MailGreen>
+	<MailBlue>true</MailBlue>
+	<MailPurple>true</MailPurple>
+
+	<TargetElites>true</TargetElites>
+
+	<AvoidMobs>
+	</AvoidMobs>
+
+	<Mailboxes>
+		<!-- Not filling in here -->
+	</Mailboxes>
+
+	<Vendors>
+		<!-- Not filling in here -->
+	</Vendors>
+
+	<Blackspots>
+	</Blackspots>
+
+	<Blacklist>
+	</Blacklist>
+
+	<QuestOrder IgnoreCheckpoints="false" >
+		<!-- Check function status -->
+		<Code File="RunCode" Type="Definition">
+			<![CDATA[
+			private static bool? profileFunctionsEnabled => (bool?)AppDomain.CurrentDomain.GetData("QuestingProfiles_FunctionsEnabled");
+			private static bool IsStoreProfile(string path) => path.StartsWith("store://");
+			private static string Slashify(string path) => IsStoreProfile(path) ? path.Replace(@"\", "/") : path.Replace("/", @"\");
+
+			public __CompiledBatchClass__()
+			{
+				ActivateFunctions();
+			}
+
+			private static void ActivateFunctions()
+			{
+				if (profileFunctionsEnabled == null || profileFunctionsEnabled == false)
+				{
+					Bots.Professionbuddy.PBLog.Log(Colors.MediumPurple, "[Profile Message!]: ", Colors.Yellow, "Please stand by as the functions are being activated!");
+					LoadProfile(@"..\..\Functions\Activate Functions.xml");
+				}
+			}
+
+			private static void LoadProfile(string path)
+			{
+				var profile = GetNewPath(path);
+				if (!IsStoreProfile(profile) && !File.Exists(profile))
+				{
+					Bots.Professionbuddy.PBLog.Log(Colors.MediumPurple, "[Profile Message!]: ", Colors.Yellow, "Profile does not exist.\n" + profile);
+					return;
+				}
+
+				Bots.Professionbuddy.PBLog.Log(Colors.MediumPurple, "[Profile Message!]: ", Colors.Yellow, "Loading: " + profile);
+				ProfileManager.LoadNew(profile, false);
+			}
+
+			private static string GetNewPath(string path)
+			{
+				if (IsStoreProfile(path))
+					return Slashify(path);
+
+				var currentProfile = ProfileManager.XmlLocation;
+				if (IsStoreProfile(currentProfile))
+					return Slashify(currentProfile + "/../" + path);
+
+				var absolutePath = Path.Combine(Path.GetDirectoryName(currentProfile), path);
+				absolutePath = Path.GetFullPath(absolutePath);
+				var canonicalPath = new Uri(absolutePath).LocalPath;
+				return Slashify(canonicalPath);
+			}]]>
+		</Code>
+		<Code File="RunCode" Code="ActivateFunctions();" />
+		<!-- END Check function status -->
+
+		<If Condition="Me.IsHorde" >
+			<Code File="LoadProfile" ProfileName="..\..\Questing Autoloader.xml" />
+		</If>
+		<!-- RunCode Methods -->
+			<Code File="RunCode">
+			<![CDATA[
+				Bots.Professionbuddy.PBLog.Log(System.Windows.Media.Colors.MediumPurple, "> [Profile Initialization Status] ", System.Windows.Media.Colors.CornflowerBlue, "\n     Auto-Looting	:: Enabled\n     Looting	:: Enabled\n     Game Addons	:: Disabled");
+				Lua.DoString("SetCVar('AutoLootDefault', 1);");
+				Lua.DoString("SetCVar('autoDismountFlying', 1);");
+				CharacterSettings.Instance.LootMobs = true;
+				CharacterSettings.Instance.Save();
+				Logging.Write(System.Windows.Media.Colors.MediumPurple, "> [Ready to bot!]");
+			]]>
+			</Code>
+			<Code File="RunCode" Type="Definition">
+				<![CDATA[
+						bool DoQuest(params uint[] questIds)
+						{
+							foreach (var questId in questIds)
+							{
+								if (HasQuest(questId) && !IsQuestCompleted(questId)) return true;
+							}
+							return false;
+						}
+						bool NeedsQuest(params uint[] questIds)
+						{
+							foreach (var questId in questIds)
+							{
+								if (!HasQuest(questId) && !IsQuestCompleted(questId)) return true;
+							}
+							return false;
+						}
+						bool NeedsBreadcrumbQuest(params uint[] questIds)
+						{
+							foreach (var questId in questIds)
+							{
+								if (IsQuestCompleted(questId)) return false;
+							}
+							return true;
+						}
+						bool QuestDone(params uint[] questIds)
+						{
+							foreach (var questId in questIds)
+							{
+								if (HasQuest(questId) && IsQuestCompleted(questId)) return true;
+							}
+							return false;
+						}
+						bool QuestFlaggedCompleted(params uint[] questIds)
+						{
+							foreach (var questId in questIds)
+							{
+								return Lua.GetReturnVal<bool>($"return IsQuestFlaggedCompleted({questId});", 0);
+							}
+							return false;
+						}
+						async Task SkipCutscene(int preWait = 3000, int postWait = 3000)
+						{
+					// Add detection of cutscene here.
+							await Coroutine.Sleep(preWait);
+					// Test and improve the working method.
+							Lua.DoString("MovieFrame:StopMovie(); CinematicFrame_CancelCinematic(); StopCinematic();");
+							await Coroutine.Sleep(postWait);
+						}
+					]]>
+			</Code>
+		<!-- END RunCode Methods -->
+
+
+		<PickUp QuestName="Honor Above All Else" QuestId="13036" GiverName="Highlord Tirion Fordring" GiverId="28179" X="6255.103" Y="-43.8075" Z="421.4149" />
+		<TurnIn QuestName="Honor Above All Else" QuestId="13036" TurnInName="Crusade Commander Entari" TurnInId="30223" X="6257.128" Y="-16.63003" Z="410.0467" />
+		<PickUp QuestName="Scourge Tactics" QuestId="13008" GiverName="Crusade Commander Entari" GiverId="30223" X="6257.128" Y="-16.63003" Z="410.0467" />
+		<PickUp QuestName="Curing The Incurable" QuestId="13040" GiverName="Father Gustav" GiverId="30226" X="6225.779" Y="-1.258135" Z="410.1638" />
+		<PickUp QuestName="Defending The Vanguard" QuestId="13039" GiverName="Crusader Lord Dalfors" GiverId="30224" X="6255.47" Y="47.74998" Z="387.7178" />
+
+		<Code File="KillUntilComplete" TerminateWhen="!DoQuest(13008, 13039, 13040)" >
+			<HuntingGrounds>
+				<Hotspot X="6410.103" Y="246.4729" Z="396.0724" />
+				<Hotspot X="6321.266" Y="152.4631" Z="387.1558" />
+				<Hotspot X="6165.006" Y="147.7204" Z="373.4219" />
+			</HuntingGrounds>
+			<PursuitList>
+				<PursueUnit Id="30333" PursueWhen="DoQuest(13039, 13040)" />
+				<PursueUnit Id="30206" PursueWhen="DoQuest(13039)" />
+				<PursueUnit Id="30273" PursueWhen="DoQuest(13008)" />
+			</PursuitList>
+		</Code>
+
+		<TurnIn QuestName="Defending The Vanguard" QuestId="13039" TurnInName="Crusader Lord Dalfors" TurnInId="30224" X="6261.394" Y="51.40701" Z="388.8297" />
+		<TurnIn QuestName="Curing The Incurable" QuestId="13040" TurnInName="Father Gustav" TurnInId="30226" X="6221.2" Y="-3.799089" Z="410.165" />
+		<TurnIn QuestName="Scourge Tactics" QuestId="13008" TurnInName="Crusade Commander Entari" TurnInId="30223" X="6253.108" Y="-15.95645" Z="410.0481" />
+		<RecheckCheckpoints />
+		<PickUp QuestName="If There Are Survivors..." QuestId="13044" GiverName="Crusade Commander Entari" GiverId="30223" X="6255.768" Y="-17.86448" Z="410.0481" />
+		<TurnIn QuestName="If There Are Survivors..." QuestId="13044" TurnInName="Penumbrius" TurnInId="30227" X="6123.349" Y="-11.57351" Z="383.5107" />
+
+		<PickUp QuestName="Into The Wild Green Yonder" QuestId="13045" GiverName="Penumbrius" GiverId="30227" X="6125.394" Y="-12.37008" Z="383.512" />
+		<While Condition="DoQuest(13045)" >
+			<Code File="InteractWith" MobId="30500" NonCompeteDistance="0" PreInteractMountStrategy="Dismount" QuestId="13045" X="6123.605" Y="-20.88129" Z="383.512" TerminateWhen="Me.InVehicle" />
+			<Code File="Vehicles\FlyingVehicle" QuestId="13045" VehicleId="30228" NpcList="30407" PickUpPassengerButton="1" DropPassengerButton="2" SpeedButton="3" TerminateWhen="!Me.InVehicle"
+				StartPath="6545.917,348.2747,580.2816|6619.757,488.2379,408.1627"
+				Path="6608.668,443.7926,436.0548|6713.227,484.2516,446.7397|6598.934,582.8495,437.1812"
+				EndPath="6545.917, 348.2747, 580.2816 | 6216.801, 4.160139, 416.227" />
+			<Code File="EjectVeh" />
+		</While>
+		<TurnIn QuestName="Into The Wild Green Yonder" QuestId="13045" TurnInName="Highlord Tirion Fordring" TurnInId="28179" X="6252.933" Y="-42.86441" Z="421.4153" />
+
+		<PickUp QuestName="A Cold Front Approaches" QuestId="13070" GiverName="Highlord Tirion Fordring" GiverId="28179" X="6252.933" Y="-42.86441" Z="421.4153" />
+		<If Condition="QuestDone(13070)" >
+			<MoveTo X="6249.489" Y="68.91794" Z="389.4745" />
+			<Code File="ForcedDismount" />
+			<TurnIn Nav="Run" QuestName="A Cold Front Approaches" QuestId="13070" TurnInName="Siegemaster Fezzik" TurnInId="30657" X="6249.387" Y="70.15255" Z="389.5928" />
+		</If>
+
+		<PickUp QuestName="The Last Line Of Defense" QuestId="13086" GiverName="Siegemaster Fezzik" GiverId="30657" X="6249.387" Y="70.15255" Z="389.5928" />
+		<While Condition="DoQuest(13086)" >
+			<MoveTo X="6247.569" Y="56.82671" Z="387.5114" />
+			<Code File="InteractWith" MobId="30236" NonCompeteDistance="0" CollectionDistance="200" MovementBy="FlightorPreferred" QuestId="13086" X="6250.757" Y="58.0285" Z="404.2916" TerminateWhen="Me.InVehicle" />
+			<Code File="Vehicles\CannonControl" QuestId="13086" VehicleId="30236" MaxAngle="0.43" MinAngle="-0.60" Buttons="1,2" ExitButton="5" Gravity="10" Velocity="80" TerminateWhen="!Me.InVehicle" />
+		</While>
+		<If Condition="QuestDone(13086)" >
+			<Code File="EjectVeh" />
+			<MoveTo X="6249.489" Y="68.91794" Z="389.4745" />
+			<Code File="ForcedDismount" />
+			<TurnIn Nav="Run" QuestName="The Last Line Of Defense" QuestId="13086" TurnInName="Siegemaster Fezzik" TurnInId="30657" X="6249.533" Y="69.90744" Z="389.5782" />
+		</If>
+
+		<PickUp QuestName="Once More Unto The Breach, Hero" VariantQuestIds="13104, 13105" GiverName="Highlord Tirion Fordring" GiverId="30677" X="6257.401" Y="51.58259" Z="388.2963" />
+		<TurnIn QuestName="Once More Unto The Breach, Hero" VariantQuestIds="13104, 13105" TurnInName="The Ebon Watcher" TurnInId="30596" X="6377.665" Y="236.1884" Z="396.046" />
+		<PickUp QuestName="The Purging Of Scourgeholme" QuestId="13118" GiverName="The Ebon Watcher" GiverId="30596" X="6377.665" Y="236.1884" Z="396.046" />
+		<PickUp QuestName="The Scourgestone" QuestId="13122" GiverName="The Ebon Watcher" GiverId="30596" X="6377.665" Y="236.1884" Z="396.046" />
+		<PickUp QuestName="The Stone That Started A Revolution" QuestId="13130" GiverName="Crusade Architect Silas" GiverId="30686" X="6374.063" Y="236.6689" Z="396.046" />
+		<PickUp QuestName="It Could Kill Us All" QuestId="13135" GiverName="Crusade Engineer Spitzpatrick" GiverId="30714" X="6374.063" Y="236.6689" Z="396.046" />
+		<PickUp QuestName="The Restless Dead" QuestId="13110" GiverName="Father Gustav" GiverId="30683" X="6384.194" Y="241.9921" Z="396.0705" />
+
+		<Code File="InteractWith" MobId="30202" CollectionDistance="200" MobState="Dead" PreInteractMountStrategy="Dismount" InteractByUsingItemId="43153" QuestId="13110" QuestObjectiveIndex="1" >
+			<HuntingGrounds>
+				<Hotspot X="6575.689" Y="458.2185" Z="408.566" />
+				<Hotspot X="6683.979" Y="471.6316" Z="399.1661" />
+				<Hotspot X="6765.536" Y="524.473" Z="413.5425" />
+			</HuntingGrounds>
+		</Code>
+
+		<Code File="KillUntilComplete" MobId="30543" QuestId="13118" QuestObjectiveIndex="1" >
+			<HuntingGrounds>
+				<Hotspot X="6689.017" Y="570.9977" Z="424.4418" />
+				<Hotspot X="6906.041" Y="486.1992" Z="467.6923" />
+				<Hotspot X="6885.734" Y="671.2734" Z="426.9959" />
+			</HuntingGrounds>
+		</Code>
+
+		<Code File="KillUntilComplete" TerminateWhen="!DoQuest(13110, 13118, 13122)" >
+			<HuntingGrounds>
+				<Hotspot X="6689.017" Y="570.9977" Z="424.4418" />
+				<Hotspot X="6906.041" Y="486.1992" Z="467.6923" />
+				<Hotspot X="6885.734" Y="671.2734" Z="426.9959" />
+			</HuntingGrounds>
+			<PursuitList>
+				<PursueUnit Id="30202" PursueWhen="!IsObjectiveComplete(3, 13118)" />
+				<PursueUnit Id="30541" PursueWhen="!IsObjectiveComplete(2, 13118)" />
+
+				<PursueUnit Id="30202" PursueWhen="DoQuest(13122)" />
+				<PursueUnit Id="30541" PursueWhen="DoQuest(13122)" />
+			</PursuitList>
+		</Code>
+
+		<TurnIn QuestName="The Purging Of Scourgeholme" QuestId="13118" TurnInName="The Ebon Watcher" TurnInId="30596" X="6379.259" Y="233.6324" Z="396.0459" />
+		<TurnIn QuestName="The Scourgestone" QuestId="13122" TurnInName="The Ebon Watcher" TurnInId="30596" X="6379.259" Y="233.6324" Z="396.0459" />
+		<PickUp QuestName="The Air Stands Still" QuestId="13125" GiverName="The Ebon Watcher" GiverId="30596" X="6379.259" Y="233.6324" Z="396.0459" />
+		<TurnIn QuestName="The Restless Dead" QuestId="13110" TurnInName="Father Gustav" TurnInId="30683" X="6383.923" Y="244.2734" Z="396.0885" />
+		<RecheckCheckpoints />
+
+		<While Condition="DoQuest(13125)" >
+			<While Condition="!IsObjectiveComplete(1, 13125)" >
+				<Code File="InteractWith" MobId="30829" NonCompeteDistance="0" InteractByUsingItemId="43206" QuestId="13125" QuestObjectiveIndex="1" X="6828.659" Y="581.9766" Z="425.3674" TerminateWhen="Unit(30840) != null" />
+				<Code File="KillUntilComplete" MobId="30829" QuestId="13125" QuestObjectiveIndex="1" X="6828.659" Y="581.9766" Z="425.3674" TerminateWhen="Unit(30840) == null" />
+			</While>
+			<While Condition="!IsObjectiveComplete(3, 13125)" >
+				<Code File="InteractWith" MobId="30831" NonCompeteDistance="0" InteractByUsingItemId="43206" QuestId="13125" QuestObjectiveIndex="3" X="6878.939" Y="441.6863" Z="471.7095" TerminateWhen="Unit(30839) != null" />
+				<Code File="KillUntilComplete" MobId="30831" QuestId="13125" QuestObjectiveIndex="3" X="6878.939" Y="441.6863" Z="471.7095" TerminateWhen="Unit(30839) == null" />
+			</While>
+			<While Condition="!IsObjectiveComplete(2, 13125)" >
+				<Code File="InteractWith" MobId="30830" NonCompeteDistance="0" InteractByUsingItemId="43206" PreInteractMountStrategy="Dismount" QuestId="13125" QuestObjectiveIndex="2" X="7161.352" Y="625.2061" Z="497.4215" TerminateWhen="Unit(30838) != null" />
+				<Code File="KillUntilComplete" MobId="30830" QuestId="13125" QuestObjectiveIndex="2" X="7161.352" Y="625.2061" Z="497.4215" TerminateWhen="Unit(30838) == null" />
+			</While>
+			<Code File="InteractWith" MobId="192907" NonCompeteDistance="0" CollectionDistance="200" PreInteractMountStrategy="Dismount" WaitForNpcs="false" />
+		</While>
+
+		<TurnIn QuestName="The Air Stands Still" QuestId="13125" TurnInName="The Ebon Watcher" TurnInId="30596" X="6381.472" Y="234.3891" Z="396.0469" />
+
+		<While Condition="DoQuest(13130)" >
+			<Code File="InteractWith" InteractByLooting="true" PreInteractMountStrategy="Dismount" CollectionDistance="200" NumOfTimes="40" QuestId="13130" >
+				<HuntingGrounds>
+					<Hotspot X="5434.208" Y="-529.8924" Z="163.6556" />
+					<Hotspot X="5291.203" Y="-621.0958" Z="162.9131" />
+					<Hotspot X="5390.373" Y="-774.0472" Z="156.7104" />
+					<Hotspot X="5501.402" Y="-779.351" Z="153.0126" />
+				</HuntingGrounds>
+				<PursuitList>
+					<PursueGameObject Id="192908" PursueWhen="!IsObjectiveComplete(1, 13130)" />
+					<PursueGameObject Id="192909" PursueWhen="!IsObjectiveComplete(2, 13130)" />
+					<PursueGameObject Id="192910" PursueWhen="!IsObjectiveComplete(2, 13130)" />
+					<PursueGameObject Id="192911" PursueWhen="!IsObjectiveComplete(2, 13130)" />
+				</PursuitList>
+			</Code>
+		</While>
+
+		<Code File="KillUntilComplete" MobIds="30860, 30862" QuestId="13135" >
+			<HuntingGrounds>
+				<Hotspot X="5278.131" Y="-380.3141" Z="174.7578" />
+				<Hotspot X="5319.689" Y="-427.89" Z="180.0665" />
+				<Hotspot X="5473.446" Y="-461.7098" Z="165.9605" />
+				<Hotspot X="5516.677" Y="-305.9955" Z="167.3739" />
+			</HuntingGrounds>
+		</Code>
+
+		<TurnIn QuestName="The Stone That Started A Revolution" QuestId="13130" TurnInName="Crusade Architect Silas" TurnInId="30686" X="6370.978" Y="235.2301" Z="396.0457" />
+		<TurnIn QuestName="It Could Kill Us All" QuestId="13135" TurnInName="Crusade Engineer Spitzpatrick" TurnInId="30714" X="6370.978" Y="235.2301" Z="396.0457" />
+		<PickUp QuestName="Into The Frozen Heart Of Northrend" QuestId="13139" GiverName="Father Gustav" GiverId="30683" X="6383.71" Y="244.2837" Z="396.0728" />
+		<TurnIn QuestName="Into The Frozen Heart Of Northrend" QuestId="13139" TurnInName="Highlord Tirion Fordring" TurnInId="30677" X="6261.143" Y="50.80233" Z="388.7574" />
+		<RecheckCheckpoints />
+
+		<PickUp QuestName="The Battle For Crusaders&apos; Pinnacle" QuestId="13141" GiverName="Highlord Tirion Fordring" GiverId="30677" X="6261.143" Y="50.80233" Z="388.7574" />
+		<While Condition="DoQuest(13141)" >
+			<MoveTo X="6419.064" Y="425.3492" Z="511.1907" />
+			<Code File="UseItem" ItemId="43243" QuestId="13141" TerminateWhen="Unit(30891) != null" />
+			<Code File="KillUntilComplete" MobIds="30984, 30986, 30987, 30989" QuestId="13141" X="6419.064" Y="425.3492" Z="511.1907" TerminateWhen="Unit(30891) == null" />
+		</While>
+		<TurnIn QuestName="The Battle For Crusaders&apos; Pinnacle" QuestId="13141" TurnInName="Father Gustav" TurnInId="30683" X="6384.637" Y="242.2409" Z="396.0877" />
+
+		<PickUp QuestName="The Crusaders&apos; Pinnacle" QuestId="13157" GiverName="Father Gustav" GiverId="30683" X="6384.25" Y="242.03" Z="396.0731" />
+		<TurnIn QuestName="The Crusaders&apos; Pinnacle" QuestId="13157" TurnInName="Highlord Tirion Fordring" TurnInId="31044" X="6424.24" Y="439.4261" Z="511.2087" />
+		<PickUp QuestName="A Tale of Valor" QuestId="13068" GiverName="Highlord Tirion Fordring" GiverId="31044" X="6424.24" Y="439.4261" Z="511.2087" />
+
+		<If Condition="QuestDone(13068) &amp;&amp; Me.HearthstoneAreaId == 4484 &amp;&amp; Unit(31044) != null" >
+			<Code File="UseHearthstone" WaitForCD="false" />
+		</If>
+
+		<TurnIn QuestName="A Tale of Valor" QuestId="13068" TurnInName="Crusader Bridenbrad" TurnInId="30562" X="8136.511" Y="435.4471" Z="574.6678" />
+
+		<PickUp QuestName="A Hero Remains" QuestId="13072" GiverName="Crusader Bridenbrad" GiverId="30562" X="8136.511" Y="435.4471" Z="574.6678" />
+		<If Condition="QuestDone(13072) &amp;&amp; Unit(30562) != null" >
+			<Code File="InteractWith" MobId="33849"  X="8479.717" Y="891.043" Z="547.2941" />
+			<Code File="Misc\RunLua" Lua="GetNumRoutes(34); TakeTaxiNode(34);" />
+		</If>
+		<TurnIn QuestName="A Hero Remains" QuestId="13072" TurnInName="Highlord Tirion Fordring" TurnInId="31044" X="6422.964" Y="441.0844" Z="511.1825" />
+
+		<Code File="KillUntilComplete" MobIds="30860, 30862" TerminateWhen="Me.Level &gt;= 80" >
+			<HuntingGrounds>
+				<Hotspot X="5278.131" Y="-380.3141" Z="174.7578" />
+				<Hotspot X="5319.689" Y="-427.89" Z="180.0665" />
+				<Hotspot X="5473.446" Y="-461.7098" Z="165.9605" />
+				<Hotspot X="5516.677" Y="-305.9955" Z="167.3739" />
+			</HuntingGrounds>
+		</Code>
+
+		<Checkpoint Level="80" />
+
+		<Code File="DeleteItems" Ids="42780" /> <!-- Relic of Ulduar -->
+		<If Condition="Me.Level &lt;= 81" >
+			<Code File="RunCode" Code="foreach (PlayerQuest quest in Me.QuestLog.GetAllQuests()) QuestLog.Instance.AbandonQuestById(quest.Id)" />
+		</If>
+		<Code File="LoadProfile" ProfileName="../80-85 Autoloader.xml" />
+
+	</QuestOrder>
+</HBProfile>

@@ -1,0 +1,647 @@
+<HBProfile xsi:noNamespaceSchemaLocation="../Schemas/EchoSchema.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<!-- Original contribution by EchoTiger -->
+	<Name>Burning Steppes ($ShortHash$)</Name>
+
+	<MinDurability>0.3</MinDurability>
+	<MinFreeBagSlots>3</MinFreeBagSlots>
+
+	<SellGrey>true</SellGrey>
+	<SellWhite>true</SellWhite>
+	<SellGreen>true</SellGreen>
+	<SellBlue>true</SellBlue>
+	<SellPurple>false</SellPurple>
+
+	<MailGrey>false</MailGrey>
+	<MailWhite>true</MailWhite>
+	<MailGreen>true</MailGreen>
+	<MailBlue>true</MailBlue>
+	<MailPurple>true</MailPurple>
+
+	<TargetElites>true</TargetElites>
+
+	<AvoidMobs>
+	</AvoidMobs>
+
+	<Mailboxes>
+	</Mailboxes>
+
+	<Vendors>
+	</Vendors>
+
+	<Blackspots>
+		<Blackspot X="-7916.176" Y="-1864.217" Z="132.5087" Radius="2.359225" /> <!-- Wooden cage behind Eitrigg -->
+		<Blackspot X="-8068.734" Y="-994.8127" Z="133.6672" Radius="5" /> <!-- Crates+Tents near Flamestar Post -->
+	</Blackspots>
+
+	<Blacklist>
+	</Blacklist>
+
+	<QuestOrder IgnoreCheckpoints="false" >
+		<!-- Check function status -->
+		<Code File="RunCode" Type="Definition">
+			<![CDATA[
+			private static bool? profileFunctionsEnabled => (bool?)AppDomain.CurrentDomain.GetData("QuestingProfiles_FunctionsEnabled");
+			private static bool IsStoreProfile(string path) => path.StartsWith("store://");
+			private static string Slashify(string path) => IsStoreProfile(path) ? path.Replace(@"\", "/") : path.Replace("/", @"\");
+
+			public __CompiledBatchClass__()
+			{
+				ActivateFunctions();
+			}
+
+			private static void ActivateFunctions()
+			{
+				if (profileFunctionsEnabled == null || profileFunctionsEnabled == false)
+				{
+					Bots.Professionbuddy.PBLog.Log(Colors.MediumPurple, "[Profile Message!]: ", Colors.Yellow, "Please stand by as the functions are being activated!");
+					LoadProfile(@"..\..\Functions\Activate Functions.xml");
+				}
+			}
+
+			private static void LoadProfile(string path)
+			{
+				var profile = GetNewPath(path);
+				if (!IsStoreProfile(profile) && !File.Exists(profile))
+				{
+					Bots.Professionbuddy.PBLog.Log(Colors.MediumPurple, "[Profile Message!]: ", Colors.Yellow, "Profile does not exist.\n" + profile);
+					return;
+				}
+
+				Bots.Professionbuddy.PBLog.Log(Colors.MediumPurple, "[Profile Message!]: ", Colors.Yellow, "Loading: " + profile);
+				ProfileManager.LoadNew(profile, false);
+			}
+
+			private static string GetNewPath(string path)
+			{
+				if (IsStoreProfile(path))
+					return Slashify(path);
+
+				var currentProfile = ProfileManager.XmlLocation;
+				if (IsStoreProfile(currentProfile))
+					return Slashify(currentProfile + "/../" + path);
+
+				var absolutePath = Path.Combine(Path.GetDirectoryName(currentProfile), path);
+				absolutePath = Path.GetFullPath(absolutePath);
+				var canonicalPath = new Uri(absolutePath).LocalPath;
+				return Slashify(canonicalPath);
+			}]]>
+		</Code>
+		<Code File="RunCode" Code="ActivateFunctions();" />
+		<!-- END Check function status -->
+
+		<If Condition="Me.IsAlliance" >
+			<Code File="LoadProfile" ProfileName="..\..\Questing Autoloader.xml" />
+		</If>
+		<!-- RunCode Methods -->
+			<Code File="RunCode">
+			<![CDATA[
+				Bots.Professionbuddy.PBLog.Log(System.Windows.Media.Colors.MediumPurple, "> [Profile Initialization Status] ", System.Windows.Media.Colors.CornflowerBlue, "\n     Auto-Looting	:: Enabled\n     Looting	:: Enabled\n     Game Addons	:: Disabled");
+				Lua.DoString("SetCVar('AutoLootDefault', 1);");
+				Lua.DoString("SetCVar('autoDismountFlying', 1);");
+				CharacterSettings.Instance.LootMobs = true;
+				CharacterSettings.Instance.Save();
+				Logging.Write(System.Windows.Media.Colors.MediumPurple, "> [Ready to bot!]");
+			]]>
+			</Code>
+			<Code File="RunCode" Type="Definition">
+				<![CDATA[
+						bool DoQuest(params uint[] questIds)
+						{
+							foreach (var questId in questIds)
+							{
+								if (HasQuest(questId) && !IsQuestCompleted(questId)) return true;
+							}
+							return false;
+						}
+						bool NeedsQuest(params uint[] questIds)
+						{
+							foreach (var questId in questIds)
+							{
+								if (!HasQuest(questId) && !IsQuestCompleted(questId)) return true;
+							}
+							return false;
+						}
+						bool NeedsBreadcrumbQuest(params uint[] questIds)
+						{
+							foreach (var questId in questIds)
+							{
+								if (IsQuestCompleted(questId)) return false;
+							}
+							return true;
+						}
+						bool QuestDone(params uint[] questIds)
+						{
+							foreach (var questId in questIds)
+							{
+								if (HasQuest(questId) && IsQuestCompleted(questId)) return true;
+							}
+							return false;
+						}
+						bool QuestFlaggedCompleted(params uint[] questIds)
+						{
+							foreach (var questId in questIds)
+							{
+								return Lua.GetReturnVal<bool>($"return IsQuestFlaggedCompleted({questId});", 0);
+							}
+							return false;
+						}
+						async Task SkipCutscene(int preWait = 3000, int postWait = 3000)
+						{
+					// Add detection of cutscene here.
+							await Coroutine.Sleep(preWait);
+					// Test and improve the working method.
+							Lua.DoString("MovieFrame:StopMovie(); CinematicFrame_CancelCinematic(); StopCinematic();");
+							await Coroutine.Sleep(postWait);
+						}
+					]]>
+			</Code>
+		<!-- END RunCode Methods -->
+
+
+		<If Condition="HasQuest(28515)" >
+			<TurnIn QuestName="Mouton Flamestar" QuestId="28515" TurnInName="Mouton Flamestar" TurnInId="47779" X="-8061.979" Y="-1002.715" Z="131.4592" />
+		</If>
+
+		<PickUp QuestName="Done Nothing Wrong" QuestId="28417" GiverName="Mouton Flamestar" GiverId="47779" X="-8061.979" Y="-1002.715" Z="131.4592" />
+		<PickUp QuestName="Burning Vengeance" QuestId="28418" GiverName="Ariok" GiverId="48559" X="-8076.439" Y="-1010.51" Z="132.8621" />
+
+		<While Condition="DoQuest(28417)" >
+			<Code File="InteractWith" MobId="47820" NonCompeteDistance="0" QuestId="28417" QuestObjectiveIndex="2" X="-8254.638" Y="-1015.375" Z="146.653" />
+			<Code File="InteractWith" MobId="47821" NonCompeteDistance="0" QuestId="28417" QuestObjectiveIndex="3" X="-8279.835" Y="-1070.958" Z="144.0278" />
+			<Code File="InteractWith" MobId="47822" NonCompeteDistance="0" QuestId="28417" QuestObjectiveIndex="4" X="-8276.58" Y="-1134.596" Z="148.2497" />
+			<Code File="InteractWith" MobId="47814" NonCompeteDistance="0" QuestId="28417" QuestObjectiveIndex="1" X="-8250.683" Y="-1195.292" Z="142.5614" />
+		</While>
+
+		<Code File="KillUntilComplete" QuestId="28418" >
+			<HuntingGrounds>
+				<Hotspot X="-8253.103" Y="-1147.96" Z="146.3238" />
+				<Hotspot X="-8270.371" Y="-1032.483" Z="149.8009" />
+				<Hotspot X="-8247.507" Y="-1272.075" Z="148.1694" />
+				<Hotspot X="-8382.62" Y="-1252.651" Z="201.1699" />
+			</HuntingGrounds>
+			<PursuitList>
+				<PursueUnit Id="47782" PursueWhen="!IsObjectiveComplete(1, 28418)" />
+				<PursueUnit Id="7049" PursueWhen="!IsObjectiveComplete(2, 28418)" />
+			</PursuitList>
+		</Code>
+
+		<TurnIn QuestName="Burning Vengeance" QuestId="28418" TurnInName="Ariok" TurnInId="48559" X="-8081.035" Y="-1010.283" Z="132.8969" />
+		<PickUp QuestName="Stocking Up" QuestId="28419" GiverName="Ariok" GiverId="48559" X="-8081.035" Y="-1010.283" Z="132.8969" />
+		<PickUp QuestName="A Future Project" QuestId="28420" GiverName="Ariok" GiverId="48559" X="-8081.035" Y="-1010.283" Z="132.8969" />
+		<PickUp QuestName="Mud Hunter" QuestId="28421" GiverName="Ariok" GiverId="48559" X="-8081.035" Y="-1010.283" Z="132.8969" />
+		<TurnIn QuestName="Done Nothing Wrong" QuestId="28417" TurnInName="Mouton Flamestar" TurnInId="47779" X="-8061.979" Y="-1002.715" Z="131.4592" />
+
+		<While Condition="DoQuest(28421)" >
+			<UseMount Value="false" />
+			<Code File="InteractWith" QuestId="28421" MobId="206853" NumOfTimes="100" InteractByLooting="true" PreInteractMountStrategy="Dismount" CollectionDistance="7" >
+				<HuntingGrounds WaypointVisitStrategy="InOrder">
+					<Hotspot X="-7880.906" Y="-853.9014" Z="146.4746" />
+					<Hotspot X="-7872.736" Y="-889.2541" Z="139.3105" />
+					<Hotspot X="-7899.621" Y="-913.7264" Z="135.1874" />
+					<Hotspot X="-7898.896" Y="-932.1718" Z="130.4277" />
+					<Hotspot X="-7888.779" Y="-922.7195" Z="129.9268" />
+					<Hotspot X="-7898.187" Y="-932.2107" Z="130.1701" />
+					<Hotspot X="-7955.272" Y="-932.7703" Z="132.3312" />
+					<Hotspot X="-7939.063" Y="-985.5897" Z="131.593" />
+					<Hotspot X="-7903.264" Y="-1112.215" Z="135.9192" />
+					<Hotspot X="-7906.67" Y="-1118.192" Z="135.8935" />
+					<Hotspot X="-7872.738" Y="-1088.842" Z="132.6392" />
+					<Hotspot X="-7881.601" Y="-1086.437" Z="132.1612" />
+					<Hotspot X="-7915.353" Y="-1039.534" Z="136.1078" />
+					<Hotspot X="-7940.154" Y="-956.2824" Z="133.3804" />
+					<Hotspot X="-7915.871" Y="-940.2756" Z="131.8955" />
+					<Hotspot X="-7885.791" Y="-867.819" Z="142.745" />
+				</HuntingGrounds>
+			</Code>
+			<UseMount Value="true" />
+		</While>
+
+		<Code File="KillUntilComplete" TerminateWhen="!DoQuest(28420, 28419)" >
+			<HuntingGrounds>
+				<Hotspot X="-7974.522" Y="-818.9394" Z="131.7541" />
+				<Hotspot X="-8050.979" Y="-781.3644" Z="131.3833" />
+				<Hotspot X="-8147.197" Y="-753.9359" Z="133.6976" />
+				<Hotspot X="-8192.308" Y="-892.7881" Z="132.9627" />
+			</HuntingGrounds>
+			<PursuitList>
+				<PursueUnit Id="9690" PursueWhen="DoQuest(28420)" />
+				<PursueUnit Id="9691" PursueWhen="DoQuest(28419)" />
+			</PursuitList>
+		</Code>
+
+		<TurnIn QuestName="Stocking Up" QuestId="28419" TurnInName="Ariok" TurnInId="48559" X="-8081.555" Y="-1011.442" Z="132.8152" />
+		<TurnIn QuestName="A Future Project" QuestId="28420" TurnInName="Ariok" TurnInId="48559" X="-8081.555" Y="-1011.442" Z="132.8152" />
+		<TurnIn QuestName="Mud Hunter" QuestId="28421" TurnInName="Ariok" TurnInId="48559" X="-8081.555" Y="-1011.442" Z="132.8152" />
+		<PickUp QuestName="The Sand, the Cider, and the Orb" QuestId="28422" GiverName="Ariok" GiverId="48559" X="-8078.586" Y="-1010.587" Z="132.8507" />
+		<TurnIn QuestName="The Sand, the Cider, and the Orb" QuestId="28422" TurnInName="Gorzeeki Wildeyes" TurnInId="14437" X="-7739.855" Y="-727.2047" Z="181.9104" />
+		<RecheckCheckpoints />
+		<PickUp QuestName="Warlocks Have the Neatest Stuff" QuestId="28423" GiverName="Gorzeeki Wildeyes" GiverId="14437" X="-7739.855" Y="-727.2047" Z="181.9104" />
+		<PickUp QuestName="Shadow Boxing" QuestId="28424" GiverName="Gorzeeki Wildeyes" GiverId="14437" X="-7739.855" Y="-727.2047" Z="181.9104" />
+
+		<Code File="KillUntilComplete" MobId="47805" QuestId="28424" X="-7608.63" Y="-777.278" Z="193.0445" />
+
+		<Code File="InteractWith" MobId="206881" InteractByLooting="true" QuestId="28423" QuestObjectiveIndex="2" X="-7656.221" Y="-637.8828" Z="200.4518" />
+		<Code File="InteractWith" MobId="206882" InteractByLooting="true" QuestId="28423" QuestObjectiveIndex="3" X="-7637.602" Y="-628.6653" Z="200.4521" />
+
+		<Code File="KillUntilComplete" MobId="7028" QuestId="28423" QuestObjectiveIndex="1" >
+			<HuntingGrounds>
+				<Hotspot X="-7648.967" Y="-688.5328" Z="181.207" />
+				<Hotspot X="-7643.145" Y="-652.3477" Z="199.8275" />
+				<Hotspot X="-7615.906" Y="-750.678" Z="190.7912" />
+			</HuntingGrounds>
+		</Code>
+
+		<TurnIn QuestName="Warlocks Have the Neatest Stuff" QuestId="28423" TurnInName="Gorzeeki Wildeyes" TurnInId="14437" X="-7734.104" Y="-727.6389" Z="181.912" />
+		<TurnIn QuestName="Shadow Boxing" QuestId="28424" TurnInName="Gorzeeki Wildeyes" TurnInId="14437" X="-7734.104" Y="-727.6389" Z="181.912" />
+		<PickUp QuestName="Return to Ariok" QuestId="28425" GiverName="Gorzeeki Wildeyes" GiverId="14437" X="-7734.104" Y="-727.6389" Z="181.912" />
+		<TurnIn QuestName="Return to Ariok" QuestId="28425" TurnInName="Ariok" TurnInId="48559" X="-8075.777" Y="-1007.79" Z="133.0454" />
+		<RecheckCheckpoints />
+
+		<PickUp QuestName="Chiselgrip, the Heart of the Steppes" QuestId="28426" GiverName="Ariok" GiverId="48559" X="-8075.777" Y="-1007.79" Z="133.0454" />
+		<Code File="KillUntilComplete" MobIds="48120, 7027, 7026, 48118" QuestId="28426" >
+			<HuntingGrounds>
+				<Hotspot X="-8105.095" Y="-1446.974" Z="131.3036" />
+				<Hotspot X="-8112.757" Y="-1508.106" Z="133.1125" />
+				<Hotspot X="-8132.16" Y="-1666.627" Z="132.5567" />
+				<Hotspot X="-8149.661" Y="-1848.834" Z="133.5274" />
+			</HuntingGrounds>
+		</Code>
+		<TurnIn QuestName="Chiselgrip, the Heart of the Steppes" QuestId="28426" TurnInName="Stebben Oreknuckle" TurnInId="48033" X="-7913.616" Y="-1937.029" Z="133.0557" />
+
+		<PickUp QuestName="Prove Yer Allegiance" QuestId="28225" GiverName="Stebben Oreknuckle" GiverId="48033" X="-7913.616" Y="-1937.029" Z="133.0557" />
+		<PickUp QuestName="Scrapped Golems" QuestId="28226" GiverName="Stebben Oreknuckle" GiverId="48033" X="-7913.616" Y="-1937.029" Z="133.0557" />
+		<PickUp QuestName="A Needle in a Hellhole" QuestId="28427" GiverName="Eitrigg" GiverId="48568" X="-7920.946" Y="-1870.612" Z="132.4626" />
+		<TurnIn QuestName="A Needle in a Hellhole" QuestId="28427" TurnInName="Thelaron Direneedle" TurnInId="48001" X="-7955.337" Y="-1897.518" Z="131.9751" />
+
+		<If Condition="Me.Race == WoWRace.Orc">
+			<PickUp QuestName="A Perfect Costume" QuestId="28428" GiverName="Thelaron Direneedle" GiverId="48001" X="-7956.236" Y="-1895.523" Z="132.0254" />
+			<While Condition="DoQuest(28428)">
+				<Code File="InteractWith" QuestId="28428" MobId="206947" InteractByGossipOptions="1,2,4,2" CollectionDistance="50" X="-7954.528" Y="-1898.745" Z="131.9331" />
+				<Code File="InteractWith" MobId="48001" InteractByGossipOptions="1" X="-7954.528" Y="-1898.745" Z="131.9331" />
+			</While>
+			<TurnIn QuestName="A Perfect Costume" QuestId="28428" TurnInName="Eitrigg" TurnInId="48568" X="-7921.099" Y="-1872.269" Z="132.4178" />
+		</If>
+		<If Condition="Me.Race == WoWRace.Undead">
+			<PickUp QuestName="A Perfect Costume" QuestId="28428" GiverName="Thelaron Direneedle" GiverId="48001" X="-7956.236" Y="-1895.523" Z="132.0254" />
+			<While Condition="DoQuest(28428)">
+				<Code File="InteractWith" QuestId="28428" MobId="206947" InteractByGossipOptions="1,2,4,2" CollectionDistance="50" X="-7954.528" Y="-1898.745" Z="131.9331" />
+				<Code File="InteractWith" MobId="48001" InteractByGossipOptions="1" X="-7954.528" Y="-1898.745" Z="131.9331" />
+			</While>
+			<TurnIn QuestName="A Perfect Costume" QuestId="28428" TurnInName="Eitrigg" TurnInId="48568" X="-7921.099" Y="-1872.269" Z="132.4178" />
+		</If>
+		<If Condition="Me.Race == WoWRace.Pandaren">
+			<PickUp QuestName="A Perfect Costume" QuestId="28429" GiverName="Thelaron Direneedle" GiverId="48001" X="-7956.236" Y="-1895.523" Z="132.0254" />
+			<While Condition="DoQuest(28429)">
+				<Code File="InteractWith" QuestId="28429" MobId="206947" InteractByGossipOptions="1,4,1,3" CollectionDistance="50" X="-7954.528" Y="-1898.745" Z="131.9331" />
+				<Code File="InteractWith" MobId="48001" InteractByGossipOptions="1" X="-7954.528" Y="-1898.745" Z="131.9331" />
+			</While>
+			<TurnIn QuestName="A Perfect Costume" QuestId="28429" TurnInName="Eitrigg" TurnInId="48568" X="-7921.099" Y="-1872.269" Z="132.4178" />
+		</If>
+		<If Condition="Me.Race == WoWRace.Tauren">
+			<PickUp QuestName="A Perfect Costume" QuestId="28429" GiverName="Thelaron Direneedle" GiverId="48001" X="-7956.236" Y="-1895.523" Z="132.0254" />
+			<While Condition="DoQuest(28429)">
+				<Code File="InteractWith" QuestId="28429" MobId="206947" InteractByGossipOptions="1,4,1,3" CollectionDistance="50" X="-7954.528" Y="-1898.745" Z="131.9331" />
+				<Code File="InteractWith" MobId="48001" InteractByGossipOptions="1" X="-7954.528" Y="-1898.745" Z="131.9331" />
+			</While>
+			<TurnIn QuestName="A Perfect Costume" QuestId="28429" TurnInName="Eitrigg" TurnInId="48568" X="-7921.099" Y="-1872.269" Z="132.4178" />
+		</If>
+		<If Condition="Me.Race == WoWRace.Goblin">
+			<PickUp QuestName="A Perfect Costume" QuestId="28430" GiverName="Thelaron Direneedle" GiverId="48001" X="-7956.236" Y="-1895.523" Z="132.0254" />
+			<While Condition="DoQuest(28430)">
+				<Code File="InteractWith" QuestId="28430" MobId="206947" InteractByGossipOptions="1,1,3,4" CollectionDistance="50" X="-7954.528" Y="-1898.745" Z="131.9331" />
+				<Code File="InteractWith" MobId="48001" InteractByGossipOptions="1" X="-7954.528" Y="-1898.745" Z="131.9331" />
+			</While>
+			<TurnIn QuestName="A Perfect Costume" QuestId="28430" TurnInName="Eitrigg" TurnInId="48568" X="-7921.099" Y="-1872.269" Z="132.4178" />
+		</If>
+		<If Condition="Me.Race == WoWRace.BloodElf">
+			<PickUp QuestName="A Perfect Costume" QuestId="28431" GiverName="Thelaron Direneedle" GiverId="48001" X="-7956.236" Y="-1895.523" Z="132.0254" />
+			<While Condition="DoQuest(28431)">
+				<Code File="InteractWith" QuestId="28431" MobId="206947" InteractByGossipOptions="1,3,2,1" CollectionDistance="50" X="-7954.528" Y="-1898.745" Z="131.9331" />
+				<Code File="InteractWith" MobId="48001" InteractByGossipOptions="1" X="-7954.528" Y="-1898.745" Z="131.9331" />
+			</While>
+			<TurnIn QuestName="A Perfect Costume" QuestId="28431" TurnInName="Eitrigg" TurnInId="48568" X="-7921.099" Y="-1872.269" Z="132.4178" />
+		</If>
+		<If Condition="Me.Race == WoWRace.Troll">
+			<PickUp QuestName="A Perfect Costume" QuestId="28431" GiverName="Thelaron Direneedle" GiverId="48001" X="-7956.236" Y="-1895.523" Z="132.0254" />
+			<While Condition="DoQuest(28431)">
+				<Code File="InteractWith" QuestId="28431" MobId="206947" InteractByGossipOptions="1,3,2,1" CollectionDistance="50" X="-7954.528" Y="-1898.745" Z="131.9331" />
+				<Code File="InteractWith" MobId="48001" InteractByGossipOptions="1" X="-7954.528" Y="-1898.745" Z="131.9331" />
+			</While>
+			<TurnIn QuestName="A Perfect Costume" QuestId="28431" TurnInName="Eitrigg" TurnInId="48568" X="-7921.099" Y="-1872.269" Z="132.4178" />
+		</If>
+
+		<PickUp QuestName="Into the Black Tooth Hovel" QuestId="28432" GiverName="Eitrigg" GiverId="48568" X="-7921.099" Y="-1872.269" Z="132.4178" />
+
+		<Code File="Hooks\DoWhen" ActivityName="KeepOrcDisguise" AllowUseWhileMounted="true" UseWhen="!Me.HasAura(89261) &amp;&amp; HasItem(63357) &amp;&amp; Me.ZoneId == 46" >
+			<Code File="UseItem" ItemId="63357" />
+			<Code File="WaitTimer" WaitTime="1000" TerminateWhen="Me.HasAura(89261)" />
+		</Code>
+
+		<TurnIn QuestName="Into the Black Tooth Hovel" QuestId="28432" TurnInName="Quartermaster Kaoshin" TurnInId="48085" X="-8068.705" Y="-1892.767" Z="132.514" />
+		<RecheckCheckpoints />
+		<PickUp QuestName="Grunt Work" QuestId="28433" GiverName="Quartermaster Kaoshin" GiverId="48085" X="-8068.705" Y="-1892.767" Z="132.514" />
+		<PickUp QuestName="Strategic Cuts" QuestId="28434" GiverName="EchoTiger" GiverId="0" />
+
+		<Code File="InteractWith" MobId="48100" InteractByUsingItemId="63350" NonCompeteDistance="0" QuestId="28434" QuestObjectiveIndex="3" X="-8089.445" Y="-1886.819" Z="182.4935" />
+
+		<While Condition="DoQuest(28433)" >
+			<Code File="InteractWith" MobId="206977" NumOfTimes="14" CollectionDistance="200" QuestId="28433" >
+				<HuntingGrounds>
+					<Hotspot X="-8065.166" Y="-1894.299" Z="132.3721" />
+					<Hotspot X="-8089.481" Y="-1778.732" Z="133.1957" />
+				</HuntingGrounds>
+			</Code>
+		</While>
+
+		<Code File="InteractWith" MobId="48099" InteractByUsingItemId="63350" NonCompeteDistance="0" InteractBlacklistTimeInSeconds="1" QuestId="28434" QuestObjectiveIndex="2" X="-8161.11" Y="-1700.899" Z="137.968" />
+		<Code File="InteractWith" MobId="9176" InteractByUsingItemId="63350" NonCompeteDistance="0" InteractBlacklistTimeInSeconds="1" QuestId="28434" QuestObjectiveIndex="1" X="-8240.977" Y="-1769.563" Z="146.3803" />
+
+		<TurnIn QuestName="Strategic Cuts" QuestId="28434" />
+		<TurnIn QuestName="Grunt Work" QuestId="28433" TurnInName="Quartermaster Kaoshin" TurnInId="48085" X="-8071.73" Y="-1889.981" Z="132.7665" />
+		<PickUp QuestName="The Kodocaller's Horn" QuestId="28435" GiverName="Quartermaster Kaoshin" GiverId="48085" X="-8071.73" Y="-1889.981" Z="132.7665" />
+
+		<While Condition="DoQuest(28435)" >
+			<Code File="InteractWith" MobId="48111" InteractByUsingItemId="63356" NumOfTimes="14" CollectionDistance="200" QuestId="28435" X="-8260" Y="-1887.453" Z="144.0968" />
+		</While>
+
+		<TurnIn QuestName="The Kodocaller's Horn" QuestId="28435" />
+		<PickUp QuestName="Taking the Horn For Ourselves" QuestId="28436" GiverName="EchoTiger" GiverId="0" />
+		<TurnIn QuestName="Taking the Horn For Ourselves" QuestId="28436" TurnInName="Eitrigg" TurnInId="48568" X="-7921.1" Y="-1872.19" Z="132.4191" />
+
+		<While Condition="DoQuest(28226)" >
+			<Code File="RunCode" Type="Definition" ><![CDATA[
+					private Styx.TreeSharp.Composite _lootPartsHook;
+					private WoWGameObject _currentPart;
+
+					private async Task<bool> LootGolemParts()
+					{
+						if (QuestDone(28226)) return false;
+						if (_currentPart == null || !_currentPart.IsValid)
+						{
+							_currentPart = ObjectManager.GetObjectsOfType<WoWGameObject>()
+								.Where(u => new[]{206971, 206972, 206973, 206974}.Contains((int)u.Entry))
+								.OrderBy(u => u.DistanceSqr).FirstOrDefault();
+							if (_currentPart == null)
+								return false;
+						}
+						if (_currentPart.Location.DistanceSquared((WoWMovement.ActiveMover ?? StyxWoW.Me).Location) > 3 * 3)
+						{
+							TreeRoot.StatusText = "Moving to golem part";
+							return (await CommonCoroutines.MoveTo(_currentPart.Location)).IsSuccessful();
+						}
+
+						TreeRoot.StatusText = "Looting golem part";
+						await CommonCoroutines.StopMoving();
+						_currentPart.Interact();
+						await Coroutine.Sleep(1500);
+
+						if (_currentPart.Entry == 206974)
+						{
+							if (!IsObjectiveComplete(1, 28226))
+								Lua.DoString("GossipTitleButton1:Click();");
+							else if (!IsObjectiveComplete(3, 28226))
+								Lua.DoString("GossipTitleButton2:Click();");
+							else
+								Lua.DoString("GossipTitleButton1:Click();");
+						}
+						else if (_currentPart.Entry == 206973)
+						{
+							if (!IsObjectiveComplete(4, 28226))
+								Lua.DoString("GossipTitleButton2:Click();");
+							else if (!IsObjectiveComplete(2, 28226))
+								Lua.DoString("GossipTitleButton2:Click();");
+							else
+								Lua.DoString("GossipTitleButton1:Click();");
+						}
+						else if (_currentPart.Entry == 206972)
+						{
+							if (!IsObjectiveComplete(2, 28226))
+								Lua.DoString("GossipTitleButton1:Click();");
+							else if (!IsObjectiveComplete(3, 28226))
+								Lua.DoString("GossipTitleButton2:Click();");
+							else
+								Lua.DoString("GossipTitleButton1:Click();");
+						}
+						else if (_currentPart.Entry == 206971)
+						{
+							if (!IsObjectiveComplete(2, 28226))
+								Lua.DoString("GossipTitleButton1:Click();");
+							else if (!IsObjectiveComplete(1, 28226))
+								Lua.DoString("GossipTitleButton1:Click();");
+							else
+								Lua.DoString("GossipTitleButton1:Click();");
+						}
+
+						return true;
+					}
+				]]>
+			</Code>
+			<Code File="RunCode"><![CDATA[ TreeHooks.Instance.InsertHook("Questbot_Profile", 0, _lootPartsHook ?? (_lootPartsHook = new  CommonBehaviors.Actions.ActionRunCoroutine(ctx => LootGolemParts()))); ]]></Code>
+			<Code File="KillUntilComplete" MobId="7039" QuestId="28226" >
+				<HuntingGrounds>
+					<Hotspot X="-7778.345" Y="-1945.105" Z="134.3411" />
+					<Hotspot X="-7852.823" Y="-2032.314" Z="136.3033" />
+					<Hotspot X="-7751.833" Y="-2094.517" Z="133.1681" />
+					<Hotspot X="-7812.992" Y="-1908.113" Z="134.5811" />
+				</HuntingGrounds>
+			</Code>
+			<Code File="RunCode"><![CDATA[ TreeHooks.Instance.RemoveHook("Questbot_Profile", _lootPartsHook); ]]></Code>
+		</While>
+
+		<Code File="KillUntilComplete" MobIds="7036, 7038, 7037" QuestId="28225" >
+			<HuntingGrounds>
+				<Hotspot X="-7778.345" Y="-1945.105" Z="134.3411" />
+				<Hotspot X="-7852.823" Y="-2032.314" Z="136.3033" />
+				<Hotspot X="-7751.833" Y="-2094.517" Z="133.1681" />
+				<Hotspot X="-7812.992" Y="-1908.113" Z="134.5811" />
+			</HuntingGrounds>
+		</Code>
+
+		<TurnIn QuestName="Prove Yer Allegiance" QuestId="28225" TurnInName="Stebben Oreknuckle" TurnInId="48033" X="-7913.504" Y="-1937.762" Z="133.1867" />
+		<TurnIn QuestName="Scrapped Golems" QuestId="28226" TurnInName="Stebben Oreknuckle" TurnInId="48033" X="-7913.504" Y="-1937.762" Z="133.1867" />
+		<RecheckCheckpoints />
+
+		<PickUp QuestName="Golem Training" QuestId="28227" GiverName="Stebben Oreknuckle" GiverId="48033" X="-7913.504" Y="-1937.762" Z="133.1867" />
+		<While Condition="DoQuest(28227)" >
+			<Code File="InteractWith" MobId="48037" GossipOptions="1" NumOfTimes="8" CollectionDistance="200" QuestId="28227" X="-7933.979" Y="-1902.794" Z="132.4554" TerminateWhen="Me.Combat" />
+		</While>
+		<TurnIn QuestName="Golem Training" QuestId="28227" TurnInName="Stebben Oreknuckle" TurnInId="48033" X="-7912.072" Y="-1936.451" Z="132.9023" />
+
+		<PickUp QuestName="General Thorg&apos;izog" QuestId="28437" GiverName="Eitrigg" GiverId="48568" X="-7921.651" Y="-1871.761" Z="132.4161" />
+		<TurnIn QuestName="General Thorg'izog" QuestId="28437" TurnInName="General Thorg'izog" TurnInId="48133" X="-7693.1" Y="-1434.513" Z="140.9365" />
+
+		<PickUp QuestName="Trial by Magma" QuestId="28438" GiverName="General Thorg'izog" GiverId="48133" X="-7693.1" Y="-1434.513" Z="140.9365" />
+		<While Condition="DoQuest(28438)" >
+			<Code File="InteractWith" MobId="48159" GossipOptions="1" NonCompeteDistance="0" QuestId="28438" X="-7689.321" Y="-1435.371" Z="140.9358" />
+			<Code File="KillUntilComplete" MobId="28438" QuestId="48133" X="-7694.005" Y="-1436.475" Z="140.9358" TerminateAfterMaxRuntimeSecs="15" />
+		</While>
+		<TurnIn QuestName="Trial by Magma" QuestId="28438" TurnInName="General Thorg'izog" TurnInId="48133" X="-7693.1" Y="-1434.513" Z="140.9365" />
+
+		<PickUp QuestName="I Am the Law and I Am the Lash" QuestId="28439" GiverName="General Thorg'izog" GiverId="48133" X="-7693.1" Y="-1434.513" Z="140.9365" />
+		<PickUp QuestName="Abuse of Power" QuestId="28440" GiverName="EchoTiger" GiverId="0" />
+
+		<While Condition="DoQuest(28439, 28440)" >
+			<Code File="RunCode" Type="Definition" ><![CDATA[
+					private Styx.TreeSharp.Composite _cudgelMobsHook;
+					private WoWUnit _currentMob;
+					private WoWItem _crudgelItem => StyxWoW.Me.BagItems.FirstOrDefault(x => x.Entry == 63390);
+
+					private async Task<bool> CrudgelMobsTask()
+					{
+						if (!DoQuest(28439, 28440)) return false;
+						if (!StyxWoW.Me.HasAura(89261)) return false;
+						if (_crudgelItem == null) return false;
+
+						if (_currentMob == null || !_currentMob.IsValid || _currentMob.IsDead || (_currentMob.HasAura(89568) && !StyxWoW.Me.HasAura(89596)))
+						{
+							if (DoQuest(28439) && DoQuest(28439))
+							{
+								_currentMob = ObjectManager.GetObjectsOfType<WoWUnit>()
+									.Where(u => new[]{48119, 7025, 48201}.Contains((int)u.Entry) && !u.HasAura(89568) && u.IsAlive)
+									.OrderBy(u => u.DistanceSqr).FirstOrDefault();
+							}
+							else if (DoQuest(28439))
+							{
+								_currentMob = ObjectManager.GetObjectsOfType<WoWUnit>()
+									.Where(u => new[]{48119, 7025}.Contains((int)u.Entry) && !u.HasAura(89568) && u.IsAlive)
+									.OrderBy(u => u.DistanceSqr).FirstOrDefault();
+							}
+							else if (DoQuest(28440))
+							{
+								_currentMob = ObjectManager.GetObjectsOfType<WoWUnit>()
+									.Where(u => new[]{48201}.Contains((int)u.Entry) && !u.HasAura(89568) && u.IsAlive)
+									.OrderBy(u => u.DistanceSqr).FirstOrDefault();
+							}
+							if (_currentMob == null)
+								return false;
+						}
+						if (_currentMob.Location.DistanceSquared((WoWMovement.ActiveMover ?? StyxWoW.Me).Location) > 3 * 3)
+						{
+							TreeRoot.StatusText = "Moving to orc to whack!";
+							return (await CommonCoroutines.MoveTo(_currentMob.Location)).IsSuccessful();
+						}
+
+						TreeRoot.StatusText = "Whacking orc!";
+						_currentMob.Target();
+						await CommonCoroutines.StopMoving();
+						_crudgelItem.Interact();
+						await Coroutine.Sleep(650);
+						
+						return true;
+					}
+				]]>
+			</Code>
+
+			<Code File="RunCode"><![CDATA[ TreeHooks.Instance.InsertHook("Questbot_Profile", 0, _cudgelMobsHook ?? (_cudgelMobsHook = new  CommonBehaviors.Actions.ActionRunCoroutine(ctx => CrudgelMobsTask()))); ]]></Code>
+			<While Condition="DoQuest(28439, 28440)" >
+				<If Condition="Me.HasAura(89261)" >
+					<MoveTo X="-7728.89" Y="-1542.32" Z="134.1321" />
+					<DisableBehavior Name="Combat" /> <!-- Shut off combat once in crudgel area. -->
+				</If>
+				<If Condition="!Me.HasAura(89261)" >
+					<MoveTo X="-7629.78" Y="-1439.217" Z="141.7135" /> <!-- Flee if we lose disguise -->
+				</If>
+			</While>
+			<EnableBehavior Name="Combat" />
+			<Code File="RunCode"><![CDATA[ TreeHooks.Instance.RemoveHook("Questbot_Profile", _cudgelMobsHook); ]]></Code>
+		</While>
+		<TurnIn QuestName="I Am the Law and I Am the Lash" QuestId="28439" TurnInName="General Thorg'izog" TurnInId="48133" X="-7693.1" Y="-1434.513" Z="140.9365" />
+
+		<Code File="Hooks\DoWhen" ActivityName="KeepOrcDisguise" Command="Disable" />
+
+		<TurnIn QuestName="Abuse of Power" QuestId="28440" TurnInName="Eitrigg" TurnInId="48568" X="-7921.1" Y="-1872.19" Z="132.4191" />
+		<PickUp QuestName="Enough Damage For One Day" QuestId="28441" GiverName="Eitrigg" GiverId="48568" X="-7921.1" Y="-1872.19" Z="132.4191" />
+		<TurnIn QuestName="Enough Damage For One Day" QuestId="28441" TurnInName="Eitrigg" TurnInId="48568" X="-7921.1" Y="-1872.19" Z="132.4191" />
+		<PickUp QuestName="Flame Crest" QuestId="28442" GiverName="Eitrigg" GiverId="48568" X="-7920.292" Y="-1870.425" Z="132.4648" />
+		<TurnIn QuestName="Flame Crest" QuestId="28442" TurnInName="Kibler" TurnInId="10260" X="-7461.717" Y="-2195.993" Z="164.9727" />
+		<RecheckCheckpoints />
+		<PickUp QuestName="Not Fireflies, Flameflies" QuestId="28491" GiverName="Kibler" GiverId="10260" X="-7461.717" Y="-2195.993" Z="164.9727" />
+		<PickUp QuestName="Blackened Ashes" QuestId="28443" GiverName="Eitrigg" GiverId="48569" X="-7498.191" Y="-2184.97" Z="165.6762" />
+		<PickUp QuestName="Latent Demons of the Land" QuestId="28444" GiverName="Eitrigg" GiverId="48569" X="-7498.191" Y="-2184.97" Z="165.6762" />
+		<PickUp QuestName="A Heap of Delicious Worg" QuestId="28445" GiverName="Eitrigg" GiverId="48569" X="-7498.191" Y="-2184.97" Z="165.6762" />
+
+		<Code File="InteractWith" MobIds="9776, 9778, 9779, 48649" KeepTargetSelected="true" CollectionDistance="200" QuestId="28444" QuestObjectiveIndex="1" >
+			<HuntingGrounds>
+				<Hotspot X="-7687.048" Y="-2153.369" Z="135.0156" />
+				<Hotspot X="-7642.061" Y="-2333.519" Z="132.7584" />
+			</HuntingGrounds>
+		</Code>
+
+		<Code File="InteractWith" MobId="48671" Range="4" QuestId="28491" QuestObjectiveIndex="1" >
+			<HuntingGrounds>
+				<Hotspot X="-7687.048" Y="-2153.369" Z="135.0156" />
+				<Hotspot X="-7642.061" Y="-2333.519" Z="132.7584" />
+			</HuntingGrounds>
+		</Code>
+
+		<Code File="KillUntilComplete" MobId="7032" QuestId="28443" >
+			<HuntingGrounds>
+				<Hotspot X="-7769.269" Y="-2430.427" Z="140.9313" />
+				<Hotspot X="-7897.854" Y="-2416.285" Z="129.8955" />
+				<Hotspot X="-8019.515" Y="-2463.231" Z="132.5033" />
+			</HuntingGrounds>
+		</Code>
+
+		<While Condition="DoQuest(28445)" >
+			<Code File="InteractWith" MobId="9697" InteractByUsingItemId="63427" CollectionDistance="200" MobState="Dead" NumOfTimes="80" QuestId="28445" >
+				<HuntingGrounds>
+					<Hotspot X="-7643.532" Y="-2528.539" Z="133.7075" />
+					<Hotspot X="-7597.929" Y="-2624.068" Z="134.6887" />
+					<Hotspot X="-7674.838" Y="-2764.675" Z="131.9459" />
+				</HuntingGrounds>
+			</Code>
+		</While>
+
+		<TurnIn QuestName="Blackened Ashes" QuestId="28443" TurnInName="Eitrigg" TurnInId="48569" X="-7502.574" Y="-2187.636" Z="165.5759" />
+		<TurnIn QuestName="Latent Demons of the Land" QuestId="28444" TurnInName="Eitrigg" TurnInId="48569" X="-7502.574" Y="-2187.636" Z="165.5759" />
+		<TurnIn QuestName="A Heap of Delicious Worg" QuestId="28445" TurnInName="Eitrigg" TurnInId="48569" X="-7502.574" Y="-2187.636" Z="165.5759" />
+		<PickUp QuestName="Blood Tour" QuestId="28446" GiverName="Ariok" GiverId="48565" X="-7502.574" Y="-2187.636" Z="165.5759" />
+		<PickUp QuestName="Draconic Vanguard" QuestId="28447" GiverName="Ariok" GiverId="48565" X="-7502.574" Y="-2187.636" Z="165.5759" />
+		<PickUp QuestName="A Deal With a Dragon" QuestId="28448" GiverName="Ariok" GiverId="48567" X="-7502.574" Y="-2187.636" Z="165.5759" /> <!--48565-->
+		<TurnIn QuestName="Not Fireflies, Flameflies" QuestId="28491" TurnInName="Kibler" TurnInId="10260" X="-7463.182" Y="-2194.966" Z="164.9783" />
+		<RecheckCheckpoints />
+
+		<While Condition="DoQuest(28447)" >
+			<Code File="KillUntilComplete" MobId="48287" QuestId="28447" QuestObjectiveIndex="1" X="-8250.579" Y="-2517.477" Z="139.6854" />
+			<Code File="KillUntilComplete" MobId="48289" QuestId="28447" QuestObjectiveIndex="3" X="-8051.263" Y="-2968.672" Z="134.3401" />
+			<Code File="KillUntilComplete" MobId="48291" QuestId="28447" QuestObjectiveIndex="4" X="-7753.289" Y="-2859.895" Z="133.4389" />
+			<Code File="KillUntilComplete" MobId="48288" QuestId="28447" QuestObjectiveIndex="2" X="-7575.833" Y="-2739.93" Z="134.0037" />
+		</While>
+
+		<Code File="KillUntilComplete" MobIds="7040, 7041" QuestId="28446" >
+			<HuntingGrounds>
+				<Hotspot X="-7638.074" Y="-2753.729" Z="133.0776" />
+				<Hotspot X="-7651.68" Y="-2861.568" Z="134.9965" />
+				<Hotspot X="-7776.728" Y="-2937.062" Z="131.7502" />
+				<Hotspot X="-7909.073" Y="-2878.426" Z="134.9655" />
+				<Hotspot X="-8021.539" Y="-2814.808" Z="133.8248" />
+			</HuntingGrounds>
+		</Code>
+
+		<TurnIn QuestName="Blood Tour" QuestId="28446" TurnInName="Ariok" TurnInId="48567" X="-7618.799" Y="-2698.792" Z="131.5284" />
+		<TurnIn QuestName="Draconic Vanguard" QuestId="28447" TurnInName="Ariok" TurnInId="48567" X="-7618.799" Y="-2698.792" Z="131.5284" />
+		<TurnIn QuestName="A Deal With a Dragon" QuestId="28448" TurnInName="Acride" TurnInId="48292" X="-7648.71" Y="-3048.856" Z="131.0455" />
+		<PickUp QuestName="Placing the Pawns" QuestId="28449" GiverName="EchoTiger" GiverId="48569" X="-7648.71" Y="-3048.856" Z="131.0455" />
+		<TurnIn QuestName="Placing the Pawns" QuestId="28449" TurnInName="Eitrigg" TurnInId="48569" X="-7504.363" Y="-2187.415" Z="165.4731" />
+		<PickUp QuestName="A Delivery for Thorg&apos;izog" QuestId="28450" GiverName="Eitrigg" GiverId="48569" X="-7504.363" Y="-2187.415" Z="165.4731" />
+		<PickUp QuestName="A Delivery for Neeralak" QuestId="28451" GiverName="Eitrigg" GiverId="48569" X="-7504.363" Y="-2187.415" Z="165.4731" />
+		<PickUp QuestName="A Delivery for Xi&apos;lun" QuestId="28452" GiverName="Eitrigg" GiverId="48569" X="-7504.363" Y="-2187.415" Z="165.4731" />
+
+		<Code File="Hooks\DoWhen" ActivityName="KeepOrcDisguise" Command="Enable" />
+
+		<TurnIn QuestName="A Delivery for Neeralak" QuestId="28451" TurnInName="Dragon-Lord Neeralak" TurnInId="48314" X="-7977.029" Y="-2678.762" Z="156.81" />
+		<TurnIn QuestName="A Delivery for Xi'lun" QuestId="28452" TurnInName="High Warlock Xi'lun" TurnInId="48312" X="-7888.42" Y="-2657.63" Z="220.1115" />
+		<TurnIn QuestName="A Delivery for Thorg'izog" QuestId="28450" TurnInName="General Thorg'izog" TurnInId="48316" X="-7839.404" Y="-2559.305" Z="126.243" />
+		<PickUp QuestName="Locked and Loaded" QuestId="28453" GiverName="EchoTiger" GiverId="0" />
+		<TurnIn QuestName="Locked and Loaded" QuestId="28453" TurnInName="Eitrigg" TurnInId="48569" X="-7502.541" Y="-2187.406" Z="165.581" />
+
+		<Code File="Hooks\DoWhen" ActivityName="KeepOrcDisguise" Command="Remove" />
+
+		<Checkpoint Level="53" /> <!-- Checkpoint is normally 52, but we're adding a level due to the lack of quests to get from 57 to 58 -->
+		<If Condition="Me.Level &lt;= 53" >
+			<Code File="RunCode" Code="foreach (PlayerQuest quest in Me.QuestLog.GetAllQuests()) QuestLog.Instance.AbandonQuestById(quest.Id)" />
+		</If>
+		<Code File="LoadProfile" ProfileName="Swamp of Sorrows.xml" />
+
+	</QuestOrder>
+</HBProfile>

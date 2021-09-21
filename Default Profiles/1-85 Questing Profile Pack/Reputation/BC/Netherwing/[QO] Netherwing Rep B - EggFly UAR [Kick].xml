@@ -1,0 +1,129 @@
+﻿<HBProfile>
+	<Name>[QO] Netherwing Rep A [Kick]</Name>
+   
+	<MinLevel>1</MinLevel>
+	<MaxLevel>86</MaxLevel>
+   
+	<MinDurability>0.2</MinDurability>
+	<MinFreeBagSlots>2</MinFreeBagSlots>
+	
+	<MailGrey>False</MailGrey>
+	<MailWhite>False</MailWhite>
+	<MailGreen>False</MailGreen>
+	<MailBlue>True</MailBlue>
+	<MailPurple>True</MailPurple>
+   
+	<SellGrey>True</SellGrey>
+	<SellWhite>True</SellWhite>
+	<SellGreen>True</SellGreen>
+	<SellBlue>False</SellBlue>
+	<SellPurple>False</SellPurple>
+   
+	<TargetElites>True</TargetElites>
+
+	<AvoidMobs>
+		<Mob Name="Dragonmaw Ascendant" Id="22253" />
+		<Mob Name="Nethermine Burster" Id="23285" />
+		<Mob Name="Reth'hedron the Subduer" Id="22357" />
+	</AvoidMobs>
+	
+	<Blackspots>
+		<Blackspot X="-5011.99" Y="487.7217" Z="-7.436669" Radius="9.258485" />
+		<Blackspot X="-5014.975" Y="366.7375" Z="170.646" Radius="5.355156" />
+	</Blackspots>
+
+	<Mailboxes>
+	</Mailboxes>
+ 
+	<Vendors>
+		<Vendor Name="Gug" Entry="23144" Type="Repair" X="-5119.803" Y="624.7665" Z="86.76022" />
+	</Vendors>
+
+	
+	<QuestOrder>
+	
+
+	<CustomBehavior File="UserSettings" LootMobs="False" PullDistance="1" TrainNewSkills="False" LearnFlightPaths="False" KillBetweenHotspots="False" LogoutForInactivity="False" />
+	
+<!--	
+	<CustomBehavior File="UserDialog"  AllowBotStop="True" SoundCue="Asterisk" SoundCueInterval="1" Text="Make sure the Netherwing and OpenThatStuff Plugins are enabled!\n\nIf you want to do a few more quests that the bot can't do atm, go up top and do them" />
+-->
+		<!-- This profile is for manual egg hunting only.  It will fly around.  If it stops dead in it's tracks, it's found an egg!
+			 If it's below 10z axis, it's in the mine.  if it's above 160z, it's on top of a rock somewhere.  Even the floating ones! 
+			 If it's anywhere inbetween, land and it should walk to it
+			 
+			 If it's underground, it could be anywhere, even inside of a mine cart!
+			 
+			 Make sure you read the Nav log for the red / yellow text
+			 
+			 If you're savvy enough, you can keep a quest bot profile open with a 
+			<CustomBehavior File="FlyTo" X="" Y="" Z="" />
+			 and copy and paste the coords in, and change over if you're having trouble finding an egg
+			 
+			 if the bot has taken over manually, it has probably found another egg, or that egg was looted by someone else
+			 
+			 sometimes navmesh sucks inside of the mine, so you may have to manually take over if the bot decides to turn around randomly
+			 
+			 if the bot half ass generates a path, you may have to go inside of the mine and press stop / start again
+		-->
+		<While Condition="Me.GetReputationLevelWith(1015) &lt; Styx.WoWUnitReaction.Exalted" >
+		
+			<CustomBehavior File="FlyTo" X="-5195.258" Y="746.5243" Z="72.51826" />
+			<CustomBehavior File="FlyTo" X="-5082.855" Y="586.9879" Z="130.2544" />
+			<CustomBehavior File="FlyTo" X="-5230.61" Y="538.0766" Z="71.67867" />
+			<CustomBehavior File="FlyTo" X="-5373.583" Y="555.6926" Z="99.59716" />
+			<CustomBehavior File="FlyTo" X="-5255.655" Y="401.659" Z="84.90911" />
+			<CustomBehavior File="FlyTo" X="-5065.046" Y="363.3931" Z="260.4366" />
+			<CustomBehavior File="FlyTo" X="-5099.065" Y="291.055" Z="197.1563" />
+			<CustomBehavior File="FlyTo" X="-5109.262" Y="144.3606" Z="149.7681" />
+			<CustomBehavior File="FlyTo" X="-5046.516" Y="192.7658" Z="142.703" />
+			<CustomBehavior File="FlyTo" X="-4988.762" Y="285.5263" Z="112.9709" />
+			<CustomBehavior File="FlyTo" X="-4957.594" Y="379.4748" Z="126.5052" />
+			<CustomBehavior File="FlyTo" X="-5024.006" Y="504.3115" Z="101.0563" />
+			<CustomBehavior File="FlyTo" X="-5236.595" Y="455.2259" Z="98.05861" />
+			<CustomBehavior File="FlyTo" X="-5343.52" Y="216.3273" Z="74.74231" />
+			<CustomBehavior File="FlyTo" X="-5267.815" Y="69.62548" Z="74.52104" />
+			<CustomBehavior File="FlyTo" X="-5409.048" Y="-55.43548" Z="137.4816" />
+			<CustomBehavior File="FlyTo" X="-5173.94" Y="-77.30832" Z="84.35261" />
+			<CustomBehavior File="FlyTo" X="-5127.631" Y="-146.6762" Z="102.9928" />
+			<CustomBehavior File="FlyTo" X="-5000.504" Y="-92.77831" Z="77.38731" />
+			<CustomBehavior File="FlyTo" X="-5010.833" Y="52.38588" Z="92.44536" />
+			<CustomBehavior File="FlyTo" X="-4913.37" Y="60.70529" Z="75.10946" />
+			<CustomBehavior File="FlyTo" X="-4878.644" Y="211.5977" Z="68.7178" />
+			<CustomBehavior File="FlyTo" X="-4828.656" Y="386.3727" Z="71.72263" />
+			<CustomBehavior File="FlyTo" X="-4963.411" Y="443.9084" Z="227.2638" />
+			<CustomBehavior File="FlyTo" X="-4299.419" Y="324.4479" Z="169.1331" />
+			<CustomBehavior File="FlyTo" X="-4220.296" Y="427.3188" Z="64.68701" />
+			<CustomBehavior File="FlyTo" X="-4164.463" Y="547.7781" Z="34.4186" />
+			<CustomBehavior File="FlyTo" X="-4397.258" Y="551.0456" Z="264.7446" />
+			<CustomBehavior File="FlyTo" X="-4718.362" Y="671.8993" Z="94.86899" />
+			<CustomBehavior File="FlyTo" X="-4848.279" Y="687.0264" Z="80.76964" />
+			<CustomBehavior File="FlyTo" X="-4950.41" Y="819.2221" Z="113.36" />
+			<CustomBehavior File="FlyTo" X="-5076.345" Y="851.3983" Z="57.69758" />
+			<CustomBehavior File="FlyTo" X="-5192.271" Y="758.268" Z="68.39481" />
+
+		</While>
+			
+
+		<If Condition="Me.GetReputationLevelWith(1015) == Styx.WoWUnitReaction.Exalted" >
+			<CustomBehavior File="UserDialog" Title="title" AllowBotStop="True" SoundCue="Asterisk" SoundCueInterval="1" Text="You have reached Exalted\nDrake Dealer Hurlunk sells the drakes\n\nIf you liked this profile, +rep is always appreciated" />
+		</If>
+		
+	
+	
+	</QuestOrder>
+
+	<ProtectedItems>
+		<Item Name="Time-Lost Offering" Id="32720" />
+		<Item Name="Karrog's Spine" Id="32717" />
+		<Item Name="Vakkiz's Scale" Id="32718" />
+		<Item Name="Akkarai's Talons" Id="32715" />
+		<Item Name="Gezzarak's Claws" Id="32716" />
+		<Item Name="Time-Lost Scroll" Id="32620" />
+		<Item Name="Shadow Dust" Id="32388" />
+		<Item Name="Netherdust Pollen" Id="32468" />
+		<Item Name="Nethercite Ore" Id="32464" />
+		<Item Name="Nethercite Flayer Hide" Id="32470" />
+	</ProtectedItems>
+
+</HBProfile>

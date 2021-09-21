@@ -1,0 +1,443 @@
+<HBProfile>
+	<Name>[Fly][N - Rep Quest] DH Therazane Rep Dailies [Kick]</Name>
+	<MinLevel>81</MinLevel>
+	<MaxLevel>101</MaxLevel>
+	
+	<MinDurability>0.2</MinDurability>
+	<MinFreeBagSlots>2</MinFreeBagSlots>
+	
+	<SellGrey>True</SellGrey>
+	<SellWhite>True</SellWhite>
+	<SellGreen>True</SellGreen>
+	<SellBlue>False</SellBlue>
+	<SellPurple>False</SellPurple>
+	
+	<MailWhite>True</MailWhite>
+	<MailGreen>True</MailGreen>
+	<MailBlue>True</MailBlue>
+	<MailPurple>True</MailPurple>  
+
+	<Vendors>
+		<Vendor Name="Rocky Cliffedge" Entry="44972" Type="Repair" X="666.938" Y="1779.79" Z="341" /> <!-- Fractured Front - West -->
+		<Vendor Name="Earthmender Doros" Entry="45363" Type="Repair" X="54.9115" Y="-274.955" Z="208.6113" /> <!-- Twilight Overlook - SE -->
+		<Vendor Name="Dugsley Deepdelver" Entry="45294" Type="Repair" X="1052.99" Y="636.936" Z="-45.87071" /> <!-- Alliance -->
+		<!-- Horde Repair
+		<Vendor Name="Rixi &quot;The Digger&quot; Bombdigger" Entry="45293" Type="Repair" X="1091.19" Y="436.332" Z="-45.96808" />
+		-->
+	</Vendors>
+	
+	<Mailboxes>
+		<Mailbox X="1050.438" Y="635.0461" Z="-45.78476" /> <!-- Alliance -->
+		<!-- Horde Mailbox 
+		<Mailbox X="1089.276" Y="436.3907" Z="-45.83395" />
+		-->
+	</Mailboxes>
+	
+	<Blackspots>
+		<Blackspot X="1762.587" Y="-576.7887" Z="270.2943" Radius="40.83547" />
+		<Blackspot X="1920.034" Y="-168.1386" Z="-174.6945" Radius="58.66096" />
+		<Blackspot X="1771.26" Y="-576.2966" Z="270.0465" Radius="27.93349" />
+		<Blackspot X="557.1691" Y="-762.451" Z="148.3766" Radius="35" />
+		<Blackspot X="900.3826" Y="947.446" Z="-68.98767" Radius="54.90371" />
+	</Blackspots>
+	
+	<AvoidMobs>
+		<Mob Name="Falling Rubble Bunny" Entry="48543" />
+		<Mob Name="Agitated Tunneler" Entry="43031" />
+		<Mob Name="Ogre Bodyguard" Entry="44879" />
+		<Mob Name="Millhouse Manastorm" Entry="44875" />
+	</AvoidMobs>
+
+	<Quest Id="27051" Name="Through Persistence">
+		<Objective Type="CollectItem" ItemId="60768" CollectCount="5">
+			<Hotspots>
+				<Hotspot X="1867.163" Y="-658.9117" Z="240.3133" />
+				<Hotspot X="1867.371" Y="-601.6373" Z="243.9714" />
+				<Hotspot X="1821.006" Y="-727.3107" Z="243.8567" />
+				<Hotspot X="1876.892" Y="-727.0038" Z="237.6184" />
+			</Hotspots>
+		</Objective>
+	</Quest>	
+	
+	<Quest Id="27046" Name="Fear of Boring">
+		<Objective Type="KillMob" MobId="44257" KillCount="10">
+			<Hotspots>
+				<Hotspot X="2008.11" Y="-176.6994" Z="-176.9008" />
+				<Hotspot X="2017.223" Y="-44.5828" Z="-185.4197" />
+				<Hotspot X="2145.805" Y="-110.8317" Z="-191.3588" />
+				<Hotspot X="2238.313" Y="-197.3273" Z="-172.2022" />
+				<Hotspot X="2160.714" Y="-238.3038" Z="-167.2043" />
+				<Hotspot X="2087.455" Y="-330.1184" Z="-160.0245" />
+				<Hotspot X="1998.774" Y="-329.7903" Z="-157.6522" />
+				<Hotspot X="1998.661" Y="-241.4005" Z="-159.0122" />			
+			</Hotspots>
+		</Objective>
+	</Quest>
+
+	<Quest Id="27047" Name="Motes">
+		<Objective Type="CollectItem" ItemId="60791" CollectCount="10">
+			<CollectFrom>
+				<GameObject Name="Painite Shard" Id="205195" />
+			</CollectFrom>
+			<Hotspots>
+				<Hotspot X="2017.223" Y="-44.5828" Z="-185.4197" />
+				<Hotspot X="2145.805" Y="-110.8317" Z="-191.3588" />
+				<Hotspot X="2238.313" Y="-197.3273" Z="-172.2022" />
+				<Hotspot X="2160.714" Y="-238.3038" Z="-167.2043" />
+				<Hotspot X="2087.455" Y="-330.1184" Z="-160.0245" />
+				<Hotspot X="1998.774" Y="-329.7903" Z="-157.6522" />
+				<Hotspot X="1998.661" Y="-241.4005" Z="-159.0122" />			
+			</Hotspots>
+		</Objective>
+	</Quest>	
+	
+	<Quest Id="28390" Name="Glop, Son of Glop">
+		<Objective Type="KillMob" MobId="43372" KillCount="1">
+			<Hotspots>
+				<Hotspot X="1647.847" Y="-490.4193" Z="145.2454" />
+				<Hotspot X="1555.994" Y="-420.4601" Z="170.2006" />
+				<Hotspot X="1480.291" Y="-577.8318" Z="165.7887" />
+				<Hotspot X="1537.519" Y="-518.4193" Z="169.9666" />			
+			</Hotspots>
+		</Objective>
+	</Quest>
+	
+	<QuestOrder>
+	
+		<CustomBehavior File="UserSettings" TrainNewSkills="False" LootMobs="True" PullDistance="10"  />
+		
+		<!-- If I am in Dalaran, take the portal to Main City -->
+		<If Condition="(Me.ZoneId == 4395)" >
+			<If Condition="Me.IsHorde" >
+				<CustomBehavior File="Message" Text="We are in Dalaran, using portal to Org" LogColor="Cornflowerblue" />
+				<CustomBehavior File="ForcedDismount" />
+				<RunTo X="5924.277" Y="589.9855" Z="639.8734" />
+				<CustomBehavior File="ForcedDismount" />
+				
+				<CustomBehavior File="InteractWith" MobId="191009" ObjectType="Gameobject" Range="4" X="5925.295" Y="593.4274" Z="640.5935" />
+				<CustomBehavior File="WaitTimer" WaitTime="5000" GoalText="Waiting for port {TimeRemaining}" />
+			 <If Condition="(Me.ZoneId == 1637)" >
+				<RunTo X="1897.4" Y="-4523.682" Z="27.50176" />
+			 </If>
+			</If>
+
+			 <If Condition="Me.IsAlliance" >
+				<CustomBehavior File="Message" Text="We are in Dalaran, using portal to SW" LogColor="Cornflowerblue" />
+				<CustomBehavior File="ForcedDismount" />
+				<RunTo X="5718.221" Y="721.2461" Z="641.7213" />
+				<CustomBehavior File="ForcedDismount" />
+				
+				<CustomBehavior File="InteractWith" MobId="190960" ObjectType="Gameobject" Range="4" X="5718.221" Y="721.2461" Z="641.7213" />
+				<CustomBehavior File="WaitTimer" WaitTime="5000" GoalText="Waiting for port {TimeRemaining}" />
+			  <If Condition="(Me.ZoneId == 1519)" >
+				<RunTo X="-8988.831" Y="860.4624" Z="125.7445" />
+			  </If>
+			 </If>
+		</If>
+		
+			<!-- If I am in Org - Take Deepholm Portal -->
+			<If Condition="(Me.IsHorde) &amp;&amp; (Me.ZoneId == 1637)" >
+				<CustomBehavior File="Message" Text="We are in Org, using portal to Deepholm" LogColor="Cornflowerblue" />
+				<CustomBehavior File="FlyTo" DestName="Org Deepholm Portal" X="2061.375" Y="-4387.435" Z="98.0477" />
+				<CustomBehavior File="ForcedDismount" />
+				
+				<CustomBehavior File="InteractWith" MobId="207689" ObjectType="Gameobject" Range="4" X="2061.375" Y="-4387.435" Z="98.0477" />
+				<CustomBehavior File="WaitTimer" WaitTime="5000" GoalText="Waiting for port {TimeRemaining}" />
+			</If>
+		
+			<!-- If I am in SW - Take Deepholm Portal -->
+			<If Condition="(Me.IsAlliance) &amp;&amp; (Me.ZoneId == 1519)" >
+				<CustomBehavior File="Message" Text="We are in SW, using portal to Deepholm" LogColor="Cornflowerblue" />
+				<CustomBehavior File="FlyTo" DestName="SW Deepholm Portal" X="-8220.372" Y="448.172" Z="117.6194" />
+				<CustomBehavior File="ForcedDismount" />
+				
+				<CustomBehavior File="InteractWith" MobId="207693" ObjectType="Gameobject" Range="4" X="-8220.372" Y="448.172" Z="117.6194" />
+				<CustomBehavior File="WaitTimer" WaitTime="5000" GoalText="Waiting for port {TimeRemaining}" />
+			</If>
+		 
+			<!--
+			<If Condition="(Me.ZoneId != 5042)" >
+				<CustomBehavior File="UserDialog" AllowBotStop="True" SoundCue="Asterisk" SoundCueInterval="1" Text="You must be in Deepholm to use this profile" />
+			</If>
+			-->
+			
+			<If Condition="(Me.ZoneId == 5042)" >
+				<If Condition="(Me.Z &lt;= -34) &amp;&amp; (Me.Z &gt;= -70) &amp;&amp; (Me.X &lt;= 1240) &amp;&amp; (Me.X &gt;= 810) &amp;&amp; (Me.Y &lt;= 800) &amp;&amp; (Me.Y &gt;= 323)" >
+					<CustomBehavior File="Message" Text="We are inside of Temple of the Earth, using portal to Therazane" LogColor="Cornflowerblue" />
+					<CustomBehavior File="InteractWith" MobId="205359" ObjectType="Gameobject" Range="4" WaitForNpcs="False" X="1081.299" Y="539.0078" Z="-44.27971" />
+				</If>
+			</If>
+
+			<!-- Pickup the quests -->
+			<While Condition="HasQuestAvailable(43805)" >
+				<CustomBehavior File="InteractWith" MobId="43805" NumOfTimes="1" CollectionDistance="500" WaitTime="1000" X="2349.374" Y="178.1308" Z="180.5086" />
+				<CustomBehavior File="RunMacro" Macro="/click GossipTitleButton1" NumOfTimes="1" WaitTime="1000" />
+				<CustomBehavior File="RunMacro" Macro="/click QuestFrameAcceptButton" NumOfTimes="1" WaitTime="1000" />
+			</While>
+			<While Condition="HasQuestAvailable(43806)" >
+				<CustomBehavior File="InteractWith" MobId="43806" NumOfTimes="1" CollectionDistance="500" WaitTime="1000" X="2349.374" Y="178.1308" Z="180.5086" />
+				<CustomBehavior File="RunMacro" Macro="/click GossipTitleButton1" NumOfTimes="1" WaitTime="1000" />
+				<CustomBehavior File="RunMacro" Macro="/click QuestFrameAcceptButton" NumOfTimes="1" WaitTime="1000" />
+			</While>
+			<While Condition="HasQuestAvailable(43804)" >
+				<CustomBehavior File="InteractWith" MobId="43804" NumOfTimes="1" CollectionDistance="500" WaitTime="1000" X="2349.374" Y="178.1308" Z="180.5086" />
+				<CustomBehavior File="RunMacro" Macro="/click GossipTitleButton1" NumOfTimes="1" WaitTime="1000" />
+				<CustomBehavior File="RunMacro" Macro="/click QuestFrameAcceptButton" NumOfTimes="1" WaitTime="1000" />
+			</While>
+			<While Condition="HasQuestAvailable(44973)" >
+				<CustomBehavior File="InteractWith" MobId="44973" NumOfTimes="1" CollectionDistance="500" WaitTime="1000" X="2313.267" Y="15.2199" Z="169.7899" />
+				<CustomBehavior File="RunMacro" Macro="/click GossipTitleButton1" NumOfTimes="1" WaitTime="1000" />
+				<CustomBehavior File="RunMacro" Macro="/click QuestFrameAcceptButton" NumOfTimes="1" WaitTime="1000" />
+			</While>
+		
+
+		
+			<!-- Objectives -->
+		
+			<If Condition="((HasQuest(27050)) &amp;&amp; (!IsQuestCompleted(27050)))" >
+				<CustomBehavior File="FlyTo" X="1704.606" Y="-463.5533" Z="272.9286" />
+				<CustomBehavior File="ForcedDismount" />
+			  <While Condition="((HasQuest(27050)) &amp;&amp; (!IsQuestCompleted(27050)))" >
+				<CustomBehavior File="InteractWith" QuestId="27050" MobId1="205151" MobId2="205146" MobId3="205147" ObjectType="Gameobject" NumOfTimes="20" WaitForNpcs="False" CollectionDistance="500" X="1651.372" Y="-549.5051" Z="289.4966" />
+				<CustomBehavior File="InteractWith" QuestId="27050" MobId1="205151" MobId2="205146" MobId3="205147" ObjectType="Gameobject" NumOfTimes="20" WaitForNpcs="False" CollectionDistance="500" X="1536.089" Y="-744.1416" Z="285.2219" />
+				<CustomBehavior File="InteractWith" QuestId="27050" MobId1="205151" MobId2="205146" MobId3="205147" ObjectType="Gameobject" NumOfTimes="20" WaitForNpcs="False" CollectionDistance="500" X="1238.287" Y="-571.6192" Z="274.9405" />
+			  </While>
+			</If>
+
+			<If Condition="((HasQuest(28391)) &amp;&amp; (!IsQuestCompleted(28391)))" >
+				<CustomBehavior File="FlyTo" X="1958.72" Y="1388.78" Z="180.4252" />
+				<CustomBehavior File="ForcedDismount" />
+				<UseItem QuestName="Resonating Blow" QuestId="28391" ItemId="60266" X="1958.72" Y="1388.78" Z="180.4252" />
+			 <If Condition="Me.Z &lt;= 181" >
+				<RunTo X="1994.544" Y="1401.745" Z="178.8949" />
+			 </If>
+				<CustomBehavior File="WaitTimer" WaitTime="20000" />
+				<CustomBehavior File="ResonatingBlow" MobId="43641" QuestId="28391" />
+			</If>
+			
+			<If Condition="((HasQuest(27049)) &amp;&amp; (!IsQuestCompleted(27049)))" >
+				<CustomBehavior File="FlyTo" X="1704.606" Y="-463.5533" Z="272.9286" />
+				<CustomBehavior File="ForcedDismount" />
+				<Objective QuestName="Soft Rock" QuestId="27049" Type="KillMob" MobId="42475" KillCount="8" />
+			</If>
+			
+			<If Condition="((HasQuest(27051)) &amp;&amp; (!IsQuestCompleted(27051)))" >
+				<CustomBehavior File="FlyTo" X="1822.293" Y="-660.3055" Z="242.7883" />
+				<CustomBehavior File="ForcedDismount" />
+				<Objective QuestName="Through Persistence" QuestId="27051" Type="CollectItem" ItemId="60768" CollectCount="5" />
+			  <While Condition="(GetItemCount(60768) == 5)" >
+				<CustomBehavior File="WaitTimer" WaitTime="2000" />
+				<CustomBehavior File="Misc\RunLua" Lua="UseItemByName(60768)" WaitTime="1000" />
+				<CustomBehavior File="WaitTimer" WaitTime="5000" />
+			  </While>
+			</If>
+			
+			<If Condition="((HasQuest(28390)) &amp;&amp; (!IsQuestCompleted(28390)))" >
+			 <If Condition="Me.Z &gt;= 180" >
+				<CustomBehavior File="FlyTo" X="1883.638" Y="-447.7057" Z="264.4557" />
+				<CustomBehavior File="FlyTo" X="1818.808" Y="-446.6318" Z="179.1952" />
+				<CustomBehavior File="ForcedDismount" />
+			 </If>
+			 <While Condition="((HasQuest(28390)) &amp;&amp; (!IsQuestCompleted(28390)))" >
+				<RunTo X="1712.635" Y="-505.8574" Z="165.0125" />
+				<CustomBehavior File="Message" Text="Waiting for Npc to respawn (someone must be on the quest if you're standing here) - You may have issues with this quest that i have not seen" LogColor="FireBrick" />
+
+				<CustomBehavior File="InteractWith" QuestId="28390" MobId="43503" NumOfTimes="1" GossipOptions="1" WaitTime="1000" CollectionDistance="50" X="1713.21" Y="-507.658" Z="164.8813" />
+				<CustomBehavior File="WaitTimer" WaitTime="5000" />
+				<!-- <Objective QuestName="Glop, Son of Glop" QuestId="28390" Type="KillMob" MobId="43372" KillCount="1" /> -->
+				<CustomBehavior File="InteractWith" QuestId="28390" MobId="43372" NumOfTimes="1000" WaitForNpcs="False" Range="2" MobState="Alive" />
+			 </While>
+				<RunTo X="1839.602" Y="-458.6029" Z="181.2831" /> <!-- outside hotspot -->
+			</If>
+			<If Condition="((HasQuest(28390)) &amp;&amp; (IsQuestCompleted(28390))) &amp;&amp; (Me.Z &lt;= 180) &amp;&amp; (Me.Y &lt;= -400) &amp;&amp; (!Me.IsOutdoors)" >
+				<RunTo X="1839.602" Y="-458.6029" Z="181.2831" /> <!-- outside hotspot -->
+			</If>
+			
+			<If Condition="((HasQuest(28488)) &amp;&amp; (!IsQuestCompleted(28488)))" >
+			 <If Condition="Me.Z &gt;= -152" >
+				<CustomBehavior File="FlyTo" X="1953.962" Y="107.5812" Z="16.37628" />
+				<CustomBehavior File="FlyTo" X="1931.028" Y="82.98725" Z="-151.6313" />
+				<CustomBehavior File="ForcedDismount" />
+			 </If>
+				<RunTo X="1871.173" Y="-79.94258" Z="-176.0063" />
+				<RunTo X="1796.39" Y="-86.41425" Z="-160.2971" />
+				<CustomBehavior File="Message" Text="Waiting for Npc to respawn (someone must have done it before you if you're standing here)" LogColor="FireBrick" />
+			 <While Condition="((HasQuest(28488)) &amp;&amp; (!IsQuestCompleted(28488)))" >
+				<CustomBehavior File="InteractWith" QuestId="28488" MobId="48639" NumOfTimes="1" Range="10" CollectionDistance="5000" WaitTime="1000" X="2136.153" Y="-238.9335" Z="-166.953" />
+				<CustomBehavior File="WaitTimer" WaitTime="9000" />
+				<CustomBehavior File="InteractWith" QuestId="28488" MobId="48533" WaitForNpcs="False" Range="10" CollectionDistance="5000" WaitTime="1000" X="2136.153" Y="-238.9335" Z="-166.953" />
+				<CustomBehavior File="WaitTimer" WaitTime="10000" />
+			 </While>
+				<Objective QuestName="Beneath the Surface" QuestId="28488" Type="CollectItem" ItemId="64404" CollectCount="1" />
+			</If>
+			
+            <If Condition="((HasQuest(27047)) &amp;&amp; (!IsQuestCompleted(27047)))" >
+              <If Condition="(!HasQuest(28488))" >
+			   <If Condition="Me.Z &gt;= -152" >
+				<CustomBehavior File="FlyTo" X="1953.962" Y="107.5812" Z="16.37628" />
+				<CustomBehavior File="FlyTo" X="1931.028" Y="82.98725" Z="-151.6313" />
+				<CustomBehavior File="ForcedDismount" />
+			   </If>
+              </If>
+				<RunTo X="1868.743" Y="-144.0033" Z="-172.2514" />
+				<RunTo X="1992.723" Y="-187.5528" Z="-177.3703" />
+
+                <CustomBehavior File="Misc\RunLua" Lua="ClearTarget()" />
+                <Objective QuestName="Motes" QuestId="27047" Type="CollectItem" ItemId="60791" CollectCount="10" />
+            </If>
+			
+			<If Condition="((HasQuest(27046)) &amp;&amp; (!IsQuestCompleted(27046)))" >
+				<Objective QuestName="Fear of Boring" QuestId="27046" Type="KillMob" MobId="44257" KillCount="10" />
+				<RunTo X="1992.723" Y="-187.5528" Z="-177.3703" />
+				<RunTo X="1868.743" Y="-144.0033" Z="-172.2514" />
+				<RunTo X="1908.326" Y="-74.07396" Z="-175.6808" />
+			</If>
+			
+			<!-- Ricket - inside of cave -->
+			<While Condition="HasQuestAvailable(44968)" >
+				<CustomBehavior File="InteractWith" MobId="44968" NumOfTimes="1" CollectionDistance="200" WaitTime="1000" X="1908.326" Y="-74.07396" Z="-175.6808" />
+				<CustomBehavior File="RunMacro" Macro="/click GossipTitleButton1" NumOfTimes="1" WaitTime="1000" />
+				<CustomBehavior File="RunMacro" Macro="/click QuestFrameAcceptButton" NumOfTimes="1" WaitTime="1000" />
+				<CustomBehavior File="WaitTimer" WaitTime="2000" GoalText="Waiting for quest {TimeRemaining}" />
+			</While>
+			<If Condition="((HasQuest(27048)) &amp;&amp; (!IsQuestCompleted(27048)))" >
+			 <While Condition="((HasQuest(27048)) &amp;&amp; (!IsObjectiveComplete(1, 27048)))"> <!-- Alabaster - White-Light Blue -->
+				<RunTo X="2051.631" Y="-149.49" Z="-176.0427" />
+				<CustomBehavior File="WaitTimer" WaitTime="2000" GoalText="Waiting for agro to clear {TimeRemaining}" />
+				<RunTo X="2051.631" Y="-149.49" Z="-176.0427" />
+				<CustomBehavior File="Misc\RunLua" Lua="UseItemByName(65514)" WaitTime="1000" />
+				<CustomBehavior File="WaitTimer" WaitTime="2000" GoalText="Waiting for item CD {TimeRemaining}" />
+				<RunTo X="2038.916" Y="-154.7008" Z="-176.3857" />
+				<CustomBehavior File="WaitTimer" WaitTime="4000" GoalText="Waiting for blowup {TimeRemaining}" />
+				<CustomBehavior File="InteractWith" QuestId="27048" MobId="207381" ObjectType="Gameobject" Range="4" NumOfTimes="3" WaitForNpcs="False" />
+			 </While>
+			 <While Condition="((HasQuest(27048)) &amp;&amp; (!IsObjectiveComplete(3, 27048)))"> <!-- Amethyst - Purple -->
+				<RunTo X="2177.997" Y="-250.7325" Z="-166.0985" />
+				<CustomBehavior File="WaitTimer" WaitTime="2000" GoalText="Waiting for agro to clear {TimeRemaining}" />
+				<RunTo X="2177.997" Y="-250.7325" Z="-166.0985" />
+				<CustomBehavior File="Misc\RunLua" Lua="UseItemByName(65514)" WaitTime="1000" />
+				<CustomBehavior File="WaitTimer" WaitTime="2000" GoalText="Waiting for item CD {TimeRemaining}" />
+				<RunTo X="2176.239" Y="-240.3884" Z="-166.52" />
+				<CustomBehavior File="WaitTimer" WaitTime="4000" GoalText="Waiting for blowup {TimeRemaining}" />
+				<CustomBehavior File="InteractWith" QuestId="27048" MobId="207383" ObjectType="Gameobject" Range="4" NumOfTimes="3" WaitForNpcs="False" />
+			 </While>
+			 <While Condition="((HasQuest(27048)) &amp;&amp; (!IsObjectiveComplete(4, 27048)))"> <!-- Garnet - Red -->
+				<RunTo X="2085.105" Y="-321.0036" Z="-159.7235" />
+				<CustomBehavior File="WaitTimer" WaitTime="2000" GoalText="Waiting for agro to clear {TimeRemaining}" />
+				<RunTo X="2085.105" Y="-321.0036" Z="-159.7235" />
+				<CustomBehavior File="Misc\RunLua" Lua="UseItemByName(65514)" WaitTime="1000" />
+				<CustomBehavior File="WaitTimer" WaitTime="2000" GoalText="Waiting for item CD {TimeRemaining}" />
+				<RunTo X="2072.879" Y="-327.3665" Z="-159.75" />
+				<CustomBehavior File="WaitTimer" WaitTime="4000" GoalText="Waiting for blowup {TimeRemaining}" />
+				<CustomBehavior File="InteractWith" QuestId="27048" MobId="207384" ObjectType="Gameobject" Range="4" NumOfTimes="3" WaitForNpcs="False" />
+			 </While>
+			 <While Condition="((HasQuest(27048)) &amp;&amp; (!IsObjectiveComplete(2, 27048)))"> <!-- Celestite - Green-Blue -->
+				<RunTo X="2161.394" Y="-85.59802" Z="-190.9036" />
+				<CustomBehavior File="WaitTimer" WaitTime="2000" GoalText="Waiting for agro to clear {TimeRemaining}" />
+				<RunTo X="2161.394" Y="-85.59802" Z="-190.9036" />
+				<CustomBehavior File="Misc\RunLua" Lua="UseItemByName(65514)" WaitTime="1000" />
+				<CustomBehavior File="WaitTimer" WaitTime="2000" GoalText="Waiting for item CD {TimeRemaining}" />
+				<RunTo X="2148.175" Y="-86.67672" Z="-191.482" />
+				<CustomBehavior File="WaitTimer" WaitTime="4000" GoalText="Waiting for blowup {TimeRemaining}" />
+				<CustomBehavior File="InteractWith" QuestId="27048" MobId="207382" ObjectType="Gameobject" Range="4" NumOfTimes="3" WaitForNpcs="False" />
+			 </While>
+			</If>
+			<If Condition="((HasQuest(27048)) &amp;&amp; (IsQuestCompleted(27048)))" >
+		<TurnIn QuestName="Underground Economy" QuestId="27048" TurnInName="Ricket" TurnInId="44968" />			
+			</If>
+			<!-- End of Ricket -->
+			
+			<If Condition="((HasQuest(27051)) || (HasQuest(27046)) || (HasQuest(27047))) &amp;&amp; (Me.Z &lt;= 140)" >
+				<RunTo X="1931.028" Y="82.98725" Z="-151.6313" />
+			</If>
+
+			<If Condition="(HasQuest(27051)) || (HasQuest(28390)) || (HasQuest(27049)) || (HasQuest(27050))" >
+				<CustomBehavior File="FlyTo" X="2318.96" Y="13.63075" Z="170.0272" />
+			</If>
+			
+			<If Condition="((HasQuest(27051)) &amp;&amp; (IsQuestCompleted(27051)))" >
+				<CustomBehavior File="FlyTo" X="2318.96" Y="13.63075" Z="170.0272" />
+		<TurnIn QuestName="Through Persistence" QuestId="27051" TurnInName="Ruberick" TurnInId="44973" />
+			</If>
+		
+			<If Condition="((HasQuest(28390)) &amp;&amp; (IsQuestCompleted(28390)))" >
+				<CustomBehavior File="FlyTo" X="2318.96" Y="13.63075" Z="170.0272" />
+		<TurnIn QuestName="Glop, Son of Glop" QuestId="28390" TurnInName="Ruberick" TurnInId="44973" />
+			</If>
+			
+			<If Condition="((HasQuest(27049)) &amp;&amp; (IsQuestCompleted(27049)))" >
+				<CustomBehavior File="FlyTo" X="2318.96" Y="13.63075" Z="170.0272" />
+		<TurnIn QuestName="Soft Rock" QuestId="27049" TurnInName="Gorsik the Tumultuous" TurnInId="43804" />
+			</If>
+		
+			<If Condition="((HasQuest(27050)) &amp;&amp; (IsQuestCompleted(27050)))" >
+				<CustomBehavior File="FlyTo" X="2318.96" Y="13.63075" Z="170.0272" />
+		<TurnIn QuestName="Fungal Fury" QuestId="27050" TurnInName="Gorsik the Tumultuous" TurnInId="43804" />
+			</If>
+			
+			<!-- Turnin Quests -->
+			<If Condition="(HasQuest(28488)) || (HasQuest(27046)) || (HasQuest(27047)) || (HasQuest(28391))" >
+				<CustomBehavior File="FlyTo" X="2348.442" Y="160.104" Z="180.4897" />
+			</If>
+			
+			<If Condition="((HasQuest(27046)) &amp;&amp; (IsQuestCompleted(27046)))" >
+				<CustomBehavior File="FlyTo" X="2305.205" Y="192.6166" Z="180.1777" />
+		<TurnIn QuestName="Fear of Boring" QuestId="27046" TurnInName="Felsen the Enduring" TurnInId="43805" />
+			</If>
+		
+			<If Condition="((HasQuest(27047)) &amp;&amp; (IsQuestCompleted(27047)))" >
+				<CustomBehavior File="FlyTo" X="2305.205" Y="192.6166" Z="180.1777" />
+		<TurnIn QuestName="Motes" QuestId="27047" TurnInName="Felsen the Enduring" TurnInId="43805" />
+			</If>
+		
+			<If Condition="((HasQuest(28488)) &amp;&amp; (IsQuestCompleted(28488)))" >
+				<CustomBehavior File="FlyTo" X="2305.205" Y="192.6166" Z="180.1777" />
+		<TurnIn QuestName="Beneath the Surface" QuestId="28488" TurnInName="Felsen the Enduring" TurnInId="43805" />
+			</If>
+			
+			<If Condition="((HasQuest(28391)) &amp;&amp; (IsQuestCompleted(28391)))" >
+				<CustomBehavior File="FlyTo" X="2328.092" Y="170.6096" Z="179.6008" />
+		<TurnIn QuestName="The Restless Brood" QuestId="28391" TurnInName="Terrath the Steady" TurnInId="43806" />
+			</If>
+			
+			
+			<While Condition="(Me.ZoneId == 5042)" >
+				<!-- Therazane to Temple of the Earth -->
+				<If Condition="(Me.Z &lt;= 210) &amp;&amp; (Me.Z &gt;= 160) &amp;&amp; (Me.X &lt;= 2450) &amp;&amp; (Me.X &gt;= 2105) &amp;&amp; (Me.Y &lt;= 300) &amp;&amp; (Me.Y &gt;= -100)" > 
+					<CustomBehavior File="Message" Text="We are at Therazane, using portal to Temple of the Earth" LogColor="Cornflowerblue" />
+					<RunTo X="2336.691" Y="137.067" Z="178.6361" />
+					<CustomBehavior File="ForcedDismount" />
+					<CustomBehavior File="InteractWith" MobId="205360" ObjectType="Gameobject" Range="3" X="2336.691" Y="137.067" Z="178.6361" />
+					<CustomBehavior File="WaitTimer" WaitTime="5000" GoalText="Waiting for port {TimeRemaining}" />
+				</If>
+				<!-- Temple of the Earth to Main City -->
+				<If Condition="(Me.Z &lt;= -34) &amp;&amp; (Me.Z &gt;= -70) &amp;&amp; (Me.X &lt;= 1240) &amp;&amp; (Me.X &gt;= 810) &amp;&amp; (Me.Y &lt;= 800) &amp;&amp; (Me.Y &gt;= 323)" > 
+					<CustomBehavior File="Message" Text="We are inside of Temple of the Earth, using portal to Main City" LogColor="Cornflowerblue" />
+				 <If Condition="(Me.IsHorde)" >
+					<CustomBehavior File="InteractWith" MobId="205273" ObjectType="Gameobject" Range="3" X="990.1199" Y="457.7099" Z="-44.2598" />
+					<CustomBehavior File="WaitTimer" WaitTime="5000" GoalText="Waiting for port {TimeRemaining}" />
+				 </If>
+				 <If Condition="(Me.IsAlliance)" >
+					<CustomBehavior File="InteractWith" MobId="205272" ObjectType="Gameobject" Range="3" X="973.6232" Y="570.9096" Z="-46.0024" />		
+					<CustomBehavior File="WaitTimer" WaitTime="5000" GoalText="Waiting for port {TimeRemaining}" />
+				 </If>
+				</If>
+			</While>
+			
+			<!--
+		<If Condition="(IsQuestCompleted(28633)) &amp;&amp; (Lua.GetReturnVal&lt;int&gt;('return GetDailyQuestsCompleted()', 0) &lt;= 23)">
+			-->
+		<If Condition="(IsQuestCompleted(28633))">
+			<CustomBehavior File="LoadProfile" ProfileName="[Fly][N - Rep Quest] U Ramkahen Rep Dailies [Kick]" /> 
+		</If> 
+			
+			
+			
+
+			
+	<CustomBehavior File="UserDialog"  Title="title" AllowBotStop="True" SoundCue="Asterisk" SoundCueInterval="1" Text="End of the Therazane Rep Dailies" />
+
+
+	</QuestOrder>
+
+</HBProfile>

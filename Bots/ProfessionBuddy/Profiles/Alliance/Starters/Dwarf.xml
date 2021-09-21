@@ -1,0 +1,323 @@
+<HBProfile xsi:noNamespaceSchemaLocation="../Schemas/EchoSchema.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<!-- Original contribution by EchoTiger -->
+	<Name>Dwarf Starter ($ShortHash$)</Name>
+
+	<MinDurability>0.3</MinDurability>
+	<MinFreeBagSlots>3</MinFreeBagSlots>
+
+	<SellGrey>true</SellGrey>
+	<SellWhite>true</SellWhite>
+	<SellGreen>true</SellGreen>
+	<SellBlue>true</SellBlue>
+	<SellPurple>false</SellPurple>
+
+	<MailGrey>false</MailGrey>
+	<MailWhite>true</MailWhite>
+	<MailGreen>true</MailGreen>
+	<MailBlue>true</MailBlue>
+	<MailPurple>true</MailPurple>
+
+	<TargetElites>true</TargetElites>
+
+	<AvoidMobs>
+	</AvoidMobs>
+
+	<Mailboxes>
+		<Mailbox Name="Coldridge" X="-6169.81" Y="376.9556" Z="398.8244" />
+		<Mailbox Name="Goldshire" X="-9456.721" Y="46.77825" Z="56.60653" />
+		<Mailbox Name="Kharanos" X="-5603.603" Y="-512.9031" Z="401.6768" />
+		<Mailbox Name="Thelsamar" X="-5364.78" Y="-2953.748" Z="323.8507" />
+	</Mailboxes>
+
+	<Vendors>
+		<!-- Coldridge Valley -->
+		<Vendor Name="Adlin Pridedrift" Id="829" Type="Food" X="-6225.237" Y="320.3721" Z="383.1173" />
+		<Vendor Name="Durnan Furcutter" Id="836" Type="Repair" X="-6056.377" Y="385.2125" Z="392.7625" />
+		<Vendor Name="Felix Whindlebolt" Id="8416" Type="Food" X="-6370.058" Y="576.2" Z="385.7998" />
+		<Vendor Name="Rybrad Coldbank" Id="945" Type="Repair" X="-6101.101" Y="390.5695" Z="395.5436" />
+
+		<!-- Kharanos -->
+		<Vendor Name="Frast Dokner" Id="1698" Type="Repair" X="-5714.372" Y="-1589.517" Z="383.2044" />
+		<Vendor Name="Grawn Thromwyn" Id="1273" Type="Repair" X="-5590.67" Y="-428.416" Z="397.3266" />
+		<Vendor Name="Jade Ramalot" Id="46996" Type="Repair" X="-4594.17" Y="-1714.2" Z="503.476" />
+		<Vendor Name="Monann Coldforge" Id="43384" Type="Food" X="-5522.49" Y="-1930.35" Z="398.9589" />
+		<Vendor Name="Turuk Amberstill" Id="3177" Type="Repair" X="-5514.975" Y="-1295.747" Z="405.9352" />
+	</Vendors>
+
+	<Blackspots>
+	</Blackspots>
+
+	<Blacklist>
+	</Blacklist>
+
+	<QuestOrder IgnoreCheckpoints="false" ContinuallySkipToCheckpoints="true" >
+		<!-- Check function status -->
+		<Code File="RunCode" Type="Definition">
+			<![CDATA[
+			private static bool? profileFunctionsEnabled => (bool?)AppDomain.CurrentDomain.GetData("QuestingProfiles_FunctionsEnabled");
+			private static bool IsStoreProfile(string path) => path.StartsWith("store://");
+			private static string Slashify(string path) => IsStoreProfile(path) ? path.Replace(@"\", "/") : path.Replace("/", @"\");
+
+			public __CompiledBatchClass__()
+			{
+				ActivateFunctions();
+			}
+
+			private static void ActivateFunctions()
+			{
+				if (profileFunctionsEnabled == null || profileFunctionsEnabled == false)
+				{
+					Bots.Professionbuddy.PBLog.Log(Colors.MediumPurple, "[Profile Message!]: ", Colors.Yellow, "Please stand by as the functions are being activated!");
+					LoadProfile(@"..\..\Functions\Activate Functions.xml");
+				}
+			}
+
+			private static void LoadProfile(string path)
+			{
+				var profile = GetNewPath(path);
+				if (!IsStoreProfile(profile) && !File.Exists(profile))
+				{
+					Bots.Professionbuddy.PBLog.Log(Colors.MediumPurple, "[Profile Message!]: ", Colors.Yellow, "Profile does not exist.\n" + profile);
+					return;
+				}
+
+				Bots.Professionbuddy.PBLog.Log(Colors.MediumPurple, "[Profile Message!]: ", Colors.Yellow, "Loading: " + profile);
+				ProfileManager.LoadNew(profile, false);
+			}
+
+			private static string GetNewPath(string path)
+			{
+				if (IsStoreProfile(path))
+					return Slashify(path);
+
+				var currentProfile = ProfileManager.XmlLocation;
+				if (IsStoreProfile(currentProfile))
+					return Slashify(currentProfile + "/../" + path);
+
+				var absolutePath = Path.Combine(Path.GetDirectoryName(currentProfile), path);
+				absolutePath = Path.GetFullPath(absolutePath);
+				var canonicalPath = new Uri(absolutePath).LocalPath;
+				return Slashify(canonicalPath);
+			}]]>
+		</Code>
+		<Code File="RunCode" Code="ActivateFunctions();" />
+		<!-- END Check function status -->
+
+		<If Condition="Me.IsHorde" >
+			<Code File="LoadProfile" ProfileName="..\..\Questing Autoloader.xml" />
+		</If>
+		<!-- RunCode Methods -->
+			<Code File="RunCode">
+			<![CDATA[
+				Bots.Professionbuddy.PBLog.Log(System.Windows.Media.Colors.MediumPurple, "> [Profile Initialization Status] ", System.Windows.Media.Colors.CornflowerBlue, "\n     Auto-Looting	:: Enabled\n     Looting	:: Enabled\n     Game Addons	:: Disabled");
+				Lua.DoString("SetCVar('AutoLootDefault', 1);");
+				Lua.DoString("SetCVar('autoDismountFlying', 1);");
+				CharacterSettings.Instance.LootMobs = true;
+				CharacterSettings.Instance.Save();
+				Logging.Write(System.Windows.Media.Colors.MediumPurple, "> [Ready to bot!]");
+			]]>
+			</Code>
+			<Code File="RunCode" Type="Definition">
+				<![CDATA[
+						bool DoQuest(params uint[] questIds)
+						{
+							foreach (var questId in questIds)
+							{
+								if (HasQuest(questId) && !IsQuestCompleted(questId)) return true;
+							}
+							return false;
+						}
+						bool NeedsQuest(params uint[] questIds)
+						{
+							foreach (var questId in questIds)
+							{
+								if (!HasQuest(questId) && !IsQuestCompleted(questId)) return true;
+							}
+							return false;
+						}
+						bool NeedsBreadcrumbQuest(params uint[] questIds)
+						{
+							foreach (var questId in questIds)
+							{
+								if (IsQuestCompleted(questId)) return false;
+							}
+							return true;
+						}
+						bool QuestDone(params uint[] questIds)
+						{
+							foreach (var questId in questIds)
+							{
+								if (HasQuest(questId) && IsQuestCompleted(questId)) return true;
+							}
+							return false;
+						}
+						bool QuestFlaggedCompleted(params uint[] questIds)
+						{
+							foreach (var questId in questIds)
+							{
+								return Lua.GetReturnVal<bool>($"return IsQuestFlaggedCompleted({questId});", 0);
+							}
+							return false;
+						}
+						async Task SkipCutscene(int preWait = 3000, int postWait = 3000)
+						{
+					// Add detection of cutscene here.
+							await Coroutine.Sleep(preWait);
+					// Test and improve the working method.
+							Lua.DoString("MovieFrame:StopMovie(); CinematicFrame_CancelCinematic(); StopCinematic();");
+							await Coroutine.Sleep(postWait);
+						}
+					]]>
+			</Code>
+		<!-- END RunCode Methods -->
+
+
+		<PickUp QuestName="Hold the Line!" QuestId="24469" GiverName="Joren Ironstock" GiverId="37081" X="-6229.438" Y="330.6924" Z="383.1394" />
+		<Code File="KillUntilComplete" MobId="37070" QuestId="24469" QuestObjectiveIndex="1" >
+			<HuntingGrounds>
+				<Hotspot X="-6309.024" Y="324.9199" Z="378.2315" />
+				<Hotspot X="-6275.651" Y="399.8838" Z="381.882" />
+			</HuntingGrounds>
+		</Code>
+		<TurnIn QuestName="Hold the Line!" QuestId="24469" TurnInName="Joren Ironstock" TurnInId="37081" X="-6228.979" Y="331.4409" Z="383.1647" />
+
+		<PickUp QuestName="Give &apos;em What-For" QuestId="24470" GiverName="Joren Ironstock" GiverId="37081" X="-6228.979" Y="331.4409" Z="383.1647" />
+		<PickUp QuestName="Aid for the Wounded" QuestId="24471" GiverName="Sten Stoutarm" GiverId="658" X="-6241.64" Y="344.7896" Z="383.5118" />
+
+		<Code File="InteractWith" MobId="37080" WaitTime="3000" CollectionDistance="200" InteractByUsingItemId="49743" QuestId="24471" QuestObjectiveIndex="1" >
+			<HuntingGrounds>
+				<Hotspot X="-6318.806" Y="401.4407" Z="380.4497" />
+				<Hotspot X="-6296.855" Y="347.0825" Z="377.0562" />
+				<Hotspot X="-6296.353" Y="298.7311" Z="375.8983" />
+			</HuntingGrounds>
+		</Code>
+
+		<Code File="KillUntilComplete" MobId="37073" QuestId="24470" QuestObjectiveIndex="1" >
+			<HuntingGrounds>
+				<Hotspot X="-6318.806" Y="401.4407" Z="380.4497" />
+				<Hotspot X="-6296.855" Y="347.0825" Z="377.0562" />
+				<Hotspot X="-6296.353" Y="298.7311" Z="375.8983" />
+			</HuntingGrounds>
+		</Code>
+
+		<TurnIn QuestName="Give &apos;em What-For" QuestId="24470" TurnInName="Joren Ironstock" TurnInId="37081" X="-6230.487" Y="329.6951" Z="383.0685" />
+		<TurnIn QuestName="Aid for the Wounded" QuestId="24471" TurnInName="Sten Stoutarm" TurnInId="658" X="-6240.052" Y="344.8338" Z="383.4945" />
+		<PickUp QuestName="Lockdown in Anvilmar" QuestId="24473" GiverName="Joren Ironstock" GiverId="37081" X="-6228.884" Y="333.2872" Z="383.2054" />
+		<TurnIn QuestName="Lockdown in Anvilmar" QuestId="24473" TurnInName="Jona Ironstock" TurnInId="37087" X="-6088.136" Y="380.1231" Z="395.5431" />
+		<PickUp QuestName="First Things First: We&apos;re Gonna Need Some Beer" QuestId="24474" GiverName="Jona Ironstock" GiverId="37087" X="-6088.136" Y="380.1231" Z="395.5431" />
+		<PickUp QuestName="Dwarven Artifacts" QuestId="24477" GiverName="Grundel Harkin" GiverId="1104" X="-6105.175" Y="385.3988" Z="395.5435" />
+
+		<Code File="InteractWith" MobId="201611" InteractByLooting="true" NonCompeteDistance="0" InteractBlacklistTimeInSeconds="1" QuestId="24474" QuestObjectiveIndex="3" X="-6141.967" Y="321.3142" Z="399.2259" />
+		<Code File="InteractWith" MobId="201610" InteractByLooting="true" NonCompeteDistance="0" InteractBlacklistTimeInSeconds="1" QuestId="24474" QuestObjectiveIndex="1" X="-6144.898" Y="429.2754" Z="399.8878" />
+		<Code File="InteractWith" MobId="201609" InteractByLooting="true" NonCompeteDistance="0" InteractBlacklistTimeInSeconds="1" QuestId="24474" QuestObjectiveIndex="2" X="-6149.365" Y="596.3177" Z="386.1913" />
+
+		<Code File="InteractWith" MobId="201608" InteractByLooting="true" CollectionDistance="200" PreInteractMountStrategy="Dismount" QuestId="24477" QuestObjectiveIndex="1" >
+			<HuntingGrounds>
+				<Hotspot X="-6146.415" Y="281.5565" Z="395.6554" />
+				<Hotspot X="-6148.184" Y="344.595" Z="399.939" />
+				<Hotspot X="-6160.075" Y="420.1003" Z="399.7042" />
+				<Hotspot X="-6142.95" Y="543.6425" Z="392.9765" />
+			</HuntingGrounds>
+		</Code>
+
+		<TurnIn QuestName="Dwarven Artifacts" QuestId="24477" TurnInName="Grundel Harkin" TurnInId="1104" X="-6106.173" Y="383.0253" Z="395.5429" />
+		<PickUp QuestName="Make Hay While the Sun Shines" QuestId="24486" GiverName="Grundel Harkin" GiverId="1104" X="-6106.173" Y="383.0253" Z="395.5429" />
+		<TurnIn QuestName="First Things First: We&apos;re Gonna Need Some Beer" QuestId="24474" TurnInName="Jona Ironstock" TurnInId="37087" X="-6104.393" Y="390.6513" Z="395.543" />
+		<PickUp QuestName="All the Other Stuff" QuestId="24475" GiverName="Jona Ironstock" GiverId="37087" X="-6104.393" Y="390.6513" Z="395.543" />
+
+		<Code File="KillUntilComplete" MobId="37105" QuestId="24486" QuestObjectiveIndex="1" X="-6251.813" Y="500.3219" Z="387.5844" />
+
+		<Code File="KillUntilComplete" TerminateWhen="!DoQuest(24475)" >
+			<HuntingGrounds>
+				<Hotspot X="-6227.935" Y="573.1991" Z="386.6204" />
+				<Hotspot X="-6248.957" Y="716.7283" Z="386.9688" />
+				<Hotspot X="-6322.672" Y="760.1197" Z="388.8644" />
+				<Hotspot X="-6379.267" Y="684.7224" Z="386.0585" />
+				<Hotspot X="-6361.002" Y="520.433" Z="384.8369" />
+			</HuntingGrounds>
+			<PursuitList>
+				<PursueUnit Id="708" PursueWhen="!IsObjectiveComplete(1, 24475)" />
+				<PursueUnit Id="705" PursueWhen="!IsObjectiveComplete(2, 24475)" />
+			</PursuitList>
+		</Code>
+
+		<!-- NOTE come back to for 24475-->
+
+		<TurnIn QuestName="Make Hay While the Sun Shines" QuestId="24486" TurnInName="Grundel Harkin" TurnInId="1104" X="-6106.457" Y="381.7488" Z="395.543" />
+		<TurnIn QuestName="All the Other Stuff" QuestId="24475" TurnInName="Jona Ironstock" TurnInId="37087" X="-6088.114" Y="382.9702" Z="395.5415" />
+		<PickUp QuestName="Whitebeard Needs Ye" QuestId="24487" GiverName="Jona Ironstock" GiverId="37087" X="-6088.114" Y="382.9702" Z="395.5415" />
+		<TurnIn QuestName="Whitebeard Needs Ye" QuestId="24487" TurnInName="Grelin Whitebeard" TurnInId="786" X="-6364.756" Y="569.303" Z="385.8635" />
+		<PickUp QuestName="The Troll Menace" QuestId="182" GiverName="Grelin Whitebeard" GiverId="786" X="-6364.756" Y="569.303" Z="385.8635" />
+		<PickUp QuestName="Trolling for Information" QuestId="24489" GiverName="Apprentice Soren" GiverId="1354" X="-6369.043" Y="562.6495" Z="385.5495" />
+		<PickUp QuestName="A Refugee&apos;s Quandary" QuestId="3361" GiverName="Felix Whindlebolt" GiverId="8416" X="-6371.553" Y="573.2546" Z="385.7196" />
+
+		<While Condition="HasQuest(24489) &amp;&amp; !IsObjectiveComplete(1,24489)">
+			<MoveTo X="-6487.4" Y="505.2996" Z="386.0609" />
+			<Code File="WaitTimer" WaitTime="12000" QuestId="24489" QuestObjectiveIndex="1" GoalText="Waiting for objective to complete {TimeRemaining}" />
+		</While>
+
+		<Code File="InteractWith" MobId="178085" InteractByLooting="true" NonCompeteDistance="0" InteractBlacklistTimeInSeconds="1" QuestId="3361" QuestObjectiveIndex="3" X="-6480.008" Y="505.2559" Z="385.9881" />
+
+		<While Condition="HasQuest(24489) &amp;&amp; !IsObjectiveComplete(2,24489)">
+			<MoveTo X="-6512.898" Y="687.8277" Z="387.2748" />
+			<Code File="WaitTimer" WaitTime="12000" QuestId="24489" QuestObjectiveIndex="2" GoalText="Waiting for objective to complete {TimeRemaining}" />
+		</While>
+
+		<Code File="InteractWith" MobId="178084" InteractByLooting="true" NonCompeteDistance="0" InteractBlacklistTimeInSeconds="1" QuestId="3361" QuestObjectiveIndex="2" X="-6506.592" Y="682.1724" Z="387.2744" />
+
+		<While Condition="HasQuest(24489) &amp;&amp; !IsObjectiveComplete(3,24489)">
+			<MoveTo X="-6396.564" Y="778.0911" Z="386.2134" />
+			<Code File="WaitTimer" WaitTime="12000" QuestId="24489" QuestObjectiveIndex="3" GoalText="Waiting for objective to complete {TimeRemaining}" />
+		</While>
+
+		<Code File="InteractWith" MobId="148499" InteractByLooting="true" NonCompeteDistance="0" InteractBlacklistTimeInSeconds="1" QuestId="3361" QuestObjectiveIndex="1" X="-6374.805" Y="773.7039" Z="386.2128" />
+
+		<Code File="KillUntilComplete" MobId="706" QuestId="182" QuestObjectiveIndex="1" >
+			<HuntingGrounds>
+				<Hotspot X="-6480.008" Y="505.2559" Z="385.9881" />
+				<Hotspot X="-6503.895" Y="680.3673" Z="387.2739" />
+				<Hotspot X="-6374.805" Y="773.7039" Z="386.2128" />
+			</HuntingGrounds>
+		</Code>
+
+		<TurnIn QuestName="The Troll Menace" QuestId="182" TurnInName="Grelin Whitebeard" TurnInId="786" X="-6363.481" Y="569.4024" Z="385.9293" />
+		<TurnIn QuestName="Trolling for Information" QuestId="24489" TurnInName="Apprentice Soren" TurnInId="1354" X="-6367.709" Y="563.7814" Z="385.6576" />
+		<TurnIn QuestName="A Refugee&apos;s Quandary" QuestId="3361" TurnInName="Felix Whindlebolt" TurnInId="8416" X="-6369.648" Y="572.4267" Z="385.7739" />
+		<PickUp QuestName="Ice and Fire" QuestId="218" GiverName="Grelin Whitebeard" GiverId="786" X="-6364.644" Y="568.1166" Z="385.8112" />
+
+		<Code File="KillUntilComplete" MobId="808" QuestId="218" QuestObjectiveIndex="1" X="-6503.65" Y="304.0777" Z="370.2265" />
+		<Code File="KillUntilComplete" MobId="37112" QuestId="218" QuestObjectiveIndex="2" X="-6522.218" Y="306.746" Z="382.2917" />
+
+		<Code File="KillUntilComplete" MobId="946" QuestId="218" QuestObjectiveIndex="3" >
+			<HuntingGrounds>
+				<Hotspot X="-6482.363" Y="317.0283" Z="374.7338" />
+				<Hotspot X="-6520.105" Y="345.6091" Z="372.2906" />
+			</HuntingGrounds>
+		</Code>
+
+		<Code File="KillUntilComplete" MobId="37507" QuestId="218" QuestObjectiveIndex="4" >
+			<HuntingGrounds>
+				<Hotspot X="-6482.363" Y="317.0283" Z="374.7338" />
+				<Hotspot X="-6520.105" Y="345.6091" Z="372.2906" />
+			</HuntingGrounds>
+		</Code>
+
+		<TurnIn QuestName="Ice and Fire" QuestId="218" TurnInName="Grelin Whitebeard" TurnInId="786" X="-6365.444" Y="566.848" Z="385.8019" />
+		<PickUp QuestName="A Trip to Ironforge" QuestId="24490" GiverName="Grelin Whitebeard" GiverId="786" X="-6365.444" Y="566.848" Z="385.8019" />
+		<TurnIn QuestName="A Trip to Ironforge" QuestId="24490" TurnInName="Hands Springsprocket" TurnInId="6782" X="-6247.007" Y="135.6906" Z="431.4949" />
+		<PickUp QuestName="Follow that Gyro-Copter!" QuestId="24491" GiverName="Hands Springsprocket" GiverId="6782" X="-6234.263" Y="134.6625" Z="430.8998" />
+		<TurnIn QuestName="Follow that Gyro-Copter!" QuestId="24491" TurnInName="Milo Geartwinge" TurnInId="37113" X="-6245.83" Y="304.9381" Z="383.8792" />
+		<PickUp QuestName="Pack Your Bags" QuestId="24492" GiverName="Milo Geartwinge" GiverId="37113" X="-6245.83" Y="304.9381" Z="383.8792" />
+
+		<Code File="InteractWith" MobId="201706" InteractByLooting="true" NonCompeteDistance="0" InteractBlacklistTimeInSeconds="1" QuestId="24492" QuestObjectiveIndex="1" X="-6113.611" Y="376.7361" Z="395.5426" />
+		<Code File="InteractWith" MobId="201705" InteractByLooting="true" NonCompeteDistance="0" InteractBlacklistTimeInSeconds="1" QuestId="24492" QuestObjectiveIndex="2" X="-6116.972" Y="379.0938" Z="395.5426" />
+		<Code File="InteractWith" MobId="201704" InteractByLooting="true" NonCompeteDistance="0" InteractBlacklistTimeInSeconds="1" QuestId="24492" QuestObjectiveIndex="3" X="-6114.495" Y="379.6945" Z="396.4621" />
+
+		<TurnIn QuestName="Pack Your Bags" QuestId="24492" TurnInName="Milo Geartwinge" TurnInId="37113" X="-6244.375" Y="307.7264" Z="383.8831" />
+
+		<Checkpoint Level="5" />
+
+		<Code File="LoadProfile" ProfileName="..\Eastern Kingdoms\Dun Morogh.xml" />
+
+	</QuestOrder>
+</HBProfile>

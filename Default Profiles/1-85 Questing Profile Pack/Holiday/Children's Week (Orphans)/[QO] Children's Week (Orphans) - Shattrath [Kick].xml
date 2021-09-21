@@ -1,0 +1,555 @@
+﻿<!-- Profile by Kick/Chinajade (last updated for 2011 Children's week chain)
+
+    General notes:
+     * The profile starts and ends in Stormwind.
+	   But, the profile is very Honorbuddy stop/start friendly... it will pick up where if left off
+	   if this happens.
+	 
+	 * This profile is as AFK-able as we can make it.  However, it needs to be watched because HB
+	   (or the WoWclient in connection with HB) doesn't appear to process events reliably.
+	   
+	 * We explicitly fly everywhere (even though its a little bit slower than using taxis).
+	   We do this because not everyone may know the flightpoints.
+	   
+	 * When we deploy the Orphan, its always in a While loop, as some addons can interfere with this.
+	 
+	 * If you have more than one Orphan whistle in your inventory, some addons can interfere with this
+	   profile if the wrong Orphan is deployed.
+	   
+	 * Honorbuddy *really* likes quest pickups/turnins to Orphans other than our own.  This can *seriously*
+	   make you look like a bot if that other player is moving around.  Sadly, there is nothing we can do
+	   about this.  The problems appear to be exacerbated by the 'not always there' NPCs giving/taking
+	   quests (e.g., the Orphan).
+	   
+	  * We encase quest TurnIns inside While loops.  Since the Questgiver(Orphan) moves around, a TurnIn
+	    will sometimes 'miss', if we don't.
+ -->	
+<HBProfile>
+	<Name>Children's Week (Draenai) [Kick/Chinajade]</Name>
+   
+	<MinLevel>1</MinLevel>
+	<MaxLevel>86</MaxLevel>
+   
+	<MinDurability>0.2</MinDurability>
+	<MinFreeBagSlots>2</MinFreeBagSlots>
+	
+	<MailGrey>False</MailGrey>
+	<MailWhite>False</MailWhite>
+	<MailGreen>False</MailGreen>
+	<MailBlue>True</MailBlue>
+	<MailPurple>True</MailPurple>
+   
+	<SellGrey>True</SellGrey>
+	<SellWhite>True</SellWhite>
+	<SellGreen>True</SellGreen>
+	<SellBlue>False</SellBlue>
+	<SellPurple>False</SellPurple>
+   
+	<TargetElites>True</TargetElites>
+
+	<AvoidMobs>
+	</AvoidMobs>
+	
+	<Blackspots>
+	</Blackspots>
+
+	<Mailboxes>
+	</Mailboxes>
+ 
+	<Vendors>
+	</Vendors>
+
+	<QuestOrder>
+		<If Condition="!CanFly()">
+			<CustomBehavior File="UserDialog" StopOnContinue="true"
+							Text="You must be able to fly to use this profile." />
+		</If>
+			
+		<CustomBehavior File="UserSettings" Preset="HarvestsOff" LootMobs="True" PullDistance="1" UseMount="True" TrainNewSkills="False" LearnFlightPaths="False" KillBetweenHotspots="True" LogoutForInactivity="False" />
+		
+		<!-- Move to the Matron, if we don't already have the whistle in inventory -->
+		<If Condition="!HasItem(31881)">
+		
+			<!-- If not in EK or Northrend, ask user to move there -->
+			<If Condition="!((Me.MapId == 0) || (Me.MapId == 530))">
+				<CustomBehavior File="UserDialog" StopOnContinue="true" SoundCue="Exclamation" SoundCueInterval="1" Text="Please move to Eastern Kingdoms, or Outlands, then start the profile." />
+			</If>
+		
+			<!-- If in Stormwind, move to portal in mage tower -->
+			<If Condition="Me.ZoneId == 1519">
+				<CustomBehavior File="FlyTo" DestName="Stormwind Mage Tower" X="-8986.242" Y="861.287" Z="124.9908" />
+				<RunTo Name="Stormwind Mage Tower" X="-9008.876" Y="868.7813" Z="129.6929" />
+				<!-- Portal to Blasted Lands -->
+				<CustomBehavior File="UseGameObject" ObjectId="195141" X="-9008.876" Y="868.7813" Z="129.6929" />
+				<CustomBehavior File="WaitTimer" WaitTime="25000" VariantTime="15000"
+								GoalText="Waiting {TimeRemaining} for teleport to complete" />
+			</If>
+			
+			<!-- Use Blasted Lands portal -->
+			<If Condition="Me.MapId == 0">
+				<CustomBehavior File="FlyTo" DestName="The Dark Portal" X="-11882.51" Y="-3205.007" Z="-16.88242" />
+				<CustomBehavior File="MyCTM" X="-11908.11" Y="-3211.058" Z="-14.85856" />
+				<CustomBehavior File="WaitTimer" WaitTime="25000" VariantTime="15000"
+								GoalText="Waiting {TimeRemaining} for zoning to complete." />
+			</If>
+
+			<If Condition="Me.MapId == 530">	
+				<!-- Spread out approach to Matron so multiple HB users won't be standing on top of one another -->
+				<If Condition="Chance(20.0)">
+					<CustomBehavior File="FlyTo" DestName="Shattrath Orphan Matron" X="-1894.267" Y="5160.354" Z="-40.20852" />
+				<ElseIf Condition="Chance(20.0)">
+					<CustomBehavior File="FlyTo" DestName="Shattrath Orphan Matron" X="-1887.389" Y="5161.38" Z="-42.3903" />
+					</ElseIf>
+				<ElseIf Condition="Chance(20.0)">
+					<CustomBehavior File="FlyTo" DestName="Shattrath Orphan Matron" X="-1883.983" Y="5155.843" Z="-43.4709" />
+					</ElseIf>
+				<ElseIf Condition="Chance(20.0)">
+					<CustomBehavior File="FlyTo" DestName="Shattrath Orphan Matron" X="-1885.817" Y="5146.214" Z="-40.20865" />
+					</ElseIf>
+				<Else>
+					<CustomBehavior File="FlyTo" DestName="Shattrath Orphan Matron" X="-1890.014" Y="5157.902" Z="-40.20861" />
+					</Else>
+				</If>
+			</If>
+			<CustomBehavior File="ForcedDismount" />
+
+			<!-- 31881	Draenei Orphan Whistle -->
+			<PickUp QuestName="Children's Week" QuestId="10943" GiverName="Orphan Matron Mercy" GiverId="22819" />
+		</If>
+		
+		<!-- If Orphan is deployed, put it away... the auto-summon has deployed the wrong Orphan
+			 because we have more than one whistle in our inventory -->
+		<While Condition="Me.HasAura(&quot;Orphan Out&quot;)" >
+			<CustomBehavior File="Misc\RunLua" Lua="UseItemByName(31881)" WaitTime="1000" />
+			<CustomBehavior File="WaitTimer" WaitTime="4000" VariantTime="3000" />
+		</While>
+
+		<!-- The Orphan is not a stationary mob, and TurnIns sometimes 'miss' because of it.  Thus, the While loop -->
+		<While Condition="HasQuest(10943) &amp;&amp; IsQuestCompleted(10943)" >
+			<While Condition="!Me.HasAura(&quot;Orphan Out&quot;)" >
+				<CustomBehavior File="Misc\RunLua" Lua="UseItemByName(31881)" WaitTime="1000" />
+				<CustomBehavior File="WaitTimer" WaitTime="4000" VariantTime="3000" />
+			</While>
+			
+			<!-- Honorbuddy sometimes wants to see the Orphan move before acknowledging presence -->
+			<TurnIn QuestName="Children's Week" QuestId="10943" TurnInName="Draenei Orphan" TurnInId="22818" />
+		</While>
+			
+		<PickUp QuestName="Jheel is at Aeris Landing!" QuestId="10954" GiverName="Draenei Orphan" GiverId="22818" />
+		<PickUp QuestName="Auchindoun and the Ring of Observance" QuestId="10950" GiverName="Draenei Orphan" GiverId="22818" />
+		<PickUp QuestName="A Trip to the Dark Portal" QuestId="10952" GiverName="Draenei Orphan" GiverId="22818" />
+		
+		
+		<!-- Jheel is at Aeris Landing! -->
+		<If Condition="HasQuest(10954) &amp;&amp; !IsQuestCompleted(10954)" >
+			<!-- Can be a busy area, so spread out our arrival...
+				Also, to complete the quest, it likes to see motion on the Orphan once its out.
+				So we land, deploy Orphan, then move to Jheel.
+			 -->
+			<If Condition="Chance(33.3)">
+				<CustomBehavior File="FlyTo" DestName="Aeris Landing" X="-2067.997" Y="8574.139" Z="23.1238"  />
+				<CustomBehavior File="ForcedDismount" />
+				<While Condition="!Me.HasAura(&quot;Orphan Out&quot;)" >
+					<CustomBehavior File="Misc\RunLua" Lua="UseItemByName(31881)" WaitTime="1000" />
+					<CustomBehavior File="WaitTimer" WaitTime="4000" VariantTime="3000" />
+				</While>
+				<RunTo Name="Jheel" X="-2079.027" Y="8558.066" Z="22.80595" />
+			<ElseIf Condition="Chance(33.3)">
+				<CustomBehavior File="FlyTo" DestName="Aeris Landing" X="-2060.748" Y="8566.084" Z="23.87418"  />
+				<CustomBehavior File="ForcedDismount" />
+				<While Condition="!Me.HasAura(&quot;Orphan Out&quot;)" >
+					<CustomBehavior File="Misc\RunLua" Lua="UseItemByName(31881)" WaitTime="1000" />
+					<CustomBehavior File="WaitTimer" WaitTime="4000" VariantTime="3000" />
+				</While>
+				<RunTo Name="Jheel" X="-2078.319" Y="8557.173" Z="22.89079" />
+				</ElseIf>
+			<Else>
+				<CustomBehavior File="FlyTo" DestName="Aeris Landing" X="-2059.259" Y="8544.618" Z="23.99125" />
+				<CustomBehavior File="ForcedDismount" />
+				<While Condition="!Me.HasAura(&quot;Orphan Out&quot;)" >
+					<CustomBehavior File="Misc\RunLua" Lua="UseItemByName(31881)" WaitTime="1000" />
+					<CustomBehavior File="WaitTimer" WaitTime="4000" VariantTime="3000" />
+				</While>
+				<RunTo Name="Jheel" X="-2078.419" Y="8554.884" Z="22.94991" />
+				</Else>
+			</If>
+			
+			<While Condition="!IsQuestCompleted(10954)">
+				<CustomBehavior File="WaitTimer" WaitTime="1000" VariantTime="1000"
+								GoalText="Waiting for quest to complete" />
+			</While>
+		</If>
+		
+		<!-- The Orphan is not a stationary mob, and TurnIns sometimes 'miss' because of it.  Thus, the While loop -->
+		<While Condition="HasQuest(10954) &amp;&amp; IsQuestCompleted(10954)" >
+			<While Condition="!Me.HasAura(&quot;Orphan Out&quot;)" >
+				<CustomBehavior File="Misc\RunLua" Lua="UseItemByName(31881)" WaitTime="1000" />
+				<CustomBehavior File="WaitTimer" WaitTime="4000" VariantTime="3000" />
+			</While>
+			
+			<TurnIn QuestName="Jheel is at Aeris Landing!" QuestId="10954" TurnInName="Jheel" TurnInId="22836" />
+		</While>
+
+		
+		<!-- Auchindoun and the Ring of Observance -->
+		<If Condition="HasQuest(10950) &amp;&amp; !IsQuestCompleted(10950)" >
+			<!-- Can be a busy area, so spread out our arrival...
+				Also, to complete the quest, it likes to see motion on the Orphan once its out.
+				So we land, deploy Orphan, then move to the summoning stone.
+			 -->
+			<If Condition="Chance(25.0)">
+				<CustomBehavior File="FlyTo" DestName="Auchindoun" X="-3340.632" Y="4953.148" Z="-101.3947" />
+				<CustomBehavior File="ForcedDismount" />
+				<While Condition="!Me.HasAura(&quot;Orphan Out&quot;)" >
+					<CustomBehavior File="Misc\RunLua" Lua="UseItemByName(31881)" WaitTime="1000" />
+					<CustomBehavior File="WaitTimer" WaitTime="4000" VariantTime="3000" />
+				</While>
+				<RunTo Name="Auchindon Summoning Stone" X="-3331.502" Y="4941.842" Z="-100.14" />
+			<ElseIf Condition="Chance(25.0)">
+				<CustomBehavior File="FlyTo" DestName="Auchindoun" X="-3322.314" Y="4963.014" Z="-101.3955" />
+				<CustomBehavior File="ForcedDismount" />
+				<While Condition="!Me.HasAura(&quot;Orphan Out&quot;)" >
+					<CustomBehavior File="Misc\RunLua" Lua="UseItemByName(31881)" WaitTime="1000" />
+					<CustomBehavior File="WaitTimer" WaitTime="4000" VariantTime="3000" />
+				</While>
+				<RunTo Name="Auchindon Summoning Stone" X="-3327.654" Y="4941.305" Z="-100.3352" />
+				</ElseIf>
+			<ElseIf Condition="Chance(25.0)">
+				<CustomBehavior File="FlyTo" DestName="Auchindoun" X="-3314.362" Y="4951.438" Z="-101.3954"  />
+				<CustomBehavior File="ForcedDismount" />
+				<While Condition="!Me.HasAura(&quot;Orphan Out&quot;)" >
+					<CustomBehavior File="Misc\RunLua" Lua="UseItemByName(31881)" WaitTime="1000" />
+					<CustomBehavior File="WaitTimer" WaitTime="4000" VariantTime="3000" />
+				</While>
+				<RunTo Name="Auchindon Summoning Stone" X="-3326.049" Y="4938.668" Z="-100.1162" />
+				</ElseIf>
+			<Else>
+				<CustomBehavior File="FlyTo" DestName="Auchindoun" X="-3309.773" Y="4937.222" Z="-100.5148" />
+				<CustomBehavior File="ForcedDismount" />
+				<While Condition="!Me.HasAura(&quot;Orphan Out&quot;)" >
+					<CustomBehavior File="Misc\RunLua" Lua="UseItemByName(31881)" WaitTime="1000" />
+					<CustomBehavior File="WaitTimer" WaitTime="4000" VariantTime="3000" />
+				</While>
+				<RunTo Name="Auchindon Summoning Stone" X="-3325.133" Y="4934.143" Z="-99.84377"/>
+				</Else>
+			</If>
+			
+			<While Condition="!IsQuestCompleted(10950)">
+				<CustomBehavior File="WaitTimer" WaitTime="1000" VariantTime="1000"
+								GoalText="Waiting for quest completion" />
+			</While>
+		</If>
+
+		<!-- The Orphan is not a stationary mob, and TurnIns sometimes 'miss' because of it.  Thus, the While loop -->		
+		<While Condition="HasQuest(10950) &amp;&amp; IsQuestCompleted(10950)" >
+			<While Condition="!Me.HasAura(&quot;Orphan Out&quot;)" >
+				<CustomBehavior File="Misc\RunLua" Lua="UseItemByName(31881)" WaitTime="1000" />
+				<CustomBehavior File="WaitTimer" WaitTime="4000" VariantTime="3000" />
+			</While>
+
+			<TurnIn QuestName="Auchindoun and the Ring of Observance" QuestId="10950" TurnInName="Draenei Orphan" TurnInId="22818" />
+		</While>
+		
+		
+		<!-- A Trip to the Dark Portal -->
+		<If Condition="HasQuest(10952) &amp;&amp; !IsQuestCompleted(10952)">
+			<!-- Can be a busy area, so spread out our arrival...
+				Also, to complete the quest, it likes to see motion on the Orphan once its out.
+				So we land, deploy Orphan, then move to another position.
+			 -->
+			<If Condition="Chance(25.0)">
+				<CustomBehavior File="FlyTo" DestName="The Dark Portal" X="-271.1154" Y="945.5175" Z="84.37973"  />
+				<CustomBehavior File="ForcedDismount" />
+				<While Condition="!Me.HasAura(&quot;Orphan Out&quot;)" >
+					<CustomBehavior File="Misc\RunLua" Lua="UseItemByName(31881)" WaitTime="1000" />
+					<CustomBehavior File="WaitTimer" WaitTime="4000" VariantTime="3000" />
+				</While>
+				<RunTo Name="The Dark Portal dias" X="-256.8532" Y="961.5139" Z="84.35489" />
+			<ElseIf Condition="Chance(25.0)">
+				<CustomBehavior File="FlyTo" DestName="The Dark Portal" X="-222.5101" Y="951.7496" Z="84.35833" />
+				<CustomBehavior File="ForcedDismount" />
+				<While Condition="!Me.HasAura(&quot;Orphan Out&quot;)" >
+					<CustomBehavior File="Misc\RunLua" Lua="UseItemByName(31881)" WaitTime="1000" />
+					<CustomBehavior File="WaitTimer" WaitTime="4000" VariantTime="3000" />
+				</While>
+				<RunTo Name="The Dark Portal dias" X="-252.0772" Y="961.8534" Z="84.3411" />
+				</ElseIf>
+			<ElseIf Condition="Chance(25.0)">
+				<CustomBehavior File="FlyTo" DestName="The Dark Portal" X="-257.0391" Y="930.5157" Z="84.37953" />
+				<CustomBehavior File="ForcedDismount" />
+				<While Condition="!Me.HasAura(&quot;Orphan Out&quot;)" >
+					<CustomBehavior File="Misc\RunLua" Lua="UseItemByName(31881)" WaitTime="1000" />
+					<CustomBehavior File="WaitTimer" WaitTime="4000" VariantTime="3000" />
+				</While>
+				<RunTo Name="The Dark Portal dias" X="-241.5592" Y="959.7591" Z="84.34399" />
+				</ElseIf>
+			<Else>
+				<CustomBehavior File="FlyTo" DestName="The Dark Portal" X="-233.1684" Y="927.5714" Z="84.37949" />
+				<CustomBehavior File="ForcedDismount" />
+				<While Condition="!Me.HasAura(&quot;Orphan Out&quot;)" >
+					<CustomBehavior File="Misc\RunLua" Lua="UseItemByName(31881)" WaitTime="1000" />
+					<CustomBehavior File="WaitTimer" WaitTime="4000" VariantTime="3000" />
+				</While>
+				<RunTo Name="The Dark Portal dias" X="-235.1521" Y="957.4091" Z="84.34785" />
+				</Else>
+			</If>
+
+			<While Condition="!IsQuestCompleted(10952)">
+				<CustomBehavior File="WaitTimer" WaitTime="1000" VariantTime="1000"
+								GoalText="Waiting for quest completion" />
+			</While>
+		</If>
+		
+		<!-- The Orphan is not a stationary mob, and TurnIns sometimes 'miss' because of it.  Thus, the While loop -->
+		<While Condition="HasQuest(10952) &amp;&amp; IsQuestCompleted(10952)" >
+			<While Condition="!Me.HasAura(&quot;Orphan Out&quot;)" >
+				<CustomBehavior File="Misc\RunLua" Lua="UseItemByName(31881)" WaitTime="1000" />
+				<CustomBehavior File="WaitTimer" WaitTime="4000" VariantTime="3000" />
+			</While>
+
+			<TurnIn QuestName="A Trip to the Dark Portal" QuestId="10952" TurnInName="Draenei Orphan" TurnInId="22818" />
+		</While>
+
+		<While Condition="!Me.HasAura(&quot;Orphan Out&quot;)" >
+				<CustomBehavior File="Misc\RunLua" Lua="UseItemByName(31881)" WaitTime="1000" />
+				<CustomBehavior File="WaitTimer" WaitTime="4000" VariantTime="3000" />
+		</While>
+		<PickUp QuestName="The Seat of the Naaru" QuestId="10956" GiverName="Draenei Orphan" GiverId="22818" />
+		<PickUp QuestName="Time to Visit the Caverns" QuestId="10962" GiverName="Draenei Orphan" GiverId="22818" />	
+		
+
+		<!-- Time to Visit the Caverns -->
+		<If Condition="HasQuest(10962) &amp;&amp; !IsQuestCompleted(10962)" >
+			<!-- If in Outland, head to portal and use it... -->
+			<If Condition="Me.MapId == 530">
+				<CustomBehavior File="FlyTo" DestName="The Dark Portal" X="-248.014" Y="899.1279" Z="84.3497" />
+				<CustomBehavior File="MyCTM" X="-249.014" Y="897.1279" Z="84.3497" />
+				<CustomBehavior File="WaitTimer" WaitTime="25000" VariantTime="15000"
+								GoalText="Waiting {TimeRemaining} for zoning to complete." />
+			</If>
+			
+			<!-- If in Eastern Kingdoms, move to Theramore via Menethil Harbor -->
+			<If Condition="Me.MapId == 0">
+				<CustomBehavior File="FlyTo" DestName="Menethil Harbor docks" X="-3857.077" Y="-668.3665" Z="4.832119" />
+				<CustomBehavior File="UseTransport"
+								TransportId="176231"
+								WaitAtX="-3859.683" WaitAtY="-658.038" WaitAtZ="5.197753"
+								StandOnX="-3865.855" StandOnY="-636.8558" StandOnZ="6.044621"
+								TransportStartX="-3872.35" TransportStartY="-639.9439" TransportStartZ="0.01362585"
+								TransportEndX="-4016.39" TransportEndY="-4740.588" TransportEndZ="0.03259248"
+								GetOffX="-3999.359" GetOffY="-4723.525" GetOffZ="4.32113" />
+			</If>
+			
+			<!-- If in Kalimdor, move to the Caverns of Time -->
+			<If Condition="Me.MapId == 1">
+				<!-- Fly to CoT entrance, if we're not near meeting stone... -->
+				<If Condition="Me.Location.Distance(new WoWPoint(-8193.25, -4708.97, 18.4433)) &gt; 30">
+					<!-- ...and Alurmi is > 300 yards away, move to Caverns of Time entrance -->
+					<If Condition="Me.Location.Distance(new WoWPoint(-8526.656,-4606.126,-212.0455)) &gt; 300">
+						<CustomBehavior File="FlyTo" DestName="Entrance to Caverns of Time" X="-8178.008" Y="-4715.393" Z="24.7092" />
+					</If>
+				</If>
+								
+				<!-- Buy toy dragon -->
+				<RunTo Name="Alurmi (toy vendor)" X="-8526.656" Y="-4606.126" Z="-212.0455" />
+				<While Condition="!Me.HasAura(&quot;Orphan Out&quot;)" >
+					<CustomBehavior File="Misc\RunLua" Lua="UseItemByName(31881)" WaitTime="1000" />
+					<CustomBehavior File="WaitTimer" WaitTime="4000" VariantTime="3000" />
+				</While>
+				<If Condition="!HasItem(31951)">
+					<CustomBehavior File="InteractWith" MobId="21643" BuyItemId="31951" NumOfTimes="1" CollectionDistance="100" WaitTime="1000" X="-8527.242" Y="-4609.146" Z="-212.1374" />
+				</If>
+			</If>
+			
+			<!-- Can be a busy area, so spread out our arrival...
+				Also, to complete the quest, it likes to see motion on the Orphan once its out.
+				So we land, deploy Orphan, then move to another position.
+			 -->
+			<If Condition="Chance(25.0)">
+				<CustomBehavior File="FlyTo" DestName="Zaladormu" X="-8510.06" Y="-4396.11" Z="-218.165" />
+			<ElseIf Condition="Chance(25.0)">
+				<CustomBehavior File="FlyTo" DestName="Zaladormu" X="-8515.758" Y="-4396.253" Z="-218.0038"  />
+				</ElseIf>
+			<ElseIf Condition="Chance(25.0)">
+				<CustomBehavior File="FlyTo" DestName="Zaladormu" X="-8515.993" Y="-4391.435" Z="-218.5184" />
+				</ElseIf>
+			<Else>
+				<CustomBehavior File="FlyTo" DestName="Zaladormu" X="-8513.194" Y="-4391.152" Z="-218.621" />
+				</Else>
+			</If>
+
+			<While Condition="!IsQuestCompleted(10962)">
+				<While Condition="!Me.HasAura(&quot;Orphan Out&quot;)" >
+					<CustomBehavior File="Misc\RunLua" Lua="UseItemByName(31881)" WaitTime="1000" />
+					<CustomBehavior File="WaitTimer" WaitTime="4000" VariantTime="3000" />
+				</While>
+				
+				<If Condition="Me.HasAura(&quot;Orphan Out&quot;) &amp;&amp; HasItem(31951)">
+					<!-- Give toy dragon to Orphan, and wait for quest to complete -->
+					<CustomBehavior File="Misc\RunLua" Lua="UseItemByName(31951)" WaitTime="1000" />
+				</If>
+
+				<CustomBehavior File="WaitTimer" WaitTime="1000" VariantTime="1000"
+								GoalText="Waiting for quest completion" />
+			</While>
+		</If>
+		
+		<!-- The Orphan is not a stationary mob, and TurnIns sometimes 'miss' because of it.  Thus, the While loop -->
+		<While Condition="HasQuest(10962) &amp;&amp; IsQuestCompleted(10962)" >
+			<While Condition="!Me.HasAura(&quot;Orphan Out&quot;)" >
+				<CustomBehavior File="Misc\RunLua" Lua="UseItemByName(31881)" WaitTime="1000" />
+				<CustomBehavior File="WaitTimer" WaitTime="4000" VariantTime="3000" />
+			</While>
+
+			<TurnIn QuestName="Time to Visit the Caverns" QuestId="10962" TurnInName="Draenei Orphan" TurnInId="22818" />
+		</While>
+		
+		<If Condition="Me.Location.Distance(new WoWPoint(-8526.656,-4606.126,-212.0455)) &lt; 300">
+			<CustomBehavior File="FlyTo" DestName="Caverns of Time entrance" X="-8509.953" Y="-4490.537" Z="-212.3654" />
+			<RunTo Name="Caverns of Time entrance" X="-8503.51" Y="-4623.196" Z="-209.9682" /> <!-- navigational aid -->
+			<RunTo Name="Caverns of Time entrance" X="-8178.008" Y="-4715.393" Z="24.7092" />
+		</If>
+		
+
+
+		<!-- The Seat of the Naaru -->
+		<If Condition="HasQuest(10956) &amp;&amp; !IsQuestCompleted(10956)">
+			<!-- If we're not on the Exodar or Azuremyst Isle... -->
+			<If Condition="!((Me.ZoneId == 3557) || (Me.ZoneId == 3524))">
+				<!-- If we're not at the Rut'theran dock, fly there... -->
+				<If Condition="Me.Location.Distance(new WoWPoint(8344.031, 1161.071, 4.549286)) &gt; 3">
+					<CustomBehavior File="FlyTo" DestName="Rut'theran dock" X="7540.029" Y="194.1134" Z="63.69017" />
+					<CustomBehavior File="MyCTM" DestName="Rut'theran dock" X="8161.693" Y="1043.964" Z="97.11938" />
+					<CustomBehavior File="MyCTM" DestName="Rut'theran dock" X="8345.604" Y="1113.229" Z="4.023457"  />
+				</If>
+			
+				<CustomBehavior File="UseTransport"
+								TransportId="181646"
+								WaitAtX="8344.031" WaitAtY="1161.071" WaitAtZ="4.549286"
+								TransportStartX="8346.647" TransportStartY="1177.085" TransportStartZ="0.04856979"
+								TransportEndX="-4264.997" TransportEndY="-11317.2" TransportEndZ="-0.01906921"
+								GetOffX="-4260.246" GetOffY="-11331.36" GetOffZ="5.490198" />
+			</If> <!-- we should be on Azuremyst Isle now -->
+			
+			<While Condition="HasQuest(10956) &amp;&amp; !IsQuestCompleted(10956)">
+				<While Condition="!Me.HasAura(&quot;Orphan Out&quot;)" >
+					<CustomBehavior File="Misc\RunLua" Lua="UseItemByName(31881)" WaitTime="1000" />
+					<CustomBehavior File="WaitTimer" WaitTime="4000" VariantTime="3000" />
+				</While>
+				
+				<!-- we have to move around until the quest completes -->
+				<RunTo Name="O'ros" X="-3901.943" Y="-11679.31" Z="-302.9516" />
+				<CustomBehavior File="WaitTimer" WaitTime="5000" VariantTime="5000" />
+				<RunTo Name="down the ramp" X="-3889.066" Y="-11641.19" Z="-310.9066" />
+				<CustomBehavior File="WaitTimer" WaitTime="5000" VariantTime="5000" />
+			</While>
+			
+			<TurnIn QuestName="The Seat of the Naaru" QuestId="10956" TurnInName="O'ros" TurnInId="17538" X="-3901.595" Y="-11678.82" Z="-302.6535" />
+		</If>
+		
+		<PickUp QuestName="Call on the Farseer" QuestId="10968" GiverName="O'ros" GiverId="17538" X="-3901.595" Y="-11678.82" Z="-302.6535" />
+		
+				
+		<!-- Call on the Farseer -->
+		<While Condition="HasQuest(10968) &amp;&amp; !IsQuestCompleted(10968)">
+			<While Condition="!Me.HasAura(&quot;Orphan Out&quot;)" >
+				<CustomBehavior File="Misc\RunLua" Lua="UseItemByName(31881)" WaitTime="1000" />
+				<CustomBehavior File="WaitTimer" WaitTime="4000" VariantTime="3000" />
+			</While>
+				
+			<!-- we have to move around until the quest completes -->
+			<RunTo Name="Farseer Nobundo" X="-3838.838" Y="-11383.4" Z="-103.731" />
+			<CustomBehavior File="WaitTimer" WaitTime="3000" VariantTime="5000" />
+			<RunTo Name="Farseer Nobundo" X="-3810.337" Y="-11396.21" Z="-104.3204" />
+			<CustomBehavior File="WaitTimer" WaitTime="3000" VariantTime="5000" />
+		</While>
+			
+		<!-- The Farseer is not a stationary mob, and TurnIns sometimes 'miss' because of it.  Thus, the While loop -->
+		<While Condition="HasQuest(10968) &amp;&amp; IsQuestCompleted(10968)">
+			<TurnIn QuestName="Call on the Farseer" QuestId="10968" TurnInName="Farseer Nobundo" TurnInId="17204" />
+		</While>
+
+		
+		<!-- The Orphan is not a stationary mob, and TurnIns sometimes 'miss' because of it.  Thus, the While loop -->
+		<While Condition="!Me.HasAura(&quot;Orphan Out&quot;)" >
+			<CustomBehavior File="Misc\RunLua" Lua="UseItemByName(31881)" WaitTime="1000" />
+			<CustomBehavior File="WaitTimer" WaitTime="4000" VariantTime="3000" />
+		</While>
+		
+		<PickUp QuestName="Back to the Orphanage" QuestId="10966" GiverName="Draenei Orphan" GiverId="22818" />
+		
+	
+		<!-- Back to the Orphanage -->
+		<If Condition="HasQuest(10966) &amp;&amp; IsQuestCompleted(10966)" >
+			<If Condition="Me.ZoneId == 3557">
+				<RunTo Name="Blasted Lands portal" X="-4051.821" Y="-11577.65" Z="-138.5728" />
+				<!-- Portal to Blasted Lands -->
+				<CustomBehavior File="UseGameObject" ObjectId="195141" X="-4053.682" Y="-11575.2" Z="-138.5848" />
+			</If>
+			
+			<!-- Use Blasted Lands portal -->
+			<If Condition="Me.MapId == 0">
+				<CustomBehavior File="FlyTo" DestName="The Dark Portal" X="-11882.51" Y="-3205.007" Z="-16.88242" />
+				<CustomBehavior File="MyCTM" X="-11908.11" Y="-3211.058" Z="-14.85856" />
+				<CustomBehavior File="WaitTimer" WaitTime="25000" VariantTime="15000"
+								GoalText="Waiting {TimeRemaining} for zoning to complete." />
+			</If>
+
+			<If Condition="Me.MapId == 530">	
+				<!-- Spread out approach to Matron so multiple HB users won't be standing on top of one another -->
+				<If Condition="Chance(20.0)">
+					<CustomBehavior File="FlyTo" DestName="Shattrath Orphan Matron" X="-1894.267" Y="5160.354" Z="-40.20852" />
+				<ElseIf Condition="Chance(20.0)">
+					<CustomBehavior File="FlyTo" DestName="Shattrath Orphan Matron" X="-1887.389" Y="5161.38" Z="-42.3903" />
+					</ElseIf>
+				<ElseIf Condition="Chance(20.0)">
+					<CustomBehavior File="FlyTo" DestName="Shattrath Orphan Matron" X="-1883.983" Y="5155.843" Z="-43.4709" />
+					</ElseIf>
+				<ElseIf Condition="Chance(20.0)">
+					<CustomBehavior File="FlyTo" DestName="Shattrath Orphan Matron" X="-1885.817" Y="5146.214" Z="-40.20865" />
+					</ElseIf>
+				<Else>
+					<CustomBehavior File="FlyTo" DestName="Shattrath Orphan Matron" X="-1890.014" Y="5157.902" Z="-40.20861" />
+					</Else>
+				</If>
+			</If>
+			<CustomBehavior File="ForcedDismount" />
+			
+			<!-- <TurnIn QuestName="Back To The Orphanage" QuestId="10966" TurnInName="Orphan Matron Aria" TurnInId="34365" /> -->
+			<CustomBehavior File="UserDialog" AllowBotStop="false" SoundCue="Exclamation" SoundCueInterval="1" Text="Turn in quest, and select your reward.\n\nWhen you hit &quot;Continue&quot;, we will return you to Stormwind." />
+		</If>	
+		
+		
+		<!-- If we're in Outland, return to Stormwind -->
+		<If Condition="Me.MapId == 530">
+			<CustomBehavior File="FlyTo" DestName="The Dark Portal" X="-248.014" Y="899.1279" Z="84.3497" />
+			<CustomBehavior File="MyCTM" X="-249.014" Y="897.1279" Z="84.3497" />
+			<CustomBehavior File="WaitTimer" WaitTime="25000" VariantTime="15000"
+								GoalText="Waiting {TimeRemaining} for zoning to complete." />
+							
+			<!-- Deploy to a random place inside Stormwind -->
+			<If Condition="Chance(20.0)">
+				<CustomBehavior File="FlyTo" DestName="Elder's mailbox" X="-8859.798" Y="640.8622" Z="96.28608" />
+			<ElseIf Condition="Chance(20.0)">
+				<CustomBehavior File="FlyTo" DestName="Backgate Bank" X="-8360.063" Y="620.2231" Z="95.35557" />
+				</ElseIf>
+			<ElseIf Condition="Chance(20.0)">
+				<CustomBehavior File="FlyTo" DestName="Cathedral Square mailbox" X="-8657.595" Y="775.6388" Z="96.99747" />
+				</ElseIf>
+			<ElseIf Condition="Chance(20.0)">
+				<CustomBehavior File="FlyTo" DestName="Fishing pier mailbox"  X="-8826.954" Y="729.8922" Z="98.42244" />
+				</ElseIf>
+			<Else Condition="Chance(20.0)">
+				<CustomBehavior File="FlyTo" DestName="Canal mailbox" X="-8752.236" Y="561.497" Z="97.43406" />
+				</Else>
+			</If>
+			
+			<CustomBehavior File="ForcedDismount" />
+		</If>
+
+				
+		<CustomBehavior File="UserDialog" AllowBotStop="True" SoundCue="Exclamation" SoundCueInterval="1" Text="End of Profile." />
+	
+	</QuestOrder>
+
+</HBProfile>

@@ -1,0 +1,293 @@
+﻿<HBProfile>
+	<Name>[QO] Consortium Rep B [Kick]</Name>
+   
+	<MinLevel>1</MinLevel>
+	<MaxLevel>86</MaxLevel>
+   
+	<MinDurability>0.2</MinDurability>
+	<MinFreeBagSlots>2</MinFreeBagSlots>
+	
+	<MailGrey>False</MailGrey>
+	<MailWhite>False</MailWhite>
+	<MailGreen>False</MailGreen>
+	<MailBlue>True</MailBlue>
+	<MailPurple>True</MailPurple>
+   
+	<SellGrey>True</SellGrey>
+	<SellWhite>True</SellWhite>
+	<SellGreen>True</SellGreen>
+	<SellBlue>False</SellBlue>
+	<SellPurple>False</SellPurple>
+   
+	<TargetElites>True</TargetElites>
+
+	<AvoidMobs>
+	</AvoidMobs>
+	<Blackspots>
+		<Blackspot X="2559.246" Y="3810.38" Z="139.932" Radius="17.76224" />
+		<Blackspot X="2573.169" Y="3839.225" Z="139.3586" Radius="23.63793" />
+		<Blackspot X="2669.215" Y="3704.528" Z="143.8714" Radius="5.548146" />
+		<Blackspot X="-2012.614" Y="7558.771" Z="-89.05171" Radius="9.484614" />
+		<Blackspot X="-2563.781" Y="7276.854" Z="15.37977" Radius="4.372739" />
+		<Blackspot X="292.1132" Y="8487.395" Z="43.51323" Radius="42.63336" />
+		<Blackspot X="486.4735" Y="8158.848" Z="21.46613" Radius="5.398831" />
+	</Blackspots>
+
+	<Mailboxes>
+		<Mailbox X="-2670.931" Y="7288.093" Z="36.30991" /> <!-- Consortium, Nagrand -->
+		<Mailbox X="3055.337" Y="3686.321" Z="142.7696" /> <!-- Area 52, Netherstorm -->
+	</Mailboxes>
+ 
+	<Vendors>
+		<Vendor Name="Paulsta'ats" Entry="23007" Type="Repair" X="-2054.747" Y="8609.072" Z="22.16219" /> <!-- Consortium, Nagrand -->
+		<Vendor Name="Qiff " Entry="19575" Type="Repair" X="2975.461" Y="3663.066" Z="143.0852" /> <!-- Area 52, Netherstorm -->
+	</Vendors>
+	
+	<Quest Id="9893" Name="Obsidian Warbeads">
+		<Objective Type="CollectItem" ItemId="25433" CollectCount="10">
+			<Hotspots>
+				<Hotspot X="-2031.721" Y="7653.852" Z="-86.77483" /> <!-- Southwind Cleft & inside cave -->
+				<Hotspot X="-2007.341" Y="7592.552" Z="-90.6832" />
+				<Hotspot X="-1966.614" Y="7562.087" Z="-91.6572" />
+				<Hotspot X="-2031.674" Y="7540.051" Z="-92.02007" />
+				<Hotspot X="-2040.388" Y="7562.156" Z="-91.48486" />
+				<Hotspot X="-2055.959" Y="7516.799" Z="-94.80575" />
+				<Hotspot X="-2043.698" Y="7495.235" Z="-97.14955" />
+				<Hotspot X="-2002.45" Y="7478.721" Z="-96.30782" />
+				<Hotspot X="-2011.966" Y="7422.976" Z="-95.20641" />
+				<Hotspot X="-2011.465" Y="7465.341" Z="-97.70175" />
+				<Hotspot X="-2040.078" Y="7441.078" Z="-99.16151" />
+				<Hotspot X="-2072.187" Y="7449.063" Z="-102.3337" />
+				<Hotspot X="-2056.631" Y="7418.72" Z="-102.942" />
+				<Hotspot X="-2078.308" Y="7373.243" Z="-104.4655" />
+				<Hotspot X="-2057.164" Y="7420.631" Z="-102.6495" />
+				<Hotspot X="-2038.31" Y="7442.574" Z="-98.70209" />
+				<Hotspot X="-2001.496" Y="7474.154" Z="-97.33662" />
+				<Hotspot X="-2045.324" Y="7494.437" Z="-97.29666" />
+				<Hotspot X="-2054.438" Y="7520.031" Z="-93.36745" />
+				<Hotspot X="-2039.958" Y="7544.921" Z="-92.78878" />
+				<Hotspot X="-1995.714" Y="7590.118" Z="-90.95038" />
+				<Hotspot X="-1949.175" Y="7682.474" Z="-93.26241" /> <!-- End of Southwind Cleft & cave -->
+			</Hotspots>
+		</Objective>
+	</Quest>	
+	<Quest Id="10262" Name="A Heap of Ethereals">
+		<Objective Type="CollectItem" ItemId="29209" CollectCount="10">
+			<CollectFrom>
+				<Mob Name="Zaxxis Raider" Id="18875" />
+				<Mob Name="Zaxxis Stalker" Id="19642" />
+				<Mob Name="Warp-Raider Nesaad" Id="19641" />
+			</CollectFrom>
+			<Hotspots>
+				<Hotspot X="2684.959" Y="3772.376" Z="141.636" />
+				<Hotspot X="2660.484" Y="3810.371" Z="138.7423" />
+				<Hotspot X="2629.525" Y="3852.031" Z="140.5526" />
+				<Hotspot X="2584.472" Y="3898.295" Z="137.7425" />
+				<Hotspot X="2533.908" Y="3877.987" Z="138.1157" />
+				<Hotspot X="2507.41" Y="3917.909" Z="129.3855" />
+				<Hotspot X="2502.337" Y="3850.076" Z="130.1702" />
+				<Hotspot X="2521.146" Y="3799.816" Z="133.2325" />
+				<Hotspot X="2569.184" Y="3765.697" Z="143.4971" />
+				<Hotspot X="2612.26" Y="3755.816" Z="144.3614" />
+				<Hotspot X="2641.541" Y="3746.299" Z="144.2991" />
+				<Hotspot X="2673.365" Y="3727.322" Z="144.3405" />
+				<Hotspot X="2681.213" Y="3767.474" Z="142.329" />
+			</Hotspots>
+		</Objective>
+	</Quest>
+	
+	
+	<QuestOrder>
+	
+	<CustomBehavior File="UserSettings" LootMobs="True" PullDistance="35" TrainNewSkills="False" LearnFlightPaths="False" KillBetweenHotspots="True" LogoutForInactivity="False" />
+				
+			<!-- Farming for Oshu'gun Crystal Fragments - 10 for each turnin, we're getting 24+ per "run" -->
+			<While Condition="Me.GetReputationLevelWith(933) &lt; Styx.WoWUnitReaction.Friendly" >
+				<If Condition="(GetItemCount(25416) &lt; 10)" >
+					<CustomBehavior File="UserSettings" PullDistance="1" />
+					<CustomBehavior File="FlyTo" X="-2221.953" Y="8437.491" Z="-24.29752" />
+					<CustomBehavior File="ForcedDismount" />
+				  <While Condition="(GetItemCount(25416) &lt; 10)" >
+					<CustomBehavior File="InteractWith"  MobId="182258" ObjectType="Gameobject" NumOfTimes="6" CollectionDistance="1000" X="-2297.695" Y="8367.567" Z="-35.90181" />
+						<CustomBehavior File="FlyTo" X="-2525.27" Y="8021.611" Z="-48.77736" />
+						<CustomBehavior File="ForcedDismount" />
+					<CustomBehavior File="InteractWith"  MobId="182258" ObjectType="Gameobject" NumOfTimes="6" CollectionDistance="1000" X="-2525.27" Y="8021.611" Z="-48.77736" />
+						<CustomBehavior File="FlyTo" X="-2770.325" Y="8567.024" Z="-36.15606" />
+						<CustomBehavior File="ForcedDismount" />
+					<CustomBehavior File="InteractWith"  MobId="182258" ObjectType="Gameobject" NumOfTimes="6" CollectionDistance="1000" X="-2770.325" Y="8567.024" Z="-36.15606" />
+						<CustomBehavior File="FlyTo" X="-2326.249" Y="8412.931" Z="-35.84259" />
+						<CustomBehavior File="ForcedDismount" />
+					<CustomBehavior File="InteractWith"  MobId="182258" ObjectType="Gameobject" NumOfTimes="6" CollectionDistance="1000" X="-2326.249" Y="8412.931" Z="-35.84259" />
+				  </While>
+				</If>
+				<If Condition="(GetItemCount(25416) &gt;= 10)" >
+					<CustomBehavior File="FlyTo" X="-2065.237" Y="8554.801" Z="23.84142" />
+					<CustomBehavior File="ForcedDismount" />
+				  <While Condition="(GetItemCount(25416) &gt;= 10) &amp;&amp; (Me.GetReputationLevelWith(933) &lt; Styx.WoWUnitReaction.Friendly)" >
+					<CustomBehavior File="InteractWith"  MobId="18265" NumOfTimes="1" CollectionDistance="50" WaitTime="1000" X="-2087.022" Y="8562.938" Z="22.01344" />
+					<CustomBehavior File="RunMacro" Macro="/click GossipTitleButton1" NumOfTimes="1" WaitTime="1000" />
+					<CustomBehavior File="RunMacro" Macro="/click QuestFrameCompleteButton" NumOfTimes="1" WaitTime="1000" />
+					<CustomBehavior File="RunMacro" Macro="/click QuestFrameCompleteQuestButton" NumOfTimes="1" WaitTime="1000" />
+					<CustomBehavior File="WaitTimer" WaitTime="3000" />
+				  </While>
+				</If>
+			</While>
+			
+		<!-- Initial quest after friendly, but before rep quest -->	
+		<If Condition="Me.GetReputationLevelWith(978) &gt;= Styx.WoWUnitReaction.Friendly" >
+				<If Condition="((!HasQuest(9893)) &amp;&amp; (!IsQuestCompleted(9893)))" >
+					<CustomBehavior File="FlyTo" X="-2065.237" Y="8554.801" Z="23.84142" />
+					<CustomBehavior File="ForcedDismount" />
+				</If>
+		<PickUp QuestName="Fierce Enemies" QuestId="9893" GiverName="Gezhe" GiverId="18265" X="-2065.237" Y="8554.801" Z="23.84142" />
+				<If Condition="((HasQuest(9893)) &amp;&amp; (!IsQuestCompleted(9893)))" >
+					<CustomBehavior File="FlyTo" X="-1926.844" Y="7644.984" Z="-87.07913" />
+					<CustomBehavior File="ForcedDismount" />
+					<CustomBehavior File="UserSettings" PullDistance="35" />
+						<SetGrindArea>
+							<Grindarea>
+								<TargetMinLevel>64</TargetMinLevel> 
+								<TargetMaxLevel>71</TargetMaxLevel>
+								<Factions>45</Factions> <!-- [Ogre] -->
+								<Hotspots>
+									<Hotspot X="-2031.721" Y="7653.852" Z="-86.77483" /> <!-- Southwind Cleft & inside cave -->
+									<Hotspot X="-2007.341" Y="7592.552" Z="-90.6832" />
+									<Hotspot X="-1966.614" Y="7562.087" Z="-91.6572" />
+									<Hotspot X="-2031.674" Y="7540.051" Z="-92.02007" />
+									<Hotspot X="-2040.388" Y="7562.156" Z="-91.48486" />
+									<Hotspot X="-2055.959" Y="7516.799" Z="-94.80575" />
+									<Hotspot X="-2043.698" Y="7495.235" Z="-97.14955" />
+									<Hotspot X="-2002.45" Y="7478.721" Z="-96.30782" />
+									<Hotspot X="-2011.966" Y="7422.976" Z="-95.20641" />
+									<Hotspot X="-2011.465" Y="7465.341" Z="-97.70175" />
+									<Hotspot X="-2040.078" Y="7441.078" Z="-99.16151" />
+									<Hotspot X="-2072.187" Y="7449.063" Z="-102.3337" />
+									<Hotspot X="-2056.631" Y="7418.72" Z="-102.942" />
+									<Hotspot X="-2078.308" Y="7373.243" Z="-104.4655" />
+									<Hotspot X="-2057.164" Y="7420.631" Z="-102.6495" />
+									<Hotspot X="-2038.31" Y="7442.574" Z="-98.70209" />
+									<Hotspot X="-2001.496" Y="7474.154" Z="-97.33662" />
+									<Hotspot X="-2045.324" Y="7494.437" Z="-97.29666" />
+									<Hotspot X="-2054.438" Y="7520.031" Z="-93.36745" />
+									<Hotspot X="-2039.958" Y="7544.921" Z="-92.78878" />
+									<Hotspot X="-1995.714" Y="7590.118" Z="-90.95038" />
+									<Hotspot X="-1949.175" Y="7682.474" Z="-93.26241" /> <!-- End of Southwind Cleft & cave -->
+								</Hotspots>
+							</Grindarea>
+						</SetGrindArea>
+					<GrindTo Condition="(GetItemCount(25433) &gt;= 10)" GoalText="Getting 10 Warbeads" />
+				</If>
+				<If Condition="((HasQuest(9893)) &amp;&amp; (IsQuestCompleted(9893)))" >
+					<CustomBehavior File="FlyTo" X="-2065.237" Y="8554.801" Z="23.84142" />
+					<CustomBehavior File="ForcedDismount" />
+				</If>
+		<TurnIn QuestName="Fierce Enemies" QuestId="9893" TurnInName="Gezhe" TurnInId="18265" X="-2065.237" Y="8554.801" Z="23.84142" />
+		
+			<!-- going to Netherstorm -->
+			<If Condition="((!HasQuest(10265)) &amp;&amp; (!IsQuestCompleted(10265)))" >
+				<CustomBehavior File="FlyTo" X="3067.401" Y="3671.251" Z="142.5094" />
+				<CustomBehavior File="ForcedDismount" />
+		<PickUp QuestName="Consortium Crystal Collection" QuestId="10265" GiverName="Nether-Stalker Khay'ji" GiverId="19880" />
+			</If>
+			<If Condition="((HasQuest(10265)) &amp;&amp; (!IsQuestCompleted(10265)))" >
+				<CustomBehavior File="FlyTo" X="2749.24" Y="3186.255" Z="151.6888" />
+				<CustomBehavior File="ForcedDismount" />
+				<Objective QuestName="Consortium Crystal Collection" QuestId="10265" Type="CollectItem" CollectCount="1" Name="Arklon Crystal Artifact" ItemId="28829" />
+			</If>
+			<If Condition="((HasQuest(10265)) &amp;&amp; (IsQuestCompleted(10265)))" >
+				<CustomBehavior File="FlyTo" X="3067.401" Y="3671.251" Z="142.5094" />
+				<CustomBehavior File="ForcedDismount" />
+		<TurnIn QuestName="Consortium Crystal Collection" QuestId="10265" TurnInName="Nether-Stalker Khay'ji" TurnInId="19880" />
+			</If>
+			<If Condition="((!HasQuest(10262)) &amp;&amp; (!IsQuestCompleted(10262)))" >
+				<CustomBehavior File="FlyTo" X="3067.401" Y="3671.251" Z="142.5094" />
+				<CustomBehavior File="ForcedDismount" />
+		<PickUp QuestName="A Heap of Ethereals" QuestId="10262" GiverName="Nether-Stalker Khay'ji" GiverId="19880" X="3069.964" Y="3674.858" Z="142.3462" />
+			</If>
+			<If Condition="((HasQuest(10262)) &amp;&amp; (!IsQuestCompleted(10262)))" >
+				<CustomBehavior File="FlyTo" X="2721.242" Y="3791.269" Z="146.9909" />
+				<CustomBehavior File="ForcedDismount" />
+				<Objective QuestName="A Heap of Ethereals" QuestId="10262" Type="CollectItem" CollectCount="10" Name="Zaxxis Insignia" ItemId="29209" />
+			</If>
+			<If Condition="((HasQuest(10262)) &amp;&amp; (IsQuestCompleted(10262)))" >
+				<CustomBehavior File="FlyTo" X="3067.401" Y="3671.251" Z="142.5094" />
+				<CustomBehavior File="ForcedDismount" />
+		<TurnIn QuestName="A Heap of Ethereals" QuestId="10262" TurnInName="Nether-Stalker Khay'ji" TurnInId="19880" X="3069.964" Y="3674.858" Z="142.3462" />
+			</If>
+			<If Condition="((!HasQuest(10205)) &amp;&amp; (!IsQuestCompleted(10205)))" >
+				<CustomBehavior File="FlyTo" X="3067.401" Y="3671.251" Z="142.5094" />
+				<CustomBehavior File="ForcedDismount" />
+		<PickUp QuestName="Warp-Raider Nesaad" QuestId="10205" GiverName="Nether-Stalker Khay'ji" GiverId="19880" X="3069.964" Y="3674.858" Z="142.3462" />
+			</If>
+			<If Condition="((HasQuest(10205)) &amp;&amp; (!IsQuestCompleted(10205)))" >
+				<CustomBehavior File="FlyTo" X="2501.833" Y="3937.188" Z="125.0979" />
+				<CustomBehavior File="ForcedDismount" />
+				<Objective QuestName="Warp-Raider Nesaad" QuestId="10205" Type="KillMob" KillCount="1" Name="Warp-Raider Nesaad" MobId="19641" />
+			</If>
+			<If Condition="((HasQuest(10205)) &amp;&amp; (IsQuestCompleted(10205)))" >
+				<CustomBehavior File="FlyTo" X="3067.401" Y="3671.251" Z="142.5094" />
+				<CustomBehavior File="ForcedDismount" />
+		<TurnIn QuestName="Warp-Raider Nesaad" QuestId="10205" TurnInName="Nether-Stalker Khay'ji" TurnInId="19880" X="3069.964" Y="3674.858" Z="142.3462" />
+			</If>
+			<If Condition="((!HasQuest(10266)) &amp;&amp; (!IsQuestCompleted(10266)))" >
+				<CustomBehavior File="FlyTo" X="3067.401" Y="3671.251" Z="142.5094" />
+				<CustomBehavior File="ForcedDismount" />
+		<PickUp QuestName="Request for Assistance" GiverName="Nether-Stalker Khay'ji" QuestId="10266" GiverId="19880" />
+			</If>
+			<If Condition="(HasQuest(10266))" >
+				<CustomBehavior File="FlyTo" X="3368.878" Y="2875.375" Z="143.1216" />
+				<CustomBehavior File="ForcedDismount" />
+		<TurnIn QuestName="Request for Assistance" TurnInName="Gahruj" QuestId="10266" TurnInId="20066" />
+			</If>
+		</If>
+			
+
+			<!-- Farming for Zaxxis Insignia - 10 for each turnin -->
+			<While Condition="Me.GetReputationLevelWith(933) &lt; Styx.WoWUnitReaction.Exalted" >
+			
+				<If Condition="(GetItemCount(29209) &lt; 30)" >
+				<CustomBehavior File="FlyTo" X="2721.242" Y="3791.269" Z="146.9909" />
+				<CustomBehavior File="ForcedDismount" />
+				<CustomBehavior File="UserSettings" PullDistance="35" />
+						<SetGrindArea>
+							<Grindarea>
+								<TargetMinLevel>66</TargetMinLevel> 
+								<TargetMaxLevel>72</TargetMaxLevel>
+								<Factions>16</Factions> <!-- [Constortium] -->
+								<Hotspots>
+									<Hotspot X="2684.959" Y="3772.376" Z="141.636" />
+									<Hotspot X="2660.484" Y="3810.371" Z="138.7423" />
+									<Hotspot X="2629.525" Y="3852.031" Z="140.5526" />
+									<Hotspot X="2584.472" Y="3898.295" Z="137.7425" />
+									<Hotspot X="2533.908" Y="3877.987" Z="138.1157" />
+									<Hotspot X="2507.41" Y="3917.909" Z="129.3855" />
+									<Hotspot X="2502.337" Y="3850.076" Z="130.1702" />
+									<Hotspot X="2521.146" Y="3799.816" Z="133.2325" />
+									<Hotspot X="2569.184" Y="3765.697" Z="143.4971" />
+									<Hotspot X="2612.26" Y="3755.816" Z="144.3614" />
+									<Hotspot X="2641.541" Y="3746.299" Z="144.2991" />
+									<Hotspot X="2673.365" Y="3727.322" Z="144.3405" />
+									<Hotspot X="2681.213" Y="3767.474" Z="142.329" />
+								</Hotspots>
+							</Grindarea>
+						</SetGrindArea>
+					<GrindTo Condition="(GetItemCount(29209) &gt;= 30)" GoalText="Getting 30 Insignia's" />
+				</If>
+				
+					<CustomBehavior File="FlyTo" X="3067.401" Y="3671.251" Z="142.5094" />
+				<While Condition="(GetItemCount(29209) &gt;= 10) &amp;&amp; (Me.GetReputationLevelWith(933) &lt; Styx.WoWUnitReaction.Exalted)" >
+					<CustomBehavior File="InteractWith"  MobId="19880" NumOfTimes="1" CollectionDistance="50" WaitTime="1000" X="3067.401" Y="3671.251" Z="142.5094" />
+					<CustomBehavior File="RunMacro" Macro="/click GossipTitleButton1" NumOfTimes="1" WaitTime="1000" />
+					<CustomBehavior File="RunMacro" Macro="/click QuestFrameCompleteButton" NumOfTimes="1" WaitTime="1000" />
+					<CustomBehavior File="RunMacro" Macro="/click QuestFrameCompleteQuestButton" NumOfTimes="1" WaitTime="1000" />
+					<CustomBehavior File="WaitTimer" WaitTime="3000" />
+				</While>
+			</While>
+			
+			<If Condition="Me.GetReputationLevelWith(933) == Styx.WoWUnitReaction.Exalted" >
+				<CustomBehavior File="UserDialog" Title="title" AllowBotStop="True" SoundCue="Asterisk" SoundCueInterval="1" Text="You have reached Exalted\nIf you liked this profile, +rep is always appreciated" />
+			</If>
+	
+	</QuestOrder>
+
+</HBProfile>

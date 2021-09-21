@@ -1,0 +1,142 @@
+<HBProfile>
+	<Name>[N - Quest] Uldum Rep Dailies [Kick]</Name>
+	<MinLevel>82</MinLevel>
+	<MaxLevel>86</MaxLevel>
+	
+	<MinDurability>0.2</MinDurability>
+	<MinFreeBagSlots>2</MinFreeBagSlots>
+	
+	<SellGrey>True</SellGrey>
+	<SellWhite>True</SellWhite>
+	<SellGreen>True</SellGreen>
+	<SellBlue>False</SellBlue>
+	<SellPurple>False</SellPurple>
+	
+	<MailWhite>True</MailWhite>
+	<MailGreen>True</MailGreen>
+	<MailBlue>True</MailBlue>
+	<MailPurple>True</MailPurple>  
+		
+		
+	<Vendors>
+
+	</Vendors>
+	
+	<Mailboxes>
+
+	</Mailboxes>
+	
+	<Blackspots>
+
+	</Blackspots>
+	
+	<AvoidMobs>
+
+	</AvoidMobs>
+
+	<QuestOrder>
+	
+		<!-- If I am in Dalaran, take the portal to Main City -->
+		<If Condition="(Me.ZoneId == 4395)" >
+			<If Condition="Me.IsHorde" >
+				<CustomBehavior File="Message" Text="We are in Dalaran, using portal to Org" LogColor="Cornflowerblue" />
+				<CustomBehavior File="ForcedDismount" />
+				<RunTo X="5924.277" Y="589.9855" Z="639.8734" />
+				<CustomBehavior File="ForcedDismount" />
+				
+				<CustomBehavior File="InteractWith" MobId="191009" ObjectType="Gameobject" Range="4" X="5925.295" Y="593.4274" Z="640.5935" />
+				<CustomBehavior File="WaitTimer" WaitTime="5000" GoalText="Waiting for port {TimeRemaining}" />
+			 <If Condition="(Me.ZoneId == 1637)" >
+				<RunTo X="1897.4" Y="-4523.682" Z="27.50176" />
+			 </If>
+			</If>
+
+			 <If Condition="Me.IsAlliance" >
+				<CustomBehavior File="Message" Text="We are in Dalaran, using portal to SW" LogColor="Cornflowerblue" />
+				<CustomBehavior File="ForcedDismount" />
+				<RunTo X="5718.221" Y="721.2461" Z="641.7213" />
+				<CustomBehavior File="ForcedDismount" />
+				
+				<CustomBehavior File="InteractWith" MobId="190960" ObjectType="Gameobject" Range="4" X="5718.221" Y="721.2461" Z="641.7213" />
+				<CustomBehavior File="WaitTimer" WaitTime="5000" GoalText="Waiting for port {TimeRemaining}" />
+			  <If Condition="(Me.ZoneId == 1519)" >
+				<RunTo X="-8988.831" Y="860.4624" Z="125.7445" />
+			  </If>
+			 </If>
+		</If>
+		
+			<!-- If I am in Org - Take Uldum Portal -->
+			<If Condition="(Me.IsHorde) &amp;&amp; (Me.ZoneId == 1637)" >
+				<CustomBehavior File="Message" Text="We are in Org, using portal to Uldum" LogColor="Cornflowerblue" />
+				<CustomBehavior File="FlyTo" DestName="Org Uldum Portal" X="2040.849" Y="-4360.841" Z="98.58047" />
+				<CustomBehavior File="ForcedDismount" />
+				
+				<CustomBehavior File="InteractWith" MobId="207687" ObjectType="Gameobject" Range="4" X="2040.849" Y="-4360.841" Z="98.58047" />
+				<CustomBehavior File="WaitTimer" WaitTime="5000" GoalText="Waiting for port {TimeRemaining}" />
+			</If>
+		
+			<!-- If I am in SW - Take Uldum Portal -->
+			<If Condition="(Me.IsAlliance) &amp;&amp; (Me.ZoneId == 1519)" >
+				<CustomBehavior File="Message" Text="We are in SW, using portal to Uldum" LogColor="Cornflowerblue" />
+				<CustomBehavior File="FlyTo" DestName="SW Uldum Portal" X="-8229.257" Y="418.2934" Z="117.5323" />
+				<CustomBehavior File="ForcedDismount" />
+				
+				<CustomBehavior File="InteractWith" MobId="207695" ObjectType="Gameobject" Range="4" X="-8229.257" Y="418.2934" Z="117.5323" />
+				<CustomBehavior File="WaitTimer" WaitTime="5000" GoalText="Waiting for port {TimeRemaining}" />
+			</If>
+
+			<If Condition="((!HasQuest(28250)) &amp;&amp; (!IsQuestCompleted(28250)))" >
+				<CustomBehavior File="FlyTo" X="-9608.542" Y="-1290.759" Z="101.9344" />
+				<CustomBehavior File="ForcedDismount" />
+		<PickUp QuestName="Thieving Little Pluckers" QuestId="28250" GiverName="Nomarch Teneth" GiverId="46603" />
+			</If>
+			<If Condition="((HasQuest(28250)) &amp;&amp; (!IsQuestCompleted(28250)))" >
+				<CustomBehavior File="UserSettings" PullDistance="1" />
+				<CustomBehavior File="ForcedDismount" />
+			  <While Condition="((HasQuest(28250)) &amp;&amp; (!IsQuestCompleted(28250)))" >
+				<CustomBehavior File="CombatUseItemOn" QuestId="28250" MobId1="48041" MobId2="48043" MobId3="48040" ItemId="63351" MaxRange="4" MobHpPercentLeft="100" X="-9647.443" Y="-1264.87" Z="101.2584" />
+			  </While>
+			</If>
+			<If Condition="((HasQuest(28250)) &amp;&amp; (IsQuestCompleted(28250)))" >
+				<CustomBehavior File="FlyTo" X="-9608.542" Y="-1290.759" Z="101.9344" />
+				<CustomBehavior File="ForcedDismount" />
+		<TurnIn QuestName="Thieving Little Pluckers" QuestId="28250" TurnInName="Nomarch Teneth" TurnInId="46603" />
+				<CustomBehavior File="UserSettings" PullDistance="25" />
+			</If>
+
+			<If Condition="((!HasQuest(28736)) &amp;&amp; (!IsQuestCompleted(28736)))" >
+				<CustomBehavior File="FlyTo" X="-8259.667" Y="-119.7054" Z="324.5576" />
+		<PickUp QuestName="Fire From the Sky" QuestId="28736" GiverName="Weathered Nomad" GiverId="49523" X="-8258.542" Y="-120.4269" Z="324.8605" />
+				<CustomBehavior File="ForcedDismount" />
+			</If>
+			<If Condition="((HasQuest(28736)) &amp;&amp; (!IsQuestCompleted(28736)))" >
+			 <If Condition="(!Me.IsOnTransport)" >
+				<CustomBehavior File="InteractWith" QuestId="28736" MobId="49499" NumOfTimes="1" CollectionDistance="1000" WaitTime="1000" X="-8261.232" Y="-119.3941" Z="320.1581" />
+				<CustomBehavior File="WaitTimer" WaitTime="3000"/>
+			 </If>
+			 <If Condition="(Me.IsOnTransport)" >
+				<CustomBehavior File="FireFromSky" QuestId="28736" />
+				<CustomBehavior File="EjectVeh" Eject="True" />
+			</If>
+			</If>
+			<If Condition="((HasQuest(28736)) &amp;&amp; (IsQuestCompleted(28736)))" >
+				<CustomBehavior File="FlyTo" X="-8260.661" Y="-120.9111" Z="357.38" />
+				<CustomBehavior File="FlyTo" X="-8259.667" Y="-119.7054" Z="324.5576" />
+		<TurnIn QuestName="Fire From the Sky" QuestId="28736" TurnInName="Weathered Nomad" TurnInId="49523" X="-8258.542" Y="-120.4269" Z="324.8605" />
+				<CustomBehavior File="ForcedDismount" />
+			</If>
+			
+			<If Condition="(Me.ZoneId == 5034)" >
+				<CustomBehavior File="ForcedDismount" />
+				<CustomBehavior File="Misc\RunLua" Lua="UseItemByName(6948)" WaitTime="1000" />
+				<CustomBehavior File="WaitTimer" WaitTime="15000" GoalText="Waiting for hearth {TimeRemaining}" />
+			</If>
+			
+
+	
+		<CustomBehavior File="UserDialog" AllowBotStop="True" SoundCue="Asterisk" SoundCueInterval="1" Text="End of the Ramkahen Rep Dailies" />
+
+
+	</QuestOrder>
+
+</HBProfile>

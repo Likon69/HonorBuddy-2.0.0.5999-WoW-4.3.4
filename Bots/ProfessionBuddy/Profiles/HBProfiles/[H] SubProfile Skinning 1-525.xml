@@ -1,0 +1,736 @@
+<HBProfile creator="TheKing" version="2.0">
+	<!-- Special thanks to Kickazz006, zedar69 for there ally version & Bengan12 For helping me out alot! -->
+	<!-- Training:
+		1-75
+		50-150
+		125-225
+		200-300
+		275-375
+		350-450
+		425-525
+		^^ These are the min / maxes that you can train at
+	-->
+	<Name>[H] Skinning 1-525</Name>
+	<MinDurability>0.2</MinDurability>
+	<MinFreeBagSlots>5</MinFreeBagSlots>
+
+	<MinLevel>1</MinLevel>
+	<MaxLevel>86</MaxLevel>
+   
+	<MailGrey>False</MailGrey>
+	<MailWhite>True</MailWhite>
+	<MailGreen>False</MailGreen>
+	<MailBlue>True</MailBlue>
+	<MailPurple>True</MailPurple>
+   
+	<SellGrey>True</SellGrey>
+	<SellWhite>False</SellWhite>
+	<SellGreen>True</SellGreen>
+	<SellBlue>False</SellBlue>
+	<SellPurple>False</SellPurple>
+   
+   
+	<SubProfile>
+		<Name>Horde Skinning 1-525 made by: TheKinG</Name>
+		<MinLevel>1</MinLevel>
+		<MaxLevel>86</MaxLevel>
+		
+		<Vendors>
+			<Vendor Name="Urtharo" Entry="3314" Type="Repair" X="1639.75" Y="-4316.71" Z="21.11932" />
+			<Vendor Name="Burkrum" Entry="6028" Type="Repair" X="2346.262" Y="-2582.214" Z="103.0934" />
+			<Vendor Name="Halija Whitestrider" Entry="3486" Type="Repair" X="-539.8406" Y="-2672.23" Z="95.7878" />
+			<Vendor Name="Zanara" Entry="9552" Type="Repair" X="-3090.929" Y="-2830.842" Z="35.1294" />
+			<Vendor Name="Gibbert" Entry="3000" Type="Repair" X="-7491.394" Y="-1501.245" Z="-266.0464" />
+			<Vendor Name="Armorer Orkuruk" Entry="25274" Type="Repair" X="2762.758" Y="6198.896" Z="83.44693" />
+		</Vendors>
+		
+		<Mailboxes>
+			<Mailbox X="1605.823" Y="-4382.258" Z="20.751" />
+			<Mailbox X="-445.4317" Y="-2649.17" Z="95.76046" />
+			<Mailbox X="-3157.219" Y="-2895.379" Z="33.68896" />
+			<Mailbox X="2791.072" Y="6149.822" Z="84.68173" />
+		</Mailboxes>
+		
+		<AvoidMobs>
+			<Mob Name="Pit Commander" Entry="18945" />
+			<Mob Name="Fel Soldier" Entry="18944" />
+		</AvoidMobs>
+		
+		<QuestOrder>
+
+			<!-- Train Skinning at 0
+			<If Condition="Me.GetSkill(Styx.SkillLine.Skinning).MaxValue = 0">
+				//Go to Trainer in Ogrimmar:
+					<Vendor Name="Thuwd" Entry="7088" Type="Train" TrainProfession="Skinning" X="1852.908" Y="-4570.059" Z="24.98076" />
+				
+				<RunTo X="1852.908" Y="-4570.059" Z="24.98076" />
+			</If>
+			-->
+		
+		<!-- Buying a Skinning Knife if non i bags (Currently NOT working!)
+	<If Condition="HasItem(7005)" >
+	<CustomBehaivor File="FlyTo" X="1842.883" Y="-4548.015" Z="24.4628" />
+	<CustomBehaivor File="InteractWith" NpcId="3366" ObjectType="Npc" NumOfTimes="1" CollectionDistance="10" BuyItemID="7005" X="1856.972" Y="-4555.948" Z="24.98102" />
+	</If>
+	-->
+	
+				<SetGrindArea>
+					 <GrindArea> <!-- Near Razorhill -->
+						<Factions>413 189 14</Factions>
+						<TargetMinLevel>1</TargetMinLevel> 
+						<TargetMaxLevel>20</TargetMaxLevel> 
+						<Hotspots>      
+							<Hotspot X="934.4364" Y="-4353.716" Z="17.48549" />
+							<Hotspot X="908.5778" Y="-4336.747" Z="19.8595" />
+							<Hotspot X="886.0627" Y="-4315.85" Z="20.94602" />
+							<Hotspot X="864.1372" Y="-4293.848" Z="20.62063" />
+							<Hotspot X="841.0775" Y="-4273.579" Z="20.74116" />
+							<Hotspot X="817.4056" Y="-4253.5" Z="22.13102" />
+							<Hotspot X="793.6526" Y="-4233.748" Z="23.27075" />
+							<Hotspot X="770.1823" Y="-4214.058" Z="23.9259" />
+							<Hotspot X="740.8596" Y="-4206.894" Z="21.61968" />
+							<Hotspot X="726.0601" Y="-4234.197" Z="19.28702" />
+							<Hotspot X="721.0346" Y="-4264.655" Z="20.549" />
+							<Hotspot X="712.8431" Y="-4294.243" Z="22.66215" />
+							<Hotspot X="685.1563" Y="-4310.275" Z="19.07418" />
+							<Hotspot X="655.6246" Y="-4318.721" Z="20.50219" />
+							<Hotspot X="661.5631" Y="-4349.051" Z="21.27071" />
+							<Hotspot X="689.3917" Y="-4360.869" Z="22.53497" />
+							<Hotspot X="720.3187" Y="-4360.982" Z="22.3514" />
+							<Hotspot X="751.0683" Y="-4358.993" Z="20.10998" />
+							<Hotspot X="781.0473" Y="-4350.302" Z="17.51658" />
+							<Hotspot X="811.6735" Y="-4351.214" Z="15.29954" />
+							<Hotspot X="837.4187" Y="-4368.275" Z="14.50079" />
+							<Hotspot X="866.9267" Y="-4375.323" Z="18.09732" />
+							<Hotspot X="897.8967" Y="-4373.842" Z="16.15345" />
+							<Hotspot X="927.4064" Y="-4365.617" Z="16.1458" />
+						</Hotspots> 
+					</GrindArea>  
+				</SetGrindArea>
+			<GrindTo Condition="Me.GetSkill(Styx.SkillLine.Skinning).CurrentValue >= 75" />
+		
+			
+			<!-- Train Skinning at 75
+			<If Condition="Me.GetSkill(Styx.SkillLine.Skinning).MaxValue == 75">
+				//Go to Trainer in Ogrimmar:
+					<Vendor Name="Thuwd" Entry="7088" Type="Train" TrainProfession="Skinning" X="1852.908" Y="-4570.059" Z="24.98076" />
+				
+				<RunTo X="1852.908" Y="-4570.059" Z="24.98076" />
+			</If>
+			-->
+			
+			
+			 
+				<SetGrindArea>
+					<GrindArea> <!-- Northern Barrens -->
+						<Factions>48 189 1999 16</Factions>
+						<TargetMinLevel>8</TargetMinLevel> 
+						<TargetMaxLevel>86</TargetMaxLevel> 
+						<Hotspots>
+							<Hotspot X="-191.3885" Y="-3461.67" Z="94.32069" />
+                            <Hotspot X="-220.7796" Y="-3470.699" Z="92.66278" />
+							<Hotspot X="-250.1523" Y="-3479.843" Z="92.61109" />
+							<Hotspot X="-278.8392" Y="-3489.506" Z="92.94408" />
+							<Hotspot X="-308.9117" Y="-3491.727" Z="92.36914" />
+							<Hotspot X="-338.9887" Y="-3483.789" Z="93.04187" />
+							<Hotspot X="-369.9215" Y="-3478.144" Z="93.01873" />
+							<Hotspot X="-399.7625" Y="-3471.271" Z="93.90458" />
+							<Hotspot X="-412.192" Y="-3499.298" Z="94.00253" />
+							<Hotspot X="-429.2643" Y="-3524.715" Z="94.30693" />
+							<Hotspot X="-458.8289" Y="-3533.412" Z="93.05096" />
+							<Hotspot X="-487.4052" Y="-3545.587" Z="91.71822" />
+							<Hotspot X="-514.0294" Y="-3560.231" Z="91.66496" />
+							<Hotspot X="-539.9501" Y="-3576.069" Z="93.35079" />
+							<Hotspot X="-570.5582" Y="-3576.964" Z="92.55761" />
+							<Hotspot X="-599.4655" Y="-3567.895" Z="91.8223" />
+							<Hotspot X="-621.8989" Y="-3546.97" Z="91.66549" />
+							<Hotspot X="-639.7791" Y="-3521.642" Z="92.24858" />
+							<Hotspot X="-654.7883" Y="-3495.007" Z="91.7384" />
+							<Hotspot X="-664.1075" Y="-3466.482" Z="94.36233" />
+							<Hotspot X="-683.9484" Y="-3443.539" Z="92.70385" />
+							<Hotspot X="-701.5041" Y="-3418.012" Z="91.66398" />
+							<Hotspot X="-724.7742" Y="-3398.002" Z="92.41868" />
+							<Hotspot X="-749.948" Y="-3379.969" Z="92.47803" />
+							<Hotspot X="-762.8923" Y="-3351.622" Z="91.66446" />
+							<Hotspot X="-767.1489" Y="-3321.907" Z="91.67122" />
+							<Hotspot X="-754.7338" Y="-3293.762" Z="94.16686" />
+							<Hotspot X="-747.5899" Y="-3263.565" Z="94.50584" />
+							<Hotspot X="-745.4861" Y="-3233.057" Z="92.35112" />
+							<Hotspot X="-743.5413" Y="-3202.025" Z="91.66756" />
+							<Hotspot X="-742.2556" Y="-3171.186" Z="93.33856" />
+							<Hotspot X="-741.5261" Y="-3140.548" Z="91.71062" />
+							<Hotspot X="-734.1316" Y="-3110.345" Z="92.6391" />
+							<Hotspot X="-723.4419" Y="-3081.608" Z="91.69678" />
+							<Hotspot X="-713.1208" Y="-3052.559" Z="96.14704" />
+							<Hotspot X="-695.0483" Y="-3027.484" Z="97.38763" />
+							<Hotspot X="-675.11" Y="-3004.245" Z="95.92835" />
+							<Hotspot X="-648.9166" Y="-2988.31" Z="96.98478" />
+							<Hotspot X="-620.9894" Y="-3000.261" Z="96.53896" />
+							<Hotspot X="-613.7929" Y="-3029.766" Z="91.66758" />
+							<Hotspot X="-612.1196" Y="-3060.799" Z="92.18285" />
+							<Hotspot X="-623.5693" Y="-3089.378" Z="93.52444" />
+							<Hotspot X="-637.4871" Y="-3116.578" Z="92.89776" />
+							<Hotspot X="-660.9172" Y="-3136.097" Z="91.68226" />
+							<Hotspot X="-680.1771" Y="-3159.733" Z="91.95277" />
+							<Hotspot X="-682.6935" Y="-3190.192" Z="93.56261" />
+							<Hotspot X="-679.3495" Y="-3220.903" Z="94.38968" />
+							<Hotspot X="-675.6205" Y="-3251.284" Z="95.60834" />
+							<Hotspot X="-668.3914" Y="-3281.297" Z="94.72971" />
+							<Hotspot X="-653.0104" Y="-3307.968" Z="94.64052" />
+							<Hotspot X="-636.469" Y="-3334.211" Z="91.83771" />
+							<Hotspot X="-619.2034" Y="-3359.438" Z="91.62338" />
+							<Hotspot X="-601.6335" Y="-3385.109" Z="93.22375" />
+							<Hotspot X="-572.6838" Y="-3394.95" Z="93.48711" />
+							<Hotspot X="-541.8077" Y="-3395.381" Z="91.66433" />
+							<Hotspot X="-511.3476" Y="-3394.938" Z="92.03459" />
+							<Hotspot X="-480.5205" Y="-3396.365" Z="91.66688" />
+							<Hotspot X="-449.4567" Y="-3395.043" Z="92.77552" />
+							<Hotspot X="-418.7446" Y="-3393.855" Z="91.66732" />
+							<Hotspot X="-388.4705" Y="-3397.741" Z="91.66715" />
+						</Hotspots>
+					</GrindArea>
+				</SetGrindArea>
+			<GrindTo Condition="Me.GetSkill(Styx.SkillLine.Skinning).CurrentValue >= 125" />
+	
+			<!-- Train Skinning at 125
+			<If Condition="Me.GetSkill(Styx.SkillLine.Skinning).MaxValue == 150">
+				//Go to Trainer in Ogrimmar:
+					<Vendor Name="Thuwd" Entry="7088" Type="Train" TrainProfession="Skinning" X="1852.908" Y="-4570.059" Z="24.98076" />
+				
+				<RunTo X="1852.908" Y="-4570.059" Z="24.98076" />
+			</If>
+			-->
+			
+			
+				<SetGrindArea>
+					<GrindArea> <!-- Ashenvale -->
+						<Factions>38 189 44</Factions>
+						<TargetMinLevel>10</TargetMinLevel> 
+						<TargetMaxLevel>86</TargetMaxLevel>	
+						<Hotspots>
+							<Hotspot X="2214.999" Y="-2444.7" Z="93.20721" />
+							<Hotspot X="2227.847" Y="-2415.824" Z="98.24233" />
+							<Hotspot X="2240.399" Y="-2387.748" Z="103.0604" />
+							<Hotspot X="2254.336" Y="-2358.859" Z="106.9139" />
+							<Hotspot X="2277.453" Y="-2338.275" Z="110.1032" />
+							<Hotspot X="2310.091" Y="-2338.555" Z="114.8243" />
+							<Hotspot X="2339.468" Y="-2344.806" Z="126.5175" />
+							<Hotspot X="2373.001" Y="-2349.442" Z="129.7001" />
+							<Hotspot X="2403.729" Y="-2353.654" Z="135.8334" />
+							<Hotspot X="2434.181" Y="-2358.251" Z="139.9911" />
+							<Hotspot X="2463.727" Y="-2367.903" Z="144.7369" />
+							<Hotspot X="2488.119" Y="-2387.874" Z="149.1898" />
+							<Hotspot X="2515.101" Y="-2404.101" Z="152.1098" />
+							<Hotspot X="2544.715" Y="-2409.932" Z="150.2131" />
+							<Hotspot X="2575.11" Y="-2408.939" Z="159.7696" />
+							<Hotspot X="2603.329" Y="-2421.42" Z="164.8851" />
+							<Hotspot X="2630.632" Y="-2437.448" Z="169.1782" />
+							<Hotspot X="2656.674" Y="-2456.021" Z="173.6878" />
+							<Hotspot X="2684.25" Y="-2470.999" Z="179.1792" />
+							<Hotspot X="2717.749" Y="-2484.265" Z="184.2217" />
+							<Hotspot X="2745.123" Y="-2471.742" Z="190.0057" />
+							<Hotspot X="2765.367" Y="-2446.897" Z="196.7261" />
+							<Hotspot X="2758.42" Y="-2417.683" Z="202.5838" />
+							<Hotspot X="2741.62" Y="-2390.638" Z="203.0685" />
+							<Hotspot X="2732.383" Y="-2350.961" Z="202.683" />
+							<Hotspot X="2732.641" Y="-2351.417" Z="202.6799" />
+							<Hotspot X="2727.469" Y="-2319.078" Z="202.9117" />
+							<Hotspot X="2729.819" Y="-2287.838" Z="201.8344" />
+							<Hotspot X="2726.482" Y="-2256.063" Z="200.7951" />
+							<Hotspot X="2731.44" Y="-2225.721" Z="197.087" />
+							<Hotspot X="2740.332" Y="-2196.4" Z="195.9296" />
+							<Hotspot X="2741.977" Y="-2162.851" Z="197.03" />
+							<Hotspot X="2715.793" Y="-2144.311" Z="196.7718" />
+							<Hotspot X="2690.072" Y="-2126.542" Z="199.0652" />
+							<Hotspot X="2664.414" Y="-2107.773" Z="201.2111" />
+							<Hotspot X="2642.712" Y="-2085.507" Z="194.5782" />
+							<Hotspot X="2626.069" Y="-2058.379" Z="178.1526" />
+							<Hotspot X="2634.44" Y="-2029.342" Z="161.1305" />
+							<Hotspot X="2629.187" Y="-1997.982" Z="153.1802" />
+							<Hotspot X="2615.698" Y="-1970.455" Z="153.5247" />
+							<Hotspot X="2584.56" Y="-1973.506" Z="148.9378" />
+							<Hotspot X="2555.629" Y="-1989.057" Z="149.903" />
+							<Hotspot X="2513.956" Y="-1998.657" Z="140.3378" />
+							<Hotspot X="2482.948" Y="-2003.179" Z="139.4076" />
+							<Hotspot X="2452.031" Y="-2006.951" Z="138.6075" />
+							<Hotspot X="2421.857" Y="-2012.454" Z="137.0599" />
+							<Hotspot X="2396.987" Y="-2031.824" Z="136.0358" />
+							<Hotspot X="2352.721" Y="-2077.425" Z="128.3187" />
+							<Hotspot X="2330.904" Y="-2100.583" Z="120.7168" />
+							<Hotspot X="2305.221" Y="-2121.396" Z="113.4702" />
+							<Hotspot X="2266.055" Y="-2110.898" Z="108.3158" />
+							<Hotspot X="2245.786" Y="-2085.755" Z="106.908" />
+							<Hotspot X="2220.641" Y="-2067.492" Z="105.7579" />
+							<Hotspot X="2195.158" Y="-2049.357" Z="103.1617" />
+							<Hotspot X="2170.518" Y="-2030.14" Z="102.3158" />
+							<Hotspot X="2147.282" Y="-2008.586" Z="101.4778" />
+							<Hotspot X="2122.061" Y="-1990.283" Z="101.088" />
+							<Hotspot X="2094.967" Y="-1973.452" Z="102.6901" />
+							<Hotspot X="2068.243" Y="-1957.022" Z="106.0052" />
+							<Hotspot X="2043.889" Y="-1938.058" Z="105.0916" />
+							<Hotspot X="2028.817" Y="-1911.215" Z="100.39" />
+							<Hotspot X="2034.097" Y="-1881.387" Z="98.50396" />
+							<Hotspot X="2042.436" Y="-1850.283" Z="98.56958" />
+							<Hotspot X="2045.367" Y="-1819.026" Z="92.69804" />
+							<Hotspot X="2047.281" Y="-1788.153" Z="86.3093" />
+							<Hotspot X="2047.527" Y="-1756.538" Z="78.31503" />
+							<Hotspot X="2043.145" Y="-1726.813" Z="72.99296" />
+							<Hotspot X="2050.389" Y="-1697.193" Z="69.25732" />
+							<Hotspot X="2066.473" Y="-1668.743" Z="66.27551" />
+							<Hotspot X="2059.155" Y="-1638.259" Z="64.74096" />
+							<Hotspot X="2038.849" Y="-1613.646" Z="64.1012" />
+							<Hotspot X="2020.717" Y="-1585.206" Z="63.27776" />
+							<Hotspot X="1997.463" Y="-1563.498" Z="62.78025" />
+							<Hotspot X="1967.624" Y="-1556.597" Z="63.76352" />
+							<Hotspot X="1937.347" Y="-1563.594" Z="63.55847" />
+							<Hotspot X="1911.448" Y="-1581.413" Z="62.94965" />
+							<Hotspot X="1894.711" Y="-1607.036" Z="60.38807" />
+							<Hotspot X="1897.098" Y="-1638.514" Z="60.0573" />
+							<Hotspot X="1896.838" Y="-1669.109" Z="57.37088" />
+							<Hotspot X="1887.832" Y="-1698.56" Z="53.82786" />
+							<Hotspot X="1892.401" Y="-1728.617" Z="53.35614" />
+							<Hotspot X="1877.014" Y="-1754.079" Z="59.6855" />							
+						</Hotspots>
+					</GrindArea>
+				</SetGrindArea>
+			<GrindTo Condition="Me.GetSkill(Styx.SkillLine.Skinning).CurrentValue >= 185" />
+			
+			
+			<SetGrindArea>
+					<GrindArea> <!-- Duskwallow -->
+						<Factions>48</Factions>
+						<TargetMinLevel>1</TargetMinLevel> 
+						<TargetMaxLevel>86</TargetMaxLevel>	
+						<Hotspots>						
+							<Hotspot X="-2709.267" Y="-3465.458" Z="33.9972" />
+							<Hotspot X="-2713.364" Y="-3495.354" Z="34.51612" />
+							<Hotspot X="-2719.263" Y="-3525.074" Z="34.1986" />
+							<Hotspot X="-2727.612" Y="-3554.498" Z="33.92009" />
+							<Hotspot X="-2709.421" Y="-3578.558" Z="39.52642" />
+							<Hotspot X="-2687.681" Y="-3600.373" Z="40.58545" />
+							<Hotspot X="-2661.063" Y="-3613.873" Z="33.64215" />
+							<Hotspot X="-2638.877" Y="-3593.386" Z="38.31117" />
+							<Hotspot X="-2624.516" Y="-3565.139" Z="35.95889" />
+							<Hotspot X="-2617.397" Y="-3535.89" Z="42.46799" />
+							<Hotspot X="-2591.098" Y="-3520.762" Z="34.58589" />
+							<Hotspot X="-2560.315" Y="-3520.393" Z="39.15064" />
+							<Hotspot X="-2544.132" Y="-3493.836" Z="41.41522" />
+							<Hotspot X="-2546.029" Y="-3463.644" Z="35.97482" />
+							<Hotspot X="-2576.091" Y="-3455.883" Z="33.74361" />
+							<Hotspot X="-2607.239" Y="-3454.903" Z="35.57116" />
+							<Hotspot X="-2638.059" Y="-3453.964" Z="35.93164" />
+							<Hotspot X="-2668.493" Y="-3448.469" Z="34.47377" />
+							<Hotspot X="-2698.555" Y="-3441.249" Z="33.87137" />						
+						</Hotspots>
+					</GrindArea>
+				</SetGrindArea>
+			<GrindTo Condition="Me.GetSkill(Styx.SkillLine.Skinning).CurrentValue >= 205" />
+		
+			<!-- Train Skinning at 205
+			<If Condition="Me.GetSkill(Styx.SkillLine.Skinning).MaxValue == 225">
+				//Go to Trainer in Ogrimmar:
+					<Vendor Name="Thuwd" Entry="7088" Type="Train" TrainProfession="Skinning" X="1852.908" Y="-4570.059" Z="24.98076" />
+				
+				<RunTo X="1852.908" Y="-4570.059" Z="24.98076" />
+			</If>
+			-->
+
+			
+			<SetGrindArea>
+					<GrindArea> <!-- Thousand Needles -->
+						<Factions>413</Factions>
+						<TargetMinLevel>10</TargetMinLevel> 
+						<TargetMaxLevel>86</TargetMaxLevel>	
+						<Hotspots>				
+							<Hotspot X="-5374.572" Y="-3982.128" Z="87.20911" />
+							<Hotspot X="-5367.009" Y="-3951.571" Z="86.66859" />
+							<Hotspot X="-5362.436" Y="-3919.714" Z="86.06152" />
+							<Hotspot X="-5357.963" Y="-3887.877" Z="86.11358" />
+							<Hotspot X="-5356.702" Y="-3855.699" Z="86.24771" />
+							<Hotspot X="-5356.168" Y="-3823.198" Z="86.11855" />
+							<Hotspot X="-5355.298" Y="-3791.404" Z="86.1113" />
+							<Hotspot X="-5349.173" Y="-3759.872" Z="86.1113" />
+							<Hotspot X="-5340.929" Y="-3728.229" Z="86.11107" />
+							<Hotspot X="-5355.949" Y="-3700.182" Z="86.16962" />
+							<Hotspot X="-5365.069" Y="-3670.166" Z="86.12685" />
+							<Hotspot X="-5364.953" Y="-3638.041" Z="86.11685" />
+							<Hotspot X="-5371.855" Y="-3606.51" Z="86.11198" />
+							<Hotspot X="-5383.942" Y="-3576.529" Z="86.11198" />
+							<Hotspot X="-5394.834" Y="-3546.363" Z="86.56062" />
+							<Hotspot X="-5398.077" Y="-3514.453" Z="86.70473" />
+							<Hotspot X="-5391.177" Y="-3484.264" Z="87.45764" />
+							<Hotspot X="-5371.15" Y="-3458.578" Z="87.7542" />
+							<Hotspot X="-5354.193" Y="-3431.541" Z="88.40938" />
+							<Hotspot X="-5335.468" Y="-3405.152" Z="89.15545" />
+							<Hotspot X="-5317.42" Y="-3378.535" Z="90.32288" />
+							<Hotspot X="-5295.567" Y="-3355.437" Z="93.08727" />
+							<Hotspot X="-5273.872" Y="-3331.297" Z="91.06447" />
+							<Hotspot X="-5253.762" Y="-3306.232" Z="87.98882" />
+							<Hotspot X="-5238.822" Y="-3277.875" Z="89.89733" />
+							<Hotspot X="-5267.25" Y="-3290.903" Z="88.68289" />
+							<Hotspot X="-5285.891" Y="-3317.327" Z="89.41241" />
+							<Hotspot X="-5305.621" Y="-3342.948" Z="89.38425" />
+							<Hotspot X="-5325.87" Y="-3367.985" Z="89.26089" />
+							<Hotspot X="-5346.18" Y="-3393.096" Z="89.23456" />
+							<Hotspot X="-5366.469" Y="-3418.183" Z="89.41235" />
+							<Hotspot X="-5386.667" Y="-3443.156" Z="89.31847" />
+							<Hotspot X="-5406.815" Y="-3468.068" Z="88.73946" />
+							<Hotspot X="-5425.817" Y="-3493.917" Z="88.11429" />
+							<Hotspot X="-5440.698" Y="-3523.029" Z="87.06773" />
+							<Hotspot X="-5441.276" Y="-3554.807" Z="86.30904" />
+							<Hotspot X="-5434.083" Y="-3586.112" Z="86.039" />
+							<Hotspot X="-5422.519" Y="-3616.158" Z="86.00552" />
+							<Hotspot X="-5407.654" Y="-3645.086" Z="86.03093" />
+							<Hotspot X="-5397.473" Y="-3675.239" Z="85.06844" />
+							<Hotspot X="-5396.393" Y="-3707.604" Z="85.82133" />
+							<Hotspot X="-5396.035" Y="-3739.931" Z="86.01342" />
+							<Hotspot X="-5395.095" Y="-3771.721" Z="86.20985" />
+							<Hotspot X="-5389.523" Y="-3803.432" Z="86.64391" />
+							<Hotspot X="-5382.104" Y="-3834.98" Z="85.55248" />
+							<Hotspot X="-5375.014" Y="-3866.288" Z="85.52136" />
+							<Hotspot X="-5372.401" Y="-3898.674" Z="86.3166" />
+							<Hotspot X="-5374.574" Y="-3930.627" Z="86.67487" />					
+						</Hotspots>
+					</GrindArea>
+				</SetGrindArea>
+			<GrindTo Condition="Me.GetSkill(Styx.SkillLine.Skinning).CurrentValue >= 265" />
+			
+			<SetGrindArea>
+					<GrindArea> <!-- Un'Goro Crater -->
+						<Factions>48 14</Factions>
+						<TargetMinLevel>45</TargetMinLevel> 
+						<TargetMaxLevel>86</TargetMaxLevel>	
+						<Hotspots>						
+							<Hotspot X="-7107.761" Y="-2106.093" Z="-272.8078" />
+							<Hotspot X="-7088.928" Y="-2129.549" Z="-270.7079" />
+							<Hotspot X="-7109.334" Y="-2152.381" Z="-268.7799" />
+							<Hotspot X="-7138.608" Y="-2164.219" Z="-267.7073" />
+							<Hotspot X="-7168.831" Y="-2170.14" Z="-272.4647" />
+							<Hotspot X="-7198.559" Y="-2177.649" Z="-269.0514" />
+							<Hotspot X="-7219.383" Y="-2199.41" Z="-272.0057" />
+							<Hotspot X="-7246.01" Y="-2216.317" Z="-271.9518" />
+							<Hotspot X="-7272.041" Y="-2232.905" Z="-268.4676" />
+							<Hotspot X="-7301.362" Y="-2241.079" Z="-270.7606" />
+							<Hotspot X="-7332.129" Y="-2240.885" Z="-271.8563" />
+							<Hotspot X="-7362.917" Y="-2244.679" Z="-270.8232" />
+							<Hotspot X="-7393.358" Y="-2251.15" Z="-271.6946" />
+							<Hotspot X="-7423.121" Y="-2246.26" Z="-271.2315" />
+							<Hotspot X="-7451.762" Y="-2234.667" Z="-273.1101" />
+							<Hotspot X="-7478.443" Y="-2219.05" Z="-272.1151" />
+							<Hotspot X="-7501.811" Y="-2198.957" Z="-271.9447" />
+							<Hotspot X="-7527.204" Y="-2180.964" Z="-270.2462" />
+							<Hotspot X="-7550.706" Y="-2161.473" Z="-271.4503" />
+							<Hotspot X="-7575.239" Y="-2142.262" Z="-272.7551" />
+							<Hotspot X="-7601.61" Y="-2126.36" Z="-272.7202" />
+							<Hotspot X="-7630.346" Y="-2114.816" Z="-272.7446" />
+							<Hotspot X="-7657.722" Y="-2099.962" Z="-272.2246" />
+							<Hotspot X="-7678.729" Y="-2077.577" Z="-273.7868" />
+							<Hotspot X="-7697.96" Y="-2053.168" Z="-272.5276" />
+							<Hotspot X="-7719.749" Y="-2031.198" Z="-271.6312" />
+							<Hotspot X="-7742.427" Y="-2010.062" Z="-270.1786" />
+							<Hotspot X="-7762.13" Y="-1986.329" Z="-271.0826" />
+							<Hotspot X="-7787.064" Y="-1968.352" Z="-270.5009" />
+							<Hotspot X="-7792.991" Y="-1938.565" Z="-272.9492" />
+							<Hotspot X="-7777.175" Y="-1912.234" Z="-273.453" />
+							<Hotspot X="-7789.651" Y="-1884.275" Z="-273.6943" />
+							<Hotspot X="-7800.104" Y="-1855.473" Z="-272.6284" />
+							<Hotspot X="-7813.986" Y="-1827.885" Z="-271.3269" />
+							<Hotspot X="-7824.685" Y="-1798.952" Z="-271.0153" />
+							<Hotspot X="-7830.177" Y="-1768.725" Z="-272.2219" />
+							<Hotspot X="-7822.236" Y="-1739.152" Z="-272.2103" />
+							<Hotspot X="-7819.038" Y="-1709.051" Z="-271.0597" />
+							<Hotspot X="-7813.259" Y="-1678.75" Z="-269.9378" />
+							<Hotspot X="-7800.003" Y="-1650.955" Z="-270.6453" />
+							<Hotspot X="-7772.048" Y="-1638.36" Z="-271.1734" />
+							<Hotspot X="-7742.164" Y="-1629.77" Z="-272.1606" />
+							<Hotspot X="-7719.006" Y="-1609.272" Z="-271.4438" />
+							<Hotspot X="-7689.542" Y="-1600.425" Z="-272.133" />
+							<Hotspot X="-7658.449" Y="-1598.669" Z="-271.1401" />
+							<Hotspot X="-7628.363" Y="-1603.744" Z="-272.1747" />
+							<Hotspot X="-7601.713" Y="-1619.386" Z="-271.0964" />
+							<Hotspot X="-7572.466" Y="-1628.539" Z="-270.8481" />
+							<Hotspot X="-7544.632" Y="-1642.326" Z="-270.2968" />
+							<Hotspot X="-7518.748" Y="-1655.88" Z="-279.1711" />
+							<Hotspot X="-7492.605" Y="-1672.085" Z="-282.9015" />
+							<Hotspot X="-7486.377" Y="-1702.057" Z="-280.1086" />
+							<Hotspot X="-7474.772" Y="-1730.402" Z="-274.37" />
+							<Hotspot X="-7449.383" Y="-1747.414" Z="-272.4675" />
+							<Hotspot X="-7421.404" Y="-1760.77" Z="-274.264" />
+							<Hotspot X="-7391.229" Y="-1768.277" Z="-274.1861" />
+							<Hotspot X="-7360.312" Y="-1771.87" Z="-270.4895" />
+							<Hotspot X="-7330.318" Y="-1779.291" Z="-272.7737" />
+							<Hotspot X="-7300.168" Y="-1785.662" Z="-275.099" />
+							<Hotspot X="-7269.651" Y="-1792.198" Z="-276.973" />
+							<Hotspot X="-7242.677" Y="-1806.512" Z="-274.3083" />
+							<Hotspot X="-7213.302" Y="-1814.726" Z="-275.0946" />
+							<Hotspot X="-7186.465" Y="-1829.645" Z="-273.9682" />
+							<Hotspot X="-7160.479" Y="-1846.487" Z="-272.9098" />
+							<Hotspot X="-7133.619" Y="-1861.786" Z="-271.7403" />
+							<Hotspot X="-7106.843" Y="-1877.036" Z="-271.9565" />
+							<Hotspot X="-7084.42" Y="-1898.341" Z="-272.0848" />			
+						</Hotspots>
+					</GrindArea>
+				</SetGrindArea>
+			<GrindTo Condition="Me.GetSkill(Styx.SkillLine.Skinning).CurrentValue >= 300" />
+
+			
+							<!-- Train Skinning at 300
+			<If Condition="Me.GetSkill(Styx.SkillLine.Skinning).MaxValue == 300">
+				//Go to Trainer in Ogrimmar:
+					<Vendor Name="Thuwd" Entry="7088" Type="Train" TrainProfession="Skinning" X="1852.908" Y="-4570.059" Z="24.98076" />
+				
+				<RunTo X="1852.908" Y="-4570.059" Z="24.98076" />
+			</If>
+			-->	
+			
+  
+				<SetGrindArea>
+					<GrindArea> <!-- Honor Hold -->
+						<Factions>954</Factions>
+						<TargetMinLevel>55</TargetMinLevel> 
+						<TargetMaxLevel>86</TargetMaxLevel>
+						<Hotspots>
+							<Hotspot X="-487.7064" Y="2609.858" Z="66.65978" />
+							<Hotspot X="-458.5109" Y="2551.861" Z="54.67494" />
+							<Hotspot X="-463.2208" Y="2478.906" Z="43.16395" />
+							<Hotspot X="-447.5613" Y="2420.833" Z="38.47363" />
+							<Hotspot X="-445.7334" Y="2378.024" Z="39.03765" />
+							<Hotspot X="-383.0123" Y="2443.212" Z="40.61808" />
+							<Hotspot X="-411.2234" Y="2544.293" Z="49.32917" />
+							<Hotspot X="-419.1731" Y="2635.358" Z="53.98248" />
+							<Hotspot X="-453.7545" Y="2707.784" Z="54.87354" />
+							<Hotspot X="-479.0135" Y="2750.133" Z="54.56009" />
+							<Hotspot X="-494.6826" Y="2816.173" Z="48.04903" />
+							<Hotspot X="-541.5155" Y="2761.508" Z="67.97762" />
+							<Hotspot X="-470.1254" Y="2621.745" Z="64.31351" />
+							<Hotspot X="-485.2344" Y="2542.975" Z="55.88961" />
+						</Hotspots>
+					</GrindArea>
+				</SetGrindArea>
+			<GrindTo Condition="Me.GetSkill(Styx.SkillLine.Skinning).CurrentValue >= 330" />
+		
+			
+			<SetGrindArea>
+					<GrindArea> <!-- Terrokar Forest -->
+						<Factions>14 49 38</Factions>
+						<TargetMinLevel>60</TargetMinLevel> 
+						<TargetMaxLevel>86</TargetMaxLevel>
+						<Hotspots>
+							<Hotspot X="-1853.129" Y="3766.222" Z="14.80976" />
+							<Hotspot X="-1987.964" Y="3764.618" Z="-8.758578" />
+							<Hotspot X="-1998.677" Y="3692.41" Z="-54.44464" />
+							<Hotspot X="-2094.156" Y="3638.407" Z="-56.62184" />
+							<Hotspot X="-2107.442" Y="3729.153" Z="-27.86611" />
+							<Hotspot X="-2025.119" Y="3825.38" Z="0.7168409" />
+							<Hotspot X="-2133.434" Y="3860.015" Z="2.670524" />
+							<Hotspot X="-2194.651" Y="3835.576" Z="4.435771" />
+							<Hotspot X="-2217.259" Y="3768.801" Z="-16.33922" />
+							<Hotspot X="-2263.358" Y="3704.068" Z="-9.689729" />
+							<Hotspot X="-2127.869" Y="3647.978" Z="-50.2472" />
+							<Hotspot X="-2084.62" Y="3709.052" Z="-38.12491" />
+							<Hotspot X="-2207.24" Y="3569.273" Z="-30.54208" />
+							<Hotspot X="-2320.846" Y="3541.388" Z="-8.326702" />
+							<Hotspot X="-2242.706" Y="3443.983" Z="-21.56718" />
+							<Hotspot X="-2137.861" Y="3419.789" Z="-43.08821" />
+							<Hotspot X="-2145.1" Y="3354.26" Z="-42.03778" />
+							<Hotspot X="-2249.891" Y="3393.045" Z="-22.77084" />
+							<Hotspot X="-2195.261" Y="3270.536" Z="-24.20861" />
+							<Hotspot X="-2330.099" Y="3533.887" Z="-7.898357" />
+							<Hotspot X="-2270.267" Y="3642.525" Z="-9.668228" />
+							<Hotspot X="-2182.281" Y="3680.801" Z="-27.90749" />
+							<Hotspot X="-2113.36" Y="3658.35" Z="-50.70345" />
+						</Hotspots>
+					</GrindArea>
+				</SetGrindArea>
+			<GrindTo Condition="Me.GetSkill(Styx.SkillLine.Skinning).CurrentValue >= 375" />	
+			
+			<!-- Train Skinning at 375
+			<If Condition="Me.GetSkill(Styx.SkillLine.Skinning).MaxValue == 375">
+				//Go to Trainer in Ogrimmar:
+					<Vendor Name="Thuwd" Entry="7088" Type="Train" TrainProfession="Skinning" X="1852.908" Y="-4570.059" Z="24.98076" />
+				
+				<RunTo X="1852.908" Y="-4570.059" Z="24.98076" />
+			</If>
+			--> 		
+
+
+				<SetGrindArea>
+					<GrindArea> <!-- Borean Tundra -->
+						<TargetMinLevel>65</TargetMinLevel>
+						<TargetMaxLevel>86</TargetMaxLevel>
+						<Factions>15 1711</Factions>
+						<Hotspots>
+							<Hotspot X="2388.442" Y="6217.238" Z="47.50923" />
+							<Hotspot X="2399.815" Y="6245.032" Z="55.877" />
+							<Hotspot X="2391.558" Y="6275.154" Z="58.40502" />
+							<Hotspot X="2369.211" Y="6297.537" Z="51.99552" />
+							<Hotspot X="2339.119" Y="6305.59" Z="50.49791" />
+							<Hotspot X="2307.502" Y="6309.824" Z="51.04183" />
+							<Hotspot X="2290.756" Y="6336.625" Z="47.4244" />
+							<Hotspot X="2272.404" Y="6362.273" Z="48.57766" />
+							<Hotspot X="2256.15" Y="6388.123" Z="49.08032" />
+							<Hotspot X="2225.215" Y="6398.417" Z="46.24198" />
+							<Hotspot X="2194.452" Y="6404.423" Z="46.7583" />
+							<Hotspot X="2162.062" Y="6404" Z="45.73406" />
+							<Hotspot X="2130.089" Y="6401.307" Z="45.27826" />
+							<Hotspot X="2097.646" Y="6395.044" Z="44.12814" />
+							<Hotspot X="2068.164" Y="6386.782" Z="47.07795" />
+							<Hotspot X="2054.645" Y="6357.686" Z="49.51537" />
+							<Hotspot X="2048.571" Y="6330.926" Z="62.28106" />
+							<Hotspot X="2066.266" Y="6304.478" Z="60.57824" />
+							<Hotspot X="2068.947" Y="6272.957" Z="52.20464" />
+							<Hotspot X="2063.551" Y="6242.065" Z="33.70224" />
+							<Hotspot X="2039.652" Y="6220.593" Z="29.53726" />
+							<Hotspot X="2021.085" Y="6194.386" Z="29.52285" />
+							<Hotspot X="2003.053" Y="6167.825" Z="28.30226" />
+							<Hotspot X="1984.459" Y="6141.14" Z="29.23508" />
+							<Hotspot X="1974.5" Y="6111.186" Z="28.98467" />
+							<Hotspot X="1976.919" Y="6079.793" Z="32.20071" />
+							<Hotspot X="1994.073" Y="6052.405" Z="32.18114" />
+							<Hotspot X="2009.684" Y="6024.251" Z="38.57331" />
+							<Hotspot X="2022.827" Y="5994.803" Z="42.89058" />
+							<Hotspot X="2030.579" Y="5963.57" Z="43.70798" />
+							<Hotspot X="2031.573" Y="5931.36" Z="43.66211" />
+							<Hotspot X="2030.813" Y="5899.523" Z="41.04903" />
+							<Hotspot X="2030.038" Y="5867.059" Z="38.2424" />
+							<Hotspot X="2039.753" Y="5836.62" Z="39.60703" />
+							<Hotspot X="2032.985" Y="5805.393" Z="38.10599" />
+							<Hotspot X="2029.222" Y="5773.654" Z="31.8397" />
+							<Hotspot X="2027.976" Y="5741.792" Z="38.60297" />
+							<Hotspot X="2046.026" Y="5716.984" Z="45.00071" />
+							<Hotspot X="2077.275" Y="5724.725" Z="48.60303" />
+							<Hotspot X="2108.896" Y="5731.167" Z="51.09876" />
+							<Hotspot X="2119.346" Y="5758.706" Z="58.4337" />
+							<Hotspot X="2107.803" Y="5789.651" Z="58.49622" />
+							<Hotspot X="2096.499" Y="5820.678" Z="53.68021" />
+							<Hotspot X="2090.277" Y="5852.186" Z="49.55785" />
+							<Hotspot X="2089.755" Y="5884.487" Z="51.18052" />
+							<Hotspot X="2089.545" Y="5916.818" Z="50.41973" />
+							<Hotspot X="2087.885" Y="5948.595" Z="52.75967" />
+							<Hotspot X="2080.417" Y="5979.335" Z="52.51537" />
+							<Hotspot X="2082.33" Y="6010.979" Z="50.83208" />
+							<Hotspot X="2091.915" Y="6041.688" Z="52.78019" />
+							<Hotspot X="2096.527" Y="6073.243" Z="49.9528" />
+							<Hotspot X="2097.016" Y="6105.622" Z="48.05181" />
+							<Hotspot X="2096.03" Y="6137.886" Z="48.0037" />
+							<Hotspot X="2096.425" Y="6169.795" Z="47.73983" />
+							<Hotspot X="2101.008" Y="6202.305" Z="48.48814" />
+							<Hotspot X="2114.07" Y="6231.232" Z="50.73808" />
+							<Hotspot X="2133.042" Y="6254.708" Z="53.2518" />
+							<Hotspot X="2163.434" Y="6262.634" Z="57.23425" />
+							<Hotspot X="2197.93" Y="6277.566" Z="51.85174" />  
+						</Hotspots>
+					</GrindArea>
+				</SetGrindArea>
+			<GrindTo Condition="Me.GetSkill(Styx.SkillLine.Skinning).CurrentValue >= 410" />
+			
+			
+				<SetGrindArea>
+					<GrindArea> <!-- Sholazar Basin -->
+						<TargetMinLevel>70</TargetMinLevel>
+						<TargetMaxLevel>86</TargetMaxLevel>
+						<Factions>15 1917 14 1999 2030</Factions>
+						<Hotspots>
+							<Hotspot X="5352.07" Y="5574.687" Z="-91.27075" />
+							<Hotspot X="5302.167" Y="5616.734" Z="-92.54089" />
+							<Hotspot X="5306.405" Y="5682.392" Z="-89.59415" />
+							<Hotspot X="5296.685" Y="5769.406" Z="-79.27522" />
+							<Hotspot X="5233.706" Y="5814.805" Z="-74.51286" />
+							<Hotspot X="5193.609" Y="5872.866" Z="-70.7523" />
+							<Hotspot X="5229.051" Y="5921.676" Z="-62.64098" />
+							<Hotspot X="5231.093" Y="5980.372" Z="-43.7092" />
+							<Hotspot X="5275.06" Y="5971.328" Z="-45.55296" />
+							<Hotspot X="5335.264" Y="5979.924" Z="-40.0816" />
+							<Hotspot X="5394.316" Y="5976.972" Z="-42.72119" />
+							<Hotspot X="5460.841" Y="5968.263" Z="-40.63033" />
+							<Hotspot X="5481.662" Y="5894.434" Z="-56.58644" />
+							<Hotspot X="5447.189" Y="5771.521" Z="-76.32093" />
+							<Hotspot X="5402.97" Y="5678" Z="-85.70569" />
+							<Hotspot X="5350.77" Y="5571.562" Z="-90.86132" />
+							<Hotspot X="5415.706" Y="5534.403" Z="-99.57941" />
+							<Hotspot X="5472.516" Y="5516.202" Z="-99.5425" />
+							<Hotspot X="5530.124" Y="5525.742" Z="-100.6296" />
+							<Hotspot X="5547.659" Y="5482.376" Z="-99.04948" />
+							<Hotspot X="5617.269" Y="5528.771" Z="-87.61431" />
+							<Hotspot X="5669.545" Y="5363.432" Z="-97.80017" />
+							<Hotspot X="5645.49" Y="5278.974" Z="-130.4818" />
+							<Hotspot X="5700.181" Y="5231.074" Z="-132.763" />
+							<Hotspot X="5742.889" Y="5195.069" Z="-132.6584" />
+							<Hotspot X="5838.138" Y="5185.11" Z="-114.1876" />
+							<Hotspot X="5902.864" Y="5200.229" Z="-101.9755" />
+							<Hotspot X="5892.915" Y="5131.26" Z="-108.1053" />
+							<Hotspot X="5861.771" Y="5058.898" Z="-128.3176" />
+							<Hotspot X="5773.376" Y="5056.947" Z="-135.8057" />
+							<Hotspot X="5721.584" Y="5031.304" Z="-133.9725" />
+							<Hotspot X="5672.262" Y="5004.075" Z="-134.9045" />
+							<Hotspot X="5636.106" Y="4958.515" Z="-134.2547" />
+							<Hotspot X="5756.711" Y="4911.549" Z="-132.7338" />
+							<Hotspot X="5766.906" Y="4838.47" Z="-133.4418" />
+							<Hotspot X="5826.711" Y="4764.17" Z="-132.565" />
+							<Hotspot X="5873.932" Y="4662.995" Z="-132.9918" />
+							<Hotspot X="5871.057" Y="4598.926" Z="-136.506" />
+							<Hotspot X="5756.27" Y="4615.857" Z="-134.1544" />
+							<Hotspot X="5729.213" Y="4724.967" Z="-135.0415" />
+							<Hotspot X="5684.926" Y="4846.579" Z="-136.3346" />
+							<Hotspot X="5617.613" Y="4858.64" Z="-136.5539" />
+							<Hotspot X="5559.41" Y="5025.689" Z="-134.6197" />
+							<Hotspot X="5458.857" Y="5009.203" Z="-130.6161" />
+							<Hotspot X="5337.802" Y="5019.649" Z="-135.9482" />
+							<Hotspot X="5206.935" Y="4980.843" Z="-133.5428" />
+							<Hotspot X="5139.125" Y="5075.871" Z="-131.8456" />
+							<Hotspot X="5236.379" Y="5129.723" Z="-135.2015" />
+							<Hotspot X="5315.612" Y="5167.044" Z="-134.4891" />
+							<Hotspot X="5334.14" Y="5279.299" Z="-135.7003" />
+							<Hotspot X="5390.019" Y="5317.742" Z="-131.1081" />
+							<Hotspot X="5278.722" Y="5399.57" Z="-103.287" />
+							<Hotspot X="5318.436" Y="5469.979" Z="-100.063" />
+						</Hotspots>
+					</GrindArea>
+				</SetGrindArea>
+			<GrindTo Condition="Me.GetSkill(Styx.SkillLine.Skinning).CurrentValue >= 450" />
+	
+			<!-- Train Skinning at 450
+			<If Condition="Me.GetSkill(Styx.SkillLine.Skinning).MaxValue = 450">
+				// Go to Trainer in Borean:
+					<Vendor Name="Trapper Jack" Entry="27000" Type="Repair" X="2136.098" Y="5255.882" Z="19.44923" />
+
+				<RunTo X="2136.098" Y="5255.882" Z="19.44923" />
+			</If>
+		-->
+
+	
+				<SetGrindArea>
+					<GrindArea>
+						<TargetMinLevel>75</TargetMinLevel>
+						<TargetMaxLevel>86</TargetMaxLevel>
+						<Factions>2146</Factions>
+						<Hotspots>
+								<Hotspot X="4719.215" Y="-1633.217" Z="1290.808" />
+								<Hotspot X="4659.107" Y="-1676.405" Z="1280.139" />
+								<Hotspot X="4547.205" Y="-1747.641" Z="1269.201" />
+								<Hotspot X="4522.125" Y="-1796.358" Z="1259.227" />
+								<Hotspot X="4516.925" Y="-1854.223" Z="1244.513" />
+								<Hotspot X="4510.341" Y="-1898.767" Z="1232.26" />
+								<Hotspot X="4491.995" Y="-1935.059" Z="1226.187" />
+								<Hotspot X="4465.148" Y="-1961.669" Z="1223.998" />
+								<Hotspot X="4427.02" Y="-1996.91" Z="1218.33" />
+								<Hotspot X="4482.471" Y="-2003.764" Z="1208.368" />
+								<Hotspot X="4522.728" Y="-2061.064" Z="1197.171" />
+								<Hotspot X="4521.311" Y="-2117.264" Z="1188.416" />
+								<Hotspot X="4465.415" Y="-2145.819" Z="1187.967" />
+								<Hotspot X="4522.469" Y="-2196.14" Z="1173.83" />
+								<Hotspot X="4569.633" Y="-2202.094" Z="1170.979" />
+								<Hotspot X="4522.545" Y="-2168.83" Z="1180.221" />
+								<Hotspot X="4517.963" Y="-2051.125" Z="1199.581" />
+								<Hotspot X="4497.383" Y="-1934.518" Z="1226.457" />
+								<Hotspot X="4519.697" Y="-1819.133" Z="1253.009" />
+								<Hotspot X="4542.881" Y="-1745.124" Z="1269.369" />
+						</Hotspots>
+					</GrindArea>
+				</SetGrindArea>
+			<GrindTo Condition="Me.GetSkill(Styx.SkillLine.Skinning).CurrentValue >= 600" />
+
+		
+		</QuestOrder>
+	</SubProfile>
+</HBProfile>

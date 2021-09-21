@@ -1,0 +1,217 @@
+<HBProfile creator="Drhawks685">
+	<Name>Gnome Start Area</Name>
+	<MinDurability>0.4</MinDurability>
+	<MinFreeBagSlots>3</MinFreeBagSlots>
+	<MinLevel>1</MinLevel>
+	<MaxLevel>86</MaxLevel>
+	<MailGrey>False</MailGrey>
+	<MailWhite>False</MailWhite>
+	<MailGreen>True</MailGreen>
+	<SellGrey>True</SellGrey>
+	<SellWhite>True</SellWhite>
+	<SellGreen>True</SellGreen>
+	<SellBlue>False</SellBlue>
+	<SellPurple>False</SellPurple>
+	
+	<AvoidMobs>
+	<Mob Name="Crazed Leper Gnome" Entry="46391" />
+	<Mob Name="Living Contamination" Entry="43089" />
+	</AvoidMobs>
+  
+	<Vendors>
+	<Vendor Name="Elly Sharpedge" Entry="42335" Type="Repair" X="-5168.75" Y="469.4097" Z="389.5963" />
+	<Vendor Name="Burdrak Harglhelm" Entry="3162" Type="Repair" X="-5367.575" Y="287.7031" Z="394.3148" />
+	<Vendor Name="Drill Sergeant Steamcrank" Entry="42324" Type="Train" TrainClass="Warrior" X="-5166.505" Y="458.7344" Z="391.1533" />
+	<Vendor Name="" Entry="42323" Type="Train" TrainClass="Priest" X="-5077.156" Y="477.2257" Z="401.7406" />
+	<Vendor Name="Kelsey Steelspark" Entry="42366" Type="Train" TrainClass="Rogue"	X="-5141.02" Y="502.714" Z="395.5452" />
+	<Vendor Name="Bipsi Frostflinger" Entry="42331" Type="Train" TrainClass="Mage" X="-5086.4" Y="446.071" Z="409.8239" />
+	<Vendor Name="Alamar Grimm" Entry="460" Type="Train" TrainClass="Warlock" X="-5195.21" Y="509.182" Z="387.7732" />
+	</Vendors>
+	
+	<QuestOrder>
+	<CustomBehavior File="Message" Text="Gnome Start Area" LogColor="info" />
+	<CustomBehavior File="Message" Text="This profile has train skills turned on by default, you can turn it off in the subprofile" LogColor="info" />
+	<CustomBehavior File="UserSettings" LootMobs="True" TrainNewSkills="True" LearnFlightPaths="True" UseFlightPaths="True" />
+	<PickUp QuestName="Pinned Down" QuestId="27670" GiverName="" GiverId="45966"  X="-4984.88" Y="875.616" Z="274.3101" />
+	<Objective QuestName="Pinned Down" QuestId="27670" Type="KillMob" MobId="46363" KillCount="6" />
+	<If Condition="(!IsQuestCompleted(27674))" >
+	<CustomBehavior File="UserSettings" PullDistance="1" />
+	</If>
+	<TurnIn QuestName="Pinned Down" QuestId="27670" TurnInName="" TurnInId="45966" />
+	
+	<PickUp QuestName="Report to Carvo Blastbolt" QuestId="28167" GiverName="" GiverId="45966" />
+	<TurnIn QuestName="Report to Carvo Blastbolt" QuestId="28167" TurnInName="" TurnInId="47250" />
+	
+	<PickUp QuestName="See to the Survivors" QuestId="27671" GiverName="" GiverId="47250" />
+	<CustomBehavior File="UseItemOn" QuestId="27671" MobId="46268" ItemId="62057" NumOfTimes="100" WaitTime="2000" MobType="Npc" X="-4986.168" Y="808.9982" Z="276.2368" />
+	<TurnIn QuestName="See to the Survivors" QuestId="27671" TurnInName="" TurnInId="47250" />
+	
+	<PickUp QuestName="Withdraw to the Loading Room!" QuestId="28169" GiverName="" GiverId="47250" />
+	<TurnIn QuestName="Withdraw to the Loading Room!" QuestId="28169" TurnInName="" TurnInId="46274" />
+	
+	<PickUp QuestName="Decontamination" QuestId="27635" GiverName="" GiverId="46274" />
+	<CustomBehavior File="InteractWith" QuestId="27635" MobId="46185" NumOfTimes="1" ObjectType="Npc" X="-5175.427" Y="745.7177" Z="287.397" />
+	<If Condition="(!IsQuestCompleted(27635)) &amp;&amp; (HasQuest(27635))" >
+	<CustomBehavior File="WaitTimer" WaitTime="30000" />
+	</If>
+	
+	<TurnIn QuestName="Decontamination" QuestId="27635" TurnInName="" TurnInId="46255" />
+	<PickUp QuestName="To the Surface" QuestId="27674" GiverName="" GiverId="46255" />
+	
+	<if Condition="HasQuest(27674)" >
+	<CustomBehavior File="InteractWith" MobId="46293" GossipOptions="1,1" ObjectType="Npc"  X="-5182.16" Y="686.507" Z="287.7939" />
+	<CustomBehavior File="WaitTimer" WaitTime="5000" />
+	<TurnIn QuestName="To the Surface" QuestId="27674" TurnInName="" TurnInId="42396" />
+	</if>
+	
+	<If Condition="(Me.Class == WoWClass.Warrior)" >
+	<PickUp QuestName="The Future of Gnomeregan" QuestId="26203" GiverName="" GiverId="42396" />
+	<TurnIn QuestName="The Future of Gnomeregan" QuestId="26203" TurnInName="" TurnInId="42324" />
+	<PickUp QuestName="Meet the High Tinker" QuestId="26425" GiverName="" GiverId="42324" />
+	<TurnIn QuestName="Meet the High Tinker" QuestId="26425" TurnInName="" TurnInId="42317" />
+	</If>
+	<If Condition="(Me.Class == WoWClass.Priest)" >
+	<PickUp QuestName="The Future of Gnomeregan" QuestId="26199" GiverName="" GiverId="42396" />
+	<TurnIn QuestName="The Future of Gnomeregan" QuestId="26199" TurnInName="" TurnInId="42323" />
+	<PickUp QuestName="Meet the High Tinker" QuestId="26422" GiverName="" GiverId="42323" />
+	<TurnIn QuestName="Meet the High Tinker" QuestId="26422" TurnInName="" TurnInId="42317" />
+	</If>
+	<If Condition="(Me.Class == WoWClass.Rogue)" >
+	<PickUp QuestName="The Future of Gnomeregan" QuestId="26206" GiverName="" GiverId="42396" />
+	<TurnIn QuestName="The Future of Gnomeregan" QuestId="26206" TurnInName="" TurnInId="42366" />
+	<PickUp QuestName="Meet the High Tinker" QuestId="26423" GiverName="" GiverId="42366" />
+	<TurnIn QuestName="Meet the High Tinker" QuestId="26423" TurnInName="" TurnInId="42317" />
+	</If>
+	<If Condition="(Me.Class == WoWClass.Mage)" >
+	<PickUp QuestName="The Future of Gnomeregan" QuestId="26197" GiverName="" GiverId="42396" />
+	<TurnIn QuestName="The Future of Gnomeregan" QuestId="26197" TurnInName="" TurnInId="42331" />
+	<PickUp QuestName="Meet the High Tinker" QuestId="26421" GiverName="" GiverId="42331" />
+	<TurnIn QuestName="Meet the High Tinker" QuestId="26421" TurnInName="" TurnInId="42317" />
+	</If>
+	<If Condition="(Me.Class == WoWClass.Warlock)" >
+	<PickUp QuestName="The Future of Gnomeregan" QuestId="26202" GiverName="" GiverId="42396" />
+	<TurnIn QuestName="The Future of Gnomeregan" QuestId="26202" TurnInName="" TurnInId="460" />
+	<PickUp QuestName="Meet the High Tinker" QuestId="26424" GiverName="" GiverId="460" />
+	<TurnIn QuestName="Meet the High Tinker" QuestId="26424" TurnInName="" TurnInId="42317" />
+	</If>
+	
+
+	<PickUp QuestName="The Fight Continues" QuestId="26208" GiverName="" GiverId="42317" />
+	<Objective QuestName="The Fight Continues" QuestId="26208" Type="KillMob" MobId="42463" KillCount="1" />
+	<TurnIn QuestName="The Fight Continues" QuestId="26208" TurnInName="" TurnInId="42317" />
+	
+	<If Condition="!HasQuest(26566)" >
+	<PickUp QuestName="A Triumph of Gnomish Ingenuity" QuestId="26566" GiverName="" GiverId="42317" />
+	</If>
+	
+	<TurnIn QuestName="A Triumph of Gnomish Ingenuity" QuestId="26566" TurnInName="" TurnInId="42553" />
+	<PickUp QuestName="Scrounging for Parts" QuestId="26222" GiverName="" GiverId="42553" />
+	<Objective QuestName="Scrounging for Parts" QuestId="26222" Type="CollectItem" ItemId="57764" CollectCount="7" />
+	<TurnIn QuestName="Scrounging for Parts" QuestId="26222" TurnInName="" TurnInId="42553" />
+	
+	<PickUp QuestName="A Job for the Multi-Bot" QuestId="26205" GiverName="" GiverId="42553" />
+	<PickUp QuestName="What's Left Behind" QuestId="26264" GiverName="" GiverId="42611" />
+	<PickUp QuestName="Dealing with the Fallout" QuestId="26265" GiverName="" GiverId="42630" />
+	
+	<CustomBehavior File="InteractWith" QuestId="26205" MobId="203975 " NumOfTimes="100" ObjectType="Gameobject" X="-5358.981" Y="448.5872" Z="384.1597" />
+	<CustomBehavior File="UserSettings" QuestId="26264" PullDistance="20" />
+	<Objective QuestName="What's Left Behind" QuestId="26264" Type="CollectItem" ItemId="57987" CollectCount="6" />
+	<Objective QuestName="Dealing with the Fallout" QuestId="26265" Type="KillMob" MobId="42185" KillCount="6" />
+	
+	<TurnIn QuestName="Dealing with the Fallout" QuestId="26265" TurnInName="" TurnInId="42630" />
+	<TurnIn QuestName="What's Left Behind" QuestId="26264" TurnInName="" TurnInId="42611" />
+	<TurnIn QuestName="A Job for the Multi-Bot" QuestId="26205" TurnInName="" TurnInId="42553" />
+	
+	<PickUp QuestName="What's Keeping Jessup?" QuestId="26316" GiverName="" GiverId="42489" />
+	
+	<!-- Class Quest time -->
+			<If Condition="(Me.Class == WoWClass.Warrior)" >
+		<PickUp QuestName="The Future of Gnomeregan" QuestId="26203" GiverName="Nevin Twistwrench" GiverId="42396" />
+		<TurnIn QuestName="The Future of Gnomeregan" QuestId="26203" TurnInName="Drill Sergeant Steamcrank" TurnInId="42324" />
+		<PickUp QuestName="Meet the High Tinker" QuestId="26425" GiverName="Drill Sergeant Steamcrank" GiverId="42324" />
+		<TurnIn QuestName="Meet the High Tinker" QuestId="26425" TurnInName="High Tinker Mekkatorque" TurnInId="42317" />
+			</If>
+			<If Condition="(Me.Class == WoWClass.Priest)" >
+		<PickUp QuestName="The Future of Gnomeregan" QuestId="26199" GiverName="Nevin Twistwrench" GiverId="42396" />
+		<TurnIn QuestName="The Future of Gnomeregan" QuestId="26199" TurnInName="Doc Cogspin" TurnInId="42323" />
+		<PickUp QuestName="Meet the High Tinker" QuestId="26422" GiverName="Doc Cogspin" GiverId="42323" />
+		<PickUp QuestName="The Arts of a Priest" QuestId="26200" GiverName="Doc Cogspin" GiverId="42323" />
+			<CustomBehavior File="CastSpellOn" QuestId="26200" SpellId="2061" MobId="42501" NumOfTimes="10" MobHpPercentLeft="60" MinRange="7" X="-5070.408" Y="482.3681" Z="401.7074" />
+		<TurnIn QuestName="The Arts of a Priest" QuestId="26200" TurnInName="Doc Cogspin" TurnInId="42323" />
+		<TurnIn QuestName="Meet the High Tinker" QuestId="26422" TurnInName="High Tinker Mekkatorque" TurnInId="42317" />
+			</If>
+			<If Condition="(Me.Class == WoWClass.Rogue)" >
+		<PickUp QuestName="The Future of Gnomeregan" QuestId="26206" GiverName="Nevin Twistwrench" GiverId="42396" />
+		<TurnIn QuestName="The Future of Gnomeregan" QuestId="26206" TurnInName="Kelsey Steelspark" TurnInId="42366" />
+		<PickUp QuestName="Meet the High Tinker" QuestId="26423" GiverName="Kelsey Steelspark" GiverId="42366" />
+		<TurnIn QuestName="Meet the High Tinker" QuestId="26423" TurnInName="High Tinker Mekkatorque" TurnInId="42317" />
+			</If>
+			<If Condition="(Me.Class == WoWClass.Mage)" >
+		<PickUp QuestName="The Future of Gnomeregan" QuestId="26197" GiverName="Nevin Twistwrench" GiverId="42396" />
+		<TurnIn QuestName="The Future of Gnomeregan" QuestId="26197" TurnInName="Bipsi Frostflinger" TurnInId="42331" />
+		<PickUp QuestName="Meet the High Tinker" QuestId="26421" GiverName="Bipsi Frostflinger" GiverId="42331" />
+		<TurnIn QuestName="Meet the High Tinker" QuestId="26421" TurnInName="High Tinker Mekkatorque" TurnInId="42317" />
+			</If>
+			<If Condition="(Me.Class == WoWClass.Warlock)" >
+		<PickUp QuestName="The Future of Gnomeregan" QuestId="26202" GiverName="Nevin Twistwrench" GiverId="42396" />
+		<TurnIn QuestName="The Future of Gnomeregan" QuestId="26202" TurnInName="Alamar Grimm" TurnInId="460" />
+		<PickUp QuestName="Meet the High Tinker" QuestId="26424" GiverName="Alamar Grimm" GiverId="460" />
+		<TurnIn QuestName="Meet the High Tinker" QuestId="26424" TurnInName="High Tinker Mekkatorque" TurnInId="42317" />
+			</If>
+	
+	
+	<TurnIn QuestName="What's Keeping Jessup?" QuestId="26316" TurnInName="" TurnInId="42708" />
+	<PickUp QuestName="Get Me Explosives Back!" QuestId="26285" GiverName="" GiverId="42708" />
+	<PickUp QuestName="Missing in Action" QuestId="26284" GiverName="" GiverId="42708" />
+	<If Condition="(!IsQuestCompleted(26284))" >
+	<CustomBehavior File="UserSettings" PullDistance="1" />
+	</If>
+	<CustomBehavior File="InteractWith" QuestId="26284" MobId="204019" NumOfTimes="100" ObjectType="Gameobject"  X="-5567.554" Y="522.3546" Z="381.4504" />
+	<If Condition="(!IsQuestCompleted(26285))" >
+	<CustomBehavior File="UserSettings" PullDistance="30" />
+	</If>
+	<Objective QuestName="Get Me Explosives Back!" QuestId="26285" Type="CollectItem" ItemId="58202" CollectCount="7" />
+	<TurnIn QuestName="Get Me Explosives Back!" QuestId="26285" TurnInName="" TurnInId="42708" />
+	<TurnIn QuestName="Missing in Action" QuestId="26284" TurnInName="" TurnInId="42708" />
+	<PickUp QuestName="Finishin' the Job" QuestId="26318" GiverName="" GiverId="42708" />
+	<Objective QuestName="Finishin' the Job" QuestId="26318" Type="UseObject" ObjectId="204042" UseCount="1" />
+	<If Condition="(!IsQuestCompleted(26318))" >
+	<CustomBehavior File="UserSettings" PullDistance="30" />
+	</If>
+	<Objective QuestName="Finishin' the Job" QuestId="26318" Type="KillMob" MobId="42773" KillCount="1" />
+	<TurnIn QuestName="Finishin' the Job" QuestId="26318" TurnInName="" TurnInId="42708" />
+	<PickUp QuestName="One More Thing" QuestId="26329" GiverName="" GiverId="42708" />
+	<TurnIn QuestName="One More Thing" QuestId="26329" TurnInName="" TurnInId="42317" />
+	<PickUp QuestName="Crushcog's Minions" QuestId="26331" GiverName="" GiverId="42317" />
+	<PickUp QuestName="No Tanks!" QuestId="26333" GiverName="" GiverId="42491" />
+	<CustomBehavior File="UseItemOn" QuestId="26333"  MobId="42224" ItemId="58200" NumOfTimes="100" WaitTime="2000" MobType="Npc" X="-5010.189" Y="151.4061" Z="386.7669" />
+	<Objective QuestName="Crushcog's Minions" QuestId="26331" Type="KillMob" MobId="42223" KillCount="8" />
+	<TurnIn QuestName="Crushcog's Minions" QuestId="26331" TurnInName="" TurnInId="42317" />
+	<TurnIn QuestName="No Tanks!" QuestId="26333" TurnInName="" TurnInId="42491" />
+	<PickUp QuestName="Staging in Brewnall" QuestId="26339" GiverName="" GiverId="42366" />
+	<TurnIn QuestName="Staging in Brewnall" QuestId="26339" TurnInName="" TurnInId="42353" />
+	
+	<PickUp QuestName="Paint it Black" QuestId="26342" GiverName="Jarvi Shadowstep" GiverId="42353" />
+	<CustomBehavior File="UserSettings" QuestId="26342" PullDistance="1" />
+	
+	<While Condition="!IsQuestCompleted(26342)" >
+	<CustomBehavior File="UserSettings" PullDistance="1" />
+	<CustomBehavior File="InteractWith" QuestId="26342" MobId="42291" NumOfTimes="1" ObjectType="Npc" X="-5318.691" Y="206.4253" Z="386.1117" />
+	<CustomBehavior File="CombatUseItemOn" QuestId="26342"  MobId="42291" ItemId="58203" MobHpPercentLeft="100" NumOfTimes="5" X="-5318.691" Y="206.4253" Z="386.1117" />
+	</While>
+	
+	<TurnIn QuestName="Paint it Black" QuestId="26342" TurnInName="Jarvi Shadowstep" TurnInId="42353" />
+	
+	<CustomBehavior File="Message" Text="Loading Kharanos" LogColor="info" />
+	<CustomBehavior File="LoadProfile" ProfileName="Kharanos" />
+	</QuestOrder>
+	
+	<Quest Id="26208" Name="The Fight Continues">
+	<Objective Type="KillMob" MobId="42463" KillCount="1">
+		<Hotspots>
+		<Hotspot X="-5133.806" Y="489.5549" Z="395.5453" />
+		</Hotspots>
+	</Objective>	
+	</Quest>
+	
+</HBProfile>

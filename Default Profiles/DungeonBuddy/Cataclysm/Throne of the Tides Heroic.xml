@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<DungeonBuddyProfile>
+  <Name>Throne of the Tides Heroic</Name>
+  <DungeonId>324</DungeonId>
+  <BossEncounters>
+	<!-- instancebuddy does this one pretty good already -->
+	<!-- 1st bosst - kill adds in 2nd phase
+	<Vendor Name="Naz'jar Honor Guard" Entry="40633" Type="Repair" X="193.3048" Y="815.6581" Z="807.7158" />
+	<Vendor Name="Naz'jar Tempest Witch" Entry="44404" Type="Repair" X="192.9254" Y="817.6807" Z="808.3682" />
+	-->
+	<Boss isFinal="false" entry="40586" name="Lady Naz'jar" killOrder="1" optional="false" X="195.0755" Y="805.0183" Z="807.6379" />
+	<Boss isFinal="false" entry="40765" name="Commander Ulthok" killOrder="2" optional="true" X="51.5573" Y="802.717" Z="805.7309" />
+	<!-- use <Vendor Name="Throne of Tides Teleporter" Entry="51395" Type="Repair" X="-14.53993" Y="796.316" Z="808.2356" /> and go back to ent -->
+	<Boss isFinal="false" entry="40825" name="Erunak Stonespeaker" killOrder="3" optional="true" X="-164.4549" Y="636.033" Z="286.3688" /> <!-- Most groups skip this guy, he's a faggot who mc's ppl - kill squid (below) and then the mc'd person -->
+	<!-- Squid -  Name="Mindbender Ghur'sha" Entry="40788" Type="Repair" X="-155.9473" Y="640.8759" Z="286.8746" />	 -->
+	
+	<!-- 4 - talk with 	entry="40792" name="Neptulon"  X="-146.8663" Y="981.5313" Z="230.3953" /> and then kill the 'event' mobs -->
+	<Boss isFinal="true" entry="44566" name="Ozumat" killOrder="4" optional="false" X="-151.7274" Y="982.7444" Z="229.7803" />
+	<!-- IB doesn't target Ozumat in the sky - melee have to stand here to melee him X="-113.4719" Y="957.8307" Z="230.7365" /> -->
+  </BossEncounters>
+  <Blackspots>
+    <Blackspot X="-296.3699" Y="794.1987" Z="260.2204" Radius="7.200134" />
+  </Blackspots>
+</DungeonBuddyProfile>

@@ -1,0 +1,163 @@
+<HBProfile>
+	<Name>Fire Festival [Kick]</Name>
+	<MinLevel>1</MinLevel>
+	<MaxLevel>86</MaxLevel>
+	
+	<MinDurability>0.1</MinDurability>
+	<MinFreeBagSlots>1</MinFreeBagSlots>
+	
+	<Quest Id="11886" Name="Unusual Activity">
+		<Objective Type="CollectItem" ItemId="35277" CollectCount="1">
+			<CollectFrom>
+				<Mob Name="Twilight Firesworn" Entry="25863" />
+				<Mob Name="Twilight Flameguard" Entry="25866" />
+			</CollectFrom>
+			<Hotspots>
+				<Hotspot X="3875.726" Y="792.8496" Z="2.727243" />
+				<Hotspot X="3947.198" Y="858.9898" Z="0.7317204" />
+				<Hotspot X="3976.418" Y="788.8929" Z="6.527483" />
+				<Hotspot X="3914.045" Y="758.1599" Z="7.458753" />	
+			</Hotspots>
+		</Objective>
+	</Quest>				
+				
+
+	
+	
+	<QuestOrder>
+
+	<CustomBehavior File="UserSettings" LootMobs="True" PullDistance="1" UseMount="False" TrainNewSkills="False" LearnFlightPaths="False" KillBetweenHotspots="True" LogoutForInactivity="False" />
+
+			<If Condition="((!HasQuest(11970)) &amp;&amp; (!IsQuestCompleted(11970)))" >
+				<CustomBehavior File="FlyTo" DestName="Pickup The Master of Summer Lore Quest" X="-8831.468" Y="555.3558" Z="95.4536" />
+		<PickUp QuestName="The Master of Summer Lore" QuestId="11970" GiverName="Goblin Commoner" GiverId="18927" X="-8831.468" Y="555.3558" Z="95.4536" />
+			</If>
+			<If Condition="((HasQuest(11970)) &amp;&amp; (IsQuestCompleted(11970)))" >
+				<CustomBehavior File="FlyTo" DestName="Turnin Quest" X="-8829.187" Y="862.3978" Z="98.97695" />
+		<TurnIn QuestName="The Master of Summer Lore" QuestId="11970" TurnInName="Festival Loremaster" TurnInId="16817" X="-8829.187" Y="862.3978" Z="98.97695" />
+		<PickUp QuestName="Incense for the Summer Scorchlings" QuestId="11964" GiverName="Festival Loremaster" GiverId="16817" />
+			</If>
+			<If Condition="((!HasQuest(11964)) &amp;&amp; (!IsQuestCompleted(11964)))" >
+				<CustomBehavior File="FlyTo" DestName="Pickup Quest" X="-8829.187" Y="862.3978" Z="98.97695" />
+		<PickUp QuestName="Incense for the Summer Scorchlings" QuestId="11964" GiverName="Festival Loremaster" GiverId="16817" />
+			</If>
+			<If Condition="((HasQuest(11964)) &amp;&amp; (IsQuestCompleted(11964)))" >
+				<CustomBehavior File="FlyTo" DestName="Turnin Quest" X="-9387.306" Y="17.85571" Z="60.79075" />
+				<CustomBehavior File="ForcedDismount" />
+		<TurnIn QuestName="Incense for the Summer Scorchlings" QuestId="11964" TurnInName="Summer Scorchling" TurnInId="26401" />
+				<!-- Honor the Flame -->
+				<CustomBehavior File="BasicInteractWith" MobId="25898" />
+				<CustomBehavior File="RunMacro" Macro="/click GossipTitleButton1" NumOfTimes="1" WaitTime="1000" />
+				<CustomBehavior File="RunMacro" Macro="/click QuestFrameCompleteQuestButton" NumOfTimes="1" WaitTime="1000" />
+			</If>
+			<If Condition="((!HasQuest(11882)) &amp;&amp; (!IsQuestCompleted(11882)))" >
+				<CustomBehavior File="FlyTo" DestName="Pickup Quest" X="-9380.124" Y="16.30272" Z="62.20164" />
+		<PickUp QuestName="Playing with Fire" QuestId="11882" GiverName="Fire Eater" GiverId="25962" />
+			</If>
+			<If Condition="((HasQuest(11882)) &amp;&amp; (IsQuestCompleted(11882)))" >
+				<CustomBehavior File="FlyTo" DestName="Turnin Quest" X="-8831.392" Y="854.4824" Z="99.16622" />
+		<TurnIn QuestName="Playing with Fire" QuestId="11882" TurnInName="Master Fire Eater" TurnInId="25975" />
+			</If>
+			<If Condition="((!HasQuest(11731)) &amp;&amp; (!IsQuestCompleted(11731)))" >
+				<CustomBehavior File="FlyTo" DestName="Pickup Quest" X="-8831.392" Y="854.4824" Z="99.16622" />
+	<CustomBehavior File="UserDialog" AllowBotStop="True" SoundCue="Exclamation" SoundCueInterval="1" Text="Accept the Torch Tossing Quest and complete it (hit 8 braziers with the V mark while standing on the fire)\n\nPress continue when done" />
+			 <If Condition="((!HasQuest(11731)) &amp;&amp; (!IsQuestCompleted(11731)))" >
+	<CustomBehavior File="UserDialog" StopOnContinue="True" SoundCue="Exclamation" SoundCueInterval="1" Text="Hey, don't press continue until you're done with the quest!" />
+		<PickUp QuestName="Torch Tossing" QuestId="11731" GiverName="Master Fire Eater" GiverId="25975" />
+			 </If>
+			</If>
+			<If Condition="((HasQuest(11731)) &amp;&amp; (IsQuestCompleted(11731)))" >
+				<CustomBehavior File="FlyTo" DestName="Turnin Quest" X="-8831.392" Y="854.4824" Z="99.16622" />
+		<TurnIn QuestName="Torch Tossing" QuestId="11731" TurnInName="Master Fire Eater" TurnInId="25975" />
+			</If>
+			<If Condition="((!HasQuest(11657)) &amp;&amp; (!IsQuestCompleted(11657)))" >
+				<CustomBehavior File="FlyTo" DestName="Pickup Quest" X="-8831.392" Y="854.4824" Z="99.16622" />
+		<PickUp QuestName="Torch Catching" QuestId="11657" GiverName="Master Fire Eater" GiverId="25975" />
+			</If>
+			<If Condition="((HasQuest(11657)) &amp;&amp; (!IsQuestCompleted(11657)))" >
+	<CustomBehavior File="UserDialog" QuestId="11657" AllowBotStop="True" SoundCue="Exclamation" SoundCueInterval="1" Text="Throw and then catch 4 torches in a row\n\nThis box will close when done" />
+	<CustomBehavior File="UserDialog" QuestId="11657" AllowBotStop="True" SoundCue="Exclamation" SoundCueInterval="1" Text="Hey, don't press continue until you're done with the quest!" />
+			</If>
+			<If Condition="((HasQuest(11657)) &amp;&amp; (IsQuestCompleted(11657)))" >
+				<CustomBehavior File="FlyTo" DestName="Turnin Quest" X="-8831.392" Y="854.4824" Z="99.16622" />
+		<TurnIn QuestName="Torch Catching" QuestId="11657" TurnInName="Master Fire Eater" TurnInId="25975" />
+			</If>
+
+			<If Condition="((!HasQuest(11886)) &amp;&amp; (!IsQuestCompleted(11886)))" >
+				<CustomBehavior File="FlyTo" DestName="Pickup Quest" X="-8832.973" Y="863.6421" Z="98.88687" />
+		<PickUp QuestName="Unusual Activity" QuestId="11886" GiverName="Earthen Ring Elder" GiverId="26221" />
+			</If>
+			<If Condition="((HasQuest(11886)) &amp;&amp; (!IsQuestCompleted(11886)))" >
+			 <If Condition="Me.MapId == 0" >
+				<CustomBehavior File="FlyTo" DestName="Darnassus boat (in SW)" X="-8644.474" Y="1327.779" Z="5.538271" />
+				<CustomBehavior File="ForcedDismount" />
+				<CustomBehavior File="UserDialog" AllowBotStop="True" SoundCue="Exclamation" SoundCueInterval="1" 
+				Text="Get on the Darnassus boat when it comes!\n\nGet off when in Kalimdor and press continue" />
+			 </If>
+			 <If Condition="Me.MapId == 1" >			
+				<CustomBehavior File="FlyTo" DestName="Rut'theran Village" X="8193.299" Y="988.65" Z="140.997" />
+				<CustomBehavior File="MyCTM" DestName="Lor'Danel" X="7380.325" Y="-529.0552" Z="137.2284" />
+				<CustomBehavior File="FlyTo" DestName="Ashenvale" X="3926.077" Y="872.5566" Z="1.784019" />
+				<Objective QuestName="Unusual Activity" QuestId="11886" Type="CollectItem" ItemId="35277" CollectCount="1" />
+			 </If>
+			</If>
+			<If Condition="((HasQuest(11886)) &amp;&amp; (IsQuestCompleted(11886)))" >
+				<CustomBehavior File="FlyTo" DestName="Turnin Quest" X="3893.657" Y="912.9663" Z="-0.126839" />
+				<CustomBehavior File="ForcedDismount" />
+				
+				<CustomBehavior File="Misc\RunLua" Lua="UseItemByName(35828)" WaitTime="1000" />
+				<CustomBehavior File="WaitTimer" WaitTime="10000" GoalText="Using item {TimeRemaining}" />
+				
+		<TurnIn QuestName="Unusual Activity" QuestId="11886" TurnInName="Earthen Ring Guide" TurnInId="25324" />
+		<PickUp QuestName="An Innocent Disguise" QuestId="11891" GiverName="Earthen Ring Guide" GiverId="25324" />
+			</If>
+			<If Condition="((!HasQuest(11891)) &amp;&amp; (!IsQuestCompleted(11891)))" >
+				<CustomBehavior File="FlyTo" DestName="Pickup Quest" X="3893.657" Y="912.9663" Z="-0.126839" />
+				
+				<CustomBehavior File="Misc\RunLua" Lua="UseItemByName(35828)" WaitTime="1000" />
+				<CustomBehavior File="WaitTimer" WaitTime="10000" GoalText="Using item {TimeRemaining}" />
+				
+		<PickUp QuestName="An Innocent Disguise" QuestId="11891" GiverName="Earthen Ring Guide" GiverId="25324" />
+			</If>
+			<If Condition="((HasQuest(11891)) &amp;&amp; (!IsQuestCompleted(11891)))" >
+				<CustomBehavior File="FlyTo" DestName="listen as a crab!" X="4181.066" Y="1130.996" Z="21.66227" />
+				<CustomBehavior File="ForcedDismount" />
+				
+				<CustomBehavior File="Misc\RunLua" Lua="UseItemByName(35237)" WaitTime="1000" />
+				<CustomBehavior File="WaitTimer" WaitTime="4000" GoalText="Using item {TimeRemaining}" />
+				
+				<RunTo X="4195.132" Y="1176.962" Z="6.272671" />
+				<CustomBehavior File="WaitTimer" WaitTime="40000" GoalText="Waiting for quest to complete {TimeRemaining}" />
+				
+				<RunTo X="4186.814" Y="1128.38" Z="17.67639" />
+				<CustomBehavior File="RunMacro" Macro="/cancelaura Crab Disguise" NumOfTimes="1" WaitTime="1000" />
+			</If>
+			<If Condition="((HasQuest(11891)) &amp;&amp; (IsQuestCompleted(11891)))" >
+				<CustomBehavior File="FlyTo" DestName="Turnin Quest" X="4186.814" Y="1128.38" Z="17.67639" />
+				
+				<CustomBehavior File="Misc\RunLua" Lua="UseItemByName(35828)" WaitTime="1000" />
+				<CustomBehavior File="WaitTimer" WaitTime="10000" GoalText="Using item {TimeRemaining}" />
+				
+		<TurnIn QuestName="An Innocent Disguise" QuestId="11891" TurnInName="Earthen Ring Guide" TurnInId="25324" />
+		<PickUp QuestName="Inform the Elder" QuestId="29092" GiverName="Earthen Ring Guide" GiverId="25324" />
+			</If>
+			<If Condition="((HasQuest(29092)) &amp;&amp; (IsQuestCompleted(29092)))" >
+			 <If Condition="Me.MapId == 1" >
+				<CustomBehavior File="UserDialog" AllowBotStop="True" SoundCue="Exclamation" SoundCueInterval="1" 
+				Text="Stop and use hearthstone if it's set to SW\n\nIf it's not, press continue and you'll fly to Reth Village to use the boat to SW" />
+				
+				<CustomBehavior File="FlyTo" DestName="Darnassus Boat (To Stormwind)" X="8196.444" Y="999.1541" Z="17.57117" />
+				<CustomBehavior File="ForcedDismount" />
+				
+				<CustomBehavior File="UserDialog" AllowBotStop="True" SoundCue="Exclamation" SoundCueInterval="1" 
+				Text="Get on the boat to SW - get off and press continue when you're in SW" />
+			 </If>
+				<CustomBehavior File="FlyTo" DestName="Turnin Quest" X="-8832.973" Y="863.6421" Z="98.88687" />
+		<TurnIn QuestName="Inform the Elder" QuestId="29092" TurnInName="Earthen Ring Elder" TurnInId="26221" />
+			</If>
+
+	<CustomBehavior File="UserDialog" AllowBotStop="True" SoundCue="Exclamation" SoundCueInterval="1" Text="End of quests - Load the Fire Warden and Extinguishing Fires EK now" />
+
+
+	</QuestOrder>
+</HBProfile>

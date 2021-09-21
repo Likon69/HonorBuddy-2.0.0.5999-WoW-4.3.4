@@ -1,0 +1,1094 @@
+<HBProfile creator="Kickazz006" version="1.0">
+	<Name>[A] Skinning 1-525 [Kick]</Name>
+	<MinDurability>0.2</MinDurability>
+	<MinFreeBagSlots>2</MinFreeBagSlots>
+
+	<MinLevel>1</MinLevel>
+	<MaxLevel>86</MaxLevel>
+   
+	<MailGrey>False</MailGrey>
+	<MailWhite>True</MailWhite>
+	<MailGreen>True</MailGreen>
+	<MailBlue>True</MailBlue>
+	<MailPurple>True</MailPurple>
+   
+	<SellGrey>True</SellGrey>
+	<SellWhite>False</SellWhite>
+	<SellGreen>False</SellGreen>
+	<SellBlue>False</SellBlue>
+	<SellPurple>False</SellPurple>
+	
+		<Mailboxes>
+			<Mailbox X="-8742.377" Y="407.5558" Z="98.20789" /> <!-- Old Town -->
+		</Mailboxes>
+		<Vendors>
+			<Vendor Name="Seoman Griffith" Entry="1320" Type="Repair" X="-8713.808" Y="474.3274" Z="98.61314" /> <!-- SW LW -->
+		</Vendors>
+
+		
+		<AvoidMobs>
+			<Mob Name="Zanzil Mindslave" Entry="43223" />
+			<Mob Name="Zanzil Zombie" Entry="1488" />
+			<Mob Name="Brownfeather Hawk" Entry="44475" />
+			<Mob Name="Windroc" Entry="17128" />
+		</AvoidMobs>
+		
+		<QuestOrder>
+			
+		<CustomBehavior File="UserSettings" LootMobs="True" TrainNewSkills="False" LearnFlightPaths="False" UseFlightPaths="False" PullDistance="25" SkinMobs="True" NinjaSkin="False" />
+		
+		<!-- EK 1-300 Skinning -->
+		<CustomBehavior File="Message" Text="Compiling EK 1-300 Skinning" LogColor="Green" />
+	
+		<If Condition="(Me.MapId == 0) &amp;&amp; (Me.GetSkill(Styx.SkillLine.Skinning).CurrentValue &lt;= 300)">
+		
+		<SetMailbox>
+			<Mailboxes>
+				<Mailbox X="-8742.377" Y="407.5558" Z="98.20789" /> <!-- Old Town -->
+			</Mailboxes>
+		</SetMailbox>
+		<SetVendor>
+			<Vendors>
+					<Vendor Name="Seoman Griffith" Entry="1320" Type="Repair" X="-8713.808" Y="474.3274" Z="98.61314" /> <!-- SW LW -->
+			</Vendors>
+		</SetVendor>
+		
+			<If Condition="(Me.GetSkill(Styx.SkillLine.Skinning).CurrentValue == 0)">
+				<CustomBehavior File="Message" Text="Training Skinning Skill Level 0-1" LogColor="Green" />
+	
+				<CustomBehavior File="FlyTo" DestName="Train Skinning in SW" X="-8722.247" Y="440.4887" Z="97.61475" />
+				<CustomBehavior File="ForcedDismount" />
+				<CustomBehavior File="InteractWith" MobId="1292" X="-8716.408" Y="469.4141" Z="98.61299" />
+				
+				<CustomBehavior File="RunMacro" NumOfTimes="1" WaitTime="1000" 
+				Macro="/run LoadAddOn'Blizzard_TrainerUI' f=ClassTrainerTrainButton f.e = 0 if f:GetScript'OnUpdate' then f:SetScript('OnUpdate', nil)else f:SetScript('OnUpdate', function(f,e) f.e=f.e+e if f.e>.01 then f.e=0 f:Click() end end)end" />
+				<CustomBehavior File="RunMacro" Macro="/click StaticPopup1Button1" NumOfTimes="1" WaitTime="5000"/> 
+				<CustomBehavior File="RunMacro" NumOfTimes="1" WaitTime="1000" 
+				Macro="/run LoadAddOn'Blizzard_TrainerUI' f=ClassTrainerTrainButton f.e = 0 if f:GetScript'OnUpdate' then f:SetScript('OnUpdate', nil)else f:SetScript('OnUpdate', function(f,e) f.e=f.e+e if f.e>.01 then f.e=0 f:Click() end end)end" />
+
+			 <If Condition="!HasItem(7005)">
+				<CustomBehavior File="InteractWith" MobId="5565" BuyItemId="7005" X="-8722.868" Y="479.3223" Z="98.61316" />
+			 </If>
+				
+				<CustomBehavior File="ForceSetVendor" DoSell="True" DoRepair="True" DoMail="True" />
+				
+				<RunTo X="-8722.247" Y="440.4887" Z="97.61475" />
+				
+			</If>
+			
+				<CustomBehavior File="Message" Text="Compiling 1-30 Skinning" LogColor="Cornflowerblue" />
+	
+			<If Condition="((Me.GetSkill(Styx.SkillLine.Skinning).CurrentValue &gt;= 1) &amp;&amp; (Me.GetSkill(Styx.SkillLine.Skinning).CurrentValue &lt; 30))">
+			 <If Condition="!HasItem(7005)">
+				<CustomBehavior File="FlyTo" DestName="Train Skinning in SW" X="-8722.247" Y="440.4887" Z="97.61475" />
+				<CustomBehavior File="ForcedDismount" />
+			
+				<CustomBehavior File="InteractWith" MobId="5565" BuyItemId="7005" X="-8722.868" Y="479.3223" Z="98.61316" />
+				
+				<RunTo X="-8722.247" Y="440.4887" Z="97.61475" />
+			 </If>
+				
+				<CustomBehavior File="FlyTo" DestName="Farm Area" X="-9519.333" Y="176.2865" Z="57.20312" />
+				<CustomBehavior File="ForcedDismount" />
+			
+				<SetGrindArea>
+					 <GrindArea> <!-- Near Goldshire / SW -->
+						<Factions>38 113 189</Factions> <!-- [Wolf, Pig] -->
+						<TargetMinLevel>1</TargetMinLevel> 
+						<TargetMaxLevel>10</TargetMaxLevel> 
+						<Hotspots>      
+							<Hotspot X="-9519.333" Y="176.2865" Z="57.20312" />
+							<Hotspot X="-9561.827" Y="203.7987" Z="59.01175" />
+							<Hotspot X="-9621.003" Y="210.0004" Z="48.13746" />
+							<Hotspot X="-9678.259" Y="229.4657" Z="48.76754" />
+							<Hotspot X="-9722.256" Y="252.2484" Z="49.13739" />
+							<Hotspot X="-9712.869" Y="197.7397" Z="50.24968" />
+							<Hotspot X="-9716.278" Y="147.5224" Z="50.12704" />
+							<Hotspot X="-9682.306" Y="118.8495" Z="47.66219" />
+							<Hotspot X="-9694.951" Y="80.90967" Z="49.80982" />
+							<Hotspot X="-9726.133" Y="42.25019" Z="39.62457" />
+							<Hotspot X="-9679.021" Y="93.38731" Z="44.50569" />
+							<Hotspot X="-9599.32" Y="100.9184" Z="59.66969" />
+							<Hotspot X="-9583.519" Y="42.5836" Z="60.15905" />
+							<Hotspot X="-9596.74" Y="-4.663225" Z="61.07923" />
+							<Hotspot X="-9551.326" Y="34.296" Z="59.34358" />
+							<Hotspot X="-9554.08" Y="118.0302" Z="58.88253" />
+							<Hotspot X="-9566.644" Y="167.5832" Z="60.89401" />
+							<Hotspot X="-9571.668" Y="212.446" Z="57.44413" />
+							<Hotspot X="-9608.707" Y="202.6342" Z="47.8317" />
+							<Hotspot X="-9687.022" Y="217.1682" Z="50.51692" />
+							<Hotspot X="-9719.47" Y="259.7462" Z="48.97263" />
+							<Hotspot X="-9797.707" Y="359.4343" Z="38.8221" />
+						</Hotspots> 
+					</GrindArea>  
+				</SetGrindArea>
+			<GrindTo Condition="Me.GetSkill(Styx.SkillLine.Skinning).CurrentValue == 30" />
+			</If>
+
+				<CustomBehavior File="Message" Text="Compiling 30-75 Skinning" LogColor="Cornflowerblue" />
+	
+			<If Condition="((Me.GetSkill(Styx.SkillLine.Skinning).CurrentValue &gt;= 30) &amp;&amp; (Me.GetSkill(Styx.SkillLine.Skinning).CurrentValue &lt; 75))">
+				<CustomBehavior File="FlyTo" DestName="Farm Area" X="-9720.43" Y="49.7692" Z="41.01646" />
+				<CustomBehavior File="ForcedDismount" />
+			
+				<SetGrindArea>
+					<GrindArea> <!-- South of Goldshire and goes east near Brackwell -->
+						<Factions>38 44 189</Factions> <!-- [Wolf, Bear, Pig] -->
+						<TargetMinLevel>7</TargetMinLevel> 
+						<TargetMaxLevel>13</TargetMaxLevel> 
+						<Hotspots>      
+								<Hotspot X="-9720.43" Y="49.7692" Z="41.01646" />
+								<Hotspot X="-9798.137" Y="9.242975" Z="29.57826" />
+								<Hotspot X="-9863.74" Y="6.092821" Z="27.79266" />
+								<Hotspot X="-9906.576" Y="-28.88545" Z="30.29438" />
+								<Hotspot X="-9973.366" Y="-47.40935" Z="34.99699" />
+								<Hotspot X="-10022.73" Y="-22.00787" Z="34.01312" />
+								<Hotspot X="-9958.058" Y="-60.10365" Z="33.72009" />
+								<Hotspot X="-9931.236" Y="-89.88985" Z="30.37609" />
+								<Hotspot X="-9899.061" Y="-50.5927" Z="28.9197" />
+								<Hotspot X="-9859.553" Y="-43.15723" Z="26.10554" />
+								<Hotspot X="-9812.51" Y="-78.52355" Z="25.81955" />
+								<Hotspot X="-9813.236" Y="-10.45343" Z="26.11792" />
+								<Hotspot X="-9823.549" Y="44.84231" Z="33.44895" />
+								<Hotspot X="-9764.188" Y="77.97866" Z="41.09714" />
+								<Hotspot X="-9786.423" Y="6.081963" Z="31.51482" />
+								<Hotspot X="-9788.001" Y="-62.88512" Z="26.40487" />
+								<Hotspot X="-9730.659" Y="-71.08958" Z="34.26672" />
+								<Hotspot X="-9672.373" Y="-19.31929" Z="43.55779" />
+								<Hotspot X="-9655.652" Y="-90.79086" Z="43.23079" />
+								<Hotspot X="-9679.263" Y="-124.3228" Z="42.91785" />
+								<Hotspot X="-9676.548" Y="-171.9559" Z="46.49627" />
+								<Hotspot X="-9731.208" Y="-206.9452" Z="42.60763" />
+								<Hotspot X="-9784.082" Y="-200.0088" Z="38.5035" />
+								<Hotspot X="-9830.678" Y="-185.0714" Z="36.51274" />
+								<Hotspot X="-9882.451" Y="-144.5452" Z="30.09871" />
+								<Hotspot X="-9918.553" Y="-87.61197" Z="29.4919" />
+								<Hotspot X="-9900.093" Y="-49.90158" Z="28.97948" />
+								<Hotspot X="-9831.786" Y="12.80331" Z="27.89258" />
+								<Hotspot X="-9729.723" Y="40.52927" Z="39.03622" /> <!-- loops back around near start point -->
+						</Hotspots>
+					</GrindArea>
+				</SetGrindArea>
+			<GrindTo Condition="Me.GetSkill(Styx.SkillLine.Skinning).CurrentValue == 75" />
+			</If>
+			
+			<If Condition="(Me.GetSkill(Styx.SkillLine.Skinning).CurrentValue == 75) &amp;&amp; (Me.GetSkill(Styx.SkillLine.Skinning).MaxValue == 75)">
+				<CustomBehavior File="Message" Text="Training 75-150 Skinning" LogColor="Green" />
+	
+				<CustomBehavior File="FlyTo" DestName="Train Skinning in SW" X="-8722.247" Y="440.4887" Z="97.61475" />
+				<CustomBehavior File="ForcedDismount" />
+				<CustomBehavior File="InteractWith" MobId="1292" X="-8716.408" Y="469.4141" Z="98.61299" />
+
+				<CustomBehavior File="RunMacro" NumOfTimes="1" WaitTime="1000" 
+				Macro="/run LoadAddOn'Blizzard_TrainerUI' f=ClassTrainerTrainButton f.e = 0 if f:GetScript'OnUpdate' then f:SetScript('OnUpdate', nil)else f:SetScript('OnUpdate', function(f,e) f.e=f.e+e if f.e>.01 then f.e=0 f:Click() end end)end" />
+
+				<CustomBehavior File="ForceSetVendor" DoSell="True" DoRepair="True" DoMail="True" />
+				
+				<RunTo X="-8722.247" Y="440.4887" Z="97.61475" />
+			</If>
+			
+				<CustomBehavior File="Message" Text="Compiling 75-105 Skinning" LogColor="Cornflowerblue" />
+	
+			<If Condition="((Me.GetSkill(Styx.SkillLine.Skinning).CurrentValue &gt;= 75) &amp;&amp; (Me.GetSkill(Styx.SkillLine.Skinning).CurrentValue &lt; 105))">
+				<CustomBehavior File="FlyTo" DestName="Farm Area" X="-10927.45" Y="682.4547" Z="36.27343" />
+				<CustomBehavior File="ForcedDismount" />
+			
+				<SetGrindArea>
+					<GrindArea> <!-- E / SE Westfall -->
+						<Factions>189 38</Factions> <!-- [Pig, Wolf] -->
+						<TargetMinLevel>12</TargetMinLevel> 
+						<TargetMaxLevel>17</TargetMaxLevel> 
+						<Hotspots>
+							<Hotspot X="-10927.45" Y="682.4547" Z="36.27343" />
+							<Hotspot X="-11007.05" Y="664.8237" Z="34.2948" />
+							<Hotspot X="-11071.32" Y="661.7849" Z="33.96656" />
+							<Hotspot X="-11158.97" Y="645.3047" Z="39.09586" />
+							<Hotspot X="-11200.58" Y="616.1589" Z="40.76339" />
+							<Hotspot X="-11197.68" Y="677.7004" Z="38.09158" />
+							<Hotspot X="-11114.45" Y="681.5295" Z="34.36172" />
+							<Hotspot X="-11075.07" Y="710.581" Z="37.09513" />
+							<Hotspot X="-11026.12" Y="724.5164" Z="35.62669" />
+							<Hotspot X="-10971.89" Y="744.1304" Z="47.07913" />
+							<Hotspot X="-10948.11" Y="820.0963" Z="35.97744" />
+							<Hotspot X="-10899.5" Y="866.967" Z="33.92288" />
+							<Hotspot X="-10950.96" Y="897.5833" Z="35.09533" />
+							<Hotspot X="-10972.46" Y="943.1457" Z="34.47799" />
+							<Hotspot X="-10962.46" Y="1015.95" Z="37.00306" />
+							<Hotspot X="-10981.58" Y="1076.918" Z="38.07872" />
+							<Hotspot X="-10881.5" Y="977.325" Z="36.30569" />
+							<Hotspot X="-10836.63" Y="942.0261" Z="39.46837" />
+							<Hotspot X="-10771.09" Y="946.0983" Z="40.59146" />
+							<Hotspot X="-10693.78" Y="905.8904" Z="36.9439" />
+							<Hotspot X="-10719.92" Y="852.7723" Z="40.85915" />
+							<Hotspot X="-10908.21" Y="908.7533" Z="33.11295" />
+							<Hotspot X="-10959.55" Y="875.8633" Z="35.40514" />
+							<Hotspot X="-10924.06" Y="757.3781" Z="36.68958" />
+							<Hotspot X="-10888.03" Y="700.5343" Z="33.92117" />
+							<Hotspot X="-10802.93" Y="711.397" Z="39.99997" />
+							<Hotspot X="-10720.86" Y="762.8583" Z="42.56983" />
+							<Hotspot X="-10619.38" Y="801.6268" Z="52.99866" />
+						</Hotspots>
+					</GrindArea>
+				</SetGrindArea>
+			<GrindTo Condition="Me.GetSkill(Styx.SkillLine.Skinning).CurrentValue == 105" />
+			</If>
+			
+				<CustomBehavior File="Message" Text="Compiling 105-135 Skinning" LogColor="Cornflowerblue" />
+	
+			<If Condition="((Me.GetSkill(Styx.SkillLine.Skinning).CurrentValue &gt;= 105) &amp;&amp; (Me.GetSkill(Styx.SkillLine.Skinning).CurrentValue &lt; 135))">
+				<CustomBehavior File="FlyTo" DestName="Farm Area" X="-9926.116" Y="-1695.649" Z="22.97017" />
+				<CustomBehavior File="ForcedDismount" />
+			
+				<SetGrindArea>
+					<GrindArea> <!-- N Duskwood Bank -->
+						<Factions>38</Factions> <!-- [Wolf] -->
+						<TargetMinLevel>18</TargetMinLevel> 
+						<TargetMaxLevel>22</TargetMaxLevel>	
+						<Hotspots>
+							<Hotspot X="-9926.116" Y="-1695.649" Z="22.97017" />
+							<Hotspot X="-9912.771" Y="-1768.645" Z="32.12413" />
+							<Hotspot X="-9982.13" Y="-1710.15" Z="27.35047" />
+							<Hotspot X="-10014.87" Y="-1673.089" Z="30.28931" />
+							<Hotspot X="-10020.26" Y="-1600.278" Z="32.25587" />
+							<Hotspot X="-9952.896" Y="-1591.395" Z="29.31221" />
+							<Hotspot X="-9972.919" Y="-1553.059" Z="27.51498" />
+							<Hotspot X="-10007.76" Y="-1508.549" Z="29.74335" />
+							<Hotspot X="-10042.83" Y="-1441.983" Z="29.19605" />
+							<Hotspot X="-10042.31" Y="-1370.095" Z="29.04033" />
+							<Hotspot X="-10046.42" Y="-1297.009" Z="30.97382" />
+							<Hotspot X="-10108.53" Y="-1270.751" Z="29.51727" />
+							<Hotspot X="-10043.31" Y="-1231.316" Z="29.07565" />
+							<Hotspot X="-10044.95" Y="-1191.777" Z="29.56542" />
+							<Hotspot X="-10044.71" Y="-1142.731" Z="29.23804" />
+							<Hotspot X="-10075.33" Y="-1106.832" Z="28.7328" />
+							<Hotspot X="-10051.44" Y="-1045.033" Z="28.25253" />
+							<Hotspot X="-10086.63" Y="-1025.012" Z="32.16104" />
+							<Hotspot X="-10120.66" Y="-975.6288" Z="32.09806" />
+							<Hotspot X="-10058.9" Y="-963.3929" Z="34.53672" />
+							<Hotspot X="-10018.89" Y="-957.1539" Z="29.39417" />
+							<Hotspot X="-10036.65" Y="-895.8156" Z="33.30318" />
+							<Hotspot X="-10082.98" Y="-901.608" Z="35.80597" />
+							<Hotspot X="-10136.14" Y="-914.5132" Z="34.65869" />
+							<Hotspot X="-10136.09" Y="-960.3381" Z="31.80387" />
+							<Hotspot X="-10199.63" Y="-976.2916" Z="36.14519" />
+							<Hotspot X="-10219.99" Y="-1021.292" Z="32.03933" />
+							<Hotspot X="-10231.76" Y="-950.4543" Z="37.79209" />
+							<Hotspot X="-10242.96" Y="-893.196" Z="36.13042" />
+							<Hotspot X="-10219.97" Y="-870.2596" Z="41.16904" />
+							<Hotspot X="-10197.21" Y="-840.8852" Z="42.02546" />
+							<Hotspot X="-10181.53" Y="-789.8684" Z="45.70173" />
+							<Hotspot X="-10125.86" Y="-801.2908" Z="36.57192" />
+							<Hotspot X="-10066.45" Y="-831.0767" Z="36.31736" />
+							<Hotspot X="-10048.87" Y="-864.4763" Z="34.51636" />
+							<Hotspot X="-10009.73" Y="-858.1799" Z="30.02235" />
+							<Hotspot X="-9990.949" Y="-805.1486" Z="28.10014" />
+							<Hotspot X="-9989.885" Y="-759.204" Z="30.49004" />
+							<Hotspot X="-10052.32" Y="-739.7487" Z="36.61999" />
+							<Hotspot X="-10123.4" Y="-717.0942" Z="41.94709" />
+							<Hotspot X="-10115.78" Y="-683.4827" Z="44.6024" />
+							<Hotspot X="-10081.05" Y="-681.1119" Z="37.75928" />
+							<Hotspot X="-10002.6" Y="-692.0652" Z="35.03407" />
+							<Hotspot X="-9957.059" Y="-683.6439" Z="29.5661" />
+							<Hotspot X="-9963.605" Y="-616.341" Z="34.21157" />
+							<Hotspot X="-9983.646" Y="-596.0478" Z="38.20391" />
+							<Hotspot X="-10017.64" Y="-626.243" Z="40.56673" />
+							<Hotspot X="-10052.97" Y="-605.2977" Z="44.42616" />
+							<Hotspot X="-10025.04" Y="-566.3351" Z="44.24185" />
+							<Hotspot X="-9981.385" Y="-517.5344" Z="39.36047" />
+							<Hotspot X="-9950.762" Y="-503.0972" Z="30.55637" />
+							<Hotspot X="-9975.688" Y="-454.87" Z="25.76377" />
+							<Hotspot X="-10010.37" Y="-441.4009" Z="31.71942" />
+							<Hotspot X="-10053.75" Y="-468.9838" Z="48.60239" />
+							<Hotspot X="-10037.43" Y="-375.3502" Z="28.4767" />
+							<Hotspot X="-10053.67" Y="-325.8018" Z="29.36052" />
+							<Hotspot X="-10074.72" Y="-295.4091" Z="30.96775" />
+							<Hotspot X="-10065.29" Y="-265.0197" Z="29.70981" />
+							<Hotspot X="-10070.75" Y="-234.8424" Z="31.63417" />
+							<Hotspot X="-10098.89" Y="-206.7364" Z="30.47458" />
+							<Hotspot X="-10070.14" Y="-185.7688" Z="28.59105" />
+							<Hotspot X="-10108.87" Y="-150.233" Z="29.61342" />
+							<Hotspot X="-10118.4" Y="-91.09659" Z="26.54906" />
+							<Hotspot X="-10109.97" Y="-36.37171" Z="22.11353" />
+						</Hotspots>
+					</GrindArea>
+				</SetGrindArea>
+			<GrindTo Condition="Me.GetSkill(Styx.SkillLine.Skinning).CurrentValue == 135" />
+			</If>
+			
+			<If Condition="(Me.GetSkill(Styx.SkillLine.Skinning).CurrentValue == 135) &amp;&amp; (Me.GetSkill(Styx.SkillLine.Skinning).MaxValue == 135)">
+				<CustomBehavior File="Message" Text="Training 150-225 Skinning" LogColor="Green" />
+	
+				<CustomBehavior File="FlyTo" DestName="Train Skinning in SW" X="-8722.247" Y="440.4887" Z="97.61475" />
+				<CustomBehavior File="ForcedDismount" />
+				<CustomBehavior File="InteractWith" MobId="1292" X="-8716.408" Y="469.4141" Z="98.61299" />
+
+				<CustomBehavior File="RunMacro" NumOfTimes="1" WaitTime="1000" 
+				Macro="/run LoadAddOn'Blizzard_TrainerUI' f=ClassTrainerTrainButton f.e = 0 if f:GetScript'OnUpdate' then f:SetScript('OnUpdate', nil)else f:SetScript('OnUpdate', function(f,e) f.e=f.e+e if f.e>.01 then f.e=0 f:Click() end end)end" />
+				<CustomBehavior File="RunMacro" NumOfTimes="1" WaitTime="1000" 
+				Macro="/run LoadAddOn'Blizzard_TrainerUI' f=ClassTrainerTrainButton f.e = 0 if f:GetScript'OnUpdate' then f:SetScript('OnUpdate', nil)else f:SetScript('OnUpdate', function(f,e) f.e=f.e+e if f.e>.01 then f.e=0 f:Click() end end)end" />
+
+
+				<CustomBehavior File="ForceSetVendor" DoSell="True" DoRepair="True" DoMail="True" />
+				
+				<RunTo X="-8722.247" Y="440.4887" Z="97.61475" />
+			</If>
+			
+				<CustomBehavior File="Message" Text="Compiling 135-175 Skinning" LogColor="Cornflowerblue" />
+	
+			<If Condition="((Me.GetSkill(Styx.SkillLine.Skinning).CurrentValue &gt;= 135) &amp;&amp; (Me.GetSkill(Styx.SkillLine.Skinning).CurrentValue &lt; 175))">
+				<CustomBehavior File="FlyTo" DestName="Farm Area" X="-11486.01" Y="314.8814" Z="43.28415" />
+				<CustomBehavior File="ForcedDismount" />
+			
+				<SetGrindArea>
+					<GrindArea> <!-- N. STV -->
+						<Factions>16 48 188</Factions> <!-- [Cat, Raptor, Monkey] -->
+						<TargetMinLevel>20</TargetMinLevel>
+						<TargetMaxLevel>30</TargetMaxLevel>	
+						<Hotspots>
+								<Hotspot X="-11486.01" Y="314.8814" Z="43.28415" /> <!-- Panthers in STV -->
+								<Hotspot X="-11546.42" Y="289.8967" Z="38.87825" />
+								<Hotspot X="-11588.51" Y="256.8199" Z="40.93376" />
+								<Hotspot X="-11640.83" Y="223.4522" Z="40.75352" />
+								<Hotspot X="-11672.26" Y="197.6156" Z="42.80061" />
+								<Hotspot X="-11707.43" Y="199.4595" Z="39.03061" />
+								<Hotspot X="-11696.64" Y="238.7745" Z="41.00598" />
+								<Hotspot X="-11652.8" Y="253.0481" Z="36.47485" />
+								<Hotspot X="-11620.65" Y="289.4843" Z="42.0281" />
+								<Hotspot X="-11651.83" Y="323.3864" Z="41.5052" />
+								<Hotspot X="-11613.18" Y="345.8741" Z="46.80145" />
+								<Hotspot X="-11586.46" Y="394.2265" Z="46.02891" />
+								<Hotspot X="-11559.79" Y="409.3743" Z="45.63778" />
+								<Hotspot X="-11570.96" Y="381.5569" Z="44.98768" />
+								<Hotspot X="-11578.6" Y="325.7874" Z="43.60071" />
+								<Hotspot X="-11538.01" Y="311.6955" Z="39.19328" />
+								<Hotspot X="-11542.57" Y="277.6321" Z="38.22281" /> <!--End of Panthers -->
+						</Hotspots>
+					</GrindArea>
+				</SetGrindArea>
+			<GrindTo Condition="Me.GetSkill(Styx.SkillLine.Skinning).CurrentValue == 175" />
+ 			</If>
+  
+				<CustomBehavior File="Message" Text="Compiling 175-225 Skinning" LogColor="Cornflowerblue" />
+	
+			<If Condition="((Me.GetSkill(Styx.SkillLine.Skinning).CurrentValue &gt;= 175) &amp;&amp; (Me.GetSkill(Styx.SkillLine.Skinning).CurrentValue &lt; 225))">
+				<CustomBehavior File="FlyTo" DestName="Farm Area" X="-13813.25" Y="93.49027" Z="26.99422" />
+				<CustomBehavior File="ForcedDismount" />
+			
+				<SetGrindArea>
+					<GrindArea> <!-- S. STV -->
+						<Factions>14 16 48 72</Factions> <!-- [Croc, Cat, Raptor, Gorilla] -->
+						<TargetMinLevel>25</TargetMinLevel>
+						<TargetMaxLevel>40</TargetMaxLevel>	
+						<Hotspots> 
+							<Hotspot X="-13813.25" Y="93.49027" Z="26.99422" />
+							<Hotspot X="-13854.97" Y="110.5135" Z="17.35789" />
+							<Hotspot X="-13878.33" Y="64.24706" Z="16.15997" />
+							<Hotspot X="-13916.53" Y="90.68429" Z="14.70266" />
+							<Hotspot X="-13958.54" Y="79.27751" Z="16.76558" />
+							<Hotspot X="-13958" Y="134.17" Z="13.38363" />
+							<Hotspot X="-13991.61" Y="161.5431" Z="13.21219" />
+							<Hotspot X="-14043.1" Y="133.2648" Z="11.27847" />
+							<Hotspot X="-14071.26" Y="174.502" Z="11.93576" />
+							<Hotspot X="-14065.82" Y="207.7571" Z="14.60054" />
+							<Hotspot X="-14018.11" Y="204.2136" Z="12.68127" />
+							<Hotspot X="-14000.44" Y="165.2755" Z="13.71375" />
+							<Hotspot X="-13942.46" Y="76.67322" Z="16.04244" />
+						</Hotspots>
+					</GrindArea>
+				</SetGrindArea>
+			<GrindTo Condition="Me.GetSkill(Styx.SkillLine.Skinning).CurrentValue == 225" />
+  			</If>
+  
+			<If Condition="(Me.GetSkill(Styx.SkillLine.Skinning).CurrentValue == 225) &amp;&amp; (Me.GetSkill(Styx.SkillLine.Skinning).MaxValue == 225)">
+				<CustomBehavior File="Message" Text="Training 225-300 Skinning" LogColor="Green" />
+	
+				<CustomBehavior File="FlyTo" DestName="Train Skinning in SW" X="-8722.247" Y="440.4887" Z="97.61475" />
+				<CustomBehavior File="ForcedDismount" />
+				<CustomBehavior File="InteractWith" MobId="1292" X="-8716.408" Y="469.4141" Z="98.61299" />
+
+				<CustomBehavior File="RunMacro" NumOfTimes="1" WaitTime="1000" 
+				Macro="/run LoadAddOn'Blizzard_TrainerUI' f=ClassTrainerTrainButton f.e = 0 if f:GetScript'OnUpdate' then f:SetScript('OnUpdate', nil)else f:SetScript('OnUpdate', function(f,e) f.e=f.e+e if f.e>.01 then f.e=0 f:Click() end end)end" />
+				<CustomBehavior File="RunMacro" NumOfTimes="1" WaitTime="1000" 
+				Macro="/run LoadAddOn'Blizzard_TrainerUI' f=ClassTrainerTrainButton f.e = 0 if f:GetScript'OnUpdate' then f:SetScript('OnUpdate', nil)else f:SetScript('OnUpdate', function(f,e) f.e=f.e+e if f.e>.01 then f.e=0 f:Click() end end)end" />
+
+
+				<CustomBehavior File="ForceSetVendor" DoSell="True" DoRepair="True" DoMail="True" />
+				
+				<RunTo X="-8722.247" Y="440.4887" Z="97.61475" />
+			</If>
+			
+				<CustomBehavior File="Message" Text="Compiling 225-255 Skinning" LogColor="Cornflowerblue" />
+				
+			<If Condition="((Me.GetSkill(Styx.SkillLine.Skinning).CurrentValue &gt;= 225) &amp;&amp; (Me.GetSkill(Styx.SkillLine.Skinning).CurrentValue &lt; 255))">
+				<CustomBehavior File="FlyTo" DestName="Farm Area" X="-7015.273" Y="-3605.118" Z="242.0636" />
+				<CustomBehavior File="ForcedDismount" />
+			
+				<SetGrindArea>
+					<GrindArea>
+					 <!-- Badlands -->
+						<Factions>38 16</Factions> <!-- Wolf, Cat -->
+						<TargetMinLevel>42</TargetMinLevel>
+						<TargetMaxLevel>52</TargetMaxLevel>	
+						<Hotspots> 
+							<Hotspot X="-7015.273" Y="-3605.118" Z="242.0636" />
+							<Hotspot X="-6873.819" Y="-3577.824" Z="243.2934" />
+							<Hotspot X="-6725.524" Y="-3561.088" Z="243.8807" />
+							<Hotspot X="-6502.863" Y="-3646.018" Z="244.1146" />
+							<Hotspot X="-6898.88" Y="-3374.939" Z="241.765" />
+							<Hotspot X="-6800.563" Y="-3342.77" Z="241.7203" />
+							<Hotspot X="-6582.287" Y="-3262.022" Z="241.9538" />
+							<Hotspot X="-6579.571" Y="-3203.49" Z="252.9633" />
+							<Hotspot X="-6550.688" Y="-3171.09" Z="255.1464" />
+							<Hotspot X="-6532.066" Y="-3255.526" Z="242.1929" />
+							<Hotspot X="-6698.496" Y="-3334.592" Z="241.3694" />
+							<Hotspot X="-6693.899" Y="-3595.03" Z="242.5235" />
+						</Hotspots>
+					</GrindArea>
+				</SetGrindArea>
+			<GrindTo Condition="Me.GetSkill(Styx.SkillLine.Skinning).CurrentValue == 255" />
+ 			</If>
+			
+				<CustomBehavior File="Message" Text="Compiling 255-300 Skinning" LogColor="Cornflowerblue" />
+	
+			<If Condition="((Me.GetSkill(Styx.SkillLine.Skinning).CurrentValue &gt;= 255) &amp;&amp; (Me.GetSkill(Styx.SkillLine.Skinning).CurrentValue &lt; 300))">
+				<CustomBehavior File="FlyTo" DestName="Farm Area" X="-7663.138" Y="-2729.281" Z="132.4882" />
+				<CustomBehavior File="ForcedDismount" />
+			
+				<SetGrindArea>
+					<GrindArea> <!-- E. Burning Steppes -->
+						<Factions>14 38 103</Factions> <!-- [Monster, Wolf, Dragonkin] -->
+						<TargetMinLevel>45</TargetMinLevel>
+						<TargetMaxLevel>60</TargetMaxLevel>	
+						<Hotspots> 
+							<Hotspot X="-7663.138" Y="-2729.281" Z="132.4882" />
+							<Hotspot X="-7547.003" Y="-2700.758" Z="135.9881" />
+							<Hotspot X="-7599.268" Y="-2862.372" Z="134.9981" />
+							<Hotspot X="-7657.523" Y="-2730.121" Z="132.0422" />
+							<Hotspot X="-7677.908" Y="-2887.794" Z="132.6012" />
+							<Hotspot X="-7778.78" Y="-2932.106" Z="131.7788" />
+							<Hotspot X="-7845.278" Y="-2899.811" Z="133.0586" />
+							<Hotspot X="-7828.276" Y="-2831.458" Z="133.4498" />
+							<Hotspot X="-7979.682" Y="-2910.747" Z="135.0967" />
+							<Hotspot X="-8065.582" Y="-2892.002" Z="135.7988" />
+							<Hotspot X="-8143.668" Y="-2934.201" Z="133.3689" />
+							<Hotspot X="-8202.089" Y="-2818.773" Z="137.4894" />
+							<Hotspot X="-8100.957" Y="-2761.546" Z="133.6333" />
+							<Hotspot X="-7982.959" Y="-2820.426" Z="138.9763" />
+						</Hotspots>
+					</GrindArea>
+				</SetGrindArea>
+			<GrindTo Condition="Me.GetSkill(Styx.SkillLine.Skinning).CurrentValue == 300" />
+ 			</If>
+
+			<If Condition="(Me.GetSkill(Styx.SkillLine.Skinning).CurrentValue == 300) &amp;&amp; (Me.GetSkill(Styx.SkillLine.Skinning).MaxValue == 300)">
+				<CustomBehavior File="Message" Text="Training 300-375 Skinning" LogColor="Green" />
+	
+				<CustomBehavior File="FlyTo" DestName="Train Skinning in SW" X="-8722.247" Y="440.4887" Z="97.61475" />
+				<CustomBehavior File="ForcedDismount" />
+				<CustomBehavior File="InteractWith" MobId="1292" X="-8716.408" Y="469.4141" Z="98.61299" />
+
+				<CustomBehavior File="RunMacro" NumOfTimes="1" WaitTime="1000" 
+				Macro="/run LoadAddOn'Blizzard_TrainerUI' f=ClassTrainerTrainButton f.e = 0 if f:GetScript'OnUpdate' then f:SetScript('OnUpdate', nil)else f:SetScript('OnUpdate', function(f,e) f.e=f.e+e if f.e>.01 then f.e=0 f:Click() end end)end" />
+				<CustomBehavior File="RunMacro" NumOfTimes="1" WaitTime="1000" 
+				Macro="/run LoadAddOn'Blizzard_TrainerUI' f=ClassTrainerTrainButton f.e = 0 if f:GetScript'OnUpdate' then f:SetScript('OnUpdate', nil)else f:SetScript('OnUpdate', function(f,e) f.e=f.e+e if f.e>.01 then f.e=0 f:Click() end end)end" />
+
+
+				<CustomBehavior File="ForceSetVendor" DoSell="True" DoRepair="True" DoMail="True" />
+				
+				<RunTo X="-8722.247" Y="440.4887" Z="97.61475" />
+			</If>
+			
+			<If Condition="(Me.GetSkill(Styx.SkillLine.Skinning).CurrentValue == 300)">
+				<!-- Through the BC portal we go! -->
+				<CustomBehavior File="FlyTo" DestName="BC Portal" X="-11903.13" Y="-3208.053" Z="-14.81489" />
+				<CustomBehavior File="ForcedDismount" />
+				
+				<RunTo X="-11903.13" Y="-3208.053" Z="-14.81489" />
+			  <While Condition="Me.MapId == 0" >
+				<CustomBehavior File="MyCTM" X="-11907.85" Y="-3208.708" Z="-14.83699" />
+				<CustomBehavior File="WaitTimer" WaitTime="20000"/>
+			  </While>
+			</If>
+			
+			<ClearVendor />
+			<ClearMailbox />
+		</If>
+		<!-- End of EK 1-300 -->
+		
+		<!-- BC 300-375 Skinning -->
+		<CustomBehavior File="Message" Text="Compiling BC 300-375 Skinning" LogColor="Green" />
+	
+	<If Condition="(Me.MapId == 530) &amp;&amp; (Me.GetSkill(Styx.SkillLine.Skinning).CurrentValue &gt;= 300)">
+		
+		<SetMailbox>
+			<Mailboxes>
+				<Mailbox X="-2670.931" Y="7288.093" Z="36.30991" /> <!-- Nagrand -->
+				<Mailbox X="-4055.459" Y="2179.535" Z="110.2131" /> <!-- SMV -->
+				<Mailbox X="-706.6517" Y="2699.225" Z="94.43571" />
+				<Mailbox X="-197.3626" Y="5505.807" Z="22.53568" />
+				<Mailbox X="-2930.488" Y="4008.443" Z="-1.354151" />
+				<Mailbox X="-1774.782" Y="5174.06" Z="-40.2085" />
+				<Mailbox X="194.057" Y="4326.619" Z="116.6893" />
+				<Mailbox X="1028.854" Y="7361.791" Z="36.41585" />
+				<Mailbox X="-2929.666" Y="4006.84" Z="-1.355859" />
+				<Mailbox X="-2672.021" Y="7286.359" Z="36.3546" />
+				<Mailbox X="3017.663" Y="5450.682" Z="146.3757" />
+				<Mailbox X="1936.454" Y="5546.771" Z="266.3495" />
+				<Mailbox X="2081.724" Y="6879.212" Z="179.9368" />
+				<Mailbox X="3054.786" Y="3687.302" Z="142.5997" />
+			</Mailboxes>
+		</SetMailbox>
+		 
+		<SetVendor>
+			<Vendors>
+				<Vendor Name="Caregiver Isel" Entry="18914" Type="Food" X="-2761.415" Y="7300.421" Z="43.4711" />
+				<Vendor Name="Sparik" Entry="19012" Type="Repair" X="-2541.9" Y="7364.772" Z="6.949437" />
+				<Vendor Name="Mari Stonehand" Entry="19373" Type="Repair" X="-3966.329" Y="2201.351" Z="101.8696" />
+				<Vendor Name="Kerpow Blastwrench" Entry="22491" Type="Repair" X="2955.032" Y="1802.131" Z="139.1211" />
+				<Vendor Name="Wind Trader Tuluman" Entry="20112" Type="Repair" X="4045.836" Y="3553.271" Z="121.3136" />
+				<Vendor Name="Apprentice Andrethan" Entry="20463" Type="Repair" X="2290.125" Y="2266.04" Z="93.63638" />
+				<Vendor Name="Siflaed Coldhammer" Entry="20890" Type="Repair" X="-2844.427" Y="5050.748" Z="-18.12777" />
+				<Vendor Name="Sid Limbardi" Entry="16826" Type="Food" X="-708.8713" Y="2739.131" Z="94.7337" />
+				<Vendor Name="Caregiver Ophera Windfury" Entry="18906" Type="Food" X="229.118" Y="4333.729" Z="119.0834" />
+				<Vendor Name="Provisioner Anir" Entry="16798" Type="Food" X="95.04395" Y="4292.254" Z="101.8884" />
+				<Vendor Name="Talaara" Entry="19001" Type="Repair" X="105.5018" Y="4337.619" Z="101.466" />
+				<Vendor Name="Fedryen Swiftspear" Entry="17904" Type="Repair" X="-198.9696" Y="5490.686" Z="21.84628"/>
+				<Vendor Name="Innkeeper Coryth Stoktron" Entry="18907" Type="Food" X="-174.478" Y="5529.211" Z="29.40756" />
+				<Vendor Name="Innkeeper Kerp" Entry="18908" Type="Food" X="1056.379" Y="7370.99" Z="39.58458" />
+				<Vendor Name="Innkeeper Biribi" Entry="19296" Type="Food" X="-2917.881" Y="4021.484" Z="0.4283262" />
+				<Vendor Name="Cecil Meyers" Entry="19056" Type="Repair" X="-2978.951" Y="4033.115" Z="3.573919" />
+				<Vendor Name="Aaron Hollman" Entry="19662" Type="Repair" X="-2099.772" Y="5298.396" Z="-37.32356" />
+				<Vendor Name="Shaarubo" Entry="19182" Type="Food" X="-1769.024" Y="5152.543" Z="-37.20408" />
+				<Vendor Name="Xerintha Ravenoak" Entry="20916" Type="Food" X="2949.437" Y="5456.5" Z="146.2315" />
+				<Vendor Name="Zinyen Swiftstrider" Entry="20917" Type="Repair" X="3023.432" Y="5504.725" Z="145.7471" />
+				<Vendor Name="Fizit &quot;Doc&quot; Clocktock" Entry="21110" Type="Food" X="1944.855" Y="5537.872" Z="266.651" />
+				<Vendor Name="Bossi Pentapiston" Entry="21112" Type="Repair" X="1910.417" Y="5548.362" Z="263.9332" />
+				<Vendor Name="Innkeeper Shaunessy" Entry="19495" Type="Food" X="2098.176" Y="6903.917" Z="183.2305" />
+				<Vendor Name="Cahill" Entry="19499" Type="Repair" X="2100.732" Y="6797.837" Z="175.6132" />
+				<Vendor Name="Gant" Entry="19572" Type="Food" X="3073.644" Y="3656.375" Z="143.0913" />
+				<Vendor Name="Blazzle" Entry="28344" Type="Repair" X="3063.406" Y="3677.57" Z="142.6772" />
+			</Vendors>
+		</SetVendor>
+		
+				<CustomBehavior File="Message" Text="Compiling BC 300-325 Skinning" LogColor="Cornflowerblue" />
+				
+			<If Condition="((Me.GetSkill(Styx.SkillLine.Skinning).CurrentValue &lt; 290)">
+				<CustomBehavior File="UserDialog" StopOnContinue="True" SoundCue="Exclamation" SoundCueInterval="1" Text="This Profile starts in Eastern Kingdoms - Please go there and press start\n\n1-300 is EK, 300-375 is BC, 375-450 is LK, 450-525 is Kalimdor (Hyjal until 500, then Uldum)" />
+				<CustomBehavior File="UserDialog" StopOnContinue="True" SoundCue="Exclamation" SoundCueInterval="2" Text="HEY! YOU NO PRESSY DA BUTTON!!!!111!11ONEONEONEONE11!11!!1" />
+				<CustomBehavior File="UserSettings" StopBot="True" />
+			</If>
+	
+			<If Condition="((Me.GetSkill(Styx.SkillLine.Skinning).CurrentValue &gt;= 290) &amp;&amp; (Me.GetSkill(Styx.SkillLine.Skinning).CurrentValue &lt; 325))">
+				<CustomBehavior File="FlyTo" DestName="Farm Area" X="-487.7064" Y="2609.858" Z="66.65978" />
+				<CustomBehavior File="ForcedDismount" />
+			
+				<SetGrindArea>
+					<GrindArea> <!-- Honor Hold -->
+						<Factions>954</Factions> <!-- [Pig (Demon)] -->
+						<TargetMinLevel>56</TargetMinLevel> 
+						<TargetMaxLevel>64</TargetMaxLevel>
+						<Hotspots>
+							<Hotspot X="-487.7064" Y="2609.858" Z="66.65978" />
+							<Hotspot X="-458.5109" Y="2551.861" Z="54.67494" />
+							<Hotspot X="-463.2208" Y="2478.906" Z="43.16395" />
+							<Hotspot X="-447.5613" Y="2420.833" Z="38.47363" />
+							<Hotspot X="-445.7334" Y="2378.024" Z="39.03765" />
+							<Hotspot X="-383.0123" Y="2443.212" Z="40.61808" />
+							<Hotspot X="-411.2234" Y="2544.293" Z="49.32917" />
+							<Hotspot X="-419.1731" Y="2635.358" Z="53.98248" />
+							<Hotspot X="-453.7545" Y="2707.784" Z="54.87354" />
+							<Hotspot X="-479.0135" Y="2750.133" Z="54.56009" />
+							<Hotspot X="-494.6826" Y="2816.173" Z="48.04903" />
+							<Hotspot X="-541.5155" Y="2761.508" Z="67.97762" />
+							<Hotspot X="-470.1254" Y="2621.745" Z="64.31351" />
+							<Hotspot X="-485.2344" Y="2542.975" Z="55.88961" />
+						</Hotspots>
+					</GrindArea>
+				</SetGrindArea>
+			<GrindTo Condition="Me.GetSkill(Styx.SkillLine.Skinning).CurrentValue == 325" />
+			</If>
+			
+				<CustomBehavior File="Message" Text="Compiling BC 325-350 Skinning" LogColor="Cornflowerblue" />
+	
+			<If Condition="((Me.GetSkill(Styx.SkillLine.Skinning).CurrentValue &gt;= 325) &amp;&amp; (Me.GetSkill(Styx.SkillLine.Skinning).CurrentValue &lt; 350))">
+				<CustomBehavior File="FlyTo" DestName="Farm Area" X="-1853.129" Y="3766.222" Z="14.80976" />
+				<CustomBehavior File="ForcedDismount" />
+			
+				<SetGrindArea>
+					<GrindArea> <!-- Terrokar Forest -->
+						<Factions>14 49 38</Factions> <!-- [Razorfang, Warp Stalker, Basilisk, Wolf] -->
+						<TargetMinLevel>60</TargetMinLevel> 
+						<TargetMaxLevel>70</TargetMaxLevel>
+						<Hotspots>
+							<Hotspot X="-1853.129" Y="3766.222" Z="14.80976" />
+							<Hotspot X="-1987.964" Y="3764.618" Z="-8.758578" />
+							<Hotspot X="-1998.677" Y="3692.41" Z="-54.44464" />
+							<Hotspot X="-2094.156" Y="3638.407" Z="-56.62184" />
+							<Hotspot X="-2107.442" Y="3729.153" Z="-27.86611" />
+							<Hotspot X="-2025.119" Y="3825.38" Z="0.7168409" />
+							<Hotspot X="-2133.434" Y="3860.015" Z="2.670524" />
+							<Hotspot X="-2194.651" Y="3835.576" Z="4.435771" />
+							<Hotspot X="-2217.259" Y="3768.801" Z="-16.33922" />
+							<Hotspot X="-2263.358" Y="3704.068" Z="-9.689729" />
+							<Hotspot X="-2127.869" Y="3647.978" Z="-50.2472" />
+							<Hotspot X="-2084.62" Y="3709.052" Z="-38.12491" />
+							<Hotspot X="-2207.24" Y="3569.273" Z="-30.54208" />
+							<Hotspot X="-2320.846" Y="3541.388" Z="-8.326702" />
+							<Hotspot X="-2242.706" Y="3443.983" Z="-21.56718" />
+							<Hotspot X="-2137.861" Y="3419.789" Z="-43.08821" />
+							<Hotspot X="-2145.1" Y="3354.26" Z="-42.03778" />
+							<Hotspot X="-2249.891" Y="3393.045" Z="-22.77084" />
+							<Hotspot X="-2195.261" Y="3270.536" Z="-24.20861" />
+							<Hotspot X="-2330.099" Y="3533.887" Z="-7.898357" />
+							<Hotspot X="-2270.267" Y="3642.525" Z="-9.668228" />
+							<Hotspot X="-2182.281" Y="3680.801" Z="-27.90749" />
+							<Hotspot X="-2113.36" Y="3658.35" Z="-50.70345" />
+						</Hotspots>
+					</GrindArea>
+				</SetGrindArea>
+			<GrindTo Condition="Me.GetSkill(Styx.SkillLine.Skinning).CurrentValue == 350" />
+			</If>
+			
+				<CustomBehavior File="Message" Text="Compiling BC 350-375 Skinning" LogColor="Cornflowerblue" />
+	
+			<If Condition="((Me.GetSkill(Styx.SkillLine.Skinning).CurrentValue &gt;= 350) &amp;&amp; (Me.GetSkill(Styx.SkillLine.Skinning).CurrentValue &lt; 375))">
+				<CustomBehavior File="FlyTo" DestName="Farm Area" X="-1886.11" Y="6594.746" Z="4.927755" />
+				<CustomBehavior File="ForcedDismount" />
+			
+				<SetGrindArea>
+					<GrindArea> <!-- Nagrand -->
+						<Factions>7 14 31</Factions> <!-- [Skinning] -->
+						<TargetMinLevel>60</TargetMinLevel> 
+						<TargetMaxLevel>71</TargetMaxLevel>
+						<Hotspots>
+							<Hotspot X="-1886.11" Y="6594.746" Z="4.927755" />
+							<Hotspot X="-1767.289" Y="6678.652" Z="-23.91578" />
+							<Hotspot X="-1695.836" Y="6731.453" Z="-11.10211" />
+							<Hotspot X="-1542.582" Y="6763.841" Z="14.40806" />
+							<Hotspot X="-1604.736" Y="6826.567" Z="-3.037169" />
+							<Hotspot X="-1676.391" Y="6916.56" Z="-21.1349" />
+							<Hotspot X="-1601.846" Y="6909.573" Z="-13.04463" />
+							<Hotspot X="-1578.642" Y="6858.929" Z="-9.571345" />
+							<Hotspot X="-1552.2" Y="6929.157" Z="-10.94931" />
+							<Hotspot X="-1459.41" Y="6880.851" Z="4.371543" />
+							<Hotspot X="-1463.996" Y="6979.167" Z="7.011062" />
+							<Hotspot X="-1501.737" Y="7060.396" Z="10.16809" />
+							<Hotspot X="-1598.148" Y="7065.057" Z="4.706275" />
+							<Hotspot X="-1636.255" Y="7112.411" Z="5.066166" />
+							<Hotspot X="-1595.867" Y="7192.375" Z="5.617188" />
+							<Hotspot X="-1697.922" Y="7208.78" Z="3.350479" />
+							<Hotspot X="-1740.054" Y="7332.917" Z="-3.176657" />
+							<Hotspot X="-1714.405" Y="7419.355" Z="-8.622484" />
+							<Hotspot X="-1641.669" Y="7426.942" Z="-4.68861" />
+							<Hotspot X="-1628.724" Y="7483.242" Z="-6.139967" />
+							<Hotspot X="-1746.467" Y="7493.624" Z="-7.672245" />
+							<Hotspot X="-1624.6" Y="7584.739" Z="-10.5864" />
+							<Hotspot X="-1538.859" Y="7534.278" Z="-4.479387" />
+							<Hotspot X="-1417.996" Y="7499.776" Z="4.022493" />
+							<Hotspot X="-1299.571" Y="7521.741" Z="14.07882" />
+							<Hotspot X="-1397.72" Y="7662.457" Z="-4.704846" />
+							<Hotspot X="-1599.127" Y="7633.911" Z="-11.44528" />	
+						</Hotspots>
+					</GrindArea>
+				</SetGrindArea>
+			<GrindTo Condition="Me.GetSkill(Styx.SkillLine.Skinning).CurrentValue == 375" />
+			</If>
+
+			<!-- Train Skinning at 375
+			<If Condition="Me.GetSkill(Styx.SkillLine.Skinning).CurrentValue = 375">
+				// Go to Trainer in Hellfire:
+				
+					<Vendor Name="Jelena Nightsky" Entry="18777" Type="Train" TrainProfession X="-693.8346" Y="2724.696" Z="94.11061" />
+				<RunTo X="-693.8346" Y="2724.696" Z="94.11061" />
+			</If>
+			-->
+			
+			<If Condition="Me.MapId == 530" >
+				<CustomBehavior File="FlyTo" X="-248.064" Y="930.2079" Z="84.37978" DestName="BC Portal" />
+				<CustomBehavior File="ForcedDismount" />
+				<CustomBehavior File="MyCTM" X="-247.046" Y="895.8558" Z="84.37974" />
+				<CustomBehavior File="WaitTimer" WaitTime="3000"/>
+			  <While Condition="Me.MapId == 530" >
+				<CustomBehavior File="MyCTM" X="-247.046" Y="895.8558" Z="84.37974" />
+				<CustomBehavior File="WaitTimer" WaitTime="3000"/>
+			  </While>
+				<CustomBehavior File="WaitTimer" WaitTime="15000"/>
+			</If>
+			
+			<ClearVendor />
+			<ClearMailbox />
+	</If>
+			<!-- End of BC 300-375 Skinning -->
+			
+			<If Condition="(Me.GetSkill(Styx.SkillLine.Skinning).CurrentValue == 375) &amp;&amp; (Me.GetSkill(Styx.SkillLine.Skinning).MaxValue == 375)">
+				<CustomBehavior File="Message" Text="Training 375-450 Skinning" LogColor="Green" />
+	
+				<CustomBehavior File="FlyTo" DestName="Train Skinning in SW" X="-8722.247" Y="440.4887" Z="97.61475" />
+				<CustomBehavior File="ForcedDismount" />
+				<CustomBehavior File="InteractWith" MobId="1292" X="-8716.408" Y="469.4141" Z="98.61299" />
+
+				<CustomBehavior File="RunMacro" NumOfTimes="1" WaitTime="1000" 
+				Macro="/run LoadAddOn'Blizzard_TrainerUI' f=ClassTrainerTrainButton f.e = 0 if f:GetScript'OnUpdate' then f:SetScript('OnUpdate', nil)else f:SetScript('OnUpdate', function(f,e) f.e=f.e+e if f.e>.01 then f.e=0 f:Click() end end)end" />
+				<CustomBehavior File="RunMacro" NumOfTimes="1" WaitTime="1000" 
+				Macro="/run LoadAddOn'Blizzard_TrainerUI' f=ClassTrainerTrainButton f.e = 0 if f:GetScript'OnUpdate' then f:SetScript('OnUpdate', nil)else f:SetScript('OnUpdate', function(f,e) f.e=f.e+e if f.e>.01 then f.e=0 f:Click() end end)end" />
+
+
+				<CustomBehavior File="ForceSetVendor" DoSell="True" DoRepair="True" DoMail="True" />
+				
+				<RunTo X="-8722.247" Y="440.4887" Z="97.61475" />
+			</If>
+			
+			<!-- Going to LK -->
+			<If Condition="(Me.GetSkill(Styx.SkillLine.Skinning).CurrentValue == 375)">
+			<If Condition="Me.MapId == 0" >
+			<CustomBehavior File="Message" Text="Compiling 'Go To LK' Functions" LogColor="Cornflowerblue" />
+
+				<CustomBehavior File="FlyTo" DestName="Train Skinning in SW" X="-8300.08" Y="1405.158" Z="4.422395" />
+				<CustomBehavior File="ForcedDismount" />
+				
+				<!-- SW dock to Valiance Keep -->
+				<CustomBehavior File="UseTransport" TransportId="190536" 
+								WaitAtX="-8300.08" WaitAtY="1405.158" WaitAtZ="4.422395"
+								GetOffX="2234.375" GetOffY="5132.568" GetOffZ="5.343217"
+								TransportStartX="-8288.816" TransportStartY="1424.703" TransportStartZ="0.04" 
+								TransportEndX="2218.391" TransportEndY="5119.589" TransportEndZ="0.04" />	
+				<CustomBehavior File="WaitTimer" WaitTime="5000" />
+			</If>
+			</If>
+			
+		<!-- LK 350-450 Skinning -->
+		<CustomBehavior File="Message" Text="Compiling LK 350-450 Skinning" LogColor="Green" />
+	
+		<If Condition="(Me.MapId == 571) &amp;&amp; (Me.GetSkill(Styx.SkillLine.Skinning).CurrentValue &gt;= 350)">
+		
+		<SetVendor>
+	<Vendors>
+		<Vendor Name="Arlen Brighthammer" Entry="28796" Type="Repair" X="5410.7" Y="-2658.249" Z="303.9552" />
+		<Vendor Name="Archmage Berinand" Entry="25314" Type="Repair" X="3575.609" Y="6671.719" Z="195.1089" />
+		<Vendor Name="Lanudal Silverhart" Entry="30241" Type="Repair" X="5056.556" Y="-591.7134" Z="219.9718" />
+		<Vendor Name="Tonraq" Entry="27188" Type="Repair" X="2891.413" Y="4079.36" Z="2.214931" /> <!-- Unu'pe -->
+		<Vendor Name="Xark Bolthammer" Entry="29907" Type="Repair" X="6097.559" Y="-1071.257" Z="404.4124" />
+		<Vendor Name="Master Smith Devin Brevig" Entry="27045" Type="Repair" X="3677.906" Y="-737.243" Z="213.6113" />
+		<Vendor Name="Mardan Thunderhoof" Entry="28040" Type="Repair" X="5552.257" Y="5738.877" Z="-76.21725" />
+		<Vendor Name="Brom Armstrong" Entry="27062" Type="Repair" X="3421.368" Y="-2757.578" Z="199.3005" />
+		<Vendor Name="Quartermaster McCarty" Entry="26375" Type="Food" X="4596.138" Y="-4237.277" Z="178.6546" />
+		<Vendor Name="Tiernan Anvilheart" Entry="26229" Type="Repair" X="4542.522" Y="-4249.319" Z="170.4924" />
+		<Vendor Name="Willis Wobblewheel" Entry="26599" Type="Repair" X="4135.004" Y="5281.168" Z="25.08813" />
+		<Vendor Name="Broff Bombast" Entry="27011" Type="Repair" X="2359.466" Y="5237.433" Z="7.713012" />
+		<Vendor Name="Mardan Thunderhoof" Entry="28040" Type="Repair" X="5552.257" Y="5738.877" Z="-76.21725" />
+		<Vendor Name="Sentinel Amberline" Entry="27055" Type="Repair" X="3514.701" Y="1999.156" Z="64.88658" />
+		<Vendor Name="Deniigi" Entry="27151" Type="Repair" X="801.2076" Y="-2948.573" Z="6.660284" />
+		<Vendor Name="Everett McGill" Entry="26934" Type="Repair" X="488.725" Y="-5932.577" Z="308.7209" />
+		<Vendor Name="Eldrim Mounder" Entry="24052" Type="Repair" X="2428.321" Y="-5086.521" Z="273.2868" />
+		<Vendor Name="Bartleby Armorfist" Entry="23735" Type="Repair" X="543.8926" Y="-4995.161" Z="10.56989" />
+		<Vendor Name="Kuk'uq" Entry="27185" Type="Repair" X="2754.21" Y="858.1937" Z="6.692381" />
+		<Vendor Name="Brollen Wheatbeard" Entry="33599" Type="Repair" X="8548.112" Y="933.3629" Z="547.2929" />
+	</Vendors>
+		</SetVendor>
+
+		<SetMailbox>
+	<Mailboxes>
+		<Mailbox X="5417.483" Y="-2622.84" Z="307.0455" /> <!-- Argent Stand -->
+		<Mailbox X="3476.894" Y="2003.463" Z="64.87822" /> <!-- Star's Rest -->
+		<Mailbox X="8591.42" Y="693.5306" Z="547.293" />
+		<Mailbox X="3401.819" Y="-2810.98" Z="200.4462" />
+		<Mailbox X="568.1748" Y="-4936.134" Z="18.03235" />
+		<Mailbox X="5566.33" Y="5758.396" Z="-75.22648" />
+	</Mailboxes>
+		</SetMailbox>
+		
+				<CustomBehavior File="Message" Text="Compiling LK 350-395 Skinning" LogColor="Cornflowerblue" />
+	
+			<If Condition="((Me.GetSkill(Styx.SkillLine.Skinning).CurrentValue &gt;= 340) &amp;&amp; (Me.GetSkill(Styx.SkillLine.Skinning).CurrentValue &lt; 395))">
+				<CustomBehavior File="FlyTo" DestName="Farm Area" X="2075.155" Y="5723.73" Z="48.65613" />
+				<CustomBehavior File="ForcedDismount" />
+			
+				<SetGrindArea>
+					<GrindArea> <!-- Borean Tundra -->
+						<TargetMinLevel>65</TargetMinLevel>
+						<TargetMaxLevel>80</TargetMaxLevel>
+						<Factions>15 1917</Factions> <!-- [Rhino, Bull] -->
+						<Hotspots> <!-- W. of Valiance Keep -->
+							<Hotspot X="2075.155" Y="5723.73" Z="48.65613" />
+							<Hotspot X="2180.611" Y="5764.582" Z="61.261" />
+							<Hotspot X="2075.894" Y="5808.236" Z="48.79553" />
+							<Hotspot X="2068.396" Y="5874.112" Z="45.4852" />
+							<Hotspot X="2060.379" Y="5953.927" Z="49.42285" />
+							<Hotspot X="2070.55" Y="6022.07" Z="48.28746" />
+							<Hotspot X="2032.624" Y="6050.289" Z="43.07656" />
+							<Hotspot X="2046.521" Y="6093.422" Z="45.60856" />
+							<Hotspot X="2007.963" Y="6118.2" Z="34.18064" />
+							<Hotspot X="2051.14" Y="6154.081" Z="43.80728" />
+							<Hotspot X="2085.876" Y="6113.478" Z="48.41899" />
+							<Hotspot X="2101.875" Y="6211.557" Z="48.6278" />
+							<Hotspot X="2159.26" Y="6215.292" Z="55.17671" />
+							<Hotspot X="2251.006" Y="6212.573" Z="55.72226" />
+							<Hotspot X="2234.303" Y="6281.225" Z="46.0552" />
+							<Hotspot X="2172.081" Y="6307.432" Z="53.97276" />
+							<Hotspot X="2229.961" Y="6367.171" Z="47.51458" />
+							<Hotspot X="2290.006" Y="6287.318" Z="52.19799" />
+							<Hotspot X="2186.58" Y="6304.22" Z="51.8308" />
+							<Hotspot X="2146.349" Y="6221.578" Z="53.31647" />
+							<Hotspot X="2090.331" Y="6159.848" Z="47.59668" />
+							<Hotspot X="2074.074" Y="6098.989" Z="47.85278" />
+							<Hotspot X="2056.01" Y="5988.378" Z="48.39315" />
+							<Hotspot X="2126.187" Y="5879.252" Z="53.85866" />
+							<Hotspot X="2092.916" Y="5773.563" Z="54.09874" />   
+						</Hotspots>
+					</GrindArea>
+				</SetGrindArea>
+			<GrindTo Condition="Me.GetSkill(Styx.SkillLine.Skinning).CurrentValue == 395" />
+			</If>
+			
+				<CustomBehavior File="Message" Text="Compiling LK 395-450 Skinning" LogColor="Cornflowerblue" />
+	
+			<If Condition="((Me.GetSkill(Styx.SkillLine.Skinning).CurrentValue &gt;= 395) &amp;&amp; (Me.GetSkill(Styx.SkillLine.Skinning).CurrentValue &lt; 450))">
+				<CustomBehavior File="FlyTo" DestName="Farm Area" X="5352.07" Y="5574.687" Z="-91.27075" />
+				<CustomBehavior File="ForcedDismount" />
+			
+				<SetGrindArea>
+					<GrindArea> <!-- Sholazar Basin -->
+						<TargetMinLevel>70</TargetMinLevel>
+						<TargetMaxLevel>80</TargetMaxLevel>
+						<Factions>15 1917 14 1999 2030</Factions> <!-- [Rhino, Croc, Snake, Giraffe, Cat] -->
+						<Hotspots>
+							<Hotspot X="5352.07" Y="5574.687" Z="-91.27075" />
+							<Hotspot X="5302.167" Y="5616.734" Z="-92.54089" />
+							<Hotspot X="5306.405" Y="5682.392" Z="-89.59415" />
+							<Hotspot X="5296.685" Y="5769.406" Z="-79.27522" />
+							<Hotspot X="5233.706" Y="5814.805" Z="-74.51286" />
+							<Hotspot X="5193.609" Y="5872.866" Z="-70.7523" />
+							<Hotspot X="5229.051" Y="5921.676" Z="-62.64098" />
+							<Hotspot X="5231.093" Y="5980.372" Z="-43.7092" />
+							<Hotspot X="5275.06" Y="5971.328" Z="-45.55296" />
+							<Hotspot X="5335.264" Y="5979.924" Z="-40.0816" />
+							<Hotspot X="5394.316" Y="5976.972" Z="-42.72119" />
+							<Hotspot X="5460.841" Y="5968.263" Z="-40.63033" />
+							<Hotspot X="5481.662" Y="5894.434" Z="-56.58644" />
+							<Hotspot X="5447.189" Y="5771.521" Z="-76.32093" />
+							<Hotspot X="5402.97" Y="5678" Z="-85.70569" />
+							<Hotspot X="5350.77" Y="5571.562" Z="-90.86132" />
+							<Hotspot X="5415.706" Y="5534.403" Z="-99.57941" />
+							<Hotspot X="5472.516" Y="5516.202" Z="-99.5425" />
+							<Hotspot X="5530.124" Y="5525.742" Z="-100.6296" />
+							<Hotspot X="5547.659" Y="5482.376" Z="-99.04948" />
+							<Hotspot X="5617.269" Y="5528.771" Z="-87.61431" />
+							<Hotspot X="5669.545" Y="5363.432" Z="-97.80017" />
+							<Hotspot X="5645.49" Y="5278.974" Z="-130.4818" />
+							<Hotspot X="5700.181" Y="5231.074" Z="-132.763" />
+							<Hotspot X="5742.889" Y="5195.069" Z="-132.6584" />
+							<Hotspot X="5838.138" Y="5185.11" Z="-114.1876" />
+							<Hotspot X="5902.864" Y="5200.229" Z="-101.9755" />
+							<Hotspot X="5892.915" Y="5131.26" Z="-108.1053" />
+							<Hotspot X="5861.771" Y="5058.898" Z="-128.3176" />
+							<Hotspot X="5773.376" Y="5056.947" Z="-135.8057" />
+							<Hotspot X="5721.584" Y="5031.304" Z="-133.9725" />
+							<Hotspot X="5672.262" Y="5004.075" Z="-134.9045" />
+							<Hotspot X="5636.106" Y="4958.515" Z="-134.2547" />
+							<Hotspot X="5756.711" Y="4911.549" Z="-132.7338" />
+							<Hotspot X="5766.906" Y="4838.47" Z="-133.4418" />
+							<Hotspot X="5826.711" Y="4764.17" Z="-132.565" />
+							<Hotspot X="5873.932" Y="4662.995" Z="-132.9918" />
+							<Hotspot X="5871.057" Y="4598.926" Z="-136.506" />
+							<Hotspot X="5756.27" Y="4615.857" Z="-134.1544" />
+							<Hotspot X="5729.213" Y="4724.967" Z="-135.0415" />
+							<Hotspot X="5684.926" Y="4846.579" Z="-136.3346" />
+							<Hotspot X="5617.613" Y="4858.64" Z="-136.5539" />
+							<Hotspot X="5559.41" Y="5025.689" Z="-134.6197" />
+							<Hotspot X="5458.857" Y="5009.203" Z="-130.6161" />
+							<Hotspot X="5337.802" Y="5019.649" Z="-135.9482" />
+							<Hotspot X="5206.935" Y="4980.843" Z="-133.5428" />
+							<Hotspot X="5139.125" Y="5075.871" Z="-131.8456" />
+							<Hotspot X="5236.379" Y="5129.723" Z="-135.2015" />
+							<Hotspot X="5315.612" Y="5167.044" Z="-134.4891" />
+							<Hotspot X="5334.14" Y="5279.299" Z="-135.7003" />
+							<Hotspot X="5390.019" Y="5317.742" Z="-131.1081" />
+							<Hotspot X="5278.722" Y="5399.57" Z="-103.287" />
+							<Hotspot X="5318.436" Y="5469.979" Z="-100.063" />
+						</Hotspots>
+					</GrindArea>
+				</SetGrindArea>
+			<GrindTo Condition="Me.GetSkill(Styx.SkillLine.Skinning).CurrentValue == 450" />
+			</If>
+
+			<!-- Train Skinning at 450
+			<If Condition="Me.GetSkill(Styx.SkillLine.Skinning).CurrentValue = 450">
+				// Go to Trainer in Borean:
+					<Vendor Name="Trapper Jack" Entry="27000" Type="Repair" X="2136.098" Y="5255.882" Z="19.44923" />
+
+				<RunTo X="2136.098" Y="5255.882" Z="19.44923" />
+			</If>
+			-->
+		<If Condition="Me.MapId == 571" >
+			<CustomBehavior File="FlyTo" X="2231.537" Y="5135.816" Z="5.345537" />
+			<CustomBehavior File="ForcedDismount" />
+			<!-- Valiance Keep to SW dock -->
+			<CustomBehavior File="UseTransport"
+							Entry="2234.375, 5132.568, 5.343217"
+							Exit="-8300.08, 1405.158, 4.422395"
+							Start="2218.391, 5119.589, 0.04" 
+							End="-8288.816, 1424.703, 0.04" 
+							TransportId="190536" />
+		</If>
+			
+			<ClearVendor />
+			<ClearMailbox />
+		</If>
+			
+			<If Condition="(Me.GetSkill(Styx.SkillLine.Skinning).CurrentValue == 450) &amp;&amp; (Me.GetSkill(Styx.SkillLine.Skinning).MaxValue == 450)">
+				<CustomBehavior File="Message" Text="Training 450-525 Skinning" LogColor="Green" />
+	
+				<CustomBehavior File="FlyTo" DestName="Train Skinning in SW" X="-8722.247" Y="440.4887" Z="97.61475" />
+				<CustomBehavior File="ForcedDismount" />
+				<CustomBehavior File="InteractWith" MobId="1292" X="-8716.408" Y="469.4141" Z="98.61299" />
+
+				<CustomBehavior File="RunMacro" NumOfTimes="1" WaitTime="1000" 
+				Macro="/run LoadAddOn'Blizzard_TrainerUI' f=ClassTrainerTrainButton f.e = 0 if f:GetScript'OnUpdate' then f:SetScript('OnUpdate', nil)else f:SetScript('OnUpdate', function(f,e) f.e=f.e+e if f.e>.01 then f.e=0 f:Click() end end)end" />
+				<CustomBehavior File="RunMacro" NumOfTimes="1" WaitTime="1000" 
+				Macro="/run LoadAddOn'Blizzard_TrainerUI' f=ClassTrainerTrainButton f.e = 0 if f:GetScript'OnUpdate' then f:SetScript('OnUpdate', nil)else f:SetScript('OnUpdate', function(f,e) f.e=f.e+e if f.e>.01 then f.e=0 f:Click() end end)end" />
+
+
+				<CustomBehavior File="ForceSetVendor" DoSell="True" DoRepair="True" DoMail="True" />
+				
+				<RunTo X="-8722.247" Y="440.4887" Z="97.61475" />
+			</If>
+			
+		<!-- Hyjal and Uldum Skinning -->
+		<CustomBehavior File="Message" Text="Compiling Uldum 425-525 Skinning" LogColor="Green" />
+		
+		<If Condition="(Me.GetSkill(Styx.SkillLine.Skinning).CurrentValue &gt;= 425) &amp;&amp; (Me.MapId == 0)">
+			<If Condition="(!IsQuestCompleted(27922))" >
+				<CustomBehavior File="FlyTo" X="-14288.29" Y="549.3284" Z="8.689642" />
+				<CustomBehavior File="ForcedDismount" />
+				<!-- BB dock to Ratchet -->
+				<CustomBehavior File="UseTransport" TransportId="20808" 
+								Entry="-14280.88, 566.6268, 6.979454"
+								Exit="-996.8669, -3826.07, 5.536246"
+								Start="-14277.75, 582.8661, 0.01553879" 
+								End="-1005.613, -3841.648, 0.03330701" 
+								StandOnX="-14270.46" StandOnY="579.9881" StandOnZ="6.088587" />
+			</If>
+			<If Condition="(IsQuestCompleted(27922))" >
+				<CustomBehavior File="InteractWith" MobId="207695" ObjectType="Gameobject" Range="8" X="-8230.338" Y="418.9445" Z="117.5297" />
+			</If>
+		</If>
+		
+		<If Condition="(Me.MapId == 1) &amp;&amp; (Me.GetSkill(Styx.SkillLine.Skinning).CurrentValue &gt;= 425)">
+		
+		<SetVendor>
+	<Vendors>
+		<!-- Hyjal -->
+		<Vendor Name="Mahaega Grimforge" Entry="43564" Type="Repair" X="4610.84" Y="-4729.36" Z="883.6992" />
+		<Vendor Name="Nunaha Grasshoof" Entry="43495" Type="Repair" X="4924.59" Y="-2740.14" Z="1437.64" />
+		<Vendor Name="Jalin Lakedeep" Entry="43380" Type="Repair" X="5180.91" Y="-1716.01" Z="1339.965" />
+		<Vendor Name="Toron Rockhoof" Entry="43410" Type="Repair" X="5573.142" Y="-3603.472" Z="1570.72" />
+		<Vendor Name="Inoho Stronghide" Entry="43550" Type="Repair" X="4421.68" Y="-2095.55" Z="1205.802" />
+		
+		<!-- Uldum -->
+		<Vendor Name="&quot;Chesty&quot; Jake" Entry="49409" Type="Repair" X="-8353.455" Y="759.2292" Z="151.4582" />
+		<Vendor Name="Blacksmith Abasi" Entry="48617" Type="Repair" X="-9404.68" Y="-906.438" Z="112.5407" />
+	</Vendors>
+		</SetVendor>
+	
+		<SetMailbox>
+	<Mailboxes>
+		<!-- Hyjal -->
+		<Mailbox X="4937.644" Y="-2709.396" Z="1432.271" />
+		<Mailbox X="5525.364" Y="-3625.407" Z="1567.266" />
+		<Mailbox X="5135.565" Y="-1723.492" Z="1336.023" />
+		<Mailbox X="5135.565" Y="-1723.492" Z="1336.023" />
+		
+		<!-- Uldum -->
+		<Mailbox X="-8352.407" Y="784.2535" Z="151.3457" />
+		<Mailbox X="-9429.111" Y="-967.3807" Z="111.0115" />
+	</Mailboxes>
+		</SetMailbox>
+	
+		
+			<If Condition="((Me.GetSkill(Styx.SkillLine.Skinning).CurrentValue &lt; 425)">
+				<CustomBehavior File="UserDialog" StopOnContinue="True" SoundCue="Exclamation" SoundCueInterval="1" Text="This Profile starts in Eastern Kingdoms - Please go there and press start\n\n1-300 is EK, 300-375 is BC, 375-450 is LK, 450-525 is Kalimdor (Hyjal until 500, then Uldum)" />
+				<CustomBehavior File="UserDialog" StopOnContinue="True" SoundCue="Exclamation" SoundCueInterval="2" Text="HEY! YOU NO PRESSY DA BUTTON!!!!111!11ONEONEONEONE11!11!!1" />
+				<CustomBehavior File="UserSettings" StopBot="True" />
+			</If>
+			
+				<CustomBehavior File="Message" Text="Compiling Uldum 450-525 Skinning" LogColor="Cornflowerblue" />
+				
+			<If Condition="((Me.GetSkill(Styx.SkillLine.Skinning).CurrentValue &gt;= 450) &amp;&amp; (Me.GetSkill(Styx.SkillLine.Skinning).CurrentValue &lt; 525))">
+				<CustomBehavior File="FlyTo" DestName="Farm Area" X="-9236.154" Y="-1116.249" Z="129.1479" />
+				<CustomBehavior File="ForcedDismount" />
+			
+				<SetGrindArea>
+					<GrindArea>
+						<TargetMinLevel>80</TargetMinLevel>
+						<TargetMaxLevel>86</TargetMaxLevel>
+						<Factions>14</Factions> <!-- [Croc, Scorpion] -->
+						<Hotspots> <!-- Uldum just NE from Ramkahen -->
+							<Hotspot X="-9236.154" Y="-1116.249" Z="129.1479" />
+							<Hotspot X="-9102.733" Y="-1014.822" Z="143.7419" />
+							<Hotspot X="-9045.854" Y="-1018.608" Z="143.0936" />
+							<Hotspot X="-8952.288" Y="-1003.165" Z="154.5804" />
+							<Hotspot X="-8889.901" Y="-1015.026" Z="156.3704" />
+							<Hotspot X="-8802.374" Y="-1047.099" Z="159.6432" />
+							<Hotspot X="-8731.496" Y="-1077.217" Z="159.7511" />
+							<Hotspot X="-8693.716" Y="-1102.526" Z="155.5276" />
+							<Hotspot X="-8757.805" Y="-1165.638" Z="157.2348" />
+							<Hotspot X="-8832.175" Y="-1136.336" Z="158.6344" />
+							<Hotspot X="-8898.434" Y="-1111.667" Z="154.8628" />
+							<Hotspot X="-8997.011" Y="-1107.165" Z="148.0606" />
+							<Hotspot X="-9067.43" Y="-1108.576" Z="140.6447" />
+							<Hotspot X="-9126.938" Y="-1153.937" Z="135.4308" />
+							<Hotspot X="-9198.672" Y="-1184.878" Z="128.5083" />
+							<Hotspot X="-9295.366" Y="-1228.76" Z="121.9696" />
+							<Hotspot X="-9344.478" Y="-1242.731" Z="117.4466" />
+							<Hotspot X="-9345.603" Y="-1169.156" Z="118.0423" />
+							<Hotspot X="-9231.165" Y="-1122.846" Z="129.4163" />
+						</Hotspots>
+					</GrindArea>
+				</SetGrindArea>
+			<GrindTo Condition="Me.GetSkill(Styx.SkillLine.Skinning).CurrentValue == 525" />
+			</If>
+			
+	<CustomBehavior File="UserDialog" AllowBotStop="False" SoundCue="Exclamation" SoundCueInterval="2" ExpiryTime="30" ExpiryAction="InputEnabled_Continue" Text="We're done!  Press continue if you want to keep farming this small Uldum route" />
+	
+				<CustomBehavior File="Message" Text="Farming Kick's Uldum Skinning" LogColor="Cornflowerblue" />
+	
+			<If Condition="((Me.GetSkill(Styx.SkillLine.Skinning).CurrentValue &gt;= 525) &amp;&amp; (Me.GetSkill(Styx.SkillLine.Skinning).CurrentValue &lt; 526))">
+				<CustomBehavior File="FlyTo" DestName="Farm Area" X="-9236.154" Y="-1116.249" Z="129.1479" />
+				<CustomBehavior File="ForcedDismount" />
+			
+				<SetGrindArea>
+					<GrindArea>
+						<TargetMinLevel>80</TargetMinLevel>
+						<TargetMaxLevel>86</TargetMaxLevel>
+						<Factions>14</Factions> <!-- [Croc, Scorpion] -->
+						<Hotspots> <!-- Uldum just NE from Ramkahen -->
+							<Hotspot X="-9236.154" Y="-1116.249" Z="129.1479" />
+							<Hotspot X="-9102.733" Y="-1014.822" Z="143.7419" />
+							<Hotspot X="-9045.854" Y="-1018.608" Z="143.0936" />
+							<Hotspot X="-8952.288" Y="-1003.165" Z="154.5804" />
+							<Hotspot X="-8889.901" Y="-1015.026" Z="156.3704" />
+							<Hotspot X="-8802.374" Y="-1047.099" Z="159.6432" />
+							<Hotspot X="-8731.496" Y="-1077.217" Z="159.7511" />
+							<Hotspot X="-8693.716" Y="-1102.526" Z="155.5276" />
+							<Hotspot X="-8757.805" Y="-1165.638" Z="157.2348" />
+							<Hotspot X="-8832.175" Y="-1136.336" Z="158.6344" />
+							<Hotspot X="-8898.434" Y="-1111.667" Z="154.8628" />
+							<Hotspot X="-8997.011" Y="-1107.165" Z="148.0606" />
+							<Hotspot X="-9067.43" Y="-1108.576" Z="140.6447" />
+							<Hotspot X="-9126.938" Y="-1153.937" Z="135.4308" />
+							<Hotspot X="-9198.672" Y="-1184.878" Z="128.5083" />
+							<Hotspot X="-9295.366" Y="-1228.76" Z="121.9696" />
+							<Hotspot X="-9344.478" Y="-1242.731" Z="117.4466" />
+							<Hotspot X="-9345.603" Y="-1169.156" Z="118.0423" />
+							<Hotspot X="-9231.165" Y="-1122.846" Z="129.4163" />
+						</Hotspots>
+					</GrindArea>
+				</SetGrindArea>
+			<GrindTo Condition="Me.GetSkill(Styx.SkillLine.Skinning).CurrentValue == 526" />
+			</If>
+			</If>
+
+	</QuestOrder>
+
+
+</HBProfile>

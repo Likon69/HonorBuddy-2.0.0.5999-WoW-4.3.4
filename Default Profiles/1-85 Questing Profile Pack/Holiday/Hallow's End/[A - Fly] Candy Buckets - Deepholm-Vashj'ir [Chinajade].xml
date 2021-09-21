@@ -1,0 +1,799 @@
+<HBProfile>
+   <!-- Profile by Chinajade (last updated for 2011 Hallow's End)
+   
+      PROFILE EXPECTATIONS:
+         * When using this profile, be certain to set the HonorBuddy bot to (select only one):
+                ( ) Grinding / Mixed
+                (*) Questing
+                ( ) PvP
+   
+         * This profile is appropriate for (check all that apply):
+                [X] Alliance   [ ] Achievement
+                [ ] Horde      [ ] Farming
+                               [ ] Leveling
+                               [ ] PvP
+                               [X] Questing
+                               [ ] Reputation
+                               [X] Seasonal
+							   
+		NOTES:
+		 * You will need a fast flying mount to do Vashj'ir.
+		   We cross a fatigue area of water, and a slow flying mount probably won't
+		   make it across (untested).
+			
+		 * Druids flight forms get stuck in Vashj'ir, so we use our own mounting code
+		    for this area
+			
+		 * We use variant timers between actions where appropriate to make it look
+			more 'human like'.
+			
+		 * We include coordinates for all the seasonal NPCs as there is a very high chance
+			they won't be in the user's Honorbuddy database.
+			
+		LICENSE:
+			This work is licensed under the
+				Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License.
+			also known as CC-BY-NC-SA.  To view a copy of this license, visit
+				http://creativecommons.org/licenses/by-nc-sa/3.0/
+			or send a letter to
+				Creative Commons
+				171 Second Street, Suite 300
+				San Francisco, California, 94105, USA.		
+    -->
+   <Name>[A - Fly] Candy Buckets - Deepholm-Vashj'ir [Chinajade] $Revision$</Name>
+   <MinLevel>80</MinLevel>	<!-- 80 for Vashj'ir, 82 for Deepholm -->
+   <MaxLevel>101</MaxLevel>
+   
+   <MinDurability>0.4</MinDurability>
+   <MinFreeBagSlots>2</MinFreeBagSlots>
+    
+   <MailGrey>False</MailGrey>
+   <MailWhite>False</MailWhite>
+   <MailGreen>True</MailGreen>
+   <MailBlue>True</MailBlue>
+   <MailPurple>True</MailPurple>
+   
+   <SellGrey>True</SellGrey>
+   <SellWhite>True</SellWhite>
+   <SellGreen>False</SellGreen>
+   <SellBlue>False</SellBlue>
+   <SellPurple>False</SellPurple>
+   
+   
+   <Blackspots>
+       <!-- Ramp in Darnasses otw to Auction House -->
+		<Blackspot X="9880.041" Y="2248.925" Z="1329.245" Radius="15" />
+   </Blackspots>
+   
+   <QuestOrder>
+		<CustomBehavior File="UserSettings" Preset="NoDistractions"
+				LearnFlightPaths="false" UseFlightPaths="false" />
+				
+		<CustomBehavior File="UserDialog" AllowBotStop="true" ExpiryTime="120"
+				Title="Problem Areas..."
+				Text="Honorbuddy (and plugins/CCs) have an array of bugs in the areas we are about to go...\nAs such, we've made the profile *very* stop/start friendly.  A stop/start usually works around the issue.\nWe're sorry we couldn't do better, but we're at the mercy of HBcore bugs.\n\nPlease disable these plugins known to interfere with proper profile operation:\n* Anti-Drown\n* Rarekiller (attempts to slowfall while swimming)\n* Unstuck Helper (interferes with swimming)\n\n\nOther Issues:\n* We've  seen problems with the Singular Hunter CC..\nIt tries unsuccessfully to forever summon its pet in Deepholm.  This prevents the profile from continuing with execution.\n\n* Toons sometimes have a problem detecting the water's surface (in Vashj'ir)...\nGnomes in particular have this problem.  This causes them to 'bounce' indefinitely.  A HB stop/start should fix this.  Occasionally, you will need to hit the spacebar to stop the bouncing before re-starting Honorbuddy." />
+
+		<CustomBehavior File="Message" LogColor="CornflowerBlue"
+			Text="Compiling Deepholm quests" />
+
+		<!-- ============================================================
+		     DEEPHOLM
+			 ============================================================
+		  -->
+		<If Condition="Me.Level &lt; 82" >
+			<CustomBehavior File="UserDialog" AllowBotStop="true" ExpiryTime="30"
+				Text="Skipping Deepholm...\n\nYou must be Level 82 or higher to go to Deepholm.  Continuing with rest of profile." />
+			
+		<ElseIf Condition="!IsQuestCompleted(29020)" >	<!-- Deepholm pumpkin -->
+			<If Condition="Me.MapId == 0" >
+				<CustomBehavior File="FlyTo" DestName="Stormwind Portal isle"
+					X="-8228.691" Y="436.2514" Z="118.2854" />
+				<CustomBehavior File="ForcedDismount" />
+			</If>
+			
+			<!-- Quest: A Personal Summons -->
+			<If Condition="HasQuest(28825)" >
+				<TurnIn QuestName="A Personal Summons" QuestId="28825"
+					TurnInName="Naraat the Earthspeaker"  TurnInId="45226"
+					X="-8216.31" Y="427.675" Z="118.0753" />
+			</If>
+		
+			<!-- Quest: Eye of the Storm -->
+			<If Condition="!HasQuest(28826) &amp;&amp; !IsQuestCompleted(28826)" >
+				<Pickup QuestName="The Eye of the Storm" QuestId="28826"
+					GiverName="Naraat the Earthspeaker"  GiverId="45226"
+					X="-8216.31" Y="427.675" Z="118.0753" />
+				<CustomBehavior File="WaitTimer" WaitTime="1500" VariantTime="1000" />
+			</If>
+			
+			<If Condition="HasQuest(28826) &amp;&amp; !IsQuestCompleted(28826)">
+				<CustomBehavior File="InteractWith" MobId="207416"
+					ObjectType="Gameobject" />
+				<CustomBehavior File="WaitTimer" WaitTime="60000" VariantTime="15000"
+					GoalText="Waiting for Cut Scene to complete" />
+			</If>
+			
+			<If Condition="HasQuest(28826)" >
+				<TurnIn QuestName="The Eye of the Storm" QuestId="28826"
+					TurnInName="Naraat the Earthspeaker"  TurnInId="45226"
+					X="-8216.31" Y="427.675" Z="118.0753"/>
+			</If>
+			
+			<!-- Quest: The Maelstrom -->
+			<If Condition="!HasQuest(27203) &amp;&amp; !IsQuestCompleted(27203)" >
+				<CustomBehavior File="UserDialog" AllowBotStop="false"
+					SoundCueInterval="3"
+					Title="HONORBUDDY BUG..."
+					Text="HONORBUDDY BUG...\n\nHonorbuddy will 'bug out' by continuously attempting to pick up the next quest, &quot;The Maelstrom&quot;, from Naraat.\n\nWhen this happens, please just stop/start Honorbuddy and the profile will work around the problem." />
+				<Pickup QuestName="The Maelstrom" QuestId="27203"
+					GiverName="Naraat the Earthspeaker"  GiverId="45226"
+					X="-8216.31" Y="427.675" Z="118.0753" />
+				<CustomBehavior File="WaitTimer" WaitTime="1500" VariantTime="1000" />
+			</If>
+			
+			<If Condition="(HasQuest(27203) || HasQuest(27123)) &amp;&amp; (Me.ZoneId == 1519)" >
+				<!-- Use Portal to Maelstrom -->
+				<CustomBehavior File="InteractWith" MobId="205268"
+					ObjectType="Gameobject"
+					X="-8209.03" Y="428.774" Z="118.164" />
+				<CustomBehavior File="WaitTimer" WaitTime="10000" VariantTime="5000" />
+			</If>
+			
+			<If Condition="Me.ZoneId == 5416" >
+				<If Condition="HasQuest(27203)" >
+					<TurnIn QuestName="The Maelstrom" QuestId="27203"
+						TurnInName="Thrall"  TurnInId="45042" />
+				</If>
+					
+				<If Condition="!HasQuest(27123) &amp;&amp; !IsQuestCompleted(27123)" >
+					<Pickup QuestName="Deepholm, Realm of Earth" QuestId="27123"
+						GiverName="Thrall"  GiverId="45042" />
+				</If>
+				
+				<!-- Take wyvern ride -->
+				<CustomBehavior File="InteractWith" MobId="45005"
+					X="833.59" Y="1052.81" Z="-7.75" />
+				<CustomBehavior File="WaitTimer" WaitTime="120000" VariantTime="15000"
+					GoalText="Waiting on Wyvern ride to complete" />
+				<CustomBehavior File="MyCTM" X="958.0533" Y="512.1508" Z="-49.33352" />
+			</If>
+			
+			<If Condition="HasQuest(27123)" >
+				<TurnIn QuestName="Deepholm, Realm of Earth" QuestId="27123"
+					TurnInName="Maruut Stonebinder"  TurnInId="43065" />
+			</If>			
+
+			<!-- Otherwise, Deepholm Portal should be active... use it -->
+			<If Condition="IsQuestCompleted(27123) &amp;&amp; (Me.ZoneId == 1519)" >
+				<RunTo DestName="Deepholm Portal" X="-8225.467" Y="446.3542" Z="117.8004" />
+				<CustomBehavior File="InteractWith" MobId="207693" ObjectType="Gameobject" />
+				<CustomBehavior File="WaitTimer" WaitTime="1000" VariantTime="7000" />
+			</If>
+			
+			<!-- Use Handful of Treats, if in our bags...
+				 If it still exists in our bags after we use it, destroy it.
+				 This means we took all the non-unique stuff out of the item, and
+				 all that remains is unique stuff that we already possess (in our bags
+				 or in the bank).
+			  -->
+			<If Condition="HasItem(37586)" >
+				<CustomBehavior File="Misc\RunLua" Lua="UseItemByName(37586)" />
+				<CustomBehavior File="WaitTimer" WaitTime="500" VariantTime="2500" />
+				<CustomBehavior File="Misc\RunLua" Lua="CloseLoot()" />
+				<CustomBehavior File="WaitTimer" WaitTime="500" VariantTime="2500" />
+
+				<CustomBehavior File="Misc\RunLua" Lua="local id,n=0; for b=0,4 do for s=1,GetContainerNumSlots(b) do id=GetContainerItemID(b,s) if (id == 37586) then ClearCursor() PickupContainerItem(b,s) DeleteCursorItem() end end end" />
+				<CustomBehavior File="WaitTimer" WaitTime="500" VariantTime="2500" />
+			</If>
+			
+			<!-- Snag new Handful of Treats -->
+			<CustomBehavior File="InteractWith" MobId="208183" ObjectType="Gameobject"
+				X="1037.625" Y="636.8455" Z="-45.40393" WaitTime="100" />
+			<CustomBehavior File="WaitTimer" WaitTime="500" VariantTime="2000" />
+			<CustomBehavior File="Misc\RunLua" Lua="GetQuestReward(1)" />
+			<CustomBehavior File="WaitTimer" WaitTime="1000" VariantTime="2000" />
+
+			<!-- Use Handful of Treats, if in our bags...
+				 If it still exists in our bags after we use it, destroy it.
+				 This means we took all the non-unique stuff out of the item, and
+				 all that remains is unique stuff that we already possess (in our bags
+				 or in the bank).
+			  -->
+			<If Condition="HasItem(37586)" >
+				<CustomBehavior File="Misc\RunLua" Lua="UseItemByName(37586)" />
+				<CustomBehavior File="WaitTimer" WaitTime="500" VariantTime="2500" />
+				<CustomBehavior File="Misc\RunLua" Lua="CloseLoot()" />
+				<CustomBehavior File="WaitTimer" WaitTime="500" VariantTime="2500" />
+
+				<CustomBehavior File="Misc\RunLua" Lua="local id,n=0; for b=0,4 do for s=1,GetContainerNumSlots(b) do id=GetContainerItemID(b,s) if (id == 37586) then ClearCursor() PickupContainerItem(b,s) DeleteCursorItem() end end end" />
+				<CustomBehavior File="WaitTimer" WaitTime="500" VariantTime="2500" />
+			</If>>
+					
+			<!-- Cancel any costume we may have, as some prevent us from mounting -->
+			<CustomBehavior File="Misc\RunLua" Lua="for i=1,40 do name,_ = UnitAura(&quot;player&quot;, i) if (name == nil) then break end if (strfind(name, &quot;Costume&quot;)) then CancelUnitBuff(&quot;player&quot;, i) end end" />
+			<CustomBehavior File="WaitTimer" WaitTime="700" VariantTime="1500" />						
+			<If Condition="(Me.HasAura(&quot;Trick&quot;))" >
+				<CustomBehavior File="WaitTimer" WaitTime="55000" VariantTime="15000"
+				GoalText="Waiting for Trick to expire {TimeRemaining}" />
+			</If>
+			</ElseIf>
+
+		<Else>
+			<CustomBehavior File="Message" LogColor="CornFlowerBlue"
+				Text="Deepholm pumpkin already completed." />
+			</Else>
+		</If>	
+		
+		<If Condition="Me.ZoneId == 5042" >
+			<!-- Move to portal and go back to Stormwind -->
+			<CustomBehavior File="InteractWith" MobId="205272" ObjectType="Gameobject"
+				X="965.25" Y="577.229" Z="-44.2583" />
+			<CustomBehavior File="WaitTimer" WaitTime="1000" VariantTime="7000" />
+		</If>
+		
+
+		<!-- ============================================================
+		     VASHJ'IR
+			 ============================================================
+		  -->
+		<If Condition="Me.Level &lt; 80" >
+			<CustomBehavior File="UserDialog" AllowBotStop="true" ExpiryTime="30"
+				Text="Skipping Vashj'ir...\n\nYou must be Level 80 or higher to go to Vashj'ir.  Continuing with rest of profile." />
+			
+		<ElseIf Condition="!IsQuestCompleted(14482) || !IsQuestCompleted(28981) || !IsQuestCompleted(28982) || !IsQuestCompleted(28983) || !IsQuestCompleted(28985)" >
+				
+			<If Condition="!IsQuestCompleted(24432)" >
+				<CustomBehavior File="UserDialog" AllowBotStop="true" ExpiryTime="120"
+					Title="You're missing the &quot;Sea Legs&quot; buff..."
+					Text="We'll get you the &quot;Sea Legs&quot; buff for Vashj'ir...\n\nYou MUST have this buff to 'open up' Vashj'ir by doing the first quest.  Otherwise, several of the Vashj'ir destinations will be too deep, and you'll drown trying to reach them.\nAlso, Honorbuddy is incapable of navigating Vashj'ir until you have the &quot;Sea Legs&quot; buff--as Vashj'ir is in the wrong 'phase' until the buff is acquired." />
+			<Else>
+				<!-- We should be good on fast flying for now, until we find otherwise...
+				<CustomBehavior File="UserDialog" AllowBotStop="true" ExpiryTime="120"
+					Text="You MUST have the 'fast flying' skill for Vashj'ir...\n\nWe will be crossing water that will cause fatigue.   The 'slow flying' skill is not fast enough to safely reach the other side.  (A fast flying skill will produce about 40% fatigue before recovery starts.)\n\nWe provide NO checks for these requirements.  You will simply get into a 'death loop' if you do not meet them." />
+				 -->
+				</Else>
+			</If>
+			
+			<CustomBehavior File="Message" LogColor="CornflowerBlue"
+				Text="Compiling Vashj'ir quests" />
+			
+			<!-- You *must* have "Sea Legs" buff...
+				Our inital attempt at this profile also allowed for a Potion/Elixir
+				of Water Breathing.   However, we discovered that without the "Sea Legs"
+				Honorbuddy cannot navigate (or FlyTo) in Vashj'ir.   This is because the
+				zone is not in the correct 'phase' until you have the "Sea Legs" buff.
+				So, although there may be remnants of Potion support in this profile,
+				potion use has been disallowed by the early tests.
+			  -->
+
+			<!-- Use Handful of Treats, if in our bags...
+				 If it still exists in our bags after we use it, destroy it.
+				 This means we took all the non-unique stuff out of the item, and
+				 all that remains is unique stuff that we already possess (in our bags
+				 or in the bank).
+			  -->
+			<If Condition="HasItem(37586)" >
+				<CustomBehavior File="Misc\RunLua" Lua="UseItemByName(37586)" />
+				<CustomBehavior File="WaitTimer" WaitTime="500" VariantTime="2500" />
+				<CustomBehavior File="Misc\RunLua" Lua="CloseLoot()" />
+				<CustomBehavior File="WaitTimer" WaitTime="500" VariantTime="2500" />
+
+				<CustomBehavior File="Misc\RunLua" Lua="local id,n=0; for b=0,4 do for s=1,GetContainerNumSlots(b) do id=GetContainerItemID(b,s) if (id == 37586) then ClearCursor() PickupContainerItem(b,s) DeleteCursorItem() end end end" />
+				<CustomBehavior File="WaitTimer" WaitTime="500" VariantTime="2500" />
+			</If>
+			
+			<!-- Quests to open up Vashj'ir zone -->
+			<!-- Quest: Call of Duty -->
+			<If Condition="!HasQuest(14482) &amp;&amp; !IsQuestCompleted(14482)" >
+				<CustomBehavior File="FlyTo" DestName="Stormwind Docks"
+					X="-8278.183" Y="1245.433" Z="5.312114" />
+				<Pickup QuestName="Call of Duty" QuestId="14482"
+					GiverName="Recuiter Burns"  GiverId="36799"
+					X="-8275.52" Y="1247.45" Z="5.23" />
+			</If>
+			
+			<If Condition="HasQuest(14482) &amp;&amp; (Me.ZoneId == 1519)" >
+				<RunTo DestName="End of dock"
+					X="-8290.955" Y="1399.146" Z="4.774575" />
+				<CustomBehavior File="ForcedDismount" />
+				<CustomBehavior File="UseTransport" TransportId="197195"
+					WaitAtX="-8290.955" WaitAtY="1399.146" WaitAtZ="4.774575"
+					TransportStartX="-8290.86" TransportStartY="1423.76" TransportStartZ="-0.005479197"
+					TransportEndX="-4632.93" TransportEndY="3863.71" TransportEndZ="7.599976"
+					GetOffX="-4631.942" GetOffY="3864.879" GetOffZ="12.82161" /> />
+					<!-- GetOffX="-4661.346" GetOffY="3873.684" GetOffZ="41.37433" /> -->
+				<CustomBehavior File="WaitTimer" WaitTime="105000" VariantTime="15000"
+					GoalText="Waiting arrival in Vashj'ir" />
+			</If>
+			
+			<If Condition="HasQuest(14482) &amp;&amp; (Me.ZoneId == 4815)" >
+				<TurnIn QuestName="Call of Duty" QuestId="14482"
+					TurnInName="Erunak Stonespeaker"  TurnInId="36915" />		
+			</If>
+			
+			<!-- Quest: Sea Legs -->
+			<If Condition="!HasQuest(24432) &amp;&amp; !IsQuestCompleted(24432)" >
+				<RunTo X="-4455.09" Y="3808.04" Z="-82.7854" />
+				<PickUp QuestName="Sea Legs" QuestId="24432"
+					GiverName="Erunak Stonespeaker"  GiverId="36915" />
+				<CustomBehavior File="MyCTM" X="-4456.072" Y="3813.583" Z="-83.74014" />
+				<CustomBehavior File="MyCTM" X="-4452.326" Y="3817.652" Z="-85.12819" />
+				<CustomBehavior File="MyCTM" X="-4455.608" Y="3815.31" Z="-89.095" />
+				<CustomBehavior File="MyCTM" X="-4461.548" Y="3812.408" Z="-89.05777" />
+				<CustomBehavior File="MyCTM" X="-4478.818" Y="3815.492" Z="-100.0297" />
+				<CustomBehavior File="MyCTM" X="-4520.823" Y="3802.979" Z="-107.0156" /> <!-- conch shell -->
+				<CustomBehavior File="CollectThings" QuestId="24432"
+					ObjectId="202560"
+					CollectItemId="52504" CollectItemCount="1" />
+				<CustomBehavior File="CollectThings" QuestId="24432"
+					ObjectId="205989"
+					CollectItemId="54828" CollectItemCount="3" />					
+				<CustomBehavior File="MyCTM" X="-4520.823" Y="3802.979" Z="-103.0156" /> <!-- conch shell -->
+				<CustomBehavior File="MyCTM" X="-4478.818" Y="3815.492" Z="-104.0297" />
+				<CustomBehavior File="MyCTM" X="-4461.548" Y="3812.408" Z="-89.05777" />
+				<CustomBehavior File="MyCTM" X="-4455.608" Y="3815.31" Z="-89.095" />
+				<CustomBehavior File="MyCTM" X="-4450.474" Y="3819.022" Z="-85.15047" />
+				<CustomBehavior File="MyCTM" X="-4448.943" Y="3822.154" Z="-84.54755" />
+				<CustomBehavior File="MyCTM" X="-4445.2" Y="3815.314" Z="-82.8759" />
+				<CustomBehavior File="MyCTM" X="-4455.681" Y="3810.645" Z="-82.94483" />			
+				<TurnIn QuestName="Sea Legs" QuestId="24432"
+					TurnInName="Erunak Stonespeaker"  TurnInId="36915" />
+			
+				<CustomBehavior File="MyCTM" X="-4456.072" Y="3813.583" Z="-83.74014" />
+				<CustomBehavior File="MyCTM" X="-4452.326" Y="3817.652" Z="-85.12819" />
+				<CustomBehavior File="MyCTM" X="-4455.608" Y="3815.31" Z="-89.095" />
+				<CustomBehavior File="MyCTM" X="-4461.548" Y="3812.408" Z="-89.05777" />
+				<CustomBehavior File="MyCTM" X="-4488.736" Y="3810.45" Z="-103.0907" />
+				<CustomBehavior File="MyCTM" X="-4488.736" Y="3810.45" Z="-10.0907" />
+			</If>			
+				
+			<!-- Move to Vashj'ir, if needed -->
+			<If Condition="(Me.MapId == 0) &amp;&amp; !((Me.ZoneId == 5146) || (Me.ZoneId == 5145) || (Me.ZoneId == 4815) || (Me.ZoneId == 5144))" >
+				<CustomBehavior File="Message" LogColor="CornflowerBlue"
+					Text="Moving to Vashj'ir" />
+				<CustomBehavior File="FlyTo" DestName="Kalimdor west coast"
+					X="-4926.692" Y="1550.49" Z="566.4958" />
+				<CustomBehavior File="MyCTM" DestName="nav waypoint"
+					X="-4936.678" Y="2985.88" Z="163.371" /> />
+				<CustomBehavior File="MyCTM" DestName="Vashj'ir Sandy Beach"
+					X="-5360.642" Y="3880.676" Z="68.77172" />
+				<CustomBehavior File="ForcedDismount" />
+			</If>
+			
+			<If Condition="!((Me.ZoneId == 5146) || (Me.ZoneId == 5145) || (Me.ZoneId == 4815) || (Me.ZoneId == 5144))" >
+				<CustomBehavior File="UserDialog" StopOnContinue="true"
+					Text="Whoops, you're not where we left you.\n\nPlease move to Eastern Kingdoms or Vashj'ir, and start the profile again." />
+			</If>
+
+			<If Condition="!Me.HasAura(&quot;Sea Legs&quot;)" >
+				<CustomBehavior File="Message" LogColor="Red"
+					Text="&quot;Sea Legs&quot; buff is missing!  SKIPPING Vashj'ir sub-achievements." />
+				<CustomBehavior File="UserDialog" AllowBotStop="true"
+					Text="Unable to continue.\n\nYou do not have the &quot;Sea Legs&quot; aura.  When the profile is continued, we will return you to Stormwind." />
+
+			<Else>
+				<!-- Vashj'ir, Deepmist Grotto -->
+				<If Condition="!IsQuestCompleted(28981)" >
+					<CustomBehavior File="Message" LogColor="CornflowerBlue"
+						Text="Moving to Deepmist Grotto pumpkin" />
+					
+					<!-- Cancel any costume we may have, as some prevent us from mounting -->
+					<CustomBehavior File="Misc\RunLua" Lua="for i=1,40 do name,_ = UnitAura(&quot;player&quot;, i) if (name == nil) then break end if (strfind(name, &quot;Costume&quot;)) then CancelUnitBuff(&quot;player&quot;, i) end end" />
+					<CustomBehavior File="WaitTimer" WaitTime="700" VariantTime="1500" />						
+					<If Condition="(Me.HasAura(&quot;Trick&quot;))" >
+						<CustomBehavior File="WaitTimer" WaitTime="55000" VariantTime="15000"
+						GoalText="Waiting for Trick to expire {TimeRemaining}" />
+					</If>
+
+					<!-- Due to HBcore bug, Druids get struck trying to shift to flight
+						 form while swimming.  We work around that, by explicitly using a 'normal' mount, instead of flight form. -->
+					<While Condition="Me.Location.Z &lt; -4.0">
+						<If Condition="!Me.MovementInfo.IsAscending" >
+							<CustomBehavior File="Misc\RunLua" Lua="JumpOrAscendStart()" />
+						</If>
+						<CustomBehavior File="WaitTimer" WaitTime="1500" VariantTime="1000" />
+					</While>
+					<While Condition="Me.IsMoving">
+						<CustomBehavior File="Misc\RunLua" Lua="AscendStop()" />
+						<CustomBehavior File="WaitTimer" WaitTime="1500" VariantTime="1000" />
+					</While>
+					
+					<If Condition="!Me.IsFlying" >
+						<CustomBehavior File="Misc\RunLua" Lua="for i=1,GetNumCompanions(&quot;MOUNT&quot;) do _,_,_,_,_,flags=GetCompanionInfo(&quot;MOUNT&quot;,i); if (bit.band(flags,0x02) &gt; 0) then CallCompanion(&quot;MOUNT&quot;, i) break end end" />
+						<CustomBehavior File="WaitTimer" WaitTime="2500" VariantTime="1500" />
+					</If>
+					
+					<While Condition="Me.Location.Z &lt; 10.0">
+						<If Condition="!Me.MovementInfo.IsAscending" >
+							<CustomBehavior File="Misc\RunLua" Lua="JumpOrAscendStart()" />
+						</If>
+						<CustomBehavior File="WaitTimer" WaitTime="1500" VariantTime="1000" />
+					</While>
+					<CustomBehavior File="Misc\RunLua" Lua="AscendStop()" />
+					
+					<CustomBehavior File="FlyTo" DestName="Deepmist Grotto"
+						X="-5264.76" Y="3388.688" Z="11.20931" />
+					<CustomBehavior File="ForcedDismount" />
+					<If Condition="Me.Class == WoWClass.Druid" >
+						<CustomBehavior File="Misc\RunLua" Lua="CastSpellByID(1066)" />
+					<ElseIf Condition="(Me.Class == WoWClass.Shaman) &amp;&amp; SpellManager.CanCast(131)" >
+						<CustomBehavior File="Misc\RunLua" Lua="CastSpellByID(131)" />
+						</ElseIf>
+					<ElseIf Condition="Me.Class == WoWClass.Warlock &amp;&amp; SpellManager.CanCast(5697)" >
+						<CustomBehavior File="Misc\RunLua" Lua="CastSpellByID(5697)" />
+						</ElseIf>
+					</If>
+					<CustomBehavior File="MyCTM" X="-5236.015" Y="3379.014" Z="-136.0156" />
+					<CustomBehavior File="MyCTM" X="-5144.837" Y="3293.227" Z="-119.5735" />
+					
+					<!-- Snag new Handful of Treats -->
+					<CustomBehavior File="InteractWith" MobId="208141" ObjectType="Gameobject"
+						X="-5144.837" Y="3293.227" Z="-119.5735" WaitTime="100" />
+					<CustomBehavior File="WaitTimer" WaitTime="500" VariantTime="2000" />
+					<CustomBehavior File="Misc\RunLua" Lua="GetQuestReward(1)" />
+					<CustomBehavior File="WaitTimer" WaitTime="1000" VariantTime="2000" />
+
+					<!-- Use Handful of Treats, if in our bags...
+						 If it still exists in our bags after we use it, destroy it.
+						 This means we took all the non-unique stuff out of the item, and
+						 all that remains is unique stuff that we already possess (in our bags
+						 or in the bank).
+					  -->
+					<If Condition="HasItem(37586)" >
+						<CustomBehavior File="Misc\RunLua" Lua="UseItemByName(37586)" />
+						<CustomBehavior File="WaitTimer" WaitTime="500" VariantTime="2500" />
+						<CustomBehavior File="Misc\RunLua" Lua="CloseLoot()" />
+						<CustomBehavior File="WaitTimer" WaitTime="500" VariantTime="2500" />
+
+						<CustomBehavior File="Misc\RunLua" Lua="local id,n=0; for b=0,4 do for s=1,GetContainerNumSlots(b) do id=GetContainerItemID(b,s) if (id == 37586) then ClearCursor() PickupContainerItem(b,s) DeleteCursorItem() end end end" />
+						<CustomBehavior File="WaitTimer" WaitTime="500" VariantTime="2500" />
+					</If>
+					
+					<!-- move outside -->
+					<CustomBehavior File="MyCTM" X="-5144.837" Y="3293.227" Z="-119.5735" />
+					<CustomBehavior File="MyCTM" X="-5236.015" Y="3379.014" Z="-136.0156" />
+				</If>
+				
+				<!-- Vashj'ir, Silver Tide Hollow -->
+				<If Condition="!IsQuestCompleted(28982)" >
+					<CustomBehavior File="Message" LogColor="CornflowerBlue"
+						Text="Moving to Silver Tide Hollow pumpkin" />
+					
+					<!-- Cancel any costume we may have, as some prevent us from mounting -->
+					<CustomBehavior File="Misc\RunLua" Lua="for i=1,40 do name,_ = UnitAura(&quot;player&quot;, i) if (name == nil) then break end if (strfind(name, &quot;Costume&quot;)) then CancelUnitBuff(&quot;player&quot;, i) end end" />
+					<CustomBehavior File="WaitTimer" WaitTime="700" VariantTime="1500" />						
+					<If Condition="(Me.HasAura(&quot;Trick&quot;))" >
+						<CustomBehavior File="WaitTimer" WaitTime="55000" VariantTime="15000"
+						GoalText="Waiting for Trick to expire {TimeRemaining}" />
+					</If>
+
+					<!-- Due to HBcore bug, Druids get struck trying to shift to flight
+						 form while swimming.  We work around that, by explicitly using a 'normal' mount, instead of flight form. -->
+					<While Condition="Me.Location.Z &lt; -4.0">
+						<If Condition="!Me.MovementInfo.IsAscending" >
+							<CustomBehavior File="Misc\RunLua" Lua="JumpOrAscendStart()" />
+						</If>
+						<CustomBehavior File="WaitTimer" WaitTime="1500" VariantTime="1000" />
+					</While>
+					<While Condition="Me.IsMoving">
+						<CustomBehavior File="Misc\RunLua" Lua="AscendStop()" />
+						<CustomBehavior File="WaitTimer" WaitTime="1500" VariantTime="1000" />
+					</While>
+					
+					<If Condition="!Me.IsFlying" >
+						<CustomBehavior File="Misc\RunLua" Lua="for i=1,GetNumCompanions(&quot;MOUNT&quot;) do _,_,_,_,_,flags=GetCompanionInfo(&quot;MOUNT&quot;,i); if (bit.band(flags,0x02) &gt; 0) then CallCompanion(&quot;MOUNT&quot;, i) break end end" />
+						<CustomBehavior File="WaitTimer" WaitTime="2500" VariantTime="1500" />
+					</If>
+					
+					<While Condition="Me.Location.Z &lt; 10.0">
+						<If Condition="!Me.MovementInfo.IsAscending" >
+							<CustomBehavior File="Misc\RunLua" Lua="JumpOrAscendStart()" />
+						</If>
+						<CustomBehavior File="WaitTimer" WaitTime="1500" VariantTime="1000" />
+					</While>
+					<CustomBehavior File="Misc\RunLua" Lua="AscendStop()" />
+					
+					<CustomBehavior File="FlyTo" DestName="Silver Tide Hollow"
+						X="-5958.664" Y="4230.054" Z="4.423082" />
+					<CustomBehavior File="ForcedDismount" />
+					<If Condition="Me.Class == WoWClass.Druid">
+						<CustomBehavior File="Misc\RunLua" Lua="CastSpellByID(1066)" />
+					<ElseIf Condition="(Me.Class == WoWClass.Shaman) &amp;&amp; SpellManager.CanCast(131)" >
+						<CustomBehavior File="Misc\RunLua" Lua="CastSpellByID(131)" />
+						</ElseIf>
+					<ElseIf Condition="Me.Class == WoWClass.Warlock &amp;&amp; SpellManager.CanCast(5697)" >
+						<CustomBehavior File="Misc\RunLua" Lua="CastSpellByID(5697)" />
+						</ElseIf>
+					</If>
+					<CustomBehavior File="MyCTM" X="-5958.664" Y="4230.054" Z="-375.8177" />
+					<CustomBehavior File="MyCTM" X="-6114.71" Y="4278.24" Z="-350.7117" />
+					
+					<!-- Snag new Handful of Treats -->
+					<CustomBehavior File="InteractWith" MobId="208142" ObjectType="Gameobject"
+						X="-6111.506" Y="4294.206" Z="-348.6067" WaitTime="100" />
+					<CustomBehavior File="WaitTimer" WaitTime="500" VariantTime="2000" />
+					<CustomBehavior File="Misc\RunLua" Lua="GetQuestReward(1)" />
+					<CustomBehavior File="WaitTimer" WaitTime="1000" VariantTime="2000" />
+
+					<!-- Use Handful of Treats, if in our bags...
+						 If it still exists in our bags after we use it, destroy it.
+						 This means we took all the non-unique stuff out of the item, and
+						 all that remains is unique stuff that we already possess (in our bags
+						 or in the bank).
+					  -->					  
+					<If Condition="HasItem(37586)" >
+						<CustomBehavior File="Misc\RunLua" Lua="UseItemByName(37586)" />
+						<CustomBehavior File="WaitTimer" WaitTime="500" VariantTime="2500" />
+						<CustomBehavior File="Misc\RunLua" Lua="CloseLoot()" />
+						<CustomBehavior File="WaitTimer" WaitTime="500" VariantTime="2500" />
+
+						<CustomBehavior File="Misc\RunLua" Lua="local id,n=0; for b=0,4 do for s=1,GetContainerNumSlots(b) do id=GetContainerItemID(b,s) if (id == 37586) then ClearCursor() PickupContainerItem(b,s) DeleteCursorItem() end end end" />
+						<CustomBehavior File="WaitTimer" WaitTime="500" VariantTime="2500" />
+					</If>
+
+					<!-- move outside -->
+					<CustomBehavior File="MyCTM" X="-6114.71" Y="4278.24" Z="-350.7117" />
+					<CustomBehavior File="MyCTM" X="-5958.664" Y="4230.054" Z="-375.8177" />
+				</If>
+				
+				<!-- Vashj'ir, Tranquil Wash -->
+				<If Condition="!IsQuestCompleted(28983)" >
+					<CustomBehavior File="Message" LogColor="CornflowerBlue"
+						Text="Moving to Tranquil Wash pumpkin" />
+					
+					<!-- Cancel any costume we may have, as some prevent us from mounting -->
+					<CustomBehavior File="Misc\RunLua" Lua="for i=1,40 do name,_ = UnitAura(&quot;player&quot;, i) if (name == nil) then break end if (strfind(name, &quot;Costume&quot;)) then CancelUnitBuff(&quot;player&quot;, i) end end" />
+					<CustomBehavior File="WaitTimer" WaitTime="700" VariantTime="1500" />
+					
+					<If Condition="(Me.HasAura(&quot;Trick&quot;))" >
+						<CustomBehavior File="WaitTimer" WaitTime="55000" VariantTime="15000"
+						GoalText="Waiting for Trick to expire {TimeRemaining}" />
+					</If>
+
+					<!-- Due to HBcore bug, Druids get struck trying to shift to flight
+						 form while swimming.  We work around that, by explicitly using a 'normal' mount, instead of flight form. -->
+					<While Condition="Me.Location.Z &lt; -4.0">
+						<If Condition="!Me.MovementInfo.IsAscending" >
+							<CustomBehavior File="Misc\RunLua" Lua="JumpOrAscendStart()" />
+						</If>
+						<CustomBehavior File="WaitTimer" WaitTime="1500" VariantTime="1000" />
+					</While>
+					<While Condition="Me.IsMoving">
+						<CustomBehavior File="Misc\RunLua" Lua="AscendStop()" />
+						<CustomBehavior File="WaitTimer" WaitTime="1500" VariantTime="1000" />
+					</While>
+					
+					<If Condition="!Me.IsFlying" >
+						<CustomBehavior File="Misc\RunLua" Lua="for i=1,GetNumCompanions(&quot;MOUNT&quot;) do _,_,_,_,_,flags=GetCompanionInfo(&quot;MOUNT&quot;,i); if (bit.band(flags,0x02) &gt; 0) then CallCompanion(&quot;MOUNT&quot;, i) break end end" />
+						<CustomBehavior File="WaitTimer" WaitTime="2500" VariantTime="1500" />
+					</If>
+					
+					<While Condition="Me.Location.Z &lt; 10.0">
+						<If Condition="!Me.MovementInfo.IsAscending" >
+							<CustomBehavior File="Misc\RunLua" Lua="JumpOrAscendStart()" />
+						</If>
+						<CustomBehavior File="WaitTimer" WaitTime="1500" VariantTime="1000" />
+					</While>
+					<CustomBehavior File="Misc\RunLua" Lua="AscendStop()" />
+					
+
+						
+					<CustomBehavior File="FlyTo" DestName="Tranquil Wash"
+						X="-6603.419" Y="4621.897" Z="0.1214749" />
+					<CustomBehavior File="ForcedDismount" />
+					<If Condition="Me.Class == WoWClass.Druid">
+						<CustomBehavior File="Misc\RunLua" Lua="CastSpellByID(1066)" />
+					<ElseIf Condition="(Me.Class == WoWClass.Shaman) &amp;&amp; SpellManager.CanCast(131)">
+						<CustomBehavior File="Misc\RunLua" Lua="CastSpellByID(131)" />
+						</ElseIf>
+					<ElseIf Condition="Me.Class == WoWClass.Warlock &amp;&amp; SpellManager.CanCast(5697)">
+						<CustomBehavior File="Misc\RunLua" Lua="CastSpellByID(5697)" />
+						</ElseIf>
+					</If>
+					<CustomBehavior File="MyCTM" X="-6603.419" Y="4621.897" Z="-532.0801"  />
+					<CustomBehavior File="MyCTM" X="-6614.11" Y="4372.972" Z="-582.7677" />
+					<CustomBehavior File="MyCTM" X="-6601.526" Y="4307.074" Z="-564.2615" />
+					
+					<!-- Snag new Handful of Treats -->
+					<CustomBehavior File="InteractWith" MobId="208133" ObjectType="Gameobject"
+						X="-6610.523" Y="4272.179" Z="-562.7366" WaitTime="100" />
+					<CustomBehavior File="WaitTimer" WaitTime="500" VariantTime="2000" />
+					<CustomBehavior File="Misc\RunLua" Lua="GetQuestReward(1)" />
+					<CustomBehavior File="WaitTimer" WaitTime="1000" VariantTime="2000" />
+					
+					<!-- Use Handful of Treats, if in our bags...
+						 If it still exists in our bags after we use it, destroy it.
+						 This means we took all the non-unique stuff out of the item, and
+						 all that remains is unique stuff that we already possess (in our bags
+						 or in the bank).
+					  -->
+					<If Condition="HasItem(37586)" >
+						<CustomBehavior File="Misc\RunLua" Lua="UseItemByName(37586)" />
+						<CustomBehavior File="WaitTimer" WaitTime="500" VariantTime="2500" />
+						<CustomBehavior File="Misc\RunLua" Lua="CloseLoot()" />
+						<CustomBehavior File="WaitTimer" WaitTime="500" VariantTime="2500" />
+
+						<CustomBehavior File="Misc\RunLua" Lua="local id,n=0; for b=0,4 do for s=1,GetContainerNumSlots(b) do id=GetContainerItemID(b,s) if (id == 37586) then ClearCursor() PickupContainerItem(b,s) DeleteCursorItem() end end end" />
+						<CustomBehavior File="WaitTimer" WaitTime="500" VariantTime="2500" />
+					</If>
+
+					<!-- move outside -->
+					<CustomBehavior File="MyCTM" X="-6601.526" Y="4307.074" Z="-564.2615" />
+					<CustomBehavior File="MyCTM" X="-6614.11" Y="4372.972" Z="-582.7677" />
+					<CustomBehavior File="MyCTM" X="-6603.419" Y="4621.897" Z="-532.0801"  />
+				</If>
+				
+				<!-- Vashj'ir, Darkbreak Cove -->
+				<If Condition="!IsQuestCompleted(28985)" >
+					<CustomBehavior File="Message" LogColor="CornflowerBlue"
+						Text="Moving to Darkbreak Cove pumpkin" />
+					
+					<!-- Cancel any costume we may have, as some prevent us from mounting -->
+					<CustomBehavior File="Misc\RunLua" Lua="for i=1,40 do name,_ = UnitAura(&quot;player&quot;, i) if (name == nil) then break end if (strfind(name, &quot;Costume&quot;)) then CancelUnitBuff(&quot;player&quot;, i) end end" />
+					<CustomBehavior File="WaitTimer" WaitTime="700" VariantTime="1500" />
+					
+					<If Condition="(Me.HasAura(&quot;Trick&quot;))" >
+						<CustomBehavior File="WaitTimer" WaitTime="55000" VariantTime="15000"
+						GoalText="Waiting for Trick to expire {TimeRemaining}" />
+					</If>
+
+					<!-- Due to HBcore bug, Druids get struck trying to shift to flight
+						 form while swimming.  We work around that, by explicitly using a 'normal' mount, instead of flight form. -->
+					<While Condition="Me.Location.Z &lt; -4.0">
+						<If Condition="!Me.MovementInfo.IsAscending" >
+							<CustomBehavior File="Misc\RunLua" Lua="JumpOrAscendStart()" />
+						</If>
+						<CustomBehavior File="WaitTimer" WaitTime="1500" VariantTime="1000" />
+					</While>
+					<While Condition="Me.IsMoving">
+						<CustomBehavior File="Misc\RunLua" Lua="AscendStop()" />
+						<CustomBehavior File="WaitTimer" WaitTime="1500" VariantTime="1000" />
+					</While>
+					
+					<If Condition="!Me.IsFlying" >
+						<CustomBehavior File="Misc\RunLua" Lua="for i=1,GetNumCompanions(&quot;MOUNT&quot;) do _,_,_,_,_,flags=GetCompanionInfo(&quot;MOUNT&quot;,i); if (bit.band(flags,0x02) &gt; 0) then CallCompanion(&quot;MOUNT&quot;, i) break end end" />
+						<CustomBehavior File="WaitTimer" WaitTime="2500" VariantTime="1500" />
+					</If>
+					
+					<While Condition="Me.Location.Z &lt; 10.0">
+						<If Condition="!Me.MovementInfo.IsAscending" >
+							<CustomBehavior File="Misc\RunLua" Lua="JumpOrAscendStart()" />
+						</If>
+						<CustomBehavior File="WaitTimer" WaitTime="1500" VariantTime="1000" />
+					</While>
+					<CustomBehavior File="Misc\RunLua" Lua="AscendStop()" />
+					
+					<CustomBehavior File="FlyTo" DestName="Darkbreak Cove"
+						X="-7142.945" Y="5669.394" Z="5.414822" />
+					<CustomBehavior File="ForcedDismount" />
+					<If Condition="Me.Class == WoWClass.Druid">
+						<CustomBehavior File="Misc\RunLua" Lua="CastSpellByID(1066)" />
+					<ElseIf Condition="(Me.Class == WoWClass.Shaman) &amp;&amp; SpellManager.CanCast(131)">
+						<CustomBehavior File="Misc\RunLua" Lua="CastSpellByID(131)" />
+						</ElseIf>
+					<ElseIf Condition="Me.Class == WoWClass.Warlock &amp;&amp; SpellManager.CanCast(5697)">
+						<CustomBehavior File="Misc\RunLua" Lua="CastSpellByID(5697)" />
+						</ElseIf>
+					</If>
+					<CustomBehavior File="MyCTM" X="-7142.945" Y="5669.394" Z="-785.0261" />
+					<CustomBehavior File="MyCTM" X="-7015.99" Y="5873.923" Z="-793.2481" />
+					<CustomBehavior File="MyCTM" X="-6910.011" Y="5966.06" Z="-766.4152" />
+					
+					<!-- Snag new Handful of Treats -->
+					<CustomBehavior File="InteractWith" MobId="208132" ObjectType="Gameobject"
+						X="-6867.623" Y="6005.045" Z="-764.0035" WaitTime="100" />
+					<CustomBehavior File="WaitTimer" WaitTime="500" VariantTime="2000" />
+					<CustomBehavior File="Misc\RunLua" Lua="GetQuestReward(1)" />
+					<CustomBehavior File="WaitTimer" WaitTime="1000" VariantTime="2000" />
+					
+					<!-- Use Handful of Treats, if in our bags...
+						 If it still exists in our bags after we use it, destroy it.
+						 This means we took all the non-unique stuff out of the item, and
+						 all that remains is unique stuff that we already possess (in our bags
+						 or in the bank).
+					  -->					  
+					<If Condition="HasItem(37586)" >
+						<CustomBehavior File="Misc\RunLua" Lua="UseItemByName(37586)" />
+						<CustomBehavior File="WaitTimer" WaitTime="500" VariantTime="2500" />
+						<CustomBehavior File="Misc\RunLua" Lua="CloseLoot()" />
+						<CustomBehavior File="WaitTimer" WaitTime="500" VariantTime="2500" />
+
+						<CustomBehavior File="Misc\RunLua" Lua="local id,n=0; for b=0,4 do for s=1,GetContainerNumSlots(b) do id=GetContainerItemID(b,s) if (id == 37586) then ClearCursor() PickupContainerItem(b,s) DeleteCursorItem() end end end" />
+						<CustomBehavior File="WaitTimer" WaitTime="500" VariantTime="2500" />
+					</If>
+
+					<!-- move outside -->
+					<CustomBehavior File="MyCTM" X="-6910.011" Y="5966.06" Z="-766.4152" />		<CustomBehavior File="MyCTM" X="-7015.99" Y="5873.923" Z="-793.2481" />
+					<CustomBehavior File="MyCTM" X="-7142.945" Y="5669.394" Z="-785.0261" />
+				</If>		
+				</Else>
+			</If>	
+			</ElseIf>
+			
+		<Else>
+			<CustomBehavior File="Message" LogColor="CornFlowerBlue"
+				Text="Vashj'ir pumpkins already completed." />
+			</Else>
+		</If>
+		
+			
+		<!-- If we're in Vashj'ir, move back to EK... -->
+		<If Condition="(Me.ZoneId == 5146) || (Me.ZoneId == 5145) || (Me.ZoneId == 4815) || (Me.ZoneId == 5144)" >
+			<CustomBehavior File="Message" LogColor="CornflowerBlue"
+				Text="Moving to Eastern Kindgoms" />
+				
+			<!-- Cancel any costume we may have, as some prevent us from mounting -->
+			<CustomBehavior File="Misc\RunLua" Lua="for i=1,40 do name,_ = UnitAura(&quot;player&quot;, i) if (name == nil) then break end if (strfind(name, &quot;Costume&quot;)) then CancelUnitBuff(&quot;player&quot;, i) end end" />
+			<CustomBehavior File="WaitTimer" WaitTime="700" VariantTime="1500" />					
+			<!-- Due to HBcore bug, Druids get struck trying to shift to flight
+				 form while swimming.  We work around that, by explicitly using a 'normal' mount, instead of flight form. -->
+			<While Condition="Me.Location.Z &lt; -4.0">
+				<If Condition="!Me.MovementInfo.IsAscending" >
+					<CustomBehavior File="Misc\RunLua" Lua="JumpOrAscendStart()" />
+				</If>
+				<CustomBehavior File="WaitTimer" WaitTime="1500" VariantTime="1000" />
+			</While>
+			<While Condition="Me.IsMoving">
+				<CustomBehavior File="Misc\RunLua" Lua="AscendStop()" />
+				<CustomBehavior File="WaitTimer" WaitTime="1500" VariantTime="1000" />
+			</While>
+			
+			<If Condition="!Me.IsFlying" >
+				<CustomBehavior File="Misc\RunLua" Lua="for i=1,GetNumCompanions(&quot;MOUNT&quot;) do _,_,_,_,_,flags=GetCompanionInfo(&quot;MOUNT&quot;,i); if (bit.band(flags,0x02) &gt; 0) then CallCompanion(&quot;MOUNT&quot;, i) break end end" />
+				<CustomBehavior File="WaitTimer" WaitTime="2500" VariantTime="1500" />
+			</If>
+			
+			<While Condition="Me.Location.Z &lt; 10.0">
+				<If Condition="!Me.MovementInfo.IsAscending" >
+					<CustomBehavior File="Misc\RunLua" Lua="JumpOrAscendStart()" />
+				</If>
+				<CustomBehavior File="WaitTimer" WaitTime="1500" VariantTime="1000" />
+			</While>
+			<CustomBehavior File="Misc\RunLua" Lua="AscendStop()" />		
+			
+			<CustomBehavior File="FlyTo" DestName="nav waypoint"
+				X="-4936.678" Y="2985.88" Z="163.371" /> />
+			<CustomBehavior File="MyCTM" DestName="Kalimdor west coast"
+				X="-4926.692" Y="1550.49" Z="566.4958" />
+		</If>
+		
+		<If Condition="Me.MapId != 0" >
+			<CustomBehavior File="UserDialog" StopOnContinue="true"
+				Text="Whoops, you're not where we left you.\n\nPlease move to Eastern Kingdoms and start the profile again." />
+		</If>
+
+			
+		<!-- Deploy to a random place inside Stormwind -->
+		<If Condition="Chance(20.0)">
+			<CustomBehavior File="FlyTo" DestName="Elder's mailbox" X="-8859.798" Y="640.8622" Z="96.28608" />
+		<ElseIf Condition="Chance(20.0)">
+			<CustomBehavior File="FlyTo" DestName="Backgate Bank" X="-8360.063" Y="620.2231" Z="95.35557" />
+			</ElseIf>
+		<ElseIf Condition="Chance(20.0)">
+			<CustomBehavior File="FlyTo" DestName="Cathedral Square mailbox" X="-8657.595" Y="775.6388" Z="96.99747" />
+			</ElseIf>
+		<ElseIf Condition="Chance(20.0)">
+			<CustomBehavior File="FlyTo" DestName="Fishing pier mailbox"  X="-8826.954" Y="729.8922" Z="98.42244" />
+			</ElseIf>
+		<Else Condition="Chance(20.0)">
+			<CustomBehavior File="FlyTo" DestName="Canal mailbox" X="-8752.236" Y="561.497" Z="97.43406" />
+			</Else>
+		</If>
+		
+		<CustomBehavior File="ForcedDismount" />
+
+		<!--
+		  ========== All we can automate ==========
+		  -->
+		<CustomBehavior File="UserDialog" StopOnContinue="true" ExpiryTime="3600"
+				Text="END of the line." />
+		
+	</QuestOrder>
+   
+      
+	<!-- Helpful LUA Snippets...
+		/run print(GetAchievementCriteriaInfo(1184,1))
+		/run print(GetQuestLogLeaderBoard(1,GetQuestLogIndexByID(11118)))
+	  -->
+   
+</HBProfile>

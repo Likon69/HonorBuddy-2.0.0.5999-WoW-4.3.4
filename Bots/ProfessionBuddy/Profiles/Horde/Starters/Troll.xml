@@ -1,0 +1,422 @@
+<HBProfile xsi:noNamespaceSchemaLocation="../Schemas/EchoSchema.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<!-- Original contribution by EchoTiger -->
+	<Name>Troll Starter ($ShortHash$)</Name>
+
+	<MinDurability>0.3</MinDurability>
+	<MinFreeBagSlots>3</MinFreeBagSlots>
+
+	<SellGrey>true</SellGrey>
+	<SellWhite>true</SellWhite>
+	<SellGreen>true</SellGreen>
+	<SellBlue>true</SellBlue>
+	<SellPurple>false</SellPurple>
+
+	<MailGrey>false</MailGrey>
+	<MailWhite>true</MailWhite>
+	<MailGreen>true</MailGreen>
+	<MailBlue>true</MailBlue>
+	<MailPurple>true</MailPurple>
+
+	<TargetElites>true</TargetElites>
+
+	<AvoidMobs>
+	</AvoidMobs>
+
+	<Mailboxes>
+	</Mailboxes>
+
+	<Vendors>
+	</Vendors>
+
+	<Blackspots>
+	</Blackspots>
+
+	<Blacklist>
+	</Blacklist>
+
+	<QuestOrder IgnoreCheckpoints="false" ContinuallySkipToCheckpoints="true" >
+		<!-- Check function status -->
+		<Code File="RunCode" Type="Definition">
+			<![CDATA[
+			private static bool? profileFunctionsEnabled => (bool?)AppDomain.CurrentDomain.GetData("QuestingProfiles_FunctionsEnabled");
+			private static bool IsStoreProfile(string path) => path.StartsWith("store://");
+			private static string Slashify(string path) => IsStoreProfile(path) ? path.Replace(@"\", "/") : path.Replace("/", @"\");
+
+			public __CompiledBatchClass__()
+			{
+				ActivateFunctions();
+			}
+
+			private static void ActivateFunctions()
+			{
+				if (profileFunctionsEnabled == null || profileFunctionsEnabled == false)
+				{
+					Bots.Professionbuddy.PBLog.Log(Colors.MediumPurple, "[Profile Message!]: ", Colors.Yellow, "Please stand by as the functions are being activated!");
+					LoadProfile(@"..\..\Functions\Activate Functions.xml");
+				}
+			}
+
+			private static void LoadProfile(string path)
+			{
+				var profile = GetNewPath(path);
+				if (!IsStoreProfile(profile) && !File.Exists(profile))
+				{
+					Bots.Professionbuddy.PBLog.Log(Colors.MediumPurple, "[Profile Message!]: ", Colors.Yellow, "Profile does not exist.\n" + profile);
+					return;
+				}
+
+				Bots.Professionbuddy.PBLog.Log(Colors.MediumPurple, "[Profile Message!]: ", Colors.Yellow, "Loading: " + profile);
+				ProfileManager.LoadNew(profile, false);
+			}
+
+			private static string GetNewPath(string path)
+			{
+				if (IsStoreProfile(path))
+					return Slashify(path);
+
+				var currentProfile = ProfileManager.XmlLocation;
+				if (IsStoreProfile(currentProfile))
+					return Slashify(currentProfile + "/../" + path);
+
+				var absolutePath = Path.Combine(Path.GetDirectoryName(currentProfile), path);
+				absolutePath = Path.GetFullPath(absolutePath);
+				var canonicalPath = new Uri(absolutePath).LocalPath;
+				return Slashify(canonicalPath);
+			}]]>
+		</Code>
+		<Code File="RunCode" Code="ActivateFunctions();" />
+		<!-- END Check function status -->
+
+		<If Condition="Me.IsAlliance" >
+			<Code File="LoadProfile" ProfileName="..\..\Questing Autoloader.xml" />
+		</If>
+		<!-- RunCode Methods -->
+			<Code File="RunCode">
+			<![CDATA[
+				Bots.Professionbuddy.PBLog.Log(System.Windows.Media.Colors.MediumPurple, "> [Profile Initialization Status] ", System.Windows.Media.Colors.CornflowerBlue, "\n     Auto-Looting	:: Enabled\n     Looting	:: Enabled\n     Game Addons	:: Disabled");
+				Lua.DoString("SetCVar('AutoLootDefault', 1);");
+				Lua.DoString("SetCVar('autoDismountFlying', 1);");
+				CharacterSettings.Instance.LootMobs = true;
+				CharacterSettings.Instance.Save();
+				Logging.Write(System.Windows.Media.Colors.MediumPurple, "> [Ready to bot!]");
+			]]>
+			</Code>
+			<Code File="RunCode" Type="Definition">
+				<![CDATA[
+						bool DoQuest(params uint[] questIds)
+						{
+							foreach (var questId in questIds)
+							{
+								if (HasQuest(questId) && !IsQuestCompleted(questId)) return true;
+							}
+							return false;
+						}
+						bool NeedsQuest(params uint[] questIds)
+						{
+							foreach (var questId in questIds)
+							{
+								if (!HasQuest(questId) && !IsQuestCompleted(questId)) return true;
+							}
+							return false;
+						}
+						bool NeedsBreadcrumbQuest(params uint[] questIds)
+						{
+							foreach (var questId in questIds)
+							{
+								if (IsQuestCompleted(questId)) return false;
+							}
+							return true;
+						}
+						bool QuestDone(params uint[] questIds)
+						{
+							foreach (var questId in questIds)
+							{
+								if (HasQuest(questId) && IsQuestCompleted(questId)) return true;
+							}
+							return false;
+						}
+						bool QuestFlaggedCompleted(params uint[] questIds)
+						{
+							foreach (var questId in questIds)
+							{
+								return Lua.GetReturnVal<bool>($"return IsQuestFlaggedCompleted({questId});", 0);
+							}
+							return false;
+						}
+						async Task SkipCutscene(int preWait = 3000, int postWait = 3000)
+						{
+					// Add detection of cutscene here.
+							await Coroutine.Sleep(preWait);
+					// Test and improve the working method.
+							Lua.DoString("MovieFrame:StopMovie(); CinematicFrame_CancelCinematic(); StopCinematic();");
+							await Coroutine.Sleep(postWait);
+						}
+					]]>
+			</Code>
+		<!-- END RunCode Methods -->
+
+		<!-- Variant Quest Id class order
+		Monk, Warlock, Druid, Mage, Shaman, Priest, Rogue, Hunter, Warrior --> 
+
+		<PickUp QuestName="The Rise of the Darkspear" VariantQuestIds="31159, 26272, 24764, 24750, 24758, 24782, 24770, 24776, 24607" GiverName="Jin&apos;thala" GiverId="37951" X="-1171.45" Y="-5263.65" Z="0.8481997" />
+
+		<If Condition="Me.Class == WoWClass.Druid" >
+			<TurnIn QuestName="The Rise of the Darkspear" QuestId="24764" TurnInName="Zen&apos;tabra" TurnInId="38243" X="-1175.964" Y="-5536.096" Z="11.94465" />
+			<PickUp QuestName="The Basics: Hitting Things" QuestId="24765" GiverName="Zen&apos;tabra" GiverId="38243" X="-1175.964" Y="-5536.096" Z="11.94465" />
+		</If>
+		<If Condition="Me.Class == WoWClass.Monk">
+			<TurnIn QuestName="The Rise of the Darkspear" QuestId="31159" TurnInName="Zabrax" TurnInId="63310" X="-1149.391" Y="-5441.252" Z="12.04295" />
+			<PickUp QuestName="The Basics: Hitting Things" QuestId="31158" GiverName="Zabrax" GiverId="63310" X="-1149.391" Y="-5441.252" Z="12.04295" />
+		</If>
+		<If Condition="Me.Class == WoWClass.Warlock">
+			<TurnIn QuestName="The Rise of the Darkspear" QuestId="26272" TurnInName="Voldreka" TurnInId="42618" X="-1125.028" Y="-5399.021" Z="12.03099" />
+			<PickUp QuestName="The Basics: Hitting Things" QuestId="26273" GiverName="Voldreka" GiverId="42618" X="-1125.028" Y="-5399.021" Z="12.03099" />
+		</If>
+		<If Condition="Me.Class == WoWClass.Mage">
+			<TurnIn QuestName="The Rise of the Darkspear" QuestId="24750" TurnInName="Soratha" TurnInId="38246" X="-1152.237" Y="-5572.602" Z="11.93535" />
+			<PickUp QuestName="The Basics: Hitting Things" QuestId="24751" GiverName="Soratha" GiverId="38246" X="-1152.237" Y="-5572.602" Z="11.93535" />
+		</If>
+		<If Condition="Me.Class == WoWClass.Shaman">
+			<TurnIn QuestName="The Rise of the Darkspear" QuestId="24758" TurnInName="Nekali" TurnInId="38242" X="-1161.943" Y="-5398.703" Z="12.46597" />
+			<PickUp QuestName="The Basics: Hitting Things" QuestId="24759" GiverName="Nekali" GiverId="38242" X="-1161.943" Y="-5398.703" Z="12.46597" />
+		</If>
+		<If Condition="Me.Class == WoWClass.Priest">
+			<TurnIn QuestName="The Rise of the Darkspear" QuestId="24782" TurnInName="Tunari" TurnInId="38245" X="-1119.309" Y="-5537.869" Z="11.96157" />
+			<PickUp QuestName="The Basics: Hitting Things" QuestId="24783" GiverName="Tunari" GiverId="38245" X="-1119.309" Y="-5537.869" Z="11.96157" />
+		</If>
+		<If Condition="Me.Class == WoWClass.Rogue">
+			<TurnIn QuestName="The Rise of the Darkspear" QuestId="24770" TurnInName="Legati" TurnInId="38244" X="-1124.257" Y="-5449.942" Z="11.98991" />
+			<PickUp QuestName="The Basics: Hitting Things" QuestId="24771" GiverName="Legati" GiverId="38244" X="-1124.257" Y="-5449.942" Z="11.98991" />
+		</If>
+		<If Condition="Me.Class == WoWClass.Hunter">
+			<TurnIn QuestName="The Rise of the Darkspear" QuestId="24776" TurnInName="Ortezza" TurnInId="38247" X="-1126.633" Y="-5506.77" Z="11.94382" />
+			<PickUp QuestName="The Basics: Hitting Things" QuestId="24777" GiverName="Ortezza" GiverId="38247" X="-1126.633" Y="-5506.77" Z="11.94382" />
+		</If>
+		<If Condition="Me.Class == WoWClass.Warrior">
+			<TurnIn QuestName="The Rise of the Darkspear" QuestId="24607" TurnInName="Nortet" TurnInId="38037" X="-1167.743" Y="-5444.301" Z="12.01966" />
+			<PickUp QuestName="The Basics: Hitting Things" QuestId="24639" GiverName="Nortet" GiverId="38037" X="-1167.743" Y="-5444.301" Z="12.01966" />
+		</If>
+
+		<If Condition="DoQuest(31158, 26273, 24765, 24751, 24759, 24783, 24771, 24777, 24639)" >
+			<Code File="RunCode"><![CDATA[ TreeHooks.Instance.InsertHook("Questbot_Main", 0, _stopcombatComposite ?? (_stopcombatComposite = new  CommonBehaviors.Actions.ActionRunCoroutine(ctx => StopCombat()))); ]]> </Code>
+			<Code File="RunCode" Type="Definition" ><![CDATA[
+					private Styx.TreeSharp.Composite _stopcombatComposite;
+					public async Task<bool> StopCombat()
+					{
+						if (DoQuest(31158, 26273, 24765, 24751, 24759, 24783, 24771, 24777, 24639)) return false;
+						if (BotPoi.Current.Type != PoiType.Kill) return false;
+						BotPoi.Clear();
+						return true;
+					}
+			]]>
+			</Code>
+			<Code File="KillUntilComplete" MobId="38038" VariantQuestIds="31158, 26273, 24765, 24751, 24759, 24783, 24771, 24777, 24639" />
+			<Code File="RunCode"><![CDATA[ TreeHooks.Instance.RemoveHook("Questbot_Main", _stopcombatComposite); ]]></Code>
+		</If>
+
+		<If Condition="Me.Class == WoWClass.Monk">
+			<TurnIn QuestName="The Basics: Hitting Things" QuestId="31158" TurnInName="Zabrax" TurnInId="63310" X="-1149.391" Y="-5441.252" Z="12.04295" />
+			<PickUp QuestName="A Rough Start" QuestId="31160" GiverName="Zabrax" GiverId="63310" X="-1149.391" Y="-5441.252" Z="12.04295" />
+		</If>
+		<If Condition="Me.Class == WoWClass.Warlock">
+			<TurnIn QuestName="The Basics: Hitting Things" QuestId="26273" TurnInName="Voldreka" TurnInId="42618" X="-1125.028" Y="-5399.021" Z="12.03099" />
+			<PickUp QuestName="A Rough Start" QuestId="26275" GiverName="Voldreka" GiverId="42618" X="-1125.028" Y="-5399.021" Z="12.03099" />
+		</If>
+		<If Condition="Me.Class == WoWClass.Druid" >
+			<TurnIn QuestName="The Basics: Hitting Things" QuestId="24765" TurnInName="Zen&apos;tabra" TurnInId="38243" X="-1175.964" Y="-5536.096" Z="11.94465" />
+			<PickUp QuestName="A Rough Start" QuestId="24767" GiverName="Zen&apos;tabra" GiverId="38243" X="-1175.964" Y="-5536.096" Z="11.94465" />
+		</If>
+		<If Condition="Me.Class == WoWClass.Mage">
+			<TurnIn QuestName="The Basics: Hitting Things" QuestId="24751" TurnInName="Soratha" TurnInId="38246" X="-1152.237" Y="-5572.602" Z="11.93535" />
+			<PickUp QuestName="A Rough Start" QuestId="24753" GiverName="Soratha" GiverId="38246" X="-1152.237" Y="-5572.602" Z="11.93535" />
+		</If>
+		<If Condition="Me.Class == WoWClass.Shaman">
+			<TurnIn QuestName="The Basics: Hitting Things" QuestId="24759" TurnInName="Nekali" TurnInId="38242" X="-1161.943" Y="-5398.703" Z="12.46597" />
+			<PickUp QuestName="A Rough Start" QuestId="24761" GiverName="Nekali" GiverId="38242" X="-1161.943" Y="-5398.703" Z="12.46597" />
+		</If>
+		<If Condition="Me.Class == WoWClass.Priest">
+			<TurnIn QuestName="The Basics: Hitting Things" QuestId="24783" TurnInName="Tunari" TurnInId="38245" X="-1119.309" Y="-5537.869" Z="11.96157" />
+			<PickUp QuestName="A Rough Start" QuestId="24785" GiverName="Tunari" GiverId="38245" X="-1119.309" Y="-5537.869" Z="11.96157" />
+		</If>
+		<If Condition="Me.Class == WoWClass.Rogue">
+			<TurnIn QuestName="The Basics: Hitting Things" QuestId="24771" TurnInName="Legati" TurnInId="38244" X="-1124.257" Y="-5449.942" Z="11.98991" />
+			<PickUp QuestName="A Rough Start" QuestId="24773" GiverName="Legati" GiverId="38244" X="-1124.257" Y="-5449.942" Z="11.98991" />
+		</If>
+		<If Condition="Me.Class == WoWClass.Hunter">
+			<TurnIn QuestName="The Basics: Hitting Things" QuestId="24777" TurnInName="Ortezza" TurnInId="38247" X="-1126.633" Y="-5506.77" Z="11.94382" />
+			<PickUp QuestName="A Rough Start" QuestId="24779" GiverName="Ortezza" GiverId="38247" X="-1126.633" Y="-5506.77" Z="11.94382" />
+		</If>
+		<If Condition="Me.Class == WoWClass.Warrior">
+			<TurnIn QuestName="The Basics: Hitting Things" QuestId="24639" TurnInName="Nortet" TurnInId="38037" X="-1167.743" Y="-5444.301" Z="12.01966" />
+			<PickUp QuestName="A Rough Start" QuestId="24641" GiverName="Nortet" GiverId="38037" X="-1167.743" Y="-5444.301" Z="12.01966" />
+		</If>
+
+		<Code File="KillUntilComplete" MobId="38046" VariantQuestIds="31160, 26275, 24767, 24753, 24761, 24785, 24773, 24779, 24641" >
+			<HuntingGrounds>
+				<Hotspot X="-1094.444" Y="-5616.467" Z="14.57797" />
+				<Hotspot X="-1195.334" Y="-5616.909" Z="14.79196" />
+				<Hotspot X="-1232.066" Y="-5500.679" Z="14.70079" />
+			</HuntingGrounds>
+		</Code>
+
+		<If Condition="Me.Class == WoWClass.Monk">
+			<TurnIn QuestName="A Rough Start" QuestId="31160" TurnInName="Zabrax" TurnInId="63310" X="-1149.391" Y="-5441.252" Z="12.04295" />
+			<PickUp QuestName="Proving Pit" QuestId="31161" GiverName="Zabrax" GiverId="63310" X="-1149.391" Y="-5441.252" Z="12.04295" />
+		</If>
+		<If Condition="Me.Class == WoWClass.Warlock">
+			<TurnIn QuestName="A Rough Start" QuestId="26275" TurnInName="Voldreka" TurnInId="42618" X="-1125.028" Y="-5399.021" Z="12.03099" />
+			<PickUp QuestName="Proving Pit" QuestId="26276" GiverName="Voldreka" GiverId="42618" X="-1125.028" Y="-5399.021" Z="12.03099" />
+		</If>
+		<If Condition="Me.Class == WoWClass.Druid" >
+			<TurnIn QuestName="A Rough Start" QuestId="24767" TurnInName="Zen&apos;tabra" TurnInId="38243" X="-1175.964" Y="-5536.096" Z="11.94465" />
+			<PickUp QuestName="Proving Pit" QuestId="24768" GiverName="Zen&apos;tabra" GiverId="38243" X="-1175.964" Y="-5536.096" Z="11.94465" />
+		</If>
+		<If Condition="Me.Class == WoWClass.Mage">
+			<TurnIn QuestName="A Rough Start" QuestId="24753" TurnInName="Soratha" TurnInId="38246" X="-1152.237" Y="-5572.602" Z="11.93535" />
+			<PickUp QuestName="Proving Pit" QuestId="24754" GiverName="Soratha" GiverId="38246" X="-1152.237" Y="-5572.602" Z="11.93535" />
+		</If>
+		<If Condition="Me.Class == WoWClass.Shaman">
+			<TurnIn QuestName="A Rough Start" QuestId="24761" TurnInName="Nekali" TurnInId="38242" X="-1161.943" Y="-5398.703" Z="12.46597" />
+			<PickUp QuestName="Proving Pit" QuestId="24762" GiverName="Nekali" GiverId="38242" X="-1161.943" Y="-5398.703" Z="12.46597" />
+		</If>
+		<If Condition="Me.Class == WoWClass.Priest">
+			<TurnIn QuestName="A Rough Start" QuestId="24785" TurnInName="Tunari" TurnInId="38245" X="-1119.309" Y="-5537.869" Z="11.96157" />
+			<PickUp QuestName="Proving Pit" QuestId="24786" GiverName="Tunari" GiverId="38245" X="-1119.309" Y="-5537.869" Z="11.96157" />
+		</If>
+		<If Condition="Me.Class == WoWClass.Rogue">
+			<TurnIn QuestName="A Rough Start" QuestId="24773" TurnInName="Legati" TurnInId="38244" X="-1124.257" Y="-5449.942" Z="11.98991" />
+			<PickUp QuestName="Proving Pit" QuestId="24774" GiverName="Legati" GiverId="38244" X="-1124.257" Y="-5449.942" Z="11.98991" />
+		</If>
+		<If Condition="Me.Class == WoWClass.Hunter">
+			<TurnIn QuestName="A Rough Start" QuestId="24779" TurnInName="Ortezza" TurnInId="38247" X="-1126.633" Y="-5506.77" Z="11.94382" />
+			<PickUp QuestName="Proving Pit" QuestId="24780" GiverName="Ortezza" GiverId="38247" X="-1126.633" Y="-5506.77" Z="11.94382" />
+		</If>
+		<If Condition="Me.Class == WoWClass.Warrior">
+			<TurnIn QuestName="A Rough Start" QuestId="24641" TurnInName="Nortet" TurnInId="38037" X="-1167.743" Y="-5444.301" Z="12.01966" />
+			<PickUp QuestName="Proving Pit" QuestId="24642" GiverName="Nortet" GiverId="38037" X="-1167.743" Y="-5444.301" Z="12.01966" />
+		</If>
+
+		<While Condition="DoQuest(31161, 26276, 24768, 24754, 24762, 24786, 24774, 24780, 24642)" >
+			<Code File="InteractWith" MobId="39062" GossipOptions="1" NonCompeteDistance="0" InteractBlacklistTimeInSeconds="1" VariantQuestIds="31161, 26276, 24768, 24754, 24762, 24786, 24774, 24780, 24642" X="-1162.095" Y="-5531.158" Z="11.97586" TerminateWhen="Unit(38142, u =&gt; u.Attackable) != null" />
+			<Code File="KillUntilComplete" MobId="38142" VariantQuestIds="31161, 26276, 24768, 24754, 24762, 24786, 24774, 24780, 24642" X="-1148.786" Y="-5532.944" Z="8.105022" TerminateWhen="Unit(38142, u =&gt; u.Attackable) == null" />
+		</While>
+
+		<If Condition="Me.Class == WoWClass.Monk">
+			<TurnIn QuestName="Proving Pit" QuestId="31161" TurnInName="Zabrax" TurnInId="63310" X="-1149.391" Y="-5441.252" Z="12.04295" />
+			<PickUp QuestName="More Than Expected" QuestId="31163" GiverName="Zabrax" GiverId="63310" X="-1149.391" Y="-5441.252" Z="12.04295" />
+		</If>
+		<If Condition="Me.Class == WoWClass.Warlock">
+			<TurnIn QuestName="Proving Pit" QuestId="26276" TurnInName="Voldreka" TurnInId="42618" X="-1125.028" Y="-5399.021" Z="12.03099" />
+			<PickUp QuestName="More Than Expected" QuestId="26277" GiverName="Voldreka" GiverId="42618" X="-1125.028" Y="-5399.021" Z="12.03099" />
+		</If>
+		<If Condition="Me.Class == WoWClass.Druid" >
+			<TurnIn QuestName="Proving Pit" QuestId="24768" TurnInName="Zen&apos;tabra" TurnInId="38243" X="-1175.964" Y="-5536.096" Z="11.94465" />
+			<PickUp QuestName="More Than Expected" QuestId="24769" GiverName="Zen&apos;tabra" TurnInId="38243" X="-1175.964" Y="-5536.096" Z="11.94465" />
+		</If>
+		<If Condition="Me.Class == WoWClass.Mage">
+			<TurnIn QuestName="Proving Pit" QuestId="24754" TurnInName="Soratha" TurnInId="38246" X="-1152.237" Y="-5572.602" Z="11.93535" />
+			<PickUp QuestName="More Than Expected" QuestId="24755" GiverName="Soratha" GiverId="38246" X="-1152.237" Y="-5572.602" Z="11.93535" />
+		</If>
+		<If Condition="Me.Class == WoWClass.Shaman">
+			<TurnIn QuestName="Proving Pit" QuestId="24762" TurnInName="Nekali" TurnInId="38242" X="-1161.943" Y="-5398.703" Z="12.46597" />
+			<PickUp QuestName="More Than Expected" QuestId="24763" GiverName="Nekali" GiverId="38242" X="-1161.943" Y="-5398.703" Z="12.46597" />
+		</If>
+		<If Condition="Me.Class == WoWClass.Priest">
+			<TurnIn QuestName="Proving Pit" QuestId="24786" TurnInName="Tunari" TurnInId="38245" X="-1119.309" Y="-5537.869" Z="11.96157" />
+			<PickUp QuestName="More Than Expected" QuestId="24787" GiverName="Tunari" GiverId="38245" X="-1119.309" Y="-5537.869" Z="11.96157" />
+		</If>
+		<If Condition="Me.Class == WoWClass.Rogue">
+			<TurnIn QuestName="Proving Pit" QuestId="24774" TurnInName="Legati" TurnInId="38244" X="-1124.257" Y="-5449.942" Z="11.98991" />
+			<PickUp QuestName="More Than Expected" QuestId="24775" GiverName="Legati" GiverId="38244" X="-1124.257" Y="-5449.942" Z="11.98991" />
+		</If>
+		<If Condition="Me.Class == WoWClass.Hunter">
+			<TurnIn QuestName="Proving Pit" QuestId="24780" TurnInName="Ortezza" TurnInId="38247" X="-1126.633" Y="-5506.77" Z="11.94382" />
+			<PickUp QuestName="More Than Expected" QuestId="24781" GiverName="Ortezza" GiverId="38247" X="-1126.633" Y="-5506.77" Z="11.94382" />
+		</If>
+		<If Condition="Me.Class == WoWClass.Warrior">
+			<TurnIn QuestName="Proving Pit" QuestId="24642" TurnInName="Nortet" TurnInId="38037" X="-1167.743" Y="-5444.301" Z="12.01966" />
+			<PickUp QuestName="More Than Expected" QuestId="24643" GiverName="Nortet" GiverId="38037" X="-1167.743" Y="-5444.301" Z="12.01966" />
+		</If>
+
+		<TurnIn QuestName="More Than Expected" VariantQuestIds="31163, 26277, 24769, 24755, 24763, 24787, 24775, 24781, 24643" TurnInName="Vol&apos;jin" TurnInId="38966" X="-1314.463" Y="-5599.671" Z="23.71969" />
+
+		<PickUp QuestName="Moraya" QuestId="25064" GiverName="Vol&apos;jin" GiverId="38966" X="-1314.463" Y="-5599.671" Z="23.71969" />
+
+		<PickUp QuestName="Crab Fishin&apos;" QuestId="25037" GiverName="Tora&apos;jin" GiverId="39007" X="-1277.715" Y="-5584.758" Z="21.00058" />
+		<Code File="KillUntilComplete" MobId="39004" QuestId="25037" >
+			<HuntingGrounds>
+				<Hotspot X="-1195.888" Y="-5692.071" Z="1.144262" />
+				<Hotspot X="-1105.067" Y="-5690.657" Z="-0.3782958" />
+			</HuntingGrounds>
+		</Code>
+		<TurnIn QuestName="Crab Fishin&apos;" QuestId="25037" TurnInName="Tora&apos;jin" TurnInId="39007" X="-1281.243" Y="-5588.295" Z="21.00638" />
+
+		<TurnIn QuestName="Moraya" QuestId="25064" TurnInName="Moraya" TurnInId="38005" X="-1292.582" Y="-5521.677" Z="20.76698" />
+		<PickUp QuestName="A Troll&apos;s Truest Companion" QuestId="24622" GiverName="Moraya" GiverId="38005" X="-1292.582" Y="-5521.677" Z="20.76698" />
+		<TurnIn QuestName="A Troll&apos;s Truest Companion" QuestId="24622" TurnInName="Kijara" TurnInId="37969" X="-1547.254" Y="-5311.067" Z="8.211567" />
+		<PickUp QuestName="Saving the Young" QuestId="24623" GiverName="Kijara" GiverId="37969" X="-1547.254" Y="-5311.067" Z="8.211567" />
+		<PickUp QuestName="Mercy for the Lost" QuestId="24624" GiverName="Tegashi" GiverId="37987" X="-1548.225" Y="-5314.966" Z="7.974018" />
+		<PickUp QuestName="Consort of the Sea Witch" QuestId="24625" GiverName="Tegashi" GiverId="37987" X="-1548.225" Y="-5314.966" Z="7.974018" />
+
+		<Code File="KillUntilComplete" MobId="39072" QuestId="24625" X="-1353.536" Y="-5159.622" Z="13.4896" />
+
+		<Code File="InteractWith" MobId="39157" CollectionDistance="200" InteractByUsingItemId="52283" QuestId="24623" QuestObjectiveIndex="1" >
+			<HuntingGrounds>
+				<Hotspot X="-1306.902" Y="-5174.234" Z="1.187117" />
+				<Hotspot X="-1397.547" Y="-5134.247" Z="1.968089" />
+			</HuntingGrounds>
+		</Code>
+
+		<Code File="KillUntilComplete" MobId="37961" QuestId="24624" >
+			<HuntingGrounds>
+				<Hotspot X="-1306.902" Y="-5174.234" Z="1.187117" />
+				<Hotspot X="-1397.547" Y="-5134.247" Z="1.968089" />
+			</HuntingGrounds>
+		</Code>
+
+		<TurnIn QuestName="Mercy for the Lost" QuestId="24624" TurnInName="Tegashi" TurnInId="37987" X="-1545.624" Y="-5313.12" Z="8.049932" />
+		<TurnIn QuestName="Consort of the Sea Witch" QuestId="24625" TurnInName="Tegashi" TurnInId="37987" X="-1545.624" Y="-5313.12" Z="8.049932" />
+		<TurnIn QuestName="Saving the Young" QuestId="24623" TurnInName="Kijara" TurnInId="37969" X="-1546.085" Y="-5312.521" Z="8.107081" />
+
+		<PickUp QuestName="Young and Vicious" QuestId="24626" GiverName="Kijara" GiverId="37969" X="-1546.085" Y="-5312.521" Z="8.107081" />
+		<While Condition="DoQuest(24626)" >
+			<Code File="InteractWith" MobId="38002" Range="19" CollectionDistance="200" NonCompeteDistance="0" InteractByUsingItemId="50053" QuestId="24626" X="-1550.001" Y="-5299.74" Z="8.991699" TerminateWhen="Me.InVehicle" />
+			<Code File="NoCombatMoveTo" QuestId="24626" X="-1305.38" Y="-5449.925" Z="14.65966" TerminateWhen="!Me.InVehicle" />
+		</While>
+		<TurnIn QuestName="Young and Vicious" QuestId="24626" TurnInName="Moraya" TurnInId="38005" X="-1294.191" Y="-5521.454" Z="20.76723" />
+
+		<PickUp QuestName="Breaking the Line" QuestId="25035" GiverName="Tortunga" GiverId="38440" X="-1327.71" Y="-5553.412" Z="21.52649" />
+		<Code File="InteractWith" MobId="38989" GossipOptions="1" WaitTime="35000" X="-1331.409" Y="-5555.198" Z="21.4374" TerminateWhen="!HasQuest(25035) &amp;&amp; Unit(38989) == null" />
+		<Code File="WaitTimer" WaitTime="40000" TerminateWhen="!Me.InVehicle" />
+		<TurnIn QuestName="Breaking the Line" QuestId="25035" TurnInName="Morakki" TurnInId="38442" X="-805.5458" Y="-5554.75" Z="4.603838" />
+
+		<PickUp QuestName="No More Mercy" QuestId="24812" GiverName="Morakki" GiverId="38442" X="-805.5458" Y="-5554.75" Z="4.603838" />
+		<PickUp QuestName="Territorial Fetish" QuestId="24813" GiverName="Morakki" GiverId="38442" X="-805.5458" Y="-5554.75" Z="4.603838" />
+
+		<Code File="InteractWith" MobId="202113" CollectionDistance="200" InteractByUsingItemId="52065" QuestId="24813" QuestObjectiveIndex="1" >
+			<HuntingGrounds>
+				<Hotspot X="-745.6462" Y="-5596.807" Z="-8.219222" />
+				<Hotspot X="-663.8286" Y="-5651.184" Z="-25.14141" />
+			</HuntingGrounds>
+		</Code>
+
+		<Code File="KillUntilComplete" MobIds="38300, 38301" QuestId="24812" >
+			<HuntingGrounds>
+				<Hotspot X="-745.6462" Y="-5596.807" Z="-8.219222" />
+				<Hotspot X="-663.8286" Y="-5651.184" Z="-25.14141" />
+			</HuntingGrounds>
+		</Code>
+
+		<DisableBehavior Name="Vendor" /> <!-- If we vendor, the bot may get confused and try to turn in the quests below to the wrong Morakki NPC -->
+
+		<TurnIn QuestName="No More Mercy" QuestId="24812" TurnInName="Morakki" TurnInId="38442" X="-799.3029" Y="-5557.472" Z="4.405144" />
+		<TurnIn QuestName="Territorial Fetish" QuestId="24813" TurnInName="Morakki" TurnInId="38442" X="-799.3029" Y="-5557.472" Z="4.405144" />
+
+		<EnableBehavior Name="Vendor" />
+
+		<Checkpoint Level="5.5" /> <!-- Would be 5, but we don't want to level up inside of the cave and not turn in quests -->
+
+		<Code File="LoadProfile" ProfileName="..\Kalimdor\Durotar.xml" />
+
+	</QuestOrder>
+</HBProfile>

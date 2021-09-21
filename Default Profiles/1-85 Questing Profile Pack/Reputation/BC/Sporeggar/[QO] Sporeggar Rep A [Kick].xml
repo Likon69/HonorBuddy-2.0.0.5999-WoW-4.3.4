@@ -1,0 +1,238 @@
+﻿<HBProfile>
+	<Name>[QO] Sporeggar Rep A [Kick]</Name>
+   
+	<MinLevel>1</MinLevel>
+	<MaxLevel>86</MaxLevel>
+   
+	<MinDurability>0.2</MinDurability>
+	<MinFreeBagSlots>2</MinFreeBagSlots>
+	
+	<MailGrey>False</MailGrey>
+	<MailWhite>False</MailWhite>
+	<MailGreen>False</MailGreen>
+	<MailBlue>True</MailBlue>
+	<MailPurple>True</MailPurple>
+   
+	<SellGrey>True</SellGrey>
+	<SellWhite>True</SellWhite>
+	<SellGreen>True</SellGreen>
+	<SellBlue>False</SellBlue>
+	<SellPurple>False</SellPurple>
+   
+	<TargetElites>True</TargetElites>
+
+	<AvoidMobs>
+	</AvoidMobs>
+	<Blackspots>
+		<Blackspot X="292.1132" Y="8487.395" Z="43.51323" Radius="42.63336" />
+		<Blackspot X="486.4735" Y="8158.848" Z="21.46613" Radius="5.398831" />
+	</Blackspots>
+
+	<Mailboxes>
+		<Mailbox X="-2670.931" Y="7288.093" Z="36.30991" /> <!-- Nagrand -->
+	</Mailboxes>
+ 
+	<Vendors>
+		<Vendor Name="Paulsta'ats" Entry="23007" Type="Repair" X="-2054.747" Y="8609.072" Z="22.16219" />
+	</Vendors>
+
+	<Quest Name="Now That We're Still Friends..." Id="9726">
+		<Objective Type="KillMob" MobId="18089" KillCount="12">
+			<Hotspots>
+				<Hotspot X="572.5067" Y="8188.215" Z="18.86026" />
+				<Hotspot X="470.2513" Y="8161.388" Z="22.77806" />
+				<Hotspot X="389.2868" Y="8156.895" Z="22.21127" />
+				<Hotspot X="333.3442" Y="8117.49" Z="17.40527" />
+				<Hotspot X="437.4489" Y="8097.01" Z="17.38597" />
+				<Hotspot X="506.4895" Y="8065.697" Z="23.40695" />
+				<Hotspot X="531.1058" Y="8129.181" Z="21.43892" />
+				<Hotspot X="603.675" Y="8082.076" Z="17.73405" />
+				<Hotspot X="637.6079" Y="8133.776" Z="23.9664" />
+				<Hotspot X="665.0836" Y="8181.369" Z="22.95399" />
+				<Hotspot X="711.2183" Y="8109.109" Z="24.01489" />
+				<Hotspot X="662.7373" Y="8224.507" Z="22.91521" />
+				<Hotspot X="606.9743" Y="8157.605" Z="20.6932" />
+				<Hotspot X="560.7531" Y="8193.819" Z="18.08574" />
+			</Hotspots>
+		</Objective>
+		<Objective Type="KillMob" MobId="18088" KillCount="6">
+			<Hotspots>
+				<Hotspot X="572.5067" Y="8188.215" Z="18.86026" />
+				<Hotspot X="470.2513" Y="8161.388" Z="22.77806" />
+				<Hotspot X="389.2868" Y="8156.895" Z="22.21127" />
+				<Hotspot X="333.3442" Y="8117.49" Z="17.40527" />
+				<Hotspot X="437.4489" Y="8097.01" Z="17.38597" />
+				<Hotspot X="506.4895" Y="8065.697" Z="23.40695" />
+				<Hotspot X="531.1058" Y="8129.181" Z="21.43892" />
+				<Hotspot X="603.675" Y="8082.076" Z="17.73405" />
+				<Hotspot X="637.6079" Y="8133.776" Z="23.9664" />
+				<Hotspot X="665.0836" Y="8181.369" Z="22.95399" />
+				<Hotspot X="711.2183" Y="8109.109" Z="24.01489" />
+				<Hotspot X="662.7373" Y="8224.507" Z="22.91521" />
+				<Hotspot X="606.9743" Y="8157.605" Z="20.6932" />
+				<Hotspot X="560.7531" Y="8193.819" Z="18.08574" />
+			</Hotspots>
+		</Objective>
+	</Quest>
+   	
+	<Quest Name="Now That We're Still Friends..." Id="9727">
+		<Objective Type="KillMob" MobId="18089" KillCount="12">
+			<Hotspots>
+				<Hotspot X="572.5067" Y="8188.215" Z="18.86026" />
+				<Hotspot X="470.2513" Y="8161.388" Z="22.77806" />
+				<Hotspot X="389.2868" Y="8156.895" Z="22.21127" />
+				<Hotspot X="333.3442" Y="8117.49" Z="17.40527" />
+				<Hotspot X="437.4489" Y="8097.01" Z="17.38597" />
+				<Hotspot X="506.4895" Y="8065.697" Z="23.40695" />
+				<Hotspot X="531.1058" Y="8129.181" Z="21.43892" />
+				<Hotspot X="603.675" Y="8082.076" Z="17.73405" />
+				<Hotspot X="637.6079" Y="8133.776" Z="23.9664" />
+				<Hotspot X="665.0836" Y="8181.369" Z="22.95399" />
+				<Hotspot X="711.2183" Y="8109.109" Z="24.01489" />
+				<Hotspot X="662.7373" Y="8224.507" Z="22.91521" />
+				<Hotspot X="606.9743" Y="8157.605" Z="20.6932" />
+				<Hotspot X="560.7531" Y="8193.819" Z="18.08574" />
+			</Hotspots>
+		</Objective>
+		<Objective Type="KillMob" MobId="18088" KillCount="6">
+			<Hotspots>
+				<Hotspot X="572.5067" Y="8188.215" Z="18.86026" />
+				<Hotspot X="470.2513" Y="8161.388" Z="22.77806" />
+				<Hotspot X="389.2868" Y="8156.895" Z="22.21127" />
+				<Hotspot X="333.3442" Y="8117.49" Z="17.40527" />
+				<Hotspot X="437.4489" Y="8097.01" Z="17.38597" />
+				<Hotspot X="506.4895" Y="8065.697" Z="23.40695" />
+				<Hotspot X="531.1058" Y="8129.181" Z="21.43892" />
+				<Hotspot X="603.675" Y="8082.076" Z="17.73405" />
+				<Hotspot X="637.6079" Y="8133.776" Z="23.9664" />
+				<Hotspot X="665.0836" Y="8181.369" Z="22.95399" />
+				<Hotspot X="711.2183" Y="8109.109" Z="24.01489" />
+				<Hotspot X="662.7373" Y="8224.507" Z="22.91521" />
+				<Hotspot X="606.9743" Y="8157.605" Z="20.6932" />
+				<Hotspot X="560.7531" Y="8193.819" Z="18.08574" />
+			</Hotspots>
+		</Objective>
+	</Quest>
+   	
+	<QuestOrder>
+	
+	
+			<!-- Grind to Friendly -->
+			<If Condition="Me.GetReputationLevelWith(970) &lt; Styx.WoWUnitReaction.Friendly" >
+	
+	<CustomBehavior File="UserSettings" LootMobs="True" PullDistance="20" TrainNewSkills="False" LearnFlightPaths="False" KillBetweenHotspots="True" LogoutForInactivity="False" />
+	
+			<If Condition="((!HasQuest(9739)) &amp;&amp; (!IsQuestCompleted(9739)))" >
+				<CustomBehavior File="FlyTo" X="-214.1056" Y="8514.414" Z="22.89437" />
+				<CustomBehavior File="ForcedDismount" />
+			</If>
+		<PickUp QuestName="The Sporelings' Plight" QuestId="9739" GiverName="Fahssn" GiverId="17923" X="-214.1056" Y="8514.414" Z="22.89437" />
+			<If Condition="((!HasQuest(9743)) &amp;&amp; (!IsQuestCompleted(9743)))" >
+				<CustomBehavior File="FlyTo" X="-214.1056" Y="8514.414" Z="22.89437" />
+				<CustomBehavior File="ForcedDismount" />
+			</If>
+		<PickUp QuestName="Natural Enemies" QuestId="9743" GiverName="Fahssn" GiverId="17923" X="-214.1056" Y="8514.414" Z="22.89437" />
+			<While Condition="((HasQuest(9739)) &amp;&amp; (!IsQuestCompleted(9739)))">
+				<CustomBehavior File="InteractWith" QuestId="9739" ObjectType="Gameobject" MobId="182069" NumOfTimes="3" CollectionDistance="500" X="-80.25971" Y="8692.001" Z="19.71755" />
+				<CustomBehavior File="InteractWith" QuestId="9739" ObjectType="Gameobject" MobId="182069" NumOfTimes="3" CollectionDistance="500" X="-102.7065" Y="8836.516" Z="18.96124" />
+			</While>
+			<Objective QuestName="Natural Enemies" QuestId="9743" Type="CollectItem" ItemId="24291" CollectCount="6" /> <!-- Bog Lord Tendril -->
+			<If Condition="((HasQuest(9743)) &amp;&amp; (IsQuestCompleted(9743)))" >
+				<CustomBehavior File="FlyTo" X="-214.1056" Y="8514.414" Z="22.89437" />
+				<CustomBehavior File="ForcedDismount" />
+			</If>
+		<TurnIn QuestName="Natural Enemies" QuestId="9743" TurnInName="Fahssn" TurnInId="17923" X="-214.1056" Y="8514.414" Z="22.89437" />
+			<If Condition="((HasQuest(9739)) &amp;&amp; (IsQuestCompleted(9739)))" >
+				<CustomBehavior File="FlyTo" X="-214.1056" Y="8514.414" Z="22.89437" />
+				<CustomBehavior File="ForcedDismount" />
+			</If>
+		<TurnIn QuestName="The Sporelings' Plight" QuestId="9739" TurnInName="Fahssn" TurnInId="17923" X="-214.1056" Y="8514.414" Z="22.89437" />
+	
+			<!-- Farming for bog lord tendrils - 6 for each turnin -->
+			<While Condition="Me.GetReputationLevelWith(970) &lt; Styx.WoWUnitReaction.Friendly" >
+				<If Condition="(GetItemCount(24291) &lt; 6)" >
+						<SetGrindArea>
+							<GrindArea>
+								<Factions>1706</Factions> <!-- [Giant] -->
+								<Hotspots>
+									<Hotspot X="-179.9534" Y="8594.732" Z="18.43291" />
+									<Hotspot X="-174.8049" Y="8666.307" Z="18.05272" />
+									<Hotspot X="-80.63025" Y="8589.877" Z="18.76948" />
+									<Hotspot X="-1.493331" Y="8587.292" Z="18.34122" />
+									<Hotspot X="-46.8652" Y="8675.612" Z="18.23368" />
+									<Hotspot X="-165.8889" Y="8737.738" Z="18.10693" />
+									<Hotspot X="-77.49797" Y="8803.201" Z="18.091" />
+									<Hotspot X="-33.64203" Y="8873.975" Z="18.77479" />
+									<Hotspot X="-161.6271" Y="8894.573" Z="18.44421" />
+									<Hotspot X="-112.6774" Y="8967.361" Z="21.52937" />
+									<Hotspot X="-185.4128" Y="8846.607" Z="17.9712" />
+									<Hotspot X="-153.1221" Y="8713.701" Z="18.86465" />
+									<Hotspot X="-154.8605" Y="8560.975" Z="17.50804" />
+								</Hotspots>
+							</GrindArea>
+						</SetGrindArea>
+					<GrindTo Condition="(GetItemCount(24291) &gt;= 6)" />
+				</If>
+				<If Condition="(GetItemCount(24291) &gt;= 6)" >
+					<CustomBehavior File="FlyTo" X="-214.1056" Y="8514.414" Z="22.89437" />
+					<CustomBehavior File="InteractWith"  MobId="17923" NumOfTimes="1" CollectionDistance="50" WaitTime="1000" X="-214.1056" Y="8514.414" Z="22.89437" />
+					<CustomBehavior File="RunMacro" Macro="/click GossipTitleButton2" NumOfTimes="1" WaitTime="1000" />
+					<CustomBehavior File="RunMacro" Macro="/click QuestFrameCompleteButton" NumOfTimes="1" WaitTime="1000" />
+					<CustomBehavior File="RunMacro" Macro="/click QuestFrameCompleteQuestButton" NumOfTimes="1" WaitTime="1000" />
+				</If>
+			</While>
+				</If>
+			
+			
+	<CustomBehavior File="UserSettings" LootMobs="False" PullDistance="20" TrainNewSkills="False" LearnFlightPaths="False" KillBetweenHotspots="True" LogoutForInactivity="False" />
+			
+			<!-- Non-repeatable quest pre-req avail at friendly -->
+			<If Condition="((!HasQuest(9726)) &amp;&amp; (!IsQuestCompleted(9726)))" >
+				<CustomBehavior File="FlyTo" X="254.0195" Y="8503.667" Z="22.98337" />
+				<CustomBehavior File="ForcedDismount" />
+		<PickUp QuestName="Now That We're Still Friends..." QuestId="9726" GiverName="Gzhun'tt" GiverId="17856" />
+			</If>
+			<If Condition="((HasQuest(9726)) &amp;&amp; (!IsQuestCompleted(9726)))" >
+				<CustomBehavior File="FlyTo" X="572.5067" Y="8188.215" Z="18.86026" />
+				<CustomBehavior File="ForcedDismount" />
+				<Objective QuestName="Now That We're Friends..." QuestId="9726" Type="KillMob" MobId="18089" KillCount="12" />
+				<Objective QuestName="Now That We're Friends..." QuestId="9726" Type="KillMob" MobId="18088" KillCount="6" />
+			</If>
+			<If Condition="((HasQuest(9726)) &amp;&amp; (IsQuestCompleted(9726)))" >
+				<CustomBehavior File="FlyTo" X="254.0195" Y="8503.667" Z="22.98337" />
+				<CustomBehavior File="ForcedDismount" />
+		<TurnIn QuestName="Now That We're Friends..." QuestId="9726" TurnInName="Gzhun'tt" TurnInId="17856" />
+			</If>
+	
+			<!-- This will stop the bot after you're Exalted -->
+			<If Condition="Me.GetReputationLevelWith(970) == Styx.WoWUnitReaction.Exalted" >
+				<CustomBehavior File="UserDialog" Title="title" AllowBotStop="True" SoundCue="Asterisk" SoundCueInterval="1" Text="You have reached Exalted\nIf you liked this profile, +rep is always appreciated" />
+			</If>
+
+			<!-- If you don't have the repeatable quest, fly there and get the quest -->
+			<If Condition="(!HasQuest(9727))" >
+				<CustomBehavior File="FlyTo" X="254.0195" Y="8503.667" Z="22.98337" />
+				<CustomBehavior File="ForcedDismount" />
+		<PickUp QuestName="Now That We're Still Friends..." QuestId="9727" GiverName="Gzhun'tt" GiverId="17856" />
+			</If>
+	
+			<If Condition="((HasQuest(9727)) &amp;&amp; (!IsQuestCompleted(9727)))" >
+				<CustomBehavior File="FlyTo" X="572.5067" Y="8188.215" Z="18.86026" />
+				<CustomBehavior File="ForcedDismount" />
+				<Objective QuestName="Now That We're Friends..." QuestId="9727" Type="KillMob" MobId="18089" KillCount="12" />
+				<Objective QuestName="Now That We're Friends..." QuestId="9727" Type="KillMob" MobId="18088" KillCount="6" />
+			</If>
+			<If Condition="((HasQuest(9727)) &amp;&amp; (IsQuestCompleted(9727)))" >
+				<CustomBehavior File="FlyTo" X="254.0195" Y="8503.667" Z="22.98337" />
+				<CustomBehavior File="ForcedDismount" />
+		<TurnIn QuestName="Now That We're Friends..." QuestId="9727" TurnInName="Gzhun'tt" TurnInId="17856" />
+			<CustomBehavior File="WaitTimer" WaitTime="2000"/>
+		<PickUp QuestName="Now That We're Still Friends..." QuestId="9727" GiverName="Gzhun'tt" GiverId="17856" />
+			</If>
+			
+			<!-- If you rename this profile, you have to rename the ProfileName="" -->
+			<CustomBehavior File="LoadProfile" ProfileName="[QO] Sporeggar Rep A [Kick].xml" />
+	
+	</QuestOrder>
+
+</HBProfile>

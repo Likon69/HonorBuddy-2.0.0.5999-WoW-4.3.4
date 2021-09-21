@@ -1,0 +1,399 @@
+<HBProfile xsi:noNamespaceSchemaLocation="../Schemas/EchoSchema.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<!-- Original contribution by EchoTiger -->
+	<Name>Durotar ($ShortHash$)</Name>
+
+	<MinDurability>0.3</MinDurability>
+	<MinFreeBagSlots>3</MinFreeBagSlots>
+
+	<SellGrey>true</SellGrey>
+	<SellWhite>true</SellWhite>
+	<SellGreen>true</SellGreen>
+	<SellBlue>true</SellBlue>
+	<SellPurple>false</SellPurple>
+
+	<MailGrey>false</MailGrey>
+	<MailWhite>true</MailWhite>
+	<MailGreen>true</MailGreen>
+	<MailBlue>true</MailBlue>
+	<MailPurple>true</MailPurple>
+
+	<TargetElites>true</TargetElites>
+
+	<AvoidMobs>
+	</AvoidMobs>
+
+	<Mailboxes>
+	</Mailboxes>
+
+	<Vendors>
+	</Vendors>
+
+	<Blackspots>
+		<Blackspot X="123.0346" Y="-4335.183" Z="39.52357" Radius="15" /> <!-- Razormane Scout in unnavable location -->
+		<Blackspot X="-236.2292" Y="-5084.252" Z="25.78056" Radius="1" /> <!-- Kul Tiras treasure in bad spot -->
+	</Blackspots>
+
+	<Blacklist>
+	</Blacklist>
+
+	<QuestOrder IgnoreCheckpoints="false" >
+		<!-- Check function status -->
+		<Code File="RunCode" Type="Definition">
+			<![CDATA[
+			private static bool? profileFunctionsEnabled => (bool?)AppDomain.CurrentDomain.GetData("QuestingProfiles_FunctionsEnabled");
+			private static bool IsStoreProfile(string path) => path.StartsWith("store://");
+			private static string Slashify(string path) => IsStoreProfile(path) ? path.Replace(@"\", "/") : path.Replace("/", @"\");
+
+			public __CompiledBatchClass__()
+			{
+				ActivateFunctions();
+			}
+
+			private static void ActivateFunctions()
+			{
+				if (profileFunctionsEnabled == null || profileFunctionsEnabled == false)
+				{
+					Bots.Professionbuddy.PBLog.Log(Colors.MediumPurple, "[Profile Message!]: ", Colors.Yellow, "Please stand by as the functions are being activated!");
+					LoadProfile(@"..\..\Functions\Activate Functions.xml");
+				}
+			}
+
+			private static void LoadProfile(string path)
+			{
+				var profile = GetNewPath(path);
+				if (!IsStoreProfile(profile) && !File.Exists(profile))
+				{
+					Bots.Professionbuddy.PBLog.Log(Colors.MediumPurple, "[Profile Message!]: ", Colors.Yellow, "Profile does not exist.\n" + profile);
+					return;
+				}
+
+				Bots.Professionbuddy.PBLog.Log(Colors.MediumPurple, "[Profile Message!]: ", Colors.Yellow, "Loading: " + profile);
+				ProfileManager.LoadNew(profile, false);
+			}
+
+			private static string GetNewPath(string path)
+			{
+				if (IsStoreProfile(path))
+					return Slashify(path);
+
+				var currentProfile = ProfileManager.XmlLocation;
+				if (IsStoreProfile(currentProfile))
+					return Slashify(currentProfile + "/../" + path);
+
+				var absolutePath = Path.Combine(Path.GetDirectoryName(currentProfile), path);
+				absolutePath = Path.GetFullPath(absolutePath);
+				var canonicalPath = new Uri(absolutePath).LocalPath;
+				return Slashify(canonicalPath);
+			}]]>
+		</Code>
+		<Code File="RunCode" Code="ActivateFunctions();" />
+		<!-- END Check function status -->
+
+		<If Condition="Me.IsAlliance" >
+			<Code File="LoadProfile" ProfileName="..\..\Questing Autoloader.xml" />
+		</If>
+		<!-- RunCode Methods -->
+			<Code File="RunCode">
+			<![CDATA[
+				Bots.Professionbuddy.PBLog.Log(System.Windows.Media.Colors.MediumPurple, "> [Profile Initialization Status] ", System.Windows.Media.Colors.CornflowerBlue, "\n     Auto-Looting	:: Enabled\n     Looting	:: Enabled\n     Game Addons	:: Disabled");
+				Lua.DoString("SetCVar('AutoLootDefault', 1);");
+				Lua.DoString("SetCVar('autoDismountFlying', 1);");
+				CharacterSettings.Instance.LootMobs = true;
+				CharacterSettings.Instance.Save();
+				Logging.Write(System.Windows.Media.Colors.MediumPurple, "> [Ready to bot!]");
+			]]>
+			</Code>
+			<Code File="RunCode" Type="Definition">
+				<![CDATA[
+						bool DoQuest(params uint[] questIds)
+						{
+							foreach (var questId in questIds)
+							{
+								if (HasQuest(questId) && !IsQuestCompleted(questId)) return true;
+							}
+							return false;
+						}
+						bool NeedsQuest(params uint[] questIds)
+						{
+							foreach (var questId in questIds)
+							{
+								if (!HasQuest(questId) && !IsQuestCompleted(questId)) return true;
+							}
+							return false;
+						}
+						bool NeedsBreadcrumbQuest(params uint[] questIds)
+						{
+							foreach (var questId in questIds)
+							{
+								if (IsQuestCompleted(questId)) return false;
+							}
+							return true;
+						}
+						bool QuestDone(params uint[] questIds)
+						{
+							foreach (var questId in questIds)
+							{
+								if (HasQuest(questId) && IsQuestCompleted(questId)) return true;
+							}
+							return false;
+						}
+						bool QuestFlaggedCompleted(params uint[] questIds)
+						{
+							foreach (var questId in questIds)
+							{
+								return Lua.GetReturnVal<bool>($"return IsQuestFlaggedCompleted({questId});", 0);
+							}
+							return false;
+						}
+						async Task SkipCutscene(int preWait = 3000, int postWait = 3000)
+						{
+					// Add detection of cutscene here.
+							await Coroutine.Sleep(preWait);
+					// Test and improve the working method.
+							Lua.DoString("MovieFrame:StopMovie(); CinematicFrame_CancelCinematic(); StopCinematic();");
+							await Coroutine.Sleep(postWait);
+						}
+					]]>
+			</Code>
+		<!-- END RunCode Methods -->
+
+
+		<If Condition="HasQuest(25133)" >
+			<TurnIn QuestName="Report to Sen&apos;jin Village" QuestId="25133" TurnInName="Master Gadrin" TurnInId="3188" X="-829.0919" Y="-4919.275" Z="19.74989" />
+		</If>
+
+		<PickUp QuestName="Breaking the Chain" QuestId="25167" GiverName="Master Gadrin" GiverId="3188" X="-829.0919" Y="-4919.275" Z="19.74989" />
+		<PickUp QuestName="Cleaning Up the Coastline" QuestId="25170" GiverName="Bom&apos;bay" GiverId="10578" X="-843.6657" Y="-4908.623" Z="20.62227" />
+
+		<Code File="KillUntilComplete" MobId="3106" QuestId="25170" >
+			<HuntingGrounds>
+				<Hotspot X="-966.4084" Y="-4909.574" Z="7.604385" />
+				<Hotspot X="-1067.56" Y="-4831.426" Z="9.771485" />
+			</HuntingGrounds>
+		</Code>
+
+		<Code File="KillUntilComplete" MobIds="39249, 39251" QuestId="25167" X="-1038.131" Y="-4714.077" Z="16.50893" />
+
+		<TurnIn QuestName="Cleaning Up the Coastline" QuestId="25170" TurnInName="Bom&apos;bay" TurnInId="10578" X="-842.5173" Y="-4907.065" Z="20.52651" />
+		<PickUp QuestName="Never Trust a Big Barb and a Smile" QuestId="25165" GiverName="Bom&apos;bay" GiverId="10578" X="-842.5173" Y="-4907.065" Z="20.52651" />
+		<TurnIn QuestName="Breaking the Chain" QuestId="25167" TurnInName="Master Gadrin" TurnInId="3188" X="-829.0167" Y="-4918.031" Z="19.64443" />
+		<PickUp QuestName="Purge the Valley" QuestId="25168" GiverName="Master Gadrin" GiverId="3188" X="-829.0167" Y="-4918.031" Z="19.64443" />
+		<PickUp QuestName="The War of Northwatch Aggression" QuestId="25169" GiverName="Lar Prowltusk" GiverId="3140" X="-836.986" Y="-4895.632" Z="23.42636" />
+
+		<While Condition="DoQuest(25165)" >
+			<Code File="RunCode" Type="Definition" >
+			<![CDATA[
+				private Styx.TreeSharp.Composite _poisonExtractionTotem;
+				private WoWItem _poisonTotem = StyxWoW.Me.BagItems.FirstOrDefault(x => x.Entry == 52505);
+				private WoWGuid _scorpidGuid;
+				private async Task<bool> PosionExtractionTotemLogic()
+				{
+					if (QuestDone(25165)) return false;
+					if (_poisonTotem == null || !_poisonTotem.IsValid)
+					{
+						_poisonTotem = StyxWoW.Me.BagItems.FirstOrDefault(x => x.Entry == 52505);
+						return false;
+					}
+					if (Me.CurrentTarget == null || Me.CurrentTarget.IsDead || Me.CurrentTarget.Entry != 3125) return false;
+					if (!Me.CurrentTarget.Aggro || Me.CurrentTarget.Guid == _scorpidGuid) return false;
+					SpellManager.StopCasting();
+					TreeRoot.StatusText = "Waiting for scorpid to cast poison.";
+					if (Me.CurrentTarget.Aggro && Me.CurrentTarget.CastingSpellId != 73672 && Me.CurrentTarget.Guid != _scorpidGuid) return true;
+
+					if (Me.CurrentTarget.Guid != _scorpidGuid)
+						_scorpidGuid = Me.CurrentTarget.Guid;
+
+					Lua.DoString("PetPassiveMode();");
+
+					_poisonTotem.Use();
+
+					await Coroutine.Sleep(2700);
+					Lua.DoString("PetAssistMode();");
+
+					return true;
+				}
+			]]>
+			</Code>
+			<Code File="RunCode"><![CDATA[ TreeHooks.Instance.InsertHook("Questbot_Main", 0, _poisonExtractionTotem ?? (_poisonExtractionTotem = new  CommonBehaviors.Actions.ActionRunCoroutine(ctx => PosionExtractionTotemLogic()))); ]]></Code>
+
+			<Code File="InteractWith" MobId="3125" MobState="AliveNotInCombat" CollectionDistance="200" PreInteractMountStrategy="Dismount" QuestId="25165" QuestObjectiveIndex="1" >
+				<HuntingGrounds>
+					<Hotspot X="-778.754" Y="-4734.114" Z="29.94708" />
+					<Hotspot X="-868.32" Y="-4765.797" Z="17.30972" />
+					<Hotspot X="-959.0878" Y="-4863.18" Z="13.00284" />
+				</HuntingGrounds>
+			</Code>
+			<Code File="RunCode"><![CDATA[ TreeHooks.Instance.RemoveHook("Questbot_Main", _poisonExtractionTotem); ]]></Code>
+		</While>
+
+		<Code File="InteractWith" MobId="3189" NonCompeteDistance="0" InteractBlacklistTimeInSeconds="1" PreInteractMountStrategy="Dismount" QuestId="25169" QuestObjectiveIndex="1" X="-1066.58" Y="-4593.727" Z="25.82208" />
+		<Code File="InteractWith" MobId="3190" NonCompeteDistance="0" InteractBlacklistTimeInSeconds="1" PreInteractMountStrategy="Dismount" QuestId="25169" QuestObjectiveIndex="2" X="-925.1393" Y="-4495.786" Z="29.56791" />
+		<Code File="InteractWith" MobId="3192" NonCompeteDistance="0" InteractBlacklistTimeInSeconds="1" PreInteractMountStrategy="Dismount" QuestId="25169" QuestObjectiveIndex="3" X="-972.9437" Y="-4412.896" Z="29.26433" />
+
+		<Code File="KillUntilComplete" MobId="39260" QuestId="25168" >
+			<HuntingGrounds>
+				<Hotspot X="-1025.571" Y="-4441.74" Z="25.82469" />
+				<Hotspot X="-997.2941" Y="-4536.941" Z="25.8093" />
+				<Hotspot X="-988.6417" Y="-4622.426" Z="25.71498" />
+			</HuntingGrounds>
+		</Code>
+
+		<TurnIn QuestName="Never Trust a Big Barb and a Smile" QuestId="25165" TurnInName="Bom&apos;bay" TurnInId="10578" X="-845.7318" Y="-4903.534" Z="21.19713" />
+		<TurnIn QuestName="The War of Northwatch Aggression" QuestId="25169" TurnInName="Lar Prowltusk" TurnInId="3140" X="-837.2903" Y="-4895.265" Z="23.45088" />
+		<TurnIn QuestName="Purge the Valley" QuestId="25168" TurnInName="Master Gadrin" TurnInId="3188" X="-828.2787" Y="-4919.267" Z="19.55996" />
+		<RecheckCheckpoints />
+
+
+		<PickUp QuestName="Riding On" QuestId="25171" GiverName="Master Gadrin" GiverId="3188" X="-828.2787" Y="-4919.267" Z="19.55996" />
+		<TurnIn QuestName="Riding On" QuestId="25171" TurnInName="Gar&apos;Thok" TurnInId="3139" X="272.2065" Y="-4710.155" Z="17.76737" />
+		
+		<PickUp QuestName="From Bad to Worse" QuestId="25173" GiverName="Gar&apos;Thok" GiverId="3139" X="272.2065" Y="-4710.155" Z="17.76737" />
+
+		<Code File="SetHearthstone" AreaId="362" MobId="6928" X="338.0916" Y="-4689.857" Z="16.4893" />
+
+		<PickUp QuestName="Exploiting the Situation" QuestId="25176" GiverName="Gail Nozzywig" GiverId="39423" X="289.1065" Y="-4766.727" Z="11.62428" />
+
+		<Code File="KillUntilComplete" MobId="39269" QuestId="25173" QuestObjectiveIndex="3" X="-246.601" Y="-5108.46" Z="41.3469" />
+
+		<Code File="InteractWith" MobId="202648" CollectionDistance="200" InteractByLooting="true" QuestId="25176" QuestObjectiveIndex="1" X="-241.6779" Y="-5121.612" Z="25.2449" />
+
+		<Code File="KillUntilComplete" QuestId="25173" >
+			<HuntingGrounds>
+				<Hotspot X="-237.8307" Y="-5008.411" Z="21.43744" />
+				<Hotspot X="-156.6974" Y="-5010.745" Z="21.44332" />
+				<Hotspot X="-177.4973" Y="-5083.324" Z="21.13748" />
+			</HuntingGrounds>
+			<PursuitList>
+				<PursueUnit Id="39267" PursueWhen="!IsObjectiveComplete(1, 25173)" />
+				<PursueUnit Id="39268" PursueWhen="!IsObjectiveComplete(2, 25173)" />
+			</PursuitList>
+		</Code>
+
+		<If Condition="QuestDone(25173, 25176) &amp;&amp; Me.HearthstoneAreaId == 362 &amp;&amp; Unit(39267) != null" >
+			<Code File="UseHearthstone" WaitForCd="false" />
+		</If>
+
+		<TurnIn QuestName="From Bad to Worse" QuestId="25173" TurnInName="Gar&apos;Thok" TurnInId="3139" X="272.2328" Y="-4709.489" Z="17.76726" />
+		<PickUp QuestName="Storming the Beaches" QuestId="25177" GiverName="Gar&apos;Thok" GiverId="3139" X="272.2328" Y="-4709.489" Z="17.76726" />
+		<TurnIn QuestName="Exploiting the Situation" QuestId="25176" TurnInName="Gail Nozzywig" TurnInId="39423" X="287.9623" Y="-4766.835" Z="11.65313" />
+		<PickUp QuestName="Shipwreck Searching" QuestId="25178" GiverName="Gail Nozzywig" GiverId="39423" X="287.9623" Y="-4766.835" Z="11.65313" />
+
+		<Code File="InteractWith" MobId="3236" CollectionDistance="200" InteractByLooting="true" PreInteractMountStrategy="Dismount" QuestId="25178" QuestObjectiveIndex="1" >
+			<HuntingGrounds>
+				<Hotspot X="164.1894" Y="-4989.998" Z="8.30092" />
+				<Hotspot X="160.1897" Y="-5090.87" Z="2.384543" />
+				<Hotspot X="263.1451" Y="-5101.335" Z="2.665331" />
+				<Hotspot X="286.292" Y="-5102.481" Z="2.332727" />
+			</HuntingGrounds>
+		</Code>
+
+		<While Condition="!IsQuestCompleted(25179)" >
+			<Code File="InteractWith" MobId="39270" CollectionDistance="200" NumOfTimes="16" TerminateWhen="IsQuestCompleted(25179)" >
+				<HuntingGrounds>
+					<Hotspot X="164.1894" Y="-4989.998" Z="8.30092" />
+					<Hotspot X="160.1897" Y="-5090.87" Z="2.384543" />
+					<Hotspot X="263.1451" Y="-5101.335" Z="2.665331" />
+					<Hotspot X="286.292" Y="-5102.481" Z="2.332727" />
+				</HuntingGrounds>
+			</Code>
+		</While>
+
+		<Code File="KillUntilComplete" MobId="39272" TerminateWhen="QuestDone(25177) &amp;&amp; (Me.Level == 7 ? Me.Experience &gt;= 2725 : true)" >
+			<HuntingGrounds>
+				<Hotspot X="164.1894" Y="-4989.998" Z="8.30092" />
+				<Hotspot X="160.1897" Y="-5090.87" Z="2.384543" />
+				<Hotspot X="263.1451" Y="-5101.335" Z="2.665331" />
+				<Hotspot X="286.292" Y="-5102.481" Z="2.332727" />
+			</HuntingGrounds>
+		</Code>
+
+		<TurnIn QuestName="Shipwreck Searching" QuestId="25178" TurnInName="Gail Nozzywig" TurnInId="39423" X="285.8777" Y="-4771.13" Z="11.61437" />
+		<TurnIn QuestName="Storming the Beaches" QuestId="25177" TurnInName="Gar&apos;Thok" TurnInId="3139" X="272.2539" Y="-4710.219" Z="17.76728" />
+		<TurnIn QuestName="Loss Reduction" QuestId="25179" TurnInName="Gar&apos;Thok" TurnInId="3139" X="272.2539" Y="-4710.219" Z="17.76728" />
+		<RecheckCheckpoints />
+
+		<PickUp QuestName="The Burning Blade" QuestId="25232" GiverName="Orgnil Soulscar" GiverId="3142" X="288.3329" Y="-4727.827" Z="12.55133" />
+
+		<PickUp QuestName="Lost in the Floods" QuestId="25187" GiverName="Thonk" GiverId="39323" X="394.9551" Y="-4582.44" Z="76.59322" />
+		<While Condition="DoQuest(25187)" >
+			<MoveTo X="393.3874" Y="-4581.685" Z="76.59281" />
+			<Code File="UseItem" ItemId="52514" QuestId="25187" X="393.3874" Y="-4581.685" Z="76.59281" TerminateWhen="Bots.DungeonBuddy.Helpers.ScriptHelpers.InCinematic" />
+			<Code File="WaitTimer" WaitTime="30000" QuestId="25187" TerminateWhen="!Bots.DungeonBuddy.Helpers.ScriptHelpers.InCinematic" />
+		</While>
+		<TurnIn QuestName="Lost in the Floods" QuestId="25187" TurnInName="Thonk" TurnInId="39323" X="390.9776" Y="-4581.806" Z="76.61802" />
+
+		<If Condition="!IsQuestCompleted(25192)" >
+			<PickUp QuestName="Watershed Patrol" QuestId="25188" GiverName="Thonk" GiverId="39323" X="390.9776" Y="-4581.806" Z="76.61802" />
+		</If>
+
+		<PickUp QuestName="Lost But Not Forgotten" QuestId="25193" GiverName="Misha Tor&apos;kren" GiverId="3193" X="725.0805" Y="-4259.535" Z="20.0992" />
+		<Code File="KillUntilComplete" MobId="39452" QuestId="25193" >
+			<HuntingGrounds>
+				<Hotspot X="626.2142" Y="-4257.228" Z="15.89098" />
+				<Hotspot X="573.5645" Y="-4197.48" Z="15.97568" />
+				<Hotspot X="520.2295" Y="-4121.67" Z="17.00622" />
+				<Hotspot X="449.1795" Y="-4111.976" Z="17.69797" />
+			</HuntingGrounds>
+		</Code>
+		<TurnIn QuestName="Lost But Not Forgotten" QuestId="25193" TurnInName="Misha Tor&apos;kren" TurnInId="3193" X="728.2195" Y="-4253.421" Z="19.88069" />
+
+		<PickUp QuestName="Raggaran&apos;s Rage" QuestId="25190" GiverName="Raggaran" GiverId="39326" X="51.09787" Y="-4222.216" Z="35.1847" />
+		<Code File="KillUntilComplete" QuestId="25190" >
+			<HuntingGrounds>
+				<Hotspot X="83.05998" Y="-4278.209" Z="29.14359" />
+				<Hotspot X="55.76519" Y="-4307.87" Z="38.0656" />
+				<Hotspot X="80.85742" Y="-4478.182" Z="37.01527" />
+			</HuntingGrounds>
+			<PursuitList>
+				<PursueUnit Id="3111" PursueWhen="!IsObjectiveComplete(1, 25190)" />
+				<PursueUnit Id="3112" PursueWhen="!IsObjectiveComplete(2, 25190)" />
+				<PursueUnit Id="5826" Priority="500" /> <!-- Rare spawn -->
+			</PursuitList>
+		</Code>
+		<TurnIn QuestName="Raggaran&apos;s Rage" QuestId="25190" TurnInName="Raggaran" TurnInId="39326" X="51.35043" Y="-4224.708" Z="35.34327" />
+
+		<PickUp QuestName="Raggaran&apos;s Fury" QuestId="25192" GiverName="Raggaran" GiverId="39326" X="51.35043" Y="-4224.708" Z="35.34327" />
+		<Code File="KillUntilComplete" QuestId="25192" >
+			<HuntingGrounds>
+				<Hotspot X="-47.91932" Y="-4065.591" Z="34.91591" />
+				<Hotspot X="-57.7879" Y="-4036.371" Z="28.73617" />
+			</HuntingGrounds>
+			<PursuitList>
+				<PursueUnit Id="3113" PursueWhen="!IsObjectiveComplete(1, 25192)" />
+				<PursueUnit Id="3114" PursueWhen="!IsObjectiveComplete(2, 25192)" />
+			</PursuitList>
+		</Code>
+		<TurnIn QuestName="Raggaran&apos;s Fury" QuestId="25192" TurnInName="Raggaran" TurnInId="39326" X="51.49988" Y="-4224.066" Z="35.27617" />
+
+		<Code File="KillUntilComplete" MobIds="3195, 3196, 3199" TerminateWhen="!DoQuest(25232) &amp;&amp; (Me.Level == 9 ? Me.Experience &gt;= 6550 : true)" >
+			<HuntingGrounds>
+				<Hotspot X="928.4833" Y="-4719.511" Z="20.28488" />
+				<Hotspot X="867.5648" Y="-4710.71" Z="31.84818" />
+				<Hotspot X="842.4625" Y="-4770.827" Z="37.71093" />
+				<Hotspot X="808.4374" Y="-4752.994" Z="37.46644" />
+			</HuntingGrounds>
+		</Code>
+
+		<TurnIn QuestName="The Burning Blade" QuestId="25232" TurnInName="Orgnil Soulscar" TurnInId="3142" X="289.9046" Y="-4724.663" Z="12.73579" />
+
+		<PickUp QuestName="The Dranosh&apos;ar Blockade" QuestId="25196" GiverName="Orgnil Soulscar" GiverId="3142" X="289.9046" Y="-4724.663" Z="12.73579" />
+
+		<If Condition="HasQuest(25188)" >
+			<Code File="AbandonQuest" QuestId="25188" />
+		</If>
+
+		<Code File="KillUntilComplete" MobIds="3195, 3196, 3199" TerminateWhen="Me.Level &gt; 9" >
+			<HuntingGrounds>
+				<Hotspot X="928.4833" Y="-4719.511" Z="20.28488" />
+				<Hotspot X="867.5648" Y="-4710.71" Z="31.84818" />
+				<Hotspot X="842.4625" Y="-4770.827" Z="37.71093" />
+				<Hotspot X="808.4374" Y="-4752.994" Z="37.46644" />
+			</HuntingGrounds>
+		</Code>
+
+		<Checkpoint Level="10" />
+
+		<Code File="LoadProfile" ProfileName="Northern Barrens.xml" />
+
+	</QuestOrder>
+</HBProfile>

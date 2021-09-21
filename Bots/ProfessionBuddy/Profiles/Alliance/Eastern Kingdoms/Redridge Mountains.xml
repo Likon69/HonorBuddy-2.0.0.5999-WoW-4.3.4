@@ -1,0 +1,410 @@
+<HBProfile xsi:noNamespaceSchemaLocation="../Schemas/EchoSchema.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<!-- Original contribution by EchoTiger -->
+	<Name>Redrdige Mountains ($ShortHash$)</Name>
+
+	<MinDurability>0.3</MinDurability>
+	<MinFreeBagSlots>3</MinFreeBagSlots>
+
+	<SellGrey>true</SellGrey>
+	<SellWhite>true</SellWhite>
+	<SellGreen>true</SellGreen>
+	<SellBlue>true</SellBlue>
+	<SellPurple>false</SellPurple>
+
+	<MailGrey>false</MailGrey>
+	<MailWhite>true</MailWhite>
+	<MailGreen>true</MailGreen>
+	<MailBlue>true</MailBlue>
+	<MailPurple>true</MailPurple>
+
+	<TargetElites>true</TargetElites>
+
+	<AvoidMobs>
+	</AvoidMobs>
+
+	<Mailboxes>
+		<Mailbox Name="Lakeshire" X="-9250.684" Y="-2144.213" Z="64.02137" />
+	</Mailboxes>
+
+	<Vendors>
+		<Vendor Name="Dorin Songblade" Id="956" Type="Repair" X="-9250.197" Y="-2244.496" Z="63.93461" />
+		<Vendor Name="Innkeeper Brianna" Id="6727" Type="Food" X="-9223.979" Y="-2157.121" Z="63.73108" />
+		<Vendor Name="Kara Adams" Id="793" Type="Repair" X="-9247.732" Y="-2234.377" Z="63.93403" />
+		<Vendor Name="Lindsay Ashlock" Id="791" Type="Food" X="-9260.255" Y="-2195.371" Z="63.93361" />
+	</Vendors>
+
+	<Blackspots>
+		<Blackspot X="-8805.83" Y="-2206.83" Z="144.3313" Radius="1" /> <!-- Failed navigation spot in Render's Rock -->
+	</Blackspots>
+
+	<Blacklist>
+		<Mob Name="Canyon Ettin" Id="43094" Flags="Pull" />
+		<Mob Name="Blackrock Battle Worg" Id="43340" Flags="Combat" />
+		<Mob Name="Blackrock Worg Captain" Id="43341" Flags="Combat" />
+	</Blacklist>
+
+	<QuestOrder IgnoreCheckpoints="false" >
+		<!-- Check function status -->
+		<Code File="RunCode" Type="Definition">
+			<![CDATA[
+			private static bool? profileFunctionsEnabled => (bool?)AppDomain.CurrentDomain.GetData("QuestingProfiles_FunctionsEnabled");
+			private static bool IsStoreProfile(string path) => path.StartsWith("store://");
+			private static string Slashify(string path) => IsStoreProfile(path) ? path.Replace(@"\", "/") : path.Replace("/", @"\");
+
+			public __CompiledBatchClass__()
+			{
+				ActivateFunctions();
+			}
+
+			private static void ActivateFunctions()
+			{
+				if (profileFunctionsEnabled == null || profileFunctionsEnabled == false)
+				{
+					Bots.Professionbuddy.PBLog.Log(Colors.MediumPurple, "[Profile Message!]: ", Colors.Yellow, "Please stand by as the functions are being activated!");
+					LoadProfile(@"..\..\Functions\Activate Functions.xml");
+				}
+			}
+
+			private static void LoadProfile(string path)
+			{
+				var profile = GetNewPath(path);
+				if (!IsStoreProfile(profile) && !File.Exists(profile))
+				{
+					Bots.Professionbuddy.PBLog.Log(Colors.MediumPurple, "[Profile Message!]: ", Colors.Yellow, "Profile does not exist.\n" + profile);
+					return;
+				}
+
+				Bots.Professionbuddy.PBLog.Log(Colors.MediumPurple, "[Profile Message!]: ", Colors.Yellow, "Loading: " + profile);
+				ProfileManager.LoadNew(profile, false);
+			}
+
+			private static string GetNewPath(string path)
+			{
+				if (IsStoreProfile(path))
+					return Slashify(path);
+
+				var currentProfile = ProfileManager.XmlLocation;
+				if (IsStoreProfile(currentProfile))
+					return Slashify(currentProfile + "/../" + path);
+
+				var absolutePath = Path.Combine(Path.GetDirectoryName(currentProfile), path);
+				absolutePath = Path.GetFullPath(absolutePath);
+				var canonicalPath = new Uri(absolutePath).LocalPath;
+				return Slashify(canonicalPath);
+			}]]>
+		</Code>
+		<Code File="RunCode" Code="ActivateFunctions();" />
+		<!-- END Check function status -->
+
+		<If Condition="Me.IsHorde" >
+			<Code File="LoadProfile" ProfileName="..\..\Questing Autoloader.xml" />
+		</If>
+		<!-- RunCode Methods -->
+			<Code File="RunCode">
+			<![CDATA[
+				Bots.Professionbuddy.PBLog.Log(System.Windows.Media.Colors.MediumPurple, "> [Profile Initialization Status] ", System.Windows.Media.Colors.CornflowerBlue, "\n     Auto-Looting	:: Enabled\n     Looting	:: Enabled\n     Game Addons	:: Disabled");
+				Lua.DoString("SetCVar('AutoLootDefault', 1);");
+				Lua.DoString("SetCVar('autoDismountFlying', 1);");
+				CharacterSettings.Instance.LootMobs = true;
+				CharacterSettings.Instance.Save();
+				Logging.Write(System.Windows.Media.Colors.MediumPurple, "> [Ready to bot!]");
+			]]>
+			</Code>
+			<Code File="RunCode" Type="Definition">
+				<![CDATA[
+						bool DoQuest(params uint[] questIds)
+						{
+							foreach (var questId in questIds)
+							{
+								if (HasQuest(questId) && !IsQuestCompleted(questId)) return true;
+							}
+							return false;
+						}
+						bool NeedsQuest(params uint[] questIds)
+						{
+							foreach (var questId in questIds)
+							{
+								if (!HasQuest(questId) && !IsQuestCompleted(questId)) return true;
+							}
+							return false;
+						}
+						bool NeedsBreadcrumbQuest(params uint[] questIds)
+						{
+							foreach (var questId in questIds)
+							{
+								if (IsQuestCompleted(questId)) return false;
+							}
+							return true;
+						}
+						bool QuestDone(params uint[] questIds)
+						{
+							foreach (var questId in questIds)
+							{
+								if (HasQuest(questId) && IsQuestCompleted(questId)) return true;
+							}
+							return false;
+						}
+						bool QuestFlaggedCompleted(params uint[] questIds)
+						{
+							foreach (var questId in questIds)
+							{
+								return Lua.GetReturnVal<bool>($"return IsQuestFlaggedCompleted({questId});", 0);
+							}
+							return false;
+						}
+						async Task SkipCutscene(int preWait = 3000, int postWait = 3000)
+						{
+					// Add detection of cutscene here.
+							await Coroutine.Sleep(preWait);
+					// Test and improve the working method.
+							Lua.DoString("MovieFrame:StopMovie(); CinematicFrame_CancelCinematic(); StopCinematic();");
+							await Coroutine.Sleep(postWait);
+						}
+					]]>
+			</Code>
+		<!-- END RunCode Methods -->
+
+
+		<PickUp QuestName="Wanted: Redridge Gnolls" QuestId="26504" GiverName="Wanted!" GiverId="204344" X="-9619.949" Y="-1891.728" Z="59.00146" />
+		<!-- <PickUp QuestName="Franks and Beans" QuestId="26506" GiverName="Darcy Parker" GiverId="379" X="-9633.35" Y="-1880.43" Z="61.81883" /> Terrible quest -->
+		<PickUp QuestName="Still Assessing the Threat" QuestId="26503" GiverName="Watch Captain Parker" GiverId="464" X="-9625.068" Y="-1872.068" Z="99.01538" />
+
+		<!--
+		<While Condition="DoQuest(26506)" >
+			<Code File="KillUntilComplete" QuestId="26506" >
+				<HuntingGrounds>
+					<Hotspot X="-9632.534" Y="-1952.714" Z="60.77942" />
+					<Hotspot X="-9546.791" Y="-2048.595" Z="70.08984" />
+					<Hotspot X="-9819.654" Y="-1781.142" Z="23.81768" />
+				</HuntingGrounds>
+				<PursuitList>
+					<PursueUnit Id="442" PursueWhen="!IsObjectiveComplete(1, 26506)" />
+					<PursueUnit Id="428" PursueWhen="!IsObjectiveComplete(2, 26506)" />
+					<PursueUnit Id="547" PursueWhen="!IsObjectiveComplete(3, 26506)" />
+				</PursuitList>
+			</Code>
+		</While> -->
+
+		<While Condition="DoQuest(26503)" >
+			<Code File="InteractWith" MobId="204345" InteractByLooting="true" QuestId="26503" QuestObjectiveIndex="1" X="-9460.93" Y="-1895.31" Z="82.4763" />
+			<Code File="InteractWith" MobId="204347" InteractByLooting="true" QuestId="26503" QuestObjectiveIndex="3" X="-9588.52" Y="-2264.23" Z="84.9562" />
+			<Code File="InteractWith" MobId="204346" InteractByLooting="true" QuestId="26503" QuestObjectiveIndex="2" X="-9796.92" Y="-2199.22" Z="59.5511" />
+		</While>
+
+		<While Condition="DoQuest(26504)" >
+			<Code File="KillUntilComplete" MobIds="426, 423, 712" QuestId="26504" >
+				<HuntingGrounds>
+					<Hotspot X="-9778.52" Y="-2289.81" Z="62.09524" />
+					<Hotspot X="-9770.468" Y="-2210.68" Z="58.81871" />
+				</HuntingGrounds>
+			</Code>
+		</While>
+
+		<!-- <TurnIn QuestName="Franks and Beans" QuestId="26506" TurnInName="Darcy Parker" TurnInId="379" X="-9633.35" Y="-1880.43" Z="61.8189" /> -->
+		<TurnIn QuestName="Wanted: Redridge Gnolls" QuestId="26504" TurnInName="Watch Captain Parker" TurnInId="464" X="-9625.442" Y="-1872.343" Z="99.01605" />
+		<TurnIn QuestName="Still Assessing the Threat" QuestId="26503" TurnInName="Watch Captain Parker" TurnInId="464" X="-9625.442" Y="-1872.343" Z="99.01605" />
+		<PickUp QuestName="Parker's Report" QuestId="26505" GiverName="Watch Captain Parker" GiverId="464" X="-9625.442" Y="-1872.343" Z="99.01605" />
+		<!-- <PickUp QuestName="Lake Everstill Clean Up" QuestId="26511" GiverName="Bailiff Conacher" GiverId="900" X="-9215.916" Y="-2215.907" Z="66.18204" /> Not doable due to HB3's navigation -->
+		<TurnIn QuestName="Parker's Report" QuestId="26505" TurnInName="Magistrate Solomon" TurnInId="344" X="-9218.61" Y="-2221.804" Z="67.53977" />
+		<RecheckCheckpoints />
+		<PickUp QuestName="We Must Prepare!" QuestId="26510" GiverName="Magistrate Solomon" GiverId="344" X="-9218.61" Y="-2221.804" Z="67.53977" />
+
+		<Code File="SetHearthstone" MobId="6727" AreaId="69" X="-9223.979" Y="-2157.121" Z="63.73108" />
+
+		<PickUp QuestName="An Unwelcome Guest" QuestId="26509" GiverName="Martie Jainrose" GiverId="342" X="-9245.81" Y="-2045.33" Z="77.00396" />
+		<Code File="KillUntilComplete" MobId="345" QuestId="26509" X="-9289.038" Y="-1919.27" Z="72.99457" />
+		<TurnIn QuestName="An Unwelcome Guest" QuestId="26509" TurnInName="Martie Jainrose" TurnInId="342" X="-9245.81" Y="-2045.33" Z="77.00396" />
+
+		<PickUp QuestName="Nida's Necklace" QuestId="26508" GiverName="Shawn" GiverId="8965" X="-9348.307" Y="-2207.541" Z="61.89745" />
+		<While Condition="DoQuest(26508)" >
+			<DisableBehavior Name="Pull" />
+			<Code File="InteractWith" QuestId="26508" MobId="154357" Range="4" MovementBy="ClickToMoveOnly" CollectionDistance="200" InteractBlacklistTimeInSeconds="1" TerminateWhen="HasItem(10958)" >
+				<HuntingGrounds WaypointVisitStrategy="InOrder" >
+					<Hotspot X="-9323.758" Y="-2003.687" Z="45.79288" />
+					<Hotspot X="-9340.211" Y="-2048.584" Z="45.4017" />
+					<Hotspot X="-9359.721" Y="-2102.028" Z="45.50304" />
+					<Hotspot X="-9346.002" Y="-2148.619" Z="47.11066" />
+					<Hotspot X="-9324.588" Y="-2155.08" Z="51.52002" />
+					<Hotspot X="-9374.233" Y="-2183.293" Z="50.35162" />
+					<Hotspot X="-9372.462" Y="-2254.087" Z="51.73122" />
+					<Hotspot X="-9367.621" Y="-2312.608" Z="52.03944" />
+					<Hotspot X="-9375.429" Y="-2389.031" Z="45.36008" />
+				</HuntingGrounds>
+			</Code>
+			<Code File="AscendInWater" />
+			<EnableBehavior Name="Pull" />
+		</While>
+		<TurnIn QuestName="Nida's Necklace" QuestId="26508" TurnInName="Nida" TurnInId="8962" X="-9348.307" Y="-2207.541" Z="61.89745" />
+
+		<While Condition="DoQuest(26510)" >
+			<Code File="InteractWith" MobId="204350" QuestId="26510" X="-9236.47" Y="-2450.75" Z="57.2139" />
+		</While>
+
+		<!-- <While Condition="DoQuest(26511)" >
+			<MoveTo X="-9237.791" Y="-2442.654" Z="56.09038" />
+			<Code File="KillUntilComplete" MobIds="578, 422" QuestId="26511" >
+				<HuntingGrounds>
+					<Hotspot X="-9240.214" Y="-2450.323" Z="57.27119" />
+					<Hotspot X="-9291.853" Y="-2460.483" Z="54.32113" />
+				</HuntingGrounds>
+			</Code>
+		</While>
+
+		<TurnIn QuestName="Lake Everstill Clean Up" QuestId="26511" TurnInName="Bailiff Conacher" TurnInId="900" X="-9215.916" Y="-2215.907" Z="66.18011" /> Not doable due to HB3's navigation -->
+		<TurnIn QuestName="We Must Prepare!" QuestId="26510" TurnInName="Magistrate Solomon" TurnInId="344" X="-9218.61" Y="-2221.804" Z="67.53977" />
+		<PickUp QuestName="Tuning the Gnomecorder" QuestId="26512" GiverName="Magistrate Solomon" GiverId="344" X="-9218.61" Y="-2221.804" Z="67.53977" />
+		<PickUp QuestName="Like a Fart in the Wind" QuestId="26513" GiverName="Marshal Marris" GiverId="382" X="-9282.144" Y="-2294.055" Z="67.51072" />
+
+		<While Condition="DoQuest(26512)" >
+			<MoveTo X="-9190.856" Y="-2309.074" Z="89.53561" />
+		</While>
+
+		<TurnIn QuestName="Tuning the Gnomecorder" QuestId="26512" TurnInName="Magistrate Solomon" TurnInId="344" X="-9218.61" Y="-2221.804" Z="67.5397" />
+		<PickUp QuestName="Canyon Romp" QuestId="26514" GiverName="Magistrate Solomon" GiverId="344" X="-9218.61" Y="-2221.804" Z="67.5397" />
+
+		<Code File="Hooks\Avoid" AvoidName="AvoidEttin" ObjectId="43094" ObjectType="Npc" Radius="20" AvoidWhen="!UNIT.Aggro" />
+		<While Condition="DoQuest(26513)" >
+			<Code File="InteractWith" MobIds="204352" InteractByLooting="true" CollectionDistance="200" NumOfTimes="8" QuestId="26513" >
+				<HuntingGrounds>
+					<Hotspot X="-9059.154" Y="-2423.142" Z="127.9526" />
+					<Hotspot X="-8908.922" Y="-2257.709" Z="132.4541" />
+				</HuntingGrounds>
+			</Code>
+		</While>
+
+		<While Condition="DoQuest(26514)" >
+			<Code File="KillUntilComplete" MobIds="430, 446, 616" QuestId="26514" >
+				<HuntingGrounds>
+					<Hotspot X="-9172.87" Y="-2271.55" Z="109.8743" />
+					<Hotspot X="-9035.06" Y="-2407.36" Z="129.5255" />
+					<Hotspot X="-8942.63" Y="-2309.69" Z="132.4417" />
+					<Hotspot X="-9055.076" Y="-2055.757" Z="134.4919" />
+				</HuntingGrounds>
+			</Code>
+		</While>
+
+		<TurnIn QuestName="Canyon Romp" TurnInName="Magistrate Solomon" TurnInId="344" QuestId="26514" />
+
+		<PickUp QuestName="They've Wised Up..." GiverName="Magistrate Solomon" GiverId="344" QuestId="26544" />
+		<Code File="KillUntilComplete" MobId="43185" QuestId="26544" X="-8830.578" Y="-1917.121" Z="124.9383" />
+		<TurnIn QuestName="They've Wised Up..." QuestId="26544" />
+		<RecheckCheckpoints />
+		<PickUp QuestName="Yowler Must Die!" QuestId="26545" GiverName="Magistrate Solomon" GiverId="344" />
+
+		<Code File="KillUntilComplete" MobId="711" QuestId="26519" X="-8832.64" Y="-1940.05" Z="132.9655" />
+
+		<TurnIn QuestName="He Who Controls the Ettins" QuestId="26519" TurnInType="Object" TurnInName="Ettin Control Orb" TurnInId="204351" X="-8831.804" Y="-1940.691" Z="133.0095" />
+		
+		<Code File="KillUntilComplete" MobId="518" QuestId="26545" X="-8894.248" Y="-2173.993" Z="132.6043" />
+		<If Condition="Me.HearthstoneAreaId == 69 &amp;&amp; QuestDone(26545) &amp;&amp; Unit(518) != null" >
+			<Code File="UseHearthstone" WaitForCD="false" />
+		</If>
+
+		<TurnIn QuestName="Like a Fart in the Wind" QuestId="26513" TurnInName="Marshal Marris" TurnInId="382" X="-9279.657" Y="-2296.762" Z="67.84701" />
+		<TurnIn QuestName="Yowler Must Die!" QuestId="26545" TurnInName="Magistrate Solomon" TurnInId="344" X="-9218.61" Y="-2221.804" Z="67.5397" />
+
+		<Code File="Hooks\Avoid" AvoidName="AvoidEttin" Command="Remove" />
+		<Code File="AbandonQuest" QuestId="26519" />
+
+		<PickUp QuestName="John J. Keeshan" QuestId="26567" GiverName="Colonel Troteman" GiverId="43221" X="-9213.332" Y="-2215.395" Z="66.18126" />
+		<TurnIn QuestName="John J. Keeshan" QuestId="26567" TurnInName="John J. Keeshan" TurnInId="43184" X="-9197.06" Y="-2153.287" Z="57.18547" />
+		<PickUp QuestName="This Ain't My War" QuestId="26568" GiverName="John J. Keeshan" GiverId="43184" X="-9197.06" Y="-2153.287" Z="57.18547" />
+		<TurnIn QuestName="This Ain't My War" QuestId="26568" TurnInName="Colonel Troteman" TurnInId="43221" X="-9214.39" Y="-2214.699" Z="66.18004" />
+		<RecheckCheckpoints />
+		<PickUp QuestName="Weapons of War" QuestId="26571" GiverName="Colonel Troteman" GiverId="43221" X="-9214.39" Y="-2214.699" Z="66.18004" />
+		<PickUp QuestName="In Search of Bravo Company" QuestId="26586" GiverName="Colonel Troteman" GiverId="43221" X="-9214.39" Y="-2214.699" Z="66.18004" />
+		<PickUp QuestName="Render's Army" QuestId="26570" GiverName="Marshal Marris" GiverId="382" X="-9282.238" Y="-2294.126" Z="67.50898" />
+		<TurnIn QuestName="In Search of Bravo Company" QuestId="26586" TurnInName="Messner" TurnInId="43270" X="-9230.266" Y="-2700.371" Z="89.08693" />
+		<PickUp QuestName="Breaking Out is Hard to Do" QuestId="26587" GiverName="Messner" GiverId="43270" X="-9230.266" Y="-2700.371" Z="89.08693" />
+
+		<Code File="Hooks\Avoid" AvoidName="AvoidWorgs" ObjectId="43340" ObjectType="Npc" Radius="5" />
+
+		<Code File="KillUntilComplete" MobIds="43327, 43329" QuestId="26571" X="-9221.069" Y="-2793.645" Z="91.1159" />
+		<TurnIn QuestName="Weapons of War" QuestId="26571" />
+		<PickUp QuestName="His Heart Must Be In It" QuestId="26573" GiverName="Colonel Troteman" GiverId="43221" />
+
+		<While Condition="DoQuest(26587)" >
+			<DisableBehavior Name="Pull" />
+			<Code File="RunMacro" Macro="/petstay" />
+			<MoveTo X="-9208.572" Y="-2774.42" Z="90.38313" />
+			<Code File="WaitTimer" WaitTime="120000" TerminateWhen="Unit(43341, u =&gt; u.DistanceSqr &gt; 70f*70f &amp;&amp; !u.IsFacing(Me)) != null" />
+			<MoveTo X="-9181.623" Y="-2766.667" Z="88.67259" />
+			<MoveTo X="-9166.504" Y="-2743.874" Z="88.90867" />
+			<Code File="InteractWith" MobId="204389" InteractByLooting="true" QuestId="26587" X="-9165.36" Y="-2744.02" Z="87.9712" />
+			<MoveTo X="-9166.504" Y="-2743.874" Z="88.90867" />
+			<MoveTo X="-9206.631" Y="-2774.025" Z="90.38362" />
+			<Code File="RunMacro" Macro="/petfollow" />
+			<EnableBehavior Name="Pull" />
+		</While>
+
+		<TurnIn QuestName="Breaking Out is Hard to Do" QuestId="26587" TurnInName="Messner" TurnInId="43270" X="-9229.735" Y="-2701.376" Z="89.0863" />
+		<PickUp QuestName="Jorgensen" QuestId="26560" GiverName="Messner" GiverId="43300" X="-9229.735" Y="-2701.376" Z="89.0863" />
+
+		<Code File="Hooks\Avoid" AvoidName="AvoidWorgs" Command="Remove" />
+
+		<Code File="KillUntilComplete" MobId="43350" QuestId="26560" X="-8699.94" Y="-2597.76" Z="142.5544" />
+
+		<TurnIn QuestName="Jorgensen" QuestId="26560" TurnInName="Jorgensen" TurnInId="43272" X="-8716.831" Y="-2343.946" Z="155.9229" />
+		<PickUp QuestName="Krakauer" QuestId="26561" GiverName="Jorgensen" GiverId="43305" X="-8716.831" Y="-2343.946" Z="155.9229" />
+
+		<Code File="KillUntilComplete" MobId="43363" QuestId="26561" X="-8693.482" Y="-2160.102" Z="157.1563" />
+		<Code File="InteractWith" MobId="204388" InteractByLooting="true" InteractBlacklistTimeInSeconds="1" NonCompeteDistance="0" QuestId="26573" QuestObjectiveIndex="1" X="-8693.478" Y="-2174.579" Z="156.7119" />
+		<Code File="InteractWith" MobId="204388" InteractByLooting="true" InteractBlacklistTimeInSeconds="1" NonCompeteDistance="0" QuestId="26573" QuestObjectiveIndex="2" X="-8693.478" Y="-2174.579" Z="156.7119" />
+
+		<TurnIn QuestName="Krakauer" QuestId="26561" TurnInName="Krakauer" TurnInId="43274" X="-8693.84" Y="-2149.253" Z="158.447" />
+		<PickUp QuestName="And Last But Not Least... Danforth" QuestId="26562" GiverName="Krakauer" GiverId="43303" X="-8693.281" Y="-2149.865" Z="158.5078" />
+
+		<While Condition="DoQuest(26562)" >
+			<Code File="KillUntilComplete" MobId="43369" QuestId="26562" X="-8824.623" Y="-2190.839" Z="138.4967" />
+		</While>
+		<While Condition="QuestDone(26562) &amp;&amp; Unit(43275, u =&gt; u.Z &gt; 143) != null" >
+			<Code File="InteractWith" MobId="204403" X="-8821.83" Y="-2192.39" Z="138.388" TerminateWhen=" Unit(43275, u =&gt; u.Z &lt; 143) != null" />
+		</While>
+
+		<TurnIn QuestName="And Last But Not Least... Danforth" QuestId="26562" TurnInName="Danforth" TurnInId="43275" X="-8806.967" Y="-2204.719" Z="132.0642" />
+		<PickUp QuestName="Return of the Bravo Company" QuestId="26563" GiverName="Danforth" GiverId="43302" X="-8825.872" Y="-2191.252" Z="138.6157" />
+
+		<While Condition="DoQuest(26570)" >
+			<Code File="KillUntilComplete" MobIds="4463, 615" QuestId="26570" >
+				<HuntingGrounds>
+					<Hotspot X="-8701.003" Y="-2230.39" Z="154.6585" />
+					<Hotspot X="-8720.482" Y="-2355.191" Z="156.0605" />
+					<Hotspot X="-8786.099" Y="-2435.544" Z="149.8568" />
+					<Hotspot X="-8744.402" Y="-2518.146" Z="132.8393" />
+				</HuntingGrounds>
+			</Code>
+		</While>
+
+		<If Condition="Me.HearthstoneAreaId == 69 &amp;&amp; QuestDone(26570) &amp;&amp; Me.MinimapZoneText.Contains(&quot;Render's Camp&quot;)" >
+			<Code File="UseHearthstone" WaitForCD="false" />
+		</If>
+
+		<TurnIn QuestName="Render's Army" QuestId="26570" TurnInName="Marshal Marris" TurnInId="382" X="-9280.485" Y="-2295.926" Z="67.76534" />
+		<TurnIn QuestName="His Heart Must Be In It" QuestId="26573" TurnInName="Colonel Troteman" TurnInId="43221" X="-9213.494" Y="-2212.644" Z="66.18006" />
+		<TurnIn QuestName="Return of the Bravo Company" QuestId="26563" TurnInName="Colonel Troteman" TurnInId="43221" X="-9213.494" Y="-2212.644" Z="66.18006" />
+		<RecheckCheckpoints />
+		<PickUp QuestName="They Drew First Blood" QuestId="26607" GiverName="Colonel Troteman" GiverId="43221" X="-9213.494" Y="-2212.644" Z="66.18006" />
+		<TurnIn QuestName="They Drew First Blood" QuestId="26607" TurnInName="John J. Keeshan" TurnInId="43184" X="-9196.896" Y="-2153.776" Z="57.18563" />
+
+		<Checkpoint Level="20" />
+		<If Condition="Me.Level &lt;= 21" >
+			<Code File="RunCode" Code="foreach (PlayerQuest quest in Me.QuestLog.GetAllQuests()) QuestLog.Instance.AbandonQuestById(quest.Id)" />
+		</If>
+		<Code File="LoadProfile" ProfileName="Duskwood.xml" />
+
+		<!--
+		<PickUp QuestName="It's Never Over" QuestId="26616" GiverName="John J. Keeshan" GiverId="43184" X="-9196.896" Y="-2153.776" Z="57.18563" />
+		<While Condition="DoQuest(26616)" >
+			<MoveTo X="-9294.923" Y="-2359.457" Z="56.62869" />
+			<Code File="InteractWith" MobId="43443" QuestId="26616" X="-9294.923" Y="-2359.457" Z="56.62869" />
+			<Code File="WaitTimer" WaitTime="50000" TerminateWhen="!Me.HasAura(46598)" />
+		</While>
+		<TurnIn QuestName="It's Never Over" QuestId="26616" TurnInName="John J. Keeshan" TurnInId="43458" X="-9459.52" Y="-2828.595" Z="65.24197" />
+
+		<PickUp QuestName="Point of Contact: Brubaker" QuestId="26639" GiverName="John J. Keeshan" GiverId="43458" X="-9459.52" Y="-2828.595" Z="65.24197" />
+		<PickUp QuestName="Bravo Company Field Kit: Camouflage" QuestId="26636" GiverName="Krakauer" GiverId="43461" X="-9459.52" Y="-2828.595" Z="65.24197" />
+		<PickUp QuestName="Hunting the Hunters" QuestId="26638" GiverName="Danforth" GiverId="43462" X="-9459.52" Y="-2828.595" Z="65.24197" />
+		<PickUp QuestName="Bravo Company Field Kit: Chloroform" QuestId="26637" GiverName="Messner" GiverId="43459" X="-9459.52" Y="-2828.595" Z="65.24197" /> -->
+
+	</QuestOrder>
+</HBProfile>

@@ -1,0 +1,417 @@
+<HBProfile xsi:noNamespaceSchemaLocation="../Schemas/EchoSchema.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<!-- Original contribution by EchoTiger -->
+	<Name>Westfall ($ShortHash$)</Name>
+
+	<MinDurability>0.3</MinDurability>
+	<MinFreeBagSlots>3</MinFreeBagSlots>
+
+	<SellGrey>true</SellGrey>
+	<SellWhite>true</SellWhite>
+	<SellGreen>true</SellGreen>
+	<SellBlue>true</SellBlue>
+	<SellPurple>false</SellPurple>
+
+	<MailGrey>false</MailGrey>
+	<MailWhite>true</MailWhite>
+	<MailGreen>true</MailGreen>
+	<MailBlue>true</MailBlue>
+	<MailPurple>true</MailPurple>
+
+	<TargetElites>true</TargetElites>
+
+	<AvoidMobs>
+	</AvoidMobs>
+
+	<Mailboxes>
+		<Mailbox Name="Sentinel Hill" X="-10643.38" Y="1157.339" Z="33.24381" />
+	</Mailboxes>
+
+	<Vendors>
+		<Vendor Name="Innkeeper Heather" Entry="8931" Type="Food" X="-10653.28" Y="1166.431" Z="34.50473" />
+		<Vendor Name="Quartermaster Lewis" Entry="491" Type="Repair" X="-10500.6" Y="1021.59" Z="60.52" />
+		<Vendor Name="Farmer Saldean" Entry="233" Type="Food" X="-10128.7" Y="1055.21" Z="36.25089" />
+	</Vendors>
+
+	<Blackspots>
+	</Blackspots>
+
+	<Blacklist>
+	</Blacklist>
+
+	<QuestOrder IgnoreCheckpoints="false" >
+		<!-- Check function status -->
+		<Code File="RunCode" Type="Definition">
+			<![CDATA[
+			private static bool? profileFunctionsEnabled => (bool?)AppDomain.CurrentDomain.GetData("QuestingProfiles_FunctionsEnabled");
+			private static bool IsStoreProfile(string path) => path.StartsWith("store://");
+			private static string Slashify(string path) => IsStoreProfile(path) ? path.Replace(@"\", "/") : path.Replace("/", @"\");
+
+			public __CompiledBatchClass__()
+			{
+				ActivateFunctions();
+			}
+
+			private static void ActivateFunctions()
+			{
+				if (profileFunctionsEnabled == null || profileFunctionsEnabled == false)
+				{
+					Bots.Professionbuddy.PBLog.Log(Colors.MediumPurple, "[Profile Message!]: ", Colors.Yellow, "Please stand by as the functions are being activated!");
+					LoadProfile(@"..\..\Functions\Activate Functions.xml");
+				}
+			}
+
+			private static void LoadProfile(string path)
+			{
+				var profile = GetNewPath(path);
+				if (!IsStoreProfile(profile) && !File.Exists(profile))
+				{
+					Bots.Professionbuddy.PBLog.Log(Colors.MediumPurple, "[Profile Message!]: ", Colors.Yellow, "Profile does not exist.\n" + profile);
+					return;
+				}
+
+				Bots.Professionbuddy.PBLog.Log(Colors.MediumPurple, "[Profile Message!]: ", Colors.Yellow, "Loading: " + profile);
+				ProfileManager.LoadNew(profile, false);
+			}
+
+			private static string GetNewPath(string path)
+			{
+				if (IsStoreProfile(path))
+					return Slashify(path);
+
+				var currentProfile = ProfileManager.XmlLocation;
+				if (IsStoreProfile(currentProfile))
+					return Slashify(currentProfile + "/../" + path);
+
+				var absolutePath = Path.Combine(Path.GetDirectoryName(currentProfile), path);
+				absolutePath = Path.GetFullPath(absolutePath);
+				var canonicalPath = new Uri(absolutePath).LocalPath;
+				return Slashify(canonicalPath);
+			}]]>
+		</Code>
+		<Code File="RunCode" Code="ActivateFunctions();" />
+		<!-- END Check function status -->
+
+		<If Condition="Me.IsHorde" >
+			<Code File="LoadProfile" ProfileName="..\..\Questing Autoloader.xml" />
+		</If>
+		<!-- RunCode Methods -->
+			<Code File="RunCode">
+			<![CDATA[
+				Bots.Professionbuddy.PBLog.Log(System.Windows.Media.Colors.MediumPurple, "> [Profile Initialization Status] ", System.Windows.Media.Colors.CornflowerBlue, "\n     Auto-Looting	:: Enabled\n     Looting	:: Enabled\n     Game Addons	:: Disabled");
+				Lua.DoString("SetCVar('AutoLootDefault', 1);");
+				Lua.DoString("SetCVar('autoDismountFlying', 1);");
+				CharacterSettings.Instance.LootMobs = true;
+				CharacterSettings.Instance.Save();
+				Logging.Write(System.Windows.Media.Colors.MediumPurple, "> [Ready to bot!]");
+			]]>
+			</Code>
+			<Code File="RunCode" Type="Definition">
+				<![CDATA[
+						bool DoQuest(params uint[] questIds)
+						{
+							foreach (var questId in questIds)
+							{
+								if (HasQuest(questId) && !IsQuestCompleted(questId)) return true;
+							}
+							return false;
+						}
+						bool NeedsQuest(params uint[] questIds)
+						{
+							foreach (var questId in questIds)
+							{
+								if (!HasQuest(questId) && !IsQuestCompleted(questId)) return true;
+							}
+							return false;
+						}
+						bool NeedsBreadcrumbQuest(params uint[] questIds)
+						{
+							foreach (var questId in questIds)
+							{
+								if (IsQuestCompleted(questId)) return false;
+							}
+							return true;
+						}
+						bool QuestDone(params uint[] questIds)
+						{
+							foreach (var questId in questIds)
+							{
+								if (HasQuest(questId) && IsQuestCompleted(questId)) return true;
+							}
+							return false;
+						}
+						bool QuestFlaggedCompleted(params uint[] questIds)
+						{
+							foreach (var questId in questIds)
+							{
+								return Lua.GetReturnVal<bool>($"return IsQuestFlaggedCompleted({questId});", 0);
+							}
+							return false;
+						}
+						async Task SkipCutscene(int preWait = 3000, int postWait = 3000)
+						{
+					// Add detection of cutscene here.
+							await Coroutine.Sleep(preWait);
+					// Test and improve the working method.
+							Lua.DoString("MovieFrame:StopMovie(); CinematicFrame_CancelCinematic(); StopCinematic();");
+							await Coroutine.Sleep(postWait);
+						}
+					]]>
+			</Code>
+		<!-- END RunCode Methods -->
+
+
+		<PickUp QuestName="Murder Was The Case That They Gave Me" QuestId="26209" GiverName="Lieutenant Horatio Laine" GiverId="42308" X="-9849.856" Y="914.9618" Z="30.27025" />
+		<While Condition="DoQuest(26209)" >
+			<Code File="InteractWith" MobState="AliveNotInCombat" QuestId="26209" X="-9818.569" Y="973.3137" Z="29.25543" >
+				<PursuitList>
+					<PursueUnit Id="42382" PursueWhen="UNIT.CanGossip" />
+					<PursueUnit Id="42384" PursueWhen="UNIT.CanGossip" />
+					<PursueUnit Id="42391" PursueWhen="UNIT.CanGossip" />
+					<PursueUnit Id="42386" PursueWhen="UNIT.CanGossip" />
+					<PursueUnit Id="42383" PursueWhen="UNIT.CanGossip" />
+				</PursuitList>
+			</Code>
+			<Code File="Misc\RunLua" Lua="GossipTitleButton2:Click(); StaticPopup1Button1:Click();" WaitTime="200" />
+		</While>
+		<TurnIn QuestName="Murder Was The Case That They Gave Me" QuestId="26209" TurnInName="Lieutenant Horatio Laine" TurnInId="42308" X="-9849.855" Y="914.9617" Z="30.26896" />
+
+		<PickUp QuestName="Hot On the Trail: The Riverpaw Clan" QuestId="26213" GiverName="Lieutenant Horatio Laine" GiverId="42308" X="-9849.855" Y="914.9617" Z="30.26896" />
+		<PickUp QuestName="Hot On the Trail: Murlocs" QuestId="26214" GiverName="Lieutenant Horatio Laine" GiverId="42308" X="-9849.855" Y="914.9617" Z="30.26896" />
+
+		<While Condition="DoQuest(26213)" >
+			<Code File="KillUntilComplete" MobIds="500, 117" QuestId="26213" >
+				<HuntingGrounds>
+					<Hotspot X="-9739.139" Y="1029.919" Z="37.50079" />
+					<Hotspot X="-9709.82" Y="962.4441" Z="35.72844" />
+				</HuntingGrounds>
+			</Code>
+		</While>
+
+		<While Condition="DoQuest(26214)" >
+			<Code File="KillUntilComplete" MobIds="515, 126" QuestId="26214" >
+				<HuntingGrounds>
+					<Hotspot X="-9622.858" Y="1056.765" Z="6.138759" />
+					<Hotspot X="-9638.83" Y="1176.439" Z="6.640587" />
+				</HuntingGrounds>
+			</Code>
+		</While>
+
+		<TurnIn QuestName="Hot On the Trail: The Riverpaw Clan" QuestId="26213" TurnInName="Lieutenant Horatio Laine" TurnInId="42308" X="-9849.856" Y="914.9618" Z="30.27025" />
+		<TurnIn QuestName="Hot On the Trail: Murlocs" QuestId="26214" TurnInName="Lieutenant Horatio Laine" TurnInId="42308" X="-9849.856" Y="914.9618" Z="30.27025" />
+		<RecheckCheckpoints />
+		<PickUp QuestName="Meet Two-Shoed Lou" QuestId="26215" GiverName="Lieutenant Horatio Laine" GiverId="42308" X="-9849.856" Y="914.9618" Z="30.27025" />
+		<TurnIn QuestName="Meet Two-Shoed Lou" QuestId="26215" TurnInName="Two-Shoed Lou" TurnInId="42405" X="-9852.321" Y="1278.76" Z="40.91474" />
+		<PickUp QuestName="Livin' the Life" QuestId="26228" GiverName="Two-Shoed Lou" GiverId="42405" X="-9852.321" Y="1278.76" Z="40.91474" />
+		<PickUp QuestName="&quot;I TAKE Candle!&quot;" QuestId="26229" GiverName="Jimb &quot;Candles&quot; McHannigan" GiverId="42498" X="-9857.424" Y="1281.175" Z="41.0022" />
+		<PickUp QuestName="Feast or Famine" QuestId="26230" GiverName="Mama Celeste" GiverId="42497" X="-9846.435" Y="1282.747" Z="41.88749" />
+
+		<While Condition="DoQuest(26230)" >
+			<Code File="InteractWith" MobId="203972" InteractByLooting="true" NumOfTimes="5" QuestId="26230" QuestObjectiveIndex="2" X="-9931.621" Y="1224.085" Z="42.43853" />
+			<Code File="KillUntilComplete" MobId="834" QuestId="26230" QuestObjectiveIndex="1" X="-9931.621" Y="1224.085" Z="42.43853" />
+		</While>
+
+		<While Condition="DoQuest(26228)" >
+			<MoveTo X="-9844.368" Y="1398.463" Z="37.15765" />
+			<Code File="UseItem" ItemId="57761" TerminateWhen="Me.HasAura(46598)" />
+			<Code File="WaitTimer" WaitTime="80000" TerminateWhen="!Me.HasAura(46598)" /> 
+		</While>
+
+		<While Condition="DoQuest(26229)" >
+			<Code File="KillUntilComplete" MobIds="1236" QuestId="26229" >
+				<HuntingGrounds>
+					<Hotspot X="-9857.863" Y="1456.96" Z="41.10264" />
+					<Hotspot X="-9905.099" Y="1421.961" Z="38.67512" />
+					<Hotspot X="-10025.59" Y="1454.083" Z="42.34622" />
+				</HuntingGrounds>
+			</Code>
+		</While>
+
+		<TurnIn QuestName="&quot;I TAKE Candle!&quot;" QuestId="26229" TurnInName="Jimb &quot;Candles&quot; McHannigan" TurnInId="42498" X="-9857.424" Y="1281.175" Z="41.00265" />
+		<TurnIn QuestName="Livin' the Life" QuestId="26228" TurnInName="Two-Shoed Lou" TurnInId="42405" X="-9852.321" Y="1278.76" Z="40.91474" />
+		<PickUp QuestName="Lou's Parting Thoughts" QuestId="26232" GiverName="Two-Shoed Lou" GiverId="42405" X="-9852.321" Y="1278.76" Z="40.91474" />
+		<TurnIn QuestName="Feast or Famine" QuestId="26230" TurnInName="Mama Celeste" TurnInId="42497" X="-9846.435" Y="1282.747" Z="41.88716" />
+
+		<While Condition="DoQuest(26232)" >
+			<Code File="KillUntilComplete" MobId="42387" QuestId="26232" TerminateAtMaxRunTimeSecs="60000" >
+				<HuntingGrounds WaypointVisitStrategy="PickOneAtRandom">
+					<Hotspot X="-9861.528" Y="1336.118" Z="41.90211" />
+					<Hotspot X="-9857.687" Y="1334.47" Z="41.90211" />
+					<Hotspot X="-9859.248" Y="1331.367" Z="41.90211" />
+					<Hotspot X="-9861.285" Y="1334.568" Z="41.90211" />
+					<Hotspot X="-9862.844" Y="1333.884" Z="41.90211" />
+				</HuntingGrounds>
+			</Code>
+			<MoveTo X="-9848.943" Y="1311.108" Z="44.26048" />
+		</While>
+		<TurnIn QuestName="Lou's Parting Thoughts" QuestId="26232" TurnInName="Lieutenant Horatio Laine" TurnInId="42558" X="-9855.285" Y="1275.561" Z="40.895" />
+		<RecheckCheckpoints />
+
+		<PickUp QuestName="Shakedown at the Saldean's" QuestId="26236" GiverName="Lieutenant Horatio Laine" GiverId="42558" X="-9855.285" Y="1275.561" Z="40.895" />
+		<TurnIn QuestName="Shakedown at the Saldean's" QuestId="26236" TurnInName="Farmer Saldean" TurnInId="233" X="-10128.7" Y="1055.21" Z="36.25064" />
+		<PickUp QuestName="Times are Tough" QuestId="26237" GiverName="Farmer Saldean" GiverId="233" X="-10128.7" Y="1055.21" Z="36.25064" />
+		<PickUp QuestName="Westfall Stew" QuestId="26241" GiverName="Salma Saldean" GiverId="235" X="-10112.16" Y="1042.099" Z="37.47148" />
+
+		<Code File="InteractWith" MobId="203982" InteractByLooting="true" PreInteractMountStrategy="Dismount" CollectionDistance="200" QuestId="26241" QuestObjectiveIndex="1" X="-10154.64" Y="1105.62" Z="36.95062" />
+
+		<Code File="KillUntilComplete" MobIds="114, 462" QuestId="26237" >
+			<HuntingGrounds>
+				<Hotspot X="-10152.53" Y="1113.596" Z="36.87741" />
+				<Hotspot X="-10213.86" Y="1037.949" Z="36.29939" />
+			</HuntingGrounds>
+		</Code>
+
+		<While Condition="DoQuest(26241)" >
+			<Code File="KillUntilComplete" QuestId="26241" >
+				<HuntingGrounds>
+					<Hotspot X="-10220.19" Y="1173.248" Z="35.90414" />
+					<Hotspot X="-10246.97" Y="1189.7" Z="36.99922" />
+					<Hotspot X="-10031.83" Y="1262.78" Z="43.08861" />
+					<Hotspot X="-10100.59" Y="1360.637" Z="43.57771" />
+					<Hotspot X="-10287.6" Y="1201.42" Z="36.30663" />
+				</HuntingGrounds>
+				<PursuitList>
+					<PursueUnit Id="157" PursueWhen="!IsObjectiveComplete(2, 26241)" />
+					<PursueUnit Id="454" PursueWhen="!IsObjectiveComplete(2, 26241)" />
+					<PursueUnit Id="1109" PursueWhen="!IsObjectiveComplete(3, 26241)" />
+					<PursueUnit Id="199" PursueWhen="!IsObjectiveComplete(3, 26241)" />
+				</PursuitList>
+			</Code>
+		</While>
+
+		<TurnIn QuestName="Times are Tough" QuestId="26237" TurnInName="Farmer Saldean" TurnInId="233" X="-10128.7" Y="1055.21" Z="36.25026" />
+		<If Condition="HasItem(57935) || HasQuest(26252)" >
+			<PickUp QuestName="Heart of the Watcher" QuestId="26252" GiverId="57935" GiverType="Item" />
+			<TurnIn QuestName="Heart of the Watcher" QuestId="26252" TurnInName="Farmer Saldean" TurnInId="233" X="-10128.7" Y="1055.21" Z="36.25026" />
+		</If>
+		<TurnIn QuestName="Westfall Stew" QuestId="26241" TurnInName="Salma Saldean" TurnInId="235" X="-10112.16" Y="1042.099" Z="37.47148" />
+		<PickUp QuestName="You Have Our Thanks" QuestId="26270" GiverName="Farmer Saldean" GiverId="233" X="-10128.7" Y="1055.21" Z="36.25026" />
+		<TurnIn QuestName="You Have Our Thanks" QuestId="26270" TurnInName="Salma Saldean" TurnInId="235" X="-10112.16" Y="1042.099" Z="37.47148" />
+
+		<PickUp QuestName="Hope for the People" QuestId="26266" GiverName="Salma Saldean" GiverId="235" X="-10112.16" Y="1042.099" Z="37.47148" />
+		<TurnIn QuestName="Hope for the People" QuestId="26266" TurnInName="Hope Saldean" TurnInId="42575" X="-10499.07" Y="1022.682" Z="60.52764" />
+		<RecheckCheckpoints />
+
+		<PickUp QuestName="Feeding the Hungry and the Hopeless" QuestId="26271" GiverName="Hope Saldean" GiverId="42575" X="-10499.07" Y="1022.682" Z="60.52764" />
+		<PickUp QuestName="The Westfall Brigade" QuestId="26287" GiverName="Captain Danuvin" GiverId="821" X="-10509.97" Y="1040.674" Z="60.51798" />
+		<PickUp QuestName="In Defense of Westfall" QuestId="26286" GiverName="Marshal Gryan Stoutmantle" GiverId="234" X="-10508.79" Y="1045.233" Z="60.51798" />
+		<PickUp QuestName="The Legend of Captain Grayson" QuestId="26371" GiverName="Scout Galiaan" GiverId="878" X="-10504.72" Y="1042.872" Z="60.51798" />
+
+		<While Condition="DoQuest(26286, 26287)" >
+			<Code File="KillUntilComplete" MobIds="54372, 54373" TerminateWhen="!DoQuest(26286, 26287)" >
+				<HuntingGrounds>
+					<Hotspot X="-10501.53" Y="1129.714" Z="38.80812" />
+					<Hotspot X="-10569.14" Y="1102.071" Z="39.81474" />
+					<Hotspot X="-10594.11" Y="1184.093" Z="34.92241" />
+				</HuntingGrounds>
+			</Code>
+		</While>
+
+		<While Condition="DoQuest(26271)" >
+			<DisableBehavior Name="Pull" />
+			<MoveTo X="-10335.38" Y="980.8546" Z="31.13051" />
+			<Code File="InteractWith" QuestId="26271" NumOfTimes="200" MobIds="42383, 42384, 42386, 42400" CollectionDistance="200" AuraIdMissingFromMob="79451" InteractByUsingItemId="57991" >
+				<HuntingGrounds>
+					<Hotspot X="-10750.99" Y="1021.052" Z="33.83258" />
+					<Hotspot X="-10734.23" Y="1130.766" Z="34.67479" />
+					<Hotspot X="-10705.35" Y="1188.122" Z="34.95616" />
+				</HuntingGrounds>
+			</Code>
+			<EnableBehavior Name="Pull" />
+		</While>
+
+		<TurnIn QuestName="In Defense of Westfall" QuestId="26286" TurnInName="Marshal Gryan Stoutmantle" TurnInId="234" X="-10508.79" Y="1045.233" Z="60.51798" />
+		<TurnIn QuestName="The Westfall Brigade" QuestId="26287" TurnInName="Captain Danuvin" TurnInId="821" X="-10509.97" Y="1040.674" Z="60.51798" />
+		<PickUp QuestName="Jango Spothide" QuestId="26288" GiverName="Captain Danuvin" GiverId="821" X="-10509.97" Y="1040.674" Z="60.51798" />
+		<TurnIn QuestName="Feeding the Hungry and the Hopeless" QuestId="26271" TurnInName="Hope Saldean" TurnInId="42575" X="-10499.07" Y="1022.682" Z="60.52777" />
+		<RecheckCheckpoints />
+		<PickUp QuestName="Find Agent Kearnen" QuestId="26289" GiverName="Marshal Gryan Stoutmantle" GiverId="234" X="-10508.79" Y="1045.233" Z="60.51798" />
+
+		<Code File="SetHearthstone" MobId="8931" AreaId="108" X="-10653.28" Y="1166.431" Z="34.50449" />
+
+		<Code File="KillUntilComplete" MobId="42653" QuestId="26288" QuestObjectiveIndex="3" X="-11183.77" Y="837.8299" Z="40.75785" />
+
+		<While Condition="DoQuest(26288)" >
+			<Code File="KillUntilComplete" QuestId="26288"  >
+				<HuntingGrounds>
+					<Hotspot X="-11165.12" Y="822.0707" Z="37.26025" />
+					<Hotspot X="-11093.42" Y="905.5302" Z="41.05676" />
+					<Hotspot X="-11096.56" Y="788.5104" Z="37.5571" />
+					<Hotspot X="-11215.67" Y="774.8148" Z="42.96269" />
+				</HuntingGrounds>
+				<PursuitList>
+					<PursueUnit Id="453" PursueWhen="!IsObjectiveComplete(1, 26288)" />
+					<PursueUnit Id="98" PursueWhen="!IsObjectiveComplete(2, 26288)" />
+				</PursuitList>
+			</Code>
+		</While>
+
+		<TurnIn QuestName="Find Agent Kearnen" QuestId="26289" TurnInName="Agent Kearnen" TurnInId="7024" X="-11042.95" Y="627.3809" Z="34.47513" />
+
+		<PickUp QuestName="Secrets of the Tower" QuestId="26290" GiverName="Agent Kearnen" GiverId="7024" X="-11042.95" Y="627.3809" Z="34.47513" />
+		<While Condition="DoQuest(26290)" >
+			<MoveTo X="-11106.04" Y="600.1963" Z="37.093" />
+			<DisableBehavior Name="Combat" />
+			<MoveTo X="-11136.32" Y="555.5871" Z="35.9606" />
+			<Code File="UseItem" ItemId="58112" X="-11136.32" Y="555.5871" Z="35.9606" />
+			<MoveTo X="-11130.85" Y="544.9093" Z="70.38125" />
+			<Code File="WaitTimer" WaitTime="65000" QuestId="26290" />
+			<MoveTo X="-11047.89" Y="622.7817" Z="34.29488" />
+			<EnableBehavior Name="Combat, Pull" />
+		</While>
+		<TurnIn QuestName="Secrets of the Tower" QuestId="26290" TurnInName="Agent Kearnen" TurnInId="7024" X="-11042.95" Y="627.3809" Z="34.47513" />
+
+		<PickUp QuestName="Big Trouble in Moonbrook" QuestId="26291" GiverName="Agent Kearnen" GiverId="7024" X="-11042.95" Y="627.3809" Z="34.47513" />
+		<If Condition="Me.HearthstoneAreaId == 108 &amp;&amp; Unit(7024) != null" >
+			<Code File="UseHearthstone" WaitForCD="false" />
+		</If>
+
+		<TurnIn QuestName="Big Trouble in Moonbrook" QuestId="26291" TurnInName="Marshal Gryan Stoutmantle" TurnInId="234" X="-10508.79" Y="1045.233" Z="60.51798" />
+		<PickUp QuestName="To Moonbrook!" QuestId="26292" GiverName="Marshal Gryan Stoutmantle" GiverId="234" X="-10508.79" Y="1045.233" Z="60.51798" />
+		<TurnIn QuestName="Jango Spothide" QuestId="26288" TurnInName="Captain Danuvin" TurnInId="821" X="-10509.97" Y="1040.674" Z="60.51849" />
+		<RecheckCheckpoints />
+		<TurnIn QuestName="To Moonbrook!" QuestId="26292" TurnInName="Captain Alpert" TurnInId="42425" X="-10896.19" Y="1543.047" Z="54.64997" />
+		<PickUp QuestName="Propaganda" QuestId="26295" GiverName="Captain Alpert" GiverId="42425" X="-10896.19" Y="1543.047" Z="54.64997" />
+
+		<While Condition="DoQuest(26295)" >
+			<Code File="InteractWith" MobId="204017" IgnoreLoSToTarget="true" QuestId="26295" QuestObjectiveIndex="4" X="-10951.61" Y="1570.57" Z="46.9774" />
+			<Code File="InteractWith" MobId="204014" IgnoreLoSToTarget="true" QuestId="26295" QuestObjectiveIndex="1" X="-10950.2" Y="1562.381" Z="46.97704" />
+			<Code File="InteractWith" MobId="204015" IgnoreLoSToTarget="true" QuestId="26295" QuestObjectiveIndex="2" X="-11029.29" Y="1500.767" Z="43.20254" />
+			<Code File="InteractWith" MobId="204016" IgnoreLoSToTarget="true" QuestId="26295" QuestObjectiveIndex="3" X="-10954.48" Y="1496.066" Z="50.60726" />
+		</While>
+
+		<While Condition="NeedsQuest(26296) || DoQuest(26296)" >
+			<Code File="InteractWith" MobId="42677" CollectionDistance="200" InteractByLooting="true" PreInteractMountStrategy="Dismount" NumOfTimes="50" TerminateWhen="IsQuestCompleted(26296)" >
+				<HuntingGrounds>
+					<Hotspot X="-10981.31" Y="1486.082" Z="43.12719" />
+					<Hotspot X="-11023.63" Y="1536.363" Z="44.25472" />
+					<Hotspot X="-11039.59" Y="1458.54" Z="45.32101" />
+				</HuntingGrounds>
+			</Code>
+		</While>
+
+		<TurnIn QuestName="Propaganda" QuestId="26295" TurnInName="Captain Alpert" TurnInId="42425" X="-10896.19" Y="1543.047" Z="54.6497" />
+		<PickUp QuestName="The Dawning of a New Day" QuestId="26297" GiverName="Captain Alpert" GiverId="42425" X="-10896.19" Y="1543.047" Z="54.6497" />
+		<TurnIn QuestName="Evidence Collection" QuestId="26296" TurnInName="Captain Alpert" TurnInId="42425" X="-10896.19" Y="1543.047" Z="54.6497" />
+
+		<While Condition="!IsQuestCompleted(26297)" >
+			<PickUp QuestName="The Dawning of a New Day" QuestId="26297" GiverName="Captain Alpert" GiverId="42425" X="-10896.19" Y="1543.047" Z="54.6497" />
+			<MoveTo X="-11016.69" Y="1485.837" Z="43.33044" />
+			<Code File="WaitTimer" WaitTime="70000" QuestId="26297" />
+			<If Condition="!IsQuestCompleted(26296)" >
+				<Code File="AbandonQuest" QuestId="26297" />
+			</If>
+		</While>
+
+		<TurnIn QuestName="The Dawning of a New Day" QuestId="26297" TurnInName="Captain Alpert" TurnInId="42425" X="-10896.19" Y="1543.047" Z="54.6497" />
+		<PickUp QuestName="Secrets Revealed" QuestId="26319" GiverName="Captain Alpert" GiverId="42425" X="-10896.19" Y="1543.047" Z="54.6497" />
+		<TurnIn QuestName="Secrets Revealed" QuestId="26319" TurnInName="Thoralius the Wise" TurnInId="42651" X="-10896.19" Y="1543.047" Z="54.6497" />
+
+		<Checkpoint Level="16" />
+		<If Condition="Me.Level &lt;= 17" >
+			<Code File="RunCode" Code="foreach (PlayerQuest quest in Me.QuestLog.GetAllQuests()) QuestLog.Instance.AbandonQuestById(quest.Id)" />
+		</If>
+		<Code File="DeleteItems" Ids="1357" />
+		<Code File="LoadProfile" ProfileName="Redridge Mountains.xml" />
+
+	</QuestOrder>
+</HBProfile>

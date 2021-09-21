@@ -1,0 +1,358 @@
+﻿<HBProfile>
+	<Name>[QO] Kalu'ak Quests - HF [Kick]</Name>
+   
+	<MinLevel>1</MinLevel>
+	<MaxLevel>86</MaxLevel>
+   
+	<MinDurability>0.2</MinDurability>
+	<MinFreeBagSlots>2</MinFreeBagSlots>
+	
+	<MailGrey>False</MailGrey>
+	<MailWhite>False</MailWhite>
+	<MailGreen>False</MailGreen>
+	<MailBlue>True</MailBlue>
+	<MailPurple>True</MailPurple>
+   
+	<SellGrey>True</SellGrey>
+	<SellWhite>True</SellWhite>
+	<SellGreen>True</SellGreen>
+	<SellBlue>False</SellBlue>
+	<SellPurple>False</SellPurple>
+   
+	<TargetElites>True</TargetElites>
+
+	<AvoidMobs>
+	</AvoidMobs>
+	<Blackspots>
+		<Blackspot X="2899.888" Y="4880.295" Z="2.382087" Radius="6.066182" />
+		<Blackspot X="2918.816" Y="4895.312" Z="2.560012" Radius="5.423362" />
+	</Blackspots>
+	<Mailboxes>
+		<Mailbox X="739.341" Y="-2921.124" Z="7.181581" />
+	</Mailboxes>
+	<Vendors>
+		<Vendor Name="Caregiver Iqniq" Entry="27148" Type="Food" X="704.0294" Y="-2932.878" Z="-3.068498" />
+		<Vendor Name="Deniigi" Entry="27151" Type="Repair" X="801.2076" Y="-2948.573" Z="6.660591" />
+	</Vendors>
+
+
+	<Quest Id="11456" Name="Feeding the Survivors">
+		<Objective Type="CollectItem" ItemId="36776" CollectCount="6">
+			<Hotspots>
+				<Hotspot X="658.3962" Y="-3047.878" Z="27.30055" />
+				<Hotspot X="747.7064" Y="-3165.94" Z="26.9098" />
+				<Hotspot X="721.0246" Y="-3248.482" Z="25.17133" />
+				<Hotspot X="609.3381" Y="-3267.703" Z="25.83744" />
+				<Hotspot X="447.8264" Y="-3364.642" Z="52.22584" />
+				<Hotspot X="345.9875" Y="-3189.961" Z="23.63999" />
+				<Hotspot X="405.7469" Y="-3177.011" Z="26.46394" />
+				<Hotspot X="497.3312" Y="-3112.596" Z="28.067" />
+				<Hotspot X="653.9415" Y="-3049.103" Z="27.6721" />
+			</Hotspots>
+		</Objective>
+	</Quest>
+	<Quest Id="11457" Name="Arming Kamagua">
+		<Objective Type="CollectItem" ItemId="34101" CollectCount="3">
+			<Hotspots>
+				<Hotspot X="943.8746" Y="-2988.337" Z="59.37661" />
+				<Hotspot X="956.8464" Y="-3065.717" Z="53.91832" />
+				<Hotspot X="952.7354" Y="-3095.717" Z="37.83835" />
+				<Hotspot X="898.3515" Y="-3161.957" Z="33.75094" />
+				<Hotspot X="848.7078" Y="-3035.343" Z="27.35593" />
+				<Hotspot X="983.1517" Y="-3024.865" Z="58.76444" />
+				<Hotspot X="923.638" Y="-2939.789" Z="60.21967" />
+			</Hotspots>
+		</Objective>
+	</Quest>
+	<Quest Id="11504" Name="The Dead Rise!">
+		<Objective Type="CollectItem" ItemId="34222" CollectCount="1">
+			<CollectFrom>
+				<GameObject Name="Mound of Debris" Id="187022" />
+			</CollectFrom>
+			<Hotspots>
+				<Hotspot X="-7.550754" Y="-4884.456" Z="297.34" />
+			</Hotspots>
+		</Objective>
+		<Objective Type="CollectItem" ItemId="34223" CollectCount="1">
+			<CollectFrom>
+				<GameObject Name="Unlocked Chest" Id="187023" />
+			</CollectFrom>
+			<Hotspots>
+				<Hotspot X="12.88793" Y="-4979.075" Z="303.5033" />
+			</Hotspots>
+		</Objective>
+		<Objective Type="CollectItem" ItemId="34224" CollectCount="1">
+			<CollectFrom>
+				<GameObject Name="Long Tail Feather" Id="187026" />
+			</CollectFrom>
+			<Hotspots>
+				<Hotspot X="-83.48564" Y="-5013.725" Z="306.8396" />
+			</Hotspots>
+		</Objective>
+		<Objective Type="CollectItem" ItemId="34225" CollectCount="1">
+			<CollectFrom>
+				<GameObject Name="Cannonball" Id="187027" />
+			</CollectFrom>
+			<Hotspots>
+				<Hotspot X="-112.7352" Y="-5143.775" Z="324.0632" />
+			</Hotspots>
+		</Objective>
+	</Quest>
+	<Quest Id="11512" Name="The Frozen Heart of Isuldof">
+		<Objective Type="CollectItem" ItemId="34237" CollectCount="1">
+			<CollectFrom>
+				<GameObject Name="The Frozen Heart of Isuldof" Id="187032" />
+			</CollectFrom>
+			<Hotspots>
+				<Hotspot X="-55.68805" Y="-3355.849" Z="3.137595" />
+			</Hotspots>
+		</Objective>
+	</Quest>
+	<Quest Id="11529" Name="Sorlof's Booty">
+		<Objective Type="CollectItem" ItemId="34468" CollectCount="1">
+			<CollectFrom>
+				<GameObject Name="Sorlof's Booty" Id="187238" />
+			</CollectFrom>
+			<Hotspots>
+				<Hotspot X="263.0114" Y="-3771.373" Z="3.138806" />
+			</Hotspots>
+		</Objective>
+	</Quest>			
+	
+	<QuestOrder>
+	
+				<CustomBehavior File="UserSettings" LootMobs="True" PullDistance="35" TrainNewSkills="False" LearnFlightPaths="True" />
+				
+			<If Condition="Me.MapId == 0" >
+				<CustomBehavior File="FlyTo" X="-8291.137" Y="1404.371" Z="4.731256" />
+				<CustomBehavior File="ForcedDismount" />
+				<!-- SW dock to Valiance Keep -->
+				<CustomBehavior File="UseTransport"
+								Entry="-8300.08, 1405.158, 4.422395"
+								Exit="2234.375, 5132.568, 5.343217"
+								Start="-8288.816, 1424.703, 0.04" 
+								End="2218.391, 5119.589, 0.04" 
+								Transport="190536" />
+				<CustomBehavior File="WaitTimer" WaitTime="5000" />
+			</If>
+
+
+			<If Condition="((!HasQuest(11573)) &amp;&amp; (!IsQuestCompleted(11573)))" >
+				<CustomBehavior File="FlyTo" X="1231.258" Y="-3348.702" Z="203.676" />
+				<CustomBehavior File="ForcedDismount" />
+		<PickUp QuestName="Orfus of Kamagua" QuestId="11573" GiverName="Lunk-tusk" GiverId="25233" />
+			</If>
+			<If Condition="((HasQuest(11573)) &amp;&amp; (IsQuestCompleted(11573)))" >
+				<CustomBehavior File="FlyTo" X="685.7165" Y="-3846.126" Z="248.1712" />
+				<CustomBehavior File="ForcedDismount" />
+		<TurnIn QuestName="Orfus of Kamagua" QuestId="11573" TurnInName="Orfus of Kamagua" TurnInId="23804" />
+		<PickUp QuestName="The Dead Rise!" QuestId="11504" GiverName="Orfus of Kamagua" GiverId="23804" />
+			</If>
+			<If Condition="((!HasQuest(11504)) &amp;&amp; (!IsQuestCompleted(11504)))" >
+				<CustomBehavior File="FlyTo" X="685.7165" Y="-3846.126" Z="248.1712" />
+				<CustomBehavior File="ForcedDismount" />
+		<PickUp QuestName="The Dead Rise!" QuestId="11504" GiverName="Orfus of Kamagua" GiverId="23804" />
+			</If>
+			<If Condition="((HasQuest(11504)) &amp;&amp; (!IsQuestCompleted(11504)))" >
+				<CustomBehavior File="FlyTo" X="-123.0555" Y="-5132.172" Z="327.5944" />
+				<CustomBehavior File="ForcedDismount" />
+				<Objective QuestName="The Dead Rise!" QuestId="11504" Type="CollectItem" ItemId="34225" CollectCount="1" />
+				
+				<CustomBehavior File="FlyTo" X="-85.22021" Y="-5000.851" Z="311.4103" />
+				<CustomBehavior File="ForcedDismount" />
+				<Objective QuestName="The Dead Rise!" QuestId="11504" Type="CollectItem" ItemId="34224" CollectCount="1" />
+				
+				<CustomBehavior File="FlyTo" X="3.358586" Y="-4985.111" Z="306.9501" />
+				<CustomBehavior File="ForcedDismount" />
+				<Objective QuestName="The Dead Rise!" QuestId="11504" Type="CollectItem" ItemId="34223" CollectCount="1" />
+				
+				<CustomBehavior File="FlyTo" X="-1.101534" Y="-4887.324" Z="301.0561" />
+				<CustomBehavior File="ForcedDismount" />
+				<Objective QuestName="The Dead Rise!" QuestId="11504" Type="CollectItem" ItemId="34222" CollectCount="1" />
+			</If>
+			<If Condition="((HasQuest(11504)) &amp;&amp; (IsQuestCompleted(11504)))" >
+				<CustomBehavior File="FlyTo" X="685.7165" Y="-3846.126" Z="248.1712" />
+				<CustomBehavior File="ForcedDismount" />
+			</If>
+		<TurnIn QuestName="The Dead Rise!" QuestId="11504" TurnInName="Orfus of Kamagua" TurnInId="23804" />
+		<PickUp QuestName="Elder Atuik and Kamagua" QuestId="11507" GiverName="Orfus of Kamagua" GiverId="23804" />
+			<If Condition="((HasQuest(11507)) &amp;&amp; (IsQuestCompleted(11507)))" >
+				<CustomBehavior File="FlyTo" X="796.6709" Y="-2927.712" Z="7.161771" />
+				<CustomBehavior File="ForcedDismount" />
+			</If>
+		<TurnIn QuestName="Elder Atuik and Kamagua" QuestId="11507" TurnInName="Elder Atuik" TurnInId="24755" />
+		<PickUp QuestName="Grezzix Spindlesnap" QuestId="11508" GiverName="Elder Atuik" GiverId="24755" />
+			<If Condition="((HasQuest(11508)) &amp;&amp; (IsQuestCompleted(11508)))" >
+				<CustomBehavior File="FlyTo" Distance="1" X="590.3079" Y="-2793.558" Z="0.1844228" />
+				<CustomBehavior File="ForcedDismount" />
+			</If>
+		<TurnIn QuestName="Grezzix Spindlesnap" QuestId="11508" TurnInName="Grezzix Spindlesnap" TurnInId="24643" />
+		<PickUp QuestName="Street &quot;Cred&quot;" QuestId="11509" GiverName="Grezzix Spindlesnap" GiverId="24643" />
+			<If Condition="((HasQuest(11509)) &amp;&amp; (IsQuestCompleted(11509)))" >
+				<CustomBehavior File="FlyTo" X="-143.1077" Y="-3529.977" Z="3.295386" />
+				<CustomBehavior File="ForcedDismount" />
+		<TurnIn QuestName="Street &quot;Cred&quot;" QuestId="11509" TurnInName="&quot;Silvermoon&quot; Harry" TurnInId="24539" />
+			</If>
+		<PickUp QuestName="&quot;Scoodles&quot;" QuestId="11510" GiverName="&quot;Silvermoon&quot; Harry" GiverId="24539" />
+			<If Condition="((HasQuest(11510)) &amp;&amp; (!IsQuestCompleted(11510)))" >
+				<CustomBehavior File="FlyTo" X="-332.6303" Y="-3743.387" Z="30.11348" />
+				<CustomBehavior File="RunMacro" Macro="/dismount\n/cancelaura Flight Form\n/cancelaura Swift Flight Form" NumOfTimes="1" WaitTime="1000" />
+				<Objective QuestName="&quot;Scoodles&quot;" QuestId="11510" Type="CollectItem" ItemId="34235" CollectCount="1" />
+			</If>
+			<If Condition="((HasQuest(11510)) &amp;&amp; (IsQuestCompleted(11510)))" >
+				<CustomBehavior File="FlyTo" X="-143.1077" Y="-3529.977" Z="3.295386" />
+				<CustomBehavior File="ForcedDismount" />
+		<TurnIn QuestName="&quot;Scoodles&quot;" QuestId="11510" TurnInName="&quot;Silvermoon&quot; Harry" TurnInId="24539" />
+			</If>
+		<PickUp QuestName="The Staff of Storm's Fury" QuestId="11511" GiverName="&quot;Silvermoon&quot; Harry" GiverId="24539" />
+		<PickUp QuestName="The Frozen Heart of Isuldof" QuestId="11512" GiverName="&quot;Silvermoon&quot; Harry" GiverId="24539" />
+		<PickUp QuestName="The Lost Shield of the Aesirites" QuestId="11519" GiverName="&quot;Silvermoon&quot; Harry" GiverId="24539" />
+		<PickUp QuestName="The Ancient Armor of the Kvaldir" QuestId="11567" GiverName="&quot;Silvermoon&quot; Harry" GiverId="24539" />
+			<If Condition="((HasQuest(11512)) &amp;&amp; (!IsQuestCompleted(11512)))" >
+				<CustomBehavior File="FlyTo" X="83.25648" Y="-3424.652" Z="10.09571" />
+				<CustomBehavior File="ForcedDismount" />
+				<Objective QuestName="The Frozen Heart of Isuldof" QuestId="11512" Type="CollectItem" ItemId="34237" CollectCount="1" />
+				<RunTo X="87.47934" Y="-3422.375" Z="9.846511" />
+			</If>
+			<If Condition="((HasQuest(11567)) &amp;&amp; (!IsQuestCompleted(11567)))" >
+				<CustomBehavior File="FlyTo" X="-170.6852" Y="-3577.425" Z="1.567765" />
+				<CustomBehavior File="ForcedDismount" />
+				<CustomBehavior File="InteractWith" MobId="28277" NumOfTimes="1" GossipOption="1" CollectionDistance="100" WaitTime="1000" X="-172.8686" Y="-3579.653" Z="1.487482" />	
+				<Objective QuestName="The Ancient Armor of the Kvaldir" QuestId="11567" Type="CollectItem" ItemId="34239" CollectCount="1" />
+				<CustomBehavior File="InteractWith" MobId="28277" NumOfTimes="1" GossipOption="1" CollectionDistance="100" WaitTime="1000" X="89.6326" Y="-6287.427" Z="-0.7396047" />		
+			</If>
+			<If Condition="((HasQuest(11519)) &amp;&amp; (IsQuestCompleted(11519)))" >
+				<CustomBehavior File="FlyTo" X="300.3613" Y="-3712.479" Z="48.3296" />
+	<CustomBehavior File="UserDialog" AllowBotStop="True" SoundCue="Exclamation" StopOnContinue="True" SoundCueInterval="1" Text="Do these 4 quests until you have the Shield questn\nJust wait for the boat to come around" />
+		<TurnIn QuestName="The Lost Shield of the Aesirites" QuestId="11519" TurnInName="Captain Ellis" TurnInId="24910" />
+		<PickUp QuestName="Mutiny on the Mercy" QuestId="11527" GiverName="Captain Ellis" GiverId="24910" />
+			</If>
+			<!--
+			<If Condition="((HasQuest(11527)) &amp;&amp; (!IsQuestCompleted(11527)))" >
+				<Objective QuestName="Mutiny on the Mercy" QuestId="11527" Type="CollectItem" ItemId="34387" CollectCount="5" />
+			</If>
+			<If Condition="((HasQuest(11527)) &amp;&amp; (IsQuestCompleted(11527)))" >
+		<TurnIn QuestName="Mutiny on the Mercy" QuestId="11527" TurnInName="Captain Ellis" TurnInId="24910" />			
+		<PickUp QuestName="Sorlof's Booty" QuestId="11529" GiverName="Captain Ellis" GiverId="24910" />
+			</If>
+			<If Condition="((HasQuest(11529)) &amp;&amp; (!IsQuestCompleted(11529)))" >
+				<CustomBehavior File="FlyTo" X="263.0114" Y="-3771.373" Z="3.138806" />
+				<CustomBehavior File="ForcedDismount" />
+				<Objective QuestName="Sorlof's Booty" QuestId="11529" Type="CollectItem" ItemId="34468" CollectCount="1" />
+			</If>
+			<If Condition="((HasQuest(11529)) &amp;&amp; (IsQuestCompleted(11529)))" >
+		<TurnIn QuestName="Sorlof's Booty" QuestId="11529" TurnInName="Captain Ellis" TurnInId="24910" />
+		<PickUp QuestName="The Shield of the Aesirites" QuestId="11530" GiverName="Captain Ellis" GiverId="24910" />
+			</If>
+			-->
+			<If Condition="(!IsQuestCompleted(11529))" >
+	<CustomBehavior File="UserDialog" AllowBotStop="True" SoundCue="Exclamation" SoundCueInterval="1" Text="Hey you, stop pressing continue.  do the quests!" />
+			</If>
+			<If Condition="((HasQuest(11511)) &amp;&amp; (!IsQuestCompleted(11511)))" >
+				<CustomBehavior File="FlyTo" X="526.3751" Y="-3540.835" Z="13.06923" />
+				<CustomBehavior File="ForcedDismount" />
+				<Objective QuestName="The Staff of Storm's Fury" QuestId="11511" Type="CollectItem" ItemId="34236" CollectCount="1" />
+			</If>
+			<If Condition="((HasQuest(11530)) &amp;&amp; (IsQuestCompleted(11530)))" >
+				<CustomBehavior File="FlyTo" X="686.6437" Y="-3842.993" Z="248.4149" />
+				<CustomBehavior File="ForcedDismount" />
+			</If>
+		<TurnIn QuestName="The Shield of the Aesirites" QuestId="11530" TurnInName="Orfus of Kamagua" TurnInId="23804" />
+		<TurnIn QuestName="The Frozen Heart of Isuldof" QuestId="11512" TurnInName="Orfus of Kamagua" TurnInId="23804" />
+		<TurnIn QuestName="The Staff of Storm's Fury" QuestId="11511" TurnInName="Orfus of Kamagua" TurnInId="23804" />
+		<TurnIn QuestName="The Ancient Armor of the Kvaldir" QuestId="11567" TurnInName="Orfus of Kamagua" TurnInId="23804" />
+		<PickUp QuestName="A Return to Resting" QuestId="11568" GiverName="Orfus of Kamagua" GiverId="23804" />
+			<While Condition="((HasQuest(11568)) &amp;&amp; (!IsQuestCompleted(11568)))" >
+				<CustomBehavior File="FlyTo" X="-8.769051" Y="-4885.207" Z="297.4681" />
+				<CustomBehavior File="ForcedDismount" />
+				<UseItem QuestId="11568" ItemId="34624" X="-8.769051" Y="-4885.207" Z="297.4681" />
+				
+				<CustomBehavior File="FlyTo" X="14.18295" Y="-4975.935" Z="303.0019" />
+				<CustomBehavior File="ForcedDismount" />
+				<UseItem QuestId="11568" ItemId="34624"  X="14.18295" Y="-4975.935" Z="303.0019" />
+				
+				<CustomBehavior File="FlyTo" X="-84.03246" Y="-5012.213" Z="306.9195" />
+				<CustomBehavior File="ForcedDismount" />
+				<UseItem QuestId="11568" ItemId="34624"  X="-84.03246" Y="-5012.213" Z="306.9195" />
+				
+				<CustomBehavior File="FlyTo" X="-111.656" Y="-5142.922" Z="323.982" />
+				<CustomBehavior File="ForcedDismount" />
+				<UseItem QuestId="11568" ItemId="34624"  X="-111.656" Y="-5142.922" Z="323.982" />
+				<CustomBehavior File="WaitTimer" WaitTime="5000" />
+			</While>
+			<If Condition="((HasQuest(11568)) &amp;&amp; (IsQuestCompleted(11568)))" >
+				<CustomBehavior File="FlyTo" X="686.6437" Y="-3842.993" Z="248.4149" />
+				<CustomBehavior File="ForcedDismount" />
+			</If>
+		<TurnIn QuestName="A Return to Resting" QuestId="11568" TurnInName="Orfus of Kamagua" TurnInId="23804" />			
+		<PickUp QuestName="Return to Atuik" QuestId="11572" GiverName="Orfus of Kamagua" GiverId="23804" />
+			<If Condition="((HasQuest(11572)) &amp;&amp; (IsQuestCompleted(11572)))" >
+				<CustomBehavior File="FlyTo" X="797.5571" Y="-2926.419" Z="7.161871" />	
+				<CustomBehavior File="ForcedDismount" />
+			</If>
+		<TurnIn QuestName="Return to Atuik" QuestId="11572" TurnInName="Elder Atuik" TurnInId="24755" />			
+		<PickUp QuestName="Feeding the Survivors" QuestId="11456" GiverName="Elder Atuik" GiverId="24755" />
+			<If Condition="((HasQuest(11456)) &amp;&amp; (!IsQuestCompleted(11456)))" >
+				<CustomBehavior File="FlyTo" X="663.7888" Y="-3025.433" Z="25.77584" />
+				<CustomBehavior File="ForcedDismount" />
+				<Objective QuestName="Feeding the Survivors" QuestId="11456" Type="CollectItem" ItemId="36776" CollectCount="6" />
+			</If>
+			<If Condition="((HasQuest(11456)) &amp;&amp; (IsQuestCompleted(11456)))" >
+				<CustomBehavior File="FlyTo" X="798.9498" Y="-2926.374" Z="7.162476" />
+				<CustomBehavior File="ForcedDismount" />
+			</If>
+		<TurnIn QuestName="Feeding the Survivors" QuestId="11456" TurnInName="Elder Atuik" TurnInId="24755" />
+		<PickUp QuestName="Arming Kamagua" QuestId="11457" GiverName="Elder Atuik" GiverId="24755" />
+			<If Condition="((HasQuest(11457)) &amp;&amp; (!IsQuestCompleted(11457)))" >
+				<CustomBehavior File="FlyTo" X="891.0389" Y="-2935.689" Z="54.9539" />
+				<CustomBehavior File="ForcedDismount" />
+				<Objective QuestName="Arming Kamagua" QuestId="11457" Type="CollectItem" ItemId="34101" CollectCount="3" />
+			</If>
+			<If Condition="((HasQuest(11457)) &amp;&amp; (IsQuestCompleted(11457)))" >
+				<CustomBehavior File="FlyTo" X="798.9498" Y="-2926.374" Z="7.162476" />
+				<CustomBehavior File="ForcedDismount" />
+			</If>
+		<TurnIn QuestName="Arming Kamagua" QuestId="11457" TurnInName="Elder Atuik" TurnInId="24755" />		
+		<PickUp QuestName="Avenge Iskaal" QuestId="11458" GiverName="Elder Atuik" GiverId="24755" />
+			<If Condition="((HasQuest(11458)) &amp;&amp; (!IsQuestCompleted(11458)))" >
+				<CustomBehavior File="FlyTo" X="544.7441" Y="-3465.365" Z="7.911884" />
+				<CustomBehavior File="ForcedDismount" />
+				<UseItem QuestId="11458" ItemId="36777" X="544.7441" Y="-3465.365" Z="7.911884" />
+				<Objective QuestName="Avenge Iskaal" QuestId="11458" Type="KillMob" MobId="24676" KillCount="8" />
+			</If>
+			<If Condition="((HasQuest(11458)) &amp;&amp; (IsQuestCompleted(11458)))" >
+				<CustomBehavior File="FlyTo" X="798.9498" Y="-2926.374" Z="7.162476" />
+				<CustomBehavior File="ForcedDismount" />
+			</If>
+		<TurnIn QuestName="Avenge Iskaal" QuestId="11458" TurnInName="Elder Atuik" TurnInId="24755" />
+		
+			<!-- moving to get the chain for daily cow -->
+			<If Condition="((!HasQuest(11469)) &amp;&amp; (!IsQuestCompleted(11469)))" >
+				<CustomBehavior File="FlyTo" X="-88.98463" Y="-3680.573" Z="12.99047" />
+				<CustomBehavior File="ForcedDismount" />
+		<PickUp QuestName="Swabbin' Soap" QuestId="11469" GiverName="Scuttle Frostprow" GiverId="24784" />
+			</If>
+			<If Condition="((HasQuest(11469)) &amp;&amp; (!IsQuestCompleted(11469)))" >
+				<CustomBehavior File="FlyTo" X="-50.86244" Y="-3267.301" Z="12.92206" />
+				<CustomBehavior File="RunMacro" Macro="/dismount\n/cancelaura Flight Form\n/cancelaura Swift Flight Form" NumOfTimes="1" WaitTime="1000" />
+				<Objective QuestName="Swabbin' Soap" QuestId="11469" Type="CollectItem" ItemId="34122" CollectCount="1" />
+			</If>
+			<If Condition="((HasQuest(11469)) &amp;&amp; (IsQuestCompleted(11469)))" >
+				<CustomBehavior File="FlyTo" X="-88.98463" Y="-3680.573" Z="12.99047" />
+				<CustomBehavior File="ForcedDismount" />
+		<TurnIn QuestName="Swabbin' Soap" QuestId="11469" TurnInName="Scuttle Frostprow" TurnInId="24784" />
+			</If>
+
+		
+		
+	<CustomBehavior File="UserDialog" AllowBotStop="True" SoundCue="Exclamation" ExpiryTime="2" ExpiryAction="InputEnabled_Continue" SoundCueInterval="1" Text="End of Line!\n\nYes, I fight for the users!" />
+			
+			<If Condition="Me.GetReputationLevelWith(1073) == Styx.WoWUnitReaction.Exalted" >
+				<CustomBehavior File="UserDialog" Title="title" AllowBotStop="True" SoundCue="Asterisk" SoundCueInterval="1" Text="You have reached Exalted\nIf you liked this profile, +rep is always appreciated" />
+			</If>
+			
+			
+	
+	</QuestOrder>
+
+</HBProfile>

@@ -1,0 +1,178 @@
+<HBProfile creator="Kickazz006" version="1.0">
+  <Name>Horde Northrend</Name>
+  <MinLevel>67</MinLevel>
+  <MaxLevel>86</MaxLevel>
+
+  <MinDurability>0.3</MinDurability>
+  <MinFreeBagSlots>2</MinFreeBagSlots>
+  
+  <SellGrey>True</SellGrey>
+  <SellWhite>True</SellWhite>
+  <SellGreen>False</SellGreen>
+  <SellBlue>False</SellBlue>
+  
+  <MailWhite>True</MailWhite>
+  <MailGreen>True</MailGreen>
+  <MailBlue>True</MailBlue>
+  <MailPurple>True</MailPurple>
+
+  <SubProfile> <!-- The Twisted Glade - Howling Fjorde -->
+    <Name>The Twisted Glade</Name>
+    <MinLevel>68</MinLevel>
+    <MaxLevel>72</MaxLevel>
+    <Vendors> <!-- Camp Winterhoof -->
+		<Vendor Name="Talu Frosthoof" Entry="24028" Type="Repair" X="2672.532" Y="-4306.23" Z="290.9643" />
+		<Vendor Name="Bori Wintertotem" Entry="24033" Type="Food" X="2681.936" Y="-4390.981" Z="284.3632" />
+	</Vendors>
+    <Mailboxes> <!-- Camp Winterhoof -->
+		<Mailbox X="2675.154" Y="-4380.016" Z="283.2007" />
+    </Mailboxes>
+	<GrindArea>
+		<Factions>634 91</Factions> <!-- [Pig, Wolf, Ram, Elemental] -->
+		<TargetMinLevel>67</TargetMinLevel>
+		<TargetMaxLevel>72</TargetMaxLevel>
+		<Hotspots> 
+			<Hotspot X="2727.251" Y="-4432.977" Z="260.458" />
+			<Hotspot X="2817.909" Y="-4445.625" Z="284.1592" />
+			<Hotspot X="2891.758" Y="-4473.275" Z="280.5864" />
+			<Hotspot X="2978.694" Y="-4439.864" Z="300.9182" />
+			<Hotspot X="3050.079" Y="-4421.965" Z="327.6284" />
+			<Hotspot X="3122.788" Y="-4434.893" Z="330.2839" />
+			<Hotspot X="3186.865" Y="-4496.576" Z="330.8087" />
+			<Hotspot X="3153.839" Y="-4578.563" Z="332.5219" />
+			<Hotspot X="3157.372" Y="-4684.922" Z="325.2411" />
+			<Hotspot X="3089.884" Y="-4700.988" Z="326.6359" />
+			<Hotspot X="3027.449" Y="-4745.385" Z="333.2386" />
+			<Hotspot X="2933.568" Y="-4765.628" Z="325.1734" />
+			<Hotspot X="2815.45" Y="-4743.844" Z="302.2335" />
+			<Hotspot X="2635.425" Y="-4587.72" Z="253.6231" />
+			<Hotspot X="2636.405" Y="-4563.479" Z="255.5566" />
+			<Hotspot X="2544.298" Y="-4448.048" Z="238.3473" />
+			<Hotspot X="2469.84" Y="-4479.449" Z="230.6947" />
+			<Hotspot X="2421.5" Y="-4436.388" Z="232.9825" />
+			<Hotspot X="2471.07" Y="-4324.743" Z="254.9622" />
+			<Hotspot X="2466.247" Y="-4248.979" Z="247.6223" />
+			<Hotspot X="2418.596" Y="-4172.334" Z="237.7637" />
+			<Hotspot X="2487.243" Y="-4053.764" Z="248.4494" />
+			<Hotspot X="2488.271" Y="-3962.545" Z="253.0181" />
+			<Hotspot X="2512.726" Y="-3911.354" Z="262.9196" />
+			<Hotspot X="2445.535" Y="-4104.784" Z="237.9906" />
+			<Hotspot X="2430.738" Y="-4220.363" Z="238.8418" />
+			<Hotspot X="2313.992" Y="-4318.093" Z="230.2487" />
+			<Hotspot X="2515.536" Y="-4375.063" Z="251.0459" />
+			<Hotspot X="2598.266" Y="-4473.639" Z="241.9136" />
+			<Hotspot X="2677.784" Y="-4457.46" Z="250.6841" />
+			<Hotspot X="2745.064" Y="-4438.67" Z="262.8756" />
+		</Hotspots>
+	</GrindArea>
+		<Blackspots>
+
+		</Blackspots>
+		<AvoidMobs>
+			<Mob Name="Storm Giant" Entry="24812" />
+			<Mob Name="Spotted Hippogryph" Entry="23772" />
+		</AvoidMobs>
+  </SubProfile>
+ 
+  <SubProfile> <!-- Grizzly Hills - Voldrune -->
+    <Name>Grizzly Hills - Voldrune</Name>
+    <MinLevel>72</MinLevel>
+    <MaxLevel>76</MaxLevel>
+	<Vendors> <!-- Conquest Hold -->
+	  <Vendor Name="Smith Prigka" Entry="27134" Type="Repair" X="3309.34" Y="-2338.626" Z="110.8467" /> 
+	  <Vendor Name="Provisioner Lorkran" Entry="26868" Type="Food" X="3200.552" Y="-2301.466" Z="107.6754" /> 
+	</Vendors>
+	<Mailboxes> <!-- Conquest Hold -->
+		<Mailbox X="3241.534" Y="-2237.716" Z="115.091" /> 
+	</Mailboxes>
+	<GrindArea>
+	<Factions>1885</Factions>
+    <TargetMinLevel>72</TargetMinLevel>
+	<TargetMaxLevel>75</TargetMaxLevel>
+    <Hotspots>
+		<Hotspot X="2757.384" Y="-2425.463" Z="39.52515" />
+		<Hotspot X="2793.607" Y="-2482.677" Z="47.74365" />
+		<Hotspot X="2872.646" Y="-2503.47" Z="62.72336" />
+		<Hotspot X="2948.708" Y="-2545.961" Z="87.1694" />
+		<Hotspot X="2958.145" Y="-2571.92" Z="87.77851" />
+		<Hotspot X="2947.92" Y="-2629.647" Z="90.7224" />
+		<Hotspot X="2946.74" Y="-2669.038" Z="93.8243" />
+		<Hotspot X="2900.605" Y="-2659.436" Z="84.69591" />
+		<Hotspot X="2860.149" Y="-2608.616" Z="84.65641" />
+		<Hotspot X="2920.517" Y="-2584.468" Z="84.65567" />
+		<Hotspot X="2886.921" Y="-2665.016" Z="84.89584" />
+		<Hotspot X="2847.61" Y="-2728.964" Z="84.68433" />
+		<Hotspot X="2784.781" Y="-2750.719" Z="92.16015" />
+		<Hotspot X="2890.551" Y="-2665.922" Z="84.87913" />
+		<Hotspot X="2921.264" Y="-2558.848" Z="84.61346" />
+		<Hotspot X="2857.923" Y="-2491.83" Z="56.92867" />
+		<Hotspot X="2753.252" Y="-2445.307" Z="39.42575" />
+    </Hotspots>
+	</GrindArea>
+	<Blackspots>
+	</Blackspots>
+  </SubProfile>
+  
+  <SubProfile> <!-- K3 Gnolls -->
+    <Name>K3 Gnolls</Name>
+    <MinLevel>76</MinLevel>
+    <MaxLevel>86</MaxLevel>
+    <Vendors> <!-- K3 -->
+		<Vendor Name="Xark Bolthammer" Entry="29907" Type="Repair" X="6097.559" Y="-1071.257" Z="404.4125" />
+		<Vendor Name="Smilin' Slirk Brassknob" Entry="29904" Type="Food" X="6124.416" Y="-1080.962" Z="402.5415" />
+	</Vendors>
+    <Mailboxes> <!-- K3 -->
+		<Mailbox X="6126.403" Y="-1069.047" Z="403.0461" />
+    </Mailboxes>
+	<GrindArea>
+	<Factions>16 1693 190</Factions> <!-- [Gnoll, Kobold, Mammoth] -->
+    <TargetMinLevel>75</TargetMinLevel>
+	<TargetMaxLevel>80</TargetMaxLevel>
+    <Hotspots>
+		<Hotspot X="6285.17" Y="-896.4157" Z="409.7999" />
+		<Hotspot X="6325.764" Y="-892.1709" Z="408.42" />
+		<Hotspot X="6383.059" Y="-863.1478" Z="408.4239" />
+		<Hotspot X="6373.252" Y="-824.2702" Z="409.4583" />
+		<Hotspot X="6322.515" Y="-791.652" Z="407.4753" />
+		<Hotspot X="6266.65" Y="-796.7496" Z="408.6371" />
+		<Hotspot X="6243.16" Y="-840.7773" Z="407.1665" />
+		<Hotspot X="6265.521" Y="-694.8317" Z="418.3795" />
+		<Hotspot X="6239.067" Y="-666.7831" Z="416.1303" />
+		<Hotspot X="6180.708" Y="-650.7217" Z="404.7965" />
+		<Hotspot X="6225.924" Y="-593.2983" Z="416.8743" />
+		<Hotspot X="6260.139" Y="-620.3668" Z="419.7072" />
+		<Hotspot X="6301.604" Y="-629.5598" Z="423.3912" />
+		<Hotspot X="6302.375" Y="-674.4965" Z="425.3145" />
+		<Hotspot X="6264.413" Y="-698.1252" Z="418.4413" />
+	</Hotspots>
+	</GrindArea>
+	<AvoidMobs>
+		<Mob Name="Ancient Watcher" Entry="31229" />
+		<Mob Name="Unbound Ancient" Entry="30861" />
+		<Mob Name="Spark AA Cannon" Entry="29399" />
+		<Mob Name="Gigantaur" Entry="26836" />
+		<Mob Name="Iceshatter" Entry="27007" />
+	</AvoidMobs>
+	<Blackspots>
+		<Blackspot X="5420.662" Y="404.5746" Z="166.2399" Radius="56.91601" />
+		<Blackspot X="3531.309" Y="-1153.684" Z="113.713" Radius="101.0137" /> <!-- Dragonblight travelling blackspot -->
+		<Blackspot X="2915.6" Y="-2750.925" Z="77.49868" Radius="48.51372" /> <!-- Blackspot by Voldrune -->
+		<Blackspot X="3887.218" Y="-1130.745" Z="130.3466" Radius="55.11689" Height="13.33934" />
+		<Blackspot X="6137.455" Y="-965.4685" Z="397.8212" Radius="7.78932" /> <!-- pipe in ground -->
+	</Blackspots>
+  </SubProfile>
+  
+	<Blackspots> <!-- Travelling Blackspots -->
+		<Blackspot X="3531.309" Y="-1153.684" Z="113.713" Radius="101.0137" /> <!-- Dragonblight travelling blackspot -->
+		<Blackspot X="2915.6" Y="-2750.925" Z="77.49868" Radius="48.51372" /> <!-- Blackspot by Voldrune -->
+	</Blackspots>
+	
+	<AvoidMobs>
+		<Mob Name="Ancient Watcher" Entry="31229" />
+		<Mob Name="Unbound Ancient" Entry="30861" />
+		<Mob Name="Spark AA Cannon" Entry="29399" />
+		<Mob Name="Gigantaur" Entry="26836" />
+		<Mob Name="Iceshatter" Entry="27007" />
+	</AvoidMobs>
+
+</HBProfile>

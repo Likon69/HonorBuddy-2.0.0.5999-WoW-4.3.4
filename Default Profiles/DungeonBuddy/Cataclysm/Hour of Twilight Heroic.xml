@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<DungeonBuddyProfile>
+  <Name>Hour of Twilight Heroic</Name>
+  <DungeonId>439</DungeonId>
+  <BossEncounters>
+	<!-- This is 'talk to thrall and kill shit' dungeon -->
+	<Boss isFinal="false" entry="54590" name="Arcurion" killOrder="1" optional="false" X="4773.262" Y="62.93239" Z="67.53364" />
+	<Boss isFinal="false" entry="54968" name="Asira Dawnslayer" killOrder="2" optional="false" X="4259.41" Y="573.1482" Z="-6.467868" />
+	<!-- After 2nd boss - drakes come, use them to fly to next boss <Vendor Name="Life Warden" Entry="55549" Type="Repair" X="4295.418" Y="576.717" Z="-3.834398" /> // make sure we're not mounted or shapeshifted! -->
+	<Boss isFinal="true" entry="54938" name="Archbishop Benedictus" killOrder="3" optional="false" X="3547.737" Y="272.7934" Z="-115.9647" />
+  </BossEncounters>
+  <Blackspots>
+    <!--<Blackspot X="-101.3791" Y="-703.8368" Z="9.095623" Radius="3.363508" />-->
+  </Blackspots>
+</DungeonBuddyProfile>

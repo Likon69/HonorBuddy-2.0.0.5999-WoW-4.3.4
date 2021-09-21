@@ -1,0 +1,36 @@
+<HBProfile>
+	<Name>[H - Quest] 1-12 Auto-Loader [Kick]</Name>
+	
+	<QuestOrder>
+	
+				<CustomBehavior File="RunMacro" Macro="/script SetCVar('AutoLootDefault', 1)" NumOfTimes="1" WaitTime="1000" />
+				<CustomBehavior File="EnablePlugin" Names="Questhelper - ItemForAura,Azenius,Anti Drown,AutoEquip2,Talented" />
+	<CustomBehavior File="UserDialog" AllowBotStop="False" SoundCue="Exclamation" SoundCueInterval="15" ExpiryTime="30" ExpiryAction="InputEnabled_Continue" Text="Make sure you setup AutoEquip2 and Talented\n\nIf you have money - set food and drinks as well\n\nYou may also want to set a mail recipient! (Settings and Tools Button)" />
+
+			<If Condition="Me.Race == WoWRace.BloodElf" >
+				<CustomBehavior File="LoadProfile" ProfileName="[H - Quest] 1-12 [Kick]\[H - Quest] 1-5 Blood Elf [Kick]" />
+			</If>
+	
+			<If Condition="Me.Race == WoWRace.Goblin" >
+				<CustomBehavior File="LoadProfile" ProfileName="[H - Quest] 1-12 [Kick]\[H - Quest] 1-12 Goblin [Kick]" />
+			</If>
+			
+			<If Condition="Me.Race == WoWRace.Orc" >
+				<CustomBehavior File="LoadProfile" ProfileName="[H - Quest] 1-12 [Kick]\[H - Quest] 1-5 Orc [Kick]" />
+			</If>
+			
+			<If Condition="Me.Race == WoWRace.Troll">
+				<CustomBehavior File="LoadProfile" ProfileName="[H - Quest] 1-12 [Kick]\[H - Quest] 1-5 Troll [Kick]" />
+			</If>
+			
+			<If Condition="Me.Race == WoWRace.Tauren" >
+				<CustomBehavior File="LoadProfile" ProfileName="[H - Quest] 1-12 [Kick]\[H - Quest] 1-5 Tauren [Kick]" />
+			</If>
+			
+			<If Condition="Me.Race == WoWRace.Undead" >
+				<CustomBehavior File="LoadProfile" ProfileName="[H - Quest] 1-12 [Kick]\[H - Quest] 1-5 Undead [Kick]" />
+			</If>
+			
+	</QuestOrder>
+	
+</HBProfile>

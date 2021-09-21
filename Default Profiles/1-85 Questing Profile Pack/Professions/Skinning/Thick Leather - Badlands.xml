@@ -1,0 +1,88 @@
+<HBProfile creator="Kickazz006" version="1.0">
+	<Name>[A] Skinning 1-525 [Kick]</Name>
+	<MinDurability>0.2</MinDurability>
+	<MinFreeBagSlots>2</MinFreeBagSlots>
+
+	<MinLevel>1</MinLevel>
+	<MaxLevel>86</MaxLevel>
+   
+	<MailGrey>False</MailGrey>
+	<MailWhite>True</MailWhite>
+	<MailGreen>True</MailGreen>
+	<MailBlue>True</MailBlue>
+	<MailPurple>True</MailPurple>
+   
+	<SellGrey>True</SellGrey>
+	<SellWhite>False</SellWhite>
+	<SellGreen>False</SellGreen>
+	<SellBlue>False</SellBlue>
+	<SellPurple>False</SellPurple>
+	
+		<Mailboxes>
+			<Mailbox X="-6600.414" Y="-3929.746" Z="379.2975" /> <!-- Fuselight -->
+		</Mailboxes>
+		<Vendors>
+			<Vendor Name="Artie Steelbolt" Entry="48057" Type="Repair" X="-6600.45" Y="-3898.99" Z="379.1218" /> <!-- Fuselight -->
+			<Vendor Name="Vernon Farcavern" Entry="48090" Type="Repair" X="-6599.86" Y="-3414" Z="279.2877" /> <!-- Dustwind Dig -->
+		</Vendors>
+
+
+		<QuestOrder>
+
+		
+		<While Condition="(true)" >
+		
+			<If Condition="(Me.FreeBagSlots &gt; 6) || (Me.LowestDurabilityPercent &gt; 20.0)" >
+				<CustomBehavior File="FlyTo" DestName="Profile Start" X="-7015.273" Y="-3605.118" Z="242.0636" />
+				<CustomBehavior File="ForcedDismount" />
+		
+				<SetGrindArea><GrindArea>
+					 <!-- Badlands -->
+						<Factions>38 16</Factions> <!-- Wolf, Cat -->
+						<TargetMinLevel>42</TargetMinLevel>
+						<TargetMaxLevel>52</TargetMaxLevel>	
+						<Hotspots> 
+							<Hotspot X="-7015.273" Y="-3605.118" Z="242.0636" />
+							<Hotspot X="-6873.819" Y="-3577.824" Z="243.2934" />
+							<Hotspot X="-6725.524" Y="-3561.088" Z="243.8807" />
+							<Hotspot X="-6502.863" Y="-3646.018" Z="244.1146" />
+							<Hotspot X="-6898.88" Y="-3374.939" Z="241.765" />
+							<Hotspot X="-6800.563" Y="-3342.77" Z="241.7203" />
+							<Hotspot X="-6582.287" Y="-3262.022" Z="241.9538" />
+							<Hotspot X="-6579.571" Y="-3203.49" Z="252.9633" />
+							<Hotspot X="-6550.688" Y="-3171.09" Z="255.1464" />
+							<Hotspot X="-6532.066" Y="-3255.526" Z="242.1929" />
+							<Hotspot X="-6698.496" Y="-3334.592" Z="241.3694" />
+							<Hotspot X="-6693.899" Y="-3595.03" Z="242.5235" />
+						</Hotspots>
+				</GrindArea></SetGrindArea>
+			<GrindTo Condition="(Me.FreeBagSlots &lt;= 6)" GoalText="Farming" />
+			</If>
+		
+			<If Condition="(Me.FreeBagSlots &lt;= 6) || (Me.LowestDurabilityPercent &lt; 20.0)" >
+			
+				<CustomBehavior File="Message" Text="Doing a vendor run at Fuselight" LogColor="Red" />
+				
+				<CustomBehavior File="FlyTo" X="-6600.414" Y="-3929.746" Z="379.2975" /> <!-- Fuselight -->
+				<CustomBehavior File="ForcedDismount" />
+
+				<SetVendor><Vendors>
+					<Vendor Name="Artie Steelbolt" Entry="48057" Type="Repair" X="-6600.45" Y="-3898.99" Z="379.1218" /> <!-- Fuselight -->
+				</Vendors></SetVendor>
+				<SetMailbox><Mailboxes>
+					<Mailbox X="-6600.414" Y="-3929.746" Z="379.2975" /> <!-- Fuselight -->
+				</Mailboxes></SetMailbox>
+				
+				<CustomBehavior File="ForceSetVendor" DoMail="True" DoRepair="True" DoSell="True" />
+				
+			
+			</If>
+			
+		</While>
+		
+
+
+	</QuestOrder>
+
+
+</HBProfile>

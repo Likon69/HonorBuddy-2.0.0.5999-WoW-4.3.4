@@ -1,0 +1,30 @@
+<HBProfile>
+	<Name>Horde 1-68 Questing</Name>
+	<MinDurability>0.4</MinDurability>
+	<MinFreeBagSlots>3</MinFreeBagSlots>
+	<MinLevel>1</MinLevel>
+	<MaxLevel>86</MaxLevel>
+	<MailGrey>False</MailGrey>
+	<MailWhite>False</MailWhite>
+	<MailGreen>True</MailGreen>
+	<SellGrey>True</SellGrey>
+	<SellWhite>True</SellWhite>
+	<SellGreen>True</SellGreen>
+	<SellBlue>False</SellBlue>
+	<SellPurple>False</SellPurple>
+
+	<QuestOrder>
+		<If Condition="Me.Level == 40">
+			<CustomBehavior File="ForceTrainRiding"  NpcID="44919" />
+		</If>
+		<CustomBehavior File="UseTransport"
+						TransportId="164871"
+						WaitAtX="1838.676" WaitAtY="-4387.965" WaitAtZ="135.2332"
+						TransportStartX="1833.509" TransportStartY="-4391.543" TransportStartZ="152.7679"
+						TransportEndX="2062.376" TransportEndY="292.998" TransportEndZ="114.973"
+						StandOnX="1834.961" StandOnY="-4385.694" StandOnZ="135.0334" 
+						GetOffX="2066.773" GetOffY="288.873" GetOffZ="97.03159"
+						/>
+		<CustomBehavior File="LoadProfile" ProfileName="..\1-68 Horde Questing" /> 
+	</QuestOrder>
+</HBProfile>

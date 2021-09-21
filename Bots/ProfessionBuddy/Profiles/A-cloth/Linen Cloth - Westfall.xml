@@ -1,0 +1,48 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<HBProfile>
+  <Name>[A] Linen Cloth Westfall</Name>
+  <MinDurability>0.3</MinDurability>
+  <MinFreeBagSlots>2</MinFreeBagSlots>
+  <MinLevel>1</MinLevel>
+  <MaxLevel>86</MaxLevel>
+	<SellGrey>True</SellGrey>
+	<SellWhite>True</SellWhite>
+	<SellGreen>False</SellGreen>
+	<SellBlue>False</SellBlue>
+	<SellPurple>False</SellPurple>
+	
+	<MailWhite>True</MailWhite>
+	<MailGreen>True</MailGreen>
+	<MailBlue>True</MailBlue>
+	<MailPurple>True</MailPurple>  
+
+	<Vendors>
+<Vendor Name="William MacGregor" Entry="1668" Type="Repair" X="-10653.31" Y="996.5868" Z="32.87476" />
+	</Vendors>
+	
+	<Mailboxes>
+<Mailbox X="-10643.46" Y="1157.421" Z="33.24135" />
+	</Mailboxes>
+  <GrindArea>
+    <TargetMinLevel>1</TargetMinLevel>
+    <TargetMaxLevel>86</TargetMaxLevel>
+    <Factions>20</Factions>
+    <MaxDistance>50</MaxDistance>
+    <Hotspots>
+      <Hotspot x="-11106.25" y="933.3334" z="findhighest" />
+      <Hotspot x="-11175" y="854.1667" z="findhighest" />
+      <Hotspot x="-11060.417" y="833.3334" z="findhighest" />
+      <Hotspot x="-11168.75" y="764.5834" z="findhighest" />
+      <Hotspot x="-11068.75" y="739.5834" z="findhighest" />
+      <Hotspot x="-11145.834" y="658.3334" z="findhighest" />
+    </Hotspots>
+  </GrindArea>
+
+
+           <ProtectedItems>
+           <Item name="Linen Cloth" entry="2589" /> 
+           </ProtectedItems>
+           <ForceMail>
+           <Item name="Linen Cloth" entry="2589" />
+           </ForceMail>
+</HBProfile>

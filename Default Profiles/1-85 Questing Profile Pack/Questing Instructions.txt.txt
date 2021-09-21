@@ -1,0 +1,39 @@
+This is the Instructions How-To for using Questing profiles in the Honorbuddy 2 bot
+
+1) Make sure that WoW is on and Honorbuddy is attached
+
+If you're having issues with attaching Honorbuddy, click the Honorbuddy Guide Link
+http://www.thebuddyforum.com/honorbuddy-forum/guides/32615-quick-hb-guide-presentation-fast-setup.html
+
+2) Assuming that everything works properly now - Select the 'Quest Bot' from the drop down menu of Honorbuddy
+
+3) Click the 'Load Profile' button on Honorbuddy
+
+4) Find the Questing Profiles in your Honorbuddy Folder
+C:/.../Honorbuddy/Questing Profiles/
+
+5) Load the appropriate profile for your Faction and level / Continent
+
+Here is the Quest Flow for the 1-80 questing profiles:
+
+Alliance:
+1-58 EK: 1-5 Race specific, Elwynn Forest, Westfall, Redridge, Duskwood, N.STV, S.STV, WPL, EPL, Badlands, Searing Gorge, Burning Steppes, SoS, Blasted Lands
+58-70: Hellfire, Zangarmarsh, Terrokar Forest, Nagrand, Blades Edge, Netherstorm
+68-80: Borean, Howling Fjord, Dragonblight, Grizzly Hills, Zul'drak, Sholazar, Icecrown, Storm Peaks
+
+Horde:
+1-58: 1-5 Race specific, Durotar, N. Barrens, Ashenvale, Stonetalon Mountain, S. Barrens, Desolace, Dustwallow Marsh, EPL, Felwood, Winterspring, Silithus, Blasted Lands
+58-70: Hellfire, Zangarmarsh, Terrokar Forest, Nagrand, Blades Edge, Netherstorm
+68-80: Borean, Howling Fjord, Dragonblight, Grizzly Hills, Zul'drak, Sholazar, Icecrown, Storm Peaks
+
+Cata Profiles are started in the home city (no quests completed for that profile), or in the zone itself if you have completed some quests
+Cata Profiles do have some User-Assisted quests (being automated in the near future)
+
+6) After the correct profile is loaded, click the Plugins button on Honorbuddy and enable the following plugins and configure them for your character:
+Auto Equip - This equips gear that is dropped from mobs and received from quest rewards.  Enable and Select the weapon type (1h, 2h, Dual Wield) then close the Auto Equip window
+Talented - This auto-selects your talents for your character.  Select the spec you are / the spec you want to be and click save
+
+You may want other plugins in the future for automated buying of PvP Gear, help for farming various items, mounts, etc - those are available here:
+http://www.thebuddyforum.com/honorbuddy-forum/plugins/
+
+This concludes the Questing Instructions

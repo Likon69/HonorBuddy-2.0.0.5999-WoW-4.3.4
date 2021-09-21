@@ -1,0 +1,262 @@
+﻿<HBProfile>
+	<Name>[QO] Cenarion Expedition - Borean A [Kick]</Name>
+   
+	<MinLevel>1</MinLevel>
+	<MaxLevel>86</MaxLevel>
+   
+	<MinDurability>0.2</MinDurability>
+	<MinFreeBagSlots>2</MinFreeBagSlots>
+	
+	<MailGrey>False</MailGrey>
+	<MailWhite>False</MailWhite>
+	<MailGreen>False</MailGreen>
+	<MailBlue>True</MailBlue>
+	<MailPurple>True</MailPurple>
+   
+	<SellGrey>True</SellGrey>
+	<SellWhite>True</SellWhite>
+	<SellGreen>True</SellGreen>
+	<SellBlue>False</SellBlue>
+	<SellPurple>False</SellPurple>
+   
+	<TargetElites>True</TargetElites>
+
+	<AvoidMobs>
+	</AvoidMobs>
+	<Blackspots>
+	</Blackspots>
+	<Mailboxes>
+		<Mailbox X="4164.14" Y="5286.563" Z="26.36433" />
+	</Mailboxes>
+	<Vendors>
+		<Vendor Name="Chief Engineer Galpen Rolltie" Entry="26600" Type="Repair" X="4135.143" Y="5326.093" Z="28.80067" />
+	</Vendors>
+
+	<Quest Id="11866" Name="Ears of Our Enemies">
+		<Objective Type="CollectItem" ItemId="35188" CollectCount="15">
+			<CollectFrom>
+				<Mob Name="Minion of Kaw" Id="25880" />
+			</CollectFrom>
+			<Hotspots>
+				<Hotspot X="3913.555" Y="5479.67" Z="35.96967" />
+				<Hotspot X="4003.075" Y="5451.531" Z="33.78458" />
+				<Hotspot X="4016.497" Y="5509.901" Z="36.20072" />
+				<Hotspot X="3956.829" Y="5523.075" Z="33.91831" />
+				<Hotspot X="3924.261" Y="5477.214" Z="34.34955" />
+			</Hotspots>
+		</Objective>
+	</Quest>
+	<Quest Id="11884" Name="Ned, Lord of Rhinos...">
+		<Objective Type="KillMob" MobId="25801" KillCount="1">
+			<Hotspots>
+				<Hotspot X="3340.431" Y="5787.201" Z="62.02713" />
+				<Hotspot X="3294.008" Y="5889.262" Z="87.07367" />
+				<Hotspot X="3107.635" Y="5937.623" Z="96.35416" />
+				<Hotspot X="3251.061" Y="6030.285" Z="79.83784" />
+			</Hotspots>
+		</Objective>
+		<Objective Type="KillMob" MobId="25968" KillCount="1">
+			<Hotspots>
+				<Hotspot X="3340.431" Y="5787.201" Z="62.02713" />
+				<Hotspot X="3294.008" Y="5889.262" Z="87.07367" />
+				<Hotspot X="3107.635" Y="5937.623" Z="96.35416" />
+				<Hotspot X="3251.061" Y="6030.285" Z="79.83784" />
+			</Hotspots>
+		</Objective>
+	</Quest>
+	<Quest Id="11879" Name="Kaw the Mammoth Destroyer">
+		<Objective Type="CollectItem" ItemId="35234" CollectCount="1">
+			<CollectFrom>
+				<GameObject Name="Kaw's War Halberd" Id="188066" />
+			</CollectFrom>
+			<Hotspots>
+				<Hotspot X="3967.855" Y="5443.664" Z="29.84406" />
+				<Hotspot X="3949.226" Y="5458.165" Z="27.76109" />
+				<Hotspot X="3968.651" Y="5460.919" Z="28.44391" />
+				<Hotspot X="3982.171" Y="5451.092" Z="30.94808" />
+			</Hotspots>
+		</Objective>
+	</Quest>
+	
+	<QuestOrder>
+	
+				<CustomBehavior File="UserSettings" LootMobs="True" PullDistance="35" TrainNewSkills="False" LearnFlightPaths="True" />
+				
+		<If Condition="Me.GetReputationLevelWith(942) &lt; Styx.WoWUnitReaction.Exalted" >
+
+				<!-- Non repeatable quests -->
+			<If Condition="((!HasQuest(11864)) &amp;&amp; (!IsQuestCompleted(11864)))" >
+				<CustomBehavior File="FlyTo" X="3196.44" Y="5283.456" Z="47.53091" />
+				<CustomBehavior File="ForcedDismount" />
+				<CustomBehavior File="InteractWith"  MobId="25809" NumOfTimes="1" CollectionDistance="50" X="3194.392" Y="5282.065" Z="47.90903" />
+				<CustomBehavior File="RunMacro" Macro="/click GossipTitleButton1" NumOfTimes="1" WaitTime="1000" />
+				<CustomBehavior File="RunMacro" Macro="/click QuestFrameCompleteQuestButton" NumOfTimes="1" WaitTime="1000" />
+			</If>
+		<PickUp QuestName="Ears of Our Enemies" QuestId="11866" GiverName="Arch Druid Lathorius" GiverId="25809" />
+		<PickUp QuestName="Happy as a Clam" QuestId="11869" GiverName="Hierophant Cenius" GiverId="25810" />
+		<PickUp QuestName="Unfit for Death" QuestId="11865" GiverName="Zaza" GiverId="25811" />
+		<PickUp QuestName="Help Those That Cannot Help Themselves" QuestId="11876" GiverId="25809" GiverName="Arch Druid Lathorius" />
+		<PickUp QuestName="Ned, Lord of Rhinos..." QuestId="11884" GiverId="25812" GiverName="Killinger the Den Watcher" />
+			<While Condition="((HasQuest(11865)) &amp;&amp; (!IsQuestCompleted(11865)))" >
+				<UseItem QuestName="Unfit for Death" QuestId="11865" ItemId="35127" X="3078.783" Y="5340.487" Z="58.12449" />
+				<CustomBehavior File="WaitTimer" WaitTime="4000" QuestId="11865" />
+				<UseItem QuestName="Unfit for Death" QuestId="11865" ItemId="35127" X="3084.69" Y="5285.571" Z="59.72563" />
+				<CustomBehavior File="WaitTimer" WaitTime="4000" QuestId="11865" />
+				<UseItem QuestName="Unfit for Death" QuestId="11865" ItemId="35127" X="3116.929" Y="5249.898" Z="60.59465" />
+				<CustomBehavior File="WaitTimer" WaitTime="4000" QuestId="11865" />
+				<UseItem QuestName="Unfit for Death" QuestId="11865" ItemId="35127" X="3062.281" Y="5237.495" Z="65.03194" />
+				<CustomBehavior File="WaitTimer" WaitTime="4000" QuestId="11865" />
+				<UseItem QuestName="Unfit for Death" QuestId="11865" ItemId="35127" X="3031.003" Y="5270.857" Z="61.49407" />
+				<CustomBehavior File="WaitTimer" WaitTime="4000" QuestId="11865" />
+				<UseItem QuestName="Unfit for Death" QuestId="11865" ItemId="35127" X="2975.476" Y="5288.088" Z="61.51498" />
+				<CustomBehavior File="WaitTimer" WaitTime="4000" QuestId="11865" />
+				<UseItem QuestName="Unfit for Death" QuestId="11865" ItemId="35127" X="2950.815" Y="5246.208" Z="60.9285" />
+				<CustomBehavior File="WaitTimer" WaitTime="4000" QuestId="11865" />
+				<UseItem QuestName="Unfit for Death" QuestId="11865" ItemId="35127" X="2893.797" Y="5260.6" Z="60.19304" />
+				<CustomBehavior File="WaitTimer" WaitTime="4000" QuestId="11865" />
+			</While>
+			<While Condition="((HasQuest(11876)) &amp;&amp; (!IsQuestCompleted(11876)))" >
+				<CustomBehavior File="UseItemOn" QuestId="11876" MobId="25850" ItemId="35228" NumOfTimes="8" WaitTime="10000" CollectionDistance="600" X="3542.615" Y="5313.339" Z="26.04872" />
+			</While>
+			<If Condition="((HasQuest(11869)) &amp;&amp; (!IsQuestCompleted(11869)))" >
+				<CustomBehavior File="FlyTo" X="3270.239" Y="5491.449" Z="50.04535" />
+				<CustomBehavior File="ForcedDismount" />
+				<Objective QuestName="Happy as a Clam" QuestId="11869" Type="KillMob" MobId="25836" MobName="Loot Crazed Diver" KillCount="10" />
+				<RunTo X="3270.239" Y="5491.449" Z="50.04535" />
+			</If>
+			<If Condition="((HasQuest(11884)) &amp;&amp; (!IsQuestCompleted(11884)))" >
+				<CustomBehavior File="FlyTo" X="3340.535" Y="5787.238" Z="62.05418" />
+				<CustomBehavior File="ForcedDismount" />
+				<Objective QuestName="Ned, Lord of Rhinos..." QuestId="11884" Type="KillMob" MobId="25968" KillCount="1" />
+				<Objective QuestName="Ned, Lord of Rhinos..." QuestId="11884" Type="KillMob" MobId="25801" KillCount="1" />
+			</If>
+			<If Condition="((HasQuest(11869)) &amp;&amp; (IsQuestCompleted(11869)))" >
+				<CustomBehavior File="FlyTo" X="3196.44" Y="5283.456" Z="47.53091" />
+				<CustomBehavior File="ForcedDismount" />
+			</If>
+		<TurnIn QuestName="Unfit for Death" QuestId="11865" TurnInName="Zaza" TurnInId="25811" TurnInType="Npc" />
+		<Pickup QuestName="The Culler Cometh" QuestId="11868" GiverName="Zaza" GiverId="25811" />
+		<TurnIn QuestName="Happy as a Clam" QuestId="11869" TurnInName="Hierophant Cenius" TurnInId="25810" TurnInType="Npc" />
+		<PickUp QuestName="The Abandoned Reach" QuestId="11870" GiverName="Hierophant Cenius" GiverId="25810" />
+		<TurnIn QuestName="Ned, Lord of Rhinos..." QuestId="11884" TurnInName="Killinger the Den Watcher" TurnInId="25812" />
+		<TurnIn QuestName="Help Those That Cannot Help Themselves" QuestId="11876" TurnInName="Arch Druid Lathorius" TurnInId="25809" />
+		<Pickup QuestName="Khu'nok Will Know" QuestId="11878" GiverName="Arch Druid Lathorius" GiverId="25809" />
+			<If Condition="((HasQuest(11878)) &amp;&amp; (!IsQuestCompleted(11878)))" >
+				<CustomBehavior File="FlyTo" X="3717.432" Y="5154.762" Z="24.26792" />
+				<CustomBehavior File="ForcedDismount" />
+			</If>
+		<TurnIn QuestName="Khu'nok Will Know" QuestId="11878" TurnInName="Khu'nok the Behemoth" TurnInId="25862" />
+		<Pickup QuestName="Kaw the Mammoth Destroyer" QuestId="11879" GiverName="Khu'nok the Behemoth" GiverId="25862" />
+			<If Condition="((HasQuest(11879)) &amp;&amp; (!IsQuestCompleted(11879)))" >
+				<CustomBehavior File="FlyTo" X="3973.427" Y="5440.914" Z="30.28548" />
+				<CustomBehavior File="ForcedDismount" />
+				<Objective QuestName="Kaw the Mammoth Destroyer" QuestId="11879" Type="CollectItem" CollectCount="1" ItemId="35234" />
+			</If>
+			<If Condition="((HasQuest(11879)) &amp;&amp; (IsQuestCompleted(11879)))" >
+				<CustomBehavior File="FlyTo" X="3196.44" Y="5283.456" Z="47.53091" />
+				<CustomBehavior File="ForcedDismount" />
+			</If>
+		<TurnIn QuestName="Kaw the Mammoth Destroyer" QuestId="11879" TurnInName="Arch Druid Lathorius" TurnInId="25809" />
+			<If Condition="((HasQuest(11870)) &amp;&amp; (IsQuestCompleted(11870)))" >
+				<CustomBehavior File="FlyTo" X="2779.779" Y="5238.808" Z="38.35458" />
+				<CustomBehavior File="ForcedDismount" />
+			</If>
+		<TurnIn QuestName="The Abandoned Reach" QuestId="11870" TurnInName="Hierophant Liandra" TurnInId="25838" TurnInType="Npc" />
+		<PickUp QuestName="Not On Our Watch" QuestId="11871" GiverName="Hierophant Liandra" GiverId="25838" />
+			<If Condition="((HasQuest(11871)) &amp;&amp; (!IsQuestCompleted(11871)))" >
+				<CustomBehavior File="FlyTo" X="2752.523" Y="5199.714" Z="29.66217" />
+				<CustomBehavior File="ForcedDismount" />
+				<Objective QuestName="Not On Our Watch" QuestId="11871" Type="CollectItem" ItemId="35222" ItemName="Shipment of Animal Parts" CollectCount="12" />
+			</If>
+			<If Condition="((HasQuest(11871)) &amp;&amp; (IsQuestCompleted(11871)))" >
+				<CustomBehavior File="FlyTo" X="2780.223" Y="5243.329" Z="37.64537" />
+				<CustomBehavior File="ForcedDismount" />
+			</If>
+		<TurnIn QuestName="Not On Our Watch" QuestId="11871" TurnInName="Hierophant Liandra" TurnInId="25838" TurnInType="Npc" />
+		<PickUp QuestName="The Nefarious Clam Master..." QuestId="11872" GiverName="Hierophant Liandra" GiverId="25838" />
+			<If Condition="((HasQuest(11872)) &amp;&amp; (!IsQuestCompleted(11872)))" >
+				<CustomBehavior File="FlyTo" X="2364.267" Y="4964.862" Z="5" />
+				<CustomBehavior File="ForcedDismount" />
+			  <While Condition="((HasQuest(11872)) &amp;&amp; (!IsQuestCompleted(11872)))" >
+				<Runto QuestId="11872" X="2364.267" Y="4964.862" Z="-1.901981" />
+				<CustomBehavior File="MyCTM" X="2347.034" Y="4989.007" Z="-32.52472" />
+				<Objective QuestName="The Nefarious Clam Master..." QuestId="11872" Type="KillMob" MobId="25800" MobName="Clam Master K" KillCount="1" />
+				<CustomBehavior File="MyCTM" X="2364.267" Y="4964.862" Z="-1.901981" />
+			  </While>
+			</If>
+			<If Condition="((HasQuest(11868)) &amp;&amp; (!IsQuestCompleted(11868)))" >
+				<CustomBehavior File="FlyTo" X="2732.565" Y="5267.409" Z="70.61388" />
+				<CustomBehavior File="ForcedDismount" />
+				<Objective QuestName="The Culler Cometh" QuestId="11868" Type="KillMob" MobId="25803" MobName="Karen &quot;I Don't Caribou&quot; the Culler" KillCount="1" />
+			</If>
+			<If Condition="((HasQuest(11872)) &amp;&amp; (IsQuestCompleted(11872)))" >
+				<CustomBehavior File="FlyTo" X="3196.44" Y="5283.456" Z="47.53091" />
+				<CustomBehavior File="ForcedDismount" />
+			</If>
+		<TurnIn QuestName="The Nefarious Clam Master..." QuestId="11872" TurnInName="Hierophant Cenius" TurnInId="25810" TurnInType="Npc" />
+			<If Condition="((HasQuest(11866)) &amp;&amp; (!IsQuestCompleted(11866)))" >
+				<CustomBehavior File="FlyTo" X="3913.555" Y="5479.67" Z="35.96967" />
+				<CustomBehavior File="ForcedDismount" />
+				<Objective QuestName="Ears of Our Enemies" QuestId="11866" Type="CollectItem" ItemId="35188" ItemName="Nesingwary Lackey Ear" CollectCount="15" />
+			</If>
+		<TurnIn QuestName="Ears of Our Enemies" QuestId="11866" TurnInName="Arch Druid Lathorius" TurnInId="25809" TurnInType="Npc" />
+			<If Condition="((HasQuest(11868)) &amp;&amp; (IsQuestCompleted(11868)))" >
+				<CustomBehavior File="FlyTo" X="3196.44" Y="5283.456" Z="47.53091" />
+				<CustomBehavior File="ForcedDismount" />
+			</If>
+		<TurnIn QuestName="The Culler Cometh" QuestId="11868" TurnInName="Zaza" TurnInId="25811" />
+		<PickUp QuestName="The Assassination of Harold Lane" QuestId="11892" GiverName="Arch Druid Lathorius" GiverId="25809" />
+			<If Condition="((HasQuest(11892)) &amp;&amp; (!IsQuestCompleted(11892)))" >
+				<CustomBehavior File="FlyTo" X="3297.726" Y="5688.147" Z="58.92074" />
+				<CustomBehavior File="ForcedDismount" />
+				<Objective QuestName="The Assassination of Harold Lane" QuestId="11892" Type="KillMob" MobId="25804" KillCount="1" />
+			</If>
+			<If Condition="((HasQuest(11892)) &amp;&amp; (IsQuestCompleted(11892)))" >
+				<CustomBehavior File="FlyTo" X="3196.44" Y="5283.456" Z="47.53091" />
+				<CustomBehavior File="ForcedDismount" />
+			</If>
+		<TurnIn QuestName="The Assassination of Harold Lane" QuestId="11892" TurnInName="Arch Druid Lathorius" TurnInId="25809" />
+
+		</If>
+
+			<!-- Farming for Nesingwary Lackey Ears - 15 for each turnin -->
+			<While Condition="Me.GetReputationLevelWith(942) &lt; Styx.WoWUnitReaction.Exalted" >
+			
+				<If Condition="(GetItemCount(35188) &lt; 120)" >
+					<CustomBehavior File="FlyTo" X="3913.555" Y="5479.67" Z="35.96967" />
+					<CustomBehavior File="ForcedDismount" />
+					<CustomBehavior File="UserSettings" PullDistance="35" />
+						<SetGrindArea>
+							<Grindarea>
+								<TargetMinLevel>45</TargetMinLevel> 
+								<TargetMaxLevel>65</TargetMaxLevel>
+								<Factions>1989</Factions> <!-- [Minion of Kaw] -->
+								<Hotspots>
+									<Hotspot X="3913.555" Y="5479.67" Z="35.96967" />
+									<Hotspot X="4003.075" Y="5451.531" Z="33.78458" />
+									<Hotspot X="4016.497" Y="5509.901" Z="36.20072" />
+									<Hotspot X="3956.829" Y="5523.075" Z="33.91831" />
+									<Hotspot X="3924.261" Y="5477.214" Z="34.34955" />
+								</Hotspots>
+							</Grindarea>
+						</SetGrindArea>
+					<GrindTo Condition="(GetItemCount(35188) &gt;= 120)" GoalText="Getting 120 Ears; 15 = 150 rep" />
+				</If>
+				
+					<CustomBehavior File="FlyTo" X="3196.44" Y="5283.456" Z="47.53091" />
+				<While Condition="(GetItemCount(35188) &gt;= 15) &amp;&amp; (Me.GetReputationLevelWith(942) &lt; Styx.WoWUnitReaction.Exalted)" >
+					<CustomBehavior File="InteractWith"  MobId="25809" NumOfTimes="1" CollectionDistance="50" WaitTime="1000" X="3194.896" Y="5282.494" Z="47.82946" />
+					<CustomBehavior File="RunMacro" Macro="/click GossipTitleButton1" NumOfTimes="1" WaitTime="1000" />
+					<CustomBehavior File="RunMacro" Macro="/click QuestFrameCompleteButton" NumOfTimes="1" WaitTime="1000" />
+					<CustomBehavior File="RunMacro" Macro="/click QuestFrameCompleteQuestButton" NumOfTimes="1" WaitTime="1000" />
+					<CustomBehavior File="WaitTimer" WaitTime="3000" />
+				</While>
+			</While>
+			
+			<If Condition="Me.GetReputationLevelWith(942) == Styx.WoWUnitReaction.Exalted" >
+				<CustomBehavior File="UserDialog" Title="title" AllowBotStop="True" SoundCue="Asterisk" SoundCueInterval="1" Text="You have reached Exalted\nIf you liked this profile, +rep is always appreciated" />
+			</If>
+	
+	</QuestOrder>
+
+</HBProfile>

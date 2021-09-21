@@ -1,0 +1,477 @@
+﻿<!-- Profile by Kick/Chinajade (last updated for 2011 Children's week chain)
+
+    General notes:
+     * The profile starts and ends in Stormwind.
+	   But, the profile is very Honorbuddy stop/start friendly... it will pick up where if left off
+	   if this happens.
+	 
+	 * This profile is as AFK-able as we can make it.  However, it needs to be watched because HB
+	   (or the WoWclient in connection with HB) doesn't appear to process events reliably.
+	   
+	 * We explicitly fly everywhere (even though its a little bit slower than using taxis).
+	   We do this because not everyone may know the flightpoints.	   
+	   
+	 * When we deploy the Orphan, its always in a While loop, as some addons can interfere with this.
+	 
+	 * If you have more than one Orphan whistle in your inventory, some addons can interfere with this
+	   profile if the wrong Orphan is deployed.
+	 
+	 * This profile will also move you along with the "Bad Example" achievement by purchasing and
+	   eating icrcream (if your achievement isn't complete).
+	   
+	 * Honorbuddy *really* likes quest pickups/turnins to Orphans other than our own.  This can *seriously*
+	   make you look like a bot if that other player is moving around.  Sadly, there is nothing we can do
+	   about this.  The problems appear to be exacerbated by the 'not always there' NPCs giving/taking
+	   quests (e.g., the Orphan).
+	   
+	 * Wintergrasp is a royal pain...
+	   Blackspots appear not to be honored there (even with Height modifier).  If we get dismounted because
+	   of an upcoming battle, then Honorbuddy has serious problems getting back on track.  As such,
+	   you'll frequently see us use several consecutive explicit FlyTo's to generate paths
+	   around Wintergrasp.
+	   
+	  * We encase quest TurnIns inside While loops.  Since the Questgiver(Orphan) moves around, a TurnIn
+	    will sometimes 'miss', if we don't.
+ -->	
+<HBProfile>
+	<Name>Children's Week (Wolvar) [Kick/Chinajade]</Name>
+   
+	<MinLevel>1</MinLevel>
+	<MaxLevel>86</MaxLevel>
+   
+	<MinDurability>0.2</MinDurability>
+	<MinFreeBagSlots>2</MinFreeBagSlots>
+	
+	<MailGrey>False</MailGrey>
+	<MailWhite>False</MailWhite>
+	<MailGreen>False</MailGreen>
+	<MailBlue>True</MailBlue>
+	<MailPurple>True</MailPurple>
+   
+	<SellGrey>True</SellGrey>
+	<SellWhite>True</SellWhite>
+	<SellGreen>True</SellGreen>
+	<SellBlue>False</SellBlue>
+	<SellPurple>False</SellPurple>
+   
+	<TargetElites>True</TargetElites>
+
+	<AvoidMobs>
+	</AvoidMobs>
+	
+	<Blackspots>
+		<!-- Need to blackspot all of Wintergrasp...
+		     If a battle is in progress, we will be dismounted and not sure HB can recover to get
+			 to the destination if that happens.  Alas, this blackspotting frequently does not work,
+			 but we try anyway.
+		-->
+		<Blackspot X="4530.591" Y="2333.127" Z="370.318" Radius="600" Height="300" /> <!-- goblin workshop -->
+		<Blackspot X="5007.337" Y="2572.927" Z="355.215" Radius="600" Height="300" /> <!-- Sunken Ring -->
+		<Blackspot X="4515.193" Y="2829.371" Z="390.5759" Radius="600" Height="300" /> <!-- Winter's Lodge tower -->
+		<Blackspot X="4588.402" Y="3369.903" Z="361.3102" Radius="600" Height="300" /> <!-- Shadowwright tower -->
+		<Blackspot X="5011.104" Y="3286.258" Z="371.5482" Radius="600" Height="300" /> <!-- Broken Temple -->
+		<Blackspot X="5143.631" Y="2840.569" Z="408.8898" Radius="600" Height="300" /> <!-- Wintergrasp fortress -->
+		<Blackspot X="4478.145" Y="1984.776" Z="433.2661"  Radius="600" Height="300" /> <!-- Flamewatch tower -->
+	</Blackspots>
+
+	<Mailboxes>
+	</Mailboxes>
+ 
+	<Vendors>
+	</Vendors>
+
+	<QuestOrder>
+		<If Condition="HasSpell(&quot;Curious Wolvar Pup&quot;)">
+			<If Condition="HasSpell(&quot;Curious Oracle Hatchling&quot;)">
+				<CustomBehavior File="UserDialog" StopOnContinue="true"
+					Text="You already have the Curious Oracle Hatchling (http://www.wowhead.com/item=46545) and the  Curious Wolvar Pup (http://www.wowhead.com/item=46544) pets.\n\nNeither profile will benefit you." />
+			<Else>
+				<CustomBehavior File="UserDialog" StopOnContinue="true"
+					Text="You already have the Curious Wolvar Pup (http://www.wowhead.com/item=46544) pet.\n\nRunning this profile will not benefit you.\n\nYou still need the Curious Oracle Hatchling (http://www.wowhead.com/item=46545).  If you wish to continue the profile, we'll pursue that pet instead." />
+				<CustomBehavior File="LoadProfile" ProfileName="[QO] Children's Week (Orphans) - Dalaran Oracles [Kick].xml" />
+				<CustomBehavior File="Halt" Message="Profile is complete." />
+				</Else>
+			</If>
+		</If>
+
+		<If Condition="!CanFly()">
+			<CustomBehavior File="UserDialog" StopOnContinue="true"
+							Text="You must be able to fly to use this profile." />
+		</If>
+			
+		<CustomBehavior File="UserSettings" Preset="HarvestsOff" LootMobs="True" PullDistance="1" UseMount="True" TrainNewSkills="False" LearnFlightPaths="False" KillBetweenHotspots="True" LogoutForInactivity="False" />
+		
+		<!-- Move to the Matron, if we don't already have the whistle in inventory -->
+		<If Condition="!HasItem(46396)">
+		
+			<!-- If not in EK or Northrend, ask user to move there -->
+			<If Condition="!((Me.MapId == 0) || (Me.MapId == 571))">
+				<CustomBehavior File="UserDialog" StopOnContinue="true" SoundCue="Exclamation" SoundCueInterval="1" Text="Please move to Eastern Kingdoms, or Northrend, then start the profile." />
+			</If>		
+			
+			<!-- If in Eastern Kingdoms, move to Stormwind boat docks and wait for boat -->
+			<If Condition="Me.MapId == 0">
+				<CustomBehavior File="FlyTo" DestName="Stormwind boat docks" X="-8289.848" Y="1345.774" Z="5.241798" />
+				<CustomBehavior File="UseTransport"
+								TransportId="190536"
+								WaitAtX="-8294.349" WaitAtY="1402.195" WaitAtZ="4.435673"
+								TransportStartX="-8288.816" TransportStartY="1424.703" TransportStartZ="0.04981628"
+								TransportEndX="2218.391" TransportEndY="5119.589" TransportEndZ="0.02275631"
+								GetOffX="2232.781" GetOffY="5135.442" GetOffZ="5.344905" />
+			</If>
+
+			<!-- If we're not in Dalaran... -->
+			<If Condition="Me.ZoneId != 4395">
+				<!-- We have to be careful with our approach to Dalaran...
+					Blackspots don't work for Wintergrasp, so we explicitly path around it.
+					FlyTo/Flightor gets easily confused at Dalaran, so we give it a particular path. -->
+				<CustomBehavior File="FlyTo" DestName="Dalaran" X="3369.983" Y="1417.957" Z="371.9586" />
+				<CustomBehavior File="FlyTo" DestName="Dalaran"  X="5380.215" Y="1289.357" Z="796.5567" />
+				<CustomBehavior File="MyCTM" DestName="Dalaran"  X="5779.141" Y="692.7416" Z="783.3972" />
+			</If>
+			
+			<!-- Spread out approach to Matron so multiple HB users won't be standing on top of one another -->
+			<If Condition="Chance(20.0)">
+				<CustomBehavior File="FlyTo" DestName="Dalaran Orphon Matron" X="5711.172" Y="634.2878" Z="646.2761" />
+			<ElseIf Condition="Chance(20.0)">
+				<CustomBehavior File="FlyTo" DestName="Dalaran Orphon Matron" X="5723.618" Y="638.3939" Z="646.4203" />
+				</ElseIf>
+			<ElseIf Condition="Chance(20.0)">
+				<CustomBehavior File="FlyTo" DestName="Dalaran Orphon Matron" X="5701.079" Y="634.8996" Z="646.2899" />
+				</ElseIf>
+			<ElseIf Condition="Chance(20.0)">
+				<CustomBehavior File="FlyTo" DestName="Dalaran Orphon Matron" X="5716.234" Y="659.96" Z="646.1047" />
+				</ElseIf>
+			<Else>
+				<CustomBehavior File="FlyTo" DestName="Dalaran Orphon Matron" X="5721.253" Y="647.7024" Z="646.2775"  />
+				</Else>
+			</If>
+			
+			<CustomBehavior File="ForcedDismount" />
+			<!-- 46396	Wolvar Orphan Whistle -->
+			<PickUp QuestName="Little Orphan Kekek Of The Wolvar" QuestId="13927" GiverName="Orphan Matron Aria" GiverId="34365" />
+		</If>
+		
+		<If Condition="HasQuest(13927) &amp;&amp; !IsQuestCompleted(13927)" >
+			<CustomBehavior File="InteractWith" MobId="34365" NumOfTimes="1" CollectionDistance="100" WaitTime="1000" GossipOptions="1" X="5717.506" Y="640.9655" Z="646.2356" />
+			<CustomBehavior File="RunMacro" Macro="/click StaticPopup1Button1" NumOfTimes="1" WaitTime="1000" />
+			<CustomBehavior File="WaitTimer" WaitTime="3000" VariantTime="3000" />
+		</If>
+		
+		<!-- If Orphan is deployed, put it away... the auto-summon has deployed the wrong Orphan
+			 because we have more than one whistle in our inventory -->
+		<While Condition="Me.HasAura(&quot;Orphan Out&quot;)" >
+			<CustomBehavior File="Misc\RunLua" Lua="UseItemByName(46396)" WaitTime="1000" />
+			<CustomBehavior File="WaitTimer" WaitTime="4000" VariantTime="3000" />
+		</While>
+
+		<!-- The Orphan is not a stationary mob, and TurnIns sometimes 'miss' because of it.  Thus, the While loop -->
+		<While Condition="HasQuest(13927) &amp;&amp; IsQuestCompleted(13927)" >
+			<While Condition="(!Me.HasAura(&quot;Orphan Out&quot;))" >
+				<CustomBehavior File="Misc\RunLua" Lua="UseItemByName(46396)" WaitTime="1000" />
+				<CustomBehavior File="WaitTimer" WaitTime="4000" VariantTime="3000" />
+			</While>
+			
+			<!-- Honorbuddy sometimes wants to see the Orphan move before acknowledging presence -->
+			<RunTo X="5721.167" Y="638.4883" Z="646.3174" />
+			<TurnIn QuestName="Little Orphan Roo Of The Oracles" QuestId="13927" TurnInName="Wolvar Orphan" TurnInId="33532" />
+		</While>
+			
+		<PickUp QuestName="The Bronze Dragonshrine" QuestId="13934" GiverName="Wolvar Orphan" GiverId="33532" />
+		<PickUp QuestName="Home Of The Bear-Men" QuestId="13930" GiverName="Wolvar Orphan" GiverId="33532" />
+		<PickUp QuestName="Playmates!" QuestId="13951" GiverName="Wolvar Orphan" GiverId="33532" />		
+		
+		<!-- Home of the Bear-Men -->
+		<If Condition="HasQuest(13930) &amp;&amp; !IsQuestCompleted(13930)" >
+			<CustomBehavior File="FlyTo" DestName="Grizzlemaw (Home of the Bear-Mean)" X="3977.696" Y="-3839.866" Z="547.131" />
+			<CustomBehavior File="MyCTM" DestName="Grizzlemaw (Home of the Bear-Mean)" X="4027.385" Y="-3771.651" Z="114.5904" />
+			<CustomBehavior File="ForcedDismount" />
+			<While Condition="(!Me.HasAura(&quot;Orphan Out&quot;))" >
+				<CustomBehavior File="Misc\RunLua" Lua="UseItemByName(46396)" WaitTime="1000" />
+				<CustomBehavior File="WaitTimer" WaitTime="4000" VariantTime="3000" />
+			</While>
+			
+			<!-- Sometimes have to move around a bit to get the quest completed -->
+			<While Condition="!IsQuestCompleted(13930)">
+				<RunTo X="4014.033" Y="-3768.799" Z="113.003" />
+				<RunTo X="4016.988" Y="-3783.353" Z="113.8793" />
+				<RunTo X="4025.555" Y="-3785.904" Z="113.5508" />
+				<RunTo X="4034.093" Y="-3777.976" Z="112.8832" />
+				<RunTo X="4032.133" Y="-3768.356" Z="112.9801" />
+				<RunTo X="4023.28" Y="-3764.491" Z="113.5893" />
+			</While>
+		</If>
+		
+		<!-- The Orphan is not a stationary mob, and TurnIns sometimes 'miss' because of it.  Thus, the While loop -->
+		<While Condition="HasQuest(13930) &amp;&amp; IsQuestCompleted(13930)" >
+			<While Condition="!Me.HasAura(&quot;Orphan Out&quot;)" >
+				<CustomBehavior File="Misc\RunLua" Lua="UseItemByName(46396)" WaitTime="1000" />
+				<CustomBehavior File="WaitTimer" WaitTime="4000" VariantTime="3000" />
+			</While>
+			
+			<!-- apparently HB wants to see some motion before acknowledging pet exists -->
+			<RunTo X="4014.033" Y="-3768.799" Z="113.003" />	
+			<TurnIn QuestName="Home of the Bear-Men" QuestId="13930" TurnInName="Wolvar Orphan" TurnInId="33532" />
+		</While>
+
+		
+		<!-- The Bronze Dragonshrine -->
+		<If Condition="HasQuest(13934) &amp;&amp; !IsQuestCompleted(13934)" >
+			<CustomBehavior File="FlyTo" DestName="Bronze Dragonshrine" X="4071.17" Y="-394.3985" Z="118.3626" />
+			<CustomBehavior File="ForcedDismount" />
+			<While Condition="(!Me.HasAura(&quot;Orphan Out&quot;))" >
+				<CustomBehavior File="Misc\RunLua" Lua="UseItemByName(46396)" WaitTime="1000" />
+				<CustomBehavior File="WaitTimer" WaitTime="4000" VariantTime="3000" />
+			</While>
+			<While Condition="!IsQuestCompleted(13934)">
+				<CustomBehavior File="WaitTimer" WaitTime="1000" VariantTime="1000"
+								GoalText="Waiting for quest completion" />
+			</While>
+		</If>
+
+		<!-- The Orphan is not a stationary mob, and TurnIns sometimes 'miss' because of it.  Thus, the While loop -->		
+		<While Condition="HasQuest(13934) &amp;&amp; IsQuestCompleted(13934)" >
+			<While Condition="(!Me.HasAura(&quot;Orphan Out&quot;))" >
+				<CustomBehavior File="Misc\RunLua" Lua="UseItemByName(46396)" WaitTime="1000" />
+				<CustomBehavior File="WaitTimer" WaitTime="4000" VariantTime="3000" />
+			</While>
+
+			<TurnIn QuestName="The Bronze Dragonshrine" QuestId="13934" TurnInName="Wolvar Orphan" TurnInId="33532" />
+		</While>
+		
+		
+		<!-- Playmates! -->
+		<If Condition="HasQuest(13951) &amp;&amp; !IsQuestCompleted(13951)" >
+			<CustomBehavior File="FlyTo" DestName="Snowfall Glade (Playmates)" X="3173.028" Y="1061.033" Z="123.1332" />
+			<CustomBehavior File="ForcedDismount" />
+			<While Condition="(!Me.HasAura(&quot;Orphan Out&quot;))" >
+				<CustomBehavior File="Misc\RunLua" Lua="UseItemByName(46396)" WaitTime="1000" />
+				<CustomBehavior File="WaitTimer" WaitTime="4000" />
+			</While>
+			<While Condition="!IsQuestCompleted(13951)" >
+				<CustomBehavior File="WaitTimer" WaitTime="1000" VariantTime="1000" />
+			</While>
+		</If>
+		
+		<!-- The Orphan is not a stationary mob, and TurnIns sometimes 'miss' because of it.  Thus, the While loop -->
+		<While Condition="((HasQuest(13951)) &amp;&amp; (IsQuestCompleted(13951)))" >
+			<While Condition="(!Me.HasAura(&quot;Orphan Out&quot;))" >
+				<CustomBehavior File="Misc\RunLua" Lua="UseItemByName(46396)" WaitTime="1000" />
+				<CustomBehavior File="WaitTimer" WaitTime="4000" VarianTime="3000" />
+			</While>
+			
+			<!-- Honorbuddy sometimes wants to see the Orphan move before acknowledging presence -->
+			<RunTo X="3157.75" Y="1064.804" Z="122.5384" />
+			<TurnIn QuestName="Playmates!" QuestId="13951" TurnInName="Wolvar Orphan" TurnInId="33532" />
+		</While>
+	
+		<PickUp QuestName="The Dragon Queen" QuestId="13955" GiverName="Wolvar Orphan" GiverId="33532" />
+		<PickUp QuestName="The Mighty Hemet Nesingwary" QuestId="13957" GiverName="Wolvar Orphan" GiverId="33532" />
+		
+		<!-- The Mighty Hemet Nesingwary -->
+		<If Condition="HasQuest(13957) &amp;&amp; !IsQuestCompleted(13957)" >
+			<If Condition="Me.ZoneId != 3711"> <!-- Scholazar  -->
+				<!-- Blackspots don't work for Wintergrasp, so we explicitly path around it. -->
+				<CustomBehavior File="FlyTo" DestName="Hemet Nesingwary" X="3479.006" Y="1913.784" Z="322.2595" /> <!-- over Star's Rest -->
+				<CustomBehavior File="FlyTo" DestName="Hemet Nesingwary" X="3379.592" Y="3556.209" Z="343.2617" /> <!-- by flying Ziggaraut -->
+			</If>
+			
+			<CustomBehavior File="FlyTo" DestName="Hemet Nesingwary" X="5581.831" Y="5748.576" Z="-72.68359" />
+			<CustomBehavior File="ForcedDismount" />
+			<While Condition="!Me.HasAura(&quot;Orphan Out&quot;)" >
+				<CustomBehavior File="Misc\RunLua" Lua="UseItemByName(46396)" WaitTime="1000" />
+				<CustomBehavior File="WaitTimer" WaitTime="4000" VariantTime="3000" />
+			</While>
+			
+			<While Condition="!IsQuestCompleted(13957)">
+				<CustomBehavior File="WaitTimer" WaitTime="1000" VariantTime="1000"
+								GoalText="Waiting for quest completion" />
+			</While>
+		</If>
+		
+		<!-- The Orphan is not a stationary mob, and TurnIns sometimes 'miss' because of it.  Thus, the While loop -->
+		<While Condition="HasQuest(13957) &amp;&amp; IsQuestCompleted(13957)" >
+			<While Condition="(!Me.HasAura(&quot;Orphan Out&quot;))" >
+				<CustomBehavior File="Misc\RunLua" Lua="UseItemByName(46396)" WaitTime="1000" />
+				<CustomBehavior File="WaitTimer" WaitTime="4000" VariantTime="3000" />
+			</While>
+			
+			<!-- Honorbuddy sometimes wants to see the Orphan move before acknowledging presence -->
+			<RunTo X="5582.995" Y="5743.426" Z="-72.03902" />
+			<TurnIn QuestName="The Mighty Hemet Nesingwary" QuestId="13957" TurnInName="Wolvar Orphan" TurnInId="33532" />
+		</While>
+
+
+		<!-- The Dragon Queen -->
+		<If Condition="HasQuest(13955) &amp;&amp; !IsQuestCompleted(13955)" >
+			<If Condition="(Me.ZoneId == 3711) || (Me.ZoneId == 3537)"> <!-- Scholazar or Borean -->
+				<!-- Blackspots don't work for Wintergrasp, so we explicitly path around it. -->
+				<CustomBehavior File="FlyTo" DestName="Wyrmrest Temple (The Dragon Queen)" X="3379.592" Y="3556.209" Z="343.2617" /> <!-- by flying Ziggaraut -->
+				<CustomBehavior File="FlyTo" DestName="Wyrmrest Temple (The Dragon Queen)" X="3479.006" Y="1913.784" Z="322.2595" /> <!-- over Star's Rest -->
+			</If>
+
+			<CustomBehavior File="FlyTo" DestName="Wyrmrest Temple (The Dragon Queen)" X="3597.376" Y="280.4121" Z="340.848" />
+			<CustomBehavior File="ForcedDismount" />
+			
+			<While Condition="(!Me.HasAura(&quot;Orphan Out&quot;))" >
+				<CustomBehavior File="Misc\RunLua" Lua="UseItemByName(46396)" WaitTime="1000" />
+				<CustomBehavior File="WaitTimer" WaitTime="4000" VariantTime="3000" />
+			</While>
+			<CustomBehavior File="MyCTM" DestName="The Dragon Queen" X="3535.692" Y="270.758" Z="342.7218" />
+			<While Condition="!IsQuestCompleted(13955)">
+				<CustomBehavior File="WaitTimer" WaitTime="1000" VariantTime="1000" />
+			</While>
+		</If>
+		
+		<!-- The Orphan is not a stationary mob, and TurnIns sometimes 'miss' because of it.  Thus, the While loop -->
+		<While Condition="HasQuest(13955) &amp;&amp; IsQuestCompleted(13955)" >
+			<While Condition="(!Me.HasAura(&quot;Orphan Out&quot;))" >
+				<CustomBehavior File="Misc\RunLua" Lua="UseItemByName(46396)" WaitTime="1000" />
+				<CustomBehavior File="WaitTimer" WaitTime="4000" VariantTime="3000" />
+			</While>
+
+			<TurnIn QuestName="The Dragon Queen" QuestId="13955" TurnInName="Wolvar Orphan" TurnInId="33532" />
+		</While>
+		
+		
+		<PickUp QuestName="A Trip To The Wonderworks" QuestId="13938" GiverName="Wolvar Orphan" GiverId="33532" />
+		
+		<!-- Wonderworks -->
+		<If Condition="HasQuest(13938) &amp;&amp; !IsQuestCompleted(13938)" >
+			<!-- Top of Wyrmrest is not meshed, so we have to use CTM to get to a meshed area -->
+			<If Condition="Me.Location.Distance(new WoWPoint(3560.341, 274.5197, 342.7212)) &lt; 50">			
+				<CustomBehavior File="MyCTM" DestName="under orb" X="3546.98" Y="272.8266" Z="342.7212" />
+				<CustomBehavior File="MyCTM" DestName="Majordomo platform" X="3595.266" Y="278.0141" Z="340.8435" />
+			</If>
+			<!-- We have to be careful with our approach to Dalaran...
+				FlyTo/Flightor gets easily confused at Dalaran, so we give it a particular path. -->
+			<If Condition="Me.ZoneId != 4395">
+				<CustomBehavior File="FlyTo" DestName="Dalaran" X="5231.284" Y="319.2642" Z="781.7074" />
+				<CustomBehavior File="MyCTM" DestName="Dalaran" X="5773.754" Y="580.0723" Z="763.301" />
+			</If>
+			<CustomBehavior File="FlyTo" DestName="Wonderworks shop" X="5799.739" Y="713.4005" Z="641.1215" />
+			<CustomBehavior File="ForcedDismount" />
+			<While Condition="(!Me.HasAura(&quot;Orphan Out&quot;))" >
+				<CustomBehavior File="Misc\RunLua" Lua="UseItemByName(46396)" WaitTime="1000" />
+				<CustomBehavior File="WaitTimer" WaitTime="4000" VariantTime="3000" />
+			</While>
+			
+			<If Condition="!HasItem(46693)">
+				<CustomBehavior File="InteractWith" MobId="29478" BuyItemId="46693" NumOfTimes="1" CollectionDistance="100" WaitTime="1000" X="5812.614" Y="683.0963" Z="647.046" />
+			</If>
+			
+			<!--we move to the street to throw it... too easy to get stuck in shop -->
+			<RunTo Name="Dalaran street" X="5790.946" Y="715.8246" Z="640.8143" />
+			<CustomBehavior File="WaitTimer" WaitTime="3000" VariantTime="3000" />
+			<CustomBehavior File="Misc\RunLua" Lua="UseItemByName(46693)" WaitTime="1000" />
+			<CustomBehavior File="WaitTimer" WaitTime="3000" VariantTime="3000" />
+			<CustomBehavior File="UseItemOn" QuestId="13938" MobId="33532" ItemId="46693" NumOfTimes="1" WaitTime="1000" Range="5" CollectionDistance="50" X="5812.614" Y="683.0963" Z="647.046" />
+			<While Condition="!IsQuestCompleted(13938)">
+				<CustomBehavior File="WaitTimer" WaitTime="1000" VariantTime="1000" />
+			</While>
+		</If>
+		
+		<!-- The Orphan is not a stationary mob, and TurnIns sometimes 'miss' because of it.  Thus, the While loop -->
+		<While Condition="((HasQuest(13938)) &amp;&amp; (IsQuestCompleted(13938)))" >
+			<While Condition="(!Me.HasAura(&quot;Orphan Out&quot;))" >
+				<CustomBehavior File="Misc\RunLua" Lua="UseItemByName(46396)" WaitTime="1000" />
+				<CustomBehavior File="WaitTimer" WaitTime="4000" VariantTime="3000" />
+			</While>
+
+			<TurnIn QuestName="A Trip To The Wonderworks" QuestId="13938" TurnInName="Wolvar Orphan" TurnInId="33532" />
+		</While>
+		
+		<PickUp QuestName="Back To The Orphanage" QuestId="13960" GiverName="Wolvar Orphan" GiverId="33532" />
+		
+		<If Condition="Me.ZoneId == 4395"> <!-- if in Dalaran -->
+			<!-- "Bad Example" Achievement: Consume the Dalaran treats in front of our Orphan -->
+			<If Condition="!IsAchievementCompleted(1788) &amp;&amp; (Me.Level &gt;= 75)">
+				<While Condition="(!Me.HasAura(&quot;Orphan Out&quot;))" >
+					<CustomBehavior File="Misc\RunLua" Lua="UseItemByName(46396)" WaitTime="1000" />
+					<CustomBehavior File="WaitTimer" WaitTime="4000" VariantTime="3000" />
+				</While>
+				<RunTo Name="Darnassas Treat Vendor" X="5904.745" Y="630.9165" Z="646.2925" />
+				
+				<!-- Red Velvet Cupcake -->
+				<CustomBehavior File="InteractWith" MobId="29548" NumOfTimes="1" CollectionDistance="500" BuyItemId="42429" WaitTime="1000" X="5905.523" Y="627.2129" Z="646.8817" />
+				<CustomBehavior File="Misc\RunLua" Lua="UseItemByName(42429)" WaitTime="1000" />
+
+				<!-- Dalaran Donut -->
+				<CustomBehavior File="InteractWith" MobId="29548" NumOfTimes="1" CollectionDistance="500" BuyItemId="42430" WaitTime="1000" X="5905.523" Y="627.2129" Z="646.8817" />
+				<CustomBehavior File="Misc\RunLua" Lua="UseItemByName(42430)" WaitTime="1000" />
+
+				<!-- Dalaran Brownie -->
+				<CustomBehavior File="InteractWith" MobId="29548" NumOfTimes="1" CollectionDistance="500" BuyItemId="42431" WaitTime="1000" X="5905.523" Y="627.2129" Z="646.8817" />
+				<CustomBehavior File="Misc\RunLua" Lua="UseItemByName(42431)" WaitTime="1000" />
+				
+				<!-- Lovely Cake Slice -->
+				<CustomBehavior File="UserDialog"
+								ExpiryTime="150"
+								SoundCueInterval="30"
+								Text="&quot;Bad Example&quot; achievement (you're &gt; Level 75)--\nThe Lovely Cake is expensive--so we won't buy it.\n\nBuy it if you need it.  Deploy it near you.  It can only be deployed once every 30 minutes, and is consumed in the deployment process. Be sure to take all the slices and mail it to your other toons that may need it.\n\nThe &quot;Tigule and Foror's Strawberry Ice Cream&quot; comes from Stormwind, and we get that for you when you run the Human Orphan profile.  The other two items--&quot;Tasty Cupcake&quot; and &quot;Lovely Chocolate Cake&quot; are crafted items.  You will need to make them, or buy them from the Auction House." />
+			</If>
+		</If>
+	
+		<!-- Back to the Orphanage -->
+		<If Condition="HasQuest(13960) &amp;&amp; IsQuestCompleted(13960)" >
+			<!-- Spread out approach to Matron so multiple HB users won't be standing on top of one another -->
+			<If Condition="Chance(20.0)">
+				<CustomBehavior File="FlyTo" DestName="Dalaran Orphon Matron" X="5711.172" Y="634.2878" Z="646.2761" />
+			<ElseIf Condition="Chance(20.0)">
+				<CustomBehavior File="FlyTo" DestName="Dalaran Orphon Matron" X="5723.618" Y="638.3939" Z="646.4203" />
+				</ElseIf>
+			<ElseIf Condition="Chance(20.0)">
+				<CustomBehavior File="FlyTo" DestName="Dalaran Orphon Matron" X="5701.079" Y="634.8996" Z="646.2899" />
+				</ElseIf>
+			<ElseIf Condition="Chance(20.0)">
+				<CustomBehavior File="FlyTo" DestName="Dalaran Orphon Matron" X="5716.234" Y="659.96" Z="646.1047" />
+				</ElseIf>
+			<Else>
+				<CustomBehavior File="FlyTo" DestName="Dalaran Orphon Matron" X="5721.253" Y="647.7024" Z="646.2775"  />
+				</Else>
+			</If>
+			
+			<CustomBehavior File="ForcedDismount" />
+			<TurnIn QuestName="Back To The Orphanage" QuestId="13960" TurnInName="Orphan Matron Aria" TurnInId="34365" />
+		</If>	
+		
+		<!-- If we're in Northrend, return to Stormwind -->
+		<If Condition="Me.MapId == 571">
+			<!-- We have to be careful with our return to Stormwind...
+				Blackspots don't work for Wintergrasp, so we explicitly path around it. -->
+			<CustomBehavior File="FlyTo" DestName="Valiance Keep docks"  X="5380.215" Y="1289.357" Z="796.5567" />
+			<CustomBehavior File="FlyTo" DestName="Valiance Keep docks" X="3369.983" Y="1417.957" Z="371.9586" />
+			<CustomBehavior File="FlyTo" DestName="Valiance Keep docks" X="2238.5" Y="5152.053" Z="5.360658" />
+			<CustomBehavior File="ForcedDismount" />
+			<CustomBehavior File="UseTransport"
+							TransportId="190536"
+							WaitAtX="2232.781" WaitAtY="5135.442" WaitAtZ="5.344905"
+							TransportStartX="2218.391" TransportStartY="5119.589" TransportStartZ="0.04738637"
+							TransportEndX="-8288.816" TransportEndY="1424.703" TransportEndZ="0.04981628"
+							GetOffX="-8294.349" GetOffY="1402.195" GetOffZ="4.435673" />
+							
+			<!-- Deploy to a random place inside Stormwind -->
+			<If Condition="Chance(20.0)">
+				<CustomBehavior File="FlyTo" DestName="Elder's mailbox" X="-8859.798" Y="640.8622" Z="96.28608" />
+			<ElseIf Condition="Chance(20.0)">
+				<CustomBehavior File="FlyTo" DestName="Backgate Bank" X="-8360.063" Y="620.2231" Z="95.35557" />
+				</ElseIf>
+			<ElseIf Condition="Chance(20.0)">
+				<CustomBehavior File="FlyTo" DestName="Cathedral Square mailbox" X="-8657.595" Y="775.6388" Z="96.99747" />
+				</ElseIf>
+			<ElseIf Condition="Chance(20.0)">
+				<CustomBehavior File="FlyTo" DestName="Fishing pier mailbox"  X="-8826.954" Y="729.8922" Z="98.42244" />
+				</ElseIf>
+			<Else Condition="Chance(20.0)">
+				<CustomBehavior File="FlyTo" DestName="Canal mailbox" X="-8752.236" Y="561.497" Z="97.43406" />
+				</Else>
+			</If>
+			
+			<CustomBehavior File="ForcedDismount" />
+		</If>
+
+				
+		<CustomBehavior File="UserDialog" AllowBotStop="True" SoundCue="Exclamation" SoundCueInterval="1" Text="The quest reward will be mailed to you within a few minutes... usually less than five minutes.  You may have already received it as we've traveled.  We've placed you next to a mailbox to claim your reward.\n\nEnd of Profile." />
+	
+	</QuestOrder>
+</HBProfile>

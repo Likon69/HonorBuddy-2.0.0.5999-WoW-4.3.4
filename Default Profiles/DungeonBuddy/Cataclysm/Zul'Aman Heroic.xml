@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<DungeonBuddyProfile>
+  <Name>Zul'Aman Heroic</Name>
+  <DungeonId>340</DungeonId>
+  <BossEncounters>
+	<Boss isFinal="false" entry="23574" name="Akil'zon" killOrder="1" optional="false" X="376.3534" Y="1407.341" Z="74.79346" /> <!-- bird boss -->
+	<Boss isFinal="false" entry="23576" name="Nalorakk" killOrder="2" optional="false" X="-79.59928" Y="1300.431" Z="48.54265" /> <!-- bear boss -->
+	<Boss isFinal="false" entry="23578" name="Jan'alai" killOrder="3" optional="false" X="-33.73415" Y="1142.871" Z="19.02341" /> <!-- fire boss -->
+	<Boss isFinal="false" entry="23577" name="Halazzi" killOrder="4" optional="false" X="370.257" Y="1135.743" Z="6.466088" /> <!-- cat boss with totems -->
+	<Boss isFinal="false" entry="24239" name="Hex Lord Malacrass" killOrder="5" optional="false" X="117.8646" Y="923.6945" Z="33.88951" /> <!-- boss that takes on forms of the group members - cc the 2 adds... or kill them first -->
+	<Boss isFinal="true" entry="23863" name="Daakara" killOrder="6" optional="false" X="119.9806" Y="674.2449" Z="51.82448" /> <!-- This boss turns into cat/bear, then one of the birds.  don'ts stand in the fire pillars -->
+  </BossEncounters>
+  <Blackspots>
+    <!--<Blackspot X="-101.3791" Y="-703.8368" Z="9.095623" Radius="3.363508" />-->
+  </Blackspots>
+</DungeonBuddyProfile>

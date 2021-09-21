@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<DungeonBuddyProfile>
+  <Name>Zul'Gurub Heroic</Name>
+  <DungeonId>334</DungeonId>
+  <BossEncounters>
+	<!-- You only have to kill *any* 2 of the first 4 bosses - then you can go to Hakkar (Jindo) -->
+	<Boss isFinal="false" entry="52155" name="High Priest Venoxis" killOrder="1" optional="false" X="-12020.37" Y="-1699.781" Z="39.54069" /> <!-- Snake + slime boss -->
+	<Boss isFinal="false" entry="52151" name="Bloodlord Mandokir" killOrder="2" optional="false" X="-12362.94" Y="-1879.438" Z="127.2361" /> <!-- Boss + raptor - always kill raptor first -->
+	<!-- <Hotspot X="-11878.78" Y="-1870.19" Z="63.50527" /> optional shitty boss - move to here and kill adds - then if use the objects if u have arch - totally optional boss; i never do it -->
+	<Boss isFinal="false" entry="52438" name="Mortaxx" killOrder="3" optional="true" X="-11701.17" Y="-1939.755" Z="55.8232" /> <!-- mini boss drops 1 shard - does not count as a main 2/5 -->
+	<Boss isFinal="false" entry="52059" name="High Priestess Kilnara" killOrder="4" optional="false" X="-11516.81" Y="-1627.233" Z="44.40211" /> <!-- Cat Boss -->
+	<Boss isFinal="false" entry="Zanzil" name="52053" killOrder="5" optional="false" X="-11598.44" Y="-1288.616" Z="77.44881" /> <!-- 3 Cauldrons boss -->
+	<Boss isFinal="true" entry="52148" name="Jin'do the Broken" killOrder="6" optional="false" X="-11787" Y="-1695.73" Z="52.95098" /> <!-- hakkar script -->
+	<!-- <Vendor Name="Spirit of Hakkar" Entry="52222" Type="Repair" X="-11786.46" Y="-1690.924" Z="52.93615" /> Ignore spirit -->
+	</BossEncounters>
+  <Blackspots>
+    <!--<Blackspot X="-101.3791" Y="-703.8368" Z="9.095623" Radius="3.363508" />-->
+  </Blackspots>
+</DungeonBuddyProfile>

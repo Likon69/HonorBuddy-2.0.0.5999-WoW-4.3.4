@@ -1,0 +1,471 @@
+﻿<HBProfile>
+	<Name>[QO] Cenarion Circle - Silithus A [Kick]</Name>
+   
+	<MinLevel>1</MinLevel>
+	<MaxLevel>86</MaxLevel>
+   
+	<MinDurability>0.2</MinDurability>
+	<MinFreeBagSlots>2</MinFreeBagSlots>
+	
+	<MailGrey>False</MailGrey>
+	<MailWhite>False</MailWhite>
+	<MailGreen>False</MailGreen>
+	<MailBlue>True</MailBlue>
+	<MailPurple>True</MailPurple>
+   
+	<SellGrey>True</SellGrey>
+	<SellWhite>True</SellWhite>
+	<SellGreen>True</SellGreen>
+	<SellBlue>False</SellBlue>
+	<SellPurple>False</SellPurple>
+   
+	<TargetElites>True</TargetElites>
+
+	<AvoidMobs>
+	</AvoidMobs>
+	<Blackspots>
+		<Blackspot X="-6246.748" Y="30.13238" Z="10.56168" Radius="3.731228" />
+	</Blackspots>
+	<Mailboxes>
+
+	</Mailboxes>
+ 
+	<Vendors>
+
+	</Vendors>
+
+	<Quest Id="8280" Name="Securing the Supply Lines">
+		<Objective Type="KillMob" MobId="11740" KillCount="15">
+			<Hotspots>
+				<Hotspot X="-6842.951" Y="1150.201" Z="0.01473822" />
+				<Hotspot X="-6808.392" Y="1210.255" Z="4.764849" />
+				<Hotspot X="-6773.849" Y="1345.217" Z="4.364433" />
+				<Hotspot X="-6666.973" Y="1305.809" Z="5.34577" />
+				<Hotspot X="-6658.624" Y="1411.404" Z="0.6777847" />
+				<Hotspot X="-6563.521" Y="1439.871" Z="3.038293" />
+				<Hotspot X="-6459.013" Y="1400.352" Z="1.154585" />
+				<Hotspot X="-6454.862" Y="1322.801" Z="2.160824" />
+				<Hotspot X="-6364.204" Y="1317.01" Z="3.454135" />
+				<Hotspot X="-6343.419" Y="1241.265" Z="4.511722" />
+				<Hotspot X="-6353.085" Y="1137.376" Z="7.251194" />
+				<Hotspot X="-6424.169" Y="1138.936" Z="1.594685" />
+				<Hotspot X="-6462.815" Y="1244.691" Z="2.517816" />
+				<Hotspot X="-6598.717" Y="1234.443" Z="4.646845" />
+				<Hotspot X="-6699.836" Y="1128.717" Z="1.319589" />		
+			</Hotspots>
+		</Objective>
+	</Quest>
+	<Quest Id="8277" Name="Deadly Desert Venom">
+		<Objective Type="CollectItem" ItemId="20373" CollectCount="8">
+			<CollectFrom>
+				<Mob Name="Stonelash Scorpid" Id="11735" />
+			</CollectFrom>
+			<Hotspots>
+				<Hotspot X="-6842.951" Y="1150.201" Z="0.01473822" />
+				<Hotspot X="-6808.392" Y="1210.255" Z="4.764849" />
+				<Hotspot X="-6773.849" Y="1345.217" Z="4.364433" />
+				<Hotspot X="-6666.973" Y="1305.809" Z="5.34577" />
+				<Hotspot X="-6658.624" Y="1411.404" Z="0.6777847" />
+				<Hotspot X="-6563.521" Y="1439.871" Z="3.038293" />
+				<Hotspot X="-6459.013" Y="1400.352" Z="1.154585" />
+				<Hotspot X="-6454.862" Y="1322.801" Z="2.160824" />
+				<Hotspot X="-6364.204" Y="1317.01" Z="3.454135" />
+				<Hotspot X="-6343.419" Y="1241.265" Z="4.511722" />
+				<Hotspot X="-6353.085" Y="1137.376" Z="7.251194" />
+				<Hotspot X="-6424.169" Y="1138.936" Z="1.594685" />
+				<Hotspot X="-6462.815" Y="1244.691" Z="2.517816" />
+				<Hotspot X="-6598.717" Y="1234.443" Z="4.646845" />
+				<Hotspot X="-6699.836" Y="1128.717" Z="1.319589" />		
+			</Hotspots>
+		</Objective>
+		<Objective Type="CollectItem" ItemId="20376" CollectCount="8">
+			<CollectFrom>
+				<Mob Name="Sand Skitterer" Id="11738" />
+			</CollectFrom>
+			<Hotspots>
+				<Hotspot X="-6842.951" Y="1150.201" Z="0.01473822" />
+				<Hotspot X="-6808.392" Y="1210.255" Z="4.764849" />
+				<Hotspot X="-6773.849" Y="1345.217" Z="4.364433" />
+				<Hotspot X="-6666.973" Y="1305.809" Z="5.34577" />
+				<Hotspot X="-6658.624" Y="1411.404" Z="0.6777847" />
+				<Hotspot X="-6563.521" Y="1439.871" Z="3.038293" />
+				<Hotspot X="-6459.013" Y="1400.352" Z="1.154585" />
+				<Hotspot X="-6454.862" Y="1322.801" Z="2.160824" />
+				<Hotspot X="-6364.204" Y="1317.01" Z="3.454135" />
+				<Hotspot X="-6343.419" Y="1241.265" Z="4.511722" />
+				<Hotspot X="-6353.085" Y="1137.376" Z="7.251194" />
+				<Hotspot X="-6424.169" Y="1138.936" Z="1.594685" />
+				<Hotspot X="-6462.815" Y="1244.691" Z="2.517816" />
+				<Hotspot X="-6598.717" Y="1234.443" Z="4.646845" />
+				<Hotspot X="-6699.836" Y="1128.717" Z="1.319589" />		
+			</Hotspots>
+		</Objective>
+	</Quest>	
+	<Quest Id="8318" Name="Secret Communication">
+		<Objective Type="CollectItem" ItemId="20404" CollectCount="10">
+			<Hotspots>
+				<Hotspot X="-6414.597" Y="293.4403" Z="8.63738" /> <!-- outside camp -->
+				<Hotspot X="-6364.772" Y="250.494" Z="3.775813" />
+				<Hotspot X="-6304.005" Y="229.3379" Z="5.807431" />
+				<Hotspot X="-6337.706" Y="179.5293" Z="5.212106" />
+				<Hotspot X="-6384.083" Y="169.2122" Z="6.755428" />
+				<Hotspot X="-6401.881" Y="224.0942" Z="5.567259" />
+				<Hotspot X="-6451.325" Y="215.7637" Z="4.214141" />
+				<Hotspot X="-6469.52" Y="248.3168" Z="4.271239" />
+				<Hotspot X="-6386.115" Y="208.7629" Z="2.907744" />
+				<Hotspot X="-6332.934" Y="169.8838" Z="5.125364" />
+				<Hotspot X="-6313.894" Y="145.8801" Z="14.03305" /> <!-- just outside cave -->
+				<Hotspot X="-6294.505" Y="111.5464" Z="15.37499" /> <!-- just inside cave -->
+				<Hotspot X="-6294.666" Y="69.87094" Z="12.90141" />
+				<Hotspot X="-6246.366" Y="20.32126" Z="8.722819" />
+				<Hotspot X="-6255.106" Y="61.72909" Z="17.26195" />
+				<Hotspot X="-6245.435" Y="20.8994" Z="8.895886" />
+				<Hotspot X="-6266.991" Y="-28.29591" Z="-1.382161" />
+				<Hotspot X="-6239.468" Y="-45.9248" Z="-5.94055" />
+				<Hotspot X="-6251.842" Y="-4.063636" Z="-10.58366" />
+				<Hotspot X="-6293.831" Y="38.31116" Z="-10.51576" />
+				<Hotspot X="-6285.029" Y="-3.305875" Z="1.178922" />
+				<Hotspot X="-6325.188" Y="7.768752" Z="6.508828" /> <!-- end of cave, hotspotting to entrance -->
+				<Hotspot X="-6290.161" Y="-8.431961" Z="1.266992" />
+				<Hotspot X="-6293.78" Y="39.41599" Z="-10.57819" />
+				<Hotspot X="-6233.281" Y="-17.76945" Z="-8.815617" />
+				<Hotspot X="-6237.558" Y="-49.51668" Z="-5.940467" />
+				<Hotspot X="-6262.622" Y="-11.51884" Z="1.406675" />
+				<Hotspot X="-6239.347" Y="23.97476" Z="9.119099" />
+				<Hotspot X="-6255.62" Y="64.45605" Z="17.26221" />
+				<Hotspot X="-6246.018" Y="18.68019" Z="8.717124" />
+				<Hotspot X="-6294.361" Y="68.53712" Z="12.58667" />
+				<Hotspot X="-6304.832" Y="128.3194" Z="14.03956" /> <!-- at entrance of cave -->
+				<Hotspot X="-6414.597" Y="293.4403" Z="8.63738" /> <!-- outside camp -->
+			</Hotspots>
+		</Objective>
+	</Quest>
+	<Quest Id="8284" Name="The Twilight Mystery">
+		<Objective Type="CollectItem" ItemId="20378" CollectCount="8">
+			<CollectFrom>
+				<GameObject Name="Twilight Tablet Fragment" Id="180501" />
+				<GameObject Name="Twilight Tablet Fragment" Id="180583" />
+			</CollectFrom>
+			<Hotspots>
+				<Hotspot X="-6167.555" Y="1771.938" Z="31.00033" />
+				<Hotspot X="-6148.988" Y="1793.275" Z="29.53723" />
+				<Hotspot X="-6206.435" Y="1736.947" Z="13.26449" />
+				<Hotspot X="-6359.112" Y="1785.444" Z="4.27576" />
+			</Hotspots>
+		</Objective>
+	</Quest>
+	<Quest Id="8278" Name="Noggle's Last Hope">
+		<Objective Type="CollectItem" ItemId="20374" CollectCount="3">
+			<CollectFrom>
+				<Mob Name="Stonelash Pincer" Id="11736"  />
+			</CollectFrom>
+			<Hotspots>
+				<Hotspot X="-7118.281" Y="1011.111" Z="5.656432" />
+				<Hotspot X="-7162.125" Y="1126.308" Z="2.938393" />
+				<Hotspot X="-7213.936" Y="1221.26" Z="1.754126" />
+				<Hotspot X="-7194.069" Y="1324.084" Z="4.953803" />
+				<Hotspot X="-7369.206" Y="1279.304" Z="4.83871" />			
+			</Hotspots>
+		</Objective>
+		<Objective Type="CollectItem" ItemId="20375" CollectCount="3">
+			<CollectFrom>
+				<Mob Name="Stonelash Flayer" Id="11737" />
+			</CollectFrom>
+			<Hotspots>
+				<Hotspot X="-7570.132" Y="1274.685" Z="6.03344" />
+				<Hotspot X="-7538.592" Y="1343.143" Z="1.817055" />
+				<Hotspot X="-7634.446" Y="1422.075" Z="3.743445" />
+				<Hotspot X="-7652.462" Y="1467.046" Z="4.806234" />
+				<Hotspot X="-7715.3" Y="1488.271" Z="1.666799" />
+				<Hotspot X="-7794.722" Y="1433.889" Z="-1.201996" />
+				<Hotspot X="-7905.161" Y="1462.686" Z="-5.370449" />
+				<Hotspot X="-7864.248" Y="1224.669" Z="-2.866989" />
+				<Hotspot X="-7852.921" Y="1129.738" Z="5.295817" />
+				<Hotspot X="-7798.596" Y="1114.609" Z="4.171047" />
+				<Hotspot X="-7755.115" Y="1033.182" Z="2.190686" />
+				<Hotspot X="-7660.045" Y="1009.001" Z="2.42847" />
+			</Hotspots>
+		</Objective>
+		<Objective Type="CollectItem" ItemId="20377" CollectCount="3">
+			<CollectFrom>
+				<Mob Name="Rock Stalker" Id="11739" />
+			</CollectFrom>
+			<Hotspots>
+				<Hotspot X="-7570.132" Y="1274.685" Z="6.03344" />
+				<Hotspot X="-7538.592" Y="1343.143" Z="1.817055" />
+				<Hotspot X="-7634.446" Y="1422.075" Z="3.743445" />
+				<Hotspot X="-7652.462" Y="1467.046" Z="4.806234" />
+				<Hotspot X="-7715.3" Y="1488.271" Z="1.666799" />
+				<Hotspot X="-7794.722" Y="1433.889" Z="-1.201996" />
+				<Hotspot X="-7905.161" Y="1462.686" Z="-5.370449" />
+				<Hotspot X="-7864.248" Y="1224.669" Z="-2.866989" />
+				<Hotspot X="-7852.921" Y="1129.738" Z="5.295817" />
+				<Hotspot X="-7798.596" Y="1114.609" Z="4.171047" />
+				<Hotspot X="-7755.115" Y="1033.182" Z="2.190686" />
+				<Hotspot X="-7660.045" Y="1009.001" Z="2.42847" />
+			</Hotspots>
+		</Objective>
+	</Quest>	
+	<Quest Id="8281" Name="Stepping Up Security">
+		<Objective Type="KillMob" MobId="11741" KillCount="20">
+			<Hotspots>
+				<Hotspot X="-7107.369" Y="1010.009" Z="2.758595" />
+				<Hotspot X="-7125.458" Y="1163.829" Z="5.836986" />
+				<Hotspot X="-7270.42" Y="1216.74" Z="0.8813767" />
+				<Hotspot X="-6796.97" Y="1495.132" Z="2.657086" />
+				<Hotspot X="-6690.154" Y="1436.33" Z="2.90286" />
+				<Hotspot X="-6782.541" Y="1479.79" Z="4.066999" />
+				<Hotspot X="-6865.634" Y="1736.855" Z="2.743316" />
+				<Hotspot X="-6949.156" Y="1806.248" Z="3.812497" />
+				<Hotspot X="-6998.34" Y="1854.019" Z="3.665416" />
+				<Hotspot X="-6903.192" Y="1396.592" Z="0.8076405" />
+				<Hotspot X="-7121.46" Y="1169.512" Z="6.000322" />
+				<Hotspot X="-7249.718" Y="1093.888" Z="1.644214" />
+			</Hotspots>
+		</Objective>
+	</Quest>
+	<Quest Id="8320" Name="Twilight Geolords">
+		<Objective Type="KillMob" MobId="11881" KillCount="10">
+			<Hotspots>
+				<Hotspot X="-7055.013" Y="1162.046" Z="0.4498966" />
+				<Hotspot X="-7009.902" Y="1175.043" Z="11.8385" />
+				<Hotspot X="-7001.801" Y="1215.484" Z="7.966096" />
+				<Hotspot X="-6934.636" Y="1189.577" Z="6.899908" />
+				<Hotspot X="-6978.876" Y="1135.221" Z="7.819675" />
+				<Hotspot X="-7032.86" Y="1153.777" Z="6.298728" />
+			</Hotspots>
+		</Objective>
+	</Quest>
+	<Quest Id="8321" Name="Vyral the Vile">
+		<Objective Type="CollectItem" ItemId="20466" CollectCount="1">
+			<Hotspots>
+				<Hotspot X="-6320.166" Y="15.8633" Z="6.216199" />
+			</Hotspots>
+		</Objective>
+	</Quest>
+	<Quest Id="8282" Name="Noggle's Lost Satchel">
+		<Objective Type="CollectItem" ItemId="20379" CollectCount="1">
+			<CollectFrom>
+				<GameObject Name="Noggle's Satchel" Id="180435" />
+			</CollectFrom>
+			<Hotspots>
+				<Hotspot X="-8080.263" Y="983.8337" Z="65.23743" />
+			</Hotspots>
+		</Objective>
+	</Quest>
+	
+	<QuestOrder>
+	
+				<CustomBehavior File="UserSettings" LootMobs="True" PullDistance="35" TrainNewSkills="False" LearnFlightPaths="True" />
+				
+		<If Condition="Me.GetReputationLevelWith(609) &lt; Styx.WoWUnitReaction.Exalted" >
+
+				<!-- Non repeatable quests -->
+			<If Condition="((!HasQuest(8318)) &amp;&amp; (!IsQuestCompleted(8318)))" >
+				<CustomBehavior File="FlyTo" X="-6836.007" Y="845.5305" Z="48.99781" />
+				<CustomBehavior File="ForcedDismount" />
+		<PickUp QuestName="Secret Communication" QuestId="8318" GiverName="Bor Wildmane" GiverId="15306" X="-6836.007" Y="845.5305" Z="48.99781" />
+			</If>
+			<If Condition="((!HasQuest(8320)) &amp;&amp; (!IsQuestCompleted(8320)))" >
+				<CustomBehavior File="FlyTo" X="-6836.007" Y="845.5305" Z="48.99781" />
+				<CustomBehavior File="ForcedDismount" />
+			</If>
+		<PickUp QuestName="Twilight Geolords" QuestId="8320" GiverName="Huum Wildmane" GiverId="15270" />
+		<PickUp QuestName="Securing the Supply Lines" QuestId="8280" GiverName="Windcaller Proudhorn" GiverId="15191" />
+		<PickUp QuestName="Wanted - Deathclasp, Terror of the Sands" QuestId="8283" GiverName="Wanted Poster: Deathclasp" GiverId="180448" X="-6845.194" Y="750.6099" Z="42.53779" />
+		<PickUp QuestName="Deadly Desert Venom" QuestId="8277" GiverName="Beetix Ficklespragg" GiverId="15189" />
+		<PickUp QuestName="Dearest Natalia" QuestId="8304" GiverName="Commander Mar'alith" GiverId="15181" />
+		<PickUp QuestName="Report to Marshal Bluewall" QuestId="9415" GiverName="Rifleman Torrig" GiverId="17082" />
+			<If Condition="((HasQuest(9415)) &amp;&amp; (IsQuestCompleted(9415)))" >
+				<CustomBehavior File="FlyTo" X="-7142.418" Y="1375.218" Z="3.799065" />
+				<CustomBehavior File="ForcedDismount" />
+			</If>
+		<TurnIn QuestName="Report to Marshal Bluewall" QuestId="9415" TurnInName="Marshal Bluewall" TurnInId="17080" X="-7144.343" Y="1377.835" Z="3.17443" />
+		
+			<If Condition="((HasQuest(8277)) &amp;&amp; (!IsQuestCompleted(8277)))" >
+				<CustomBehavior File="FlyTo" X="-6818.295" Y="1166.867" Z="0.8163894" />
+				<CustomBehavior File="ForcedDismount" />
+				<Objective QuestName="Deadly Desert Venom" QuestId="8277" Type="CollectItem" ItemId="20376" CollectCount="8" />
+				
+				<CustomBehavior File="FlyTo" X="-6604.316" Y="1307.721" Z="5.195007" />
+				<CustomBehavior File="ForcedDismount" />
+				<Objective QuestName="Deadly Desert Venom" QuestId="8277" Type="CollectItem" ItemId="20373" CollectCount="8" />
+			</If>
+			<If Condition="((HasQuest(8280)) &amp;&amp; (!IsQuestCompleted(8280)))" >
+				<CustomBehavior File="FlyTo" X="-6818.295" Y="1166.867" Z="0.8163894" />
+				<CustomBehavior File="ForcedDismount" />
+				<Objective QuestName="Securing the Supply Lines" QuestId="8280" Type="KillMob" MobId="11740" KillCount="15" />
+			</If>
+			<If Condition="((HasQuest(8280)) &amp;&amp; (IsQuestCompleted(8280)))" >
+				<CustomBehavior File="FlyTo" X="-6836.007" Y="845.5305" Z="48.99781" />
+				<CustomBehavior File="ForcedDismount" />
+			</If>
+		<TurnIn QuestName="Securing the Supply Lines" QuestId="8280" TurnInName="Windcaller Proudhorn" TurnInId="15191" />
+		<TurnIn QuestName="Deadly Desert Venom" QuestId="8277" TurnInName="Beetix Ficklespragg" TurnInId="15189" />
+		<PickUp QuestName="Noggle's Last Hope" QuestId="8278" GiverName="Beetix Ficklespragg" GiverId="15189" />
+		<PickUp QuestName="Stepping Up Security" QuestId="8281" GiverName="Windcaller Proudhorn" GiverId="15191" />
+			<If Condition="((HasQuest(8284)) &amp;&amp; (!IsQuestCompleted(8284)))" >
+				<CustomBehavior File="FlyTo" X="-6167.555" Y="1771.938" Z="31.00033" />
+				<CustomBehavior File="ForcedDismount" />
+				<Objective QuestName="The Twilight Mystery" QuestId="8284" Type="CollectItem" ItemId="20378" CollectCount="8" />
+			</If>
+			<If Condition="((HasQuest(8281)) &amp;&amp; (!IsQuestCompleted(8281)))" >
+				<CustomBehavior File="FlyTo" X="-7239.52" Y="1082.701" Z="2.048507" />
+				<CustomBehavior File="ForcedDismount" />
+				<Objective QuestName="Stepping Up Security" QuestId="8281" Type="KillMob" MobId="11741" KillCount="20" />
+			</If>
+			<If Condition="((HasQuest(8278)) &amp;&amp; (!IsQuestCompleted(8278)))" >
+				<CustomBehavior File="FlyTo" X="-7239.52" Y="1082.701" Z="2.048507" />
+				<CustomBehavior File="ForcedDismount" />
+				<Objective QuestName="Noggle's Last Hope" QuestId="8278" Type="CollectItem" ItemId="20374" CollectCount="3" />
+				
+				<CustomBehavior File="FlyTo" X="-7570.132" Y="1274.685" Z="6.03344" />
+				<CustomBehavior File="ForcedDismount" />
+				<Objective QuestName="Noggle's Last Hope" QuestId="8278" Type="CollectItem" ItemId="20375" CollectCount="3" />
+				<Objective QuestName="Noggle's Last Hope" QuestId="8278" Type="CollectItem" ItemId="20377" CollectCount="3" />
+			</If>
+			<If Condition="((HasQuest(8320)) &amp;&amp; (!IsQuestCompleted(8320)))" >
+				<CustomBehavior File="FlyTo" X="-7055.013" Y="1162.046" Z="0.4498966" />
+				<CustomBehavior File="ForcedDismount" />
+				<Objective QuestName="Twilight Geolords" QuestId="8320" Type="KillMob" MobId="11881" KillCount="10" />
+			</If>
+			<If Condition="((HasQuest(8320)) &amp;&amp; (IsQuestCompleted(8320)))" >
+				<CustomBehavior File="FlyTo" X="-6836.007" Y="845.5305" Z="48.99781" />
+				<CustomBehavior File="ForcedDismount" />
+			</If>
+		<TurnIn QuestName="Twilight Geolords" QuestId="8320" TurnInName="Huum Wildmane" TurnInId="15270" />
+		<PickUp QuestName="Vyral the Vile" QuestId="8321" GiverName="Huum Wildmane" GiverId="15270" />
+		<TurnIn QuestName="The Twilight Mystery" QuestId="8284" TurnInName="Geologist Larksbane" TurnInId="15183" />
+		<PickUp QuestName="The Deserter" QuestId="8285" GiverName="Geologist Larksbane" GiverId="15183" />
+		<TurnIn QuestName="Noggle's Last Hope" QuestId="8278" TurnInName="Beetix Ficklespragg" TurnInId="15189" />
+		<PickUp QuestName="Noggle's Lost Satchel" QuestId="8282" GiverName="Noggle Ficklespragg" GiverId="15190" />
+		<TurnIn QuestName="Stepping Up Security" QuestId="8281" TurnInName="Windcaller Proudhorn" TurnInId="15191" />
+				<If Condition="((HasQuest(8321)) &amp;&amp; (!IsQuestCompleted(8321)))" >
+					<CustomBehavior File="FlyTo" X="-6414.597" Y="293.4403" Z="8.63738" />
+					<CustomBehavior File="ForcedDismount" />
+					<Objective QuestName="Vyral the Vile" QuestId="8321" Type="CollectItem" ItemId="20466" CollectCount="1" />
+				</If>
+				<If Condition="((HasQuest(8318)) &amp;&amp; (!IsQuestCompleted(8318)))" >
+					<CustomBehavior File="FlyTo" X="-6414.597" Y="293.4403" Z="8.63738" />
+					<CustomBehavior File="ForcedDismount" />
+					<Objective QuestName="Secret Communication" QuestId="8318" Type="CollectItem" ItemId="20404" CollectCount="10" />
+				</If>
+			<If Condition="((HasQuest(8285)) &amp;&amp; (IsQuestCompleted(8285)))" >
+				<CustomBehavior File="FlyTo" X="-7591.029" Y="255.5147" Z="3.14413" />
+				<CustomBehavior File="ForcedDismount" />
+		<TurnIn QuestName="The Deserter" QuestId="8285" TurnInName="Hermit Ortell" TurnInId="15194" X="-7578.721" Y="196.9136" Z="11.46642" />
+				<RunTo X="-7588.745" Y="236.5513" Z="10.09998" />
+			</If>
+			<If Condition="((HasQuest(8282)) &amp;&amp; (!IsQuestCompleted(8282)))" >
+				<CustomBehavior File="FlyTo" X="-8057.809" Y="984.4365" Z="42.65918" />
+				<CustomBehavior File="ForcedDismount" />
+				<Objective QuestName="Noggle's Lost Satchel" QuestId="8282" Type="CollectItem" ItemId="20379" CollectCount="1" />
+			</If>
+			<If Condition="((HasQuest(8283)) &amp;&amp; (!IsQuestCompleted(8283)))" >
+				<CustomBehavior File="FlyTo" X="-8057.809" Y="984.4365" Z="42.65918" />
+				<CustomBehavior File="ForcedDismount" />
+				<Objective QuestName="Wanted - Deathclasp, Terror of the Sands" QuestId="8283" Type="CollectItem" ItemId="20385" CollectCount="1" />
+			</If>
+			<If Condition="((HasQuest(8283)) &amp;&amp; (IsQuestCompleted(8283)))" >
+				<CustomBehavior File="FlyTo" X="-6773.237" Y="755.2231" Z="142.7798" />
+				<CustomBehavior File="MyCTM" X="-6742.301" Y="768.6009" Z="130.4309" />
+		<TurnIn QuestName="Wanted - Deathclasp, Terror of the Sands" QuestId="8283" TurnInName="Vish Kozus" TurnInId="15182" />
+				<CustomBehavior File="MyCTM" X="-6744.362" Y="776.7184" Z="129.3328" />
+				<CustomBehavior File="MyCTM" X="-6760.185" Y="789.7673" Z="68.58439" />
+			</If>
+			<If Condition="((HasQuest(8321)) &amp;&amp; (IsQuestCompleted(8321)))" >
+				<CustomBehavior File="FlyTo" X="-6836.007" Y="845.5305" Z="48.99781" />
+				<CustomBehavior File="ForcedDismount" />
+		<TurnIn QuestName="Vyral the Vile" QuestId="8321" TurnInName="Huum Wildmane" TurnInId="15270" />
+			</If>
+		<PickUp QuestName="The Twilight Mystery" QuestId="8284" GiverName="Geologist Larksbane" GiverId="15183" />
+		<TurnIn QuestName="Noggle's Lost Satchel" QuestId="8282" TurnInName="Noggle Ficklespragg" TurnInId="15190" />
+			<If Condition="((HasQuest(8318)) &amp;&amp; (IsQuestCompleted(8318)))" >
+				<CustomBehavior File="FlyTo" X="-6834.226" Y="846.9423" Z="48.85535" />
+				<CustomBehavior File="ForcedDismount" />
+		<TurnIn QuestName="Secret Communication" QuestId="8318" TurnInName="Bor Wildmane" TurnInId="15306" X="-6836.007" Y="845.5305" Z="48.99781" />
+			</If>
+		</If>
+			<If Condition="((HasQuest(8304)) &amp;&amp; (!IsQuestCompleted(8304)))" >
+				<CustomBehavior File="FlyTo" X="-8010.16" Y="1100.567" Z="4.059024" />
+				<CustomBehavior File="ForcedDismount" />
+			  <While Condition="((HasQuest(8304)) &amp;&amp; (!IsQuestCompleted(8304)))" >
+				<CustomBehavior File="InteractWith" QuestId="8304" MobId="15170" NumOfTimes="1" GossipOptions="1, 1, 1, 1, 1, 1, 1, 1" WaitTime="1000" CollectionDistance="50" X="-8010.16" Y="1100.567" Z="4.059024" />
+				<CustomBehavior File="InteractWith" QuestId="8304" MobId="15171" NumOfTimes="1" GossipOptions="1, 1, 1, 1, 1, 1, 1, 1" WaitTime="1000" CollectionDistance="50" X="-8022.499" Y="1115.789" Z="2.737845" />
+			  </While>
+			</If>
+			<If Condition="((HasQuest(8304)) &amp;&amp; (IsQuestCompleted(8304)))" >
+				<CustomBehavior File="FlyTo" X="-6836.007" Y="845.5305" Z="48.99781" />
+				<CustomBehavior File="ForcedDismount" />
+		<TurnIn QuestName="Dearest Natalia" QuestId="8304" TurnInName="Commander Mar'alith" TurnInId="15181" />
+			</If>
+
+			<!-- Farming for Farming for Twilight Texts - 10 for each turnin -->
+			<While Condition="Me.GetReputationLevelWith(609) &lt; Styx.WoWUnitReaction.Exalted" >
+			
+				<If Condition="(GetItemCount(20404) &lt; 30)" >
+					<CustomBehavior File="FlyTo" X="-6414.597" Y="293.4403" Z="8.63738" />
+					<CustomBehavior File="ForcedDismount" />
+					<CustomBehavior File="SetPullDistance" Distance="35" />
+						<SetGrindArea>
+							<Grindarea>
+								<TargetMinLevel>45</TargetMinLevel> 
+								<TargetMaxLevel>65</TargetMaxLevel>
+								<Factions>16</Factions> <!-- [Twilights] -->
+								<Hotspots>
+									<Hotspot X="-6414.597" Y="293.4403" Z="8.63738" /> <!-- outside camp -->
+									<Hotspot X="-6364.772" Y="250.494" Z="3.775813" />
+									<Hotspot X="-6304.005" Y="229.3379" Z="5.807431" />
+									<Hotspot X="-6337.706" Y="179.5293" Z="5.212106" />
+									<Hotspot X="-6384.083" Y="169.2122" Z="6.755428" />
+									<Hotspot X="-6401.881" Y="224.0942" Z="5.567259" />
+									<Hotspot X="-6451.325" Y="215.7637" Z="4.214141" />
+									<Hotspot X="-6469.52" Y="248.3168" Z="4.271239" />
+									<Hotspot X="-6386.115" Y="208.7629" Z="2.907744" />
+									<Hotspot X="-6332.934" Y="169.8838" Z="5.125364" />
+									<Hotspot X="-6313.894" Y="145.8801" Z="14.03305" /> <!-- just outside cave -->
+									<Hotspot X="-6294.505" Y="111.5464" Z="15.37499" /> <!-- just inside cave -->
+									<Hotspot X="-6294.666" Y="69.87094" Z="12.90141" />
+									<Hotspot X="-6246.366" Y="20.32126" Z="8.722819" />
+									<Hotspot X="-6255.106" Y="61.72909" Z="17.26195" />
+									<Hotspot X="-6245.435" Y="20.8994" Z="8.895886" />
+									<Hotspot X="-6266.991" Y="-28.29591" Z="-1.382161" />
+									<Hotspot X="-6239.468" Y="-45.9248" Z="-5.94055" />
+									<Hotspot X="-6251.842" Y="-4.063636" Z="-10.58366" />
+									<Hotspot X="-6293.831" Y="38.31116" Z="-10.51576" />
+									<Hotspot X="-6285.029" Y="-3.305875" Z="1.178922" />
+									<Hotspot X="-6325.188" Y="7.768752" Z="6.508828" /> <!-- end of cave, hotspotting to entrance -->
+									<Hotspot X="-6290.161" Y="-8.431961" Z="1.266992" />
+									<Hotspot X="-6293.78" Y="39.41599" Z="-10.57819" />
+									<Hotspot X="-6233.281" Y="-17.76945" Z="-8.815617" />
+									<Hotspot X="-6237.558" Y="-49.51668" Z="-5.940467" />
+									<Hotspot X="-6262.622" Y="-11.51884" Z="1.406675" />
+									<Hotspot X="-6239.347" Y="23.97476" Z="9.119099" />
+									<Hotspot X="-6255.62" Y="64.45605" Z="17.26221" />
+									<Hotspot X="-6246.018" Y="18.68019" Z="8.717124" />
+									<Hotspot X="-6294.361" Y="68.53712" Z="12.58667" />
+									<Hotspot X="-6304.832" Y="128.3194" Z="14.03956" /> <!-- at entrance of cave -->
+									<Hotspot X="-6414.597" Y="293.4403" Z="8.63738" /> <!-- outside camp -->
+								</Hotspots>
+							</Grindarea>
+						</SetGrindArea>
+					<GrindTo Condition="(GetItemCount(20404) &gt;= 30)" GoalText="Getting 30 Text's" />
+				</If>
+				
+					<CustomBehavior File="FlyTo" X="-6834.226" Y="846.9423" Z="48.85535" />
+				<While Condition="(GetItemCount(20404) &gt;= 10) &amp;&amp; (Me.GetReputationLevelWith(609) &lt; Styx.WoWUnitReaction.Exalted)" >
+					<CustomBehavior File="InteractWith"  MobId="15306" NumOfTimes="1" CollectionDistance="50" WaitTime="1000" X="-6836.007" Y="845.5305" Z="48.99781" />
+					<CustomBehavior File="RunMacro" Macro="/click GossipTitleButton1" NumOfTimes="1" WaitTime="1000" />
+					<CustomBehavior File="RunMacro" Macro="/click QuestFrameCompleteButton" NumOfTimes="1" WaitTime="1000" />
+					<CustomBehavior File="RunMacro" Macro="/click QuestFrameCompleteQuestButton" NumOfTimes="1" WaitTime="1000" />
+					<CustomBehavior File="WaitTimer" WaitTime="3000" />
+				</While>
+			</While>
+			
+			<If Condition="Me.GetReputationLevelWith(609) == Styx.WoWUnitReaction.Exalted" >
+				<CustomBehavior File="UserDialog" Title="title" AllowBotStop="True" SoundCue="Asterisk" SoundCueInterval="1" Text="You have reached Exalted\nIf you liked this profile, +rep is always appreciated" />
+			</If>
+	
+	</QuestOrder>
+
+</HBProfile>

@@ -1,0 +1,484 @@
+<HBProfile>
+	<Name>[Fly][N - Rep Quest] Hyjal Firelands Dailies [Kick]</Name>
+
+	<MinDurability>0.1</MinDurability>
+
+
+	<Blackspots>
+	</Blackspots>
+	<AvoidMobs>
+		<Mob Name="Hyjal Protector" Entry="52213" />
+		<Mob Name="Hyjal Protector" Entry="52214" />
+		<Mob Name="Hyjal Protector" Entry="52215" />
+		<Mob Name="Hyjal Protector" Entry="52216" />
+		<Mob Name="Leyara" Entry="53014" />
+	</AvoidMobs>
+	
+	
+	<Quest Id="29127" Name="Rage Against the Flames">
+		<Objective Type="KillMob" MobId="52816" KillCount="8">
+			<Hotspots>
+				<Hotspot X="4691.802" Y="-2261.604" Z="1169.293" />
+				<Hotspot X="4617.677" Y="-2198.616" Z="1156.865" />
+				<Hotspot X="4730.866" Y="-2198.972" Z="1196.309" />
+				<Hotspot X="4709.215" Y="-2350.19" Z="1174.337" />
+				<Hotspot X="4658.587" Y="-2478.721" Z="1146.134" />
+				<Hotspot X="4746.831" Y="-2559.83" Z="1160.337" />
+				<Hotspot X="4629.755" Y="-2602.287" Z="1134.873" />
+				<Hotspot X="4410.779" Y="-2556.289" Z="1119.575" />	
+			</Hotspots>
+		</Objective>
+	</Quest>	
+	<Quest Id="29123" Name="Rage Against the Flames">
+		<Objective Type="KillMob" MobId="52816" KillCount="6">
+			<Hotspots>
+				<Hotspot X="4691.802" Y="-2261.604" Z="1169.293" />
+				<Hotspot X="4617.677" Y="-2198.616" Z="1156.865" />
+				<Hotspot X="4730.866" Y="-2198.972" Z="1196.309" />
+				<Hotspot X="4709.215" Y="-2350.19" Z="1174.337" />
+				<Hotspot X="4658.587" Y="-2478.721" Z="1146.134" />
+				<Hotspot X="4746.831" Y="-2559.83" Z="1160.337" />
+				<Hotspot X="4629.755" Y="-2602.287" Z="1134.873" />
+				<Hotspot X="4410.779" Y="-2556.289" Z="1119.575" />	
+			</Hotspots>
+		</Objective>
+	</Quest>	
+	<Quest Id="29128" Name="The Protectors of Hyjal">
+		<Objective Type="KillMob" MobId="52300" KillCount="6">
+			<Hotspots>
+				<Hotspot X="4134.973" Y="-2308.888" Z="1132.256" />
+				<Hotspot X="4051.516" Y="-2256.317" Z="1132.266" />
+				<Hotspot X="3944.532" Y="-2223.205" Z="1126.918" />
+				<Hotspot X="3855.314" Y="-2266.951" Z="1158.317" />			
+			</Hotspots>
+		</Objective>
+	</Quest>
+	<Quest Id="29246" Name="Relieving the Pain">
+		<Objective Type="CollectItem" ItemId="69678" CollectCount="4">
+			<CollectFrom>
+				<Mob Name="Seething Pyrelord" Id="52300" />
+			</CollectFrom>
+			<Hotspots>
+				<Hotspot X="4134.973" Y="-2308.888" Z="1132.256" />
+				<Hotspot X="4051.516" Y="-2256.317" Z="1132.266" />
+				<Hotspot X="3944.532" Y="-2223.205" Z="1126.918" />
+				<Hotspot X="3855.314" Y="-2266.951" Z="1158.317" />			
+			</Hotspots>
+		</Objective>
+	</Quest>	
+	<Quest Id="29247" Name="Treating the Wounds" >
+		<Objective Type="CollectItem" ItemId="69677" CollectCount="4" >
+			<CollectFrom>
+				<Mob Name="Seething Pyrelord" Id="52300" />
+			</CollectFrom>
+			<Hotspots>
+				<Hotspot X="4134.973" Y="-2308.888" Z="1132.256" />
+				<Hotspot X="4051.516" Y="-2256.317" Z="1132.266" />
+				<Hotspot X="3944.532" Y="-2223.205" Z="1126.918" />
+				<Hotspot X="3855.314" Y="-2266.951" Z="1158.317" />			
+			</Hotspots>
+		</Objective>
+	</Quest>	
+	<Quest Id="29248" Name="Releasing the Pressure">
+		<Objective Type="CollectItem" ItemId="69679" CollectCount="100">
+			<CollectFrom>
+				<Mob Name="Charred Flamewaker" Entry="52791" />
+			</CollectFrom>
+			<Hotspots>
+				<Hotspot X="4728.867" Y="-2215.293" Z="1191.717" />
+				<Hotspot X="4659.072" Y="-2198.987" Z="1148.771" />
+				<Hotspot X="4516.407" Y="-2296.364" Z="1138.873" />
+				<Hotspot X="4561.838" Y="-2404.688" Z="1134.496" />
+				<Hotspot X="4556.398" Y="-2551.5" Z="1123.437" />
+				<Hotspot X="4647.258" Y="-2631.478" Z="1141.982" />
+				<Hotspot X="4696.271" Y="-2449.841" Z="1154.348" />			
+			</Hotspots>
+		</Objective>
+	</Quest>	
+	<Quest Id="29166" Name="Supplies for the Other Side">
+		<Objective Type="CollectItem" ItemId="69236" CollectCount="7">
+			<CollectFrom>
+			</CollectFrom>
+			<Hotspots>
+				<Hotspot X="4728.867" Y="-2215.293" Z="1191.717" />
+				<Hotspot X="4659.072" Y="-2198.987" Z="1148.771" />
+				<Hotspot X="4516.407" Y="-2296.364" Z="1138.873" />
+				<Hotspot X="4561.838" Y="-2404.688" Z="1134.496" />
+				<Hotspot X="4556.398" Y="-2551.5" Z="1123.437" />
+				<Hotspot X="4647.258" Y="-2631.478" Z="1141.982" />
+				<Hotspot X="4696.271" Y="-2449.841" Z="1154.348" />			
+			</Hotspots>
+		</Objective>
+	</Quest>	
+	
+	<QuestOrder>
+	
+		<CustomBehavior File="UserSettings" TrainNewSkills="False" LootMobs="True" PullDistance="25"  />
+	
+				<!-- Enable this if you want the bot to fly you there, if you're in Kalimdor
+			<CustomBehavior File="FlyTo" DestName="Pickup Quests" X="4426.363" Y="-2084.204" Z="1209.685" />	
+				-->
+			
+			<!-- This is the MobId, not QuestId -->
+			<While Condition="HasQuestAvailable(52669)" >
+				<CustomBehavior File="InteractWith" MobId="52669" />
+				<CustomBehavior File="RunMacro" Macro="/click GossipTitleButton1" />
+				<CustomBehavior File="RunMacro" Macro="/click QuestFrameAcceptButton" />
+			</While>
+			<While Condition="HasQuestAvailable(52671)" >
+				<CustomBehavior File="InteractWith" MobId="52671" />
+				<CustomBehavior File="RunMacro" Macro="/click GossipTitleButton1" />
+				<CustomBehavior File="RunMacro" Macro="/click QuestFrameAcceptButton" />
+			</While>
+			<While Condition="HasQuestAvailable(53073)" >
+				<CustomBehavior File="InteractWith" MobId="53073" />
+				<CustomBehavior File="RunMacro" Macro="/click GossipTitleButton1" />
+				<CustomBehavior File="RunMacro" Macro="/click QuestFrameAcceptButton" />
+			</While>
+			<While Condition="HasQuestAvailable(52986)" >
+				<CustomBehavior File="InteractWith" MobId="52986" />
+				<CustomBehavior File="RunMacro" Macro="/click GossipTitleButton1" />
+				<CustomBehavior File="RunMacro" Macro="/click QuestFrameAcceptButton" />
+			</While>
+			<!--
+			<While Condition="HasQuestAvailable()" >
+				<CustomBehavior File="InteractWith" MobId="" />
+				<CustomBehavior File="RunMacro" Macro="/click GossipTitleButton1" />
+				<CustomBehavior File="RunMacro" Macro="/click QuestFrameAcceptButton" />
+			</While>
+			-->
+			
+
+
+
+
+			
+	
+			<!-- Perfecting Your Howl and The Call of the Pack -->
+			<If Condition="((HasQuest(29164)) &amp;&amp; (!IsQuestCompleted(29164)))" >
+				<CustomBehavior File="FlyTo" DestName="Howl at the Moon" X="4478.799" Y="-1966.34" Z="1219.213" />
+				<CustomBehavior File="ForcedDismount" />
+				<CustomBehavior File="UseItemOn" QuestId="29164" MobId="52219" ItemId="69235" NumOfTimes="50" WaitTime="1000" Range="5" CollectionDistance="500" X="4512.562" Y="-1863.173" Z="1239.869" />
+			</If>
+			<If Condition="((HasQuest(29164)) &amp;&amp; (IsQuestCompleted(29164)))" >
+				<CustomBehavior File="CompleteLogQuest" QuestId="29164" /> <!-- Get  -->
+				<CustomBehavior File="WaitTimer" WaitTime="2000" GoalText="Waiting for bot {TimeRemaining}" />
+			</If>
+			<If Condition="((HasQuest(29165)) &amp;&amp; (!IsQuestCompleted(29165)))" >
+				<CustomBehavior File="FlyTo" DestName="kill Lylagar" X="4605.289" Y="-2707.801" Z="1144.167" />
+				<CustomBehavior File="ForcedDismount" />
+				
+				<CustomBehavior File="Misc\RunLua" Lua="UseItemByName(69225)" WaitTime="1000" />
+				<CustomBehavior File="WaitTimer" WaitTime="2000" GoalText="Using item {TimeRemaining}" />
+
+				<Objective QuestName="The Call of the Pack" QuestId="29165" Type="KillMob" MobId="52766" KillCount="1" />
+			</If>
+
+			<!-- Relieving the Pain -->
+			<If Condition="((HasQuest(29246)) &amp;&amp; (!IsQuestCompleted(29246)))" >
+				<CustomBehavior File="FlyTo" DestName="get 4 Flame-Wreathed Hearts" X="4103.459" Y="-2301.724" Z="1131.987" />
+				<CustomBehavior File="ForcedDismount" />
+				<Objective QuestName="Relieving the Pain" QuestId="29246" Type="CollectItem" ItemId="69678" CollectCount="4" />
+			</If>
+			
+			<!-- Protectors of Hyjal -->
+			<If Condition="((HasQuest(29128)) &amp;&amp; (!IsQuestCompleted(29128)))" >
+				<CustomBehavior File="FlyTo" DestName="kill Sethria's Roost" X="4103.459" Y="-2301.724" Z="1131.987" />
+				<CustomBehavior File="ForcedDismount" />
+				<Objective QuestName="The Protectors of Hyjal" QuestId="29128" Type="KillMob" MobId="52300" KillCount="6" />
+			</If>
+			
+			<!-- Treating the Wounds -->
+			<If Condition="((HasQuest(29247)) &amp;&amp; (!IsQuestCompleted(29247)))" >
+				<CustomBehavior File="FlyTo" DestName="kill Sethria's Roost" X="4103.459" Y="-2301.724" Z="1131.987" />
+				<CustomBehavior File="ForcedDismount" />
+				<Objective QuestName="Treating the Wounds" QuestId="29247" Type="CollectItem" ItemId="69677" CollectCount="4" />
+			</If>
+	
+			<!-- Between the Trees and The Power of Malorne -->
+			<While Condition="((HasQuest(29125)) &amp;&amp; (!IsQuestCompleted(29125)))" >
+				<!-- I need an attr for interactwith to UseMount or StayOnMount for this quest unless i have agro -->
+				<CustomBehavior File="FlyTo" QuestId="29125" DestName="capture 3 Spirits of Malorne"  X="4525.667" Y="-2325.843" Z="1140.4" />
+				<CustomBehavior File="InteractWith" QuestId="29125" MobId="52176" NumOfTimes="100" CollectionDistance="500" WaitForNpcs="False" Range="1"  X="4525.667" Y="-2325.843" Z="1140.4" />
+
+				<CustomBehavior File="FlyTo" QuestId="29125" DestName="capture 3 Spirits of Malorne"  X="4480.135" Y="-2519.665" Z="1129.381" />
+				<CustomBehavior File="InteractWith" QuestId="29125" MobId="52176" NumOfTimes="100" CollectionDistance="500" WaitForNpcs="False" Range="1"  X="4480.135" Y="-2519.665" Z="1129.381" />
+
+				<CustomBehavior File="FlyTo" QuestId="29125" DestName="capture 3 Spirits of Malorne"  X="4700.01" Y="-2566.731" Z="1147.963" />
+				<CustomBehavior File="InteractWith" QuestId="29125" MobId="52176" NumOfTimes="100" CollectionDistance="500" WaitForNpcs="False" Range="1"  X="4700.01" Y="-2566.731" Z="1147.963" />
+
+				<CustomBehavior File="FlyTo" QuestId="29125" DestName="capture 3 Spirits of Malorne"  X="4677.301" Y="-2367.177" Z="1164.98" />				
+				<CustomBehavior File="InteractWith" QuestId="29125" MobId="52176" NumOfTimes="100" CollectionDistance="500" WaitForNpcs="False" Range="1"  X="4677.301" Y="-2367.177" Z="1164.98" />
+			</While>
+			<If Condition="((HasQuest(29125)) &amp;&amp; (IsQuestCompleted(29125)))" >
+				<CustomBehavior File="CompleteLogQuest" QuestId="29125" /> <!-- Get 29126 -->
+				<CustomBehavior File="WaitTimer" WaitTime="2000" GoalText="Waiting for bot {TimeRemaining}" />
+			</If>
+			<If Condition="((HasQuest(29126)) &amp;&amp; (!IsQuestCompleted(29126)))" >
+				<CustomBehavior File="FlyTo" DestName="kill Galenges" X="4604.546" Y="-2697.2" Z="1140.474" />
+				<CustomBehavior File="ForcedDismount" />
+				<UseItem QuestId="29126" ItemId="68997" X="4604.546" Y="-2697.2" Z="1140.474" />
+				<CustomBehavior File="WaitTimer" WaitTime="10000" GoalText="Waiting for agro to clear {TimeRemaining}" />
+				<!-- <Objective QuestName="The Power of Malorne" QuestId="29126" Type="KillMob" MobId="52399" KillCount="1" /> -->
+				<CustomBehavior File="KillUntilComplete" QuestId="29126" MobId="52399" X="4604.546" Y="-2697.2" Z="1140.474" />
+			</If>
+			
+			<!-- Punting Season and Echoes of Nemesis -->
+			<If Condition="((HasQuest(29101)) &amp;&amp; (!IsQuestCompleted(29101)))" >
+				<CustomBehavior File="FlyTo" DestName="Punt Turtles" X="4499.939" Y="-1968.376" Z="1218.086" />
+				<CustomBehavior File="ForcedDismount" />
+			 <While Condition="((HasQuest(29101)) &amp;&amp; (!IsQuestCompleted(29101)))" >
+					<If Condition="!StyxWoW.Me.IsOnTransport" >
+				<CustomBehavior File="InteractWith" QuestId="29101" MobId="52177" NumOfTimes="1" WaitForNpcs="True" CollectionDistance="100" X="4499.939" Y="-1968.376" Z="1218.086" />
+					</If>
+					<If Condition="StyxWoW.Me.IsOnTransport" >
+				<CustomBehavior File="VehicleBehavior" QuestId="29101" VehicleMountId="52988" VehicleId="52988" AttackButton="1" FireHeight="40" 
+											FireLocationX="4499.939" FireLocationY="-1968.376" FireLocationZ="1218.086"
+											TargetLocationX="4566.33" TargetLocationY="-1988.167" TargetLocationZ="1211.557" />
+					</If>
+				<CustomBehavior File="WaitTimer" WaitTime="6000" GoalText="Waiting for quest to complete {TimeRemaining}" />
+			 </While>
+			</If>
+			<If Condition="((HasQuest(29101)) &amp;&amp; (IsQuestCompleted(29101)))" >
+				<CustomBehavior File="CompleteLogQuest" QuestId="29101" /> <!-- Get 29122 -->
+				<CustomBehavior File="WaitTimer" WaitTime="2000" GoalText="Waiting for bot {TimeRemaining}" />
+			</If>
+			<If Condition="((HasQuest(29122)) &amp;&amp; (!IsQuestCompleted(29122)))" >
+				<CustomBehavior File="FlyTo" DestName="kill Nemises" X="4623.372" Y="-1983.948" Z="1193.515" />
+				<CustomBehavior File="ForcedDismount" />
+				
+				<CustomBehavior File="InteractWith" QuestId="29122" MobId="52425" GossipOptions="1" WaitForNpcs="True" />
+				<RunTo X="4616.084" Y="-1970.393" Z="1193.13" />
+				
+				<CustomBehavior File="WaitTimer" WaitTime="15000" GoalText="Waiting for Nemises {TimeRemaining}" />
+				<Objective QuestName="Echoes of Nemesis" QuestId="29122" Type="KillMob" MobId="52383" KillCount="1" />
+			</If>
+
+			<!-- Bears up there and Nature's Blessing -->
+			<If Condition="((HasQuest(29161)) &amp;&amp; (!IsQuestCompleted(29161)))" >
+				<CustomBehavior File="FlyTo" DestName="throw Bears Down" X="5250.184" Y="-1527.648" Z="1361.464" />
+				<CustomBehavior File="ForcedDismount" />
+				<CustomBehavior File="UserSettings" PullDistance="1" />
+				<CustomBehavior File="InteractWith" QuestId="29161" MobId="52676" CollectionDistance="2" X="5254.562" Y="-1536.917" Z="1361.341" />
+				<CustomBehavior File="WaitTimer" WaitTime="2000"/>
+				
+				<!-- 74920 is the climbing auraid - aura in tree is 46598 - but I can't get this behavior to climb all the way up 
+				
+				http://ui.wowinterface.com/downloads/info17033-SpellID.html
+				
+				
+				<CustomBehavior File="MountHyjal\BearsUpThereF" QuestName="The Bears Up There" QuestId="29161" />
+				<CustomBehavior File="WaitTimer" WaitTime="5000" GoalText="Waiting for quest to complete {TimeRemaining}" />
+				-->
+				
+	<CustomBehavior File="UserDialog" QuestId="29161" AllowBotStop="True" SoundCue="Exclamation" SoundCueInterval="1" Text="Chuck the bears down, climb down and jump off the tree and press continue" />
+	<CustomBehavior File="UserDialog" QuestId="29161" StopOnContinue="True" SoundCue="Exclamation" SoundCueInterval="1" Text="HEY, NO PRESSIE DA BUTTON!!!11111ONEONEONEONE11!!111" />
+				
+				<CustomBehavior File="UserSettings" PullDistance="25" />
+			</If>
+			<If Condition="((HasQuest(29161)) &amp;&amp; (IsQuestCompleted(29161)))" >
+				<CustomBehavior File="CompleteLogQuest" QuestId="29161" /> <!-- Get  -->
+				<CustomBehavior File="WaitTimer" WaitTime="2000" GoalText="Waiting for bot {TimeRemaining}" />
+			</If>
+			<If Condition="((HasQuest(29162)) &amp;&amp; (!IsQuestCompleted(29162)))" >
+				<CustomBehavior File="FlyTo" DestName="kill Pyrachnis" X="4927.581" Y="-1493.392" Z="1328.175" />
+				<CustomBehavior File="ForcedDismount" />
+				<UseItem QuestId="29162" ItemId="69232" X="4927.581" Y="-1493.392" Z="1328.175" />
+				<!-- poison doesn't hurt us
+				<CustomBehavior File="CombatUseItemOn" QuestId="29162" MobId="52749" ItemId="69232" HasAuraId="97515" CollectionDistance="500" X="4927.581" Y="-1493.392" Z="1328.175" /> -->
+				<Objective QuestName="Nature's Blessing" QuestId="29162" Type="KillMob" MobId="52749" KillCount="1" />
+			</If>
+
+			<!-- Call the Flock and Wings Aflame -->
+			<If Condition="((HasQuest(29147)) &amp;&amp; (!IsQuestCompleted(29147)))" >
+				<CustomBehavior File="FlyTo" DestName="Call The Flock" X="5079.347" Y="-1363.696" Z="1372.45" />
+				
+	<CustomBehavior File="UserDialog" QuestId="29147" AllowBotStop="True" SoundCue="Exclamation" SoundCueInterval="1" Text="Use the 'feather' and then use the vehicle to call birds \n\nPress continue when completed" />
+	<CustomBehavior File="UserDialog" QuestId="29147" StopOnContinue="True" SoundCue="Exclamation" SoundCueInterval="1" Text="HEY, NO PRESSIE DA BUTTON!!!11111ONEONEONEONE11!!111" />
+				
+				<!-- Flying Vehicle quest w/ a simple useitem
+				<Objective QuestName="Call the Flock" QuestId="29147" Type="CollectItem" ItemId="69234" CollectCount="1" />
+				<CustomBehavior File="ForcedDismount" />
+				-->
+			</If>
+			<If Condition="((HasQuest(29147)) &amp;&amp; (IsQuestCompleted(29147)))" >
+				<CustomBehavior File="EjectVeh" Eject="True" />
+			
+				<CustomBehavior File="CompleteLogQuest" QuestId="29147" /> <!-- Get  -->
+				<CustomBehavior File="WaitTimer" WaitTime="2000" GoalText="Waiting for bot {TimeRemaining}" />
+			</If>
+			<If Condition="((HasQuest(29148)) &amp;&amp; (!IsQuestCompleted(29148)))" >
+					<!-- Flying Vehicle quest w/ a useitem to help kill the elite -->
+					<If Condition="StyxWoW.Me.IsOnTransport" >
+						<CustomBehavior File="EjectVeh" Eject="True" />
+					</If>
+				<CustomBehavior File="FlyTo" DestName="kill Millagazor" X="4933.787" Y="-1490.77" Z="1327.634" />
+				<CustomBehavior File="ForcedDismount" />
+				<CustomBehavior File="Misc\RunLua" Lua="UseItemByName(69212)" WaitTime="1000" />
+				<CustomBehavior File="WaitTimer" WaitTime="3000" GoalText="Using item {TimeRemaining}" />
+				<Objective QuestName="Wings Aflame" QuestId="29148" Type="KillMob" MobId="52649" KillCount="1" />
+			</If>
+			
+			<!-- Releasing the Pressure -->
+			<If Condition="((HasQuest(29248)) &amp;&amp; (!IsQuestCompleted(29248)))" >
+				<CustomBehavior File="FlyTo" DestName="get 100 Flamewalker Scales" X="4682.283" Y="-2247.94" Z="1164.888" />
+				<CustomBehavior File="ForcedDismount" />
+				<Objective QuestName="Releasing the Pressure" QuestId="29248" Type="CollectItem" ItemId="69679" CollectCount="100" />
+			</If>
+
+			<If Condition="((HasQuest(29166)) &amp;&amp; (!IsQuestCompleted(29166)))" >
+				<CustomBehavior File="FlyTo" DestName="get 7 Supplies" X="4682.283" Y="-2247.94" Z="1164.888" />
+				<CustomBehavior File="ForcedDismount" />
+				<Objective QuestName="Supplies for the Other Side" QuestId="29166" Type="CollectItem" ItemId="69236" CollectCount="7" />
+			</If>
+			
+
+			
+			
+			
+			
+			
+			
+			
+
+
+
+
+	
+	
+	
+	
+	
+	
+			<!-- Rage Against the Flames x9 -->
+			<If Condition="((HasQuest(29163)) &amp;&amp; (!IsQuestCompleted(29163)))" >
+				<CustomBehavior File="FlyTo" DestName="Kill Firelands Invaders" X="4691.802" Y="-2261.604" Z="1169.293" />
+				<CustomBehavior File="ForcedDismount" />
+				<Objective QuestName="Rage Against the Flames" QuestId="29163" Type="KillMob" MobId="52816" KillCount="9" />
+			</If>
+			<!-- Rage Against the Flames x8 -->
+			<If Condition="((HasQuest(29127)) &amp;&amp; (!IsQuestCompleted(29127)))" >
+				<CustomBehavior File="FlyTo" DestName="Kill Firelands Invaders" X="4691.802" Y="-2261.604" Z="1169.293" />
+				<CustomBehavior File="ForcedDismount" />
+				<Objective QuestName="Rage Against the Flames" QuestId="29127" Type="KillMob" MobId="52816" KillCount="8" />
+			</If>
+			<!-- Rage Against the Flames x7 -->
+			<If Condition="((HasQuest(29149)) &amp;&amp; (!IsQuestCompleted(29149)))" >
+				<CustomBehavior File="FlyTo" DestName="Kill Firelands Invaders" X="4691.802" Y="-2261.604" Z="1169.293" />
+				<CustomBehavior File="ForcedDismount" />
+				<Objective QuestName="Rage Against the Flames" QuestId="29149" Type="KillMob" MobId="52816" KillCount="6" />
+			</If>
+			<!-- Rage Against the Flames x6 -->
+			<If Condition="((HasQuest(29123)) &amp;&amp; (!IsQuestCompleted(29123)))" >
+				<CustomBehavior File="FlyTo" DestName="Kill Firelands Invaders" X="4691.802" Y="-2261.604" Z="1169.293" />
+				<CustomBehavior File="ForcedDismount" />
+				<Objective QuestName="Rage Against the Flames" QuestId="29123" Type="KillMob" MobId="52816" KillCount="6" />
+			</If>
+	
+
+	
+	
+
+			 <If Condition="Me.ZoneId == 616" >
+				<CustomBehavior File="FlyTo" DestName="Turnin Quests" X="4426.363" Y="-2084.204" Z="1209.685" />	
+			 </If>
+			
+			<If Condition="((HasQuest(29149)) &amp;&amp; (IsQuestCompleted(29149)))" >
+		<TurnIn QuestName="Rage Against the Flames" QuestId="29149" TurnInName="Matoclaw" TurnInId="52669" />
+			</If>
+			<If Condition="((HasQuest(29127)) &amp;&amp; (IsQuestCompleted(29127)))" >
+		<TurnIn QuestName="Rage Against the Flames" QuestId="29127" TurnInName="Matoclaw" TurnInId="52669" />
+			</If>
+			<If Condition="((HasQuest(29123)) &amp;&amp; (IsQuestCompleted(29123)))" >
+		<TurnIn QuestName="Rage Against the Flames" QuestId="29123" TurnInName="Matoclaw" TurnInId="52669" />
+			</If>
+			<If Condition="((HasQuest(29163)) &amp;&amp; (IsQuestCompleted(29163)))" >
+		<TurnIn QuestName="Rage Against the Flames" QuestId="29163" TurnInName="Matoclaw" TurnInId="52669" />
+			</If>
+			<If Condition="((HasQuest(29126)) &amp;&amp; (IsQuestCompleted(29126)))" >
+		<TurnIn QuestName="The Power of Malorne" QuestId="29126" TurnInName="Matoclaw" TurnInId="52669" />
+			</If>
+			<If Condition="((HasQuest(29148)) &amp;&amp; (IsQuestCompleted(29148)))" >
+		<TurnIn QuestName="Wings Aflame" QuestId="29148" TurnInName="Matoclaw" TurnInId="52669" />
+			</If>
+			<If Condition="((HasQuest(29165)) &amp;&amp; (IsQuestCompleted(29165)))" >
+		<TurnIn QuestName="The Call of the Pack" QuestId="29165" TurnInName="Matoclaw" TurnInId="52669" />
+			</If>
+			<If Condition="((HasQuest(29166)) &amp;&amp; (IsQuestCompleted(29166)))" >
+		<TurnIn QuestName="Supplies for the Other Side" QuestId="29166" TurnInName="Matoclaw" TurnInId="52669" />
+			</If>
+			<If Condition="((HasQuest(29122)) &amp;&amp; (IsQuestCompleted(29122)))" >
+		<TurnIn QuestName="Echoes of Nemesis" QuestId="29122" TurnInName="Mylune" TurnInId="52671" />
+			</If>
+			<If Condition="((HasQuest(29162)) &amp;&amp; (IsQuestCompleted(29162)))" >
+		<TurnIn QuestName="Nature's Blessing" QuestId="29162" TurnInName="Mylune" TurnInId="52671" />
+			</If>
+			<If Condition="((HasQuest(29246)) &amp;&amp; (IsQuestCompleted(29246)))" >
+		<TurnIn QuestName="Relieving the Pain" QuestId="29246" TurnInName="Dorda'en Nightweaver" TurnInId="52986" />
+			</If>
+			<If Condition="((HasQuest(29247)) &amp;&amp; (IsQuestCompleted(29247)))" >
+		<TurnIn QuestName="Treating the Wounds" QuestId="29247" TurnInName="Dorda'en Nightweaver" TurnInId="52986" />
+			</If>
+			<If Condition="((HasQuest(29248)) &amp;&amp; (IsQuestCompleted(29248)))" >
+		<TurnIn QuestName="Releasing the Pressure" QuestId="29248" TurnInName="Dorda'en Nightweaver" TurnInId="52986" />			
+			</If>
+			<If Condition="((HasQuest()) &amp;&amp; (IsQuestCompleted()))" >
+			</If>
+			<If Condition="((HasQuest()) &amp;&amp; (IsQuestCompleted()))" >
+			</If>
+			
+			<If Condition="((HasQuest(29199)) &amp;&amp; (IsQuestCompleted(29199)))" >
+				<!-- Calling for Reinforcements - 20 Tokens -->
+				<CustomBehavior File="FlyTo" DestName="Turnin Quest" X="4418.696" Y="-2080.762" Z="1210.32" />
+		<TurnIn QuestName="Calling for Reinforcements" QuestId="29199" TurnInName="Arch Druid Hamuul Runetotem" TurnInId="52838" X="4418.696" Y="-2080.762" Z="1210.32" />
+		<PickUp QuestName="Leyara" QuestId="29200" GiverName="Arch Druid Hamuul Runetotem" GiverId="52838" X="4418.696" Y="-2080.762" Z="1210.32" />
+			</If>
+			
+			<If Condition="((HasQuest(29202)) &amp;&amp; (IsQuestCompleted(29202)))" >
+				<!-- After completing the Firelands Turnin -->
+				<CustomBehavior File="FlyTo" DestName="Turnin Quest" X="4427.619" Y="-2098.229" Z="1205.72" />
+		<TurnIn QuestName="The Fate of Runetotem" QuestId="29202" TurnInName="Dorda'en Nightweaver" TurnInId="52986" />
+			</If>
+			
+			<If Condition="(((HasQuest(29181)) || (HasQuest(29214))) &amp;&amp; (GetCurrencyAmount(416) &gt;= 150))" >
+				<CustomBehavior File="UserDialog" AllowBotStop="True" SoundCue="Exclamation" SoundCueInterval="1" 
+				Text="I noticed you have 150 tokens - please go and turn in your quest (In Hyjal)\n\nI went with the Shadow Wardens and I'll be developing that profile first" />
+			</If>
+			
+			<If Condition="HasQuestAvailable(52669)" >
+			<!--
+			<If Condition="(IsQuestCompleted(29214)) &amp;&amp; ((!HasQuest(29215)) &amp;&amp; (!IsQuestCompleted(29215)))" >
+				<CustomBehavior File="FlyTo" DestName="Pickup Quest" X="4426.363" Y="-2084.204" Z="1209.685" />	
+			</If>
+			-->
+		<PickUp QuestName="The Hunt Begins" QuestId="29215" GiverName="Matoclaw" GiverId="52669" />
+			</If>
+			
+			
+			
+			
+			<If Condition="(IsQuestCompleted(29201))" >
+			 <If Condition="Me.ZoneId == 616" >
+				<CustomBehavior File="FlyTo" DestName="Firelands" X="4618.406" Y="-2093.736" Z="1238.793" />
+				<CustomBehavior File="ForcedDismount" />
+				<CustomBehavior File="InteractWith" MobId="208900" ObjectType="Gameobject" WaitTime="10000" X="4605.788" Y="-2095.764" Z="1238.9" />
+	<CustomBehavior File="LoadProfile" ProfileName="[Fly][N - Rep Quest] Molten Front Firelands Dailies [Kick]" /> 
+			 </If>
+			 
+			</If>
+			<If Condition="(HasQuest(29200))" >
+	<CustomBehavior File="LoadProfile" ProfileName="[Fly][N - Quest] Hyjal to Firelands Quests [Kick]" /> 
+			</If>
+				
+			
+			
+	<CustomBehavior File="UserDialog" AllowBotStop="True" SoundCue="Exclamation" SoundCueInterval="1" Text="End of Line!\n\nYes, I fight for the users!" />
+		<!--
+		-->
+
+	
+	
+	
+	</QuestOrder>
+
+</HBProfile>

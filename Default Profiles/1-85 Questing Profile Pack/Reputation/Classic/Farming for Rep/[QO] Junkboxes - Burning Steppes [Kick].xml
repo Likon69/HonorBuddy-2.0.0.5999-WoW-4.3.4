@@ -1,0 +1,66 @@
+﻿<HBProfile>
+	<Name>[QO] Heavy Junkboxes [Kick]</Name>
+   
+	<MinLevel>1</MinLevel>
+	<MaxLevel>86</MaxLevel>
+   
+	<MinDurability>0.2</MinDurability>
+	<MinFreeBagSlots>2</MinFreeBagSlots>
+	
+	<MailGrey>False</MailGrey>
+	<MailWhite>True</MailWhite>
+	<MailGreen>True</MailGreen>
+	<MailBlue>True</MailBlue>
+	<MailPurple>True</MailPurple>
+   
+	<SellGrey>True</SellGrey>
+	<SellWhite>False</SellWhite>
+	<SellGreen>False</SellGreen>
+	<SellBlue>False</SellBlue>
+	<SellPurple>False</SellPurple>
+   
+	<TargetElites>True</TargetElites>
+
+	<AvoidMobs>
+	</AvoidMobs>
+	<Blackspots>
+	</Blackspots>
+
+	<Mailboxes>
+
+	</Mailboxes>
+ 
+	<Vendors>
+
+	</Vendors>
+
+	<!-- flyto <Hotspot X="-9270.661" Y="-2215.524" Z="64.05799" />
+	<Vendor Name="Kara Adams" Entry="793" Type="Repair" X="-9247.732" Y="-2234.377" Z="63.93372" />
+	<Hotspot X="-9252.326" Y="-2145.735" Z="64.04883" />
+	
+	fly back to farming area
+	<Hotspot X="-7804.442" Y="-1535.787" Z="133.037" />
+	-->
+ 
+ 
+	<QuestOrder>
+	
+		<CustomBehavior File="UserSettings" LootMobs="False" PullDistance="1" TrainNewSkills="False" LearnFlightPaths="False" KillBetweenHotspots="True" LogoutForInactivity="False" />
+	
+						<SetGrindArea>
+							<GrindArea>
+								<Factions></Factions>
+								<Hotspots>
+									<Hotspot X="-7804.442" Y="-1535.787" Z="133.037" />
+									<Hotspot X="-7770.809" Y="-1598.544" Z="133.3461" />
+									<Hotspot X="-7725.068" Y="-1556.047" Z="133.2716" />
+									<Hotspot X="-7804.442" Y="-1535.787" Z="133.037" />
+								</Hotspots>
+							</GrindArea>
+						</SetGrindArea>
+					<GrindTo Level="86" GoalText="Farming Heavy Junkboxes" />
+
+	</QuestOrder>
+	
+
+</HBProfile>

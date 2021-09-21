@@ -1,0 +1,55 @@
+<HBProfile>
+	<Name>Stromgarde Keep</Name>
+	
+	<Blackspots>
+		<Blackspot X="-1584.592" Y="-1814.036" Z="69.34252" Radius="3.365977" />
+		<Blackspot X="-1620.659" Y="-1811.185" Z="80.46535" Radius="4.03258" />
+		<Blackspot X="-1620.555" Y="-1796.434" Z="80.40482" Radius="4.3579" />
+		<Blackspot X="-1604.033" Y="-1914" Z="67.92047" Radius="4.039231" />
+		<Blackspot X="-1580.93" Y="-1815.448" Z="68.31144" Radius="7.603116" />
+		<Blackspot X="-1583.778" Y="-1858.029" Z="68.35046" Radius="4.998808" />
+		<Blackspot X="-1584.585" Y="-1818.2" Z="69.32816" Radius="7.418295" />
+		<Blackspot X="-1589.28" Y="-1869.376" Z="68.139" Radius="7.482079" />
+		<Blackspot X="-1681.069" Y="-1892.361" Z="79.76506" Radius="7.281698" />
+		<Blackspot X="-1629.778" Y="-1920.3" Z="73.49431" Radius="7.004163" />
+		<Blackspot X="-1710.079" Y="-1825.899" Z="108.3372" Radius="2.286655" />
+    </Blackspots>
+	
+	<Vendors>
+		<Vendor Name="Jannos Ironwill" Entry="1471" Type="Repair" X="-1257.819" Y="-2546.45" Z="21.45417" /> <!-- Refuge Point -->
+	</Vendors>
+	
+  
+  <QuestOrder>
+	  <CustomBehavior File="UserDialog"  AllowBotStop="True" SoundCue="Asterisk" ExpiryTime="5" ExpiryAction="InputEnabled_Continue" UseMount="False" SoundCueInterval="1" Text="This profile is not meant to be AFK'd for a long period of time" />
+				<CustomBehavior File="UserSettings" LootMobs="False" PullDistance="20" TrainNewSkills="False" LearnFlightPaths="False" />
+	
+			<If Condition="Me.ZoneId != 45" >
+		<CustomBehavior File="FlyTo" X="-1567.931" Y="-1805.492" Z="67.17797" />
+			</If>
+		
+				<SetGrindArea>
+					<GrindArea>
+						<Factions>16 87 190</Factions>
+						<Hotspots>
+							<Hotspot X="-1567.931" Y="-1805.492" Z="67.17797" />
+							<Hotspot X="-1600.698" Y="-1926.706" Z="67.95086" />
+							<Hotspot X="-1635.056" Y="-1933.108" Z="68.9612" />
+							<Hotspot X="-1598.285" Y="-1921.231" Z="67.52428" />
+							<Hotspot X="-1568.981" Y="-1804.435" Z="67.16963" />
+							<Hotspot X="-1640.38" Y="-1790.085" Z="80.45792" />
+							<Hotspot X="-1645.123" Y="-1841.475" Z="79.13651" />
+							<Hotspot X="-1651.249" Y="-1868.256" Z="80.22478" />
+							<Hotspot X="-1693.132" Y="-1865.505" Z="80.8624" />
+							<Hotspot X="-1717.28" Y="-1898.68" Z="80.796" />
+							<Hotspot X="-1693.156" Y="-1900.913" Z="80.74549" />
+							<Hotspot X="-1690.923" Y="-1916.487" Z="81.72655" />
+							<Hotspot X="-1567.931" Y="-1805.492" Z="67.17797" />
+						</Hotspots>
+					</GrindArea>
+				</SetGrindArea>
+			<GrindTo Condition="False" GoalText="Ravenholdt Rep" />
+
+  </QuestOrder>
+
+</HBProfile>  

@@ -1,0 +1,748 @@
+<HBProfile xsi:noNamespaceSchemaLocation="../Schemas/EchoSchema.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<!-- Original contribution by EchoTiger -->
+	<Name>Eastern Plaguelands ($ShortHash$)</Name>
+
+	<MinDurability>0.3</MinDurability>
+	<MinFreeBagSlots>3</MinFreeBagSlots>
+
+	<SellGrey>true</SellGrey>
+	<SellWhite>true</SellWhite>
+	<SellGreen>true</SellGreen>
+	<SellBlue>true</SellBlue>
+	<SellPurple>false</SellPurple>
+
+	<MailGrey>false</MailGrey>
+	<MailWhite>true</MailWhite>
+	<MailGreen>true</MailGreen>
+	<MailBlue>true</MailBlue>
+	<MailPurple>true</MailPurple>
+
+	<TargetElites>true</TargetElites>
+
+	<AvoidMobs>
+	</AvoidMobs>
+
+	<Mailboxes>
+	</Mailboxes>
+
+	<Vendors>
+	</Vendors>
+
+	<Blackspots>
+		<Blackspot X="2530.93" Y="-2411.226" Z="71.07332" Radius="1.381874" /> <!-- Bashee Bell in bad spot -->
+		<Blackspot X="3204.936" Y="-4557.108" Z="107.7769" Radius="4.099672" /> <!-- Scourge War Machine in Siege Vise -->
+		<Blackspot X="3238.641" Y="-4556.789" Z="106.4739" Radius="4.227232" /> <!-- Scourge War Machine in Siege Vise -->
+		<Blackspot X="2803.787" Y="-2341.369" Z="42.96603" Radius="11.67397" /> <!-- Banshee Bells underwater -->
+		<Blackspot X="2589.5" Y="-2400.24" Z="46.6971" Radius="1" /> <!-- Banshee Bells underwater -->
+		<Blackspot X="1764.506" Y="-5201.195" Z="108.7765" Radius="6.655759" /> <!-- Ballista up on walls in Tyr's Hand -->
+		<Blackspot X="3492.421" Y="-4974.963" Z="183.9424" Radius="1" /> <!-- Mossflayer Shadowhunter on the side of the temple in Zul'Mashar -->
+		<Blackspot X="3057.309" Y="-3454.481" Z="147.1203" Radius="15" /> <!-- Bad mushroom spot in Plaguewood -->
+
+	</Blackspots>
+
+	<Blacklist>
+		<Mob Name="Garginox" Id="45681" Flags="Pull" />
+		<Mob Name="Mossflayer Abducter" Id="47064" Flags="Combat" /> <!-- Constant spawning 'attack' mob attacking Crown Guard Tower -->
+	</Blacklist>
+
+	<QuestOrder IgnoreCheckpoints="false" >
+		<!-- Check function status -->
+		<Code File="RunCode" Type="Definition">
+			<![CDATA[
+			private static bool? profileFunctionsEnabled => (bool?)AppDomain.CurrentDomain.GetData("QuestingProfiles_FunctionsEnabled");
+			private static bool IsStoreProfile(string path) => path.StartsWith("store://");
+			private static string Slashify(string path) => IsStoreProfile(path) ? path.Replace(@"\", "/") : path.Replace("/", @"\");
+
+			public __CompiledBatchClass__()
+			{
+				ActivateFunctions();
+			}
+
+			private static void ActivateFunctions()
+			{
+				if (profileFunctionsEnabled == null || profileFunctionsEnabled == false)
+				{
+					Bots.Professionbuddy.PBLog.Log(Colors.MediumPurple, "[Profile Message!]: ", Colors.Yellow, "Please stand by as the functions are being activated!");
+					LoadProfile(@"..\..\Functions\Activate Functions.xml");
+				}
+			}
+
+			private static void LoadProfile(string path)
+			{
+				var profile = GetNewPath(path);
+				if (!IsStoreProfile(profile) && !File.Exists(profile))
+				{
+					Bots.Professionbuddy.PBLog.Log(Colors.MediumPurple, "[Profile Message!]: ", Colors.Yellow, "Profile does not exist.\n" + profile);
+					return;
+				}
+
+				Bots.Professionbuddy.PBLog.Log(Colors.MediumPurple, "[Profile Message!]: ", Colors.Yellow, "Loading: " + profile);
+				ProfileManager.LoadNew(profile, false);
+			}
+
+			private static string GetNewPath(string path)
+			{
+				if (IsStoreProfile(path))
+					return Slashify(path);
+
+				var currentProfile = ProfileManager.XmlLocation;
+				if (IsStoreProfile(currentProfile))
+					return Slashify(currentProfile + "/../" + path);
+
+				var absolutePath = Path.Combine(Path.GetDirectoryName(currentProfile), path);
+				absolutePath = Path.GetFullPath(absolutePath);
+				var canonicalPath = new Uri(absolutePath).LocalPath;
+				return Slashify(canonicalPath);
+			}]]>
+		</Code>
+		<Code File="RunCode" Code="ActivateFunctions();" />
+		<!-- END Check function status -->
+
+		<If Condition="Me.IsAlliance" >
+			<Code File="LoadProfile" ProfileName="..\..\Questing Autoloader.xml" />
+		</If>
+		<!-- RunCode Methods -->
+			<Code File="RunCode">
+			<![CDATA[
+				Bots.Professionbuddy.PBLog.Log(System.Windows.Media.Colors.MediumPurple, "> [Profile Initialization Status] ", System.Windows.Media.Colors.CornflowerBlue, "\n     Auto-Looting	:: Enabled\n     Looting	:: Enabled\n     Game Addons	:: Disabled");
+				Lua.DoString("SetCVar('AutoLootDefault', 1);");
+				Lua.DoString("SetCVar('autoDismountFlying', 1);");
+				CharacterSettings.Instance.LootMobs = true;
+				CharacterSettings.Instance.Save();
+				Logging.Write(System.Windows.Media.Colors.MediumPurple, "> [Ready to bot!]");
+			]]>
+			</Code>
+			<Code File="RunCode" Type="Definition">
+				<![CDATA[
+						bool DoQuest(params uint[] questIds)
+						{
+							foreach (var questId in questIds)
+							{
+								if (HasQuest(questId) && !IsQuestCompleted(questId)) return true;
+							}
+							return false;
+						}
+						bool NeedsQuest(params uint[] questIds)
+						{
+							foreach (var questId in questIds)
+							{
+								if (!HasQuest(questId) && !IsQuestCompleted(questId)) return true;
+							}
+							return false;
+						}
+						bool NeedsBreadcrumbQuest(params uint[] questIds)
+						{
+							foreach (var questId in questIds)
+							{
+								if (IsQuestCompleted(questId)) return false;
+							}
+							return true;
+						}
+						bool QuestDone(params uint[] questIds)
+						{
+							foreach (var questId in questIds)
+							{
+								if (HasQuest(questId) && IsQuestCompleted(questId)) return true;
+							}
+							return false;
+						}
+						bool QuestFlaggedCompleted(params uint[] questIds)
+						{
+							foreach (var questId in questIds)
+							{
+								return Lua.GetReturnVal<bool>($"return IsQuestFlaggedCompleted({questId});", 0);
+							}
+							return false;
+						}
+						async Task SkipCutscene(int preWait = 3000, int postWait = 3000)
+						{
+					// Add detection of cutscene here.
+							await Coroutine.Sleep(preWait);
+					// Test and improve the working method.
+							Lua.DoString("MovieFrame:StopMovie(); CinematicFrame_CancelCinematic(); StopCinematic();");
+							await Coroutine.Sleep(postWait);
+						}
+					]]>
+			</Code>
+		<!-- END RunCode Methods -->
+
+
+		<Code File="Hooks\MountHook" state="true" />
+
+		<If Condition="HasQuest(27683)" >
+			<TurnIn QuestName="Into the Woods" QuestId="27683" TurnInName="Fiona" TurnInId="45417" X="1917.929" Y="-2651.883" Z="60.35614" />
+		</If>
+
+		<PickUp QuestName="Gidwin Goldbraids" QuestId="27367" GiverName="Fiona" GiverId="45417" X="1917.929" Y="-2651.883" Z="60.35614" />
+		<PickUp QuestName="Tarenar Sunstrike" QuestId="27370" GiverName="Fiona" GiverId="45417" X="1917.929" Y="-2651.883" Z="60.35614" />
+		<TurnIn QuestName="Gidwin Goldbraids" QuestId="27367" TurnInName="Gidwin Goldbraids" TurnInId="45428" X="2733.717" Y="-2454.716" Z="68.64453" />
+
+		<PickUp QuestName="Just Encased" QuestId="27368" GiverName="Gidwin Goldbraids" GiverId="45428" X="2733.717" Y="-2454.716" Z="68.64453" />
+		<Code File="KillUntilComplete" MobId="8557" QuestId="27368" >
+			<HuntingGrounds>
+				<Hotspot X="2859.622" Y="-2591.376" Z="87.94242" />
+				<Hotspot X="2978.443" Y="-2720.913" Z="99.92875" />
+			</HuntingGrounds>
+		</Code>
+		<TurnIn QuestName="Just Encased" QuestId="27368" TurnInName="Gidwin Goldbraids" TurnInId="45428" X="2736.845" Y="-2455.598" Z="69.14642" />
+
+		<PickUp QuestName="Greasing the Wheel" QuestId="27369" GiverName="Gidwin Goldbraids" GiverId="45431" X="2736.845" Y="-2455.598" Z="69.14642" />
+		<While Condition="DoQuest(27369)" >
+			<Code File="InteractWith" MobId="205423" InteractByLooting="true" CollectionDistance="200" NumOfTimes="10" QuestId="27369" >
+				<HuntingGrounds>
+					<Hotspot X="2713.514" Y="-2433.35" Z="60.91457" />
+					<Hotspot X="2537.142" Y="-2442.409" Z="73.60049" />
+					<Hotspot X="2316.688" Y="-2559.51" Z="72.92865" />
+				</HuntingGrounds>
+			</Code>
+		</While>
+		<TurnIn QuestName="Greasing the Wheel" QuestId="27369" TurnInName="Fiona" TurnInId="45417" X="1916.728" Y="-2652.55" Z="60.88547" />
+
+		<TurnIn QuestName="Tarenar Sunstrike" QuestId="27370" TurnInName="Tarenar Sunstrike" TurnInId="45429" X="1693.686" Y="-3024.162" Z="77.36738" />
+		<PickUp QuestName="What I Do Best" QuestId="27371" GiverName="Tarenar Sunstrike" GiverId="45429" X="1693.686" Y="-3024.162" Z="77.36738" />
+
+		<Code File="KillUntilComplete" MobId="45444" QuestId="27371" X="1570.096" Y="-3005.985" Z="83.14162" />
+
+		<TurnIn QuestName="What I Do Best" QuestId="27371" />
+		<PickUp QuestName="A Gift For Fiona" QuestId="27372" GiverName="Tarenar Sunstrike" GiverId="45429" />
+
+		<While Condition="DoQuest(27372)" >
+			<Code File="KillUntilComplete" MobId="8596" QuestId="27372" >
+				<HuntingGrounds>
+					<Hotspot X="1755.243" Y="-3029.784" Z="77.83002" />
+					<Hotspot X="1902.41" Y="-3025.97" Z="74.96756" />
+					<Hotspot X="1985.801" Y="-2939.832" Z="76.2165" />
+					<Hotspot X="2051.613" Y="-2981.545" Z="85.41569" />
+				</HuntingGrounds>
+			</Code>
+		</While>
+
+		<TurnIn QuestName="A Gift For Fiona" QuestId="27372" TurnInName="Fiona" TurnInId="45417" X="1916.866" Y="-2656.038" Z="60.99667" />
+
+		<PickUp QuestName="Onward, to Light's Hope Chapel" QuestId="27373" GiverName="Fiona" GiverId="45417" X="1916.866" Y="-2656.038" Z="60.99667" />
+		<While Condition="DoQuest(27373)" >
+			<Code File="InteractWith" MobId="45400" NonCompeteDistance="0" QuestId="27373" X="1915.547" Y="-2643.504" Z="59.67756" />
+			<Code File="Misc\RunLua" WaitTime="1000" Lua="GossipTitleButton1:Click();" />
+			<Code File="Misc\RunLua" Lua="QuestFrameCompleteQuestButton:Click();" />
+			<Code File="InteractWith" MobId="45400" NonCompeteDistance="0" GossipOptions="1" QuestId="27373" QuestObjectiveIndex="1" X="1915.547" Y="-2643.504" Z="59.67756" TerminateWhen="Me.IsOnTransport" />
+			<Code File="WaitTimer" WaitTime="130000" TerminateWhen="!Me.IsOnTransport" />
+		</While>
+		<TurnIn QuestName="Onward, to Light's Hope Chapel" QuestId="27373" TurnInName="Fiona" TurnInId="45417" X="1847.453" Y="-3690.351" Z="158.6643" />
+
+		<Code File="Hooks\DoWhen" ActivityName="Open_HiddenStash" UseWhen="HasItem(61387)" >
+			<While Condition="HasItem(61387)" >
+				<Code File="UseItem" ItemId="61387" TerminateWhen="!HasItem(61387)" />
+				<Code File="RunCode" Code="LootFrame.Instance.LootAll();" />
+				<Code File="WaitTimer" WaitTime="1000" />
+			</While>
+		</Code>
+
+		<PickUp QuestName="Zaeldarr the Outcast" QuestId="27432" GiverName="Urk Gagbaz" GiverId="45500" X="1871.443" Y="-3697.52" Z="158.5872" />
+		<PickUp QuestName="Traveling Companions" QuestId="27381" GiverName="Tarenar Sunstrike" GiverId="45429" X="1855.715" Y="-3707.76" Z="160.5855" />
+		<PickUp QuestName="Little Pamela" QuestId="27383" GiverName="Carlin Redpath" GiverId="11063" X="1853.573" Y="-3720.262" Z="160.5868" />
+		<PickUp QuestName="Rough Roads" QuestId="27382" GiverName="Argus Highbeacon" GiverId="45451" X="1856.77" Y="-3723.123" Z="195.6798" />
+
+		<While Condition="DoQuest(27381)" >
+			<Code File="InteractWith" MobId="45451" GossipOptions="1" QuestId="27381" X="1856.77" Y="-3723.123" Z="195.6798" />
+		</While>
+
+		<TurnIn QuestName="Traveling Companions" QuestId="27381" TurnInName="Tarenar Sunstrike" TurnInId="45429" X="1854.948" Y="-3707.171" Z="160.5854" />
+		<TurnIn QuestName="Little Pamela" QuestId="27383" TurnInName="Pamela Redpath" TurnInId="10926" X="1451.364" Y="-3599.633" Z="85.70431" />
+		<RecheckCheckpoints />
+		<PickUp QuestName="Pamela's Doll" QuestId="27384" GiverName="Pamela Redpath" GiverId="10926" X="1451.364" Y="-3599.633" Z="85.70431" />
+		<PickUp QuestName="I'm Not Supposed to Tell You This" QuestId="27392" GiverName="Pamela Redpath" GiverId="10926" X="1451.364" Y="-3599.633" Z="85.70431" />
+
+		<While Condition="DoQuest(27384)" >
+			<Code File="InteractWith" InteractByLooting="true" NonCompeteDistance="0" NumOfTimes="3" TerminateWhen="HasItem(12886) &amp;&amp; HasItem(12887) &amp;&amp; HasItem(12888)" >
+				<HuntingGrounds>
+					<Hotspot X="1411.691" Y="-3719.976" Z="78.17376" />
+					<Hotspot X="1470.399" Y="-3721.009" Z="80.51619" />
+					<Hotspot X="1477.118" Y="-3716.008" Z="80.51584" />
+				</HuntingGrounds>
+				<PursuitList>
+					<PursueGameObject Id="176116" PursueWhen="!HasItem(12886)" />
+					<PursueGameObject Id="176142" PursueWhen="!HasItem(12887)" />
+					<PursueGameObject Id="176143" PursueWhen="!HasItem(12888)" />
+				</PursuitList>
+			</Code>
+			<Code File="UseItem" ItemId="12886" />
+		</While>
+
+		<Code File="KillUntilComplete" MobId="45450" QuestId="27392" X="1458.685" Y="-3893.415" Z="131.129" />
+
+		<TurnIn QuestName="Pamela's Doll" QuestId="27384" TurnInName="Pamela Redpath" TurnInId="10926" X="1454.302" Y="-3596.256" Z="86.95145" />
+		<TurnIn QuestName="I'm Not Supposed to Tell You This" QuestId="27392" TurnInName="Pamela Redpath" TurnInId="10926" X="1454.302" Y="-3596.256" Z="86.95145" />
+		<PickUp QuestName="Uncle Carlin" QuestId="27385" GiverName="Pamela Redpath" GiverId="10926" X="1454.302" Y="-3596.256" Z="86.95145" />
+
+		<Code File="KillUntilComplete" MobId="12250" QuestId="27432" X="1599.389" Y="-3248.921" Z="66.8298" />
+
+		<TurnIn QuestName="Zaeldarr the Outcast" QuestId="27432" TurnInName="Urk Gagbaz" TurnInId="45500" X="1871.381" Y="-3696.552" Z="158.2587" />
+		<TurnIn QuestName="Uncle Carlin" QuestId="27385" TurnInName="Carlin Redpath" TurnInId="11063" X="1853.145" Y="-3719.648" Z="160.5867" />
+		<PickUp QuestName="A Strange Historian" QuestId="27386" GiverName="Carlin Redpath" GiverId="11063" X="1853.145" Y="-3719.648" Z="160.5867" />
+		<TurnIn QuestName="A Strange Historian" QuestId="27386" TurnInName="Chromie" TurnInId="10667" X="1875.22" Y="-3706.758" Z="159.3511" />
+		<RecheckCheckpoints />
+		<PickUp QuestName="Villains of Darrowshire" QuestId="27387" GiverName="Chromie" GiverId="10667" X="1875.583" Y="-3707.543" Z="159.4513" />
+		<PickUp QuestName="Heroes of Darrowshire" QuestId="27388" GiverName="Chromie" GiverId="10667" X="1875.583" Y="-3707.543" Z="159.4513" />
+		<PickUp QuestName="Marauders of Darrowshire" QuestId="27389" GiverName="Chromie" GiverId="10667" X="1875.583" Y="-3707.543" Z="159.4513" />
+		<PickUp QuestName="Cenarion Tenacity" QuestId="27544" GiverName="Urk Gagbaz" GiverId="45500" X="1872.501" Y="-3697.656" Z="158.5725" />
+
+		<Code File="InteractWith" MobId="11063" GossipOptions="1" NonCompeteDistance="0" QuestId="27388" QuestObjectiveIndex="1" X="1853.557" Y="-3719.805" Z="160.5872" />
+		<Code File="InteractWith" MobId="176209" NonCompeteDistance="0" QuestId="27387" QuestObjectiveIndex="2" X="1759.41" Y="-3890.4" Z="130.023" />
+
+		<While Condition="DoQuest(27382)" >
+			<Code File="KillUntilComplete" MobId="8600" QuestId="27382" >
+				<HuntingGrounds>
+					<Hotspot X="1823.743" Y="-3884.13" Z="134.1257" />
+					<Hotspot X="1711.906" Y="-3914.647" Z="129.3932" />
+					<Hotspot X="1666.716" Y="-3894.999" Z="134.0261" />
+				</HuntingGrounds>
+			</Code>
+		</While>
+
+		<TurnIn QuestName="Rough Roads" QuestId="27382" TurnInName="Argus Highbeacon" TurnInId="45451" X="1851.09" Y="-3719.916" Z="195.68" />
+
+		<Code File="InteractWith" MobId="176207" InteractByLooting="true" QuestId="27388" QuestObjectiveIndex="3" X="1873.125" Y="-3185.455" Z="128.5399" />
+		<Code File="InteractWith" MobId="176206" InteractByLooting="true" QuestId="27388" QuestObjectiveIndex="2" X="1869.665" Y="-3188.027" Z="133.3164" />
+
+		<TurnIn QuestName="Heroes of Darrowshire" QuestId="27388" TurnInName="Chromie" TurnInId="10667" X="1875.944" Y="-3706.472" Z="159.3812" />
+
+		<Code File="InteractWith" MobId="176208" InteractByLooting="true" QuestId="27387" QuestObjectiveIndex="1" X="2085.1" Y="-3792.66" Z="133.376" />
+
+		<TurnIn QuestName="Cenarion Tenacity" QuestId="27544" TurnInName="Rayne" TurnInId="16135" X="2175.383" Y="-3502.298" Z="125.453" />
+		<PickUp QuestName="Postponing the Inevitable" QuestId="27420" GiverName="Rayne" GiverId="16135" X="2175.383" Y="-3502.298" Z="125.453" />
+		<PickUp QuestName="Amidst Death, Life" QuestId="27421" GiverName="Rayne" GiverId="16135" X="2175.383" Y="-3502.298" Z="125.453" />
+
+		<While Condition="DoQuest(27421)" >
+			<While Condition="!IsObjectiveComplete(1, 27421)" >
+				<MoveTo Percision="0" X="2407.098" Y="-3800.501" Z="185.4719" />
+				<Code File="UseItem" ItemId="61036" QuestId="27421" QuestObjectiveIndex="1" />
+			</While>
+			<While Condition="!IsObjectiveComplete(2, 27421)" >
+				<MoveTo Percision="0" X="2509.618" Y="-3645.599" Z="186.61" />
+				<Code File="UseItem" ItemId="61036" QuestId="27421" QuestObjectiveIndex="2" />
+			</While>
+			<While Condition="!IsObjectiveComplete(3, 27421)" >
+				<MoveTo Percision="0" X="2562.591" Y="-3809.716" Z="185.0584" />
+				<Code File="UseItem" ItemId="61036" QuestId="27421" QuestObjectiveIndex="3" />
+			</While>
+		</While>
+
+		<While Condition="DoQuest(27420)" >
+			<Code File="KillUntilComplete" MobIds="8550, 8546" QuestId="27420" TerminateWhen="GetItemCount(61037) &gt;= 3" >
+				<HuntingGrounds>
+					<Hotspot X="2384.613" Y="-3752.978" Z="179.9534" />
+					<Hotspot X="2480.716" Y="-3699.633" Z="178.4796" />
+					<Hotspot X="2487.992" Y="-3817.598" Z="179.879" />
+					<Hotspot X="2531.17" Y="-3719.862" Z="179.0297" />
+				</HuntingGrounds>
+			</Code>
+			<MoveTo X="2502.546" Y="-3728.153" Z="180.5989" />
+			<Code File="InteractWith" MobId="45475" InteractByUsingItemId="61038" NumOfTimes="9" IgnoreLoSToTarget="false" Range="120" CollectionDistance="300" QuestId="27420" X="2502.546" Y="-3728.153" Z="180.5989" TerminateWhen="!HasItem(61037)" />
+		</While>
+
+		<While Condition="DoQuest(27389)" >
+			<Code File="KillUntilComplete" MobId="8529" QuestId="27389" TerminateWhen="HasItem(13157)" >
+				<HuntingGrounds>
+					<Hotspot X="2453.968" Y="-3706.418" Z="178.8102" />
+					<Hotspot X="2430.034" Y="-3681.931" Z="178.9254" />
+					<Hotspot X="2427.738" Y="-3621.949" Z="179.1481" />
+				</HuntingGrounds>
+			</Code>
+
+			<Code File="UseItem" ItemId="13156" QuestId="27389" TerminateWhen="!HasItem(13157)" />
+		</While>
+
+		<TurnIn QuestName="Postponing the Inevitable" QuestId="27420" TurnInName="Rayne" TurnInId="16135" X="2173.99" Y="-3503.079" Z="125.5674" />
+		<TurnIn QuestName="Amidst Death, Life" QuestId="27421" TurnInName="Rayne" TurnInId="16135" X="2173.99" Y="-3503.079" Z="125.5674" />
+		<TurnIn QuestName="Villains of Darrowshire" QuestId="27387" TurnInName="Chromie" TurnInId="10667" X="1875.916" Y="-3706.479" Z="159.3793" />
+		<TurnIn QuestName="Marauders of Darrowshire" QuestId="27389" TurnInName="Chromie" TurnInId="10667" X="1875.916" Y="-3706.479" Z="159.3793" />
+
+		<Code File="Hooks\DoWhen" ActivityName="Open_HiddenStash" Command="Remove" />
+
+		<RecheckCheckpoints />
+
+		<PickUp QuestName="The Trek Continues" QuestId="27448" GiverName="Fiona" GiverId="45417" X="1846.371" Y="-3690.872" Z="158.6067" />
+		<While Condition="DoQuest(27448)" >
+			<Code File="InteractWith" MobId="45400" NonCompeteDistance="0" QuestId="27448" X="1915.547" Y="-2643.504" Z="59.67756" />
+			<Code File="Misc\RunLua" WaitTime="1000" Lua="GossipTitleButton4:Click();" />
+			<Code File="Misc\RunLua" Lua="QuestFrameCompleteQuestButton:Click();" />
+
+			<Code File="InteractWith" MobId="45400" NonCompeteDistance="0" GossipOptions="1" QuestId="27448" QuestObjectiveIndex="1" X="1841.215" Y="-3697.077" Z="158.631" TerminateWhen="Me.IsOnTransport" />
+			<Code File="WaitTimer" WaitTime="130000" TerminateWhen="!Me.IsOnTransport" />
+		</While>
+		<TurnIn QuestName="The Trek Continues" QuestId="27448" TurnInName="Fiona" TurnInId="45417" X="2274.984" Y="-4418.989" Z="111.7301" />
+
+		<PickUp QuestName="Boys Will Be Boys" QuestId="27455" GiverName="Fiona" GiverId="45417" X="2274.984" Y="-4418.989" Z="111.7301" />
+		<PickUp QuestName="To Kill With Purpose" QuestId="27451" GiverName="Betina Bigglezink" GiverId="11035" X="2236.679" Y="-4429.175" Z="111.7304" />
+		<PickUp QuestName="Dark Garb" QuestId="27452" GiverName="Betina Bigglezink" GiverId="11035" X="2236.679" Y="-4429.175" Z="111.7304" />
+
+		<PickUp QuestName="Honor and Strength" QuestId="27449" GiverName="Vex'tul" GiverId="45574" X="2319.465" Y="-4416.514" Z="95.37148" />
+		<While Condition="DoQuest(27449)" >
+			<Code File="InteractWith" MobId="45574" NonCompeteDistance="0" GossipOptions="1" QuestId="27449" X="2320.089" Y="-4412.571" Z="95.92788" TerminateWhen="Unit(45579) != null" />
+			<Code File="KillUntilComplete" MobId="45579" QuestId="27449" TerminateWhen="Unit(45579) == null" />
+		</While>
+		<TurnIn QuestName="Honor and Strength" QuestId="27449" TurnInName="Vex'tul" TurnInId="45574" X="2319.465" Y="-4416.514" Z="95.37148" />
+
+		<While Condition="DoQuest(27451)" >
+			<Code File="KillUntilComplete" MobIds="8531, 8541, 8538, 8526, 8525" QuestId="27451" TerminateWhen="GetItemCount(15447) &gt;= 7" >
+				<HuntingGrounds>
+					<Hotspot X="2012.765" Y="-4475.803" Z="73.62327" />
+					<Hotspot X="2077.515" Y="-4546.384" Z="73.62379" />
+				</HuntingGrounds>
+			</Code>
+
+			<Code File="UseItem" ItemId="15454" QuestId="27451" /> 
+		</While>
+		<TurnIn QuestName="To Kill With Purpose" QuestId="27451" />
+
+		<Code File="KillUntilComplete" MobId="8551" QuestId="27452" X="2035.253" Y="-4500.166" Z="73.62351" />
+		<TurnIn QuestName="Dark Garb" QuestId="27452" />
+
+		<If Condition="HasQuest(27453)" >
+			<!-- <PickUp QuestName="Catalysm" QuestId="27453" GiverName="Betina Bigglezink" GiverId="11035" /> -->
+			<Code File="AbandonQuest" QuestId="27453" />
+		</If>
+
+		<TurnIn QuestName="Boys Will Be Boys" QuestId="27455" TurnInName="Gidwin Goldbraids" TurnInId="45431" X="2270.435" Y="-5282.271" Z="81.75151" />
+		<PickUp QuestName="A Boyhood Dream" QuestId="27463" GiverName="Gidwin Goldbraids" GiverId="45431" X="2270.435" Y="-5282.271" Z="81.75151" />
+		<PickUp QuestName="Gathering Some Grub(s)" QuestId="27456" GiverName="Rimblat Earthshatter" GiverId="16134" X="2307.357" Y="-5262.651" Z="82.45673" />
+		<PickUp QuestName="Smokey and the Bandage" QuestId="27458" GiverName="Smokey LaRue" GiverId="11033" X="2265.56" Y="-5305.974" Z="82.16471" />
+		<TurnIn QuestName="A Boyhood Dream" QuestId="27463" TurnInName="Lord Maxwell Tyrosus" TurnInId="11034" X="2305.21" Y="-5343.695" Z="90.75337" />
+		<PickUp QuestName="Argent Call: The Trial of the Crypt" QuestId="27464" GiverName="Lord Maxwell Tyrosus" GiverId="11034" X="2303.68" Y="-5342.221" Z="90.73402" />
+
+		<Code File="SetHearthstone" MobId="16256" AreaId="2268" X="2301.101" Y="-5348.604" Z="90.75359" />
+
+		<PickUp QuestName="The Brotherhood of Light" QuestId="27459" GiverName="Leonid Barthalomew the Revered" GiverId="11036" X="2303.986" Y="-5335.618" Z="90.75214" />
+		<While Condition="DoQuest(27464)" >
+			<Code File="UseItem" ItemId="61309" QuestId="27464" X="2324.756" Y="-5423.919" Z="64.10773" />
+			<Code File="KillUntilComplete" MobId="27464" QuestId="27464" X="2324.756" Y="-5423.919" Z="64.10773" TerminateWhen="Unit(27464) == null" />
+		</While>
+		<TurnIn QuestName="Argent Call: The Trial of the Crypt" QuestId="27464" TurnInName="Lord Maxwell Tyrosus" TurnInId="11034" X="2304.717" Y="-5343.25" Z="90.75235" />
+
+		<PickUp QuestName="Argent Call: The Noxious Glade" QuestId="27465" GiverName="Lord Maxwell Tyrosus" GiverId="11034" X="2304.717" Y="-5343.25" Z="90.75235" />
+		<PickUp QuestName="Buried Blades" QuestId="27467" GiverName="Master Craftsman Omarion" GiverId="16365" X="2303.51" Y="-5336.925" Z="90.752" />
+
+		<Code File="KillUntilComplete" MobId="46167" QuestId="27458" X="2486.06" Y="-5179.898" Z="76.11423" />
+
+		<Code File="Hooks\Avoids" AvoidName="Garginox_Avoid" ObjectId="45681" ObjectType="Unit" Radius="15" AvoidWhen="!UNIT.Aggro" />
+
+		<While Condition="DoQuest(27467)" >
+			<Code File="InteractWith" MobId="45695" NumOfTimes="10" CollectionDistance="200" QuestId="27467" >
+				<HuntingGrounds>
+					<Hotspot X="2500.495" Y="-5145.224" Z="76.49217" />
+					<Hotspot X="2684.726" Y="-5351.746" Z="157.7861" />
+					<Hotspot X="2773.027" Y="-5414.655" Z="159.7366" />
+					<Hotspot X="2658.507" Y="-5523.953" Z="159.4527" />
+				</HuntingGrounds>
+			</Code>
+		</While>
+
+		<Code File="KillUntilComplete" TerminateWhen="!DoQuest(27465)" >
+			<HuntingGrounds>
+				<Hotspot X="2796.273" Y="-5430.831" Z="162.485" />
+				<Hotspot X="2680.165" Y="-5360.331" Z="157.1721" />
+				<Hotspot X="2636.279" Y="-5501.762" Z="158.5122" />
+			</HuntingGrounds>
+			<PursuitList>
+				<PursueUnit Id="8528" PursueWhen="!IsObjectiveComplete(1, 27465)" />
+				<PursueUnit Id="8532" PursueWhen="!IsObjectiveComplete(1, 27465)" />
+				<PursueUnit Id="8542" PursueWhen="!IsObjectiveComplete(1, 27465)" />
+				<PursueUnit Id="45692" PursueWhen="!IsObjectiveComplete(2, 27465)" />
+				<PursueUnit Id="45691" PursueWhen="!IsObjectiveComplete(2, 27465)" />
+			</PursuitList>
+		</Code>
+
+		<If Condition="QuestDone(27467) &amp;&amp; Me.HearthstoneAreaId == 2268" >
+			<Code File="UseHearthstone" WaitForCD="false" />
+		</If>
+
+		<TurnIn QuestName="Argent Call: The Noxious Glade" QuestId="27465" TurnInName="Lord Maxwell Tyrosus" TurnInId="11034" X="2304.734" Y="-5345.098" Z="90.75198" />
+		<TurnIn QuestName="Buried Blades" QuestId="27467" TurnInName="Master Craftsman Omarion" TurnInId="16365" X="2305.111" Y="-5338.468" Z="90.75217" />
+		<PickUp QuestName="Argent Call: Northdale" QuestId="27466" GiverName="Tarenar Sunstrike" GiverId="45729" X="2280.282" Y="-5313.622" Z="87.83975" />
+		<TurnIn QuestName="Smokey and the Bandage" QuestId="27458" TurnInName="Smokey LaRue" TurnInId="11033" X="2265.477" Y="-5307.073" Z="82.16592" />
+		<RecheckCheckpoints />
+
+		<Code File="KillUntilComplete" MobIds="8603, 8605" QuestId="27456" >
+			<HuntingGrounds>
+				<Hotspot X="2070.488" Y="-5186.66" Z="79.91189" />
+				<Hotspot X="1934.71" Y="-5125.461" Z="76.86626" />
+				<Hotspot X="1983.244" Y="-4934.456" Z="76.42874" />
+			</HuntingGrounds>
+		</Code>
+
+		<TurnIn QuestName="The Brotherhood of Light" QuestId="27459" TurnInName="Archmage Angela Dosantos" TurnInId="16116" X="1692.706" Y="-5213.644" Z="74.18649" />
+
+		<PickUp QuestName="Soft Landing" QuestId="27460" GiverName="Archmage Angela Dosantos" GiverId="16116" X="1692.706" Y="-5213.644" Z="74.18649" />
+		<Code File="KillUntilComplete" MobIds="9452, 9447, 9449" QuestId="27460" >
+			<HuntingGrounds>
+				<Hotspot X="1696.574" Y="-5251.834" Z="73.65994" />
+				<Hotspot X="1731.976" Y="-5372.937" Z="78.03329" />
+				<Hotspot X="1654.048" Y="-5425.531" Z="82.53442" />
+			</HuntingGrounds>
+		</Code>
+		<TurnIn QuestName="Soft Landing" QuestId="27460" TurnInName="Crusader's Flare" TurnInId="205875" TurnInType="Object" X="1572.589" Y="-5412.594" Z="74.66956" />
+
+		<PickUp QuestName="To Take the Abbey" QuestId="27461" GiverName="Crusader's Flare" GiverId="205875" PickUpType="Object" X="1572.589" Y="-5412.594" Z="74.66956" />
+		<PickUp QuestName="To Take the Barracks" QuestId="27462" GiverName="Crusader's Flare" GiverId="205875" PickUpType="Object" X="1572.589" Y="-5412.594" Z="74.66956" />
+		<TurnIn QuestName="To Take the Barracks" QuestId="27462" TurnInName="Crusade Commander Korfax" TurnInId="16112" X="1656.876" Y="-5329.48" Z="74.15465" />
+		<PickUp QuestName="Scarlet Salvage" QuestId="27614" GiverName="Crusade Commander Korfax" GiverId="16112" X="1656.876" Y="-5329.48" Z="74.15465" />
+		<PickUp QuestName="The Wrathcaster" QuestId="27615" GiverName="Crusade Commander Korfax" GiverId="16112" X="1656.876" Y="-5329.48" Z="74.15465" />
+		<PickUp QuestName="The Huntsman" QuestId="27616" GiverName="Crusade Commander Korfax" GiverId="16112" X="1656.876" Y="-5329.48" Z="74.15465" />
+		<PickUp QuestName="The Commander" QuestId="27619" GiverName="Crusade Commander Korfax" GiverId="16112" X="1656.876" Y="-5329.48" Z="74.15465" />
+
+		<Code File="InteractWith" MobId="205878" InteractByLooting="true" NonCompeteDistance="0" InteractBlacklistTimeInSeconds="1" QuestId="27614" QuestObjectiveIndex="1" X="1641.072" Y="-5300.982" Z="75.88776" />
+		<Code File="InteractWith" MobId="205879" InteractByLooting="true" NonCompeteDistance="0" InteractBlacklistTimeInSeconds="1" QuestId="27614" QuestObjectiveIndex="2" X="1600.455" Y="-5281" Z="75.88776" />
+		<Code File="InteractWith" MobId="205880" InteractByLooting="true" NonCompeteDistance="0" InteractBlacklistTimeInSeconds="1" QuestId="27614" QuestObjectiveIndex="3" X="1580.889" Y="-5316.914" Z="75.88776" />
+		<Code File="InteractWith" MobId="205881" InteractByLooting="true" NonCompeteDistance="0" InteractBlacklistTimeInSeconds="1" QuestId="27614" QuestObjectiveIndex="4" X="1620.948" Y="-5344.862" Z="75.88776" />
+
+		<Code File="KillUntilComplete" MobId="46093" QuestId="27615" X="1592.848" Y="-5300.306" Z="68.73303" />
+		<Code File="KillUntilComplete" MobId="46092" QuestId="27619" X="1614.726" Y="-5312.178" Z="89.81121" />
+		<Code File="KillUntilComplete" MobId="46094" QuestId="27616" X="1613.549" Y="-5288.99" Z="99.96593" />
+
+		<TurnIn QuestName="Scarlet Salvage" QuestId="27614" TurnInName="Crusade Commander Korfax" TurnInId="16112" X="1656.7" Y="-5326.615" Z="74.41264" />
+		<TurnIn QuestName="The Wrathcaster" QuestId="27615" TurnInName="Crusade Commander Korfax" TurnInId="16112" X="1656.7" Y="-5326.615" Z="74.41264" />
+		<TurnIn QuestName="The Huntsman" QuestId="27616" TurnInName="Crusade Commander Korfax" TurnInId="16112" X="1656.7" Y="-5326.615" Z="74.41264" />
+		<TurnIn QuestName="The Commander" QuestId="27619" TurnInName="Crusade Commander Korfax" TurnInId="16112" X="1656.7" Y="-5326.615" Z="74.41264" />
+		<PickUp QuestName="Argent Upheaval" QuestId="27618" GiverName="Crusade Commander Korfax" GiverId="16112" X="1656.7" Y="-5326.615" Z="74.41264" />
+		<TurnIn QuestName="Argent Upheaval" QuestId="27618" TurnInName="Archmage Angela Dosantos" TurnInId="16116" X="1677.564" Y="-5353.296" Z="73.61473" />
+		<TurnIn QuestName="To Take the Abbey" QuestId="27461" TurnInName="Crusade Commander Eligor Dawnbringer" TurnInId="16115" X="1737.481" Y="-5378.549" Z="80.98283" />
+		<RecheckCheckpoints />
+		<PickUp QuestName="Victory From Within" QuestId="27612" GiverName="Crusade Commander Eligor Dawnbringer" GiverId="16115" X="1677.564" Y="-5353.296" Z="73.61473" />
+		<PickUp QuestName="The Assassin" QuestId="27613" GiverName="Crusade Commander Eligor Dawnbringer" GiverId="16115" X="1677.564" Y="-5353.296" Z="73.61473" />
+
+		<Code File="InteractWith" MobId="205877" NonCompeteDistance="0" InteractBlacklistTimeInSeconds="1" QuestId="27612" QuestObjectiveIndex="2" X="1798.137" Y="-5420.937" Z="89.68306" />
+		<Code File="InteractWith" MobId="205876" NonCompeteDistance="0" InteractBlacklistTimeInSeconds="1" QuestId="27612" QuestObjectiveIndex="1" X="1739.345" Y="-5454.499" Z="82.49226" />
+
+		<Code File="KillUntilComplete" MobId="46095" QuestId="27613" X="1749.087" Y="-5419.094" Z="113.5255" />
+
+		<TurnIn QuestName="Victory From Within" QuestId="27612" TurnInName="Crusade Commander Eligor Dawnbringer" TurnInId="16115" X="1738.415" Y="-5378.614" Z="80.97836" />
+		<TurnIn QuestName="The Assassin" QuestId="27613" TurnInName="Crusade Commander Eligor Dawnbringer" TurnInId="16115" X="1738.415" Y="-5378.614" Z="80.97836" />
+
+		<PickUp QuestName="Befouled No More" QuestId="27617" GiverName="Crusade Commander Eligor Dawnbringer" GiverId="16115" X="1738.415" Y="-5378.614" Z="80.97836" />
+		<TurnIn QuestName="Befouled No More" QuestId="27617" TurnInName="Archmage Angela Dosantos" TurnInId="16116" X="1681.47" Y="-5356.477" Z="73.61178" />
+
+		<PickUp QuestName="Like Rats" QuestId="27620" GiverName="Archmage Angela Dosantos" GiverId="16116" X="1681.47" Y="-5356.477" Z="73.61178" />
+		<Code File="KillUntilComplete" MobId="46096" QuestId="27620" X="1577.372" Y="-5591.06" Z="111.1716" />
+
+		<TurnIn QuestName="Gathering Some Grub(s)" QuestId="27456" TurnInName="Rimblat Earthshatter" TurnInId="16134" X="2306.859" Y="-5264.891" Z="82.77411" />
+		<PickUp QuestName="An Opportune Alliance" QuestId="27457" GiverName="Rimblat Earthshatter" GiverId="16134" X="2306.859" Y="-5264.891" Z="82.77411" />
+		<TurnIn QuestName="Like Rats" QuestId="27620" TurnInName="Leonid Barthalomew the Revered" TurnInId="11036" X="2302.892" Y="-5334.762" Z="90.75256" />
+
+		<PickUp QuestName="Out of the Ziggurat" QuestId="27481" GiverName="Vex'tul" GiverId="45574" X="2592.478" Y="-4770.416" Z="107.3679" />
+
+		<TurnIn QuestName="Argent Call: Northdale" QuestId="27466" TurnInName="Fiona" TurnInId="45417" X="2557.098" Y="-4762.161" Z="105.8324" />
+		<TurnIn QuestName="An Opportune Alliance" QuestId="27457" TurnInName="Fiona" TurnInId="45417" X="2557.098" Y="-4762.161" Z="105.8324" />
+		<RecheckCheckpoints />
+		<PickUp QuestName="Ix'lar the Underlord" QuestId="27487" GiverName="Tarenar Sunstrike" GiverId="45729" X="2540.873" Y="-4765.4" Z="104.5758" />
+		<PickUp QuestName="The Corpulent One" QuestId="27477" GiverName="Gamella Cracklefizz" GiverId="45735" X="2542.463" Y="-4767.598" Z="105.0555" />
+		<PickUp QuestName="Righteous Indignation" QuestId="27479" GiverName="Deacon Andaal" GiverId="45736" X="2535.379" Y="-4748.66" Z="99.18615" />
+
+		<Code File="KillUntilComplete" MobId="45744" QuestId="27487" QuestObjectiveIndex="1" >
+			<HuntingGrounds>
+				<Hotspot X="2750.921" Y="-4832.791" Z="80.37282" />
+				<Hotspot X="2747.638" Y="-4720.551" Z="74.94307" />
+				<Hotspot X="2852.024" Y="-4705.134" Z="90.63764" />
+			</HuntingGrounds>
+		</Code>
+
+		<Code File="KillUntilComplete" MobIds="45743, 8527, 8544, 45744" QuestId="27487" >
+			<HuntingGrounds>
+				<Hotspot X="2750.921" Y="-4832.791" Z="80.37282" />
+				<Hotspot X="2747.638" Y="-4720.551" Z="74.94307" />
+			</HuntingGrounds>
+		</Code>
+
+		<Code File="KillUntilComplete" MobId="11896" QuestId="27477" X="2953.099" Y="-4571.014" Z="73.93397" />
+
+		<Code File="KillUntilComplete" MobId="10822" QuestId="27481" X="3429.793" Y="-4972.688" Z="184.6259" />
+
+		<TurnIn QuestName="Out of the Ziggurat" QuestId="27481" />
+
+		<PickUp QuestName="Into the Flames" QuestId="27482" GiverName="Vex&apos;tul" GiverId="45574" />
+		<While Condition="DoQuest(27482)" >
+			<MoveTo Percision="1" X="3455.789" Y="-4998.041" Z="198.584" />
+			<Code File="UseItem" ItemId="61316" WaitTime="10000" QuestId="27482" />
+		</While>
+		<TurnIn QuestName="Into the Flames" QuestId="27482" />
+
+		<Code File="KillUntilComplete" MobIds="8561, 8560" QuestId="27479" >
+			<HuntingGrounds>
+				<Hotspot X="3361.141" Y="-4952.689" Z="159.5007" />
+				<Hotspot X="3444.249" Y="-4888.29" Z="165.991" />
+			</HuntingGrounds>
+		</Code>
+
+		<If Condition="QuestDone(27479) &amp;&amp; Me.HearthstoneAreaId == 2268" >
+			<Code File="UseHearthstone" WaitForCD="false" />
+		</If>
+
+		<TurnIn QuestName="Righteous Indignation" QuestId="27479" TurnInName="Deacon Andaal" TurnInId="45736" X="2518.217" Y="-4749.133" Z="97.81625" />
+		<TurnIn QuestName="The Corpulent One" QuestId="27477" TurnInName="Gamella Cracklefizz" TurnInId="45735" X="2543.578" Y="-4767.922" Z="105.2451" />
+		<TurnIn QuestName="Ix'lar the Underlord" QuestId="27487" TurnInName="Fiona" TurnInId="45417" X="2554.891" Y="-4763.062" Z="105.7635" />
+		<RecheckCheckpoints />
+
+		<PickUp QuestName="Impatience" QuestId="27488" GiverName="Tarenar Sunstrike" GiverId="45729" X="2543.054" Y="-4767.033" Z="105.0892" />
+		<Code File="InteractWith" MobId="205537" InteractByLooting="true" NonCompeteDistance="0" InteractBlacklistTimeInSeconds="1" PreInteractMountStrategy="Dismount" QuestId="27488" QuestObjectiveIndex="1" X="3045.551" Y="-4926.424" Z="102.6976" />
+		<TurnIn QuestName="Impatience" QuestId="27488" TurnInName="Tarenar Sunstrike" TurnInId="45729" X="2542.367" Y="-4766.226" Z="104.912" />
+
+		<PickUp QuestName="Nobody to Blame but Myself" QuestId="27489" GiverName="Tarenar Sunstrike" GiverId="45729" X="2542.367" Y="-4766.226" Z="104.912" />
+		<While Condition="DoQuest(27489)" >
+			<Code File="InteractWith" MobId="45400" GossipOptions="1" QuestId="27489" X="2559.24" Y="-4771.25" Z="106.0114" />
+			<Code File="WaitTimer" WaitTime="130000" TerminateWhen="!Me.IsOnTransport" />
+		</While>
+		<TurnIn QuestName="Nobody to Blame but Myself" QuestId="27489" TurnInName="Tarenar Sunstrike" TurnInId="45729" X="3160.169" Y="-4321.419" Z="131.5386" />
+
+		<PickUp QuestName="Beat it Out of Them" QuestId="27522" GiverName="Tarenar Sunstrike" GiverId="45729" X="3160.169" Y="-4321.419" Z="131.5386" />
+		<PickUp QuestName="Wretched Hive of Scum and Villainy" QuestId="27521" GiverName="Kirkian Dawnshield" GiverId="45826" X="3177.836" Y="-4305.192" Z="128.5105" />
+
+		<Code File="KillUntilComplete" MobId="17878" QuestId="27522" X="3190.966" Y="-4522.219" Z="109.2059" />
+
+		<Code File="KillUntilComplete" MobIds="8563, 8565, 8564" QuestId="27521" >
+			<HuntingGrounds>
+				<Hotspot X="3188.382" Y="-4201.588" Z="93.79685" />
+				<Hotspot X="3356.368" Y="-4148.123" Z="141.8355" />
+				<Hotspot X="3389.9" Y="-4255.391" Z="157.8937" />
+			</HuntingGrounds>
+		</Code>
+
+		<PickUp QuestName="Duskwing, Oh How I Hate Thee..." QuestId="27523" GiverName="Corpseburner Tim" GiverId="45816" X="3082.47" Y="-4223.098" Z="91.41722" />
+		<While Condition="DoQuest(27523)" >
+			<MoveTo X="2799.248" Y="-4165.632" Z="90.94763" />
+			<Code File="UseItem" ItemId="61334" QuestId="27523" X="2799.248" Y="-4165.632" Z="90.94763" />
+		</While>
+		<TurnIn QuestName="Duskwing, Oh How I Hate Thee..." QuestId="27523" TurnInName="Corpseburner Tim" TurnInId="45816" X="3081.975" Y="-4222.521" Z="91.30255" />
+
+		<TurnIn QuestName="Beat it Out of Them" QuestId="27522" TurnInName="Fiona" TurnInId="45417" X="3160.319" Y="-4323.575" Z="131.8828" />
+		<PickUp QuestName="Blind Fury" QuestId="27524" GiverName="Fiona" GiverId="45417" X="3160.319" Y="-4323.575" Z="131.8828" />
+		<TurnIn QuestName="Wretched Hive of Scum and Villainy" QuestId="27521" TurnInName="Kirkian Dawnshield" TurnInId="45826" X="3178.308" Y="-4306.383" Z="129.3303" />
+		<TurnIn QuestName="Blind Fury" QuestId="27524" TurnInName="Tarenar Sunstrike" TurnInId="45729" X="3134.648" Y="-3394.612" Z="139.9876" />
+		<RecheckCheckpoints />
+		<PickUp QuestName="Guardians of Stratholme" QuestId="27525" GiverName="Tarenar Sunstrike" GiverId="45729" X="3134.648" Y="-3394.612" Z="139.9876" />
+		<!-- <PickUp QuestName="Scourged Mass" QuestId="27528" GiverName="Crusader Kevin Frost" GiverId="45831" X="3141.753" Y="-3401.446" Z="139.7979" /> -->
+		<!-- <PickUp QuestName="Defenders of Darrowshire" QuestId="27529" GiverName="Crusader Kevin Frost" GiverId="45831" X="3141.753" Y="-3401.446" Z="139.7979" /> -->
+		<!-- <PickUp QuestName="Add 'em to the Pile" QuestId="27539" GiverName="Crusader Kevin Frost" GiverId="45831" X="3141.753" Y="-3401.446" Z="139.7979" /> -->
+
+		<While Condition="!IsObjectiveComplete(2, 27525) || (!HasItem(61378) &amp;&amp; NeedsQuest(27551))" >
+			<Code File="InteractWith" MobId="45868" NonCompeteDistance="0" InteractByLooting="true" PreInteractMountStrategy="Dismount" X="3171.142" Y="-3481.694" Z="167.3959" TerminateWhen="IsObjectiveComplete(2, 27525) &amp;&amp; (HasItem(61378) || !NeedsQuest(27551))" /> <!-- QuestId="27525" QuestObjectiveIndex="2" -->
+		</While>
+
+		<If Condition="HasItem(61378)" >
+			<!-- NOTE Custom looting issue -->
+			<PickUp QuestName="The Baroness' Missive" QuestId="27551" GiverName="The Baroness&apos; Missive" GiverId="61378" GiverType="Item" />
+		</If>
+		<If Condition="HasQuest(27551)" >
+			<TurnIn QuestName="The Baroness' Missive" QuestId="27551" TurnInName="Tarenar Sunstrike" TurnInId="45729" X="3133.587" Y="-3397.01" Z="139.7489" />
+		</If>
+
+		<PickUp QuestName="Gidwin's Fate Revealed" QuestId="27526" GiverName="Tarenar Sunstrike" GiverId="45729" X="3133.587" Y="-3397.01" Z="139.7489" />
+		<While Condition="DoQuest(27526)" >
+			<MoveTo X="3000.545" Y="-3458.247" Z="154.4024" />
+			<Code File="WaitTimer" WaitTime="50000" QuestId="27526" />
+		</While>
+		<TurnIn QuestName="Gidwin's Fate Revealed" QuestId="27526" TurnInName="Gidwin Goldbraids" TurnInId="45730" X="3007.342" Y="-3430.562" Z="149.7087" />
+
+		<PickUp QuestName="Journey's End" QuestId="27527" GiverName="Gidwin Goldbraids" GiverId="45730" X="3008.343" Y="-3429.731" Z="149.7082" />
+
+		<Code File="KillUntilComplete" MobId="45867" QuestId="27525" QuestObjectiveIndex="1" X="3161.623" Y="-3299.164" Z="165.1607" />
+
+		<!-- These quests have horrible spawn rates + low mob densities and just isn't worth doing at all.
+		<While Condition="DoQuest(27528)" >
+			<Code File="InteractWith" MobId="45851" NumOfTimes="8" CollectionDistance="200" InteractByUsingItemId="61369" MobState="Dead" QuestId="27528" >
+				<HuntingGrounds>
+					<Hotspot X="3114.569" Y="-3306.17" Z="142.4038" />
+					<Hotspot X="3149.275" Y="-3263.343" Z="157.9848" />
+					<Hotspot X="2939.894" Y="-3284.78" Z="118.34" />
+					<Hotspot X="3010.27" Y="-3230.526" Z="145.8849" />
+					<Hotspot X="3048.871" Y="-3119.792" Z="129.7397" />
+					<Hotspot X="3188.161" Y="-3422.066" Z="165.2679" />
+				</HuntingGrounds>
+			</Code>
+		</While>
+
+		<Code File="KillUntilComplete" TerminateWhen="!DoQuest(27529, 27539)" >
+			<HuntingGrounds>
+				<Hotspot X="3085.363" Y="-3583.455" Z="130.3959" />
+				<Hotspot X="3003.811" Y="-3571.706" Z="133.5462" />
+				<Hotspot X="3178.957" Y="-3556.893" Z="154.4729" />
+				<Hotspot X="3223.562" Y="-3680.197" Z="138.7383" />
+				<Hotspot X="3119.661" Y="-3691.908" Z="133.1983" />
+				<Hotspot X="2899.519" Y="-3622.167" Z="114.8464" />
+				<Hotspot X="2896.714" Y="-3619.213" Z="114.3199" />
+			</HuntingGrounds>
+			<PursuitList>
+				<PursueUnit Id="8530" PursueWhen="DoQuest(27539)" />
+				<PursueUnit Id="8524" PursueWhen="DoQuest(27539)" />
+				<PursueUnit Id="8523" PursueWhen="DoQuest(27539)" />
+			</PursuitList>
+		</Code> -->
+
+		<TurnIn QuestName="Guardians of Stratholme" QuestId="27525" TurnInName="Tarenar Sunstrike" TurnInId="45729" X="3005.494" Y="-3440.17" Z="149.7096" />
+
+		<PickUp QuestName="Counter-Plague Research" QuestId="27531" GiverName="Argent Apothecary Judkins" GiverId="45828" X="2956.69" Y="-3006.917" Z="126.9712" />
+		<PickUp QuestName="Just a Little Touched" QuestId="27535" GiverName="Argent Apothecary Judkins" GiverId="45828" X="2956.69" Y="-3006.917" Z="126.9712" />
+
+		<Code File="InteractWith" MobId="205558" InteractByLooting="true" NonCompeteDistance="0" QuestId="27531" QuestObjectiveIndex="3" X="2774.823" Y="-3293.865" Z="96.45471" />
+
+		<While Condition="DoQuest(27531)" >
+			<Code File="InteractWith" InteractByLooting="true" NumOfTimes="25" CollectionDistance="200" QuestId="27531"  >
+				<HuntingGrounds>
+					<Hotspot X="2794.176" Y="-3288.227" Z="96.77902" />
+					<Hotspot X="2933.076" Y="-3323.273" Z="118.378" />
+					<Hotspot X="3053.334" Y="-3302.405" Z="143.7995" />
+					<Hotspot X="3169.651" Y="-3239.368" Z="166.0742" />
+				</HuntingGrounds>
+				<PursuitList>
+					<PursueObject Id="205560" PursueWhen="!IsObjectiveComplete(2, 27531)" />
+					<PursueObject Id="205559" PursueWhen="!IsObjectiveComplete(1, 27531)" />
+				</PursuitList>
+			</Code>
+		</While>
+
+		<TurnIn QuestName="Counter-Plague Research" QuestId="27531" TurnInName="Argent Apothecary Judkins" TurnInId="45828" X="2956.594" Y="-3007.408" Z="126.969" />
+		<TurnIn QuestName="Just a Little Touched" QuestId="27535" TurnInName="Augustus the Touched" TurnInId="12384" X="2932.682" Y="-2745.376" Z="109.6161" />
+		<RecheckCheckpoints />
+
+		<PickUp QuestName="A Fate Worse Than Butchery" QuestId="27533" GiverName="Augustus the Touched" GiverId="12384" X="2933.157" Y="-2746.111" Z="109.6152" />
+		<PickUp QuestName="Augustus' Receipt Book" QuestId="27534" GiverName="Augustus the Touched" GiverId="12384" X="2933.157" Y="-2746.111" Z="109.6152" />
+
+		<Code File="InteractWith" MobId="177789" NonCompeteDistance="0" InteractByLooting="true" QuestId="27534" QuestObjectiveIndex="1" X="2996.021" Y="-2861.425" Z="107.6301" />
+
+		<Code File="KillUntilComplete" MobId="16117" QuestId="27533" >
+			<HuntingGrounds>
+				<Hotspot X="2928.829" Y="-2871.902" Z="98.54178" />
+				<Hotspot X="2961.885" Y="-2786.134" Z="110.8203" />
+			</HuntingGrounds>
+		</Code>
+
+		<TurnIn QuestName="A Fate Worse Than Butchery" QuestId="27533" TurnInName="Augustus the Touched" TurnInId="12384" X="2933.774" Y="-2747.255" Z="109.6151" />
+		<TurnIn QuestName="Augustus' Receipt Book" QuestId="27534" TurnInName="Augustus the Touched" TurnInId="12384" X="2933.774" Y="-2747.255" Z="109.6151" />
+
+		<If Condition="HasItem(61379)" > <!-- Gidwin's Hearthstone back to light's Hope -->
+			<Code File="UseItem" ItemId="61379" />
+		</If>
+
+		<If Condition="IsQuestCompleted(27534) &amp;&amp; Me.HearthstoneAreaId == 2268 &amp;&amp; Unit(12384) != null" >
+			<Code File="UseHearthstone" WaitForCD="false" />
+		</If>
+
+		<TurnIn QuestName="Journey's End" QuestId="27527" TurnInName="Fiona" TurnInId="45417" X="2302.222" Y="-5263.173" Z="82.5424" />
+
+		<Code File="KillUntilComplete" MobIds="8528, 8532, 8542, 45692, 45691" TerminateWhen="Me.Level &gt;= 44" >
+			<HuntingGrounds>
+				<Hotspot X="2796.273" Y="-5430.831" Z="162.485" />
+				<Hotspot X="2680.165" Y="-5360.331" Z="157.1721" />
+				<Hotspot X="2636.279" Y="-5501.762" Z="158.5122" />
+			</HuntingGrounds>
+		</Code>
+
+		<Checkpoint Level="45" />
+		<If Condition="Me.Level &lt;= 46" >
+			<Code File="RunCode" Code="foreach (PlayerQuest quest in Me.QuestLog.GetAllQuests()) QuestLog.Instance.AbandonQuestById(quest.Id)" />
+		</If>
+
+		<Code File="UseItem" ItemId="20767" WaitTime="1000" NumOfTimes="500" TerminateWhen="!HasItem(20767) || Me.FreeBagSlots &lt; 1" /> <!-- Scum Covered Bag -->
+		<Code File="DeleteItems" Ids="16884, 20767" />
+		<Code File="LoadProfile" ProfileName="Badlands.xml" />
+
+	</QuestOrder>
+</HBProfile>

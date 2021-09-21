@@ -1,0 +1,159 @@
+﻿<HBProfile>
+	<Name>[QO] Kalu'ak Dailies - Borean A [Kick]</Name>
+   
+	<MinLevel>1</MinLevel>
+	<MaxLevel>86</MaxLevel>
+   
+	<MinDurability>0.2</MinDurability>
+	<MinFreeBagSlots>2</MinFreeBagSlots>
+	
+	<MailGrey>False</MailGrey>
+	<MailWhite>False</MailWhite>
+	<MailGreen>False</MailGreen>
+	<MailBlue>True</MailBlue>
+	<MailPurple>True</MailPurple>
+   
+	<SellGrey>True</SellGrey>
+	<SellWhite>True</SellWhite>
+	<SellGreen>True</SellGreen>
+	<SellBlue>False</SellBlue>
+	<SellPurple>False</SellPurple>
+   
+	<TargetElites>True</TargetElites>
+
+	<AvoidMobs>
+	</AvoidMobs>
+	<Blackspots>
+		<Blackspot X="2899.888" Y="4880.295" Z="2.382087" Radius="6.066182" />
+		<Blackspot X="2918.816" Y="4895.312" Z="2.560012" Radius="5.423362" />
+	</Blackspots>
+	<Mailboxes>
+
+	</Mailboxes>
+	<Vendors>
+
+	</Vendors>
+
+
+	<Quest Id="11945" Name="Preparing for the Worst">
+		<Objective Type="CollectItem" ItemId="35711" CollectCount="8">
+			<CollectFrom>
+				<GameObject Name="Kaskala Supplies" Id="188164" />
+			</CollectFrom>
+			<Hotspots>
+				<Hotspot X="2876.18" Y="4858.867" Z="0.3971166" />
+				<Hotspot X="2962.803" Y="4865.652" Z="0.3968507" />
+				<Hotspot X="3062.123" Y="4852.588" Z="1.770035" />
+				<Hotspot X="3071.917" Y="4782.755" Z="1.116853" />
+				<Hotspot X="3041.523" Y="4631.554" Z="2.150343" />
+			</Hotspots>
+		</Objective>
+	</Quest>
+
+
+	
+	<QuestOrder>
+	
+				<CustomBehavior File="UserSettings" LootMobs="True" PullDistance="35" TrainNewSkills="False" LearnFlightPaths="True" />
+				
+			<If Condition="Me.MapId == 0" >
+				<CustomBehavior File="FlyTo" X="-8291.137" Y="1404.371" Z="4.731256" />
+				<CustomBehavior File="ForcedDismount" />
+				<!-- SW dock to Valiance Keep -->
+				<CustomBehavior File="UseTransport"
+								Entry="-8300.08, 1405.158, 4.422395"
+								Exit="2234.375, 5132.568, 5.343217"
+								Start="-8288.816, 1424.703, 0.04" 
+								End="2218.391, 5119.589, 0.04" 
+								Transport="190536" />
+				<CustomBehavior File="WaitTimer" WaitTime="5000" />
+			</If>
+		
+			<If Condition="((!HasQuest(11945)) &amp;&amp; (!IsQuestCompleted(11945)))" >
+				<CustomBehavior File="FlyTo" X="3137.975" Y="4884.562" Z="2.450774" />
+				<CustomBehavior File="ForcedDismount" />
+		<PickUp QuestName="Preparing for the Worst" QuestId="11945" GiverName="Utaik" GiverId="26213" />
+			</If>
+			<If Condition="((HasQuest(11945)) &amp;&amp; (!IsQuestCompleted(11945)))" >
+				<CustomBehavior File="FlyTo" X="2876.18" Y="4858.867" Z="0.3971166" />
+				<CustomBehavior File="ForcedDismount" />
+				<Objective QuestName="Preparing for the Worst" QuestId="11945" Type="CollectItem" ItemId="35711" CollectCount="8" />
+			</If>
+			<If Condition="((HasQuest(11945)) &amp;&amp; (IsQuestCompleted(11945)))" >
+				<CustomBehavior File="FlyTo" X="3137.975" Y="4884.562" Z="2.450774" />
+				<CustomBehavior File="ForcedDismount" />
+		<TurnIn QuestName="Preparing for the Worst" QuestId="11945" TurnInName="Utaik" TurnInId="26213" />		
+			</If>
+		
+			<If Condition="((!HasQuest(11960)) &amp;&amp; (!IsQuestCompleted(11960)))" >
+				<CustomBehavior File="FlyTo" X="2798.11" Y="915.9924" Z="22.08739" />
+				<CustomBehavior File="ForcedDismount" />
+		<PickUp QuestName="Planning for the Future" QuestId="11960" GiverName="Trapper Mau'i" GiverId="26228" />
+			</If>
+			<If Condition="((HasQuest(11960)) &amp;&amp; (!IsQuestCompleted(11960)))" >
+				<CustomBehavior File="FlyTo" X="3213.432" Y="1059.143" Z="126.9744" />
+				<CustomBehavior File="ForcedDismount" />
+			  <While Condition="((HasQuest(11960)) &amp;&amp; (!IsQuestCompleted(11960)))" >
+				<CustomBehavior File="InteractWith" QuestId="11960" MobId="26200" NumOfTimes="6" CollectionDistance="500" WaitTime="1000" X="3359.655" Y="1173.807" Z="138.81" />
+				<CustomBehavior File="InteractWith" QuestId="11960" MobId="26200" NumOfTimes="6" CollectionDistance="500" WaitTime="1000" X="3213.432" Y="1059.143" Z="126.9744" />
+			  </While>
+			</If>
+			<If Condition="((HasQuest(11960)) &amp;&amp; (IsQuestCompleted(11960)))" >
+				<CustomBehavior File="FlyTo" X="2798.11" Y="915.9924" Z="22.08739" />
+				<CustomBehavior File="ForcedDismount" />
+		<TurnIn QuestName="Planning for the Future" QuestId="11960" TurnInName="Trapper Mau'i" TurnInId="26228" />		
+			</If>
+
+			
+			<!-- Kamagua HF to Moa'ki DB - i need HBConsole to work :(
+			<CustomBehavior File="UseTransport"
+							WaitAtX="787.2147" WaitAtY="-2816.46" WaitAtZ="4.57107"
+							GetOffX="2642.688" GetOffY="845.1028" GetOffZ="4.532837"
+							TransportStartX="793.1353" TransportStartY="-2796.574" TransportStartZ="3" 
+							TransportEndX="2640.246" TransportEndY="838.6086" TransportEndZ="7.311943"
+							TransportId="188511" />
+			-->
+			
+		<!-- insert boat behavior
+		<Hotspot X="2642.688" Y="845.1028" Z="4.532837" /> // Moa'ki in Dragonblight \\
+		<Hotspot X="2640.246" Y="838.6086" Z="7.311943" /> // on boat 188511 Turtle (Green Island) \\ 
+
+		<Hotspot X="787.2147" Y="-2816.46" Z="4.57107" /> // Kamagua in HF \\
+		<Hotspot X="789.3913" Y="-2812.037" Z="7.065066" /> // on boat 188511 Turtle (Green Island) \\ 
+		-->
+		
+		
+			<!-- HF - Reef Cow -->
+		<If Condition="(IsQuestCompleted(11469))" >
+			<If Condition="((!HasQuest(11472)) &amp;&amp; (!IsQuestCompleted(11472)))" >
+			 <If Condition="Me.ZoneId == 65" >
+				<CustomBehavior File="FlyTo" Name="1st point to HF" X="2765.821" Y="-2602.532" Z="370.5847" />
+			 </If>
+				<CustomBehavior File="FlyTo" Name="Kamagua in HF" X="749.1319" Y="-2887.481" Z="7.648436" />
+				<CustomBehavior File="ForcedDismount" />
+		<PickUp QuestName="The Way to His Heart..." QuestId="11472" GiverName="Anuniaq" GiverId="24810" />
+			</If>
+			<If Condition="((HasQuest(11472)) &amp;&amp; (!IsQuestCompleted(11472)))" >
+				<CustomBehavior File="FlyTo" X="151.7973" Y="-3174.247" Z="25.40625" />
+	<CustomBehavior File="UserDialog" AllowBotStop="True" QuestId="11472" SoundCue="Exclamation" SoundCueInterval="1" Text="Net reef fish from the pools or get them from sharks, then lead the reef bull across the channel by throwing fish in it's path" />
+				<!--
+				<CustomBehavior File="ForcedDismount" />
+				186949	School of Tasty Reef Fish
+				<Objective QuestName="The Way to His Heart..." QuestId="11472" Type="CollectItem" ItemId="34127" CollectCount="250" />
+				<Objective QuestName="The Way to His Heart..." QuestId="11472" Type="CollectItem" ItemId="40946" CollectCount="1" />
+				-->
+			</If>
+			<If Condition="((HasQuest(11472)) &amp;&amp; (IsQuestCompleted(11472)))" >
+				<CustomBehavior File="FlyTo" X="749.1319" Y="-2887.481" Z="7.648436" />
+				<CustomBehavior File="ForcedDismount" />
+		<TurnIn QuestName="The Way to His Heart..." QuestId="11472" TurnInName="Anuniaq" TurnInId="24810" />
+			</If>
+		</If>
+		
+			
+	<CustomBehavior File="UserDialog"  AllowBotStop="True" SoundCue="Asterisk" SoundCueInterval="2" Text="End of Dailies today\n\nNot doing the Sea Cow quest" />
+			
+	
+	</QuestOrder>
+
+</HBProfile>

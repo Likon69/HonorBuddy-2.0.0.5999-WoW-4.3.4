@@ -1,0 +1,416 @@
+
+<HBProfile xsi:noNamespaceSchemaLocation="../Schemas/EchoSchema.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<!-- Original contribution by EchoTiger -->
+	<Name>Netherstorm ($ShortHash$)</Name>
+
+	<DefaultNavType>Fly</DefaultNavType>
+
+	<MinDurability>0.3</MinDurability>
+	<MinFreeBagSlots>3</MinFreeBagSlots>
+
+	<SellGrey>true</SellGrey>
+	<SellWhite>true</SellWhite>
+	<SellGreen>true</SellGreen>
+	<SellBlue>true</SellBlue>
+	<SellPurple>false</SellPurple>
+
+	<MailGrey>false</MailGrey>
+	<MailWhite>true</MailWhite>
+	<MailGreen>true</MailGreen>
+	<MailBlue>true</MailBlue>
+	<MailPurple>true</MailPurple>
+
+	<TargetElites>true</TargetElites>
+
+	<AvoidMobs>
+	</AvoidMobs>
+
+	<Mailboxes>
+	</Mailboxes>
+
+	<Vendors>
+	</Vendors>
+
+	<Blackspots>
+	</Blackspots>
+
+	<Blacklist>
+		<Mob Name="Boom Bot" Id="19692" Flags="Combat" />
+	</Blacklist>
+
+	<QuestOrder IgnoreCheckpoints="false" >
+		<!-- Check function status -->
+		<Code File="RunCode" Type="Definition">
+			<![CDATA[
+			private static bool? profileFunctionsEnabled => (bool?)AppDomain.CurrentDomain.GetData("QuestingProfiles_FunctionsEnabled");
+			private static bool IsStoreProfile(string path) => path.StartsWith("store://");
+			private static string Slashify(string path) => IsStoreProfile(path) ? path.Replace(@"\", "/") : path.Replace("/", @"\");
+
+			public __CompiledBatchClass__()
+			{
+				ActivateFunctions();
+			}
+
+			private static void ActivateFunctions()
+			{
+				if (profileFunctionsEnabled == null || profileFunctionsEnabled == false)
+				{
+					Bots.Professionbuddy.PBLog.Log(Colors.MediumPurple, "[Profile Message!]: ", Colors.Yellow, "Please stand by as the functions are being activated!");
+					LoadProfile(@"..\..\Functions\Activate Functions.xml");
+				}
+			}
+
+			private static void LoadProfile(string path)
+			{
+				var profile = GetNewPath(path);
+				if (!IsStoreProfile(profile) && !File.Exists(profile))
+				{
+					Bots.Professionbuddy.PBLog.Log(Colors.MediumPurple, "[Profile Message!]: ", Colors.Yellow, "Profile does not exist.\n" + profile);
+					return;
+				}
+
+				Bots.Professionbuddy.PBLog.Log(Colors.MediumPurple, "[Profile Message!]: ", Colors.Yellow, "Loading: " + profile);
+				ProfileManager.LoadNew(profile, false);
+			}
+
+			private static string GetNewPath(string path)
+			{
+				if (IsStoreProfile(path))
+					return Slashify(path);
+
+				var currentProfile = ProfileManager.XmlLocation;
+				if (IsStoreProfile(currentProfile))
+					return Slashify(currentProfile + "/../" + path);
+
+				var absolutePath = Path.Combine(Path.GetDirectoryName(currentProfile), path);
+				absolutePath = Path.GetFullPath(absolutePath);
+				var canonicalPath = new Uri(absolutePath).LocalPath;
+				return Slashify(canonicalPath);
+			}]]>
+		</Code>
+		<Code File="RunCode" Code="ActivateFunctions();" />
+		<!-- END Check function status -->
+
+		<If Condition="Me.IsAlliance" >
+			<Code File="LoadProfile" ProfileName="..\..\Questing Autoloader.xml" />
+		</If>
+		<!-- RunCode Methods -->
+			<Code File="RunCode">
+			<![CDATA[
+				Bots.Professionbuddy.PBLog.Log(System.Windows.Media.Colors.MediumPurple, "> [Profile Initialization Status] ", System.Windows.Media.Colors.CornflowerBlue, "\n     Auto-Looting	:: Enabled\n     Looting	:: Enabled\n     Game Addons	:: Disabled");
+				Lua.DoString("SetCVar('AutoLootDefault', 1);");
+				Lua.DoString("SetCVar('autoDismountFlying', 1);");
+				CharacterSettings.Instance.LootMobs = true;
+				CharacterSettings.Instance.Save();
+				Logging.Write(System.Windows.Media.Colors.MediumPurple, "> [Ready to bot!]");
+			]]>
+			</Code>
+			<Code File="RunCode" Type="Definition">
+				<![CDATA[
+						bool DoQuest(params uint[] questIds)
+						{
+							foreach (var questId in questIds)
+							{
+								if (HasQuest(questId) && !IsQuestCompleted(questId)) return true;
+							}
+							return false;
+						}
+						bool NeedsQuest(params uint[] questIds)
+						{
+							foreach (var questId in questIds)
+							{
+								if (!HasQuest(questId) && !IsQuestCompleted(questId)) return true;
+							}
+							return false;
+						}
+						bool NeedsBreadcrumbQuest(params uint[] questIds)
+						{
+							foreach (var questId in questIds)
+							{
+								if (IsQuestCompleted(questId)) return false;
+							}
+							return true;
+						}
+						bool QuestDone(params uint[] questIds)
+						{
+							foreach (var questId in questIds)
+							{
+								if (HasQuest(questId) && IsQuestCompleted(questId)) return true;
+							}
+							return false;
+						}
+						bool QuestFlaggedCompleted(params uint[] questIds)
+						{
+							foreach (var questId in questIds)
+							{
+								return Lua.GetReturnVal<bool>($"return IsQuestFlaggedCompleted({questId});", 0);
+							}
+							return false;
+						}
+						async Task SkipCutscene(int preWait = 3000, int postWait = 3000)
+						{
+					// Add detection of cutscene here.
+							await Coroutine.Sleep(preWait);
+					// Test and improve the working method.
+							Lua.DoString("MovieFrame:StopMovie(); CinematicFrame_CancelCinematic(); StopCinematic();");
+							await Coroutine.Sleep(postWait);
+						}
+					]]>
+			</Code>
+		<!-- END RunCode Methods -->
+
+
+		<PickUp QuestName="Consortium Crystal Collection" QuestId="10265" GiverName="Nether-Stalker Khay&apos;ji" GiverId="19880" X="3072.719" Y="3671.442" Z="142.4377" />
+		<PickUp QuestName="Securing the Shaleskin Shale" QuestId="10342" GiverName="Boots" GiverId="19617" X="3083.394" Y="3679.397" Z="142.4245" />
+		<!--<PickUp QuestName="Wanted: Annihilator Servo!" QuestId="10261" GiverName="Wanted Poster" GiverId="183811" X="3053.182" Y="3691.877" Z="142.6839" /> Not worth it -->
+		<!--<PickUp QuestName="Breaking Down Netherock" QuestId="10701" GiverName="Wanted Poster" GiverId="183811" X="3053.182" Y="3691.877" Z="142.6839" /> Not worth it -->
+
+		<If Condition="Me.HearthstoneAreaId != 8613" >
+			<Code File="InteractWith" MobId="19571" NonCompeteDistance="0" X="3065.304" Y="3699.897" Z="142.433" />
+			<Code File="Misc\RunLua" Lua="StaticPopup1Button1:Click();" />
+		</If>
+
+		<If Condition="HasQuest(10183)" >
+			<TurnIn QuestName="Off To Area 52" QuestId="10183" TurnInName="Rocket-Chief Fuselage" TurnInId="19570" X="3043.815" Y="3659.275" Z="143.3479" />
+		</If>
+
+		<PickUp QuestName="You&apos;re Hired!" QuestId="10186" GiverName="Rocket-Chief Fuselage" GiverId="19570" X="3043.815" Y="3659.275" Z="143.3479" />
+		<PickUp QuestName="The Archmage&apos;s Staff" QuestId="10173" GiverName="Ravandwyr" GiverId="19217" X="2996.662" Y="3731.99" Z="144.0554" />
+
+		<Code File="InteractWith" MobId="183767" CollectionDistance="200" InteractByLooting="true" PreInteractMountStrategy="Dismount" QuestId="10186" QuestObjectiveIndex="1" >
+			<HuntingGrounds>
+				<Hotspot X="3429.474" Y="3690.325" Z="147.5284" />
+				<Hotspot X="3494.485" Y="3589.311" Z="156.4102" />
+				<Hotspot X="3447.786" Y="3482.442" Z="146.3877" />
+			</HuntingGrounds>
+		</Code>
+
+		<TurnIn QuestName="You&apos;re Hired!" QuestId="10186" TurnInName="Rocket-Chief Fuselage" TurnInId="19570" X="3047.009" Y="3659.148" Z="143.0703" />
+
+		<PickUp QuestName="Invaluable Asset Zapping" QuestId="10203" GiverName="Rocket-Chief Fuselage" GiverId="19570" X="3047.009" Y="3659.148" Z="143.0703" />
+		<PickUp QuestName="Report to Engineering" QuestId="10225" GiverName="Rocket-Chief Fuselage" GiverId="19570" X="3047.009" Y="3659.148" Z="143.0703" />
+		<TurnIn QuestName="Report to Engineering" QuestId="10225" TurnInName="Chief Engineer Trep" TurnInId="19709" X="2977.392" Y="3672.527" Z="143.4661" />
+
+		<PickUp QuestName="Essence for the Engines" QuestId="10224" GiverName="Chief Engineer Trep" GiverId="19709" X="2977.392" Y="3672.527" Z="143.4661" />
+		<Code File="KillUntilComplete" MobId="18864" QuestId="10224" >
+			<HuntingGrounds>
+				<Hotspot X="3163.991" Y="3472.001" Z="104.4203" />
+				<Hotspot X="3293.343" Y="3439.304" Z="110.5632" />
+				<Hotspot X="3325.419" Y="3551.735" Z="130.1449" />
+				<Hotspot X="3257.396" Y="3658.723" Z="128.3246" />
+				<Hotspot X="3309.024" Y="3796.261" Z="138.8224" />
+			</HuntingGrounds>
+		</Code>
+		<TurnIn QuestName="Essence for the Engines" QuestId="10224" TurnInName="Chief Engineer Trep" TurnInId="19709" X="2979.174" Y="3672.203" Z="143.5358" />
+
+		<PickUp QuestName="Elemental Power Extraction" QuestId="10226" GiverName="Chief Engineer Trep" GiverId="19709" X="2977.344" Y="3673.05" Z="143.4675" />
+
+		<Code File="KillUntilComplete" MobId="20210" QuestId="10342" >
+			<HuntingGrounds>
+				<Hotspot X="3209.277" Y="3593.512" Z="128.7897" />
+				<Hotspot X="3217.459" Y="3710.2" Z="128.7234" />
+				<Hotspot X="3225.165" Y="3926.374" Z="177.8693" />
+				<Hotspot X="3338.543" Y="3981.698" Z="175.5736" />
+			</HuntingGrounds>
+		</Code>
+
+		<TurnIn QuestName="Securing the Shaleskin Shale" QuestId="10342" TurnInName="Boots" TurnInId="19617" X="3084.104" Y="3680.653" Z="142.449" />
+		<PickUp QuestName="That Little Extra Kick" QuestId="10199" GiverName="Boots" GiverId="19617" X="3084.104" Y="3680.653" Z="142.449" />
+
+		<While Condition="DoQuest(10226)" >
+			<If Condition="Unit(18865) == null" >
+				<MoveTo X="2591.001" Y="3472.374" Z="141.6473" />
+			</If>
+			<Code File="InteractWith" MobIds="18865, 18881" MobState="Alive" Range="9" CollectionDistance="200" InteractByUsingItemId="28547" PreInteractMountStrategy="Dismount" MovementBy="NavigatorOnly" QuestId="10226" QuestObjectiveIndex="1" TerminateWhen="Object(183933) != null" >
+				<HuntingGrounds>
+					<Hotspot X="2523.311" Y="3399.358" Z="130.8034" />
+					<Hotspot X="2557.423" Y="3549.344" Z="142.3158" />
+					<Hotspot X="2556.971" Y="3667.44" Z="146.1776" />
+				</HuntingGrounds>
+			</Code>
+
+			<Code File="InteractWith" MobId="183933" QuestId="10226" CollectionDistance="200" InteractByLooting="true" TerminateWhen="Object(183933) == null" />
+		</While>
+
+		<While Condition="DoQuest(10203)" >
+			<Code File="InteractWith" MobId="183807" NonCompeteDistance="0" InteractBlacklistTimeInSeconds="1" PreInteractMountStrategy="Dismount" QuestId="10203" QuestObjectiveIndex="3" X="2744.253" Y="3232.959" Z="147.5972" />
+			<Code File="InteractWith" MobId="183805" NonCompeteDistance="0" InteractBlacklistTimeInSeconds="1" PreInteractMountStrategy="Dismount" QuestId="10203" QuestObjectiveIndex="1" X="2782.401" Y="3181.396" Z="145.9379" />
+			<Code File="InteractWith" MobId="183806" NonCompeteDistance="0" Range="7" InteractBlacklistTimeInSeconds="1" PreInteractMountStrategy="Dismount" QuestId="10203" QuestObjectiveIndex="2" X="2784.404" Y="3174.14" Z="146.0049" />
+			<Code File="InteractWith" MobId="183808" NonCompeteDistance="0" Range="7" InteractBlacklistTimeInSeconds="1" PreInteractMountStrategy="Dismount" QuestId="10203" QuestObjectiveIndex="4" X="2776.097" Y="3108.36" Z="155.1075" />
+		</While>
+
+		<Code File="KillUntilComplete" MobId="20215" QuestId="10265" X="2760.042" Y="3128.101" Z="152.4628" />
+
+		<While Condition="DoQuest(10173)" >
+			<MoveTo X="2761.787" Y="3197.864" Z="150.7346" />
+			<Code File="ForcedDismount" />
+			<Code File="UseItem" ItemId="29207" X="2761.787" Y="3197.864" Z="150.7346" TerminateWhen="Unit(19493, u =&gt; u.IsAlive) != null" />
+			<Code File="KillUntilComplete" MobId="19493" QuestId="10173" X="2761.81" Y="3197.479" Z="150.7347" TerminateWhen="Unit(19493, u =&gt; u.IsAlive) == null" />
+		</While>
+
+		<Code File="KillUntilComplete" MobId="18880" QuestId="10199" >
+			<HuntingGrounds>
+				<Hotspot X="2750.943" Y="2944.293" Z="116.4578" />
+				<Hotspot X="2838.456" Y="2992.049" Z="119.3661" />
+				<Hotspot X="2884.295" Y="3096.385" Z="134.3607" />
+			</HuntingGrounds>
+		</Code>
+
+		<TurnIn QuestName="Invaluable Asset Zapping" QuestId="10203" TurnInName="Lead Sapper Blastfizzle" TurnInId="19634" X="2928.231" Y="3580.001" Z="129.3158" />
+		<!-- <PickUp QuestName="Dr. Boom!" QuestId="10221" GiverName="Lead Sapper Blastfizzle" GiverId="19634" X="2928.231" Y="3580.001" Z="129.3158" /> Not worth it -->
+		<TurnIn QuestName="Elemental Power Extraction" QuestId="10226" TurnInName="Chief Engineer Trep" TurnInId="19709" X="2977.602" Y="3671.801" Z="143.498" />
+		<TurnIn QuestName="The Archmage&apos;s Staff" QuestId="10173" TurnInName="Ravandwyr" TurnInId="19217" X="2994.914" Y="3730.849" Z="143.9915" />
+		<PickUp QuestName="Rebuilding the Staff" QuestId="10300" GiverName="Ravandwyr" GiverId="19217" X="2994.914" Y="3730.849" Z="143.9915" />
+		<TurnIn QuestName="Consortium Crystal Collection" QuestId="10265" TurnInName="Nether-Stalker Khay&apos;ji" TurnInId="19880" X="3067.816" Y="3671.781" Z="142.4945" />
+		<PickUp QuestName="A Heap of Ethereals" QuestId="10262" GiverName="Nether-Stalker Khay&apos;ji" GiverId="19880" X="3067.816" Y="3671.781" Z="142.4945" />
+		<TurnIn QuestName="That Little Extra Kick" QuestId="10199" TurnInName="Boots" TurnInId="19617" X="3083.414" Y="3680.081" Z="142.4311" />
+		<RecheckCheckpoints />
+		<PickUp QuestName="Pick Your Part" QuestId="10206" GiverName="Papa Wheeler" GiverId="19645" X="3049.986" Y="3647.494" Z="143.2258" />
+
+		<Code File="KillUntilComplete" MobIds="18872, 18873, 21058" QuestId="10300" >
+			<HuntingGrounds>
+				<Hotspot X="3429.474" Y="3690.325" Z="147.5284" />
+				<Hotspot X="3494.485" Y="3589.311" Z="156.4102" />
+				<Hotspot X="3447.786" Y="3482.442" Z="146.3877" />
+			</HuntingGrounds>
+		</Code>
+
+		<!-- Not worth it
+		<While Condition="DoQuest(10221)" >
+			<Code File="FlyTo" X="3244.337" Y="3530.728" Z="132.8759" />
+			<Code File="Misc\RunLua" Lua="Dismount();" />
+			<Code File="KillUntilComplete" MobId="20284" QuestId="10221" X="3245.04" Y="3529.864" Z="120.7603" />
+		</While> -->
+
+		<TurnIn QuestName="Rebuilding the Staff" QuestId="10300" TurnInName="Ravandwyr" TurnInId="19217" X="2996.486" Y="3731.531" Z="144.0397" />
+
+		<PickUp QuestName="Curse of the Violet Tower" QuestId="10174" GiverName="Ravandwyr" GiverId="19217" X="2996.486" Y="3731.531" Z="144.0397" />
+		<If Condition="QuestDone(10174)" >
+			<Code File="UseItem" ItemId="28455" TerminateWhen="Unit(19644, u =&gt; u.QuestGiverStatus == QuestGiverStatus.TurnIn) != null" />
+		</If>
+		<TurnIn QuestName="Curse of the Violet Tower" QuestId="10174" TurnInName="Image of Archmage Vargoth" TurnInId="19644" X="2994.061" Y="3728.906" Z="143.9156" />
+
+		<!-- Not worth it
+		<If Condition="NeedsQuest(10188) &amp;&amp; Unit(19644) == null" >
+			<Code File="InteractWith" MobId="19217" GossipOptions="1" NonCompeteDistance="0" X="2994.639" Y="3730.587" Z="143.976" TerminateWhen="HasItem(28455)" />
+			<Code File="UseItem" ItemId="28455" TerminateWhen="Unit(19644) != null" />
+			<PickUp QuestName="The Sigil of Krasus" QuestId="10188" GiverName="Image of Archmage Vargoth" GiverId="19644" X="2991.425" Y="3727.059" Z="143.6732" />
+		</If> -->
+
+		<Code File="InteractWith" MobIds="183813, 183814" InteractByLooting="true" CollectionDistance="200" PreInteractMountStrategy="Dismount" QuestId="10206" QuestObjectiveIndex="1" >
+			<HuntingGrounds>
+				<Hotspot X="2647.264" Y="3753.116" Z="144.0414" />
+				<Hotspot X="2598.977" Y="3843.564" Z="139.1117" />
+				<Hotspot X="2504.371" Y="3979.856" Z="128.2196" />
+			</HuntingGrounds>
+		</Code>
+
+		<Code File="KillUntilComplete" MobIds="18875, 19642" TerminateWhen="HasQuest(10262) ? Me.BagItems.Any(x =&gt; x.Entry == 29209) &amp;&amp; Me.BagItems.FirstOrDefault(x =&gt; x.Entry == 29209).StackCount &gt;= 10 : true" >
+			<HuntingGrounds>
+				<Hotspot X="2647.264" Y="3753.116" Z="144.0414" />
+				<Hotspot X="2598.977" Y="3843.564" Z="139.1117" />
+				<Hotspot X="2504.371" Y="3979.856" Z="128.2196" />
+			</HuntingGrounds>
+		</Code>
+
+		<TurnIn QuestName="Pick Your Part" QuestId="10206" TurnInName="Papa Wheeler" TurnInId="19645" X="3048.559" Y="3644.801" Z="143.2662" />
+		<TurnIn QuestName="A Heap of Ethereals" QuestId="10262" TurnInName="Nether-Stalker Khay&apos;ji" TurnInId="19880" X="3068.482" Y="3672.073" Z="142.4763" />
+		<RecheckCheckpoints />
+		<PickUp QuestName="Warp-Raider Nesaad" QuestId="10205" GiverName="Nether-Stalker Khay&apos;ji" GiverId="19880" X="3068.482" Y="3672.073" Z="142.4763" />
+
+		<Code File="KillUntilComplete" MobId="19641" QuestId="10205" X="2507.926" Y="3912.714" Z="129.8534" />
+
+		<TurnIn QuestName="Warp-Raider Nesaad" QuestId="10205" TurnInName="Nether-Stalker Khay&apos;ji" TurnInId="19880" X="3069.131" Y="3672.783" Z="142.449" />
+		<PickUp QuestName="Request for Assistance" QuestId="10266" GiverName="Nether-Stalker Khay&apos;ji" GiverId="19880" X="3069.131" Y="3672.783" Z="142.449" />
+		<TurnIn QuestName="Request for Assistance" QuestId="10266" TurnInName="Gahruj" TurnInId="20066" X="3336.803" Y="2883.197" Z="143.5874" />
+		<RecheckCheckpoints />
+		<!-- <PickUp QuestName="Rightful Repossession" QuestId="10267" GiverName="Gahruj" GiverId="20066" X="3336.803" Y="2883.197" Z="143.5874" /> Not worth it -->
+		<PickUp QuestName="One Demon&apos;s Trash..." QuestId="10234" GiverName="Mama Wheeler" GiverId="19728" X="3358.086" Y="2884.216" Z="143.9662" />
+		<PickUp QuestName="Run a Diagnostic!" QuestId="10417" GiverName="Mehrdad" GiverId="20810" X="3361.732" Y="2890.848" Z="143.9533" />
+		<PickUp QuestName="New Opportunities" QuestId="10348" GiverName="Mehrdad" GiverId="20810" X="3361.732" Y="2890.848" Z="143.9533" />
+		<PickUp QuestName="Keeping Up Appearances" QuestId="10433" GiverName="Shauly Pore" GiverId="20921" X="3371.931" Y="2889.402" Z="143.9661" />
+
+		<Code File="InteractWith" MobId="184589" NonCompeteDistance="0" InteractByLooting="true" InteractBlacklistTimeInSeconds="1" PreInteractMountStrategy="Dismount" QuestId="10417" QuestObjectiveIndex="1" X="3411.189" Y="2796.768" Z="149.9713" />
+
+		<Code File="InteractWith" MobId="184443" CollectionDistance="200" InteractByLooting="true" PreInteractMountStrategy="Dismount" QuestId="10348" QuestObjectiveIndex="1" >
+			<HuntingGrounds>
+				<Hotspot X="3421.32" Y="2825.004" Z="146.5936" />
+				<Hotspot X="3539.227" Y="2829.811" Z="146.7456" />
+				<Hotspot X="3534.888" Y="3003.975" Z="143.0215" />
+				<Hotspot X="3368.475" Y="3006.645" Z="141.7811" />
+				<Hotspot X="3365.877" Y="2848.15" Z="142.4111" />
+			</HuntingGrounds>
+		</Code>
+
+		<Code File="KillUntilComplete" MobId="20671" QuestId="10433" >
+			<HuntingGrounds>
+				<Hotspot X="3421.32" Y="2825.004" Z="146.5936" />
+				<Hotspot X="3539.227" Y="2829.811" Z="146.7456" />
+				<Hotspot X="3534.888" Y="3003.975" Z="143.0215" />
+				<Hotspot X="3368.475" Y="3006.645" Z="141.7811" />
+				<Hotspot X="3365.877" Y="2848.15" Z="142.4111" />
+			</HuntingGrounds>
+		</Code>
+
+		<Code File="InteractWith" MobId="183935" CollectionDistance="200" InteractByLooting="true" PreInteractMountStrategy="Dismount" QuestId="10234" QuestObjectiveIndex="1" >
+			<HuntingGrounds>
+				<Hotspot X="3240.612" Y="2751.074" Z="154.1255" />
+				<Hotspot X="3327.364" Y="2678.152" Z="157.4706" />
+				<Hotspot X="3420.605" Y="2651.645" Z="155.9272" />
+			</HuntingGrounds>
+		</Code>
+
+		<TurnIn QuestName="One Demon&apos;s Trash..." QuestId="10234" TurnInName="Mama Wheeler" TurnInId="19728" X="3352.41" Y="2880.456" Z="144.1104" />
+		<PickUp QuestName="Declawing Doomclaw" QuestId="10235" GiverName="Mama Wheeler" GiverId="19728" X="3352.41" Y="2880.456" Z="144.1104" />
+		<TurnIn QuestName="Run a Diagnostic!" QuestId="10417" TurnInName="Mehrdad" TurnInId="20810" X="3361.853" Y="2890.055" Z="143.9555" />
+		<PickUp QuestName="Deal With the Saboteurs" QuestId="10418" GiverName="Mehrdad" GiverId="20810" X="3361.853" Y="2890.055" Z="143.9555" />
+		<TurnIn QuestName="New Opportunities" QuestId="10348" TurnInName="Mehrdad" TurnInId="20810" X="3361.853" Y="2890.055" Z="143.9555" />
+		<TurnIn QuestName="Keeping Up Appearances" QuestId="10433" TurnInName="Shauly Pore" TurnInId="20921" X="3371.689" Y="2890.175" Z="143.9656" />
+		<RecheckCheckpoints />
+
+		<Code File="KillUntilComplete" MobId="20773" QuestId="10418" >
+			<HuntingGrounds>
+				<Hotspot X="3435.071" Y="2854.719" Z="142.828" />
+				<Hotspot X="3505.744" Y="2868.584" Z="144.5202" />
+				<Hotspot X="3536.518" Y="2960.702" Z="143.4129" />
+			</HuntingGrounds>
+		</Code>
+
+		<Code File="KillUntilComplete" MobId="19738" QuestId="10235" X="3344.091" Y="2670.418" Z="157.3006" />
+
+		<TurnIn QuestName="Declawing Doomclaw" QuestId="10235" TurnInName="Mama Wheeler" TurnInId="19728" X="3352.082" Y="2880.066" Z="144.1247" />
+		<PickUp QuestName="Warn Area 52!" QuestId="10237" GiverName="Mama Wheeler" GiverId="19728" X="3352.082" Y="2880.066" Z="144.1247" />
+		<TurnIn QuestName="Deal With the Saboteurs" QuestId="10418" TurnInName="Mehrdad" TurnInId="20810" X="3361.789" Y="2893.027" Z="143.9394" />
+
+		<If Condition="QuestDone(10237) &amp;&amp; Me.HearthstoneAreaId == 8613 &amp;&amp; Unit(19728) != null" >
+			<Code File="UseHearthstone" WaitForCd="false" />
+		</If>
+
+		<TurnIn QuestName="Warn Area 52!" QuestId="10237" TurnInName="Rocket-Chief Fuselage" TurnInId="19570" X="3057.667" Y="3659.216" Z="143.1896" />
+
+		<Code File="KillUntilComplete" MobIds="16944, 16948" TerminateWhen="Me.Level &gt;= 68" >
+			<HuntingGrounds>
+				<Hotspot X="3219.299" Y="2758.666" Z="155.4144" />
+				<Hotspot X="3314.782" Y="2697.708" Z="155.8779" />
+				<Hotspot X="3429.698" Y="2679.914" Z="157.5777" />
+			</HuntingGrounds>
+		</Code>
+
+		<Checkpoint Level="68" />
+
+		<Code File="DeleteItems" Ids="29209, 30809, 25555, 26042, 20749, 24421, 29740, 22832, 25658, 28455" />
+
+		<If Condition="Me.ZoneId == 3523" >
+			<Code File="InteractWith" MobId="18938" NonCompeteDistance="0" PreInteractMountStrategy="Dismount" X="3077.666" Y="3597.757" Z="144.0669" />
+			<Code File="Misc\RunLua" Lua="GetNumRoutes(9); TakeTaxiNode(9);" />
+		</If>
+
+		<If Condition="Me.Level &lt;= 70" >
+			<Code File="RunCode" Code="foreach (PlayerQuest quest in Me.QuestLog.GetAllQuests()) QuestLog.Instance.AbandonQuestById(quest.Id)" />
+		</If>
+		<Code File="LoadProfile" ProfileName="../68-80 Autoloader" />
+
+	</QuestOrder>
+</HBProfile>
+
+

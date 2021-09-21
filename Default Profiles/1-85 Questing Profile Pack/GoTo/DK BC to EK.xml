@@ -1,0 +1,80 @@
+<HBProfile>
+	<Name>DK BC to EK [Kick]</Name>
+	<MinLevel>58</MinLevel>
+	<MaxLevel>86</MaxLevel>
+	
+	<MinDurability>0</MinDurability>
+	<MinFreeBagSlots>0</MinFreeBagSlots>
+	
+	<MailGrey>False</MailGrey>
+	<MailWhite>False</MailWhite>
+	<MailGreen>True</MailGreen>
+	<MailBlue>True</MailBlue>
+	<MailPurple>True</MailPurple>
+	
+	<SellGrey>True</SellGrey>
+	<SellWhite>True</SellWhite>
+	<SellGreen>True</SellGreen>
+	<SellBlue>False</SellBlue>
+	<SellPurple>False</SellPurple>
+
+	<Blackspots>
+		<Blackspot X="-8862.166" Y="637.9529" Z="96.27942" Radius="3" />
+		<Blackspot X="-8825.209" Y="629.1733" Z="94.38562" Radius="15" />
+	</Blackspots>
+	
+	<QuestOrder>
+	
+		<CustomBehavior File="UserSettings" TrainNewSkills="False" LearnFlightPaths="False" />
+				
+			<If Condition="Me.MapId == 530" >
+			 <While Condition="Me.ZoneId != 139" >
+				<CustomBehavior File="ForcedDismount" />
+				<CustomBehavior File="Misc\RunLua" Lua="CastSpellByID(50977)" />
+				<CustomBehavior File="WaitTimer" WaitTime="12000" GoalText="Waiting for port {TimeRemaining}" />
+				<CustomBehavior File="InteractWith" MobId="190942" ObjectType="Gameobject" Range="6" WaitForNpcs="False" />
+				<CustomBehavior File="WaitTimer" WaitTime="5000" GoalText="Waiting for port {TimeRemaining}" />
+			 </While>
+			</If>
+				
+				 <If Condition="Me.ZoneId == 139" >
+					<ClearVendor />
+					
+					<SetVendor>
+						<Vendors>
+							<Vendor Name="Amal'thazad" Entry="29194" Type="Train" TrainClass="DeathKnight" X="2413.916" Y="-5524.467" Z="377.0423" />
+						</Vendors>
+					</SetVendor>
+					
+					<CustomBehavior File="ForceSetVendor" DoTrain="True" />
+					<CustomBehavior File="WaitTimer" WaitTime="5000" GoalText="Waiting to Train  {TimeRemaining}" />
+					<ClearVendor />
+				
+					<CustomBehavior File="UserSettings" UseFlightPaths="True" />
+					<CustomBehavior File="InteractWith" MobId="29480" X="2348.626" Y="-5669.289" Z="382.2406" />
+					
+				  <If Condition="(Me.IsAlliance) &amp;&amp; (Me.MapId == 0)" >
+					<RunTo X="-8290.925" Y="1405.826" Z="4.721312" />
+				  </If>
+					<CustomBehavior File="UserSettings" UseFlightPaths="False" />
+				 </If>
+			
+			<If Condition="Me.MapId == 0" >
+				<If Condition="((!HasQuest(28709)) &amp;&amp; (!IsQuestCompleted(28709)))" >
+				<CustomBehavior File="FlyTo" X="-8829.578" Y="625.59" Z="94.23041" DestName="SW" />
+				<CustomBehavior File="ForcedDismount" />
+		<PickUp QuestName="Hero's Call: Northrend!" QuestId="28709" GiverName="Hero's Call Board" GiverId="206111" GiverType="Object" X="-8825.209" Y="629.1733" Z="94.38562" />
+				</If>
+			 </If>
+				
+				<CustomBehavior File="FlyTo" X="-8290.925" Y="1405.826" Z="4.721312" DestName="SW dock" />
+				<CustomBehavior File="ForcedDismount" />
+			</If>
+			
+			<CustomBehavior File="LoadProfile" ProfileName="..\GoTo\DK EK to LK" /> 
+			
+
+	  
+	</QuestOrder>
+
+</HBProfile>

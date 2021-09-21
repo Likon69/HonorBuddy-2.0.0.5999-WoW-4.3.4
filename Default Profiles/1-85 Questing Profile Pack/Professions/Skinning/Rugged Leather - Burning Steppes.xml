@@ -1,0 +1,88 @@
+<HBProfile>
+    <Name>QO Fly Dummy Grind</Name> 
+  
+    <MinLevel>1</MinLevel> 
+    <MaxLevel>86</MaxLevel> 
+    
+    <TargetElites>False</TargetElites>
+
+    <MinDurability>0.1</MinDurability>
+    <MinFreeBagSlots>1</MinFreeBagSlots>
+    
+    <SellGrey>True</SellGrey>
+    <SellWhite>False</SellWhite>
+    <SellGreen>False</SellGreen>
+    <MailWhite>True</MailWhite>
+    <MailGreen>True</MailGreen>
+    <MailBlue>True</MailBlue>
+    <MailPurple>True</MailPurple>
+
+   <AvoidMobs>
+   </AvoidMobs>
+    
+	<!--
+	<Mailboxes>
+	</Mailboxes>
+	-->
+   
+   <!--
+	<Vendors>     
+	</Vendors>
+	-->
+	
+	<QuestOrder>
+   
+		<While Condition="(true)" >
+		
+			<If Condition="(Me.FreeBagSlots &gt; 6) || (Me.LowestDurabilityPercent &gt; 20.0)" >
+				<CustomBehavior File="FlyTo" DestName="Farm Area" X="-7663.138" Y="-2729.281" Z="132.4882" />
+				<CustomBehavior File="ForcedDismount" />
+			
+				<SetGrindArea>
+					<GrindArea> <!-- E. Burning Steppes -->
+						<Factions>14 38 103</Factions> <!-- [Monster, Wolf, Dragonkin] -->
+						<TargetMinLevel>45</TargetMinLevel>
+						<TargetMaxLevel>60</TargetMaxLevel>	
+						<Hotspots> 
+							<Hotspot X="-7663.138" Y="-2729.281" Z="132.4882" />
+							<Hotspot X="-7547.003" Y="-2700.758" Z="135.9881" />
+							<Hotspot X="-7599.268" Y="-2862.372" Z="134.9981" />
+							<Hotspot X="-7657.523" Y="-2730.121" Z="132.0422" />
+							<Hotspot X="-7677.908" Y="-2887.794" Z="132.6012" />
+							<Hotspot X="-7778.78" Y="-2932.106" Z="131.7788" />
+							<Hotspot X="-7845.278" Y="-2899.811" Z="133.0586" />
+							<Hotspot X="-7828.276" Y="-2831.458" Z="133.4498" />
+							<Hotspot X="-7979.682" Y="-2910.747" Z="135.0967" />
+							<Hotspot X="-8065.582" Y="-2892.002" Z="135.7988" />
+							<Hotspot X="-8143.668" Y="-2934.201" Z="133.3689" />
+							<Hotspot X="-8202.089" Y="-2818.773" Z="137.4894" />
+							<Hotspot X="-8100.957" Y="-2761.546" Z="133.6333" />
+							<Hotspot X="-7982.959" Y="-2820.426" Z="138.9763" />
+						</Hotspots>
+				</GrindArea></SetGrindArea>
+			<GrindTo Condition="(Me.FreeBagSlots &lt;= 6)" GoalText="Farming" />
+			</If>
+		
+			<If Condition="(Me.FreeBagSlots &lt;= 6) || (Me.LowestDurabilityPercent &lt;= 20.0)" >
+			
+				<CustomBehavior File="Message" Text="Doing a vendor run at Fuselight" LogColor="Red" />
+				
+				<CustomBehavior File="FlyTo" X="-6600.414" Y="-3929.746" Z="379.2975" /> <!-- Fuselight -->
+				<CustomBehavior File="ForcedDismount" />
+
+				<SetVendor><Vendors>
+					<Vendor Name="Artie Steelbolt" Entry="48057" Type="Repair" X="-6600.45" Y="-3898.99" Z="379.1218" /> <!-- Fuselight -->
+				</Vendors></SetVendor>
+				<SetMailbox><Mailboxes>
+					<Mailbox X="-6600.414" Y="-3929.746" Z="379.2975" /> <!-- Fuselight -->
+				</Mailboxes></SetMailbox>
+				
+				<CustomBehavior File="ForceSetVendor" DoMail="True" DoRepair="True" DoSell="True" />
+				
+			
+			</If>
+			
+		</While>
+		
+	</QuestOrder>
+</HBProfile>  

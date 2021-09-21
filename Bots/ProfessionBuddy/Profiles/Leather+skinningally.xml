@@ -1,0 +1,672 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Professionbuddy ChildrenCount="32">
+  <CustomAction Code="Log(&quot;Alpha's Leather + Skinning Profile Loaded&quot;);" />
+  <If Condition="Me.DurabilityPercent &lt; 0.5" IgnoreCanRun="True" ChildrenCount="3">
+    <If Condition="Me.MapId == 571" IgnoreCanRun="True" ChildrenCount="4">
+      <FlyToAction Dismount="True" X="2355.95" Y="5239.358" Z="7.833567" />
+      <InteractionAction Entry="27011" InteractDelay="2000" InteractType="NPC" GameObjectType="Mailbox" SpellFocus="Anvil" />
+      <WaitAction Condition="Styx.Logic.Inventory.Frames.Merchant.MerchantFrame.Instance != null &amp;&amp; Styx.Logic.Inventory.Frames.Merchant.MerchantFrame.Instance.IsVisible" Timeout="20000" />
+      <CustomAction Code="Styx.Logic.Inventory.Frames.Merchant.MerchantFrame.Instance.RepairAllItems();" />
+    </If>
+    <If Condition="Me.ZoneId == 4922" IgnoreCanRun="True" ChildrenCount="4">
+      <FlyToAction Dismount="True" X="-2783.268" Y="-5345.718" Z="173.8715" />
+      <MoveToAction MoveType="Location" Pathing="Navigator" Entry="0" X="-2802.171" Y="-5345.216" Z="177.0488" />
+      <WaitAction Condition="Styx.Logic.Inventory.Frames.Merchant.MerchantFrame.Instance != null &amp;&amp; Styx.Logic.Inventory.Frames.Merchant.MerchantFrame.Instance.IsVisible" Timeout="2000" />
+      <CustomAction Code="Styx.Logic.Inventory.Frames.Merchant.MerchantFrame.Instance.RepairAllItems();" />
+    </If>
+    <If Condition="Me.ZoneId == 616" IgnoreCanRun="True" ChildrenCount="4">
+      <FlyToAction Dismount="True" X="4432.816" Y="-2077.359" Z="1205.964" />
+      <InteractionAction Entry="53075" InteractDelay="0" InteractType="NPC" GameObjectType="Mailbox" SpellFocus="Anvil" />
+      <WaitAction Condition="Styx.Logic.Inventory.Frames.Merchant.MerchantFrame.Instance != null &amp;&amp; Styx.Logic.Inventory.Frames.Merchant.MerchantFrame.Instance.IsVisible" Timeout="2000" />
+      <CustomAction Code="Styx.Logic.Inventory.Frames.Merchant.MerchantFrame.Instance.RepairAllItems();" />
+    </If>
+  </If>
+  <If Condition="Leatherworking.Level &lt; 1" IgnoreCanRun="True" ChildrenCount="1">
+    <If Condition="Me.IsAlliance" IgnoreCanRun="True" ChildrenCount="1">
+      <TrainSkillAction NpcEntry="5564" X="-8725.547" Y="477.4149" Z="98.61316" />
+    </If>
+  </If>
+  <If Condition="Me.GetSkill(Styx.SkillLine.Skinning).CurrentValue &lt; 1" IgnoreCanRun="True" ChildrenCount="1">
+    <If Condition="Me.IsAlliance" IgnoreCanRun="True" ChildrenCount="1">
+      <TrainSkillAction NpcEntry="1292" X="-8716.408" Y="469.4141" Z="98.61417" />
+    </If>
+  </If>
+  <If Condition="Me.GetSkill(Styx.SkillLine.Skinning).CurrentValue == 75 || Me.GetSkill(Styx.SkillLine.Skinning).CurrentValue == 150 || Me.GetSkill(Styx.SkillLine.Skinning).CurrentValue == 225 || Me.GetSkill(Styx.SkillLine.Skinning).CurrentValue == 300 || Me.GetSkill(Styx.SkillLine.Skinning).CurrentValue == 375 || Me.GetSkill(Styx.SkillLine.Skinning).CurrentValue == 425" IgnoreCanRun="True" ChildrenCount="1">
+    <CallSubRoutine SubRoutineName="Train Skinning" />
+  </If>
+  <While Condition="Leatherworking.Level == Leatherworking.MaxLevel &amp;&amp; HasRecipe (2108) &amp;&amp; Leatherworking.Level != 525" IgnoreCanRun="False" ChildrenCount="1">
+    <CallSubRoutine SubRoutineName="Train Leatherworking" />
+  </While>
+  <SubRoutine SubRoutineName="Train Leatherworking" ChildrenCount="1">
+    <If Condition="Me.IsAlliance" IgnoreCanRun="True" ChildrenCount="3">
+      <If Condition="Me.MapId == 0" IgnoreCanRun="True" ChildrenCount="2">
+        <CustomAction Code="Log(&quot;Training Leatherworking&quot;);" />
+        <TrainSkillAction NpcEntry="5564" X="-8725.547" Y="477.4149" Z="98.61316" />
+      </If>
+      <If Condition="Me.MapId == 530" IgnoreCanRun="True" ChildrenCount="1">
+        <TrainSkillAction NpcEntry="18771" X="-721.657" Y="2745.256" Z="94.0022" />
+      </If>
+      <If Condition="Me.MapId == 571" IgnoreCanRun="True" ChildrenCount="2">
+        <FlyToAction Dismount="True" X="2134.127" Y="5250.55" Z="19.44688" />
+        <TrainSkillAction NpcEntry="26998" X="2132.718" Y="5255.874" Z="19.44764" />
+      </If>
+    </If>
+  </SubRoutine>
+  <SubRoutine SubRoutineName="Train Skinning" ChildrenCount="1">
+    <If Condition="Me.IsAlliance" IgnoreCanRun="True" ChildrenCount="3">
+      <If Condition="Me.MapId == 0" IgnoreCanRun="True" ChildrenCount="2">
+        <CustomAction Code="Log(&quot;Training Skinning&quot;);" />
+        <TrainSkillAction NpcEntry="1292" X="-8716.408" Y="469.4141" Z="98.61417" />
+      </If>
+      <If Condition="Me.MapId == 530" IgnoreCanRun="True" ChildrenCount="2">
+        <CustomAction Code="Log(&quot;Training Skinning&quot;);" />
+        <TrainSkillAction NpcEntry="18777" X="-693.8336" Y="2724.696" Z="94.11015" />
+      </If>
+      <If Condition="Me.MapId == 571" IgnoreCanRun="True" ChildrenCount="2">
+        <FlyToAction Dismount="True" X="2134.552" Y="5250.273" Z="19.44688" />
+        <TrainSkillAction NpcEntry="27000" X="2136.098" Y="5255.882" Z="19.44816" />
+      </If>
+    </If>
+  </SubRoutine>
+  <SubRoutine SubRoutineName="Mail" ChildrenCount="1">
+    <While Condition="HasNewMail || MailCount &gt; 0" IgnoreCanRun="True" ChildrenCount="2">
+      <GetMailAction ItemID="" CheckNewMail="True" GetMailType="AllItems" AutoFindMailBox="True" X="0" Y="0" Z="0" MinFreeBagSlots="2" />
+      <WaitAction Condition="false" Timeout="6000" />
+    </While>
+  </SubRoutine>
+  <SubRoutine SubRoutineName="Hyjal to SW" ChildrenCount="3">
+    <FlyToAction Dismount="True" X="5542.739" Y="-3589.56" Z="1567.986" />
+    <InteractionAction Entry="209080" InteractDelay="0" InteractType="GameObject" GameObjectType="Transport" SpellFocus="Anvil" />
+    <WaitAction Condition="Me.MapId == 0" Timeout="250000" />
+  </SubRoutine>
+  <SubRoutine SubRoutineName="SW to Hyjal" ChildrenCount="3">
+    <FlyToAction Dismount="True" X="-8210.015" Y="409.0066" Z="117.4663" />
+    <If Condition="ObjectManager.GetObjectsOfType&lt;WoWGameObject&gt;().FirstOrDefault(o =&gt; o.Entry == 207692 ) != null &amp;&amp; ObjectManager.GetObjectsOfType&lt;WoWGameObject&gt;().FirstOrDefault(o =&gt; o.Entry == 207692 ).Location.Distance(new WoWPoint(-8210.015, 409.0066, 117.4663)) &lt; 20" IgnoreCanRun="True" ChildrenCount="2">
+      <InteractionAction Entry="207692" InteractDelay="0" InteractType="GameObject" GameObjectType="Transport" SpellFocus="Anvil" />
+      <WaitAction Condition="Me.MapId == 1" Timeout="200000" />
+    </If>
+    <If Condition="Me.MapId == 0" IgnoreCanRun="True" ChildrenCount="4">
+      <FlyToAction Dismount="True" X="-3860.002" Y="-654.7922" Z="5.301855" />
+      <WaitAction Condition="ObjectManager.GetObjectsOfType&lt;WoWGameObject&gt;().FirstOrDefault(o =&gt; o.Entry == 176231 ) != null &amp;&amp; ObjectManager.GetObjectsOfType&lt;WoWGameObject&gt;().FirstOrDefault(o =&gt; o.Entry == 176231 ).Location.Distance(new WoWPoint(-3872.35, -639.9439, 0.01283023)) &lt; 3" Timeout="650000" />
+      <CustomAction Code="CTM(-3865.994, -645.5936, 6.105168);" />
+      <WaitAction Condition="Me.MapId == 1" Timeout="250000" />
+    </If>
+  </SubRoutine>
+  <SubRoutine SubRoutineName="SW to Twilight" ChildrenCount="1">
+    <FlyToAction Dismount="True" X="-3581.029" Y="-6041.342" Z="19.04092" />
+  </SubRoutine>
+  <SubRoutine SubRoutineName="Northrend to SW" ChildrenCount="1">
+    <If Condition="Me.MapId == 571" IgnoreCanRun="True" ChildrenCount="6">
+      <FlyToAction Dismount="True" X="2232.188" Y="5135.341" Z="5.344332" />
+      <CustomAction Code="Log(&quot;Waiting for Boat&quot;);" />
+      <WaitAction Condition="ObjectManager.GetObjectsOfType&lt;WoWGameObject&gt;().FirstOrDefault(o =&gt; o.Entry == 190536 ) != null &amp;&amp; ObjectManager.GetObjectsOfType&lt;WoWGameObject&gt;().FirstOrDefault(o =&gt; o.Entry == 190536 ).Location.Distance(new WoWPoint(-8288.816, 1424.703, -0.01198259)) &lt; 3" Timeout="650000" />
+      <CustomAction Code="CTM(2225.18,5118.147,9.615541);" />
+      <WaitAction Condition="Me.MapId == 0" Timeout="650000" />
+      <FlyToAction Dismount="True" X="-8825.161" Y="622.9095" Z="94.38611" />
+    </If>
+  </SubRoutine>
+  <SubRoutine SubRoutineName="SW to Northrend" ChildrenCount="1">
+    <If Condition="Me.MapId == 0" IgnoreCanRun="True" ChildrenCount="6">
+      <FlyToAction Dismount="True" X="-8288.853" Y="1394.903" Z="4.548806" />
+      <CustomAction Code="Log(&quot;Waiting for Boat&quot;);" />
+      <WaitAction Condition="ObjectManager.GetObjectsOfType&lt;WoWGameObject&gt;().FirstOrDefault(o =&gt; o.Entry == 190536 ) != null &amp;&amp; ObjectManager.GetObjectsOfType&lt;WoWGameObject&gt;().FirstOrDefault(o =&gt; o.Entry == 190536 ).Location.Distance(new WoWPoint(-8288.816, 1424.703, -0.01198259)) &lt; 3" Timeout="650000" />
+      <CustomAction Code="CTM(-8294.051, 1424.353, 9.505318);" />
+      <WaitAction Condition="Me.MapId == 571" Timeout="650000" />
+      <FlyToAction Dismount="True" X="2149.927" Y="5238.374" Z="19.44571" />
+    </If>
+  </SubRoutine>
+  <SubRoutine SubRoutineName="Outlands to SW" ChildrenCount="1">
+    <If Condition="Me.MapId == 530" IgnoreCanRun="True" ChildrenCount="2">
+      <CustomAction Code="Log(&quot;Using Portal back to SW&quot;);" />
+      <If Condition="Me.IsAlliance" IgnoreCanRun="True" ChildrenCount="4">
+        <FlyToAction Dismount="True" X="-335.299" Y="985.499" Z="54.29087" />
+        <MoveToAction MoveType="Location" Pathing="Navigator" Entry="0" X="-337.2916" Y="962.9234" Z="54.28607" />
+        <InteractionAction Entry="195139" InteractDelay="200" InteractType="GameObject" GameObjectType="Transport" SpellFocus="Anvil" />
+        <WaitAction Condition="Me.MapId == 0" Timeout="25000" />
+      </If>
+    </If>
+  </SubRoutine>
+  <SubRoutine SubRoutineName="SW to Outlands" ChildrenCount="1">
+    <If Condition="Me.MapId == 0" IgnoreCanRun="True" ChildrenCount="5">
+      <CustomAction Code="Log(&quot;Moving to Outlands Portal&quot;);" />
+      <If Condition="Me.IsAlliance" IgnoreCanRun="True" ChildrenCount="2">
+        <MoveToAction MoveType="Location" Pathing="Navigator" Entry="0" X="-9007.162" Y="871.0374" Z="129.6926" />
+        <InteractionAction Entry="195141" InteractDelay="0" InteractType="GameObject" GameObjectType="Transport" SpellFocus="Anvil" />
+      </If>
+      <FlyToAction Dismount="True" X="-11895.9" Y="-3206.984" Z="-6.04731" />
+      <CustomAction Code="CTM (-11930.31,-3209.613,-1.836873);" />
+      <WaitAction Condition="Me.MapId == 530" Timeout="25000" />
+    </If>
+  </SubRoutine>
+  <SubRoutine SubRoutineName="Sell" ChildrenCount="1">
+    <If Condition="Me.IsAlliance" IgnoreCanRun="True" ChildrenCount="7">
+      <If Condition="Leatherworking.Level &gt;=1 &amp;&amp; Leatherworking.Level &lt;= 100" IgnoreCanRun="True" ChildrenCount="3">
+        <CustomAction Code="Log(&quot;Selling shit I dont need&quot;);" />
+        <SellItemAction NpcEntry="5565" X="-8722.868" Y="479.3223" Z="98.61379" ItemID="4237,2304,7276,9064,4239,3173,769,117,2672" Count="100" SellItemType="Specific" />
+        <SellItemAction NpcEntry="5565" X="-8722.868" Y="479.3223" Z="98.61379" ItemID="" Count="0" SellItemType="Greys" />
+      </If>
+      <If Condition="Leatherworking.Level &gt;= 100 &amp;&amp; Leatherworking.Level &lt; 150" IgnoreCanRun="True" ChildrenCount="2">
+        <If Condition="DistanceTo (-8722.868, 479.3223, 98.61379) &lt; DistanceTo (-10590.63, -1156.782, 30.05962)" IgnoreCanRun="True" ChildrenCount="3">
+          <CustomAction Code="Log(&quot;Selling shit I dont need&quot;);" />
+          <SellItemAction NpcEntry="5565" X="-8722.868" Y="479.3223" Z="98.61379" ItemID="2315,4249,2316,1015,2304,7276,9064,4239,3173,769,117,2672" Count="100" SellItemType="Specific" />
+          <SellItemAction NpcEntry="5565" X="-8722.868" Y="479.3223" Z="98.61375" ItemID="" Count="0" SellItemType="Greys" />
+        </If>
+        <If Condition="DistanceTo (-8722.868, 479.3223, 98.61379) &gt; DistanceTo (-10590.63, -1156.782, 30.05962)" IgnoreCanRun="True" ChildrenCount="3">
+          <CustomAction Code="Log(&quot;Selling shit I dont need&quot;);" />
+          <SellItemAction NpcEntry="226" X="-10590.63" Y="-1156.782" Z="30.05962" ItemID="2315,4249,2316,1015,2304,7276,9064,4239,3173,769,117,2672" Count="100" SellItemType="Specific" />
+          <SellItemAction NpcEntry="226" X="-10590.63" Y="-1156.782" Z="30.05962" ItemID="" Count="0" SellItemType="Greys" />
+        </If>
+      </If>
+      <If Condition="Leatherworking.Level &gt;= 150 &amp;&amp; Leatherworking.Level &lt; 200" IgnoreCanRun="True" ChildrenCount="2">
+        <If Condition="DistanceTo (-6600.45, -3898.99, 379.1212) &lt; DistanceTo (-14368.63, 416.7743, 6.627068)" IgnoreCanRun="False" ChildrenCount="4">
+          <CustomAction Code="Log(&quot;Selling shit i dont need&quot;);" />
+          <SellItemAction NpcEntry="48057" X="-6600.45" Y="-3898.99" Z="379.1212" ItemID="" Count="0" SellItemType="Greys" />
+          <SellItemAction NpcEntry="48057" X="-6597.621" Y="-3898.76" Z="379.144" ItemID="" Count="0" SellItemType="Greens" />
+          <SellItemAction NpcEntry="48057" X="-6597.621" Y="-3898.76" Z="379.144" ItemID="8193,15564,8766,13443,8952,12203,4338,4306,14047,8173,3385,4606,1205,1708,1645,4599,18944,17733,12208,4265,5134,12202,2315,4249,2316,1015,2304,7276,9064,4239,3173,769,117,2672" Count="100" SellItemType="Specific" />
+        </If>
+        <If Condition="DistanceTo (-6600.45, -3898.99, 379.1212) &gt; DistanceTo (-14368.63, 416.7743, 6.627068)" IgnoreCanRun="True" ChildrenCount="4">
+          <CustomAction Code="Log(&quot;Selling shit i dont need&quot;);" />
+          <SellItemAction NpcEntry="5565" X="-8365.992" Y="-2760.547" Z="187.1255" ItemID="" Count="0" SellItemType="Greys" />
+          <SellItemAction NpcEntry="5565" X="-8365.992" Y="-2760.547" Z="187.1255" ItemID="" Count="0" SellItemType="Greens" />
+          <SellItemAction NpcEntry="5565" X="-8365.992" Y="-2760.547" Z="187.1255" ItemID="8193,15564,8766,13443,8952,12203,4338,4306,14047,8173,3385,4606,1205,1708,1645,4599,18944,17733,12208,4265,5134,12202,2315,4249,2316,1015,2304,7276,9064,4239,3173,769,117,2672" Count="100" SellItemType="Specific" />
+        </If>
+      </If>
+      <If Condition="Leatherworking.Level &gt;= 200 &amp;&amp; Leatherworking.Level &lt; 300" IgnoreCanRun="True" ChildrenCount="2">
+        <If Condition="DistanceTo (-8722.868, 479.3223, 98.61379) &lt; DistanceTo (-8366.36, -2762.51, 187.5337)" IgnoreCanRun="False" ChildrenCount="4">
+          <CustomAction Code="Log(&quot;Selling shit i dont need&quot;);" />
+          <SellItemAction NpcEntry="5565" X="-8722.868" Y="479.3223" Z="98.61379" ItemID="" Count="0" SellItemType="Greys" />
+          <SellItemAction NpcEntry="5565" X="-8722.868" Y="479.3223" Z="98.61379" ItemID="" Count="0" SellItemType="Greens" />
+          <SellItemAction NpcEntry="5565" X="-8722.868" Y="479.3223" Z="98.61379" ItemID="8766,13443,8952,12203,4438,4306,14047,8173,3385,4606,1205,1708,1645,4599,18944,17733,12208,4265,5134,12202,2315,4249,2316,1015,2304,7276,9064,4239,3173,769,117,2672" Count="100" SellItemType="Specific" />
+        </If>
+        <If Condition="DistanceTo (-8722.868, 479.3223, 98.61379) &gt; DistanceTo (-8366.36, -2762.51, 187.5337)" IgnoreCanRun="True" ChildrenCount="4">
+          <CustomAction Code="Log(&quot;Selling shit i dont need&quot;);" />
+          <SellItemAction NpcEntry="1296" X="-8366.36" Y="-2762.51" Z="187.5337" ItemID="" Count="0" SellItemType="Greys" />
+          <SellItemAction NpcEntry="1296" X="-8366.36" Y="-2762.51" Z="187.5337" ItemID="" Count="0" SellItemType="Greens" />
+          <SellItemAction NpcEntry="1296" X="-8366.36" Y="-2762.51" Z="187.5337" ItemID="8766,13443,8952,12203,4438,4306,14047,8173,3385,4606,1205,1708,1645,4599,18944,17733,12208,4265,5134,12202,2315,4249,2316,1015,2304,7276,9064,4239,3173,769,117,2672" Count="100" SellItemType="Specific" />
+        </If>
+      </If>
+      <If Condition="Leatherworking.Level &gt;= 300 &amp;&amp; Leatherworking.Level &lt; 350" IgnoreCanRun="True" ChildrenCount="4">
+        <FlyToAction Dismount="True" X="-696.8309" Y="2632.787" Z="90.01573" />
+        <SellItemAction NpcEntry="16823" X="-717.3172" Y="2607.582" Z="91.01124" ItemID="" Count="0" SellItemType="Greys" />
+        <SellItemAction NpcEntry="16823" X="-717.3172" Y="2607.582" Z="91.01124" ItemID="" Count="0" SellItemType="Greens" />
+        <SellItemAction NpcEntry="16823" X="-717.3172" Y="2607.582" Z="91.01124" ItemID="27674,27678" Count="1000" SellItemType="Specific" />
+      </If>
+      <If Condition="Leatherworking.Level &gt;= 350 &amp;&amp; Leatherworking.Level &lt; 425" IgnoreCanRun="True" ChildrenCount="4">
+        <FlyToAction Dismount="True" X="2348.835" Y="5256.54" Z="7.629225" />
+        <SellItemAction NpcEntry="27011" X="2359.466" Y="5237.433" Z="7.712789" ItemID="" Count="0" SellItemType="Greys" />
+        <SellItemAction NpcEntry="27011" X="2359.466" Y="5237.433" Z="7.712789" ItemID="" Count="0" SellItemType="Greens" />
+        <SellItemAction NpcEntry="27011" X="2359.466" Y="5237.433" Z="7.712789" ItemID="25659,27674,27678,43013,43012" Count="1000" SellItemType="Specific" />
+      </If>
+      <If Condition="Leatherworking.Level &gt;= 425 &amp;&amp; Leatherworking.Level &lt; 525" IgnoreCanRun="True" ChildrenCount="1">
+        <If Condition="Me.MapId == 1" IgnoreCanRun="True" ChildrenCount="3">
+          <FlyToAction Dismount="True" X="4432.816" Y="-2077.359" Z="1205.964" />
+          <SellItemAction NpcEntry="53075" X="4432.816" Y="-2077.359" Z="1205.964" ItemID="" Count="0" SellItemType="Greys" />
+          <SellItemAction NpcEntry="53075" X="4432.816" Y="-2077.359" Z="1205.964" ItemID="" Count="0" SellItemType="Greens" />
+        </If>
+      </If>
+    </If>
+  </SubRoutine>
+  <If Condition="InbagCount (7005) == 0" IgnoreCanRun="True" ChildrenCount="1">
+    <If Condition="Me.IsAlliance" IgnoreCanRun="True" ChildrenCount="1">
+      <BuyItemAction NpcEntry="5565" X="-8722.868" Y="479.3223" Z="98.61377" ItemID="7005" Count="1" BuyItemType="SpecificItem" BuyAdditively="True" />
+    </If>
+  </If>
+  <While Condition="Me.FreeNormalBagSlots &lt;= 2" IgnoreCanRun="True" ChildrenCount="1">
+    <CallSubRoutine SubRoutineName="Sell" />
+  </While>
+  <While Condition="InbagCount (2318) &gt;= 30 &amp;&amp; Leatherworking.Level &gt;= 1 &amp;&amp; Leatherworking.Level &lt; 30 || InbagCount (2318) &gt;= 30 &amp;&amp; Leatherworking.Level &gt;= 30 &amp;&amp; Leatherworking.Level &lt; 45 || InbagCount (2318) &gt;= 50 &amp;&amp; Leatherworking.Level &gt;= 45 &amp;&amp; Leatherworking.Level &lt; 55 || InbagCount (2318) &gt;= 90 &amp;&amp; Leatherworking.Level &gt;= 55 &amp;&amp; Leatherworking.Level &lt; 85 || InbagCount (2318) &gt;= 120 &amp;&amp; Leatherworking.Level &gt;= 85 &amp;&amp; Leatherworking.Level &lt; 100 || InbagCount (4232) &gt;= 15 &amp;&amp; Leatherworking.Level &gt;= 100 &amp;&amp; Leatherworking.Level &lt; 115 || InbagCount (2319) &gt;= 40 &amp;&amp; Leatherworking.Level &gt;= 115 &amp;&amp; Leatherworking.Level &lt; 125 || InbagCount (2319) &gt;= 40 &amp;&amp; Leatherworking.Level &gt;= 125 &amp;&amp; Leatherworking.Level &lt; 130 || InbagCount (4233) &gt;= 15 &amp;&amp; Leatherworking.Level &gt;= 130 &amp;&amp; Leatherworking.Level &lt; 145 || InbagCount (2319) &gt;= 70 &amp;&amp; Leatherworking.Level &gt;= 145 &amp;&amp; Leatherworking.Level &lt; 150 || InbagCount (2319) &gt;= 140 &amp;&amp; Leatherworking.Level &gt;= 150 &amp;&amp; Leatherworking.Level &lt; 160 || InbagCount (4234) &gt;= 75 &amp;&amp; Leatherworking.Level &gt;= 160 &amp;&amp; Leatherworking.Level &lt; 175 || InbagCount (4234) &gt;= 60 &amp;&amp; Leatherworking.Level &gt;= 175 &amp;&amp; Leatherworking.Level &lt; 180 || InbagCount (4234) &gt;= 80 &amp;&amp; Leatherworking.Level &gt;= 180 &amp;&amp; Leatherworking.Level &lt; 190 || InbagCount (4234) &gt;= 40 &amp;&amp; Leatherworking.Level &gt;= 190 &amp;&amp; Leatherworking.Level &lt; 200 || InbagCount (4304) &gt;= 100 &amp;&amp; Leatherworking.Level &gt;= 200 &amp;&amp; Leatherworking.Level &lt; 220 || InbagCount (4304) &gt;= 50 &amp;&amp; Leatherworking.Level &gt;= 220 &amp;&amp; Leatherworking.Level &lt; 230 || InbagCount (4304) &gt;= 280 &amp;&amp; Leatherworking.Level &gt;= 230 &amp;&amp; Leatherworking.Level &lt; 250 || InbagCount (8170) &gt;= 100 &amp;&amp; Leatherworking.Level &gt;= 250 &amp;&amp; Leatherworking.Level &lt; 265 || InbagCount (8170) &gt;= 160 &amp;&amp; Leatherworking.Level &gt;= 265 &amp;&amp; Leatherworking.Level &lt; 285 || InbagCount (8170) &gt;= 180 &amp;&amp; Leatherworking.Level &gt;= 285 &amp;&amp; Leatherworking.Level &lt; 300 || InbagCount (21887) &gt;= 60 &amp;&amp; Leatherworking.Level &gt;= 300 &amp;&amp; Leatherworking.Level &lt; 315 || InbagCount (21887) &gt;= 45 &amp;&amp; Leatherworking.Level &gt;= 315 &amp;&amp; Leatherworking.Level &lt; 320 || InbagCount (21887) &gt;= 50 &amp;&amp; Leatherworking.Level &gt;= 320 &amp;&amp; Leatherworking.Level &lt; 325 || InbagCount (21887) &gt;= 25 &amp;&amp; Leatherworking.Level &gt;= 325 &amp;&amp; Leatherworking.Level &lt; 330 || InbagCount (23793) &gt;= 30 &amp;&amp; Leatherworking.Level &gt;= 330 &amp;&amp; Leatherworking.Level &lt; 340 || InbagCount (23793) &gt;= 20 &amp;&amp; Leatherworking.Level &gt;= 34 &amp;&amp; Leatherworking.Level &lt; 350 || InbagCount (33568) &gt;= 100 &amp;&amp; Leatherworking.Level &gt;= 350 &amp;&amp; Leatherworking.Level &lt; 375 || InbagCount (33568) &gt;= 150 &amp;&amp; Leatherworking.Level &gt;= 375 &amp;&amp; Leatherworking.Level &lt; 390 || InbagCount (33568) &gt;= 60 &amp;&amp; Leatherworking.Level &gt;= 390 &amp;&amp; Leatherworking.Level &lt; 395 || InbagCount (38425) &gt;= 20 &amp;&amp; Leatherworking.Level &gt;= 395 &amp;&amp; Leatherworking.Level &lt; 400 || InbagCount (38425) &gt;= 60 &amp;&amp; Leatherworking.Level &gt;= 400 &amp;&amp; Leatherworking.Level &lt; 415 || InbagCount (38425) &gt;= 40 &amp;&amp; Leatherworking.Level &gt;= 415 &amp;&amp; Leatherworking. Level &lt; 420 || InbagCount (38425) &gt;= 40 &amp;&amp; Leatherworking.Level &gt;= 420 &amp;&amp; Leatherworking.Level &lt; 425 || InbagCount (52977) &gt;= 50 &amp;&amp; Leatherworking.Level &gt;= 425 &amp;&amp; Leatherworking.Level &lt; 435 || InbagCount (52976) &gt;= 75 &amp;&amp; Leatherworking.Level &gt;= 435 &amp;&amp; Leatherworking.Level &lt; 450 || InbagCount (52976) &gt;= 35 &amp;&amp; Leatherworking.Level &gt;= 450 &amp;&amp; Leatherworking.Level &lt; 455 || InbagCount (52976) &gt;= 35 &amp;&amp; Leatherworking.Level &gt;= 455 &amp;&amp; Leatherworking.Level &lt; 460 || InbagCount (52976) &gt;= 70 &amp;&amp; Leatherworking.Level &gt;= 460 &amp;&amp; Leatherworking.Level &lt; 470 || InbagCount (52976) &gt;= 120 &amp;&amp; Leatherworking.Level &gt;= 470 &amp;&amp; Leatherworking.Level &lt; 480 || InbagCount (52976) &gt;= 120 &amp;&amp; Leatherworking.Level &gt;= 480 &amp;&amp; Leatherworking.Level &lt; 490 || InbagCount (56516) &gt;= 50 &amp;&amp; Leatherworking.Level &gt;= 490 &amp;&amp; Leatherworking.Level &lt; 500" IgnoreCanRun="True" ChildrenCount="3">
+    <CustomAction Code="Log(&quot;Time to make stuff&quot;);" />
+    <While Condition="Me.FreeBagSlots &lt; 20" IgnoreCanRun="True" ChildrenCount="1">
+      <CallSubRoutine SubRoutineName="Sell" />
+    </While>
+    <If Condition="Me.FreeNormalBagSlots &gt; 2" IgnoreCanRun="True" ChildrenCount="1">
+      <If Condition="Me.IsAlliance" IgnoreCanRun="True" ChildrenCount="1">
+        <If Condition="Leatherworking.Level &gt;=1 &amp;&amp; Leatherworking.Level &lt; 525" IgnoreCanRun="True" ChildrenCount="41">
+          <If Condition="Leatherworking.Level &gt;= 1 &amp;&amp; Leatherworking.Level &lt; 30" IgnoreCanRun="True" ChildrenCount="1">
+            <CastSpellAction Entry="2152" Repeat="30" RepeatType="Specific" CastOnItem="False" ItemId="0" ItemType="Chest" />
+          </If>
+          <If Condition="Leatherworking.Level &gt;= 30 &amp;&amp; Leatherworking.Level &lt; 45" IgnoreCanRun="True" ChildrenCount="3">
+            <If Condition="!HasRecipe(9058)" IgnoreCanRun="True" ChildrenCount="1">
+              <CallSubRoutine SubRoutineName="Train Leatherworking" />
+            </If>
+            <BuyItemAction NpcEntry="5565" X="-8722.868" Y="479.3223" Z="98.61379" ItemID="2320" Count="15" BuyItemType="SpecificItem" BuyAdditively="True" />
+            <CastSpellAction Entry="9058" Repeat="15" RepeatType="Specific" CastOnItem="False" ItemId="0" ItemType="Chest" />
+          </If>
+          <If Condition="Leatherworking.Level &gt;= 45 &amp;&amp; Leatherworking.Level &lt; 55" IgnoreCanRun="True" ChildrenCount="3">
+            <If Condition="!HasRecipe (3753)" IgnoreCanRun="True" ChildrenCount="1">
+              <CallSubRoutine SubRoutineName="Train Leatherworking" />
+            </If>
+            <BuyItemAction NpcEntry="5565" X="-8722.868" Y="479.3223" Z="98.61379" ItemID="2320" Count="50" BuyItemType="SpecificItem" BuyAdditively="False" />
+            <CastSpellAction Entry="3753" Repeat="10" RepeatType="Specific" CastOnItem="False" ItemId="0" ItemType="Chest" />
+          </If>
+          <If Condition="Leatherworking.Level &gt;= 55 &amp;&amp; Leatherworking.Level &lt; 85" IgnoreCanRun="True" ChildrenCount="3">
+            <If Condition="!HasRecipe (3756)" IgnoreCanRun="True" ChildrenCount="1">
+              <CallSubRoutine SubRoutineName="Train Leatherworking" />
+            </If>
+            <BuyItemAction NpcEntry="5565" X="-8722.868" Y="479.3223" Z="98.61365" ItemID="2320" Count="60" BuyItemType="SpecificItem" BuyAdditively="False" />
+            <CastSpellAction Entry="3756" Repeat="30" RepeatType="Specific" CastOnItem="False" ItemId="0" ItemType="Chest" />
+          </If>
+          <If Condition="Leatherworking.Level &gt;= 85 &amp;&amp; Leatherworking.Level &lt; 100" IgnoreCanRun="True" ChildrenCount="6">
+            <If Condition="!HasRecipe (3763)" IgnoreCanRun="True" ChildrenCount="1">
+              <CallSubRoutine SubRoutineName="Train Leatherworking" />
+            </If>
+            <BuyItemAction NpcEntry="5565" X="-8722.868" Y="479.3223" Z="98.61365" ItemID="2320" Count="40" BuyItemType="SpecificItem" BuyAdditively="False" />
+            <CastSpellAction Entry="3763" Repeat="15" RepeatType="Specific" CastOnItem="False" ItemId="0" ItemType="Chest" />
+            <PutItemInBankAction Amount="15" ItemID="4246" NpcEntry="0" GuildTab="0" AutoFindBank="True" UseCategory="False" Category="TradeGoods" SubCategoryType="WoWItemTradeGoodsClass" SubCategory="None" Bank="Personal" X="0" Y="0" Z="0" />
+            <CallSubRoutine SubRoutineName="Train Skinning" />
+            <If Condition="!HasRecipe (20648)" IgnoreCanRun="True" ChildrenCount="1">
+              <CallSubRoutine SubRoutineName="Train Leatherworking" />
+            </If>
+          </If>
+          <If Condition="Leatherworking.Level &gt;= 100 &amp;&amp; Leatherworking.Level &lt; 115" IgnoreCanRun="True" ChildrenCount="3">
+            <If Condition="!HasRecipe(3817)" IgnoreCanRun="True" ChildrenCount="1">
+              <CallSubRoutine SubRoutineName="Train Leatherworking" />
+            </If>
+            <BuyItemAction NpcEntry="5565" X="-8722.868" Y="479.3223" Z="98.61365" ItemID="4289" Count="15" BuyItemType="SpecificItem" BuyAdditively="True" />
+            <CastSpellAction Entry="3817" Repeat="15" RepeatType="Craftable" CastOnItem="False" ItemId="0" ItemType="Chest" />
+          </If>
+          <If Condition="Leatherworking.Level &gt;= 115 &amp;&amp; Leatherworking.Level &lt; 125" IgnoreCanRun="True" ChildrenCount="4">
+            <If Condition="!HasRecipe (2167)" IgnoreCanRun="True" ChildrenCount="1">
+              <CallSubRoutine SubRoutineName="Train Leatherworking" />
+            </If>
+            <BuyItemAction NpcEntry="5565" X="-8722.868" Y="479.3223" Z="98.61365" ItemID="4340" Count="10" BuyItemType="SpecificItem" BuyAdditively="False" />
+            <BuyItemAction NpcEntry="5565" X="-8722.868" Y="479.3223" Z="98.61365" ItemID="2321" Count="20" BuyItemType="SpecificItem" BuyAdditively="False" />
+            <CastSpellAction Entry="2167" Repeat="10" RepeatType="Specific" CastOnItem="False" ItemId="0" ItemType="Chest" />
+          </If>
+          <If Condition="Leatherworking.Level &gt;= 125 &amp;&amp; Leatherworking.Level &lt; 130" IgnoreCanRun="True" ChildrenCount="4">
+            <If Condition="!HasRecipe(2168)" IgnoreCanRun="True" ChildrenCount="1">
+              <CallSubRoutine SubRoutineName="Train Leatherworking" />
+            </If>
+            <BuyItemAction NpcEntry="5565" X="-8722.868" Y="479.3223" Z="98.61365" ItemID="2321" Count="5" BuyItemType="SpecificItem" BuyAdditively="False" />
+            <BuyItemAction NpcEntry="5565" X="-8722.868" Y="479.3223" Z="98.61365" ItemID="4340" Count="5" BuyItemType="SpecificItem" BuyAdditively="False" />
+            <CastSpellAction Entry="2168" Repeat="5" RepeatType="Specific" CastOnItem="False" ItemId="0" ItemType="Chest" />
+          </If>
+          <If Condition="Leatherworking.Level &gt;= 130 &amp;&amp; Leatherworking.Level &lt; 145" IgnoreCanRun="True" ChildrenCount="6">
+            <If Condition="!HasRecipe (3766)" IgnoreCanRun="True" ChildrenCount="1">
+              <CallSubRoutine SubRoutineName="Train Leatherworking" />
+            </If>
+            <If Condition="Me.FreeBagSlots &lt; 15" IgnoreCanRun="True" ChildrenCount="1">
+              <CallSubRoutine SubRoutineName="Sell" />
+            </If>
+            <GetItemfromBankAction ItemID="4246" Amount="15" Bank="Personal" GetItemfromBankType="SpecificItem" NpcEntry="0" AutoFindBank="True" X="0" Y="0" Z="0" MinFreeBagSlots="2" WithdrawAdditively="True" />
+            <BuyItemAction NpcEntry="5565" X="-8722.868" Y="479.3223" Z="98.61365" ItemID="2321" Count="30" BuyItemType="SpecificItem" BuyAdditively="False" />
+            <BuyItemAction NpcEntry="5565" X="-8722.868" Y="479.3223" Z="98.61365" ItemID="4340" Count="15" BuyItemType="SpecificItem" BuyAdditively="False" />
+            <CastSpellAction Entry="3766" Repeat="15" RepeatType="Specific" CastOnItem="False" ItemId="0" ItemType="Chest" />
+          </If>
+          <If Condition="Leatherworking.Level &gt;= 145 &amp;&amp; Leatherworking.Level &lt; 150" IgnoreCanRun="True" ChildrenCount="4">
+            <If Condition="!HasRecipe (3764)" IgnoreCanRun="True" ChildrenCount="1">
+              <CallSubRoutine SubRoutineName="Train Leatherworking" />
+            </If>
+            <BuyItemAction NpcEntry="5565" X="-8722.868" Y="479.3223" Z="98.61365" ItemID="2321" Count="20" BuyItemType="SpecificItem" BuyAdditively="False" />
+            <CastSpellAction Entry="3764" Repeat="5" RepeatType="Specific" CastOnItem="False" ItemId="0" ItemType="Chest" />
+            <CallSubRoutine SubRoutineName="Train Skinning" />
+          </If>
+          <If Condition="Leatherworking.Level &gt;= 150 &amp;&amp; Leatherworking.Level &lt; 160" IgnoreCanRun="True" ChildrenCount="3">
+            <If Condition="!HasRecipe (3764)" IgnoreCanRun="True" ChildrenCount="1">
+              <CallSubRoutine SubRoutineName="Train Leatherworking" />
+            </If>
+            <BuyItemAction NpcEntry="5565" X="-8722.868" Y="479.3223" Z="98.6138" ItemID="2321" Count="40" BuyItemType="SpecificItem" BuyAdditively="True" />
+            <CastSpellAction Entry="3764" Repeat="10" RepeatType="Specific" CastOnItem="False" ItemId="0" ItemType="Chest" />
+          </If>
+          <If Condition="Leatherworking.Level &gt;= 160 &amp;&amp; Leatherworking.Level &lt; 180" IgnoreCanRun="True" ChildrenCount="3">
+            <If Condition="!HasRecipe(3780)" IgnoreCanRun="True" ChildrenCount="1">
+              <CallSubRoutine SubRoutineName="Train Leatherworking" />
+            </If>
+            <BuyItemAction NpcEntry="5565" X="-8722.868" Y="479.3223" Z="98.6138" ItemID="2321" Count="20" BuyItemType="SpecificItem" BuyAdditively="False" />
+            <CastSpellAction Entry="3780" Repeat="20" RepeatType="Specific" CastOnItem="False" ItemId="0" ItemType="Chest" />
+          </If>
+          <If Condition="Leatherworking.Level &gt;= 180 &amp;&amp; Leatherworking.Level &lt; 190" IgnoreCanRun="True" ChildrenCount="5">
+            <If Condition="!HasRecipe (3818)" IgnoreCanRun="True" ChildrenCount="1">
+              <CallSubRoutine SubRoutineName="Train Leatherworking" />
+            </If>
+            <BuyItemAction NpcEntry="5565" X="-8722.868" Y="479.3223" Z="98.61313" ItemID="4289" Count="60" BuyItemType="SpecificItem" BuyAdditively="True" />
+            <CastSpellAction Entry="3818" Repeat="1" RepeatType="Craftable" CastOnItem="False" ItemId="0" ItemType="Chest" />
+            <BuyItemAction NpcEntry="5565" X="-8722.868" Y="479.3223" Z="98.61313" ItemID="2321" Count="20" BuyItemType="SpecificItem" BuyAdditively="False" />
+            <CastSpellAction Entry="7151" Repeat="10" RepeatType="Specific" CastOnItem="False" ItemId="0" ItemType="Chest" />
+          </If>
+          <If Condition="Leatherworking.Level &gt;= 190 &amp;&amp; Leatherworking.Level &lt; 200" IgnoreCanRun="True" ChildrenCount="3">
+            <If Condition="!HasRecipe (7156)" IgnoreCanRun="True" ChildrenCount="1">
+              <CallSubRoutine SubRoutineName="Train Leatherworking" />
+            </If>
+            <BuyItemAction NpcEntry="5565" X="-8722.868" Y="479.3223" Z="98.61313" ItemID="4291" Count="10" BuyItemType="SpecificItem" BuyAdditively="False" />
+            <CastSpellAction Entry="7156" Repeat="10" RepeatType="Specific" CastOnItem="False" ItemId="0" ItemType="Chest" />
+          </If>
+          <If Condition="Leatherworking.Level &gt;= 200 &amp;&amp; Leatherworking.Level &lt; 220" IgnoreCanRun="True" ChildrenCount="3">
+            <If Condition="!HasRecipe (10487)" IgnoreCanRun="True" ChildrenCount="1">
+              <CallSubRoutine SubRoutineName="Train Leatherworking" />
+            </If>
+            <BuyItemAction NpcEntry="5565" X="-8722.868" Y="479.3223" Z="98.61313" ItemID="4291" Count="20" BuyItemType="SpecificItem" BuyAdditively="False" />
+            <CastSpellAction Entry="10487" Repeat="20" RepeatType="Craftable" CastOnItem="False" ItemId="0" ItemType="Chest" />
+          </If>
+          <If Condition="Leatherworking.Level &gt;= 220 &amp;&amp; Leatherworking.Level &lt; 230" IgnoreCanRun="True" ChildrenCount="3">
+            <If Condition="!HasRecipe (10507)" IgnoreCanRun="True" ChildrenCount="1">
+              <CallSubRoutine SubRoutineName="Train Leatherworking" />
+            </If>
+            <BuyItemAction NpcEntry="5565" X="-8722.868" Y="479.3223" Z="98.61313" ItemID="4291" Count="20" BuyItemType="SpecificItem" BuyAdditively="True" />
+            <CastSpellAction Entry="10507" Repeat="10" RepeatType="Specific" CastOnItem="False" ItemId="0" ItemType="Chest" />
+          </If>
+          <If Condition="Leatherworking.Level &gt;= 230 &amp;&amp; Leatherworking.Level &lt; 250" IgnoreCanRun="True" ChildrenCount="3">
+            <If Condition="!HasRecipe (10548)" IgnoreCanRun="True" ChildrenCount="1">
+              <CallSubRoutine SubRoutineName="Train Leatherworking" />
+            </If>
+            <BuyItemAction NpcEntry="5565" X="-8722.868" Y="479.3223" Z="98.61313" ItemID="4291" Count="80" BuyItemType="SpecificItem" BuyAdditively="True" />
+            <CastSpellAction Entry="10548" Repeat="20" RepeatType="Craftable" CastOnItem="False" ItemId="0" ItemType="Chest" />
+          </If>
+          <If Condition="Leatherworking.Level &gt;= 250 &amp;&amp; Leatherworking.Level &lt; 265" IgnoreCanRun="True" ChildrenCount="2">
+            <If Condition="!HasRecipe (19058)" IgnoreCanRun="True" ChildrenCount="1">
+              <CallSubRoutine SubRoutineName="Train Leatherworking" />
+            </If>
+            <CastSpellAction Entry="19058" Repeat="20" RepeatType="Specific" CastOnItem="False" ItemId="0" ItemType="Chest" />
+          </If>
+          <If Condition="Leatherworking.Level &gt;= 265 &amp;&amp; Leatherworking.Level &lt; 285" IgnoreCanRun="True" ChildrenCount="4">
+            <If Condition="!HasRecipe (19052)" IgnoreCanRun="True" ChildrenCount="1">
+              <CallSubRoutine SubRoutineName="Train Leatherworking" />
+            </If>
+            <BuyItemAction NpcEntry="5565" X="-8722.868" Y="479.3223" Z="98.61313" ItemID="2325" Count="20" BuyItemType="SpecificItem" BuyAdditively="False" />
+            <BuyItemAction NpcEntry="5565" X="-8722.868" Y="479.3223" Z="98.61313" ItemID="14341" Count="20" BuyItemType="SpecificItem" BuyAdditively="False" />
+            <CastSpellAction Entry="19052" Repeat="20" RepeatType="Specific" CastOnItem="False" ItemId="0" ItemType="Chest" />
+          </If>
+          <If Condition="Leatherworking.Level &gt;= 285 &amp;&amp; Leatherworking.Level &lt; 300" IgnoreCanRun="True" ChildrenCount="4">
+            <If Condition="!HasRecipe (19071)" IgnoreCanRun="True" ChildrenCount="1">
+              <CallSubRoutine SubRoutineName="Train Leatherworking" />
+            </If>
+            <BuyItemAction NpcEntry="5565" X="-8722.868" Y="479.3223" Z="98.61313" ItemID="2325" Count="15" BuyItemType="SpecificItem" BuyAdditively="False" />
+            <BuyItemAction NpcEntry="5565" X="-8722.868" Y="479.3223" Z="98.61313" ItemID="14341" Count="15" BuyItemType="SpecificItem" BuyAdditively="False" />
+            <CastSpellAction Entry="19071" Repeat="15" RepeatType="Specific" CastOnItem="False" ItemId="0" ItemType="Chest" />
+          </If>
+          <If Condition="Leatherworking.Level &gt;= 300 &amp;&amp; Leatherworking.Level &lt; 310" IgnoreCanRun="True" ChildrenCount="1">
+            <CastSpellAction Entry="32456" Repeat="10" RepeatType="Specific" CastOnItem="False" ItemId="0" ItemType="Chest" />
+          </If>
+          <If Condition="Leatherworking.Level &gt;= 310 &amp;&amp; Leatherworking.Level &lt; 320" IgnoreCanRun="True" ChildrenCount="3">
+            <If Condition="!HasRecipe(32479)" IgnoreCanRun="True" ChildrenCount="1">
+              <CallSubRoutine SubRoutineName="Train Leatherworking" />
+            </If>
+            <BuyItemAction NpcEntry="16826" X="-708.8713" Y="2739.131" Z="94.73376" ItemID="14341" Count="15" BuyItemType="SpecificItem" BuyAdditively="True" />
+            <CastSpellAction Entry="32479" Repeat="10" RepeatType="Specific" CastOnItem="False" ItemId="0" ItemType="Chest" />
+          </If>
+          <If Condition="Leatherworking.Level &gt;= 320 &amp;&amp; Leatherworking.Level &lt; 325" IgnoreCanRun="True" ChildrenCount="3">
+            <If Condition="!HasRecipe (32471)" IgnoreCanRun="True" ChildrenCount="1">
+              <CallSubRoutine SubRoutineName="Train Leatherworking" />
+            </If>
+            <BuyItemAction NpcEntry="16826" X="-708.8713" Y="2739.131" Z="94.73376" ItemID="14341" Count="10" BuyItemType="SpecificItem" BuyAdditively="True" />
+            <CastSpellAction Entry="32471" Repeat="5" RepeatType="Specific" CastOnItem="False" ItemId="0" ItemType="Chest" />
+          </If>
+          <If Condition="Leatherworking.Level &gt;= 325 &amp;&amp; Leatherworking.Level &lt; 330" IgnoreCanRun="True" ChildrenCount="1">
+            <If Condition="!HasRecipe(32455)" IgnoreCanRun="True" ChildrenCount="2">
+              <CallSubRoutine SubRoutineName="Train Leatherworking" />
+              <CastSpellAction Entry="32455" Repeat="5" RepeatType="Craftable" CastOnItem="False" ItemId="0" ItemType="Chest" />
+            </If>
+          </If>
+          <If Condition="Leatherworking.Level &gt;= 330 &amp;&amp; Leatherworking.Level &lt; 340" IgnoreCanRun="True" ChildrenCount="3">
+            <If Condition="!HasRecipe (32473)" IgnoreCanRun="True" ChildrenCount="1">
+              <CallSubRoutine SubRoutineName="Train Leatherworking" />
+            </If>
+            <BuyItemAction NpcEntry="16826" X="-708.8713" Y="2739.131" Z="94.73376" ItemID="14341" Count="30" BuyItemType="SpecificItem" BuyAdditively="False" />
+            <CastSpellAction Entry="32473" Repeat="10" RepeatType="Specific" CastOnItem="False" ItemId="0" ItemType="Chest" />
+          </If>
+          <If Condition="Leatherworking.Level &gt;= 340 &amp;&amp; Leatherworking.Level &lt; 350" IgnoreCanRun="True" ChildrenCount="3">
+            <If Condition="!HasRecipe(32469)" IgnoreCanRun="True" ChildrenCount="1">
+              <CallSubRoutine SubRoutineName="Train Leatherworking" />
+            </If>
+            <BuyItemAction NpcEntry="16826" X="-708.8713" Y="2739.131" Z="94.73376" ItemID="14341" Count="30" BuyItemType="SpecificItem" BuyAdditively="True" />
+            <CastSpellAction Entry="32469" Repeat="10" RepeatType="Specific" CastOnItem="False" ItemId="0" ItemType="Chest" />
+          </If>
+          <If Condition="Leatherworking.Level &gt;= 350 &amp;&amp; Leatherworking.Level &lt; 360" IgnoreCanRun="True" ChildrenCount="2">
+            <If Condition="!HasRecipe (50962)" IgnoreCanRun="True" ChildrenCount="1">
+              <CallSubRoutine SubRoutineName="Train Leatherworking" />
+            </If>
+            <CastSpellAction Entry="50962" Repeat="33" RepeatType="Specific" CastOnItem="False" ItemId="0" ItemType="Chest" />
+          </If>
+          <If Condition="Leatherworking.Level &gt;= 375 &amp;&amp; Leatherworking.Level &lt; 390" IgnoreCanRun="True" ChildrenCount="2">
+            <If Condition="!HasRecipe (50947)" IgnoreCanRun="True" ChildrenCount="1">
+              <CallSubRoutine SubRoutineName="Train Leatherworking" />
+            </If>
+            <CastSpellAction Entry="50947" Repeat="15" RepeatType="Specific" CastOnItem="False" ItemId="0" ItemType="Chest" />
+          </If>
+          <If Condition="Leatherworking.Level &gt;= 390 &amp;&amp; Leatherworking.Level &lt; 395" IgnoreCanRun="True" ChildrenCount="2">
+            <If Condition="!HasRecipe (50936)" IgnoreCanRun="True" ChildrenCount="1">
+              <CallSubRoutine SubRoutineName="Train Leatherworking" />
+            </If>
+            <CastSpellAction Entry="50936" Repeat="5" RepeatType="Craftable" CastOnItem="False" ItemId="0" ItemType="Chest" />
+          </If>
+          <If Condition="Leatherworking.Level &gt;= 395 &amp;&amp; Leatherworking.Level &lt; 400" IgnoreCanRun="True" ChildrenCount="2">
+            <If Condition="!HasRecipe (50963)" IgnoreCanRun="True" ChildrenCount="1">
+              <CallSubRoutine SubRoutineName="Train Leatherworking" />
+            </If>
+            <CastSpellAction Entry="50963" Repeat="1" RepeatType="Craftable" CastOnItem="False" ItemId="0" ItemType="Chest" />
+          </If>
+          <If Condition="Leatherworking.Level &gt;= 400 &amp;&amp; Leatherworking.Level &lt; 415" IgnoreCanRun="True" ChildrenCount="5">
+            <If Condition="!HasRecipe (60601)" IgnoreCanRun="True" ChildrenCount="1">
+              <CallSubRoutine SubRoutineName="Train Leatherworking" />
+            </If>
+            <FlyToAction Dismount="True" X="5902.246" Y="727.6273" Z="639.8905" />
+            <BuyItemFromAhAction ItemID="37705" MaxBuyout="100g0s0c" Amount="75" ItemListType="Item" AutoFindAh="True" X="0" Y="0" Z="0" BidOnItem="False" BuyAdditively="False" />
+            <CallSubRoutine SubRoutineName="Mail" />
+            <CastSpellAction Entry="60601" Repeat="15" RepeatType="Specific" CastOnItem="False" ItemId="0" ItemType="Chest" />
+          </If>
+          <If Condition="Leatherworking.Level &gt;= 415 &amp;&amp; Leatherworking.Level &lt; 420" IgnoreCanRun="True" ChildrenCount="2">
+            <If Condition="!HasRecipe (60643)" IgnoreCanRun="True" ChildrenCount="1">
+              <CallSubRoutine SubRoutineName="Train Leatherworking" />
+            </If>
+            <CastSpellAction Entry="60643" Repeat="5" RepeatType="Specific" CastOnItem="False" ItemId="0" ItemType="Chest" />
+          </If>
+          <If Condition="Leatherworking.Level &gt;= 420 &amp;&amp; Leatherworking.Level &lt; 425" IgnoreCanRun="True" ChildrenCount="5">
+            <If Condition="!HasRecipe (60720)" IgnoreCanRun="True" ChildrenCount="1">
+              <CallSubRoutine SubRoutineName="Train Leatherworking" />
+            </If>
+            <FlyToAction Dismount="True" X="5902.246" Y="727.6273" Z="639.8905" />
+            <BuyItemFromAhAction ItemID="35622" MaxBuyout="100g0s0c" Amount="5" ItemListType="Item" AutoFindAh="True" X="0" Y="0" Z="0" BidOnItem="False" BuyAdditively="True" />
+            <CallSubRoutine SubRoutineName="Mail" />
+            <CastSpellAction Entry="60720" Repeat="5" RepeatType="Specific" CastOnItem="False" ItemId="0" ItemType="Chest" />
+          </If>
+          <If Condition="Leatherworking.Level &gt;= 425 &amp;&amp; Leatherworking.Level &lt; 430" IgnoreCanRun="True" ChildrenCount="2">
+            <If Condition="!HasRecipe (84950)" IgnoreCanRun="True" ChildrenCount="2">
+              <CallSubRoutine SubRoutineName="Hyjal to SW" />
+              <CallSubRoutine SubRoutineName="Train Leatherworking" />
+            </If>
+            <CastSpellAction Entry="84950" Repeat="10" RepeatType="Specific" CastOnItem="False" ItemId="0" ItemType="Chest" />
+          </If>
+          <If Condition="Leatherworking.Level &gt;=435 &amp;&amp; Leatherworking.Level &lt; 450" IgnoreCanRun="True" ChildrenCount="2">
+            <If Condition="!HasRecipe (78379)" IgnoreCanRun="True" ChildrenCount="2">
+              <CallSubRoutine SubRoutineName="Hyjal to SW" />
+              <CallSubRoutine SubRoutineName="Train Leatherworking" />
+            </If>
+            <CastSpellAction Entry="78379" Repeat="15" RepeatType="Specific" CastOnItem="False" ItemId="0" ItemType="Chest" />
+          </If>
+          <If Condition="Leatherworking.Level &gt;= 450 &amp;&amp; Leatherworking.Level &lt; 455" IgnoreCanRun="True" ChildrenCount="5">
+            <If Condition="Me.MapId == 1" IgnoreCanRun="True" ChildrenCount="1">
+              <CallSubRoutine SubRoutineName="Hyjal to SW" />
+            </If>
+            <If Condition="!HasRecipe (78398)" IgnoreCanRun="True" ChildrenCount="1">
+              <CallSubRoutine SubRoutineName="Train Leatherworking" />
+            </If>
+            <FlyToAction Dismount="True" X="-8718.813" Y="424.2958" Z="98.05862" />
+            <BuyItemAction NpcEntry="5565" X="-8722.868" Y="479.3223" Z="98.61375" ItemID="38426" Count="5" BuyItemType="SpecificItem" BuyAdditively="False" />
+            <CastSpellAction Entry="78398" Repeat="5" RepeatType="Specific" CastOnItem="False" ItemId="0" ItemType="Chest" />
+          </If>
+          <If Condition="Leatherworking.Level &gt;= 455 &amp;&amp; Leatherworking.Level &lt; 460" IgnoreCanRun="True" ChildrenCount="5">
+            <If Condition="Me.MapId == 1" IgnoreCanRun="True" ChildrenCount="1">
+              <CallSubRoutine SubRoutineName="Hyjal to SW" />
+            </If>
+            <If Condition="!HasRecipe (78416)" IgnoreCanRun="True" ChildrenCount="1">
+              <CallSubRoutine SubRoutineName="Train Leatherworking" />
+            </If>
+            <FlyToAction Dismount="True" X="-8718.813" Y="424.2958" Z="98.05862" />
+            <BuyItemAction NpcEntry="5565" X="-8722.868" Y="479.3223" Z="98.61375" ItemID="38426" Count="5" BuyItemType="SpecificItem" BuyAdditively="False" />
+            <CastSpellAction Entry="78416" Repeat="5" RepeatType="Specific" CastOnItem="False" ItemId="0" ItemType="Chest" />
+          </If>
+          <If Condition="Leatherworking.Level &gt;= 460 &amp;&amp; Leatherworking.Level &lt; 470" IgnoreCanRun="True" ChildrenCount="5">
+            <If Condition="Me.MapId == 1" IgnoreCanRun="True" ChildrenCount="1">
+              <CallSubRoutine SubRoutineName="Hyjal to SW" />
+            </If>
+            <If Condition="!HasRecipe (78380)" IgnoreCanRun="True" ChildrenCount="1">
+              <CallSubRoutine SubRoutineName="Train Leatherworking" />
+            </If>
+            <FlyToAction Dismount="True" X="-8718.813" Y="424.2958" Z="98.05862" />
+            <BuyItemAction NpcEntry="5565" X="-8722.868" Y="479.3223" Z="98.61375" ItemID="38426" Count="10" BuyItemType="SpecificItem" BuyAdditively="False" />
+            <CastSpellAction Entry="78380" Repeat="10" RepeatType="Specific" CastOnItem="False" ItemId="0" ItemType="Chest" />
+          </If>
+          <If Condition="Leatherworking.Level &gt;= 470 &amp;&amp; Leatherworking.Level &lt; 480" IgnoreCanRun="True" ChildrenCount="5">
+            <If Condition="Me.MapId == 1" IgnoreCanRun="True" ChildrenCount="1">
+              <CallSubRoutine SubRoutineName="Hyjal to SW" />
+            </If>
+            <If Condition="!HasRecipe (78396)" IgnoreCanRun="True" ChildrenCount="1">
+              <CallSubRoutine SubRoutineName="Train Leatherworking" />
+            </If>
+            <FlyToAction Dismount="True" X="-8718.813" Y="424.2958" Z="98.05862" />
+            <BuyItemAction NpcEntry="5565" X="-8722.868" Y="479.3223" Z="98.61375" ItemID="38426" Count="10" BuyItemType="SpecificItem" BuyAdditively="False" />
+            <CastSpellAction Entry="78396" Repeat="10" RepeatType="Specific" CastOnItem="False" ItemId="0" ItemType="Chest" />
+          </If>
+          <If Condition="Leatherworking.Level &gt;= 480 &amp;&amp; Leatherworking.Level &lt; 490" IgnoreCanRun="True" ChildrenCount="5">
+            <If Condition="Me.MapId == 1" IgnoreCanRun="True" ChildrenCount="1">
+              <CallSubRoutine SubRoutineName="Hyjal to SW" />
+            </If>
+            <If Condition="!HasRecipe (78428)" IgnoreCanRun="True" ChildrenCount="1">
+              <CallSubRoutine SubRoutineName="Train Leatherworking" />
+            </If>
+            <FlyToAction Dismount="True" X="-8718.813" Y="424.2958" Z="98.05862" />
+            <BuyItemAction NpcEntry="5565" X="-8722.868" Y="479.3223" Z="98.61375" ItemID="38426" Count="10" BuyItemType="SpecificItem" BuyAdditively="False" />
+            <CastSpellAction Entry="78428" Repeat="10" RepeatType="Specific" CastOnItem="False" ItemId="0" ItemType="Chest" />
+          </If>
+          <If Condition="Leatherworking.Level &gt;= 490 &amp;&amp; Leatherworking.Level &lt; 500" IgnoreCanRun="True" ChildrenCount="3">
+            <If Condition="Me.MapId == 1" IgnoreCanRun="True" ChildrenCount="1">
+              <CallSubRoutine SubRoutineName="Hyjal to SW" />
+            </If>
+            <If Condition="!HasRecipe (78424)" IgnoreCanRun="True" ChildrenCount="1">
+              <CallSubRoutine SubRoutineName="Train Leatherworking" />
+            </If>
+            <CastSpellAction Entry="78424" Repeat="10" RepeatType="Specific" CastOnItem="False" ItemId="0" ItemType="Chest" />
+          </If>
+        </If>
+      </If>
+    </If>
+  </While>
+  <If Condition="InbagCount (2318) &lt; 30 &amp;&amp; Leatherworking.Level &gt;= 1 &amp;&amp; Leatherworking.Level &lt; 30 || InbagCount (2318) &lt; 30 &amp;&amp; Leatherworking.Level &gt;= 30 &amp;&amp; Leatherworking.Level &lt; 45 || InbagCount (2318) &lt; 50 &amp;&amp; Leatherworking.Level &gt;= 45 &amp;&amp; Leatherworking.Level &lt; 55 || InbagCount (2318) &lt; 90 &amp;&amp; Leatherworking.Level &gt;= 55 &amp;&amp; Leatherworking.Level &lt; 85 || InbagCount (2318) &lt; 120 &amp;&amp; Leatherworking.Level &gt;= 85 &amp;&amp; Leatherworking.Level &lt; 100 || InbagCount (4232) &lt; 15 &amp;&amp; Leatherworking.Level &gt;= 100 &amp;&amp; Leatherworking.Level &lt; 115 || InbagCount (2319) &lt; 40 &amp;&amp; Leatherworking.Level &gt;= 115 &amp;&amp; Leatherworking.Level &lt; 125 || InbagCount (2319) &lt; 40 &amp;&amp; Leatherworking.Level &gt;= 125 &amp;&amp; Leatherworking.Level &lt; 130 || InbagCount (2319) &gt;= 40 &amp;&amp; Leatherworking.Level &gt;= 125 &amp;&amp; Leatherworking.Level &lt; 130 || InbagCount (4233) &lt; 15 &amp;&amp; Leatherworking.Level &gt;= 130 &amp;&amp; Leatherworking.Level &lt; 145 || InbagCount (2319) &lt; 70 &amp;&amp; Leatherworking.Level &gt;= 145 &amp;&amp; Leatherworking.Level &lt; 150 || InbagCount (2319) &lt; 140 &amp;&amp; Leatherworking.Level &gt;= 150 &amp;&amp; Leatherworking.Level &lt; 160 || InbagCount (4234) &lt; 75 &amp;&amp; Leatherworking.Level &gt;= 160 &amp;&amp; Leatherworking.Level &lt; 175 || InbagCount (4234) &lt; 60 &amp;&amp; Leatherworking.Level &gt;= 175 &amp;&amp; Leatherworking.Level &lt; 180 || InbagCount (4234) &lt; 80 &amp;&amp; Leatherworking.Level &gt;= 180 &amp;&amp; Leatherworking.Level &lt; 190 || InbagCount (4234) &lt; 40 &amp;&amp; Leatherworking.Level &gt;= 190 &amp;&amp; Leatherworking.Level &lt; 200 || InbagCount (4304) &lt; 100 &amp;&amp; Leatherworking.Level &gt;= 200 &amp;&amp; Leatherworking.Level &lt; 220 || InbagCount (4304) &lt; 50 &amp;&amp; Leatherworking.Level &gt;= 220 &amp;&amp; Leatherworking.Level &lt; 230 || InbagCount (4304) &lt; 280 &amp;&amp; Leatherworking.Level &gt;= 230 &amp;&amp; Leatherworking.Level &lt; 250 || InbagCount (8170) &lt; 100 &amp;&amp; Leatherworking.Level &gt;= 250 &amp;&amp; Leatherworking.Level &lt; 265 || InbagCount (8170) &lt; 160 &amp;&amp; Leatherworking.Level &gt;= 265 &amp;&amp; Leatherworking.Level &lt; 285 || InbagCount (8170) &lt; 180 &amp;&amp; Leatherworking.Level &gt;= 285 &amp;&amp; Leatherworking.Level &lt; 300 || InbagCount (21887) &lt; 60 &amp;&amp; Leatherworking.Level &gt;= 300 &amp;&amp; Leatherworking.Level &lt; 315 || InbagCount (21887) &lt; 45 &amp;&amp; Leatherworking.Level &gt;= 315 &amp;&amp; Leatherworking.Level &lt; 320 || InbagCount (21887) &lt; 50 &amp;&amp; Leatherworking.Level &gt;= 320 &amp;&amp; Leatherworking.Level &lt; 325 || InbagCount (21887) &lt; 25 &amp;&amp; Leatherworking.Level &gt;= 325 &amp;&amp; Leatherworking.Level &lt; 330 || InbagCount (23793) &lt; 30 &amp;&amp; Leatherworking.Level &gt;= 330 &amp;&amp;Leatherworking.Level &lt; 340 || InbagCount (23793) &lt; 20 &amp;&amp; Leatherworking.Level &gt;= 34 &amp;&amp; Leatherworking.Level &lt; 350 || InbagCount (33568) &lt; 100 &amp;&amp; Leatherworking.Level &gt;= 350 &amp;&amp; Leatherworking.Level &lt; 375 || InbagCount (33568) &lt; 150 &amp;&amp; Leatherworking.Level &gt;= 375 &amp;&amp; Leatherworking.Level &lt; 390 || InbagCount (33568) &lt; 60 &amp;&amp; Leatherworking.Level &gt;= 390 &amp;&amp; Leatherworking.Level &lt; 395 || InbagCount (38425) &lt; 20 &amp;&amp; Leatherworking.Level &gt;= 395 &amp;&amp; Leatherworking.Level &lt; 400 || InbagCount (38425) &lt; 60 &amp;&amp; Leatherworking.Level &gt;= 400 &amp;&amp; Leatherworking.Level &lt; 415 || InbagCount (38425) &lt; 40 &amp;&amp; Leatherworking.Level &gt;= 415 &amp;&amp; Leatherworking. Level &lt; 420 || InbagCount (38425) &lt; 40 &amp;&amp; Leatherworking.Level &gt;= 420 &amp;&amp; Leatherworking.Level &lt; 425 || InbagCount (52977) &lt; 50 &amp;&amp; Leatherworking.Level &gt;= 425 &amp;&amp; Leatherworking.Level &lt; 435 || InbagCount (52976) &lt; 75 &amp;&amp; Leatherworking.Level &gt;= 435 &amp;&amp; Leatherworking.Level &lt; 450 || InbagCount (52976) &lt; 35 &amp;&amp; Leatherworking.Level &gt;= 450 &amp;&amp; Leatherworking.Level &lt; 455 || InbagCount (52976) &lt; 35 &amp;&amp; Leatherworking.Level &gt;= 455 &amp;&amp; Leatherworking.Level &lt; 460 || InbagCount (52976) &lt; 70 &amp;&amp; Leatherworking.Level &gt;= 460 &amp;&amp; Leatherworking.Level &lt; 470 || InbagCount (52976) &lt; 120 &amp;&amp; Leatherworking.Level &gt;= 470 &amp;&amp; Leatherworking.Level &lt; 480 || InbagCount (52976) &lt; 120 &amp;&amp; Leatherworking.Level &gt;= 480 &amp;&amp; Leatherworking.Level &lt; 490 || InbagCount (56516) &lt; 50 &amp;&amp; Leatherworking.Level &gt;= 490 &amp;&amp; Leatherworking.Level &lt; 500" IgnoreCanRun="True" ChildrenCount="1">
+    <If Condition="Me.IsAlliance" IgnoreCanRun="True" ChildrenCount="1">
+      <If Condition="Me.FreeNormalBagSlots &gt; 2" IgnoreCanRun="True" ChildrenCount="9">
+        <If Condition="Leatherworking.Level &gt;= 1 &amp;&amp; Leatherworking.Level &lt; 100" IgnoreCanRun="True" ChildrenCount="2">
+          <LoadProfileAction Path="HBProfiles\Skinning\30-75.xml" ProfileType="Honorbuddy" />
+          <CustomAction Code="Log(&quot;Load Profile for Light Leather&quot;);" />
+        </If>
+        <If Condition="Leatherworking.Level &gt;= 100 &amp;&amp; Leatherworking.Level &lt; 150" IgnoreCanRun="True" ChildrenCount="3">
+          <If Condition="Me.GetSkill(Styx.SkillLine.Skinning).CurrentValue &lt; 105" IgnoreCanRun="False" ChildrenCount="2">
+            <LoadProfileAction Path="HBProfiles\Skinning\75-105.xml" ProfileType="Honorbuddy" />
+            <CustomAction Code="Log(&quot;Loading Profile for Light/Medium Leather&quot;);" />
+          </If>
+          <If Condition="Me.GetSkill(Styx.SkillLine.Skinning).CurrentValue &gt;105 &amp;&amp; Me.GetSkill(Styx.SkillLine.Skinning).CurrentValue &lt; 130" IgnoreCanRun="False" ChildrenCount="2">
+            <LoadProfileAction Path="HBProfiles\Skinning\105-130.xml" ProfileType="Honorbuddy" />
+            <CustomAction Code="Log(&quot;Loading Profile for Medium Leather&quot;);" />
+          </If>
+          <If Condition="Me.GetSkill(Styx.SkillLine.Skinning).CurrentValue &gt;130 &amp;&amp; Me.GetSkill(Styx.SkillLine.Skinning).CurrentValue &lt; 175" IgnoreCanRun="False" ChildrenCount="2">
+            <CustomAction Code="Log(&quot;Load Profile for Medium Hide&quot;);" />
+            <LoadProfileAction Path="HBProfiles\Skinning\130-175.xml" ProfileType="Honorbuddy" />
+          </If>
+        </If>
+        <If Condition="Leatherworking.Level &gt;= 150 &amp;&amp; Leatherworking.Level &lt; 175" IgnoreCanRun="True" ChildrenCount="3">
+          <LoadProfileAction Path="HBProfiles\Skinning\175-200.xml" ProfileType="Honorbuddy" />
+          <CustomAction Code="Log(&quot;Load Profile for Heavy Leather&quot;);" />
+          <If Condition="Me.GetSkill(Styx.SkillLine.Skinning).CurrentValue &gt;= 200 &amp;&amp; Me.GetSkill(Styx.SkillLine.Skinning).CurrentValue &lt; 300" IgnoreCanRun="True" ChildrenCount="2">
+            <LoadProfileAction Path="HBProfiles\Skinning\200-230.xml" ProfileType="Honorbuddy" />
+            <CustomAction Code="Log(&quot;Load Profile for Heavy Leather and Hide&quot;);" />
+          </If>
+        </If>
+        <If Condition="Leatherworking.Level &gt;= 175 &amp;&amp; Leatherworking.Level &lt; 200" IgnoreCanRun="True" ChildrenCount="2">
+          <LoadProfileAction Path="HBProfiles\Skinning\200-230.xml" ProfileType="Honorbuddy" />
+          <CustomAction Code="Log(&quot;Loading Profile for Heavy Leather&quot;);" />
+        </If>
+        <If Condition="Leatherworking.Level &gt;= 200 &amp;&amp; Leatherworking.Level &lt; 300" IgnoreCanRun="True" ChildrenCount="2">
+          <CustomAction Code="Log(&quot;Loading Profile for Thick/Rugged Leather&quot;);" />
+          <LoadProfileAction Path="HBProfiles\Skinning\275-300.xml" ProfileType="Honorbuddy" />
+        </If>
+        <If Condition="Leatherworking.Level &gt;= 300 &amp;&amp; Leatherworking.Level &lt; 325" IgnoreCanRun="True" ChildrenCount="5">
+          <CallSubRoutine SubRoutineName="SW to Outlands" />
+          <FlyToAction Dismount="True" X="-673.42" Y="2717.27" Z="94.18" />
+          <If Condition="!HasRecipe(32454)" IgnoreCanRun="True" ChildrenCount="1">
+            <CallSubRoutine SubRoutineName="Train Leatherworking" />
+          </If>
+          <LoadProfileAction Path="HBProfiles\Skinning\310-330 skinning Hellfire.xml" ProfileType="Honorbuddy" />
+          <CustomAction Code="Log(&quot;Loading Profile for Knothide Leather&quot;);" />
+        </If>
+        <If Condition="Leatherworking.Level &gt;= 325 &amp;&amp; Leatherworking.Level &lt; 350" IgnoreCanRun="True" ChildrenCount="2">
+          <LoadProfileAction Path="HBProfiles\Skinning\Nagrand Alliance.xml" ProfileType="Honorbuddy" />
+          <CustomAction Code="Log(&quot;Loading Profile for Knothide Leather&quot;);" />
+        </If>
+        <If Condition="Leatherworking.Level &gt;= 350 &amp;&amp; Leatherworking.Level &lt; 425" IgnoreCanRun="True" ChildrenCount="3">
+          <If Condition="Me.MapId == 530" IgnoreCanRun="True" ChildrenCount="1">
+            <CallSubRoutine SubRoutineName="Outlands to SW" />
+          </If>
+          <If Condition="Me.MapId == 0" IgnoreCanRun="True" ChildrenCount="1">
+            <CallSubRoutine SubRoutineName="SW to Northrend" />
+          </If>
+          <If Condition="Me.MapId == 571" IgnoreCanRun="True" ChildrenCount="4">
+            <If Condition="!HasRecipe (44970)" IgnoreCanRun="True" ChildrenCount="1">
+              <CallSubRoutine SubRoutineName="Train Leatherworking" />
+            </If>
+            <FlyToAction Dismount="True" X="3104.612" Y="5384.283" Z="59.56114" />
+            <LoadProfileAction Path="HBProfiles\Skinning\Northrend.xml" ProfileType="Honorbuddy" />
+            <CustomAction Code="Log(&quot;Loading Profile for Borean Leather&quot;);" />
+          </If>
+        </If>
+        <If Condition="Leatherworking.Level &gt;= 425 &amp;&amp; Leatherworking.Level &lt;= 525" IgnoreCanRun="True" ChildrenCount="3">
+          <If Condition="Me.MapId == 571" IgnoreCanRun="True" ChildrenCount="2">
+            <CustomAction Code="Log(&quot;Heading back from Northrend&quot;);" />
+            <CallSubRoutine SubRoutineName="Northrend to SW" />
+          </If>
+          <If Condition="Me.MapId == 1" IgnoreCanRun="True" ChildrenCount="4">
+            <CustomAction Code="Log(&quot;Flying to Farm Point&quot;);" />
+            <FlyToAction Dismount="True" X="4515.462" Y="-4144.023" Z="926.4802" />
+            <CustomAction Code="Log(&quot;Loading Profile for Savage Leather&quot;);" />
+            <LoadProfileAction Path="HBProfiles\Skinning\Mount Hyjal[GRIND] 79-83[SKINNING] (2).xml" ProfileType="Honorbuddy" />
+          </If>
+          <If Condition="Me.MapId == 0" IgnoreCanRun="True" ChildrenCount="2">
+            <CustomAction Code="Log(&quot;Using Portal to Hyjal&quot;);" />
+            <CallSubRoutine SubRoutineName="SW to Hyjal" />
+          </If>
+        </If>
+      </If>
+    </If>
+  </If>
+  <While Condition="InbagCount (2318) &gt;= 4  &amp;&amp; Leatherworking.Level &gt;= 100" IgnoreCanRun="True" ChildrenCount="1">
+    <If Condition="HasRecipe (20648)" IgnoreCanRun="True" ChildrenCount="1">
+      <CastSpellAction Entry="20648" Repeat="1" RepeatType="Craftable" CastOnItem="False" ItemId="0" ItemType="Chest" />
+    </If>
+  </While>
+  <While Condition="InbagCount (2319) &gt;= 5 &amp;&amp; Leatherworking.Level &gt;= 160" IgnoreCanRun="True" ChildrenCount="1">
+    <If Condition="HasRecipe (20649)" IgnoreCanRun="True" ChildrenCount="1">
+      <CastSpellAction Entry="20649" Repeat="1" RepeatType="Specific" CastOnItem="False" ItemId="0" ItemType="Chest" />
+    </If>
+  </While>
+  <While Condition="InbagCount (2934) &gt;= 3" IgnoreCanRun="True" ChildrenCount="1">
+    <CastSpellAction Entry="2881" Repeat="1" RepeatType="Craftable" CastOnItem="False" ItemId="0" ItemType="Chest" />
+  </While>
+  <While Condition="InbagCount (25649) &gt;= 5 &amp;&amp; Leatherworking.Level &gt;= 300" IgnoreCanRun="True" ChildrenCount="1">
+    <CastSpellAction Entry="32454" Repeat="1" RepeatType="Craftable" CastOnItem="False" ItemId="0" ItemType="Chest" />
+  </While>
+  <While Condition="InbagCount (4234) &gt;= 6 &amp;&amp; Leatherworking.Level &gt;= 200" IgnoreCanRun="True" ChildrenCount="1">
+    <If Condition="HasRecipe (20650)" IgnoreCanRun="True" ChildrenCount="1">
+      <CastSpellAction Entry="20650" Repeat="1" RepeatType="Craftable" CastOnItem="False" ItemId="0" ItemType="Chest" />
+    </If>
+  </While>
+  <While Condition="InbagCount (21887) &gt;= 5 &amp;&amp; Leatherworking.Level &gt;= 325" IgnoreCanRun="True" ChildrenCount="1">
+    <If Condition="HasRecipe(32455)" IgnoreCanRun="True" ChildrenCount="1">
+      <CastSpellAction Entry="32455" Repeat="1" RepeatType="Craftable" CastOnItem="False" ItemId="0" ItemType="Chest" />
+    </If>
+  </While>
+  <While Condition="InbagCount (52976) &gt;= 5 &amp;&amp; Leatherworking.Level &gt;= 485" IgnoreCanRun="True" ChildrenCount="1">
+    <CastSpellAction Entry="78436" Repeat="1" RepeatType="Craftable" CastOnItem="False" ItemId="0" ItemType="Chest" />
+  </While>
+  <While Condition="InbagCount (33567) &gt;= 5 " IgnoreCanRun="True" ChildrenCount="1">
+    <CustomAction Code="Lua.DoString(&quot;UseItemByName(33567)&quot;); " />
+  </While>
+  <While Condition="InbagCount (52977) &gt;= 5 &amp;&amp; Leatherworking.Level &gt;= 425" IgnoreCanRun="True" ChildrenCount="1">
+    <CastSpellAction Entry="84950" Repeat="1" RepeatType="Craftable" CastOnItem="False" ItemId="0" ItemType="Chest" />
+  </While>
+  <While Condition="InbagCount (33568) &gt;= 6 &amp;&amp; Leatherworking.Level &gt;= 395" IgnoreCanRun="True" ChildrenCount="1">
+    <CastSpellAction Entry="50936" Repeat="1" RepeatType="Craftable" CastOnItem="False" ItemId="0" ItemType="Chest" />
+  </While>
+  <While Condition="InbagCount (4304) &gt;= 6 &amp;&amp; Leatherworking.Level &gt;= 250" IgnoreCanRun="True" ChildrenCount="1">
+    <If Condition="HasRecipe(22331)" IgnoreCanRun="True" ChildrenCount="1">
+      <CastSpellAction Entry="22331" Repeat="1" RepeatType="Craftable" CastOnItem="False" ItemId="0" ItemType="Chest" />
+    </If>
+  </While>
+</Professionbuddy>

@@ -1,0 +1,206 @@
+<HBProfile>
+	<Name>[Fly][A] TH Wildhammer Dailies [Kick]</Name>
+	<MinLevel>84</MinLevel>
+	<MaxLevel>86</MaxLevel>
+	
+	<MinDurability>0.1</MinDurability>
+	<MinFreeBagSlots>2</MinFreeBagSlots>
+	
+	<MailGrey>False</MailGrey>
+	<MailWhite>True</MailWhite>
+	<MailGreen>True</MailGreen>
+	<MailBlue>True</MailBlue>
+	
+	<SellGrey>True</SellGrey>
+	<SellWhite>True</SellWhite>
+	<SellGreen>True</SellGreen>
+	<SellBlue>False</SellBlue>
+	
+	<TargetElites>False</TargetElites>
+	
+	<Blackspots>
+		<Blackspot X="-3187.637" Y="-5051.431" Z="120.5044" Radius="3.215476" />
+		<Blackspot X="-4464.373" Y="-4355.637" Z="322.3997" Radius="5.291939" />
+		<Blackspot X="-4470.015" Y="-4365.385" Z="323.4476" Radius="8.171865" />
+		<Blackspot X="-4470.494" Y="-4344.559" Z="324.4923" Radius="6.656543" />
+		<Blackspot X="-4345.01" Y="-4160.042" Z="330.6165" Radius="35.02598" />
+		<Blackspot X="-4742.982" Y="-4231.451" Z="388.6737" Radius="72.50719" Height="45.43324" />
+		<Blackspot X="-4894.418" Y="-4201.325" Z="425.4089" Radius="117.7542" />
+		<Blackspot X="-4324.718" Y="-4607.72" Z="164.2688" Radius="39.3668" Height="14.42256" />
+		<Blackspot X="-4104.871" Y="-4832.733" Z="106.6524" Radius="11.26585" />
+		<Blackspot X="-4044.171" Y="-4909.552" Z="90.73296" Radius="26.49721" />
+		<Blackspot X="-4061.168" Y="-4872.312" Z="106.8161" Radius="15.97308" Height="20" />
+	</Blackspots>
+
+	<Quest Id="28861" Name="Fight Like a Wildhammer">
+		<Objective Type="CollectItem" ItemId="62330" CollectCount="10">
+			<CollectFrom>
+				<GameObject Name="Thundermar Ale Keg" Id="206195" />
+			</CollectFrom>
+			<Hotspots>
+				<Hotspot X="-3342.683" Y="-5134.394" Z="78.47117" />
+				<Hotspot X="-3289.504" Y="-5182.296" Z="83.72706" />
+				<Hotspot X="-3349.529" Y="-5114.7" Z="81.10044" />
+				<Hotspot X="-3456.49" Y="-5031.073" Z="67.01005" />
+				<Hotspot X="-3475.834" Y="-5008.827" Z="66.14836" />
+				<Hotspot X="-3468.091" Y="-4879.089" Z="87.91726" />
+				<Hotspot X="-3469.935" Y="-4855.805" Z="89.41178" />
+				<Hotspot X="-3590.673" Y="-4843.582" Z="86.92313" />
+				<Hotspot X="-3681.934" Y="-4816.55" Z="80.95533" />
+				<Hotspot X="-3660.262" Y="-4809.378" Z="80.95533" />
+				<Hotspot X="-3346.555" Y="-4843.382" Z="109.9733" />
+				<Hotspot X="-3309.868" Y="-4870.069" Z="110.6208" />
+			</Hotspots>
+		</Objective>
+	</Quest>
+
+	<Quest Id="28862" Name="Never Leave a Dinner Behind">
+		<Objective Type="CollectItem" ItemId="62324" CollectCount="10">
+			<CollectFrom>
+				<GameObject Name="Wildhammer Food Stores" Id="206291" />
+				<GameObject Name="Wildhammer Food Stores" Id="206290" />
+				<GameObject Name="Wildhammer Food Stores" Id="206289" />
+			</CollectFrom>
+			<Hotspots>
+				<Hotspot X="-3342.683" Y="-5134.394" Z="78.47117" />
+				<Hotspot X="-3289.504" Y="-5182.296" Z="83.72706" />
+				<Hotspot X="-3349.529" Y="-5114.7" Z="81.10044" />
+				<Hotspot X="-3456.49" Y="-5031.073" Z="67.01005" />
+				<Hotspot X="-3475.834" Y="-5008.827" Z="66.14836" />
+				<Hotspot X="-3468.091" Y="-4879.089" Z="87.91726" />
+				<Hotspot X="-3469.935" Y="-4855.805" Z="89.41178" />
+				<Hotspot X="-3590.673" Y="-4843.582" Z="86.92313" />
+				<Hotspot X="-3681.934" Y="-4816.55" Z="80.95533" />
+				<Hotspot X="-3660.262" Y="-4809.378" Z="80.95533" />
+				<Hotspot X="-3346.555" Y="-4843.382" Z="109.9733" />
+				<Hotspot X="-3309.868" Y="-4870.069" Z="110.6208" />
+			</Hotspots>
+		</Objective>
+	</Quest>
+
+	<Quest Id="28860" Name="Keeping the Dragonmaw at Bay">
+		<Objective Type="CollectItem" ItemId="62332" CollectCount="8">
+			<Hotspots>
+				<Hotspot X="-3342.683" Y="-5134.394" Z="78.47117" />
+				<Hotspot X="-3289.504" Y="-5182.296" Z="83.72706" />
+				<Hotspot X="-3349.529" Y="-5114.7" Z="81.10044" />
+				<Hotspot X="-3456.49" Y="-5031.073" Z="67.01005" />
+				<Hotspot X="-3475.834" Y="-5008.827" Z="66.14836" />
+				<Hotspot X="-3468.091" Y="-4879.089" Z="87.91726" />
+				<Hotspot X="-3469.935" Y="-4855.805" Z="89.41178" />
+				<Hotspot X="-3590.673" Y="-4843.582" Z="86.92313" />
+				<Hotspot X="-3681.934" Y="-4816.55" Z="80.95533" />
+				<Hotspot X="-3660.262" Y="-4809.378" Z="80.95533" />
+				<Hotspot X="-3346.555" Y="-4843.382" Z="109.9733" />
+				<Hotspot X="-3309.868" Y="-4870.069" Z="110.6208" />
+			</Hotspots>
+		</Objective>
+	</Quest>
+	
+	<QuestOrder>
+	
+		<If Condition="Me.IsHorde" >
+			<CustomBehavior File="UserDialog" Title="title" AllowBotStop="True" SoundCue="Asterisk" SoundCueInterval="2" Text="You must be Alliance to run this profile" />
+		</If>
+		
+		<CustomBehavior File="UserSettings" TrainNewSkills="False" LootMobs="True" PullDistance="35"  />
+
+		<!-- If I am in Dalaran, take the portal to Main City -->
+		<If Condition="(Me.ZoneId == 4395)" >
+			 <If Condition="Me.IsAlliance" >
+				<CustomBehavior File="Message" Text="We are in Dalaran, using portal to SW" LogColor="Cornflowerblue" />
+				<CustomBehavior File="ForcedDismount" />
+				<RunTo X="5718.221" Y="721.2461" Z="641.7213" />
+				<CustomBehavior File="ForcedDismount" />
+				
+				<CustomBehavior File="InteractWith" MobId="190960" ObjectType="Gameobject" Range="4" X="5718.221" Y="721.2461" Z="641.7213" />
+				<CustomBehavior File="WaitTimer" WaitTime="5000" GoalText="Waiting for port {TimeRemaining}" />
+			  <If Condition="(Me.ZoneId == 1519)" >
+				<RunTo X="-8988.831" Y="860.4624" Z="125.7445" />
+			  </If>
+			 </If>
+		</If>
+		
+			<!-- If I am in EK, take the SW portal -->
+			 <If Condition="(Me.ZoneId == 1519)" >
+				<CustomBehavior File="Message" Text="We are in SW, using portal to Twilight Highlands" LogColor="Cornflowerblue" />
+				<CustomBehavior File="FlyTo" DestName="SW TH Portal" X="-8188.84" Y="416.1452" Z="116.8094" />
+				<CustomBehavior File="ForcedDismount" />
+				
+				<CustomBehavior File="InteractWith" MobId="207694" ObjectType="Gameobject" Range="4" X="-8188.84" Y="416.1452" Z="116.8094" />
+				<CustomBehavior File="WaitTimer" WaitTime="5000" GoalText="Waiting for port {TimeRemaining}" />
+			 </If>
+	
+			<If Condition="((!HasQuest(28860)) &amp;&amp; (!IsQuestCompleted(28860)))" >
+				<CustomBehavior File="FlyTo" X="-3203.28" Y="-5016.308" Z="119.995" />
+				<CustomBehavior File="ForcedDismount" />
+			</If>
+		<PickUp QuestName="Keeping the Dragonmaw at Bay" QuestId="28860" GiverName="Colin Thundermar" GiverId="46591" />
+		<PickUp QuestName="Beer Run" QuestId="28864" GiverName="Colin Thundermar" GiverId="46591" />
+		<PickUp QuestName="Warlord Halthar is Back" QuestId="28863" GiverName="Craw MacGraw" GiverId="49386" />
+		<PickUp QuestName="Fight Like a Wildhammer" QuestId="28861" GiverName="Low Shaman Blundy" GiverId="48010" />
+			<If Condition="((!HasQuest(28862)) &amp;&amp; (!IsQuestCompleted(28862)))" >
+				<CustomBehavior File="InteractWith"  MobId="48010" NumOfTimes="1" WaitTime="1000" CollectionDistance="50" X="-3180.926" Y="-5058.645" Z="120.9948" />
+				<CustomBehavior File="RunMacro" Macro="/click GossipTitleButton1" NumOfTimes="1" WaitTime="1000" />
+				<CustomBehavior File="RunMacro" Macro="/click QuestFrameAcceptButton" NumOfTimes="1" WaitTime="1000" />
+			<!-- <PickUp QuestName="Never Leave a Dinner Behind" QuestId="28862" GiverName="Low Shaman Blundy" GiverId="48010" /> -->
+			</If>
+		
+			<If Condition="((HasQuest(28861)) &amp;&amp; (!IsQuestCompleted(28861)))" >
+				<CustomBehavior File="UserSettings" PullDistance="1" />
+				<CustomBehavior File="FlyTo" X="-3342.683" Y="-5134.394" Z="78.47117" />
+				<CustomBehavior File="ForcedDismount" />
+				<Objective QuestName="Fight Like a Wildhammer" QuestId="28861" Type="CollectItem" ItemId="62330" CollectCount="10" />
+				<CustomBehavior File="UserSettings" PullDistance="25" />
+			</If>
+			<If Condition="((HasQuest(28862)) &amp;&amp; (!IsQuestCompleted(28862)))" >
+				<!--
+				<Objective QuestName="Never Leave a Dinner Behind" QuestId="28862" Type="CollectItem" ItemId="62324" CollectCount="10" />
+				-->
+				<CustomBehavior File="InteractWith" QuestId="28862" MobId1="206289" MobId2="206290" MobId3="206291" ObjectType="Gameobject" Range="6" NumOfTimes="100" CollectionDistance="1000" WaitForNpcs="False" X="-3342.683" Y="-5134.394" Z="78.47117" />
+				<CustomBehavior File="InteractWith" QuestId="28862" MobId1="206289" MobId2="206290" MobId3="206291" ObjectType="Gameobject" Range="6" NumOfTimes="100" CollectionDistance="1000" WaitForNpcs="False" X="-3289.504" Y="-5182.296" Z="83.72706" />
+				<CustomBehavior File="InteractWith" QuestId="28862" MobId1="206289" MobId2="206290" MobId3="206291" ObjectType="Gameobject" Range="6" NumOfTimes="100" CollectionDistance="1000" WaitForNpcs="False" X="-3349.529" Y="-5114.7" Z="81.10044" />
+				<CustomBehavior File="InteractWith" QuestId="28862" MobId1="206289" MobId2="206290" MobId3="206291" ObjectType="Gameobject" Range="6" NumOfTimes="100" CollectionDistance="1000" WaitForNpcs="False" X="-3456.49" Y="-5031.073" Z="67.01005" />
+				<CustomBehavior File="InteractWith" QuestId="28862" MobId1="206289" MobId2="206290" MobId3="206291" ObjectType="Gameobject" Range="6" NumOfTimes="100" CollectionDistance="1000" WaitForNpcs="False" X="-3475.834" Y="-5008.827" Z="66.14836" />
+				<CustomBehavior File="InteractWith" QuestId="28862" MobId1="206289" MobId2="206290" MobId3="206291" ObjectType="Gameobject" Range="6" NumOfTimes="100" CollectionDistance="1000" WaitForNpcs="False" X="-3468.091" Y="-4879.089" Z="87.91726" />
+				<CustomBehavior File="InteractWith" QuestId="28862" MobId1="206289" MobId2="206290" MobId3="206291" ObjectType="Gameobject" Range="6" NumOfTimes="100" CollectionDistance="1000" WaitForNpcs="False" X="-3469.935" Y="-4855.805" Z="89.41178" />
+				<CustomBehavior File="InteractWith" QuestId="28862" MobId1="206289" MobId2="206290" MobId3="206291" ObjectType="Gameobject" Range="6" NumOfTimes="100" CollectionDistance="1000" WaitForNpcs="False" X="-3590.673" Y="-4843.582" Z="86.92313" />
+				<CustomBehavior File="InteractWith" QuestId="28862" MobId1="206289" MobId2="206290" MobId3="206291" ObjectType="Gameobject" Range="6" NumOfTimes="100" CollectionDistance="1000" WaitForNpcs="False" X="-3681.934" Y="-4816.55" Z="80.95533" />
+				<CustomBehavior File="InteractWith" QuestId="28862" MobId1="206289" MobId2="206290" MobId3="206291" ObjectType="Gameobject" Range="6" NumOfTimes="100" CollectionDistance="1000" WaitForNpcs="False" X="-3660.262" Y="-4809.378" Z="80.95533" />
+				<CustomBehavior File="InteractWith" QuestId="28862" MobId1="206289" MobId2="206290" MobId3="206291" ObjectType="Gameobject" Range="6" NumOfTimes="100" CollectionDistance="1000" WaitForNpcs="False" X="-3346.555" Y="-4843.382" Z="109.9733" />
+				<CustomBehavior File="InteractWith" QuestId="28862" MobId1="206289" MobId2="206290" MobId3="206291" ObjectType="Gameobject" Range="6" NumOfTimes="100" CollectionDistance="1000" WaitForNpcs="False" X="-3309.868" Y="-4870.069" Z="110.6208" />
+			</If>
+			<If Condition="((HasQuest(28863)) &amp;&amp; (!IsQuestCompleted(28863)))" >
+				<CustomBehavior File="FlyTo" X="-3464.487" Y="-5033.1" Z="67.20532" />
+				<CustomBehavior File="ForcedDismount" />
+				<Objective QuestName="Warlord Halthar is Back" QuestId="28863" Type="KillMob" MobId="46493" KillCount="1" />
+			</If>
+			<If Condition="((HasQuest(28860)) &amp;&amp; (!IsQuestCompleted(28860)))" >
+				<CustomBehavior File="FlyTo" X="-3342.683" Y="-5134.394" Z="78.47117" />
+				<Objective QuestName="Keeping the Dragonmaw at Bay" QuestId="28860" Type="CollectItem" ItemId="62332" CollectCount="8" />
+			</If>
+			<If Condition="((HasQuest(28864)) &amp;&amp; (!IsQuestCompleted(28864)))" >
+				<!-- Beer Run -->
+				<CustomBehavior File="FlyTo" X="-2955.018" Y="-5835.184" Z="136.728" />
+				<CustomBehavior File="ForcedDismount" />
+				<CustomBehavior File="InteractWith" QuestId="28864" MobId="48758" NumOfTimes="1" GossipOptions="1" CollectionDistance="20" X="-2950.147" Y="-5831.96" Z="137.9726" />
+				<CustomBehavior File="WaitTimer" WaitTime="1000" />
+				<CustomBehavior File="Escort" QuestId="28864" MobId="48917" X="-2950.147" Y="-5831.96" Z="137.9726" />
+			</If>
+			
+			<If Condition="((HasQuest(28860)) &amp;&amp; (IsQuestCompleted(28860)))" >
+				<CustomBehavior File="FlyTo" X="-3203.28" Y="-5016.308" Z="119.995" />
+				<CustomBehavior File="ForcedDismount" />
+			</If>
+		<TurnIn QuestName="Keeping the Dragonmaw at Bay" QuestId="28860" TurnInName="Colin Thundermar" TurnInId="46591" />
+		<TurnIn QuestName="Beer Run" QuestId="28864" TurnInName="Colin Thundermar" TurnInId="46591" />
+		<TurnIn QuestName="Warlord Halthar is Back" QuestId="28863" TurnInName="Craw MacGraw" TurnInId="49386" />
+		<TurnIn QuestName="Fight Like a Wildhammer" QuestId="28861" TurnInName="Low Shaman Blundy" TurnInId="48010" />
+		<TurnIn QuestName="Never Leave a Dinner Behind" QuestId="28862" TurnInName="Low Shaman Blundy" TurnInId="48010" />
+
+	<CustomBehavior File="UserDialog"  Title="title" AllowBotStop="True" SoundCue="Asterisk" SoundCueInterval="1" Text="End of TH Dailies" />
+
+		
+	</QuestOrder>
+	
+</HBProfile>

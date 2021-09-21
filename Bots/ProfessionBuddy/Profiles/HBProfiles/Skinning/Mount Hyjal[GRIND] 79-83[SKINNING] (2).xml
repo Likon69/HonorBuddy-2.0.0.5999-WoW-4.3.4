@@ -1,0 +1,37 @@
+﻿<HBProfile>
+  <MinDurability>0.05</MinDurability>
+  <MinFreeBagSlots>1</MinFreeBagSlots>
+  <MinLevel>75</MinLevel>
+  <MaxLevel>86</MaxLevel>
+  <SellGrey>true</SellGrey>
+  <MailWhite>true</MailWhite>
+  <MailGreen>true</MailGreen>
+  <MailBlue>true</MailBlue>
+  <MailPurple>true</MailPurple>
+
+ <Vendors>
+	<Vendor Name="Inoho Stronghide" Entry="53075" Type="Repair" X="4432.82" Y="-2077.36" Z="1205.96" />
+ </Vendors>
+
+  <Mailboxes>
+  </Mailboxes>
+
+  <SubProfile>
+    <Name>test</Name>
+    <MinLevel>75</MinLevel>
+    <MaxLevel>86</MaxLevel>
+    <GrindArea>
+      <Factions>14</Factions>
+      <RandomizeHotspots>true</RandomizeHotspots>
+      <Hotspots>
+<Hotspot X="4752.665" Y="-4738.235" Z="883.3557" />
+<Hotspot X="4639.735" Y="-4548.817" Z="887.9747" />
+<Hotspot X="4703.162" Y="-4373.567" Z="897.0779" />
+<Hotspot X="4552.579" Y="-4252.272" Z="904.8968" />
+<Hotspot X="4581.812" Y="-4482.207" Z="883.0331" />
+<Hotspot X="4725.318" Y="-4743.592" Z="881.1725" />
+
+      </Hotspots>
+    </GrindArea>
+  </SubProfile>
+</HBProfile>

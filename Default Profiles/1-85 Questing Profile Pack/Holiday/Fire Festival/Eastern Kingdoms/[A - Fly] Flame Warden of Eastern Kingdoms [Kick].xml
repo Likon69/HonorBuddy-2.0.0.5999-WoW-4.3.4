@@ -1,0 +1,145 @@
+<HBProfile>
+	<Name>[A] Flame Warden of EK [Kick]</Name>
+	<MinLevel>1</MinLevel>
+	<MaxLevel>86</MaxLevel>
+	
+	<MinDurability>0.1</MinDurability>
+	<MinFreeBagSlots>1</MinFreeBagSlots>
+	
+	
+	
+	<QuestOrder>
+
+	<CustomBehavior File="UserSettings" LootMobs="True" PullDistance="1" UseMount="False" TrainNewSkills="False" LearnFlightPaths="False" KillBetweenHotspots="True" LogoutForInactivity="False" />
+
+
+				<!-- Goldshire / EF Flame Warden -->
+				<CustomBehavior File="FlyTo" DestName="Elwynn Forest Flame Warden" X="-9396.608" Y="23.8935" Z="59.17491" />
+				<CustomBehavior File="ForcedDismount" />
+				<CustomBehavior File="InteractWith" MobId="25898" />
+				<CustomBehavior File="RunMacro" Macro="/click GossipTitleButton1" />
+				<CustomBehavior File="RunMacro" Macro="/click QuestFrameCompleteQuestButton" />	
+
+				<!-- Moonbrook / Westfall Flame Warden -->
+				<CustomBehavior File="FlyTo" DestName="Westfall Flame Warden" X="-10847.26" Y="1452.622" Z="42.06357" />
+				<CustomBehavior File="ForcedDismount" />
+				<CustomBehavior File="InteractWith" MobId="25910" />
+				<CustomBehavior File="RunMacro" Macro="/click GossipTitleButton1" />
+				<CustomBehavior File="RunMacro" Macro="/click QuestFrameCompleteQuestButton" />	
+
+				<!-- Fort Livingston / N. STV Flame Warden -->
+				<CustomBehavior File="FlyTo" DestName="Cape of STV Flame Warden" X="-12757.08" Y="-389.9047" Z="13.39248" />
+				<CustomBehavior File="ForcedDismount" />
+				<CustomBehavior File="InteractWith" MobId="51574" />
+				<CustomBehavior File="RunMacro" Macro="/click GossipTitleButton1" />
+				<CustomBehavior File="RunMacro" Macro="/click QuestFrameCompleteQuestButton" />	
+
+				<!-- BB / S. STV Flame Warden -->
+				<CustomBehavior File="FlyTo" DestName="Stranglethorn Flame Warden" X="-14300.95" Y="60.82663" Z="1.416853" />
+				<CustomBehavior File="ForcedDismount" />
+				<CustomBehavior File="InteractWith" MobId="25915" />
+				<CustomBehavior File="RunMacro" Macro="/click GossipTitleButton1" />
+				<CustomBehavior File="RunMacro" Macro="/click QuestFrameCompleteQuestButton" />	
+
+				<!-- Darkshire / Duskwood Flame Warden -->
+				<CustomBehavior File="FlyTo" DestName="Duskwood Flame Warden" X="-10705.7" Y="-1151.751" Z="24.92626" />
+				<CustomBehavior File="ForcedDismount" />
+				<CustomBehavior File="InteractWith" MobId="25896" />
+				<CustomBehavior File="RunMacro" Macro="/click GossipTitleButton1" />
+				<CustomBehavior File="RunMacro" Macro="/click QuestFrameCompleteQuestButton" />	
+
+				<!-- Nethergarde Keep / Blasted Lands Flame Warden -->
+				<CustomBehavior File="FlyTo" DestName="Blasted Lands Flame Warden" X="-10951.35" Y="-3233.583" Z="41.34812" />
+				<CustomBehavior File="ForcedDismount" />
+				<CustomBehavior File="InteractWith" MobId="25890" />
+				<CustomBehavior File="RunMacro" Macro="/click GossipTitleButton1" />
+				<CustomBehavior File="RunMacro" Macro="/click QuestFrameCompleteQuestButton" />	
+
+				<!-- Bogpaddle / SoS Flame Warden -->
+				<CustomBehavior File="FlyTo" DestName="SoS Flame Warden" X="-9793.199" Y="-3841.107" Z="21.90276" />
+				<CustomBehavior File="ForcedDismount" />
+				<CustomBehavior File="InteractWith" MobId="51602" />
+				<CustomBehavior File="RunMacro" Macro="/click GossipTitleButton1" />
+				<CustomBehavior File="RunMacro" Macro="/click QuestFrameCompleteQuestButton" />	
+
+				<!-- Lakeshire / Redridge Flame Warden -->
+				<CustomBehavior File="FlyTo" DestName="Redridge Flame Warden" X="-9430.941" Y="-2121.163" Z="66.00724" />
+				<CustomBehavior File="ForcedDismount" />
+				<CustomBehavior File="InteractWith" MobId="25904" />
+				<CustomBehavior File="RunMacro" Macro="/click GossipTitleButton1" />
+				<CustomBehavior File="RunMacro" Macro="/click QuestFrameCompleteQuestButton" />	
+
+				<!-- Morgan's Vigil / Burning Steppes Flame Warden -->
+				<CustomBehavior File="FlyTo" DestName="Burning Steppes Flame Warden" X="-8258.638" Y="-2613.956" Z="133.1685" />
+				<CustomBehavior File="ForcedDismount" />
+				<CustomBehavior File="InteractWith" MobId="25892" />
+				<CustomBehavior File="RunMacro" Macro="/click GossipTitleButton1" />
+				<CustomBehavior File="RunMacro" Macro="/click QuestFrameCompleteQuestButton" />	
+
+				<!-- Dragon's Mount / Badlands Flame Warden -->
+				<CustomBehavior File="FlyTo" DestName="Badlands Flame Warden" X="-7000.593" Y="-2483.417" Z="242.0782" />
+				<CustomBehavior File="ForcedDismount" />
+				<CustomBehavior File="InteractWith" MobId="51585" />
+				<CustomBehavior File="RunMacro" Macro="/click GossipTitleButton1" />
+				<CustomBehavior File="RunMacro" Macro="/click QuestFrameCompleteQuestButton" />	
+				
+				<!-- Searing gorge?? -->
+
+				<!-- Kharanos / Dun Morogh Flame Warden -->
+				<CustomBehavior File="FlyTo" DestName="Dun Morogh Flame Warden" X="-5418.707" Y="-501.8575" Z="396.2868" />
+				<CustomBehavior File="ForcedDismount" />
+				<CustomBehavior File="InteractWith" MobId="25895" />
+				<CustomBehavior File="RunMacro" Macro="/click GossipTitleButton1" />
+				<CustomBehavior File="RunMacro" Macro="/click QuestFrameCompleteQuestButton" />	
+				
+				<!-- Ironforge?? -->
+
+				<!-- Thelsamar / Loch Modan Flame Warden -->
+				<CustomBehavior File="FlyTo" DestName="Loch Modan Flame Warden" X="-5244.096" Y="-2885.374" Z="339.0984" />
+				<CustomBehavior File="ForcedDismount" />
+				<CustomBehavior File="InteractWith" MobId="25902" />
+				<CustomBehavior File="RunMacro" Macro="/click GossipTitleButton1" />
+				<CustomBehavior File="RunMacro" Macro="/click QuestFrameCompleteQuestButton" />	
+
+				<!-- Menethil Harbor / Wetlands Flame Warden -->
+				<CustomBehavior File="FlyTo" DestName="Wetlands Flame Warden" X="-3448.197" Y="-949.9843" Z="9.171152" />
+				<CustomBehavior File="ForcedDismount" />
+				<CustomBehavior File="InteractWith" MobId="25911" />
+				<CustomBehavior File="RunMacro" Macro="/click GossipTitleButton1" />
+				<CustomBehavior File="RunMacro" Macro="/click QuestFrameCompleteQuestButton" />	
+
+				<!-- Thundermar / Twilight Highlands Flame Warden -->
+				<CustomBehavior File="FlyTo" DestName="Twilight Highlands Flame Warden" X="-3176.559" Y="-4928.955" Z="130.656" />
+				<CustomBehavior File="ForcedDismount" />
+				<CustomBehavior File="InteractWith" MobId="51650" />
+				<CustomBehavior File="RunMacro" Macro="/click GossipTitleButton1" />
+				<CustomBehavior File="RunMacro" Macro="/click QuestFrameCompleteQuestButton" />	
+
+				<!-- Refuge Point / Arathi Highlands Flame Warden -->
+				<CustomBehavior File="FlyTo" DestName="Arathi Highlands Flame Warden" X="-1204.281" Y="-2669.047" Z="44.75145" />
+				<CustomBehavior File="ForcedDismount" />
+				<CustomBehavior File="InteractWith" MobId="25887" />
+				<CustomBehavior File="RunMacro" Macro="/click GossipTitleButton1" />
+				<CustomBehavior File="RunMacro" Macro="/click QuestFrameCompleteQuestButton" />	
+
+				<!-- Aerie Peak / Hinterlands Flame Warden -->
+				<CustomBehavior File="FlyTo" DestName="Hinterlands Flame Warden" X="177.7917" Y="-2129.253" Z="103.0328" />
+				<CustomBehavior File="ForcedDismount" />
+				<CustomBehavior File="InteractWith" MobId="25908" />
+				<CustomBehavior File="RunMacro" Macro="/click GossipTitleButton1" />
+				<CustomBehavior File="RunMacro" Macro="/click QuestFrameCompleteQuestButton" />	
+
+				<!-- Chillwind Camp / WPL Flame Warden -->
+				<CustomBehavior File="FlyTo" DestName="WPL Flame Warden" X="1008.811" Y="-1455.936" Z="61.5415" />
+				<CustomBehavior File="ForcedDismount" />
+				<CustomBehavior File="InteractWith" MobId="25909" />
+				<CustomBehavior File="RunMacro" Macro="/click GossipTitleButton1" />
+				<CustomBehavior File="RunMacro" Macro="/click QuestFrameCompleteQuestButton" />	
+				
+				<!-- Grats on achievement! -->
+
+
+	<CustomBehavior File="UserDialog" AllowBotStop="True" SoundCue="Exclamation" SoundCueInterval="1" Text="Grats on achievement - EK is done" />
+
+	</QuestOrder>
+</HBProfile>

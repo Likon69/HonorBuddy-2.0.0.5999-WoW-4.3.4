@@ -1,0 +1,351 @@
+<HBProfile xsi:noNamespaceSchemaLocation="../Schemas/EchoSchema.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<!-- Original contribution by EchoTiger -->
+	<Name>Elwynn Forest ($ShortHash$)</Name>
+
+	<MinDurability>0.3</MinDurability>
+	<MinFreeBagSlots>3</MinFreeBagSlots>
+
+	<SellGrey>true</SellGrey>
+	<SellWhite>true</SellWhite>
+	<SellGreen>true</SellGreen>
+	<SellBlue>true</SellBlue>
+	<SellPurple>false</SellPurple>
+
+	<MailGrey>false</MailGrey>
+	<MailWhite>true</MailWhite>
+	<MailGreen>true</MailGreen>
+	<MailBlue>true</MailBlue>
+	<MailPurple>true</MailPurple>
+
+	<TargetElites>true</TargetElites>
+
+	<AvoidMobs>
+	</AvoidMobs>
+
+	<Mailboxes>
+		<Mailbox Name="Goldshire" X="-9456.721" Y="46.77825" Z="56.60653" />
+	</Mailboxes>
+
+	<Vendors>
+		<!-- Goldshire Vendors -->
+		<Vendor Name="Corina Steele" Id="54" Type="Repair" X="-9464.4" Y="94.0174" Z="58.34372" />
+		<Vendor Name="Innkeeper Farley" Id="295" Type="Food" X="-9462.663" Y="16.19151" Z="56.96306" />
+
+		<!-- Eastvale Logging Camp Vendors -->
+		<Vendor Name="Drake Lindgren" Id="1250" Type="Food" X="-9483.098" Y="-1356.247" Z="46.95809" />
+		<Vendor Name="Rallic Finn" Id="1198" Type="Repair" X="-9469.282" Y="-1355.242" Z="47.20493" />
+
+		<!-- Westbrook Garrison Vendors -->
+		<Vendor Name="Quartermaster Hudson" Id="1249" Type="Repair" X="-9653.945" Y="659.6507" Z="38.65258" />
+	</Vendors>
+
+	<Blackspots>
+	</Blackspots>
+
+	<Blacklist>
+	</Blacklist>
+
+	<QuestOrder IgnoreCheckpoints="false" >
+		<!-- Check function status -->
+		<Code File="RunCode" Type="Definition">
+			<![CDATA[
+			private static bool? profileFunctionsEnabled => (bool?)AppDomain.CurrentDomain.GetData("QuestingProfiles_FunctionsEnabled");
+			private static bool IsStoreProfile(string path) => path.StartsWith("store://");
+			private static string Slashify(string path) => IsStoreProfile(path) ? path.Replace(@"\", "/") : path.Replace("/", @"\");
+
+			public __CompiledBatchClass__()
+			{
+				ActivateFunctions();
+			}
+
+			private static void ActivateFunctions()
+			{
+				if (profileFunctionsEnabled == null || profileFunctionsEnabled == false)
+				{
+					Bots.Professionbuddy.PBLog.Log(Colors.MediumPurple, "[Profile Message!]: ", Colors.Yellow, "Please stand by as the functions are being activated!");
+					LoadProfile(@"..\..\Functions\Activate Functions.xml");
+				}
+			}
+
+			private static void LoadProfile(string path)
+			{
+				var profile = GetNewPath(path);
+				if (!IsStoreProfile(profile) && !File.Exists(profile))
+				{
+					Bots.Professionbuddy.PBLog.Log(Colors.MediumPurple, "[Profile Message!]: ", Colors.Yellow, "Profile does not exist.\n" + profile);
+					return;
+				}
+
+				Bots.Professionbuddy.PBLog.Log(Colors.MediumPurple, "[Profile Message!]: ", Colors.Yellow, "Loading: " + profile);
+				ProfileManager.LoadNew(profile, false);
+			}
+
+			private static string GetNewPath(string path)
+			{
+				if (IsStoreProfile(path))
+					return Slashify(path);
+
+				var currentProfile = ProfileManager.XmlLocation;
+				if (IsStoreProfile(currentProfile))
+					return Slashify(currentProfile + "/../" + path);
+
+				var absolutePath = Path.Combine(Path.GetDirectoryName(currentProfile), path);
+				absolutePath = Path.GetFullPath(absolutePath);
+				var canonicalPath = new Uri(absolutePath).LocalPath;
+				return Slashify(canonicalPath);
+			}]]>
+		</Code>
+		<Code File="RunCode" Code="ActivateFunctions();" />
+		<!-- END Check function status -->
+
+		<If Condition="Me.IsHorde" >
+			<Code File="LoadProfile" ProfileName="..\..\Questing Autoloader.xml" />
+		</If>
+		<!-- RunCode Methods -->
+			<Code File="RunCode">
+			<![CDATA[
+				Bots.Professionbuddy.PBLog.Log(System.Windows.Media.Colors.MediumPurple, "> [Profile Initialization Status] ", System.Windows.Media.Colors.CornflowerBlue, "\n     Auto-Looting	:: Enabled\n     Looting	:: Enabled\n     Game Addons	:: Disabled");
+				Lua.DoString("SetCVar('AutoLootDefault', 1);");
+				Lua.DoString("SetCVar('autoDismountFlying', 1);");
+				CharacterSettings.Instance.LootMobs = true;
+				CharacterSettings.Instance.Save();
+				Lua.DoString("for i=1,GetNumAddOns() do local relo=false if IsAddOnLoaded(i) then relo=true DisableAddOn(i) end if relo then relo=nil ReloadUI() end end");
+				Logging.Write(System.Windows.Media.Colors.MediumPurple, "> [Ready to bot!]");
+			]]>
+			</Code>
+			<Code File="RunCode" Type="Definition">
+				<![CDATA[
+						bool DoQuest(params uint[] questIds)
+						{
+							foreach (var questId in questIds)
+							{
+								if (HasQuest(questId) && !IsQuestCompleted(questId)) return true;
+							}
+							return false;
+						}
+						bool NeedsQuest(params uint[] questIds)
+						{
+							foreach (var questId in questIds)
+							{
+								if (!HasQuest(questId) && !IsQuestCompleted(questId)) return true;
+							}
+							return false;
+						}
+						bool NeedsBreadcrumbQuest(params uint[] questIds)
+						{
+							foreach (var questId in questIds)
+							{
+								if (IsQuestCompleted(questId)) return false;
+							}
+							return true;
+						}
+						bool QuestDone(params uint[] questIds)
+						{
+							foreach (var questId in questIds)
+							{
+								if (HasQuest(questId) && IsQuestCompleted(questId)) return true;
+							}
+							return false;
+						}
+						bool QuestFlaggedCompleted(params uint[] questIds)
+						{
+							foreach (var questId in questIds)
+							{
+								return Lua.GetReturnVal<bool>($"return IsQuestFlaggedCompleted({questId});", 0);
+							}
+							return false;
+						}
+						async Task SkipCutscene(int preWait = 3000, int postWait = 3000)
+						{
+					// Add detection of cutscene here.
+							await Coroutine.Sleep(preWait);
+					// Test and improve the working method.
+							Lua.DoString("MovieFrame:StopMovie(); CinematicFrame_CancelCinematic(); StopCinematic();");
+							await Coroutine.Sleep(postWait);
+						}
+					]]>
+			</Code>
+		<!-- END RunCode Methods -->
+
+
+		<PickUp QuestName="Rest and Relaxation" QuestId="37112" GiverName="Falkhaan Isenstrider" GiverId="6774" X="-9073.705" Y="-39.39063" Z="87.7765" />
+
+		<If Condition="QuestDone(54)" >
+			<TurnIn QuestName="Report to Goldshire" QuestId="54" TurnInName="Marshal Dughan" TurnInId="240" X="-9465.521" Y="74.00694" Z="56.59559" />
+		</If>
+
+		<PickUp QuestName="The Fargodeep Mine" QuestId="62" GiverName="Marshal Dughan" GiverId="240" X="-9465.521" Y="74.00694" Z="56.59559" />
+
+		<TurnIn QuestName="Rest and Relaxation" QuestId="37112" TurnInName="Innkeeper Farley" TurnInId="295" X="-9462.663" Y="16.19151" Z="56.96306" />
+		<If Condition="Me.HearthstoneAreaId != 5637 &amp;&amp; Unit(295) != null" >
+			<Code File="SetHearthstone" MobId="295" AreaId="5637" X="-9462.663" Y="16.19151" Z="56.9635" />
+		</If>
+
+		<PickUp QuestName="Kobold Candles" QuestId="60" GiverName="William Pestle" GiverId="253" X="-9460.302" Y="31.93891" Z="56.96619" />
+		<PickUp QuestName="Gold Dust Exchange" QuestId="47" GiverName="Remy &quot;Two Times&quot;" GiverId="241" X="-9496.319" Y="72.82639" Z="56.41559" />
+
+		<While Condition="DoQuest(60, 47, 62)" >
+			<If Condition="!QuestDone(62)" >
+				<MoveTo X="-9793.067" Y="148.622" Z="24.34465" />
+			</If>
+
+			<Code File="KillUntilComplete" MobIds="79, 475" TerminateWhen="QuestDone(60) &amp;&amp; QuestDone(47)" >
+				<HuntingGrounds>
+					<Hotspot X="-9891.738" Y="221.9362" Z="14.26464" />
+					<Hotspot X="-9852.318" Y="179.6674" Z="20.82833" />
+					<Hotspot X="-9793.067" Y="148.622" Z="24.34465" />
+					<Hotspot X="-9752.847" Y="120.7639" Z="16.00548" />
+				</HuntingGrounds>
+			</Code>
+
+			<If Condition="Me.HearthstoneAreaId == 5637" >
+				<Code File="UseHearthstone" WaitForCD="false" />
+			</If>
+		</While>
+
+		<TurnIn QuestName="Gold Dust Exchange" QuestId="47" TurnInName="Remy &quot;Two Times&quot;" TurnInId="241" X="-9496.319" Y="72.82639" Z="56.41537" />
+		<TurnIn QuestName="The Fargodeep Mine" QuestId="62" TurnInName="Marshal Dughan" TurnInId="240" X="-9465.521" Y="74.00694" Z="56.59559" />
+		<TurnIn QuestName="Kobold Candles" QuestId="60" TurnInName="William Pestle" TurnInId="253" X="-9460.302" Y="31.93891" Z="56.96619" />
+		<RecheckCheckpoints />
+
+		<PickUp QuestName="A Visit With Maybell" QuestId="26150" GiverName="William Pestle" GiverId="253" X="-9460.302" Y="31.93891" Z="56.96619" />
+
+		<TurnIn QuestName="A Visit With Maybell" QuestId="26150" TurnInName="Maybell Maclure" TurnInId="251" X="-10014.04" Y="37.6059" Z="35.17056" />
+		<PickUp QuestName="Young Lovers" QuestId="106" GiverName="Maybell Maclure" GiverId="251" X="-10014.04" Y="37.6059" Z="35.17152" />
+
+		<PickUp QuestName="Princess Must Die!" QuestId="88" GiverName="Ma Stonefield" GiverId="244" X="-9895" Y="332.4236" Z="36.36739" />
+		<PickUp QuestName="Lost Necklace" QuestId="85" GiverName="&quot;Auntie&quot; Bernice Stonefield" GiverId="246" X="-9889.681" Y="338.4665" Z="36.49801" />
+
+		<Code File="KillUntilComplete" MobId="330" QuestId="88" X="-9910.02" Y="398.9503" Z="35.28754" />
+
+		<TurnIn QuestName="Young Lovers" QuestId="106" TurnInName="Tommy Joe Stonefield" TurnInId="252" X="-9930.049" Y="499.7344" Z="32.33896" />
+		<PickUp QuestName="Speak with Gramma" QuestId="111" GiverName="Tommy Joe Stonefield" GiverId="252" X="-9930.049" Y="499.7344" Z="32.33896" />
+		<TurnIn QuestName="Princess Must Die!" QuestId="88" TurnInName="Ma Stonefield" TurnInId="244" X="-9895" Y="332.4236" Z="36.37064" />
+		<TurnIn QuestName="Speak with Gramma" QuestId="111" TurnInName="Gramma Stonefield" TurnInId="248" X="-9880.63" Y="322.6189" Z="37.74076" />
+		<PickUp QuestName="Note to William" QuestId="107" GiverName="Gramma Stonefield" GiverId="248" X="-9880.63" Y="322.6189" Z="37.74076" />
+		<TurnIn QuestName="Lost Necklace" QuestId="85" TurnInName="Billy Maclure" TurnInId="247" X="-9923.681" Y="38.38715" Z="32.41259" />
+		<RecheckCheckpoints />
+
+		<PickUp QuestName="Pie for Billy" QuestId="86" GiverName="Billy Maclure" GiverId="247" X="-9923.681" Y="38.38715" Z="32.41259" />
+		<While Condition="DoQuest(86)" >
+			<Code File="KillUntilComplete" MobId="113" QuestId="86" >
+				<HuntingGrounds>
+					<Hotspot X="-9944.565" Y="65.96491" Z="33.34656" />
+					<Hotspot X="-9939.902" Y="124.7903" Z="33.2239" />
+				</HuntingGrounds>
+			</Code>
+		</While>
+		<TurnIn QuestName="Pie for Billy" QuestId="86" TurnInName="&quot;Auntie&quot; Bernice Stonefield" TurnInId="246" X="-9889.681" Y="338.4665" Z="36.49786" />
+
+		<PickUp QuestName="Back to Billy" QuestId="84" GiverName="&quot;Auntie&quot; Bernice Stonefield" GiverId="246" X="-9889.681" Y="338.4665" Z="36.49786" />
+		<TurnIn QuestName="Back to Billy" QuestId="84" TurnInName="Billy Maclure" TurnInId="247" X="-9923.681" Y="38.38715" Z="32.41235" />
+		<RecheckCheckpoints />
+
+		<If Condition="Me.HearthstoneAreaId == 5637 &amp;&amp; Unit(197) == null" >
+			<Code File="UseHearthstone" WaitForCD="false" />
+		</If>
+		<TurnIn QuestName="Note to William" QuestId="107" TurnInName="William Pestle" TurnInId="253" X="-9460.302" Y="31.93891" Z="56.96619" />
+
+		<!--<Checkpoint Level="7" />  Eastvale Logging Camp -->
+
+		<PickUp QuestName="A Bundle of Trouble" QuestId="5545" GiverName="Supervisor Raelen" GiverId="10616" X="-9469.795" Y="-1289.215" Z="41.34326" />
+		<PickUp QuestName="Fine Linen Goods" QuestId="83" GiverName="Sara Timberlain" GiverId="278" X="-9530.045" Y="-1222.585" Z="47.28948" />
+		<PickUp QuestName="Protect the Frontier" QuestId="52" GiverName="Guard Thomas" GiverId="261" X="-9610.232" Y="-1032.052" Z="41.1223" />
+		<PickUp QuestName="Bounty on Murlocs" QuestId="46" GiverName="Bounty Board" GiverId="203733" X="-9613.295" Y="-1034.03" Z="40.15746" />
+		<PickUp QuestName="Wanted: James Clark" QuestId="26152" GiverName="Bounty Board" GiverId="203733" X="-9613.295" Y="-1034.03" Z="40.15746" />
+
+		<Code File="KillUntilComplete" MobId="13159" QuestId="26152" X="-9492.269" Y="-1194.878" Z="49.56448" />
+
+		<If Condition="HasItem(1307)" >
+			<PickUp QuestName="The Collector" QuestId="123" GiverId="1307" GiverType="Item" />
+		</If>
+		<TurnIn QuestName="Wanted: James Clark" QuestId="26152" TurnInName="Marshal McCree" TurnInId="42256" X="-9468.153" Y="-1305.781" Z="44.15007" />
+		<TurnIn QuestName="The Collector" QuestId="123" TurnInName="Marshal McCree" TurnInId="42256" X="-9468.153" Y="-1305.781" Z="44.15007" />
+
+		<PickUp QuestName="Manhunt" QuestId="147" GiverName="Marshal McCree" GiverId="42256" X="-9468.153" Y="-1305.781" Z="44.15007" />
+
+		<While Condition="DoQuest(83)" >
+			<Code File="KillUntilComplete" MobIds="474" QuestId="83" >
+				<HuntingGrounds>
+					<Hotspot X="-9187.492" Y="-1040.116" Z="71.16479" />
+					<Hotspot X="-9149.224" Y="-1090.129" Z="72.17609" />
+				</HuntingGrounds>
+			</Code>
+		</While>
+
+		<While Condition="DoQuest(5545)" >
+			<Code File="InteractWith" MobId="176793" InteractByLooting="true" CollectionDistance="200" NumOfTimes="16" QuestId="5545" >
+				<HuntingGrounds>
+					<Hotspot X="-9237.669" Y="-1241.41" Z="73.71766" />
+					<Hotspot X="-9350.07" Y="-1173.284" Z="65.07401" />
+					<Hotspot X="-9401.577" Y="-1194.098" Z="60.41949" />
+					<Hotspot X="-9417.314" Y="-1140.56" Z="57.77008" />
+					<Hotspot X="-9350.333" Y="-1340.595" Z="62.82411" />
+				</HuntingGrounds>
+			</Code>
+		</While>
+
+		<While Condition="DoQuest(46)" >
+			<Code File="KillUntilComplete" MobIds="732, 46" QuestId="46" >
+				<HuntingGrounds>
+					<Hotspot X="-9281.384" Y="-1219.426" Z="69.98434" />
+					<Hotspot X="-9297.118" Y="-1150.395" Z="68.41891" />
+					<Hotspot X="-9232.533" Y="-1192.484" Z="66.37033" />
+				</HuntingGrounds>
+			</Code>
+		</While>
+
+		<While Condition="DoQuest(52)" >
+			<Code File="KillUntilComplete" QuestId="52" >
+				<HuntingGrounds>
+					<Hotspot X="-9339.116" Y="-1251.584" Z="65.25999" />
+					<Hotspot X="-9359.521" Y="-1182.751" Z="64.59283" />
+					<Hotspot X="-9476.28" Y="-1036.147" Z="54.71905" />
+					<Hotspot X="-9345.95" Y="-941.6569" Z="67.2854" />
+					<Hotspot X="-9466.055" Y="-842.8104" Z="60.94244" />
+					<Hotspot X="-9509.791" Y="-1056.279" Z="50.48272" />
+					<Hotspot X="-9721.858" Y="-1129.451" Z="39.04957" />
+				</HuntingGrounds>
+				<PursuitList>
+					<PursueUnit Id="1922" Priority="1" PursueWhen="!IsObjectiveComplete(1, 52)" />
+					<PursueUnit Id="118" Priority="1" PursueWhen="!IsObjectiveComplete(1, 52)" />
+					<PursueUnit Id="822" Priority="10" PursueWhen="!IsObjectiveComplete(2, 52)" />
+				</PursuitList>
+			</Code>
+		</While>
+
+		<TurnIn QuestName="A Bundle of Trouble" QuestId="5545" TurnInName="Supervisor Raelen" TurnInId="10616" X="-9469.795" Y="-1289.215" Z="41.34259" />
+		<TurnIn QuestName="Fine Linen Goods" QuestId="83" TurnInName="Sara Timberlain" TurnInId="278" X="-9530.045" Y="-1222.585" Z="47.28971" />
+		<TurnIn QuestName="Protect the Frontier" QuestId="52" TurnInName="Guard Thomas" TurnInId="261" X="-9610.232" Y="-1032.052" Z="41.1223" />
+		<TurnIn QuestName="Bounty on Murlocs" QuestId="46" TurnInName="Guard Thomas" TurnInId="261" X="-9610.232" Y="-1032.052" Z="41.1223" />
+		<RecheckCheckpoints />
+
+		<Code File="KillUntilComplete" MobId="473" QuestId="147" X="-9788.713" Y="-930.1451" Z="39.40944" />
+
+		<TurnIn QuestName="Manhunt" QuestId="147" TurnInName="Marshal McCree" TurnInId="42256" X="-9468.153" Y="-1305.781" Z="44.15" />
+		<Checkpoint Level="9.5" />
+
+		<If Condition="Me.HearthstoneAreaId == 5637 &amp;&amp; Unit(42256) != null" >
+			<Code File="UseHearthstone" WaitForCD="false" />
+		</If>
+
+		<PickUp QuestName="Riverpaw Gnoll Bounty" QuestId="11" GiverName="Deputy Rainer" GiverId="963" X="-9750.328" Y="682.7726" Z="27.07097" />
+		<While Condition="DoQuest(11)" >
+			<Code File="KillUntilComplete" MobIds="478, 97" QuestId="11" >
+				<HuntingGrounds>
+					<Hotspot X="-10040.33" Y="649.2754" Z="38.15834" />
+					<Hotspot X="-9914.384" Y="641.0994" Z="36.57458" />
+					<Hotspot X="-9925.939" Y="595.0551" Z="39.24081" />
+				</HuntingGrounds>
+			</Code>
+		</While>
+		<TurnIn QuestName="Riverpaw Gnoll Bounty" QuestId="11" TurnInName="Deputy Rainer" TurnInId="963" X="-9662.753" Y="694.3211" Z="36.85239" />
+
+		<Checkpoint Level="10" />
+		<If Condition="Me.Level &lt;= 11" >
+			<Code File="RunCode" Code="foreach (PlayerQuest quest in Me.QuestLog.GetAllQuests()) QuestLog.Instance.AbandonQuestById(quest.Id)" />
+		</If>
+		<Code File="LoadProfile" ProfileName="Westfall.xml" />
+
+	</QuestOrder>
+</HBProfile>

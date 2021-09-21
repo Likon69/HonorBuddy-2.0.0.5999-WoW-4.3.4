@@ -1,0 +1,138 @@
+﻿<HBProfile>
+	<Name>[QO] Timbermaw Rep - Winterspring A [Kick]</Name>
+   
+	<MinLevel>1</MinLevel>
+	<MaxLevel>86</MaxLevel>
+   
+	<MinDurability>0.2</MinDurability>
+	<MinFreeBagSlots>2</MinFreeBagSlots>
+	
+	<MailGrey>False</MailGrey>
+	<MailWhite>False</MailWhite>
+	<MailGreen>False</MailGreen>
+	<MailBlue>True</MailBlue>
+	<MailPurple>True</MailPurple>
+   
+	<SellGrey>True</SellGrey>
+	<SellWhite>True</SellWhite>
+	<SellGreen>True</SellGreen>
+	<SellBlue>False</SellBlue>
+	<SellPurple>False</SellPurple>
+   
+	<TargetElites>True</TargetElites>
+
+	<AvoidMobs>
+	</AvoidMobs>
+	<Blackspots>
+
+	</Blackspots>
+
+	<Mailboxes>
+
+	</Mailboxes>
+ 
+	<Vendors>
+
+	</Vendors>
+	
+
+	<Quest Id="28460" Name="Threat of the Winterfall">
+		<Objective Type="KillMob" MobId="48586" KillCount="15">
+			<Hotspots>
+				<Hotspot X="6799.417" Y="-2400.198" Z="551.8031" />
+				<Hotspot X="6830.648" Y="-2449.682" Z="553.4839" />
+				<Hotspot X="6831.046" Y="-2520.062" Z="556.2173" />
+				<Hotspot X="6758.177" Y="-2507.258" Z="544.7654" />
+				<Hotspot X="6691.748" Y="-2457.378" Z="541.4437" />
+				<Hotspot X="6630.727" Y="-2487.777" Z="539.9264" />
+				<Hotspot X="6674.858" Y="-2579.818" Z="524.0839" />
+				<Hotspot X="6694.896" Y="-2648.641" Z="532.2322" />
+				<Hotspot X="6740.413" Y="-2619.704" Z="542.4307" />
+				<Hotspot X="6770.062" Y="-2697.068" Z="545.9664" />
+				<Hotspot X="6783.432" Y="-2666.593" Z="544.8677" />
+				<Hotspot X="6782.859" Y="-2589.065" Z="557.2614" />
+				<Hotspot X="6828.128" Y="-2533.442" Z="555.0035" />
+				<Hotspot X="6830.909" Y="-2452.941" Z="554.2817" />				
+			</Hotspots>
+		</Objective>
+	</Quest>	
+	
+	<QuestOrder>
+	
+				<CustomBehavior File="UserSettings" LootMobs="True" PullDistance="35" TrainNewSkills="False" LearnFlightPaths="True" />
+				
+			<If Condition="Me.GetReputationLevelWith(576) &lt; Styx.WoWUnitReaction.Exalted" >
+				<!-- Non repeatable quests -->
+				<If Condition="((!HasQuest(28522)) &amp;&amp; (!IsQuestCompleted(28522)))" >
+					<CustomBehavior File="FlyTo" X="6896.613" Y="-2290.671" Z="586.9252" />
+					<CustomBehavior File="ForcedDismount" />
+		<PickUp QuestName="Winterfall Activity" QuestId="28522" GiverName="Salfa" GiverId="11556" X="6896.613" Y="-2290.671" Z="586.9252" />
+				</If>
+				<If Condition="((!HasQuest()) &amp;&amp; (!IsQuestCompleted()))" >
+					<CustomBehavior File="FlyTo" X="6896.613" Y="-2290.671" Z="586.9252" />
+					<CustomBehavior File="ForcedDismount" />
+		<PickUp QuestName="Delivery for Donova" QuestId="28524" GiverName="Salfa" GiverId="11556" X="6896.613" Y="-2290.671" Z="586.9252" />
+				</If>
+				<If Condition="((HasQuest(28524)) &amp;&amp; (IsQuestCompleted(28524)))" >
+					<CustomBehavior File="FlyTo" X="6396.061" Y="-2542.99" Z="542.2377" />
+					<CustomBehavior File="ForcedDismount" />
+		<TurnIn QuestName="Delivery for Donova" QuestId="28524" TurnInName="Donova Snowden" TurnInId="9298" X="6396.061" Y="-2542.99" Z="542.2377" />
+				</If>
+				<If Condition="((HasQuest(28522)) &amp;&amp; (IsQuestCompleted(28522)))" >
+					<CustomBehavior File="FlyTo" X="6896.613" Y="-2290.671" Z="586.9252" />
+					<CustomBehavior File="ForcedDismount" />
+		<TurnIn QuestName="Winterfall Activity" QuestId="28522" TurnInName="Salfa" TurnInId="11556" X="6896.613" Y="-2290.671" Z="586.9252" />
+				</If>
+			</If>
+				
+				
+				
+			<!-- Farming for Farming for Beads - 5 for each turnin -->
+			<While Condition="Me.GetReputationLevelWith(576) &lt; Styx.WoWUnitReaction.Exalted" >
+			
+				<If Condition="(GetItemCount(21383) &lt; 5)" >
+					<CustomBehavior File="FlyTo" X="6799.417" Y="-2400.198" Z="551.8031" />
+					<CustomBehavior File="ForcedDismount" />
+					<CustomBehavior File="UserSettings" PullDistance="35" />
+						<SetGrindArea>
+							<Grindarea>
+								<TargetMinLevel>45</TargetMinLevel> 
+								<TargetMaxLevel>62</TargetMaxLevel>
+								<Factions>82</Factions> <!-- [Furbolg] -->
+								<Hotspots>
+									<Hotspot X="6799.417" Y="-2400.198" Z="551.8031" />
+									<Hotspot X="6830.648" Y="-2449.682" Z="553.4839" />
+									<Hotspot X="6831.046" Y="-2520.062" Z="556.2173" />
+									<Hotspot X="6758.177" Y="-2507.258" Z="544.7654" />
+									<Hotspot X="6691.748" Y="-2457.378" Z="541.4437" />
+									<Hotspot X="6630.727" Y="-2487.777" Z="539.9264" />
+									<Hotspot X="6674.858" Y="-2579.818" Z="524.0839" />
+									<Hotspot X="6694.896" Y="-2648.641" Z="532.2322" />
+									<Hotspot X="6740.413" Y="-2619.704" Z="542.4307" />
+									<Hotspot X="6770.062" Y="-2697.068" Z="545.9664" />
+									<Hotspot X="6783.432" Y="-2666.593" Z="544.8677" />
+									<Hotspot X="6782.859" Y="-2589.065" Z="557.2614" />
+									<Hotspot X="6828.128" Y="-2533.442" Z="555.0035" />
+									<Hotspot X="6830.909" Y="-2452.941" Z="554.2817" />				
+								</Hotspots>
+							</Grindarea>
+						</SetGrindArea>
+					<GrindTo Condition="(GetItemCount(21383) &gt;= 5)" GoalText="Getting 5 Bead's" />
+				</If>
+				
+					<CustomBehavior File="FlyTo" X="6896.613" Y="-2290.671" Z="586.9252" />
+				<While Condition="(GetItemCount(21383) &gt;= 5) &amp;&amp; (Me.GetReputationLevelWith(576) &lt; Styx.WoWUnitReaction.Exalted)" >
+					<CustomBehavior File="InteractWith"  MobId="11556" NumOfTimes="1" CollectionDistance="50" WaitTime="1000" X="6900.443" Y="-2285.773" Z="586.0645" />
+					<CustomBehavior File="RunMacro" Macro="/click GossipTitleButton1" NumOfTimes="1" WaitTime="1000" />
+					<CustomBehavior File="RunMacro" Macro="/click QuestFrameCompleteButton" NumOfTimes="1" WaitTime="1000" />
+					<CustomBehavior File="RunMacro" Macro="/click QuestFrameCompleteQuestButton" NumOfTimes="1" WaitTime="1000" />
+					<CustomBehavior File="WaitTimer" WaitTime="3000" />
+				</While>
+			</While>
+			
+			<If Condition="Me.GetReputationLevelWith(576) == Styx.WoWUnitReaction.Exalted" >
+				<CustomBehavior File="UserDialog" Title="title" AllowBotStop="True" SoundCue="Asterisk" SoundCueInterval="1" Text="You have reached Exalted with Wintersaber Trainers and Timbermaw\nIf you liked this profile, +rep is always appreciated" />
+			</If>
+	
+	</QuestOrder>
+</HBProfile>
