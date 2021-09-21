@@ -1,0 +1,5 @@
+#move this file to C:\Windows\System32\drivers\etc\
+
+127.0.0.1 auth3.buddyauth.com 
+127.0.0.1 auth2.buddyauth.com
+127.0.0.1 www.buddyauth.com
