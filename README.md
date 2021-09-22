@@ -28,7 +28,7 @@ start it : HBRelog
 # HBRelog Account config.
 ![alt text](https://i.ibb.co/zQgt7Bc/1.png)
 
-This software launches the game and the bot. 
+This software launches the game and the bot.  (You are required to use HBRelog to connect to the game. Directx9 problem in Windows 10. If not the game crashed with error 132.)
 
 Adds your account name. 
 
@@ -53,7 +53,9 @@ https://youtu.be/TKCltTK67Xg
 
 
 I just throw the wow with HBReloag. I let it connect to accounte and close it. Honorbuddy I launch myself.
+
 ID 1
+
 PASS 1
 
 # If you have a problem, please contact me.
