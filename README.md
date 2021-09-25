@@ -19,7 +19,7 @@ added it's lines :
 # II
 go to file : Honorbuddy 2.0.0.5999 (4.3.4)\Auth
 
-start it : HBCD_Auth (must do it every time)
+start it : Auth.exe (must do it every time)
 
 # III
 go to file : Honorbuddy 2.0.0.5999 (4.3.4)\HBRelog
