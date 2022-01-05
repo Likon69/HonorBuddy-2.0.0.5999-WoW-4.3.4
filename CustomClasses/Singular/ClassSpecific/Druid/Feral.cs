@@ -210,12 +210,14 @@ namespace Singular.ClassSpecific.Druid
                            (!SpellManager.HasSpell("Feral Charge (Cat)") ||
                            SpellManager.Spells["Feral Charge (Cat)"].CooldownTimeLeft.TotalSeconds >= 3)),
                 Spell.Cast("Pounce"),
+				Spell.Cast("Ravage!", ret => StyxWoW.Me.HasAura("Stampede")),
                 Spell.Cast("Shred", ret => StyxWoW.Me.CurrentTarget.MeIsBehind),
                 Spell.Cast("Mangle (Cat)"),
                 Spell.Cast("Moonfire", ret => StyxWoW.Me.CurrentTarget.Distance2DSqr < 10 * 10 && Math.Abs(StyxWoW.Me.CurrentTarget.Z - StyxWoW.Me.Z) > 5),
                 Movement.CreateMoveToMeleeBehavior(true)
                 );
         }
+
 
         [Spec(TalentSpec.FeralDruid)]
         [Behavior(BehaviorType.Combat)]
@@ -260,9 +262,9 @@ namespace Singular.ClassSpecific.Druid
                     ret => StyxWoW.Me.ComboPoints == 5 ||
                            StyxWoW.Me.ComboPoints > 1 && StyxWoW.Me.CurrentTarget.HealthPercent < 20),
                 Spell.Cast("Shred", ret => StyxWoW.Me.CurrentTarget.MeIsBehind),
-                Spell.Cast("Ravage!", ret => StyxWoW.Me.HasAura("Stampede")),
-                Spell.Buff("Rake", true, ret => StyxWoW.Me.CurrentTarget.Elite),
-                Spell.Cast("Mangle (Cat)", ret => !StyxWoW.Me.CurrentTarget.MeIsBehind),
+				Spell.Cast("Ravage!", ret => StyxWoW.Me.ActiveAuras.ContainsKey("Stampede")),
+                Spell.Buff("Rake", true, ret => StyxWoW.Me.CurrentTarget),
+                Spell.Cast("Mangle (Cat)"),
                 Movement.CreateMoveToMeleeBehavior(true)
                 );
         }
@@ -281,7 +283,7 @@ namespace Singular.ClassSpecific.Druid
                 Spell.Cast("Ferocious Bite",
                     ret => StyxWoW.Me.ComboPoints == 5 ||
                            StyxWoW.Me.ComboPoints > 1 && StyxWoW.Me.CurrentTarget.HealthPercent < 20),
-                Spell.Buff("Rake", true, ret => StyxWoW.Me.CurrentTarget.Elite),
+                Spell.Buff("Rake", true, ret => StyxWoW.Me.CurrentTarget),
                 Spell.Cast("Mangle (Cat)"),
                 Movement.CreateMoveToMeleeBehavior(true)
                 );
@@ -292,9 +294,10 @@ namespace Singular.ClassSpecific.Druid
             return new PrioritySelector(
                 Spell.BuffSelf("Cat Form"),
                 Spell.BuffSelf("Prowl"),
-                Spell.Cast("Feral Charge (Cat)"),
-                Spell.Cast("Ravage", ret => StyxWoW.Me.CurrentTarget.MeIsBehind),
-                Spell.Cast("Pounce"),
+                Spell.Cast("Feral Charge (Cat)"),				
+				Spell.Cast("Pounce"),
+				Spell.Cast("Ravage!", ret => StyxWoW.Me.HasAura("Stampede")),
+				Spell.Buff("Rake", true, ret => StyxWoW.Me.CurrentTarget),
                 Spell.Cast("Mangle (Cat)"),
                 Movement.CreateMoveToMeleeBehavior(true)
                 );
@@ -306,8 +309,8 @@ namespace Singular.ClassSpecific.Druid
                 Spell.Cast("Ferocious Bite",
                     ret => StyxWoW.Me.ComboPoints == 5 ||
                            StyxWoW.Me.ComboPoints > 1 && StyxWoW.Me.CurrentTarget.HealthPercent < 20),
-                Spell.Cast("Ravage!", ret => StyxWoW.Me.HasAura("Stampede")),
-                Spell.Buff("Rake", true, ret => StyxWoW.Me.CurrentTarget.Elite),
+                Spell.Cast("Ravage!", ret => StyxWoW.Me.ActiveAuras.ContainsKey("Stampede")),
+                Spell.Buff("Rake", true, ret => StyxWoW.Me.CurrentTarget),
                 Spell.Cast("Mangle (Cat)"),
                 Movement.CreateMoveToMeleeBehavior(true)
                 );
