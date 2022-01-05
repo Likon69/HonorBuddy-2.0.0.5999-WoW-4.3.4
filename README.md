@@ -66,8 +66,8 @@ Bossland GmbH
 
 # Contributors
 RCorsair (My help to set up this version and fix the bugs.)
-
 MausFarm (My help with the information about xml.)
+Mullz (Fixed 2 CR)
 
 Many thanks to the developer of the Honorbuddy content. Your profiles and plugins are always very useful.
-Kickazz006, Akna, Brodie, Cava, Vitalic, Twist etc.
+Kickazz006, Akna, Brodie, Cava, Vitalic, Twist, Echo, etc.
