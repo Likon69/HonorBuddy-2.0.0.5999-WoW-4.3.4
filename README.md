@@ -49,9 +49,9 @@ Make start.
 Enjoy
 
 # Video Guide 
-![Watch the video] (https://youtu.be/TKCltTK67Xg)
+![Watch the video](https://youtu.be/TKCltTK67Xg)
 
-https://youtu.be/TKCltTK67Xg
+
 
 
 I just throw the wow with HBReloag. I let it connect to accounte and close it. Honorbuddy I launch myself.
