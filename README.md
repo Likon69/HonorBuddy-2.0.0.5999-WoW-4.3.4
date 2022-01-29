@@ -2,7 +2,7 @@
 Latest version of HonorBuddy for Cataclysm 4.3.4 (15595)
 ![alt text](https://i.ibb.co/brmGbbC/2.png)
 
-# | ## How to execute it 
+# | How to execute it 
 
 go into :
 
@@ -64,9 +64,9 @@ PASS 1
 Discord Téxy#7011
 
 # Authors
-Bossland GmbH
+**Bossland GmbH**
 
-# Contributors
+## Contributors
 RCorsair (My help to set up this version and fix the bugs.)
 
 MausFarm (My help with the information about xml.)
