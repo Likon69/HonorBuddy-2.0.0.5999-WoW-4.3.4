@@ -49,7 +49,7 @@ Make start.
 Enjoy
 
 # Video Guide 
-![alt text](https://youtu.be/TKCltTK67Xg)
+https://youtu.be/TKCltTK67Xg
 
 
 
