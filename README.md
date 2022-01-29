@@ -2,7 +2,7 @@
 Latest version of HonorBuddy for Cataclysm 4.3.4 (15595)
 ![alt text](https://i.ibb.co/brmGbbC/2.png)
 
-# How to execute it 
+# | ## How to execute it 
 
 go into :
 
@@ -49,6 +49,8 @@ Make start.
 Enjoy
 
 # Video Guide 
+![Watch the video] (https://youtu.be/TKCltTK67Xg)
+
 https://youtu.be/TKCltTK67Xg
 
 
