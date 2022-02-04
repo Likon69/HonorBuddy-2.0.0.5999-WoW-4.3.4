@@ -96,10 +96,7 @@ namespace Singular.ClassSpecific.Warlock
                     new Action(ctx => SpellManager.StopCasting())),
                 Spell.WaitForCast(false),
                 Spell.BuffSelf("Life Tap", ret => StyxWoW.Me.ManaPercent < 80 && StyxWoW.Me.HealthPercent > 60 && !StyxWoW.Me.HasAnyAura("Drink", "Food")),
-                new Decorator(ret=>(StyxWoW.Me.CurrentSoulShards <= 2 || StyxWoW.Me.HealthPercent <= 55) && !StyxWoW.Me.HasAnyAura("Drink", "Food"),
-                    new PrioritySelector(
-                        Spell.BuffSelf("Soul Harvest"),
-                        new WaitContinue(System.TimeSpan.FromMilliseconds(500), ret => false, new ActionAlwaysSucceed()))),
+                Spell.BuffSelf("Soul Harvest", ret => (StyxWoW.Me.CurrentSoulShards <= 2 || StyxWoW.Me.HealthPercent <= 55) && !StyxWoW.Me.HasAnyAura("Drink", "Food")),
                 Rest.CreateDefaultRestBehaviour()
                 );
         }

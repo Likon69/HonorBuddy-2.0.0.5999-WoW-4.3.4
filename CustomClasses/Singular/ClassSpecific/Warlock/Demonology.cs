@@ -84,7 +84,7 @@ namespace Singular.ClassSpecific.Warlock
 
                 // Single target rotation
                 Spell.BuffSelf("Metamorphosis"),
-                Spell.BuffSelf("Demon Soul", ret => PetManager.CurrentPetType != PetType.None && (PetManager.CurrentPetType == PetType.Felguard || PetManager.CurrentPetType == PetType.Felhunter || PetManager.CurrentPetType == PetType.Imp || PetManager.CurrentPetType == PetType.Succubus || PetManager.CurrentPetType == PetType.Voidwalker)),
+                Spell.BuffSelf("Demon Soul"),
                 Spell.Buff("Immolate", true),
                 Spell.Cast("Hand of Gul'dan"),
                 Spell.Buff("Bane of Agony", true),
@@ -141,7 +141,7 @@ namespace Singular.ClassSpecific.Warlock
                 Spell.Buff("Curse of Elements", ret => StyxWoW.Me.CurrentTarget.PowerType != WoWPowerType.Mana),
                 // Single target rotation
                 Spell.BuffSelf("Metamorphosis"),
-                Spell.BuffSelf("Demon Soul", ret => PetManager.CurrentPetType != PetType.None && (PetManager.CurrentPetType == PetType.Felguard || PetManager.CurrentPetType == PetType.Felhunter || PetManager.CurrentPetType == PetType.Imp || PetManager.CurrentPetType == PetType.Succubus || PetManager.CurrentPetType == PetType.Voidwalker)),
+                Spell.BuffSelf("Demon Soul"),
                 Spell.Buff("Immolate", true),
                 Spell.Cast("Hand of Gul'dan"),
                 Spell.Buff("Bane of Agony", true),
@@ -199,7 +199,7 @@ namespace Singular.ClassSpecific.Warlock
 
                 // Single target rotation
                 Spell.BuffSelf("Metamorphosis"),
-                Spell.BuffSelf("Demon Soul", ret => PetManager.CurrentPetType != PetType.None && (PetManager.CurrentPetType == PetType.Felguard || PetManager.CurrentPetType == PetType.Felhunter || PetManager.CurrentPetType == PetType.Imp || PetManager.CurrentPetType == PetType.Succubus || PetManager.CurrentPetType == PetType.Voidwalker)),
+                Spell.BuffSelf("Demon Soul"),
                 Spell.Buff("Immolate", true),
                 Spell.Cast("Hand of Gul'dan"),
                 Spell.Buff("Bane of Doom", true),
