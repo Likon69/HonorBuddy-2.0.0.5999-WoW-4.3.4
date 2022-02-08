@@ -26,14 +26,12 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
-
 using Styx.Logic.BehaviorTree;
 using Styx.Logic.Combat;
 using Styx.Logic.Pathing;
 using Styx.Logic.Questing;
 using Styx.WoWInternals;
 using Styx.WoWInternals.WoWObjects;
-
 using TreeSharp;
 using Action = TreeSharp.Action;
 
@@ -114,7 +112,7 @@ namespace Styx.Bot.Quest_Behaviors
 
         // Private properties
         private int Counter { get; set; }
-        private LocalPlayer Me { get { return (ObjectManager.Me); } }
+        private LocalPlayer Me { get { return (StyxWoW.Me); } }
         public List<WoWUnit> MobList
         {
             get
@@ -223,15 +221,23 @@ namespace Styx.Bot.Quest_Behaviors
         }
 
 
-        private Composite CreateRootBehavior()
+        protected override Composite CreateBehavior()
         {
             return new PrioritySelector(
 
-                new Decorator(nat => !IsDone && !_isBehaviorDone && Me.IsAlive && (Counter >= NumOfTimes || (Me.QuestLog.GetQuestById((uint)QuestId) != null && Me.QuestLog.GetQuestById((uint)QuestId).IsCompleted)),
+                new Decorator(ret => !IsDone && !_isBehaviorDone && Me.IsAlive && (Counter >= NumOfTimes || (Me.QuestLog.GetQuestById((uint)QuestId) != null && Me.QuestLog.GetQuestById((uint)QuestId).IsCompleted)),
                     new Sequence(
-                        new Action(nat => TreeRoot.StatusText = "Finished CastSpellOn!"),
-                        new Action(nat => _isBehaviorDone = true),
-                        new Action(nat => RunStatus.Success))),
+                        new Action(ret => TreeRoot.StatusText = "Finished CastSpellOn!"),
+                        new Action(ret => _isBehaviorDone = true),
+                        new Action(ret => RunStatus.Success))),
+
+                        new Decorator(ret => MobList.Count == 0,
+                            new Sequence(
+                                    new Action(ret => TreeRoot.StatusText = "Moving To Location - X: " + Location.X + " Y: " + Location.Y),
+                                    new Action(ret => Navigator.MoveTo(Location)),
+                                    new Action(ret => Thread.Sleep(300))
+                                )
+                            ),
 
                         new Decorator(ret => CastSelf,
                                     new Sequence(
@@ -292,23 +298,6 @@ namespace Styx.Bot.Quest_Behaviors
 
         #region Overrides of CustomForcedBehavior
 
-        protected override Composite CreateBehavior()
-        {
-            return _root ?? (_root =
-                new PrioritySelector(
-
-                        new Decorator(ret => MobList.Count == 0,
-                            new Sequence(
-                                    new Action(ret => TreeRoot.StatusText = "Moving To Location - X: " + Location.X + " Y: " + Location.Y),
-                                    new Action(ret => Navigator.MoveTo(Location)),
-                                    new Action(ret => Thread.Sleep(300))
-                                )
-                            )
-
-                        )
-                    );
-        }
-
 
         public override void Dispose()
         {
@@ -354,18 +343,6 @@ namespace Styx.Bot.Quest_Behaviors
                     _isBehaviorDone = true;
                     return;
                 }
-
-
-                if (TreeRoot.Current != null && TreeRoot.Current.Root != null && TreeRoot.Current.Root.LastStatus != RunStatus.Running)
-                {
-                    var currentRoot = TreeRoot.Current.Root;
-                    if (currentRoot is GroupComposite)
-                    {
-                        var root = (GroupComposite)currentRoot;
-                        root.InsertChild(0, CreateRootBehavior());
-                    }
-                }
-
 
                 PlayerQuest quest = StyxWoW.Me.QuestLog.GetQuestById((uint)QuestId);
 
