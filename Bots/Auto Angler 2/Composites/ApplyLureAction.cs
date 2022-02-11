@@ -37,7 +37,7 @@ namespace HighVoltz.Composites
 
         protected override RunStatus Run(object context)
         {
-            if (!_me.IsCasting && !Util.IsLureOnPole && Applylure())
+            if (!_me.IsCasting && !Util1.IsLureOnPole && Applylure())
                 return RunStatus.Success;
             return RunStatus.Failure;
         }
@@ -58,12 +58,12 @@ namespace HighVoltz.Composites
             if (head != null && head.Entry == 33820)
             {
                 AutoAngler.Instance.Log("Appling Weather-Beaten Fishing Hat to fishing pole");
-                Util.UseItemByID(33820);
+                Util1.UseItemByID(33820);
                 return true;
             }
             foreach (var kv in Lures)
             {
-                WoWItem _lureInBag = Util.GetIteminBag(kv.Key);
+                WoWItem _lureInBag = Util1.GetIteminBag(kv.Key);
                 if (_lureInBag != null && _lureInBag.Use())
                 {
                     AutoAngler.Instance.Log("Appling {0} to fishing pole", kv.Value);

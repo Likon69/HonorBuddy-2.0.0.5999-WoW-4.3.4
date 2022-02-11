@@ -35,6 +35,9 @@
     <Reference Include="Honorbuddy">
       <HintPath>..\..\Honorbuddy\Honorbuddy.exe</HintPath>
     </Reference>
+    <Reference Include="Honorbuddy, Version=2.0.0.5999, Culture=neutral, PublicKeyToken=50a565ab5c01ae50">
+      <HintPath>..\..\Honorbuddy.exe</HintPath>
+    </Reference>
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
     <Reference Include="System" />
@@ -48,6 +51,9 @@
     <Reference Include="System.Xml" />
     <Reference Include="Tripper.Tools">
       <HintPath>..\..\Honorbuddy\Tripper.Tools.dll</HintPath>
+    </Reference>
+    <Reference Include="Tripper.Tools, Version=1.0.0.0, Culture=neutral, PublicKeyToken=c40611ce03f849a2">
+      <HintPath>..\..\Tripper.Tools.dll</HintPath>
     </Reference>
     <Reference Include="UIAutomationProvider" />
     <Reference Include="WindowsBase" />
@@ -80,7 +86,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SVN.cs" />
     <Compile Include="SvnBase.cs" />
-    <Compile Include="Util.cs" />
+    <Compile Include="Util1.cs" />
     <Compile Include="WaterWalking.cs" />
   </ItemGroup>
   <ItemGroup>

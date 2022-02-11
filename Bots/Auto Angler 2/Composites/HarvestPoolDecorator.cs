@@ -55,7 +55,7 @@ namespace HighVoltz.Composites
                 ObjectManager.GetObjectsOfType<WoWPlayer>(false, false).
                 Any(p => !p.IsFlying && p.Location.Distance2D(pool.Location) < 20 )));
             if (!ret)
-                Util.BlacklistPool(pool, TimeSpan.FromMinutes(1), "Another player fishing that pool");
+                Util1.BlacklistPool(pool, TimeSpan.FromMinutes(1), "Another player fishing that pool");
             return ret;
         }
 

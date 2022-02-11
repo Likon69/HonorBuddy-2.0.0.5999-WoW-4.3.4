@@ -57,7 +57,7 @@ namespace HighVoltz.Composites
                 //        else
                 //            Lua.DoString("for i=1,4 do if GetContainerNumFreeSlots(i) > 1 then PutItemInBag(i) end end");
                 //    }
-                   Util.EquipItemByID(pole.Entry);
+                   Util1.EquipItemByID(pole.Entry);
                 //}
                 return true;
             }

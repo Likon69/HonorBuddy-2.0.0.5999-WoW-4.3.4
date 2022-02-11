@@ -1,18 +1,14 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using Styx.Logic.Combat;
 using Styx.WoWInternals;
 using Styx.WoWInternals.WoWObjects;
 using Styx.Logic;
 using Styx.Logic.POI;
-using Styx.Logic.BehaviorTree;
 using System.Diagnostics;
 
 namespace HighVoltz
 {
-    public class Util
+    public class Util1
     {
         static LocalPlayer me = ObjectManager.Me;
 

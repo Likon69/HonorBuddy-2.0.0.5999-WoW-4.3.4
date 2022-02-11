@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using Action = TreeSharp.Action;
 using Styx.Logic.POI;
 using Styx.WoWInternals.WoWObjects;
@@ -247,14 +245,14 @@ namespace HighVoltz.Composites
                 lastPoolGuid = pool.Guid;
                 if (!FindPoolPoint(pool) || PoolPoints.Count == 0)
                 {
-                    Util.BlacklistPool(pool, TimeSpan.FromDays(1), "Found no landing spots");
+                    Util1.BlacklistPool(pool, TimeSpan.FromDays(1), "Found no landing spots");
                     return RunStatus.Failure;
                 }
             }
             // should never be true.. but being safe..
             if (PoolPoints.Count == 0)
             {
-                Util.BlacklistPool(pool, TimeSpan.FromDays(1), "Pool landing points mysteriously disapear...");
+                Util1.BlacklistPool(pool, TimeSpan.FromDays(1), "Pool landing points mysteriously disapear...");
                 return RunStatus.Failure;
             }
             TreeRoot.StatusText = "Moving to " + pool.Name;
@@ -349,7 +347,7 @@ namespace HighVoltz.Composites
             _movetoConcludingSW.Reset();
             if (PoolPoints.Count == 0)
             {
-                Util.BlacklistPool(pool, TimeSpan.FromMinutes(10), "No Landing spot found");
+                Util1.BlacklistPool(pool, TimeSpan.FromMinutes(10), "No Landing spot found");
                 return false;
             }
             return true;

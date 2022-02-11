@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Linq;
 using Styx.WoWInternals;
 using Styx.Logic.Combat;
 using Styx.WoWInternals.WoWObjects;
@@ -21,7 +18,7 @@ namespace HighVoltz
                     (SpellManager.HasSpell(1706) ||// priest levitate
                     SpellManager.HasSpell(546) || // shaman water walking
                     SpellManager.HasSpell(3714) ||// Dk Path of frost
-                    Util.IsItemInBag(8827));//isItemInBag(8827);
+                    Util1.IsItemInBag(8827));//isItemInBag(8827);
             }
         }
 
@@ -65,7 +62,7 @@ namespace HighVoltz
                     SpellManager.Cast(waterwalkingSpellID);
                     casted = true;
                 }
-                WoWItem waterPot = Util.GetIteminBag(8827);
+                WoWItem waterPot = Util1.GetIteminBag(8827);
                 if (waterPot != null && waterPot.Use())
                 {
                     casted = true;

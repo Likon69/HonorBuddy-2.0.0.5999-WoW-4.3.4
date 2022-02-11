@@ -1,21 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
 using System.Windows.Forms;
-using System.Windows;
 using Styx.Logic.Profiles;
 using Styx.Logic.POI;
 using Styx.Helpers;
 using Styx.Logic.BehaviorTree;
-using HighVoltz.Composites;
-using Styx.WoWInternals;
-using Styx.WoWInternals.WoWObjects;
-using Styx.Logic.Pathing;
-using Styx.WoWInternals.World;
 using System.IO;
 
 namespace HighVoltz

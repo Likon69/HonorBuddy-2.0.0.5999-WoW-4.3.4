@@ -2,11 +2,6 @@
 // Build Date: 2011/11/12 14:05:22
 // SVN url: https://autoangler2.googlecode.com/svn/trunk
 
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
 namespace HighVoltz
 {
     public partial class Svn

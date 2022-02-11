@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using Styx;
 using TreeSharp;
 using Styx.WoWInternals;
@@ -12,13 +11,9 @@ using Levelbot.Actions.Death;
 using Styx.Logic.Combat;
 using Action = TreeSharp.Action;
 using Styx.Helpers;
-using Styx.Logic.Pathing;
-using HighVoltz;
 using Styx.Logic.Profiles;
 using Styx.Logic.POI;
-using System.Security.Cryptography;
 using System.IO;
-using System.Diagnostics;
 
 namespace HighVoltz
 {
@@ -167,10 +162,10 @@ namespace HighVoltz
             {
                 BotEvents.OnBotStart += BotEvents_OnBotStart;
                 BotEvents.OnBotStop += BotEvents_OnBotStop;
-                WoWItem mainhand = MySettings.MainHand != 0 ? Util.GetIteminBag(MySettings.MainHand) : null;
+                WoWItem mainhand = MySettings.MainHand != 0 ? Util1.GetIteminBag(MySettings.MainHand) : null;
                 if (mainhand == null)
                     mainhand = FindMainHand();
-                WoWItem offhand = MySettings.OffHand != 0 ? Util.GetIteminBag(MySettings.OffHand) : null;
+                WoWItem offhand = MySettings.OffHand != 0 ? Util1.GetIteminBag(MySettings.OffHand) : null;
                 if (((mainhand != null && mainhand.ItemInfo.InventoryType != InventoryType.TwoHandWeapon) ||
                     mainhand == null) && offhand == null)
                 {

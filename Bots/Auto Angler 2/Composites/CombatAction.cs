@@ -25,10 +25,10 @@ namespace HighVoltz.Composites
             uint mainHandID = AutoAngler.Instance.MySettings.MainHand;
             WoWItem mainHand = ObjectManager.Me.Inventory.Equipped.MainHand;
 
-            if (mainHand == null || (mainHand.Entry != mainHandID && Util.IsItemInBag(mainHandID)))
+            if (mainHand == null || (mainHand.Entry != mainHandID && Util1.IsItemInBag(mainHandID)))
             {
-                Is2Hand = Util.GetIteminBag(AutoAngler.Instance.MySettings.MainHand).ItemInfo.InventoryType == Styx.InventoryType.TwoHandWeapon;
-                Util.EquipItemByID(AutoAngler.Instance.MySettings.MainHand);
+                Is2Hand = Util1.GetIteminBag(AutoAngler.Instance.MySettings.MainHand).ItemInfo.InventoryType == Styx.InventoryType.TwoHandWeapon;
+                Util1.EquipItemByID(AutoAngler.Instance.MySettings.MainHand);
             }
 
             // equip left hand weapon
@@ -36,9 +36,9 @@ namespace HighVoltz.Composites
             WoWItem offhand = ObjectManager.Me.Inventory.Equipped.OffHand;
 
             if ((!Is2Hand && offhandID > 0 &&
-                (offhand == null || (offhand.Entry != offhandID && Util.IsItemInBag(offhandID)))))
+                (offhand == null || (offhand.Entry != offhandID && Util1.IsItemInBag(offhandID)))))
             {
-                Util.EquipItemByID(AutoAngler.Instance.MySettings.OffHand);
+                Util1.EquipItemByID(AutoAngler.Instance.MySettings.OffHand);
             }
 
             if (RoutineManager.Current.CombatBehavior != null) // this check doesn't have any effect. anymore...
