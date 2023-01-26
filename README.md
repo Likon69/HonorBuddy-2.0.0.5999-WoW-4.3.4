@@ -60,9 +60,6 @@ ID 1
 
 PASS 1
 
-# If you have a problem, please contact me.
-Discord Téxy#7011
-
 # Authors
 **Bossland GmbH**
 
