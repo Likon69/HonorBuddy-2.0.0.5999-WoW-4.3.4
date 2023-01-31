@@ -1,0 +1,464 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<UIElements>
+  <TabPages>
+    <Tab>
+      <Label>Common</Label>
+    </Tab>
+    <Tab>
+      <Label>Combat</Label>
+    </Tab>
+    <Tab>
+      <Label>Advanced</Label>
+    </Tab>
+  </TabPages>
+  <Groupboxes>
+    <!--Common Tab-->
+    <Group>
+      <Label>Rest and Health</Label>
+      <Name>RestGroup</Name>
+      <Column>Left</Column>
+      <Tab>Common</Tab>
+    </Group>
+    <!--Combat Tab-->
+    <Group>
+      <Label>Combat</Label>
+      <Name>CombatGroup</Name>
+      <Column>Left</Column>
+      <Tab>Combat</Tab>
+    </Group>
+    <Group>
+      <Label>Misc</Label>
+      <Name>BuffsGroup</Name>
+      <Column>Right</Column>
+      <Tab>Combat</Tab>
+    </Group>
+    <Group>
+      <Label>Buffs and Protection</Label>
+      <Name>BuffsAndProtectionGroup</Name>
+      <Column>Right</Column>
+      <Tab>Combat</Tab>
+    </Group>
+    <!--Advanced Tab-->
+    <Group>
+      <Label>Misc</Label>
+      <Name>MiscGroup</Name>
+      <Column>Left</Column>
+      <Tab>Advanced</Tab>
+    </Group>
+  </Groupboxes>
+  <ValueTemplates>
+    <!--Common use templates-->
+    <Template>
+      <Label>AllOptions</Label>
+      <Value>... always|... never|... only on adds|... only on 3+ adds|... only on 4+ adds|... only on 5+ adds|... only when no adds|... only when in battlegrounds|... only when not in battlegrounds|... only when in instance|... only when not in instance</Value>
+    </Template>
+    <Template>
+      <Label>Cleanse</Label>
+      <Value>... immediately|... never|... only out of combat</Value>
+    </Template>
+    <Template>
+      <Label>BackupHeal</Label>
+      <Value>... always|... healer OOM or Dead|... never</Value>
+    </Template>
+    <Template>
+      <Label>AddsNever</Label>
+      <Value>... never|... only on adds|... only on 3+ adds|... only on 4+ adds|... only on 5+ adds|... only on 6+ adds|... only on 7+ adds|... only on 8+ adds|... only when no adds</Value>
+    </Template>
+    <Template>
+      <Label>AddsAlways</Label>
+      <Value>... always|... never|... only on adds|... only on 3+ adds|... only on 4+ adds|... only on 5+ adds|... only on 6+ adds|... only on 7+ adds|... only on 8+ adds|... only when no adds</Value>
+    </Template>
+    <Template>
+      <Label>5Step50</Label>
+      <Value>10|15|20|25|30|35|40|45|50</Value>
+    </Template>
+    <Template>
+      <Label>5Step100</Label>
+      <Value>10|15|20|25|30|35|40|45|50|55|60|65|70|75|80|85|90|95</Value>
+    </Template>
+    <Template>
+      <Label>10Step50</Label>
+      <Value>10|20|30|40|50</Value>
+    </Template>
+    <Template>
+      <Label>10Step100</Label>
+      <Value>10|20|30|40|50|60|70|80|90</Value>
+    </Template>
+    <Template>
+      <Label>10Step1</Label>
+      <Value>1|2|3|4|5|6|7|8|9|10</Value>
+    </Template>
+    <Template>
+      <Label>CastersAndRunners</Label>
+      <Value>... always|... never|... on casters and runners|... only on casters|... only on runners</Value>
+    </Template>
+    <!--Class specific templates-->
+  </ValueTemplates>
+  <Items>
+    <!--Rest and Health - Common Tab-->
+    <Item>
+      <Label>Rest Health</Label>
+      <Name>RestHealth</Name>
+      <GroupName>RestGroup</GroupName>
+      <Type>Bar</Type>
+      <Value></Value>
+      <Tooltip></Tooltip>
+      <Tag></Tag>
+    </Item>
+    <Item>
+      <Label>Rest Mana</Label>
+      <Name>RestMana</Name>
+      <GroupName>RestGroup</GroupName>
+      <Type>Bar</Type>
+      <Value></Value>
+      <Tooltip></Tooltip>
+      <Tag></Tag>
+    </Item>
+    <Item>
+      <Label>Mana Gem</Label>
+      <Name>ManaGem</Name>
+      <GroupName>RestGroup</GroupName>
+      <Type>Bar</Type>
+      <Value></Value>
+      <Tooltip></Tooltip>
+      <Tag></Tag>
+    </Item>
+    <Item>
+      <Label>Health Potion</Label>
+      <Name>HealthPotion</Name>
+      <GroupName>RestGroup</GroupName>
+      <Type>Bar</Type>
+      <Value></Value>
+      <Tooltip></Tooltip>
+      <Tag></Tag>
+    </Item>
+    <Item>
+      <Label>Lifeblood</Label>
+      <Name>LifebloodHealth</Name>
+      <GroupName>RestGroup</GroupName>
+      <Type>Bar</Type>
+      <Value></Value>
+      <Tooltip></Tooltip>
+      <Tag></Tag>
+    </Item>
+    <!--Misc - Advanced Tab-->
+    <Item>
+      <Label>Lazy Raider</Label>
+      <Name></Name>
+      <GroupName>MiscGroup</GroupName>
+      <Type></Type>
+      <Value></Value>
+      <Tooltip>Disable all movement within the CC. You must face the target and move the character yourself. NB Some spells are disabled if this setting is used</Tooltip>
+      <Tag></Tag>
+    </Item>
+    <!--Buffs (Misc) - Combat Tab-->
+    <Item>
+      <Label>Pull Spell</Label>
+      <Name></Name>
+      <GroupName>BuffsGroup</GroupName>
+      <Type></Type>
+      <Value>Fireball|Frostbolt|Arcane Blast|Pyroblast|Arcane Barrage|Ice Lance|Frostfire Bolt|Scorch</Value>
+      <Tooltip></Tooltip>
+      <Tag>Sort</Tag>
+    </Item>
+    <Item>
+      <Label>Evocation (Mana)</Label>
+      <Name>EvocationMana</Name>
+      <GroupName>BuffsGroup</GroupName>
+      <Type>Bar</Type>
+      <Value></Value>
+      <Tooltip>Cast Evocation when your mana drops below %</Tooltip>
+      <Tag></Tag>
+    </Item>
+    <Item>
+      <Label>Evocation (Health)</Label>
+      <Name>EvocationHealth</Name>
+      <GroupName>BuffsGroup</GroupName>
+      <Type>Bar</Type>
+      <Value></Value>
+      <Tooltip>Cast Evocation when your health drops below %</Tooltip>
+      <Tag></Tag>
+    </Item>
+    <Item>
+      <Label>Wand (Mana)</Label>
+      <Name>WandMana</Name>
+      <GroupName>BuffsGroup</GroupName>
+      <Type>Bar</Type>
+      <Value></Value>
+      <Tooltip>If your mana is below this level stop all DPS spells and only use Wand</Tooltip>
+      <Tag></Tag>
+    </Item>
+    <Item>
+      <Label>Sheep</Label>
+      <Name></Name>
+      <GroupName>BuffsGroup</GroupName>
+      <Type></Type>
+      <Value>VT:AddsNever</Value>
+      <Tooltip></Tooltip>
+      <Tag></Tag>
+    </Item>
+    <Item>
+      <Label>Counterspell</Label>
+      <Name></Name>
+      <GroupName>BuffsGroup</GroupName>
+      <Type></Type>
+      <Value>... always|... never</Value>
+      <Tooltip></Tooltip>
+      <Tag></Tag>
+    </Item>
+    <Item>
+      <Label>Slow</Label>
+      <Name></Name>
+      <GroupName>BuffsGroup</GroupName>
+      <Type></Type>
+      <Value></Value>
+      <Tooltip></Tooltip>
+      <Tag></Tag>
+    </Item>
+    <Item>
+      <Label>Time Warp</Label>
+      <Name></Name>
+      <GroupName>BuffsGroup</GroupName>
+      <Type></Type>
+      <Value>VT:AllOptions</Value>
+      <Tooltip></Tooltip>
+      <Tag></Tag>
+    </Item>
+    <Item>
+      <Label>Arcane Power</Label>
+      <Name></Name>
+      <GroupName>BuffsGroup</GroupName>
+      <Type></Type>
+      <Value>VT:AllOptions</Value>
+      <Tooltip></Tooltip>
+      <Tag></Tag>
+    </Item>
+    <Item>
+      <Label>Presence of Mind</Label>
+      <Name>PresenceOfMind</Name>
+      <GroupName>BuffsGroup</GroupName>
+      <Type></Type>
+      <Value>VT:AllOptions</Value>
+      <Tooltip></Tooltip>
+      <Tag></Tag>
+    </Item>
+    <!--Buffs and Protection - Combat Tab-->
+    <Item>
+      <Label>Cleanse</Label>
+      <Name></Name>
+      <GroupName>BuffsAndProtectionGroup</GroupName>
+      <Type></Type>
+      <Value>VT:Cleanse</Value>
+      <Tooltip></Tooltip>
+      <Tag>Sort</Tag>
+    </Item>
+    <Item>
+      <Label>Mana Shield</Label>
+      <Name>ManaShield</Name>
+      <GroupName>BuffsAndProtectionGroup</GroupName>
+      <Type></Type>
+      <Value>VT:AllOptions</Value>
+      <Tooltip></Tooltip>
+      <Tag></Tag>
+    </Item>
+    <Item>
+      <Label>Mana Shield (Health)</Label>
+      <Name>ManaShieldHealth</Name>
+      <GroupName>BuffsAndProtectionGroup</GroupName>
+      <Type>Bar</Type>
+      <Value></Value>
+      <Tooltip>If cast Mana Shield if your health is below this %</Tooltip>
+      <Tag></Tag>
+    </Item>
+    <Item>
+      <Label>Ice Barrier</Label>
+      <Name></Name>
+      <GroupName>BuffsAndProtectionGroup</GroupName>
+      <Type></Type>
+      <Value>VT:AllOptions</Value>
+      <Tooltip></Tooltip>
+      <Tag></Tag>
+    </Item>
+    <Item>
+      <Label>Ice Barrier (Health)</Label>
+      <Name>IceBarrierHealth</Name>
+      <GroupName>BuffsAndProtectionGroup</GroupName>
+      <Type>Bar</Type>
+      <Value></Value>
+      <Tooltip>If cast Ice Barrier if your health is below this %</Tooltip>
+      <Tag></Tag>
+    </Item>
+    <Item>
+      <Label>Armor Buff</Label>
+      <Name></Name>
+      <GroupName>BuffsAndProtectionGroup</GroupName>
+      <Type></Type>
+      <Value>Molten Armor|Mage Armor|Frost Armor</Value>
+      <Tooltip></Tooltip>
+      <Tag>Sort</Tag>
+    </Item>
+    <Item>
+      <Label>Mage Ward</Label>
+      <Name></Name>
+      <GroupName>BuffsAndProtectionGroup</GroupName>
+      <Type></Type>
+      <Value>... always|... never</Value>
+      <Tooltip>Only used if your target is a caster</Tooltip>
+      <Tag></Tag>
+    </Item>
+    <!--Combat - Combat Tab-->
+    <Item>
+      <Label>Main DPS Spell</Label>
+      <Name></Name>
+      <GroupName>CombatGroup</GroupName>
+      <Type></Type>
+      <Value>Fireball|Frostbolt|Arcane Blast|Frostfire Bolt|Scorch|Pyroblast|Ice Lance</Value>
+      <Tooltip></Tooltip>
+      <Tag>Sort</Tag>
+    </Item>
+    <Item>
+      <Label>Arcane Explosion</Label>
+      <Name></Name>
+      <GroupName>CombatGroup</GroupName>
+      <Type></Type>
+      <Value>VT:AddsAlways</Value>
+      <Tooltip></Tooltip>
+      <Tag></Tag>
+    </Item>
+    <Item>
+      <Label>Arcane Barrage</Label>
+      <Name></Name>
+      <GroupName>CombatGroup</GroupName>
+      <Type></Type>
+      <Value>VT:AllOptions</Value>
+      <Tooltip></Tooltip>
+      <Tag></Tag>
+    </Item>
+    <Item>
+      <Label>Arcane Missiles</Label>
+      <Name></Name>
+      <GroupName>CombatGroup</GroupName>
+      <Type></Type>
+      <Value>... always|... never</Value>
+      <Tooltip></Tooltip>
+      <Tag></Tag>
+    </Item>
+    <Item>
+      <Label>Fire Blast</Label>
+      <Name></Name>
+      <GroupName>CombatGroup</GroupName>
+      <Type></Type>
+      <Value>VT:AllOptions</Value>
+      <Tooltip></Tooltip>
+      <Tag></Tag>
+    </Item>
+    <Item>
+      <Label>Cone of Cold</Label>
+      <Name>ConeOfCold</Name>
+      <GroupName>CombatGroup</GroupName>
+      <Type></Type>
+      <Value>VT:AllOptions</Value>
+      <Tooltip></Tooltip>
+      <Tag></Tag>
+    </Item>
+    <Item>
+      <Label>Frost Nova</Label>
+      <Name></Name>
+      <GroupName>CombatGroup</GroupName>
+      <Type></Type>
+      <Value>VT:AllOptions</Value>
+      <Tooltip></Tooltip>
+      <Tag></Tag>
+    </Item>
+    <Item>
+      <Label>Frost Nova Spell</Label>
+      <Name></Name>
+      <GroupName>CombatGroup</GroupName>
+      <Type></Type>
+      <Value>Fireball|Frostbolt|Arcane Blast|Frostfire Bolt|Scorch|Pyroblast|Ice Lance|Scorch</Value>
+      <Tooltip>The spell to cast when the target is debuffed with Frost Nova. Typically Ice Lance is the prefered spell</Tooltip>
+      <Tag>Sort</Tag>
+    </Item>
+    <Item>
+      <Label>Mirror Image</Label>
+      <Name></Name>
+      <GroupName>CombatGroup</GroupName>
+      <Type></Type>
+      <Value>VT:AllOptions</Value>
+      <Tooltip></Tooltip>
+      <Tag></Tag>
+    </Item>
+    <Item>
+      <Label>Icy Veins</Label>
+      <Name></Name>
+      <GroupName>CombatGroup</GroupName>
+      <Type></Type>
+      <Value>VT:AllOptions</Value>
+      <Tooltip></Tooltip>
+      <Tag></Tag>
+    </Item>
+    <Item>
+      <Label>Living Bomb</Label>
+      <Name></Name>
+      <GroupName>CombatGroup</GroupName>
+      <Type></Type>
+      <Value>VT:AllOptions</Value>
+      <Tooltip></Tooltip>
+      <Tag></Tag>
+    </Item>
+    <Item>
+      <Label>Pyroblast</Label>
+      <Name></Name>
+      <GroupName>CombatGroup</GroupName>
+      <Type></Type>
+      <Value>VT:AllOptions</Value>
+      <Tooltip></Tooltip>
+      <Tag></Tag>
+    </Item>
+    <Item>
+      <Label>Flame Orb</Label>
+      <Name></Name>
+      <GroupName>CombatGroup</GroupName>
+      <Type></Type>
+      <Value>VT:AddsAlways</Value>
+      <Tooltip></Tooltip>
+      <Tag></Tag>
+    </Item>
+    <Item>
+      <Label>Blizzard</Label>
+      <Name></Name>
+      <GroupName>CombatGroup</GroupName>
+      <Type></Type>
+      <Value>VT:AddsAlways</Value>
+      <Tooltip></Tooltip>
+      <Tag></Tag>
+    </Item>
+    <Item>
+      <Label>Flamestrike</Label>
+      <Name></Name>
+      <GroupName>CombatGroup</GroupName>
+      <Type></Type>
+      <Value>VT:AddsAlways</Value>
+      <Tooltip></Tooltip>
+      <Tag></Tag>
+    </Item>
+    <Item>
+      <Label>Blast Wave</Label>
+      <Name></Name>
+      <GroupName>CombatGroup</GroupName>
+      <Type></Type>
+      <Value>VT:AddsAlways</Value>
+      <Tooltip></Tooltip>
+      <Tag></Tag>
+    </Item>
+    <Item>
+      <Label>Dragon's Breath</Label>
+      <Name>DragonsBreath</Name>
+      <GroupName>CombatGroup</GroupName>
+      <Type></Type>
+      <Value>VT:AllOptions</Value>
+      <Tooltip></Tooltip>
+      <Tag></Tag>
+    </Item>
+  </Items>
+</UIElements>

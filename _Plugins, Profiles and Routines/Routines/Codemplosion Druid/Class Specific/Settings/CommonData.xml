@@ -1,0 +1,311 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<CommonData>
+  <IgnoreSpells>
+    <Spell>
+      <SpellID></SpellID>
+      <Name />
+    </Spell>
+  </IgnoreSpells>
+  <RangedCapableMobs>
+    <Mob>
+      <EntryID>8338</EntryID>
+      <!--Dark Iron Marksman-->
+    </Mob>
+    <Mob>
+      <EntryID>8566</EntryID>
+      <!--Dark Iron Lookout-->
+    </Mob>
+    <Mob>
+      <EntryID>7235</EntryID>
+      <!--Gnarlpine Mystic-->
+    </Mob>
+    <Mob>
+      <EntryID>16966</EntryID>
+      <!--Haal'eshi Windwalker-->
+    </Mob>
+    <Mob>
+      <EntryID>19411</EntryID>
+      <!--Shattered Hand Warlock-->
+    </Mob>
+    <Mob>
+      <EntryID>19422</EntryID>
+      <!--Bleeding Hollow Necrolyte-->
+    </Mob>
+    <Mob>
+      <EntryID>2019</EntryID>
+      <!--Bloodfeather Fury-->
+    </Mob>
+    <Mob>
+      <EntryID>21660</EntryID>
+      <!--Cabal Abjurist-->
+    </Mob>
+  </RangedCapableMobs>
+  <PriorityMobs>
+    <Mob>
+      <EntryID>5854</EntryID>
+      <!--Heavy War Golem - Knock back-->
+    </Mob>
+    <Mob>
+      <EntryID>7039</EntryID>
+      <!--War Reaver - Knock back-->
+    </Mob>
+    <Mob>
+      <EntryID>7041</EntryID>
+      <!--Black Wyrmkin                - Caster-->
+    </Mob>
+    <Mob>
+      <EntryID>7049</EntryID>
+      <!--Flamescale Broodling         - Casters that piss me off-->
+    </Mob>
+    <Mob>
+      <EntryID>19295</EntryID>
+      <!--Shattered Hand Grenadier     - Throws freaking grenades that piss me off-->
+    </Mob>
+    <Mob>
+      <EntryID>19461</EntryID>
+      <!--Tamed Ravager                - They don't flee and can be killed quickly-->
+    </Mob>
+    <Mob>
+      <EntryID>17058</EntryID>
+      <!--Illidari Taskmaster          - Kill them and the slaves go away-->
+    </Mob>
+    <Mob>
+      <EntryID>16966</EntryID>
+      <!--Haal'eshi Windwalker         - Caster-->
+    </Mob>
+    <Mob>
+      <EntryID>19411</EntryID>
+      <!--Shattered Hand Warlock       - Caster-->
+    </Mob>
+    <Mob>
+      <EntryID>19422</EntryID>
+      <!--Bleeding Hollow Necrolyte    - Caster-->
+    </Mob>
+    <Mob>
+      <EntryID>2020</EntryID>
+      <!--Bloodfeather Wind Witch      - Cyclone -->
+    </Mob>
+    <Mob>
+      <EntryID>18079</EntryID>
+      <!--Umbrafen Seer                - Caster / Healer-->
+    </Mob>
+    <Mob>
+      <EntryID>20455</EntryID>
+      <!--Terror Totem                 - It makes you scared-->
+    </Mob>
+    <Mob>
+      <EntryID>18118</EntryID>
+      <!--Ango'rosh Shaman             - Caster / Healer-->
+    </Mob>
+    <Mob>
+      <EntryID>21405</EntryID>
+      <!--Ethereal Arcanist            - Caster-->
+    </Mob>
+    <Mob>
+      <EntryID>21902</EntryID>
+      <!--Cabal Spell-weaver-->
+    </Mob>
+    <Mob>
+      <EntryID>19986</EntryID>
+      <!--Ruuan'ok Skyfury - Knock back effect-->
+    </Mob>
+  </PriorityMobs>
+  <HealingSpells>
+    <!--Druid-->
+    <Spell>
+      <SpellID>8936</SpellID>
+      <Name>Regrowth</Name>
+    </Spell>
+    <Spell>
+      <SpellID>50464</SpellID>
+      <Name>Nourish</Name>
+    </Spell>
+    <Spell>
+      <SpellID>774</SpellID>
+      <Name>Rejuvenation</Name>
+    </Spell>
+    <Spell>
+      <SpellID>5185</SpellID>
+      <Name>Healing Touch</Name>
+    </Spell>
+    <Spell>
+      <SpellID>740</SpellID>
+      <Name>Tranquility</Name>
+    </Spell>
+    <!--Paladin-->
+    <Spell>
+      <SpellID>635</SpellID>
+      <Name>Holy Light</Name>
+    </Spell>
+    <Spell>
+      <SpellID>19750</SpellID>
+      <Name>Flash of Light</Name>
+    </Spell>
+    <Spell>
+      <SpellID>82326</SpellID>
+      <Name>Divine Light</Name>
+    </Spell>
+    <!--Priest-->
+    <Spell>
+      <SpellID>2061</SpellID>
+      <Name>Flash Heal</Name>
+    </Spell>
+    <Spell>
+      <SpellID>2050</SpellID>
+      <Name>Heal</Name>
+    </Spell>
+    <Spell>
+      <SpellID>2060</SpellID>
+      <Name>Greater Heal</Name>
+    </Spell>
+    <Spell>
+      <SpellID>596</SpellID>
+      <Name>Prayer of Healing</Name>
+    </Spell>
+    <Spell>
+      <SpellID>32546</SpellID>
+      <Name>Binding Heal</Name>
+    </Spell>
+    <Spell>
+      <SpellID>64901</SpellID>
+      <Name>Hymn of Hope</Name>
+    </Spell>
+    <Spell>
+      <SpellID>64843</SpellID>
+      <Name>Divine Hymn</Name>
+    </Spell>
+    <!--Shaman-->
+    <Spell>
+      <SpellID>8004</SpellID>
+      <Name>Healing Surge</Name>
+    </Spell>
+    <Spell>
+      <SpellID>1064</SpellID>
+      <Name>Chain Heal</Name>
+    </Spell>
+    <Spell>
+      <SpellID>331</SpellID>
+      <Name>Healing Wave</Name>
+    </Spell>
+    <Spell>
+      <SpellID>77472</SpellID>
+      <Name>Greater Healing Wave</Name>
+    </Spell>
+    <Spell>
+      <SpellID>73420</SpellID>
+      <Name>Healing Rain</Name>
+    </Spell>
+  </HealingSpells>
+  <ImportantInterruptSpells>
+    <!--Zul' Aman-->
+    <!--Hex Lord Malacarass-->
+    <Spell>
+      <SpellID>41383</SpellID>
+    </Spell>
+    <Spell>
+      <SpellID>43428</SpellID>
+    </Spell>
+    <Spell>
+      <SpellID>43427</SpellID>
+    </Spell>
+    <Spell>
+      <SpellID>43451</SpellID>
+    </Spell>
+    <Spell>
+      <SpellID>41372</SpellID>
+    </Spell>
+    <Spell>
+      <SpellID>43548</SpellID>
+    </Spell>
+    <Spell>
+      <SpellID>43584</SpellID>
+    </Spell>
+    <Spell>
+      <SpellID>43579</SpellID>
+    </Spell>
+    <!--Trash-->
+    <Spell>
+      <SpellID>43294</SpellID>
+    </Spell>
+    <Spell>
+      <SpellID>24059</SpellID>
+    </Spell>
+    <Spell>
+      <SpellID>23596</SpellID>
+    </Spell>
+    <Spell>
+      <SpellID>43362</SpellID>
+    </Spell>
+    <Spell>
+      <SpellID>42477</SpellID>
+    </Spell>
+    <Spell>
+      <SpellID>45075</SpellID>
+    </Spell>
+    <Spell>
+      <SpellID>43527</SpellID>
+    </Spell>
+    <Spell>
+      <SpellID>43526</SpellID>
+    </Spell>
+    <Spell>
+      <SpellID>98014</SpellID>
+    </Spell>
+    <Spell>
+      <SpellID>98016</SpellID>
+    </Spell>
+    <Spell>
+      <SpellID>98019</SpellID>
+    </Spell>
+    <Spell>
+      <SpellID>97962</SpellID>
+    </Spell>
+    <!--Zul' Gurub-->
+    <Spell>
+      <SpellID>96652</SpellID>
+    </Spell>
+    <Spell>
+      <SpellID>96466</SpellID>
+    </Spell>
+    <Spell>
+      <SpellID>96435</SpellID>
+    </Spell>
+    <Spell>
+      <SpellID>96347</SpellID>
+    </Spell>
+    <!--Trash-->
+    <Spell>
+      <SpellID>97017</SpellID>
+    </Spell>
+    <Spell>
+      <SpellID>96952</SpellID>
+    </Spell>
+    <Spell>
+      <SpellID>96956</SpellID>
+    </Spell>
+    <Spell>
+      <SpellID>96790</SpellID>
+    </Spell>
+    <Spell>
+      <SpellID>96466</SpellID>
+    </Spell>
+    <Spell>
+      <SpellID>97083</SpellID>
+    </Spell>
+    <Spell>
+      <SpellID>97337</SpellID>
+    </Spell>
+    <Spell>
+      <SpellID>98014</SpellID>
+    </Spell>
+    <Spell>
+      <SpellID>98016</SpellID>
+    </Spell>
+    <Spell>
+      <SpellID>98019</SpellID>
+    </Spell>
+    <Spell>
+      <SpellID>97962</SpellID>
+    </Spell>
+  </ImportantInterruptSpells>
+</CommonData>

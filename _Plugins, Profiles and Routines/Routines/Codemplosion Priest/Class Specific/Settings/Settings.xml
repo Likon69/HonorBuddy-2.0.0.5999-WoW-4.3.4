@@ -1,0 +1,94 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Priest>
+  <!--Multiple Environment options are: never and always-->
+  <MultipleEnvironment>... never</MultipleEnvironment>
+  <Version>0.0.9</Version>
+  <!--Common class settings template-->
+  <ShowUI>... always</ShowUI>
+  <SmartEatDrink>... always</SmartEatDrink>
+  <RAFTarget>... always</RAFTarget>
+  <Debug>... do not show debug</Debug>
+  <LowLevelCheck>... always</LowLevelCheck>
+  <RestHealth>55</RestHealth>
+  <RestMana>60</RestMana>
+  <CombatTimeout>30</CombatTimeout>
+  <HealthPotion>52</HealthPotion>
+  <LifebloodHealth>40</LifebloodHealth>
+  <ManaPotion>25</ManaPotion>
+  <RacialSpell>... never</RacialSpell>
+  <RacialUseWhen>... never</RacialUseWhen>
+  <Cleanse>... only out of combat</Cleanse>
+  <MaximumPullDistance>38</MaximumPullDistance>
+  <MinimumPullDistance>35</MinimumPullDistance>
+  <LazyRaider>... never</LazyRaider>
+  <IgnoreRunners>... always</IgnoreRunners>
+  <!--Class specific settings everything below here-->
+  <RestHealPercent>75</RestHealPercent>
+  <!--Healing-->
+  <FlashHealHealth>52</FlashHealHealth>
+  <PowerWordShieldHealth>79</PowerWordShieldHealth>
+  <RenewHealth>65</RenewHealth>
+  <PainSuppressionHealth>40</PainSuppressionHealth>
+  <!--Party Healing-->
+  <PartyHealerOOM>25</PartyHealerOOM>
+  <PartyCleanse>... immediately</PartyCleanse>
+  <PartyHealWhen>... I'm dedicated healer</PartyHealWhen>
+  <PartyHealWhenSpec>... Discipline spec only</PartyHealWhenSpec>
+  <PartyGuardianSpirit>25</PartyGuardianSpirit>
+  <PartyPrayerOfMending>80</PartyPrayerOfMending>
+  <PartyPenance>75</PartyPenance>
+  <PartyPainSuppression>60</PartyPainSuppression>
+  <PartyRenew>96</PartyRenew>
+  <PartyPWS>95</PartyPWS>
+  <PartyFlashHeal>70</PartyFlashHeal>
+  <PartyGreaterHeal>55</PartyGreaterHeal>
+  <PrayerOfHealingCount>3</PrayerOfHealingCount>
+  <PrayerOfHealingHealth>85</PrayerOfHealingHealth>
+  <CircleOfHealingCount>2</CircleOfHealingCount>
+  <CircleOfHealingHealth>85</CircleOfHealingHealth>
+  <VerboseHealing>... never</VerboseHealing>
+  <SmiteEvangelism>... only if mana &gt; 55%</SmiteEvangelism>
+  <SmiteEvangelismHealth>85</SmiteEvangelismHealth>
+  <Archangel>... 5+ stacks</Archangel>
+  <ArchangelParty>... 5+ stacks</ArchangelParty>
+  <BouncePoM>... always</BouncePoM>
+  <WandParty>... always</WandParty>
+  <HealPets>... always</HealPets>
+  <ResurrectPlayers>... always</ResurrectPlayers>
+  <PowerWordBarrier>... only on 3+ adds</PowerWordBarrier>
+  <!--Combat-->
+  <WandMana>25</WandMana>
+  <PullSpell>Vampiric Touch</PullSpell>
+  <InnerFireWill>Inner Fire</InnerFireWill>
+  <PowerWordFortitude>... always</PowerWordFortitude>
+  <ShadowProtection>... always</ShadowProtection>
+  <Smite>... never</Smite>
+  <ShadowWordPain>... only on adds</ShadowWordPain>
+  <MindBlast>... always</MindBlast>
+  <MindFlay>... always</MindFlay>
+  <HolyFire>... never</HolyFire>
+  <DevouringPlague>... always</DevouringPlague>
+  <ShadowWordDeath>... target &lt; 25% health</ShadowWordDeath>
+  <ShadowfiendMana>35</ShadowfiendMana>
+  <ReserveMana>1</ReserveMana>
+  <DispersionMana>25</DispersionMana>
+  <HymnOfHopeMana>15</HymnOfHopeMana>
+  <Silence>... always</Silence>
+  <VampiricTouch>... always</VampiricTouch>
+  <Shadowform>... always</Shadowform>
+  <FearWard>... only when in instance</FearWard>
+  <MindSpike>... never</MindSpike>
+  <Chastise>... only on adds</Chastise>
+  <Penance>... always</Penance>
+  <InnerFocusMana>50</InnerFocusMana>
+  <PowerInfusion>... only on 3+ adds</PowerInfusion>
+  <ShackleUndead>... only on adds</ShackleUndead>
+  <PWSBeforePull>... never</PWSBeforePull>
+  <PsychicScream>... never</PsychicScream>
+  <MindSear>... only on adds</MindSear>
+  <HolyNova>... only on 3+ adds</HolyNova>
+  <!--Hidden settings. Not visible in the UI-->
+  <HealingSpellTimer>1100</HealingSpellTimer>
+  <HealingModifierSolo>80</HealingModifierSolo>
+  <HealingAbsoluteMinimum>25</HealingAbsoluteMinimum>
+</Priest>

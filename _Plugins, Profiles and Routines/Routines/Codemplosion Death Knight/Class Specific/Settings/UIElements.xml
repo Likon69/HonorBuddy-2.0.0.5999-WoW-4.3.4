@@ -1,0 +1,480 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<UIElements>
+  <TabPages>
+    <Tab>
+      <Label>Common</Label>
+    </Tab>
+    <Tab>
+      <Label>Combat</Label>
+    </Tab>
+    <Tab>
+      <Label>Advanced</Label>
+    </Tab>
+  </TabPages>
+  <Groupboxes>
+    <!--Common Tab-->
+    <Group>
+      <Label>Rest and Health</Label>
+      <Name>RestGroup</Name>
+      <Column>Left</Column>
+      <Tab>Common</Tab>
+    </Group>
+    <!--Combat Tab-->
+    <Group>
+      <Label>Combat</Label>
+      <Name>CombatGroup</Name>
+      <Column>Left</Column>
+      <Tab>Combat</Tab>
+    </Group>
+    <Group>
+      <Label>Combat</Label>
+      <Name>CombatContinuedGroup</Name>
+      <Column>Right</Column>
+      <Tab>Combat</Tab>
+    </Group>
+    <Group>
+      <Label>Misc</Label>
+      <Name>MiscCombatGroup</Name>
+      <Column>Right</Column>
+      <Tab>Combat</Tab>
+    </Group>
+    <Group>
+      <Label>Buffs and Protection</Label>
+      <Name>BuffsAndProtectionGroup</Name>
+      <Column>Right</Column>
+      <Tab>Combat</Tab>
+    </Group>
+    <!--Advanced Tab-->
+    <Group>
+      <Label>Misc</Label>
+      <Name>MiscGroup</Name>
+      <Column>Left</Column>
+      <Tab>Advanced</Tab>
+    </Group>
+  </Groupboxes>
+  <ValueTemplates>
+    <!--Common use templates-->
+    <Template>
+      <Label>AllOptions</Label>
+      <Value>... always|... never|... only on adds|... only on 3+ adds|... only on 4+ adds|... only on 5+ adds|... only when no adds|... only when in battlegrounds|... only when not in battlegrounds|... only when in instance|... only when not in instance</Value>
+    </Template>
+    <Template>
+      <Label>Cleanse</Label>
+      <Value>... immediately|... never|... only out of combat</Value>
+    </Template>
+    <Template>
+      <Label>BackupHeal</Label>
+      <Value>... always|... healer OOM or Dead|... never</Value>
+    </Template>
+    <Template>
+      <Label>AddsNever</Label>
+      <Value>... never|... only on adds|... only on 3+ adds|... only on 4+ adds|... only on 5+ adds|... only on 6+ adds|... only on 7+ adds|... only on 8+ adds|... only when no adds</Value>
+    </Template>
+    <Template>
+      <Label>AddsAlways</Label>
+      <Value>... always|... never|... only on adds|... only on 3+ adds|... only on 4+ adds|... only on 5+ adds|... only on 6+ adds|... only on 7+ adds|... only on 8+ adds|... only when no adds</Value>
+    </Template>
+    <Template>
+      <Label>5Step50</Label>
+      <Value>10|15|20|25|30|35|40|45|50</Value>
+    </Template>
+    <Template>
+      <Label>5Step100</Label>
+      <Value>10|15|20|25|30|35|40|45|50|55|60|65|70|75|80|85|90|95</Value>
+    </Template>
+    <Template>
+      <Label>10Step50</Label>
+      <Value>10|20|30|40|50</Value>
+    </Template>
+    <Template>
+      <Label>10Step100</Label>
+      <Value>10|20|30|40|50|60|70|80|90</Value>
+    </Template>
+    <Template>
+      <Label>10Step1</Label>
+      <Value>1|2|3|4|5|6|7|8|9|10</Value>
+    </Template>
+    <Template>
+      <Label>CastersAndRunners</Label>
+      <Value>... always|... never|... on casters and runners|... only on casters|... only on runners</Value>
+    </Template>
+    <!--Class specific templates-->
+  </ValueTemplates>
+  <Items>
+    <!--Rest and Health - Common Tab-->
+    <Item>
+      <Label>Rest Health</Label>
+      <Name>RestHealth</Name>
+      <GroupName>RestGroup</GroupName>
+      <Type>Bar</Type>
+      <Value></Value>
+      <Tooltip></Tooltip>
+      <Tag></Tag>
+    </Item>
+    <Item>
+      <Label>Health Potion</Label>
+      <Name>HealthPotion</Name>
+      <GroupName>RestGroup</GroupName>
+      <Type>Bar</Type>
+      <Value></Value>
+      <Tooltip></Tooltip>
+      <Tag></Tag>
+    </Item>
+    <Item>
+      <Label>Lifeblood</Label>
+      <Name>LifebloodHealth</Name>
+      <GroupName>RestGroup</GroupName>
+      <Type>Bar</Type>
+      <Value></Value>
+      <Tooltip></Tooltip>
+      <Tag></Tag>
+    </Item>
+    <!--Misc - Advanced Tab-->
+    <Item>
+      <Label>Lazy Raider</Label>
+      <Name></Name>
+      <GroupName>MiscGroup</GroupName>
+      <Type></Type>
+      <Value></Value>
+      <Tooltip>Disable all movement within the CC. You must face the target and move the character yourself. NB Some spells are disabled if this setting is used</Tooltip>
+      <Tag></Tag>
+    </Item>
+    <Item>
+      <Label>Attack Delay</Label>
+      <Name></Name>
+      <GroupName>MiscGroup</GroupName>
+      <Type></Type>
+      <Value></Value>
+      <Tooltip>Don't use the same type of spell more than once every 2 seconds. Eg, Ice/Unholy/Blood will only be used every 2 seconds</Tooltip>
+      <Tag></Tag>
+    </Item>
+    <!--Misc - Combat Tab-->
+    <Item>
+      <Label>Presence</Label>
+      <Name></Name>
+      <GroupName>MiscCombatGroup</GroupName>
+      <Type></Type>
+      <Value>Unholy Presence|Frost Presence|Blood Presence</Value>
+      <Tooltip></Tooltip>
+      <Tag>Sort</Tag>
+    </Item>
+    <Item>
+      <Label>Raise Dead</Label>
+      <Name></Name>
+      <GroupName>MiscCombatGroup</GroupName>
+      <Type></Type>
+      <Value>VT:AllOptions</Value>
+      <Tooltip></Tooltip>
+      <Tag></Tag>
+    </Item>
+    <!--Buffs and Protection - Combat Tab-->
+    <Item>
+      <Label>Death Strike</Label>
+      <Name>DeathStrike</Name>
+      <GroupName>BuffsAndProtectionGroup</GroupName>
+      <Type></Type>
+      <Value>VT:AllOptions</Value>
+      <Tooltip></Tooltip>
+      <Tag></Tag>
+    </Item>
+    <ww>
+      <Label>Anti-Magic Shell</Label>
+      <Name>AntiMagicShell</Name>
+      <GroupName>BuffsAndProtectionGroup</GroupName>
+      <Type></Type>
+      <Value>VT:AllOptions</Value>
+      <Tooltip>Will only be evaluated if you are unable to cast Mind Freeze and Strangulate. Or if you have adds with casters</Tooltip>
+      <Tag></Tag>
+    </ww>
+    <Item>
+      <Label>Death Strike (Health)</Label>
+      <Name>DeathStrikeHealth</Name>
+      <GroupName>BuffsAndProtectionGroup</GroupName>
+      <Type>Bar</Type>
+      <Value></Value>
+      <Tooltip></Tooltip>
+      <Tag></Tag>
+    </Item>
+    <Item>
+      <Label>Rune Tap</Label>
+      <Name>RuneTap</Name>
+      <GroupName>BuffsAndProtectionGroup</GroupName>
+      <Type></Type>
+      <Value>VT:AllOptions</Value>
+      <Tooltip></Tooltip>
+      <Tag></Tag>
+    </Item>
+    <Item>
+      <Label>Rune Tap (Health)</Label>
+      <Name>RuneTapHealth</Name>
+      <GroupName>BuffsAndProtectionGroup</GroupName>
+      <Type>Bar</Type>
+      <Value></Value>
+      <Tooltip></Tooltip>
+      <Tag></Tag>
+    </Item>
+    <Item>
+      <Label>Bone Shield</Label>
+      <Name></Name>
+      <GroupName>BuffsAndProtectionGroup</GroupName>
+      <Type></Type>
+      <Value>VT:AllOptions</Value>
+      <Tooltip></Tooltip>
+      <Tag></Tag>
+    </Item>
+    <Item>
+      <Label>Bone Shield (Health)</Label>
+      <Name>BoneShieldHealth</Name>
+      <GroupName>BuffsAndProtectionGroup</GroupName>
+      <Type>Bar</Type>
+      <Value></Value>
+      <Tooltip></Tooltip>
+      <Tag></Tag>
+    </Item>
+    <Item>
+      <Label>Icebound Fortitude</Label>
+      <Name></Name>
+      <GroupName>BuffsAndProtectionGroup</GroupName>
+      <Type></Type>
+      <Value>VT:AllOptions</Value>
+      <Tooltip></Tooltip>
+      <Tag></Tag>
+    </Item>
+    <Item>
+      <Label>Icebound Fortitude</Label>
+      <Name>IceboundFortitudeHealth</Name>
+      <GroupName>BuffsAndProtectionGroup</GroupName>
+      <Type>Bar</Type>
+      <Value></Value>
+      <Tooltip></Tooltip>
+      <Tag></Tag>
+    </Item>
+    <!--Combat - Combat Tab-->
+    <Item>
+      <Label>Frost Strike</Label>
+      <Name></Name>
+      <GroupName>CombatGroup</GroupName>
+      <Type></Type>
+      <Value>VT:AllOptions</Value>
+      <Tooltip></Tooltip>
+      <Tag></Tag>
+    </Item>
+    <Item>
+      <Label>Frost Strike (RP)</Label>
+      <Name>FrostStrikeRunePower</Name>
+      <GroupName>CombatGroup</GroupName>
+      <Type>Bar</Type>
+      <Value></Value>
+      <Tooltip>Frost Strike rune power</Tooltip>
+      <Tag></Tag>
+    </Item>
+    <Item>
+      <Label>Icy Touch</Label>
+      <Name></Name>
+      <GroupName>CombatGroup</GroupName>
+      <Type></Type>
+      <Value>... always|... never|... only on adds|... only on 3+ adds|... only on 4+ adds|... only on 5+ adds|... only when no adds|... only when in battlegrounds|... only when not in battlegrounds|... only when in instance|... only when not in instance|... only when no Frost Fever debuff</Value>
+      <Tooltip></Tooltip>
+      <Tag></Tag>
+    </Item>
+    <Item>
+      <Label>Heart Strike</Label>
+      <Name></Name>
+      <GroupName>CombatGroup</GroupName>
+      <Type></Type>
+      <Value>VT:AllOptions</Value>
+      <Tooltip></Tooltip>
+      <Tag></Tag>
+    </Item>
+    <Item>
+      <Label>Blood Strike</Label>
+      <Name></Name>
+      <GroupName>CombatGroup</GroupName>
+      <Type></Type>
+      <Value>... always|... never|... only on adds|... only on 3+ adds|... only on 4+ adds|... only on 5+ adds|... only when no adds|... only when in battlegrounds|... only when not in battlegrounds|... only when in instance|... only when not in instance|... only on 1+ disease|... only on 2+ disease|... only on 2x blood runes</Value>
+      <Tooltip></Tooltip>
+      <Tag></Tag>
+    </Item>
+    <Item>
+      <Label>Scourge Strike</Label>
+      <Name></Name>
+      <GroupName>CombatGroup</GroupName>
+      <Type></Type>
+      <Value>... always|... never|... only on adds|... only on 3+ adds|... only on 4+ adds|... only on 5+ adds|... only when no adds|... only when in battlegrounds|... only when not in battlegrounds|... only when in instance|... only when not in instance|... only on 1+ disease|... only on 2+ disease</Value>
+      <Tooltip></Tooltip>
+      <Tag></Tag>
+    </Item>
+    <Item>
+      <Label>Plague Strike</Label>
+      <Name></Name>
+      <GroupName>CombatGroup</GroupName>
+      <Type></Type>
+      <Value>... always|... never|... only on adds|... only on 3+ adds|... only on 4+ adds|... only on 5+ adds|... only when no adds|... only when in battlegrounds|... only when not in battlegrounds|... only when in instance|... only when not in instance|... only when no Blood Plague debuff</Value>
+      <Tooltip></Tooltip>
+      <Tag></Tag>
+    </Item>
+    <Item>
+      <Label>Death Coil (RP)</Label>
+      <Name>DeathCoil</Name>
+      <GroupName>CombatGroup</GroupName>
+      <Type>Bar</Type>
+      <Value></Value>
+      <Tooltip></Tooltip>
+      <Tag></Tag>
+    </Item>
+    <Item>
+      <Label>Unholy Frenzy</Label>
+      <Name></Name>
+      <GroupName>CombatGroup</GroupName>
+      <Type></Type>
+      <Value>VT:AllOptions</Value>
+      <Tooltip></Tooltip>
+      <Tag></Tag>
+    </Item>
+    <Item>
+      <Label>Mind Freeze</Label>
+      <Name>MindFreeze</Name>
+      <GroupName>CombatGroup</GroupName>
+      <Type></Type>
+      <Value>... always|... never</Value>
+      <Tooltip>Only evaluated when the target is casting</Tooltip>
+      <Tag></Tag>
+    </Item>
+    <Item>
+      <Label>Strangulate</Label>
+      <Name></Name>
+      <GroupName>CombatGroup</GroupName>
+      <Type></Type>
+      <Value>... always|... never</Value>
+      <Tooltip>Only evaluated when the target is casting</Tooltip>
+      <Tag></Tag>
+    </Item>
+    <Item>
+      <Label>Death And Decay</Label>
+      <Name></Name>
+      <GroupName>CombatGroup</GroupName>
+      <Type></Type>
+      <Value>VT:AllOptions</Value>
+      <Tooltip></Tooltip>
+      <Tag></Tag>
+    </Item>
+    <Item>
+      <Label>Pestilence</Label>
+      <Name></Name>
+      <GroupName>CombatGroup</GroupName>
+      <Type></Type>
+      <Value>... always|... never|... only on adds|... only on 3+ adds|... only on 4+ adds|... only on 5+ adds|... only when no adds|... only when in battlegrounds|... only when not in battlegrounds|... only when in instance|... only when not in instance|... only on 1+ disease|... only on 2+ disease</Value>
+      <Tooltip></Tooltip>
+      <Tag></Tag>
+    </Item>
+    <Item>
+      <Label>Blood Boil</Label>
+      <Name></Name>
+      <GroupName>CombatGroup</GroupName>
+      <Type></Type>
+      <Value>... always|... never|... only on adds|... only on 3+ adds|... only on 4+ adds|... only on 5+ adds|... only when no adds|... only when in battlegrounds|... only when not in battlegrounds|... only when in instance|... only when not in instance|... only on 1+ disease|... only on 2+ disease</Value>
+      <Tooltip></Tooltip>
+      <Tag></Tag>
+    </Item>
+    <Item>
+      <Label>Chains of Ice</Label>
+      <Name>ChainsOfIce</Name>
+      <GroupName>CombatGroup</GroupName>
+      <Type></Type>
+      <Value>... only on runners|... never</Value>
+      <Tooltip></Tooltip>
+      <Tag></Tag>
+    </Item>
+    <Item>
+      <Label>Obliterate</Label>
+      <Name></Name>
+      <GroupName>CombatGroup</GroupName>
+      <Type></Type>
+      <Value>... always|... never|... only on adds|... only on 3+ adds|... only on 4+ adds|... only on 5+ adds|... only when no adds|... only when in battlegrounds|... only when not in battlegrounds|... only when in instance|... only when not in instance|... only on 1+ disease|... only on 2+ disease|... only on 2x frost &amp; unholy runes</Value>
+      <Tooltip></Tooltip>
+      <Tag></Tag>
+    </Item>
+    <Item>
+      <Label>Howling Blast</Label>
+      <Name></Name>
+      <GroupName>CombatGroup</GroupName>
+      <Type></Type>
+      <Value>... always|... never|... only on adds|... only on 3+ adds|... only on 4+ adds|... only on 5+ adds|... only when no adds|... only when in battlegrounds|... only when not in battlegrounds|... only when in instance|... only when not in instance|... only on Frost Fever debuff</Value>
+      <Tooltip></Tooltip>
+      <Tag></Tag>
+    </Item>
+    <Item>
+      <Label>Pillar of Frost</Label>
+      <Name>PillarOfFrost</Name>
+      <GroupName>CombatGroup</GroupName>
+      <Type></Type>
+      <Value>VT:AllOptions</Value>
+      <Tooltip></Tooltip>
+      <Tag></Tag>
+    </Item>
+    <Item>
+      <Label>Blood Tap</Label>
+      <Name></Name>
+      <GroupName>CombatGroup</GroupName>
+      <Type></Type>
+      <Value>... always|... never</Value>
+      <Tooltip>Only used when all of your Blood runes are on cooldown</Tooltip>
+      <Tag></Tag>
+    </Item>
+    <!--Combat Continued - Combat Tab-->
+    <Item>
+      <Label>Outbreak</Label>
+      <Name></Name>
+      <GroupName>CombatContinuedGroup</GroupName>
+      <Type></Type>
+      <Value>VT:AllOptions</Value>
+      <Tooltip>Only cast if the target does not have Frost Fever and Blood Plauge debuffs.</Tooltip>
+      <Tag></Tag>
+    </Item>
+    <Item>
+      <Label>Festering Strike</Label>
+      <Name></Name>
+      <GroupName>CombatContinuedGroup</GroupName>
+      <Type></Type>
+      <Value>VT:AllOptions</Value>
+      <Tooltip></Tooltip>
+      <Tag></Tag>
+    </Item>
+    <Item>
+      <Label>Rune Weapon</Label>
+      <Name></Name>
+      <GroupName>CombatContinuedGroup</GroupName>
+      <Type></Type>
+      <Value>VT:AllOptions</Value>
+      <Tooltip>Dancing Rune Weapon</Tooltip>
+      <Tag></Tag>
+    </Item>
+    <Item>
+      <Label>Gargoyle</Label>
+      <Name></Name>
+      <GroupName>CombatContinuedGroup</GroupName>
+      <Type></Type>
+      <Value>VT:AllOptions</Value>
+      <Tooltip></Tooltip>
+      <Tag></Tag>
+    </Item>
+    <Item>
+      <Label>Hungering Cold</Label>
+      <Name></Name>
+      <GroupName>CombatContinuedGroup</GroupName>
+      <Type></Type>
+      <Value>VT:AllOptions</Value>
+      <Tooltip></Tooltip>
+      <Tag>Disabled</Tag>
+    </Item>
+    <Item>
+      <Label>Eye Lasers</Label>
+      <Name></Name>
+      <GroupName>CombatContinuedGroup</GroupName>
+      <Type></Type>
+      <Value>Red Lasers|Blue Lasers|Green Lasers|Rabit Lasers</Value>
+      <Tooltip>This feature was requested by Kickazz006</Tooltip>
+      <Tag>Sort</Tag>
+    </Item>
+  </Items>
+</UIElements>

@@ -1,0 +1,1119 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<UIElements>
+  <TabPages>
+    <Tab>
+      <Label>Common</Label>
+    </Tab>
+    <Tab>
+      <Label>Cat</Label>
+    </Tab>
+    <Tab>
+      <Label>Bear</Label>
+    </Tab>
+    <Tab>
+      <Label>Balance</Label>
+    </Tab>
+    <Tab>
+      <Label>Restoration</Label>
+    </Tab>
+    <Tab>
+      <Label>Advanced</Label>
+    </Tab>
+  </TabPages>
+  <Groupboxes>
+    <!--Common Tab-->
+    <Group>
+      <Label>Rest and Health</Label>
+      <Name>RestGroup</Name>
+      <Column>Left</Column>
+      <Tab>Common</Tab>
+    </Group>
+    <Group>
+      <Label>Misc</Label>
+      <Name>MiscCommonGroup</Name>
+      <Column>Left</Column>
+      <Tab>Common</Tab>
+    </Group>
+    <Group>
+      <Label>Buffs and Protection</Label>
+      <Name>BuffsAndProtectionGroup</Name>
+      <Column>Right</Column>
+      <Tab>Common</Tab>
+    </Group>
+    <!--Combat Cat Tab-->
+    <Group>
+      <Label>Combat</Label>
+      <Name>CombatCatGroup</Name>
+      <Column>Left</Column>
+      <Tab>Cat</Tab>
+    </Group>
+    <Group>
+      <Label>Healing and Protection</Label>
+      <Name>HealingFeralCatGroup</Name>
+      <Column>Right</Column>
+      <Tab>Cat</Tab>
+    </Group>
+    <Group>
+      <Label>Combo Point Usage</Label>
+      <Name>CombatCatComboPointUsageGroup</Name>
+      <Column>Left</Column>
+      <Tab>Cat</Tab>
+    </Group>
+    <!--Combat Bear Tab-->
+    <Group>
+      <Label>Combat</Label>
+      <Name>CombatBearGroup</Name>
+      <Column>Left</Column>
+      <Tab>Combat</Tab>
+    </Group>
+    <!--Combat Balance Tab-->
+    <Group>
+      <Label>Combat</Label>
+      <Name>CombatBalanceGroup</Name>
+      <Column>Left</Column>
+      <Tab>Balance</Tab>
+    </Group>
+    <Group>
+      <Label>Healing and Protection</Label>
+      <Name>HealingBalanceGroup</Name>
+      <Column>Right</Column>
+      <Tab>Balance</Tab>
+    </Group>
+    <!--Advanced Tab-->
+    <Group>
+      <Label>Misc</Label>
+      <Name>MiscAdvancedGroup</Name>
+      <Column>Left</Column>
+      <Tab>Advanced</Tab>
+    </Group>
+    <!--Restoration Tab-->
+    <Group>
+      <Label>Tank Healing</Label>
+      <Name>TankRestorationGroup</Name>
+      <Column>Left</Column>
+      <Tab>Restoration</Tab>
+    </Group>
+    <Group>
+      <Label>Party Member Healing</Label>
+      <Name>PartyRestorationGroup</Name>
+      <Column>Right</Column>
+      <Tab>Restoration</Tab>
+    </Group>
+    <Group>
+      <Label>Misc</Label>
+      <Name>MiscRestorationGroup</Name>
+      <Column>Right</Column>
+      <Tab>Restoration</Tab>
+    </Group>
+  </Groupboxes>
+  <ValueTemplates>
+    <!--Common use templates-->
+    <Template>
+      <Label>AllOptions</Label>
+      <Value>... always|... never|... only on adds|... only on 3+ adds|... only on 4+ adds|... only on 5+ adds|... only when no adds|... only when in battlegrounds|... only when not in battlegrounds|... only when in instance|... only when not in instance|... only if mob is not low level|... only if mob is high level|... only if mob is casting|... only if mob is fleeing|... if mob is casting or is fleeing|... only if mob is player|... only if mob is not player|... only when in party|... only when not in party|... only when in raid|... only when not in raid|... only if target health % &lt; 75|... only if target health % &lt; 50|... only if target health % &lt; 25|... only if target health % &gt; 75|... only if target health % &gt; 50|... only if target health % &gt; 25|[Multiple Options]</Value>
+    </Template>
+    <Template>
+      <Label>Cleanse</Label>
+      <Value>... immediately|... never|... only out of combat</Value>
+    </Template>
+    <Template>
+      <Label>BackupHeal</Label>
+      <Value>... always|... healer OOM or Dead|... never</Value>
+    </Template>
+    <Template>
+      <Label>AddsNever</Label>
+      <Value>... never|... only on adds|... only on 3+ adds|... only on 4+ adds|... only on 5+ adds|... only on 6+ adds|... only on 7+ adds|... only on 8+ adds|... only when no adds</Value>
+    </Template>
+    <Template>
+      <Label>AddsAlways</Label>
+      <Value>... always|... never|... only on adds|... only on 3+ adds|... only on 4+ adds|... only on 5+ adds|... only on 6+ adds|... only on 7+ adds|... only on 8+ adds|... only when no adds</Value>
+    </Template>
+    <Template>
+      <Label>5Step50</Label>
+      <Value>10|15|20|25|30|35|40|45|50</Value>
+    </Template>
+    <Template>
+      <Label>5Step100</Label>
+      <Value>10|15|20|25|30|35|40|45|50|55|60|65|70|75|80|85|90|95</Value>
+    </Template>
+    <Template>
+      <Label>10Step50</Label>
+      <Value>10|20|30|40|50</Value>
+    </Template>
+    <Template>
+      <Label>10Step100</Label>
+      <Value>10|20|30|40|50|60|70|80|90</Value>
+    </Template>
+    <Template>
+      <Label>10Step1</Label>
+      <Value>1|2|3|4|5|6|7|8|9|10</Value>
+    </Template>
+    <Template>
+      <Label>CastersAndRunners</Label>
+      <Value>... always|... never|... on casters and runners|... only on casters|... only on runners</Value>
+    </Template>
+    <Template>
+      <Label>ComboPoints</Label>
+      <Value>... 1+ combo points|... 2+ combo points|... 3+ combo points|... 4+ combo points|... 5+ combo points|... never</Value>
+    </Template>
+    <Template>
+      <Label>ComboPoints2</Label>
+      <Value>... 1+ combo points|... 2+ combo points|... 3+ combo points|... 4+ combo points|... 5+ combo points</Value>
+    </Template>
+    <Template>
+      <Label>Healing</Label>
+      <Value>Healing Touch|Regrowth|Rejuvenation|Nourish|Lifebloom|Swiftmend</Value>
+    </Template>
+    <Template>
+      <Label>HealingOptions</Label>
+      <Value>... always|... never|... only on adds|... only on 3+ adds|... only on 4+ adds|... only on 5+ adds</Value>
+    </Template>
+    <Template>
+      <Label>HealingPartyOptions</Label>
+      <Value>... always|... never|... only on adds|... only on 3+ adds|... only on 4+ adds|... only on 5+ adds|... only if target is a Mage|... only if target is a Warlock|... only if target is a Priest|... only if target is a Rogue|... only if target is a Druid|... only if target is a Hunter|... only if target is a Shaman|... only if target is a Warrior|... only if target is a Paladin|... only if target is a Death Knight</Value>
+    </Template>
+    <!--Class specific templates-->
+  </ValueTemplates>
+  <Items>
+    <!--Rest and Health - Common Tab-->
+    <Item>
+      <Label>Rest Health</Label>
+      <Name>RestHealth</Name>
+      <GroupName>RestGroup</GroupName>
+      <Type>Bar</Type>
+      <Value></Value>
+      <Tooltip></Tooltip>
+      <Tag></Tag>
+    </Item>
+    <Item>
+      <Label>Rest Mana</Label>
+      <Name>RestMana</Name>
+      <GroupName>RestGroup</GroupName>
+      <Type>Bar</Type>
+      <Value></Value>
+      <Tooltip></Tooltip>
+      <Tag></Tag>
+    </Item>
+    <Item>
+      <Label>Health Potion</Label>
+      <Name>HealthPotion</Name>
+      <GroupName>RestGroup</GroupName>
+      <Type>Bar</Type>
+      <Value></Value>
+      <Tooltip></Tooltip>
+      <Tag></Tag>
+    </Item>
+    <Item>
+      <Label>Mana Potion</Label>
+      <Name>ManaPotion</Name>
+      <GroupName>RestGroup</GroupName>
+      <Type>Bar</Type>
+      <Value></Value>
+      <Tooltip></Tooltip>
+      <Tag></Tag>
+    </Item>
+    <Item>
+      <Label>Lifeblood</Label>
+      <Name>LifebloodHealth</Name>
+      <GroupName>RestGroup</GroupName>
+      <Type>Bar</Type>
+      <Value></Value>
+      <Tooltip></Tooltip>
+      <Tag></Tag>
+    </Item>
+    <!--Misc - Advanced Tab-->
+    <Item>
+      <Label>Lazy Raider</Label>
+      <Name></Name>
+      <GroupName>MiscAdvancedGroup</GroupName>
+      <Type></Type>
+      <Value></Value>
+      <Tooltip>Disable all movement within the CC. You must face the target and move the character yourself. NB Some spells are disabled if this setting is used</Tooltip>
+      <Tag></Tag>
+    </Item>
+    <Item>
+      <Label>Charge + Ravage</Label>
+      <Name>FeralCatRavage</Name>
+      <GroupName>MiscAdvancedGroup</GroupName>
+      <Type></Type>
+      <Value></Value>
+      <Tooltip>Only select this if you have the 'Stampede' talent in the Feral Cat tree</Tooltip>
+      <Tag></Tag>
+    </Item>
+    <Item>
+      <Label>Double 'HoT' Heal</Label>
+      <Name>DoubleDotFeralCat</Name>
+      <GroupName>MiscAdvancedGroup</GroupName>
+      <Type></Type>
+      <Value>... always|... never</Value>
+      <Tooltip>Will evaluate both HoTs in a single cast, Regrowth and Rejuvenation, regardless of their individual settings. 
+
+If you are getting a lot of overhealing turn this off. If you are dying a lot turn this on.</Tooltip>
+      <Tag></Tag>
+    </Item>
+    <Item>
+      <Label>Priority Targeting</Label>
+      <Name></Name>
+      <GroupName>MiscAdvancedGroup</GroupName>
+      <Type></Type>
+      <Value>... always|... never|... only when in battlegrounds|... only when not in battlegrounds|... only when in instance|... only when not in instance|... only when in party|... only when not in party|... only when in raid|... only when not in raid|[Multiple Options]</Value>
+      <Tooltip>A special target weighting calculation that should attack (or retarget) the most appropriate target based on an evaluated check.
+
+NB: Automatically disabled when using LazyRaider</Tooltip>
+      <Tag></Tag>
+    </Item>
+    <Item>
+      <Label>Chase Fleeing</Label>
+      <Name>ChaseFleeingTargets</Name>
+      <GroupName>MiscAdvancedGroup</GroupName>
+      <Type></Type>
+      <Value></Value>
+      <Tooltip>If a target is fleeing you can choose to ignore it or chase it. 
+
+NB: Only applicable when using the Priority Targeting setting.</Tooltip>
+      <Tag>Disabled</Tag>
+    </Item>
+    <!--Buffs and Protection - Combat Tab-->
+    <Item>
+      <Label>Mark of the Wild</Label>
+      <Name>MarkOfTheWild</Name>
+      <GroupName>BuffsAndProtectionGroup</GroupName>
+      <Type></Type>
+      <Value>... always|... never</Value>
+      <Tooltip></Tooltip>
+      <Tag></Tag>
+    </Item>
+    <Item>
+      <Label>Travel Form</Label>
+      <Name></Name>
+      <GroupName>MiscCommonGroup</GroupName>
+      <Type></Type>
+      <Value>Automatic|... always|... never</Value>
+      <Tooltip>If set to 'automatic' it will only use Travel Form if you are below level 20. If set to 'always' it will use Travel Form instead of your mount. NB: 'always' will override your mount.</Tooltip>
+      <Tag></Tag>
+    </Item>
+    <!--Healing Balance Tab-->
+    <Item>
+      <Label>Rejuvenation</Label>
+      <Name>RejuvenationBalance</Name>
+      <GroupName>HealingBalanceGroup</GroupName>
+      <Type></Type>
+      <Value>VT:AllOptions</Value>
+      <Tooltip></Tooltip>
+      <Tag></Tag>
+    </Item>
+    <Item>
+      <Label>Rejuvenation</Label>
+      <Name>RejuvenationBalanceHealth</Name>
+      <GroupName>HealingBalanceGroup</GroupName>
+      <Type>Bar</Type>
+      <Value></Value>
+      <Tooltip></Tooltip>
+      <Tag></Tag>
+    </Item>
+    <Item>
+      <Label>Regrowth</Label>
+      <Name>RegrowthBalance</Name>
+      <GroupName>HealingBalanceGroup</GroupName>
+      <Type></Type>
+      <Value>VT:AllOptions</Value>
+      <Tooltip></Tooltip>
+      <Tag></Tag>
+    </Item>
+    <Item>
+      <Label>Regrowth</Label>
+      <Name>RegrowthBalanceHealth</Name>
+      <GroupName>HealingBalanceGroup</GroupName>
+      <Type>Bar</Type>
+      <Value></Value>
+      <Tooltip></Tooltip>
+      <Tag></Tag>
+    </Item>
+    <Item>
+      <Label>Nourish</Label>
+      <Name>NourishBalance</Name>
+      <GroupName>HealingBalanceGroup</GroupName>
+      <Type></Type>
+      <Value>VT:AllOptions</Value>
+      <Tooltip></Tooltip>
+      <Tag></Tag>
+    </Item>
+    <Item>
+      <Label>Nourish</Label>
+      <Name>NourishBalanceHealth</Name>
+      <GroupName>HealingBalanceGroup</GroupName>
+      <Type>Bar</Type>
+      <Value></Value>
+      <Tooltip></Tooltip>
+      <Tag></Tag>
+    </Item>
+    <Item>
+      <Label>Barkskin</Label>
+      <Name>BarkskinBalance</Name>
+      <GroupName>HealingBalanceGroup</GroupName>
+      <Type></Type>
+      <Value>VT:AllOptions</Value>
+      <Tooltip></Tooltip>
+      <Tag></Tag>
+    </Item>
+    <Item>
+      <Label>Barkskin</Label>
+      <Name>BarkskinBalanceHealth</Name>
+      <GroupName>HealingBalanceGroup</GroupName>
+      <Type>Bar</Type>
+      <Value></Value>
+      <Tooltip></Tooltip>
+      <Tag></Tag>
+    </Item>
+    <Item>
+      <Label>Remove Corruption</Label>
+      <Name>RemoveCorruptionBalance</Name>
+      <GroupName>HealingBalanceGroup</GroupName>
+      <Type></Type>
+      <Value>... immediately|... never|... only out of combat</Value>
+      <Tooltip></Tooltip>
+      <Tag></Tag>
+    </Item>
+    <Item>
+      <Label>Innervate</Label>
+      <Name>InnervateManaBalance</Name>
+      <GroupName>HealingBalanceGroup</GroupName>
+      <Type>Bar</Type>
+      <Value></Value>
+      <Tooltip></Tooltip>
+      <Tag></Tag>
+    </Item>
+    <Item>
+      <Label>Thorns</Label>
+      <Name>ThornsBalance</Name>
+      <GroupName>HealingBalanceGroup</GroupName>
+      <Type></Type>
+      <Value>VT:AllOptions</Value>
+      <Tooltip>Thorns will only be applied if you have melee mobs attacking you</Tooltip>
+      <Tag></Tag>
+    </Item>
+    <!--Combat Balance Tab-->
+    <Item>
+      <Label>Pull Spell</Label>
+      <Name>PullSpellBalance</Name>
+      <GroupName>CombatBalanceGroup</GroupName>
+      <Type></Type>
+      <Value>Automatic|Wrath|Starsurge|Starfire|Moonfire|Faerie Fire|Entangling Roots|Insect Swarm</Value>
+      <Tooltip></Tooltip>
+      <Tag></Tag>
+    </Item>
+    <Item>
+      <Label>Primary DPS Spell</Label>
+      <Name></Name>
+      <GroupName>CombatBalanceGroup</GroupName>
+      <Type></Type>
+      <Value>Automatic|Starfire|Wrath</Value>
+      <Tooltip></Tooltip>
+      <Tag></Tag>
+    </Item>
+    <Item>
+      <Label>AoE DoT</Label>
+      <Name>AOEDOTBalance</Name>
+      <GroupName>CombatBalanceGroup</GroupName>
+      <Type></Type>
+      <Value>... always|... never</Value>
+      <Tooltip>When you have adds dot all targets with Moonfire and Insect Swarm</Tooltip>
+      <Tag></Tag>
+    </Item>
+    <Item>
+      <Label>Cat Form Mana</Label>
+      <Name>CatFormManaBalance</Name>
+      <GroupName>CombatBalanceGroup</GroupName>
+      <Type>Bar</Type>
+      <Value></Value>
+      <Tooltip>When your mana percent drops below this level swap to Cat Form. 
+
+NB: Do not set this above 25%</Tooltip>
+      <Tag></Tag>
+    </Item>
+    <Item>
+      <Label>Starsurge</Label>
+      <Name>StarsurgeBalance</Name>
+      <GroupName>CombatBalanceGroup</GroupName>
+      <Type></Type>
+      <Value>VT:AllOptions</Value>
+      <Tooltip></Tooltip>
+      <Tag></Tag>
+    </Item>
+    <Item>
+      <Label>Moonfire</Label>
+      <Name>MoonfireBalance</Name>
+      <GroupName>CombatBalanceGroup</GroupName>
+      <Type></Type>
+      <Value>VT:AllOptions</Value>
+      <Tooltip></Tooltip>
+      <Tag></Tag>
+    </Item>
+    <Item>
+      <Label>Insect Swarm</Label>
+      <Name>InsectSwarmBalance</Name>
+      <GroupName>CombatBalanceGroup</GroupName>
+      <Type></Type>
+      <Value>VT:AllOptions</Value>
+      <Tooltip></Tooltip>
+      <Tag></Tag>
+    </Item>
+    <Item>
+      <Label>Faerie Fire</Label>
+      <Name>FaerieFireBalance</Name>
+      <GroupName>CombatBalanceGroup</GroupName>
+      <Type></Type>
+      <Value>VT:AllOptions</Value>
+      <Tooltip></Tooltip>
+      <Tag></Tag>
+    </Item>
+    <Item>
+      <Label>Typhoon</Label>
+      <Name>Typhoon</Name>
+      <GroupName>CombatBalanceGroup</GroupName>
+      <Type></Type>
+      <Value>... always|... never|... only on adds|... only on 3+ adds|... only on 4+ adds|... only on 5+ adds|... only when no adds|... only when in battlegrounds|... only when not in battlegrounds|... only when in instance|... only when not in instance|... only if mob is not low level|... only if mob is high level|... only if mob is casting|... only if mob is in melee range|... if mob is casting or is in melee range</Value>
+      <Tooltip></Tooltip>
+      <Tag></Tag>
+    </Item>
+    <Item>
+      <Label>Force of Nature</Label>
+      <Name>ForceOfNature</Name>
+      <GroupName>CombatBalanceGroup</GroupName>
+      <Type></Type>
+      <Value>VT:AllOptions</Value>
+      <Tooltip></Tooltip>
+      <Tag></Tag>
+    </Item>
+    <Item>
+      <Label>Starfall</Label>
+      <Name></Name>
+      <GroupName>CombatBalanceGroup</GroupName>
+      <Type></Type>
+      <Value>VT:AllOptions</Value>
+      <Tooltip></Tooltip>
+      <Tag></Tag>
+    </Item>
+    <Item>
+      <Label>Wild Mushroom</Label>
+      <Name>WildMushroomBalance</Name>
+      <GroupName>CombatBalanceGroup</GroupName>
+      <Type></Type>
+      <Value>VT:AllOptions</Value>
+      <Tooltip></Tooltip>
+      <Tag></Tag>
+    </Item>
+    <Item>
+      <Label>Wild Mushroom</Label>
+      <Name>WildMushroomCountBalance</Name>
+      <GroupName>CombatBalanceGroup</GroupName>
+      <Type></Type>
+      <Value>... 1 Wild Mushroom|... 2 Wild Mushrooms|... 3 Wild Mushrooms</Value>
+      <Tooltip></Tooltip>
+      <Tag></Tag>
+    </Item>
+    <!--Healing Feral Cat Tab-->
+    <Item>
+      <Label>Rejuvenation</Label>
+      <Name>RejuvenationFeralCat</Name>
+      <GroupName>HealingFeralCatGroup</GroupName>
+      <Type></Type>
+      <Value>VT:AllOptions</Value>
+      <Tooltip></Tooltip>
+      <Tag></Tag>
+    </Item>
+    <Item>
+      <Label>Rejuvenation</Label>
+      <Name>RejuvenationFeralCatHealth</Name>
+      <GroupName>HealingFeralCatGroup</GroupName>
+      <Type>Bar</Type>
+      <Value></Value>
+      <Tooltip></Tooltip>
+      <Tag></Tag>
+    </Item>
+    <Item>
+      <Label>Regrowth</Label>
+      <Name>RegrowthFeralCat</Name>
+      <GroupName>HealingFeralCatGroup</GroupName>
+      <Type></Type>
+      <Value>VT:AllOptions</Value>
+      <Tooltip></Tooltip>
+      <Tag></Tag>
+    </Item>
+    <Item>
+      <Label>Regrowth</Label>
+      <Name>RegrowthFeralCatHealth</Name>
+      <GroupName>HealingFeralCatGroup</GroupName>
+      <Type>Bar</Type>
+      <Value></Value>
+      <Tooltip></Tooltip>
+      <Tag></Tag>
+    </Item>
+    <Item>
+      <Label>Nourish</Label>
+      <Name>NourishFeralCat</Name>
+      <GroupName>HealingFeralCatGroup</GroupName>
+      <Type></Type>
+      <Value>VT:AllOptions</Value>
+      <Tooltip></Tooltip>
+      <Tag></Tag>
+    </Item>
+    <Item>
+      <Label>Nourish</Label>
+      <Name>NourishFeralCatHealth</Name>
+      <GroupName>HealingFeralCatGroup</GroupName>
+      <Type>Bar</Type>
+      <Value></Value>
+      <Tooltip></Tooltip>
+      <Tag></Tag>
+    </Item>
+    <Item>
+      <Label>Barkskin</Label>
+      <Name>BarkskinFeralCat</Name>
+      <GroupName>HealingFeralCatGroup</GroupName>
+      <Type></Type>
+      <Value>VT:AllOptions</Value>
+      <Tooltip></Tooltip>
+      <Tag></Tag>
+    </Item>
+    <Item>
+      <Label>Barkskin</Label>
+      <Name>BarkskinFeralCatHealth</Name>
+      <GroupName>HealingFeralCatGroup</GroupName>
+      <Type>Bar</Type>
+      <Value></Value>
+      <Tooltip></Tooltip>
+      <Tag></Tag>
+    </Item>
+    <Item>
+      <Label>Survival Instincts</Label>
+      <Name>SurvivalInstinctsFeralCat</Name>
+      <GroupName>HealingFeralCatGroup</GroupName>
+      <Type></Type>
+      <Value>VT:AllOptions</Value>
+      <Tooltip></Tooltip>
+      <Tag></Tag>
+    </Item>
+    <Item>
+      <Label>Survival Instincts</Label>
+      <Name>SurvivalInstinctsFeralCatHealth</Name>
+      <GroupName>HealingFeralCatGroup</GroupName>
+      <Type>Bar</Type>
+      <Value></Value>
+      <Tooltip></Tooltip>
+      <Tag></Tag>
+    </Item>
+    <Item>
+      <Label>Predator's Swiftness</Label>
+      <Name>PredatorsSwiftnessFeralCat</Name>
+      <GroupName>HealingFeralCatGroup</GroupName>
+      <Type></Type>
+      <Value>VT:AllOptions</Value>
+      <Tooltip></Tooltip>
+      <Tag></Tag>
+    </Item>
+    <Item>
+      <Label>Predator's Swiftness</Label>
+      <Name>PredatorsSwiftnessFeralCatHealth</Name>
+      <GroupName>HealingFeralCatGroup</GroupName>
+      <Type>Bar</Type>
+      <Value></Value>
+      <Tooltip></Tooltip>
+      <Tag></Tag>
+    </Item>
+    <Item>
+      <Label>Predator's Swiftness</Label>
+      <Name>PredatorsSwiftnessFeralCatSpell</Name>
+      <GroupName>HealingFeralCatGroup</GroupName>
+      <Type></Type>
+      <Value>Healing Touch|Rejuvenation|Regrowth|Nourish</Value>
+      <Tooltip></Tooltip>
+      <Tag></Tag>
+    </Item>
+    <Item>
+      <Label>Remove Corruption</Label>
+      <Name>RemoveCorruptionFeralCat</Name>
+      <GroupName>HealingFeralCatGroup</GroupName>
+      <Type></Type>
+      <Value>... immediately|... never|... only out of combat</Value>
+      <Tooltip></Tooltip>
+      <Tag></Tag>
+    </Item>
+    <Item>
+      <Label>Innervate</Label>
+      <Name>InnervateManaFeralCat</Name>
+      <GroupName>HealingFeralCatGroup</GroupName>
+      <Type>Bar</Type>
+      <Value></Value>
+      <Tooltip></Tooltip>
+      <Tag></Tag>
+    </Item>
+    <Item>
+      <Label>Thorns</Label>
+      <Name>ThornsFeralCat</Name>
+      <GroupName>HealingFeralCatGroup</GroupName>
+      <Type></Type>
+      <Value>VT:AllOptions</Value>
+      <Tooltip>Thorns will only be applied if you have melee mobs attacking you</Tooltip>
+      <Tag></Tag>
+    </Item>
+    <!--Combat Feral Cat Tab-->
+    <Item>
+      <Label>Pull Spell</Label>
+      <Name>PullSpellFeralCat</Name>
+      <GroupName>CombatCatGroup</GroupName>
+      <Type></Type>
+      <Value>Automatic|Faerie Fire (Feral)|Prowl</Value>
+      <Tooltip></Tooltip>
+      <Tag></Tag>
+    </Item>
+    <Item>
+      <Label>Attack Energy</Label>
+      <Name>AttackEnergyFeralCat</Name>
+      <GroupName>CombatCatGroup</GroupName>
+      <Type>Bar</Type>
+      <Value></Value>
+      <Tooltip>Will only cast Mangle / Claw if your energy is above this percentage</Tooltip>
+      <Tag></Tag>
+    </Item>
+    <Item>
+      <Label>Rake</Label>
+      <Name></Name>
+      <GroupName>CombatCatGroup</GroupName>
+      <Type></Type>
+      <Value>VT:AllOptions</Value>
+      <Tooltip></Tooltip>
+      <Tag></Tag>
+    </Item>
+    <Item>
+      <Label>Skull Bash</Label>
+      <Name>SkullBashCat</Name>
+      <GroupName>CombatCatGroup</GroupName>
+      <Type></Type>
+      <Value>... always|... never|... only on healing spells|... only on instance important spells</Value>
+      <Tooltip></Tooltip>
+      <Tag></Tag>
+    </Item>
+    <Item>
+      <Label>Swipe</Label>
+      <Name>SwipeCat</Name>
+      <GroupName>CombatCatGroup</GroupName>
+      <Type></Type>
+      <Value>VT:AddsNever</Value>
+      <Tooltip></Tooltip>
+      <Tag></Tag>
+    </Item>
+    <Item>
+      <Label>Tiger's Fury</Label>
+      <Name>TigersFury</Name>
+      <GroupName>CombatCatGroup</GroupName>
+      <Type></Type>
+      <Value>VT:AllOptions</Value>
+      <Tooltip></Tooltip>
+      <Tag></Tag>
+    </Item>
+    <Item>
+      <Label>Shred</Label>
+      <Name></Name>
+      <GroupName>CombatCatGroup</GroupName>
+      <Type></Type>
+      <Value>VT:AllOptions</Value>
+      <Tooltip>Only cast if you are 'safely' behind the target</Tooltip>
+      <Tag></Tag>
+    </Item>
+    <Item>
+      <Label>Faerie Fire</Label>
+      <Name>FaerieFireFeralCat</Name>
+      <GroupName>CombatCatGroup</GroupName>
+      <Type></Type>
+      <Value>VT:AllOptions</Value>
+      <Tooltip></Tooltip>
+      <Tag></Tag>
+    </Item>
+    <Item>
+      <Label>Berserk</Label>
+      <Name>BerserkFeralCat</Name>
+      <GroupName>CombatCatGroup</GroupName>
+      <Type></Type>
+      <Value>VT:AllOptions</Value>
+      <Tooltip></Tooltip>
+      <Tag></Tag>
+    </Item>
+    <!--Combat Feral Cat Finishing Moves Tab-->
+    <Item>
+      <Label>Maim</Label>
+      <Name></Name>
+      <GroupName>CombatCatComboPointUsageGroup</GroupName>
+      <Type></Type>
+      <Value>... always|... never|... only on adds|... only on 3+ adds|... only on 4+ adds|... only on 5+ adds|... only when no adds|... only when in battlegrounds|... only when not in battlegrounds|... only when in instance|... only when not in instance|... only if mob is not low level|... only if mob is high level|... only if mob is casting|... only if mob is fleeing|... if mob is casting or is fleeing|... only if mob is player|... only if mob is not player|... only when in party|... only when not in party|... only when in raid|... only when not in raid|... only if target health % &lt; 75|... only if target health % &lt; 50|... only if target health % &lt; 25|... only if target health % &gt; 75|... only if target health % &gt; 50|... only if target health % &gt; 25|... only on healing spells|... only on instance important spells|[Multiple Options]</Value>
+      <Tooltip></Tooltip>
+      <Tag></Tag>
+    </Item>
+    <Item>
+      <Label>Maim</Label>
+      <Name>MaimComboPoints</Name>
+      <GroupName>CombatCatComboPointUsageGroup</GroupName>
+      <Type></Type>
+      <Value>VT:ComboPoints2</Value>
+      <Tooltip></Tooltip>
+      <Tag></Tag>
+    </Item>
+    <Item>
+      <Label>Rip</Label>
+      <Name></Name>
+      <GroupName>CombatCatComboPointUsageGroup</GroupName>
+      <Type></Type>
+      <Value>VT:AllOptions</Value>
+      <Tooltip></Tooltip>
+      <Tag></Tag>
+    </Item>
+    <Item>
+      <Label>Rip</Label>
+      <Name>RipComboPoints</Name>
+      <GroupName>CombatCatComboPointUsageGroup</GroupName>
+      <Type></Type>
+      <Value>VT:ComboPoints2</Value>
+      <Tooltip></Tooltip>
+      <Tag></Tag>
+    </Item>
+    <Item>
+      <Label>Ferocious Bite</Label>
+      <Name></Name>
+      <GroupName>CombatCatComboPointUsageGroup</GroupName>
+      <Type></Type>
+      <Value>VT:AllOptions</Value>
+      <Tooltip></Tooltip>
+      <Tag></Tag>
+    </Item>
+    <Item>
+      <Label>Ferocious Bite</Label>
+      <Name>FerociousBiteComboPoints</Name>
+      <GroupName>CombatCatComboPointUsageGroup</GroupName>
+      <Type></Type>
+      <Value>VT:ComboPoints2</Value>
+      <Tooltip></Tooltip>
+      <Tag></Tag>
+    </Item>
+    <Item>
+      <Label>Savage Roar</Label>
+      <Name></Name>
+      <GroupName>CombatCatComboPointUsageGroup</GroupName>
+      <Type></Type>
+      <Value>VT:AllOptions</Value>
+      <Tooltip></Tooltip>
+      <Tag></Tag>
+    </Item>
+    <Item>
+      <Label>Savage Roar</Label>
+      <Name>SavageRoarComboPoints</Name>
+      <GroupName>CombatCatComboPointUsageGroup</GroupName>
+      <Type></Type>
+      <Value>VT:ComboPoints2</Value>
+      <Tooltip></Tooltip>
+      <Tag></Tag>
+    </Item>
+    <!--Restoration Tab-->
+    <!--Dedicated Tank Healing-->
+    <Item>
+      <Label>Swiftmend</Label>
+      <Name>SwiftmendTank</Name>
+      <GroupName>TankRestorationGroup</GroupName>
+      <Type></Type>
+      <Value>VT:HealingOptions</Value>
+      <Tooltip>Only cast if the tank is buffed with Regrowth or Rejuvenation</Tooltip>
+      <Tag></Tag>
+    </Item>
+    <Item>
+      <Label>Swiftmend</Label>
+      <Name>SwiftmendTankHealth</Name>
+      <GroupName>TankRestorationGroup</GroupName>
+      <Type>Bar</Type>
+      <Value></Value>
+      <Tooltip></Tooltip>
+      <Tag></Tag>
+    </Item>
+    <Item>
+      <Label>Healing Touch</Label>
+      <Name>HealingTouchTank</Name>
+      <GroupName>TankRestorationGroup</GroupName>
+      <Type></Type>
+      <Value>VT:HealingOptions</Value>
+      <Tooltip></Tooltip>
+      <Tag></Tag>
+    </Item>
+    <Item>
+      <Label>Healing Touch</Label>
+      <Name>HealingTouchTankHealth</Name>
+      <GroupName>TankRestorationGroup</GroupName>
+      <Type>Bar</Type>
+      <Value></Value>
+      <Tooltip></Tooltip>
+      <Tag></Tag>
+    </Item>
+    <Item>
+      <Label>Regrowth</Label>
+      <Name>RegrowthTank</Name>
+      <GroupName>TankRestorationGroup</GroupName>
+      <Type></Type>
+      <Value>VT:HealingOptions</Value>
+      <Tooltip></Tooltip>
+      <Tag></Tag>
+    </Item>
+    <Item>
+      <Label>Regrowth</Label>
+      <Name>RegrowthTankHealth</Name>
+      <GroupName>TankRestorationGroup</GroupName>
+      <Type>Bar</Type>
+      <Value></Value>
+      <Tooltip></Tooltip>
+      <Tag></Tag>
+    </Item>
+    <Item>
+      <Label>Rejuvenation</Label>
+      <Name>RejuvenationTank</Name>
+      <GroupName>TankRestorationGroup</GroupName>
+      <Type></Type>
+      <Value>VT:HealingOptions</Value>
+      <Tooltip></Tooltip>
+      <Tag></Tag>
+    </Item>
+    <Item>
+      <Label>Rejuvenation</Label>
+      <Name>RejuvenationTankHealth</Name>
+      <GroupName>TankRestorationGroup</GroupName>
+      <Type>Bar</Type>
+      <Value></Value>
+      <Tooltip></Tooltip>
+      <Tag></Tag>
+    </Item>
+    <Item>
+      <Label>Nourish</Label>
+      <Name>NourishTank</Name>
+      <GroupName>TankRestorationGroup</GroupName>
+      <Type></Type>
+      <Value>VT:HealingOptions</Value>
+      <Tooltip></Tooltip>
+      <Tag></Tag>
+    </Item>
+    <Item>
+      <Label>Nourish</Label>
+      <Name>NourishTankHealth</Name>
+      <GroupName>TankRestorationGroup</GroupName>
+      <Type>Bar</Type>
+      <Value></Value>
+      <Tooltip></Tooltip>
+      <Tag></Tag>
+    </Item>
+    <Item>
+      <Label>Lifebloom</Label>
+      <Name>LifebloomTank</Name>
+      <GroupName>TankRestorationGroup</GroupName>
+      <Type></Type>
+      <Value>... always|... never|... only on adds|... only on 3+ adds|... only on 4+ adds|... only on 5+ adds|... keep up 3 stacks</Value>
+      <Tooltip>Will allways apply 3 stacks of Lifebloom to the tank</Tooltip>
+      <Tag></Tag>
+    </Item>
+    <Item>
+      <Label>Lifebloom</Label>
+      <Name>LifebloomTankHealth</Name>
+      <GroupName>TankRestorationGroup</GroupName>
+      <Type>Bar</Type>
+      <Value></Value>
+      <Tooltip></Tooltip>
+      <Tag></Tag>
+    </Item>
+    <Item>
+      <Label>Thorns</Label>
+      <Name>ThornsTankRestoration</Name>
+      <GroupName>TankRestorationGroup</GroupName>
+      <Type></Type>
+      <Value>... always|... never</Value>
+      <Tooltip></Tooltip>
+      <Tag></Tag>
+    </Item>
+    <!--Restoration Tab-->
+    <!--Party Members Healing-->
+    <Item>
+      <Label>Swiftmend</Label>
+      <Name>SwiftmendParty</Name>
+      <GroupName>PartyRestorationGroup</GroupName>
+      <Type></Type>
+      <Value>VT:HealingOptions</Value>
+      <Tooltip>Only cast if the unit is buffed with Regrowth or Rejuvenation</Tooltip>
+      <Tag></Tag>
+    </Item>
+    <Item>
+      <Label>Swiftmend</Label>
+      <Name>SwiftmendPartyHealth</Name>
+      <GroupName>PartyRestorationGroup</GroupName>
+      <Type>Bar</Type>
+      <Value></Value>
+      <Tooltip></Tooltip>
+      <Tag></Tag>
+    </Item>
+    <Item>
+      <Label>Healing Touch</Label>
+      <Name>HealingTouchParty</Name>
+      <GroupName>PartyRestorationGroup</GroupName>
+      <Type></Type>
+      <Value>... always|... never|... only on non-clothies</Value>
+      <Tooltip></Tooltip>
+      <Tag></Tag>
+    </Item>
+    <Item>
+      <Label>Healing Touch</Label>
+      <Name>HealingTouchPartyHealth</Name>
+      <GroupName>PartyRestorationGroup</GroupName>
+      <Type>Bar</Type>
+      <Value></Value>
+      <Tooltip></Tooltip>
+      <Tag></Tag>
+    </Item>
+    <Item>
+      <Label>Regrowth</Label>
+      <Name>RegrowthParty</Name>
+      <GroupName>PartyRestorationGroup</GroupName>
+      <Type></Type>
+      <Value>VT:HealingOptions</Value>
+      <Tooltip></Tooltip>
+      <Tag></Tag>
+    </Item>
+    <Item>
+      <Label>Regrowth</Label>
+      <Name>RegrowthPartyHealth</Name>
+      <GroupName>PartyRestorationGroup</GroupName>
+      <Type>Bar</Type>
+      <Value></Value>
+      <Tooltip></Tooltip>
+      <Tag></Tag>
+    </Item>
+    <Item>
+      <Label>Rejuvenation</Label>
+      <Name>RejuvenationParty</Name>
+      <GroupName>PartyRestorationGroup</GroupName>
+      <Type></Type>
+      <Value>VT:HealingOptions</Value>
+      <Tooltip></Tooltip>
+      <Tag></Tag>
+    </Item>
+    <Item>
+      <Label>Rejuvenation</Label>
+      <Name>RejuvenationPartyHealth</Name>
+      <GroupName>PartyRestorationGroup</GroupName>
+      <Type>Bar</Type>
+      <Value></Value>
+      <Tooltip></Tooltip>
+      <Tag></Tag>
+    </Item>
+    <Item>
+      <Label>Nourish</Label>
+      <Name>NourishParty</Name>
+      <GroupName>PartyRestorationGroup</GroupName>
+      <Type></Type>
+      <Value>... always|... never|... only on clothies</Value>
+      <Tooltip></Tooltip>
+      <Tag></Tag>
+    </Item>
+    <Item>
+      <Label>Nourish</Label>
+      <Name>NourishPartyHealth</Name>
+      <GroupName>PartyRestorationGroup</GroupName>
+      <Type>Bar</Type>
+      <Value></Value>
+      <Tooltip></Tooltip>
+      <Tag></Tag>
+    </Item>
+    <!--Restoration Tab-->
+    <!--Misc-->
+    <Item>
+      <Label>Wild Growth</Label>
+      <Name></Name>
+      <GroupName>MiscRestorationGroup</GroupName>
+      <Type></Type>
+      <Value>... never|... only on 2+ members low health|... only on 3+ members low health|... only on 4+ members low health|... only on 5+ members low health</Value>
+      <Tooltip>Only cast Wild Growth if X number of party members health % are below</Tooltip>
+      <Tag></Tag>
+    </Item>
+    <Item>
+      <Label>Wild Growth</Label>
+      <Name>WildGrowthHealth</Name>
+      <GroupName>MiscRestorationGroup</GroupName>
+      <Type>Bar</Type>
+      <Value></Value>
+      <Tooltip></Tooltip>
+      <Tag></Tag>
+    </Item>
+    <Item>
+      <Label>Tranquility</Label>
+      <Name></Name>
+      <GroupName>MiscRestorationGroup</GroupName>
+      <Type></Type>
+      <Value>... never|... only on 2+ members low health|... only on 3+ members low health|... only on 4+ members low health|... only on 5+ members low health</Value>
+      <Tooltip>Only cast Tranquility if X number of party members health % are below</Tooltip>
+      <Tag></Tag>
+    </Item>
+    <Item>
+      <Label>Tranquility</Label>
+      <Name>TranquilityHealth</Name>
+      <GroupName>MiscRestorationGroup</GroupName>
+      <Type>Bar</Type>
+      <Value></Value>
+      <Tooltip></Tooltip>
+      <Tag></Tag>
+    </Item>
+    <Item>
+      <Label>Remove Corruption</Label>
+      <Name>RemoveCorruptionRestoration</Name>
+      <GroupName>MiscRestorationGroup</GroupName>
+      <Type></Type>
+      <Value>... immediately|... never|... only out of combat</Value>
+      <Tooltip></Tooltip>
+      <Tag></Tag>
+    </Item>
+    <Item>
+      <Label>Innervate</Label>
+      <Name>InnervateRestoration</Name>
+      <GroupName>MiscRestorationGroup</GroupName>
+      <Type>Bar</Type>
+      <Value></Value>
+      <Tooltip></Tooltip>
+      <Tag></Tag>
+    </Item>
+    <Item>
+      <Label>Barkskin</Label>
+      <Name>BarkskinRestoration</Name>
+      <GroupName>MiscRestorationGroup</GroupName>
+      <Type></Type>
+      <Value>... never|... on aggro</Value>
+      <Tooltip></Tooltip>
+      <Tag></Tag>
+    </Item>
+    <Item>
+      <Label>Rebirth</Label>
+      <Name>RebirthRestoration</Name>
+      <GroupName>MiscRestorationGroup</GroupName>
+      <Type></Type>
+      <Value>... always|... never</Value>
+      <Tooltip>Battle resurrection</Tooltip>
+      <Tag></Tag>
+    </Item>
+    <Item>
+      <Label>Tree of Life</Label>
+      <Name>TreeOfLifeRestoration</Name>
+      <GroupName>MiscRestorationGroup</GroupName>
+      <Type></Type>
+      <Value>... always|... never</Value>
+      <Tooltip></Tooltip>
+      <Tag></Tag>
+    </Item>
+    <Item>
+      <Label>Heal Pets</Label>
+      <Name></Name>
+      <GroupName>MiscRestorationGroup</GroupName>
+      <Type></Type>
+      <Value>... always|... never</Value>
+      <Tooltip>Will only heal pets if no one needs healing and your mana is above 75%. Will only cast Regrowth on pets.</Tooltip>
+      <Tag></Tag>
+    </Item>
+  </Items>
+</UIElements>

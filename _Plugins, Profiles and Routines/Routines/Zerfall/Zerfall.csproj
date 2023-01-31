@@ -1,0 +1,91 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{0EABE5D5-BE78-4CB1-A17A-1F53CB97E174}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Zerfall</RootNamespace>
+    <AssemblyName>Zerfall</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="HDCP">
+      <HintPath>G:\HB\HDCP.exe</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+    <Reference Include="Tripper.Tools">
+      <HintPath>G:\HB\Tripper.Tools.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Affliction.cs" />
+    <Compile Include="Demonology.cs" />
+    <Compile Include="Destruction.cs" />
+    <Compile Include="Extensions.cs" />
+    <Compile Include="LowLevel.cs" />
+    <Compile Include="Methods.cs" />
+    <Compile Include="PetManager.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Spells.cs" />
+    <Compile Include="Talents\TalentManager.cs" />
+    <Compile Include="Talents\WarlockTalentSpec.cs" />
+    <Compile Include="ZerfallSettings.cs" />
+    <Compile Include="Zerfall.Combat.cs" />
+    <Compile Include="Zerfall.CombatBuffs.cs" />
+    <Compile Include="Zerfall.cs" />
+    <Compile Include="Zerfall.Heal.cs" />
+    <Compile Include="Zerfall.PreCombatBuffs.cs" />
+    <Compile Include="Zerfall.Pull.cs" />
+    <Compile Include="Zerfall.PullBuffs.cs" />
+    <Compile Include="Zerfall.Rest.cs" />
+    <Compile Include="ZerfallConfig.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ZerfallConfig.designer.cs">
+      <DependentUpon>ZerfallConfig.cs</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="ZerfallConfig.resx">
+      <DependentUpon>ZerfallConfig.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

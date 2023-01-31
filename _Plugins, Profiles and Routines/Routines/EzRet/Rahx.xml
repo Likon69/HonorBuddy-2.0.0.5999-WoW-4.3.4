@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<EzRetSettings>
+  <DPSSeal>Seal of Truth</DPSSeal>
+  <DisableInq>True</DisableInq>
+  <InqRefreshDuration>6</InqRefreshDuration>
+  <Rotation>
+    <Entry>Hammer of Justice</Entry>
+    <Entry>Crusader Strike</Entry>
+    <Entry>Holy Wrath</Entry>
+    <Entry>Judgement</Entry>
+  </Rotation>
+  <KickRotation>
+    <Entry>Rebuke</Entry>
+    <Entry>Repentance</Entry>
+    <Entry>Arcane Torrent</Entry>
+  </KickRotation>
+  <Cooldowns>
+    <Entry>Avenging Wrath</Entry>
+    <Entry>Guardian of Ancient Kings</Entry>
+  </Cooldowns>
+  <Trinkets>
+    <Entry>Badge of Victory--0-100</Entry>
+    <Entry>Essence of the Eternal Flame--0-100</Entry>
+    <Entry>Apparatus of Khaz'goroth-Titanic Power-5-60</Entry>
+    <Entry>Fury of Angerforge-Raw Fury-5-60</Entry>
+  </Trinkets>
+  <HealRotation>
+    <Entry>Divine Protection-60</Entry>
+    <Entry>Lay on Hands-20</Entry>
+    <Entry>Word of Glory-10</Entry>
+  </HealRotation>
+</EzRetSettings>

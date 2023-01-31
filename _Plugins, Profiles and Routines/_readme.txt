@@ -1,0 +1,1 @@
+Adds to the bot's folder only the content you know. Not everything works properly. 

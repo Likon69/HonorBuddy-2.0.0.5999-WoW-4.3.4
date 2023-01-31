@@ -1,0 +1,624 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<UIElements>
+  <TabPages>
+    <Tab>
+      <Label>Common</Label>
+    </Tab>
+    <Tab>
+      <Label>Combat</Label>
+    </Tab>
+    <Tab>
+      <Label>Healing</Label>
+    </Tab>
+    <Tab>
+      <Label>Advanced</Label>
+    </Tab>
+  </TabPages>
+  <Groupboxes>
+    <!--Common Tab-->
+    <Group>
+      <Label>Rest and Health</Label>
+      <Name>RestGroup</Name>
+      <Column>Left</Column>
+      <Tab>Common</Tab>
+    </Group>
+    <!--Combat Tab-->
+    <Group>
+      <Label>Combat</Label>
+      <Name>CombatGroup</Name>
+      <Column>Left</Column>
+      <Tab>Combat</Tab>
+    </Group>
+    <Group>
+      <Label>Holy Power</Label>
+      <Name>HolyPowerGroup</Name>
+      <Column>Right</Column>
+      <Tab>Combat</Tab>
+    </Group>
+    <Group>
+      <Label>Buffs</Label>
+      <Name>BuffsGroup</Name>
+      <Column>Right</Column>
+      <Tab>Combat</Tab>
+    </Group>
+    <!--Healing Tab-->
+    <Group>
+      <Label>Healing and Protection</Label>
+      <Name>HealingGroup</Name>
+      <Column>Left</Column>
+      <Tab>Healing</Tab>
+    </Group>
+    <Group>
+      <Label>Party Healing</Label>
+      <Name>PartyHealingGroup</Name>
+      <Column>Right</Column>
+      <Tab>Healing</Tab>
+    </Group>
+    <!--Advanced Tab-->
+    <Group>
+      <Label>Misc</Label>
+      <Name>MiscGroup</Name>
+      <Column>Left</Column>
+      <Tab>Advanced</Tab>
+    </Group>
+  </Groupboxes>
+  <ValueTemplates>
+    <!--Common use templates-->
+    <Template>
+      <Label>AllOptions</Label>
+      <Value>... always|... never|... only on adds|... only on 3+ adds|... only on 4+ adds|... only on 5+ adds|... only when no adds|... only when in battlegrounds|... only when not in battlegrounds|... only when in instance|... only when not in instance</Value>
+    </Template>
+    <Template>
+      <Label>Cleanse</Label>
+      <Value>... immediately|... never|... only out of combat</Value>
+    </Template>
+    <Template>
+      <Label>BackupHeal</Label>
+      <Value>... always|... healer OOM or Dead|... never</Value>
+    </Template>
+    <Template>
+      <Label>AddsNever</Label>
+      <Value>... never|... only on adds|... only on 3+ adds|... only on 4+ adds|... only on 5+ adds|... only when no adds</Value>
+    </Template>
+    <Template>
+      <Label>AddsAlways</Label>
+      <Value>... always|... never|... only on adds|... only on 3+ adds|... only on 4+ adds|... only on 5+ adds|... only when no adds</Value>
+    </Template>
+    <Template>
+      <Label>5Step50</Label>
+      <Value>10|15|20|25|30|35|40|45|50</Value>
+    </Template>
+    <Template>
+      <Label>5Step100</Label>
+      <Value>10|15|20|25|30|35|40|45|50|55|60|65|70|75|80|85|90|95</Value>
+    </Template>
+    <Template>
+      <Label>10Step50</Label>
+      <Value>10|20|30|40|50</Value>
+    </Template>
+    <Template>
+      <Label>10Step100</Label>
+      <Value>10|20|30|40|50|60|70|80|90</Value>
+    </Template>
+    <Template>
+      <Label>10Step1</Label>
+      <Value>1|2|3|4|5|6|7|8|9|10</Value>
+    </Template>
+    <Template>
+      <Label>CastersAndRunners</Label>
+      <Value>... always|... never|... on casters and runners|... only on casters|... only on runners</Value>
+    </Template>
+    <!--Class specific templates-->
+    <Template>
+      <Label>HolyPower</Label>
+      <Value>1+ Holy Power|2+ Holy Power|3+ Holy Power</Value>
+    </Template>
+    <Template>
+      <Label>Seals</Label>
+      <Value>Automatic|Seal of Insight|Seal of Justice|Seal of Righteousness|Seal of Truth</Value>
+    </Template>
+    <Template>
+      <Label>Blessings</Label>
+      <Value>Automatic|Blessing of Kings|Blessing of Might</Value>
+    </Template>
+    <Template>
+      <Label>Auras</Label>
+      <Value>Automatic|Concetration Aura|Devotion Aura|Retribution Aura</Value>
+    </Template>
+  </ValueTemplates>
+  <Items>
+    <!--Rest and Health - Common Tab-->
+    <Item>
+      <Label>Rest Health</Label>
+      <Name>RestHealth</Name>
+      <GroupName>RestGroup</GroupName>
+      <Type>Bar</Type>
+      <Value></Value>
+      <Tooltip></Tooltip>
+      <Tag></Tag>
+    </Item>
+    <Item>
+      <Label>Rest Mana</Label>
+      <Name>RestMana</Name>
+      <GroupName>RestGroup</GroupName>
+      <Type>Bar</Type>
+      <Value></Value>
+      <Tooltip></Tooltip>
+      <Tag></Tag>
+    </Item>
+    <Item>
+      <Label>Health Potion</Label>
+      <Name>HealthPotion</Name>
+      <GroupName>RestGroup</GroupName>
+      <Type>Bar</Type>
+      <Value></Value>
+      <Tooltip></Tooltip>
+      <Tag></Tag>
+    </Item>
+    <Item>
+      <Label>Lifeblood</Label>
+      <Name>LifebloodHealth</Name>
+      <GroupName>RestGroup</GroupName>
+      <Type>Bar</Type>
+      <Value></Value>
+      <Tooltip></Tooltip>
+      <Tag></Tag>
+    </Item>
+    <!--Misc - Advanced Tab-->
+    <Item>
+      <Label>Sacred Cleansing</Label>
+      <Name></Name>
+      <GroupName>MiscGroup</GroupName>
+      <Type></Type>
+      <Value>... talented|... not talented</Value>
+      <Tooltip>If you have a talent point in Sacred Cleansing then select 'talented' otherwise select 'not talented'</Tooltip>
+      <Tag></Tag>
+    </Item>
+    <Item>
+      <Label>Lazy Raider</Label>
+      <Name></Name>
+      <GroupName>MiscGroup</GroupName>
+      <Type></Type>
+      <Value></Value>
+      <Tooltip></Tooltip>
+      <Tag></Tag>
+    </Item>
+    <Item>
+      <Label>Ignore Runners</Label>
+      <Name></Name>
+      <GroupName>MiscGroup</GroupName>
+      <Type></Type>
+      <Value></Value>
+      <Tooltip></Tooltip>
+      <Tag></Tag>
+    </Item>
+    <!--Healing - Healing Tab-->
+    <Item>
+      <Label>Cleanse / Decurse</Label>
+      <Name>Cleanse</Name>
+      <GroupName>HealingGroup</GroupName>
+      <Type></Type>
+      <Value>VT:Cleanse</Value>
+      <Tooltip></Tooltip>
+      <Tag></Tag>
+    </Item>
+    <Item>
+      <Label>Ardent Defender</Label>
+      <Name>ArdentDefenderHealth</Name>
+      <GroupName>HealingGroup</GroupName>
+      <Type>Bar</Type>
+      <Value></Value>
+      <Tooltip></Tooltip>
+      <Tag></Tag>
+    </Item>
+    <Item>
+      <Label>Lay on Hands</Label>
+      <Name>LayOnHandsHealth</Name>
+      <GroupName>HealingGroup</GroupName>
+      <Type>Bar</Type>
+      <Value></Value>
+      <Tooltip></Tooltip>
+      <Tag></Tag>
+    </Item>
+    <Item>
+      <Label>Holy Shock</Label>
+      <Name>HolyShockHealth</Name>
+      <GroupName>HealingGroup</GroupName>
+      <Type>Bar</Type>
+      <Value></Value>
+      <Tooltip></Tooltip>
+      <Tag></Tag>
+    </Item>
+    <Item>
+      <Label>Word of Glory</Label>
+      <Name>WordOfGloryHealth</Name>
+      <GroupName>HealingGroup</GroupName>
+      <Type>Bar</Type>
+      <Value></Value>
+      <Tooltip></Tooltip>
+      <Tag></Tag>
+    </Item>
+    <Item>
+      <Label>Word of Glory</Label>
+      <Name>WordOfGloryHolyPower</Name>
+      <GroupName>HealingGroup</GroupName>
+      <Type></Type>
+      <Value>VT:HolyPower</Value>
+      <Tooltip></Tooltip>
+      <Tag></Tag>
+    </Item>
+    <Item>
+      <Label>Divine Protection</Label>
+      <Name>DivineProtectionHealth</Name>
+      <GroupName>HealingGroup</GroupName>
+      <Type>Bar</Type>
+      <Value></Value>
+      <Tooltip></Tooltip>
+      <Tag></Tag>
+    </Item>
+    <Item>
+      <Label>Holy Light</Label>
+      <Name>HolyLightHealth</Name>
+      <GroupName>HealingGroup</GroupName>
+      <Type>Bar</Type>
+      <Value></Value>
+      <Tooltip></Tooltip>
+      <Tag></Tag>
+    </Item>
+    <Item>
+      <Label>Holy Light</Label>
+      <Name></Name>
+      <GroupName>HealingGroup</GroupName>
+      <Type></Type>
+      <Value>... always|... never|... only on adds|... only on 3+ adds|... only on 4+ adds|... only on 5+ adds|... only when no adds|... only when in battlegrounds|... only when not in battlegrounds|... only when in instance|... only when not in instance|... only with Crusader buff</Value>
+      <Tooltip></Tooltip>
+      <Tag></Tag>
+    </Item>
+    <Item>
+      <Label>Flash of Light</Label>
+      <Name>FlashOfLightHealth</Name>
+      <GroupName>HealingGroup</GroupName>
+      <Type>Bar</Type>
+      <Value></Value>
+      <Tooltip></Tooltip>
+      <Tag></Tag>
+    </Item>
+    <Item>
+      <Label>Flash of Light</Label>
+      <Name>FlashOfLight</Name>
+      <GroupName>HealingGroup</GroupName>
+      <Type></Type>
+      <Value>VT:AllOptions</Value>
+      <Tooltip></Tooltip>
+      <Tag></Tag>
+    </Item>
+    <Item>
+      <Label>Divine Light</Label>
+      <Name>DivineLightHealth</Name>
+      <GroupName>HealingGroup</GroupName>
+      <Type>Bar</Type>
+      <Value></Value>
+      <Tooltip></Tooltip>
+      <Tag></Tag>
+    </Item>
+    <Item>
+      <Label>Divine Shield</Label>
+      <Name>DivineShieldHealth</Name>
+      <GroupName>HealingGroup</GroupName>
+      <Type>Bar</Type>
+      <Value></Value>
+      <Tooltip></Tooltip>
+      <Tag></Tag>
+    </Item>
+    <Item>
+      <Label>Divine Plea (Mana)</Label>
+      <Name>DivinePleaMana</Name>
+      <GroupName>HealingGroup</GroupName>
+      <Type>Bar</Type>
+      <Value></Value>
+      <Tooltip></Tooltip>
+      <Tag></Tag>
+    </Item>
+    <!--Party Healing - Healing Tab-->
+    <Item>
+      <Label>Cleanse / Decurse</Label>
+      <Name>PartyCleanse</Name>
+      <GroupName>PartyHealingGroup</GroupName>
+      <Type></Type>
+      <Value>VT:Cleanse</Value>
+      <Tooltip></Tooltip>
+      <Tag></Tag>
+    </Item>
+    <Item>
+      <Label>Heal When</Label>
+      <Name>PartyHealWhen</Name>
+      <GroupName>PartyHealingGroup</GroupName>
+      <Type>Combo</Type>
+      <Value>... always|... never|... healer OOM or Dead</Value>
+      <Tooltip></Tooltip>
+      <Tag></Tag>
+    </Item>
+    <Item>
+      <Label>Holy Shock</Label>
+      <Name>PartyHolyShock</Name>
+      <GroupName>PartyHealingGroup</GroupName>
+      <Type>Bar</Type>
+      <Value></Value>
+      <Tooltip></Tooltip>
+      <Tag></Tag>
+    </Item>
+    <Item>
+      <Label>Flash of Light</Label>
+      <Name>PartyFlashOfLight</Name>
+      <GroupName>PartyHealingGroup</GroupName>
+      <Type>Bar</Type>
+      <Value></Value>
+      <Tooltip></Tooltip>
+      <Tag></Tag>
+    </Item>
+    <Item>
+      <Label>Holy Light</Label>
+      <Name>PartyHolyLight</Name>
+      <GroupName>PartyHealingGroup</GroupName>
+      <Type>Bar</Type>
+      <Value></Value>
+      <Tooltip></Tooltip>
+      <Tag></Tag>
+    </Item>
+    <Item>
+      <Label>Divine Light</Label>
+      <Name>PartyDivineLight</Name>
+      <GroupName>PartyHealingGroup</GroupName>
+      <Type>Bar</Type>
+      <Value></Value>
+      <Tooltip></Tooltip>
+      <Tag></Tag>
+    </Item>
+    <!--Buffs - Combat Tab-->
+    <Item>
+      <Label>Auras</Label>
+      <Name>AuraBuffs</Name>
+      <GroupName>BuffsGroup</GroupName>
+      <Type></Type>
+      <Value>VT:Auras</Value>
+      <Tooltip></Tooltip>
+      <Tag></Tag>
+    </Item>
+    <Item>
+      <Label>Blessings</Label>
+      <Name></Name>
+      <GroupName>BuffsGroup</GroupName>
+      <Type></Type>
+      <Value>VT:Blessings</Value>
+      <Tooltip></Tooltip>
+      <Tag></Tag>
+    </Item>
+    <Item>
+      <Label>Seals</Label>
+      <Name></Name>
+      <GroupName>BuffsGroup</GroupName>
+      <Type></Type>
+      <Value>VT:Seals</Value>
+      <Tooltip></Tooltip>
+      <Tag></Tag>
+    </Item>
+    <Item>
+      <Label>Righteous Fury</Label>
+      <Name></Name>
+      <GroupName>BuffsGroup</GroupName>
+      <Type></Type>
+      <Value></Value>
+      <Tooltip></Tooltip>
+      <Tag></Tag>
+    </Item>
+    <!--Combat - Combat Tab-->
+    <Item>
+      <Label>Crusader Strike</Label>
+      <Name></Name>
+      <GroupName>CombatGroup</GroupName>
+      <Type></Type>
+      <Value></Value>
+      <Tooltip></Tooltip>
+      <Tag></Tag>
+    </Item>
+    <Item>
+      <Label>Holy Shock</Label>
+      <Name></Name>
+      <GroupName>CombatGroup</GroupName>
+      <Type></Type>
+      <Value>VT:AllOptions</Value>
+      <Tooltip></Tooltip>
+      <Tag></Tag>
+    </Item>
+    <Item>
+      <Label>HotR</Label>
+      <Name>HammerOfTheRighteous</Name>
+      <GroupName>CombatGroup</GroupName>
+      <Type></Type>
+      <Value>VT:AddsAlways</Value>
+      <Tooltip>Hammer of the Righteous</Tooltip>
+      <Tag></Tag>
+    </Item>
+    <Item>
+      <Label>Consecration</Label>
+      <Name></Name>
+      <GroupName>CombatGroup</GroupName>
+      <Type></Type>
+      <Value>VT:AddsAlways</Value>
+      <Tooltip></Tooltip>
+      <Tag></Tag>
+    </Item>
+    <Item>
+      <Label>Holy Wrath</Label>
+      <Name></Name>
+      <GroupName>CombatGroup</GroupName>
+      <Type></Type>
+      <Value>VT:AddsAlways</Value>
+      <Tooltip></Tooltip>
+      <Tag></Tag>
+    </Item>
+    <Item>
+      <Label>Hammer of Justice</Label>
+      <Name>HammerOfJustice</Name>
+      <GroupName>CombatGroup</GroupName>
+      <Type></Type>
+      <Value>VT:CastersAndRunners</Value>
+      <Tooltip></Tooltip>
+      <Tag></Tag>
+    </Item>
+    <Item>
+      <Label>Avenging Wrath</Label>
+      <Name></Name>
+      <GroupName>CombatGroup</GroupName>
+      <Type></Type>
+      <Value>VT:AddsAlways</Value>
+      <Tooltip></Tooltip>
+      <Tag></Tag>
+    </Item>
+    <Item>
+      <Label>Rebuke</Label>
+      <Name></Name>
+      <GroupName>CombatGroup</GroupName>
+      <Type></Type>
+      <Value>VT:AllOptions</Value>
+      <Tooltip></Tooltip>
+      <Tag></Tag>
+    </Item>
+    <Item>
+      <Label>The Art of War</Label>
+      <Name>TheArtOfWar</Name>
+      <GroupName>CombatGroup</GroupName>
+      <Type></Type>
+      <Value>VT:AddsAlways</Value>
+      <Tooltip></Tooltip>
+      <Tag></Tag>
+    </Item>
+    <Item>
+      <Label>Avenger's Shield</Label>
+      <Name>AvengersShield</Name>
+      <GroupName>CombatGroup</GroupName>
+      <Type></Type>
+      <Value>VT:AddsAlways</Value>
+      <Tooltip></Tooltip>
+      <Tag></Tag>
+    </Item>
+    <Item>
+      <Label>Hammer of Wrath</Label>
+      <Name>HammerOfWrath</Name>
+      <GroupName>CombatGroup</GroupName>
+      <Type></Type>
+      <Value></Value>
+      <Tooltip></Tooltip>
+      <Tag></Tag>
+    </Item>
+    <Item>
+      <Label>Divine Storm</Label>
+      <Name></Name>
+      <GroupName>CombatGroup</GroupName>
+      <Type></Type>
+      <Value>VT:AddsAlways</Value>
+      <Tooltip></Tooltip>
+      <Tag></Tag>
+    </Item>
+    <Item>
+      <Label>Zealotry</Label>
+      <Name></Name>
+      <GroupName>CombatGroup</GroupName>
+      <Type></Type>
+      <Value>VT:AllOptions</Value>
+      <Tooltip></Tooltip>
+      <Tag></Tag>
+    </Item>
+    <Item>
+      <Label>GoAK</Label>
+      <Name>GuardianOfAncientKings</Name>
+      <GroupName>CombatGroup</GroupName>
+      <Type></Type>
+      <Value>VT:AllOptions</Value>
+      <Tooltip>Guardian of Ancient Kings</Tooltip>
+      <Tag></Tag>
+    </Item>
+    <Item>
+      <Label>Exorcism</Label>
+      <Name></Name>
+      <GroupName>CombatGroup</GroupName>
+      <Type></Type>
+      <Value>VT:AllOptions</Value>
+      <Tooltip></Tooltip>
+      <Tag></Tag>
+    </Item>
+    <Item>
+      <Label>Exorcism (Sec.)</Label>
+      <Name>ExorcismSeconds</Name>
+      <GroupName>CombatGroup</GroupName>
+      <Type></Type>
+      <Value>VT:10Step1</Value>
+      <Tooltip>The absolute minimum delay (in seconds) between trying to cast Exorcism spells</Tooltip>
+      <Tag></Tag>
+    </Item>
+    <!--Holy Power - Combat Tab-->
+    <Item>
+      <Label>SotR</Label>
+      <Name>ShieldOfTheRighteous</Name>
+      <GroupName>HolyPowerGroup</GroupName>
+      <Type></Type>
+      <Value>VT:AllOptions</Value>
+      <Tooltip>Shield of the Righteous</Tooltip>
+      <Tag></Tag>
+    </Item>
+    <Item>
+      <Label>SotR Holy Power</Label>
+      <Name>ShieldOfTheRighteousHolyPower</Name>
+      <GroupName>HolyPowerGroup</GroupName>
+      <Type></Type>
+      <Value>VT:HolyPower</Value>
+      <Tooltip></Tooltip>
+      <Tag></Tag>
+    </Item>
+    <Item>
+      <Label>Templars Verdict</Label>
+      <Name></Name>
+      <GroupName>HolyPowerGroup</GroupName>
+      <Type></Type>
+      <Value>VT:AllOptions</Value>
+      <Tooltip></Tooltip>
+      <Tag></Tag>
+    </Item>
+    <Item>
+      <Label>TV Holy Power</Label>
+      <Name>TemplarsVerdictHolyPower</Name>
+      <GroupName>HolyPowerGroup</GroupName>
+      <Type></Type>
+      <Value>VT:HolyPower</Value>
+      <Tooltip></Tooltip>
+      <Tag></Tag>
+    </Item>
+    <Item>
+      <Label>Inquisition</Label>
+      <Name></Name>
+      <GroupName>HolyPowerGroup</GroupName>
+      <Type></Type>
+      <Value>VT:AllOptions</Value>
+      <Tooltip></Tooltip>
+      <Tag></Tag>
+    </Item>
+    <Item>
+      <Label>Inq. Holy Power</Label>
+      <Name>InquisitionHolyPower</Name>
+      <GroupName>HolyPowerGroup</GroupName>
+      <Type></Type>
+      <Value>VT:HolyPower</Value>
+      <Tooltip></Tooltip>
+      <Tag></Tag>
+    </Item>
+    <Item>
+      <Label>Divine Purpose</Label>
+      <Name></Name>
+      <GroupName>HolyPowerGroup</GroupName>
+      <Type></Type>
+      <Value>Templar's Verdict|Shield of the Righteous|Inquisition|Zealotry|Word of Glory|Inquisition &gt; Templar's Verdict|Inquisition &gt; Shield of the Righteous</Value>
+      <Tooltip></Tooltip>
+      <Tag>Sort</Tag>
+    </Item>
+  </Items>
+</UIElements>

@@ -1,0 +1,75 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<DeathKnight>
+  <!--Multiple Environment options are: never and always-->
+  <MultipleEnvironment>... never</MultipleEnvironment>
+  <Version>0.0.0</Version>
+  <!--Common class settings template-->
+  <ShowUI>... always</ShowUI>
+  <SmartEatDrink>... always</SmartEatDrink>
+  <RAFTarget>... always</RAFTarget>
+  <Debug>... do not show debug</Debug>
+  <LowLevelCheck>... always</LowLevelCheck>
+  <RestHealth>55</RestHealth>
+  <RestMana>55</RestMana>
+  <CombatTimeout>30</CombatTimeout>
+  <HealthPotion>52</HealthPotion>
+  <LifebloodHealth>40</LifebloodHealth>
+  <ManaPotion>25</ManaPotion>
+  <RacialSpell>... never</RacialSpell>
+  <RacialUseWhen>... never</RacialUseWhen>
+  <Cleanse>... only out of combat</Cleanse>
+  <MaximumPullDistance>5</MaximumPullDistance>
+  <MinimumPullDistance>4</MinimumPullDistance>
+  <LazyRaider>... never</LazyRaider>
+  <IgnoreRunners>... always</IgnoreRunners>
+  <!--Class specific settings everything below here-->
+  <RestHealPercent>75</RestHealPercent>
+  
+  <!--Healing-->
+  <DeathStrike>... always</DeathStrike>
+  <DeathStrikeHealth>50</DeathStrikeHealth>
+  <RuneTap>... only on adds</RuneTap>
+  <RuneTapHealth>40</RuneTapHealth>
+  <BoneShield>... always</BoneShield>
+  <BoneShieldHealth>100</BoneShieldHealth>
+  <IceboundFortitude>... only on adds</IceboundFortitude>
+  <IceboundFortitudeHealth>40</IceboundFortitudeHealth>
+  
+  <!--Combat-->
+  <PullSpell>Death Grip</PullSpell>
+  <RaiseDead>... only on adds</RaiseDead>
+  <DeathCoil>80</DeathCoil>
+  <UnholyFrenzy>... only on adds</UnholyFrenzy>
+  <MindFreeze>... always</MindFreeze>
+  <Strangulate>... always</Strangulate>
+  <DeathAndDecay>... only on adds</DeathAndDecay>
+  <BloodBoil>... only on 2+ disease</BloodBoil>
+  <ChainsOfIce>... only on runners</ChainsOfIce>
+  <HeartStrike>... always</HeartStrike>
+  <IcyTouch>... always</IcyTouch>
+  <FrostStrike>... always</FrostStrike>
+  <FrostStrikeRunePower>80</FrostStrikeRunePower>
+  <PlagueStrike>... always</PlagueStrike>
+  <BloodStrike>... always</BloodStrike>
+  <ScourgeStrike>... always</ScourgeStrike>
+  <Pestilence>... only on 2+ disease</Pestilence>
+  <AttackDelay>... always</AttackDelay>
+  <Obliterate>... only on 2+ disease</Obliterate>
+  <AntiMagicShell>... always</AntiMagicShell>
+  <Presence>Blood Presence</Presence>
+  <RuneWeapon>... only on adds</RuneWeapon>
+  <Gargoyle>... only on adds</Gargoyle>
+  <PillarOfFrost>... always</PillarOfFrost>
+  <HungeringCold>... never</HungeringCold>
+  <HowlingBlast>... only on adds</HowlingBlast>
+  <BloodTap>... always</BloodTap>
+  <FesteringStrike>... never</FesteringStrike>
+  <Outbreak>... always</Outbreak>
+  
+  <!--Hidden settings. Not visible in the UI-->
+  <AttackCooldown>2000</AttackCooldown>
+  <BloodBoilCooldown>3500</BloodBoilCooldown>
+  
+  
+  
+</DeathKnight>

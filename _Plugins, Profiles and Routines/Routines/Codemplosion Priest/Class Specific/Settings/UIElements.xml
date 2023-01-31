@@ -1,0 +1,698 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<UIElements>
+  <TabPages>
+    <Tab>
+      <Label>Common</Label>
+    </Tab>
+    <Tab>
+      <Label>Combat</Label>
+    </Tab>
+    <Tab>
+      <Label>Healing</Label>
+    </Tab>
+    <Tab>
+      <Label>Advanced</Label>
+    </Tab>
+  </TabPages>
+  <Groupboxes>
+    <!--Common Tab-->
+    <Group>
+      <Label>Rest and Health</Label>
+      <Name>RestGroup</Name>
+      <Column>Left</Column>
+      <Tab>Common</Tab>
+    </Group>
+    <!--Combat Tab-->
+    <Group>
+      <Label>Combat</Label>
+      <Name>CombatGroup</Name>
+      <Column>Left</Column>
+      <Tab>Combat</Tab>
+    </Group>
+    <Group>
+      <Label>Misc</Label>
+      <Name>BuffsGroup</Name>
+      <Column>Right</Column>
+      <Tab>Combat</Tab>
+    </Group>
+    <!--Healing Tab-->
+    <Group>
+      <Label>Self Healing and Protection</Label>
+      <Name>HealingGroup</Name>
+      <Column>Left</Column>
+      <Tab>Healing</Tab>
+    </Group>
+    <Group>
+      <Label>Misc</Label>
+      <Name>MiscHealingGroup</Name>
+      <Column>Left</Column>
+      <Tab>Healing</Tab>
+    </Group>
+    <Group>
+      <Label>Party Healing and Protection</Label>
+      <Name>PartyHealingGroup</Name>
+      <Column>Right</Column>
+      <Tab>Healing</Tab>
+    </Group>
+    <!--Advanced Tab-->
+    <Group>
+      <Label>Misc</Label>
+      <Name>MiscGroup</Name>
+      <Column>Left</Column>
+      <Tab>Advanced</Tab>
+    </Group>
+  </Groupboxes>
+  <ValueTemplates>
+    <!--Common use templates-->
+    <Template>
+      <Label>AllOptions</Label>
+      <Value>... always|... never|... only on adds|... only on 3+ adds|... only on 4+ adds|... only on 5+ adds|... only when no adds|... only when in battlegrounds|... only when not in battlegrounds|... only when in instance|... only when not in instance</Value>
+    </Template>
+    <Template>
+      <Label>Cleanse</Label>
+      <Value>... immediately|... never|... only out of combat</Value>
+    </Template>
+    <Template>
+      <Label>BackupHeal</Label>
+      <Value>... always|... healer OOM or Dead|... never</Value>
+    </Template>
+    <Template>
+      <Label>AddsNever</Label>
+      <Value>... never|... only on adds|... only on 3+ adds|... only on 4+ adds|... only on 5+ adds|... only on 6+ adds|... only on 7+ adds|... only on 8+ adds|... only when no adds</Value>
+    </Template>
+    <Template>
+      <Label>AddsAlways</Label>
+      <Value>... always|... never|... only on adds|... only on 3+ adds|... only on 4+ adds|... only on 5+ adds|... only on 6+ adds|... only on 7+ adds|... only on 8+ adds|... only when no adds</Value>
+    </Template>
+    <Template>
+      <Label>5Step50</Label>
+      <Value>10|15|20|25|30|35|40|45|50</Value>
+    </Template>
+    <Template>
+      <Label>5Step100</Label>
+      <Value>10|15|20|25|30|35|40|45|50|55|60|65|70|75|80|85|90|95</Value>
+    </Template>
+    <Template>
+      <Label>10Step50</Label>
+      <Value>10|20|30|40|50</Value>
+    </Template>
+    <Template>
+      <Label>10Step100</Label>
+      <Value>10|20|30|40|50|60|70|80|90</Value>
+    </Template>
+    <Template>
+      <Label>10Step1</Label>
+      <Value>1|2|3|4|5|6|7|8|9|10</Value>
+    </Template>
+    <Template>
+      <Label>CastersAndRunners</Label>
+      <Value>... always|... never|... on casters and runners|... only on casters|... only on runners</Value>
+    </Template>
+    <!--Class specific templates-->
+  </ValueTemplates>
+  <Items>
+    <!--Rest and Health - Common Tab-->
+    <Item>
+      <Label>Rest Health</Label>
+      <Name>RestHealth</Name>
+      <GroupName>RestGroup</GroupName>
+      <Type>Bar</Type>
+      <Value></Value>
+      <Tooltip></Tooltip>
+      <Tag></Tag>
+    </Item>
+    <Item>
+      <Label>Rest Mana</Label>
+      <Name>RestMana</Name>
+      <GroupName>RestGroup</GroupName>
+      <Type>Bar</Type>
+      <Value></Value>
+      <Tooltip></Tooltip>
+      <Tag></Tag>
+    </Item>
+    <Item>
+      <Label>Mana Potion</Label>
+      <Name>ManaPotion</Name>
+      <GroupName>RestGroup</GroupName>
+      <Type>Bar</Type>
+      <Value></Value>
+      <Tooltip></Tooltip>
+      <Tag></Tag>
+    </Item>
+    <Item>
+      <Label>Lifeblood</Label>
+      <Name>LifebloodHealth</Name>
+      <GroupName>RestGroup</GroupName>
+      <Type>Bar</Type>
+      <Value></Value>
+      <Tooltip></Tooltip>
+      <Tag></Tag>
+    </Item>
+    <!--Misc - Advanced Tab-->
+    <Item>
+      <Label>Lazy Raider</Label>
+      <Name></Name>
+      <GroupName>MiscGroup</GroupName>
+      <Type></Type>
+      <Value></Value>
+      <Tooltip></Tooltip>
+      <Tag></Tag>
+    </Item>
+    <Item>
+      <Label>Ignore Runners</Label>
+      <Name></Name>
+      <GroupName>MiscGroup</GroupName>
+      <Type></Type>
+      <Value></Value>
+      <Tooltip></Tooltip>
+      <Tag>Disabled</Tag>
+    </Item>
+    <Item>
+      <Label>PWS Before Pull</Label>
+      <Name></Name>
+      <GroupName>MiscGroup</GroupName>
+      <Type></Type>
+      <Value></Value>
+      <Tooltip>Always cast Power Word: Shield before pulling</Tooltip>
+      <Tag></Tag>
+    </Item>
+    <Item>
+      <Label>Verbose Healing</Label>
+      <Name></Name>
+      <GroupName>MiscGroup</GroupName>
+      <Type></Type>
+      <Value></Value>
+      <Tooltip>Display verbose messages during party healing</Tooltip>
+      <Tag></Tag>
+    </Item>
+    <!--Healing - Healing Tab-->
+    <Item>
+      <Label>Cleanse / Decurse</Label>
+      <Name>Cleanse</Name>
+      <GroupName>HealingGroup</GroupName>
+      <Type></Type>
+      <Value>VT:Cleanse</Value>
+      <Tooltip></Tooltip>
+      <Tag></Tag>
+    </Item>
+    <Item>
+      <Label>Pain Suppression</Label>
+      <Name>PainSuppressionHealth</Name>
+      <GroupName>HealingGroup</GroupName>
+      <Type>Bar</Type>
+      <Value></Value>
+      <Tooltip></Tooltip>
+      <Tag></Tag>
+    </Item>
+    <Item>
+      <Label>Renew</Label>
+      <Name>RenewHealth</Name>
+      <GroupName>HealingGroup</GroupName>
+      <Type>Bar</Type>
+      <Value></Value>
+      <Tooltip></Tooltip>
+      <Tag></Tag>
+    </Item>
+    <Item>
+      <Label>Flash Heal</Label>
+      <Name>FlashHealHealth</Name>
+      <GroupName>HealingGroup</GroupName>
+      <Type>Bar</Type>
+      <Value></Value>
+      <Tooltip></Tooltip>
+      <Tag></Tag>
+    </Item>
+    <Item>
+      <Label>Power Word: Shield</Label>
+      <Name>PowerWordShieldHealth</Name>
+      <GroupName>HealingGroup</GroupName>
+      <Type>Bar</Type>
+      <Value></Value>
+      <Tooltip></Tooltip>
+      <Tag></Tag>
+    </Item>
+    <!--Misc Healing - Healing Tab-->
+    <Item>
+      <Label>Smite (Evangelism)</Label>
+      <Name>SmiteEvangelism</Name>
+      <GroupName>MiscHealingGroup</GroupName>
+      <Type></Type>
+      <Value>... never|... only if mana &gt; 90%|... only if mana &gt; 85%|... only if mana &gt; 80%|... only if mana &gt; 75%|... only if mana &gt; 70%|... only if mana &gt; 65%|... only if mana &gt; 60%|... only if mana &gt; 55%|... only if mana &gt; 50%</Value>
+      <Tooltip>Instance or BG only: If no healing is required cast Smite for Evangelism / Archangle buff</Tooltip>
+      <Tag></Tag>
+    </Item>
+    <Item>
+      <Label>Smite (Evangelism)</Label>
+      <Name>SmiteEvangelismHealth</Name>
+      <GroupName>MiscHealingGroup</GroupName>
+      <Type>Bar</Type>
+      <Value></Value>
+      <Tooltip>Minimum health of all party members before evaluating Smite</Tooltip>
+      <Tag></Tag>
+    </Item>
+    <Item>
+      <Label>Archangel</Label>
+      <Name>ArchangelParty</Name>
+      <GroupName>MiscHealingGroup</GroupName>
+      <Type></Type>
+      <Value>... never|... 1+ stacks|... 2+ stacks|... 3+ stacks|... 4+ stacks|... 5+ stacks</Value>
+      <Tooltip>Instance and BGs Only: Cast Archangel only when you have X stacks of Evangelism </Tooltip>
+      <Tag></Tag>
+    </Item>
+    <Item>
+      <Label>Bounce PoM</Label>
+      <Name></Name>
+      <GroupName>MiscHealingGroup</GroupName>
+      <Type></Type>
+      <Value></Value>
+      <Tooltip>If you have Prayer of Mending on you, cast SW:Death to 'bounce' it to another party member</Tooltip>
+      <Tag></Tag>
+    </Item>
+    <Item>
+      <Label>Wand</Label>
+      <Name>WandParty</Name>
+      <GroupName>MiscHealingGroup</GroupName>
+      <Type></Type>
+      <Value></Value>
+      <Tooltip></Tooltip>
+      <Tag></Tag>
+    </Item>
+    <Item>
+      <Label>Resurrect Players</Label>
+      <Name></Name>
+      <GroupName>MiscHealingGroup</GroupName>
+      <Type></Type>
+      <Value></Value>
+      <Tooltip></Tooltip>
+      <Tag></Tag>
+    </Item>
+    <!--Party Healing - Healing Tab-->
+    <Item>
+      <Label>Cleanse / Decurse</Label>
+      <Name>PartyCleanse</Name>
+      <GroupName>PartyHealingGroup</GroupName>
+      <Type></Type>
+      <Value>VT:Cleanse</Value>
+      <Tooltip></Tooltip>
+      <Tag></Tag>
+    </Item>
+    <Item>
+      <Label>Heal When</Label>
+      <Name>PartyHealWhen</Name>
+      <GroupName>PartyHealingGroup</GroupName>
+      <Type>Combo</Type>
+      <Value>... I'm dedicated healer|... never|... healer OOM or Dead|... off healer</Value>
+      <Tooltip></Tooltip>
+      <Tag>Sort</Tag>
+    </Item>
+    <Item>
+      <Label>Heal When</Label>
+      <Name>PartyHealWhenSpec</Name>
+      <GroupName>PartyHealingGroup</GroupName>
+      <Type></Type>
+      <Value>... Discipline spec only|... Holy spec only|... Shadow spec only</Value>
+      <Tooltip>Only heal when you are in this spec</Tooltip>
+      <Tag></Tag>
+    </Item>
+    <Item>
+      <Label>Heal Pets</Label>
+      <Name></Name>
+      <GroupName>PartyHealingGroup</GroupName>
+      <Type></Type>
+      <Value></Value>
+      <Tooltip>Will only attempt to heal pets if no one needs healing or decursing</Tooltip>
+      <Tag></Tag>
+    </Item>
+    <Item>
+      <Label>Circle of Healing</Label>
+      <Name>CircleOfHealingCount</Name>
+      <GroupName>PartyHealingGroup</GroupName>
+      <Type></Type>
+      <Value>1|2|3|4|5</Value>
+      <Tooltip>The maximum number of players below the health %</Tooltip>
+      <Tag></Tag>
+    </Item>
+    <Item>
+      <Label>Circle of Healing</Label>
+      <Name>CircleOfHealingHealth</Name>
+      <GroupName>PartyHealingGroup</GroupName>
+      <Type>Bar</Type>
+      <Value></Value>
+      <Tooltip></Tooltip>
+      <Tag></Tag>
+    </Item>
+    <Item>
+      <Label>Prayer of Healing</Label>
+      <Name>PrayerOfHealingCount</Name>
+      <GroupName>PartyHealingGroup</GroupName>
+      <Type></Type>
+      <Value>1|2|3|4|5</Value>
+      <Tooltip>The maximum number of players below the health %</Tooltip>
+      <Tag></Tag>
+    </Item>
+    <Item>
+      <Label>Prayer of Healing</Label>
+      <Name>PrayerOfHealingHealth</Name>
+      <GroupName>PartyHealingGroup</GroupName>
+      <Type>Bar</Type>
+      <Value></Value>
+      <Tooltip></Tooltip>
+      <Tag></Tag>
+    </Item>
+    <Item>
+      <Label>Guardian Spirit</Label>
+      <Name>PartyGuardianSpirit</Name>
+      <GroupName>PartyHealingGroup</GroupName>
+      <Type>Bar</Type>
+      <Value></Value>
+      <Tooltip></Tooltip>
+      <Tag></Tag>
+    </Item>
+    <Item>
+      <Label>Prayer of Mending</Label>
+      <Name>PartyPrayerOfMending</Name>
+      <GroupName>PartyHealingGroup</GroupName>
+      <Type>Bar</Type>
+      <Value></Value>
+      <Tooltip></Tooltip>
+      <Tag></Tag>
+    </Item>
+    <Item>
+      <Label>Power Word: Shield</Label>
+      <Name>PartyPWS</Name>
+      <GroupName>PartyHealingGroup</GroupName>
+      <Type>Bar</Type>
+      <Value></Value>
+      <Tooltip></Tooltip>
+      <Tag></Tag>
+    </Item>
+    <Item>
+      <Label>Penance</Label>
+      <Name>PartyPenance</Name>
+      <GroupName>PartyHealingGroup</GroupName>
+      <Type>Bar</Type>
+      <Value></Value>
+      <Tooltip></Tooltip>
+      <Tag></Tag>
+    </Item>
+    <Item>
+      <Label>Pain Suppression</Label>
+      <Name>PartyPainSuppression</Name>
+      <GroupName>PartyHealingGroup</GroupName>
+      <Type>Bar</Type>
+      <Value></Value>
+      <Tooltip></Tooltip>
+      <Tag></Tag>
+    </Item>
+    <Item>
+      <Label>Renew</Label>
+      <Name>PartyRenew</Name>
+      <GroupName>PartyHealingGroup</GroupName>
+      <Type>Bar</Type>
+      <Value></Value>
+      <Tooltip></Tooltip>
+      <Tag></Tag>
+    </Item>
+    <Item>
+      <Label>Flash Heal</Label>
+      <Name>PartyFlashHeal</Name>
+      <GroupName>PartyHealingGroup</GroupName>
+      <Type>Bar</Type>
+      <Value></Value>
+      <Tooltip></Tooltip>
+      <Tag></Tag>
+    </Item>
+    <Item>
+      <Label>Greater Heal</Label>
+      <Name>PartyGreaterHeal</Name>
+      <GroupName>PartyHealingGroup</GroupName>
+      <Type>Bar</Type>
+      <Value></Value>
+      <Tooltip>Used only on the tank</Tooltip>
+      <Tag></Tag>
+    </Item>
+    <!--Buffs (Misc) - Combat Tab-->
+    <Item>
+      <Label>Pull Spell</Label>
+      <Name>PullSpell</Name>
+      <GroupName>BuffsGroup</GroupName>
+      <Type></Type>
+      <Value>Smite|Mind Blast|Mind Flay|Shadow Word: Pain|Holy Fire|Devouring Plague|Shadow Word: Death|Mind Spike|Holy Word: Chastise|Penance|Vampiric Touch|Silence</Value>
+      <Tooltip></Tooltip>
+      <Tag>Sort</Tag>
+    </Item>
+    <Item>
+      <Label>Wand (Mana)</Label>
+      <Name>WandMana</Name>
+      <GroupName>BuffsGroup</GroupName>
+      <Type>Bar</Type>
+      <Value></Value>
+      <Tooltip>If your mana is below this level stop all DPS spells and only use Wand</Tooltip>
+      <Tag></Tag>
+    </Item>
+    <Item>
+      <Label>Hymn of Hope Mana</Label>
+      <Name>HymnOfHopeMana</Name>
+      <GroupName>BuffsGroup</GroupName>
+      <Type>Bar</Type>
+      <Value></Value>
+      <Tooltip></Tooltip>
+      <Tag></Tag>
+    </Item>
+    <Item>
+      <Label>Shadowfiend (Mana)</Label>
+      <Name>ShadowfiendMana</Name>
+      <GroupName>BuffsGroup</GroupName>
+      <Type>Bar</Type>
+      <Value></Value>
+      <Tooltip></Tooltip>
+      <Tag></Tag>
+    </Item>
+    <Item>
+      <Label>Dispersion (Mana)</Label>
+      <Name>DispersionMana</Name>
+      <GroupName>BuffsGroup</GroupName>
+      <Type>Bar</Type>
+      <Value></Value>
+      <Tooltip></Tooltip>
+      <Tag></Tag>
+    </Item>
+    <Item>
+      <Label>Shackle Undead</Label>
+      <Name></Name>
+      <GroupName>BuffsGroup</GroupName>
+      <Type></Type>
+      <Value>VT:AddsNever</Value>
+      <Tooltip></Tooltip>
+      <Tag></Tag>
+    </Item>
+    <Item>
+      <Label>Shadowform</Label>
+      <Name></Name>
+      <GroupName>BuffsGroup</GroupName>
+      <Type></Type>
+      <Value></Value>
+      <Tooltip></Tooltip>
+      <Tag></Tag>
+    </Item>
+    <Item>
+      <Label>Inner Fire/Will</Label>
+      <Name>InnerFireWill</Name>
+      <GroupName>BuffsGroup</GroupName>
+      <Type></Type>
+      <Value>Inner Fire|Inner Will|None</Value>
+      <Tooltip>Inner Fire or Inner Will</Tooltip>
+      <Tag>Sort</Tag>
+    </Item>
+    <Item>
+      <Label>Power Word: Fort.</Label>
+      <Name>PowerWordFortitude</Name>
+      <GroupName>BuffsGroup</GroupName>
+      <Type></Type>
+      <Value></Value>
+      <Tooltip></Tooltip>
+      <Tag></Tag>
+    </Item>
+    <Item>
+      <Label>Shadow Protection</Label>
+      <Name></Name>
+      <GroupName>BuffsGroup</GroupName>
+      <Type></Type>
+      <Value>VT:AllOptions</Value>
+      <Tooltip></Tooltip>
+      <Tag></Tag>
+    </Item>
+    <Item>
+      <Label>Fear Ward</Label>
+      <Name></Name>
+      <GroupName>BuffsGroup</GroupName>
+      <Type></Type>
+      <Value>VT:AllOptions</Value>
+      <Tooltip></Tooltip>
+      <Tag></Tag>
+    </Item>
+    <Item>
+      <Label>Archangel</Label>
+      <Name></Name>
+      <GroupName>BuffsGroup</GroupName>
+      <Type></Type>
+      <Value>... never|... 1+ stacks|... 2+ stacks|... 3+ stacks|... 4+ stacks|... 5+ stacks</Value>
+      <Tooltip>Questing &amp; Grinding Only: Cast Archangel only when you have X stacks of Evangelism </Tooltip>
+      <Tag></Tag>
+    </Item>
+    <Item>
+      <Label>Power Word: Barrier</Label>
+      <Name>PowerWordBarrier</Name>
+      <GroupName>BuffsGroup</GroupName>
+      <Type></Type>
+      <Value>VT:AddsNever</Value>
+      <Tooltip></Tooltip>
+      <Tag></Tag>
+    </Item>
+    <!--Combat - Combat Tab-->
+    <Item>
+      <Label>Chastise</Label>
+      <Name></Name>
+      <GroupName>CombatGroup</GroupName>
+      <Type></Type>
+      <Value>VT:AllOptions</Value>
+      <Tooltip>Holy Word: Chastise</Tooltip>
+      <Tag></Tag>
+    </Item>
+    <Item>
+      <Label>Power Infusion</Label>
+      <Name></Name>
+      <GroupName>CombatGroup</GroupName>
+      <Type></Type>
+      <Value>VT:AllOptions</Value>
+      <Tooltip></Tooltip>
+      <Tag></Tag>
+    </Item>
+    <Item>
+      <Label>Silence</Label>
+      <Name></Name>
+      <GroupName>CombatGroup</GroupName>
+      <Type></Type>
+      <Value>VT:AllOptions</Value>
+      <Tooltip>Only used on casters</Tooltip>
+      <Tag></Tag>
+    </Item>
+    <Item>
+      <Label>Holy Nova</Label>
+      <Name></Name>
+      <GroupName>CombatGroup</GroupName>
+      <Type></Type>
+      <Value>VT:AddsNever</Value>
+      <Tooltip></Tooltip>
+      <Tag></Tag>
+    </Item>
+    <Item>
+      <Label>Mind Sear</Label>
+      <Name></Name>
+      <GroupName>CombatGroup</GroupName>
+      <Type></Type>
+      <Value>VT:AddsNever</Value>
+      <Tooltip></Tooltip>
+      <Tag></Tag>
+    </Item>
+    <Item>
+      <Label>Mind Flay</Label>
+      <Name></Name>
+      <GroupName>CombatGroup</GroupName>
+      <Type></Type>
+      <Value>VT:AllOptions</Value>
+      <Tooltip></Tooltip>
+      <Tag></Tag>
+    </Item>
+    <Item>
+      <Label>Devouring Plague</Label>
+      <Name></Name>
+      <GroupName>CombatGroup</GroupName>
+      <Type></Type>
+      <Value>VT:AllOptions</Value>
+      <Tooltip></Tooltip>
+      <Tag></Tag>
+    </Item>
+    <Item>
+      <Label>Vampiric Touch</Label>
+      <Name></Name>
+      <GroupName>CombatGroup</GroupName>
+      <Type></Type>
+      <Value>VT:AllOptions</Value>
+      <Tooltip></Tooltip>
+      <Tag></Tag>
+    </Item>
+    <Item>
+      <Label>SW: Death</Label>
+      <Name>ShadowWordDeath</Name>
+      <GroupName>CombatGroup</GroupName>
+      <Type></Type>
+      <Value>... always|... never|... only on adds|... only on 3+ adds|... only on 4+ adds|... only on 5+ adds|... only when no adds|... only when in battlegrounds|... only when not in battlegrounds|... only when in instance|... only when not in instance|... target &lt; 25% health</Value>
+      <Tooltip>Shadow Word: Death</Tooltip>
+      <Tag></Tag>
+    </Item>
+    <Item>
+      <Label>SW: Pain</Label>
+      <Name>ShadowWordPain</Name>
+      <GroupName>CombatGroup</GroupName>
+      <Type></Type>
+      <Value>VT:AllOptions</Value>
+      <Tooltip>Shadow Word: Pain</Tooltip>
+      <Tag></Tag>
+    </Item>
+    <Item>
+      <Label>Psychic Scream</Label>
+      <Name></Name>
+      <GroupName>CombatGroup</GroupName>
+      <Type></Type>
+      <Value>VT:AllOptions</Value>
+      <Tooltip>Only evaluated if the target is within 8 yards</Tooltip>
+      <Tag></Tag>
+    </Item>
+    <Item>
+      <Label>Mind Blast</Label>
+      <Name></Name>
+      <GroupName>CombatGroup</GroupName>
+      <Type></Type>
+      <Value>... always|... never|... only on adds|... only on 3+ adds|... only on 4+ adds|... only on 5+ adds|... only when no adds|... only when in battlegrounds|... only when not in battlegrounds|... only when in instance|... only when not in instance|... 1+ Shadow Orb|... 2+ Shadow Orb|... 3+ Shadow Orb|... 1+ Mind Spike|... 2+ Mind Spike|... 3+ Mind Spike</Value>
+      <Tooltip></Tooltip>
+      <Tag></Tag>
+    </Item>
+    <Item>
+      <Label>Mind Spike</Label>
+      <Name></Name>
+      <GroupName>CombatGroup</GroupName>
+      <Type></Type>
+      <Value>VT:AllOptions</Value>
+      <Tooltip></Tooltip>
+      <Tag></Tag>
+    </Item>
+    <Item>
+      <Label>Holy Fire</Label>
+      <Name></Name>
+      <GroupName>CombatGroup</GroupName>
+      <Type></Type>
+      <Value>... always|... never|... only on adds|... only on 3+ adds|... only on 4+ adds|... only on 5+ adds|... only when no adds|... only when in battlegrounds|... only when not in battlegrounds|... only when in instance|... only when not in instance|... only when not in Shadowform</Value>
+      <Tooltip></Tooltip>
+      <Tag></Tag>
+    </Item>
+    <Item>
+      <Label>Penance</Label>
+      <Name></Name>
+      <GroupName>CombatGroup</GroupName>
+      <Type></Type>
+      <Value>VT:AllOptions</Value>
+      <Tooltip></Tooltip>
+      <Tag></Tag>
+    </Item>
+    <Item>
+      <Label>Smite</Label>
+      <Name></Name>
+      <GroupName>CombatGroup</GroupName>
+      <Type></Type>
+      <Value>... always|... never|... only on adds|... only on 3+ adds|... only on 4+ adds|... only on 5+ adds|... only when no adds|... only when in battlegrounds|... only when not in battlegrounds|... only when in instance|... only when not in instance|... only when not in Shadowform</Value>
+      <Tooltip></Tooltip>
+      <Tag></Tag>
+    </Item>
+  </Items>
+</UIElements>

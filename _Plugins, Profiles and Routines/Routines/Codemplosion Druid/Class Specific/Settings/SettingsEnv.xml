@@ -1,0 +1,6 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+
+<Environment>
+  <Dynamic>True</Dynamic>
+  <FixedEnvironment>PVE</FixedEnvironment>
+</Environment>

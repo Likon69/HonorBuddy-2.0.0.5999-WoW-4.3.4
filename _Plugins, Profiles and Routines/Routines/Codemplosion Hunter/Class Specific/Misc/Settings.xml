@@ -1,0 +1,55 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Hunter>
+  <!--Common class settings template-->
+  <PullSpell>Concussive Shot</PullSpell>
+  <MaximumPullDistance>39</MaximumPullDistance>
+  <MinimumPullDistance>36</MinimumPullDistance>
+  <ShowUI>... always</ShowUI>
+  <SmartEatDrink>... always</SmartEatDrink>
+  <RAFTarget>... always</RAFTarget>
+  <Debug>... do not show debug</Debug>
+  <LowLevelCheck>... always</LowLevelCheck>
+  <RestHealth>45</RestHealth>
+  <CombatTimeout>30</CombatTimeout>
+  <HealthPotion>39</HealthPotion>
+  <!--Class specific settings everything below here-->
+  <AspectOfTheCheetah>... always</AspectOfTheCheetah>
+  <CheetahMinDistance>100</CheetahMinDistance>
+  <CheetahHostileRange>60</CheetahHostileRange>
+  <PreEmptiveLooting>... never</PreEmptiveLooting>
+  <SerpentSting>... only if not low level</SerpentSting>
+  <MendPetHealth>91</MendPetHealth>
+  <AimedShot>... focus 80+</AimedShot>
+  <ArcaneShot>... focus 40+</ArcaneShot>
+  <FeignDeathHealth>30</FeignDeathHealth>
+  <TrapInCombat>... never</TrapInCombat>
+  <TrapOnAdds>Explosive Trap</TrapOnAdds>
+  <TrapLauncher>Immolation Trap</TrapLauncher>
+  <KillCommand>... always</KillCommand>
+  <ExplosiveShot>... always</ExplosiveShot>
+  <BlackArrow>... always</BlackArrow>
+  <BestialWrath>... always</BestialWrath>
+  <Intimidation>... on casters and runners</Intimidation>
+  <RapidFire>... only on adds</RapidFire>
+  <DeterrenceHealth>30</DeterrenceHealth>
+  <LifebloodHealth>40</LifebloodHealth>
+  <RestMana>0</RestMana>
+  <ManaPotion>0</ManaPotion>
+  <PetSlot>Call Pet 1</PetSlot>
+  <PetAttackDelay>... never</PetAttackDelay>
+  <PetFoodName>Bristle Whisker Catfish</PetFoodName>
+  <Disengage>... always</Disengage>
+  <WidowVenom>... only in battlegrounds</WidowVenom>
+  <FocusShot>39</FocusShot>
+  <Misdirection>... always</Misdirection>
+  <HuntersMark>... only if not low level</HuntersMark>
+  <ChimeraShot>... always</ChimeraShot>
+  <FeignDeath>... on aggro and low health</FeignDeath>
+  <PetHappiness>... Glyph of Mend Pet</PetHappiness>
+  <FocusFire>... on 4+ Frenzy</FocusFire>
+  <ConsumeFrenzyEffect>... always</ConsumeFrenzyEffect>
+  <ContinuousPulling>... never</ContinuousPulling>
+  <PreLootMinDistance>10</PreLootMinDistance>
+  <PreLootMaxHealth>55</PreLootMaxHealth>
+  <LazyRaider>... never</LazyRaider>
+</Hunter>

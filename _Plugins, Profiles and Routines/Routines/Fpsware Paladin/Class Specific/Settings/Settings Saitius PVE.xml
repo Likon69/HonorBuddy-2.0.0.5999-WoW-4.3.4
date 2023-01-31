@@ -1,0 +1,80 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Paladin>
+  <!--Common class settings template-->
+  <ShowUI>... always</ShowUI>
+  <SmartEatDrink>... always</SmartEatDrink>
+  <RAFTarget>... always</RAFTarget>
+  <Debug>... do not show debug</Debug>
+  <LowLevelCheck>... always</LowLevelCheck>
+  <RestHealth>55</RestHealth>
+  <RestMana>30</RestMana>
+  <CombatTimeout>30</CombatTimeout>
+  <HealthPotion>52</HealthPotion>
+  <LifebloodHealth>40</LifebloodHealth>
+  <ManaPotion>0</ManaPotion>
+  <RacialSpell>... never</RacialSpell>
+  <RacialUseWhen>... never</RacialUseWhen>
+  <Cleanse>... only out of combat</Cleanse>
+  <PullSpell>Stealth</PullSpell>
+  <MaximumPullDistance>5</MaximumPullDistance>
+  <MinimumPullDistance>3</MinimumPullDistance>
+  <LazyRaider>... never</LazyRaider>
+  <IgnoreRunners>... always</IgnoreRunners>
+  <!--Class specific settings everything below here-->
+  <RestHealPercent>75</RestHealPercent>
+  <WordOfGloryHealth>70</WordOfGloryHealth>
+  <WordOfGloryHolyPower>2+ Holy Power</WordOfGloryHolyPower>
+  <HolyLightHealth>50</HolyLightHealth>
+  <HolyLight>... always</HolyLight>
+  <DivineLightHealth>1</DivineLightHealth>
+  <HolyShockHealth>1</HolyShockHealth>
+  <DivineShieldHealth>1</DivineShieldHealth>
+  <ArdentDefenderHealth>1</ArdentDefenderHealth>
+  <DivineProtectionHealth>85</DivineProtectionHealth>
+  <FlashOfLightHealth>40</FlashOfLightHealth>
+  <FlashOfLight>... always</FlashOfLight>
+  <LayOnHandsHealth>20</LayOnHandsHealth>
+  <Seals>Automatic</Seals>
+  <Blessings>Automatic</Blessings>
+  <AuraBuffs>Automatic</AuraBuffs>
+  <RighteousFury>... never</RighteousFury>
+  <DivinePleaMana>20</DivinePleaMana>
+  <Consecration>... only on adds</Consecration>
+  <HolyWrath>... only on adds</HolyWrath>
+  <HammerOfJustice>... only on runners</HammerOfJustice>
+  <AvengingWrath>... only on adds</AvengingWrath>
+  <Rebuke>... always</Rebuke>
+  <DivineStorm>... only on adds</DivineStorm>
+  <TheArtOfWar>... always</TheArtOfWar>
+  <AvengersShield>... always</AvengersShield>
+  <HammerOfWrath>... always</HammerOfWrath>
+  <PartyCleanse>... only out of combat</PartyCleanse>
+  <PartyHealWhen>... always</PartyHealWhen>
+  <PartyFlashOfLight>40</PartyFlashOfLight>
+  <PartyHolyLight>50</PartyHolyLight>
+  <PartyDivineLight>1</PartyDivineLight>
+  <PartyHolyShock>1</PartyHolyShock>
+  <HammerOfTheRighteous>... only on adds</HammerOfTheRighteous>
+  <CrusaderStrike>... always</CrusaderStrike>
+  <GuardianOfAncientKings>... only on adds</GuardianOfAncientKings>
+  <Zealotry>... always</Zealotry>
+  <SacredCleansing>... not talented</SacredCleansing>
+  <Exorcism>... never</Exorcism>
+  <ExorcismSeconds>5</ExorcismSeconds>
+  <DivinePurpose>Templar's Verdict</DivinePurpose>
+  <!--Holy Power Usage-->
+  <ShieldOfTheRighteous>... always</ShieldOfTheRighteous>
+  <ShieldOfTheRighteousHolyPower>3+ Holy Power</ShieldOfTheRighteousHolyPower>
+  <TemplarsVerdict>... always</TemplarsVerdict>
+  <TemplarsVerdictHolyPower>2+ Holy Power</TemplarsVerdictHolyPower>
+  <Inquisition>... always</Inquisition>
+  <InquisitionHolyPower>3+ Holy Power</InquisitionHolyPower>
+  <HolyShock>... always</HolyShock>
+  <!--Hidden settings. Not visible in the UI-->
+  <HealingSpellTimer>1100</HealingSpellTimer>
+  <HealingModifierSolo>80</HealingModifierSolo>
+  <HealingAbsoluteMinimum>25</HealingAbsoluteMinimum>
+  <PVPDance>... never</PVPDance>
+  <PVPDanceInterval>1419</PVPDanceInterval>
+    
+</Paladin>

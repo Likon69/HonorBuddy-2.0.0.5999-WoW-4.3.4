@@ -1,0 +1,39 @@
+?<?xml version="1.0" encoding="utf-8"?>
+<EzFrostSettings>
+  <LichborneHealStop>50</LichborneHealStop>
+  <HealthStone>35</HealthStone>
+  <UnholyPresence>True</UnholyPresence>
+  <EmpowerRuneWeapon>True</EmpowerRuneWeapon>
+  <Rotation>
+    <Entry>Necrotic Strike</Entry>
+    <Entry>Howling Blast</Entry>
+    <Entry>Frost Strike</Entry>
+  </Rotation>
+  <RangedRotation>
+    <Entry>Death Grip</Entry>
+    <Entry>Howling Blast</Entry>
+    <Entry>Death Coil</Entry>
+  </RangedRotation>
+  <KickRotation>
+    <Entry>Mind Freeze</Entry>
+    <Entry>Strangulate</Entry>
+    <Entry>Arcane Torrent</Entry>
+  </KickRotation>
+  <Cooldowns>
+    <Entry>Horn of Winter</Entry>
+    <Entry>Blood Tap</Entry>
+    <Entry>Outbreak</Entry>
+    <Entry>Pillar of Frost</Entry>
+  </Cooldowns>
+  <Trinkets>
+    <Entry>Badge of Victory||0|100</Entry>
+    <Entry>Essence of the Eternal Flame||0|100</Entry>
+    <Entry>Apparatus of Khaz'goroth|Titanic Power|5|60</Entry>
+    <Entry>Fury of Angerforge|Raw Fury|5|60</Entry>
+  </Trinkets>
+  <HealRotation>
+    <Entry>Lichborne|30</Entry>
+    <Entry>Icebound Fortitude|50</Entry>
+    <Entry>Anti-Magic Shell|60</Entry>
+  </HealRotation>
+</EzFrostSettings>

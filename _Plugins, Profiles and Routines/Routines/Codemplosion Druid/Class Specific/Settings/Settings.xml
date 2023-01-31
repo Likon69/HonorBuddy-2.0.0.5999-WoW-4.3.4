@@ -1,0 +1,164 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Druid>
+  <!--Multiple Environment options are: never and always-->
+  <MultipleEnvironment>... never</MultipleEnvironment>
+  <Version>0.0.0</Version>
+  
+  <!--Common class settings template-->
+  <ShowUI>... always</ShowUI>
+  <SmartEatDrink>... always</SmartEatDrink>
+  <RAFTarget>... always</RAFTarget>
+  <Debug>... do not show debug</Debug>
+  <LowLevelCheck>... always</LowLevelCheck>
+  <RestHealth>55</RestHealth>
+  <RestMana>55</RestMana>
+  <CombatTimeout>30</CombatTimeout>
+  <HealthPotion>52</HealthPotion>
+  <LifebloodHealth>40</LifebloodHealth>
+  <ManaPotion>10</ManaPotion>
+  <RacialSpell>... never</RacialSpell>
+  <RacialUseWhen>... never</RacialUseWhen>
+  <Cleanse>... only out of combat</Cleanse>
+  <MaximumPullDistance>5</MaximumPullDistance>
+  <MinimumPullDistance>4</MinimumPullDistance>
+  <LazyRaider>... never</LazyRaider>
+  <IgnoreRunners>... always</IgnoreRunners>
+  
+  <!--Class specific settings everything below here-->
+  <RestHealPercent>75</RestHealPercent>
+  <BearForm>... never</BearForm>
+  <BearFormHealth>40</BearFormHealth>
+  <TravelForm>Automatic</TravelForm>
+  <MarkOfTheWild>... always</MarkOfTheWild>
+  <PriorityTargeting>... only when not in instance</PriorityTargeting>
+  <ChaseFleeingTargets>... always</ChaseFleeingTargets>
+  
+  
+  <!--Healing Balance-->
+  <InnervateManaBalance>28</InnervateManaBalance>
+  <RejuvenationBalanceHealth>70</RejuvenationBalanceHealth>
+  <RejuvenationBalance>... always</RejuvenationBalance>
+  <NourishBalance>... only when no adds</NourishBalance>
+  <NourishBalanceHealth>50</NourishBalanceHealth>
+  <RegrowthBalance>... only on adds</RegrowthBalance>
+  <RegrowthBalanceHealth>50</RegrowthBalanceHealth>
+  <RemoveCorruptionBalance>... only out of combat</RemoveCorruptionBalance>
+  <ThornsBalance>... only on adds</ThornsBalance>
+  <InnervateBalanceMana>30</InnervateBalanceMana>
+  <BarkskinBalance>... only on 3+ adds</BarkskinBalance>
+  <BarkskinBalanceHealth>100</BarkskinBalanceHealth>
+
+  <!--Healing Feral Cat-->
+  <RejuvenationFeralCatHealth>50</RejuvenationFeralCatHealth>
+  <RejuvenationFeralCat>... always</RejuvenationFeralCat>
+  <NourishFeralCat>... only when no adds</NourishFeralCat>
+  <NourishFeralCatHealth>50</NourishFeralCatHealth>
+  <RegrowthFeralCat>... only on adds</RegrowthFeralCat>
+  <RegrowthFeralCatHealth>50</RegrowthFeralCatHealth>
+  <RemoveCorruptionFeralCat>... only out of combat</RemoveCorruptionFeralCat>
+  <ThornsFeralCat>... never</ThornsFeralCat>
+  <BarkskinFeralCat>... only on 3+ adds</BarkskinFeralCat>
+  <BarkskinFeralCatHealth>100</BarkskinFeralCatHealth>
+  <InnervateManaFeralCat>10</InnervateManaFeralCat>
+  <DoubleDotFeralCat>... always</DoubleDotFeralCat>
+  <SurvivalInstinctsFeralCat>... only on adds</SurvivalInstinctsFeralCat>
+  <SurvivalInstinctsFeralCatHealth>65</SurvivalInstinctsFeralCatHealth>
+  <PredatorsSwiftnessFeralCat>... always</PredatorsSwiftnessFeralCat>
+  <PredatorsSwiftnessFeralCatSpell>Healing Touch</PredatorsSwiftnessFeralCatSpell>
+  <PredatorsSwiftnessFeralCatHealth>40</PredatorsSwiftnessFeralCatHealth>
+  
+
+  <!--Combat Balance-->
+  <PullSpellBalance>Automatic</PullSpellBalance>
+  <PrimaryDPSSpell>Automatic</PrimaryDPSSpell>
+  <StarsurgeBalance>... only if mob is not low level</StarsurgeBalance>
+  <MoonfireBalance>... only if mob is not low level</MoonfireBalance>
+  <InsectSwarmBalance>... only if mob is high level</InsectSwarmBalance>
+  <FaerieFireBalance>... only if mob is high level</FaerieFireBalance>
+  <Typhoon>... never</Typhoon>
+  <ForceOfNature>... only on adds</ForceOfNature>
+  <Starfall>... only on 3+ adds</Starfall>
+  <WildMushroomBalance>... never</WildMushroomBalance>
+  <WildMushroomCountBalance>... 1 Wild Mushroom</WildMushroomCountBalance>
+  <CatFormManaBalance>7</CatFormManaBalance>
+  <AOEDOTBalance>... always</AOEDOTBalance>
+  
+  <!--Combat Feral Cat-->
+  <AttackEnergyFeralCat>55</AttackEnergyFeralCat>
+  <PullSpellFeralCat>Automatic</PullSpellFeralCat>
+  <Rake>... always</Rake>
+  <SkullBashCat>... always</SkullBashCat>
+  <SwipeCat>... only on adds</SwipeCat>
+  <TigersFury>... only on adds</TigersFury>
+  <FerociousBite>... always</FerociousBite>
+  <FerociousBiteComboPoints>... 4+ combo points</FerociousBiteComboPoints>
+  <Shred>... never</Shred>
+  <SavageRoar>... only on adds</SavageRoar>
+  <SavageRoarComboPoints>... 1+ combo points</SavageRoarComboPoints>
+  <Maim>... if mob is casting or is fleeing</Maim>
+  <MaimComboPoints>... 4+ combo points</MaimComboPoints>
+  <Rip>... only if mob is high level</Rip>
+  <RipComboPoints>... 4+ combo points</RipComboPoints>
+  <BerserkFeralCat>... only on 3+ adds</BerserkFeralCat>
+  <FeralCatRavage>... always</FeralCatRavage>
+  <FaerieFireFeralCat>... only if mob is high level</FaerieFireFeralCat>
+
+  <!--Restoration-->
+  <!--Restoration Tank-->
+  <SwiftmendTank>... always</SwiftmendTank>
+  <SwiftmendTankHealth>40</SwiftmendTankHealth>
+  <HealingTouchTank>... always</HealingTouchTank>
+  <HealingTouchTankHealth>45</HealingTouchTankHealth>
+  <RegrowthTank>... always</RegrowthTank>
+  <RegrowthTankHealth>85</RegrowthTankHealth>
+  <RejuvenationTank>... always</RejuvenationTank>
+  <RejuvenationTankHealth>95</RejuvenationTankHealth>
+  <NourishTank>... never</NourishTank>
+  <NourishTankHealth>80</NourishTankHealth>
+  <LifebloomTank>... always</LifebloomTank>
+  <LifebloomTankHealth>65</LifebloomTankHealth>
+  <ThornsTankRestoration>... always</ThornsTankRestoration>
+  <!--Restoration Party Members-->
+  <SwiftmendParty>... always</SwiftmendParty>
+  <SwiftmendPartyHealth>40</SwiftmendPartyHealth>
+  <HealingTouchParty>... never</HealingTouchParty>
+  <HealingTouchPartyHealth>45</HealingTouchPartyHealth>
+  <RegrowthParty>... always</RegrowthParty>
+  <RegrowthPartyHealth>90</RegrowthPartyHealth>
+  <RejuvenationParty>... always</RejuvenationParty>
+  <RejuvenationPartyHealth>95</RejuvenationPartyHealth>
+  <NourishParty>... always</NourishParty>
+  <NourishPartyHealth>80</NourishPartyHealth>
+  <WildGrowth>... only on 2+ members low health</WildGrowth>
+  <WildGrowthHealth>85</WildGrowthHealth>
+  <Tranquility>... only on 3+ members low health</Tranquility>
+  <TranquilityHealth>60</TranquilityHealth>
+  <RemoveCorruptionRestoration>... immediately</RemoveCorruptionRestoration>
+  <InnervateRestoration>35</InnervateRestoration>
+  <BarkskinRestoration>... on aggro</BarkskinRestoration>
+  <TreeOfLifeRestoration>... never</TreeOfLifeRestoration>
+  <RebirthRestoration>... never</RebirthRestoration>
+  <HealPets>... never</HealPets>
+  
+  
+
+  <!--Hidden settings. Not visible in the UI-->
+  <TravelFormMinDistance>80</TravelFormMinDistance>
+  <TravelFormHostileRange>50</TravelFormHostileRange>
+  <DoubleHeal>... always</DoubleHeal>
+  <StealthPullDistance>25</StealthPullDistance>
+  <FeralCatHealSpam>5500</FeralCatHealSpam>
+  <MinTankHealth>65</MinTankHealth>
+  <MinTankHealthOverride>65</MinTankHealthOverride>
+  <PetHealth>80</PetHealth>
+  
+  
+  
+  
+  
+
+
+
+
+
+</Druid>

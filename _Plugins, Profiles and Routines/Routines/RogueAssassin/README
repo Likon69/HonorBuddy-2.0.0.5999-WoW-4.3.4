@@ -1,0 +1,19 @@
+RogueAssassin
+A Rogue PvE Assassination CustomClass for HonorBuddy.
+Based on work by fiftypence.
+More details at: http://www.thebuddyforum.com/honorbuddy-forum/classes/rogue/34203-rogueassassin-mutaraidbt-continuation.html
+
+
+HONORBUDDY VERSION: 2.0.0.5354
+
+
+!!! IMPORTANT !!!
+BUILDING & REFERENCES:
+Please follow the instructions below to work on this solution.  The exe and dll file are marked as excluded via the
+.gitignore file in References folder.  This will be the case until I obtain permission to include those two files
+in the repo. This way, you can keep those two files there and not worry about having to change the references every
+time you do a pull.
+
+1. Download the above version of Honorbuddy.
+2. Copy Honorbuddy.exe and Tripper.Tools.dll to the References folder.
+3. Write your code.

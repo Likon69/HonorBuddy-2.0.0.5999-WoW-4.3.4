@@ -1,0 +1,76 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mage>
+  <!--Multiple Environment options are: never and always-->
+  <MultipleEnvironment>... never</MultipleEnvironment>
+  <Version>0.0.0</Version>
+  <!--Common class settings template-->
+  <ShowUI>... always</ShowUI>
+  <SmartEatDrink>... always</SmartEatDrink>
+  <RAFTarget>... always</RAFTarget>
+  <Debug>... do not show debug</Debug>
+  <LowLevelCheck>... always</LowLevelCheck>
+  <RestHealth>55</RestHealth>
+  <RestMana>55</RestMana>
+  <CombatTimeout>30</CombatTimeout>
+  <HealthPotion>52</HealthPotion>
+  <LifebloodHealth>40</LifebloodHealth>
+  <ManaPotion>25</ManaPotion>
+  <RacialSpell>... never</RacialSpell>
+  <RacialUseWhen>... never</RacialUseWhen>
+  <Cleanse>... only out of combat</Cleanse>
+  <MaximumPullDistance>38</MaximumPullDistance>
+  <MinimumPullDistance>35</MinimumPullDistance>
+  <LazyRaider>... never</LazyRaider>
+  <IgnoreRunners>... always</IgnoreRunners>
+  <!--Class specific settings everything below here-->
+  <RestHealPercent>75</RestHealPercent>
+  <!--Healing-->
+  <ManaGem>30</ManaGem>
+  
+  <!--Combat-->
+  <WandMana>10</WandMana>
+  <PullSpell>Frostbolt</PullSpell>
+  
+  <ArcaneMissiles>... always</ArcaneMissiles>
+  <FireBlast>... always</FireBlast>
+  <ConeOfCold>... never</ConeOfCold>
+  <FrostNova>... always</FrostNova>
+  <FrostNovaSpell>Ice Lance</FrostNovaSpell>
+  <ArcaneBarrage>... always</ArcaneBarrage>
+  <MageWard>... always</MageWard>
+  <Counterspell>... always</Counterspell>
+  <MirrorImage>... only on 3+ adds</MirrorImage>
+  <DragonsBreath>... only on adds</DragonsBreath>
+  <ArmorBuff>Molten Armor</ArmorBuff>
+  <Sheep>... only on adds</Sheep>
+  <IceBarrier>... only on adds</IceBarrier>
+  <IceBarrierHealth>80</IceBarrierHealth>
+  <IcyVeins>... always</IcyVeins>
+  <LivingBomb>... always</LivingBomb>
+  <Pyroblast>... never</Pyroblast>
+  <Slow>... never</Slow>
+  <ArcaneExplosion>... never</ArcaneExplosion>
+  <TimeWarp>... only on 3+ adds</TimeWarp>
+  <FlameOrb>... always</FlameOrb>
+  <ManaShield>... always</ManaShield>
+  <ManaShieldHealth>35</ManaShieldHealth>
+  <ArcanePower>... only on 3+ adds</ArcanePower>
+  <PresenceOfMind>... always</PresenceOfMind>
+  <Scorch>... never</Scorch>
+  <EvocationMana>30</EvocationMana>
+  <EvocationHealth>45</EvocationHealth>
+  <AlternateFrostNova>... never</AlternateFrostNova>
+  <MainDPSSpell>Fireball</MainDPSSpell>
+  <Flamestrike>... only on 3+ adds</Flamestrike>
+  <Blizzard>... only on 3+ adds</Blizzard>
+  <BlastWave>... only on 3+ adds</BlastWave>
+  <Combustion>... always</Combustion>
+  
+  <!--Hidden settings. Not visible in the UI-->
+  <SheepPullRange>18</SheepPullRange>
+  <FrostNovaDistance>12</FrostNovaDistance>
+  <PullSheep>... always</PullSheep>
+  <ArcaneBlast>... never</ArcaneBlast>
+  <Fireball>... never</Fireball>
+  <Frostbolt>... never</Frostbolt>
+</Mage>
