@@ -68,9 +68,22 @@ namespace Talented
             return placement;
         }
 
+        private int _lastCheckedLevel = 0;
+
         private void InitializeHooks()
         {
             Lua.Events.AttachEvent("CHARACTER_POINTS_CHANGED", HandleTalentPointsChanged);
+            Lua.Events.AttachEvent("PLAYER_LEVEL_UP", HandleLevelUp); // Gestion de la montée de niveau
+        }
+
+        private void HandleLevelUp(object sender, LuaEventArgs args)
+        {
+            int currentLevel = StyxWoW.Me.Level;
+            if (currentLevel > _lastCheckedLevel)
+            {
+                _lastCheckedLevel = currentLevel;
+                HandleTalentPointsChanged(null, null); // Vérifie et attribue les talents disponibles
+            }
         }
 
         private void HandleTalentPointsChanged(object sender, LuaEventArgs args)
@@ -82,7 +95,6 @@ namespace Talented
 
                 var learned = BuildLearnedTalentDictionary();
                 var wanted = _talentBuild.TalentPlacements;
-                //var wanted = GetCurrentSpecTalentPlacements();
 
                 int numAvailable = Lua.GetReturnVal<int>("return GetUnspentTalentPoints()", 0);
 
